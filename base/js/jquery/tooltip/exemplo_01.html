@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Exemplo 01 Tooltip Plugin Demo</title>
+
+<link rel="stylesheet" href="jquery.tooltip.css" />
+<script src="lib/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.dimensions.js" type="text/javascript"></script>
+<script src="jquery.tooltip.js" type="text/javascript"></script>
+</head>
+
+<body>
+Normal:<input type="text" name="nom_usuario" id="nom_usuario" size="30" maxlength="30" title="CABEÇALHO - E agora, o que faço eu da vida sem você!!!" />
+<br/>
+<br/>
+pretty fancy:<input type="text" name="nom_usuario2" id="nom_usuario2" size="30" maxlength="30" title="Letra da Música - E agora, o que faço eu da vida sem você, você não me ensinou a te esquecer, voce so me ensinou a te querer a te querer a te querer a te querer te querer te querer te querer te." />
+<br/>
+<br/>
+pretty:<input type="text" name="nom_usuario3" id="nom_usuario3" size="30" maxlength="30" title="TÍTULO - E agora, o que faço eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida eu da vida." />
+<script>
+//$('#nom_usuario').tooltip();
+$('#nom_usuario').tooltip(
+{ 
+    track: true, 
+    delay: 0, 
+    showURL: true, 
+    showBody: " - ", 
+    fade: 250 
+});
+
+$("#nom_usuario2").tooltip({
+	track: true,
+	delay: 0,
+	showURL: false,
+	fixPNG: true,
+	showBody: " - ",
+	extraClass: "pretty fancy",
+	top: -15,
+	left: 5
+});
+
+$('#nom_usuario3').tooltip({
+	track: true,
+	delay: 0,
+	showURL: false,
+	showBody: " - ",
+	extraClass: "pretty",
+	fixPNG: true,
+	left: -120
+});
+
+</script>
+</body>
+</html>

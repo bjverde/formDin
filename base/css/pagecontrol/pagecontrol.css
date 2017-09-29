@@ -1,0 +1,76 @@
+/*
+Copyright DHTMLX LTD. http://www.dhtmlx.com
+You allowed to use this component or parts of it under GPL terms
+To use it on other terms or get Professional edition of the component please contact us at sales@dhtmlx.com
+*/
+
+
+ /*- Menu Tabs J--------------------------- */
+.tabsJ {
+	float:left;
+	width:100%;
+	background:transparent;
+	font-family: Arial,Times New Roman, cursive;
+	font-size:12px;
+	line-height:normal;
+	border-bottom:1px solid #24618E;
+}
+.tabsJ ul {
+	margin:0;
+	padding:5px 10px 0 3px;
+	list-style:none;
+}
+.tabsJ li {
+	display:inline;
+	margin:0;
+	padding:0;
+}
+.tabsJ a {
+	float:left;
+	background:url("tableftJ.gif") no-repeat left top;
+	margin:0;
+	padding:0 1px 0 5px; /* 1px a distancia entre as abas */
+	text-decoration:none;
+}
+.tabsJ a span {
+	float:left;
+	display:block;
+	background:url("tabrightJ.gif") no-repeat right top;
+	padding:5px 10px 4px 6px;
+	color:#24618E;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+.tabsJ a span {float:none;}
+/* End IE5-Mac hack */
+
+.tabsJ a:hover span {
+color:#FFF;
+}
+
+.tabsJ a:hover {
+	background-position:0% -42px;
+}
+.tabsJ a:hover span {
+	background-position:100% -42px;
+}
+
+.tabsJ .activePageControl a {
+	background-position:0% -42px;
+}
+.tabsJ .activePageControl a span {
+	background-position:100% -42px;
+	color:#FFF;
+}
+
+.tabsJ .activePageControl .fwShortcut {
+	color:#F0E239;
+}
+.tabsJsheet
+{
+	border:none;
+	display: none;
+	overflow:auto;
+	padding:10px;
+	background:#F4F4F4;
+}

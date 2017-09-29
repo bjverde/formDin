@@ -1,0 +1,106 @@
+/*
+GreyBox is copyrighted work by Amir Salihefendic.
+
+It is based on AJS JavaScript library.
+
+It is realesed under LGPL.
+*/
+
+
+
+.tlc, .trc { zoom: 1 }
+.box
+	{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3em;
+	padding: 0;
+	text-align: left;
+	width:80%;				/* <-- use this to tie width to viewport size */
+	width: 55em;				/* <-- use this for a set width */
+	background-color: #eeeeee;
+	border:none;
+	}
+
+.content
+	{
+	padding-top:5px;
+	padding-bottom:3px;
+	padding-right:1px;
+	padding-left:6px;
+	}
+/* ---=== border code follows ===--- */
+/*
+	tlc = top left corner
+	trc = top right corner
+	blc = bottom left corner
+	brc = bottom right corner
+	lb = left border
+	rb = right border
+	tb = top border
+	bb = bottom border
+*/
+
+.tlc, .trc, .blc, .brc
+	{
+	background-color: transparent;
+	background-repeat: no-repeat;
+	}
+
+.tlc
+	{
+	background-image:url(tlc.gif);
+	background-position: 0% 0%;
+	}
+
+.trc
+	{
+	background-image:url(trc.gif);
+	background-position: 100% 0%;
+	}
+
+.blc
+	{
+	background-image:url(blc.gif);
+	background-position: 0% 100%;
+	}
+
+.brc
+	{
+	background-image:url(brc.gif);
+	background-position: 100% 100%;
+	}
+
+.tb, .bb
+	{
+	background-color: transparent;
+	background-repeat: repeat-x;
+	}
+
+.tb
+	{
+	background-image:url(tb.gif);
+	background-position: 0% 0%;
+	}
+
+.bb
+	{
+	background-image:url(bb.gif);
+	background-position: 50% 100%;
+	}
+
+.rb
+	{
+	background-image:url(r.gif);
+	background-position: 100% 0%;
+	background-repeat: repeat-y;
+	}
+
+.lb
+	{
+	background-color: #eeeeee;
+	background-image:url(l.gif);
+	background-position: 0% 100%;
+	background-repeat: repeat-y;
+	}

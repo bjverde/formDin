@@ -1,0 +1,73 @@
+
+/*
+
+jQuery project
+Copyright (c) 2012 jQuery Foundation
+
+Licence: GPL Version 2
+
+You may use any jQuery project under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
+The MIT License is recommended for most projects. It is simple and easy to understand and it places almost no restrictions on what you can do with a jQuery project.
+
+If the GPL suits your project better you are also free to use a jQuery project under that license.
+
+You don’t have to do anything special to choose one license or the other and you don’t have to notify anyone which license you are using. You are free to use a jQuery project in commercial projects as long as the copyright header is left intact.
+
+*/
+
+.ac_results {
+	padding: 0px;
+	border: 1px solid silver;
+	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	filter:mask();
+	width:3000px;
+	height:3000px;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	/*font: menu;*/
+	font-family:Arial,cursive;
+	font-size: 10px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background : Window url('carregando.gif') right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #ffffff
+}
+.ac_even {
+	background-color: #E7E7E7;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+
+

@@ -1,0 +1,52 @@
+#tooltip {
+	position: absolute;
+	z-index: 30000;
+	border: 1px solid #FFDF00;
+	background-color: #FFFFDF;
+	padding: 5px;
+	color:navy;
+	font-size:14px;
+	font-family: Times New Roman,Arial, cursive;
+	opacity: 0.85;
+}
+#tooltip div { margin: 2; }
+#tooltip h3 {
+	margin: 0px;
+	font-size: 14px;
+	text-align: center;
+}
+
+
+#tooltip.pretty {
+	font-size:12px;
+	font-family:Arial,Times New Roman,cursive;
+	color:navy;
+	border: none;
+	width: 210px;
+	padding:20px;
+	padding-top:10px;
+	height: 145px;
+	opacity: 0.8;
+	background: url('shadow.png');
+}
+
+#tooltip.pretty h3 {
+	margin-bottom: 10px;
+	font-size: 14px;
+	width: 205px;
+	text-align: center;
+	padding-top:5px;
+}
+#tooltip.pretty div { width: 210px; text-align: left;text-align: justify;}
+
+#tooltip.fancy {
+	background: url('shadow2.png');
+	font-size:12px;
+	font-family:Arial,Times New Roman,cursive;
+	color:navy;
+	padding-top: 50px;
+	height: 110px;
+}
+#tooltip.fancy.viewport-right {
+	background: url('shadow2-reverse.png');
+}

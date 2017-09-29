@@ -1,0 +1,335 @@
+.RadWindow table, .RadWindow table td {
+    border: 0 none;
+    padding: 0;
+}
+.RadWindow .rwTopResize {
+    background-position: 0 -31px;
+    background-repeat: repeat-x;
+    font-size: 1px;
+    height: 4px;
+    line-height: 4px;
+    width: 100%;
+}
+.RadWindow .rwStatusbarRow .rwCorner {
+    background-repeat: no-repeat;
+}
+.RadWindow .rwStatusbarRow .rwBodyLeft {
+    background-position: -16px 0;
+}
+.RadWindow .rwStatusbarRow .rwBodyRight {
+    background-position: -24px 0;
+}
+.RadWindow .rwStatusbar {
+    background-position: 0 -114px;
+    background-repeat: repeat-x;
+    height: 22px;
+}
+.RadWindow .rwStatusbar div {
+    background-position: 0 -94px;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
+}
+.RadWindow table {
+    height: 100%;
+    table-layout: auto;
+    width: 100%;
+}
+.RadWindow table td {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+.RadWindow .rwCorner {
+    width: 8px;
+}
+.RadWindow .rwTopLeft, .RadWindow .rwTopRight, .RadWindow .rwTitlebar, .RadWindow .rwFooterLeft, .RadWindow .rwFooterRight, .RadWindow .rwFooterCenter {
+    background-repeat: no-repeat;
+    font-size: 1px;
+    height: 8px;
+    line-height: 1px;
+}
+.RadWindow .rwBodyLeft, .RadWindow .rwBodyRight {
+    background-repeat: repeat-y;
+}
+.RadWindow .rwBodyRight {
+    background-position: -8px 0;
+}
+.RadWindow .rwTopLeft {
+    background-position: 0 0;
+}
+.RadWindow .rwTopRight {
+    background-position: -8px 0;
+}
+.RadWindow table .rwTitlebar {
+    -moz-user-select: none;
+    background-position: 0 -31px;
+    background-repeat: repeat-x;
+}
+.RadWindow .rwFooterLeft {
+    background-position: 0 -62px;
+}
+.RadWindow .rwFooterRight {
+    background-position: -8px -62px;
+}
+.RadWindow .rwFooterCenter {
+    background-position: 0 -70px;
+    background-repeat: repeat-x;
+}
+.RadWindow .rwTitlebarControls {
+    height: 27px;
+}
+.RadWindow .rwWindowContent {
+    background: none repeat scroll 0 0 white;
+    height: 100% !important;
+}
+.RadWindow td.rwLoading {
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.RadWindow .rwStatusbar .rwLoading {
+    background-repeat: no-repeat;
+}
+.RadWindow .rwStatusbar .rwLoading {
+    padding-left: 30px;
+}
+.RadWindow td.rwStatusbar input {
+    -moz-user-select: none;
+    background-color: transparent !important;
+    background-position: left center !important;
+    background-repeat: no-repeat !important;
+    border: 0 none !important;
+    cursor: default;
+    display: block;
+    float: left;
+    font: 12px "Segoe UI",Arial,Verdana,Sans-serif;
+    height: 18px;
+    margin: 0;
+    overflow: hidden;
+    padding: 4px 0 0 7px;
+    vertical-align: middle;
+    width: 100%;
+}
+.RadWindow .rwControlButtons {
+    float: right;
+    list-style: none outside none;
+    margin: 2px 0 0;
+    padding: 0;
+    white-space: nowrap;
+}
+.RadWindow .rwControlButtons li {
+    float: left;
+    padding: 0 1px 0 0;
+}
+.RadWindow .rwControlButtons a {
+    background-repeat: no-repeat;
+    cursor: default;
+    display: block;
+    font-size: 1px;
+    height: 21px;
+    line-height: 1px;
+    outline: medium none;
+    text-decoration: none;
+    width: 30px;
+}
+.RadWindow .rwControlButtons span {
+    display: block;
+    text-indent: -9999px;
+}
+.RadWindow .rwReloadButton {
+    background-position: -120px 0;
+}
+.RadWindow .rwReloadButton:hover {
+    background-position: -120px -21px;
+}
+.RadWindow .rwPinButton {
+    background-position: -180px 0;
+}
+.RadWindow .rwPinButton:hover {
+    background-position: -180px -21px;
+}
+.RadWindow .rwPinButton.on {
+    background-position: -150px 0;
+}
+.RadWindow .rwPinButton.on:hover {
+    background-position: -150px -21px;
+}
+.RadWindow .rwMinimizeButton {
+    background-position: 0 0;
+}
+.RadWindow .rwMinimizeButton:hover {
+    background-position: 0 -21px;
+}
+.RadWindow .rwMaximizeButton {
+    background-position: -60px 0;
+}
+.RadWindow .rwMaximizeButton:hover {
+    background-position: -60px -21px;
+}
+.RadWindow .rwCloseButton {
+    background-position: -90px 0;
+}
+.RadWindow .rwCloseButton:hover {
+    background-position: -90px -21px;
+}
+.RadWindow.rwMaximizedWindow .rwMaximizeButton, .RadWindow.rwMinimizedWindow .rwMinimizeButton {
+    background-position: -30px 0;
+}
+.RadWindow.rwMaximizedWindow .rwMaximizeButton:hover, .RadWindow.rwMinimizedWindow .rwMinimizeButton:hover {
+    background-position: -30px -21px;
+}
+.RadWindow .rwIcon {
+    background-position: 0 -78px;
+    background-repeat: no-repeat;
+    cursor: default;
+    display: block;
+    height: 16px;
+    margin: 4px 5px 0 0;
+    width: 16px;
+}
+.RadWindow em {
+    color: black;
+    float: left;
+    font: bold 12px "Segoe UI",Arial;
+    overflow: hidden;
+    padding: 3px 0 0 4px;
+    white-space: nowrap;
+}
+.RadWindow_rtl .rwControlButtons {
+    float: left;
+}
+div.RadWindow_rtl .rwControlButtons li {
+    float: right;
+}
+.RadWindow.rwInactiveWindow .rwTitlebarControls {
+    position: static;
+}
+.RadWindow .rwDialogPopup {
+    color: black;
+    cursor: default;
+    font: 12px "Segoe UI",Arial,Verdana;
+    margin: 16px;
+    padding: 0 0 16px 50px;
+}
+.rwDialogPopup .rwPopupButton {
+    margin: 0;
+}
+.rwDialogPopup .rwPopupButton:focus, .rwDialogPopup .rwPopupButton:active {
+    border: 1px dotted #999999;
+}
+.rwDialogPopup .rwPopupButton, .rwDialogPopup .rwPopupButton span {
+    display: block;
+    float: left;
+}
+.RadWindow .rwControlButtons a {
+    text-indent: -9999px;
+}
+html:first-child .RadWindow ul {
+    border: 1px solid transparent;
+    float: right;
+}
+.RadWindow .rwDialogText {
+    text-align: left;
+}
+.RadWindow.rwMinimizedWindow .rwPinButton, .RadWindow.rwMinimizedWindow .rwReloadButton, .RadWindow.rwMinimizedWindow .rwMaximizeButton, .RadWindow.rwMinimizedWindow .rwTopResize {
+    display: none !important;
+}
+.RadWindow .rwDialogInput {
+    color: black;
+    display: block;
+    font: 12px "Segoe UI",Arial,Verdana;
+    margin: 8px 0;
+    width: 100%;
+}
+.RadWindow .rwWindowContent .radconfirm, .RadWindow .rwWindowContent .radalert {
+    background-color: transparent;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+.RadWindow .rwWindowContent .radconfirm {
+    background-image: url("WebResource.axd?d=v1-6Mkwdp9FcTqT2eHYXO5-WlAn_rhWpAo2wQK2zB-UFCiLg9n7d-tRC7wb-SkCT-nZ0rU5Yy5sB0QZ9lW4GxSFdCPln_ZLe0&t=634157625600000000");
+}
+.RadWindow .rwWindowContent .radalert {
+    background-image: url("WebResource.axd?d=v1-6Mkwdp9FcTqT2eHYXO5-WlAn_rhWpAo2wQK2zB-UFCiLg9n7d-tRC7wb-SkCTBOJMmJrr-1qPc_mgXxMr6zZQt__m3fXL0&t=634157625600000000");
+}
+.RadWindow .rwWindowContent .radprompt {
+    padding: 0;
+}
+.RadWindow .rwPopupButton, .RadWindow .rwPopupButton span {
+    color: black;
+    cursor: default;
+    height: 21px;
+    line-height: 21px;
+    text-decoration: none;
+}
+.RadWindow .rwPopupButton {
+    background-position: 0 -136px;
+    background-repeat: no-repeat;
+    margin: 8px 8px 8px 0;
+    padding: 0 0 0 3px;
+}
+.RadWindow .rwWindowContent .rwPopupButton .rwOuterSpan {
+    background-position: right -136px;
+    background-repeat: no-repeat;
+    padding: 0 3px 0 0;
+}
+.RadWindow .rwWindowContent .rwPopupButton .rwInnerSpan {
+    background-position: 0 -157px;
+    background-repeat: repeat-x;
+    padding: 0 12px;
+}
+.RadWindow .rwWindowContent .rwPopupButton:hover {
+    background-position: 0 -178px;
+    margin: 8px 8px 8px 0;
+    padding: 0 0 0 3px;
+}
+.RadWindow .rwWindowContent .rwPopupButton:hover .rwOuterSpan {
+    background-position: right -178px;
+    padding: 0 3px 0 0;
+}
+.RadWindow .rwWindowContent .rwPopupButton:hover .rwInnerSpan {
+    background-position: 0 -199px;
+    padding: 0 12px;
+}
+.RadWindow .rwStatusbarRow .rwBodyLeft {
+    background-position: -16px 0;
+}
+.RadWindow .rwStatusbarRow .rwBodyRight {
+    background-position: -24px 0;
+}
+.RadWindow.rwMinimizedWindow .rwContentRow, .RadWindow.rwMinimizedWindow .rwStatusbarRow {
+    display: none;
+}
+.RadWindow.rwMinimizedWindow table.rwTitlebarControls {
+    margin-top: 4px;
+}
+.RadWindow.rwMinimizedWindow .rwControlButtons {
+    width: 66px !important;
+}
+.RadWindow.rwMinimizedWindow em {
+    width: 90px;
+}
+.RadWindow.rwMinimizedWindow {
+    float: left !important;
+    height: 30px !important;
+    overflow: hidden !important;
+    width: 200px !important;
+}
+.RadWindow.rwMinimizedWindow .rwCorner.rwTopLeft {
+    background-position: 0 -220px;
+    background-repeat: no-repeat;
+}
+.RadWindow.rwMinimizedWindow .rwCorner.rwTopRight {
+    background-position: -8px -220px;
+    background-repeat: no-repeat;
+}
+.RadWindow.rwMinimizedWindow .rwTitlebar {
+    background-position: 0 -250px !important;
+    background-repeat: repeat-x;
+}
+.RadWindow.rwInactiveWindow .rwCorner, .RadWindow.rwInactiveWindow .rwTitlebar, .RadWindow.rwInactiveWindow .rwFooterCenter {
+    opacity: 0.65 !important;
+}
+.RadWindow ul.rwControlButtons span {
+}

@@ -1,0 +1,42 @@
+/************************************************************************************************************
+
+	DHTML Suite for Applications
+	(C) www.dhtmlgoodies.com, August 2006
+
+	CSS for the DHTMLsuite_tableWidget class.
+
+	Terms of use:
+	Look at the terms of use at http://www.dhtmlgoodies.com/index.html?page=termsOfUse
+
+	Thank you!
+
+	www.dhtmlgoodies.com
+	Alf Magne Kalleland
+
+************************************************************************************************************/
+.DHTMLSuite_menuBar_top{	/* The bar that is parent of the menu strip */
+	height:26px;
+	width:100%;
+	background-repeat:repeat-x;
+	font-family: Arial;
+	font-size:13px;
+	z-index:100000;
+	padding-left:10px;
+	background-image:url('../../imagens/menu/menu_strip_bg.jpg');
+}
+
+.DHTMLSuite_menuBar_sub{
+	position:absolute;
+	background-color:#FFF;
+	border:1px solid #000;
+	background-image:url('../../imagens/menu/menu-bar-gradient.jpg');	/* Background image for sub menu items */
+	background-repeat:repeat-y;
+	background-position: left center;
+	display:inline;
+	/*eugenio*/
+	width:auto;
+	background-color:#F7FAFD;
+	font-size: 14px;
+
+}
+

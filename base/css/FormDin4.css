@@ -1,0 +1,564 @@
+/*
+ * Formdin Framework
+ * Copyright (C) 2012 Ministério do Planejamento
+ * ----------------------------------------------------------------------------
+ * This file is part of Formdin Framework.
+ *
+ * Formdin Framework is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License version 3
+ * along with this program; if not,  see <http://www.gnu.org/licenses/>
+ * or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA  02110-1301, USA.
+ * ----------------------------------------------------------------------------
+ * Este arquivo é parte do Framework Formdin.
+ *
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * do Software Livre (FSF).
+ *
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+ */
+
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body
+{
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    overflow: auto;
+    font-family: arial, times new roman;
+    font-size:11px;
+	background-color:transparent;
+	/*background-image:url('imagens/app/bg_listrado.jpg');*/
+	/*background-image:url('../imagens/marcaDagua.png');
+	background-repeat:no-repeat;
+	background-position:center center;
+	*/
+}
+.fwHelpText
+{
+	width:auto;
+	padding:2px;
+	background-color:#F9FFC9;
+	border:1px solid #FFC900;
+	color:#256391;
+}
+.fwTitleBar
+{
+	height:16px;
+	border:none;
+	text-align:center;
+	font-family:arial,helvetica, geneva, sans-serif;
+	/*color:#256391;*/
+	color:#000;
+	font-size:16px;
+	font-weight:bold;
+	vertical-align:middle;
+}
+.fwHeaderBar
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+	border:1px outset silver;
+	background-color:#E1E1E1;
+	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;
+	position:relative;
+}
+
+.fwButton
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+	border:1px outset silver;
+	background-color:#E1E1E1;
+	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;
+	color:blue;
+	cursor:pointer;
+	position:relative;
+}
+.fwButton:hover
+{
+	cursor:pointer;
+	text-decoration: underline;
+	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-y;
+	text-decoration: underline;
+	/*background: url(../imagens/fwsubmit-btn.gif) no-repeat bottom left;*/
+}
+.fwLinkOnlineSearch
+{
+	cursor:pointer;
+}
+.fwLinkOnlineSearch:hover
+{
+	color:white;
+	background-color:navy;
+}
+.fwExampleText
+{
+
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+	color:blue;
+	margin-left:3px;
+	cursor:pointer;
+}
+
+
+/* css do gride */
+.fwGridTitle
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+	font-weight: bold;
+	height:20px;
+	/*color:#256391;*/
+	color:#000;
+	border:1px outset silver;
+	/*background-color:#E1E1E1;*/
+	background-color:transparent;
+	/*background:#ddd url(../imagens/fwtitlebg.gif) left center repeat-x;*/
+	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;
+	position:relative;
+	line-height:100%;
+}
+.fwGridHeader
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	border:none;
+	font-size:11px;
+	font-weight: normal;
+    border-bottom:1px solid silver;
+    border-right:1px solid silver;
+    background-color:transparent;
+    line-height:100%;
+   	height:20px;
+
+}
+.fwGridHeaderSortable
+{
+   	color:#0000ff;
+   	text-decoration:underline;
+}
+.fwGridBody
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	overflow:auto;
+	border-bottom: 1px solid gray;
+}
+.fwGridFooter
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+	font-weight: normal;
+	color:#000000;
+	border:1px outset silver;
+	/*background-color:#efefef;*/
+	background-color:transparent;
+	/*background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;*/
+	text-align:left;
+	padding:2px;
+}
+
+.fwGridCell
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size: 11px;
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding-left: 2px;
+}
+.fwGridRow
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size: 11px;
+	height:20px;
+}
+.fwGridCellAction
+{
+	border-bottom: 1px solid gray;
+	background-color:#efefef;
+}
+
+.fwField
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+}
+
+.fwFieldRequired
+{
+	color:#ff0000;
+	vertical-align: middle;
+}
+
+.fwFieldDisabled
+{
+	background-color:#DCDCDC;
+	/*color:#4F4F4F;
+	color:#E75512;*/
+	color:black;
+	border:1px solid silver;
+}
+
+.fwFieldReadonly
+{
+	background-color:#FFFFF0;
+	color:black;
+	border:1px solid silver;
+}
+
+.fwCheckbox
+{
+ 	border: medium none;
+ 	vertical-align: middle;
+ 	cursor: pointer;
+}
+
+.fwHtml
+{
+	overflow:auto;
+	border:none;
+	background-color:transparent;
+}
+
+.fwLink
+{
+	cursor:pointer;
+	border:none;
+	display:inline;
+	margin:0;
+	padding:0;
+	vertical-align:top;
+	color:blue;
+	text-decoration: underline;
+	font-size:12px;
+	background-color: transparent;
+}
+.fwMemo
+{
+	font-family: Courier New;
+	font-size: 11px;
+	text-align: justify;
+	border:1px solid gray;
+}
+.fwGroupBox
+{
+	padding-left:10px;
+	border:1px solid silver;
+}
+.fwGroupBoxLegend
+{
+	/*font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-weight:bold;
+	color:#256391;
+	border:1px solid #c0c0c0;
+	background-color:#efefef;
+	padding-right:2px;
+	padding-left:2px;
+	*/
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	border-right: #a8a8a8 1px solid;
+	border-top: white 1px solid;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-bottom:1px;
+	border-left: white 1px solid;
+	border-bottom: #a8a8a8 1px solid;
+	background-color:#F3F3F4;
+	color:#0A5F97;
+	font-size:11px;
+	font-weight: bold;
+	text-indent:0px;
+	text-align:left;
+}
+
+.fwColorPick {
+	border: 1px solid silver;
+	font-family:Verdana;
+	font-size:10px;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+
+
+.fwOnlineDoc{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	color:#000000;
+	border:1px solid gray;
+	background-color:#efefef;
+	position:absolute;
+	top:0px;
+	left:0px;
+	text-align:center;
+	display:none;
+	overflow:hidden;
+	width:80%;
+	height:80%;
+}
+.fwOnlineDocHeader{
+	background-color:#efefef;
+	height:50px;
+	width:100%;
+	border:none;
+	font-size:16px;
+	font-weight:bold;
+	vertical-align:middle;
+	background-repeat:repeat-x;
+	background-image:url(imagens/app/headerbgsilver.gif);
+	line-height:105%;
+}
+.fwOnlineDocCloseButton{
+	float:right;
+	cursor:pointer;
+}
+.fwOnlineDocTitleSystemName{
+}
+.fwOnlineDocTitleModuleName{
+}
+.fwOnlineDocTitleFieldName{
+}
+.fwOnlineDocInput
+{
+	font-size:12px;
+	border:1px solid silver;
+	background:transparente;
+	text-align: center;
+	font-weight:bold;
+	color:blue;
+
+}
+.fwOnlineDocBody
+{
+	width:100%;
+	height: 100%;
+	background-color:#ffffff;
+}
+.fwOnlineDocTextArea
+{
+	/*border-bottom-style: groove;*/
+	margin:0px;
+	padding:0px;
+	border:1px solid silver;
+	width:95%;
+	height :95%;
+}
+
+
+
+.fwTreeView
+{
+	background-color: #ffffff;
+	font-size:10;
+	color:#000000;
+	overflow: auto;
+	border:1px solid silver;
+	padding-bottom: 30px;
+}
+.fwTreeViewToolBar
+{
+	background-color:#E1E1E1;
+	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;
+	width:100%;
+    height:25px;
+    border-bottom: 1px solid silver;
+    font-size:10px;
+}
+.fwTreeViewToolBar img
+{
+	padding-top:5px;
+	padding-left:2px;
+}
+
+.fwMapMarker
+{
+	font-family:Arial,Helvetica, Geneva, Sans-Serif;
+	font-size:11px;
+}
+
+.fwHR
+{
+	border-left:none;
+	border-right:none;
+	border-top:1px;
+	height:1px;
+	color:grey;
+}
+
+.fwBlockScreenDiv
+{
+    display: none;
+    z-index:1001;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    opacity:.40;
+    filter: alpha(opacity=40);
+}
+.fwImgBlockScreen
+{
+	border:none;
+}
+.fwTxtBlockScreen
+{
+	font-family:Arial,Times New Roman,fantasy;
+	color:#ffffff;
+	font-size:18px;
+}
+
+
+.fwDialogBox
+{
+	text-align: center;
+	border:1px solid silver;
+	background-color: white;
+	display: none;
+}
+.fwDialogBoxButton
+{
+	width:100px;
+}
+.fwDialogBoxText
+{
+	font-size: 13px;
+	font-weight: bold;
+	text-align:left;
+	color:blue;
+}
+.fwDialogBoxImage
+{
+	width:50px;
+	height:50px;
+	margin-left: 5px;
+	border:none;
+}
+
+.fwGroupBoxImage
+{
+	margin:0px;
+	padding:0px;
+	position:relative;
+	top:-10px;
+	width:15px;
+	height:15px;
+	cursor:pointer;
+	float:right;
+	z-index:90;
+	margin-bottom:-10px;
+	cursor:pointer;
+}
+.fwMessageAreaError
+{
+	padding:2px;
+	border:1px solid #FF0000;
+	color:#FF0000;
+	background-color: #FFFFE0;
+	font-weight: bold;
+	overflow:hidden;
+}
+
+.fwMessageAreaSucess
+{
+	padding:2px;
+	border:1px solid #0000FF;
+	color:#0000FF;
+	background-color: #FFFFE0;
+	font-weight: bold;
+	font-size:16px;
+	text-align: center;
+	overflow:hidden;
+
+}
+
+.fwShortcut
+{
+	text-decoration: underline;
+	color:#000000;
+	font-weight:bold;
+}
+
+#fwDivMsgLoading
+{
+	width:450px;
+	background-color: #ffffff;
+    color:#000000;
+    border:2px solid #000;
+	padding: 5px;
+	font-size:12px;
+	font-weight:bold;
+	text-align: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius:15px;
+
+}
+/* temas para as caixas de dialogos utilizando o plugin jAlert */
+#popup_container.error {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+	border: solid 5px #999;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#popup_container.error #popup_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+	color: #666;
+	background: #CCC url(imagens/alert/title.gif) top repeat-x;
+	border: solid 1px #FFF;
+	border-bottom: solid 1px #999;
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+
+#popup_container.error #popup_content {
+	background: 16px 16px no-repeat url(imagens/alert/important.gif);
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+
+.fwGridRow:hover {
+	/*background-color: #E6DB74 !important;*/
+	/* background-color: #D0D0D0 !important;*/
+	 background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x !important;
+ 	/* background: -moz-linear-gradient(center top , #C0F7FF, #93E9F6 20%, #78CEDB 51%, #63B9C6 51%, #54AAB7 95%, #489EAB) repeat scroll 0 0 rgba(0, 0, 0, 0);*/
+
+}
+
+.fwGridCellAction:hover{
+	 background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x !important;
+}

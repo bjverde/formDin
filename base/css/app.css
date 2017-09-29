@@ -1,0 +1,239 @@
+
+/*
+ * Formdin Framework
+ * Copyright (C) 2012 Ministério do Planejamento
+ * ----------------------------------------------------------------------------
+ * This file is part of Formdin Framework.
+ *
+ * Formdin Framework is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License version 3
+ * along with this program; if not,  see <http://www.gnu.org/licenses/>
+ * or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA  02110-1301, USA.
+ * ----------------------------------------------------------------------------
+ * Este arquivo é parte do Framework Formdin.
+ *
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * do Software Livre (FSF).
+ *
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+ */
+
+/*
+Estilo do index.php da aplicação
+*/
+html
+{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;
+}
+body
+{
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	font-family: arial, "times new roman";
+	font-size:11px;
+	/*background-repeat:repeat;*/
+	/*background-image:url('imagens/app/binary.gif');*/
+	/*background-image:url('imagens/app/bg_listrado.jpg')*/;
+}
+#app_header_logo
+{
+	height		:55px;
+	border-left	:1px solid silver;
+	border-top	:1px solid silver;
+	font-size	:26px;
+	font-weight	:bold;
+	background	:#efefef;
+	background-repeat:repeat-x;
+	background-image:url(imagens/app/headerbgsilver.gif);
+}
+#app_header_logo img
+{
+	height		: 50px;
+	border		: none;
+	padding		: 0px;
+	margin		: 0px;
+}
+#app_header_title
+{
+	border-top	:1px solid silver;
+	font-size	:24px;
+	font-weight	:bold;
+	background	:transparent;
+	text-align	:center;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/headerbgsilver.gif');
+	line-height:90%;
+}
+#app_header_subtitle
+{
+	font-size	:20px;
+	font-weight	:bold;
+	background	:transparent;
+}
+#app_header_login
+{
+	border-top	:1px solid silver;
+	border-right:1px solid silver;
+	font-size	:12px;
+	background	:#efefef;
+	text-align	:center;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/headerbgsilver.gif');
+}
+#app_main_menu
+{
+	border-left	:1px solid silver;
+	border-right:1px solid silver;
+	font-size	:12px;
+	background	:#efefef;
+	text-align	:center;
+}
+#app_center
+{
+	border			:0px;
+	font-size		:12px;
+	background		:white;
+	text-align		:center;
+	vertical-align	:top;
+	padding-top		:5px;
+	background-color:transparent;
+}
+#app_footer_message
+{
+	border			:0px;
+	font-size		:10px;
+	color			:navy;
+	background		:#efefef;
+	text-align		:center;
+	vertical-align	:middle;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/footerbgsilver.gif');
+
+}
+#app_footer_company
+{
+	border			:0px;
+	font-size		:10px;
+	color			:navy;
+	background		:#efefef;
+	text-align		:center;
+	vertical-align	:middle;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/footerbgsilver.gif');
+}
+#app_footer_module
+{
+	border-right	:0px solid silver;
+	border-top		:0px solid silver;
+	border-bottom	:0px solid silver;
+	font-size		:10px;
+	color			:navy;
+	background		:white;
+	text-align		:center;
+	vertical-align	:middle;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/footerbgsilver.gif');
+}
+#button_end_session
+{
+	height: 19px;
+	color:blue;
+	font-size:9px;
+	background-repeat:repeat-x;
+	background-image:url('../imagens/fwbuttonbg.gif');
+	vertical-align: middle;
+	cursor:pointer;
+}
+#button_end_session:hover
+{
+	color:red;
+}
+#app_iframe
+{
+	/*height:500px;*/
+	width:100%;
+	overflow:auto;
+	border:none;
+	color:black;
+	font-size:10px;
+	background-color: transparent;
+	vertical-align: middle;
+	margin:0px;
+	padding: 0px;
+}
+.app_div_error{
+    width:50%;
+    overflow:hidden;
+    background-color:#FFEFEF;
+    border:1px solid #FFA0A0;
+    color:#0000ff;
+    font-size:14px;
+    font-family:Arial;
+    padding:2px;
+    text-align:left;
+}
+.app_div_sucess{
+    width:50%;
+    overflow:hidden;
+    background-color:#E4F9E4;
+    border:1px solid #A0ECA0;
+    color:#0000ff;
+    font-size:14px;
+    font-family:Arial;
+    padding:2px;
+    text-align:left;
+}
+.app_div_attention{
+    width:50%;
+    overflow:hidden;
+    background-color:#FEFEDC;
+    border:1px solid #FBFB00;
+    color:#0000ff;
+    font-size:14px;
+    font-family:Arial;
+    padding:2px;
+    text-align:left;
+}
+.fwBlockScreenDiv
+{
+    display: none;
+    z-index:1001;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    opacity:.40;
+    filter: alpha(opacity=40);
+}
+
+.ui-widget-overlay
+{
+    opacity: 0.8;
+    -moz-opacity:0.80;
+    filter: alpha(opacity=80);
+}

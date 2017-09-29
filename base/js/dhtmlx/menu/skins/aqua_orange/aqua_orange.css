@@ -1,0 +1,325 @@
+/***************************************************************************************************************************************************************
+								"AQUA ORANGE" dhtmlxMenu Skin
+***************************************************************************************************************************************************************/
+
+/*
+	top level container
+*/
+table.dhtmlxMenu_aqua_orange_TBL {
+	height: 30px;
+	position: relative;
+}
+div.dhtmlxMenu_aqua_orange_Middle {
+	position: relative;
+	height: 30px;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	border: none;
+	background-color: none;
+	background-image: url("dhtmlxmenu_top_bg_middle.gif");
+	-moz-user-select: none;
+}
+iframe.dhtmlxMenu_IE6CoverFix_aqua_orange {
+	position: absolute;
+	border: none;
+	background: #000000;
+	filter: alpha(opacity=100);
+}
+
+table td.dhtmlxMenu_aqua_orange_Left {
+	width: 8px;
+	font-size: 2px;
+	background-image: url("dhtmlxmenu_top_bg_left.gif");
+	background-repeat: no-repeat;
+}
+table td.dhtmlxMenu_aqua_orange_Right {
+	width: 8px;
+	font-size: 2px;
+	background-image: url("dhtmlxmenu_top_bg_right.gif");
+	background-repeat: no-repeat;
+}
+/*
+	top level items
+*/
+div.dhtmlxMenu_aqua_orange_TopLevel_Item_Normal {
+	position: absolute;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	cursor: default;
+	white-space: nowrap;
+	-moz-user-select: none;
+	top: 0px;
+	height: 22px;
+	height=30px;
+	padding-left: 7px;
+	padding-right: 7px;
+	margin-left: 1px;
+	margin-right: 1px;
+	padding-top: 8px;
+}
+div.dhtmlxMenu_aqua_orange_TopLevel_Item_Disabled {
+	position: absolute;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #F6C09D;
+	cursor: default;
+	white-space: nowrap;
+	-moz-user-select: none;
+	top: 0px;
+	height: 22px;
+	height=30px;
+	padding-left: 7px;
+	padding-right: 7px;
+	margin-left: 1px;
+	margin-right: 1px;
+	padding-top: 8px;
+}
+div.dhtmlxMenu_aqua_orange_TopLevel_Item_Selected {
+	position: absolute;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	/* background-color: #648DB3; */
+	cursor: pointer;
+	color: #FFFFFF;
+	white-space: nowrap;
+	-moz-user-select: none;
+	top: 0px;
+	height: 22px;
+	height=30px;
+	background-image: url("dhtmlxmenu_top_bg_over.gif");
+	background-repeat: repeat-x;
+	border-left: #B04E0D 1px solid;
+	border-right: #B04E0D 1px solid;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 8px;
+	margin: 0px;
+}
+/*
+	sub level polygon
+*/
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Polygon {
+	position: absolute;
+	background-color: #FFFFFF;
+	padding-top: 1px;
+	border-top: #FF6600 1px solid;
+	border-left: #FF6600 1px solid;
+	border-bottom: #C1570F 1px solid;
+	border-right: #C1570F 1px solid;
+	overflow: hidden;
+}
+/*
+	separator
+*/
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Separator {
+	font-size: 1px;
+	cursor: default;
+	-moz-user-select: none;
+	border-top: #D3D2D2 1px solid;
+	border-bottom: #FFFFFF 1px solid;
+}
+/*
+	items
+*/
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Normal {
+	position: relative;
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: normal;
+	color: #333333;
+	border-left: #FFFFFF 1px solid;
+	border-right: #CCCCCC 1px solid;
+	background-color: #F5F5F5;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 28px 5px 28px;
+	cursor: default;
+	white-space: nowrap;
+	-moz-user-select: none;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Disabled {
+	position: relative;
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: normal;
+	color: #999999;
+	border-left: #FFFFFF 1px solid;
+	border-right: #CCCCCC 1px solid;
+	background-color: #F5F5F5;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 28px 5px 28px;
+	cursor: default;
+	white-space: nowrap;
+	-moz-user-select: none;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Selected {
+	position: relative;
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: normal;
+	color: #FFFFFF;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 28px 5px 28px;
+	border-left: #F87D1D 1px solid;
+	border-right: #F87D1D 1px solid;
+	background-color: #F87D1D;
+	cursor: pointer;
+	white-space: nowrap;
+	-moz-user-select: none;
+}
+/*
+	hotkeys
+*/
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Normal div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_HotKey {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	font-size: 10px;
+	color: #606060;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Disabled div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_HotKey {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	font-size: 10px;
+	color: #999999;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Selected div.dhtmlxMenu_aqua_orange_SubLevelArea_Item_HotKey {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+/*
+	arrow cascade (right, loading)
+*/
+img.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Arrow {
+	width: 4px;
+	height: 9px;
+	position: absolute;
+	margin-top: 3px;
+	right: 8px;
+}
+img.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Arrow_Loading {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	margin-top: -2px;
+	right: 2px;
+}
+/*
+	icons (checkboxes and radios are use the same class)
+*/
+img.dhtmlxMenu_aqua_orange_TopLevel_Item_Icon {
+	position: absolute;
+	margin-top: -1px;
+	left: 6px;
+	width: 16px;
+	height: 16px;
+}
+img.dhtmlxMenu_aqua_orange_SubLevelArea_Item_Icon {
+	position: absolute;
+	top: 3px;
+	left: 6px;
+	_left: -23px;
+	width: 16px;
+	height: 16px;
+}
+/*
+	arrows limit (up, down)
+*/
+div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_default.gif");
+	background-repeat: repeat-x;
+	border-top: #FF6600 1px solid;
+	border-left: #FF6600 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp_Over {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_over.gif");
+	background-repeat: repeat-x;
+	border-top: #FF6600 1px solid;
+	border-left: #FF6600 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp_Disabled {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_default.gif");
+	background-repeat: repeat-x;
+	border-top: #FF6600 1px solid;
+	border-left: #FF6600 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_up.gif");
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp_Over div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_up_over.gif");
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowUp_Disabled div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_up_dis.gif");
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_default.gif");
+	background-repeat: repeat-x;
+	border-left: #FF6600 1px solid;
+	border-bottom: #C1570F 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown_Over {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_over.gif");
+	background-repeat: repeat-x;
+	border-left: #FF6600 1px solid;
+	border-bottom: #C1570F 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown_Disabled {
+	position: absolute;
+	height: 16px;
+	height=17px;
+	font-size: 1px;
+	background-image: url("dhtmlxmenu_arrow_bg_default.gif");
+	background-repeat: repeat-x;
+	border-left: #FF6600 1px solid;
+	border-bottom: #C1570F 1px solid;
+	border-right: #C1570F 1px solid;
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_down.gif");
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown_Over div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_down_over.gif");
+}
+div.dhtmlxMenu_aqua_orange_SubLevelArea_ArrowDown_Disabled div.dhtmlxMenu_aqua_orange_SubLevelArea_Arrow {
+	background-image: url("dhtmlxmenu_arrow_down_dis.gif");
+}

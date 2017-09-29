@@ -1,0 +1,152 @@
+Login Form
+$(document).ready(function() {
+    $('#demo1').click(function() {
+        $.blockUI({ message: $('#loginForm') });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+iPhoto (ish)
+$(document).ready(function() {
+    $('#demo2').click(function() {
+        $.blockUI({ css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+        } });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+
+
+Blue Overlay
+$(document).ready(function() {
+    $('#demo3').click(function() {
+        $.blockUI({ overlayCSS: { backgroundColor: '#00f' } });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+Tall Content
+$(document).ready(function() {
+    $('#demo4').click(function() {
+        $.blockUI({
+            message: $('#tallContent'),
+            css: { top: '20%' }
+        });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+
+Image Box
+$(document).ready(function() {
+    $('#demo5').click(function() {
+        $.blockUI({
+            message: $('#displayBox'),
+            css: {
+                top:  ($(window).height() - 400) /2 + 'px',
+                left: ($(window).width() - 400) /2 + 'px',
+                width: '400px'
+            }
+        });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+Non-centered message
+$(document).ready(function() {
+    $('#demo6').click(function() {
+        $.blockUI({
+            centerY: 0,
+            css: { top: '10px', left: '', right: '10px' }
+        });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+Blocking without a message
+(pass null as message)
+
+$(document).ready(function() {
+    $('#demo7').click(function() {
+        $.blockUI({ message: null });
+
+        setTimeout($.unblockUI, 2000);
+    });
+});
+
+
+onUnblock callback
+(useful when using fadeOut option
+as it is invoked when all
+the blocking elements have been removed)
+
+$(document).ready(function() {
+    $('#demo8').click(function() {
+        $.blockUI();
+
+        setTimeout(function() {
+            $.unblockUI({
+                onUnblock: function(){ alert('onUnblock'); }
+            });
+        }, 2000);
+    });
+});
+
+
+Click overlay to unblock
+(This demo will not automatically unblock, you must click the overlay.)
+
+$(document).ready(function() {
+    $('#demo9').click(function() {
+        $.blockUI();
+        $('.blockOverlay').attr('title','Click to unblock').click($.unblockUI);
+    });
+});
+
+
+Auto-Unblock
+Sets a timer to unblock after a specified timeout.
+
+$(document).ready(function() {
+    $('#demo10').click(function() {
+        $.blockUI({
+            message: '<h1>Auto-Unblock!</h1>',
+            timeout: 2000
+        });
+    });
+});
+
+Bloquear container
+ $('#blockButton').click(function() {
+            $('div.test').block({ message: null });
+        });
+
+        $('#blockButton2').click(function() {
+            $('div.test').block({
+                message: '<h1>Processing</h1>',
+                css: { border: '3px solid #a00' }
+            });
+        });
+
+        $('#unblockButton').click(function() {
+            $('div.test').unblock();
+        });
+    });
