@@ -1,6 +1,6 @@
 # formDin
 
-![Logo formDin](https://softwarepublico.gov.br/social/image_uploads/0000/0296/formdin_big.png)
+![Logo formDin](https://raw.githubusercontent.com/bjverde/formDin/master/base/imagens/formdin_logo.png)
 
 formDin ou Formulário Dinâmico - Framework PHP para desenvolvimento rápido de sistemas web. Essa versão é **Fork do FormDin 4 do [portal do software publico.](https://softwarepublico.gov.br/social/formdin)**
 
