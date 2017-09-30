@@ -115,7 +115,7 @@ function callBackSelectCombinado(pai,filho)
 }
 function regiaoChange()
 {
-	alert( 'Rregião foi alterada');
+	alert( 'Região foi alterada');
 }
 function lerMunAjax()
 {
