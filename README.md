@@ -15,3 +15,10 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 ## Sobre as branchs
 * Master - tem as modificações e novidades
 * copyLEB - copia de versão original, congelada e sem alterações.
+
+## Informações
+
+* arquivos do projeto
+    * UTF-8 Sem BOM
+    * retorno do carro formato Windows
+* PHP 5.4.x ou superior
