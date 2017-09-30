@@ -14,4 +14,4 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 
 ## Sobre as branchs
 * Master - tem as modificações e novidades
-* ultimaCopia - tem um copia de versão congelada e sem alterações.
+* copyLEB - copia de versão original, congelada e sem alterações.
