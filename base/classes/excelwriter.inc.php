@@ -90,7 +90,7 @@ Class ExcelWriter{
                 xmlns="http://www.w3.org/TR/REC-html40">
 
                 <head>
-                <meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+                <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
                 <meta name=ProgId content=Excel.Sheet>
                 <!--[if gte mso 9]><xml>
                  <o:DocumentProperties>

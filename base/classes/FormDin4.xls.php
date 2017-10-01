@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(0);
@@ -72,7 +72,7 @@ if ( file_exists( $tempFile ) )
 }
 else
 {
-	echo '<h2>Dados do gride n„o foram salvos em ' . $tempFile . '</h2>';
+	echo '<h2>Dados do gride n√£o foram salvos em ' . $tempFile . '</h2>';
 	die();
 }
 
@@ -91,7 +91,7 @@ $keys = array_keys($dadosGride);
 if( $tituloGride )
 {
 	$excel->writeRow();
-	$excel->writeCol(htmlentities( $tituloGride,null,'ISO-8859-1' ),count($keys));
+	$excel->writeCol(htmlentities( $tituloGride,null,'UTF-8' ),count($keys));
 }
 
 $count=0;
@@ -103,7 +103,7 @@ foreach( $_REQUEST as $k => $v )
 		{
 			$count++;
 			$excel->writeRow();
-			$excel->writeCol(htmlentities("CritÈrio(s) de SeleÁ„o:",null,'ISO-8859-1'),count($keys));
+			$excel->writeCol(htmlentities("Crit√©rio(s) de Sele√ß√£o:",null,'ISO-8859-1'),count($keys));
 		}
 		$excel->writeLine(array( htmlentities( preg_replace( '/(w_|:)/', '', $k  ),null,'ISO-8859-1'  ),array( htmlentities( $v,null,'ISO-8859-1' ),(count($keys)-1) ) ) );
 	}
@@ -157,7 +157,7 @@ $excel->close();
 //ob_clean();
 //flush();
 
-// ConfiguraÁıes header para forÁar o download
+// Configura√ß√µes header para for√ßar o download
 header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
 header ("Cache-Control: no-cache, must-revalidate");
