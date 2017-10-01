@@ -18,11 +18,34 @@
 
 </style>
 <?php
+
+function testar($extensao=null,$html){
+	if( !extension_loaded($extensao) )	{
+		$html->add('<b>'.$extensao.'</b>: <span class="vermelho">Não instalada</span><br>');
+		return true;
+	}else {
+		$html->add('<b>'.$extensao.'</b>: <span class="verde">Instalada.</span><br>');
+		return false;
+	}
+}
+
+function phpVersionOK(){
+	$texto = '<b>Versão do PHP</b>: ';
+	if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+		$texto =  $texto.'<span class="verde">'.phpversion().'</span><br>';
+	}else{
+		$texto =  $texto.'<span class="vermelho">'.phpversion().' atualize seu sistema para o PHP 5.4.0 ou seperior </span><br>';
+	}
+	return $texto;
+}
+
+
+	
 	$frm = new TForm('Configurações do PHP',null,600);
 	$html = $frm->addHtmlField('conf','');
 	$html->setCss('font-size','14px');
 
-	$html->add('<b>Versão do PHP</b>: <span class="versao">'.phpversion().'</span><br>');
+	$html->add(phpVersionOK());
 	$html->add('<b>Seu Ip</b>: <span class="versao">'.$_SERVER['REMOTE_ADDR'].'</span><br>');
 
 	$html->add('<br><b>Extensões:</b><br>');
@@ -62,19 +85,4 @@
 	testar('curl',$html);
 
 	$frm->show();
-	//phpinfo();
-	function testar($extensao=null,$html)
-	{
-		if( !extension_loaded($extensao) )
-		{
-			$html->add('<b>'.$extensao.'</b>: <span class="vermelho">Não instalada</span><br>');
-			return true;
-		}
-		else
-		{
-			$html->add('<b>'.$extensao.'</b>: <span class="verde">Instalada.</span><br>');
-			return false;
-		}
-  	}
-
 ?>
