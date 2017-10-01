@@ -46,8 +46,7 @@ $frm->addHtmlField('campo_gride');
 $_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 if( $_REQUEST['action'] == 'atualizar_gride' ) {
 	// criação do array de dados
-	for( $i=0; $i<30; $i++ )
-	{
+	for( $i=0; $i<30; $i++ ) {
 		$res['SEQ_GRIDE'][] = ($i+1);
 		$res['NOM_LINHA'][] = 'Linha nº '. (10-$i+1);
 		$res['DES_LINHA'][] = $i.' - '.str_repeat('Linha ',20);

@@ -47,44 +47,36 @@ $frm->addHtmlField('resultado1','',null,null,220,300)->setCss('border','1px soli
 $frm->addHtmlField('resultado2','',NULL,NULL,220,300,false)->setCss('border','1px solid blue');
 $frm->addHtmlField('status');
 error_reporting(E_ALL);
-if( $acao == 'Testar' )
-{
-	try
-	{
+
+$acao = isset($acao) ? $acao : '';
+if( $acao == 'Testar' ) {
+	try	{
 		TDb::setDbType('mysql');
 		$res = TDb::sql('select * from engines');
 		$frm->set('resultado1','<b><blink>MySql - Table: ENGINES</blink></b><hr><pre>'.print_r(converteArray($res),true).'</pre>');
-	}
-	catch (Exception $e)
-	{
+	} catch (Exception $e) {
 		$frm->set('resultado1',$e->getMessage());
 	}
 
-	try
-	{
+	try	{
 		TDb::setDbType('sqlite');
 		$res = TDb::sql('select * from tb_test');
 		$frm->set('resultado2','<b><blink>Sqlite - Table: tb_test</blink></b><hr><pre>'.print_r(converteArray($res),true).'</pre>');
-	}
-	catch (Exception $e)
-	{
+	} catch (Exception $e) {
 		$frm->set('resultado2',$e->getMessage());
 	}
-
-
 }
-function converteArray($dados)
-{
+
+function converteArray($dados) {
 	$res=null;
-	foreach($dados as $k=>$a)
-	{
-		foreach($a as $k1=>$v1)
-		{
+	foreach($dados as $k=>$a) {
+		foreach($a as $k1=>$v1) {
 			$res[strtoupper($k1)][$k]=$v1;
 		}
 	}
 	return $res;
 }
+
 $frm->setAction('Testar,Refresh');
 $frm->show();
 ?>

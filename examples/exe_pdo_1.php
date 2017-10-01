@@ -41,8 +41,8 @@ $frm = new TForm('Exemplo PDO 1',450);
 $frm->addHtmlField('mensagem','Dados da conexão:<br>Banco:MYSQL<BR>Host:127.0.0.1<br>Port:3306<br>Database:text<br>Usuário:root<br>Senha:');
 $frm->addHtmlField('status');
 
-if( $acao == 'Testar' )
-{
+$acao = isset($acao) ? $acao : '';
+if( $acao == 'Testar' ) {
 	/*
 	TPDOConnection::connect('config_conexao_sqlite.php',null,false);
 	$bd1 = TPDOConnection::getInstance();
