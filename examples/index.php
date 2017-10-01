@@ -49,7 +49,7 @@ $app->setWidth(990);
 $app->setNorthSize(55);
 //$app->getNorthArea()->setCss('border','0px');
 
-$app->setMainMenuFile('menu_principal.php');
+$app->setMainMenuFile('includes/menu.php');
 $app->setConfigFile(null);
 //$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
