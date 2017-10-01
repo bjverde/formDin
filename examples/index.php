@@ -41,7 +41,7 @@ define('FORMDIN',1);
 define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
-include('../classes/webform/TApplication.class.php');
+include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app->setMenuIconsPath('imagem/');
 
