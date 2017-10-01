@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,27 +20,27 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
 Sistema FASIS
-Módulo de alteração de senha oracle
-Autor: Luis Eugênio Barbosa
+MÃ³dulo de alteraÃ§Ã£o de senha oracle
+Autor: Luis EugÃªnio Barbosa
 */
 // campos do formulario
 $arrCampos['num_cpf']				= new Campocpf('num_cpf','C.P.F.:',false,null,null,false);
@@ -50,8 +50,8 @@ $arrCampos['separacao']				= new CampoHtml('separacao','<hr>');
 $arrCampos['des_senha']				= new CampoSenha('des_senha','Nova Senha',true,'',null,20,20);
 $arrCampos['des_senha2']			= new CampoSenha('des_senha2','Redigite a Nova Senha',true,'',null,20,20);
 
-// criar instancia do formulário dinâmico
-$frm = new FormDin3($arrCampos,'ALTERAÇÃO DE SENHA',$_POST);
+// criar instancia do formulÃ¡rio dinÃ¢mico
+$frm = new FormDin3($arrCampos,'ALTERAÃ‡ÃƒO DE SENHA',$_POST);
 $frm->criarVariavel('modulo',PASTA_BASE.'/seguranca/alt_senha_oracle.inc');
 $frm->setAltura(0);
 $frm->setCampoFocoInicial('des_senha_atual');
@@ -74,7 +74,7 @@ switch($_SESSION[APLICATIVO]['acao']) {
 		{
 			if((string)$frm->get('des_senha') <> (string)$frm->get('des_senha2'))
 			{
-				$frm->msgerros[]='Senhas não conferem!';
+				$frm->msgerros[]='Senhas nÃ£o conferem!';
 				break;
 			}
 			// validar senha atual
@@ -90,15 +90,15 @@ switch($_SESSION[APLICATIVO]['acao']) {
 			}
 			else
 			{
-				$frm->mensagem = "Erro na validação da senha atual'";
+				$frm->mensagem = "Erro na validaÃ§Ã£o da senha atual'";
 				$erro = oci_error();
 				if($erro["code"]==1017)
 				{
-					$frm->mensagem = "Senha Atual Inválida.";
+					$frm->mensagem = "Senha Atual InvÃ¡lida.";
 				}
 				else if($erro["code"]==28000)
 				{
-					$frm->mensagem = "Usuário(a) está bloqueado(a)";
+					$frm->mensagem = "UsuÃ¡rio(a) estÃ¡ bloqueado(a)";
 				}
 			}
 		}

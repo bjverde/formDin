@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -45,14 +45,14 @@ if(isset($_POST['num_cep'])){
 $frm = new TForm('Exemplo Campo CEP',400,600);
 // define a largura das colunas verticais do formulario para alinhamento dos campos
 $frm->setColumns(array(100,100));
-$fldCep = $frm->addCepField('num_cep1','Cep:',true,null,null,'des_endereco','nom_bairro','nom_cidade','cod_uf',null,null,null,null,null,null,'pesquisarCepCallback','pesquisarCepBeforeSend',false,'Cep est· incompleto')->setExampleText('N„o limpar se estiver incompleto');
+$fldCep = $frm->addCepField('num_cep1','Cep:',true,null,null,'des_endereco','nom_bairro','nom_cidade','cod_uf',null,null,null,null,null,null,'pesquisarCepCallback','pesquisarCepBeforeSend',false,'Cep est√° incompleto')->setExampleText('N√£o limpar se estiver incompleto');
 $fldCep = $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco','nom_bairro','nom_cidade','cod_uf',null,null,null,null,null,null,'pesquisarCepCallback','pesquisarCepBeforeSend');
-$frm->addTextField('des_endereco','EndereÁo:',60);
-$frm->addTextField('num_endereco','N˙mero:',10);
+$frm->addTextField('des_endereco','Endere√ßo:',60);
+$frm->addTextField('num_endereco','N√∫mero:',10);
 $frm->addTextField('des_complemento','Complemento:',60);
 $frm->addTextField('nom_bairro','Bairro:',60);
 $frm->addTextField('nom_cidade','Cidade:',60);
-$frm->addTextField('cod_municipio','Cod. MunicÌpio:',10);
+$frm->addTextField('cod_municipio','Cod. Munic√≠pio:',10);
 $frm->addSelectField('cod_uf','Uf:',2);
 $frm->addTextField('sig_uf','Uf:',2);
 $frm->setValue('num_cep','71505030');
@@ -72,10 +72,10 @@ $fldCep = $frm->addCepField('num_cep2','Cep:',true,null,null
 	,'cod_municipio2_temp'
 	,null
 	,null,'myCallback');
-	$frm->addTextField('des_endereco2','EndereÁo:',60);
+	$frm->addTextField('des_endereco2','Endere√ßo:',60);
 	$frm->addSelectField('cod_uf2','Estado:',false);
-	$frm->addSelectField('cod_municipio2','MunicÌpio:',null,null,false);
-	$frm->combinarSelects('cod_uf2','cod_municipio2','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- MunicÌpios --','0','Nenhum MunicÌpio Encontrado');
+	$frm->addSelectField('cod_municipio2','Munic√≠pio:',null,null,false);
+	$frm->combinarSelects('cod_uf2','cod_municipio2','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Munic√≠pios --','0','Nenhum Munic√≠pio Encontrado');
 
 $frm->show();
 ?>

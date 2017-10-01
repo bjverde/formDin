@@ -1,7 +1,7 @@
 <?php
 /*
-MÛdulo de cadastro de usu·rios
-Autor: Luis EugÍnio Barbosa
+M√≥dulo de cadastro de usu√°rios
+Autor: Luis Eug√™nio Barbosa
 Data Inicio: 07-08-2009
 */
 
@@ -9,7 +9,7 @@ if(!defined('MULTI_PERFIL'))
 {
 	define('MULTI_PERFIL','N');
 }
-$frm = new TForm('Habilitar / Desabilitar Acesso de Usu·rio',450);
+$frm = new TForm('Habilitar / Desabilitar Acesso de Usu√°rio',450);
 $frm->setColumns(array(50));
 $frm->addHiddenField('num_cpf');
 $frm->addHiddenField('num_pessoa');
@@ -19,7 +19,7 @@ $frm->setPopUpMessage('Teste da mensagem',0,'ATTENTION','search.gif');
 $frm->setPopUpMessage('Teste da mensagem',0,'ERROR','search.gif');
 $frm->setPopUpMessage('Teste da mensagem',0,'SUCESS','search.gif');
 */
-// criar os campos do formul·rio
+// criar os campos do formul√°rio
 switch($acao)
 {
 	case "gd_excluir":
@@ -29,16 +29,16 @@ switch($acao)
 			$bvars['NUM_CPF'] 			= preg_replace('/[^0-9]/','',$frm->getValue('num_cpf'));
 			$bvars['SEQ_PERFIL'] 		= null;
 
-			// evitar que o prÛprio usu·rio retire todos os seus perfis
+			// evitar que o pr√≥prio usu√°rio retire todos os seus perfis
 			if( $_SESSION[APLICATIVO]['login']['num_pessoa'] == $bvars['NUM_PESSOA'] )
 			{
-				$frm->setMessage('Auto exclus„o n„o È permitida!');
+				$frm->setMessage('Auto exclus√£o n√£o √© permitida!');
 			}
 			else
 			{
     			if( !$frm->msgerros = executarPacote(ESQUEMA.'.PKG_SEGURANCA.INC_ALT_USUARIO',$bvars))
     			{
-					$frm->setPopUpMessage('Usu·rio desabilitado com SUCESSO!');
+					$frm->setPopUpMessage('Usu√°rio desabilitado com SUCESSO!');
 				}
 
 			}
@@ -48,14 +48,14 @@ switch($acao)
 		$frm->addHiddenField('num_cpf');
 		$frm->addHiddenField('num_pessoa');
 		$frm->setValue('num_pessoa','');
-		$frm->addGroupField('gpFiltro','Consultar Usu·rios Habilitados')->setColumns(array(40));
+		$frm->addGroupField('gpFiltro','Consultar Usu√°rios Habilitados')->setColumns(array(40));
 			$frm->addTextField('nom_pessoa_filtro'	,'Nome:',20,false);//->setHint('Dica - informe qualquer parte do nome.');
 			$frm->addSelectField('cod_uf_filtro'	,'Estado:',false,null,false);
 			$frm->addButton('Pesquisar','Listagem','btnPesquisar',null,null,null,false);
 		$frm->closeGroup();
 		$frm->addHtmlField('html_gride',getUsuarios(),null,null,null,null,true);
 		$frm->setAction('Novo');
-		// selecionar a uf do usu·rio logado como padr„o
+		// selecionar a uf do usu√°rio logado como padr√£o
 		if(!$acao)
 		{
 			$frm->setValue('cod_uf_filtro',$_SESSION[APLICATIVO]['login']['cod_uf']);
@@ -73,21 +73,21 @@ switch($acao)
 		$frm->addCpfCnpjField('num_cpf'			,'CPF/CNPJ'	,true);
 		//$frm->addTextField('tecla'			,'Tecla'		,60,false,null,null);
 		$frm->addTextField('nom_pessoa'			,'Nome'		,60,true,null,null);
-		$frm->addTextField('end_pessoa'			,'EndereÁo'	,100,null,60);
+		$frm->addTextField('end_pessoa'			,'Endere√ßo'	,100,null,60);
 		$frm->addTextField('des_bairro'			,'Bairro'	,60,false);
 		$frm->addCepField('num_cep'				,'C.E.P.',false);
-		$frm->addTextField('nom_municipio'		,'MunicÌpio/Uf',60);
+		$frm->addTextField('nom_municipio'		,'Munic√≠pio/Uf',60);
 		$frm->addTextField('num_fone'			,'Telefone',60);
 		$frm->addTextField('des_email'			,'E-mail',60);
 		$frm->addTextField('nom_unidade_ibama'	,'Unidade de Controle',100,false,60);
 		$frm->addHtmlField('html_gride',null,null,null,null,null,true);
-		// botıes
+		// bot√µes
 		$frm->setAction('Gravar,Novo,Listagem');
 		// desabilitar todos os campos exceto o cpf
 		$frm->disableFields(null);
 }
 
-// tratar a aÁ„o
+// tratar a a√ß√£o
 switch($acao)
 {
 	//---------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ switch($acao)
 		// adicionar autocompletar no campo cpf
 		//$frm->setAutoComplete('num_cpf','TESTE.PKG_SEGURANCA.SEL_DADOS_FUNCIONARIO','NUM_CPF','NUM_PESSOA,NOM_PESSOA,COD_UNIDADE_IBAMA,END_PESSOA,DES_BAIRRO,NUM_CEP,NUM_FONE,DES_EMAIL,NOM_MUNICIPIO,NOM_UNIDADE_IBAMA,HTML_GRIDE',true,null,"atualizar",14,800,null,null,true);
 		$frm->setAutoComplete('num_cpf',ESQUEMA.'.PKG_SEGURANCA.SEL_DADOS_FUNCIONARIO','NUM_CPF','NUM_PESSOA,NOM_PESSOA,COD_UNIDADE_IBAMA,END_PESSOA,DES_BAIRRO,NUM_CEP,NUM_FONE,DES_EMAIL,NOM_MUNICIPIO,NOM_UNIDADE_IBAMA,HTML_GRIDE',true,null,"fwFazerAcao('atualizar')",14,400,2,null,true);
-		//$frm->setOnlineSearch('num_cpf',ESQUEMA.'.PKG_SEGURANCA.SEL_DADOS_FUNCIONARIO','NUM_CPF',false,false,false,'NUM_CPF|CPF,NOM_PESSOA|Nome','NOM_PESSOA','Consulta Funcion·rio');
+		//$frm->setOnlineSearch('num_cpf',ESQUEMA.'.PKG_SEGURANCA.SEL_DADOS_FUNCIONARIO','NUM_CPF',false,false,false,'NUM_CPF|CPF,NOM_PESSOA|Nome','NOM_PESSOA','Consulta Funcion√°rio');
 	break;
 	//---------------------------------------------------------------------------------
 	case 'Gravar':
@@ -109,7 +109,7 @@ switch($acao)
 			$bvars['DES_ROLE'] 			= ROLE;
 			$bvars['NUM_CPF'] 			= $frm->getValue('num_cpf');
 			$bvars['SEQ_PERFIL'] 		= $_POST['seq_perfil'];
-			// evitar que o prÛprio usu·rio retire todos os seus perfis
+			// evitar que o pr√≥prio usu√°rio retire todos os seus perfis
 			if( !is_array( $_POST['seq_perfil'] ) && $_SESSION[APLICATIVO]['login']['maior_nivel'] != '999' )
 			{
 				if( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'])==preg_replace('/[^0-9]/','',$frm->getValue('num_cpf')) )
@@ -129,7 +129,7 @@ switch($acao)
 		$res=null;
 		print_r( recuperarPacote(ESQUEMA.'.PKG_SEGURANCA.SEL_DADOS_FUNCIONARIO',$bvars,$res,-1));
 		$frm->update($res);
-		// recuperar os perfis do usu·rio
+		// recuperar os perfis do usu√°rio
 		$bvars=array('NUM_PESSOA'=>(integer)$frm->getValue('num_pessoa')
 		            ,'SEQ_PROJETO'=>PROJETO);
 		$res=null;
@@ -158,7 +158,7 @@ function getUsuarios()
 {
 	if(!$_POST['nom_pessoa_filtro'] && !$_POST['cod_uf_filtro'])
 	{
-		return '<center><br><b>Informe o NOME e/ou a UF para visualizar a lista de usu·rios cadastrados.<br/><br/>Para habilitar um usu·rio a utilizar este sistema, clique <a href="javascript:Void(0);" onClick=\'fwFazerAcao("Novo")\'>Aqui</a> ou no bot„o Novo,<br>localizado no rodapÈ deste formul·rio.</b></center>';
+		return '<center><br><b>Informe o NOME e/ou a UF para visualizar a lista de usu√°rios cadastrados.<br/><br/>Para habilitar um usu√°rio a utilizar este sistema, clique <a href="javascript:Void(0);" onClick=\'fwFazerAcao("Novo")\'>Aqui</a> ou no bot√£o Novo,<br>localizado no rodap√© deste formul√°rio.</b></center>';
 	}
 
 	$g = new TGrid('gd'
@@ -182,7 +182,7 @@ function getUsuarios()
 //--------------------------------------------------------------------------------------
 function getPerfil()
 {
-	// recuperar os perfis do usu·rio para marcar no grid
+	// recuperar os perfis do usu√°rio para marcar no grid
 	$bvars=array('NUM_PESSOA'=>$_REQUEST['num_pessoa']
 	            ,'SEQ_PROJETO'=>PROJETO);
 	$res=null;
@@ -199,7 +199,7 @@ function getPerfil()
 
 	if(!is_array($res_perfil))
 	{
-		return 'Necess·rio cadastrar pelo menos um perfil';
+		return 'Necess√°rio cadastrar pelo menos um perfil';
 	}
 	$bvars=array('NUM_PESSOA'=>$_REQUEST['num_pessoa']
 	            ,'SEQ_PROJETO'=>PROJETO);

@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 //d($_REQUEST);
@@ -63,22 +63,22 @@ $frm->show();
 <script>
 function subcadastro()
 {
-	// Passsando o campo nome como json. Se n„o for informado o valor, ser· lido do formul·rio
-	//fwModalBox('Este È um Subcadastro','../teste.php');
-	//fwModalBox('Este È um Subcadastro','www.globo.com.br');
-	fwModalBox('Este È um Subcadastro',app_index_file+'?modulo=exe_TForm.php',380,820,callbackModaBox,{'nome':''});
+	// Passsando o campo nome como json. Se n√£o for informado o valor, ser√° lido do formul√°rio
+	//fwModalBox('Este √© um Subcadastro','../teste.php');
+	//fwModalBox('Este √© um Subcadastro','www.globo.com.br');
+	fwModalBox('Este √© um Subcadastro',app_index_file+'?modulo=exe_TForm.php',380,820,callbackModaBox,{'nome':''});
 }
 
 /**
-* A funÁ„o de callback da janela modal, recebe 2 parametros:
-* 1) array com todos os campos do formul·rio do subcadastro
+* A fun√ß√£o de callback da janela modal, recebe 2 parametros:
+* 1) array com todos os campos do formul√°rio do subcadastro
 * 2) instancia do objeto document do subcadastro
 */
 function callbackModaBox(data, doc )
 {
 	var msg;
     // exemplo de tratamento do retorno do subcadastro
-	msg = 'A funÁ„o callbackModalBox() foi executada!\n\nAcessando os dados da janela modal:\n'+'Campo nome = '+data.nome+'\nCores:'+String(data.cor);
+	msg = 'A fun√ß√£o callbackModalBox() foi executada!\n\nAcessando os dados da janela modal:\n'+'Campo nome = '+data.nome+'\nCores:'+String(data.cor);
 	try{
 		msg+='\n\n A cor '+data.cor[0]+' foi selecionada';
 	} catch(e){};

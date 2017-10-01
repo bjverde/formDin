@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -67,7 +67,7 @@ class TApplication extends TLayout
 	private $cellLogin;
 	private $cellHeader;
 	private $cellLogo;
-	private $loCenter; // inst‚ncia do LayoutCenter
+	private $loCenter; // inst√¢ncia do LayoutCenter
 	private $beforeActionFunction;
 	private $width;
 	private $onGetLoginInfo;
@@ -80,7 +80,7 @@ class TApplication extends TLayout
 	private $onBeforeLogin;
 
 	/**
-	 * classe para criaÁ„o da aplicaÁ„o
+	 * classe para cria√ß√£o da aplica√ß√£o
 	 *
 	 * @param string $strTitle
 	 * @param string $strSubtitle
@@ -106,7 +106,7 @@ class TApplication extends TLayout
 
 		session_start();
 
-		// n„o exibir as mensagens de E_NOTICE para evitar os aviso de redefiniÁ„o das constantes BANCO_USUARIO E BANCO_SENHA do config.php
+		// n√£o exibir as mensagens de E_NOTICE para evitar os aviso de redefini√ß√£o das constantes BANCO_USUARIO E BANCO_SENHA do config.php
 		if ( defined( 'E_DEPRECATED' ) )
 		{
 
@@ -151,11 +151,11 @@ class TApplication extends TLayout
 		$this->setShowMenu( true );
 		$this->setFormDin3Compatible( false );
 
-		// arquivo css padr„o localizado na base base/css
+		// arquivo css padr√£o localizado na base base/css
 		$this->addCssFile( 'app.css' );
 		$this->setBackgroundImage( $this->getBase() . '/css/imagens/app/bg_listrado.jpg' );
 
-		// biblioteca de funÁıes geral
+		// biblioteca de fun√ß√µes geral
 		$this->addIncludeFile( $this->getBase() . 'includes/funcoes.inc' );
 	}
 
@@ -174,7 +174,7 @@ class TApplication extends TLayout
 		return $this->strTitle;
 	}
 	/**
-	* Define a tag <title> da p·gina que aparecer· na aba do browser
+	* Define a tag <title> da p√°gina que aparecer√° na aba do browser
 	*
 	* @param string $strNewValue
 	*/
@@ -263,7 +263,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Permite ocultar ou exibir o menu principal da aplicaÁ„o
+	 * Permite ocultar ou exibir o menu principal da aplica√ß√£o
 	 */
 	public function setShowMenu( $boolNewValue = null )
 	{
@@ -287,14 +287,14 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Este mÈtodo inicializa a aplicaÁ„o e cria a interface da aplicaÁ„o.
-	 * Se for passado o modulo ele apenas inclui mÛdulo e sai funcionando como o modulo ler_modulo.php antigo
+	 * Este m√©todo inicializa a aplica√ß√£o e cria a interface da aplica√ß√£o.
+	 * Se for passado o modulo ele apenas inclui m√≥dulo e sai funcionando como o modulo ler_modulo.php antigo
 	 *
 	 */
 	public function run()
 	{
 		ini_set( 'default_charset', $this->getCharset() );
-		ob_start(); // arquivos includes podem conter espaÁos no final que causam erros nas chamadas ajax
+		ob_start(); // arquivos includes podem conter espa√ßos no final que causam erros nas chamadas ajax
 		// adicionar os arquivos definidos no setIncludeFile()
 		if ( $this->getIncludeFiles() )
 		{
@@ -307,7 +307,7 @@ class TApplication extends TLayout
 			}
 		}
 		ob_clean();
-		// definir a constante de controle de sess„o do aplicativo caso n„o tenha sido definido no config.inc (php)
+		// definir a constante de controle de sess√£o do aplicativo caso n√£o tenha sido definido no config.inc (php)
 		if ( !defined( 'APLICATIVO' ) )
 		{
 			define( 'APLICATIVO', 'FORMDIN' );
@@ -328,7 +328,7 @@ class TApplication extends TLayout
 				include( $this->getBase() . 'includes/app_action.php' );
 			}
 
-			// arquivo de actions da aplicaÁ„o
+			// arquivo de actions da aplica√ß√£o
 			if ( file_exists( 'includes/app_action.php' ) )
 			{
 				include( 'includes/app_action.php' );
@@ -369,9 +369,9 @@ class TApplication extends TLayout
 		}
 
 		//******************************************************************************************
-		$this->processRequest(); // se existir modulo postado, a aplicaÁ„o termina nesta linha sen„o cria a tela b·sica do aplicativo
+		$this->processRequest(); // se existir modulo postado, a aplica√ß√£o termina nesta linha sen√£o cria a tela b√°sica do aplicativo
 		//******************************************************************************************
-		// limpar arquivos tempor·rios mas de 2 dias
+		// limpar arquivos tempor√°rios mas de 2 dias
 		//$h=opendir(getcwd().'/../tmp');
 		$tmpDir = preg_replace('/\/\//','/',$this->getBase().'/tmp/');
 		if( is_dir($tmpDir))
@@ -420,7 +420,7 @@ class TApplication extends TLayout
 		// css
 		if( $this->getHeaderBgImage() )
 		{
-			// sobrescrever as definiÁıes do app.css
+			// sobrescrever as defini√ß√µes do app.css
 			$this->addStyle('#app_header_title{background	:transparent;}');
 			$this->addStyle('#app_header_login{background	:transparent;}');
 			$this->addStyle('#app_header_logo{background	:transparent;}');
@@ -451,7 +451,7 @@ class TApplication extends TLayout
 		}
 		if( $this->getFooterBgImage() )
 		{
-			// sobrescrever as definiÁıes do app.css
+			// sobrescrever as defini√ß√µes do app.css
 			$this->addStyle('#app_footer_message{background	:transparent;}');
 			$this->addStyle('#app_footer_company{background	:transparent;}');
 			$this->addStyle('#app_footer_module{background	:transparent;}');
@@ -486,19 +486,19 @@ class TApplication extends TLayout
 		}
 
 		//$this->addJsCssFile('greybox/gb_styles.css');
-		//$menuTheme = 'clear_silver'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'aqua_dark'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'aqua_orange'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'aqua_sky'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'aqua_sky'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'clear_blue'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		//$menuTheme = 'clear_green'; // Estilos v·lidos: clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'clear_silver'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'aqua_dark'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'aqua_orange'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'aqua_sky'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'aqua_sky'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'clear_blue'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		//$menuTheme = 'clear_green'; // Estilos v√°lidos: clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 
 		// ajustar css. o height do item pricipal esta muito pequeno
 		//$menuTheme = 'dhx_black'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 		//$menuTheme = 'dhx_blue'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 
-		// estes est„o com o funco combinando com o tema, ver como fazer para os outros que est„o cinza
+		// estes est√£o com o funco combinando com o tema, ver como fazer para os outros que est√£o cinza
 		//$menuTheme = 'glassy_blue'; // glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 
 		// heihght ok, falta o fundo na cor do thema
@@ -530,10 +530,10 @@ class TApplication extends TLayout
 		$this->addJsCssFile( $this->getCssFile() );
 		$this->addJsCssFile( 'FormDin4.css' );
 
-		// arquivo js que ser· carregado por ˙ltimo se existir
+		// arquivo js que ser√° carregado por √∫ltimo se existir
 		$this->addJsCssFile( 'js/main.js' );
 
-		// arquivo css que ser· carregado por ˙ltimo se existir
+		// arquivo css que ser√° carregado por √∫ltimo se existir
 		$this->addJsCssFile( 'css/main.css' );
 
 		/*
@@ -557,20 +557,20 @@ class TApplication extends TLayout
 
 		if( $this->getLoginDone() )
 		{
-			// montar o cabeÁalho da pagina
+			// montar o cabe√ßalho da pagina
 			$this->buildPageHeader();
 
 			$btnLogOut='';
 
-			// montar o rodapÈ da pagina
+			// montar o rodap√© da pagina
 			$this->buildPageFooter();
 
 			if ( isset( $this->cellLogin ) )
 			{
-				// exibir o bot„o de ecerrar a sess„o somente se existir tela de login definida
+				// exibir o bot√£o de ecerrar a sess√£o somente se existir tela de login definida
 				if ( $this->getLoginFile() )
 				{
-					$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sess„o" onclick="app_login(1,\''
+					$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sess√£o" onclick="app_login(1,\''
 					. $this->getLoginFile() . '\')">';
 				}
 				if ( $this->getLoginInfo() )
@@ -596,13 +596,13 @@ class TApplication extends TLayout
 		}
 		else
 		{
-			// montar o cabeÁalho da pagina
+			// montar o cabe√ßalho da pagina
 			$this->buildPageHeader();
 
-			// montar o rodapÈ da pagina
+			// montar o rodap√© da pagina
 			$this->buildPageFooter();
 
-			//$this->loCenter->setNorthInitClosed(true); // n„o mostrar a ·rea de menu
+			//$this->loCenter->setNorthInitClosed(true); // n√£o mostrar a √°rea de menu
 			if ( $this->getLoginInfo() && isset( $this->cellLogin ) )
 			{
 				$this->cellLogin->add( $this->getLoginInfo() );
@@ -616,7 +616,7 @@ class TApplication extends TLayout
 				}
 				else
 				{
-					$this->addJavascript( 'alert("Tela de login:' . $this->getLoginFile() . ', defindo para a aplicaÁ„o, n„o existe.")' );
+					$this->addJavascript( 'alert("Tela de login:' . $this->getLoginFile() . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 				}
 
 				$this->show();
@@ -630,24 +630,24 @@ class TApplication extends TLayout
 			{
 				if ( file_exists( $this->getMainMenuFile() ) )
 				{
-					$this->addJavascript( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. N„o foi possÌvel instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
+					$this->addJavascript( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. N√£o foi poss√≠vel instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
 					$this->addJavascript( 'app_build_menu(false,null,"' . $this->getMainMenuFile() . '")' );
 				}
 				else
 				{
-					$this->addJavascript( 'alert("MÛdulo de menu:' . $this->getMainMenuFile() . ', defindo para a aplicaÁ„o, n„o existe.")' );
+					$this->addJavascript( 'alert("M√≥dulo de menu:' . $this->getMainMenuFile() . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 				}
 			}
 		}
 
-		//se pressionar F5, recarregar o ultimo mÛdulo solicitado
+		//se pressionar F5, recarregar o ultimo m√≥dulo solicitado
 		$loadModule=null;
 		if ( isset( $_SESSION[ APLICATIVO ][ 'modulo' ] ) && $_SESSION[ APLICATIVO ][ 'modulo' ] )
 		{
 
 			if ( $_SESSION[ APLICATIVO ][ 'modulo' ] != $this->getLoginFile() )
 			{
-				//$this->addJavascript( '//se pressionar F5, recarregar o ultimo mÛdulo solicitado' );
+				//$this->addJavascript( '//se pressionar F5, recarregar o ultimo m√≥dulo solicitado' );
 				$loadModule = $_SESSION[ APLICATIVO ][ 'modulo' ];
 				//$this->addJavascript( 'app_load_module("' . $_SESSION[ APLICATIVO ][ 'modulo' ] . '")' );
 			}
@@ -676,7 +676,7 @@ class TApplication extends TLayout
 
 	//-----------------------------------------------------------------
 	/**
-	 * Este mÈtodo È respons·vel por processar as requisiÁıes web
+	 * Este m√©todo √© respons√°vel por processar as requisi√ß√µes web
 	 *
 	 */
 	private function processRequest()
@@ -725,8 +725,8 @@ class TApplication extends TLayout
 						ob_clean();
 					}
 					$_SESSION[APLICATIVO]=null;
-					$_POST['fwSession_expired'] = true; // avisar a classe TForm para reiniciar a aplicaÁ„o
-					//die('<html><head><script>window.setTimeout("top.app_restart(\'Sua sess„o foi encerrada.\\\n\\\nPressione OK para continuar.\')",100);</script></head><body></body></html>');
+					$_POST['fwSession_expired'] = true; // avisar a classe TForm para reiniciar a aplica√ß√£o
+					//die('<html><head><script>window.setTimeout("top.app_restart(\'Sua sess√£o foi encerrada.\\\n\\\nPressione OK para continuar.\')",100);</script></head><body></body></html>');
 					if ( ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ])||$_REQUEST['gridOffline']  )
 					{
 						if( strtolower( $_REQUEST['dataType'] ) == 'json')
@@ -748,7 +748,7 @@ class TApplication extends TLayout
 						}
 						else
 						{
-							die('Sess„o Expirada. Efetue login novamente.');
+							die('Sess√£o Expirada. Efetue login novamente.');
 						}
 
 						die();
@@ -772,8 +772,8 @@ class TApplication extends TLayout
 					header( "content-type: text/xml; charset=".$this->getCharset().'"' );
 
 					echo '<menu>
-							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' n„o existe."/>
-							<item id="verifique" text="Verifique as configuraÁıes no index.php"/>
+							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' n√£o existe."/>
+							<item id="verifique" text="Verifique as configura√ß√µes no index.php"/>
 						</menu>';
 					exit();
 				}
@@ -805,7 +805,7 @@ class TApplication extends TLayout
 			if ( !file_exists( $modulo ) )
 			{
 				echo $htmlScript;
-				$this->addJavascript( 'top.app_show_message("Modulo ' . $_POST[ 'modulo' ] . ' n„o encontrado","ERROR",8)' );
+				$this->addJavascript( 'top.app_show_message("Modulo ' . $_POST[ 'modulo' ] . ' n√£o encontrado","ERROR",8)' );
 				$this->addJavascript( 'top.app_setFooterModule();' );
 
 				echo $this->getJavascript( true, false );
@@ -844,7 +844,7 @@ class TApplication extends TLayout
 					exit();
 				}
 
-				// se existir o modulo terminado com xajax este ser· chamado
+				// se existir o modulo terminado com xajax este ser√° chamado
 				if ( $xajax = $this->processXajaxRequest( $modulo ) )
 				{
 					$xajax->processRequest();
@@ -852,7 +852,7 @@ class TApplication extends TLayout
 
 				if ( !isset( $_REQUEST[ 'subform' ] ) || !$_REQUEST[ 'subform' ] )
 				{
-					// guardar o modulo na sess„o para reexibir a p·gina se o usuario pressionar F5
+					// guardar o modulo na sess√£o para reexibir a p√°gina se o usuario pressionar F5
 					$_SESSION[ APLICATIVO ][ 'modulo' ] = $_POST[ 'modulo' ];
 				}
 
@@ -863,7 +863,7 @@ class TApplication extends TLayout
 				{
 					if ( function_exists( 'executarPacote' ) )
 					{
-						// verificar se j· respondeu
+						// verificar se j√° respondeu
 						$bvars = array( 'NUM_PESSOA' => $_SESSION[ 'num_pessoa' ], 'COD_PSQ_PESQUISA' => COD_PSQ, 'SEQ_CONTEXTO' => SEQ_CONTEXTO );
 
 						executarPacote( 'SISTAT.PK_SISREG.PESQUISA_PESSOA_RESPONDEU', $bvars, -1 );
@@ -885,7 +885,7 @@ class TApplication extends TLayout
 					$acao = null;
 				}
 
-				// quando for subformularios dentro de um facebox, n„o sobrepor o nome do modulo principal aberto guardado na sess„o
+				// quando for subformularios dentro de um facebox, n√£o sobrepor o nome do modulo principal aberto guardado na sess√£o
 				if ( !isset( $_REQUEST[ 'subform' ] ) )
 				{
 					$this->addJavascript( "try{ parent.app_setFooterModule(\"{$modulo}\",\"{$acao}\");}catch(e){}" );
@@ -902,12 +902,12 @@ class TApplication extends TLayout
 					echo "
 					<script>
 					//http://xajaxproject.org/en/docs-tutorials/upgrading-from-xajax-0-2-x-to-0-5/
-					// fazer controle de requisiÁıes xajax
+					// fazer controle de requisi√ß√µes xajax
 					var globalXajaxRequests	= 0;
 					xajax.callback.global.onRequest = function()
 					{
 						globalXajaxRequests++;
-						//alert('RequisiÁ„o n. '+globalXajaxRequests);
+						//alert('Requisi√ß√£o n. '+globalXajaxRequests);
 						try{parent.app_setFooterMessage('Xajax:'+globalXajaxRequests);}catch(e){}
 						//xajax.$('loadingMsg').style.display = 'block';
 					};
@@ -937,16 +937,16 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Este mÈtodo faz a integraÁ„o da aplicaÁ„o com a classe XAJAX
+	 * Este m√©todo faz a integra√ß√£o da aplica√ß√£o com a classe XAJAX
 	 * Ao receber o modulo, ela verifica se existe o arquivo correspondente terminado em _xajax.
-	 * Se existir este ser· incluido e todas as suas funÁıes ser„o extraidas e registradas automaticamente.
+	 * Se existir este ser√° incluido e todas as suas fun√ß√µes ser√£o extraidas e registradas automaticamente.
 	 *
 	 * @param string $modulo
 	 * @return object xajax
 	 */
 	protected function processXajaxRequest( $modulo )
 	{
-		// fazer integraÁ„o com a classe XAJAX
+		// fazer integra√ß√£o com a classe XAJAX
 		$moduloXajax = str_replace( '.inc', '_xajax.php', str_replace( '.php', '_xajax.php', $modulo ) );
 		$xajax = null;
 
@@ -1034,7 +1034,7 @@ class TApplication extends TLayout
 		{
 			if ( !file_exists( $strNewValue ) )
 			{
-				die( 'Arquivo ' . $strNewValue . ' informado n„o existe!' );
+				die( 'Arquivo ' . $strNewValue . ' informado n√£o existe!' );
 			}
 		}
 	}
@@ -1129,14 +1129,14 @@ class TApplication extends TLayout
 			}
 			else
 			{
-				$this->addJavascript( 'alert("Arquivo de conex„o:' . $this->getConnectionFile() . ', defindo para a aplicaÁ„o, n„o existe.")' );
+				$this->addJavascript( 'alert("Arquivo de conex√£o:' . $this->getConnectionFile() . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 			}
 		}
 	}
 
 	//-----------------------------------------------------------------------------
 	/**
-	 * MÈtodo para encontrar e retornar o caminho correto do mÛdulo dentro do diretÛrio modulos/ da aplicaÁ„o
+	 * M√©todo para encontrar e retornar o caminho correto do m√≥dulo dentro do diret√≥rio modulos/ da aplica√ß√£o
 	 *
 	 * @param string $strFileName
 	 */
@@ -1168,13 +1168,13 @@ class TApplication extends TLayout
 		$baseName = $aFileParts[ 'basename' ];
 		$fileName = $aFileParts[ 'filename' ];
 		$dirName = $aFileParts[ 'dirname' ];
-		// extens„o padr„o È inc
+		// extens√£o padr√£o √© inc
 		$extName = isset( $aFileParts[ 'extension' ] ) ? $aFileParts[ 'extension' ] : 'inc';
 		$dirName = ( $dirName == '.' ) ? '' : $dirName;
 		$dirName = ( $dirName == './' ) ? '' : $dirName;
 		$dirName .= ( $dirName != '' ) ? '/' : '';
 
-		// se exisiter o diretÛrio, n„o acrescenter o diretÛrio modulos/
+		// se exisiter o diret√≥rio, n√£o acrescenter o diret√≥rio modulos/
 		if ( $dirName != '' && is_dir( $dirName ) )
 		{
 			$pathModulos = '';
@@ -1185,7 +1185,7 @@ class TApplication extends TLayout
 			$fileName = basename( $baseName, '.' . $extName );
 		}
 
-		//1∫ possibilidade: Estrutura de Vis„o e Controle
+		//1¬∫ possibilidade: Estrutura de Vis√£o e Controle
 		$file = $pathModulos . $dirName . $fileName;
 
 		if ( is_dir( $file ) )
@@ -1206,7 +1206,7 @@ class TApplication extends TLayout
 			}
 		}
 
-		//2∫ possibilidade modelo normal na pasta modulos
+		//2¬∫ possibilidade modelo normal na pasta modulos
 		$fileOut = $pathModulos . $dirName . $fileName . '.' . $extName;
 
 		if ( file_exists( $fileOut ) )
@@ -1231,7 +1231,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Adicinar diretÛrios no caminho de pesquisa de arquivos do php
+	 * Adicinar diret√≥rios no caminho de pesquisa de arquivos do php
 	 *
 	 * @param string $path
 	 */
@@ -1246,8 +1246,8 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define a imagem que ser· exibida no fundo da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Define a imagem que ser√° exibida no fundo da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -1289,8 +1289,8 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Retorna a imagem que ser· exibida no fundo da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Retorna a imagem que ser√° exibida no fundo da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -1319,8 +1319,8 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define a imagem que ser· exibida no centro da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Define a imagem que ser√° exibida no centro da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -1384,7 +1384,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define o conetudo ou o arquivo para montagem do cabeÁalho da p·gina
+	 * Define o conetudo ou o arquivo para montagem do cabe√ßalho da p√°gina
 	 * @param string $strNewValue
 	 */
 	public function setHeaderContent( $strNewValue = null )
@@ -1404,7 +1404,7 @@ class TApplication extends TLayout
 			}
 			else
 			{
-				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabeÁalho n„o encontrado.';
+				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabe√ßalho n√£o encontrado.';
 			}
 		}
 
@@ -1412,7 +1412,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define o conetudo ou o arquivo para montagem do corpo da p·gina
+	 * Define o conetudo ou o arquivo para montagem do corpo da p√°gina
 	 *
 	 * @param string $strNewValue
 	 */
@@ -1431,7 +1431,7 @@ class TApplication extends TLayout
 			}
 			else
 			{
-				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo n„o encontrado.';
+				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo n√£o encontrado.';
 			}
 		}
 
@@ -1439,7 +1439,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define o conetudo ou o arquivo para montagem do rodapÈ
+	 * Define o conetudo ou o arquivo para montagem do rodap√©
 	 *
 	 * @param string $strNewValue
 	 */
@@ -1458,7 +1458,7 @@ class TApplication extends TLayout
 			}
 			else
 			{
-				return 'Arquivo <b>' . $this->footerContent . '<b> definido para o rodapÈ n„o encontrado.';
+				return 'Arquivo <b>' . $this->footerContent . '<b> definido para o rodap√© n√£o encontrado.';
 			}
 		}
 
@@ -1466,7 +1466,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define o alinhamento vertical dos formul·rios na tela
+	 * Define o alinhamento vertical dos formul√°rios na tela
 	 *
 	 * @param mixed $strNewValue - top,center,bottom
 	 */
@@ -1476,7 +1476,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Recupera o valor definido para o alinhamento vertical dos formul·rios na tela
+	 * Recupera o valor definido para o alinhamento vertical dos formul√°rios na tela
 	 */
 	public function getVerticalAlign()
 	{
@@ -1484,7 +1484,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Define o alinhamento horizontal dos formul·rios na tela
+	 * Define o alinhamento horizontal dos formul√°rios na tela
 	 *
 	 * @param mixed $strNewValue
 	 */
@@ -1494,7 +1494,7 @@ class TApplication extends TLayout
 	}
 
 	/**
-	 * Recupera o valor do alinhamento vertical dos formul·rios na tela
+	 * Recupera o valor do alinhamento vertical dos formul√°rios na tela
 	 */
 	public function getHorizontalAlign()
 	{
@@ -1504,7 +1504,7 @@ class TApplication extends TLayout
 	private function buildPageHeader()
 	{
 		/**
-		 *  tabela do cabeÁalho
+		 *  tabela do cabe√ßalho
 		 *  ids: app_header_logo ,app_header_title, app_header_login
 		 */
 		$tbCab = new TTable( 'table_header' );
@@ -1516,7 +1516,7 @@ class TApplication extends TLayout
 
 		if ( $this->getHeaderContent() )
 		{
-			// cabeÁalho definido pelo usu·rio
+			// cabe√ßalho definido pelo usu√°rio
 			$row = $tbCab->addRow();
 			$cellHeader = $row->addCell( $this->getHeaderContent() );
 			$cellHeader->setId( 'app_header' );
@@ -1526,7 +1526,7 @@ class TApplication extends TLayout
 			$cellHeader->setCss( 'border-top', 'none' );
 			$cellHeader->setCss( 'font-weight', 'normal' );
 			$cellHeader->setCss( 'line-height', '100%' );
-			// td do cabeÁalho
+			// td do cabe√ßalho
 			$this->cellHeader = $cellHeader;
 		}
 		else
@@ -1579,7 +1579,7 @@ class TApplication extends TLayout
 			return;
 		}
 		/**
-		 *  tabela do rodapÈ - app_footer
+		 *  tabela do rodap√© - app_footer
 		 *  ids: app_footer_message,app_footer_company, app_footer_module
 		 */
 		$tbFooter = new TTable( 'table_footer' );
@@ -1690,8 +1690,8 @@ class TApplication extends TLayout
 		return '';
 	}
 	/**
-	* Define a imagem de fundo do cabeÁalho da aplicaÁ„o
-	* O parametro $strRepeat define a maneira como a imagem de fundo È repetida:
+	* Define a imagem de fundo do cabe√ßalho da aplica√ß√£o
+	* O parametro $strRepeat define a maneira como a imagem de fundo √© repetida:
 	* repeat -> repete vertical e horizontal
 	* repeat-y -> repete vertical;
 	* repeat-x -> repete horizontal;
@@ -1808,7 +1808,7 @@ class TApplication extends TLayout
 			return true;
 		}
 		*/
-		// se n„o existe tela de login definida, ent„o sempre retornar verdadeiro
+		// se n√£o existe tela de login definida, ent√£o sempre retornar verdadeiro
 		if( ! $this->getLoginFile() )
 		{
 			return true;

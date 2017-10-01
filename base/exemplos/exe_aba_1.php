@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 //error_reporting(E_ALL);
-$frm = new TForm('Exemplo Utilização de Abas',600,800);
+$frm = new TForm('Exemplo UtilizaÃ§Ã£o de Abas',600,800);
 $frm->setMaximize(true);
 //$frm->setflat(true);
 //$pc = $frm->addPageControl('pc',null,null,'pcBeforeClick','pcAfterClick');
@@ -49,17 +49,17 @@ $pc = $frm->addPageControl('pc',300,null,null,null);
 //$pc = $frm->addPageControl('pc',null,null,null,null);
 $acao='';
 
-$p = $pc->addPage('Cadastro Ação',true,true,'aba1',null);
+$p = $pc->addPage('Cadastro AÃ§Ã£o',true,true,'aba1',null);
 
 
 	$pc2 = $frm->addPageControl('pc2',300);
-	$pc2->addPage('Sub Aba Ação',true,true,'aba11',null);
+	$pc2->addPage('Sub Aba AÃ§Ã£o',true,true,'aba11',null);
 	$frm->addTextField('cadastro','Cadastro:',20,true);
-	//$frm->addHtmlField('html_texto',null,null,"Observação:",200,500);//->setCss('background-color','yellow');
-	$frm->addButton('Selecionar a aba relatório',null,'btnAtivarAba','btnClick()',null,true,false);
-	$frm->addButton('Selecionar a aba Histórico',null,'btnAtivarAbaHist','btnClick2()',null,false,false);
-	$frm->addButton('Desabilitar aba histórico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,false,false);
-	$frm->addButton('Habilitar aba histórico',null,'btnHabilitarAba','btnHabilitarClick()',null,false,false);
+	//$frm->addHtmlField('html_texto',null,null,"ObservaÃ§Ã£o:",200,500);//->setCss('background-color','yellow');
+	$frm->addButton('Selecionar a aba relatÃ³rio',null,'btnAtivarAba','btnClick()',null,true,false);
+	$frm->addButton('Selecionar a aba HistÃ³rico',null,'btnAtivarAbaHist','btnClick2()',null,false,false);
+	$frm->addButton('Desabilitar aba histÃ³rico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,false,false);
+	$frm->addButton('Habilitar aba histÃ³rico',null,'btnHabilitarAba','btnHabilitarClick()',null,false,false);
 	$frm->addButton('Mostrar Erros',null,'btnMostrarErro','MostrarErros()');
 	$frm->addMemoField('memo','Obs:',1000,true,60,10);
 	$frm->addTextField('campo2','Campo2:',20);
@@ -67,32 +67,32 @@ $p = $pc->addPage('Cadastro Ação',true,true,'aba1',null);
 
 
 
-$pc->addPage('&Relatório',false,true,'abaRelatorio');
-	$frm->addGroupField('gpRelatorio','Grupo do Relatório');
+$pc->addPage('&RelatÃ³rio',false,true,'abaRelatorio');
+	$frm->addGroupField('gpRelatorio','Grupo do RelatÃ³rio');
 		$frm->addMemoField('memo2','Obs:',1000,true,60,10);
     $frm->closeGroup();
 
-$pc->addPage('Histórico',false,true,'aHist');
-	$frm->addTextField('historico','Histórico:',20);
+$pc->addPage('HistÃ³rico',false,true,'aHist');
+	$frm->addTextField('historico','HistÃ³rico:',20);
 
 
-$pc->addPage('Orçamento',false,false,'abaOrcamento');
+$pc->addPage('OrÃ§amento',false,false,'abaOrcamento');
 	$frm->addGroupField('gpx','Grupo x');
-		$frm->addTextField('orcamento','Orçamento:',20,true)->setHint('teste - teste');
+		$frm->addTextField('orcamento','OrÃ§amento:',20,true)->setHint('teste - teste');
 	$frm->closeGroup();
 $frm->closeGroup();
 //$frm->closeGroup();
 //$frm->addTextField('cadastro2','Cadastro:',20);
 //$pc->setActivePage('abaHistorico',true);
-//$frm->addTextField('descricao','Descrição:',50);
+//$frm->addTextField('descricao','DescriÃ§Ã£o:',50);
 $frm->setAction('Atualizar,Gravar');
-//$frm->setMessage('Gravarção realizada com sucesso');
+//$frm->setMessage('GravarÃ§Ã£o realizada com sucesso');
 error_reporting(~E_NOTICE);
 
 if($acao=='Gravar')
 {
 	$frm->validate();
-	//$frm->validate('Cadastro Ação');
+	//$frm->validate('Cadastro AÃ§Ã£o');
 	//$frm->validate('gpx');
 	//$frm->validate('abaOrcamento');
 	$pc->getPage('aHist')->setVisible(false);
@@ -105,7 +105,7 @@ function pcBeforeClick(rotulo,container,id)
 {
 	if( id == 'abarelatorio' )
 	{
-		//alert('Não é permito acesso a esta aba via mouse');
+		//alert('NÃ£o Ã© permito acesso a esta aba via mouse');
 		return false;
 	}
 	return true;
@@ -143,7 +143,7 @@ function fwAdjustHeight2(frmId,jsonParams)
 }
 function pcAfterClick(aba,pageControl,id)
 {
-	alert('A função definida no evento afterClick do pageControl,\nfoi chamada e recebeu os seguintes parametros:\n\n'+
+	alert('A funÃ§Ã£o definida no evento afterClick do pageControl,\nfoi chamada e recebeu os seguintes parametros:\n\n'+
 	'aba='+aba+'\n'+
 	'pageControls='+pageControl+'\n'+
 	'id='+id);

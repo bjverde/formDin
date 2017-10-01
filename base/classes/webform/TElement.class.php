@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -41,16 +41,16 @@
 Esta classe representa qualquer elemento HTML criado atraves de tag de abertura e fechamento
 Ex: <input> <br> <p> <h1> etc...
 
-Estrutura b·sica
+Estrutura b√°sica
 <tagType class="" style="">x y z</tagType>
 */
 //error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-$GLOBALS[ 'teste' ] = true; // deixar as quebras de linha e a identaÁ„o do html
+$GLOBALS[ 'teste' ] = true; // deixar as quebras de linha e a identa√ß√£o do html
 
 class TElement
 {
     /**
-     * Armazenar o caminho do diretÛrio base/
+     * Armazenar o caminho do diret√≥rio base/
      * @var string
      */
 
@@ -62,7 +62,7 @@ class TElement
     */
     static private $depth;
     /**
-    * Array com as mensagens de advertÍncias encontradas durante o processamento
+    * Array com as mensagens de advert√™ncias encontradas durante o processamento
     *
     * @var array $warnings
     */
@@ -75,14 +75,14 @@ class TElement
      */
     private $tagType;
     /**
-     * Valores que ser„o inseridos na tag de abertura
+     * Valores que ser√£o inseridos na tag de abertura
      * ex: style, class, size, maxlength etc..
      *
      * @var array $properties
      */
     private $properties;
     /**
-     * Conteudo que ser· exibido entre a tag de abertura e fechamento
+     * Conteudo que ser√° exibido entre a tag de abertura e fechamento
      *
      * @var array $children
      */
@@ -95,7 +95,7 @@ class TElement
      */
     protected $css;
     /**
-     * Array de eventos javascript que ser„o atribuidos a tag html
+     * Array de eventos javascript que ser√£o atribuidos a tag html
      * Ex: addEvent("onClick","fazerAlgo()");
      *
      * @var array $events
@@ -252,7 +252,7 @@ class TElement
         $str = str_replace( '("', "('", $str );
         $str = str_replace( '")', "')", $str );
         $str = str_replace( '" )', "')", $str );
-        //$str=str_replace('"','ì' ,$str);
+        //$str=str_replace('"','‚Äú' ,$str);
         $str = str_replace( '"', "'", $str );
         //$str=str_replace('"',"\'\'" ,$str);
 
@@ -288,7 +288,7 @@ class TElement
     }
     /**
     * Remove os caracteres invalidos para criacao de nomes de funcoes e variaveis
-    * Para n„o excluir algum caractere especifico, utilize o parametro $strExcept
+    * Para n√£o excluir algum caractere especifico, utilize o parametro $strExcept
     * ex: removeIllegalChars($teste,'[]');
     * @param string $word
     * @param string $strExcept
@@ -305,7 +305,7 @@ class TElement
             $strExcept = str_replace( array( '[', ']', '^' ), array( '\\[', '\\]', '\\^' ), $strExcept );
         }
         return $word = @preg_replace( "/[^a-zA-Z0-9_" . $strExcept . "]/", "",
-            strtr( $word, "·‡„‚ÈÍÌÛÙı˙¸Á¡¿√¬… Õ”‘’⁄‹« ", "aaaaeeiooouucAAAAEEIOOOUUC_" ) );
+            strtr( $word, "√°√†√£√¢√©√™√≠√≥√¥√µ√∫√º√ß√Å√Ä√É√Ç√â√ä√ç√ì√î√ï√ö√ú√á ", "aaaaeeiooouucAAAAEEIOOOUUC_" ) );
 
 
     }
@@ -348,7 +348,7 @@ class TElement
         }
     }
     /**
-    * Adiciona conteudo dentro da tag antes de todos os objeto j· inseridos.
+    * Adiciona conteudo dentro da tag antes de todos os objeto j√° inseridos.
     * Pode ser um texto ou outro objeto da classe Element
     *
     * @param mixed $child
@@ -435,7 +435,7 @@ class TElement
 	                                {
 	                                    $v .= 'px';
 	                                }
-                                    // atributos que n„o possuem medidas
+                                    // atributos que n√£o possuem medidas
                                     if( preg_match('/(cellspacing|cellpadding)/i', $k ) )
                                     {
                                         $v = preg_replace('/[^0-9]/','',$v);
@@ -587,7 +587,7 @@ class TElement
                 }
                 else
                 {
-                    // o texto do campo textarea e option n„o ser identado sen„o aparece na tela
+                    // o texto do campo textarea e option n√£o ser identado sen√£o aparece na tela
                     if ( $this->tagType != 'textarea' && $this->tagType != 'option' )
                     {
                         // linha de comentario
@@ -611,13 +611,13 @@ class TElement
             }
         }
 
-        // encontrar depois uma express„o regular para retirar estra quebra
+        // encontrar depois uma express√£o regular para retirar estra quebra
         // para evitar epaco em branco no internet explorer
 /* exeplo de codigo com problema:
 <fieldset name="lay_x"  id="lay_x"  type="panel"  style="width:auto;height:auto;overflow:auto;display:inline;verticalalign:top;margin:0px;padding:2px;border:1px dashed red;position:relative;" >
 <fieldset name="pnl_x"  id="pnl_x"  type="panel"  style="width:auto;height:auto;overflow:auto;display:inline;verticalalign:top;margin:0px;padding:2px;border:1px dashed red;position:relative;" >
-<div name="lblDataInclusao"  value="Data Inclus„o:"  id="lblDataInclusao"  type="label"  style="float:left;position:relative;" >
-    Data Inclus„o:
+<div name="lblDataInclusao"  value="Data Inclus√£o:"  id="lblDataInclusao"  type="label"  style="float:left;position:relative;" >
+    Data Inclus√£o:
 </div>
 <input name="dat_inclusao"  maxlength="10"  size="10"  required="false"  id="dat_inclusao"  type="edit"  style="position:relative;"  onblur="fwValidarData(this,event,'dmy','','')"  onfocus="MaskInput(this,'99/99/9999')"  onkeyup="fwSetBordaCampo(this,false)" >
 </input>
@@ -654,7 +654,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
 
     //----------------------------------------------------------------
     /**
-    * permite alterar o tipo de tag que ser· gerada. Ex. input, label, textarea, div ...
+    * permite alterar o tipo de tag que ser√° gerada. Ex. input, label, textarea, div ...
     *
     * $param string $newTagType
     */
@@ -767,7 +767,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     //--------------------------------------------------------------------------
     /**
     * Define o evento e a funcao javascript que sera executada ao ocorrer o evento
-    * Se for restritivo e a funÁ„o executada retornar false, interrompe a execuÁ„o dos prÛximos eventos se houver
+    * Se for restritivo e a fun√ß√£o executada retornar false, interrompe a execu√ß√£o dos pr√≥ximos eventos se houver
     *
     * @param string $eventName
     * @param string $functionJs
@@ -790,7 +790,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
         return $this;
     }
     /**
-    * Atribui um array de ventos e funÁıes ao elemento
+    * Atribui um array de ventos e fun√ß√µes ao elemento
     *
     * @param array $arrEvents
     */
@@ -803,7 +803,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     /**
     * Adiciona um evento na tag html. Se ja exisitir um evento com o mesmo nome, faz a concatenacao
     * dos eventos, executando ambos em sequencia.
-    * Se for restritivo e a funÁ„o executada retornar false, interrompe a execuÁ„o dos prÛximos eventos se houver
+    * Se for restritivo e a fun√ß√£o executada retornar false, interrompe a execu√ß√£o dos pr√≥ximos eventos se houver
     *
     * @param string $eventName
     * @param string $functionJs
@@ -831,8 +831,8 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
         return $this;
     }
     /**
-    *  Retorna a funÁ„o chamada pelo evento solicitado
-    *  se n„o existir, retorna null
+    *  Retorna a fun√ß√£o chamada pelo evento solicitado
+    *  se n√£o existir, retorna null
     *
     * @param string $strEventName
     */
@@ -843,7 +843,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     }
     /**
     *  Retorna o array de eventos ligados ao elemento
-    *  se n„o existir, retorna null
+    *  se n√£o existir, retorna null
     *
     */
     public function getEvents()
@@ -879,11 +879,11 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     public function setId( $newId )
     {
         // considerar os caracteres [] porque os campo check e select multi tem [] no final
-        // e a funÁ„o removeillegaChars remove eles se n„o for informado
+        // e a fun√ß√£o removeillegaChars remove eles se n√£o for informado
         $this->id = $this->removeIllegalChars( $newId );
         if( ! is_null($newId) )
         {
-	        // se o nome n„o possuir colchetes, dos campos multivalorados, igualar ao id
+	        // se o nome n√£o possuir colchetes, dos campos multivalorados, igualar ao id
 	        if ( !strpos( $this->name, '[' ) )
 	        {
 	            $this->name = $this->removeIllegalChars( $newId, '[]' );
@@ -897,7 +897,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     {
         $this->name = $this->removeIllegalChars( $newName, '[]' );
 
-        // se o nome n„o possuir colchetes, dos campos multivalorados, igualar ao id
+        // se o nome n√£o possuir colchetes, dos campos multivalorados, igualar ao id
         if ( !$this->id )
         {
             $this->id = $this->removeIllegalChars( $newName);
@@ -1058,68 +1058,68 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
         if (is_string($value)) {
             $html_entities = array
                 (
-                '¡' => '&Aacute;',
-                '¿' => '&Agrave;',
-                '…' => '&Eacute;',
-                '»' => '&Egrave;',
-                'Õ' => '&Iacute;',
-                'Ã' => '&Igrave;',
-                '”' => '&Oacute;',
-                '“' => '&Ograve;',
-                '⁄' => '&Uacute;',
-                'Ÿ' => '&Ugrave;',
-                '·' => '&aacute;',
-                '‡' => '&agrave;',
-                'È' => '&eacute;',
-                'Ë' => '&egrave;',
-                'Ì' => '&iacute;',
-                'Ï' => '&igrave;',
-                'Û' => '&oacute;',
-                'Ú' => '&ograve;',
-                '˙' => '&uacute;',
-                '˘' => '&ugrave;',
-                'ƒ' => '&Auml;',
-                '¬' => '&Acirc;',
-                'À' => '&Euml;',
-                ' ' => '&Ecirc;',
-                'œ' => '&Iuml;',
-                'Œ' => '&Icirc;',
-                '÷' => '&Ouml;',
-                '‘' => '&Ocirc;',
-                '‹' => '&Uuml;',
-                '€' => '&Ucirc;',
-                '‰' => '&auml;',
-                '‚' => '&acirc;',
-                'Î' => '&euml;',
-                'Í' => '&ecirc;',
-                'Ô' => '&iuml;',
-                'Ó' => '&icirc;',
-                'ˆ' => '&ouml;',
-                'Ù' => '&ocirc;',
-                '¸' => '&uuml;',
-                '˚' => '&ucirc;',
-                '√' => '&Atilde;',
-                'Â' => '&aring;',
-                '—' => '&Ntilde;',
-                '≈' => '&Aring;',
-                '’' => '&Otilde;',
-                '«' => '&Ccedil;',
-                '„' => '&atilde;',
-                'Á' => '&ccedil;',
-                'Ò' => '&ntilde;',
-                '›' => '&Yacute;',
-                'ı' => '&otilde;',
-                '˝' => '&yacute;',
-                'ÿ' => '&Oslash;',
-                'ˇ' => '&yuml;',
-                '¯' => '&oslash;',
-                'ﬁ' => '&THORN;',
-                '–' => '&ETH;',
-                '˛' => '&thorn;',
-                '' => '&eth;',
-                '∆' => '&AElig;',
-                'ﬂ' => '&szlig;',
-                'Ê' => '&aelig;'
+                '√Å' => '&Aacute;',
+                '√Ä' => '&Agrave;',
+                '√â' => '&Eacute;',
+                '√à' => '&Egrave;',
+                '√ç' => '&Iacute;',
+                '√å' => '&Igrave;',
+                '√ì' => '&Oacute;',
+                '√í' => '&Ograve;',
+                '√ö' => '&Uacute;',
+                '√ô' => '&Ugrave;',
+                '√°' => '&aacute;',
+                '√†' => '&agrave;',
+                '√©' => '&eacute;',
+                '√®' => '&egrave;',
+                '√≠' => '&iacute;',
+                '√¨' => '&igrave;',
+                '√≥' => '&oacute;',
+                '√≤' => '&ograve;',
+                '√∫' => '&uacute;',
+                '√π' => '&ugrave;',
+                '√Ñ' => '&Auml;',
+                '√Ç' => '&Acirc;',
+                '√ã' => '&Euml;',
+                '√ä' => '&Ecirc;',
+                '√è' => '&Iuml;',
+                '√é' => '&Icirc;',
+                '√ñ' => '&Ouml;',
+                '√î' => '&Ocirc;',
+                '√ú' => '&Uuml;',
+                '√õ' => '&Ucirc;',
+                '√§' => '&auml;',
+                '√¢' => '&acirc;',
+                '√´' => '&euml;',
+                '√™' => '&ecirc;',
+                '√Ø' => '&iuml;',
+                '√Æ' => '&icirc;',
+                '√∂' => '&ouml;',
+                '√¥' => '&ocirc;',
+                '√º' => '&uuml;',
+                '√ª' => '&ucirc;',
+                '√É' => '&Atilde;',
+                '√•' => '&aring;',
+                '√ë' => '&Ntilde;',
+                '√Ö' => '&Aring;',
+                '√ï' => '&Otilde;',
+                '√á' => '&Ccedil;',
+                '√£' => '&atilde;',
+                '√ß' => '&ccedil;',
+                '√±' => '&ntilde;',
+                '√ù' => '&Yacute;',
+                '√µ' => '&otilde;',
+                '√Ω' => '&yacute;',
+                '√ò' => '&Oslash;',
+                '√ø' => '&yuml;',
+                '√∏' => '&oslash;',
+                '√û' => '&THORN;',
+                '√ê' => '&ETH;',
+                '√æ' => '&thorn;',
+                '√∞' => '&eth;',
+                '√Ü' => '&AElig;',
+                '√ü' => '&szlig;',
+                '√¶' => '&aelig;'
             );
 
             return strtr($value, $html_entities);

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-*	Classe criar campos de conteúdo livre ( html )
+*	Classe criar campos de conteÃºdo livre ( html )
 */
 class THtml extends TControl
 {
@@ -75,7 +75,7 @@ class THtml extends TControl
 	{
 		if( !is_null($this->includeFile) && !file_exists($this->includeFile) )
 		{
-			$this->setValue('Arquivo '.$this->includeFile.' não encontrado');
+			$this->setValue('Arquivo '.$this->includeFile.' nÃ£o encontrado');
 		}
 		else
 		{
@@ -115,7 +115,7 @@ class THtml extends TControl
 		{
 			return $this->parseFile();
 		}
-		// o campo html não possui um value e sim um array de values ( childrens )
+		// o campo html nÃ£o possui um value e sim um array de values ( childrens )
 		$value = $this->getChildren();
 		if( is_array( $value ) && count( $value ) == 1 )
 		{
@@ -128,7 +128,7 @@ class THtml extends TControl
 	//-----------------------------------------------------------------------------------
 	/**
 	* Define o nome de um arquivo que cria um gride utilizando a classe TGrid
-	* Se for definido este parametro, o TForm criará o javascript para carregamento do gride via ajax
+	* Se for definido este parametro, o TForm criarÃ¡ o javascript para carregamento do gride via ajax
 	*
 	* @param mixed $strGridFile
 	*/
@@ -144,7 +144,7 @@ class THtml extends TControl
 		}
 	}
 	/**
-	* Retonra o array com as informações do ID e FILE do arquivo do gride
+	* Retonra o array com as informaÃ§Ãµes do ID e FILE do arquivo do gride
 	* se for passado null como parametro.
 	* Se for passado id, retorna o ID
 	* Se for passado file, retorna o FILE
@@ -184,7 +184,7 @@ class THtml extends TControl
 $html = new THtmlField('html_teste','Luis Eugenio',null,800,600);
 //$html = new THtmlField('html_teste','Luis Eugenio','t.html',600,200);
 //$html = new THtmlField('html_teste','Luis Eugenio','teste.inc',600,200);
-//$html->setValue('asçdkflaskdfjakldjfaskdfj');
+//$html->setValue('asÃ§dkflaskdfjakldjfaskdfj');
 //$html->setIncludeFile('y.html');
 $html->show();
 */
@@ -201,7 +201,7 @@ $frm->show();
 print_r($_POST);
 */
 /*
-$h = new THtml('obs','Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div ',null,100,500);
+$h = new THtml('obs','ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ObservaÃ§Ã£o oara teste de quebra do campo html dento de uma div ',null,100,500);
 print $h->getValue();
 //$h->show();
 print '<hr>';

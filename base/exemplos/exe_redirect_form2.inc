@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,35 +20,35 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm('Exemplo de Redirect - Form 2',200,600);
 $frm->addTextField('nom_pessoa2','Nome:',20);
-$frm->addHtmlField('html','Este é o form 2, clique no botão Ir para VOLTAR para o form 1')->setCss('color','red');
+$frm->addHtmlField('html','Este Ã© o form 2, clique no botÃ£o Ir para VOLTAR para o form 1')->setCss('color','red');
 $frm->setAction('Voltar,Ir');
 
 if($acao == 'Voltar' )
 {
-	$frm->redirect('base/exemplos/exe_redirect.inc','Redirect realizado com sucesso. Você está agora no 1º form.');
+	$frm->redirect('base/exemplos/exe_redirect.inc','Redirect realizado com sucesso. VocÃª estÃ¡ agora no 1Âº form.');
 } 
 else if($acao =='Ir')
 {
-  	$frm->redirect('base/exemplos/exe_redirect_form3.inc','Redirect realizado com sucesso. Você está agora no 3º form.',null,null,false);
+  	$frm->redirect('base/exemplos/exe_redirect_form3.inc','Redirect realizado com sucesso. VocÃª estÃ¡ agora no 3Âº form.',null,null,false);
 }
 
 $frm->show();

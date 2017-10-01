@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -107,17 +107,17 @@ class TCalendar extends TControl
 			'.( ($aux=$this->getHeight()) ? "height: {$aux}," : '' ) .'
 			'.( ($aux=$this->getContentHeight()) ? "contentHeight: {$aux}," : '' ) .'
 			theme: true,
-			monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+			monthNames: ["Janeiro", "Fevereiro", "MarÃ§o", "Abril", "Maio", "Junho", "Julho",
 						"Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 			monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
  								"Jul", "Ago", "Set", "Out", "Nov", "Dec"],
- 			dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"],
+ 			dayNames: ["Domingo", "Segunda", "TerÃ§a", "Quarta", "Quinta", "Sexta", "Sabado"],
  			dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
  			allDayText : "Dia todo",
  			firstHour : 6,
  			buttonText: {
  							today:    "Hoje",
-    						month:    "Mês",
+    						month:    "MÃªs",
     						week:     "Semana",
     						day:      "Dia"
 						},
@@ -171,12 +171,12 @@ class TCalendar extends TControl
 /*
 select: function (dataInicial, dataFinal) {
 if (selecionavel) {
-// Executa código
+// Executa cÃ³digo
 }}*/
 	//-------------------------------------------------------------------------------------
 
 	/**
-	 * @param integer $newHeight Tamanho da área total ocupada pelo calendário
+	 * @param integer $newHeight Tamanho da Ã¡rea total ocupada pelo calendÃ¡rio
 	 * @return TCalendar
 	 */
 	public function setHeight($newHeight=null)
@@ -191,7 +191,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param integer $newContentHeight Tamanho do calendário
+	 * @param integer $newContentHeight Tamanho do calendÃ¡rio
 	 * @return TCalendar
 	 */
 	public function setContentHeight($newContentHeight=null)
@@ -205,7 +205,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param float $newAspectRatio Proporção entra largura e altura do calendário
+	 * @param float $newAspectRatio ProporÃ§Ã£o entra largura e altura do calendÃ¡rio
 	 * @return TCalendar
 	 */
 	public function setAspectRatio($newAspectRatio=null)
@@ -219,7 +219,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowHeader Informa se deve exibir o cabeçalho
+	 * @param boolean $boolShowHeader Informa se deve exibir o cabeÃ§alho
 	 * @return TCalendar
 	 */
 	public function setShowHeader($boolShowHeader=null)
@@ -233,7 +233,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowTitle Informa se deve exibir o título "Ex: Janeiro 2000".
+	 * @param boolean $boolShowTitle Informa se deve exibir o tÃ­tulo "Ex: Janeiro 2000".
 	 * @return TCalendar
 	 */
 	public function setShowTitle($boolShowTitle=null)
@@ -247,7 +247,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowNavigatorButtons Informa se deve exibir os botões de navegação (anterior e próximo).
+	 * @param boolean $boolShowNavigatorButtons Informa se deve exibir os botÃµes de navegaÃ§Ã£o (anterior e prÃ³ximo).
 	 * @return TCalendar
 	 */
 	public function setShowNavigatorButtons($boolShowNavigatorButtons=null)
@@ -261,7 +261,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowTodayButton Informa se deve exibir o botão "Hoje".
+	 * @param boolean $boolShowTodayButton Informa se deve exibir o botÃ£o "Hoje".
 	 * @return TCalendar
 	 */
 	public function setShowTodayButton($boolShowTodayButton=null)
@@ -275,7 +275,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowMonthButton Informa se deve exibir o botão "Mês".
+	 * @param boolean $boolShowMonthButton Informa se deve exibir o botÃ£o "MÃªs".
 	 * @return TCalendar
 	 */
 	public function setShowMonthButton($boolShowMonthButton=null)
@@ -289,7 +289,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowDayButton Informa se deve exibir o botão "Dia".
+	 * @param boolean $boolShowDayButton Informa se deve exibir o botÃ£o "Dia".
 	 * @return TCalendar
 	 */
 	public function setShowDayButton($boolShowDayButton=null)
@@ -303,7 +303,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowWeekButton Informa se deve exibir o botão "Semana".
+	 * @param boolean $boolShowWeekButton Informa se deve exibir o botÃ£o "Semana".
 	 * @return TCalendar
 	 */
 	public function setShowWeekButton($boolShowWeekButton=null)
@@ -317,7 +317,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolBasicView Define tipo de visão dos calendários "Semana" e "Dia" para básica ou completa.
+	 * @param boolean $boolBasicView Define tipo de visÃ£o dos calendÃ¡rios "Semana" e "Dia" para bÃ¡sica ou completa.
 	 * @return TCalendar
 	 */
 	public function setBasicView($boolBasicView=null)
@@ -334,7 +334,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param boolean $boolShowWeekends Informa se deve exibir fins de semana no calendário (sábado e domingo).
+	 * @param boolean $boolShowWeekends Informa se deve exibir fins de semana no calendÃ¡rio (sÃ¡bado e domingo).
 	 * @return TCalendar
 	 */
 	public function setShowWeekends($boolShowWeekends=null)
@@ -347,7 +347,7 @@ if (selecionavel) {
 		return ( $this->showWeekends === false) ? false : true;
 	}
 	/**
-	 *  str $strNewvalue Define a url onde os eventos serão carregados
+	 *  str $strNewvalue Define a url onde os eventos serÃ£o carregados
 	 *  Ex. array(array("title"=>'Titulo do evento', "start"=>'2011-12-03', "end"=>'2011-12-04')
 	 *  Evento deve ser retornado pelo: echo json_encode($retorno);
 	 * @param $strNewvalue
@@ -401,9 +401,9 @@ if (selecionavel) {
 	 * @param str $jsOnEventClick Informa qual metodo javascript tratara o evento de clicar sobre um evento
 	 *
 	 * Deve possuir a assinatura(calEvent, jsEvent, view)
-	 * calEvent -> possui os dados do evento. (Padrão: calEvent.title, calEvent.start, calEvent.end) ou os que definiu ex. calEvent.descricao
+	 * calEvent -> possui os dados do evento. (PadrÃ£o: calEvent.title, calEvent.start, calEvent.end) ou os que definiu ex. calEvent.descricao
 	 * jsEvent -> mostrara as coordenadas
-	 * view -> a visão ativa do calendario
+	 * view -> a visÃ£o ativa do calendario
 	 *
 	 * @return TCalendar
 	 */
@@ -432,7 +432,7 @@ if (selecionavel) {
 		}
 
 	/**
-	 * @param str $defaultView Informa qual deve ser a visualização padrão do calendário, padrão month. ex:(basicWeek, basicDay, agendaWeek, agendaDay).
+	 * @param str $defaultView Informa qual deve ser a visualizaÃ§Ã£o padrÃ£o do calendÃ¡rio, padrÃ£o month. ex:(basicWeek, basicDay, agendaWeek, agendaDay).
 	 * @return TCalendar
 	 */
 		public function setDefaultView($defaultView=null)

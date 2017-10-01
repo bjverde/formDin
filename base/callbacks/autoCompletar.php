@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,24 +20,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// quanto este arquivo for chamado pela função registerExternalFunction() não precisa da include dos arquivos abaixo
+// quanto este arquivo for chamado pela funÃ§Ã£o registerExternalFunction() nÃ£o precisa da include dos arquivos abaixo
 if( file_exists('../xajax/xajax.inc.php') )
 {
 	session_start();
@@ -60,7 +60,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 
 	// verficar se o array de pesquisa tem mesmo tamanho que array dos parametros de entrada
 	if ( count($arrBusca) != count($arrCampoDescricao) ) {
-		$objResponse->addAlert(utf8_encode('Tamanho dos campos de entrada não são iguais!'));
+		$objResponse->addAlert(utf8_encode('Tamanho dos campos de entrada nÃ£o sÃ£o iguais!'));
 		return $objResponse->getXML();
 	}
 
@@ -70,7 +70,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$bvars[$v] = utf8_decode($arrBusca[$k]);
 	}
 
-	// Por razões de segurança, o variável num_pessoa tem que ser lido da sessão
+	// Por razÃµes de seguranÃ§a, o variÃ¡vel num_pessoa tem que ser lido da sessÃ£o
 	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
 		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
 	} else {
@@ -93,7 +93,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$arquivo = md5(serialize($bvarsCache)).".cache";
 			$nome_arquivo = $pac_func_proc."/".$arquivo;
 
-			//Tentar abrir arquivo cache ou ler da sessão
+			//Tentar abrir arquivo cache ou ler da sessÃ£o
 			if ( $tempoCache > 0 and is_readable($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo)
 					and (time() - filemtime($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo)) < $tempoCache ) {
 				$fp = fopen($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo, "r");
@@ -150,7 +150,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 
 	// verficar se os arrays dos parametros de retorno tem mesmo tamanho
 	if ( count($arrIdRetorno) != count($arrCampoRetorno) ) {
-		$objResponse->addAlert('Tamanho dos campos de retorno não são iguais!');
+		$objResponse->addAlert('Tamanho dos campos de retorno nÃ£o sÃ£o iguais!');
 		return $objResponse->getXML();
 	}
 	if ( $nCnt > 50 ) {
@@ -183,7 +183,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"block\"");
 
 
-			// calcular a altura do div em função da quantidade de opções encontradas
+			// calcular a altura do div em funÃ§Ã£o da quantidade de opÃ§Ãµes encontradas
 			$alturaDiv = (16 * $nCnt);
 
 			// limite 200
@@ -192,8 +192,8 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.height=\"".$alturaDiv."\"");
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.width=6.5*getObj('".$campo_origem."').size");
 
-			// Aqui zeramos todos os parametros de retorno menos o parametro de retorno que também é parametros de pesquisa.
-			// Depois serão preenchidos com os valores da lista acima
+			// Aqui zeramos todos os parametros de retorno menos o parametro de retorno que tambÃ©m Ã© parametros de pesquisa.
+			// Depois serÃ£o preenchidos com os valores da lista acima
 			foreach ( $arrIdRetorno as $k1=>$v1 ) {
 				$campoRetorno = $arrCampoRetorno[$k1];
 				if ( !array_search($v1,$arrStrOrigem) ) {
@@ -203,7 +203,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
  		}
  		else
  		{
-			$objResponse->addAlert("Nenhuma Opção");
+			$objResponse->addAlert("Nenhuma OpÃ§Ã£o");
 
  		}
 	} elseif($nCnt == 1)  {
@@ -219,7 +219,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$objResponse->addScript("formDinAutoSugestao.clearBuffer()");
 	} elseif ($nCnt < 1 ) {
 
-		//	Se não tiver nenhum resultado, esconder o div-select
+		//	Se nÃ£o tiver nenhum resultado, esconder o div-select
 		$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"none\"");
 		$objResponse->addScriptCall('setImagemFundoCampo(\''.$arrStrOrigem[0].'\',\'base/imagens/erro.gif\')');
 		foreach ( $arrIdRetorno as $k1=>$v1 ) {

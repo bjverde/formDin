@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -65,16 +65,16 @@ class TDAO
 	private $eof		= null;
 
 	/**
-	* Classe de conexão com banco de dados e execução de comandos sql
-	* Permite conectar com vários tipos de banco de dados ao mesmo tempo
+	* Classe de conexÃ£o com banco de dados e execuÃ§Ã£o de comandos sql
+	* Permite conectar com vÃ¡rios tipos de banco de dados ao mesmo tempo
 	*
-	* Por padrão utilizará o arquivo conn_default.php ou includes/con_default.php
-	* caso não seja informado o parametro dbType. Quando o parametro dbType for
-	* informado, será então utlizado o arquivo "conn_????.php" referente.
+	* Por padrÃ£o utilizarÃ¡ o arquivo conn_default.php ou includes/con_default.php
+	* caso nÃ£o seja informado o parametro dbType. Quando o parametro dbType for
+	* informado, serÃ¡ entÃ£o utlizado o arquivo "conn_????.php" referente.
 	* Exemplo: $dao = new TDAO(null,'postgres');
-	* será utilizado o arquivo conn_postgres.php
+	* serÃ¡ utilizado o arquivo conn_postgres.php
 	*
-	* Os arquivos de configurações devem possuir as seguintes definições:
+	* Os arquivos de configuraÃ§Ãµes devem possuir as seguintes definiÃ§Ãµes:
 	*
     * Exemplo Postgres
 	* $dbType = "postgres";
@@ -152,11 +152,11 @@ class TDAO
 
 	//----------------------------------------------------------------------------------
 	/**
-	* Define o tipo do banco de dados que será acessado.
-	* Os tipos de banco de dados suportados atualmente são:
+	* Define o tipo do banco de dados que serÃ¡ acessado.
+	* Os tipos de banco de dados suportados atualmente sÃ£o:
 	* 1) mysql 2) postgres 3) firebird 4) sqlserver 5) oracle 6) sqlite3
 	*
-	* Obs: todos utilizam a extensão PDO exceto o Oracle que utiliza as funções OCI diretamente
+	* Obs: todos utilizam a extensÃ£o PDO exceto o Oracle que utiliza as funÃ§Ãµes OCI diretamente
 	*
 	* @param string $strNewValue
 	*/
@@ -166,7 +166,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna o tipo do banco de dados que será acessado
+	* Retorna o tipo do banco de dados que serÃ¡ acessado
 	*
 	* @return string;
 	*/
@@ -180,7 +180,7 @@ class TDAO
 	}
 
 	/**
-	* Define o nome do usuário que será utilizado para fazer a conexão com o banco de dados
+	* Define o nome do usuÃ¡rio que serÃ¡ utilizado para fazer a conexÃ£o com o banco de dados
 	*
 	* @param string $strNewValue
 	*/
@@ -190,7 +190,7 @@ class TDAO
 	}
 
    	/**
-	* Retorna o nome do usuário definido para fazer a conexão com o banco de dados.
+	* Retorna o nome do usuÃ¡rio definido para fazer a conexÃ£o com o banco de dados.
 	*
 	* @return string $strNewValue
 	*/
@@ -219,7 +219,7 @@ class TDAO
 	}
 
 	/**
-	* Define o banco de dados onde estão as tabelas. No caso do oracle deve ser especificado
+	* Define o banco de dados onde estÃ£o as tabelas. No caso do oracle deve ser especificado
 	* o TNS, no caso do oracleXE seria XE
 	*
 	* @param string $strNewValue
@@ -229,7 +229,7 @@ class TDAO
 		$this->database=$strNewValue;
 	}
     /**
-    * Retorna o nome do banco de dados onde estão as tabelas
+    * Retorna o nome do banco de dados onde estÃ£o as tabelas
     *
     * @return string
     */
@@ -239,7 +239,7 @@ class TDAO
 	}
 
 	/**
-	* Define o nome ou endereço IP do computador onde está instalado o banco de dados
+	* Define o nome ou endereÃ§o IP do computador onde estÃ¡ instalado o banco de dados
 	*
 	* @param mixed $strNewValue
 	*/
@@ -248,7 +248,7 @@ class TDAO
 		$this->host=$strNewValue;
 	}
     /**
-    * Retorna o nome ou endereço IP do computador onde está instalado o banco de dados
+    * Retorna o nome ou endereÃ§o IP do computador onde estÃ¡ instalado o banco de dados
     *
     * @return null
     */
@@ -258,8 +258,8 @@ class TDAO
 	}
 
 	/**
-	* Define a porta de comunicação utilizada pelo banco de dados
-	* Quando não informada será utilzada as portas padrão de cada banco
+	* Define a porta de comunicaÃ§Ã£o utilizada pelo banco de dados
+	* Quando nÃ£o informada serÃ¡ utilzada as portas padrÃ£o de cada banco
 	*
 	* @param string $strNewValue
 	*/
@@ -268,7 +268,7 @@ class TDAO
 		$this->port=$strNewValue;
 	}
     /**
-    * Retorna a porta de comunicação utilizada pelo banco de dados
+    * Retorna a porta de comunicaÃ§Ã£o utilizada pelo banco de dados
     *
     */
 	public function getPort()
@@ -303,9 +303,9 @@ class TDAO
 	}
 
 	/**
-	* Define o nome do esquema dentro do banco de dados que deverã ser utilizado.
-	* Este método aplica somente ao banco de dados postgres
-	* Quando informado será adicionado ao path do banco de dados
+	* Define o nome do esquema dentro do banco de dados que deverÃ£ ser utilizado.
+	* Este mÃ©todo aplica somente ao banco de dados postgres
+	* Quando informado serÃ¡ adicionado ao path do banco de dados
 	*
 	* @param string $strNewValue
 	*/
@@ -315,10 +315,10 @@ class TDAO
 	}
 
 	/**
-	* Retorna o nome do esquema do banco de dados que será utilizado. Aplica-se somente
+	* Retorna o nome do esquema do banco de dados que serÃ¡ utilizado. Aplica-se somente
 	* ao banco de dados postgres.
 	*
-	* Quando informado será adicionado ao path do banco de dados
+	* Quando informado serÃ¡ adicionado ao path do banco de dados
 	*
 	* @return string
 	*/
@@ -332,7 +332,7 @@ class TDAO
 	}
 
 	/**
-	* Define se o banco de dados está utilizando codificação UTF-8
+	* Define se o banco de dados estÃ¡ utilizando codificaÃ§Ã£o UTF-8
 	*
 	* @param boolean $boolNewValue
 	*/
@@ -341,7 +341,7 @@ class TDAO
 		$this->utf8=$boolNewValue;
 	}
     /**
-    * Retorna true ou false se o banco de dados está utilizando codificação UTF-8
+    * Retorna true ou false se o banco de dados estÃ¡ utilizando codificaÃ§Ã£o UTF-8
     *
     */
 	public function getUtf8()
@@ -354,7 +354,7 @@ class TDAO
 	}
 
 	/**
-	* Tenta fazer a conexão com o banco de dados retornando verdadeiro o falso
+	* Tenta fazer a conexÃ£o com o banco de dados retornando verdadeiro o falso
 	*
 	* @return boolean
 	*/
@@ -396,7 +396,7 @@ class TDAO
 	}
 
 	/**
-	* Executa o comando sql recebido retornando o cursor ou verdadeiro o falso se a operação
+	* Executa o comando sql recebido retornando o cursor ou verdadeiro o falso se a operaÃ§Ã£o
 	* foi bem sucedida.
 	*
 	* @param string $sql
@@ -417,14 +417,14 @@ class TDAO
 			{
 				$params = array($params);
 			}
-			$sql=trim( $sql );              // remover espaços do início e final
-			$sql=$this->utf8Decode( $sql ); // remover codificação utf8
+			$sql=trim( $sql );              // remover espaÃ§os do inÃ­cio e final
+			$sql=$this->utf8Decode( $sql ); // remover codificaÃ§Ã£o utf8
 
 			if ( $this->getConnUtf8() )
 			{
-				$sql = $this->utf8Encode( $sql ); // aplicar codificação utf8
+				$sql = $this->utf8Encode( $sql ); // aplicar codificaÃ§Ã£o utf8
 			}
-			$params=$this->prepareParams( $params ); // aplicar/remover utf8 nos parâmetros
+			$params=$this->prepareParams( $params ); // aplicar/remover utf8 nos parÃ¢metros
 		}
 		catch( Exception $e )
 		{
@@ -616,7 +616,7 @@ class TDAO
 						}
 					}
 
-					if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) ) // OCI_DEFAULT = não commit
+					if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) ) // OCI_DEFAULT = nÃ£o commit
 					{
 						$e=oci_error( $stmt );
 
@@ -660,7 +660,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna a instância do objeto da conexão com o banco de dados
+	* Retorna a instÃ¢ncia do objeto da conexÃ£o com o banco de dados
 	*
 	* @return object
 	*/
@@ -678,8 +678,8 @@ class TDAO
 	}
 
 	/**
-	* Adiciona campos da tabela ao array de campos que serão utilizados
-	* nos binds e nos métodos save, insert e delete da classe
+	* Adiciona campos da tabela ao array de campos que serÃ£o utilizados
+	* nos binds e nos mÃ©todos save, insert e delete da classe
 	*
 	* @param string $strFieldName
 	* @param string $strFieldType
@@ -712,7 +712,7 @@ class TDAO
 
 	/**
 	* Retorna o objeto do campo solictado
-	* Se o campo não existier retorna null
+	* Se o campo nÃ£o existier retorna null
 	*
 	* @param string $strFieldName
 	*/
@@ -755,7 +755,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna a string dsn utilizada na conexão PDO
+	* Retorna a string dsn utilizada na conexÃ£o PDO
 	*
 	* @return string
 	*/
@@ -770,7 +770,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna se o banco de dados está utilizando a codificação UTF-8
+	* Retorna se o banco de dados estÃ¡ utilizando a codificaÃ§Ã£o UTF-8
 	*
 	*/
 	public function getConnUtf8()
@@ -783,7 +783,7 @@ class TDAO
 		return true;
 	}
 	/**
-	* Retorna o tipo de banco de dados que está sendo utilizado.
+	* Retorna o tipo de banco de dados que estÃ¡ sendo utilizado.
 	* Ex: mysql, postgres, oracle...
 	*
 	* @return string
@@ -799,7 +799,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna o nome do esquema utilizado pela conexão postgres somente
+	* Retorna o nome do esquema utilizado pela conexÃ£o postgres somente
 	* @return string
 	*/
 	public function getConnSchema()
@@ -823,15 +823,15 @@ class TDAO
 		{
 			$this->specialChars=array
 				(
-				'Ã',
-				'Â'
+				'Ãƒ',
+				'Ã‚'
 				);
 
 			for( $i = 127; $i < 256; $i++ )
 			{
 				$char = chr( $i );
 
-				if ( !preg_match( '/Â|Ã/', $char ) )
+				if ( !preg_match( '/Ã‚|Ãƒ/', $char ) )
 				{
 					$this->specialChars[] = $char;
 				}
@@ -880,11 +880,11 @@ class TDAO
 	}
 
 	/**
-	* Processa o array de parametros aplicando/removendo codificação utf8, convertendo
-	* datae números no formado correto de acordo com o banco de dados.
+	* Processa o array de parametros aplicando/removendo codificaÃ§Ã£o utf8, convertendo
+	* datae nÃºmeros no formado correto de acordo com o banco de dados.
 	*
-	* Se $boolBind for true ( padrão) o retorno será o array associativo (key=>value ) quando
-	* este for recebido neste formato,  se false o resultdo será convertido em um array indexado de 0 a N
+	* Se $boolBind for true ( padrÃ£o) o retorno serÃ¡ o array associativo (key=>value ) quando
+	* este for recebido neste formato,  se false o resultdo serÃ¡ convertido em um array indexado de 0 a N
 	*
 	* @param mixed $mixParams
 	* @param boolean $boolBind
@@ -970,7 +970,7 @@ class TDAO
 		return $mixParams;
 	}
     /**
-    * Retorna a data invertida no formato Ano, MÊs e Dia.
+    * Retorna a data invertida no formato Ano, MÃŠs e Dia.
     *
     * @param string $date
     */
@@ -995,7 +995,7 @@ class TDAO
 		return $strDate . ( is_null( $time ) ? '' : ' ' . $time );
 	}
     /**
-    * Retorna a data no formato normal de Dia, Mês e Ano
+    * Retorna a data no formato normal de Dia, MÃªs e Ano
     *
     * @param string $date
     */
@@ -1021,7 +1021,7 @@ class TDAO
 	}
 
 	/**
-	* Corrige o valor formatdo para numero decimal válido, colocando o ponto no lugar
+	* Corrige o valor formatdo para numero decimal vÃ¡lido, colocando o ponto no lugar
 	* da virgula
 	*
 	* @param string $value
@@ -1062,7 +1062,7 @@ class TDAO
 	}
 
 	/**
-	* Processa o resultado da consulta sql aplivando/removendo utf-8, ajustando números e datas
+	* Processa o resultado da consulta sql aplivando/removendo utf-8, ajustando nÃºmeros e datas
 	* de acordo com o tipo da coluna
 	*
 	* @param mixed $data
@@ -1155,7 +1155,7 @@ class TDAO
 		return $data;
 	}
 	/**
-	* Define o tipo de codificação que está sendo utilizada no browser. Padrão é utf-8
+	* Define o tipo de codificaÃ§Ã£o que estÃ¡ sendo utilizada no browser. PadrÃ£o Ã© utf-8
 	* Pode ser definido de maneira global utilizando a constante CHARSET
 	* Exemplo: setCharset('utf-8'); ou setCharset('iso-8859');
 	*
@@ -1167,7 +1167,7 @@ class TDAO
 		$this->charset=$strNewValue;
 	}
     /**
-    * REtorna o tipo de codificação que está sendo utilizada no browser
+    * REtorna o tipo de codificaÃ§Ã£o que estÃ¡ sendo utilizada no browser
     *
     * @return string
     */
@@ -1198,7 +1198,7 @@ class TDAO
 	}
 
 	/**
-	* Retorna true/false se string estiver na codificação UTF-8
+	* Retorna true/false se string estiver na codificaÃ§Ã£o UTF-8
 	*
 	* @param string $strValue
 	* @return boolean
@@ -1224,7 +1224,7 @@ class TDAO
 		return $result;
 	}
 	/**
-	* Método para verificar se existe algum caractere especial na string
+	* MÃ©todo para verificar se existe algum caractere especial na string
 	*
 	* @param mixed $strValue
 	* @return boolean
@@ -1236,7 +1236,7 @@ class TDAO
 			return false;
 		}
 
-		// se tiver na codificação utf-8 retornar false
+		// se tiver na codificaÃ§Ã£o utf-8 retornar false
 		if ( $this->detectUTF8( $strValue ) )
 		{
 			return false;
@@ -1257,8 +1257,8 @@ class TDAO
 	}
 
 	/**
-	* Método para converter a string para utf-8 ou ascii dependendo
-	* das configurações do banco de dados e do charset definido
+	* MÃ©todo para converter a string para utf-8 ou ascii dependendo
+	* das configuraÃ§Ãµes do banco de dados e do charset definido
 	*
 	* @param string $strValue
 	*/
@@ -1288,7 +1288,7 @@ class TDAO
 	}
 
 	/**
-	* Define o nome da tabela do banco de dados que será utizizada nos
+	* Define o nome da tabela do banco de dados que serÃ¡ utizizada nos
 	* comando insert, save, delete ...
 	*
 	* @param string $strNewValue
@@ -1298,7 +1298,7 @@ class TDAO
 		$this->tableName=$strNewValue;
 	}
     /**
-    * Retorna o nome da tabela que está sendo utilizada nos comandos
+    * Retorna o nome da tabela que estÃ¡ sendo utilizada nos comandos
     * insert, delete, save ...
     *
     */
@@ -1308,7 +1308,7 @@ class TDAO
 	}
 
 	/**
-	* Converte o tipo de campo da coluna da tabela para um tipo de campo padrão da classe
+	* Converte o tipo de campo da coluna da tabela para um tipo de campo padrÃ£o da classe
 	*
 	* @param string $strFieldType
 	* @return string
@@ -1346,8 +1346,8 @@ class TDAO
 	}
 
 	/**
-	* Retorna o diretório/pasta onde será armazenada as informações dos campos
-	* extraídos das tabela
+	* Retorna o diretÃ³rio/pasta onde serÃ¡ armazenada as informaÃ§Ãµes dos campos
+	* extraÃ­dos das tabela
 	*
 	* @param string $strNewValue
 	*/
@@ -1364,7 +1364,7 @@ class TDAO
 		}
 	}
     /**
-    * Retorna o nome do diretório/pasta onde serão armazendas as informações dos campos
+    * Retorna o nome do diretÃ³rio/pasta onde serÃ£o armazendas as informaÃ§Ãµes dos campos
     * das tabelas
     *
     * @return string;
@@ -1380,7 +1380,7 @@ class TDAO
 	}
 
 	/**
-	* Serialize e salva os campos no diretório/pasta de metadados
+	* Serialize e salva os campos no diretÃ³rio/pasta de metadados
 	*
 	* @return null
 	*/
@@ -1392,7 +1392,7 @@ class TDAO
 		}
 	}
     /**
-    * Desserializa as definições dos campos de uma tabela que foram salvos no diretório/pasta
+    * Desserializa as definiÃ§Ãµes dos campos de uma tabela que foram salvos no diretÃ³rio/pasta
     * de metadados e carrega o array fields da classe
     *
     * @return boolean
@@ -1420,7 +1420,7 @@ class TDAO
 	}
 
 	/**
-	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
+	* Recupera as informaÃ§Ãµes dos campos da tabela defida na classe diretamente do banco de dados
 	* @return null
 	*/
 	public function loadFieldsFromDatabase()
@@ -1614,7 +1614,7 @@ class TDAO
 		return $this->lastId;
 	}
     /**
-    * Recupera do banco de dados o valor campo autoincremento referente ao último insert ocorrido
+    * Recupera do banco de dados o valor campo autoincremento referente ao Ãºltimo insert ocorrido
     *
     */
 	public function getLastInsertId()
@@ -1670,9 +1670,9 @@ class TDAO
 		return null;
 	}
     /**
-    * Retorna se a conexão está utilizando a extensão PDO para conexão com o
+    * Retorna se a conexÃ£o estÃ¡ utilizando a extensÃ£o PDO para conexÃ£o com o
     * banco de dados
-    * Obs: para o banco de dados oracle serão utilizadas as funções oci do php
+    * Obs: para o banco de dados oracle serÃ£o utilizadas as funÃ§Ãµes oci do php
     *
     */
 	public function isPDO()
@@ -1713,7 +1713,7 @@ class TDAO
 		return $result;
 	}
     /**
-    * Ativa / Desativia o commit automático após a execução do método query()
+    * Ativa / Desativia o commit automÃ¡tico apÃ³s a execuÃ§Ã£o do mÃ©todo query()
     *
     * @param boolean $boolNewValue
     */
@@ -1722,7 +1722,7 @@ class TDAO
 		$this->autoCommit=$boolNewValue;
 	}
     /**
-    * Retorna se autocomit está ativo ou não.
+    * Retorna se autocomit estÃ¡ ativo ou nÃ£o.
     *
     */
 	public function getAutoCommit()
@@ -1730,7 +1730,7 @@ class TDAO
 		return ( ( $this->autoCommit === false ) ? false : true );
 	}
     /**
-    * Inicializa uma transação no banco de dados
+    * Inicializa uma transaÃ§Ã£o no banco de dados
     *
     */
 	public function beginTransaction()
@@ -1751,7 +1751,7 @@ class TDAO
 		return false;
 	}
     /**
-    * Termina a transação atual e faz com que todas as mudanças sejam permanentes.
+    * Termina a transaÃ§Ã£o atual e faz com que todas as mudanÃ§as sejam permanentes.
     *
     */
 	public function commit()
@@ -1774,7 +1774,7 @@ class TDAO
 		}
 	}
     /**
-    * Cancela a transação atual desfazendo todas as mudanças pendentes.
+    * Cancela a transaÃ§Ã£o atual desfazendo todas as mudanÃ§as pendentes.
     *
     */
 	public function rollBack()
@@ -1825,7 +1825,7 @@ class TDAO
 		return null;
 	}
 	/**
-	* Define o(s) campo(s) que serão chave primária da tabela
+	* Define o(s) campo(s) que serÃ£o chave primÃ¡ria da tabela
 	*
 	* @example
 	* $daoPg->setPrimaryKey(array('campo1','campo2'));
@@ -1838,7 +1838,7 @@ class TDAO
 		$fields 	= $this->getFields();
 		if( is_array( $fields ) )
 		{
-			// remover marcação de chave primaria
+			// remover marcaÃ§Ã£o de chave primaria
 			foreach($fields as $k => $objField )
 			{
 				$objField->primaryKey= 0;
@@ -1880,7 +1880,7 @@ class TDAO
 		}
 	}
     /**
-    * Retorna o array de campos que fazem parte da chave primária da tabela
+    * Retorna o array de campos que fazem parte da chave primÃ¡ria da tabela
     *
     * @return array
     */
@@ -1908,7 +1908,7 @@ class TDAO
 	}
 	/**
 	* Persiste os valores dos campos definidos com setFieldValue() chamando
-	* o método insert ou update
+	* o mÃ©todo insert ou update
 	*
 	*/
 	public function save()
@@ -2512,7 +2512,7 @@ class TDAO
 		return $result;
 	}
 	/**
-	* Retorna se já existe ou não uma transação aberta
+	* Retorna se jÃ¡ existe ou nÃ£o uma transaÃ§Ã£o aberta
 	*
 	*/
 	public function getHasActiveTransaction()
@@ -2520,7 +2520,7 @@ class TDAO
 		return $this->hasActiveTransaction;
 	}
 	/**
-	* Retorna o último comando sql executado
+	* Retorna o Ãºltimo comando sql executado
 	*
 	*/
 	public function getSqlCmd()
@@ -2537,9 +2537,9 @@ class TDAO
 	}
 
 	/**
-	* Método mágico para definir/recuperar os valores dos campos no formato
+	* MÃ©todo mÃ¡gico para definir/recuperar os valores dos campos no formato
 	* setNome_campo(0) e getNome_campo();
-	* sem a necessidade de criar um método get e set para cada campo
+	* sem a necessidade de criar um mÃ©todo get e set para cada campo
 	*
 	* @param mixed $m
 	* @param mixed $a

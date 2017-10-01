@@ -2,7 +2,7 @@
 TPDOConnection::test(false);
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,27 +20,27 @@ TPDOConnection::test(false);
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm( 'Exemplo Campo Texto com Autocompletar II',220 );
-$frm->addHtmlField('msg','<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlite) do diretório exemplos.<br>
-A tabela de consulta é a tb_municipio.<br>
-A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>Se o campo Estado tiver preenchido o codigo da uf será utilizado no filtro.<br></h3>');
+$frm->addHtmlField('msg','<h3>Este exemplo estÃ¡ utilizando o banco de dados bdApoio.s3db ( sqlite) do diretÃ³rio exemplos.<br>
+A tabela de consulta Ã© a tb_municipio.<br>
+A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>Se o campo Estado tiver preenchido o codigo da uf serÃ¡ utilizado no filtro.<br></h3>');
 
 
 $frm->addSelectField( 'cod_uf', 'Estado:')->addEvent('onChange','jQuery("#nom_municipio").val("");fwAutoCompleteClearCache("nom_municipio")');
@@ -49,13 +49,13 @@ $frm->addHiddenField('cod_municipio','');
 $frm->setAutoComplete( 'nom_municipio'
 			, 'tb_municipio'	// tabela de municipios
 			, 'nom_municipio'	// campo de pesquisa
-			, 'cod_municipio'	// campo que será atualizado ao selecionar o nome do município
+			, 'cod_municipio'	// campo que serÃ¡ atualizado ao selecionar o nome do municÃ­pio
 			, null
-			,'cod_uf'			// campo do formulário que será adicionado como filtro
+			,'cod_uf'			// campo do formulÃ¡rio que serÃ¡ adicionado como filtro
 			,null
 			,3					// numero de caracteres minimos para disparar a pesquisa
-			,1000				// tempo após a digitação para disparar a consulta
-			,50					// máximo de registros que deverá ser retornado
+			,1000				// tempo apÃ³s a digitaÃ§Ã£o para disparar a consulta
+			,50					// mÃ¡ximo de registros que deverÃ¡ ser retornado
 			);
 $frm->show();
 ?>

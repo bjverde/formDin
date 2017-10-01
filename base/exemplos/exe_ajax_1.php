@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,43 +20,43 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
 * Primeiro exemplo.
-* Adicionar botão ajax em um form no padrão normal com submit
+* Adicionar botÃ£o ajax em um form no padrÃ£o normal com submit
 */
 
-// fazer o include das funções ajax quando receber uma requisição ajax;
+// fazer o include das funÃ§Ãµes ajax quando receber uma requisiÃ§Ã£o ajax;
 if( isset($_REQUEST['ajax'] ) && $_REQUEST['ajax'] == 1 )
 {
 	require_once($this->getBase().'includes/formDin4Ajax.php');
 }
 
-$frm = new TForm('Formulário Ajax - Exemplo Nº 1 - Módulo: exe_ajax_1.php ',400,600);
-$frm->addHtmlField('html','<br><center><b>Exemplo de transformação de um formulário no formato padrão ( submit ) para ajax.</b></center><br>Os botões abaixo foram trasnformados para o padrão ajax, alterando a linha:<br>$frm->setActions("Gravar,Excluir"); <br>para:<br>$frm->addButtonAjax("Gravar");<br>$frm->addButtonAjax("Excluir");<br<br>');
+$frm = new TForm('FormulÃ¡rio Ajax - Exemplo NÂº 1 - MÃ³dulo: exe_ajax_1.php ',400,600);
+$frm->addHtmlField('html','<br><center><b>Exemplo de transformaÃ§Ã£o de um formulÃ¡rio no formato padrÃ£o ( submit ) para ajax.</b></center><br>Os botÃµes abaixo foram trasnformados para o padrÃ£o ajax, alterando a linha:<br>$frm->setActions("Gravar,Excluir"); <br>para:<br>$frm->addButtonAjax("Gravar");<br>$frm->addButtonAjax("Excluir");<br<br>');
 
 $frm->addTextField('nome','Nome:',100,true,50);
 $frm->addDateField('nasc','Nascimento:',true);
-$frm->addNumberField('salario','Salário',10,false,2);
+$frm->addNumberField('salario','SalÃ¡rio',10,false,2);
 $frm->addButton('Normal',null,'btnTeste',null,null,true,false);
 $frm->addButtonAjax('Normal',null,null,null,null,null,null,null,null,'btnAjax',null,true,false);
-$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informações','text',false);
+$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informaÃ§Ãµes','text',false);
 
 if( $acao =='login') {
     sleep(1);
@@ -90,14 +90,14 @@ switch($_POST['formDinAcao'])
 	case 'Gravar':
 		/*
 		$res['DAT_ITEM'][0] = '01/01/2012';
-		$res['NOM_ITEM'][0] = "CORAÇÃO";
+		$res['NOM_ITEM'][0] = "CORAÃ‡ÃƒO";
 		prepareReturnAjax(1,$res);
-		prepareReturnAjax(1,"'CORAÇÃO'");
+		prepareReturnAjax(1,"'CORAÃ‡ÃƒO'");
 		*/
 		sleep(1); // temporizador de 1 segundo para retornar
 		if( $frm->validate() )
 		{
-			$frm->setMessage('Ação salvar executada com SUCESSO!!!');
+			$frm->setMessage('AÃ§Ã£o salvar executada com SUCESSO!!!');
 		}
 	break;
 	//---------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ switch($_POST['formDinAcao'])
 		//sleep(1); // temporizador de 1 segundo para retornar
 		if( $frm->validate() )
 		{
-			$frm->setMessage('Ação Excluir executada com SUCESSO!!!');
+			$frm->setMessage('AÃ§Ã£o Excluir executada com SUCESSO!!!');
 		}
 	break;
 	//---------------------------------------------------------------------------------
@@ -115,9 +115,9 @@ switch($_POST['formDinAcao'])
 //$frm->setAction('Salvar,Excuir');
 
 // depois
-// botão ajax
+// botÃ£o ajax
 $frm->addButtonAjax('Gravar',null,null,null,null,'Gravando. Aguarde...','json');
-// botão ajax
+// botÃ£o ajax
 $frm->addButtonAjax('Excluir',null,null,null,null,'Excluindo Registro...');
 
 // chamada ajax manual
@@ -153,8 +153,8 @@ function meuCallBack(res)
 function meuBeforeSend(data)
 {
 	data['nome'] = 'parametro adicionado no evento beforeSend';
-	//alert('Não vai passar');
-	if( confirm('Função beforeSend foi chamada. Deseja continuar ?'))
+	//alert('NÃ£o vai passar');
+	if( confirm('FunÃ§Ã£o beforeSend foi chamada. Deseja continuar ?'))
 		return true;
 	return false;
 }
@@ -202,7 +202,7 @@ function confirmacao(status)
     status = status||null;
 	if( !status)
 	{
-		fwConfirm('Tem certeza que testou esta mensagem?', confirmacao, confirmacao, 'Sim', 'Não', 'Salvar arquivo');
+		fwConfirm('Tem certeza que testou esta mensagem?', confirmacao, confirmacao, 'Sim', 'NÃ£o', 'Salvar arquivo');
 	}
     else
     {

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -44,7 +44,7 @@ $frm->addSelectField('seq_impureza_metal','Metal',false,'1=Chumbo,2=Arsenio,3=Cr
 $frm->addSelectField('cod_impureza_comp','Valor (mg/kg)',false,array('='=>'=','>'=>'&gt;','<'=>'&lt;'),false,false,null,null,null,null,'--');
 $frm->addNumberField('val_impureza_metalica','',7,true,4,false,null,0,1000);
 $frm->addHiddenField('chave_gride_impureza_metalica');
-$frm->addButton('+',null,'btn_gride_impureza_metalica','gride_linha_alterar(this)',null,false,false,null,null,'Clique aqui para adicionar metal à lista');
+$frm->addButton('+',null,'btn_gride_impureza_metalica','gride_linha_alterar(this)',null,false,false,null,null,'Clique aqui para adicionar metal Ã  lista');
 $frm->addHtmlField('gride_impureza');
 $frm->setAction('Gravar');
 
@@ -83,10 +83,10 @@ $frm->show();
 /*
 include('base/classes/FormDin3.func.inc');
 include('base/classes/FormDin3.class.php');
-$aCampos['val_salario'] = new CampoDecimal('val_salario','Salário:',false,null,null,null,null,15,null,null,null,null,2,null,null,true);
+$aCampos['val_salario'] = new CampoDecimal('val_salario','SalÃ¡rio:',false,null,null,null,null,15,null,null,null,null,2,null,null,true);
 $aCampos['des_email']	= new CampoEmail('des_email','Email:');
 $frm = new FormDin3($aCampos,'Teste Decimal',$_POST);
-$frm->adicionarCampoDecimal('val_salario2','Salário2:',false,null,null,2,15);
+$frm->adicionarCampoDecimal('val_salario2','SalÃ¡rio2:',false,null,null,2,15);
 $frm->setEvento('des_email',array('onKeyPress'=>'return disabilitarTeclaCtrl(event,"v");'));
 print $frm->criarForm();
 */
@@ -101,7 +101,7 @@ function disabilitarTeclaCtrl(e,teclas)
 	}
 	else
 	{
-		//Lista de todas as combinações de CTRL + key que voce quer desativar
+		//Lista de todas as combinaÃ§Ãµes de CTRL + key que voce quer desativar
 		teclasProibidas = new Array('a', 'n', 'c', 'x', 'v', 'j');
 	}
 	var key;

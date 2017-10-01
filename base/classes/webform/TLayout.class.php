@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -53,9 +53,9 @@ class TLayout extends THtmlPage {
     private $container;
     // global
     private $closable; // permite fechar/abrir as areas clicando no centro
-    private $resizable; // clicar na barra e arrastar para mudar o tamanho do espaço
+    private $resizable; // clicar na barra e arrastar para mudar o tamanho do espaÃ§o
     private $slidable; // quanto esta aberto, ao clicar na barra ele abre e ao retirar o mouse da area ela se fecha automaticamente
-    private $initClosed; // inicia com todas as áreas  fechadas
+    private $initClosed; // inicia com todas as Ã¡reas  fechadas
     // area iniClosed
     private $northInitClosed;
     private $southInitClosed;
@@ -87,7 +87,7 @@ class TLayout extends THtmlPage {
     private $southClosable;
     private $eastClosable;
     private $westClosable;
-    private $padding; // margem interna da área
+    private $padding; // margem interna da Ã¡rea
     private $url;
 
     /**
@@ -318,7 +318,7 @@ class TLayout extends THtmlPage {
 
 	$js = new TElement('');
 	$js->add('l' . $this->getId() . '=jQuery( jQuery("' . $centerClass . '").parent() ).layout({');
-	// definições gerais para todas as áreas
+	// definiÃ§Ãµes gerais para todas as Ã¡reas
 	$js->add('spacing_open:' . $this->getSpacingOpen(), false);
 
 	if (!is_null($this->getSpacingClosed())) {
@@ -336,7 +336,7 @@ class TLayout extends THtmlPage {
 	if ($this->getInitClosed()) {
 	    $js->add(', initClosed:true', false);
 	}
-	// definições gerais para cada área
+	// definiÃ§Ãµes gerais para cada Ã¡rea
 	$js->add(',center__paneSelector:"' . $centerClass . '"', false);
 	$child = $this->getCenterArea()->getChildren();
 	if (is_array($child) && is_object($child[0]) && get_Class($child[0]) == 'TLayout') {
@@ -655,7 +655,7 @@ class TLayout extends THtmlPage {
 
     //-------------------------------------------------------------------------------------------
     /**
-     * Define se a área será aberta ao clicar na divisão e será fechada quando o mouse sair
+     * Define se a Ã¡rea serÃ¡ aberta ao clicar na divisÃ£o e serÃ¡ fechada quando o mouse sair
      *
      * @param mixed $boolNewValue
      */
@@ -668,7 +668,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define se todas as áres inicializarão fechadas
+     * Define se todas as Ã¡res inicializarÃ£o fechadas
      *
      * @param boolean $boolNewValue
      */
@@ -716,7 +716,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver aberta
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver aberta
      *
      * @param int $intNewValue
      */
@@ -729,7 +729,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver fechada
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver fechada
      *
      * @param int $intNewValue
      */
@@ -831,7 +831,7 @@ class TLayout extends THtmlPage {
 
     //-------------------------------------------------------------------------------------------
     /**
-     * Define a espessuara da disvisória quando a área estiver aberta
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver aberta
      *
      * @param int $intNewValue
      */
@@ -844,7 +844,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver fechada
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver fechada
      *
      * @param int $intNewValue
      */
@@ -859,7 +859,7 @@ class TLayout extends THtmlPage {
     //-------------------------------------------------------------------------------------------
 
     /**
-     * Define a espessuara da disvisória quando a área estiver aberta
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver aberta
      *
      * @param int $intNewValue
      */
@@ -872,7 +872,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver fechada
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver fechada
      *
      * @param int $intNewValue
      */
@@ -887,7 +887,7 @@ class TLayout extends THtmlPage {
     //-------------------------------------------------------------------------------------------
 
     /**
-     * Define a espessuara da disvisória quando a área estiver aberta
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver aberta
      *
      * @param int $intNewValue
      */
@@ -900,7 +900,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver fechada
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver fechada
      *
      * @param int $intNewValue
      */
@@ -915,7 +915,7 @@ class TLayout extends THtmlPage {
     //-------------------------------------------------------------------------------------------
 
     /**
-     * Define a espessuara da disvisória quando a área estiver aberta
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver aberta
      *
      * @param int $intNewValue
      */
@@ -928,7 +928,7 @@ class TLayout extends THtmlPage {
     }
 
     /**
-     * Define a espessuara da disvisória quando a área estiver fechada
+     * Define a espessuara da disvisÃ³ria quando a Ã¡rea estiver fechada
      *
      * @param int $intNewValue
      */

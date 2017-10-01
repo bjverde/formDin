@@ -1,6 +1,6 @@
 <?php
 /**
- * Classe base para construção de inputs tipo radio button, checkbox, combobox e multi select
+ * Classe base para construÃ§Ã£o de inputs tipo radio button, checkbox, combobox e multi select
  */
 abstract class TOption extends TControl
 {
@@ -18,15 +18,15 @@ abstract class TOption extends TControl
 	private $nowWrapText;
 	private $arrOptionsData;
 	/**
-	 * Método construtor
+	 * MÃ©todo construtor
 	 *
-	 * $mixOptions = array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
-	 * $arrValues = array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
-	 * $intPaddingItems = numero inteiro para definir o espaço vertical entre as colunas de opções
+	 * $mixOptions = array no formato "key=>value" ou nome do pacote oracle e da funÃ§Ã£o a ser executada
+	 * $arrValues = array no formato "key=>key" para identificar a(s) opÃ§Ã£o(Ãµes) selecionada(s)
+	 * $intPaddingItems = numero inteiro para definir o espaÃ§o vertical entre as colunas de opÃ§Ãµes
 	 * $strInptType = define o tipo de input a ser gerado. Ex: select, radio ou check
-	 * $strKeyColumn = nome da coluna que será utilizada para preencher os valores das opções
-	 * $strDisplayColumn = nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
-	 * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
+	 * $strKeyColumn = nome da coluna que serÃ¡ utilizada para preencher os valores das opÃ§Ãµes
+	 * $strDisplayColumn = nome da coluna que serÃ¡ utilizada para preencher as opÃ§Ãµes que serÃ£o exibidas para o usuÃ¡rio
+	 * $strDataColumns = informaÃ§Ãµes extras do banco de dados que deverÃ£o ser adicionadas na tag option do campo select
 	 *
 	 * @abstract
 	 * @param string $strName
@@ -61,7 +61,7 @@ abstract class TOption extends TControl
 		$this->setDisplayField( $strDisplayField );
 		$this->setOptions( $mixOptions, $strDisplayField, $strKeyField, null, $strDataColumns );
 		$this->setNowrapText($boolNowrapText);
-		// tratamento para campos selects postados das colunas tipo do TGrid onde os nomes são arrays
+		// tratamento para campos selects postados das colunas tipo do TGrid onde os nomes sÃ£o arrays
 	   if( $this->getFieldType() == 'select' && strpos( $this->getName(), '[' ) !== false )
 	   {
 	   	   $name = $this->getName();
@@ -86,7 +86,7 @@ abstract class TOption extends TControl
 	 * cria o html do input
 	 * se $boolPrint for true, joga o html para o browser
 	 * se $boolPrint for false, retorna o html gerado apenas
-	 * se $boolShowOnlyInput for true, será retornada somente a tag input do campo
+	 * se $boolShowOnlyInput for true, serÃ¡ retornada somente a tag input do campo
 	 *
 	 * @param boolean $boolPrint
 	 * @param boolean $boolShowOnlyInput
@@ -99,7 +99,7 @@ abstract class TOption extends TControl
 
 			$this->setCss( 'overflow', 'auto' );
 			$this->setCss( 'border',  '1px solid transparent' );
-			// é necessário pelo menos uma coluna
+			// Ã© necessÃ¡rio pelo menos uma coluna
 			if( ( int ) $this->getColumnCount() == 0 && ( int ) $this->getQtdColumns() == 0 )
 			{
 				$this->setQtdColumns( 1 );
@@ -272,10 +272,10 @@ abstract class TOption extends TControl
 					}
 				}
 			}
-			// trocar o id da div para não conflitar
+			// trocar o id da div para nÃ£o conflitar
 			$this->setid( $this->getId() . '_container' );
 
-			// para colocar a borda vermelha na validação do campo obrigatório tem que ter uma borda já definida
+			// para colocar a borda vermelha na validaÃ§Ã£o do campo obrigatÃ³rio tem que ter uma borda jÃ¡ definida
 			if( !$this->getCss('border') )
 			{
 				$this->setCss('border','1px solid transparent');
@@ -304,10 +304,10 @@ abstract class TOption extends TControl
 			$this->setProperty( 'size', $this->getSelectSize() );
 			//$this->setCss('border','1px solid #c0c0c0');
 			$this->setCss( 'background-color', '#ffffff' );
-			// colocar hint se não tiver
+			// colocar hint se nÃ£o tiver
 			if( $this->getMultiSelect() && $this->title == '' )
 			{
-				$this->setProperty( 'title', 'Pressione a tecla CTRL ou SHIFT para marcar/desmarcar as opções!' );
+				$this->setProperty( 'title', 'Pressione a tecla CTRL ou SHIFT para marcar/desmarcar as opÃ§Ãµes!' );
 			}
 			if( is_array( $this->getOptions() ) )
 			{
@@ -362,7 +362,7 @@ abstract class TOption extends TControl
 	}
 
 	/**
-	 * Define a quantidade de itens que ficarão visíveis quando o input for do tipo multi select
+	 * Define a quantidade de itens que ficarÃ£o visÃ­veis quando o input for do tipo multi select
 	 *
 	 * @param integer $intNewValue
 	 */
@@ -372,7 +372,7 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
-	 * Recupera a quantidade de itens que ficarão visíveis quando o input for do tipo multi select
+	 * Recupera a quantidade de itens que ficarÃ£o visÃ­veis quando o input for do tipo multi select
 	 *
 	 */
 	public function getSelectSize()
@@ -391,7 +391,7 @@ abstract class TOption extends TControl
 		return ( int ) $this->selectSize;
 	}
 	/**
-	 * Define se o input será do tipo multi select
+	 * Define se o input serÃ¡ do tipo multi select
 	 *
 	 * @param boolean $boolMultiSelect
 	 */
@@ -415,7 +415,7 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
-	 * Recupera se o input será do tipo multi select
+	 * Recupera se o input serÃ¡ do tipo multi select
 	 *
 	 */
 	public function getMultiSelect()
@@ -423,8 +423,8 @@ abstract class TOption extends TControl
 		return $this->multiSelect;
 	}
 	/**
-	 * Adiciona uma coluna para gerar a visualiazação dos checkbox ou radio buttons em mais de uma coluna
-	 * Tambem pode ser utilzado o parametro $intQtdColumns para definir a quantidade de colunas caso NÃO seja necessário
+	 * Adiciona uma coluna para gerar a visualiazaÃ§Ã£o dos checkbox ou radio buttons em mais de uma coluna
+	 * Tambem pode ser utilzado o parametro $intQtdColumns para definir a quantidade de colunas caso NÃƒO seja necessÃ¡rio
 	 * especificar a largura, cor e alinhamento de cada coluna.
 	 *
 	 * @param int $intWidth
@@ -445,7 +445,7 @@ abstract class TOption extends TControl
 		return count( $this->columns );
 	}
 	/**
-	 * Define o(s) valor(es) que será(ão) selecionado(s) no campo
+	 * Define o(s) valor(es) que serÃ¡(Ã£o) selecionado(s) no campo
 	 *
 	 * @param mixed $mixValues
 	 */
@@ -492,9 +492,9 @@ abstract class TOption extends TControl
 
 	/**
 	 * Define um array no formato "key=>value" ou string no formato "S=SIM,N=NAO,..." ou
-	 * o nome de um pacoteFunção para recuperar do banco de dados, neste
-	 * caso pode ser especificada a coluna chave, a coluna descrição e
-	 * searchFields como parametros para a função do pacote oracle.
+	 * o nome de um pacoteFunÃ§Ã£o para recuperar do banco de dados, neste
+	 * caso pode ser especificada a coluna chave, a coluna descriÃ§Ã£o e
+	 * searchFields como parametros para a funÃ§Ã£o do pacote oracle.
 	 *
 	 * Ex: $mixSearchFields="cod_uf=53,num_pessoa=20" ou array('COD_UF'=53,'NUM_PESSOA'=>20)
 	 * Ex: $strDataColumns = "cod_uf,sig_uf,cod_regiao"
@@ -533,14 +533,14 @@ abstract class TOption extends TControl
 				if( strpos( $mixOptions, '=' ) || strlen($mixOptions)==1 )
 				{
 
-				// tratar opção de 1 caractere. Ex: S,N,1,2...
+				// tratar opÃ§Ã£o de 1 caractere. Ex: S,N,1,2...
 					if( strlen($mixOptions)==1 )
 					{
 						$mixOptions = array( 'N'=>'' );
 					}
 					else
 					{
-						// tratar formato S=>SIM,N=>NÃO
+						// tratar formato S=>SIM,N=>NÃƒO
 						$mixOptions = preg_replace('/\=\>/','=',$mixOptions);
 						$mixOptions = explode( ',', $mixOptions );
 						forEach( $mixOptions as $k=>$v )
@@ -605,7 +605,7 @@ abstract class TOption extends TControl
 							{
 								if( $GLOBALS[ 'conexao' ]->executar_recuperar( $sql, $bvars, $mixOptions, $nrows ) )
 								{
-									echo 'Erro na execução do sql:' . $sql;
+									echo 'Erro na execuÃ§Ã£o do sql:' . $sql;
 								}
 							}
 						}
@@ -647,10 +647,10 @@ abstract class TOption extends TControl
 			$this->arrOptions = null;
 			if( is_array( $mixOptions ) )
 			{
-				// verificar se o array está no formato oracle
+				// verificar se o array estÃ¡ no formato oracle
 				if( key( $mixOptions ) && is_array( $mixOptions[ key( $mixOptions ) ] ) )
 				{
-					// assumir a primeira e segunda coluna para popular as opções caso não tenha sido informadas
+					// assumir a primeira e segunda coluna para popular as opÃ§Ãµes caso nÃ£o tenha sido informadas
 					if( !isset( $strKeyField ) )
 					{
 						if( !$this->getKeyField() )
@@ -731,7 +731,7 @@ abstract class TOption extends TControl
 	}
 
 	/**
-	 * Recupera o array de opções do campo
+	 * Recupera o array de opÃ§Ãµes do campo
 	 *
 	 */
 	public function getOptions()
@@ -739,7 +739,7 @@ abstract class TOption extends TControl
 		return $this->arrOptions;
 	}
 	/**
-	 * Define se o campo deverá ter pelo menos uma opção selecinada para o teste de validação
+	 * Define se o campo deverÃ¡ ter pelo menos uma opÃ§Ã£o selecinada para o teste de validaÃ§Ã£o
 	 *
 	 * @param boolean $boolValue
 	 */
@@ -749,7 +749,7 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
-	 * Retorna se campo está definido como obrigatório.
+	 * Retorna se campo estÃ¡ definido como obrigatÃ³rio.
 	 *
 	 */
 	public function getRequired()
@@ -758,7 +758,7 @@ abstract class TOption extends TControl
 	}
 
 	/**
-	 * Define a quantidade de colunas para distribuição dos checkbox ou radios na tela
+	 * Define a quantidade de colunas para distribuiÃ§Ã£o dos checkbox ou radios na tela
 	 *
 	 * @param integer $intNewValue
 	 */
@@ -768,7 +768,7 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
-	 * Recupera a quantidade de colunas para distribuição dos checkbox ou radios na tela
+	 * Recupera a quantidade de colunas para distribuiÃ§Ã£o dos checkbox ou radios na tela
 	 *
 	 */
 	public function getQtdColumns()
@@ -776,7 +776,7 @@ abstract class TOption extends TControl
 		return ( int ) $this->qtdColunms;
 	}
 	/**
-	 * Define a distância entre as colunas. Padrão=20px
+	 * Define a distÃ¢ncia entre as colunas. PadrÃ£o=20px
 	 *
 	 * @param integer $intNewValue
 	 */
@@ -786,7 +786,7 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
-	 * recupera a distância entre as colunas. Padrão=20px
+	 * recupera a distÃ¢ncia entre as colunas. PadrÃ£o=20px
 	 *
 	 */
 	public function getPaddingRight()
@@ -825,18 +825,18 @@ abstract class TOption extends TControl
 			{
 				if( count( $value) == 0 || trim( $value[0] ) == ''  )
 				{
-					$this->addError( "Campo obrigatório" );
+					$this->addError( "Campo obrigatÃ³rio" );
 				}
 			}
 			else if ( is_null( $value ) || trim($value) == '' )
 			{
-				$this->addError( "Campo obrigatório" );
+				$this->addError( "Campo obrigatÃ³rio" );
 			}
 		}
 		return ( ( string ) $this->getError() === "" );
 	}
 	/**
-	 * Permite retornar somente a tag input do campo sem as tags de formatação para exibição na classe TForm.
+	 * Permite retornar somente a tag input do campo sem as tags de formataÃ§Ã£o para exibiÃ§Ã£o na classe TForm.
 	 *
 	 * @param boolean $boolNewValue
 	 */
@@ -883,9 +883,9 @@ abstract class TOption extends TControl
  */
 /* for($i=1;$i<10;$i++)
   {
-  $opt[$i]='Opção Nº '.($i+1);
+  $opt[$i]='OpÃ§Ã£o NÂº '.($i+1);
   }
-  //$check = new TCheck('chk',array(1=>'Maça',2=>'Tomate',3=>'Limão'),array('2',1),false);
+  //$check = new TCheck('chk',array(1=>'MaÃ§a',2=>'Tomate',3=>'LimÃ£o'),array('2',1),false);
   //$check = new TCheck('chk',$opt,array('2',1),false,5,null,null,null,5);
   //$check->show();
   //$check = new TCheck('chk',$opt,array('2',1),false,10,800,600,null,5);

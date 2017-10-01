@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -43,11 +43,11 @@ $frm = new TForm( 'Confirmar Pagamento Anvisa' , 260 , 635 );
 $frm->setAction( 'Gravar,Limpar' );
 
 $frm->addGroupField( 'grupo_confirma_pagamento' , 'Confirmar Pagamento Anvisa' , NULL , NULL , FALSE );
-$frm->addTextField( 'num_ret' , 'N° Ret:' , 10 , TRUE , 10 )->setEnabled( FALSE );
-$frm->addTextField( 'des_ret_registro_especial_temp' , 'Descrição do Ret:' , 80 , FALSE )->setEnabled( FALSE );
+$frm->addTextField( 'num_ret' , 'NÂ° Ret:' , 10 , TRUE , 10 )->setEnabled( FALSE );
+$frm->addTextField( 'des_ret_registro_especial_temp' , 'DescriÃ§Ã£o do Ret:' , 80 , FALSE )->setEnabled( FALSE );
 $frm->addTextField( 'nom_pessoa' , 'Nome da Pessoa:' , 80 , FALSE )->setEnabled( FALSE );
 $frm->addCpfCnpjField( 'cpf_cnpj' , 'CPF/CNPJ' , FALSE )->setEnabled( FALSE );
-$frm->addTextField( 'end_pessoa' , 'Endereço da Pessoa' , 80 , FALSE )->setEnabled( FALSE );
+$frm->addTextField( 'end_pessoa' , 'EndereÃ§o da Pessoa' , 80 , FALSE )->setEnabled( FALSE );
 $frm->addTextField( 'des_bairro' , 'Bairro da Pessoa' , 80 , FALSE )->setEnabled( FALSE );
 $frm->addDateField( 'dat_sit_anvisa_pago' , 'Dat. Pagamento' , TRUE );
 $frm->closeGroup();
@@ -55,13 +55,13 @@ $frm->closeGroup();
 // consulta dinamica por numero de registro
 $frm->setOnlineSearch('num_ret'
 	, 'AGROTOXICO.PK_REGISTRO_ESPECIAL_TEMP.LIST_RET'
- 	, 'NUM_RET|Nº Ret:|10'
+ 	, 'NUM_RET|NÂº Ret:|10'
  	, 'NUM_RET'
  	, TRUE
 	, TRUE
- 	, 'SEQ_RET_REGISTRO_ESPECIAL_TEMP|Nº Ret,DES_RET_REGISTRO_ESPECIAL_TEMP|Descrição do Ret'
+ 	, 'SEQ_RET_REGISTRO_ESPECIAL_TEMP|NÂº Ret,DES_RET_REGISTRO_ESPECIAL_TEMP|DescriÃ§Ã£o do Ret'
 	, 'SEQ_RET_REGISTRO_ESPECIAL_TEMP|num_ret,DES_RET_REGISTRO_ESPECIAL_TEMP|des_ret_registro_especial_temp,NOM_PESSOA|nom_pessoa,NUM_CPF_CNPJ|cpf_cnpj,END_PESSOA|end_pessoa,DES_BAIRRO|des_bairro,DAT_SIT_ANVISA_PAGO|dat_sit_anvisa_pago'
- 	, 'Consulta por Nº Ret.'
+ 	, 'Consulta por NÂº Ret.'
 	, 'Registros Encontrados'
  	, NULL
  	, 400
@@ -78,20 +78,20 @@ switch ( $acao )
 {
   case 'Gravar':
     
-    // verifica se a pessoa está tentando executar a mesma ação
+    // verifica se a pessoa estÃ¡ tentando executar a mesma aÃ§Ã£o
     if ( isset( $_SESSION[ 'token' ] ) and ( $_SESSION[ 'token' ] == md5( serialize( $_POST ) ) ) )
     {
-      $frm->addJavascript( "alert('Gravação já foi Realizada!');" );
+      $frm->addJavascript( "alert('GravaÃ§Ã£o jÃ¡ foi Realizada!');" );
       break;
     } # end iF;
     
-    // verifica a validação dos campos.
+    // verifica a validaÃ§Ã£o dos campos.
     if ( $frm->validate() )
     {
-      // pega os campos do formulário que vai ser enviado ao pacote para atualizar os dados.
+      // pega os campos do formulÃ¡rio que vai ser enviado ao pacote para atualizar os dados.
       $bvars = $frm->createBvars( 'num_ret,dat_sit_anvisa_pago' );
       
-      // antes de executar pacote é criado a session[token] para verificação antes
+      // antes de executar pacote Ã© criado a session[token] para verificaÃ§Ã£o antes
       $_SESSION[ 'token' ]  = md5( serialize( $_POST ) );
            
       if( !$arrErro = executarPacote( 'AGROTOXICO.PK_REGISTRO_ESPECIAL_TEMP.ALT_CONFIRM_PAGAMENTO' , $bvars , 0 ) ) 
@@ -109,7 +109,7 @@ switch ( $acao )
     break;
   case 'Limpar':
 
-    //limpando os campos do formulário
+    //limpando os campos do formulÃ¡rio
 	$frm->clearFields();
     
     break;

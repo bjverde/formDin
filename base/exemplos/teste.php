@@ -38,7 +38,7 @@ $dados['DAT'][] = '01/01/2015';
 $dados['TXT_TERMO'][] = 'Termo';
 $dados['TXT_OBS'][] = 'OBS';
 $dados['NUM_VALOR'][] = '10.45';
-$dados['TXT_DESCRIMINACAO'][] = 'Descriminação';
+$dados['TXT_DESCRIMINACAO'][] = 'DescriminaÃ§Ã£o';
 
 $dados['TXT_EMPENHO'][] = '2015NE4478';
 $dados['TXT_REGISTRO'][] = 'REGNE4457';
@@ -47,7 +47,7 @@ $dados['DAT'][] = '02/01/2015';
 $dados['TXT_TERMO'][] = 'Termo 2';
 $dados['TXT_OBS'][] = 'OBS 2';
 $dados['NUM_VALOR'][] = '150.47';
-$dados['TXT_DESCRIMINACAO'][] = 'Descriminação';
+$dados['TXT_DESCRIMINACAO'][] = 'DescriminaÃ§Ã£o';
 
 
 //adicionar array de objeto pdf

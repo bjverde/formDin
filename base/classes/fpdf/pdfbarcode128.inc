@@ -35,7 +35,7 @@ For any suggestions or bug report please contact me : guinux@cosmoplazza.com
 
 
 	//JSS - 05/04/2006 - corrigindo o caminho das fontes pdf e do arquivo fpdf.php
-	// Caso n„o encontre em uma pasta procura na outra e onde for achado faz o define e o require
+	// Caso n√£o encontre em uma pasta procura na outra e onde for achado faz o define e o require
 	if( file_exists( '../../base/classes/fpdf/fpdf.php' ) ) {
 		define('FPDF_FONTPATH','../../base/classes/fpdf/fonts/');
 		require_once('../../base/classes/fpdf/fpdf.php');

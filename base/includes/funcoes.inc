@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-funÁ„o para depuraÁ„o. Exibe o modulo a linha e a vari·vel/objeto solicitado
+fun√ß√£o para depura√ß√£o. Exibe o modulo a linha e a vari√°vel/objeto solicitado
 */
 function d( $mixExpression,$strComentario='Debug', $boolExit=FALSE )
 {
@@ -155,7 +155,7 @@ function str2float($str)
 		}
 		else if( $posVirgula > $posPonto )
 		{
-			// converte 1.000.000,05 em 1000000.05 para poder ser utilizado em operaÁıes matematicas
+			// converte 1.000.000,05 em 1000000.05 para poder ser utilizado em opera√ß√µes matematicas
    			$str = str_replace('.','',$str);
    			$str = str_replace(',','.',$str);
 		}
@@ -169,17 +169,17 @@ function str2float($str)
 
 function lindig2codigobarra($ld) {
 	/*
-	Transforma o conte˙do de uma linha digit·vel de boleto de cobranÁa
-	em cÛdigo para cÛdigo de barras.
+	Transforma o conte√∫do de uma linha digit√°vel de boleto de cobran√ßa
+	em c√≥digo para c√≥digo de barras.
 	Autor: Andries Jan Algera
-	Data: 13 de marÁo de 2007
+	Data: 13 de mar√ßo de 2007
 	*/
 	$cb = substr($ld, 0, 4).substr($ld, 40, 14).
 			substr($ld, 4, 1).substr($ld, 6, 4).substr($ld, 12, 5).
 			substr($ld, 18, 5).substr($ld, 25, 5).
 			substr($ld, 31, 5);
 	if ( substr($ld, 38, 1) <> dv_banco_11_cb($cb) )
-	  return 'Erro no dÌgito verificador';
+	  return 'Erro no d√≠gito verificador';
 	else
 	  return substr($cb,0,4).substr($ld, 38, 1).substr($cb,4);
 }
@@ -255,7 +255,7 @@ function html2rgb($color)
 }
 //--------------------------------------------------------------------------------------
 function getDiaSemana(){
-	$diaSemana = array('Domingo','Segunda-Feira','TerÁa-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','S·bado');
+	$diaSemana = array('Domingo','Segunda-Feira','Ter√ßa-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','S√°bado');
 	return $diaSemana[date(w)];
 }
 
@@ -272,7 +272,7 @@ function mensagem($TEXTO){?>
 	<SCRIPT>
 		newWindow = window.open('', 'newWin', 'toolbar=no,location=no,scrollbars=0,resizable=no,width=400,height=250,top=100,left=180')
 		newWindow.focus();
-		newWindow.document.writeln('<font face="Arial Black">ATEN«√O</font><hr>');
+		newWindow.document.writeln('<font face="Arial Black">ATEN√á√ÉO</font><hr>');
 		newWindow.document.writeln('<font face="Arial" color=red size="2"><?=$TEXTO;?></font>');
 		newWindow.document.writeln('<hr><center><input type="button" value="Fechar" onclick="window.close();"></center>')
 	</SCRIPT>
@@ -353,14 +353,14 @@ function ulcase($variavel) {
 }
 
 	function tirar_acentos($variavel) {
-		$busca= array("'¡'","'¿'","'√'","'ƒ'","'¬'","'…'","'»'","' '","'À'",
-					  "'Õ'","'Ã'","'œ'","'Œ'","'—'",
-					  "'”'","'“'","'‘'","'’'","'÷'","'⁄'","'Ÿ'","'‹'","'€'",
-					  "'›'","'«'",
-					  "'·'","'‡'","'„'","'‰'","'‚'","'È'","'Ë'","'Í'","'Î'",
-					  "'Ì'","'Ï'","'Ô'","'Ó'","'Ò'",
-					  "'Û'","'Ú'","'Ù'","'ı'","'ˆ'","'˙'","'˘'","'¸'","'˚'",
-					  "'˝'","'Á'");
+		$busca= array("'√Å'","'√Ä'","'√É'","'√Ñ'","'√Ç'","'√â'","'√à'","'√ä'","'√ã'",
+					  "'√ç'","'√å'","'√è'","'√é'","'√ë'",
+					  "'√ì'","'√í'","'√î'","'√ï'","'√ñ'","'√ö'","'√ô'","'√ú'","'√õ'",
+					  "'√ù'","'√á'",
+					  "'√°'","'√†'","'√£'","'√§'","'√¢'","'√©'","'√®'","'√™'","'√´'",
+					  "'√≠'","'√¨'","'√Ø'","'√Æ'","'√±'",
+					  "'√≥'","'√≤'","'√¥'","'√µ'","'√∂'","'√∫'","'√π'","'√º'","'√ª'",
+					  "'√Ω'","'√ß'");
 		$subst= array("A","A","A","A","A","E","E","E","E","I","I","I","I","N",
 					  "O","O","O","O","O","U","U","U","U","Y","C",
 					  "a","a","a","a","a","e","e","e","e","i","i","i","i","n",
@@ -496,7 +496,7 @@ function ulcase($variavel) {
 	function exibir_erros($erros) {
 		$num = count($erros);
 		if(!$num) return 0;
-		echo "Foram encontrado(s) o(s) seguinte(s) erro(s) no seu formul·rio:<br>\n";
+		echo "Foram encontrado(s) o(s) seguinte(s) erro(s) no seu formul√°rio:<br>\n";
 		for($x=0;$x<$num;$x++) {
 			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;"."<font color=red><b>".$erros[$x]."</b></font>"."\n";
 		}
@@ -519,25 +519,25 @@ function ulcase($variavel) {
 
 	function maiuscula($str) {
 		$str = strtoupper($str);
-		$str = str_replace(	 array('·','È','Ì','Û','˙','‡','„','‚','ı','‚','Í','Ù','Á')
-							,array('¡','…','Õ','”','⁄','¿','„','¬','’','¬',' ','‘','«')
+		$str = str_replace(	 array('√°','√©','√≠','√≥','√∫','√†','√£','√¢','√µ','√¢','√™','√¥','√ß')
+							,array('√Å','√â','√ç','√ì','√ö','√Ä','√£','√Ç','√ï','√Ç','√ä','√î','√á')
 						,$str);
 		return $str;
 
 	}
 	function minuscula($str) {
 		$str = strtolower($str);
-		$str = str_replace(	 array('¡','…','Õ','”','⁄','¿','¬','√','’','¬',' ','‘','«')
-				   			,array('·','È','Ì','Û','˙','‡','‚','„','ı','‚','Í','Ù','Á')
+		$str = str_replace(	 array('√Å','√â','√ç','√ì','√ö','√Ä','√Ç','√É','√ï','√Ç','√ä','√î','√á')
+				   			,array('√°','√©','√≠','√≥','√∫','√†','√¢','√£','√µ','√¢','√™','√¥','√ß')
 						,$str);
 		return $str;
 
 	}
-	// esta funÁ„o ordena o array no formato de rotorno da classe banco()
+	// esta fun√ß√£o ordena o array no formato de rotorno da classe banco()
 	// ex: odenarArrayBanco($res,'NOM_PESSOA'); // ordena pela coluna NOM_PESSOA
 	function ordenarArrayBanco( $array, $coluna,$crescente=true, $tipoString=true ){
 	if(!$array[$coluna]) {
-		//print 'Impossivel ordenar o array. Coluna ['.$coluna.'] n„o existe!';
+		//print 'Impossivel ordenar o array. Coluna ['.$coluna.'] n√£o existe!';
 		return $array;
 	}
 	if(!is_array($array) )
@@ -574,7 +574,7 @@ function ulcase($variavel) {
 		$expressao= 'array_multisort($array["'.$coluna.'"], '.$tipo.', '.$ordem;
 	}
 	foreach ($array as $k=>$col){
-		$array[$k][0] = $array[$k][0]; // para corrigir o bug de n„o alterar os dados da sessao
+		$array[$k][0] = $array[$k][0]; // para corrigir o bug de n√£o alterar os dados da sessao
 		if( $k != $coluna ){
 			$expressao.=' ,$array["'.$k.'"]';
 		}
@@ -585,7 +585,7 @@ function ulcase($variavel) {
 	return $array;
 	}
 
-	//FunÁ„o para gerar numero romano
+	//Fun√ß√£o para gerar numero romano
 	function converterRomano($num) {
 		$conv = array(10 => array('X', 'C', 'M'),
 		5 => array('V', 'L', 'D'),
@@ -633,7 +633,7 @@ function ulcase($variavel) {
 				if ( is_array($resultadoBanco[$k]) )
 					$chaves = array_keys($resultadoBanco[$k],$v);
 				else
-					return 'Campo '.$k.' n„o encontrado no resultado!';
+					return 'Campo '.$k.' n√£o encontrado no resultado!';
 				if ( is_array($chavesAnterior) ) {
 					foreach ( $chaves as $kc=>$vc ) {
 						if ( !in_array($vc,$chavesAnterior) ) {

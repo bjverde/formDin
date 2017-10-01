@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -48,8 +48,8 @@ class TTreeView extends TControl
 	private $xmlFile;
 	private $onClick;    // recebe o ID do item clicado
 	private $onDblClick; // recebe o ID do item clicado
-	private $onDragEnd;  // recebe o ID do ítem de origem e o ID do ítem destino
-	private $onCheck;    // recebe o ID e o state do check box do ítem. State = 0 ou 1
+	private $onDragEnd;  // recebe o ID do Ã­tem de origem e o ID do Ã­tem destino
+	private $onCheck;    // recebe o ID e o state do check box do Ã­tem. State = 0 ou 1
 	private $enableCheckBoxes;
 	//private $enableRadiobuttons;
 	private $enableDragAndDrop;
@@ -75,25 +75,25 @@ class TTreeView extends TControl
 	* Implementa Tree View
 	*
 	* O parametro $mixData pode ser um array de dados ou o nome de uma tabela. Se for o nome de uma tabela,
-	* o carregamento dos filhos será feito dinamicamente ao clicar no item pai
+	* o carregamento dos filhos serÃ¡ feito dinamicamente ao clicar no item pai
 	*
-	* A função definida no parametro jsOnClick recebe o id do item clicado e deve ser utilizado para
-	* recuperar attributos do nó.
+	* A funÃ§Ã£o definida no parametro jsOnClick recebe o id do item clicado e deve ser utilizado para
+	* recuperar attributos do nÃ³.
 	* <code>
 	* 	alert( tree.getSelectedItemId());
 	* 	alert( tree.getItemText(id ) );
 	* 	alert( tree.getUserData(id,'URL') );
 	* </code>
 	*
-	* A função definida no parametro jsOnDblClick recebe o id do item duplamente clicado e deve ser utilizado para
-	* recuperar attributos do nó.
+	* A funÃ§Ã£o definida no parametro jsOnDblClick recebe o id do item duplamente clicado e deve ser utilizado para
+	* recuperar attributos do nÃ³.
 	* <code>
 	* 	alert( tree.getSelectedItemId());
 	* 	alert( tree.getItemText(id ) );
 	* 	alert( tree.getUserData(id,'URL') );
 	* </code>
 	*
-	* A função definida no parametro jsOnCheck recebe o id e o state do item clicado.
+	* A funÃ§Ã£o definida no parametro jsOnCheck recebe o id e o state do item clicado.
 	* <code>
 	* 	function treeCheck(id, state)
 	* 	{
@@ -101,10 +101,10 @@ class TTreeView extends TControl
 	* 	}
 	* </code>
 	*
-	* A função definida no parametro jsOnDrag recebe o id do item arrastado e o id do item destino, se retornar true a operação e aceita
+	* A funÃ§Ã£o definida no parametro jsOnDrag recebe o id do item arrastado e o id do item destino, se retornar true a operaÃ§Ã£o e aceita
 	* <code>
 	* 	function treeDrag(id, id2) {
-	*		return confirm("Deseja mover o ítem " + tree.getItemText(id) + " para o item " + tree.getItemText(id2) + "?");
+	*		return confirm("Deseja mover o Ã­tem " + tree.getItemText(id) + " para o item " + tree.getItemText(id2) + "?");
 	*	};
 	* </code>
 	*
@@ -168,10 +168,10 @@ class TTreeView extends TControl
 	}
 
 	/**
-	* Define o arquivo externo para criação dinâmica da árvore quando o ítem for expandido.
+	* Define o arquivo externo para criaÃ§Ã£o dinÃ¢mica da Ã¡rvore quando o Ã­tem for expandido.
 	*
 	* Se for definido os parametros $mixData,$strParentFieldName,$strChildFieldName,$strDescFieldName, a classe
-	* utilizará automaticamente o arquivo genérico base/callbacks/treeView.php para obter os valores via ajax
+	* utilizarÃ¡ automaticamente o arquivo genÃ©rico base/callbacks/treeView.php para obter os valores via ajax
 
 	* <code>
 	* 	$tree->setXmlFile('index.php?modulo=base/exemplos/tree.php&ajax=1');
@@ -200,7 +200,7 @@ class TTreeView extends TControl
 			}
 			else
 			{
-				$this->addItem(0,1,'Arquivo '.$xmlFile.' não encontrado!', true, '' );
+				$this->addItem(0,1,'Arquivo '.$xmlFile.' nÃ£o encontrado!', true, '' );
 			}
 		}
 	}
@@ -211,8 +211,8 @@ class TTreeView extends TControl
 		return parent::show( $print );
 	}
 	/**
-	* Define a função que será chamada quando o usuário clicar em um ítem da árvore.
-	* Esta função recebe o id do ítem clicado
+	* Define a funÃ§Ã£o que serÃ¡ chamada quando o usuÃ¡rio clicar em um Ã­tem da Ã¡rvore.
+	* Esta funÃ§Ã£o recebe o id do Ã­tem clicado
 	* Exemplo: alert( tree.getItemText(id) );
 	*
 	* @param mixed $strJsFuncion
@@ -228,8 +228,8 @@ class TTreeView extends TControl
 		return $this->removeIllegalChars( $this->onClick, '.' );
 	}
 	/**
-	* Define a função que será chamada quando o usuário fizer um duplo clique em um ítem da árvore.
-	* Esta função recebe o id do ítem clicado
+	* Define a funÃ§Ã£o que serÃ¡ chamada quando o usuÃ¡rio fizer um duplo clique em um Ã­tem da Ã¡rvore.
+	* Esta funÃ§Ã£o recebe o id do Ã­tem clicado
 	* Exemplo: alert( tree.getItemText(id) );
 	*
 	* @param mixed $strJsFuncion
@@ -245,8 +245,8 @@ class TTreeView extends TControl
 		return $this->removeIllegalChars( $this->onDblClick, '.' );
 	}
 	/**
-	* Define o nome de uma função javascript que será chamada ao clicar no checkbox
-	* Esta função receberá dois parametros: o ID do state do checkbox sendo 0 ou 1
+	* Define o nome de uma funÃ§Ã£o javascript que serÃ¡ chamada ao clicar no checkbox
+	* Esta funÃ§Ã£o receberÃ¡ dois parametros: o ID do state do checkbox sendo 0 ou 1
 	*
 	* @param mixed $strJsFunction
 	*/
@@ -297,9 +297,9 @@ class TTreeView extends TControl
 	/**
 	* Habilita/Desabilita o recurso de arrastar e soltar
 	*
-	* A função de callback recebe os IDs dos ítens origem e destino, se for
-	* returnado false a operação é cancelada
-	* Exemplo:     return confirm("Deseja mover o ítem " + tree.getItemText(id) + " para o item " + tree.getItemText(id2) + "?");
+	* A funÃ§Ã£o de callback recebe os IDs dos Ã­tens origem e destino, se for
+	* returnado false a operaÃ§Ã£o Ã© cancelada
+	* Exemplo:     return confirm("Deseja mover o Ã­tem " + tree.getItemText(id) + " para o item " + tree.getItemText(id2) + "?");
 	*
 	* @param boolean $boolNewValue
 	* @param string $strJsCallBack
@@ -316,7 +316,7 @@ class TTreeView extends TControl
 		return $this->enableDragAndDrop;
 	}
 	/**
-	* Permite mostra ou esconder as linhas de desenho dos níveis da treeview
+	* Permite mostra ou esconder as linhas de desenho dos nÃ­veis da treeview
 	*
 	* @param boolean $boolNewValue
 	*/
@@ -374,10 +374,10 @@ class TTreeView extends TControl
 
 	//---------------------------------------------------------------------------
 	/**
-	* Método para adicionar campos do formulário como parametro de filtragem nos
-	* dados retornados para construção da árvore.
-	* Se o valor for passado, este será constante, se for nulo será o valor atual do
-	* campo no formulário.
+	* MÃ©todo para adicionar campos do formulÃ¡rio como parametro de filtragem nos
+	* dados retornados para construÃ§Ã£o da Ã¡rvore.
+	* Se o valor for passado, este serÃ¡ constante, se for nulo serÃ¡ o valor atual do
+	* campo no formulÃ¡rio.
 	*
 	* @param mixed $mixFieldId
 	* @param mixed $strValue
@@ -482,7 +482,7 @@ class TTreeView extends TControl
 	{
 		if (!is_null($this->rootNode))
 		{
-			echo 'Função setRootLabel() classe TTreeview só pode ser utilizada enquanto a árvore está vazia.';
+			echo 'FunÃ§Ã£o setRootLabel() classe TTreeview sÃ³ pode ser utilizada enquanto a Ã¡rvore estÃ¡ vazia.';
 			return;
 		}
 		$this->rootLabel = $strNewValue;
@@ -506,7 +506,7 @@ class TTreeView extends TControl
 
 	//---------------------------------------------------------------------------
 	/**
-	* Adicionar ítem na árvore
+	* Adicionar Ã­tem na Ã¡rvore
 	*
 	* @param bool $idParent
 	* @param mixed $id
@@ -528,17 +528,17 @@ class TTreeView extends TControl
 				$expand = is_null( $this->getStartExpanded() ) ? true : $this->getStartExpanded();
 				if ( $this->getRootLabel() )
 				{
-					$this->itens = new TTreeViewData( '0', 'root', true, '' ); // nivel obrigatório
+					$this->itens = new TTreeViewData( '0', 'root', true, '' ); // nivel obrigatÃ³rio
 					$this->itens->addItem($this->rootNode = new TTreeViewData( $this->getRandomChars(10)  , $this->getRootLabel(), true, 'Item Raiz' )); //raiz
 				}
 				else
 				{
-					$this->itens = $this->rootNode = new TTreeViewData( '0', 'root', $expand, '' ); // nivel obrigatório
+					$this->itens = $this->rootNode = new TTreeViewData( '0', 'root', $expand, '' ); // nivel obrigatÃ³rio
 				}
 			}
 			else
 			{
-				$this->itens = $this->rootNode = new TTreeViewData( $idParent, 'root', $expand, '' ); // nivel obrigatório
+				$this->itens = $this->rootNode = new TTreeViewData( $idParent, 'root', $expand, '' ); // nivel obrigatÃ³rio
 			}
 
 		}
@@ -552,10 +552,10 @@ class TTreeView extends TControl
 		}
 		if ( $id === '0' )
 		{
-			echo 'Função addItem() da classe TTreeview não permite ítem com ID = 0 (ZERO).';
+			echo 'FunÃ§Ã£o addItem() da classe TTreeview nÃ£o permite Ã­tem com ID = 0 (ZERO).';
 			return;
 		}
-		// adicionar filho somente se não existir
+		// adicionar filho somente se nÃ£o existir
 		if ( !$item = $this->itens->getElementById( $id ) )
 		{
 			$parent->addItem( new TTreeViewData( $id, $text, $open, $hint, $arrUserData, $boolSelect, $boolChecked ) );
@@ -586,8 +586,8 @@ class TTreeView extends TControl
 
 			if ( $this->getEnableCheck() )
 			{
-				$tb->add( new TButton( $tb->getId() . '_btn3', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um ítem");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),true)', null, 'iconCheckAll.gif', null, 'Marcar o ítem e seus descendentes' ) );
-				$tb->add( new TButton( $tb->getId() . '_btn4', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um item");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),false)', null, 'iconUncheckAll.gif', null, 'Desmarcar o ítem e seus descendentes' ) );
+				$tb->add( new TButton( $tb->getId() . '_btn3', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um Ã­tem");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),true)', null, 'iconCheckAll.gif', null, 'Marcar o Ã­tem e seus descendentes' ) );
+				$tb->add( new TButton( $tb->getId() . '_btn4', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um item");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),false)', null, 'iconUncheckAll.gif', null, 'Desmarcar o Ã­tem e seus descendentes' ) );
 			}
 			$this->add( $tb );
 			$this->setCss( 'overflow', 'auto' );
@@ -631,7 +631,7 @@ class TTreeView extends TControl
 		//}
 		if ( $this->getEnableDrag() )
 		{
-			// Parametro false = não pode soltar em uma area vazia da arvore, somente sobre outro item
+			// Parametro false = nÃ£o pode soltar em uma area vazia da arvore, somente sobre outro item
 			$js .= $id . '.enableDragAndDrop(1,false);' . "\n";
 		}
 
@@ -676,7 +676,7 @@ class TTreeView extends TControl
 		}
 		else
 		{
-			// adicionar os itens orfãos
+			// adicionar os itens orfÃ£os
 			if ( $this->getOrphans() )
 			{
 				foreach( $this->getOrphans() as $k => $item )
@@ -689,7 +689,7 @@ class TTreeView extends TControl
 			}
 			if (is_null($this->itens))
 			{
-				$this->itens = new TTreeViewData( 0, 'root', $expand, '' ); // nivel obrigatório
+				$this->itens = new TTreeViewData( 0, 'root', $expand, '' ); // nivel obrigatÃ³rio
 			}
 			$js .= $id . ".loadXMLString('" . $this->getXml(false) . "')";
 		}
@@ -719,7 +719,7 @@ class TTreeView extends TControl
 
 	function addOrphan( TTreeViewData $item )
 	{
-		// se existir filhos orfão, adicionar todos os filhos
+		// se existir filhos orfÃ£o, adicionar todos os filhos
 		while( $obj = $this->getOrphanByIdParent( $item->getId() ) )
 		{
 			$item->addItem( $obj );
@@ -732,7 +732,7 @@ class TTreeView extends TControl
 		}
 		else
 		{
-			// adicionar a lista de orfãos
+			// adicionar a lista de orfÃ£os
 			$this->arrOrphan[ ] = $item;
 		}
 	}
@@ -767,7 +767,7 @@ class TTreeView extends TControl
 				if ( $obj->getIdParent() == $strId )
 				{
 					$result = $obj;
-					// remover o registro órfão
+					// remover o registro Ã³rfÃ£o
 					array_splice( $this->arrOrphan, $k, 1 );
 					break;
 				}
