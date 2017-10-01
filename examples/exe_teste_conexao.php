@@ -49,23 +49,22 @@ $pc->addPage('ORACLE',true,true,'abaora');
 	$frm->addHtmlField('oraGride'	,'');
 
 
+$_POST['banco'] = isset($_POST['banco']) ? $_POST['banco'] : '';
 $banco = $_POST['banco'];
-switch($acao)
-{
+$Schema = isset($_POST[$banco.'Schema']) ? $_POST[$banco.'Schema'] : '';
+
+$acao = isset($acao) ? $acao : '';
+switch($acao) {
 	case 'testar_conexao':
-
-
 		//prepareReturnAjax(0,null, $banco.print_r($_POST,TRUE) );
-		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora')
-		{
-			if( ! $_POST[$banco.'User'] )
-			{
+		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora'){
+			if( ! $_POST[$banco.'User'] ){
 				prepareReturnAjax(0,null,'Informe o Usuário');
 			}
 		}
-		$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$_POST[$banco.'Schema']);
-		if( $dao->connect() )
-		{
+		
+		$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$Schema);
+		if( $dao->connect() ) {
 			prepareReturnAjax(2,null,'Conexão OK!');
 		}
 		prepareReturnAjax(0,null, $dao->getError());
@@ -77,7 +76,7 @@ switch($acao)
 		//if( $banco == 'my' || $banco == 'pg')
 		{
 			//prepareReturnAjax(0,null,print_r($_POST,true));
-			$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$_POST[$banco.'Schema']);
+			$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$Schema);
 			$dados = $dao->executeSql($_POST[$banco.'Sql']);
 			if( ! $dao->getError() )
 			{

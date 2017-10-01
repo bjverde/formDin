@@ -127,7 +127,7 @@ $menu->add('93','9','Exemplo Postgres');
  $menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
 $menu->add('94','9','Exemplo Firebird');
  $menu->add('941','94','Conexão','exe_firebird_1.php');
-$menu->add('99','9','Gerador VO/DAO','../includes/gerador_vo_dao.php');
+$menu->add('99','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 $menu->add('95','9','Testar Conexão','exe_teste_conexao.php');
 
 
