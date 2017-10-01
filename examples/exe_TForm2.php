@@ -36,8 +36,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 //d($_REQUEST);
-if( $_REQUEST['subform'] == 1)
-{
+
+$_REQUEST['subform'] = isset($_REQUEST['subform']) ? $_REQUEST['subform'] : '';
+if( $_REQUEST['subform'] == 1){
 	//require_once('../classes/FormDin3.class.php');
 	//$f = new FormDin3(null,'Teste');
 	//echo $f->criarForm();
