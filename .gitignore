@@ -1,0 +1,5 @@
+# Ignore all directories, and all sub-directories, and it's contents:
+# Ignore * all files in directories
+# Ignore **/ alll subdirectories 
+
+base/tmp/*
