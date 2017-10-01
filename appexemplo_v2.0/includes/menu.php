@@ -38,7 +38,7 @@
  
   $menu = new TMenuDhtmlx();
   $menu->add('1',null,'Menu',null,null,'menu-alt-512.png');
-  $menu->add('11','1','Campo Arquivo');
+  $menu->add('11','1','Config Ambiente');
   $menu->add('111','11','Ambiente Resumido','view/ambiente_resumido.php');
   $menu->add('112','11','Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php');
   $menu->getXml();
