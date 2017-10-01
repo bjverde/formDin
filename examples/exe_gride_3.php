@@ -59,17 +59,13 @@ $frm->setAction('Gravar,Novo');
 
 $frm->show();
 
-
-if($acao == 'Novo')
-{
+$acao = isset($acao) ? $acao : '';
+if($acao == 'Novo'){
 	$frm->clearFields();
-}
-else if($acao == 'Gravar')
-{
+}else if($acao == 'Gravar'){
     print_r($_POST);
 	$res = $frm->createBvars('campo_moeda,dat_nascimento');
-	foreach($res as $k=>$v)
-	{
+	foreach($res as $k=>$v)	{
 		d($k,'$k');
 		d($v,'$v');
 	}

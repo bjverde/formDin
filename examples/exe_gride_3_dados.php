@@ -54,10 +54,9 @@ $frm->addSelectField('cod_municipio'	,'Município:',null,null,false)->setAttribu
 $frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Municípios --','0','Nenhum Município Encontrado','cod_regiao','callBackSelectCombinado()');
 
 // fazer a validação manualmente
-if( $_REQUEST['action'] == 'save')
-{
-	if( ! $frm->get('nom_moeda') )
-	{
+$_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+if( $_REQUEST['action'] == 'save'){
+	if( ! $frm->get('nom_moeda') ){
 		$frm->addError('O campo Moeda é de preenchimento Obrigatório');
 	}
 }

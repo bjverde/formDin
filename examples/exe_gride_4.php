@@ -43,8 +43,8 @@ $frm= new TForm('Exemplo de Criação de Gride');
 $frm->addHtmlField('campo_gride');
 
 // quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formulário
-if( $_REQUEST['action'] == 'atualizar_gride' )
-{
+$_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+if( $_REQUEST['action'] == 'atualizar_gride' ) {
 	// criação do array de dados
 	for( $i=0; $i<30; $i++ )
 	{
