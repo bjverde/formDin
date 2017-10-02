@@ -38,7 +38,7 @@
  
   $menu = new TMenuDhtmlx();
   $menu->add('1',null,'Menu',null,null,'menu-alt-512.png');
-  $menu->add('11','1','Pessoa','view/pessoa.php',null);
+  $menu->add('11','1','Pessoa','view/pessoa.php',null,'user916.gif');
   $menu->add('10',null,'Config Ambiente',null,null,'setting-gear-512.png');
   $menu->add('101','10','Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg');
   $menu->add('102','10','Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png');
