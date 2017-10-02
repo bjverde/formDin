@@ -38,8 +38,8 @@
  */
 
  // criar 2 eventos no calendário
-if( $_REQUEST['ajax'] )
-{
+ $_REQUEST['ajax'] = isset( $_REQUEST['ajax']) ?  $_REQUEST['ajax'] : null;
+if( $_REQUEST['ajax'] ) {
 
 	// ver todos os atributos do evento em : http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
 	echo json_encode(array(
