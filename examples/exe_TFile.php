@@ -48,16 +48,14 @@ $frm->addFileField('anexo','Anexo Async:',true,'pdf,gif,txt,jpg,rar,zip,doc','2M
 
 $frm->setAction('Gravar,Novo');
 
-switch($acao)
-{
-case 'Gravar':
-{
-	d($_FILES);
-	$frm->validate();
-	$bvars = $frm->createBvars('anexo');
-	d($bvars);
-}
-
+$acao = isset($acao) ? $acao : null;
+switch($acao) {
+case 'Gravar': {
+		d($_FILES);
+		$frm->validate();
+		$bvars = $frm->createBvars('anexo');
+		d($bvars);
+	}
 }
 $frm->show();
 ?>

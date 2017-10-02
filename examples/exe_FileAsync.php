@@ -62,13 +62,11 @@ $frm->addTextField('local'	,'Local temp:',60);
 $frm->addButton('Limpar JS',null,'btnLimpar','fwClearChildFields()');
 $frm->setAction('Gravar,Novo,TempName');
 
-
-switch($acao)
-{
+$acao = isset($acao) ? $acao : null;
+switch($acao) {
 	case 'Gravar':
 	{
-		if( $frm->validate() )
-		{
+		if( $frm->validate() ) {
 			$lobAnexo = $frm->getField('anexo_async')->getContent();
 			//echo $dadosAnexo;
 			//$bvars = $frm->createBvars('anexo_async');
