@@ -28,11 +28,18 @@ switch( $acao ) {
     //--------------------------------------------------------------------
     case 'gd_excluir':
         $id = $frm->get( 'IDPESSOA' ) ;
-        pessoaDAO::delete( $id );
+        $id = $frm->get( $primaryKey ) ;
+        $resultado = pessoaDAO::delete( $id );
+        if($resultado==1) {
+            $frm->setMessage('Registro excluido com sucesso!!!');
+            $frm->clearFields();
+        }else{
+            $frm->clearFields();
+            $frm->setMessage($resultado);
+        }        
     break;
 	//--------------------------------------------------------------------
 }
-
 
 $dados = pessoaDAO::selectAll('nome');
 $gride = new TGrid( 'gd' // id do gride
