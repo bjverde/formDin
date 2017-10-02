@@ -38,7 +38,7 @@
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
-$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
+//$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla('FORMDIN IV');
 $app->setUnit('Departamento de Informática - DI - 2011');
 $app->setLoginInfo('Bem-vindo');
