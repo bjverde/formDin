@@ -37,18 +37,13 @@
  */
 include('../base/classes/webform/TApplication.class.php');
 
-// estabelecer conexão
-//TPDOConnection::connect('includes/con_default.php');
-
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 //$app->setSigla('formdin');
 $app->setUnit('Departamento de Informática - DI - 2011');
 $app->setLoginInfo('Bem-vindo');
-
 $app->setMainMenuFile('includes/menu.php');
-$app->setConnectionFile('includes/con_default.php');
 $app->setWaterMark('brasao_marca_dagua.png');
 $app->run();
 ?>
