@@ -40,41 +40,38 @@
 // url para teste: http://index.php?modulo=menu_principal.php&ajax=1&content-type=xml
 $menu =  new TMenuDhtmlx();
 $menu->add('1',null,'Campos',null,null,'user916.gif');
-$menu->add('11','1','Campo Texto',null,'Declaração de texto' );
-$menu->add('11.1','11','Campo Texto','exe_TextField.php')->setJsonParams("{'p1':'parametro_1','p2':'parametro_2'}");
-
-$menu->add('11.2','11','Autocompletar','exe_autocomplete.php');
-$menu->add('11.3','11','Autocompletar II','exe_autocomplete2.php');
-$menu->add('11.4','11','Consulta On-line I','exe_onlinesearch1.php');
-$menu->add('11.5','11','Entrada com Máscara','exe_maskField.php');
-
-
-$menu->add('12','1','Campo HTML','exe_HtmlField.php');
-$menu->add('13','1','Campo Coord GMS','exe_CoordGmsField.php');
-$menu->add('14','1','Campo Select','exe_SelectField.php');
-$menu->add('15','1','Campo Radio','exe_RadioField.php');
-$menu->add('16','1','Campo Check','exe_CheckField.php');
-$menu->add('17','1','Campo Arquivo');
-  $menu->add('171','17','Assincrono','exe_FileAsync.php');
-  $menu->add('172','17','Normal','exe_TFile.php');
-$menu->add('18','1','Campo Numérico','exe_NumberField.php');
-$menu->add('19','1','Campo CEP'	,'exe_CepField.php');
-$menu->add('20','1','Campo Telefone'	,'exe_FoneField.php');
-$menu->add('21','1','Campo Cpf/Cnpj'	,'exe_campo_cpf_cnpj.php');
-
-$menu->add('110','1','Campo Data'	,'exe_DateField.php');
-$menu->add('111','1','Campo Select Diretorio/Pasta'	,'exe_OpenDirField.php');
-$menu->add('112','1','Campo Fuso Horário'	,'exe_TTimeZoneField.php');
-$menu->add('113','1','Campo Editor'	,'exe_TTextEditor.php');
-$menu->add('114','1','Campo Memo'	,'exe_TMemo.php');
-$menu->add('115','1','Campo Senha'	,'exe_TPasswordField.php');
-$menu->add('116','1','Campo Agenda'	,'exe_TCalendar.php');
-$menu->add('117','1','Campo Captcha'	,'exe_TCaptchaField.php');
-$menu->add('118','1','Campo Blob'	);
-$menu->add('1181','118','Campo Blob Salvo no Banco'		,'campos/exe_fwShowBlob.php');
-$menu->add('1182','118','Campo Blob Salvo no Disco'		,'campos/exe_fwShowBlobDisco.php');
-$menu->add('119','1','Campo Cor'		,'exe_TColorPicker.php');
-$menu->add('120','1','Tecla de Atalho'		,'exe_Shortcut.php');
+	$menu->add('11','1','Campo Texto',null,'Declaração de texto' );
+		$menu->add('11.1','11','Campo Texto','view/fields/exe_TextField.php')->setJsonParams("{'p1':'parametro_1','p2':'parametro_2'}");
+		$menu->add('11.2','11','Autocompletar','view/fields/exe_autocomplete.php');
+		$menu->add('11.3','11','Autocompletar II','view/fields/exe_autocomplete2.php');
+		$menu->add('11.4','11','Consulta On-line I','view/fields/exe_onlinesearch1.php');
+		$menu->add('11.5','11','Entrada com Máscara','view/fields/exe_maskField.php');
+	$menu->add('12','1','Campo HTML','view/fields/exe_HtmlField.php');
+	$menu->add('13','1','Campo Coord GMS','view/fields/exe_CoordGmsField.php');
+	$menu->add('14','1','Campo Select','view/fields/exe_SelectField.php');
+	$menu->add('15','1','Campo Radio','view/fields/exe_RadioField.php');
+	$menu->add('16','1','Campo Check','view/fields/exe_CheckField.php');
+	$menu->add('17','1','Campo Arquivo');
+		$menu->add('171','17','Assincrono','view/fields/exe_FileAsync.php');
+		$menu->add('172','17','Normal','view/fields/exe_TFile.php');
+		$menu->add('173','17','TAssincrono','view/fields/exe_TFileAsync.php');
+	$menu->add('18','1','Campo Numérico','view/fields/exe_NumberField.php');
+	$menu->add('19','1','Campo CEP'	,'view/fields/exe_CepField.php');
+	$menu->add('20','1','Campo Telefone'	,'view/fields/exe_FoneField.php');
+	$menu->add('21','1','Campo Cpf/Cnpj'	,'view/fields/exe_campo_cpf_cnpj.php');
+	$menu->add('110','1','Campo Data'	,'view/fields/exe_DateField.php');
+	$menu->add('111','1','Campo Select Diretorio/Pasta'	,'view/fields/exe_OpenDirField.php');
+	$menu->add('112','1','Campo Fuso Horário - ERRO'	,'exe_TTimeZoneField.php');
+	$menu->add('113','1','Campo Editor'	,'view/fields/exe_TTextEditor.php');
+	$menu->add('114','1','Campo Memo - ERRO'	,'exe_TMemo.php');
+	$menu->add('115','1','Campo Senha'	,'view/fields/exe_TPasswordField.php');
+	$menu->add('116','1','Campo Agenda'	,'view/fields/exe_TCalendar.php');
+	$menu->add('117','1','Campo Captcha'	,'view/fields/exe_TCaptchaField.php');
+	$menu->add('118','1','Campo Blob'	);
+		$menu->add('1181','118','Campo Blob Salvo no Banco'		,'view/fields/exe_fwShowBlob.php');
+		$menu->add('1182','118','Campo Blob Salvo no Disco'		,'view/fields/exe_fwShowBlobDisco.php');
+	$menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
+	$menu->add('120','1','Tecla de Atalho'		,'view/fields/exe_Shortcut.php');
 
 
 
