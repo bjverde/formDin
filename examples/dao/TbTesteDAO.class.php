@@ -43,7 +43,7 @@ class TbTesteDAO extends TPDOConnection
 	{
 	}
 	//--------------------------------------------------------------------------------
-	public function insert( TbTesteVO $objVo )
+	public static function insert( TbTesteVO $objVo )
 	{
 		if( $objVo->getId() )
 		{
@@ -60,13 +60,13 @@ class TbTesteDAO extends TPDOConnection
 								) values (?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function delete( $id )
+	public static function delete( $id )
 	{
 		$values = array($id);
 		return self::executeSql('delete from tbTeste where id = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public function select( $id )
+	public static function select( $id )
 	{
 		$values = array($id);
 		return self::executeSql('select
@@ -77,7 +77,7 @@ class TbTesteDAO extends TPDOConnection
 								from tbTeste where id = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function selectAll( $orderBy=null, $where=null )
+	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
 								 id
@@ -89,7 +89,7 @@ class TbTesteDAO extends TPDOConnection
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
 	//--------------------------------------------------------------------------------
-	public function update ( TbTesteVO $objVo )
+	public static function update ( TbTesteVO $objVo )
 	{
 		$values = array( $objVo->getNome_teste()
 						,$objVo->getData_teste()

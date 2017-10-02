@@ -42,7 +42,7 @@ class Tb_pedido_itemDAO extends TPDOConnection
 	{
 	}
 	//--------------------------------------------------------------------------------
-	public function insert( Tb_pedido_itemVO $objVo )
+	public static function insert( Tb_pedido_itemVO $objVo )
 	{
 		if( $objVo->getId_item() )
 		{
@@ -61,13 +61,13 @@ class Tb_pedido_itemDAO extends TPDOConnection
 								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function delete( $id )
+	public static function delete( $id )
 	{
 		$values = array($id);
 		return self::executeSql('delete from tb_pedido_item where id_item = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public function select( $id )
+	public static function select( $id )
 	{
 		$values = array($id);
 		return self::executeSql('select
@@ -79,7 +79,7 @@ class Tb_pedido_itemDAO extends TPDOConnection
 								from tb_pedido_item where id_item = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function selectAll( $orderBy=null, $where=null )
+	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
 								 id_item
@@ -92,7 +92,7 @@ class Tb_pedido_itemDAO extends TPDOConnection
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
 	//--------------------------------------------------------------------------------
-	public function update ( Tb_pedido_itemVO $objVo )
+	public static function update ( Tb_pedido_itemVO $objVo )
 	{
 		$values = array( $objVo->getId_pedido()
 						,$objVo->getProduto()
@@ -107,7 +107,7 @@ class Tb_pedido_itemDAO extends TPDOConnection
 								where id_item = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-    public function select_itens_pedido($id_pedido = null)
+    public static function select_itens_pedido($id_pedido = null)
 	{
 		$dados = self::executeSql('select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?',array($id_pedido) );
 		return $dados;

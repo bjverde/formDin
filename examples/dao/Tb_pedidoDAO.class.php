@@ -42,7 +42,7 @@ class Tb_pedidoDAO extends TPDOConnection
 	{
 	}
 	//--------------------------------------------------------------------------------
-	public function insert( Tb_pedidoVO $objVo )
+	public static function insert( Tb_pedidoVO $objVo )
 	{
 
 		if( $objVo->getId_pedido() != 'Novo' )
@@ -61,13 +61,13 @@ class Tb_pedidoDAO extends TPDOConnection
 		return  self::executeSql('select last_insert_rowid() as ID_PEDIDO');
 	}
 	//--------------------------------------------------------------------------------
-	public function delete( $id )
+	public static function delete( $id )
 	{
 		$values = array($id);
 		return self::executeSql('delete from tb_pedido where id_pedido = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public function select( $id )
+	public static function select( $id )
 	{
 		$values = array($id);
 		return self::executeSql('select
@@ -78,7 +78,7 @@ class Tb_pedidoDAO extends TPDOConnection
 								from tb_pedido where id_pedido = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function selectAll( $orderBy=null, $where=null )
+	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
 								 id_pedido
@@ -90,7 +90,7 @@ class Tb_pedidoDAO extends TPDOConnection
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
 	//--------------------------------------------------------------------------------
-	public function update ( Tb_pedidoVO $objVo )
+	public static function update ( Tb_pedidoVO $objVo )
 	{
 		$values = array( $objVo->getData_pedido()
 						,$objVo->getnome_comprador()

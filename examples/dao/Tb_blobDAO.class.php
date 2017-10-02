@@ -42,7 +42,7 @@ class Tb_blobDAO extends TPDOConnection
 	{
 	}
 	//--------------------------------------------------------------------------------
-	public function insert( Tb_blobVO $objVo )
+	public static function insert( Tb_blobVO $objVo )
 	{
 		if( $objVo->getId_blob() )
 		{
@@ -62,13 +62,13 @@ class Tb_blobDAO extends TPDOConnection
 
 	}
 	//--------------------------------------------------------------------------------
-	public function delete( $id )
+	public static function delete( $id )
 	{
 		$values = array($id);
 		return self::executeSql('delete from tb_blob where id_blob = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public function select( $id )
+	public static function select( $id )
 	{
 		$values = array($id);
 		return self::executeSql('select
@@ -78,7 +78,7 @@ class Tb_blobDAO extends TPDOConnection
 								from tb_blob where id_blob = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function selectAll( $orderBy=null, $where=null )
+	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
 								 id_blob
@@ -88,7 +88,7 @@ class Tb_blobDAO extends TPDOConnection
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
 	//--------------------------------------------------------------------------------
-	public function update ( Tb_blobVO $objVo )
+	public static function update ( Tb_blobVO $objVo )
 	{
 		$values = array( $objVo->getNome_arquivo()
 						,$objVo->getConteudo_arquivo()

@@ -5,7 +5,7 @@ class Tb_arquivoDAO extends TPDOConnection
 	{
 	}
 	//--------------------------------------------------------------------------------
-	public function insert( Tb_arquivoVO $objVo )
+	public static function insert( Tb_arquivoVO $objVo )
 	{
 		if( $objVo->getId_arquivo() )
 		{
@@ -25,7 +25,7 @@ class Tb_arquivoDAO extends TPDOConnection
 		}
 	}
 	//--------------------------------------------------------------------------------
-	public function delete( $id )
+	public static function delete( $id )
 	{
     	// recuperar o nome do arquivo para excluí-lo do disco
 		$res = self::select($id);
@@ -34,7 +34,7 @@ class Tb_arquivoDAO extends TPDOConnection
 		return self::executeSql('delete from tb_arquivo where id_arquivo = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public function select( $id )
+	public static function select( $id )
 	{
 		$values = array($id);
 		return self::executeSql('select
@@ -43,7 +43,7 @@ class Tb_arquivoDAO extends TPDOConnection
 								from tb_arquivo where id_arquivo = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public function selectAll( $orderBy=null, $where=null )
+	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
 								 id_arquivo
@@ -53,7 +53,7 @@ class Tb_arquivoDAO extends TPDOConnection
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
 	//--------------------------------------------------------------------------------
-	public function update ( Tb_arquivoVO $objVo )
+	public static function update ( Tb_arquivoVO $objVo )
 	{
 		$values = array( $objVo->getNome_arquivo()
 						,$objVo->getId_arquivo() );
