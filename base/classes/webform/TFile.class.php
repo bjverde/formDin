@@ -101,7 +101,7 @@ class TFile extends TEdit
 		{
 			if( isset($_POST[$this->getId().'_size']))
 			{
-				$maxSize = ereg_replace('[^0-9]','',$this->getMaxSize());
+				$maxSize = preg_replace('[^0-9]','',$this->getMaxSize());
 				if( strpos(strtoupper($this->getMaxSize()),'M')!==false )
 				{
 					// megabytes
