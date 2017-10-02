@@ -183,10 +183,9 @@ class TFile extends TEdit
 	* Retorna a extensão do arquivo anexado
 	* Ex. teste.gif -> retorna: gif
 	*/
-	public function getFileExtension()
-	{
+	public function getFileExtension() {
 		$filename = strtolower($this->getValue(true)) ;
-		$exts = split("[/\\.]", $filename) ;
+		$exts = explode(".", $filename);
 		$n = count($exts)-1;
 		$exts = $exts[$n];
 		return $exts;
