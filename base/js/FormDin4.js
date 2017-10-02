@@ -1,6 +1,6 @@
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -18,32 +18,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 /*
-Biblioteca de FunÁıes JavaScript utilizadas pela classe FormDin4
-Vers„o:1.0
-Ultima AtualizaÁao:31/05/2009    Por:Luis EugÍnio Barbosa
+Biblioteca de Fun√ß√µes JavaScript utilizadas pela classe FormDin4
+Vers√£o:1.0
+Ultima Atualiza√ßao:31/05/2009    Por:Luis Eug√™nio Barbosa
 */
 if (!app_url)
 {
 	try
 	{
-		// configuraÁ„o do ambiente javascript
+		// configura√ß√£o do ambiente javascript
 		var app_formdin;
 		var isNS4 = (navigator.appName=="Netscape")?1:0;
 		var isIE  = (navigator.appName=="Netscape")?0:1;
@@ -65,10 +65,10 @@ if (!app_url)
 	}
 	catch (e)
 	{
-		alert('N„o foi possÌvel inicializar a aplicaÁ„o neste browser');
+		alert('N√£o foi poss√≠vel inicializar a aplica√ß√£o neste browser');
 	}
 
-	// vari·veis globais
+	// vari√°veis globais
 	/*
 	var isNS4 = (navigator.appName=="Netscape")?1:0;
 	var isIE  = (navigator.appName=="Netscape")?0:1;
@@ -93,7 +93,7 @@ if (!app_url)
 	}
 	var GB_CURRENT=false;
 
-	// verificar se o formul·rio est· sendo chamado pela TApplication.class.php
+	// verificar se o formul√°rio est√° sendo chamado pela TApplication.class.php
 	try
 	{
 		if( typeof top.app_init == 'function')
@@ -132,7 +132,7 @@ else
 //-------------------------------------------------------------------------------------
 function fwTeste(a,b,c)
 {
-	alert('fwTeste - FunÁ„o GenÈrica de Teste');
+	alert('fwTeste - Fun√ß√£o Gen√©rica de Teste');
 	if( a )
 	{
 		alert(a)
@@ -331,16 +331,16 @@ function fwValidarCpf(e,evento,clear) {
         	}
 			else
 			{
-				fwAlert('funÁ„o callback '+fn+' n„o definida.');
+				fwAlert('fun√ß√£o callback '+fn+' n√£o definida.');
 			}
 			return;
 		}
 
 		if ( ! dv && tam > 0) {
 			fwSetBordaCampo(e,true,evento); // coloca a cor vermelha
-			mensagem = "           Erro de digitaÁ„o:\n";
+			mensagem = "           Erro de digita√ß√£o:\n";
 			mensagem+= "          ===============\n\n";
-			mensagem+= " O CPF: " + e.value + " n„o existe!!\n";
+			mensagem+= " O CPF: " + e.value + " n√£o existe!!\n";
 			//mensagem+= " O DV: " + controle + "\n";
 			if( clear )
 			{
@@ -363,7 +363,7 @@ function fwValidarCpf(e,evento,clear) {
         	}
 			else
 			{
-				fwAlert('funÁ„o callback '+fn+' n„o definida.');
+				fwAlert('fun√ß√£o callback '+fn+' n√£o definida.');
 			}
 			return;
 		}
@@ -395,7 +395,7 @@ function fwFormatarCnpj(e,evento,value) {
 		} else {
 			tecla=evento.keyCode;
 		}
-		// teclas v·lidas tab, backspace setaesquerda, setadireita e delete
+		// teclas v√°lidas tab, backspace setaesquerda, setadireita e delete
 		if( tecla==35 || tecla==36 ||tecla==37 || tecla==38 || tecla==39 || tecla==40 || tecla==46 ) {
 			return true;
 		}
@@ -460,16 +460,16 @@ function fwValidarCnpj(e,evento,clear) {
         	}
 			else
 			{
-				fwAlert('funÁ„o callback '+fn+' n„o definida.');
+				fwAlert('fun√ß√£o callback '+fn+' n√£o definida.');
 			}
 			return;
 		}
 
 
 		if ( ! dv && tam > 0) {
-			mensagem = "           Erro de digitaÁ„o:\n";
+			mensagem = "           Erro de digita√ß√£o:\n";
 			mensagem+= "          ===============\n\n";
-			mensagem+= " O CNPJ: " + e.value + " n„o existe!!\n";
+			mensagem+= " O CNPJ: " + e.value + " n√£o existe!!\n";
 			//mensagem+= " CONTROLE " +controle +"\n";
 			if( clear )
 			{
@@ -494,7 +494,7 @@ function fwValidarCnpj(e,evento,clear) {
         	}
 			else
 			{
-				fwAlert('funÁ„o callback '+fn+' n„o definida.');
+				fwAlert('fun√ß√£o callback '+fn+' n√£o definida.');
 			}
 			return;
 		}
@@ -590,7 +590,7 @@ function fwValidarData(e,evento,formato,dataMinima,dataMaxima)
 	}
 	if ( fwFiltraCampo(texto)!="")
 	{
-		// data est· digitada incompleta
+		// data est√° digitada incompleta
 		if ( texto.length < 10 && texto.length != 8 )
 		{
 			e.value = '';
@@ -622,22 +622,22 @@ function fwValidarData(e,evento,formato,dataMinima,dataMaxima)
 		}
 
 		if ((Dia<1) || (Dia>31) || isNaN(Dia)) {
-			Msg = Msg + 'Dia '+Dia+' inv·lido\n';
+			Msg = Msg + 'Dia '+Dia+' inv√°lido\n';
 			erro = true;
 		}
 		if ((Mes<1) || (Mes>12) || isNaN(Mes))
 		{
-			Msg = Msg + 'MÍs '+Mes+' inv·lido\n';
+			Msg = Msg + 'M√™s '+Mes+' inv√°lido\n';
 			erro = true;
 		}
 		if (isNaN(Ano))
 		{
-			Msg = Msg + 'Ano '+Ano+' inv·lido\n';
+			Msg = Msg + 'Ano '+Ano+' inv√°lido\n';
 			erro = true;
 		}
 		if ((Dia>=31) && ((Mes==4) || (Mes==6) || (Mes==9) || (Mes==11)))
 		{
-			Msg = Msg + 'Dia inv·lido para este mÍs\n';
+			Msg = Msg + 'Dia inv√°lido para este m√™s\n';
 			erro = true;
 		}
 		if (Mes==2)
@@ -645,18 +645,18 @@ function fwValidarData(e,evento,formato,dataMinima,dataMaxima)
 			//MES DE FEVEREIRO
 			if (Dia>=30)
 			{
-				Msg = Msg + 'Dia inv·lido para fevereiro\n';
+				Msg = Msg + 'Dia inv√°lido para fevereiro\n';
 				erro = true;
 			}
 			if ((Dia==29) && (((Ano % 4) != 0) || (((Ano % 100) == 0) && ((Ano % 400) != 0))))
 			{
-				Msg = Msg + 'Dia inv·lido para fevereiro. '+ Ano +' n„o È bisexto\n';
+				Msg = Msg + 'Dia inv√°lido para fevereiro. '+ Ano +' n√£o √© bisexto\n';
 				erro = true;
 			}
 		}
 		if(!erro)
 		{
-			// verificar se a data est· dento da faixa
+			// verificar se a data est√° dento da faixa
 			if( dataMaxima )
 			{
 				strDiaMax = dataMaxima.substring(0,2);
@@ -744,10 +744,10 @@ function fwValidarData(e,evento,formato,dataMinima,dataMaxima)
 		switch (formato)
 		{
 			case 'dm':
-				alert(Msg +'Informe o dia e o mÍs no formato DD/MM.\nExemplo:25/12' );
+				alert(Msg +'Informe o dia e o m√™s no formato DD/MM.\nExemplo:25/12' );
 				break;
 			case 'my':
-				alert(Msg +'Informe a mÍs e o ano no formato MM/YYYY.\nExemplo:12/2009' );
+				alert(Msg +'Informe a m√™s e o ano no formato MM/YYYY.\nExemplo:12/2009' );
 				break;
 			default:
 				alert(Msg +'Informe a data no formato DD/MM/YYYY\nExemplo:25/12/2009' );
@@ -791,7 +791,7 @@ function fwValidarEmail(campo,alertar)
 		fwSetBordaCampo(campo,true,true); // coloca a cor vermelha
 		if(alertar)
 		{
-			alert('Email inv·lido!');
+			alert('Email inv√°lido!');
 		}
 	}
 	return r;
@@ -934,9 +934,9 @@ function fwValidarProcesso(e,clear)
 	}
 	if ( ! dv && tam > 0 ) {
 		if( !fwValidarProcessoSISPROT(e) ) {
-			mensagem = "           Erro de digitaÁ„o:\n";
+			mensagem = "           Erro de digita√ß√£o:\n";
 			mensagem+= "          ===============\n\n";
-			mensagem+= " DV para o processo " + e.value + " n„o confere!!\n";
+			mensagem+= " DV para o processo " + e.value + " n√£o confere!!\n";
 
 			alert(mensagem);
 			if( clear )
@@ -1049,7 +1049,7 @@ function fwFazerAcao( acao,formulario )
 	{
 		if ( document.forms[0].name != 'menuweb_submit')
 		{
-			// encontrar o formul·rio
+			// encontrar o formul√°rio
 			formulario = document.forms[0];
 		}
 		else
@@ -1070,11 +1070,11 @@ function fwFazerAcao( acao,formulario )
 		formulario.formDinAcao.value=acao;
 		formulario.submit();
 	} catch(e){
-		alert('coloque um campo hidden com id=formDinAcao no formul·rio\npara qua a acao '+acao+' possa ser submetida!');
+		alert('coloque um campo hidden com id=formDinAcao no formul√°rio\npara qua a acao '+acao+' possa ser submetida!');
 	}
 }
 //-------------------------------------------------------------------------------------
-// FunÁ„o para substituir a document.getElementById()
+// Fun√ß√£o para substituir a document.getElementById()
 function fwGetObj(nomeObjeto,propriedade)
 {
 	var app_iframe = document.getElementById('app_iframe');
@@ -1147,7 +1147,7 @@ function fwFormatarInteiro(e,formatar)
 		s = '- ';
 	negativo = (s.indexOf('-') > -1) && ( s.indexOf('+') == -1 );
 
-	s = fwFiltraCampo(e.value); // retirar os caractes inv·lidos
+	s = fwFiltraCampo(e.value); // retirar os caractes inv√°lidos
 	if (formatar=='N') {
 		if (negativo)
 			e.value = ' -'+s ;
@@ -1205,7 +1205,7 @@ function fwFormatarDecimal(e,casas)
 	{
 		e.value += ','+zeros;
 	}
-	// retirar os caractes inv·lidos
+	// retirar os caractes inv√°lidos
 	s = fwFiltraCampo(e.value);
 	// completar com zeros quando o valor for menor que  1,00
 	if (s.length == 0)
@@ -1221,7 +1221,7 @@ function fwFormatarDecimal(e,casas)
 	// numero de caracteres digitados
 	tam =  s.length;
 	if ( tam > casas ) {
-		// a posiÁ„o da vÌrgula ser· sempre o tamanho meno 2
+		// a posi√ß√£o da v√≠rgula ser√° sempre o tamanho meno 2
 		posvirg = tam - casas;
 		// retirar os zeros da esquerda da parte inteira e colocar a virgula na parte decimal
 		s = eval(s.substring(0,posvirg)) + "," + s.substring(posvirg);
@@ -1335,7 +1335,7 @@ function fwSelecionarAba(aba,pageControl,fnAfterClick,ignoreDisabled)
 		}
 		else
 		{
-			alert( 'A aba ' + aba + ' n„o existe no formul·rio!');
+			alert( 'A aba ' + aba + ' n√£o existe no formul√°rio!');
 		}
 	}
 	else if( typeof(aba) == 'object')
@@ -1414,10 +1414,10 @@ function fwConfirmCloseForm( strForm, boolSubForm, afterCloseFunction ,beforeClo
 					return false;
 				}
 			}
-	// quando tiver um iframe, pode ter um plugin da adobe aberto, ent„o utilzar confirm() nativo que n„o d· conflito
+	// quando tiver um iframe, pode ter um plugin da adobe aberto, ent√£o utilzar confirm() nativo que n√£o d√° conflito
 	if( jQuery('iframe').length>0)
 	{
-		if( confirm('Deseja fechar o formul·rio?'))
+		if( confirm('Deseja fechar o formul√°rio?'))
 		{
 			fwFecharFormulario(strForm,boolSubForm,afterCloseFunction,beforeCloseFunction)
 		}
@@ -1425,8 +1425,8 @@ function fwConfirmCloseForm( strForm, boolSubForm, afterCloseFunction ,beforeClo
 	}
 
 	jQuery.alerts.okButton        ='Sim';
-	jQuery.alerts.cancelButton    ='N„o';
-	jConfirm('Deseja fechar o formul·rio?','ConfirmaÁ„o'
+	jQuery.alerts.cancelButton    ='N√£o';
+	jConfirm('Deseja fechar o formul√°rio?','Confirma√ß√£o'
 	,function(r)
 	{
 		if( r == true )
@@ -1490,7 +1490,7 @@ function fwFecharFormulario( strForm, boolSubForm, afterCloseFunction, beforeClo
 			catch(e){}
 			try
 			{
-				// n„o limpar o nome do mÛdulo do rodape se fechar um subformulario
+				// n√£o limpar o nome do m√≥dulo do rodape se fechar um subformulario
 				if( ! boolSubForm )
 				{
 					parent.app_setFooterModule('');
@@ -1505,13 +1505,13 @@ function fwUpdateFields( fields, values, event )
 {
 	fwSetFields( fields, values, event )
 }
-// funÁ„o utilizada pelo autocomplete para limpar os campo que ser„o atualizados ao comeÁar a digitar
+// fun√ß√£o utilizada pelo autocomplete para limpar os campo que ser√£o atualizados ao come√ßar a digitar
 function fwSetFields( fields, values, event )
 {
 	if( event )
 	{
 		tecla = fwGetTecla(event);
-		// desprezar teclas que n„o alteram valor do campo
+		// desprezar teclas que n√£o alteram valor do campo
 		if( tecla==9 ||tecla==17 ||tecla==18 ||tecla==20 || tecla==33|| tecla==34 || tecla==35 || tecla==36 || tecla==37 || tecla==38 || tecla==39 || tecla==40 )
 		{
 			return false;
@@ -1554,7 +1554,7 @@ function fwSetFields( fields, values, event )
 				{
 					obj = jQuery("input[name='" + aFields[i] + "']" ).get(0);
 				}
-				// verificar se È checkbox de opÁ„o S ou N
+				// verificar se √© checkbox de op√ß√£o S ou N
 				if( !obj )
 				{
 					obj = jQuery("#" + aFields[i] + "_"+val ).get(0);
@@ -1564,11 +1564,11 @@ function fwSetFields( fields, values, event )
 				{
 					obj.selectedIndex=-1;
 					jQuery(obj).val(val);
-					// verificar se È um select combinado atraves da propriedade parentselect
+					// verificar se √© um select combinado atraves da propriedade parentselect
 					if( jQuery(obj).attr('parentselect'))
 					{
 						parentSelects.push(jQuery(obj).attr('parentselect'));
-						// criar  campo temp se n„o existir
+						// criar  campo temp se n√£o existir
 						if( ! jQuery("#"+obj.id+'_temp').get(0) )
 						{
 							jQuery(obj).append('<input type="hidden" id="'+obj.id+'_temp" name="'+obj.id+'_temp" value="'+val+'">');
@@ -1634,8 +1634,8 @@ function fwAutoCompleteFindValue(li,obj)
 	//fwGetObj('tecla_disabled').value = data;
 
 	/*
-	 * keepFieldValues - Utilizado para n„o sobrepor os valores dos campos
-	 * do formul·rio alterados pelo usu·rio na primeira vez que o formulario
+	 * keepFieldValues - Utilizado para n√£o sobrepor os valores dos campos
+	 * do formul√°rio alterados pelo usu√°rio na primeira vez que o formulario
 	 * for postado. Recurso utilizado pelo gride-offline com autocomplete
 	 */
 	var keepFieldValues = obj.getAttribute('keepFieldValues');
@@ -1819,7 +1819,7 @@ function fwSetOpcoesSelect(dados)
 		}
 		if(!comboFilho)
 		{
-			alert( 'Erro na funÁ„o: fwSetOpÁıesSelect().\n\nO campo '+obj['selectFilho']+' n„o existe no formul·rio, e foi combinado com o campo '+obj['selectPai']);
+			alert( 'Erro na fun√ß√£o: fwSetOp√ß√µesSelect().\n\nO campo '+obj['selectFilho']+' n√£o existe no formul√°rio, e foi combinado com o campo '+obj['selectPai']);
 			return;
 		}
 		else
@@ -1832,7 +1832,7 @@ function fwSetOpcoesSelect(dados)
                }
            }
 			fwLimparOpcoesSelect(comboFilho);
-			// retirar animaÁ„o ajax
+			// retirar anima√ß√£o ajax
 			//try {fwSetEstilo('{"id":"'+objCombo.id+'","backgroundImage":"","backgroundRepeat":"","backgroundposition":""}');}catch(e){}
 			if (indiceComboPai == -1 || valorComboPai==''  )
 			{
@@ -1888,7 +1888,7 @@ function fwPreencherSelectAjax(obj)
 	}
 	if( !acao && !obj['pacoteOracle'])
 	{
-		alert('Necess·rio definir uma acao ou o nome do pacote oracle na funÁ„o conbinarSelect()');
+		alert('Necess√°rio definir uma acao ou o nome do pacote oracle na fun√ß√£o conbinarSelect()');
 		return;
 	}
 	if( obj['pastaBase'])
@@ -1899,7 +1899,7 @@ function fwPreencherSelectAjax(obj)
 	{
 		arquivoInclude = pastaBase+'/'+arquivoInclude;
 	}
-	// campos do form que entrar„o no filtro
+	// campos do form que entrar√£o no filtro
 	var campoFormFiltroValor='';
 	var campoBvars='';
 	if(obj['campoFormFiltro'])
@@ -2019,7 +2019,7 @@ function fwPreencherSelectAjax(obj)
 
 			if( aDados['fwSession_expired'] && aDados['fwSession_expired'] == 1 )
 			{
-				alert( 'Sess„o encerrada. Clique Ok para reiniciar!');
+				alert( 'Sess√£o encerrada. Clique Ok para reiniciar!');
 				fwApplicationRestart();
 				return;
 			}
@@ -2029,11 +2029,11 @@ function fwPreencherSelectAjax(obj)
 			{
 				objCombo	= fwGetObj(aDados['campo']);
 			}
-			// retirar animaÁ„o ajax
+			// retirar anima√ß√£o ajax
 			//try {fwSetEstilo('{"id":"'+objCombo.id+'","backgroundImage":"","backgroundRepeat":"","backgroundPosition":""}');}catch(e){}
 			if( !objCombo)
 			{
-				alert('campo select ' + aDados['campo']+' n„o encontrado no formul·rio');
+				alert('campo select ' + aDados['campo']+' n√£o encontrado no formul√°rio');
 				return;
 			}
 			if( !aDados['dados'])
@@ -2083,10 +2083,10 @@ function fwPreencherSelectAjax(obj)
 				}
 				objCombo.options[objCombo.options.length] = opt;
 			}
-			// fazer seleÁ„o autom·tica quando houver apenas uma opÁ„o no select filho
+			// fazer sele√ß√£o autom√°tica quando houver apenas uma op√ß√£o no select filho
 			if( ! v_selected )
 			{
-				// selecionar a primeira e ˙nica opÁ„o
+				// selecionar a primeira e √∫nica op√ß√£o
 				//if( aDados['descPrimeiraOpcao'] && objCombo.options.length==2 && selectUniqueOption )
 				if( aDados['descPrimeiraOpcao'] && objCombo.options.length==2 && aDados['selectUniqueOption'] == 1 )
 				{
@@ -2145,7 +2145,7 @@ function fwSetEstilo(dados)
 	var id = oDados['id'];
 	if( !id )
 	{
-		alert("Para utilizar a funÁ„o setEstilo, È necess·rio o parametro id. Ex: {id='div1'}");
+		alert("Para utilizar a fun√ß√£o setEstilo, √© necess√°rio o parametro id. Ex: {id='div1'}");
 		return;
 	}
 	var obj = fwGetObj(id);
@@ -2280,7 +2280,7 @@ function fwLimparCampoAnexo(e,campo)
 function fwClearFileAsync(id)
 {
 	var btnDelete;
-	// trocar a imagem do bot„o
+	// trocar a imagem do bot√£o
     try
     {
 		btnDelete = jQuery('#'+id+'_btn_delete');
@@ -2301,7 +2301,7 @@ function fwCampoArquivoChange(e)
 //btn.disabled=false;
 
 }
-// Executar uma funÁ„o javascript
+// Executar uma fun√ß√£o javascript
 function fwExecutarFuncao(funcao,param)
 {
   	if( typeof param == 'undefined')
@@ -2310,13 +2310,13 @@ function fwExecutarFuncao(funcao,param)
 	}
 	try
 	{
-		var app_iframe = document.getElementById('app_iframe'); // n„o utilizar fwGetObj() aqui
+		var app_iframe = document.getElementById('app_iframe'); // n√£o utilizar fwGetObj() aqui
 		if ( app_iframe )
 		{
 			app_iframe.contentWindow.fwExecutarFuncao(funcao,param);
 			return;
 		}
-		var app_iframe = document.getElementById('iframe_area_dados'); // n„o utilizar fwGetObj() aqui
+		var app_iframe = document.getElementById('iframe_area_dados'); // n√£o utilizar fwGetObj() aqui
 		if ( app_iframe )
 		{
 			app_iframe.contentWindow.fwExecutarFuncao(funcao,param);
@@ -2413,17 +2413,17 @@ function fwAtualizarCampos(campos,valores)
 
 					if( campo.type == 'undefined' )
 					{
-						campo.innerHTML= decodeURI(aValor[i]); // para campos label que n„o possuem value;
+						campo.innerHTML= decodeURI(aValor[i]); // para campos label que n√£o possuem value;
 					}
 					else if( campo.type =='select-one')
 					{
 						campo.selectedIndex=-1;
 						jQuery(campo).val(aValor[i]);
-						// verificar se È um select combinado atraves da propriedade parentselect
+						// verificar se √© um select combinado atraves da propriedade parentselect
 						if( jQuery(campo).attr('parentselect') )
 						{
 							parentSelects.push(jQuery(campo).attr('parentselect') );
-							// criar  campo temp se n„o existir
+							// criar  campo temp se n√£o existir
 							if( ! campo_temp )
 							{
 								jQuery(campo).append('<input type="hidden" id="'+campo.id+'_temp" name="'+campo.id+'_temp" value="'+aValor[i]+'">');
@@ -2481,7 +2481,7 @@ function fwAtualizarCampos(campos,valores)
 				{
 					if( campo.type == 'undefined' )
 					{
-						campo.innerHTML=''; // para campos label que n„o possuem value;
+						campo.innerHTML=''; // para campos label que n√£o possuem value;
 					}
 					else
 					{
@@ -2528,7 +2528,7 @@ function fwMostrarAjuda(arquivo)
 	}
 	else
 	{
-		alert('Arquivo de ajuda n„o disponÌvel');
+		alert('Arquivo de ajuda n√£o dispon√≠vel');
 	}
 }
 //------------------------------------------------------------------------------
@@ -2614,7 +2614,7 @@ function fwModalBox2(title,url,height,width,callBack,fullscreen)
 										}
 										else
 										{
-											alert('N„o foi possivel carregar a biblioteca graybox!');
+											alert('N√£o foi possivel carregar a biblioteca graybox!');
 										}
 								});
 							  });
@@ -2638,7 +2638,7 @@ function fwModalBox2(title,url,height,width,callBack,fullscreen)
 				title = title.substr(0,title.indexOf('|'));
 			}
 
-			// adicionar o parametro subform=1 para n„o alterar o modulo atual da sess„o
+			// adicionar o parametro subform=1 para n√£o alterar o modulo atual da sess√£o
 			if( fullscreen )
 			{
 				GB_showFullScreen(title, url, callBack );
@@ -2671,12 +2671,12 @@ function fwSetSelectedIndex(idCampo,valor)
 /**
 *	Fazer o carregamento via ajax de grides
 *	phpFile = nome do arquivo php que gera o html do gride
-*	idContainer = id do elemento html onde ser· inserdo o codigo html
-*	jsonData = parametros que ser„o passados para o arquivo phpFile, se for passada uma string
-* 	ser· assumido como a aÁ„o a ser executada pelo formul·rio
-* 	obs:se o parametro estiver sem valor definido, a funÁ„o tentara encontrar nos campos do formul·rio
+*	idContainer = id do elemento html onde ser√° inserdo o codigo html
+*	jsonData = parametros que ser√£o passados para o arquivo phpFile, se for passada uma string
+* 	ser√° assumido como a a√ß√£o a ser executada pelo formul√°rio
+* 	obs:se o parametro estiver sem valor definido, a fun√ß√£o tentara encontrar nos campos do formul√°rio
 *	Ex: fwGetGrid("gride4.php","campo_gride4",{"num_pessoa":""}); // pegar o valor de num_pessoa no formulario
-*	Ex: fwGetGrid("gride4.php","campo_gride4","criar_gride"); // o parametro jsonData como sendo a aÁ„o
+*	Ex: fwGetGrid("gride4.php","campo_gride4","criar_gride"); // o parametro jsonData como sendo a a√ß√£o
 */
 function fwGetGrid(phpFile,idContainer,jsonData,clearContainer,callback)
 {
@@ -2716,7 +2716,7 @@ function fwGetGrid(phpFile,idContainer,jsonData,clearContainer,callback)
 	{
 		if( res == 'fwSession_expired' || res.indexOf('oci_parse()') >-1 )
 		{
-			alert( 'Sess„o encerrada. Clique Ok para reiniciar!');
+			alert( 'Sess√£o encerrada. Clique Ok para reiniciar!');
 			fwApplicationRestart();
 			return;
 		}
@@ -2903,7 +2903,7 @@ function fwFieldCepKeyUp(e,event,fields)
 	{
 		fwSetFields(fields,'');
 	}
-	// habilitar/desabilitar o bot„o de consulta
+	// habilitar/desabilitar o bot√£o de consulta
 	if( (tecla > 47 && tecla < 58) || (tecla > 95 && tecla < 106) )
 	{
 		//fwGetObj('num_endereco').value = tecla;
@@ -2926,14 +2926,14 @@ function fwFieldCepKeyUp(e,event,fields)
 }
 //---------------------------------------------------------------------------------------------
 /*
-FunÁ„o para preenchimento autom·tico de campos que compoem o endereÁo, utilizando ajax para consultar o CEP
+Fun√ß√£o para preenchimento autom√°tico de campos que compoem o endere√ßo, utilizando ajax para consultar o CEP
 Xml de retorno:
 <cep>35164067</cep>
 <uf>MG</uf>
 <cidade>Ipatinga</cidade>
-<bairro>Beth‚nia</bairro>
+<bairro>Beth√¢nia</bairro>
 <tipo_logradouro>Avenida</tipo_logradouro>
-<logradouro>JosÈ Assis Vasconcelos</logradouro>
+<logradouro>Jos√© Assis Vasconcelos</logradouro>
 <resultado>1</resultado>
 <resultado_txt>sucesso. logradouro encontrado local</resultado_txt>
 <limite_buscas>5</limite_buscas>
@@ -2955,7 +2955,7 @@ function getCepJquery(idNum_cep,fields,callback,beforeSend)
 		}
 		catch(e){}
 	}
-	// se n„o informou o cep limpar os campos e sair
+	// se n√£o informou o cep limpar os campos e sair
 	if(!idNum_cep || jQuery('#'+idNum_cep).attr('value').replace(/[^0-9]/g,'').length != 8 )
 	{
 		// limpar o campos
@@ -2967,7 +2967,7 @@ function getCepJquery(idNum_cep,fields,callback,beforeSend)
 		}
 		return;
 	}
-	// bucar os dados de endereÁo
+	// bucar os dados de endere√ßo
 	setTimeout( function()
 	{
 		if(jQuery('#'+idNum_cep).attr('value')!='' && jQuery('#'+idNum_cep).attr('value')!=undefined)
@@ -3002,10 +3002,10 @@ function getCepJquery(idNum_cep,fields,callback,beforeSend)
 								case '1':
 									break;
 								case '-1':
-									alert('CEP n„o encontrado');
+									alert('CEP n√£o encontrado');
 									break;
 								case '-2':
-									alert('Formato de CEP inv·lido');
+									alert('Formato de CEP inv√°lido');
 									break;
 								case '-3':
 									alert('Limite de buscas de ip por minuto excedido');
@@ -3091,7 +3091,7 @@ function fwSet_position(element,position)
 }
 function fwSetPosition(element,position)
 {
-	// position pode ser: tl, tc, tr, cl, cc, cr, bl, bc, br e o padr„o È tc
+	// position pode ser: tl, tc, tr, cl, cc, cr, bl, bc, br e o padr√£o √© tc
 	position = position || 'tc';
 	var topReference=0;
 	try
@@ -3169,10 +3169,10 @@ function fwSetPosition(element,position)
 }
 //--------------------------------------------------------------------------------------
 /*
-	FunÁ„o utilizada para transformar uma textarea em um editor de texto reach text.
+	Fun√ß√£o utilizada para transformar uma textarea em um editor de texto reach text.
 	Utiliza a biblioteca tinyMce link: http://tinymce.moxiecode.com
-	Recebe como parametro o id da textArea e o nome da funÁ„o que ser· chamada
-	quando for clicado no bot„o save. Esta funÁ„o recebe uma inst‚ncia do editor
+	Recebe como parametro o id da textArea e o nome da fun√ß√£o que ser√° chamada
+	quando for clicado no bot√£o save. Esta fun√ß√£o recebe uma inst√¢ncia do editor
 	onde podemos recuperar o texto editado utilizando o comando getContent();
 */
 function fwSetHtmlEditor(textAreaName,saveHandler,readonly,height,width)
@@ -3269,7 +3269,7 @@ function fwSetHtmlEditor(textAreaName,saveHandler,readonly,height,width)
 	}
 	catch(e)
 	{
-		alert('arquivo .js do tinyMCE editor n„o carregado!');
+		alert('arquivo .js do tinyMCE editor n√£o carregado!');
 	}
 }
 function InitInstanceCallback(inst)
@@ -3296,7 +3296,7 @@ function InitInstanceCallback(inst)
 //--------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------
 /*
-FunÁ„o para desabilitar a cobinaÁ„o de teclas "ctrl + tecla"
+Fun√ß√£o para desabilitar a cobina√ß√£o de teclas "ctrl + tecla"
 O parametro teclas deve ser as teclas separadas por virgula. Ex: v,c,x
 exemplo: adicionar no evento onKeyPress do campo a chamada: onKeyPress="fwDisableCtrlKey(event,'v')" para desabilitar o ctrl+v
 */
@@ -3311,7 +3311,7 @@ function fwDisableCtrlKey(evt,teclas,field)
 	}
 	else
 	{
-		//Lista de todas as combinaÁıes de CTRL + key que voce quer desativar
+		//Lista de todas as combina√ß√µes de CTRL + key que voce quer desativar
 		teclasProibidas = new Array('a', 'n', 'c', 'x', 'v', 'j');
 	}
 	if(window.event)
@@ -3368,7 +3368,7 @@ function fwDisableCtrlKey(evt,teclas,field)
 }
 //-------------------------------------------------------------------------------------
 /*
-Cancela a tecla F5 para evitar o carregamento da p·gina.
+Cancela a tecla F5 para evitar o carregamento da p√°gina.
 */
 function fwCancelRefresh(event,reload)
 {
@@ -3417,10 +3417,10 @@ function fwCancelRefresh(event,reload)
 	return false;
 }
 /**
-*	FunÁ„o para preenchimento de campos do tipo combobox ( select ) utilizando chamada assincrona ajax
+*	Fun√ß√£o para preenchimento de campos do tipo combobox ( select ) utilizando chamada assincrona ajax
 *
 *	Ex: fwFillSelectAjax("tip_bioma2","bioma","COD_BIOMA","NOM_BIOMA","200","myCallback","-- biomas --","-1","tip_bioma|COD_BIOMA","",0,0)
-*	Se for especificada a funÁ„o de callback, esta receber· o id do campo select informado
+*	Se for especificada a fun√ß√£o de callback, esta receber√° o id do campo select informado
 *
 *	@param selectId
 *	@param packageFunctionTable
@@ -3454,12 +3454,12 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 	fwLimparOpcoesSelect(objSelect);
 	if( !selectId)
 	{
-		alert('Parametro selectId da funÁ„o fwFillSelectAjax() deve ser informado!');
+		alert('Parametro selectId da fun√ß√£o fwFillSelectAjax() deve ser informado!');
 		return null;
 	}
 	if( !packageFunctionTable)
 	{
-		alert('Parametro packageFunctionTable da funÁ„o fwFillSelectAjax() deve ser informado!');
+		alert('Parametro packageFunctionTable da fun√ß√£o fwFillSelectAjax() deve ser informado!');
 		return null;
 	}
 	// adicionar texto carregando
@@ -3467,7 +3467,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 	objSelect.options[0] = opt;
 	// desabilitar o campo
 	objSelect.disabled=true;
-	// ler os valores dos campos do formulario para compor a express„o where
+	// ler os valores dos campos do formulario para compor a express√£o where
 	if ( formWhereField )
 	{
 		var aTemp1 = formWhereField.split(',');
@@ -3531,7 +3531,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 		}
 		if( data )
 		{
-			data=String(data).trim(); // remover espaÁos do inicio e fim da string para evitar erro no eval()
+			data=String(data).trim(); // remover espa√ßos do inicio e fim da string para evitar erro no eval()
 		}
 		fwFillSelectJson( selectId,data,keyColumn,descColumn,initialValue,firstOptionText, firstOptionValue);
 		if( callBackFunction )
@@ -3543,7 +3543,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 				callBackFunction = callBackFunction.substr(0,i);
 			}
 			callBackFunction = callBackFunction+'(selectId)';
-			// executar a funÁ„o de callback
+			// executar a fun√ß√£o de callback
 			try{
 				eval(callBackFunction+';')
 			} catch(e){
@@ -3554,7 +3554,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 }
 
 /**
-* FunÁ„o para preenchimento de campos do tipo combobox (select) a partir de dados no formato json {key:value}
+* Fun√ß√£o para preenchimento de campos do tipo combobox (select) a partir de dados no formato json {key:value}
 *
 * @param selectId
 * @param jsonString
@@ -3638,12 +3638,12 @@ function fwFillSelectJson(selectId, jsonString, keyField, descField, initialValu
 		}
 		if( !data[keyField])
 		{
-			//alert('Campo chave '+keyField+' n„o existe');
+			//alert('Campo chave '+keyField+' n√£o existe');
 			return;
 		}
 		if( !data[descField])
 		{
-			//alert('Campo descricao '+descField+' n„o existe');
+			//alert('Campo descricao '+descField+' n√£o existe');
 			return;
 		}
 	}
@@ -3829,8 +3829,8 @@ function fwConfirmOld(message, callbackYes, callbackNo, yesLabel, noLabel, title
 {
 
 	yesLabel	= yesLabel||'Sim';
-	noLabel		= noLabel||'N„o';
-	titleLabel	= titleLabel||'ConfirmaÁ„o';
+	noLabel		= noLabel||'N√£o';
+	titleLabel	= titleLabel||'Confirma√ß√£o';
 
 	jQuery.alerts.okButton        = yesLabel;
 	jQuery.alerts.cancelButton    = noLabel;
@@ -3856,8 +3856,8 @@ function fwConfirmOld(message, callbackYes, callbackNo, yesLabel, noLabel, title
 }
 function fwConfirm2(message, callbackYes, callbackNo, yesLabel, noLabel, titleLabel) {
 	yesLabel	= yesLabel||'Sim';
-	noLabel		= noLabel||'N„o';
-	titleLabel	= titleLabel||'ConfirmaÁ„o';
+	noLabel		= noLabel||'N√£o';
+	titleLabel	= titleLabel||'Confirma√ß√£o';
 
 	//jQuery("<div id='confirm'><div class='header'><span>"+titleLabel+"</span></div><div class='message' style='overflow-y:auto;border:none;height:45px;'></div><div class='buttons'><div class='no simplemodal-close'>"+noLabel+"</div><div class='yes'>"+yesLabel+"</div></div></div>").modal({
 	jQuery("<div id='confirm'><div class='header'><span>"+titleLabel+"</span></div><div class='message'></div><div class='buttons'><div class='no simplemodal-close'>"+noLabel+"</div><div class='yes'>"+yesLabel+"</div></div></div>").modal({
@@ -3936,7 +3936,7 @@ function fwFaceBox(content,iframe,height,width,onClose,onShow,css)
 		{
 			height	= height || 600;
 			width	= width  || 800;
-			// container mostra a animaÁ„o de carregando
+			// container mostra a anima√ß√£o de carregando
 			container = '<iframe id="faceBoxIframe" scrolling="auto" frameborder="no" align="center" style="width:'+width+'px;height:'+height+'px;border:0px;padding-right:7px;'+css+'" src="'+pastaBase+'includes/carregando_cinza.html"></iframe>';
 			// mostrar a url dentro do iframe em 1 segundo
 			content += ( ( content.indexOf('?')==-1) ? '?' :'&' ) +'modalbox=1&subform=1&facebox=1';
@@ -3978,7 +3978,7 @@ function fwFaceBox(content,iframe,height,width,onClose,onShow,css)
 	}
 }
 /**
-FunÁ„o para fechar a faceBox aberta via javascript
+Fun√ß√£o para fechar a faceBox aberta via javascript
 */
 function fwFaceBoxClose()
 {
@@ -3987,14 +3987,14 @@ function fwFaceBoxClose()
 	}catch(e){}
 }
 /*
-funÁ„o para fazer arredondamento de n˙meros decimais
+fun√ß√£o para fazer arredondamento de n√∫meros decimais
 */
 function fwRoundNumber(num, dec) {
 	var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
 	return result;
 }
 /*
-funÁ„o javascript para recuperar os parametros recebidos via get, equivalente ao $_GET do php. Ex: a=jsRequest('num_pessoa');
+fun√ß√£o javascript para recuperar os parametros recebidos via get, equivalente ao $_GET do php. Ex: a=jsRequest('num_pessoa');
 */
 function fwJsRequest( name )
 {
@@ -4015,11 +4015,11 @@ function fwFieldCoordShowMap(id,height,width,jsonParams)
 	var w= width  || jQuery("body").width()-100;
 	var url = "?modulo="+pastaBase+"includes/ponto_google_map.php&ajax=1&h=+"+(h-50)+"&prototypeId=&updateField="+id;
 
-    // se o campo estiver readonly via funÁ„o fwReadOnly(), n„o permitir clicar no mapa para retornar a coordenada
+    // se o campo estiver readonly via fun√ß√£o fwReadOnly(), n√£o permitir clicar no mapa para retornar a coordenada
     if( jQuery("#"+id+"_lat_grau").attr('readonly') == 'readonly' )
     {
     	jsonParams['readonly'] = 'true';
-    	jsonParams['mapHeaderText'] = 'Consulta Coordendada Geogr·fica';
+    	jsonParams['mapHeaderText'] = 'Consulta Coordendada Geogr√°fica';
     }
 
 	for( key in jsonParams )
@@ -4037,8 +4037,8 @@ function fwFieldCoordShowMap(id,height,width,jsonParams)
 }
 
 /*
-funÁ„o para definir o bounding box e o centro do mapa utilizada pelo campo coordenada gerogr·fica ao exibir o mapa
-Formato do par‚metro bounds: {"latMin":"-13,0141881286166","latMax":"-12,7248145057069","lonMin":"-38,6998295398796","lonMax":"-38,2952318041981"}
+fun√ß√£o para definir o bounding box e o centro do mapa utilizada pelo campo coordenada gerogr√°fica ao exibir o mapa
+Formato do par√¢metro bounds: {"latMin":"-13,0141881286166","latMax":"-12,7248145057069","lonMin":"-38,6998295398796","lonMax":"-38,2952318041981"}
 */
 function fwSetZoomLevelCenter(id, bounds, height, width) {
 	if (typeof bounds == "undefined" || bounds.latMin  == "undefined" )
@@ -4078,7 +4078,7 @@ function fwSetZoomLevelCenter(id, bounds, height, width) {
 }
 //--------------------------------------------------------------------------------------------
 /*
-	Esta funÁ„o aumenta a altura do formul·rio atÈ sumir a barra vertical de scroll
+	Esta fun√ß√£o aumenta a altura do formul√°rio at√© sumir a barra vertical de scroll
 	fwFormDinAutoSize({formId:"formdin",initialHeight:150});
 */
 function fwFormDinAutoSize(jsonParams)
@@ -4097,7 +4097,7 @@ function fwFormDinAutoSize(jsonParams)
 		fwSetFormHeight(initialHeight);
 	}
 	var i  = 0;
-	var o1 = jQuery('#content_'+frmId); // so existe se o form n„o estiver flat
+	var o1 = jQuery('#content_'+frmId); // so existe se o form n√£o estiver flat
 	var o2 = jQuery('#body_'+frmId);
 	var o3 = jQuery('#'+frmId+'_body');
 
@@ -4113,7 +4113,7 @@ function fwFormDinAutoSize(jsonParams)
 	*/
 	do
 	{
-		// posiciona a barra de rolagem no valor m·ximo
+		// posiciona a barra de rolagem no valor m√°ximo
 		o3[0].scrollTop = o3[0].scrollTop + o3[0].scrollHeight;
 		dif = o3[0].scrollTop;
 		if( dif > 0 )
@@ -4146,12 +4146,12 @@ function fwFormDinAutoSize(jsonParams)
 }
 
 /**
- * FunÁ„o para ajustar a altura do formdin
+ * Fun√ß√£o para ajustar a altura do formdin
 */
 function fwSetFormHeight(h,frmId,showScrollBar)
 {
 	frmId = frmId || 'formdin';
-	var o1 = jQuery('#content_'+frmId); // so existe se o form n„o estiver flat
+	var o1 = jQuery('#content_'+frmId); // so existe se o form n√£o estiver flat
 	var o2 = jQuery('#body_'+frmId);
 	var o3 = jQuery('#'+frmId+'_body');
 	if( o1.get(0) )
@@ -4184,7 +4184,7 @@ function fwSetFormHeight(h,frmId,showScrollBar)
 	}
 }
 /**
- * FunÁ„o para ajustar a largura do formdin
+ * Fun√ß√£o para ajustar a largura do formdin
 */
 function fwSetFormWidth(w,frmId,showScrollBar)
 {
@@ -4194,7 +4194,7 @@ function fwSetFormWidth(w,frmId,showScrollBar)
 	var o3 = jQuery('#body_'+frmId);
 	var o4 = jQuery('#'+frmId+'_header');
 	var o5 = jQuery('#'+frmId+'_body');
-	if( o2.get(0)) // n„o est· flat
+	if( o2.get(0)) // n√£o est√° flat
 	{
 		o1.width(w);
 		o2.width(o1.width());
@@ -4224,7 +4224,7 @@ function fwSetFormWidth(w,frmId,showScrollBar)
 }
 
 /**
-Esta funÁ„o È utilizada pela classe TGrid para exportar o dados.
+Esta fun√ß√£o √© utilizada pela classe TGrid para exportar o dados.
 */
 function fwExportGrid2Excel(dadosJson)
 {
@@ -4360,7 +4360,7 @@ function fwExportGrid2Excel(dadosJson)
 	}
 }
 //--------------------------------------------------------------------------------------
-// funÁıes genÈricas para utilizaÁ„o com dhtmlx Tree
+// fun√ß√µes gen√©ricas para utiliza√ß√£o com dhtmlx Tree
 function fwTreeAddLoading(tree,id)
 {
 	if( id )
@@ -4403,8 +4403,8 @@ function fwUrlAddParams(url,formFields)
 	return url+p;
 }
 /**
-	FunÁ„o para desabilitar abas da classe TPageControl via javascript
-	O parametro pc È opcional e se for omitido ser· considerado o nome do
+	Fun√ß√£o para desabilitar abas da classe TPageControl via javascript
+	O parametro pc √© opcional e se for omitido ser√° considerado o nome do
 	primeiro grupo de abas da pagina
 */
 function fwDesabilitarAba(aba,pc)
@@ -4426,8 +4426,8 @@ function fwDesabilitarAba(aba,pc)
 	}
 }
 /**
-	FunÁ„o para habilitar abas da classe TPageControl via javascript
-	O parametro pc È opcional e se for omitido ser· considerado o nome do
+	Fun√ß√£o para habilitar abas da classe TPageControl via javascript
+	O parametro pc √© opcional e se for omitido ser√° considerado o nome do
 	primeiro grupo de abas da pagina
 */
 function fwHabilitarAba(aba,pc)
@@ -4450,7 +4450,7 @@ function fwHabilitarAba(aba,pc)
 }
 //--------------------------------------------------------------------------------------------------
 /**
-FunÁ„o para inicializar o tooltip das imagens com o atributo "tooltip" definidos na classe TDisplayControl
+Fun√ß√£o para inicializar o tooltip das imagens com o atributo "tooltip" definidos na classe TDisplayControl
 */
 function fwAttatchTooltip( config )
 {
@@ -4492,9 +4492,9 @@ function fwShowBlob(table_name, blob_column_name, file_column_name, key_column_n
 	}
 }
 /**
-FunÁ„o para calcular a idade em anos.
+Fun√ß√£o para calcular a idade em anos.
 @param string data - data de nascimento
-@param mixed updateField - campo ou nome do campo que ser· atualizado com a idade ( opcional )
+@param mixed updateField - campo ou nome do campo que ser√° atualizado com a idade ( opcional )
 */
 function fwGetAge( birthDate, updateField )
 {
@@ -4512,11 +4512,11 @@ function fwGetAge( birthDate, updateField )
 	// data atual
 	today = new Date()
 	var array_birthDate = birthDate.split("/")
-	//se o array nao tem tres partes, a data est· errada
+	//se o array nao tem tres partes, a data est√° errada
 	if (array_birthDate.length != 3 )
 		return '';
 
-	//comprovo que o ano, mes, dia s„o corretos
+	//comprovo que o ano, mes, dia s√£o corretos
 	var year = parseInt(array_birthDate[2]);
 	if (isNaN(year))
 		return ''
@@ -4548,7 +4548,7 @@ function fwGetAge( birthDate, updateField )
 		else  if (today.getUTCDate() - day >= 0)
 		{
 			//entao eh porque sao iguais. Vejo os dias
-			//se subtraio os dias e der menor que 0 entao nao cumpriu anos. Se der maior ou igual sim que j· cumpriu
+			//se subtraio os dias e der menor que 0 entao nao cumpriu anos. Se der maior ou igual sim que j√° cumpriu
 			age++
 		}
 	}
@@ -4579,7 +4579,7 @@ function fwSetFormAlignment(vertical,horizontal)
 }
 //-------------------------------------------------------------------------------------------
 /**
-FunÁ„o para ajustar o caminho da pasta base das urls
+Fun√ß√£o para ajustar o caminho da pasta base das urls
 */
 function fwAdjustBasePath(url)
 {
@@ -4590,7 +4590,7 @@ function fwAdjustBasePath(url)
 	return url
 }
 /*
-FunÁ„o para limpar todos os campos filhos
+Fun√ß√£o para limpar todos os campos filhos
 */
 function fwClearChildFields( parentId,except )
 {
@@ -4660,8 +4660,8 @@ function fwClearChildFields( parentId,except )
 }
 //-------------------------------------------------------------------------------------
 /*
-FunÁ„o para formatar n˙meros adicionando pontos a cada 3 digitos e
-retornando a virgula como separador decimal se o numÈro n„o for inteiro
+Fun√ß√£o para formatar n√∫meros adicionando pontos a cada 3 digitos e
+retornando a virgula como separador decimal se o num√©ro n√£o for inteiro
 Ex:
 	fwAddPoints('123456') 		-> 123.456
 	fwAddPoints('1,234.56') 	-> 1,234.56
@@ -4781,7 +4781,7 @@ function fwCancelEvent(event)
  *
  * @todo add config: exetoCampos, msg no topo, validar aba especifica
  * -retorna true se estiver ok
- * -retorna false + mensagens de erro se n„o estiver ok
+ * -retorna false + mensagens de erro se n√£o estiver ok
 */
 function fwValidateForm(config)
 {
@@ -4789,7 +4789,7 @@ function fwValidateForm(config)
 	var numErros = 0;
 	var campoRadio = new Array();
 	var formName=null;
-	// considerar sempre o ˙ltimo form da pagina
+	// considerar sempre o √∫ltimo form da pagina
 	var objForm = jQuery("form");
 	if( objForm.length > 0 )
 	{
@@ -4835,7 +4835,7 @@ function fwValidateForm(config)
 			var aCampos = fields.split(',');
 			for(var idx in aCampos )
 			{
-				// se n„o encontrar pelo id, tentar pelo name
+				// se n√£o encontrar pelo id, tentar pelo name
 				elemForm = jQuery("#"+aCampos[idx]).get(0);
 				if( !elemForm )
 				{
@@ -4891,7 +4891,7 @@ function fwValidateForm(config)
 									fwSetBordaCampo(elemForm,true,true);
 									if(campoLabel)
 									{
-										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' È obrigatÛrio !'+"\n";
+										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' √© obrigat√≥rio !'+"\n";
 									}
 									numErros++;
 								}
@@ -4900,7 +4900,7 @@ function fwValidateForm(config)
 									if( ! elemForm.value.isCPF() && ! elemForm.value.isCNPJ() )
 									{
 										fwSetBordaCampo(elemForm,true,true);
-										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' est· inv·lido !'+"\n";
+										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' est√° inv√°lido !'+"\n";
 										numErros++;
 									}
 								}
@@ -4908,7 +4908,7 @@ function fwValidateForm(config)
 								{
 									if( ! fwValidarEmail(elemForm,false) )
 									{
-										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' est· inv·lido !'+"\n";
+										msgErroJS+=' O campo '+ campoLabel.replace(':','') +' est√° inv√°lido !'+"\n";
 										numErros++;
 									}
 								}
@@ -4923,7 +4923,7 @@ function fwValidateForm(config)
 									if( jQuery("input[name='" + elemForm.name + "']:checked" ).length == 0 )
 									{
 										campoRadio.push(elemForm.name);
-										msgErroJS+=' O campo '+ campoLabel +' È obrigatÛrio !'+"\n";
+										msgErroJS+=' O campo '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 										fwSetBordaCampo(elemForm.name+'_container',true,true);
 										numErros++;
 									}
@@ -4940,7 +4940,7 @@ function fwValidateForm(config)
 									if( jQuery("input[name='" + elemForm.name + "']:checked" ).length == 0 )
 									{
 										campoRadio.push(elemForm.name.replace('[]','') );
-										msgErroJS+=' O campo '+ campoLabel +' È obrigatÛrio !'+"\n";
+										msgErroJS+=' O campo '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 										//jQuery("#"+elemForm.name.replace('[]','')+'_container').css('border','1px solid transparent');
 										fwSetBordaCampo(elemForm.name.replace('[]','')+'_container',true,true);
 										numErros++;
@@ -4958,7 +4958,7 @@ function fwValidateForm(config)
 									if(jQuery('#'+idField+'_disabled').val()==''){
 										fwSetBordaCampo(jQuery('#'+idField+'_disabled'),true,true);
 										if(campoLabel){
-											msgErroJS+=' O campo '+ campoLabel +' È obrigatÛrio !'+"\n";
+											msgErroJS+=' O campo '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 										}
 										numErros++;
 									}
@@ -5018,7 +5018,7 @@ function fwValidateForm(config)
 									if(jQuery('#'+idField+'_disabled').val()==''){
 										fwSetBordaCampo(jQuery('#'+idField+'_disabled'),true,true);
 										if(campoLabel){
-											msgErroJS+=' O campo: '+ campoLabel +' È obrigatÛrio !'+"\n";
+											msgErroJS+=' O campo: '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 										}
 										numErros++;
 									}
@@ -5030,7 +5030,7 @@ function fwValidateForm(config)
 									fwSetBordaCampo(elemForm,true,true);
 									//var campoLabel = jQuery.trim(jQuery('#'+elemForm.id+'_label').html());
 									if(campoLabel){
-										msgErroJS+=' O campo: '+ campoLabel +' È obrigatÛrio !'+"\n";
+										msgErroJS+=' O campo: '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 									}
 									numErros++;
 								}
@@ -5039,7 +5039,7 @@ function fwValidateForm(config)
 									if( ! elemForm.value.isCPF() && ! elemForm.value.isCNPJ() )
 									{
 										fwSetBordaCampo(elemForm,true,true);
-										msgErroJS+=' O campo: '+ campoLabel.replace(':','') +' est· inv·lido !'+"\n";
+										msgErroJS+=' O campo: '+ campoLabel.replace(':','') +' est√° inv√°lido !'+"\n";
 										numErros++;
 									}
 								}
@@ -5047,7 +5047,7 @@ function fwValidateForm(config)
 								{
 									if( ! fwValidarEmail(elemForm,false) )
 									{
-										msgErroJS+=' O campo: '+ campoLabel.replace(':','') +' est· inv·lido !'+"\n";
+										msgErroJS+=' O campo: '+ campoLabel.replace(':','') +' est√° inv√°lido !'+"\n";
 										numErros++;
 									}
 								}
@@ -5065,7 +5065,7 @@ function fwValidateForm(config)
 								if( jQuery("input[name='" + elemForm.name + "']:checked" ).length == 0 )
 								{
 									campoRadio.push(elemForm.name);
-									msgErroJS+=' O campo: '+ campoLabel +' È obrigatÛrio !'+"\n";
+									msgErroJS+=' O campo: '+ campoLabel +' √© obrigat√≥rio !'+"\n";
 									fwSetBordaCampo(elemForm.name+'_container',true,true);
 									numErros++;
 								}
@@ -5084,7 +5084,7 @@ function fwValidateForm(config)
 	return true;
 }
 /**
- * FunÁ„o alias de fwValidateForm() simplificada para validar campos, abas ou grupos
+ * Fun√ß√£o alias de fwValidateForm() simplificada para validar campos, abas ou grupos
  * EX: fwValidateFields('des_nivel,nom_pessoa,...');
  * Para validar campos de uma aba ou grupo especifico, passe o id do grupo ou da aba no
  * segundo parametro.
@@ -5264,7 +5264,7 @@ function fwShowMsgArea(jsonParams)
 
 	try
 	{
-    	// funÁ„o fwAlert n„o funciona direito com subforms
+    	// fun√ß√£o fwAlert n√£o funciona direito com subforms
 		if ( typeof parent.fwShowMsgArea == 'function')
    		{
    			alert( jsonParams['message'] );
@@ -5340,7 +5340,7 @@ function fwHideMsgArea( id )
 	catch(e){}
 }
 /*
-FunÁ„o para exibir um arquivo pdf ou um pdf gerado dinamicamente com php.
+Fun√ß√£o para exibir um arquivo pdf ou um pdf gerado dinamicamente com php.
 Parametros: url, modulo, acao, titulo
 Ex: fwShowPdf({"modulo" : pastaBase + "exemplos/exe_pdf_1.php" });
 Ex: fwShowPdf({"url" :"tmp/teste.pdf" });
@@ -5365,7 +5365,7 @@ function fwShowPdf( jsonParams )
 	}
 	if( !jsonParams.titulo )
 	{
-		jsonParams.titulo = 'RelatÛrio Pdf';
+		jsonParams.titulo = 'Relat√≥rio Pdf';
 	}
 	if( !jsonParams.conatinerId )
 	{
@@ -5556,7 +5556,7 @@ function fwGridSetRowColor(idGrid,rownum,$newColor)
 function fwGridConfirmDelete( campos, valores, idGrid, rownum )
 {
 	var bgc = fwGridSetRowColor(idGrid,rownum,'#FFFF66');
-	if( confirm('confirma Exclus„o ?') )
+	if( confirm('confirma Exclus√£o ?') )
 	{
 		fwGridSetRowColor(idGrid,rownum,bgc);
 		fwAtualizarCampos(campos,valores);
@@ -5567,8 +5567,8 @@ function fwGridConfirmDelete( campos, valores, idGrid, rownum )
 	return false;
 }
 /**
- * FunÁ„o utilizada pelo campo TCoordGms para formatar os segundos
- * permitindo digitar a virgula quando necess·rio, diferentemente do campo
+ * Fun√ß√£o utilizada pelo campo TCoordGms para formatar os segundos
+ * permitindo digitar a virgula quando necess√°rio, diferentemente do campo
  * decimal
  */
 function fwFormatSecondsGms(e,evt)
@@ -5586,7 +5586,7 @@ function fwFormatSecondsGms(e,evt)
 			key=evt.keyCode;
 		}
 	}
-	// keys v·lidas tab, backspace setaesquerda, setadireita e delete
+	// keys v√°lidas tab, backspace setaesquerda, setadireita e delete
 	if( key==8 || key==9 || key==35 || key==36 ||key==37 || key==38 || key==39 || key==40 || key==46 ) {
 		 return true;
 	}
@@ -5620,7 +5620,7 @@ function fwFormatSecondsGms(e,evt)
 }
 
 /**
- * FunÁ„o para bloquear ou desbloquear campos do formul·rio
+ * Fun√ß√£o para bloquear ou desbloquear campos do formul√°rio
  * areaId = id do elemento pai
  * lock = true para bloquear ou false para desbloquear
  */
@@ -5648,9 +5648,9 @@ function fwLockUnlockArea(areaId,lock)
 }
 
 /**
- * FunÁ„o utilizada para bloquear ou desbloquear campos
+ * Fun√ß√£o utilizada para bloquear ou desbloquear campos
  * containerId = id do campo, grupo ou aba para bloquear somente campos filhos
- * except = lista de campos que n„o dever„o ser desabilitados, separados por virgula.
+ * except = lista de campos que n√£o dever√£o ser desabilitados, separados por virgula.
  * lock = true para bloquear ou false para desbloquear
  */
 function fwLockFields(containerId, except, lock )
@@ -5728,7 +5728,7 @@ function fwLockFields(containerId, except, lock )
 	});
 }
 /**
-* Maximizar/Minimizar o formul·rio
+* Maximizar/Minimizar o formul√°rio
 *
 * @param formdinId
 * @param callback
@@ -5789,7 +5789,7 @@ function fwFullScreen(formdinId,callback)
 	}
 }
 /*
- * FunÁ„o para transformar valores e campos concatenados com | em objeto
+ * Fun√ß√£o para transformar valores e campos concatenados com | em objeto
  * Ex: valores='brasilia|computador' e campos='cidade|objeto'
  * o=fwFV2O(campos, valores);
  * alert( o.cidade )
@@ -5811,7 +5811,7 @@ function fwFV2O(fields,values)
 }
 
 /**
- * FunÁ„o para solicitar confirmaÁ„o de visualizar o arquivo anexado
+ * Fun√ß√£o para solicitar confirma√ß√£o de visualizar o arquivo anexado
  * quando utilizado o campo TFileAsync
  */
 function fwConfirmShowTempFile(tempName,fileName,type,size)
@@ -5819,8 +5819,8 @@ function fwConfirmShowTempFile(tempName,fileName,type,size)
 	if( tempName )
 	{
 		jQuery.alerts.okButton		='Sim';
-		jQuery.alerts.cancelButton	='N„o';
-		jConfirm('Deseja visualizar o arquivo '+fileName+'?', 'ConfirmaÁ„o',
+		jQuery.alerts.cancelButton	='N√£o';
+		jConfirm('Deseja visualizar o arquivo '+fileName+'?', 'Confirma√ß√£o',
 			function(res)
 			{
 				if( res )
@@ -5833,13 +5833,13 @@ function fwConfirmShowTempFile(tempName,fileName,type,size)
 
 function fwOpenDir(updateField,rootDir,callback,title)
 {
-		title = title || 'Selecionar DiretÛrio';
+		title = title || 'Selecionar Diret√≥rio';
 		var container = jQuery('#divFileTree')
 		if( ! container.get(0) )
 		{
 			idContainer='divFileTree';
 			title +='<span style="float:right;cursor:pointer;margin-right:5px;" onClick="jQuery(\'#divFileTree\').hide()">x</span>';
-			//jQuery('body').append('<div id="divFileTree" style="width:500px;height:300px;border:1px solid silver;overflow:auto;background-color:#ffffff;display:none;position:absolute;top:20px;left:20px;"><div id="divTreeFileHeader" style="border:none;border-bottom:1px;height:26px;font-size:12px;color:#000000;background-color:#efefef;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;"><table width="100%" height="100%"><tr><td>Selecione o DiretÛrio</td></tr></table></div><div id="divFileTreeContainer" style="border:none;border-top:1px solid silver;height:auto;"></div></div>');
+			//jQuery('body').append('<div id="divFileTree" style="width:500px;height:300px;border:1px solid silver;overflow:auto;background-color:#ffffff;display:none;position:absolute;top:20px;left:20px;"><div id="divTreeFileHeader" style="border:none;border-bottom:1px;height:26px;font-size:12px;color:#000000;background-color:#efefef;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;"><table width="100%" height="100%"><tr><td>Selecione o Diret√≥rio</td></tr></table></div><div id="divFileTreeContainer" style="border:none;border-top:1px solid silver;height:auto;"></div></div>');
 			jQuery('body').append('<div id="divFileTree" style="display:none;font-size:12px;font-family:Verdana, Geneva, Arial, sans-serif;;margin:0px;padding:0px;width:500px;height:300px;border:1px solid silver;overflow:hidden;background-color:#ffffff;display:block;position:absolute;top:20px;left:20px;"><div style="position:absolute;top:-1px;left:0px;width:100%;height:26px;margin:0px;padding:0px;border:none;border-bottom:1px solid silver;display:block;background-image:url(headerbg.gif);background-repeat: repeat-x;text-align:left;"><div style="padding-left:2px;margin-top:6px;border:none;">'+title+'</div></div><div id="divFileTreeContainer" style="position:absolute;width:100%;height:246px;top:27px;border:0px;overflow:auto;padding-left:2px;"></div><div style="position:absolute;bottom:-1px;width:100%;height:26px;border:none;display:block;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;text-align:center;"> <div style="margin-top:4px;border:none;"><input id="fileTreeCurDir" type="hidden" value=""> <input class="fwButton" type="button" name="btnAbrir" id="btnAbrirFileTree" value="Selecionar" onClick="jQuery(\'#'+updateField+'\').val(jQuery(\'#fileTreeCurDir\').val());jQuery(\'#divFileTree\').hide();"></div></div></div>');
 			container = jQuery('#divFileTree');
 			container.hide();
@@ -5882,7 +5882,7 @@ function fwOpenDir(updateField,rootDir,callback,title)
 			});
 	}
 /**
-* funÁ„o para retorna a data e a hora atual
+* fun√ß√£o para retorna a data e a hora atual
 *
 */
 function fwGetTime()
@@ -5890,7 +5890,7 @@ function fwGetTime()
 	return new Date().getTime();
 }
 /**
-* funÁ„o para converter horas em minutos
+* fun√ß√£o para converter horas em minutos
 * @exemple: fwH2M('08:00');
 * @param hrs - 99:99
 */
@@ -5902,18 +5902,18 @@ function fwH2M(hrs)
 	return min;
 }
 /**
-* funÁ„o para tranformar minutos em horas
+* fun√ß√£o para tranformar minutos em horas
 * @exemple: fwM2H('128'); = 02:08
 *
 * @param min
-* @prame returnType - s=string , a=array ou j=json ( padr„o )
+* @prame returnType - s=string , a=array ou j=json ( padr√£o )
 */
 function fwM2H( min,returnType )
 {
 	returnType 	= returnType || 'j';
 	var hours 	= Math.floor ( min / 60 );
 	var minutes = min%60;
-	// funÁ„o pad esta definida no arquivo funcoes.js
+	// fun√ß√£o pad esta definida no arquivo funcoes.js
 	if( returnType == 's')
 	{
 		return String(hours).pad(2,'0',0) + ":" + String(minutes).pad(2,'0',0);
@@ -5929,7 +5929,7 @@ function fwM2H( min,returnType )
 	return null;
 }
 /**
-* funÁ„o para calcular a diferenÁa entre 2 horas
+* fun√ß√£o para calcular a diferen√ßa entre 2 horas
 */
 function fwTimeDiference(earlierDate, laterDate)
 {
@@ -5955,7 +5955,7 @@ function fwTimeDiference(earlierDate, laterDate)
 }
 
 /**
-* FunÁ„o para converter string no formato dd/mm/yyyy em objeto Date
+* Fun√ß√£o para converter string no formato dd/mm/yyyy em objeto Date
 *
 * @param dateDMY
 *
@@ -5996,7 +5996,7 @@ function fwOpen_modal_window(jsonParams)
 		return;
 	}
 
-	if( typeof $ != 'function') // n„o carregou a prototype
+	if( typeof $ != 'function') // n√£o carregou a prototype
 	{
 		if( typeof jQuery(document).dialog == 'function')
 		{
@@ -6229,8 +6229,8 @@ function fwParseJSON( valor )
 	return valor;
 }
 /**
-* FunÁ„o para verificar se existe alguma chamada ajax em execuÁ„o.
-* Valida somente para as chamadas ajax feitas pela funÁ„o
+* Fun√ß√£o para verificar se existe alguma chamada ajax em execu√ß√£o.
+* Valida somente para as chamadas ajax feitas pela fun√ß√£o
 * fwAjaxRequest()
 *
 * @returns {Boolean}
@@ -6243,11 +6243,11 @@ function fwChkRequestAjax()
 		var msg;
 		if( ajaxRequestCount > 1 )
 		{
-		   msg = 'Existem '+ajaxRequestCount+' requisiÁıes ajax pendentes!';
+		   msg = 'Existem '+ajaxRequestCount+' requisi√ß√µes ajax pendentes!';
 		}
 		else
 		{
-		   msg = 'Existe '+ajaxRequestCount+' requisiÁ„o ajax pendente!';
+		   msg = 'Existe '+ajaxRequestCount+' requisi√ß√£o ajax pendente!';
 		}
 		fwAlert(msg);
 		return false;
@@ -6263,7 +6263,7 @@ function fwBlinkElement(seletor,speed)
 	speed = speed || 500;
 
 /**
- * FunÁ„o interna para piscar um elemento usada por fwBlinkElement
+ * Fun√ß√£o interna para piscar um elemento usada por fwBlinkElement
  */
 	function _fwBlinkElement(seletor,speed)
 {
@@ -6363,8 +6363,8 @@ function fwRefreshCalendar(idCalendar) {
 * Acrescentar dias a uma data. Pode ser passada a data no formato dd/mm/yyyy ou o id do campo data
 * neste caso o campo data sera atualizado
 * no formato dd/mm/yyyy
-* Obs: o dia informado conta como o primeiro dia v·lido ent„o por exemplo
-* dia 20/01/2012 + 1 dia ser· o prÛprio dia 20/01/2012
+* Obs: o dia informado conta como o primeiro dia v√°lido ent√£o por exemplo
+* dia 20/01/2012 + 1 dia ser√° o pr√≥prio dia 20/01/2012
 */
 function fwDateAddDay(dateDmy,days,fieldId)
 {
@@ -6426,9 +6426,9 @@ function fwDateAddDay(dateDmy,days,fieldId)
 }
 
 /**
-* FunÁ„o para calcular a diferenÁa em dias entre duas datas
-* Obs: o dia informado conta como o primeiro dia v·lido ent„o por exemplo
-* dia 20/01/2012 - 20/01/2012 ser· 1 dia
+* Fun√ß√£o para calcular a diferen√ßa em dias entre duas datas
+* Obs: o dia informado conta como o primeiro dia v√°lido ent√£o por exemplo
+* dia 20/01/2012 - 20/01/2012 ser√° 1 dia
 */
 function fwDateDiffDays(date1,date2)
 {
@@ -6479,8 +6479,8 @@ function fwDateDiffDays(date1,date2)
 }
 
 /**
-* Habilitar a navegaÁ„o entre os campos com a tecla Enter como se fosse TAB
-* Se o parametro always for true, ir· pular atÈ mesmo selects e textareas
+* Habilitar a navega√ß√£o entre os campos com a tecla Enter como se fosse TAB
+* Se o parametro always for true, ir√° pular at√© mesmo selects e textareas
 *
 * @param idForm
 * @param always
@@ -6503,7 +6503,7 @@ function fwEnterAsTab(idForm,always)
 }
 //------------------------------------------------------------------
 /**
-* FunÁ„o para definr a cor do campo TColorPicker
+* Fun√ß√£o para definr a cor do campo TColorPicker
 *
 * @param id
 * @param {String} color
@@ -6533,7 +6533,7 @@ function fwSetColorPicker(id,color)
 }
 
 /**
-* FunÁ„o para esconder/mostrar colunas do gride
+* Fun√ß√£o para esconder/mostrar colunas do gride
 *
 * @param string colName
 * @param string idGrid
@@ -6542,7 +6542,7 @@ function fwSetColorPicker(id,color)
 * @example:
 * fwGridShowHideColumn('col_a',null,true); exibir a coluna
 * fwGridShowHideColumn('col_a,col_b',null, false); // esconder as colunas
-* fwGridShowHideColumn('action','gridA', false); // ocultar a coluna AÁ„o do gridA
+* fwGridShowHideColumn('action','gridA', false); // ocultar a coluna A√ß√£o do gridA
 */
 function fwGridShowHideColumn( colName, idGrid, show )
 {
@@ -6585,7 +6585,7 @@ function fwGridShowHideColumn( colName, idGrid, show )
 }
 
 /**
-* FunÁ„o para esconder colunas do gride
+* Fun√ß√£o para esconder colunas do gride
 *
 * @param string colName
 * @param string idGrid
@@ -6593,9 +6593,9 @@ function fwGridShowHideColumn( colName, idGrid, show )
 * @example
 * fwGridHideColumn('col_a');
 * fwGridHideColumn('col_a,col_b');
-* fwGridHideColumn('grideX_action'); // ocultar a coluna AÁ„o
-* fwGridHideColumn('action'); // ocultar a coluna AÁ„o
-* fwGridHideColumn('action','gridA'); // ocultar a coluna AÁ„o do gridA
+* fwGridHideColumn('grideX_action'); // ocultar a coluna A√ß√£o
+* fwGridHideColumn('action'); // ocultar a coluna A√ß√£o
+* fwGridHideColumn('action','gridA'); // ocultar a coluna A√ß√£o do gridA
 */
 
 function fwGridHideColumn( colName, idGrid )
@@ -6603,7 +6603,7 @@ function fwGridHideColumn( colName, idGrid )
 	fwGridShowHideColumn(colName,idGrid,false);
 }
 /**
-* FunÁ„o para exibir colunas do gride
+* Fun√ß√£o para exibir colunas do gride
 *
 * @param string colName
 * @param string idGrid
@@ -6611,9 +6611,9 @@ function fwGridHideColumn( colName, idGrid )
 * @example
 * fwGridShowColumn('col_a');
 * fwGridShowColumn('col_a,col_b');
-* fwGridShowColumn('grideX_action'); // exibir a coluna AÁ„o
-* fwGridShowColumn('action'); // exibir a coluna AÁ„o
-* fwGridShowColumn('action','gridA'); // exibir a coluna AÁ„o do gridA
+* fwGridShowColumn('grideX_action'); // exibir a coluna A√ß√£o
+* fwGridShowColumn('action'); // exibir a coluna A√ß√£o
+* fwGridShowColumn('action','gridA'); // exibir a coluna A√ß√£o do gridA
 */
 function fwGridShowColumn( colName, idGrid )
 {
@@ -6621,7 +6621,7 @@ function fwGridShowColumn( colName, idGrid )
 }
 
 /**
-* FunÁ„o para habilitar/desabilitar a ediÁ„o de campos
+* Fun√ß√£o para habilitar/desabilitar a edi√ß√£o de campos
 * @example fwReadOnly() para proteger, fwReadOnly(false) para desproteger
 * @example fwReadOnly(null,'gp1'); para proteger os campos do grupo gp1
 *
@@ -6664,7 +6664,7 @@ function fwReadOnly(trueFalse, parentId, except )
 		var fieldType = this.getAttribute('fieldtype');
 		if( id != '' )
 		{
-			// se n„o encontrar o id informado, procurar em caixa baixa
+			// se n√£o encontrar o id informado, procurar em caixa baixa
 			if( ! jQuery("#"+id).get(0) )
 			{
 				id = String(id).toLowerCase();
@@ -6723,7 +6723,7 @@ function fwReadOnly(trueFalse, parentId, except )
 
 				else if (type == 'hidden')
 				{
-					// pode ser campos radio, check ou select que est„o desabilitados
+					// pode ser campos radio, check ou select que est√£o desabilitados
 					if( jQuery("#"+id).attr('readonly')=='readonly' && trueFalse == false)
 					{
 						jQuery("#"+id).remove();
@@ -6795,7 +6795,7 @@ function fwDialog( title,url,height,width,callback,data)
 		top.fwDialog( title,url,height,width,callback,data );
 		return;
 	}
-	// padr„o ser· fullscreen
+	// padr√£o ser√° fullscreen
 
 	width  = width || parseInt(jQuery(window).width()-45); // jQuery(body).width()-100;
     height = height || parseInt(jQuery(window).height()-45); // jQuery(body).height()-100;
@@ -6960,8 +6960,8 @@ function fwApplyShortcuts()
 }
 
 /**
-* Atribuir uma tecla de atalho a um elemento do formul·rio ou para executar uma
-* funÁ„o javascript
+* Atribuir uma tecla de atalho a um elemento do formul√°rio ou para executar uma
+* fun√ß√£o javascript
 *
 * @param hotkey
 * @param id
@@ -6987,9 +6987,9 @@ function fwSetShortcut(hotkey,id,changeLabel,js )
 	var e = jQuery("#"+id);
 	if( !e.get(0))
 	{
-		// varificar se È uma aba
+		// varificar se √© uma aba
 		e = jQuery('span[tabid="'+id+'"]');
-		// se n„o existir nenhum elemento executa uma aÁ„o
+		// se n√£o existir nenhum elemento executa uma a√ß√£o
 		if( ! e.get(0) )
 		{
 			jQuery.Shortcuts.add({
@@ -7088,8 +7088,8 @@ function fwSetShortcut(hotkey,id,changeLabel,js )
 }
 
 /**
-* Bloqueia a execuÁ„o do programa pelo tempo solicitado em milissegundos e
-* depois executa a funÁ„o de callback se tiver sido informada.
+* Bloqueia a execu√ß√£o do programa pelo tempo solicitado em milissegundos e
+* depois executa a fun√ß√£o de callback se tiver sido informada.
 *
 * Exemplo: 	fwSleep(1000,function(){alert("voltei")}); // aguarda 1 segundo
 * 			fwSleep(2000,"alert('voltei')")}); // aguarda 2 segundos
@@ -7107,7 +7107,7 @@ function fwSleep(milliSeconds,callback)
 /**
 
 
-* Retorna o cÛdigo da tecla pressionada
+* Retorna o c√≥digo da tecla pressionada
 *
 * @param event
 */
@@ -7122,8 +7122,8 @@ function fwGetKey(event)
 	return key;
 }
 /**
-* FunÁ„o utilizada pela classe TGrid quando o gride possuir paginaÁ„o e for clicado nos botoes
-* de proxima, anterior, ultima e primeira p·gina.
+* Fun√ß√£o utilizada pela classe TGrid quando o gride possuir pagina√ß√£o e for clicado nos botoes
+* de proxima, anterior, ultima e primeira p√°gina.
 *
 * @param params
 */
@@ -7166,7 +7166,7 @@ function fwGridChangePage(params)
 }
 
 /**
-* FunÁ„o utilizada pela classe TGrid quando o gride possuir paginaÁ„o e a p·gina for modificada
+* Fun√ß√£o utilizada pela classe TGrid quando o gride possuir pagina√ß√£o e a p√°gina for modificada
 *
 * @param params
 */
@@ -7184,7 +7184,7 @@ function fwGridPageChange(page,params)
 			,'callback': function( html ){
 				jQuery("#"+params.gridId+"_table tbody").remove();
 				try{
-					jQuery("#"+params.gridId+"_table").trigger("update"); // funÁ„o do TableSorter
+					jQuery("#"+params.gridId+"_table").trigger("update"); // fun√ß√£o do TableSorter
 				}catch(e){}
             	jQuery("#"+params.gridId+"_table").append(html);
 				fwLockUnlockArea(params.gridId,false);
@@ -7222,7 +7222,7 @@ function fwGridPageChange(page,params)
 			});
 }
 /**
-* FunÁ„o para ajustar a altura da aplicaÁ„o para a altura do formul·rio e
+* Fun√ß√£o para ajustar a altura da aplica√ß√£o para a altura do formul√°rio e
 * evitar as barras de rolagem do iframe, mostrando apenas as barrar de rolagem
 * do browser.
 */
@@ -7269,11 +7269,11 @@ function fwAppFitFormHeight(delay)
 		paramModal.css = (paramModal.css == null) ? '' : paramModal.css;
 		if( app_url )
 		{
-			paramModal.img = (paramModal.img==null) ? app_url+(pastaBase==null?'base/':pastaBase)+ 'css/imagens/alert/help.gif':paramModal.img; // n„o utilizar a variavel pastaBase aqui
+			paramModal.img = (paramModal.img==null) ? app_url+(pastaBase==null?'base/':pastaBase)+ 'css/imagens/alert/help.gif':paramModal.img; // n√£o utilizar a variavel pastaBase aqui
 		}
 		else
 		{
-			paramModal.img = (paramModal.img==null) ? '../css/imagens/alert/help.gif':paramModal.img; // n„o utilizar a variavel pastaBase aqui
+			paramModal.img = (paramModal.img==null) ? '../css/imagens/alert/help.gif':paramModal.img; // n√£o utilizar a variavel pastaBase aqui
 		}
 		if (jQuery('#janela-modal' + paramModal.id))
 			{
@@ -7342,7 +7342,7 @@ function fwAppFitFormHeight(delay)
 		}
 		else
 		{
-			jsonParams.img = (jsonParams.img==null) ? '../css/imagens/alert/info.gif':jsonParams.img; // n„o utilizar a variavel pastaBase aqui
+			jsonParams.img = (jsonParams.img==null) ? '../css/imagens/alert/info.gif':jsonParams.img; // n√£o utilizar a variavel pastaBase aqui
 		}
 		if( theme === 'error')
         {
@@ -7362,7 +7362,7 @@ function fwAppFitFormHeight(delay)
 		}
 
 /**
-* Dialogo de confirmaÁ„o
+* Dialogo de confirma√ß√£o
 *
 * @param message
 * @param callbackYes
@@ -7375,9 +7375,9 @@ function fwAppFitFormHeight(delay)
 function fwConfirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 {
 	try{top.app_confirm(message, callbackYes, callbackNo, yesLabel, noLabel, title);return;}catch(e){}
-	title 		= (!title)?'ConfirmaÁ„o':title;
+	title 		= (!title)?'Confirma√ß√£o':title;
 	yesLabel 	=(!yesLabel)?'Sim':yesLabel;
-	noLabel 	=(!noLabel)?'N„o':noLabel;
+	noLabel 	=(!noLabel)?'N√£o':noLabel;
 
 	fwModalGeneric(
 	{
@@ -7409,8 +7409,8 @@ function fwConfirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 }
 //------------------------------------------------------------------------------
 /**
-* FunÁ„o utilizada pelo plugin do jquery tablesorter para ordenar datas e
-* valores monet·rios formatados com ponto e virgula ex: 123.456,78
+* Fun√ß√£o utilizada pelo plugin do jquery tablesorter para ordenar datas e
+* valores monet√°rios formatados com ponto e virgula ex: 123.456,78
 */
 function fwTableSorter(node)
 {
@@ -7418,7 +7418,7 @@ function fwTableSorter(node)
 	var number = text.replace(/[^0-9]/g,'');
 	if( String(number) != '' )
 	{
-		// verificar se È um data
+		// verificar se √© um data
 		var dateFormat = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/;
   		if ( dateFormat.test( text ) )
   		{
@@ -7431,7 +7431,7 @@ function fwTableSorter(node)
 		}
 		else
 		{
-			// valores monet·rios ou inteiros
+			// valores monet√°rios ou inteiros
 			var posPonto 	= text.indexOf('.');
 			var posVirgula	= text.indexOf(',');
 			if( posVirgula > posPonto  )
@@ -7449,7 +7449,7 @@ function fwTableSorter(node)
 
 
 /**
-* funÁ„o para verificar se a tag esta com a barra de rolagem vertical visivel
+* fun√ß√£o para verificar se a tag esta com a barra de rolagem vertical visivel
 *
 * @param id
 *
@@ -7483,7 +7483,7 @@ function fwHasVScrollBar( id )
 	return false;
 }
 /**
-* funÁ„o para ajustr a largura dos grupos e seus subgrupos
+* fun√ß√£o para ajustr a largura dos grupos e seus subgrupos
 * @param containerId
 */
 function fwAdjustGroupsWidth(containerId)
@@ -7560,7 +7560,7 @@ function fwAdjustGroupsWidth(containerId)
 }
 
 /**
-* funÁ„o para ajustr a largura das abas e suas subabas
+* fun√ß√£o para ajustr a largura das abas e suas subabas
 * @param containerId
 */
 function fwAdjustTabsWidth(containerId)
