@@ -70,16 +70,15 @@ if ( !$frm->getValue('seq_dado_apoio') )
 TPDOConnection::connect('config_conexao.php');
 
 // SWITCH DA ACAO
-switch($acao)
-{
+$acao = isset($acao) ? $acao : null;
+switch($acao) {
 	case 'Novo':
 		$frm->clearFields();
 		$_POST['formDinAcao']='';
 	break;
 	//------------------------------------------------------------------------------
 	case 'Gravar':
-		if( !$frm->get('seq_dado_apoio') )
-		{
+		if( !$frm->get('seq_dado_apoio') )		{
 			if ( $frm->validate() )
 			{
 				$bvars = $frm->createBvars('tip_dado_apoio,sig_dado_apoio');
