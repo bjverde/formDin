@@ -1,7 +1,8 @@
 <?php
 
-$primaryKey = 'idautoridade';
+d($_POST);
 
+$primaryKey = 'idautoridade';
 $frm = new TForm('Cadastro de Autoridade',600);
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
@@ -14,9 +15,15 @@ $frm->addNumberField('ordem', 'Ordem:',10,true,0,true,null,1,5,true);
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
     case 'Salvar':
-        $vo = new AutoridadeVO();
-        $frm->setVo( $vo );
-        autoridadeDAO::insert( $vo );
+        if ( $frm->validate() ) {
+            $vo = new AutoridadeVO();
+            $frm->setVo( $vo );
+            $resultado = autoridadeDAO::insert( $vo );
+            if($resultado==true) {
+                $frm->setMessage('Registro gravado com sucesso!!!');
+                $frm->clearFields();
+            }
+        }        
     //------------------------------------------------------------------
     case 'Limpar':
         $frm->clearFields();
@@ -30,16 +37,16 @@ switch( $acao ) {
 }
 
 
-//,$primaryKey.'|'.$primaryKey.',dat_inclusao|dat_inclusao,dat_inicio|dat_inicio,dat_fim|dat_fim,cargo|cargo,nome_pessoa|nome_pessoa,ordem|ordem'  // update dos campos
 $dados = autoridadeDAO::selectAll('dat_inicio');
 $gride = new TGrid( 'gd'                   // id do gride
                    ,'Lista de Autoridades' // titulo do gride
                    ,$dados 	    // array de dados
                    ,null		// altura do gride
                    ,null		// largura do gride
-                   ,$primaryKey  // chave primaria
-                   ,',dat_inclusao|dat_inclusao,dat_inicio|dat_inicio,dat_fim|dat_fim,cargo|cargo,nome_pessoa|nome_pessoa,ordem|ordem'  // update dos campos
+                   ,$primaryKey // chave primaria
+                   ,'cargo|cargo,nome_pessoa|nome_pessoa'
                 );
+//$primaryKey.'|'.$primaryKey.',dat_inclusao|dat_inclusao,dat_inicio|dat_inicio,dat_fim|dat_fim,cargo|cargo,nome_pessoa|nome_pessoa,ordem|ordem'  // update dos campos
 
 $gride->addColumn( $primaryKey,'id',50,'center');
 $gride->addColumn('dat_inclusao','Data Inclusão',100,'center');
