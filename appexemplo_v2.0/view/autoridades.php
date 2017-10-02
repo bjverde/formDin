@@ -1,8 +1,7 @@
 <?php
+require_once('servicos/autoridades.php');
 
-d($_POST);
-
-$primaryKey = 'idautoridade';
+$primaryKey = 'IDAUTORIDADE';
 $frm = new TForm('Cadastro de Autoridade',600);
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
@@ -19,36 +18,44 @@ switch( $acao ) {
             $vo = new AutoridadeVO();
             $frm->setVo( $vo );
             $resultado = autoridadeDAO::insert( $vo );
-            if($resultado==true) {
+            //$resultado = autoriadeGravar($vo);
+            if($resultado==1) {
                 $frm->setMessage('Registro gravado com sucesso!!!');
                 $frm->clearFields();
+            }else{
+                $frm->setMessage($resultado);
             }
-        }        
+        }
+    break;
     //------------------------------------------------------------------
     case 'Limpar':
         $frm->clearFields();
-        break;
+    break;
     //--------------------------------------------------------------------
     case 'gd_excluir':
         $id = $frm->get( $primaryKey ) ;
-        autoridadeDAO::delete( $id );
+        $resultado = autoridadeDAO::delete( $id );
+        if($resultado==1) {
+            $frm->setMessage('Registro excluido com sucesso!!!');
+            $frm->clearFields();
+        }else{
+            $frm->clearFields();
+            $frm->setMessage($resultado);
+        }
     break;
 	//--------------------------------------------------------------------
 }
 
-
-$dados = autoridadeDAO::selectAll('dat_inicio');
+$dados = autoridadeDAO::selectAll('DAT_INCLUSAO');
 $gride = new TGrid( 'gd'                   // id do gride
                    ,'Lista de Autoridades' // titulo do gride
                    ,$dados 	    // array de dados
                    ,null		// altura do gride
                    ,null		// largura do gride
-                   ,$primaryKey // chave primaria
-                   ,'cargo|cargo,nome_pessoa|nome_pessoa'
+                   ,'IDAUTORIDADE' // chave primaria
+                   ,$primaryKey.'|'.$primaryKey.',DAT_INCLUSAO|DAT_INCLUSAO,DAT_INICIO|DAT_INICIO,DAT_FIM|DAT_FIM,CARGO|cargo,NOME_PESSOA|NOME_PESSOA,ORDEM|ORDEM'
                 );
-//$primaryKey.'|'.$primaryKey.',dat_inclusao|dat_inclusao,dat_inicio|dat_inicio,dat_fim|dat_fim,cargo|cargo,nome_pessoa|nome_pessoa,ordem|ordem'  // update dos campos
-
-$gride->addColumn( $primaryKey,'id',50,'center');
+$gride->addColumn($primaryKey,'id',50,'center');
 $gride->addColumn('dat_inclusao','Data Inclusão',100,'center');
 $gride->addColumn('dat_inicio','Data Inicio',100,'center');
 $gride->addColumn('dat_fim','Data Fim',100,'center');
