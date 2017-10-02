@@ -3,7 +3,7 @@
 $frm = new TForm('Cadastro de Pessoa');
 
 $frm->addHiddenField( 'IDPESSOA' ); // coluna chave da tabela
-$frm->addTextField('NOME', 'Nome:',50,false);
+$frm->addTextField('NOME', 'Nome:',50,true);
 $frm->addSelectField('TIPO'	, 'Tipo Pessoa:',null,'PF=Pessoa física,PJ=Pessoa jurídica',false);
 $frm->addTextField('DAT_INCLUSAO', 'Data:',50,false);
 //$frm->addDateField('DAT_INCLUSAO','Data:',null);
@@ -12,9 +12,15 @@ $frm->addTextField('DAT_INCLUSAO', 'Data:',50,false);
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
     case 'Salvar':
-        $vo = new PessoaVO();
-        $frm->setVo( $vo );
-        pessoaDAO::insert( $vo );
+        if ( $frm->validate() ) {
+            $vo = new PessoaVO();
+            $frm->setVo( $vo );
+            $resultado = pessoaDAO::insert( $vo );
+            if($resultado==true) {
+                $frm->setMessage('Registro gravado com sucesso!!!');
+                $frm->clearFields();
+            }
+        }
     //------------------------------------------------------------------
     case 'Limpar':
         $frm->clearFields();
