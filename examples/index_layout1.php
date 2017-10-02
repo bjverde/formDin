@@ -36,7 +36,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-include('../classes/webform/TApplication.class.php');
+include('../base/classes/webform/TApplication.class.php');
 
 class TAppSeiam extends TApplication
 {

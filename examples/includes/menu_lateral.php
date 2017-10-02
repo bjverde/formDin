@@ -37,7 +37,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-include('../../classes/webform/TTreeView.class.php');
+include('../../base/classes/webform/TTreeView.class.php');
 $page = new THtmlPage();
 
 $page->addJsCssFile('../js/appJs.js');
