@@ -18,7 +18,7 @@ print_r($conn);
 echo '<pre>';
 $img = file_get_contents('imagem/acessibilidade-brasil.gif');
 $txt = file_get_contents('config.php');
-require_once('../classes/webform/TConnection.class.php');
+require_once('../base/classes/webform/TConnection.class.php');
 
 // teste sqlite
 $d = new TDAO('tb_test','sqlite',null,null,'bdApoio.s3db');
