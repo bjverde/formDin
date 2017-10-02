@@ -1160,9 +1160,9 @@ class TGrid extends TTable
 					{
 						@unlink($tmpName);
 					}
-					if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) )
-					{
-						$excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,'ISO-8859-1'));
+					if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
+						$htmlentities = htmlentities('Erro ao salvar os dados para exportação',null,'UTF-8');
+						$excel->setAttribute('title',$htmlentities);
 					}
 				}
 
