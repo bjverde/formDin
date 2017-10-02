@@ -1,9 +1,13 @@
 <?php
 
-d($_POST);
-
-
 $frm = new TForm('Cadastro de Pessoa');
+
+$frm->addHiddenField( 'IDPESSOA' ); // coluna chave da tabela
+$frm->addTextField('NOME', 'Nome:',50,false);
+$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',null,'PF=Pessoa física,PJ=Pessoa jurídica',false);
+$frm->addTextField('DAT_INCLUSAO', 'Data:',50,false);
+//$frm->addDateField('DAT_INCLUSAO','Data:',null);
+
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -23,6 +27,7 @@ switch( $acao ) {
 	//--------------------------------------------------------------------
 }
 
+
 $dados = pessoaDAO::selectAll('nome');
 $gride = new TGrid( 'gd' // id do gride
                    ,'Lista de Pessoas' // titulo do gride
@@ -39,13 +44,6 @@ $gride->addColumn('TIPO','Tipo',50,'center');
 $gride->addColumn('DAT_INCLUSAO','Data Inclusão',100,'center');
 
 
-
-
-$frm->addHiddenField( 'IDPESSOA' ); // coluna chave da tabela
-$frm->addTextField('NOME', 'Nome:',50,false);
-$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',null,'PF=Pessoa física,PJ=Pessoa jurídica',false);
-$frm->addTextField('DAT_INCLUSAO', 'Data:',50,false);
-//$frm->addDateField('DAT_INCLUSAO','Data:',null);
 $frm->addHtmlField('gride',$gride);
 $frm->setAction( 'Salvar,Limpar' );
 $frm->show();
