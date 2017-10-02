@@ -71,8 +71,8 @@ $menu->add('115','1','Campo Senha'	,'exe_TPasswordField.php');
 $menu->add('116','1','Campo Agenda'	,'exe_TCalendar.php');
 $menu->add('117','1','Campo Captcha'	,'exe_TCaptchaField.php');
 $menu->add('118','1','Campo Blob'	);
-$menu->add('1181','118','Campo Blob Salvo no Banco'		,'exe_fwShowBlob.php');
-$menu->add('1182','118','Campo Blob Salvo no Disco'		,'exe_fwShowBlobDisco.php');
+$menu->add('1181','118','Campo Blob Salvo no Banco'		,'campos/exe_fwShowBlob.php');
+$menu->add('1182','118','Campo Blob Salvo no Disco'		,'campos/exe_fwShowBlobDisco.php');
 $menu->add('119','1','Campo Cor'		,'exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'		,'exe_Shortcut.php');
 
