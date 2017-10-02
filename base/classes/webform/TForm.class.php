@@ -7124,7 +7124,9 @@ class TForm Extends TBox
 	public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null, $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
 	{
 		$field = new TOpenDir( $strName, $rootDir, $strValue, $intMaxLength, $boolRequired, $intSize, $strTitle, $strJsCallBack);
-		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+		$boolNoWrapLabel = isset($boolNoWrapLabel) ? $boolNoWrapLabel : null;
+		$TDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+		$this->addDisplayControl( $TDisplayControl );
 		return $field;
 	}
 	/**
