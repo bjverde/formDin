@@ -64,27 +64,26 @@ $frm->closeGroup();
 // criar os botões no rodapé do formulário
 $frm->setAction( 'Salvar,Limpar' );
 
-$Tb_blobDAO = new Tb_blobDAO();
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
     case 'Salvar':
         $vo = new Tb_blobVO();
         $frm->setVo( $vo );
         $vo->setTempName( '../' . $_POST[ 'conteudo_arquivo_temp_name' ] );
-        $Tb_blobDAO->insert( $vo );
+        Tb_blobDAO::insert( $vo );
     //------------------------------------------------------------------
     case 'Limpar':
         $frm->clearFields();
         break;
     //--------------------------------------------------------------------
     case 'gdArquivos_excluir':
-        $Tb_blobDAO->delete( $frm->get( 'id_blob' ) );
+        Tb_blobDAO::delete( $frm->get( 'id_blob' ) );
     break;
 	//--------------------------------------------------------------------
 }
 
 // criar o gride com os arquivos já anexados
-$dados = $Tb_blobDAO->selectAll( 'nome_arquivo' );
+$dados = Tb_blobDAO::selectAll( 'nome_arquivo' );
 $g = new TGrid( 'gdArquivos', 'Arquivos Gravados', $dados, null, null, 'ID_BLOB' );
 $g->addColumn( 'id_blob', 'Código', 100, 'center' );
 $g->addColumn( 'nome_arquivo', 'Nome do Arquivo', 3000 );
