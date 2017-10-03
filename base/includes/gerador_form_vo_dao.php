@@ -37,8 +37,23 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
- $frm = new TForm('Gerador de Objeto VO e DAO',500,500);
+ function verifyPath($path){
+	$diretorio = str_replace('//','/',$path.'/');
+	@mkdir($diretorio,"775",true);
+	if( ! file_exists( $diretorio ) ) {
+		$diretorio = 0;
+	}
+	return $diretorio;
+}
+
+
+$frm = new TForm('Gerador de From, VO e DAO',650,700);
 $frm->setFlat(true);
+$frm->addGroupField('gpx1','Informações do form');
+	$frm->addTextField('form_title','Título do formulario:',50,true,50);
+	$frm->addTextField('form_dir','Diretório do formulário:',50,true,150,'modulos/');
+	$frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
+$frm->closeGroup();
 $frm->addGroupField('gpx2','Informações do VO e DAO');
 	$frm->addTextField('diretorio','Diretório:',50,true);
 	$frm->addTextField('tabela','Nome da Tabela:',30,true);
@@ -71,14 +86,29 @@ switch( $acao ) {
 				$txt=substr($txt,0,strlen($txt)-1);
 			}
 			$arr = explode(',',$txt);
-			$coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $arr[0];
-			//require_once('../base/classes/webform/TDAOCreate.class.php');
+			$coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $arr[0];			
 			$gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
 			foreach($arr as $k=>$v) {
 				$gerador->addColumn($v);
 			}
 			$gerador->saveVO();
 			$gerador->saveDAO();
+
+			$diretorio = str_replace('//','/',$frm->get('form_dir').'/');
+			@mkdir($diretorio,"775",true);
+			if( ! file_exists( $diretorio ) ) {
+				$frm->setMessage('Diretório '.$diretorio.' não existe!');
+				break;
+			}
+
+			require_once('../base/classes/webform/TFormCreate.class.php');
+			$geradorForm = new TFormCreate($formFileName,$primaryKeyTable);
+			$geradorForm ->setFormTitle( $frm->get('form_title') );
+			$geradorForm ->setFormPath( $diretorio );
+			$geradorForm ->setFormFileName($frm->get('form_name'));
+			$geradorForm ->setPrimaryKeyTable($frm->get('coluna_chave'));
+			$geradorForm ->setTableRef($frm->get('tabela'));
+			$geradorForm ->saveForm();
 			$frm->setMessage('Fim');
 		}
 	break;
