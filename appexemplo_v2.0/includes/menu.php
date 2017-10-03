@@ -52,6 +52,7 @@
   $menu->add('102','10','Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png');
   $menu->add('103','10','Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png');
   $menu->add('104','10','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+  $menu->add('105','10','Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png');
   
   $menu->getXml();
 ?>
