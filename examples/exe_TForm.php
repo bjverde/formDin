@@ -57,8 +57,8 @@ else
 {
 	$frm->addButton('Sem bordas',null,'btn2','jQuery("#flat").val(1);fwDoAction();');
 }
-$frm->addRadioField('sexo','Sexo:',fase,'M=masculino,F=Feminino');
-$frm->addCheckField('cor','Cor:',fase,'M=Marrom,B=Branca');
+$frm->addRadioField('sexo','Sexo:',false,'M=masculino,F=Feminino');
+$frm->addCheckField('cor','Cor:',false,'M=Marrom,B=Branca');
 
 $frm->addTextField('municipio','Municipio',60,false,60);
 
