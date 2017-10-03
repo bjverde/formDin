@@ -36,10 +36,9 @@ $pc->addPage('SQLITE',false,true,'abaSqlite');
 	$frm->addButton('Executar Sql',null,'btnSqlsq','executarSql("sq")',null,true,false);
 	$frm->addHtmlField('sqGride'	,'');
 
-//$dao = new TDAO('tb_uf','oracle','root','123456','xe','192.168.1.140',null,null,null,null,true);
 $pc->addPage('ORACLE',true,true,'abaora');
 	$frm->addHiddenField('oraDbType','oracle');
-	$frm->addTextField('oraHost'	,'Host:',20,true,20,'127.0.0.0.1',true,null,null,true);
+	$frm->addTextField('oraHost'	,'Host:',50,true,50,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('oraDb'		,'Database:',20,true,20,'xe',true,null,null,true);
 	$frm->addTextField('oraUser'	,'User:',40,true,20,'root',false,null,null,true);
 	$frm->addTextField('oraPass'	,'Password:',40,true,20,'123456',false,null,null,true);
@@ -47,6 +46,19 @@ $pc->addPage('ORACLE',true,true,'abaora');
 	$frm->addMemoField('oraSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlOra','executarSql("ora")',null,true,false);
 	$frm->addHtmlField('oraGride'	,'');
+
+
+$pc->addPage('SQLSERVER',true,true,'abass');
+	$frm->addHiddenField('ssDbType','sqlserver');
+	$frm->addTextField('ssHost'    ,'Host:',50,true,50,'127.0.0.0.1',true,null,null,true);
+	$frm->addTextField('ssDb'      ,'Database:',20,true,20,'Northwind',true,null,null,true);
+	$frm->addTextField('ssUser'    ,'User:',40,true,20,'sa',false,null,null,true);
+	$frm->addTextField('ssPass'	   ,'Password:',40,true,20,'123456',false,null,null,true);
+	$frm->addTextField('ssPort'    ,'Porta:',6,false,6,'1433',false,null,null,true,false);
+    $frm->addButton('Testar Conexão',null,'btnTestarss','testarConexao("ss")',null,true,false);
+	$frm->addMemoField('oraSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
+	$frm->addButton('Executar Sql',null,'btnSqlss','executarSql("ss")',null,true,false);
+	$frm->addHtmlField('ssGride'	,'');
 
 
 $_POST['banco'] = isset($_POST['banco']) ? $_POST['banco'] : '';
@@ -57,7 +69,7 @@ $acao = isset($acao) ? $acao : '';
 switch($acao) {
 	case 'testar_conexao':
 		//prepareReturnAjax(0,null, $banco.print_r($_POST,TRUE) );
-		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora'){
+		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora'|| $banco == 'ss'){
 			if( ! $_POST[$banco.'User'] ){
 				prepareReturnAjax(0,null,'Informe o Usuário');
 			}

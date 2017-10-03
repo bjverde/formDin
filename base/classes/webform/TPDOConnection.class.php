@@ -286,24 +286,26 @@ class TPDOConnection
 
 				//----------------------------------------------------------
 				case 'SQLSERVER':
-					if ( !defined( 'PORT' ) )
-					{
+					if ( !defined( 'PORT' ) ) {
 						define( 'PORT', '1433' );
 					}
 
-					if ( !defined( 'DATABASE' ) )
-					{
+					if ( !defined( 'DATABASE' ) ) {
 						$configErrors[] = 'Falta informar o DATABASE';
 					}
 
-					// Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+					/**
+					 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+					 * 
+					 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
+					 * */
 					if (PHP_OS == "Linux") {
 						$driver = 'dblib';
+						self::$dns = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 					} else {
-						$driver = 'mssql';
+						$driver = 'sqlsrv';
+						self::$dns = $driver.':Server=' . HOST . ';Database=' . DATABASE;
 					}
-
-					self::$dns = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 					break;
 				//----------------------------------------------------------
 				case 'FIREBIRD':

@@ -144,12 +144,28 @@ final class TConnection
 			break;
 			//----------------------------------------------------------
 			case 'mssql':
+			if( ! $port ){
+				$port = '1433';
+			}
+			$dsn='mssql:host='.$host.';dbname='.$database.';port='.$port;
+			break;
+			//----------------------------------------------------------
 			case 'sqlserver':
-				if( ! $port )
-				{
+				if( ! $port ){
 					$port = '1433';
 				}
-				$dsn='mssql:host='.$host.';dbname='.$database.';port='.$port;
+				/**
+				 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+				 * 
+				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
+				 * */
+					if (PHP_OS == "Linux") {
+					$driver = 'dblib';
+					$dsn = $driver.':host='.$host.';dbname='.$database.';port='.$port;
+				} else {
+					$driver = 'sqlsrv';
+					$dsn = $driver.':Server='.$host.';Database='.$database;
+				}
 			break;
 			case 'firebird':
 				$dsn = 'firebird:dbname='.( ( is_null($host) ? '' : $host.':') ).$database;
@@ -259,9 +275,9 @@ final class TConnection
                     dbtype="sqlite"<br>
 					database = "includes/exemplo.s3db"<hr>
 				<center>Exemplo de configuração para conexão com banco SQLSERVER. Arquivo: conn_sqlserver.php</center><br>
-                    $dbType = "mssql";<br>
+                    $dbType = "sqlserver";<br>
 					$host = "192.168.1.140";<br>
-					$port = "1533";<br>
+					$port = "1433";<br>
 					$database = "dbteste";<br>
 					$username = "sa";<br>
 					$password = "123456";<br>
