@@ -47,7 +47,8 @@ class TFormCreate {
 	private $primaryKeyTable;
 	private $tableRef;
     private $daoTableRef;
-    private $voTableRef;
+	private $voTableRef;
+	private $listColumnsName;
     private $lines;
 
 	public function __construct(){
@@ -70,13 +71,17 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	public function setPrimaryKeyTable($primaryKeyTable) {
 		$primaryKeyTable = ( isset($primaryKeyTable) ) ?$primaryKeyTable : "id";
-		$this->primaryKeyTable    = $primaryKeyTable;
+		$this->primaryKeyTable    = strtoupper($primaryKeyTable);
 	}
 	//--------------------------------------------------------------------------------------
 	public function setTableRef($tableRef) {
 		$this->daoTableRef= ucfirst($tableRef).'DAO';
 		$this->voTableRef = ucfirst($tableRef).'VO';
 	}
+	public function setListColunnsName($listColumnsName) {
+		array_shift($listColumnsName);
+		$this->listColumnsName = array_map('strtoupper', $listColumnsName);
+	}	
 	//--------------------------------------------------------------------------------------	
 	private function addLine($strNewValue=null,$boolNewLine=true){
 		$strNewValue = is_null( $strNewValue ) ? TAB.'//' . str_repeat( '-', 80 ) : $strNewValue;
@@ -225,7 +230,11 @@ class TFormCreate {
 		$this->addBlankLine();
 		$this->addBlankLine();
 		$this->addLine('$frm->addHiddenField( $primaryKey ); // coluna chave da tabela');
-		$this->addLine('$frm->addTextField(\'textField\', \'TextField:\',50,false);');
+		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+			foreach($this->listColumnsName as $key=>$value){
+				$this->addLine('$frm->addTextField(\''.$value.'\', \''.$value.'\',50,true);');
+			}
+		}		
 	}
 	//--------------------------------------------------------------------------------------
 	private function addBasicaViewController() {
@@ -267,15 +276,28 @@ class TFormCreate {
 	private function addBasicaGrid() {
 		$this->addBlankLine();
 		$this->addLine('$dados = '.$this->daoTableRef.'::selectAll($primaryKey);');
+		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+			$mixUpdateFields = '$primaryKey.\'|\'.$primaryKey.\'';
+			foreach($this->listColumnsName as $key=>$value){
+				$mixUpdateFields = $mixUpdateFields.','.$value.'|'.$value;
+			}
+			$mixUpdateFields = $mixUpdateFields.'\';';
+			$this->addLine('$mixUpdateFields = '.$mixUpdateFields);
+		}
 		$this->addLine('$gride = new TGrid( \'gd\'        // id do gride');
 		$this->addLine('				   ,\'Gride\'     // titulo do gride');
 		$this->addLine('				   ,$dados 	      // array de dados');
 		$this->addLine('				   ,null		  // altura do gride');
 		$this->addLine('				   ,null		  // largura do gride');
 		$this->addLine('				   ,$primaryKey   // chave primaria');
-		$this->addLine('				   ,$primaryKey.\'|\'.$primaryKey');
+		$this->addLine('				   ,$mixUpdateFields');
 		$this->addLine('				   );');
 		$this->addLine('$gride->addColumn($primaryKey,\'id\',50,\'center\');');
+		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+			foreach($this->listColumnsName as $key=>$value){
+				$this->addLine('$gride->addColumn(\''.$value.'\',\''.$value.'\',50,\'center\');');
+			}
+		}
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------

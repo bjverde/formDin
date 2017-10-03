@@ -85,10 +85,10 @@ switch( $acao ) {
 			if( substr($txt,-1) ==',') {
 				$txt=substr($txt,0,strlen($txt)-1);
 			}
-			$arr = explode(',',$txt);
-			$coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $arr[0];			
+			$listColumns = explode(',',$txt);
+			$coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];			
 			$gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
-			foreach($arr as $k=>$v) {
+			foreach($listColumns as $k=>$v) {
 				$gerador->addColumn($v);
 			}
 			$gerador->saveVO();
@@ -102,12 +102,13 @@ switch( $acao ) {
 			}
 
 			require_once('../base/classes/webform/TFormCreate.class.php');
-			$geradorForm = new TFormCreate($formFileName,$primaryKeyTable);
+			$geradorForm = new TFormCreate();
 			$geradorForm ->setFormTitle( $frm->get('form_title') );
 			$geradorForm ->setFormPath( $diretorio );
 			$geradorForm ->setFormFileName($frm->get('form_name'));
 			$geradorForm ->setPrimaryKeyTable($frm->get('coluna_chave'));
 			$geradorForm ->setTableRef($frm->get('tabela'));
+			$geradorForm ->setListColunnsName($listColumns);
 			$geradorForm ->saveForm();
 			$frm->setMessage('Fim');
 		}
