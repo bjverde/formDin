@@ -56,7 +56,7 @@ class TPDOConnection
 	private static $error = null;
 	private static $instance = null;
 	private static $banco;
-	private static $dns;
+	private static $dsn;
 	private static $password;
 	private static $username;
 	private static $lastSql;
@@ -222,7 +222,7 @@ class TPDOConnection
 					{
 						self::showExemplo( 'MYSQL', $configErrors );
 					}
-					self::$dns = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+					self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 					break;
 
 				//-----------------------------------------------------------------------
@@ -245,7 +245,7 @@ class TPDOConnection
 					{
 						self::showExemplo( 'POSTGRES', $configErrors );
 					}
-					self::$dns = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
+					self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
 					break;
 
 				//-----------------------------------------------------------------------
@@ -266,7 +266,7 @@ class TPDOConnection
 					{
 						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
 					}
-					self::$dns = 'sqlite:' . DATABASE;
+					self::$dsn = 'sqlite:' . DATABASE;
 					break;
 
 				//-----------------------------------------------------------------------
@@ -280,8 +280,8 @@ class TPDOConnection
 					{
 						$configErrors[] = 'Falta informar o SERVICE_NAME';
 					}
-					self::$dns = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
-					//self::$dns = "oci:dbname=".SERVICE_NAME;
+					self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
+					//self::$dsn = "oci:dbname=".SERVICE_NAME;
 					break;
 
 				//----------------------------------------------------------
@@ -301,10 +301,10 @@ class TPDOConnection
 					 * */
 					if (PHP_OS == "Linux") {
 						$driver = 'dblib';
-						self::$dns = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+						self::$dsn = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 					} else {
 						$driver = 'sqlsrv';
-						self::$dns = $driver.':Server=' . HOST . ';Database=' . DATABASE;
+						self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
 					}
 					break;
 				//----------------------------------------------------------
@@ -324,7 +324,7 @@ class TPDOConnection
 					{
 						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
 					}
-					self::$dns = 'firebird:dbname='.DATABASE;
+					self::$dsn = 'firebird:dbname='.DATABASE;
 					break;
 				//----------------------------------------------------------
 				case 'MSACCESS':
@@ -344,7 +344,7 @@ class TPDOConnection
 					{
 						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
 					}
-					self::$dns = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
+					self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
 					break;
 
 				//----------------------------------------------------------
@@ -361,12 +361,12 @@ class TPDOConnection
 			{
 				self::showExemplo( self::$banco, $configErrors );
 			}
-			self::$instance[ self::getDatabaseName()] = new PDO( self::$dns, self::$username, self::$password );
+			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
 			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		}
 		catch( PDOException $e )
 		{
-			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dns . '<br><BR><b>Erro retornado:</b><br>'
+			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
 				. $e->getMessage() );
 			return false;
 		}
@@ -841,7 +841,7 @@ class TPDOConnection
         $res = self::executeSql( 'select 1 as teste' );
 		if ( $res )
 		{
-			echo '<H2>FORMDIN - Teste de conexão com banco de dados.<br>Arquivo de Configuração utilizado: '.self::$configFile.'<br></h2><h3>DNS:'.self::$dns.'</h3><h1>Conexão com ' . BANCO . ' está Ok!!!!</h1>';
+			echo '<H2>FORMDIN - Teste de conexão com banco de dados.<br>Arquivo de Configuração utilizado: '.self::$configFile.'<br></h2><h3>DNS:'.self::$dsn.'</h3><h1>Conexão com ' . BANCO . ' está Ok!!!!</h1>';
 		}
 		else
 		{
