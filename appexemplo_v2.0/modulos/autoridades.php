@@ -1,4 +1,5 @@
 <?php
+require_once('servicos/autoridades.php');
 $primaryKey = 'IDAUTORIDADE';
 $frm = new TForm('Cadastro de Autoridades',600);
 $frm->setFlat(true);
@@ -11,15 +12,14 @@ $frm->addNumberField('ordem', 'Ordem:',10,true,0,true,null,1,5,true);
 $frm->addTextField('cargo', 'Cargo:',50,true);
 $frm->addTextField('nome_pessoa', 'Nome Pessoa:',50,true);
 
-$frm->
-
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
 	case 'Salvar':
 		if ( $frm->validate() ) {
 			$vo = new AutoridadeVO();
 			$frm->setVo( $vo );
-			$resultado = AutoridadeDAO::insert( $vo );
+			//$resultado = AutoridadeDAO::insert( $vo );
+			$resultado = autoriadeGravar($vo);
 			if($resultado==1) {
 				$frm->setMessage('Registro gravado com sucesso!!!');
 				$frm->clearFields();
