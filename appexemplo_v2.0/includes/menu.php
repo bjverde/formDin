@@ -43,8 +43,7 @@
   
   
   $menu->add('2',null,'Autoridades',null,null);
-  $menu->add('21','2','Cadastro Autoridades','view/autoridades.php',null);
-  $menu->add('22','2','Lista Externa de Autoridades','view/autoridades_lista_externa',null);
+  $menu->add('21','2','Cadastro Autoridades','modulos/autoridades.php',null);
 
   
   $menu->add('10',null,'Config Ambiente',null,null,'setting-gear-512.png');

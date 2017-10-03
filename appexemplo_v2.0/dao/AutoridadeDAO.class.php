@@ -11,21 +11,17 @@ class AutoridadeDAO extends TPDOConnection
 		{
 			return self::update($objVo);
 		}
-		$values = array(  $objVo->getDat_inclusao() 
-						, $objVo->getDat_inicio() 
-						, $objVo->getDat_fim() 
+		$values = array(  $objVo->getDat_evento() 
+						, $objVo->getOrdem() 
 						, $objVo->getCargo() 
 						, $objVo->getNome_pessoa() 
-						, $objVo->getOrdem() 
 						);
 		return self::executeSql('insert into autoridade(
-								 dat_inclusao
-								,dat_inicio
-								,dat_fim
+								 dat_evento
+								,ordem
 								,cargo
 								,nome_pessoa
-								,ordem
-								) values (?,?,?,?,?,?)', $values );
+								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function delete( $id )
@@ -40,11 +36,10 @@ class AutoridadeDAO extends TPDOConnection
 		return self::executeSql('select
 								 idautoridade
 								,dat_inclusao
-								,dat_inicio
-								,dat_fim
+								,dat_evento
+								,ordem
 								,cargo
 								,nome_pessoa
-								,ordem
 								from autoridade where idautoridade = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
@@ -53,11 +48,10 @@ class AutoridadeDAO extends TPDOConnection
 		return self::executeSql('select
 								 idautoridade
 								,dat_inclusao
-								,dat_inicio
-								,dat_fim
+								,dat_evento
+								,ordem
 								,cargo
 								,nome_pessoa
-								,ordem
 								from autoridade'.
 		( ($where)? ' where '.$where:'').
 		( ($orderBy) ? ' order by '.$orderBy:''));
@@ -66,19 +60,17 @@ class AutoridadeDAO extends TPDOConnection
 	public static function update ( AutoridadeVO $objVo )
 	{
 		$values = array( $objVo->getDat_inclusao()
-						,$objVo->getDat_inicio()
-						,$objVo->getDat_fim()
+						,$objVo->getDat_evento()
+						,$objVo->getOrdem()
 						,$objVo->getCargo()
 						,$objVo->getNome_pessoa()
-						,$objVo->getOrdem()
 						,$objVo->getIdautoridade() );
 		return self::executeSql('update autoridade set 
 								 dat_inclusao = ?
-								,dat_inicio = ?
-								,dat_fim = ?
+								,dat_evento = ?
+								,ordem = ?
 								,cargo = ?
 								,nome_pessoa = ?
-								,ordem = ?
 								where idautoridade = ?',$values);
 	}
 	//--------------------------------------------------------------------------------

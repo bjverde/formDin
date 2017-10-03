@@ -2,4 +2,6 @@
 # Ignore * all files in directories
 # Ignore **/ alll subdirectories 
 
-base/tmp/*
+base/tmp/
+.vscode/
+appexemplo_mssql/
