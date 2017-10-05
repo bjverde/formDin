@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -106,7 +106,7 @@ class TMenu
 					}
 					$item[4] = is_null($item[4])? "false": $item[4];
 					echo "addItem({$item[0]},'{$item[1]}','{$item[2]}','{$item[3]}',{$item[4]},'{$item[5]}','{$item[6]}','{$item[7]}');\n";
-					// width automatico se nÃ£o tiver especificado
+					// width automatico se não tiver especificado
 					if( isset($item[4] ) && $item[4] != "false")
 					{
 						$currentMenu = $item[4];
@@ -174,7 +174,7 @@ class TMenu
  	//-------------------------------------------------------------------------
 	/**
 	* Remove os caracteres invalidos para criacao de nomes de funcoes e variaveis
-	* Para nÃ£o excluir algum caractere especifico, utilize o parametro $strExcept
+	* Para não excluir algum caractere especifico, utilize o parametro $strExcept
 	* ex: removeIllegalChars($teste,'[]');
 	* @param string $word
 	* @param string $strExcept
@@ -186,7 +186,7 @@ class TMenu
 		{
 			$strExcept = str_replace(array('[',']','^'),array('\\[','\\]','\\^'),$strExcept);
 		}
-		return $word = ereg_replace("[^a-zA-Z0-9_".$strExcept."]", "", strtr($word, "Ã¡Ã Ã£Ã¢Ã©ÃªÃ­Ã³Ã´ÃµÃºÃ¼Ã§ÃÃ€ÃƒÃ‚Ã‰ÃŠÃÃ“Ã”Ã•ÃšÃœÃ‡ ", "aaaaeeiooouucAAAAEEIOOOUUC_"));
+		return $word = ereg_replace("[^a-zA-Z0-9_".$strExcept."]", "", strtr($word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_"));
 	}
  	//-------------------------------------------------------------------------
 	public function getBase()
@@ -234,11 +234,11 @@ new TElement();
 $menu = new TMenu('main_menu',null,null,null,40,10,500);
 $menu->addItem(1,null,'Cadastro','search.gif',null,'hint do item',null);
 $menu->addItem();
-$menu->addItem(2,null,'RelatÃ³rio','lixeira.gif',null,'RelatÃ³rio de Produtos');
-$menu->addItem(22,2,'Vidas2','lixeira.gif',null,'RelatÃ³rio de Funcionarios',null);
-$menu->addItem(23,2,'Vidas','lixeira.gif',null,'RelatÃ³rio de Funcionarios',null);
+$menu->addItem(2,null,'Relatório','lixeira.gif',null,'Relatório de Produtos');
+$menu->addItem(22,2,'Vidas2','lixeira.gif',null,'Relatório de Funcionarios',null);
+$menu->addItem(23,2,'Vidas','lixeira.gif',null,'Relatório de Funcionarios',null);
 $menu->addItem();
-$menu->addItem(24,2,'Maria','lixeira.gif',null,'RelatÃ³rio de Funcionarios',null);
-$menu->addItem(25,2,'Maria maria Ã© um dom uma certa magia','lixeira.gif',null,'RelatÃ³rio de Funcionarios',null,400);
+$menu->addItem(24,2,'Maria','lixeira.gif',null,'Relatório de Funcionarios',null);
+$menu->addItem(25,2,'Maria maria é um dom uma certa magia','lixeira.gif',null,'Relatório de Funcionarios',null,400);
 $menu->show();
 ?>

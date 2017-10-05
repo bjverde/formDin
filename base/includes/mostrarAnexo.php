@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,38 +20,38 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-Este mÃ³dulo deverÃ¡ ser utilizado para mostrar o conteudo de um campo blob gravado no banco de dados
-Os parametros deverÃ£o ser passados no formato json:
+Este módulo deverá ser utilizado para mostrar o conteudo de um campo blob gravado no banco de dados
+Os parametros deverão ser passados no formato json:
 Parametros:
 pacote 		-> nome do pacote oracle que retorna o campo blob
 colunaChave	-> nome da coluna chave do pacote
 colunaLOB	-> nome da coluna que contem os dados binarios
 valorChave	-> valor da chave a ser pesquisada
-nomeArquivo	-> nome do arquivo que foi armazenado no banco. ( se tiver) ex: teste.doc, anotaÃ§Ãµes.rtf
+nomeArquivo	-> nome do arquivo que foi armazenado no banco. ( se tiver) ex: teste.doc, anotações.rtf
 
 Exemplo:
-1Âª FORMA ( nÃ£o recomendada )
+1ª FORMA ( não recomendada )
 	$link = '<a href="javascript:void(0);" onClick='mostrarAnexo("{\"pacote\":\"SIGER.PKG_UNIDADE_IBAMA_ACORDO.SEL_LOB\",\"colunaChave\":\"SEQ_UNIDADE_IBAMA_ACORDO\",\"colunaLOB\":\"ANEXO\",\"valorChave\":77,\"nomeArquivo\":\"dof.pdf\"}");'>052/2005</a>
 
-2Âª forma ( recomendado )
+2ª forma ( recomendado )
 $dados = array("pacote"=>"SIGER.PKG_UNIDADE_IBAMA_ACORDO.SEL_LOB"
 			,"colunaChave"=>"SEQ_UNIDADE_IBAMA_ACORDO"
 			,"colunaLOB"=>"ANEXO"
@@ -67,7 +67,7 @@ $dados = json_decode(utf8_encode($_REQUEST['dados']),true);
 
 if(!is_array($dados))
 {
-	print 'Parametro "dados" nÃ£o estÃ¡ no formato json correto!';
+	print 'Parametro "dados" não está no formato json correto!';
 	print '<hr>';
 	print 'Valor recebido:';
 	print '<pre>';
@@ -77,7 +77,7 @@ if(!is_array($dados))
 }
 $db = new banco();
 $bvars=array($dados['colunaChave']=>$dados['valorChave']);
-// enviar o num_pessoa para a execuÃ§Ã£o do pacote por motivo de seguranÃ§a
+// enviar o num_pessoa para a execução do pacote por motivo de segurança
 if( !array_key_exists('NUM_PESSOA',$bvars))
 {
 	$bvars['NUM_PESSOA'] = $_SESSION['num_pessoa'];
@@ -89,7 +89,7 @@ if( $erro = $db->executar_pacote_func_proc($dados['pacote'],$bvars,-1))
 	return;
 }
 
-// limpa diretÃ³rio temporÃ¡rio
+// limpa diretório temporário
 $t=time();
 $h=opendir($tmpDir);
 while($file=readdir($h)) {
@@ -122,7 +122,7 @@ if( file_exists($arquivo) )
 }
 if (!$handle = fopen($arquivo, 'x+'))
 {
-   echo "NÃ£o foi possÃ­vel abrir o arquivo ($arquivo)";
+   echo "Não foi possível abrir o arquivo ($arquivo)";
    exit;
 }
 
@@ -131,7 +131,7 @@ if( is_array( $bvars['CURSOR']))
 	// Write $somecontent to our opened file.
 	if (fwrite($handle, $bvars['CURSOR'][$dados['colunaLOB']][0]) === FALSE)
 	{
-		echo "NÃ£o foi possivel gravar no arquivo ($arquivo)";
+		echo "Não foi possivel gravar no arquivo ($arquivo)";
 		exit;
 	}
 }
@@ -139,7 +139,7 @@ else
 {
 	if (fwrite($handle, $bvars[$dados['colunaLOB']]) === FALSE)
 	{
-		echo "NÃ£o foi possivel gravar no arquivo ($arquivo)";
+		echo "Não foi possivel gravar no arquivo ($arquivo)";
 		exit;
 	}
 }

@@ -5,7 +5,7 @@ This code was made by White Hat Web Design and it is free.
 Copyrigth (C) White Hat Web Design - http://www.white-hat-web-design.co.uk/
 */
 
-session_start(); // tem que inicializar a sess√£o, sen√£o n√£o funciona
+session_start(); // tem que inicializar a sess„o, sen„o n„o funciona
 class CaptchaSecurityImages {
 	var $font = 'fonts/monofont.ttf';
 	function generateCode($characters) {

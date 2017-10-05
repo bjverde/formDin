@@ -34,7 +34,7 @@
 		<table width="100%" height="100%" border="0" cellpadding="0px" cellspacing="0px" style="border:1px solid gray;">
 			<tr>
 				<td height="26px" style="border-bottom:1px solid gray;padding:1px;background-image:url(headerbg.gif);background-repeat: repeat-x;" >
-					Selecione o DiretÃ³rio
+					Selecione o Diretório
 				</td>
 			</tr>
 			<tr>

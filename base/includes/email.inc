@@ -14,32 +14,32 @@ Function enviarEmail( $email_remetente
 							,$senha=null
 ) {
 
-//Tratando a acentuaÃ§Ã£o do campo Nome Remetente($nome_remetente).
+//Tratando a acentuação do campo Nome Remetente($nome_remetente).
 if ( utf8_encode($nome_remetente) != $nome_remetente )
     $nome_remetente = "=?iso8859-1?B?".base64_encode($nome_remetente)."?=";
-//Tratando a acentuaÃ§Ã£o do campo Nome DestinatÃ¡rio.
+//Tratando a acentuação do campo Nome Destinatário.
  if ( utf8_encode($nome_destinatario) != $nome_destinatario )
     $nome_destinatario = "=?iso8859-1?B?".base64_encode($nome_destinatario)."?=";
 
-//$assunto = "Agendamento On-Line -  Acompanhamento da SolicitaÃ§Ã£o";
-//Tratando a acentuaÃ§Ã£o do campo assunto(Subject) da Mala Direta.
+//$assunto = "Agendamento On-Line -  Acompanhamento da Solicitação";
+//Tratando a acentuação do campo assunto(Subject) da Mala Direta.
 if ( utf8_encode($assunto) != $assunto )
 	$assunto = "=?iso8859-1?B?".base64_encode($assunto)."?=";
 
-//$mensagem = "   VocÃª estÃ¡ recebendo este e-mail para o acompanhamento de sua solicitaÃ§Ã£o.";
+//$mensagem = "   Você está recebendo este e-mail para o acompanhamento de sua solicitação.";
 
-//Montando o cabeÃ§Ã¡rio da mensagem.
+//Montando o cabeçário da mensagem.
 $headers['From']    = $nome_remetente.'<'.$email_remetente.'>';
 $headers['To']      = $nome_destinatario.'<'.$email_destinatario.'>';
 $headers['Subject'] = $assunto;
 $headers['MIME-Version'] = '1.0';
-$headers['Content-Type'] = 'TEXT/HTML; charset=UTF-8';
+$headers['Content-Type'] = 'TEXT/HTML; charset=ISO-8859-1';
 $headers['Content-Transfer-Encoding'] = '8BIT';
 //		Criando uma nova instancia da classe mime
 $mime = new Mail_Mime();
 
 
-// Se vc precisar anexar algum arquivo Ã© aqui que vc faz. Basta colocar a pasta em que o arquivo estÃ¡.
+// Se vc precisar anexar algum arquivo é aqui que vc faz. Basta colocar a pasta em que o arquivo está.
 //$mime->addAttachment("../index.php");
 if ($anexos){
 	$mensagem.="\nAnexos:$anexos";
@@ -48,24 +48,24 @@ if ($anexos){
 		if (file_exists($v)){
 	 		$mime->addAttachment($v);
 		} else {
-			$mensagem.="\nArquivo:$v nÃ£o encontrado para anexar";
+			$mensagem.="\nArquivo:$v não encontrado para anexar";
 		}
 	}
 }
 
-// Setar aqui a mensagem de texto, que aparecerÃ¡ nos webmails que nÃ£o suportarem msg em formato HTML.
+// Setar aqui a mensagem de texto, que aparecerá nos webmails que não suportarem msg em formato HTML.
 $mime->setTxtBody($mensagem);
 
 //$mime->setHTMLBody();
 //$mime->setHTMLBody('<html><body><img src="cab_email.jpg"/><br><br><strong>Kleber Ferreira Gomes</strong></body></html>');
 
-//Aqui vc adiciona a imagem, pode ser um logo, ao cabeÃ§alho do email.
+//Aqui vc adiciona a imagem, pode ser um logo, ao cabeçalho do email.
 //$mime->addHTMLImage($logotipo);
 
-//Recuperando as informaÃ§Ãµes do email
+//Recuperando as informações do email
 $corpo_msg = $mime->get();
 
-//Montando o cabeÃ§Ã¡rio.
+//Montando o cabeçário.
 $hdrs = $mime->headers($headers);
 
 $config = null;
@@ -83,7 +83,7 @@ if($send)
  }
  else
  {
- 	return 'Mensagem NÃƒO foi enviada para '.$email_destinatario;
+ 	return 'Mensagem NÃO foi enviada para '.$email_destinatario;
  }
 }
 ?>

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm('Estrutura Oragnizacional',400);
-$frm->addTextField('cod_unidade','CÃ³digo:',10);
+$frm->addTextField('cod_unidade','Código:',10);
 $frm->addTextField('nom_unidade','Unidade:',60);
 $frm->addTextField('url_unidade','Url:',60);
 $frm->addTextField('sig_unidade','Sigla:',60);
@@ -50,7 +50,7 @@ $frm->addGroupField('gpTree','Exemplo Treeview')->setcloseble(true);
 $res=null;
 $res['COD_UNIDADE_PAI'][] = null;
 $res['COD_UNIDADE'][] = 1;
-$res['NOM_UNIDADE'][] = 'PresidÃªncia';
+$res['NOM_UNIDADE'][] = 'Presidência';
 $res['URL_UNIDADE'][] = 'www.presidencia_ibama.gov.br';
 $res['SIG_UNIDADE'][] = 'PRESI';
 
@@ -64,7 +64,7 @@ $res['SIG_UNIDADE'][] = 'DIPLAN';
 
 $tree = $frm->addTreeField('tree',null,$res,'COD_UNIDADE_PAI','COD_UNIDADE','NOM_UNIDADE',null, array('SIG_UNIDADE','URL_UNIDADE') );
 $tree->setStartExpanded(true);
-$tree->setOnClick('treeClick'); // fefinir o evento que serÃ¡ chamado ao clicar no item da treeview
+$tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
                                                                                
 //$frm->setAction('Atualizar');
 $frm->show();
@@ -78,7 +78,7 @@ function treeClick(id)
 	'User data URL:'+treeJs.getUserData(id,'URL_UNIDADE')
 	);
 	*/
-	// atualizar os campos do formulÃ¡rio
+	// atualizar os campos do formulário
 	jQuery("#cod_unidade").val(treeJs.getSelectedItemId());
 	jQuery("#nom_unidade").val(treeJs.getItemText(id ));
 	jQuery("#url_unidade").val(treeJs.getUserData(id,'URL_UNIDADE'));

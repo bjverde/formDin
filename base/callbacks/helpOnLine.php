@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Copyright (C) 2012 MinistÈrio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo √© parte do Framework Formdin.
+ * Este arquivo È parte do Framework Formdin.
  * 
- * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
- * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
+ * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
+ * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
  * do Software Livre (FSF).
  * 
- * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
- * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
+ * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
+ * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
  * para maiores detalhes.
  * 
- * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
- * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
+ * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
+ * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -104,8 +104,8 @@ print '<pre>';
 print_r($_REQUEST);
 print '</pre>';
 /**
-* se no nome do arquivo n√£o tiver a extens√£o .html, adicionar a extens√£o .html e se o arquivo 
-* n√£o existir criar um em branco
+* se no nome do arquivo n„o tiver a extens„o .html, adicionar a extens„o .html e se o arquivo 
+* n„o existir criar um em branco
 */
 if( strpos(strtolower($file),'.html') === false)
 {
@@ -119,7 +119,7 @@ if( strpos( $file, '../' ) === false)
 // criar o arquivo
 if( ! file_exists($file) )
 {
-	//file_put_contents($file,'O texto de ajuda para este campo ainda n√£o foi definido!');
+	//file_put_contents($file,'O texto de ajuda para este campo ainda n„o foi definido!');
 }
 if( file_exists($file) )
 {

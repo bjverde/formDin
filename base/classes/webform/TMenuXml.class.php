@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para gerar o xml para criaÃ§Ã£o de menus verticais utilizando a bibliotaca DHTMLX
+* Classe para gerar o xml para criação de menus verticais utilizando a bibliotaca DHTMLX
 * Link: http://www.dhtmlx.com/docs/products/docsExplorer/index.shtml?node=dhtmlxmenu
 * Ex:
 * 	$menu = new TMenuDhtmlx();
@@ -74,7 +74,7 @@ class TMenuDhtmlx
         $this->arrMenu=null;
     }
     /**
-    * MÃ©todo para adicionar itens de menu
+    * Método para adicionar itens de menu
     *
     * @param string $strId
     * @param string $strIdParent
@@ -102,7 +102,7 @@ class TMenuDhtmlx
         $menu->setHotKey($strHotKey);
         $menu->setSeparator($boolSeparator);
 
-        // verificar se o pai jÃ¡ estÃ¡ adicionado
+        // verificar se o pai já está adicionado
         $objMenu = $this->getMenuById($strIdParent);
         if( $strIdParent && $objMenu )
         {
@@ -110,7 +110,7 @@ class TMenuDhtmlx
         }
         else
         {
-        	// se tiver idparent entÃ£o Ã© orfÃ£o
+        	// se tiver idparent então é orfão
             if( !$strIdParent )
             {
             	// item pai ou filho
@@ -328,7 +328,7 @@ class TMenuDhtmlx
     }
     public function addOrphan(TMenuDhtmlx $menu)
     {
-        // se existir filhos orfÃ£o, adicionar todos os filhos
+        // se existir filhos orfão, adicionar todos os filhos
         while( $objMenu = $this->getOrphanByIdParent($menu->getId()) )
         {
             $menu->addMenu($objMenu);
@@ -340,7 +340,7 @@ class TMenuDhtmlx
         }
         else
         {
-        	// adicionar a lista de orfÃ£os
+        	// adicionar a lista de orfãos
             $this->arrOrphan[] = $menu;
         }
     }
@@ -354,7 +354,7 @@ class TMenuDhtmlx
                 if( $objMenu->getIdParent() == $strId)
                 {
                     $result=$objMenu;
-                    // remover o registro Ã³rfÃ£o
+                    // remover o registro órfão
                     array_splice($this->arrOrphan,$k,1);
                     break;
                 }
@@ -453,7 +453,7 @@ class TMenuDhtmlx
 		}
         /*
 		echo '<menu>
-		<item id="file" text="AdministraÃ§Ã£o">
+		<item id="file" text="Administração">
 			<item id="new" text="New" img="new.gif"/>
 			<item id="file_sep_1" type="separator"/>
 			<item id="open" text="Open" img="open.gif">
@@ -496,7 +496,7 @@ $menu->add(7,5,'2.1');
 $menu->add(8,7,'2.1.1');
 $menu->add(9,7,'2.1.2');
 $menu->add(10,7,'2.1.3');
-$menu->add(5,0,'2 - RelatÃ³rio',null,null,'save.gif');
+$menu->add(5,0,'2 - Relatório',null,null,'save.gif');
 */
 
 /*

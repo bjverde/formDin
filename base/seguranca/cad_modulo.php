@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,45 +20,45 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÃ³dulo de cadastro de modulos
-Autor: Luis EugÃªnio Barbosa
+Módulo de cadastro de modulos
+Autor: Luis Eugênio Barbosa
 Data Inicio: 10-12-2009
 */
 
 //include('../../classes/webform/TForm.class.php');
 // campos do formulario
-$frm =  new TForm('Cadastro de MÃ³dulos',500,620);
+$frm =  new TForm('Cadastro de Módulos',500,620);
 $frm->addHiddenField('seq_projeto',PROJETO);
 $frm->addHiddenField('seq_modulo');
 $frm->addHiddenField('num_pessoa');
-$des_titulo = $frm->addTextField('des_titulo'		,'TÃ­tulo'		,100,true,50);
-$frm->addTextField('nom_fisico'		,'Nome FÃ­sico'	,200,true,60);
-$frm->addSelectField('cod_situacao'	,'SituaÃ§Ã£o'		,true);
-$frm->addMemoField('des_observacao'	,'ObservaÃ§Ãµes'	,1000,false,50,2);
-$frm->addMemoField('des_pendencia'	,'PendÃªncias' 	,500,false,50,2);
+$des_titulo = $frm->addTextField('des_titulo'		,'Título'		,100,true,50);
+$frm->addTextField('nom_fisico'		,'Nome Físico'	,200,true,60);
+$frm->addSelectField('cod_situacao'	,'Situação'		,true);
+$frm->addMemoField('des_observacao'	,'Observações'	,1000,false,50,2);
+$frm->addMemoField('des_pendencia'	,'Pendências' 	,500,false,50,2);
 $frm->addHtmlField('gride');
 $frm->setAction('Gravar,Novo');
 
 //$des_titulo->setHint('Hint do campo titulo');
-//$frm->setHelpOnLine('Cadastro de MÃ³dulos',null,null,'cad_modulo.html');
+//$frm->setHelpOnLine('Cadastro de Módulos',null,null,'cad_modulo.html');
 //$frm->setEnabled(true);
 $frm->setHint('Teste do hint do formulario');
 // tratamento das acoes do formulario
@@ -88,7 +88,7 @@ switch($acao )
 						$strConteudo='<?php'."\n".'$frm = new TForm(\''.$frm->getValue('des_titulo').'\');'."\n".'$frm->setAction(\'Atualizar\');'."\n".'$frm->show();'."\n?>";
 						umask(2);
 						@touch ($strArquivo);
-						// verificar se estÃ¡ aberto para escrita
+						// verificar se está aberto para escrita
 						if ( is_writeable($strArquivo) )
 						{
 							if (!$handle = fopen($strArquivo, 'w+'))
@@ -134,7 +134,7 @@ $g = new TGrid('gd'
 	,'SEQ_MODULO'
 	,'SEQ_MODULO'
 	);
-$g->addColumn('DES_TITULO','TÃ­tulo');
+$g->addColumn('DES_TITULO','Título');
 $g->setCache(-1);
 $g->addColumn('NOM_FISICO','Arquivo Php');
 $g->setBvars(array('SEQ_PROJETO'=>PROJETO,'SIT_SISTEMA'=>'N'));

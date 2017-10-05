@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,25 +19,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para criar a disposiÃ§Ã£o do rotulo e do input
+* Classe para criar a disposição do rotulo e do input
 * utilizando TABLE para definir o layout rotulo em cima ou na frente do campo
 */
 class TDisplayControl extends TTable
@@ -49,7 +49,7 @@ class TDisplayControl extends TTable
 	private $noWrapField;
 	private $newLine;
 	private $verticalAlign;
-	// EstÃ¡ Ã© a estrutura padrÃ£o de saida do display control, 1 ou 2 linhas com 1 ou 2 colunas dependendo do labelAbove
+	// Está é a estrutura padrão de saida do display control, 1 ou 2 linhas com 1 ou 2 colunas dependendo do labelAbove
 	private $row1;
 	private $row2; // no caso do label em cima
 	private $column1;
@@ -60,7 +60,7 @@ class TDisplayControl extends TTable
 	private $fieldCellWidth;
 
 	/**
-	* Cria a estrutura (table) de exibiÃ§Ã£o do rotulo e do campo no formulÃ¡rio
+	* Cria a estrutura (table) de exibição do rotulo e do campo no formulário
 	*
 	* @param mixed $strLabel
 	* @param mixed $objField
@@ -131,7 +131,7 @@ class TDisplayControl extends TTable
 				{
 					if( ! trim( $labelClean ) == ''  )
 					{
-					   $this->label->setValue( $this->label->getValue() . '<span id="' . $this->field->getId() . '_label_required" style="cursor:pointer;" tooltip="true" class="fwFieldRequired" title="Campo obrigatÃ³rio">' . REQUIRED_FIELD_MARK . '</span>' );
+					   $this->label->setValue( $this->label->getValue() . '<span id="' . $this->field->getId() . '_label_required" style="cursor:pointer;" tooltip="true" class="fwFieldRequired" title="Campo obrigatório">' . REQUIRED_FIELD_MARK . '</span>' );
 					}
 				}
 				else
@@ -182,7 +182,7 @@ class TDisplayControl extends TTable
 			}
 			$this->label->setCss( 'width', '100%' );
 			$this->column1->add( $this->label );
-			//$this->column3->add('<div style="margin-right:2px;float:left;cursor:pointer;" tooltip="true" class="fwFieldRequired" title="Campo obrigatÃ³rio">*</div>');
+			//$this->column3->add('<div style="margin-right:2px;float:left;cursor:pointer;" tooltip="true" class="fwFieldRequired" title="Campo obrigatório">*</div>');
 			$this->column3->add( $this->field );
 			$this->column3->setCss( 'padding-bottom', '3px' );
 
@@ -325,7 +325,7 @@ class TDisplayControl extends TTable
 
 		if ( method_exists( $this->field, 'getVisible' ) )
 		{
-			// esconder a linha se o campo estiver invisÃ­vel
+			// esconder a linha se o campo estiver invisível
 			if ( !$this->field->getVisible() )
 			{
 				$this->setCss( 'display', 'none' );
@@ -380,7 +380,7 @@ class TDisplayControl extends TTable
 		return strtolower( ( is_null( $va ) ? 'middle' : $va ) );
 	}
 	/**
-	* Retorna o objeto coluna caso seja necessÃ¡rio fazer algum tratamento
+	* Retorna o objeto coluna caso seja necessário fazer algum tratamento
 	* como no caso do pageControl que tem que alterar o css para a aba ocupar a largura do form
 	*
 	*/
@@ -412,8 +412,8 @@ class TDisplayControl extends TTable
 
 	//---------------------------------------------------------------------------
 	/**
-	* Define se o conteudo da coluna da tebela onde o rÃ³tulo serÃ¡ exibido,
-	* pode ocorrer quebra de linha quando o seu conteÃºdo for muito longo.
+	* Define se o conteudo da coluna da tebela onde o rótulo será exibido,
+	* pode ocorrer quebra de linha quando o seu conteúdo for muito longo.
 	*
 	* @param bool $boolNewValue
 	*/
@@ -431,15 +431,15 @@ class TDisplayControl extends TTable
 
 	//---------------------------------------------------------------------------
 	/**
-	* Define se o conteudo da coluna da tebela onde o campo serÃ¡ exibido,
-	* pode ocorrer quebra de linha quando o campo tiver alguma imagem, botÃ£o ou texto
+	* Define se o conteudo da coluna da tebela onde o campo será exibido,
+	* pode ocorrer quebra de linha quando o campo tiver alguma imagem, botão ou texto
 	* sendo exibido na sua frente
 	*
 	* @param bool $boolNewValue
 	*/
 	public function setNoWrapField( $boolNewValue = null )
 	{
-		// padrÃ£o Ã© false, para nÃ£o afetar as linhas da classe TGrid
+		// padrão é false, para não afetar as linhas da classe TGrid
 		$boolNewValue = is_null( $boolNewValue ) ? false : $boolNewValue;
 		$this->noWrapField = $boolNewValue;
 	}
@@ -461,7 +461,7 @@ class TDisplayControl extends TTable
 		$this->labelAbove = $boolNewValue;
 	}
 	/**
-	* Habilita/Desabilita o botÃ£o para ediÃ§Ã£o online da documentaÃ§Ã£o do campo
+	* Habilita/Desabilita o botão para edição online da documentação do campo
 	*
 	* @param boolean $boolNewValue
 	*/
@@ -476,7 +476,7 @@ class TDisplayControl extends TTable
 		return ( $this->onlineDoc === true ? true : false );
 	}
 	/**
-	* Define a largura da celula da tabela que exibirÃ¡ o rÃ³tulo do campo
+	* Define a largura da celula da tabela que exibirá o rótulo do campo
 	*
 	* @param mixed $strWidth
 	*/
@@ -486,7 +486,7 @@ class TDisplayControl extends TTable
 	}
 
 	/**
-	* Define a largura da celula da tabela que exibirÃ¡ o campo
+	* Define a largura da celula da tabela que exibirá o campo
 	*
 	* @param mixed $strWidth
 	*/
@@ -495,7 +495,7 @@ class TDisplayControl extends TTable
 		$this->fieldCellWidth = $strWidth;
 	}
 	/**
-	* Recupera a largura da celula da tabela que exibirÃ¡ o rÃ³tulo do campo
+	* Recupera a largura da celula da tabela que exibirá o rótulo do campo
 	*
 	* @param mixed $strWidth
 	*/
@@ -515,7 +515,7 @@ class TDisplayControl extends TTable
 		return $this->labelCellWidth;
 	}
 	/**
-	* Recupera a largura da celula da tabela que exibirÃ¡ o campo
+	* Recupera a largura da celula da tabela que exibirá o campo
 	*
 	* @param mixed $strWidth
 	*/
@@ -538,6 +538,6 @@ class TDisplayControl extends TTable
 
 //-----------------------------------------------
 /*
-$teste = new TDisplayControl('Nome:',new TEdit('nom_pessoa','Luis EugÃªnio',30),false);
+$teste = new TDisplayControl('Nome:',new TEdit('nom_pessoa','Luis Eugênio',30),false);
 */
 ?>

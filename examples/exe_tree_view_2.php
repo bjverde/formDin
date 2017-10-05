@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -44,9 +44,9 @@ $frm->setAutoSize(true);
 
 
 
-// exemplo de criaÃ§Ã£o de uma treeview fora do formulÃ¡rio
+// exemplo de criação de uma treeview fora do formulário
 
-// adicionar ao form os arquivos js e css necessÃ¡rios para o funcionamento da treeview
+// adicionar ao form os arquivos js e css necessários para o funcionamento da treeview
 $frm->addJsFile('dhtmlx/dhtmlxcommon.js');
 $frm->addJsFile('dhtmlx/treeview/dhtmlxtree.js');
 $frm->addCssFile('dhtmlx/treeview/dhtmlxtree.css');
@@ -54,20 +54,20 @@ $frm->addCssFile('dhtmlx/treeview/dhtmlxtree.css');
 // criar o objeto treeview. 
 $tree = new TTreeView('tree');
 
-$tree->setWidth(400); // define a largura da Ã¡rea onde serÃ¡ exibida a treeview
-$tree->setHeight(300); // define a altura da Ã¡rea onde serÃ¡ exibida a treeview
+$tree->setWidth(400); // define a largura da área onde será exibida a treeview
+$tree->setHeight(300); // define a altura da área onde será exibida a treeview
 
-// adicionar manualmente os Ã­tens na treeview
-$tree->addItem(null,1,'RelatÃ³rio',true);
+// adicionar manualmente os ítens na treeview
+$tree->addItem(null,1,'Relatório',true);
 $tree->addItem(1,11,'Financeiro',true,null,array('URL'=>'www.bb.com.br'));
-$tree->addItem(1,12,'OrÃ§amentÃ¡rio',true,null,array('URL'=>'www.bb.com.br'));
+$tree->addItem(1,12,'Orçamentário',true,null,array('URL'=>'www.bb.com.br'));
 
-$tree->setOnClick('treeClick'); // fefinir o evento que serÃ¡ chamado ao clicar no item da treeview
-$frm->addJavascript($tree->getJs());// gerar e adicionar na criaÃ§Ã£o da pagina o codigo javascript que adiciona os itens na treeview
+$tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
+$frm->addJavascript($tree->getJs());// gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
 $tree->setXY(0,20); // posiciona a treeview na tela. left=0, top=100
 $tree->show(); // exibe o tree view
 $frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview 
-// fim criaÃ§Ã£o da treeview
+// fim criação da treeview
 
 $frm->setAction('Atulizar');	
 $frm->show();

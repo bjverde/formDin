@@ -36,11 +36,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 include('../base/classes/webform/TApplication.class.php');
-$app = new TApplication(); // criar uma instï¿½ncia do objeto aplicaï¿½ï¿½o
+$app = new TApplication(); // criar uma instância do objeto aplicação
 $app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
 $app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla('FORMDIN IV');
-$app->setUnit('Departamento de InformÃ¡tica - DI - 2011');
+$app->setUnit('Departamento de Informática – DI – 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->run();

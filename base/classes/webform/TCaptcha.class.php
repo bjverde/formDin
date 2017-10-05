@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 class TCaptcha extends TButton
@@ -43,7 +43,7 @@ class TCaptcha extends TButton
         $intCaracters = is_null($intCaracters) ? 6 : $intCaracters;
         $intCaracters = $intCaracters > 10 ? 10 : $intCaracters;
         $url = $this->getBase().'classes/captcha/CaptchaSecurityImages.class.php?field='.$this->removeIllegalChars($strName).( is_null( $intCaracters ) ? '' : '&characters='.$intCaracters);
-        parent::__construct($strName.'_img',$strValue,null,"javascript:this.src='".$url."&'+ Math.random()",null,null,null,'CÃ³digo de SeguranÃ§a - Digite no campo ao lado os caracteres que estÃ£o impressos nesta imagem!');
+        parent::__construct($strName.'_img',$strValue,null,"javascript:this.src='".$url."&'+ Math.random()",null,null,null,'Código de Segurança - Digite no campo ao lado os caracteres que estão impressos nesta imagem!');
         //parent::__construct($strName.'_img',$strValue,null,"javascript:document.getElementById('".$strName."_img').src = '".$url."&'+ Math.random()",null,null,null,'Clique aqui para atualizar a imagem!');
 		$this->setFieldType('captcha');
         $this->setImage($url);
@@ -69,7 +69,7 @@ class TCaptcha extends TButton
 		{
 			/*$this->setError(strtolower($this->removeIllegalChars($this->getInput()->getValue())) .' e '.
 			strtolower($this->removeIllegalChars($_SESSION[$this->getInput()->getId().'_code'])) );
-			//'CÃ³digos de seguranÃ§a nÃ£o foi digitado corretamente!');
+			//'Códigos de segurança não foi digitado corretamente!');
 			*/
 			if( $this->getInput()->getValue() != '' )
 			{

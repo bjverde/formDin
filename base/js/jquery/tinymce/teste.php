@@ -37,7 +37,7 @@ tinyMCE.init({
 function teste()
 {
 	var ed = tinyMCE.get('content');
-	ed.setContent('Luis EugÃªnio');
+	ed.setContent('Luis Eugênio');
 }
 </script>
 

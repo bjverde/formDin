@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,27 +20,27 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 session_start();
 /*
-Este mÃ³dulo Ã© utilizado pela funÃ§Ã£o agruparSelects do formulario dinÃ¢mico para preencher os selects filhos.
-Autor: Luis EugÃªnio Barbosa
+Este módulo é utilizado pela função agruparSelects do formulario dinâmico para preencher os selects filhos.
+Autor: Luis Eugênio Barbosa
 Data : 04/07/2005
 */
 ?>
@@ -82,11 +82,11 @@ function setOpt(selectPai, filhos,chaves,valores,valorFilho,valorNulo,textoSelec
 	   if (!selFilho){
    		   selFilho=parent.document.getElementById(aFilhos[i]+'disabled');
 	   }
-	   // proteger contra ediÃ§Ã£o os selects filhos
+	   // proteger contra edição os selects filhos
 	   limparSelect(selFilho);
 	   selFilho.disabled=true;
 	}
-	// se nÃ£o tiver dados, deixar os filhos bloqueados
+	// se não tiver dados, deixar os filhos bloqueados
    if ( valores != ''){
       // se o select pai tiver valor, preencher o select filho
       if( selPai.value != valorNulo && selPai.value !='' ) {
@@ -135,8 +135,8 @@ $aBvars               = explode(',',$_GET['bvars']);
 $tempoCache           = $_GET['tempoCache'];
 
 
-// se o parametro nomePacote  vier com apenas um pacote, indica que nÃ£o Ã© a primeira chamada
-// para configurar os selects do formulario, entÃ£o os campos filhos devem ser passados da forma que chegarem
+// se o parametro nomePacote  vier com apenas um pacote, indica que não é a primeira chamada
+// para configurar os selects do formulario, então os campos filhos devem ser passados da forma que chegarem
 
 if( count($aNomePacote) == 1 ) {
    $aSelelectFilho  = $_GET['selectFilho'];
@@ -166,10 +166,10 @@ foreach ($aSelelectPai as $k=>$v){
    }
    $erro='';
    if( is_array($res) and !array_key_exists($aColChavePacote[$k],$res) ) {
-   	  $erro.= "Coluna: $aColChavePacote[$k] nÃ£o existe no pacote $aNomePacote[$k]. Verifique parametros da funÃ§Ã£o agruparSelects()";
+   	  $erro.= "Coluna: $aColChavePacote[$k] não existe no pacote $aNomePacote[$k]. Verifique parametros da função agruparSelects()";
    }
    if( is_array($res) and !array_key_exists($aColListarPacote[$k],$res) ) {
-  	  $erro.= "\\nColuna: $aColListarPacote[$k] nÃ£o existe no pacote $aNomePacote[$k]. Verifique parametros da funÃ§Ã£o agruparSelects()";
+  	  $erro.= "\\nColuna: $aColListarPacote[$k] não existe no pacote $aNomePacote[$k]. Verifique parametros da função agruparSelects()";
    }
    if ($erro) {
   	print '<script>alert(\''.$erro.'\');</script>';
@@ -205,7 +205,7 @@ foreach ($aSelelectPai as $k=>$v){
 }
 function tirarAspas( $valor){
     $valor = str_replace("'",'`',$valor);
-    $valor = str_replace('"','â€œ',$valor);
+    $valor = str_replace('"','“',$valor);
     return trim($valor);
 }
 ?>

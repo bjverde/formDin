@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,32 +20,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÃ³dulo de alteraÃ§Ã£o de senha oracle
-Autor: Luis EugÃªnio Barbosa
+Módulo de alteração de senha oracle
+Autor: Luis Eugênio Barbosa
 Data: 16/12/2009
 */
 //$_SESSION[APLICATIVO]['login']['num_cpf']='45427380191';
-//$_SESSION[APLICATIVO]['login']['nom_pessoa']='Luis EugÃªnio';
+//$_SESSION[APLICATIVO]['login']['nom_pessoa']='Luis Eugênio';
 
-$frm = new TForm('FormulÃ¡rio de AlteraÃ§Ã£o de Senha',220,500);
+$frm = new TForm('Formulário de Alteração de Senha',220,500);
 // campos do formulario
 $frm->addCpfField('num_cpf','C.P.F.:',true);
 $frm->addTextField('nom_pessoa','Nome:',50,true);
@@ -70,7 +70,7 @@ switch($acao)
 		{
 			if((string)$frm->getValue('des_senha') <> (string)$frm->getValue('des_senha2'))
 			{
-				$frm->setMessage('Senhas nÃ£o conferem!');
+				$frm->setMessage('Senhas não conferem!');
 				break;
 			}
 			// validar senha atual
@@ -88,15 +88,15 @@ switch($acao)
 			}
 			else
 			{
-				$frm->setMessage("Erro na validaÃ§Ã£o da senha atual'");
+				$frm->setMessage("Erro na validação da senha atual'");
 				$erro = oci_error();
 				if($erro["code"]==1017)
 				{
-					$frm->setMessage("Senha Atual InvÃ¡lida.");
+					$frm->setMessage("Senha Atual Inválida.");
 				}
 				else if($erro["code"]==28000)
 				{
-					$frm->setMessage("UsuÃ¡rio(a) estÃ¡ bloqueado(a)");
+					$frm->setMessage("Usuário(a) está bloqueado(a)");
 				}
 			}
 		}

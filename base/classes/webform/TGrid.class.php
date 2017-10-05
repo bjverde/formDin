@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Copyright (C) 2012 MinistÈrio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,25 +19,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo √© parte do Framework Formdin.
+ * Este arquivo È parte do Framework Formdin.
  *
- * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
- * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
+ * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
+ * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
  * do Software Livre (FSF).
  *
- * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
- * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
+ * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
+ * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
  * para maiores detalhes.
  *
- * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
- * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
+ * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
+ * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 /**
-* @todo	- possibilitar exibir ou n√£o o bot√£o editar e excluir do grid-offline
-* @todo	- definir o foco para o primeiro campo do formulario do grid-ofline se n√£o tiver sido informado pelo usuario
+* @todo	- possibilitar exibir ou n„o o bot„o editar e excluir do grid-offline
+* @todo	- definir o foco para o primeiro campo do formulario do grid-ofline se n„o tiver sido informado pelo usuario
 */
 include_once( 'autoload_formdin.php');
 class TGrid extends TTable
@@ -51,7 +51,7 @@ class TGrid extends TTable
 	private $footerCell;
 	private $data;
 	private $keyField;
-	private $updateFields; // campos que ser√£o atualizados no formulario antes de executar a a√ß√£o
+	private $updateFields; // campos que ser„o atualizados no formulario antes de executar a aÁ„o
 	private $buttons;
 	private $onDrawRow;
 	private $onDrawCell;
@@ -91,14 +91,14 @@ class TGrid extends TTable
 	private $createDefaultEditButton;
 	private $createDefaultDeleteButton;
 	private $createDefaultAdicionarButton;
-	private $showAdicionarButton; // bot√£o do grid offline
+	private $showAdicionarButton; // bot„o do grid offline
 	private $disableButtonImage=null;
 	private $exportFullData;
 	private $columnConfig;
 
 
 	/**
-	* Classe para cria√ß√£o de grides
+	* Classe para criaÁ„o de grides
 	*
 	* Parametros do evento onDrawHeaderCell
 	* 	1) $th			- objeto TElement
@@ -107,19 +107,19 @@ class TGrid extends TTable
 	*
 	* Parametros do envento onDrawRow
 	* 	1) $row 		- objeto TGridRow
-	* 	2) $rowNum 		- n√∫mero da linha corrente
+	* 	2) $rowNum 		- n˙mero da linha corrente
 	* 	3) $aData		- o array de dados da linha ex: $res[''][n]
 	*
 	* Parametros do envento onDrawCell
-	* 	1) $rowNum 		- n√∫mero da linha corrente
+	* 	1) $rowNum 		- n˙mero da linha corrente
 	* 	2) $cell		- objeto TTableCell
 	* 	3) $objColumn	- objeto TGrideColum
 	* 	4) $aData		- o array de dados da linha ex: $res[''][n]
-	* 	5) $edit		- o objeto campo quando a coluna for um campo de edi√ß√£o
+	* 	5) $edit		- o objeto campo quando a coluna for um campo de ediÁ„o
 	*   ex: function ondrawCell($rowNum=null,$cell=null,$objColumn=null,$aData=null,$edit=null)
 	*
 	* Parametros do evento onDrawActionButton
-	* 	1) $rowNum 		- n√∫mero da linha corrente
+	* 	1) $rowNum 		- n˙mero da linha corrente
 	* 	2) $button 		- objeto TButton
 	* 	3) $objColumn	- objeto TGrideColum
 	* 	4) $aData		- o array de dados da linha ex: $res[''][n]
@@ -128,7 +128,7 @@ class TGrid extends TTable
 	* Parametros do evento onGetAutocompleteParameters
 	* 	1) $ac 			- classe TAutocomplete
 	* 	2) $aData		- o array de dados da linha ex: $res[''][n]
-	* 	3) $rowNum 		- n√∫mero da linha corrente
+	* 	3) $rowNum 		- n˙mero da linha corrente
 	* 	3) $cell		- objeto TTableCell
 	* 	4) $objColumn	- objeto TGrideColum
 	*
@@ -203,14 +203,14 @@ class TGrid extends TTable
 		// zebrar o gride
 		$this->setZebrarColors( '#ffffff', '#efefef' );
 
-		// iniciar as vari√°veis de controle de pagina√ß√£o
+		// iniciar as vari·veis de controle de paginaÁ„o
 		$this->currentPage = 1;
 		$this->numPages = 0;
 
 		if ( isset( $_REQUEST[ 'TGrid' ] ) && $_REQUEST[ 'TGrid' ] > 0 )
 		{
 			/**
-			* @todo alterar a chamada do gride para fwAjaxRequest e n√£o mais pela json.onLoad();
+			* @todo alterar a chamada do gride para fwAjaxRequest e n„o mais pela json.onLoad();
 			*/
 			$_REQUEST[ 'dataType' ] = 'text'; // evitar problema com a chamada pela fwAjaxRequest
 		}
@@ -230,7 +230,7 @@ class TGrid extends TTable
 	//------------------------------------------------------------------------------------
 	public function show( $boolPrint = true )
 	{
-		// quando for requisi√ß√£o de pagina√ß√£o do gride, limpar o buffer de saida
+		// quando for requisiÁ„o de paginaÁ„o do gride, limpar o buffer de saida
 		if( isset($_REQUEST['page'] ) && isset( $_REQUEST['TGrid'] ) )
 		{
 			ob_clean();
@@ -279,7 +279,7 @@ class TGrid extends TTable
 		}
 		else
 		{
-			// adicionar os bot√µes Alterar e Excluir
+			// adicionar os botıes Alterar e Excluir
 			if ( $this->getCreateDefaultButtons() )
 			{
 				$imgEdit = null;
@@ -298,7 +298,7 @@ class TGrid extends TTable
 
 				if ( $this->getCreateDefaultDeleteButton() )
 				{
-					//$this->addButton('Excluir',$this->getId().'_excluir',null,null,'Confirma exclus√£o ?',$imgDelete,null,'Excluir');
+					//$this->addButton('Excluir',$this->getId().'_excluir',null,null,'Confirma exclus„o ?',$imgDelete,null,'Excluir');
 					$this->addButton( 'Excluir', $this->getId() . '_excluir', null, 'fwGridConfirmDelete()', null, $imgDelete, null, 'Excluir' );
 				}
 			}
@@ -378,14 +378,14 @@ class TGrid extends TTable
 				$this->setOnGetAutocompleteCallBackParameters( null );
 			}
 
-			// adicionar a coluna de a√ß√µes do gride se tiver botoes adicionados
+			// adicionar a coluna de aÁıes do gride se tiver botoes adicionados
 			if ( $this->getButtons() )
 			{
 				$colAction = $this->addColumn( null, $this->getActionColumnTitle(), 'auto' );
 				$colAction->setId('col_action');
 				$colAction->setColumnType( 'action' );
 				$colAction->setCss( 'text-align', 'center' );
-				// dist√£ncia entre a borda e os bot√µes
+				// dist„ncia entre a borda e os botıes
 				$colAction->setCss( 'padding', '2.5px' );
 			}
 			// contador de colunas
@@ -395,7 +395,7 @@ class TGrid extends TTable
 			// criar as colunas titulo do gride
 			foreach( $this->getColumns() as $name => $objColumn )
 			{
-                // aplicar as configura√ß√µes definidas pelo usu√°rio
+                // aplicar as configuraÁıes definidas pelo usu·rio
                 $objConfig = $this->getColumnConfig($colIndex);
 
                 if( !is_null( $objConfig ))
@@ -533,10 +533,10 @@ class TGrid extends TTable
 
         	$this->javaScript[] = 'jQuery("#'.$this->getId().'_table").tablesorter({textExtraction: fwTableSorter ,'.$tableSorterCfg.'});';
 
-			// avisar erro se tiver passado o parametro maxRows e n√£o tiver informado a url
+			// avisar erro se tiver passado o parametro maxRows e n„o tiver informado a url
 			if ( $this->getMaxRows() && !$this->url )
 			{
-				$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de pagina√ß√£o, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
+				$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de paginaÁ„o, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
 			}
 
 			if ( is_array( $this->getData() ) )
@@ -620,7 +620,7 @@ class TGrid extends TTable
 						// zebrar o gride se nao existir a funcao ondrawrow definida pelo usuario
 						if ( $this->getZebrarColors( 0 ) )
 						{
-							// n√£o sobrepor se o background color estiver definido
+							// n„o sobrepor se o background color estiver definido
 							if ( !$row->getCss( 'background-color' ) )
 							{
 								if ( $rowNum % 2 != 0 )
@@ -645,7 +645,7 @@ class TGrid extends TTable
 							$cell->setProperty( 'nowrap', 'nowrap' );
 						}
 						$cell->setCss( $objColumn->getCss() );
-						$cell->setCss( 'width', null ); // a largura √© dada pelo titulo (head)
+						$cell->setCss( 'width', null ); // a largura È dada pelo titulo (head)
 
 						if ( $objColumn->getTextAlign() )
 						{
@@ -737,7 +737,7 @@ class TGrid extends TTable
 						{
 
 							$value = null;
-							// primeiro ler o valor do post, se n√£o existir, ler do $res
+							// primeiro ler o valor do post, se n„o existir, ler do $res
 							if ( $objColumn->getFieldName() )
 							{
 								if ( isset( $res[ $objColumn->getFieldName()][ $k ] ) )
@@ -771,14 +771,14 @@ class TGrid extends TTable
 								{
 									// Se o edit tiver algum evento definido, adicionar os campos
 									// chaves e seus valores como atributos para serem recuperados
-									// no evento se neces√°rio
+									// no evento se neces·rio
 									if ( is_array( $edit->getEvents() ) )
 									{
 										$edit->setAttribute( $fieldName, $res[ $fieldName ][ $k ] );
 									}
 								}
 							}
-							// se a coluna checkbox tiver o campo descri√ß√£o, adicionar a descri√ß√£o na op√ß√£o
+							// se a coluna checkbox tiver o campo descriÁ„o, adicionar a descriÁ„o na opÁ„o
 							if ( $objColumn->getDataType() == 'select' )
 							{
 								if ( !$objColumn->getKeyValue() )
@@ -876,7 +876,7 @@ class TGrid extends TTable
 									// parametros defaul
 									$ac->setCallBackParameters( "'" . $keyValue . "'," . $objColumn->getRowNum() . ',' . $this->getRowCount() );
 
-									// verificar se o usu√°rio quer redefinir os parametros
+									// verificar se o usu·rio quer redefinir os parametros
 									if ( $this->getOnGetAutocompleteParameters() )
 									{
 										call_user_func( $this->onGetAutocompleteParameters, $ac, $this->getRowData( $k ), $rowNum, $cell, $objColumn );
@@ -915,7 +915,7 @@ class TGrid extends TTable
 										$objButton->setImageDisabled( $this->getDisabledButtonImage() ) ;
 									}
                                     $ajax = false;
-                                    // criar novo bot√£o para n√£o acumular o evento onClick
+                                    // criar novo bot„o para n„o acumular o evento onClick
                                     if( $objButton instanceof TButtonAjax )
                                     {
                                         $ajax=true;
@@ -938,7 +938,7 @@ class TGrid extends TTable
                                     }
                                     else
                                     {
-                                        // criar novo bot√£o para n√£o acumular o evento onClick
+                                        // criar novo bot„o para n„o acumular o evento onClick
 									    $newButton = new TButton( $objButton->getName(), $objButton->getValue(), $objButton->getAction(), $objButton->getOnClick(), $objButton->getConfirmMessage(), $objButton->getImage(), $objButton->getImageDisabled(), $objButton->getHint(), $objButton->getSubmitAction() );
                                     }
 
@@ -949,7 +949,7 @@ class TGrid extends TTable
 									$newButton->setVisible( $objButton->getVisible() );
 									$newButton->setEnabled( $objButton->getEnabled() );
 
-									// criar a fun√ß√£o de atualizar os campos do formul√°rio ao clicar no bot√£o
+									// criar a funÁ„o de atualizar os campos do formul·rio ao clicar no bot„o
 									if ( is_array( $this->getUpdateFields() ) )
 									{
 										$strFields = null;
@@ -987,7 +987,7 @@ class TGrid extends TTable
                                         {
 										    if ( $newButton->getOnClick() )
 										    {
-											    // deixar somente o nome da fun√ß√£o sem os parametros
+											    // deixar somente o nome da funÁ„o sem os parametros
 											    $jsFunction = $objButton->getOnClick();
 											    if( substr($strJquery,0,1) != ',' )
 											    {
@@ -1019,7 +1019,7 @@ class TGrid extends TTable
 										        }
 										    }
 									        $newButton->setOnClick( $jsFunction );
-                                            // retirar a acao do bot√£o para valer o evento onclick;
+                                            // retirar a acao do bot„o para valer o evento onclick;
                                             $newButton->setAction( null );
                                         }
                                         else
@@ -1059,7 +1059,7 @@ class TGrid extends TTable
 										call_user_func( $this->onDrawActionButton, $rowNum, $newButton, $objColumn, $this->getRowData( $k ), $row );
 									}
 
-									// se o bot√£o estiver invis√≠vel, trocar para uma imagem transparente para manter o epa√ßamento dos outros bot√µes
+									// se o bot„o estiver invisÌvel, trocar para uma imagem transparente para manter o epaÁamento dos outros botıes
 									if ( !$newButton->getVisible() )
 									{
 										$newButton->setEnabled( false );
@@ -1067,7 +1067,7 @@ class TGrid extends TTable
 										$newButton->setImageDisabled( 'fwDisabled.png' );
 									}
 
-									// alterar o rotulo do bot√£o excluir para recuperar quando o registro tiver excluido
+									// alterar o rotulo do bot„o excluir para recuperar quando o registro tiver excluido
 									if ( $this->getForm() )
 									{
 										if ( strtolower( $newButton->getId() ) == strtolower( 'btn' . $this->getId() . '_edit' ) )
@@ -1090,7 +1090,7 @@ class TGrid extends TTable
 												// alterar a confirm message.
 												//$newButton->setImage('lixeira_cancelar.gif');
 												$newButton->setImage( 'undo16.gif' );
-												$newButton->setConfirmMessage( 'Confirma a recupera√ß√£o do registro ?' );
+												$newButton->setConfirmMessage( 'Confirma a recuperaÁ„o do registro ?' );
 											}
 										}
 									}
@@ -1131,7 +1131,7 @@ class TGrid extends TTable
 					}
 				}
 
-				// adicionar a imagem do excel no rodap√©
+				// adicionar a imagem do excel no rodapÈ
 				if ( $this->getExportExcel() )
 				{
 					//$_SESSION['fwGrid'][$this->getId()] = $this->getData2Excel();
@@ -1160,14 +1160,14 @@ class TGrid extends TTable
 					{
 						@unlink($tmpName);
 					}
-					if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
-						$htmlentities = htmlentities('Erro ao salvar os dados para exporta√ß√£o',null,'UTF-8');
-						$excel->setAttribute('title',$htmlentities);
+					if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) )
+					{
+						$excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportaÁ„o',null,'ISO-8859-1'));
 					}
 				}
 
 				//$btnExcel = new TButton('btnExcel','Excel',null,'alert("excel")',null,'excel.gif',null,'Exportar dados para o excel');
-				// adicionar a barra de navega√ß√£o no fim do gride
+				// adicionar a barra de navegaÁ„o no fim do gride
 				if ( $this->getMaxRows() )
 				{
 					//$this->setNavButtons($tbody,$qtdColumns);
@@ -1395,9 +1395,9 @@ class TGrid extends TTable
 
 	//------------------------------------------------------------------------------------
 	/**
-	 * Adicionar bot√£o na linha do gride
+	 * Adicionar bot„o na linha do gride
 	 *
-	 * $boolSubmitAction = adicionar/remover a fun√ß√£o fwFazerAcao(). Padr√£o=true
+	 * $boolSubmitAction = adicionar/remover a funÁ„o fwFazerAcao(). Padr„o=true
 	 *
 	 * @param string $strRotulo
 	 * @param string $strAction
@@ -1422,7 +1422,7 @@ class TGrid extends TTable
 			$strAction = strtolower( $this->getId() . '_' . $strRotulo );
 		}
 		$this->buttons[ $strName ] = new TButton( $strName, $strRotulo, $strAction, $strOnClick, $strConfirmMessage, $strImage, $strImageDisabled, $strHint, $boolSubmitAction );
-		// se o usu√°rio adicionar um bot√£o, cancelar a cria√ß√£o dos bot√µes padr√£o de alterar e excluir
+		// se o usu·rio adicionar um bot„o, cancelar a criaÁ„o dos botıes padr„o de alterar e excluir
 		$this->enableDefaultButtons( false );
 		return $this->buttons[ $strName ];
 	}
@@ -1630,7 +1630,7 @@ class TGrid extends TTable
 	{
 		if ( is_null( $this->actionColumnTitle ) )
 		{
-			return htmlentities( 'A√ß√£o',null,'ISO-8859-1' );
+			return htmlentities( 'AÁ„o',null,'ISO-8859-1' );
 		}
 		return htmlentities( $this->actionColumnTitle,null,'ISO-8859-1' );
 	}
@@ -1781,7 +1781,7 @@ class TGrid extends TTable
 	public function addRowNumColumn( $strName = null, $strTitle = null, $strWidth = null, $strAlign = null )
 	{
 		$strName = is_null( $strName ) ? 'grid_rownum' : $strName;
-		$strTitle = is_null( $strTitle ) ? 'N¬∫' : $strTitle;
+		$strTitle = is_null( $strTitle ) ? 'N∫' : $strTitle;
 		$strAlign = is_null( $strAlign ) ? 'center' : $strAlign;
 		$col = new TGridRowNumColumn( $strName, $strTitle, $strWidth, $strAlign );
 		$this->columns[ strtolower( $strName )] = $col;
@@ -1835,7 +1835,7 @@ class TGrid extends TTable
 		}
 		/*
 			Desabilitei os botoes next, prior etc.. porque quando o clica no titulo
-			da coluna para ordenar, os bot√µes estavam sendo ordenados tambem, ficando
+			da coluna para ordenar, os botıes estavam sendo ordenados tambem, ficando
 			na parte superior do gride.
 		*/
 		/*
@@ -1844,7 +1844,7 @@ class TGrid extends TTable
 		 //$jsOnClick 			= 'jQuery("#'.$this->getId().'_loading").show();jQuery("#'.$this->getId().'_jumpToPage").attr("disable",true);jQuery("#'.$this->getId().'_first_page").attr("disable",true);jQuery("#'.$this->getId().'_prev_page").attr("disable",true);jQuery("#'.$this->getId().'_next_page").attr("disable",true);jQuery("#'.$this->getId().'_last_page").attr("disable",true);';
 		 //sleep(3);
 		$jsOnClick 			= 'jQuery("#'.$this->getId().'_loading").show();jQuery("#'.$this->getId().'_jumpToPage").hide();jQuery("#'.$this->getId().'_first_page").hide();jQuery("#'.$this->getId().'_prev_page").hide();jQuery("#'.$this->getId().'_next_page").hide();jQuery("#'.$this->getId().'_last_page").hide();';
-		 // se o proprio modulo fizer include da classe banco, config etc, n√£o precisa ser chamado pelo index da aplicacao
+		 // se o proprio modulo fizer include da classe banco, config etc, n„o precisa ser chamado pelo index da aplicacao
 		 if( defined( APLICATIVO ) )
 		 {
 			 $urlFirst			= $jsOnClick.'jQuery("#'.$this->getId().'_table > tbody").load("'.$this->url.' tbody>tr",{ "ajax":1,"page":1});';
@@ -1859,10 +1859,10 @@ class TGrid extends TTable
 			 $urlNext 			= $jsOnClick.'jQuery("#'.$this->getId().'_table > tbody").load(app_url+app_index_file+" tbody>tr",{ "ajax":1,"page":'.$next.',"modulo":"'.$this->url.'"});';
 			 $urlLast			= $jsOnClick.'jQuery("#'.$this->getId().'_table > tbody").load(app_url+app_index_file+" tbody>tr",{ "ajax":1,"page":'.$this->numPages.',"modulo":"'.$this->url.'"});';
 		}
-		   $btnFirst 			= new TButton($this->getId().'_first_page','<<'	,null,$urlFirst,null,'page-first.png','page-first_disabled.png','Primeira p√°gina');
-		   $btnPrev 			= new TButton($this->getId().'_prev_page','<'	,null,$urlPrev,null ,'page-prev.png' ,'page-prev_disabled.png','P√°gina anterior');
-		   $btnNext 			= new TButton($this->getId().'_next_page','>'	,null,$urlNext,null ,'page-next.png' ,'page-next_disabled.png','Pr√≥xima p√°gina');
-		   $btnLast 			= new TButton($this->getId().'_last_page','>>'	,null,$urlLast,null ,'page-last.png' ,'page-last_disabled.png','√öltima p√°gina');
+		   $btnFirst 			= new TButton($this->getId().'_first_page','<<'	,null,$urlFirst,null,'page-first.png','page-first_disabled.png','Primeira p·gina');
+		   $btnPrev 			= new TButton($this->getId().'_prev_page','<'	,null,$urlPrev,null ,'page-prev.png' ,'page-prev_disabled.png','P·gina anterior');
+		   $btnNext 			= new TButton($this->getId().'_next_page','>'	,null,$urlNext,null ,'page-next.png' ,'page-next_disabled.png','PrÛxima p·gina');
+		   $btnLast 			= new TButton($this->getId().'_last_page','>>'	,null,$urlLast,null ,'page-last.png' ,'page-last_disabled.png','⁄ltima p·gina');
 
 		   if( $prev == 0 )
 		   {
@@ -1892,9 +1892,9 @@ class TGrid extends TTable
 			$select = new TSelect( $this->getId() . '_jumpToPage', $aPages, null, true );
 			$select->setcss( 'margin-left', '5px' );
 			$select->setcss( 'margin-right', '5px' );
-			$select->setProperty( 'noClear', 'true' ); // evitar que a fun√ß√£o fwClearFields() limpe o seu vavalor
+			$select->setProperty( 'noClear', 'true' ); // evitar que a funÁ„o fwClearFields() limpe o seu vavalor
 			$select->setValue( $this->currentPage );
-			// estes parametros devem ser sempre passados na atualiza√ß√£o da p√°gina do gride
+			// estes parametros devem ser sempre passados na atualizaÁ„o da p·gina do gride
 			//$arrRequest = array( 'ajax' => 1, 'page' => 'this.value', 'TGrid' => 1 );
 			$arrRequest = array( 'ajax' => 1, 'TGrid' => 1, 'gridId' => $this->getId() );
 			foreach( $_REQUEST as $k => $v )
@@ -1906,7 +1906,7 @@ class TGrid extends TTable
 			}
 			$arrRequest[ 'gridId' ]=$this->getId();
 			$jsOnClick = isset( $jsOnClick ) ? $jsOnClick : '';
-			if ( defined( APLICATIVO ) ) // j√° fez o includes dos arquivos ncess√°rios
+			if ( defined( APLICATIVO ) ) // j· fez o includes dos arquivos ncess·rios
 			{
 				$arrRequest['url'] = $this->url;
 			}
@@ -1924,16 +1924,16 @@ class TGrid extends TTable
 		$div->setcss( 'padding-top', '2px' );
 		$div->setcss( 'width', '100%' );
 		$div->setcss( 'float', 'left' );
-		$div->add( 'P√°gina:' );
+		$div->add( 'P·gina:' );
 		$div->add( $select );
 
-		$btnFirst 			= new TButton($this->getId().'_first_page','<<'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'first') ).')',null,'page-first.png',null,'Primeira p√°gina');
+		$btnFirst 			= new TButton($this->getId().'_first_page','<<'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'first') ).')',null,'page-first.png',null,'Primeira p·gina');
 		$div->add( $btnFirst,false );
-		$btnPrev	= new TButton($this->getId().'_prev_page','<'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'prior') ).')',null ,'page-prev.png' ,null,'P√°gina anterior');
+		$btnPrev	= new TButton($this->getId().'_prev_page','<'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'prior') ).')',null ,'page-prev.png' ,null,'P·gina anterior');
 		$div->add( $btnPrev,false );
-	   	$btnNext 	= new TButton($this->getId().'_next_page','>'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'next') ).')',null ,'page-next.png',null,'Pr√≥xima p√°gina');
+	   	$btnNext 	= new TButton($this->getId().'_next_page','>'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'next') ).')',null ,'page-next.png',null,'PrÛxima p·gina');
 		$div->add( $btnNext,false );
-		$btnLast 			= new TButton($this->getId().'_last_page','>>'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'last') ).')',null ,'page-last.png' ,null,'√öltima p√°gina');
+		$btnLast 			= new TButton($this->getId().'_last_page','>>'	,null,'fwGridChangePage('. json_encode(array('id'=>$this->getId(),'action'=>'last') ).')',null ,'page-last.png' ,null,'⁄ltima p·gina');
 		$div->add( $btnLast,false );
 
 		$img = new TButton($this->getId().'_loading',null,null,null,null,'carregando.gif');
@@ -1947,7 +1947,7 @@ class TGrid extends TTable
 		$div->add($btnLast);
 		*/
 
-		// imagem processando durante as requisi√ß√µes ajax
+		// imagem processando durante as requisiÁıes ajax
 		/*
 		$img = new TElement('img');
 		$img->setId($this->getId().'_loading');
@@ -1958,7 +1958,7 @@ class TGrid extends TTable
 		$img->setProperty('src','base/imagens/processando.gif');
 		$div->add($img);
 		*/
-		// criar uma linha <tr> no final do gride para mostrar os bot√µes de pagina√ß√£o
+		// criar uma linha <tr> no final do gride para mostrar os botıes de paginaÁ„o
 		$tbody->add( $row = new TTableRow() );
 		$row->setId( $this->getId() . '_tr_nav_buttons' );
 		$row->clearCss();
@@ -1998,8 +1998,8 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	/**
-	* Define se os botoes Alterar e Excluir ser√£o exibidos quando n√£o for
-	* adicionado nenhum bot√£o
+	* Define se os botoes Alterar e Excluir ser„o exibidos quando n„o for
+	* adicionado nenhum bot„o
 	*
 	* @param mixed $boolNewValue
 	*/
@@ -2013,8 +2013,8 @@ class TGrid extends TTable
 		return is_null( $this->createDefaultButtons ) ? true : $this->createDefaultButtons;
 	}
 	/**
-	* Define se os botoes Alterar e Excluir ser√£o exibidos quando n√£o for
-	* adicionado nenhum bot√£o
+	* Define se os botoes Alterar e Excluir ser„o exibidos quando n„o for
+	* adicionado nenhum bot„o
 	*
 	* @param mixed $boolNewValue
 	*/
@@ -2025,7 +2025,7 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	/**
-	* Define a utiliza√ß√£o das imagens alterar.gif e lixeira.gif do diretorio base/imagens
+	* Define a utilizaÁ„o das imagens alterar.gif e lixeira.gif do diretorio base/imagens
 	*
 	* @param mixed $boolNewValue
 	*/
@@ -2097,7 +2097,7 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------------------
-	// Configura√ß√µes do grid offline
+	// ConfiguraÁıes do grid offline
 	//-------------------------------------------------------------------------------------
 	protected function configOffLine()
 	{
@@ -2134,7 +2134,7 @@ class TGrid extends TTable
 		$strFirstKeyField = null;
 		$noClearFields = null;
 
-		// definir a chave prim√°ria do gride se n√£o tiver sido passada
+		// definir a chave prim·ria do gride se n„o tiver sido passada
 		if ( $keyField = $this->getKeyField() )
 		{
 			$strFirstKeyField = strtoupper( $keyField[ 0 ] );
@@ -2154,10 +2154,10 @@ class TGrid extends TTable
 			}
 		}
 		$this->keyField = null;
-		// bot√£o de esconder/exibir o formul√°rio
+		// bot„o de esconder/exibir o formul·rio
 		$this->titleCell->add( '<img id="' . $this->getId() . '_img_show_hide_form" onclick="if( jQuery(\'#' . $this->getId() . '_form_area\').is(\':visible\') ){this.src=this.src.replace(\'Collapse\',\'Expand\');jQuery(\'#' . $this->getId() . '_form_area\').hide(\'slow\');jQuery(\'#' . $this->getId() . '_collapsed\').val(1) } else { this.src=this.src.replace(\'Expand\',\'Collapse\');jQuery(\'#' . $this->getId() . '_form_area\').show(\'fast\');jQuery(\'#' . $this->getId() . '_collapsed\').val(0);}" src="' . $this->getBase() . 'imagens/groupCollapse.jpg" width="16px" height="16px" style="float:right;cursor:pointer;" title="Abrir/Fechar">' );
 
-		// legenda do rodap√©
+		// legenda do rodapÈ
 		$this->footerCell->add( '<table border="0" style="float:left;border:none;" cellspacing="0" cellpadding="0">
 		<tr>
 		<td width="8" height="8" bgcolor="' . $this->getSavedRecordColor() . '"></td><td style="font-size:10px;">Salvo</td><td width="10px"></td>
@@ -2166,7 +2166,7 @@ class TGrid extends TTable
 		<td width="8" height="8" bgcolor="' . $this->getDeletedRecordColor() . '"></td><td style="font-size:10px;">Excluido</td>
 		</tr>
 		</table>' );
-		// coluna de controle de registro incluido, alterado e exclu√≠do
+		// coluna de controle de registro incluido, alterado e excluÌdo
 		$controlAEI = strtoupper( $this->getId() . '_AEI' );
 
 		if ( is_array( $frm->getDisplayControls() ) )
@@ -2177,7 +2177,7 @@ class TGrid extends TTable
 			$col->setSortable(false);
 
 			$fields = $this->extractFormFields($frm);
-			// criar as colunas do gride utilizando os campos do formul√°rio
+			// criar as colunas do gride utilizando os campos do formul·rio
 			foreach( $fields as $objField )
 			{
 				$field 		= $objField->field;
@@ -2192,7 +2192,7 @@ class TGrid extends TTable
 					{
 						$field->setAttribute( 'gridOfflineField', 'true' );
 
-						// se n√£o for campo chave do grid, adicionar tag noClear para a fun√ß√£o frm->clearFields() apos a edi√ß√£o n√£o limpar os campos ocultos
+						// se n„o for campo chave do grid, adicionar tag noClear para a funÁ„o frm->clearFields() apos a ediÁ„o n„o limpar os campos ocultos
 						if ( !preg_match( '/,' . $fieldName . ',/i', ',' . implode( ',', $keyField ) . ',' ) )
 						{
 							$field->setAttribute( 'noClear', 'true' );
@@ -2230,7 +2230,7 @@ class TGrid extends TTable
 					$strJquery .= '"' . $fieldName . '":jQuery("#' . $fieldName . '").val()';
 					$aFieldNames[] = $fieldName;
 
-					// definir o foco para o primeiro campo do formul√°rio do grid-offline
+					// definir o foco para o primeiro campo do formul·rio do grid-offline
 					if ( !$frm->getFocusField() )
 					{
 						$frm->setFocusField( $fieldName );
@@ -2280,7 +2280,7 @@ class TGrid extends TTable
 				$aFieldNames[] = $strFirstKeyField;
 			}
 
-			// adicionar os campos chave no evento do bot√£o Adicionar para enviar o seu valor
+			// adicionar os campos chave no evento do bot„o Adicionar para enviar o seu valor
 			if( is_array( $this->getKeyField() ))
 			{
 				foreach( $this->getKeyField() as $k => $v )
@@ -2294,7 +2294,7 @@ class TGrid extends TTable
 				}
 			}
 
-			// campos ocultos que devem ser sempre submetidos ao executar uma a√ß√£o do grid offline
+			// campos ocultos que devem ser sempre submetidos ao executar uma aÁ„o do grid offline
 			if ( is_array( $noClearFields ) )
 			{
 				foreach( $noClearFields as $k => $v )
@@ -2306,7 +2306,7 @@ class TGrid extends TTable
 
 			if ( !$this->getUpdateFields() )
 			{
-				$frm->addMessage( 'Para o funcionamento do grid offline, √© necess√°rio definir um campo chave.\nAdicione um campo oculto no formul√°rio anexado ao gride com o nome do campo chave.' );
+				$frm->addMessage( 'Para o funcionamento do grid offline, È necess·rio definir um campo chave.\nAdicione um campo oculto no formul·rio anexado ao gride com o nome do campo chave.' );
 			}
 
 			if ( $this->getUrl() )
@@ -2318,15 +2318,15 @@ class TGrid extends TTable
 
 				if ( $this->getShowAdicionarButton() )
 				{
-					$frm->addButton( ($_REQUEST['action']=='edit'?"Salvar Altera√ß√£o":"Adicionar"), null, 'btn' . $this->getId() . 'Save', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"save","subform":1,' . $strJquery . '} );' );
+					$frm->addButton( ($_REQUEST['action']=='edit'?"Salvar AlteraÁ„o":"Adicionar"), null, 'btn' . $this->getId() . 'Save', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"save","subform":1,' . $strJquery . '} );' );
 				}
-				$frm->addButton( ($_REQUEST['action']=='edit'?"Cancelar Altera√ß√£o":"Limpar"), null, 'btn' . $this->getId() . 'Clear', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clear","subform":1,' . $strJquery . '} );' );
-				$frm->addButton( 'Desfazer', null, 'btn' . $this->getId() . 'ClearAll', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clearAll","subform":1,' . $strJquery . '} );', 'Esta a√ß√£o cancela todas as opera√ß√µes de inclus√£o, altera√ß√£o e exclus√£o\nrealizadas no gride antes da √∫ltima grava√ß√£o.\n\n Confirma ?\n', null, null, null, null, 'Desfazer todas as altera√ß√µes/inclus√µes e voltar os dados para a situa√ß√£o original!' );
+				$frm->addButton( ($_REQUEST['action']=='edit'?"Cancelar AlteraÁ„o":"Limpar"), null, 'btn' . $this->getId() . 'Clear', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clear","subform":1,' . $strJquery . '} );' );
+				$frm->addButton( 'Desfazer', null, 'btn' . $this->getId() . 'ClearAll', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clearAll","subform":1,' . $strJquery . '} );', 'Esta aÁ„o cancela todas as operaÁıes de inclus„o, alteraÁ„o e exclus„o\nrealizadas no gride antes da ˙ltima gravaÁ„o.\n\n Confirma ?\n', null, null, null, null, 'Desfazer todas as alteraÁıes/inclusıes e voltar os dados para a situaÁ„o original!' );
 				$this->bodyCell->add( '<span id="' . $this->getId() . '_form_area">' );
 				$this->bodyCell->add( $frm );
 				$this->bodyCell->add( '</span>' );
 
-				// adicionar os bot√µes de alterar e excluir no gride
+				// adicionar os botıes de alterar e excluir no gride
 				if ( $this->getCreateDefaultEditButton() )
 				{
 					$this->addButton( 'Alterar', 'edit', 'btn' . $this->getId() . '_edit', '()', null, 'editar.gif', 'alterar_bw.gif', 'Alterar' );
@@ -2335,17 +2335,17 @@ class TGrid extends TTable
 
 				if ( $this->getCreateDefaultDeleteButton() )
 				{
-					$this->addButton( 'Excluir', 'delete', 'btn' . $this->getId() . '_delete', '()', 'Confirma exclus√£o ?', 'lixeira.gif', 'lixeira_bw.gif', 'Excluir' );
+					$this->addButton( 'Excluir', 'delete', 'btn' . $this->getId() . '_delete', '()', 'Confirma exclus„o ?', 'lixeira.gif', 'lixeira_bw.gif', 'Excluir' );
 				}
 			}
 			else
 			{
-				//$frm->addMessage('Para o funcionamento do grid offline, √© necess√°rio definir o parametro $strRequestUrl da classe TGrid');
-				print 'Para o funcionamento do grid offline,<br>√© necess√°rio definir o parametro $strRequestUrl da classe TGrid';
+				//$frm->addMessage('Para o funcionamento do grid offline, È necess·rio definir o parametro $strRequestUrl da classe TGrid');
+				print 'Para o funcionamento do grid offline,<br>È necess·rio definir o parametro $strRequestUrl da classe TGrid';
 			}
 
-			// recuperar da sess√£o os dados e definir como $res para o grid
-			// fazer a inclus√£o, altera√ß√£o e exclus√£o
+			// recuperar da sess„o os dados e definir como $res para o grid
+			// fazer a inclus„o, alteraÁ„o e exclus„o
 			if ( isset( $_POST[ 'action' ] ) && $_POST[ 'action' ] == 'save' )
 			{
 				if ( $frm->validate() )
@@ -2370,8 +2370,8 @@ class TGrid extends TTable
 
 					if ( $k === false )
 					{
-						// inclus√£o
-						//gravar na sess√£o os dados postados
+						// inclus„o
+						//gravar na sess„o os dados postados
 						$lower = 0;
 
 						if ( isset( $res[ $aKeys[ 0 ] ] ) && is_array( $res[ $aKeys[ 0 ] ] ) )
@@ -2393,7 +2393,7 @@ class TGrid extends TTable
 						{
 							$res[ strtoupper( $fieldName )][] = utf8_decode( $_POST[ $fieldName ] );
 						}
-						else // altera√ß√£o
+						else // alteraÁ„o
 						{
 							$res[ strtoupper( $fieldName )][ $k ] = utf8_decode( $_POST[ $fieldName ] );
 						}
@@ -2458,7 +2458,7 @@ class TGrid extends TTable
 					}
 					else
 					{
-						// marcar como alterado somente registros que j√° existirem no banco de dados
+						// marcar como alterado somente registros que j· existirem no banco de dados
 						if ( $res[ $strFirstKeyField ][ $k ] > 0 )
 						{
 							$res[ $controlAEI ][ $k ] = 'A';
@@ -2506,7 +2506,7 @@ class TGrid extends TTable
 				{
 					if ( $k > -1 )
 					{
-						// se ainda n√£o existir no banco de dados pode excluir do gride, sen√£o s√≥ marca para exclus√£o quando o gride for processado
+						// se ainda n„o existir no banco de dados pode excluir do gride, sen„o sÛ marca para exclus„o quando o gride for processado
 						if ( $res[ strtoupper( $key )][ $k ] < 0 )
 						{
 							foreach( $res as $fieldName => $value )
@@ -2533,7 +2533,7 @@ class TGrid extends TTable
 			}
 		}
 
-		// se ainda n√£o existir na sess√£o os dados offline, ler do banco os valores j√° gravados e adicionar na sess√£o
+		// se ainda n„o existir na sess„o os dados offline, ler do banco os valores j· gravados e adicionar na sess„o
 		if ( !isset( $_SESSION[ APLICATIVO ][ 'offline' ][ $this->getId()] ) || !$_SESSION[ APLICATIVO ][ 'offline' ][ $this->getId()] && $this->getData() )
 		{
 
@@ -2633,7 +2633,7 @@ class TGrid extends TTable
 
 	//------------------------------------------------------------------------------------------------
 	/**
-	* Define o nome de uma fun√ß√£o php que a classe TGrid ir√° executar passando a classe TAutocomplete, o array de dados ($res) referente a linha atual, o objeto celula e o objeto coluna
+	* Define o nome de uma funÁ„o php que a classe TGrid ir· executar passando a classe TAutocomplete, o array de dados ($res) referente a linha atual, o objeto celula e o objeto coluna
 	*
 	* @param mixed $strNewValue
 	*/
@@ -2875,7 +2875,7 @@ class TGrid extends TTable
 		    $expressao= 'array_multisort($array["'.$coluna.'"], '.$tipo.', '.$ordem;
 		}
 		foreach ($array as $k=>$col){
-			$array[$k][0] = $array[$k][0]; // para corrigir o bug de n√£o alterar os dados da sessao
+			$array[$k][0] = $array[$k][0]; // para corrigir o bug de n„o alterar os dados da sessao
 			if( $k != $coluna ){
 				$expressao.=' ,$array["'.$k.'"]';
 			}
@@ -2886,8 +2886,8 @@ class TGrid extends TTable
 		return $array;
 	}
 	/**
-	* Definir a imagem que ser√° exibida no lugar de um bot√£o desabilitado quando
-	* o pr√≥prio bot√£o n√£o tiver a sua imagem desabilitada definida
+	* Definir a imagem que ser· exibida no lugar de um bot„o desabilitado quando
+	* o prÛprio bot„o n„o tiver a sua imagem desabilitada definida
 	*
 	* ex: $g->setDisabledButtonImage('fwDisabled.png');
 	*
@@ -2910,7 +2910,7 @@ class TGrid extends TTable
 		return $this->exportFullData;
 	}
 	/**
-	* Retorna um array de objeto com os campos do formul√°rio
+	* Retorna um array de objeto com os campos do formul·rio
 	*
 	* @param object $frm
 	*/

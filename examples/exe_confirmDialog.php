@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,32 +20,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Substituir a fuÃ§Ã£o alert() do javascript;
+* Substituir a fução alert() do javascript;
 */
 
-$frm = new TForm('Exemplo de DiÃ¡logo de ConfirmaÃ§Ã£o',300,600);
-$frm->addHtmlField('html','<br><center><b>Exemplo de utilizaÃ§Ã£o da funÃ§Ã£o fwConfirm() para substituir a funÃ§Ã£o alert() do javascript</b></center>');
+$frm = new TForm('Exemplo de Diálogo de Confirmação',300,600);
+$frm->addHtmlField('html','<br><center><b>Exemplo de utilização da função fwConfirm() para substituir a função alert() do javascript</b></center>');
 $frm->addTextField('nome','Nome:',100,true,50);
 $frm->addDateField('nasc','Nascimento:',true);
-$frm->addNumberField('salario','SalÃ¡rio',10,false,2);
+$frm->addNumberField('salario','Salário',10,false,2);
 
 $frm->addButton('Salvar',null,'btnSalvar1','btnGravarClick()');
 
@@ -55,7 +55,7 @@ switch($_POST['formDinAcao'])
 	case 'Gravar':
 		if( $frm->validate() )
 		{
-			$frm->setMessage('AÃ§Ã£o salvar executada com SUCESSO!!!');
+			$frm->setMessage('Ação salvar executada com SUCESSO!!!');
 		}
 	break;
 }
@@ -65,8 +65,8 @@ $frm->show();
 <script>
 function btnGravarClick(status)
 {
-	//fwConfirm('Confirma GravaÃ§Ã£o do Regirtro ?', function(){alert('ok')},function(){alert('nÃ£o') }, 'Sim', 'NÃ£o', 'Salvar dados');
-	fwConfirm('Confirma GravaÃ§Ã£o do Regirtro ?', cb,null, 'Sim', 'NÃ£o', 'Salvar dados');
+	//fwConfirm('Confirma Gravação do Regirtro ?', function(){alert('ok')},function(){alert('não') }, 'Sim', 'Não', 'Salvar dados');
+	fwConfirm('Confirma Gravação do Regirtro ?', cb,null, 'Sim', 'Não', 'Salvar dados');
 
 }
 function cb(p)

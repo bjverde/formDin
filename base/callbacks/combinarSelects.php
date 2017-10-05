@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -65,7 +65,7 @@ if( isset( $_REQUEST['descPrimeiraOpcao'] ) && combinarSelectIsUTF8( $_REQUEST['
 
 // executar pacote
 $bvars=array(strtoupper($_REQUEST['colunaFiltro'])=>$_REQUEST['valorFiltro']);
-// where que podera se utilizado no comando select se nÃ£o tiver sido informado o nome de um pacote
+// where que podera se utilizado no comando select se não tiver sido informado o nome de um pacote
 $where		= strtoupper($_REQUEST['colunaFiltro'])."='".$_REQUEST['valorFiltro']."'";
 if((string)$_REQUEST['campoFormFiltro']<>'')
 {
@@ -118,7 +118,7 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 )
 		   print "alert('{$erro[0]}')";
 		return;
 		*/
-		print "alert('Erro na funÃ§Ã£o combinarSelect().\\n".$erro[0]."')";
+		print "alert('Erro na função combinarSelect().\\n".$erro[0]."')";
 		return;
 	}
 }
@@ -193,14 +193,14 @@ if($res)
 	{
 		$res[$campoCodigo][] = 0;
 		$res[$campoDescricao][] = "1) Erro nos parametros da funcao combinarSelect(). A coluna ".$campoCodigo." nao existe no retorno do banco";
-		//print "alert('Erro nos parametros da funÃ§Ã£o combinarSelect().\\nA coluna ".$campoCodigo." nÃ£o existe no retorno da funÃ§Ã£o \\n".$_REQUEST['pacoteOracle']."')";
+		//print "alert('Erro nos parametros da função combinarSelect().\\nA coluna ".$campoCodigo." não existe no retorno da função \\n".$_REQUEST['pacoteOracle']."')";
 		//return;
 	}
 	else if( !array_key_exists($campoDescricao,$res))
 	{
 		$res[$campoCodigo][] = 0;
 		$res[$campoDescricao][] = "2) Erro nos parametros da funcao combinarSelect(). A coluna ".$campoDescricao." nao existe no retorno do banco";
-		//	print "alert('Erro nos parametros da funÃ§Ã£o combinarSelect().\\nA coluna ".$campoDescricao." nÃ£o existe no retorno da funÃ§Ã£o \\n".$_REQUEST['pacoteOracle']."')";
+		//	print "alert('Erro nos parametros da função combinarSelect().\\nA coluna ".$campoDescricao." não existe no retorno da função \\n".$_REQUEST['pacoteOracle']."')";
 		//	return;
 	}
 	if($res){
@@ -208,9 +208,9 @@ if($res)
 		foreach($res[$campoCodigo] as $k=>$v)
 		{
 			$retorno .= ($k>0) ? ',' : '';
-			//$retorno.='"'.$v.'":"'.str_replace("'",'Â´',str_replace('"','â€œ',$res[$campoDescricao][$k]) ).'"';
-			//$retorno.='"'.$v.'":"'.htmlspecialchars(str_replace('"','â€œ',$res[$campoDescricao][$k])).'"';
-			$retorno.='"'. htmlspecialchars(str_replace('"','â€œ',$res[$campoDescricao][$k]))  .'":"'.$v.'"';
+			//$retorno.='"'.$v.'":"'.str_replace("'",'´',str_replace('"','“',$res[$campoDescricao][$k]) ).'"';
+			//$retorno.='"'.$v.'":"'.htmlspecialchars(str_replace('"','“',$res[$campoDescricao][$k])).'"';
+			$retorno.='"'. htmlspecialchars(str_replace('"','“',$res[$campoDescricao][$k]))  .'":"'.$v.'"';
 		}
 		//$retorno.='"where":"'.$where.'"';
 		$retorno.="}";

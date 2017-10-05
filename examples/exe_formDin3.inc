@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -49,12 +49,12 @@
 //die('fim');
 
 /*
-$arrCampos['Salario'] = new CampoDecimal('Salario','SalÃ¡rio:');
+$arrCampos['Salario'] = new CampoDecimal('Salario','Salário:');
 $arrCampos['valor'] = new CampoInteiro('valor','Valor:',true,null,1,100,null,3,null,false,'1 a 100',null,null,null,null,true);
 $arrCampos['inteiro'] = new CampoInteiro('inteiro','Inteiro:',true,null,null,null,null,10,10);
 $arrCampos['tipo'] 	= new CampoSelect('tipo','Tipo:',false,null,array(10=>'Um', 30=>'Dois',20=>'Tres'),null,null,null,null,null,null,null,null,null,null,null,3);
 $arrCampos['fone'] 	= new CampoFoneFax('fone','Fone:');
-$arrCampos['ajuda_imagem'] 	= new CampoAjuda('ajuda_imagem','','<table border=1><th>Nada</hr><tr><td>do que foi serÃ¡</td></tr></table>',true,null,null,null,null,null,null,null,null,'AJUDA ON-LINE');
+$arrCampos['ajuda_imagem'] 	= new CampoAjuda('ajuda_imagem','','<table border=1><th>Nada</hr><tr><td>do que foi será</td></tr></table>',true,null,null,null,null,null,null,null,null,'AJUDA ON-LINE');
 $arrCampos['ajuda_arquivo']	= new CampoAjuda('ajuda_arquivo','','',null,'base/exemplos/ajuda.txt');
 */
 
@@ -82,17 +82,17 @@ $frm->javaScript[] = 'abreFechaGrupo(null,"gpx");';
 /*
 $frm->botaoAcao[''] 		= array('Gravar');
 $frm->setEvento('Gravar',	array('onClick'=>"conf();return false;"));
-$frm->campos['tipo'] 		= new CampoSelect('tipo','Tipo:',false,null,array(10=>'Um', 30=>'Dois',20=>'Tres'),null,null,'Utilize a tecla CTRL para Marcar/Desmacar a(s) opÃ§Ã£o(Ãµes)',null,null,null,null,null,null,'',null,3);
+$frm->campos['tipo'] 		= new CampoSelect('tipo','Tipo:',false,null,array(10=>'Um', 30=>'Dois',20=>'Tres'),null,null,'Utilize a tecla CTRL para Marcar/Desmacar a(s) opção(ões)',null,null,null,null,null,null,'',null,3);
 $frm->adicionarArquivoJsCss('base/js/jquery/jquery.meio.mask.min.js');
 $frm->campos['sac']			= new CampoTexto('sac','SAC:',null,null,null,11,15);
 $frm->javaScript[] = 'jQuery("#sac").setMask("9999 999 9999");';
 
 $frm->adicionarCampoFoneFax('num_fone','Telefone:');
 
-$frm->adicionarCampoDecimal('val_salario1','SalÃ¡rio1:',true,null,true,1,10,20);
-$frm->adicionarCampoDecimal('val_salario2','SalÃ¡rio2:',true,null,true,2,10,20);
-$frm->adicionarCampoDecimal('val_salario3','SalÃ¡rio3:',true,null,true,3,10,20);
-$frm->adicionarCampoDecimal('val_salario4','SalÃ¡rio4:',true,null,true,4,10,20);
+$frm->adicionarCampoDecimal('val_salario1','Salário1:',true,null,true,1,10,20);
+$frm->adicionarCampoDecimal('val_salario2','Salário2:',true,null,true,2,10,20);
+$frm->adicionarCampoDecimal('val_salario3','Salário3:',true,null,true,3,10,20);
+$frm->adicionarCampoDecimal('val_salario4','Salário4:',true,null,true,4,10,20);
 
 
 
@@ -172,6 +172,6 @@ function simCallBack()
 }
 function naoCallBack()
 {
-	alert('NÃ£o');	
+	alert('Não');	
 }
 </script>

@@ -67,13 +67,13 @@ var $AliasNbPages;       //alias for total number of pages
 
 //Alexandre
 var $PageBorder;		 //
-var $widths;			 // utilizada pela funÃ§Ãµes de criaÃ§Ã£o de tabelas com quebra de pÃ¡gina
-var $aligns;			 // utilizada pela funÃ§Ãµes de criaÃ§Ã£o de tabelas com quebra de pÃ¡gina
-var $angle=0;			 // utilizada pela funÃ§Ã£o rotate
+var $widths;			 // utilizada pela funções de criação de tabelas com quebra de página
+var $aligns;			 // utilizada pela funções de criação de tabelas com quebra de página
+var $angle=0;			 // utilizada pela função rotate
 // eugenio
-var $alturaLinha;           // altura da linha para funÃ§Ã£o row calcular a quebra de pÃ¡gina. PadrÃ£o Ã© 3.
+var $alturaLinha;           // altura da linha para função row calcular a quebra de página. Padrão é 3.
 var $colunaCor;             // define a cor de cada celula
-var $colunaBorda;			// define se a coluna vai ou nÃ£o ter borda
+var $colunaBorda;			// define se a coluna vai ou não ter borda
 var $colunaFonteCor;		// define a cor da fonte de cada coluna
 var $colunaFonteEstilo;     // define o estilo da fonte de cada coluna
 var $colunaFonteTamanho;     // define o tamanho da fonte de cada coluna
@@ -382,7 +382,7 @@ function AddPage($orientation='')
 	}
 	$this->TextColor=$tc;
 	$this->ColorFlag=$cf;
-	//implementaÃ§Ã£o de borda a cada pÃ¡gina, automaticamente - Alexandre
+	//implementação de borda a cada página, automaticamente - Alexandre
 	if($this->PageBorder == 1)
 	{
 		$yy = $this->GetY();
@@ -1037,7 +1037,7 @@ function MultiCell($w, $h, $txt, $border=0, $align='J',$fill=false,$indent=0,$nu
 	$this->x=$this->lMargin;
 }
 
-//funÃ§Ã£o alterada para permitir tabulaÃ§Ã£o de parÃ¡grafos - Alexandre
+//função alterada para permitir tabulação de parágrafos - Alexandre
 function MultiCellDoc($w,$h,$txt,$border=0,$align='J',$fill=0,$indent=0,$numerarParagrafo=false,$quebra=false)
 {
 	$txt = trim($txt);
@@ -1509,7 +1509,7 @@ function encontrarPastaBase() {
 		if(!$this->pasta_base){
 			$this->pasta_base = $this->encontrarPastaBase();
 		}
-		// limpa diretÃ³rio temporÃ¡rio
+		// limpa diretório temporário
 		$t=time();
 		$h=opendir($this->pasta_base."tmp");
 		while($file=readdir($h)) {
@@ -2101,7 +2101,7 @@ function _out($s)
 }
 
 //
-//funÃ§Ãµes para criaÃ§Ã£o de tabelas com gerenciamento de quebra de pÃ¡gina
+//funções para criação de tabelas com gerenciamento de quebra de página
 //Alexandre - Site www.fpdf.org
 
 function SetWidths($w)
@@ -2147,8 +2147,8 @@ function SetColunaFonteTamanho($a){
 /**
 * Imprimir array de dados em colunas
 *
-* O parametro $margemInferior indica o limite inferior maximo que a funÃ§Ã£o
-* poderÃ¡ utilizar para impressÃ£o da linha,  jogando o texto para a outra pÃ¡gina se nÃ£o couber.
+* O parametro $margemInferior indica o limite inferior maximo que a função
+* poderá utilizar para impressão da linha,  jogando o texto para a outra página se não couber.
 *
 * @param mixed $data
 * @param mixed $margemInferior
@@ -2182,7 +2182,7 @@ function Row($data,$margemInferior=null)
         $nb=max($nb,$aNb[$i]);
     }
     $h = $alturaLinha*$nb;
-    // eugenio - saltar pÃ¡gina se a linha for ocupar mais que o limite informado.
+    // eugenio - saltar página se a linha for ocupar mais que o limite informado.
     if( $margemInferior )
     {
 		if( ( $this->GetY() +$h ) > $margemInferior )
@@ -2200,7 +2200,7 @@ function Row($data,$margemInferior=null)
         //$f=isset($this->fonts[$i] ) ? $this->fonts[$i]  : null;             // fontes
         $borda=isset($this->colunaBorda[$i]) ? $this->colunaBorda[$i] : 1;  // borda
 
-        // eugenio - colocar a fonte no estilo e tamanho padrÃ£o
+        // eugenio - colocar a fonte no estilo e tamanho padrão
         $this->SetFont('',$estiloAtual,$tamanhoAtualAtual);
         $this->SetTextColor($corFonteAtual);
 
@@ -2239,7 +2239,7 @@ function Row($data,$margemInferior=null)
         // eugenio - pintar o fundo da celula
         $this->Rect($x,$y,$w,$h,'FD');
 
-        // centralizar verticalmente o texto na cÃ©lula
+        // centralizar verticalmente o texto na célula
         if( ( $c = $nb - $aNb[$i] ) > 0 ){
          $c *= ($alturaLinha/2);
             $this->SetXY($x,($y+$c) );
@@ -2357,7 +2357,7 @@ function NbLines($w,$txt)
 	 if(!$this->pasta_base){
 	  $this->pasta_base = $this->encontrarPastaBase();
 	 }
-	 // limpa diretÃ³rio temporÃ¡rio
+	 // limpa diretório temporário
 	 $t=time();
 	 $h=opendir($this->pasta_base."tmp");
 	 while($file=readdir($h)) {

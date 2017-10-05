@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,30 +20,30 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para implementaÃ§Ã£o de caixas on-line de apresentaÃ§Ã£o de texto e imÃ¡gem
+* Classe para implementação de caixas on-line de apresentação de texto e imágem
 *
 * <code>
 * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
 * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
-* $frm->addBoxField('campo_3','Este Ã© o texto de ajuda que serÃ¡ exibido quando o usuÃ¡rio clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
+* $frm->addBoxField('campo_3','Este é o texto de ajuda que será exibido quando o usuário clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
 * $frm->addBoxField('campo_y',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
 * </code>
 */
@@ -77,7 +77,7 @@ class THelpBox extends TControl
 		$e->setImage($this->image);
 		$value = $this->value;
 		$isImage=false;
-		// verificar so texto ou o nome do arquivo Ã© uma imagem
+		// verificar so texto ou o nome do arquivo é uma imagem
 		if( preg_match('/\.(jpe?g|gif|bmp|png)$/i',$value.$this->getFileName()))
 		{
 			$isImage=true;

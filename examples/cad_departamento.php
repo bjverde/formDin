@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('InformaÃ§Ãµes Iniciais',780,980);
-//$frm = new TForm('InformaÃ§Ãµes Iniciais 2');
+$frm = new TForm('Informações Iniciais',780,980);
+//$frm = new TForm('Informações Iniciais 2');
 //$frm->setFlat(true);
 //$frm->setOverflowY(false);
 
@@ -93,11 +93,11 @@ $g = new TGrid('gride_andamento_pessoal'
 				,null // largura
 				,'SEQ_DOCUMENTO,NUM_DOCIBAMA,SEQ_ANDAMENTO','SEQ_DOCUMENTO,NUM_DOCIBAMA,SEQ_ANDAMENTO',null,null,null,null,null,'grideDrawButtonGeral');
 $g->enableDefaultButtons(false);
-$g->addColumn('NUM_DOCIBAMA','NÃºmero');
+$g->addColumn('NUM_DOCIBAMA','Número');
 $g->addColumn('DES_ORIGEM','Origem');
 $g->addColumn('NOM_PESSOA_ORIGEM','Remetente');
 $g->addColumn('DES_CLASSIFICACAO','Assunto');
-$g->addColumn('NUM_ORIGINAL','NÂº Original');
+$g->addColumn('NUM_ORIGINAL','Nº Original');
 $g->addColumn('DES_TIPO_DOCUMENTO','Tipo documento');
 $g->addColumn('DES_ASSUNTO','Obs. documento');
 $g->addColumn('NOM_MOVIMENTO','Movimento');
@@ -125,11 +125,11 @@ $g = new TGrid('gride_andamento_unidade'
 				,null // largura
 				,'SEQ_DOCUMENTO,NUM_DOCIBAMA','SEQ_DOCUMENTO,NUM_DOCIBAMA',null,null,null,null,null,'grideDrawButton');
 $g->enableDefaultButtons(false);
-$g->addColumn('NUM_DOCIBAMA','NÃºmero',35);
+$g->addColumn('NUM_DOCIBAMA','Número',35);
 $g->addColumn('DES_ASSUNTO','Assunto',300);
 $g->addColumn('DES_TIPO_DOCUMENTO','Tipo Documento',100,'center');
 $g->addColumn('DES_ORIGEM','Origem',55,'center');
-$g->addColumn('NUM_ORIGINAL','NÂº Original',null,'center');
+$g->addColumn('NUM_ORIGINAL','Nº Original',null,'center');
 $g->addColumn('SIT_CONFIRMADO','Lista Para Envio',80,'center');
 $g->addColumn('QTD_DIAS','Dias no Setor',70,'center');
 $g->addColumn('DAT_PRAZO','Prazo',39,'center');
@@ -161,7 +161,7 @@ $g = new TGrid('gride_andamento_lista'
 				,'NOM_UNIDADE_IBAMA,COD_UNIDADE_IBAMA','NOM_UNIDADE_IBAMA,COD_UNIDADE_IBAMA',null,null,null,null,null,'grideDrawButton');
 $g->enableDefaultButtons(false);
 $g->addColumn('SIG_UNIDADE_DESTINO','Destino');
-$g->addColumn('DAT_MOVIMENTO','Data da MovimentaÃ§Ã£o');
+$g->addColumn('DAT_MOVIMENTO','Data da Movimentação');
 $g->addButton('Andamento','btngride_documentoLista',null,null,null,'retornar.gif');
 $frm->setValue('gride_andamento_lista',"<BR><HR><BR>".$g->show(false));
 

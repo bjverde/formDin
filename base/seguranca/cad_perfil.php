@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,27 +20,27 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
 Sistema FASIS
-MÃ³dulo de cadastro de perfis de acesso do projeto
-Autor: Luis EugÃªnio Barbosa
+Módulo de cadastro de perfis de acesso do projeto
+Autor: Luis Eugênio Barbosa
 Data: 15/12/2009
 */
 for ($i=1;$i<51;$i++)
@@ -53,9 +53,9 @@ $frm->addHiddenField('seq_projeto',PROJETO);
 $frm->addHiddenField('seq_perfil','');
 
 $frm->addTextField('des_perfil'		, 'Nome do Perfil',50,true);
-$frm->addSelectField('num_nivel'	, 'NÃ­vel Hierarquico',true,$aNiveisPerfil);
-$frm->addSelectField('sit_publico'	,'PÃºblico',true,array('N'=>"NÃ£o","S"=>"Sim"));
-$frm->addSelectField('sit_cancelado','Cancelado',true,array('N'=>"NÃ£o","S"=>"Sim"));
+$frm->addSelectField('num_nivel'	, 'Nível Hierarquico',true,$aNiveisPerfil);
+$frm->addSelectField('sit_publico'	,'Público',true,array('N'=>"Não","S"=>"Sim"));
+$frm->addSelectField('sit_cancelado','Cancelado',true,array('N'=>"Não","S"=>"Sim"));
 $frm->addHtmlGride('gride'			,'base/seguranca/gride_perfil.php','gd')->setCss('width',500);
 
 $frm->setAction('Gravar,Novo');

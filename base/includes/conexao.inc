@@ -5,7 +5,7 @@ if ( !session_id() )
 }
 if( !defined('PASTA_BASE') )
 {
-	// permitir utilizar o arquivo de configura√ß√£o config_sem_autenticar quando a variavel de sess√£o ACESSO_PUBLICO estiver true
+	// permitir utilizar o arquivo de configuraÁ„o config_sem_autenticar quando a variavel de sess„o ACESSO_PUBLICO estiver true
     $arquivo = encontrarArquivoNivel('includes/config_sem_autenticar.inc',$nivel);
     if( $arquivo && isset($_SESSION['ACESSO_PUBLICO']) && $_SESSION['ACESSO_PUBLICO'] == true )
     {
@@ -17,7 +17,7 @@ if( !defined('PASTA_BASE') )
     }
     else
     {
-        echo 'M√≥dulo conexao.inc. Arquivo config.inc n√£o encontrado';
+        echo 'MÛdulo conexao.inc. Arquivo config.inc n„o encontrado';
         return;
     }
 }
@@ -28,7 +28,7 @@ if( $arquivo = encontrarArquivoNivel(PASTA_BASE.'classes/banco.inc',$nivel) )
 }
 else
 {
-    print utf8_encode('M√≥dulo base/includes/conexao.inc, arquivo banco.inc n√£o encontrado.');
+    print utf8_encode('MÛdulo base/includes/conexao.inc, arquivo banco.inc n„o encontrado.');
     return;
 }
 $clientedb = new banco();
@@ -43,9 +43,9 @@ if( (isset($_REQUEST["modulo"]) && strtolower($_REQUEST["modulo"])=='limparcache
     echo '<script>alert("Cache da classe banco foi limpo com SUCESSO!")</script>';
 }
 /**
-* Recupera um pacote do Banco, deve ser usado caso tenha um pacote com uma fun√ß√£o que retorne dados um ou mais cursores
+* Recupera um pacote do Banco, deve ser usado caso tenha um pacote com uma funÁ„o que retorne dados um ou mais cursores
 *
-* $porLinha - retorna o array de dados no formato $res[0]['NUM_PESSOA']=2, o padr√£o √© $res['NUM_PESSOA'][0] = 2;
+* $porLinha - retorna o array de dados no formato $res[0]['NUM_PESSOA']=2, o padr„o È $res['NUM_PESSOA'][0] = 2;
 * $cursor_skip - quantidade de registros que devem ser ignorados a partir do primeiro registro
 * $cursor_linhas - quantidade de linhas a serem retornadas
 *
@@ -166,11 +166,11 @@ function encontrarArquivoNivel($arquivo,&$i)
 
 function callback($buffer)
 {
-    if( preg_match('/expects parameter 1 to be resource/i', ob_get_contents() ) ) // erro oracle por falta de conex√£o
+    if( preg_match('/expects parameter 1 to be resource/i', ob_get_contents() ) ) // erro oracle por falta de conex„o
     {
         if( ! isset($_REQUEST['ajax'] ) || ! $_REQUEST['ajax'] )
         {
-            return '<script>alert("Sua sess√£o expirou. Necess√°rio informar sua senha novamente!");top.app_server_action("logout",true,"script",null,"top.app_restart()");</script>';
+            return '<script>alert("Sua sess„o expirou. Necess·rio informar sua senha novamente!");top.app_server_action("logout",true,"script",null,"top.app_restart()");</script>';
         }
         else if( isset($_REQUEST['ajax'] ) && $_REQUEST['ajax'] )
         {
@@ -178,7 +178,7 @@ function callback($buffer)
             {
                 $resAjax['status']        = 0;
                 $resAjax['data']        = null;
-                $resAjax['message']        = utf8_encode('Sua sess√£o expirou. Necess√°rio informar sua senha novamente!');
+                $resAjax['message']        = utf8_encode('Sua sess„o expirou. Necess·rio informar sua senha novamente!');
                 $resAjax['dataType']    = 'json';
                 $resAjax['containerId']    = null;
                 $resAjax['script']        = 'top.app_server_action("logout",true,"script",null,"top.app_restart()")';
@@ -186,7 +186,7 @@ function callback($buffer)
             }
             else if( $_REQUEST['datatype'] && $_REQUEST['datatype']=='text' )
             {
-                return utf8_encode('Sua sess√£o expirou. Necess√°rio informar sua senha novamente!');
+                return utf8_encode('Sua sess„o expirou. Necess·rio informar sua senha novamente!');
             }
         }
     }

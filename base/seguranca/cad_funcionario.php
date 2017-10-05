@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,24 +20,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Cadastro de FuncionÃ¡rio',500);
+$frm = new TForm('Cadastro de Funcionário',500);
 $frm->setColumns(array(130));
 
 $frm->addHiddenField('num_pessoa');
@@ -46,29 +46,29 @@ $frm->addGroupField('gpCTF','Consulta CTF');
 	$frm->addCpfField('num_cpf'					,'Cpf:'					,true);
 $frm->closeGroup();
 
-$frm->addGroupField('gpCadastro','Dados do FuncionÃ¡rio')->setEnabled(false);
+$frm->addGroupField('gpCadastro','Dados do Funcionário')->setEnabled(false);
 	$frm->addTextField('nom_pessoa'				,'Nome'					,60,false);
-	$frm->addDateField('dat_nasc'				,'AniversÃ¡rio:'	,false,false);
-	$frm->addTextField('end_pessoa'				,'EndereÃ§o'	,100,null,60);
+	$frm->addDateField('dat_nasc'				,'Aniversário:'	,false,false);
+	$frm->addTextField('end_pessoa'				,'Endereço'	,100,null,60);
 	$frm->addTextField('des_bairro'				,'Bairro'	,60,false);
 	$frm->addCepField('num_cep'					,'C.E.P.',false,null,false);
-	$frm->addTextField('nom_municipio'			,'MunicÃ­pio/Uf',60);
+	$frm->addTextField('nom_municipio'			,'Município/Uf',60);
 	$frm->addTextField('sig_uf'					,'',2,null,2,null,false)->setEnabled(false);
 	$frm->addTextField('num_fone'				,'Telefone',60);
 	$frm->addTextField('des_email'				,'E-mail',60);
 $frm->closeGroup();
 
-$frm->addGroupField('gpLotaÃ§Ã£o','LotaÃ§Ã£o e ExercÃ­cio');
-	$frm->addSelectField('seq_tipo_funcionario'	,'Tipo de FuncionÃ¡rio:'	,true,'SIGER.PKG_PUBLICO.SEL_TIPO_FUNCIONARIO',true,null,null,null,null,null,null,null,'SEQ_TIPO_FUNCIONARIO','DES_TIPO_FUNCIONARIO');
-	$frm->addMaskField('cod_matricula'			,'MatrÃ­cula SIAPE:'		,true,'9999999999',false);
-	$frm->addTextField('nom_unidade_ibama'		,'LotaÃ§Ã£o:'				,120,null,75)->setEnabled(false);
+$frm->addGroupField('gpLotação','Lotação e Exercício');
+	$frm->addSelectField('seq_tipo_funcionario'	,'Tipo de Funcionário:'	,true,'SIGER.PKG_PUBLICO.SEL_TIPO_FUNCIONARIO',true,null,null,null,null,null,null,null,'SEQ_TIPO_FUNCIONARIO','DES_TIPO_FUNCIONARIO');
+	$frm->addMaskField('cod_matricula'			,'Matrícula SIAPE:'		,true,'9999999999',false);
+	$frm->addTextField('nom_unidade_ibama'		,'Lotação:'				,120,null,75)->setEnabled(false);
 	$frm->addTextField('cod_unidade_ibama'		,''				,10,true,5,null,false)->setEnabled(false);
-	$frm->addTextField('nom_unidade_exercicio'	,'Unidade ExercÃ­cio:'	,120,null,75)->setEnabled(false);
+	$frm->addTextField('nom_unidade_exercicio'	,'Unidade Exercício:'	,120,null,75)->setEnabled(false);
 	$frm->addTextField('cod_unidade_exercicio'	,''				,10,true,5,null,false)->setEnabled(false);
 $frm->closeGroup();
 
 $frm->addGroupField('gpSenha','Cadastrar/Alterar Senha');
-	$frm->addHtmlField('aviso','Obs: <b>Deixe os campos abaixo em branco para manter a senha atual do funcionÃ¡rio.</b><br>');
+	$frm->addHtmlField('aviso','Obs: <b>Deixe os campos abaixo em branco para manter a senha atual do funcionário.</b><br>');
 	$frm->addPasswordField('des_senha'		,'Senha:',false,true,15);
 	$frm->addPasswordField('des_senha2'		,'Redigite a senha:',false,false,15);
 
@@ -87,7 +87,7 @@ switch( $acao )
 	break;
 	//--------------------------------------------------------------
 	case 'Gravar':
-		// se nao for servidor, nÃ£o precisa do cod_matricula
+		// se nao for servidor, não precisa do cod_matricula
 		if((integer)$frm->getValue('seq_tipo_funcionario')>1)
 		{
 			$frm->getField('cod_matricula')->setRequired(false);
@@ -97,7 +97,7 @@ switch( $acao )
 		{
 			if((string)$frm->getValue('des_senha')<>'' && (string)$frm->getValue('des_senha') <> (string)$frm->getValue('des_senha2') )
 			{
-				$frm->setPopUpMessage('Senhas informadas estÃ£o diferentes.',null,'ERROR');
+				$frm->setPopUpMessage('Senhas informadas estão diferentes.',null,'ERROR');
 				break;
 			}
 			$bvars=$frm->createBvars('num_pessoa,num_cpf,cod_matricula,cod_unidade_ibama,cod_unidade_exercicio,des_senha,seq_tipo_funcionario');
@@ -107,11 +107,11 @@ switch( $acao )
 				if((integer)$frm->getValue('num_pessoa')==0)
 				{
 					$frm->setValue('num_pessoa',$bvars['NUM_PESSOA']);
-					$frm->setPopUpMessage('InclusÃ£o realizada com sucesso!');
+					$frm->setPopUpMessage('Inclusão realizada com sucesso!');
 				}
 				else
 				{
-					$frm->setPopUpMessage('AlteraÃ§Ã£o realizada com sucesso!!!');
+					$frm->setPopUpMessage('Alteração realizada com sucesso!!!');
 				}
 				$frm->setValue('des_senha','');
 				$frm->setValue('des_senha2','');
@@ -137,7 +137,7 @@ $frm->setOnlineSearch('nom_unidade_ibama'
 	,false,false,true
 	,'NOM_UNIDADE_IBAMA|Unidade,SIG_UNIDADE_IBAMA|Sigla'
 	,'COD_UNIDADE_IBAMA,NOM_UNIDADE_IBAMA'
-	,'Unidade de LotaÃ§Ã£o'
+	,'Unidade de Lotação'
 	,null,null,null,null,null,null,'cod_unidade_ibama_callback()',100,null,null
 	,'NOM_UNIDADE_IBAMA');
 $frm->setOnlineSearch('nom_unidade_exercicio'
@@ -146,7 +146,7 @@ $frm->setOnlineSearch('nom_unidade_exercicio'
 	,false,false,true
 	,'NOM_UNIDADE_IBAMA|Unidade,SIG_UNIDADE_IBAMA|Sigla'
 	,'COD_UNIDADE_IBAMA|cod_unidade_exercicio,NOM_UNIDADE_IBAMA|nom_unidade_exercicio'
-	,'Unidade de ExercÃ­cio'
+	,'Unidade de Exercício'
 	,null,null,null,null,null,null,null,100,null,null
 	,'NOM_UNIDADE_IBAMA');
 $frm->show();

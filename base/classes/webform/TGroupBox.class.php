@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -140,7 +140,7 @@ class TGroupBox Extends TForm
 
 /*
 $group = new TGroupBox('gpTeste','Cadastro');
-$group->setLegendText('Luis EugÃªnio');
+$group->setLegendText('Luis Eugênio');
 $group->addTextField('nom_pessoa','Nome:',50);
 $group->show();
 return;
@@ -148,7 +148,7 @@ return;
 
 /*
 $group->addTextField('nom_pessoa2','Nome2:',50);
-$group->addMemoField('obs','Obs',500,true,80,4,null,null,null,'asasdfasdfasd fÃ§kjasÃ§d flasÃ§dklf asdf');
+$group->addMemoField('obs','Obs',500,true,80,4,null,null,null,'asasdfasdfasd fçkjasçd flasçdklf asdf');
 $group->setColumns(array(120));
 //$group->legend->setCss('background-color','red');
 $group->setEnabled(false);
@@ -164,7 +164,7 @@ $f = new TForm('Teste Grupo Box');
 	$g->addTextField('nom_pessoa5',"Nome:",20);
 
 $f->closeGroup();
-	$g = $f->addGroupField('gpTeste2','Dados RelatÃ³rio','auto','auto',false);
+	$g = $f->addGroupField('gpTeste2','Dados Relatório','auto','auto',false);
 	$g->addTextField('nom_pessoa6',"Nome:",20);
 	$g->addTextField('nom_pessoa7',"Nome:",20);
 	$g->addTextField('nom_pessoa8',"Nome:",20);

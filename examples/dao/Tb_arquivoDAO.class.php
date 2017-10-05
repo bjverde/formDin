@@ -13,7 +13,7 @@ class Tb_arquivoDAO extends TPDOConnection
 		}
 		$values = array(  $objVo->getNome_arquivo()
 						);
-		// mover o arquivo para a pasta de armazenamento da aplicaÃ§Ã£o
+		// mover o arquivo para a pasta de armazenamento da aplicação
 		$origem = $objVo->getTempName();
 		$destino = 'arquivos/'.$objVo->getNome_arquivo();
 		if( copy($origem,$destino) )
@@ -27,7 +27,7 @@ class Tb_arquivoDAO extends TPDOConnection
 	//--------------------------------------------------------------------------------
 	public static function delete( $id )
 	{
-    	// recuperar o nome do arquivo para excluÃ­-lo do disco
+    	// recuperar o nome do arquivo para excluí-lo do disco
 		$res = self::select($id);
 		@unlink('arquivos/'.$res['NOME_ARQUIVO'][0]);
 		$values = array($id);

@@ -9,7 +9,7 @@
 
 <?php
 /**
-* @todo Implementar mÃ©todo open,first,last, next, prior
+* @todo Implementar método open,first,last, next, prior
 */
 /*
 $conn = oci_connect('root','123456','xe');
@@ -78,7 +78,7 @@ $dao = new TDAO('tb_uf','mysql','root','','dbteste','192.168.1.140');
 $dao->setPrimaryKey('cod_uf');
 $dao->setFieldValue( 'cod_uf',2);  // ou
 $dao->setCod_uf(2);
-echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluÃ­do<br>';
+echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluído<br>';
 echo '<br>';
 $dao->delete();
 echo $dao->getError();
@@ -93,7 +93,7 @@ $dao->setPrimaryKey('cod_uf');
 $dao->setCod_uf(22);
 if( $dao->delete() )
 {
-	echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluÃ­do<br>';
+	echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluído<br>';
 	echo '<br>';
 }
 //$res = $dao->query("select * from tb_uf");
@@ -111,7 +111,7 @@ $dao->setPrimaryKey('cod_uf');
 $dao->setCod_uf(20);
 if( $dao->delete() )
 {
-	echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluÃ­do<br>';
+	echo '<br>Cod_uf:'.$dao->getCod_uf().' foi excluído<br>';
 	echo '<br>';
 }
 $res = $dao->query("select cod_uf from tb_uf");
@@ -173,7 +173,7 @@ echo '<hr>';
 print_r($dao->query("SELECT * FROM TB_UF WHERE COD_UF = ?",22));
 */
 
-// teste 2 sem blob e sem definiÃ§Ã£o de campos
+// teste 2 sem blob e sem definição de campos
 /*
 $res = $dao->query( "INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB,OBS_UF)
 		VALUES (?,?,?,?,?)"
@@ -192,7 +192,7 @@ print_r($dao->query("SELECT * FROM TB_UF WHERE COD_UF = ?",22));
 /*
 // Teste 3 - sql e valores sem parametros
 $res = $dao->query( "INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB,OBS_UF)
-		VALUES (22,'NV','Estado Novo',120.78,'ObservaÃ§Ã£o estado')");;
+		VALUES (22,'NV','Estado Novo',120.78,'Observação estado')");;
 
 if( !$res )
 {
@@ -274,7 +274,7 @@ die;
 //echo '<img src="teste.jpg"/>';
 //if( $daoOra->deleteValues(array('COD_UF'=>22)))
 //{
-//	echo 'Registro 22 excluÃ­do com sucesso!';
+//	echo 'Registro 22 excluído com sucesso!';
 //	$daoOra->commit();
 //	$res = $daoOra->query('select * from tb_uf where cod_uf = ?',22);
 //	print_r($res);
@@ -291,7 +291,7 @@ $row = ibase_fetch_object( $sth );
 print_r($row);
 die();
 */
-// exemplo conexÃ§Ã£o
+// exemplo conexção
 /*
 // oracle
 $conOracle = TConnection::connect('oracle','root','123456','xe','192.168.1.140','1521');
@@ -425,7 +425,7 @@ echo $daoOra->getError();
 /*
 if( ! file_exists('imagem/acessibilidade-brasil.gif'))
 {
-	die('imagem nÃ£o existe');
+	die('imagem não existe');
 }
 $img = file_get_contents('imagem/acessibilidade-brasil.gif');
 $txt = file_get_contents('config.php');
@@ -537,7 +537,7 @@ $daoPg->setFieldValue('sig_uf'		,null);
 $daoPg->setFieldValue('dat_validade',date('d/m/Y') );
 $daoPg->setFieldValue('dat_inclusao',date('d/m/Y h:i:s') );
 $daoPg->setFieldValue('val_pib' 	, 157.89);
-$daoPg->setFieldValue('obs_uf' 		, 'ObservaÃ§Ã£o da uf');
+$daoPg->setFieldValue('obs_uf' 		, 'Observação da uf');
 //if( $daoPg->save() )
 if( $daoPg->save() )
 {
@@ -568,7 +568,7 @@ print_r($res);
 //die;
 //$daoPg->setKeyFieldName('cod_uf');
 //print_r($daoPg->getKeyFieldNames());
-if( ! $daoPg->insertValues(array('cod_uf'=>'22','nom_uf'=>'Estado Luis EugÃªnio','sig_uf'=>'LE','val_pib'=>'157,78','dat_validade'=>'12/03/2012') ))
+if( ! $daoPg->insertValues(array('cod_uf'=>'22','nom_uf'=>'Estado Luis Eugênio','sig_uf'=>'LE','val_pib'=>'157,78','dat_validade'=>'12/03/2012') ))
 {
 		die($daoPg->getError());
 
@@ -592,14 +592,14 @@ if( !$daoMySql->connect())
 //echo '<pre>';
 //print_r($daoMySql->getFields());
 //die;
-if( ! $daoMySql->insertValues(array('cod_uf'=>'26','nom_uf'=>'Estado Luis EugÃªnio','sig_uf'=>'LE','val_pib'=>'157,78','dat_validade'=>'12/03/2012') ))
+if( ! $daoMySql->insertValues(array('cod_uf'=>'26','nom_uf'=>'Estado Luis Eugênio','sig_uf'=>'LE','val_pib'=>'157,78','dat_validade'=>'12/03/2012') ))
 {
 		die($daoMySql->getError());
 
 }
 //$dao = new TDAO('tb_lixo','mysql','root','','dbteste','192.168.1.140','includes/metadata/');
 //$dao->setAutoincFieldName('seq_lixo');
-//$dao->insertValues(array('seq_lixo'=>'5','codigo'=>4,'nome'=>'Luis EugÃªnio'));
+//$dao->insertValues(array('seq_lixo'=>'5','codigo'=>4,'nome'=>'Luis Eugênio'));
 //echo 'Last Id:'.$dao->getLastId().'<br>';
 //echo 'Last Inserted Id:'.$dao->getLastInsertId().'<br><br>';
 echo 'Last Id tb_uf:'.$daoMySql->getLastId().'<br>';
@@ -649,12 +649,12 @@ $dao->setTableName('tb_uf');
 }
 */
 /*
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (54,'GO','JOÃƒO E JOSÃ‰',125.68)");
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (55,'GO',? ,125.68)", ARRAY('JOÃƒO E JOSÃ‰') );
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (56,'GO',? ,125.68)", ARRAY(utf8_encode('JOÃƒO E JOSÃ‰')) );
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (57,'GO','".utf8_encode('JOÃƒO E JOSÃ‰')."',125.68)");
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (58,'GO',? ,125.68)", ARRAY('JOÃƒÆ’O E JOSÃƒâ€°') );
-$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (59,'GO','".'JOÃƒÆ’O E JOSÃƒâ€°'."',125.68)");
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (54,'GO','JOÃO E JOSÉ',125.68)");
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (55,'GO',? ,125.68)", ARRAY('JOÃO E JOSÉ') );
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (56,'GO',? ,125.68)", ARRAY(utf8_encode('JOÃO E JOSÉ')) );
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (57,'GO','".utf8_encode('JOÃO E JOSÉ')."',125.68)");
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (58,'GO',? ,125.68)", ARRAY('JOÃƒO E JOSÃ‰') );
+$dao->query("INSERT INTO TB_UF ( COD_UF, SIG_UF, NOM_UF,VAL_PIB) VALUES (59,'GO','".'JOÃƒO E JOSÃ‰'."',125.68)");
 */
 
 //$dao->query("update tb_uf set dat_nascimento=?, dat_inclusao = ?",array('dat_nascimento'=>'31/12/2012','DAT_INCLUSAO'=>date('d/m/Y h:i:s') ) );

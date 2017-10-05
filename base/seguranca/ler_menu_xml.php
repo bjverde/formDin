@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -42,7 +42,7 @@
 //error_reporting(E_ALL);
 
 /*
-// testar conexÃ£o
+// testar conexão
 http://10.1.4.65/~45427380191/appbase/index.php?modulo=base/seguranca/ler_menu_xml.php
 $bvars=array("SEQ_PROJETO"=> PROJETO,'NUM_PESSOA'=>$_SESSION[APLICATIVO]['login']['num_pessoa']);
 $res=null;
@@ -60,7 +60,7 @@ $menu = new TMenuDhtmlx(null,false);
 		ob_clean();
 		echo '<menu>
 				<item id="erro" text="Erro '.date('h:i:s').'">
-					<item id="erro1" text="Constante PROJETO nÃ£o definida."/>
+					<item id="erro1" text="Constante PROJETO não definida."/>
 				</item>
 			</menu>';
 		return;
@@ -70,7 +70,7 @@ $menu = new TMenuDhtmlx(null,false);
 		ob_clean();
 		echo '<menu>
 				<item id="erro" text="Erro '.date('h:i:s').'">
-					<item id="erro1" text="Constante APLICATIVO nÃ£o definida."/>
+					<item id="erro1" text="Constante APLICATIVO não definida."/>
 				</item>
 			</menu>';
 		return;
@@ -82,7 +82,7 @@ $menu = new TMenuDhtmlx(null,false);
 		ob_clean();
 		echo '<menu>
 			<item id="erro" text="Erro '.date('h:i:s').'">
-				<item id="erro1" text="NUM_PESSOA nÃ£o encontrado na sessÃ£o. Efetue login novamente."/>
+				<item id="erro1" text="NUM_PESSOA não encontrado na sessão. Efetue login novamente."/>
 			</item>
 		</menu>';
 		return;
@@ -148,8 +148,8 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
    	))
    	{
 	$menu->add(-9,0,'Limpar Cache ','app_server_action("limparCache",false,"script");','Remover dados offline dos pacotes','lixeira.gif');
-	$menu->add(-10,0,'F A S I S',null,'VocÃª Ã© um desenvolvedor','editar.gif');
-	$menu->add(-100,-10,'Cadastro de MÃ³dulo','base/seguranca/cad_modulo.php');
+	$menu->add(-10,0,'F A S I S',null,'Você é um desenvolvedor','editar.gif');
+	$menu->add(-100,-10,'Cadastro de Módulo','base/seguranca/cad_modulo.php');
 	$menu->add(-101,-10,'Cadastro do Menu Principal','base/seguranca/cad_menu_principal.php');
 	$menu->add(-102,-10,'Cadastro de Perfil','base/seguranca/cad_perfil.php');
 	$menu->add(-103,-10,'Cadastro de Perfil Acesso','base/seguranca/cad_perfil_menu.php');
@@ -159,10 +159,10 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 		$menu->add(-104,-10,'Alterar Senha','base/seguranca/alt_senha_oracle.php');
 	}
 
-   //	$menu->add(-10,0,'Exemplos','base/exemplos/index.php','Exemplo de Recursos do FormulÃ¡rio DinÃ¢mico IV','ajudaonline.gif');
-   	$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do FormulÃ¡rio DinÃ¢mico IV','ajudaonline.gif');
+   //	$menu->add(-10,0,'Exemplos','base/exemplos/index.php','Exemplo de Recursos do Formulário Dinâmico IV','ajudaonline.gif');
+   	$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Dinâmico IV','ajudaonline.gif');
 	$menu->add(-260,-20,'Grides');
-	$menu->add(-26001,-260	,'CriaÃ§Ã£o de Gride','base/exemplos/exe_gride.inc');
+	$menu->add(-26001,-260	,'Criação de Gride','base/exemplos/exe_gride.inc');
 	$menu->add(-26002,-260	,'Grid Off-Line - Formdin3','base/exemplos/exe_gride_off_line.inc');
 	$menu->add(-26003,-260	,'Grid Off-Line - FormDin4','base/exemplos/exe_gride_off_line_novo.inc');
 	$menu->add(-26004,-260	,'Grid Com Coluna Checkbox','base/exemplos/exe_gride_checkbox.inc');
@@ -171,7 +171,7 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 	$menu->add(-270,-20,'Outros');
 	$menu->add(-27001,-270,'Banco Textual DBM (db4)','base/exemplos/exe_db4.inc');
 	$menu->add(-27002,-270,'Cadastro on-line (CRUD)','base/exemplos/exe_crud_online.inc');
-	$menu->add(-27003,-270,'DocumentaÃ§Ã£o on-line','base/exemplos/exe_documentacao_online.inc');
+	$menu->add(-27003,-270,'Documentação on-line','base/exemplos/exe_documentacao_online.inc');
 	$menu->add(-27004,-270,'Select Combinado','base/exemplos/exe_select_combinado.inc');
 	$menu->add(-27005,-270,'Select Combinado F3','base/exemplos/exe_select_combinado_f3.inc');
 	$menu->add(-27006,-270,'Select Combinado Ajax','base/exemplos/exe_select_combinado_ajax.php');
@@ -184,8 +184,8 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 	$menu->add(-27014,-270,'Campo Select Ajax','base/exemplos/exe_fill_select_ajax.inc');
 	$menu->add(-27015,-270,'Redirect','base/exemplos/exe_redirect.inc');
 	$menu->add(-27016,-270,'Javascript/Css Externos','base/exemplos/exe_javascript_externo.inc');
-	$menu->add(-27017,-270,'Definir Colunas no FormulÃ¡rio','base/exemplos/exe_colunas.inc');
-	$menu->add(-27018,-270,'Tela de ConfirmaÃ§Ã£o','base/exemplos/exe_confirm_dialog.php');
+	$menu->add(-27017,-270,'Definir Colunas no Formulário','base/exemplos/exe_colunas.inc');
+	$menu->add(-27018,-270,'Tela de Confirmação','base/exemplos/exe_confirm_dialog.php');
 	// parametros da janela
 	$params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
 	$menu->add(-27019,-270,'Site da Google','http://www.google.com','Site do Google',null,null,null,null,null,json_encode($params));
@@ -193,7 +193,7 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 	$menu->add(-27019,-270,'Postgres Lob','base/exemplos/exe_postgres.php');
 	$menu->add(-27020,-270,'Exemplo de Mensagens','base/exemplos/exe_mensagem.php');
 
-	$menu->add(-2001,-20,'CriaÃ§Ã£o de Abas','base/exemplos/exe_aba.inc');
+	$menu->add(-2001,-20,'Criação de Abas','base/exemplos/exe_aba.inc');
 	$menu->add(-2002,-20,'Campo/Gride com Autocompletar','base/exemplos/exe_autocompletar.inc');
 	$menu->add(-2003,-20,'Campo Checkbox','base/exemplos/exe_checkbox.inc');
 	$menu->add(-2004,-20,'Campo com Consulta On-line','base/exemplos/exe_onlinesearch.inc');
@@ -204,15 +204,15 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 	$menu->add(-2009,-20,'Campo Hora','base/exemplos/exe_campo_hora.inc');
 	$menu->add(-2010,-20,'Campo Cor','base/exemplos/exe_campo_cor.inc');
 	$menu->add(-2011,-20,'Campo Memo / Editor HTML','base/exemplos/exe_campo_memo.inc');
-	$menu->add(-2012,-20,'Campo Coordenada GeogrÃ¡fica','base/exemplos/exe_campo_coordGMS.inc');
-	$menu->add(-2013,-20,'Campo NÃºmero','base/exemplos/exe_campo_numero.inc');
+	$menu->add(-2012,-20,'Campo Coordenada Geográfica','base/exemplos/exe_campo_coordGMS.inc');
+	$menu->add(-2013,-20,'Campo Número','base/exemplos/exe_campo_numero.inc');
 	$menu->add(-2014,-20,'Campo Ajuda (facebox)','base/exemplos/exe_campo_ajuda.inc');
 	$menu->add(-2015,-20,'Campo Grupo','base/exemplos/exe_campo_grupo.inc');
 	$menu->add(-2016,-20,'Campo Telefone','base/exemplos/exe_telefone.inc');
 	$menu->add(-2017,-20,'Campo Arquivo','base/exemplos/exe_campo_arquivo.inc');
 	$menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
 	$menu->add(-2019,-20,'Campo Autocompletar'	,'base/exemplos/exe_autocomplete.php');
-	$menu->add(-2099,-20,'Testes LaboratÃ³rio','base/exemplos/exe_teste.inc');
+	$menu->add(-2099,-20,'Testes Laboratório','base/exemplos/exe_teste.inc');
 
 	}
 

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -45,17 +45,17 @@ $frm = new TForm('Exemplo do Campo Checkbox');
 
 $frm->addGroupField('gp1','Grupo');
 
-	//$frm->addTextField('nm_anexo_doc', 'Arquivo de Word (DOC) associado pelo Advogado ou EstagiÃ¡rio:&nbsp;&nbsp;',35,false,35,null,true,null,null,null,true);
+	//$frm->addTextField('nm_anexo_doc', 'Arquivo de Word (DOC) associado pelo Advogado ou Estagiário:&nbsp;&nbsp;',35,false,35,null,true,null,null,null,true);
 	//$frm->addButton('Baixar',null,'btn_baixar_anexo',"baixar_anexo('doc')",null,false,false,'last16.gif',null,'Baixar');
   	//$frm->addHtmlField('st_publico_doc',null,null,null,20,100,false)->setCss('font','9px sans-serif')->setCss('border','1px solid red');
-	$frm->addCheckField('st_publico','Na anÃ¡lise do Advogado esta peÃ§a deve ser pÃºblica?',false,null,null,null,null,null,null,null,null,true);
+	$frm->addCheckField('st_publico','Na análise do Advogado esta peça deve ser pública?',false,null,null,null,null,null,null,null,null,true);
 
 	$frm->addCheckField('campo_1','Confirma ?',true);
-	$frm->addCheckField('campo_2','Bioma ObrigatÃ³rio para o cadastramentodas espÃ©cies:',true,'1=Cerrado,2=Mata AtlÃ¢ntica,3=Caatinga',null,null,null,null,null,null,null,true);
-	$frm->addCheckField('campo_3','Bioma NÃ£o ObrigatÃ³rio:',false,'1=Cerrado,2=Mata AtlÃ¢ntica,3=Caatinga');
+	$frm->addCheckField('campo_2','Bioma Obrigatório para o cadastramentodas espécies:',true,'1=Cerrado,2=Mata Atlântica,3=Caatinga',null,null,null,null,null,null,null,true);
+	$frm->addCheckField('campo_3','Bioma Não Obrigatório:',false,'1=Cerrado,2=Mata Atlântica,3=Caatinga');
 	$frm->addCheckField('campo_4','Exemplo 4:',false,'N',null,null);
 
-	$frm->addCheckField('cd_especie','EspÃ©cies:',false,'1=Amarela,2=Branca,3=Vermelha')->addEvent('onChange','cd_especieChange()');
+	$frm->addCheckField('cd_especie','Espécies:',false,'1=Amarela,2=Branca,3=Vermelha')->addEvent('onChange','cd_especieChange()');
 $frm->closeGroup();
 
 $frm->addGroupField('gp2','Grupo 2');
@@ -81,7 +81,7 @@ if( $acao=='Validar' )
 {
 	$frm->validate();
 }
-// exibir o formulÃ¡rio
+// exibir o formulário
 $frm->show();
 ?>
 <script>
