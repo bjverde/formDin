@@ -44,20 +44,15 @@ define('FORMDIN',1);
 define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
-<<<<<<< HEAD
-include('../base/classes/webform/TApplication.class.php');
-$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telem�tica - CNT');
-=======
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
->>>>>>> 92fad7f... correção da referencia do base
 $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);
 $app->setNorthSize(55);
 //$app->getNorthArea()->setCss('border','0px');
 
-$app->setMainMenuFile('menu_principal.php');
+$app->setMainMenuFile('includes/menu.php');
 $app->setConfigFile(null);
 //$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
