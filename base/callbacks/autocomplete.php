@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -41,7 +41,7 @@ if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() )
 {
 	if( !function_exists('recuperarPacote') )
 	{
-		print 'Faltou include da conexÃ£o|';
+		print 'Faltou include da conexão|';
 		return;
 	}
 }
@@ -76,7 +76,7 @@ foreach($_REQUEST as $k=>$v)
 			impAutocomplete("bvars:".strtoupper($aTemp[1]).'='.$v,$boolDebug);
 		}
 	}
-	// os parametros para atualizar os campos ao selecionar uma opÃ§Ã£o veem com _u_  ( de update )
+	// os parametros para atualizar os campos ao selecionar uma opção veem com _u_  ( de update )
 	else if(substr($k,0,3)=="_u_")
 	{
 		$arrUpdateFields[strtoupper(substr($k,3))]=$v;
@@ -114,7 +114,7 @@ if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0)
 		$bvars[$strSearchField]=$_REQUEST['q'];
 	}
 
-	// Por razÃµes de seguranÃ§a, o variÃ¡vel num_pessoa tem que ser lido da sessÃ£o
+	// Por razões de segurança, o variável num_pessoa tem que ser lido da sessão
 	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
 		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
 	} else {
@@ -131,7 +131,7 @@ if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0)
 	//executar_pacote_func_proc($strTablePackageFuncion,$bvars,$intCacheTime))
 	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime))
 	{
-		echo utf8_encode("Erro na funÃ§Ã£o autocomplete(). Erro:".$erro[0])."\n";
+		echo utf8_encode("Erro na função autocomplete(). Erro:".$erro[0])."\n";
 		return;
 	}
 }
@@ -176,7 +176,7 @@ else
 			//impAutocomplete('Erro='.$erro,$boolDebug);
 			if( preg_match('/falha/i',$erro ) > 0 )
 			{
-				echo utf8_encode("Erro na funÃ§Ã£o autocomplete(). Erro:".$erro)."\n".$sql;
+				echo utf8_encode("Erro na função autocomplete(). Erro:".$erro)."\n".$sql;
 				return;
 			}
 		}
@@ -202,7 +202,7 @@ if( is_array( $res ) )
 	}
 	if ( !array_key_exists($strSearchField ,$res) )
 	{
-		echo utf8_encode('Coluna '.$strSearchField.' nÃ£o existe na tabela');
+		echo utf8_encode('Coluna '.$strSearchField.' não existe na tabela');
 		return;
 	}
 	foreach($res[key($res)] as $k=>$v)
@@ -235,7 +235,7 @@ return;
 
 //--------------------------------------------------------
 /**
-* FunÃ§Ã£o para ajudar na depuraÃ§Ã£o do retorno do autocomplete
+* Função para ajudar na depuração do retorno do autocomplete
 *
 * @param string $strTexto
 * @param string $boolDebug

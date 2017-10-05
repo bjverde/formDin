@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -43,7 +43,7 @@
 	private $divContent;
 	public	$divBody;
 	private $flat;
-	public $legend;   // devido a compatibilidade com IE, a legenda sÃ³ serÃ¡ exibida no modo FLAT
+	public $legend;   // devido a compatibilidade com IE, a legenda só será exibida no modo FLAT
 	public $openCloseButton;
 	private $position;
 	private $outside;
@@ -266,7 +266,7 @@
 		}
 	}
 	/**
-	* Define o css que serÃ¡ aplicado na div onde serÃ¡ colocado o conteudo do BOX
+	* Define o css que será aplicado na div onde será colocado o conteudo do BOX
 	*
 	* @param string $strCssProperty
 	* @param string $strValue
@@ -277,7 +277,7 @@
 	}
 
 	/**
-	* Define se a caixa terÃ¡ borda 3D ou Simples
+	* Define se a caixa terá borda 3D ou Simples
 	*
 	* @param boolean $boolNewValue
 	*/
@@ -296,7 +296,7 @@
 	}
 	/**
 	* Define o objeto legenda
-	* Obs: devido a compatibilidade com IE, a legenda sÃ³ serÃ¡ exibida no modo FLAT
+	* Obs: devido a compatibilidade com IE, a legenda só será exibida no modo FLAT
 	*
 	* @param TElement $objLegend
 	*/
@@ -334,7 +334,7 @@
 		$this->openCloseButton = $objNewValue;
 	}
 	/**
-	* Define a posiÃ§Ã£o do box na tela. Os valores possÃ­veis sÃ£o:
+	* Define a posição do box na tela. Os valores possíveis são:
 	*
 	*	TL	= Top Left		CL	= Center Left 		BL	= Bottom Left
 	* 	TC	= Top Center	CC	= Center Center		BC	= Bottom Center
@@ -371,7 +371,7 @@
 	}
 
 		/**
-	 * MÃ©todo para retornar a instÃ¢ncia do objeto outside
+	 * Método para retornar a instância do objeto outside
 	 *
 	 */
 	public function getOutside()
@@ -379,7 +379,7 @@
 		return $this->outside;
 	}
 	/**
-	 * MÃ©todo utilizado para retornar o html adicionado fora da Ã¡rea do formulÃ¡rio.
+	 * Método utilizado para retornar o html adicionado fora da área do formulário.
 	 *
 	 */
 	public function getOutsideHtml($print=true)
@@ -388,8 +388,8 @@
 	}
 	//-----------------------------------------------------------------------------
 	/**
-	 * MÃ©todo utilizado para adicionar objetos e ou cÃ³digos html
-	 * fora da Ã¡rea do formulÃ¡rio
+	 * Método utilizado para adicionar objetos e ou códigos html
+	 * fora da área do formulário
 	 */
 	public function addOutside($mixNewValue=null)
 	{

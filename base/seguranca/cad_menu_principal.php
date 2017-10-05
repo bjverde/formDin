@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,29 +20,29 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÃ³dulo de cadastro do menu principal do projeto
-Autor: Luis EugÃªnio Barbosa
+Módulo de cadastro do menu principal do projeto
+Autor: Luis Eugênio Barbosa
 Data Inicio: 03-12-2009
 */
-$frm = new TForm('Cadastro do Menu Principal da AplicaÃ§Ã£o',500);
+$frm = new TForm('Cadastro do Menu Principal da Aplicação',500);
 $frm->addHiddenField('seq_projeto',PROJETO);
 $frm->addHiddenField('seq_menu');
 $frm->addHiddenField('sit_sistema');
@@ -51,11 +51,11 @@ $frm->addHiddenField('sit_sistema');
 $pc = $frm->addPageControl('pc',null,null,'pcClick');
 $abaCadastro = $pc->addPage('Cadastro',true,true,'abaCadastro');
 	$frm->addSelectField('seq_menu_pai'			,'Item Pai:',false);
-	$frm->addTextField('des_rotulo'				,'RÃ³tulo:',40,false);
-	$frm->addSelectField('seq_modulo'			,'MÃ³dulo Executar:',false,null);
+	$frm->addTextField('des_rotulo'				,'Rótulo:',40,false);
+	$frm->addSelectField('seq_modulo'			,'Módulo Executar:',false,null);
 	$frm->addNumberField('num_ordem'			,'Ordem:',3,false,0);
-	$frm->addSelectField('sit_separador'		,'Item Separador:',true,'N=NÃ£o,S=Sim');
-	$frm->addSelectField('sit_cancelado'		,'Cancelado:',true,'N=NÃ£o,S=Sim');
+	$frm->addSelectField('sit_separador'		,'Item Separador:',true,'N=Não,S=Sim');
+	$frm->addSelectField('sit_cancelado'		,'Cancelado:',true,'N=Não,S=Sim');
 	$frm->addTextField('des_grupo'				,'Grupo:',20,false,null,null);
 	$frm->addTextField('des_hint'				,'Texto Ajuda:',500,false,30);
 	$frm->addTextField('nom_gif'				,'Imagem Gif:',100,false,30,null);
@@ -63,7 +63,7 @@ $abaCadastro = $pc->addPage('Cadastro',true,true,'abaCadastro');
 $pc->addPage('Gride',false,true,'abaGride');
 	$frm->addHtmlField('gride');
 
-// definir os botÃµes de aÃ§Ã£o do formulÃ¡rio
+// definir os botões de ação do formulário
 $frm->setAction('Gravar,Novo');
 $frm->getField('seq_modulo')->addEvent('onChange','jQuery("#des_rotulo").val(jQuery("#seq_modulo option:selected").text() );');
 //$frm->addButton('Atualizar',null,'btnAtualizar','btnAtualizarClick()');
@@ -76,10 +76,10 @@ switch($acao)
 	break;
 	//---------------------------------------------------------------------------------
 	case 'Gravar':
-		// item do menu principal nÃ£o pode ter mais de 25 caracteres
+		// item do menu principal não pode ter mais de 25 caracteres
 		if((integer)$frm->getValue('seq_menu_pai')==0 && strlen($frm->getValue('des_rotulo'))>40)
 		{
-			$frm->setMessage('Item do menu principal nÃ£o pode ter mais de 40 caracteres!!');
+			$frm->setMessage('Item do menu principal não pode ter mais de 40 caracteres!!');
 			break;
 		}
 		if( $frm->validate() )
@@ -110,7 +110,7 @@ switch($acao)
 		$pc->setActivePage('abaCadastro',true);
 	break;
 }
-// refazer o menu para dar um preview de como estÃ¡ ficando
+// refazer o menu para dar um preview de como está ficando
 
 if( $acao && $acao != 'gd_alterar')
 {

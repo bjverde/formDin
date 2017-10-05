@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,24 +19,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
- // marcar os campos obrigatÃ³rios com Asterisco na frente
+ // marcar os campos obrigatórios com Asterisco na frente
 define('REQUIRED_FIELD_MARK','*');
 
 $frm = new TForm('Exemplo do Campo Texto');
@@ -51,14 +51,14 @@ $res['DESC'][] = 'Um';
 $res['COD'][] = '2';
 $res['DESC'][] = 'Dois';
 
-// definir consulta dinÃ¢mica no campo municÃ­pio
+// definir consulta dinâmica no campo município
 $frm->setOnlineSearch('municipio'
-    ,'tb_municipio' // tabela de municÃ­pios
-	,'nom_municipio|MunicÃ­pio:||||||like,cod_estado|Uf:||||select'  // campos para seleÃ§Ã£o do municÃ­pio. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+    ,'tb_municipio' // tabela de municípios
+	,'nom_municipio|Município:||||||like,cod_estado|Uf:||||select'  // campos para seleção do município. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
 	,false
 	,false
-	,true // se for encontrada apenas 1 opÃ§Ã£o fazer a seleÃ§Ã£o automaticamente
-	,'cod_municipio|CÃ³digo,nom_municipio|MunicÃ­pio'
+	,true // se for encontrada apenas 1 opção fazer a seleção automaticamente
+	,'cod_municipio|Código,nom_municipio|Município'
 	,'NOM_MUNICIPIO|municipio'
 	,null
 	,null,null,null,null,null,null
@@ -76,21 +76,21 @@ $frm->setOnlineSearch('municipio'
 $frm->addTextField('nome2','Nome Desabilitado:',80,null,null,'Desabilitado',true,null,null,true)->setEnabled(false);
 $frm->addTextField('nome3','Nome Somente Leitura:',80,true,null,'Somente leitura',true,null,null,true)->setReadOnly(true);
 
-// botÃµes de aÃ§Ã£o
+// botões de ação
 $frm->setAction('Atualizar');
 $frm->addButton('Validar',null,null,'fwValidateFields()');
 $frm->addButton('Limpar',null,'btnLimpar','fwClearChildFields()');
 
-// funÃ§Ã£o chamada no carregamento da pÃ¡gina
+// função chamada no carregamento da página
 $frm->addJavascript('init()');
 
-// criar o html do formulÃ¡rio
+// criar o html do formulário
 $frm->show();
 ?>
 <script>
 function init()
 {
-	fwAlert('FormulÃ¡rio foi carregado!')
+	fwAlert('Formulário foi carregado!')
 }
 
 // Online Search callback

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,32 +20,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÃ³dulo utilizado para preenchimento dos campos de endereÃ§o utilizando consulta do cep, via
-ajax, ao serviÃ§o www.bucacep.com.br
+Módulo utilizado para preenchimento dos campos de endereço utilizando consulta do cep, via
+ajax, ao serviço www.bucacep.com.br
 Data:22-03-2010
 Teste: cep=74265010
 */
 error_reporting(0);
 /*
-//Utilizando o serviÃ§o: http://viavirtual.com.br/webservicecep.php
+//Utilizando o serviço: http://viavirtual.com.br/webservicecep.php
 $consulta = 'http://viavirtual.com.br/webservicecep.php?cep='.$_GET['cep'];
 $consulta = file($consulta);
 $consulta = explode('||',$consulta[0]);
@@ -84,14 +84,14 @@ if(isset($_REQUEST['cep']))
 {
 
 	$cep = preg_replace('/[^0-9]/','',$_REQUEST['cep']);
-	header ("content-type: text/xml; charset=UTF-8");
+	header ("content-type: text/xml; charset=ISO-8859-1");
 	if( function_exists('curl_init'))
 	{
 
 	    // utilizando curl()
 		$options = array(
 			CURLOPT_RETURNTRANSFER => true, // return web page
-			CURLOPT_HEADER => false, // donâ€™t return headers
+			CURLOPT_HEADER => false, // don’t return headers
 			CURLOPT_FOLLOWLOCATION => true, // follow redirects
 			CURLOPT_ENCODING => '', // handle all encodings
 			CURLOPT_USERAGENT => 'formdin', // who am i
@@ -121,7 +121,7 @@ if(isset($_REQUEST['cep']))
 	{
 		/**
 		* utilizando file_get_contents()
-		* nÃ£o vai funcionar se a opÃ§Ã£o URL file-access estiver desabilitada no servidor.
+		* não vai funcionar se a opção URL file-access estiver desabilitada no servidor.
 		*/
 		$cep = ereg_replace('[^0-9]','',$_POST['cep']);
 		header ("content-type: text/xml; charset=UTF-8");
@@ -143,7 +143,7 @@ if(isset($_REQUEST['cep']))
 				<cep>71505030</cep>
 				<uf>DF</uf>
 				<cidade>Lago Norte</cidade>
-				<bairro>Setor de HabitaÃ§Ãµes Individuais Norte</bairro>
+				<bairro>Setor de Habitações Individuais Norte</bairro>
 				<tipo_logradouro>Conjunto</tipo_logradouro>
 				<logradouro>SHIN QI 1  3</logradouro>
 				<data>2010-06-12 00:18:12</data>

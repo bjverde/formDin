@@ -18,15 +18,15 @@
 
 </style>
 <?php
-	include('../base/classes/webform/TApplication.class.php');
-	$frm = new TForm('Configura√ß√µes do PHP',null,500);
+	include('../base/classes/webform/TApplication.class.php');	
+	$frm = new TForm('ConfiguraÁıes do PHP',null,500);
 	$html = $frm->addHtmlField('conf','');
 	$html->setCss('font-size','14px');
 
-	$html->add('<b>Vers√£o do PHP</b>: <span class="versao">'.phpversion().'</span><br>');
+	$html->add('<b>Vers„o do PHP</b>: <span class="versao">'.phpversion().'</span><br>');
 	$html->add('<b>Seu Ip</b>: <span class="versao">'.$_SERVER['REMOTE_ADDR'].'</span><br>');
 
-	$html->add('<br><b>Extens√µes:</b><br>');
+	$html->add('<br><b>Extensıes:</b><br>');
 
 	testar('gd',$html);
 	testar('pdf',$html);
@@ -68,7 +68,7 @@
 	{
 		if( !extension_loaded($extensao) )
 		{
-			$html->add('<b>'.$extensao.'</b>: <span class="vermelho">N√£o instalada</span><br>');
+			$html->add('<b>'.$extensao.'</b>: <span class="vermelho">N„o instalada</span><br>');
 			return true;
 		}
 		else

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -45,19 +45,19 @@ $frm->setcss('background-color','#B4CDCD');
 //$frm->addJavascript('gridCallBack(REQUEST)');
 
 $frm->addNumberField('val_salario'		, 'Salario:',10,false,2);
-$frm->addSelectField('tip_pagamento'	, 'Tipo Pagamento:',null,'1=Mensal,2=Semanal,3=DiÃ¡rio',false);
+$frm->addSelectField('tip_pagamento'	, 'Tipo Pagamento:',null,'1=Mensal,2=Semanal,3=Diário',false);
 $frm->addTextField('nom_moeda'			, 'Moeda:',13,false);
 $frm->addTextField('sig_moeda'			, 'Sigla:',4,true,null,null,false)->setAttribute('grid_align','center')->setAttribute('grid_hidden','true');
 
 $frm->addSelectField('cod_uf','Estado:',false,null,true);
-$frm->addSelectField('cod_municipio'	,'MunicÃ­pio:',null,null,false)->setAttribute('grid_column','NOM_MUNICIPIO');
-$frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- MunicÃ­pios --','0','Nenhum MunicÃ­pio Encontrado','cod_regiao','callBackSelectCombinado()');
+$frm->addSelectField('cod_municipio'	,'Município:',null,null,false)->setAttribute('grid_column','NOM_MUNICIPIO');
+$frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Municípios --','0','Nenhum Município Encontrado','cod_regiao','callBackSelectCombinado()');
 
-// fazer a validaÃ§Ã£o manualmente
+// fazer a validação manualmente
 $_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 if( $_REQUEST['action'] == 'save'){
 	if( ! $frm->get('nom_moeda') ){
-		$frm->addError('O campo Moeda Ã© de preenchimento ObrigatÃ³rio');
+		$frm->addError('O campo Moeda é de preenchimento Obrigatório');
 	}
 }
 /*session_start();
@@ -102,10 +102,10 @@ $grid = new TGrid('gdx','Dados Off-line'
 					,null
 					,'exe_gride_3_dados.php');
 
-// adicionar o formulÃ¡rio ao gride para criar o gride offline
+// adicionar o formulário ao gride para criar o gride offline
 $grid->setForm($frm,false);
 
-$grid->setShowAdicionarButton(true); // exibir o botÃ£o de adicionar - default =  true
+$grid->setShowAdicionarButton(true); // exibir o botão de adicionar - default =  true
 
 // Exemplo de como alterar a largura e o alinhamento da coluna Moeda.
 $grid->setOnDrawHeaderCell('drawHeader');
@@ -124,7 +124,7 @@ function drawHeader($objTh,$objCol,$objHead)
 /*$tb = new TTable();
 $tb->setCss('font-size','12px');
 $row = $tb->addRow();
-$row->addCell('<center>Exemplo dos dados do Grid que estÃ£o na variÃ¡vel de sessÃ£o:<br><b>$_SESSION[APLICATIVO]["offline"]["gdx"]</b></center>');
+$row->addCell('<center>Exemplo dos dados do Grid que estão na variável de sessão:<br><b>$_SESSION[APLICATIVO]["offline"]["gdx"]</b></center>');
 $row = $tb->addRow();
 $row->addCell('<pre><div style="border:1px dashed black;width:540px;height:150px;overflow:hidden;overflow-y:auto;">'.print_r($_SESSION[APLICATIVO]['offline']['gdx'],true).'</div></pre>');
 $tb->show();

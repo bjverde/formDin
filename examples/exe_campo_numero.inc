@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -46,17 +46,17 @@
 
 //phpinfo();
 //return;
-$frm = new TForm('Campo NumÃ©rico');
+$frm = new TForm('Campo Numérico');
 //$frm->setAutoSize(true);
 //$frm->setColumns(array(50,100,200,200));
 $frm->addNumberField('num_pessoa'			,'Qtd:',9,false,2,true,null,5,null,null,null,true,true);
-$frm->addNumberField('num_peso',             'Peso UnitÃ¡rio',4,true,2,false)->setExampleText('Kg');
-$frm->addNumberField('num_peso2',            'Peso UnitÃ¡rio2',9,true,2,false)->setExampleText('Kg');
+$frm->addNumberField('num_peso',             'Peso Unitário',4,true,2,false)->setExampleText('Kg');
+$frm->addNumberField('num_peso2',            'Peso Unitário2',9,true,2,false)->setExampleText('Kg');
 
 //$frm->addTag('<div style="border:1px dashed red;">');
-//$frm->addNumberField('val_salario'	,'SalÃ¡rio:',10,false,2,false);
-//$frm->addNumberField('val_taxa'		,'Taxa:',10,false,4,null,null,null,null,null,null,null,null,null,null,'Informe a taxa de variÃ§Ã£o do valor');
-//$frm->addSelectField('sit_cancelado','Cancelado?',null,'S=Sim,N=NÃ£o')->addEvent('onChange','alert("oi")');
+//$frm->addNumberField('val_salario'	,'Salário:',10,false,2,false);
+//$frm->addNumberField('val_taxa'		,'Taxa:',10,false,4,null,null,null,null,null,null,null,null,null,null,'Informe a taxa de varição do valor');
+//$frm->addSelectField('sit_cancelado','Cancelado?',null,'S=Sim,N=Não')->addEvent('onChange','alert("oi")');
 //$frm->addTag('</div>');
 $frm->set('num_peso','1,5');
 $frm->setAction('Gravar,Testar');
@@ -68,10 +68,10 @@ if($acao=='Gravart')
 		//d($_POST);
 		$bvars = $frm->createBvars('num_pessoa,val_salario,val_taxa');
 		//d($bvars);
-		$frm->setPopUpMessage('ValidaÃ§Ã£o OK');
+		$frm->setPopUpMessage('Validação OK');
 	}
 }
-// exibir o formulÃ¡rio
+// exibir o formulário
 $frm->show();
 ?>
 <script>

@@ -15,10 +15,16 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 ## Sobre as branchs
 * Master - tem as modificações e novidades
 * copyLEB - copia de versão original, congelada e sem alterações.
+* UTF-8 - Um tentativa para deixar o projeto com o formato UTF-8. 
+* ANSI - Uma copia do master
 
 ## Informações
 
 * arquivos do projeto
-    * UTF-8 Sem BOM
+    * ANSI
     * retorno do carro formato Windows
 * PHP 5.4.x ou superior
+
+## Instalação.
+
+Baixe o projeto em coloque um servidor PHP.

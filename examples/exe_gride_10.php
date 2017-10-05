@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@ error_reporting(E_ALL);
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(E_ALL);
 
-$frm = new TForm('Exemplo de Com Campos EditÃ¡veis');
+$frm = new TForm('Exemplo de Com Campos Editáveis');
 $frm->addTextField('nome','Nome:',30,true);
 
 $dados = null;
@@ -78,7 +78,7 @@ $dados['VAL_PRECO'][] = '578,87';
 
 
 $gride = new TGrid( 'gdxy' // id do gride
-					,'TÃ­tulo do Gride' // titulo do gride
+					,'Título do Gride' // titulo do gride
 					,$dados 	// array de dados
 					,250		// altura do gride
 					,null		// largura do gride
@@ -86,8 +86,8 @@ $gride = new TGrid( 'gdxy' // id do gride
 					,'NM_TABELA|nome'
 					);
 
-//$gride->addTextColumn('val_preco','PreÃ§o','VAL_PRECO',10,10)->addEvent('onClick','alert( this.value)');
-//$gride->addNumberColumn('val_preco','PreÃ§o','VAL_PRECO',10,2)->addEvent('onFocus','alert( this.value)');
+//$gride->addTextColumn('val_preco','Preço','VAL_PRECO',10,10)->addEvent('onClick','alert( this.value)');
+//$gride->addNumberColumn('val_preco','Preço','VAL_PRECO',10,2)->addEvent('onFocus','alert( this.value)');
 
 $gride->addRadioColumn('st_perfil','Perfil','ST_PERFIL','NM_TABELA');
 //$gride->addColumn('nm_tabela'	,'Tabela',20,20);
@@ -95,9 +95,9 @@ $gride->addCheckColumn('st_tabela','Aprovado','ST_TABELA','NM_TABELA')->setEvent
 $gride->addTextColumn('id_tabela','ID','ID_TABELA',20,20);
 //$gride->addTextColumn('nm_tabela','Nome da Tabela','NM_TABELA',60,80);
 $gride->addColumn('link','Link',200,'center');
-$gride->addSelectColumn('sit_opcoes' ,'OpÃ§Ãµes','SIT_OPCOES','1=Amarelo,2=Verde');
-//$gride->addSelectColumn('sit_opcoes','OpÃ§Ãµes','SIT_OPCOES',null,null,null,null,null,null,null,'VAL_OPCAO');
-$gride->addNumberColumn('val_preco','PreÃ§o','VAL_PRECO',10,2)->setAttribute('required','true')->addEvent('onBlur','alert( this.value)');
+$gride->addSelectColumn('sit_opcoes' ,'Opções','SIT_OPCOES','1=Amarelo,2=Verde');
+//$gride->addSelectColumn('sit_opcoes','Opções','SIT_OPCOES',null,null,null,null,null,null,null,'VAL_OPCAO');
+$gride->addNumberColumn('val_preco','Preço','VAL_PRECO',10,2)->setAttribute('required','true')->addEvent('onBlur','alert( this.value)');
 
 
 
@@ -109,7 +109,7 @@ $frm->setAction('Atualizar');
 
 $frm->show();
 
-d($_POST,'conteÃºdo do $_POST');
+d($_POST,'conteúdo do $_POST');
 
 function gdAoDesenharCab($th,$objColumn,$objHeader )
 {

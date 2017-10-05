@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,45 +20,45 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
 F.A.S.I.S
-Projeto......:CADASTRO TÃ©CNICO FEDERAL
-MÃ³dulo.......: Cadastro de Tabelas Auxiliares
+Projeto......:CADASTRO TéCNICO FEDERAL
+Módulo.......: Cadastro de Tabelas Auxiliares
 Data Inicio..:
-Data TÃ©rmino.:
+Data Término.:
 */
 
 // campos do formulario
 $arrCampos['form_status']						= new CampoHtml('form_status','');
 $arrCampos['gpTipoDado']							= new CampoGrupo('Tipo de Dado');
 $arrCampos['seq_tipo_dados_apoio']			= new CampoSelect('seq_tipo_dados_apoio','Tipo Dado',false,null,null,array("onChange"=>"submit()"),true,null,null,null,null,null,null,null,'&lt;Registrar tipo de dado novo&gt;');
-$arrCampos['des_tipo_dados_apoio']			= new CampoTexto('des_tipo_dados_apoio','DescriÃ§Ã£o',true,'',null,100,80);
+$arrCampos['des_tipo_dados_apoio']			= new CampoTexto('des_tipo_dados_apoio','Descrição',true,'',null,100,80);
 $arrCampos['sig_tipo_dados_apoio']			= new CampoTexto('sig_tipo_dados_apoio','Sigla',true,'',null,25,25);
-$arrCampos['sit_cancela_tipo_dados_apoio']	= new CampoSelect('sit_cancela_tipo_dados_apoio','Inativo',true,null,array('N'=>'NÃ£o','S'=>'Sim'),null,true);
+$arrCampos['sit_cancela_tipo_dados_apoio']	= new CampoSelect('sit_cancela_tipo_dados_apoio','Inativo',true,null,array('N'=>'Não','S'=>'Sim'),null,true);
 $arrCampos['gpTipoDadoFim']						= new CampoGrupo();
 $arrCampos['gpDado']								= new CampoGrupo('Dados');
 $arrCampos['gride']								= new CampoHtml('gride','');
-$arrCampos['num_registros_novos']				= new CampoSelect('num_registros_novos','NÂº de registros novos no grid atÃ©',false,2,array("1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5","6"=>"6","7"=>"7","8"=>"8","9"=>"9","10"=>"10"),array("onChange"=>"submit()"),true);
+$arrCampos['num_registros_novos']				= new CampoSelect('num_registros_novos','Nº de registros novos no grid até',false,2,array("1"=>"1","2"=>"2","3"=>"3","4"=>"4","5"=>"5","6"=>"6","7"=>"7","8"=>"8","9"=>"9","10"=>"10"),array("onChange"=>"submit()"),true);
 $arrCampos['gpDadofim']							= new CampoGrupo();;
 
-// criar instancia do formulÃ¡rio dinÃ¢mico
+// criar instancia do formulário dinâmico
 $frm = new FormDin3($arrCampos,'Dados de Apoio',$_POST);
 $frm->setAltura(0);
 $frm->botaoAcao[''] = array('Gravar','Novo');
@@ -82,7 +82,7 @@ switch($formDinAcao) {
 			if(!$frm->msgerros = executarPacote(ESQUEMA.'.PKG_DADOS_APOIO.EXC_DADOS_APOIO',$_POST,-1))
 			{
 				$frm->limparCampos();
-				$frm->mensagem='Registro excluÃ­do com sucesso!!!';
+				$frm->mensagem='Registro excluído com sucesso!!!';
 			}
 	break;
    	//---------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ switch($formDinAcao) {
 			$_SESSION['form_token'] = md5(serialize($_POST));
 			if(!$frm->msgerros = executarPacote(ESQUEMA.'.PKG_DADOS_APOIO.INC_ALT_TIPO_DADO',$_POST,-1)) {
 				if((integer)$frm->get('seq_tipo_dados_apoio')==0) {
-					$frm->mensagem='Tipo dado incluÃ­do com sucesso!!!';
+					$frm->mensagem='Tipo dado incluído com sucesso!!!';
 					$frm->limparCampos();
 				}
 				else {
@@ -133,7 +133,7 @@ switch($formDinAcao) {
 		}
 	break;
 }
-// inicializar os campos em branco com valor padrÃ£o
+// inicializar os campos em branco com valor padrão
 $bvars = null;
 print_r(recuperarPacote(ESQUEMA.'.PKG_DADOS_APOIO.SEL_TIPO_DADOS',$bvars,$res_tipo_dados,-1));
 $frm->setOpcoes('seq_tipo_dados_apoio',$res_tipo_dados,'CODIGO','DESCRICAO');
@@ -150,7 +150,7 @@ if ( $frm->get('seq_tipo_dados_apoio') ) {
 		$bvars['CURSOR']['SIT_CANCELADO'][] = 'N';
 	}
 
-	// criaÃ§Ã£o do gride
+	// criação do gride
 	$frm->set('gride',criarGride('gride'
 								,null
 								,$bvars['CURSOR']
@@ -159,8 +159,8 @@ if ( $frm->get('seq_tipo_dados_apoio') ) {
 								,'SEQ_DADOS_APOIO'
 								,'text_sit_cancelado_atual/0/text/SIT_CANCELADO|
 								`text_des_dados_apoio_atual/0/text/DES_DADOS_APOIO|
-								`text_sit_cancelado/100/sel/SIT_CANCELADO/N/N=>NÃ£o,S=>Sim|Inativo
-								`text_des_dados_apoio/100:80/text/DES_DADOS_APOIO/N/|DescriÃ§Ã£o
+								`text_sit_cancelado/100/sel/SIT_CANCELADO/N/N=>Não,S=>Sim|Inativo
+								`text_des_dados_apoio/100:80/text/DES_DADOS_APOIO/N/|Descrição
 								`SEQ_DADOS_APOIO|SEQ'
 								,null
 								,null
@@ -173,7 +173,7 @@ if ( $frm->get('seq_tipo_dados_apoio') ) {
 								,null
 								,'COR_FUNDO||$nl%2!=0|#efefef
 								 ,ALINHAMENTO_TEXTO|SIT_CANCELADO||CENTER
-								 ,VALOR|SIT_CANCELADO|$res["SIT_CANCELADO"][$k]=="S"|NÃ£o|Sim
+								 ,VALOR|SIT_CANCELADO|$res["SIT_CANCELADO"][$k]=="S"|Não|Sim
 								,COR_FUNDO|SEQ_DADOS_APOIO|$res["SIT_CANCELADO"][$k]=="S"|#F7BBBB|#CFFFB4
 								,ALINHAMENTO_TEXTO|SEQ_DADOS_APOIO||CENTER'
 								,null,null,null,null,null,null,null,30,null,null,null,false
@@ -183,8 +183,8 @@ if ( $frm->get('seq_tipo_dados_apoio') ) {
 		$frm->setSoLeitura('sig_tipo_dados_apoio',true);
 }
 
-// true->mostrar conteÃºdo do $_POST.  false->nÃ£o mostra;
+// true->mostrar conteúdo do $_POST.  false->não mostra;
 $frm->modoDepuracao=false;
-// exibir o formulÃ¡rio
+// exibir o formulário
 print $frm->criarForm($formDinAcao);
 ?>

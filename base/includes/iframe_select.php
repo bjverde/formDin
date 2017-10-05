@@ -2,15 +2,15 @@
 //---------------------------------------------------------------------------------------------------------
 // EXEMPLO 1:
 // $campos['cod_uf']		= new camposelect('cod_uf','Estado:',true);
-// $campos['cod_municipio']	= new CampoIframe('cod_municipio','MunicÃ­pio:',true,'cod_uf','SISLIV.PK_GERAL.SEL_MUNICIPIO','COD_UF',null,null,null,null,null,null,null,null,null,null,'teste');
-// o parametro 'teste' Ã© o nome da funÃ§Ã£o javascript que serÃ¡ chamada apos a seleÃ§Ã£o do municipios.
-// Esta funÃ§Ã£o recebe 4 parametros: o objeto select, o valor da chave que Ã© o codigo do municipio, a posicao que o municipio selecionado esta na lista e o nome do mumicipio selecionado
+// $campos['cod_municipio']	= new CampoIframe('cod_municipio','Município:',true,'cod_uf','SISLIV.PK_GERAL.SEL_MUNICIPIO','COD_UF',null,null,null,null,null,null,null,null,null,null,'teste');
+// o parametro 'teste' é o nome da função javascript que será chamada apos a seleção do municipios.
+// Esta função recebe 4 parametros: o objeto select, o valor da chave que é o codigo do municipio, a posicao que o municipio selecionado esta na lista e o nome do mumicipio selecionado
 // function teste(p1,p2,p3,p4) {
 // alert( "Funcao teste foi executada:\n"+'Objeto:' + p1+"\nValor:"+p2+"\nIndice:"+p3+"\nTexto:"+p4);
 // return true;
 //---------------------------------------------------------------------------------------------------------
 // EXEMPLO 2:
-// $campos['seq_norma']  			= new CampoSelect ('seq_norma','NÂº norma:',false);
+// $campos['seq_norma']  			= new CampoSelect ('seq_norma','Nº norma:',false);
 // $campos['seq_rotina_anterior'] 	= new CampoIFrame ('seq_rotina_anterior'
 //                           ,'Artigo anterior:'
 //                           ,false
@@ -88,7 +88,7 @@ input {
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -106,20 +106,20 @@ input {
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -128,7 +128,7 @@ $nomePacote   = strtoupper($aDados[0]);
 $colunaChave  = strtoupper($aDados[1]);
 $colunaDados  = strtoupper($aDados[2]);
 $msgSelecione = !$aDados[3] ? 'Selecione UF' : $aDados[3];
-$msgNenhum    = !$aDados[4] ? 'Nenhum municÃ­pio encontrado' : $aDados[4];
+$msgNenhum    = !$aDados[4] ? 'Nenhum município encontrado' : $aDados[4];
 $msgSelecione = '-- '.$msgSelecione.' --';
 $msgNenhum    = '-- '.$msgNenhum.' --';
 
@@ -168,25 +168,25 @@ $campoOutroTamanho		=$_GET['campoOutroTamanho'];
 $campoOutroRotulo		=$_GET['campoOutroRotulo'];
 $campoOutroValorMostrar	=$_GET['campoOutroValorMostrar'];
 $campoOutroValorInicial	=$_GET['campoOutroValorInicial'];
-$campoOutroCampoAtualizar=$_GET['campoOutroCampoAtualizar']; // nome do campo hidden do formulario que serÃ¡ gravado no banco de dados o valor do campo outro
+$campoOutroCampoAtualizar=$_GET['campoOutroCampoAtualizar']; // nome do campo hidden do formulario que será gravado no banco de dados o valor do campo outro
 $executarFuncao 		=$_GET['executarFuncao'];
 if( !$valorFiltro ) {
 	print $msgSelecione;
 	return;
 }
 
-// verificar se o usuÃ¡rio estÃ¡ logado
+// verificar se o usuário está logado
 $_POST['login_cpf']   =  $_SESSION['usuario']['login_cpf'];
 $_POST['login_senha'] =  $_SESSION['usuario']['login_senha'];
 if(!isset($_POST['login_cpf'])) {
-	//print 'falta definir:Para que o campo iframe funcione Ã© necessÃ¡rio existir na sessao as seguintes variÃ¡veis: '."\n";
-	print 'NÃ£o achei: '."\n";
+	//print 'falta definir:Para que o campo iframe funcione é necessário existir na sessao as seguintes variáveis: '."\n";
+	print 'Não achei: '."\n";
 	print '$_SESSION[\'usuario\'][\'login_cpf\'] e '."\n";
 	print '$_SESSION[\'usuario\'][\'login_senha\']'."\n";
 	return;
 }
 $clientedb = new banco();
-// definir as opÃ§Ãµes do select para o campo municipio
+// definir as opções do select para o campo municipio
 $bvars = array( $nomePacoteParametro => $valorFiltro );
 if( $clientedb ){
 	//	$mens = $clientedb->executar_recuperar_pkg_funcao($nomePacote,$bvars,$res);
@@ -195,19 +195,19 @@ if( $clientedb ){
 	if( !is_array($res) or ( $res[key($res)])===0 )
 	   $res=null;
 } else {
-	print 'NÃ£o consegui conexÃ£o com banco de dados!';
+	print 'Não consegui conexão com banco de dados!';
 	return;
 }
 if( !$res ) {
 	print $msgNenhum;
 } else {
-	// se nÃ£o foi informado as colunas do pacote que irÃ£o alimentar o select, assumir as duas primeiras colunas do pacote
+	// se não foi informado as colunas do pacote que irão alimentar o select, assumir as duas primeiras colunas do pacote
 	if(!$colunaChave or !$colunaDados) {
 		// encontrar as colunas
 		foreach ($res as $p=>$s){
 				$cols[]=$p;
 			}
-		// o pacote deverÃ¡ devolver sempre 2 colunas. Uma com a chave e a outra com a descricao
+		// o pacote deverá devolver sempre 2 colunas. Uma com a chave e a outra com a descricao
 		$colunaChave= !$colunaChave ? $cols[0] : $colunaChave;
 		$colunaDados= !$colunaDados ? $cols[1] : $colunaDados;
 		// se o pacote tiver somente uma coluna, assumir a coluna chave como segunda coluna

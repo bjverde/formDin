@@ -3,7 +3,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -21,25 +21,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
   /**
- * Campo para ediÃ§Ã£o de horas.
+ * Campo para edição de horas.
  * maskType como hms,hm
  *
  */
@@ -67,10 +67,10 @@ class TTime extends TMask
 	//-------------------------------------------------------------------------------
 	public function show($print=true)
 	{
-		// nÃ£o colocar a imagem no campo data se ele estiver desabilitado
+		// não colocar a imagem no campo data se ele estiver desabilitado
 		if( $this->getEnabled())
 		{
-			$this->addEvent('onBlur' ,'fwValidarHora(this,this.value,"'.$this->getMaskType().'","'.$this->getMinValue().'","'.$this->getMaxValue().'","Hora invÃ¡lida")');
+			$this->addEvent('onBlur' ,'fwValidarHora(this,this.value,"'.$this->getMaskType().'","'.$this->getMinValue().'","'.$this->getMaxValue().'","Hora inválida")');
 		}
 		return parent::show($print);
 	}
@@ -115,7 +115,7 @@ class TTime extends TMask
 			$tam = strlen($hora);
 			if( $tam == 0 )
 			{
-				return true; // campo estÃ¡ vazio
+				return true; // campo está vazio
 			}
 			if ( $tam == 5 or $tam==8 )
 			{
@@ -126,12 +126,12 @@ class TTime extends TMask
 				if ( ($h<0) || ($h>23)  || ($m<0) || ($m>59)|| ($s<0) || ($s>59) )
 				{
 
-					$this->setError('Hora invÃ¡lida');
+					$this->setError('Hora inválida');
 				}
 			}
 			else
 			{
-				$this->setError('Hora invÃ¡lida');
+				$this->setError('Hora inválida');
 			}
 			if(!$this->getError())
 			{

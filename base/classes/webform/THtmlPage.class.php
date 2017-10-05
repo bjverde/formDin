@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -58,9 +58,9 @@ class THtmlPage extends TElement
 	{
 		parent::__construct('DOCTYPE');
 
-		// elstilo da pÃ¡gina
+		// elstilo da página
         self::$style = new TElement('style');
-        // scripts da pÃ¡gina
+        // scripts da página
         self::$js = new TElement('script');
 		$this->objHtml 	= new TElement('html');$this->objHtml->clearCss();$this->add($this->objHtml);
 		//$this->objHtml->setProperty('lang','pt-br');
@@ -71,7 +71,7 @@ class THtmlPage extends TElement
 		$this->objTitle = new TElement('title');$this->objTitle->clearCss();$this->objHead->add($this->objTitle);
 	}
 	/**
-	* MÃ©todo para gerar o html da pÃ¡gina
+	* Método para gerar o html da página
 	* Se $print for false retorna o html se for true manda para o browser
 	*
 	* @param boolean $print
@@ -105,7 +105,7 @@ class THtmlPage extends TElement
 				{
 					//print 'tem um formulario';
 					$this->addJsCssFile($child->getJsCss());
-					// o form jÃ¡ esta dentro de uma tag html, entÃ£o nao precisa imprimir a tag html nes os js e css dele
+					// o form já esta dentro de uma tag html, então nao precisa imprimir a tag html nes os js e css dele
 					if ( method_exists( $child, 'autoIncludeJsCss' ) )
 					{
 						$child->autoIncludeJsCss(false);
@@ -117,13 +117,13 @@ class THtmlPage extends TElement
 				}
 			}
 		}
-		// inserir no HEAD as funÃ§Ãµes e comandos javascripts
+		// inserir no HEAD as funções e comandos javascripts
 		//if( $js = $this->getJavascript())
 		//{
 			/*$js = new TElement('script');
 			$js->clearCss();
 			$js->add('jQuery(document).ready(function() {');
-			$js->add(chr(9).'// javasripts que serÃ£o executados depois que o documento estiver 100% carregado.');
+			$js->add(chr(9).'// javasripts que serão executados depois que o documento estiver 100% carregado.');
    			foreach($this->getJavascript() as $k=>$strJs)
 			{
 				$js->add(chr(9).str_replace(";;",";",$strJs.";"));
@@ -144,9 +144,9 @@ class THtmlPage extends TElement
 		}
 	}
 	/**
-	* MÃ©doto para adicionar um arquivo javascript ou css na pÃ¡gina
-	* se o arquivo estiver na pasta padrÃ£o base/js ou base/css
-	* nÃ£o precisa informar o caminho
+	* Médoto para adicionar um arquivo javascript ou css na página
+	* se o arquivo estiver na pasta padrão base/js ou base/css
+	* não precisa informar o caminho
 	* Pode ser informado um array de arquivos no formato key/value
 	*
 	* @param string $mixJsCssFile
@@ -162,7 +162,7 @@ class THtmlPage extends TElement
 		}
 		else if( is_string($mixJsCssFile))
 		{
-			// ignorar se jÃ¡ tiver adicionado
+			// ignorar se já tiver adicionado
 			if( !is_array(self::$arrJsCssFile) || !isset($mixJsCssFile) || array_search($mixJsCssFile,self::$arrJsCssFile,true) === false)
 			{
 				self::$arrJsCssFile[] = $mixJsCssFile;
@@ -170,7 +170,7 @@ class THtmlPage extends TElement
 		}
 	}
 	/**
-	* MÃ©todo interno para gerar o codigo html de inserÃ§Ã£o do arquivo js
+	* Método interno para gerar o codigo html de inserção do arquivo js
 	*
 	*/
 	protected function includeJsCssFiles()
@@ -325,10 +325,10 @@ class THtmlPage extends TElement
 	}
 	//-----------------------------------------------------------------------------
 	/**
-	 * MÃ©todo para adicionar funÃ§Ãµes javascript na pagina que serÃ£o executadas
-	 * apÃ³s o mesmo tiver sido completamente carregado pelo browser
+	 * Método para adicionar funções javascript na pagina que serão executadas
+	 * após o mesmo tiver sido completamente carregado pelo browser
 	 * O parametro, opcional, $intIndex deve ser utilizado para estabelecer a ordem de
-	 * execuÃ§Ã£o, os menores serÃ£o executados primeiro;
+	 * execução, os menores serão executados primeiro;
 	 * ex:	addJavascript("alert('mensagem 1')");
 	 * 		addJavascript("alert('mensagem 2')",10);
 	 *
@@ -345,7 +345,7 @@ class THtmlPage extends TElement
 		{
 			if( !is_array(self::$arrJsOnLoad) )
 			{
-				// comeÃ§ar no indice 20 para poder inserir algum javascript que precise
+				// começar no indice 20 para poder inserir algum javascript que precise
 				// ser executado primeiro
 				self::$arrJsOnLoad[20] = $mixJs;
 			}
@@ -368,7 +368,7 @@ class THtmlPage extends TElement
 		if(is_array(self::$arrJsOnLoad))
 		{
 			$arrTemp = (array)self::$arrJsOnLoad;
-			// colocar em ordem crescente de execuÃ§Ã£o
+			// colocar em ordem crescente de execução
 			ksort($arrTemp);
 			self::$js->setProperty('language','javascript');
 			self::$js->clearCss();
@@ -376,7 +376,7 @@ class THtmlPage extends TElement
 			{
 				self::$js->add('if( typeof jQuery=="function" ){try{ jQuery(document).ready(function() {');
 			}
-			self::$js->add(chr(9).'// javasripts que serÃ£o executados depois que o documento estiver 100% carregado.');
+			self::$js->add(chr(9).'// javasripts que serão executados depois que o documento estiver 100% carregado.');
    			foreach($arrTemp as $k=>$mixJs)
 			{
 				if( is_object( $mixJs ) )
@@ -420,16 +420,19 @@ class THtmlPage extends TElement
 	{
 	}
 
-	public function getCharset(){
-  		if ( ! defined('CHARSET') ){
-			define('CHARSET','UTF-8');
+	public function getCharset()
+	{
+  		if ( ! defined('CHARSET') )
+		{
+			define('CHARSET','iso-8859-1');
 		}
 		return CHARSET;
 	}
 	/**
-	* @deprecated - substituido pelo mÃ©todo getCharset();
+	* @deprecated - substituido pelo método getCharset();
 	*/
-	public function getContentType(){
+	public function getContentType()
+	{
 		return $this->getCharset();
 	}
 

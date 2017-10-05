@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -64,7 +64,7 @@ class TCoordGMS extends TGroup
 	private $mapType;
 
 	/**
-	 * campo para inclusÃ£o de coordenadas geogrÃ¡ficas no formato Grau, Minuto e Segundos
+	 * campo para inclusão de coordenadas geográficas no formato Grau, Minuto e Segundos
 	 *
 	 * @param string  $strName
 	 * @param boolean $boolRequired
@@ -83,20 +83,20 @@ class TCoordGMS extends TGroup
 	 */
 	public function __construct($strName, $boolRequired=null, $floatLatY=null, $floatLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $strMapHeaderText=null, $strMapHeaderFontColor=null, $strMapHeaderFontSize=null,$strJsMapCallback=null,$intMapZoom=null,$strMapType=null)
 	{
-		parent::__construct($strName, 'Coordenadas GeogrÃ¡ficas', 55, 425);
+		parent::__construct($strName, 'Coordenadas Geográficas', 55, 425);
 		$this->setFieldType('coordgms');
 		$this->setRequired($boolRequired);
 		$this->setFieldNameLat($strFieldNameLat);
 		$this->setFieldNameLon($strFieldNameLon);
 		$this->setMapHeight($intMapHeight);
 		$this->setMapWidth($intMapWidth);
-		$this->setMapHeaderText(is_null($strMapHeaderText) ? 'Clique com o botÃ£o direito do mouse sobre o mapa para selecionar o ponto.' : $strMapHeaderText );
+		$this->setMapHeaderText(is_null($strMapHeaderText) ? 'Clique com o botão direito do mouse sobre o mapa para selecionar o ponto.' : $strMapHeaderText );
 		$this->setMapHeaderFontSize(is_null($strMapHeaderFontSize) ? '12px' : $strMapHeaderFontSize );
 		$this->setMapHeaderFontColor(is_null($strMapHeaderFontColor) ? 'black' : $strMapHeaderFontColor );
         $this->setMapCallback($strJsMapCallback);
 		$this->setMapZoom( $intMapZoom );
 		$this->setMapType($strMapType);
-		$strSymbols = is_null($strSymbols) ? "Â°,',\"" : $strSymbols;
+		$strSymbols = is_null($strSymbols) ? "°,',\"" : $strSymbols;
 		$strLabels = is_null($strSymbols) ? ",," : $strLabels;
 		$intSymbolsFontSize = is_null($intSymbolsFontSize) ? "18" : $intSymbolsFontSize;
 		$labels = explode(',', $strLabels);
@@ -122,33 +122,33 @@ class TCoordGMS extends TGroup
 		// construir os campos de latitude e longitude
 		$this->latGrau = $this->addNumberField($this->getId() . '_lat_grau', "Latitude&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $labels[0], 2, $boolRequired, 0, true, null, 0, 33, false, null, true, true);
 		$this->latGrau->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[0] . '</span>');
-		$this->latGrau->setProperty('title', 'Intervalo vÃ¡lido - Grau: 0Âº a 33Âº');
+		$this->latGrau->setProperty('title', 'Intervalo válido - Grau: 0º a 33º');
 		$this->latMin = $this->addNumberField($this->getId() . '_lat_min', $labels[1], 2, $boolRequired, 0, false, null, 0, 59, false, null, true);
 		$this->latMin->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[1] . '</span>');
-		$this->latMin->setProperty('title', "Intervalo vÃ¡lido - Minuto: 0 a 59");
+		$this->latMin->setProperty('title', "Intervalo válido - Minuto: 0 a 59");
 		//$this->latSeg = $this->addNumberField($this->getId() . '_lat_seg', $labels[2], 5, $boolRequired, 2, false, null, 0, "59.99", false, null, true, true);
 		//$this->latSeg = $this->addMaskField($this->getId() . '_lat_seg', $labels[2],$boolRequired,'99,99',false)->setAttribute('dir', 'rtl');
 		$this->latSeg = $this->addTextField($this->getId() . '_lat_seg', $labels[2],5,$boolRequired,5,null,false)->setCss('text-align', 'right');
 		$this->latSeg->addEvent('onblur',"fwChkMinMax(0, 59.99, '".$this->getId() . '_lat_seg'."',2,true,0)");
 		$this->latSeg->addEvent('onkeydown',"fwFormatSecondsGms(this,event)");
 		$this->latSeg->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[2] . '</span>');
-		$this->latSeg->setProperty('title', 'Intervalo vÃ¡lido - Segundo: 0 a 59,99');
+		$this->latSeg->setProperty('title', 'Intervalo válido - Segundo: 0 a 59,99');
 		$this->latHem = $this->addSelectField($this->getId() . '_lat_hem', 'Hem:', $boolRequired, "S=Sul,N=Norte", false, null, null, null, null, null, "");
 
 
 		// longitude
 		$this->lonGrau = $this->addNumberField($this->getId() . '_lon_grau', "Longitude&nbsp;&nbsp;" . $labels[0], 2, $boolRequired, 0, true, null, 32, 73, false, null, false, true);
-		$this->lonGrau->setProperty('title', 'Intervalo vÃ¡lido - Grau: 32Âº a 73Âº');
+		$this->lonGrau->setProperty('title', 'Intervalo válido - Grau: 32º a 73º');
 		$this->lonGrau->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[0] . '</span>');
 		$this->lonMin = $this->addNumberField($this->getId() . '_lon_min', $labels[1], 2, $boolRequired, 0, false, null, 0, 59, false, null, true);
-		$this->lonMin->setProperty('title', 'Intervalo vÃ¡lido - Minuto: 0 a 59');
+		$this->lonMin->setProperty('title', 'Intervalo válido - Minuto: 0 a 59');
 		$this->lonMin->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[1] . '</span>');
 		//$this->lonSeg = $this->addNumberField($this->getId() . '_lon_seg', $labels[2], 5, $boolRequired, 2, false, null, 0, "59.99", false, null, true, true);
 		//$this->lonSeg = $this->addMaskField($this->getId() . '_lon_seg', $labels[2],$boolRequired,'99,99',false)->setAttribute('dir', 'rtl');
 		$this->lonSeg = $this->addTextField($this->getId() . '_lon_seg', $labels[2],5,$boolRequired,5,null,false)->setCss('text-align', 'right');
 		$this->lonSeg->addEvent('onblur',"fwChkMinMax(0, 59.99, '".$this->getId() . '_lon_seg'."',2,true,false)");
 		$this->lonSeg->addEvent('onkeydown',"fwFormatSecondsGms(this,event)");
-		$this->lonSeg->setProperty('title', 'Intervalo vÃ¡lido - Segundo: 0 a 59,99');
+		$this->lonSeg->setProperty('title', 'Intervalo válido - Segundo: 0 a 59,99');
 		$this->lonSeg->setExampleText('<span style="font-size:' . $intSymbolsFontSize . 'px;">' . $symbols[2] . '</span>');
 		//$this->lonHem = $this->addTextField($this->getId() . '_lon_hem', 'Hem:', 1, $boolRequired, 1, 'W', false);
 		$this->lonHem = $this->addSelectField($this->getId() . '_lon_hem', 'Hem:', $boolRequired, "W=Oeste,E=Leste", false, null, null, null, null, null, "");
@@ -156,14 +156,14 @@ class TCoordGMS extends TGroup
 		//$this->lonHem->setEnabled(false);
 		//$this->lonHem->setCss('text-align', 'center');
 		//$this->lonHem->setCss('width', '20px');
-		// botÃ£o para abrir o mapa
+		// botão para abrir o mapa
 		$this->buttonGMap = $this->addButton('G', null, 'btnGoogle_' . $this->getId(), null, null, false, false, 'fwgoogle-maps-icon_19x19px.gif', 'fwgoogle-maps-icon_19x19px.gif', 'Mapa - Visualizar / selecionar a coordenada');
 		$this->fieldZoom = $this->addHiddenField($this->getId().'_map_zoom');
 		$this->fieldLonCenter = $this->addHiddenField($this->getId().'_map_lon_center');
 		$this->fieldLatCenter= $this->addHiddenField($this->getId().'_map_lat_center');
 		/*
 		  //$this->addButton('G',null,'btnGoogle_'.$this->getId(),'fwFieldCoordShowMap("'.$this->getId().'","'.$this->getMapHeight().'","'.$this->getMapWidth().'")',null,false,false,'gmark_grey.jpg',null,'Google Map - Visualizar/selecionar coordenadas');
-		  // se nÃ£o tiver sido postado, inicializar com os valores passados em $floatLat e $floatLon
+		  // se não tiver sido postado, inicializar com os valores passados em $floatLat e $floatLon
 		  if(is_null($this->latGrau->getValue()))
 		  {
 		  $this->setLat($floatLatY);
@@ -172,7 +172,7 @@ class TCoordGMS extends TGroup
 		 */
 	}
 /**
-	 * Imprime ou devolve o cÃ³digo html se $print for false
+	 * Imprime ou devolve o código html se $print for false
 	 *
 	 * @param boolean $print
 	 * @return string
@@ -316,7 +316,7 @@ class TCoordGMS extends TGroup
 
 	//----------------------------------------------------------------------
 	/**
-	 * Retorna um valor decimal sem arredondamento atÃ© a quantidade de casas informada
+	 * Retorna um valor decimal sem arredondamento até a quantidade de casas informada
 	 *
 	 * @param float $val
 	 * @param int $casas
@@ -355,7 +355,7 @@ class TCoordGMS extends TGroup
 
 	//-------------------------------------------
 	/**
-	 * Define o valor de grau min e seg da latitude (y) em funÃ§Ã£o do valor decimal passado
+	 * Define o valor de grau min e seg da latitude (y) em função do valor decimal passado
 	 *
 	 * @param float $y
 	 */
@@ -383,7 +383,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Define o valor de grau min e seg da longitude (x) em funÃ§Ã£o do valor decimal passado
+	 * Define o valor de grau min e seg da longitude (x) em função do valor decimal passado
 	 *
 	 * @param float $x
 	 */
@@ -410,7 +410,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Define o nome do campo referente ao valor da latitude que serÃ¡ retornado no array da funÃ§Ã£o getValue()
+	 * Define o nome do campo referente ao valor da latitude que será retornado no array da função getValue()
 	 *
 	 * @param string $strNewValue
 	 */
@@ -421,7 +421,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Define o nome do campo referente ao valor da longitude que serÃ¡ retornado no array da funÃ§Ã£o getValue()
+	 * Define o nome do campo referente ao valor da longitude que será retornado no array da função getValue()
 	 *
 	 * @param string $strNewValue
 	 */
@@ -432,7 +432,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Retonra o nome do campo referente ao valor da latitude que serÃ¡ retornado no array da funÃ§Ã£o getValue()
+	 * Retonra o nome do campo referente ao valor da latitude que será retornado no array da função getValue()
 	 *
 	 */
 	public function getFieldNameLat()
@@ -445,7 +445,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Retonra o nome do campo referente ao valor da longitude que serÃ¡ retornado no array da funÃ§Ã£o getValue()
+	 * Retonra o nome do campo referente ao valor da longitude que será retornado no array da função getValue()
 	 *
 	 */
 	public function getFieldNameLon()
@@ -490,7 +490,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Valida se os campos estÃ£o preenchidos coretamente.
+	 * Valida se os campos estão preenchidos coretamente.
 	 *
 	 */
 	public function validate()
@@ -513,40 +513,40 @@ class TCoordGMS extends TGroup
 				is_null($this->lonMin->getValue()) ||
 				is_null($this->lonSeg->getValue()))
 			{
-				$this->addError("Campo obrigatÃ³rio");
+				$this->addError("Campo obrigatório");
 				$this->setCss('border', '1px solid #ff0000');
 				return ( (string) $this->getError() === "" );
 			}
 		}
 		if (!is_null($this->latGrau->getValue()) && $this->latGrau->getValue() > 35)
 		{
-			$this->addError("Grau Latitude invÃ¡lido");
+			$this->addError("Grau Latitude inválido");
 			$this->latGrau->setCss('border', '1px solid #ff0000');
 		}
 		if (!is_null($this->latMin->getValue()) && $this->latMin->getValue() > 59)
 		{
-			$this->addError("Minuto Latitude invÃ¡lido");
+			$this->addError("Minuto Latitude inválido");
 			$this->latMin->setCss('border', '1px solid #ff0000');
 		}
 		if (!is_null($this->latSeg->getValue()) && $this->latSeg->getValue() > 59)
 		{
-			$this->addError("Segundo Latitude invÃ¡lido");
+			$this->addError("Segundo Latitude inválido");
 			$this->latSeg->setCss('border', '1px solid #ff0000');
 		}
 		// longitude
 		if (!is_null($this->lonGrau->getValue()) && $this->lonGrau->getValue() != '' && $this->lonGrau->getValue() < 30 || $this->lonGrau->getValue() > 70)
 		{
-			$this->addError("Grau Longitude invÃ¡lido");
+			$this->addError("Grau Longitude inválido");
 			$this->lonGrau->setCss('border', '1px solid #ff0000');
 		}
 		if (!is_null($this->lonMin->getValue()) && $this->lonMin->getValue() > 59)
 		{
-			$this->addError("Minuto Longitude invÃ¡lido");
+			$this->addError("Minuto Longitude inválido");
 			$this->lonMin->setCss('border', '1px solid #ff0000');
 		}
 		if (!is_null($this->lonSeg->getValue()) && $this->lonSeg->getValue() > 59)
 		{
-			$this->addError("Segundo Longitude invÃ¡lido");
+			$this->addError("Segundo Longitude inválido");
 			$this->lonSeg->setCss('border', '1px solid #ff0000');
 		}
 		return ( (string) $this->getError() === "" );
@@ -567,7 +567,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Define os simbolos para Grau, Minuto e Segundos, que serÃ£o exibidos depois dos campos como texto de exemplo
+	 * Define os simbolos para Grau, Minuto e Segundos, que serão exibidos depois dos campos como texto de exemplo
 	 * Devem ser passados separados por virgula;
 	 * <code>
 	 * $f->setSymbolS('G,M,S');
@@ -582,7 +582,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Retorna a string com os simbolos para Grau, Minutos e Segundos, separados por vÃ­rgula
+	 * Retorna a string com os simbolos para Grau, Minutos e Segundos, separados por vírgula
 	 *
 	 */
 	public function getSymbols()
@@ -591,7 +591,7 @@ class TCoordGMS extends TGroup
 	}
 
 	/**
-	 * Define os rÃ³tulos para os campos Grau, Minuto e Segundos, que serÃ£o exibidos na frente dos campos.
+	 * Define os rótulos para os campos Grau, Minuto e Segundos, que serão exibidos na frente dos campos.
 	 * Devem ser passados separados por virgula;
 	 * <code>
 	 * $f->setLabels('Grau:,Min:,Seg:');

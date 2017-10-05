@@ -37,7 +37,7 @@ function start()
 	document.getElementById('map').style.height="<?php print($_REQUEST['h']); ?>px";
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -55,20 +55,20 @@ function start()
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
     <?php
@@ -83,10 +83,10 @@ function start()
   		MapTypeId: google.maps.MapTypeId.ROADMAP
 	};
     /*
-    MapTypeId.ROADMAP: exibe a visualizaÃ§Ã£o de mapas rodoviÃ¡rios padrÃ£o
-    MapTypeId.SATELLITE: exibe imagens de satÃ©lite do Google Earth
-    MapTypeId.HYBRID: exibe uma mistura de visualizaÃ§Ãµes normais e de satÃ©lite
-    MapTypeId.TERRAIN: exibe um mapa fÃ­sico com base nas informaÃ§Ãµes do terreno.
+    MapTypeId.ROADMAP: exibe a visualização de mapas rodoviários padrão
+    MapTypeId.SATELLITE: exibe imagens de satélite do Google Earth
+    MapTypeId.HYBRID: exibe uma mistura de visualizações normais e de satélite
+    MapTypeId.TERRAIN: exibe um mapa físico com base nas informações do terreno.
     */
 
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -111,11 +111,11 @@ function start()
         {
             if ( map.readonly )
             {
-                document.getElementById('fwMapHeader').innerHTML ='Consulta de Coordenada GeogrÃ¡fica';
+                document.getElementById('fwMapHeader').innerHTML ='Consulta de Coordenada Geográfica';
             }
             else
             {
-                document.getElementById('fwMapHeader').innerHTML ='Clique com o botÃ£o direito do mouse sobre o mapa para selecionar o ponto.';
+                document.getElementById('fwMapHeader').innerHTML ='Clique com o botão direito do mouse sobre o mapa para selecionar o ponto.';
             }
         }
     }
@@ -313,7 +313,7 @@ function request( name )
 
 
 /**
-* Converte de Grau decimal para Graus Minuto segundos direÃ§Ã£o
+* Converte de Grau decimal para Graus Minuto segundos direção
 * EX: fwDecimalDegrees2Gms('-7.161829',"LA");
 * @return string[] resultado
 */
@@ -322,15 +322,15 @@ function fwDecimalDegrees2Gms(pCoordinated,pType)
    var v_type = pType.toUpperCase();
    // valida o tipo de coordenada: LA => latitude, LO => longitude
    if(v_type!="LA" && v_type!="LO"){
-       return false; //alert("O tipo (LA)titude ou (LO)ngitudeinformado Ã© invÃ¡lido!")
+       return false; //alert("O tipo (LA)titude ou (LO)ngitudeinformado é inválido!")
    }
    var v_coordinated = new String(pCoordinated);
-   // verifica a direÃ§Ã£o
+   // verifica a direção
    var v_direction = (v_coordinated.substring(0,1)=="-")?"W":"E";
    if(v_type=="LA"){
            v_direction = (v_coordinated.substring(0,1)=="-")?"S":"N";
    }
-   // retira o "-" se direÃ§Ã£o for "S" ou "W"
+   // retira o "-" se direção for "S" ou "W"
    if(v_direction=="S" || v_direction=="W"){
            v_coordinated = v_coordinated.substring(1,v_coordinated.length);
    }
@@ -351,8 +351,8 @@ function fwDecimalDegrees2Gms(pCoordinated,pType)
    segundos = (isNaN(segundos))?"0":segundos;
 
    // retorno em forma de array
-   var aRes = [v_direction,pad( graus ,3,'Â ',1),pad( minutosOK ,3,'Â ',1),pad( segundos,3,'Â ',1) ];
-   return aRes[0] + "Â " + aRes[1] + "ÂºÂ " + aRes[2] + "`Â " + aRes[3] + "``";
+   var aRes = [v_direction,pad( graus ,3,' ',1),pad( minutosOK ,3,' ',1),pad( segundos,3,' ',1) ];
+   return aRes[0] + " " + aRes[1] + "º " + aRes[2] + "` " + aRes[3] + "``";
 }
 var STR_PAD_LEFT = 1;
 var STR_PAD_RIGHT = 2;

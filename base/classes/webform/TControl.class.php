@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -92,7 +92,7 @@ abstract class TControl extends TElement
         if ( !$this->getEnabled() )
         { $this->setProperty( 'disabled', 'true' ); }
 
-        // como os campos desabilitados, nÃ£o sÃ£o postados,
+        // como os campos desabilitados, não são postados,
         // criar os campos ocultos para nao perder os valores quando o form for postado
         $disableHtml=null;
 
@@ -100,7 +100,7 @@ abstract class TControl extends TElement
         {
             if ( $this->getTagType() == 'img' )
             {
-            // ainda nÃ£o tenho o que fazer com uma imagem desabilitada
+            // ainda não tenho o que fazer com uma imagem desabilitada
             }
             else
             {
@@ -126,7 +126,7 @@ abstract class TControl extends TElement
                 $this->setEvent( null );
                 $value=$this->getValue();
 
-                // campo memo Ã© uma tag textarea entÃ£o nÃ£o pode ter um campo oculto relacionado a ele, basta colocar readonly
+                // campo memo é uma tag textarea então não pode ter um campo oculto relacionado a ele, basta colocar readonly
                 if ( $this->getFieldType() == 'memo' )
                 {
                     $this->setProperty( 'disabled', null );
@@ -140,7 +140,7 @@ abstract class TControl extends TElement
                     {
 			   			$h->setProperty('needed','true');
 					}
-					// se o campo estiver em um gride ele Ã© um array entÃ£o fazer a jogada com o neme e id conforma abaixo
+					// se o campo estiver em um gride ele é um array então fazer a jogada com o neme e id conforma abaixo
                     $h->setId( $this->getId() );
                     $this->setName( $this->getId() );
                     $h->clearCss();
@@ -172,7 +172,7 @@ abstract class TControl extends TElement
                 	if( $this->getTagType() != 'button' )
                 	{
 	                    $h=new THidden( $this->getName() );
-	                    // se o campo estiver em um gride ele Ã© um array entÃ£o fazer a jogada com o neme e id conforma abaixo
+	                    // se o campo estiver em um gride ele é um array então fazer a jogada com o neme e id conforma abaixo
 	                    $h->setId( $this->getId() );
 	                    $this->setName( $this->getId() );
 
@@ -284,7 +284,7 @@ abstract class TControl extends TElement
 
     //-------------------------------------------------------------------------
     /**
-    * Metodo adicionado apenas para nÃ£o dar conflito com a funÃ§Ã£o de validaÃ§Ã£o do TForm
+    * Metodo adicionado apenas para não dar conflito com a função de validação do TForm
     *
     */
     public function getRequired()
@@ -346,11 +346,11 @@ abstract class TControl extends TElement
 
     //-----------------------------------------------------------------------------
     /**
-    * MÃ©todo para criar ajuda on-line em um campo
+    * Método para criar ajuda on-line em um campo
     * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
-    * se nÃ£o for informado assume o id do campo.
-    * O arquivo deverÃ¡ estar no diretÃ³rio ajuda/ na raiz da aplicaÃ§Ã£o.
-    * Poder ser informada tambem o endereÃ§o (url) da pagina de help
+    * se não for informado assume o id do campo.
+    * O arquivo deverá estar no diretório ajuda/ na raiz da aplicação.
+    * Poder ser informada tambem o endereço (url) da pagina de help
     * Exemplo: $nom->setHelpFile('nom_pessoa','Nome da Pessoa',200,500);
     * Exemplo: $nom->setHelpFile('http://localhost/sistema/texto_ajuda.html','Exemplo de help on-line',200,500);
     * @param mixed $strWindowHeader
@@ -390,11 +390,11 @@ abstract class TControl extends TElement
     }
     */
     /**
-    * MÃ©todo para criar ajuda on-line em um campo
+    * Método para criar ajuda on-line em um campo
     * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
-    * se nÃ£o for informado assume o id do campo.
-    * O arquivo deverÃ¡ estar no diretÃ³rio ajuda/ na raiz da aplicaÃ§Ã£o.
-    * Poder ser informada tambem o endereÃ§o (url) da pagina de help
+    * se não for informado assume o id do campo.
+    * O arquivo deverá estar no diretório ajuda/ na raiz da aplicação.
+    * Poder ser informada tambem o endereço (url) da pagina de help
     * Exemplo: $nom->setHelpFile('nom_pessoa','Nome da Pessoa',200,500);
     * Exemplo: $nom->setHelpFile('http://localhost/sistema/texto_ajuda.html','Exemplo de help on-line',200,500);
     * @param mixed $strWindowHeader

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,27 +20,27 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
 Sistema FASIS
-MÃ³dulo de cadastro de perfis do projeto
-Autor: Luis EugÃªnio Barbosa
+Módulo de cadastro de perfis do projeto
+Autor: Luis Eugênio Barbosa
 */
 for ($i=1;$i<51;$i++)
 {
@@ -52,12 +52,12 @@ $arrCampos['seq_perfil']			= new CampoOculto('seq_perfil','');
 $arrCampos['operacao']				= new CampoHtml('operacao','');
 
 $arrCampos['des_perfil']			= new CampoTexto('des_perfil','Nome do Perfil',true,'',null,40,40);
-$arrCampos['num_nivel']				= new CampoSelect('num_nivel','NÃ­vel Hierarquico',true,1,$aNiveisPerfil);
-$arrCampos['sit_publico']			= new CampoSelect('sit_publico','PÃºblico',true,'N',array('N'=>"NÃ£o","S"=>"Sim"),null,false);
-$arrCampos['sit_cancelado']			= new CampoSelect('sit_cancelado','Cancelado',true,'N',array('N'=>"NÃ£o","S"=>"Sim"));
+$arrCampos['num_nivel']				= new CampoSelect('num_nivel','Nível Hierarquico',true,1,$aNiveisPerfil);
+$arrCampos['sit_publico']			= new CampoSelect('sit_publico','Público',true,'N',array('N'=>"Não","S"=>"Sim"),null,false);
+$arrCampos['sit_cancelado']			= new CampoSelect('sit_cancelado','Cancelado',true,'N',array('N'=>"Não","S"=>"Sim"));
 $arrCampos['gride_perfil']			= new CampoHtml('gride_perfil','');
 
-// criar instancia do formulÃ¡rio dinÃ¢mico
+// criar instancia do formulário dinâmico
 $frm = new FormDin3($arrCampos,'CADASTRO DE PERFIL DE ACESSO',$_POST);
 $frm->criarVariavel('modulo',PASTA_BASE.'seguranca/cad_perfil.inc');
 $frm->setAltura(0);
@@ -78,7 +78,7 @@ switch($_SESSION[APLICATIVO]['acao']) {
 		// nivel hierarquico deve ser menor que o do usuario logado
 		if((integer)$frm->get('num_nivel') >= $_SESSION[APLICATIVO]['login']['maior_nivel'])
 		{
-			$frm->msgerros[] = "NÃ­vel hierÃ¡rquico deve ser menor que ".$_SESSION[APLICATIVO]['login']['maior_nivel'];
+			$frm->msgerros[] = "Nível hierárquico deve ser menor que ".$_SESSION[APLICATIVO]['login']['maior_nivel'];
 			break;
 
 		}
@@ -87,7 +87,7 @@ switch($_SESSION[APLICATIVO]['acao']) {
 			if(!$frm->msgerros = executarPacote(ESQUEMA.'.PKG_SEGURANCA.INC_ALT_PERFIL',$_POST,-1))
 			{
 				$frm->limparCampos('seq_projeto',true);
-				$frm->mensagem='GravaÃ§Ã£o realizada com sucesso!!!';
+				$frm->mensagem='Gravação realizada com sucesso!!!';
 			}
 		}
 	break;
@@ -96,7 +96,7 @@ switch($_SESSION[APLICATIVO]['acao']) {
 			if(!$frm->msgerros = executarPacote(ESQUEMA.'.PKG_SEGURANCA.EXC_PERFIL',$_POST,-1))
 			{
 				$frm->limparCampos('seq_projeto',true);
-				$frm->mensagem='Registro excluÃ­do com sucesso!!!';
+				$frm->mensagem='Registro excluído com sucesso!!!';
 			}
 	break;
 	//-----------------------------------------------------------------------------
@@ -113,10 +113,10 @@ switch($_SESSION[APLICATIVO]['acao']) {
 $bvars = array('SEQ_PROJETO'=>PROJETO
                ,'NUM_NIVEL'=>$_SESSION[APLICATIVO]['login']['maior_nivel']);
 print_r(recuperarPacote(ESQUEMA.'.PKG_SEGURANCA.SEL_PERFIL_PROJETO',$bvars,$res));
-// se for cadastro inicial, criar o botÃ£o para gerar os perfis padrÃ£o
+// se for cadastro inicial, criar o botão para gerar os perfis padrão
 if(count($res['SEQ_PERFIL'])==0)
 {
-$frm->botaoAcao[''][] = 'Gerar Perfis PadrÃ£o';
+$frm->botaoAcao[''][] = 'Gerar Perfis Padrão';
 }
 // criar o gride com os projetos cadastrados
 $frm->set('gride_perfil','<br>'.criarGride('gride_perfil'
@@ -125,7 +125,7 @@ $frm->set('gride_perfil','<br>'.criarGride('gride_perfil'
 									,null
 									,null
 									,'SEQ_PERFIL'
-									,'DES_PERFIL|PERFIL,NUM_NIVEL|NÃVEL,CALC_SIT_PUBLICO|PÃšBLICO,CALC_SIT_CANCELADO|CANCELADO'
+									,'DES_PERFIL|PERFIL,NUM_NIVEL|NÍVEL,CALC_SIT_PUBLICO|PÚBLICO,CALC_SIT_CANCELADO|CANCELADO'
 									,null
 									,null
 									,null
@@ -146,7 +146,7 @@ $frm->set('gride_perfil','<br>'.criarGride('gride_perfil'
 
 
 //$frm->modoDepuracao=true;
-// exibir o formulÃ¡rio
+// exibir o formulário
 if((integer)$frm->get('seq_perfil')>0)
 {
 	$frm->set('operacao',STATUS_ALTERANDO);

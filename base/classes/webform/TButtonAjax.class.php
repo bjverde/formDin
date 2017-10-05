@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -75,7 +75,7 @@ class TButtonAjax extends TButton
 				    /*
 					foreach($data as $k=>$v)
 					{
-						// se nÃ£o tiver valor, ler do campo do formulÃ¡rio
+						// se não tiver valor, ler do campo do formulário
 						$data[ utf8_encode($k) ] = utf8_encode($v);
 					}
 					*/
@@ -89,8 +89,8 @@ class TButtonAjax extends TButton
 		return parent::show($print);
 	}
 	/**
-	* Define a funÃ§Ã£o ou handle da funÃ§Ã£o javascript que serÃ¡ chamada ao terminar
-	* a requisiÃ§Ã£o ajax.
+	* Define a função ou handle da função javascript que será chamada ao terminar
+	* a requisição ajax.
 	*
 	* @param string $jsCallback
 	*/
@@ -100,8 +100,8 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna a funÃ§Ã£o ou handle da funÃ§Ã£o javascript que serÃ¡ chamada ao terminar
-	* a requisiÃ§Ã£o ajax.
+	* Retorna a função ou handle da função javascript que será chamada ao terminar
+	* a requisição ajax.
 	*
 	*/
 	public function getCallback()
@@ -115,7 +115,7 @@ class TButtonAjax extends TButton
 	}
 	/**
 	* Define o tipo de retorno da chamada ajax. Podendo ser text ou json.
-	* O padrÃ£o serÃ¡ text
+	* O padrão será text
 	* @param string $strReturnDataType
 	*/
 	public function setReturnDataType( $strReturnDataType = null )
@@ -124,8 +124,8 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna o tipo de dados retornado pela requisiÃ§Ã£o ajax, sendo, text ou json
-	* text Ã© o padrÃ£o.
+	* Retorna o tipo de dados retornado pela requisição ajax, sendo, text ou json
+	* text é o padrão.
 	*
 	*/
 	public function getReturnDataType()
@@ -133,9 +133,9 @@ class TButtonAjax extends TButton
 		return strtolower( $this->returnDataType ) === 'json' ? 'json' : 'text';
 	}
 	/**
-	* Define o nome de uma funÃ§Ã£o js ou handle de uma funÃ§Ã£o javascript que
-	* serÃ¡ executa antes de fazer a requisiÃ§Ã£o ajax.
-	* Se a funÃ§Ã£o retornar false a chamada serÃ¡ cancelada.
+	* Define o nome de uma função js ou handle de uma função javascript que
+	* será executa antes de fazer a requisição ajax.
+	* Se a função retornar false a chamada será cancelada.
 	*
 	* @param string $jsBeforeSend
 	*/
@@ -145,8 +145,8 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna o nome da funÃ§Ã£o que serÃ¡ executada antes da requisiÃ§Ã£o ajax
-	* Se a funÃ§Ã£o retornar false a chamada serÃ¡ cancelada.
+	* Retorna o nome da função que será executada antes da requisição ajax
+	* Se a função retornar false a chamada será cancelada.
 	*/
 	public function getBeforeSend()
 	{
@@ -158,7 +158,7 @@ class TButtonAjax extends TButton
 		return $this->beforeSend;
 	}
 	/**
-	* Define se a chamada serÃ¡ assincrona ou sincrona
+	* Define se a chamada será assincrona ou sincrona
 	*
 	* @param boolean $boolAsync
 	*/
@@ -168,7 +168,7 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna true ou false, se a chamada serÃ¡ assincrona
+	* Retorna true ou false, se a chamada será assincrona
 	*
 	* @param boolean $boolAsyn
 	*/
@@ -177,7 +177,7 @@ class TButtonAjax extends TButton
 		return ( $this->async === false ) ? false : true;
 	}
 	/**
-	* Define o id do elemento html onde serÃ¡ inserido o resultado da consulta ajax
+	* Define o id do elemento html onde será inserido o resultado da consulta ajax
 	*
 	* @param string $strContainerId
 	*/
@@ -187,7 +187,7 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna o id do elemento html onde serÃ¡ inserido o resultado da consulta ajax
+	* Retorna o id do elemento html onde será inserido o resultado da consulta ajax
 	*
 	*/
 	public function getContainerId()
@@ -196,8 +196,8 @@ class TButtonAjax extends TButton
 	}
 
 	/**
-	* Define a url destino da requisiÃ§Ã£o.
-	* O padrÃ£o serÃ¡ o valor do campo oculto modulo do formulÃ¡rio.
+	* Define a url destino da requisição.
+	* O padrão será o valor do campo oculto modulo do formulário.
 	*
 	* @param string $strUrl
 	*/
@@ -207,8 +207,8 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna a url destino da requisiÃ§Ã£o.
-	* O padrÃ£o serÃ¡ o valor do campo oculto modulo do formulÃ¡rio.
+	* Retorna a url destino da requisição.
+	* O padrão será o valor do campo oculto modulo do formulário.
 	*
 	 */
 
@@ -217,7 +217,7 @@ class TButtonAjax extends TButton
 		return $this->url;
 	}
 	/**
-	* Define a mensagem que serÃ¡ exibida durante a requisiÃ§Ã£o sincrona.
+	* Define a mensagem que será exibida durante a requisição sincrona.
 	*
 	* @param mixed $strMessage
 	*/
@@ -227,7 +227,7 @@ class TButtonAjax extends TButton
         return $this;
 	}
 	/**
-	* Retorna a mensagem que serÃ¡ exibida durante a requisiÃ§Ã£o sincrona.
+	* Retorna a mensagem que será exibida durante a requisição sincrona.
 	*
 	* @param mixed $strMessage
 	*/

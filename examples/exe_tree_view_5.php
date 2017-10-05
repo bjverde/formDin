@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,24 +20,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Estados e MunicÃ­pios com MÃ©todo setXmlFile()',500);
+$frm = new TForm('Estados e Municípios com Método setXmlFile()',500);
 
 // ler os Estados cadastrados
 $ufs = TPDOConnection::executeSql("select 'uf'||cod_uf as cod_uf,nom_uf||'/'||sig_uf as nom_uf from tb_uf order by nom_uf");
@@ -46,16 +46,16 @@ $ufs = TPDOConnection::executeSql("select 'uf'||cod_uf as cod_uf,nom_uf||'/'||si
 $frm->addSelectField('cod_uf','Estado:',false,$ufs,null,null,null,null,null,null,'-- Todos --')->addEvent('onchange','submit()');
 
 // adicionar grupo
-$frm->addGroupField('gpTree','Exemplo Treeview com Fonte de Dados Definido pelo UsuÃ¡rio')->setcloseble(true);
-    // adicionar o campo Treeview ao formulÃ¡rio
-	$tree = $frm->addTreeField('tree','RegiÃ£o/Extados/MunicÃ­pios','vw_tree_regiao_uf_mun','ID_PAI','ID','NOME',null,null,320);
+$frm->addGroupField('gpTree','Exemplo Treeview com Fonte de Dados Definido pelo Usuário')->setcloseble(true);
+    // adicionar o campo Treeview ao formulário
+	$tree = $frm->addTreeField('tree','Região/Extados/Municípios','vw_tree_regiao_uf_mun','ID_PAI','ID','NOME',null,null,320);
  	// configurar a treeview	
 	$tree->addFormSearchFields('cod_uf'); // informar a tree para utilizar o campo cod_uf do form como parte do filtro
 	$tree->setStartExpanded(true);  // iniciar aberta
 	$tree->setTheme('winstyle'); // estilo das imagens
-	$tree->setXmlFile('includes/carregar_treeview.php'); 	// definir a fonte de dados ( xml ) que alimentarÃ¡ a treview
+	$tree->setXmlFile('includes/carregar_treeview.php'); 	// definir a fonte de dados ( xml ) que alimentará a treview
 $frm->closeGroup();  // fim do grupo
 
-// exibir o formulÃ¡rio
+// exibir o formulário
 $frm->show();
 ?>

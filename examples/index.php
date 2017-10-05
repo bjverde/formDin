@@ -1,7 +1,10 @@
 <?php
+//phpinfo();
+//die;
+
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 Minist�rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo � parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin � um software livre; voc� pode redistribu�-lo e/ou
+ * modific�-lo dentro dos termos da GNU LGPL vers�o 3 como publicada pela Funda��o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa � distribu�do na esperan�a que possa ser �til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl�cita de ADEQUA��O a qualquer MERCADO ou
+ * APLICA��O EM PARTICULAR. Veja a Licen�a P�blica Geral GNU/LGPL em portugu�s
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * Voc� deve ter recebido uma c�pia da GNU LGPL vers�o 3, sob o t�tulo
+ * "LICENCA.txt", junto com esse programa. Se n�o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda��o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -41,15 +44,20 @@ define('FORMDIN',1);
 define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
+<<<<<<< HEAD
+include('../base/classes/webform/TApplication.class.php');
+$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telem�tica - CNT');
+=======
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
+>>>>>>> 92fad7f... correção da referencia do base
 $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);
 $app->setNorthSize(55);
 //$app->getNorthArea()->setCss('border','0px');
 
-$app->setMainMenuFile('includes/menu.php');
+$app->setMainMenuFile('menu_principal.php');
 $app->setConfigFile(null);
 //$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
@@ -117,13 +125,13 @@ print_r( TPDOConnection::executeSql('select * from producao.usuario ') );
 die('fim');
 */
 
-// testar prototyé
+// testar prototy�
 set_error_handler("exception_error_handler");
 $app->run();
 
 function minhaFuncaoLogin()
 {
-    return 'Olá';
+    return 'Ol�';
 }
 
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {

@@ -2,7 +2,7 @@
 class TRadio extends TOption
 {
     /**
-    * Classe para criaÃ§Ã£o de campos do tipo RadioButtons, onde apenas uma opÃ§Ã£o poderÃ¡ ser selecionada
+    * Classe para criação de campos do tipo RadioButtons, onde apenas uma opção poderá ser selecionada
     *
     * @param string $strName
     * @param array $arrOptions
@@ -21,7 +21,7 @@ class TRadio extends TOption
     }
     public function show($print=true)
     {
-    	// se o controle etiver desativado, gerar um campo oculto com mesmo nome e id para nÃ£o perder o post e
+    	// se o controle etiver desativado, gerar um campo oculto com mesmo nome e id para não perder o post e
     	// renomear o input para "id"_disabled
     	if( ! $this->getEnabled() )
     	{

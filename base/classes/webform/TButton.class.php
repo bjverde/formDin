@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-*  Classe para criar botÃµes
+*  Classe para criar botões
 */
 class TButton extends TControl
 {
@@ -60,7 +60,7 @@ class TButton extends TControl
 		$this->setOnClick($strOnClick);
 		$this->setConfirmMessage($strConfirmMessage);
 		$this->setSubmitAction($boolSubmitAction);
-		// definir o estilo do botÃ£o
+		// definir o estilo do botão
 		/*$this->setCss('border','1px outset silver');
 		$this->setCss('background-color','#E1E1E1');
 		$this->setCss('background','#ddd url('.$this->getBase().'imagens/fwbuttonbg.gif) left center repeat-x');
@@ -74,7 +74,7 @@ class TButton extends TControl
 
 	public function show($print=true)
 	{
-	    // ajustar as propriedades se o botÃ£o for uma imagem
+	    // ajustar as propriedades se o botão for uma imagem
 	    $isImage=false;
 		if((string)$this->getImage()!="")
 		{
@@ -150,7 +150,7 @@ class TButton extends TControl
 			$this->setCss('cursor','default');
 			if( ! $this->getProperty('title') )
 			{
-				$this->setProperty('title',htmlentities('AÃ§Ã£o desabilitada',null,'ISO-8859-1') );
+				$this->setProperty('title',htmlentities('Ação desabilitada',null,'ISO-8859-1') );
 			}
 			$this->setAttribute('disabled','true');
 			if( $this->getOnClick() && $this->getImage() != '' )
@@ -213,7 +213,7 @@ class TButton extends TControl
 		}
 		if($image)
 		{
-			// se nÃ£o foi informado o endereÃ§o manualmente, encontrar na pasta base
+			// se não foi informado o endereço manualmente, encontrar na pasta base
 			if( strpos($image,'/')===false)
 			{
 				if( ! file_exists($image) )
@@ -263,7 +263,7 @@ class TButton extends TControl
 	}
 }
 /*
-$btn = new TButton('btnGravar','Gravar','actGravar',null,'Confirma GravaÃ§Ã£o ?');
+$btn = new TButton('btnGravar','Gravar','actGravar',null,'Confirma Gravação ?');
 $btn->setImage('btnCalendario.gif');
 $btn->show();
 */

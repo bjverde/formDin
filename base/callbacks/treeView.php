@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -19,32 +19,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  * 
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  * 
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  * 
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÃ³dulo utilizado para gerar o xml de carregamento on-line da classe TreeView
+Módulo utilizado para gerar o xml de carregamento on-line da classe TreeView
 Exemplo de chamada para teste do resultado:
 https://10.1.4.65/~45427380191/appbase/?modulo=base/callbacks/treeView.php&ajax=1&parentField=SEQ_TAXONOMIA_PAI&childField=SEQ_TAXONOMIA&descField=DES_TAXONOMIA&tableName=TESTE.PKG_TAXONOMIA_TREE.SEL_TAXON
 https://10.1.4.65/~45427380191/appbase/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
  */
 error_reporting(0);
 header("Content-type:text/xml");
-echo '<?xml version="1.0" encoding="UTF-8"?>';
+echo '<?xml version="1.0" encoding="iso-8859-1"?>';
 
 $debug=false;
 if( $debug )
@@ -53,7 +53,7 @@ if( $debug )
 	print	'	<item text="Tabela: '.$_REQUEST['tableName'].'" id="1"/>';
 	print	'	<item text="Coluna Pai: '.$_REQUEST['parentField'].'" id="2"/>';
 	print	'	<item text="Coluna Filha: '.$_REQUEST['childField'].'" id="3"/>';
-	print	'	<item text="Coluna DescriÃ§Ã£o: '.$_REQUEST['descField'].'" id="4"/>';
+	print	'	<item text="Coluna Descrição: '.$_REQUEST['descField'].'" id="4"/>';
 	print	'	<item text="id request = '.$_REQUEST['id'].'" id="5"/>';
 	print 	'</tree>';
 	die();
@@ -82,7 +82,7 @@ else
 		}
 	}
 }
-// cria a instÃ¢ncia do objeto treeData
+// cria a instância do objeto treeData
 $tree = new TTreeViewData($_GET['id'],'');
 
 // recuperar os dados do banco de dados

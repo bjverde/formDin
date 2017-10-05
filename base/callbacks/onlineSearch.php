@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-Exemplo dos parametros recebidos na variavel de sessÃ£o: $_SESSION[APLICATIVO]['onlineSearch'][$sessionField];
+Exemplo dos parametros recebidos na variavel de sessão: $_SESSION[APLICATIVO]['onlineSearch'][$sessionField];
 Array
 (
 	[fieldName] => des_nome
@@ -52,7 +52,7 @@ Array
 	[filterFields] => NUM_CPF|CPF||||cpf,NOM_PESSOA|Nome
 	[windowHeight] => 400
 	[windowWidth] => 600
-	[windowHeader] => Consulta Pessoa JurÃ­dica
+	[windowHeader] => Consulta Pessoa Jurídica
 	[gridHeader] => Registros Encontrados
 	[searchButtonLabel] =>
 	[formFilterFields] =>
@@ -66,7 +66,7 @@ Array
 	[prototypeParentWin]=>
 )
 */
-$GLOBALS[ 'strJsClick' ] = ''; // variavel global para guardar o javascript do autoselect quando existir somente 1 opÃ§Ã£o no gride
+$GLOBALS[ 'strJsClick' ] = ''; // variavel global para guardar o javascript do autoselect quando existir somente 1 opção no gride
 
 $sessionField = $_GET[ 'sessionField' ];
 $aParams = $_SESSION[ APLICATIVO ][ 'onlineSearch' ][ $sessionField ];
@@ -74,7 +74,7 @@ $aParams = $_SESSION[ APLICATIVO ][ 'onlineSearch' ][ $sessionField ];
 //print_R($aParams);
 //die();
 //-----------------------------------------------------------
-// Fazer o cadastro on-line se tiver passado o nome do mÃ³dulo
+// Fazer o cadastro on-line se tiver passado o nome do módulo
 //-----------------------------------------------------------
 $app_formdin =  ( isset( $_REQUEST[ 'app_formdin' ]) && $_REQUEST['app_formdin'] > 0 ) ;
 
@@ -100,17 +100,17 @@ if ( isset( $_POST[ 'formDinAcao' ] ) && $_POST[ 'formDinAcao' ] == 'cadastrar_o
 				{
 					include($base . 'includes/conexao.inc' );
 				}
-				// criar automaticamento os campos ocultos no formulario que serÃ¡ chamado
+				// criar automaticamento os campos ocultos no formulario que será chamado
 				$_REQUEST[ 'onLineSearch' ] = true;
 				$_REQUEST[ 'subform' ] = true;
 				$_REQUEST[ 'modulo' ] = $moduleName;
-				// abrir o formulÃ¡rio
+				// abrir o formulário
 				include( $moduleName );
 				exit;
 			}
 			else
 			{
-				print "MÃ³dulo: " . $aParams[ 'crudModule' ] . ' nÃ£o encontrado e nem ' . $moduleName;
+				print "Módulo: " . $aParams[ 'crudModule' ] . ' não encontrado e nem ' . $moduleName;
 			}
 		}
 	}
@@ -135,7 +135,7 @@ $form->addHiddenField( 'prototypeParentWin', $aParams[ 'prototypeParentWin' ] );
 $form->setShowMessageForm( false );
 $acao = isset( $acao ) ? $acao : null;
 
-// preencher o campo de filtro com o valor que estiver preenchido no formulÃ¡rio
+// preencher o campo de filtro com o valor que estiver preenchido no formulário
 if ( !$acao )
 {
 	$form->addJavascript( 'osStart("' . $aParams[ 'autoFillFilterField' ] . '","' . $aParams[ 'fieldName' ] . '","' . $aParams[ 'autoStart' ] . '","' . $aParams[ 'filterFields' ] . '")' );
@@ -149,7 +149,7 @@ $html->setCss( 'border', '0px' );
 $html->setCss( 'padding-top', '10px' );
 $html->setCss( 'text-align', 'center' );
 
-// botÃµes do formulÃ¡rio
+// botões do formulário
 $aParams[ 'searchButtonLabel' ] = is_null( $aParams[ 'searchButtonLabel' ] ) ? "Pesquisar" : $aParams[ 'searchButtonLabel' ];
 
 $form->addButton( $aParams[ 'searchButtonLabel' ], null, 'btnPesquisar', 'osPesquisar()' );
@@ -157,7 +157,7 @@ $form->addButton( 'Fechar', null, 'btnFechar', 'fechar();' );
 
 $acao = isset( $_POST[ 'formDinAcao' ] ) ? $_POST[ 'formDinAcao' ] : '';
 
-// tratamento da aÃ§Ã£o
+// tratamento da ação
 switch( $acao )
 {
 	case "pesquisar":
@@ -313,7 +313,7 @@ else
 /*
 *************************************************************************************************
 *********************************                                 *******************************
-*********************************  F U N Ã‡ Ã• E S  D E  A P O I O  *******************************
+*********************************  F U N Ç Õ E S  D E  A P O I O  *******************************
 *********************************                                 *******************************
 *************************************************************************************************
 */
@@ -366,7 +366,7 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 							$campoDescricao = null;
 
 							//$clientedb 		= new banco();
-							// verificar se passou o nome de um pacote ou uma instruÃ§Ã£o sql
+							// verificar se passou o nome de um pacote ou uma instrução sql
 							if ( substr( strtolower( $sql ), 0, 7 ) !== 'select ' )
 							{
 								// passou pacote
@@ -449,7 +449,7 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 					$newField = $form->addTextField( $name, $label, $length, $required, $size );
 			}
 
-			// colocar a propriedade filter no campo para poder montar o array bvars na aÃ§Ã£o pesquisar
+			// colocar a propriedade filter no campo para poder montar o array bvars na ação pesquisar
 			if ( !is_null( $newField ) )
 			{
 				$newField->setProperty( 'filter', 'true' );
@@ -488,7 +488,7 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 
 		if ( $topFields )
 		{
-			// alimentar os campo da consulta on-line com os valores do formulÃ¡rio do usuÃ¡rio
+			// alimentar os campo da consulta on-line com os valores do formulário do usuário
 			$form->addJavaScript( 'osGetTopValues("' . $topFields . '")' );
 		}
 	}
@@ -503,8 +503,8 @@ function setGrid( $res, $aParams, $form )
 	$g->enableDefaultButtons( false );
 
 	// colunas
-	// criar o link de seleÃ§Ã£o na coluna iformada ou na primeira coluna do $res se nÃ£o tiver sido informado
-	$columnLink = key( $res ); // primeira coluna serÃ¡ a link
+	// criar o link de seleção na coluna iformada ou na primeira coluna do $res se não tiver sido informado
+	$columnLink = key( $res ); // primeira coluna será a link
 	$firstColumn = null;
 
 	if ( !$aParams[ 'gridColumns' ] )
@@ -537,7 +537,7 @@ function setGrid( $res, $aParams, $form )
 			{
 				$align = 'left';
 			}
-			// se a coluna de link nÃ£o existir ou for informada uma invÃ¡lida, assumir a primeira coluna do gride
+			// se a coluna de link não existir ou for informada uma inválida, assumir a primeira coluna do gride
 			$aParams[ 'columnLink' ] = is_null( $aParams[ 'columnLink' ] ) ? $field : $aParams[ 'columnLink' ];
 
 			if ( $aParams[ 'columnLink' ] == $field )
@@ -560,18 +560,18 @@ function setGrid( $res, $aParams, $form )
 			}
 		}
 
-		// quando for multiselect adicionar ao form um botÃ£o para finalizar consulta
+		// quando for multiselect adicionar ao form um botão para finalizar consulta
 		if ( $aParams[ 'multiSelectKeyField' ] )
 		{
-			$btn = $form->addButton( 'Finalizar SeleÃ§Ã£o', 'finalizar', 'btnFinalizar' );
-			$btn->setProperty( 'title', 'Marque os Ã­tens desejados e clique aqui para finalizar a seleÃ§Ã£o' );
+			$btn = $form->addButton( 'Finalizar Seleção', 'finalizar', 'btnFinalizar' );
+			$btn->setProperty( 'title', 'Marque os ítens desejados e clique aqui para finalizar a seleção' );
 			$aParams[ 'autoSelect' ] = false;
 		}
 		// tem que ser chamada a funcao show(false) para gerar o script de autoselecionar quando tem somente 1 opcao
 		$form->getField( 'html_gride' )->add( $g->show( false ) );
 
 		//$form->getField('html_gride')->add($g);
-		// se existir apenas uma opÃ§Ã£o no gride, fazer a seleÃ§Ã£o automÃ¡tica
+		// se existir apenas uma opção no gride, fazer a seleção automática
 		if ( count( $res[ key( $res )] ) == 1 && $aParams[ 'autoSelect' ] )
 		{
 			// para o formulario fechar automaticamente tem que ter um delay de 1 segundo para evitar erro no javascript da pagina
@@ -583,7 +583,7 @@ function setGrid( $res, $aParams, $form )
 					$form->addJavascript( $GLOBALS[ 'strJsClick' ] );
 				}
 
-				// pode ser que a Ãºnica opÃ§Ã£o esteja desabilitada se existir o parametro clickCondition, entÃ£o nÃ£o desabilitar os campos do form
+				// pode ser que a única opção esteja desabilitada se existir o parametro clickCondition, então não desabilitar os campos do form
 				if ( !$aParams[ 'clickCondition' ] )
 				{
 					$form->setEnabled( false );
@@ -626,7 +626,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 		{
 			if ( is_array( $aUpdateFormFields ) )
 			{
-				// criar os parametros de retorno ao selecionar a opÃ§Ã£o
+				// criar os parametros de retorno ao selecionar a opção
 				foreach( $aUpdateFormFields as $k1 => $v1 )
 				{
 					$aV = explode( '|', $v1 ); // $v1 = END_PESSOA|des_endereco
@@ -647,7 +647,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 						$value = $aData[ strtoupper( $aV[ 0 ] )];
 					}
 					$value = $value ? $value : '';
-					$aUpdateValues[] = str_replace( chr( 10 ), ' ', str_replace( chr( 13 ), '', str_replace( "'", "Â´", str_replace( '"', 'â€œ', trim( $value ) ) ) ) );
+					$aUpdateValues[] = str_replace( chr( 10 ), ' ', str_replace( chr( 13 ), '', str_replace( "'", "´", str_replace( '"', '“', trim( $value ) ) ) ) );
 				}
 			}
 			$strFields = implode( '|', $aUpdateFields );
@@ -675,7 +675,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 	// colunas
 	$colGrid="";
 	$gridCfg='COR_FUNDO||$nl%2!=0|#efefef';
-	// criar o link de seleÃ§Ã£o na coluna iformada ou na primeira coluna do $res se nÃ£o tiver sido informado
+	// criar o link de seleção na coluna iformada ou na primeira coluna do $res se não tiver sido informado
 	$columnLink		= null;
 	$firstColumn	= null;
 
@@ -687,7 +687,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 			@list($field,$label,$width,$align) = explode("|",$v);
 			$colGrid .= $colGrid == "" ? "" : ",";
 			$colGrid .= $field.'|'.$label;
-			// se a coluna de link nÃ£o existir ou for informada uma invÃ¡lida, assumir a primeira coluna do gride
+			// se a coluna de link não existir ou for informada uma inválida, assumir a primeira coluna do gride
 			$aParams['columnLink'] = is_null($aParams['columnLink']) ? $field : $aParams['columnLink'];
 			if( $aParams['columnLink'] == $field)
 			{
@@ -709,19 +709,19 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 	}
 	else
 	{
-		// se nÃ£o foi informada nenhuma coluna, mostrar todas as colunas do $res
+		// se não foi informada nenhuma coluna, mostrar todas as colunas do $res
 		foreach($res as $k=>$v)
 		{
 			$colGrid .= $colGrid == "" ? "" : ",";
 			$colGrid .= $k.'|'.str_replace('_',' ',$k);
 		}
 	}
-	// se a coluna de link nÃ£o existir assumir a primeira coluna do $res
+	// se a coluna de link não existir assumir a primeira coluna do $res
 	if( ! array_key_exists($aParams['columnLink'],$res))
 	{
 		$aParams['columnLink'] = key($res);
 	}
-	// criar array com o nome dos campos que serÃ£o atualizados no formulÃ¡rio ao selecionar uma opÃ§Ã£o
+	// criar array com o nome dos campos que serão atualizados no formulário ao selecionar uma opção
 	$aUpdateFormFields=null;
 	if($aParams['updateFormFields'])
 	{
@@ -735,20 +735,20 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 		$aParams['maxRecords'] = count($aParams['columnLink']);
 	}
 
-	// criar o link de seleÃ§Ã£o na coluna do gride
+	// criar o link de seleção na coluna do gride
 	foreach($res[$aParams['columnLink']] as $k=>$v)
 	{
 		$aUpdateFields=array();
 		$aUpdateValues=array();
 		if(is_array($aUpdateFormFields))
 		{
-			// criar os parametros de retorno ao selecionar a opÃ§Ã£o
+			// criar os parametros de retorno ao selecionar a opção
 			foreach($aUpdateFormFields as $k1=>$v1)
 			{
 				$aV 	= explode('|',$v1); // $v1 = END_PESSOA|des_endereco
 				$aV[1] 	=  isset($aV[1]) ?  $aV[1] : strtolower($aV[0]);
 				$aUpdateFields[] = $aV[1];
-				$aUpdateValues[] = str_replace(chr(10),' ',str_replace(chr(13),'',str_replace("'","Â´",str_replace('"','â€œ',trim($res[$aV[0]][$k])))));
+				$aUpdateValues[] = str_replace(chr(10),' ',str_replace(chr(13),'',str_replace("'","´",str_replace('"','“',trim($res[$aV[0]][$k])))));
 			}
 		}
 		$strFields = implode('|',$aUpdateFields);
@@ -760,7 +760,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 			$aParams['clickCondition'] = str_replace(array(' or ',' and ',' OR ', ' AND '),array(' || ',' && ',' || ',' && '),$aParams['clickCondition']);
 			@eval('$ok='.$aParams['clickCondition'].';');
 		}
-		// se for multiselect nÃ£o tem onClick
+		// se for multiselect não tem onClick
 		if( $ok && ! $aParams['multiSelectKeyField'])
 		{
 			$strJsClick = 'osSelecionar(\''.$strFields.'\',\''.$strValues.'\',\''.$aParams['functionExecute'].'\',0);';
@@ -773,15 +773,15 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 			$res[ $aParams['columnLink']][$k] = '<input type="checkbox" style="cursor:pointer;vertical-align:middle;" name="'.$aParams['multiSelectKeyField'].'[]" value="'.$res[$aParams['multiSelectKeyField']][$k].'"'.( ($ok) ? "" : " disabled").'>&nbsp;'.(($ok)?'<b>':"").$v.(($ok)?'</b>':"");
 		}
 	}
-	// quando for multiselect adicionar ao form um botÃ£o para finalizar consulta
+	// quando for multiselect adicionar ao form um botão para finalizar consulta
 	if( $aParams['multiSelectKeyField'] )
 	{
-		$btn=$form->addButton('Finalizar SeleÃ§Ã£o','finalizar','btnFinalizar');
-		$btn->setProperty('title','Marque os Ã­tens desejados e clique aqui para finalizar a seleÃ§Ã£o');
+		$btn=$form->addButton('Finalizar Seleção','finalizar','btnFinalizar');
+		$btn->setProperty('title','Marque os ítens desejados e clique aqui para finalizar a seleção');
 		$aParams['autoSelect']=false;
 	}
 
-	// se existir apenas uma opÃ§Ã£o no gride, fazer a seleÃ§Ã£o automÃ¡tica
+	// se existir apenas uma opção no gride, fazer a seleção automática
 	if( count($res[key($res)])==1 && $aParams['autoSelect'] )
 	{
 		// para o formulario fechar automaticamente tem que ter um delay de 1 segundo para evitar erro no javascript da pagina
@@ -809,7 +809,7 @@ function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 			,null //colunas ocultar
 			,$gridCfg
 			,false // so leitura
-			,false // quebra linha automÃ¡tica
+			,false // quebra linha automática
 			);
 	}
 }

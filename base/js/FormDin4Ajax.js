@@ -1,6 +1,6 @@
 /*
  * Formdin Framework
- * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Copyright (C) 2012 MinistÈrio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -18,29 +18,29 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo √© parte do Framework Formdin.
+ * Este arquivo È parte do Framework Formdin.
  *
- * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
- * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
+ * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
+ * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
  * do Software Livre (FSF).
  *
- * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
- * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
+ * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
+ * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
  * para maiores detalhes.
  *
- * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
- * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
+ * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
+ * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 var ajaxRequestCount=0;
 var semaphore = [];
 var xhr;
 /**
- * Fun√ß√£o responsavel por envio de uma requisi√ß√£o AJAX.
- * Esta fun√ß√£o ir√° enviar todos os dados do formul√°rio para o modulo especificado
- * e ser√° retornado para fun√ß√£o de callback o resultado no formato texto ou json
+ * FunÁ„o responsavel por envio de uma requisiÁ„o AJAX.
+ * Esta funÁ„o ir· enviar todos os dados do formul·rio para o modulo especificado
+ * e ser· retornado para funÁ„o de callback o resultado no formato texto ou json
  * conforme o parametro dataType
  * EX:
  * fwAjaxRequest(
@@ -76,12 +76,12 @@ function fwAjaxRequest(config)
    			jQuery(div).css({"visibility":"visible"});
 		}
 	 }
-    // Iniciando a requisi√ß√£o em AJAX
+    // Iniciando a requisiÁ„o em AJAX
     if( ! config.module  )
     {
     	config.module = jQuery("#modulo").val();
 	}
-    if(!config.module) return alert('Atributo "modulo" n√£o foi informado!');
+    if(!config.module) return alert('Atributo "modulo" n„o foi informado!');
     if( config.acao != null )
     {
 		config.action = config.acao;
@@ -150,7 +150,7 @@ function fwAjaxRequest(config)
     var v_containerId='';
     if( config.containerId ) v_containerId = config.containerId;
 
-    // configura chamada em paralelo ou n√£o
+    // configura chamada em paralelo ou n„o
     var v_async = true;
     if( typeof config.async != 'undefined' ) v_async = config.async;
 
@@ -162,7 +162,7 @@ function fwAjaxRequest(config)
 		v_blockScreen = config.blockScreen;
     }
 
-    // configura e seta a fun√ß√£o de retorno
+    // configura e seta a funÁ„o de retorno
     var v_callback = function(res)
     {
     	var session_expired=false;
@@ -208,11 +208,11 @@ function fwAjaxRequest(config)
 
 		if( session_expired )
 		{
-			alert('Sess√£o expirada.\n\nClique Ok para reiniciar!');
+			alert('Sess„o expirada.\n\nClique Ok para reiniciar!');
  			fwApplicationRestart();
  			return;
 		}
-        // tratar queda de se√ß√£o
+        // tratar queda de seÁ„o
         var message='';
         if( config.dataType == 'json')
         {
@@ -229,7 +229,7 @@ function fwAjaxRequest(config)
         // cancelar o semaforo se houver
         if ( config.semaphore )
 	    {
-	    	// se o semaphoro estiver aberto √© porque atingiu o tempo limite de execu√ß√£o, ent√£o cancelar a requisi√ß√£o ajax
+	    	// se o semaphoro estiver aberto È porque atingiu o tempo limite de execuÁ„o, ent„o cancelar a requisiÁ„o ajax
             if( fwSemaphoreIsOpen( config.semaphore ) )
             {
             	if( v_containerId )
@@ -244,7 +244,7 @@ function fwAjaxRequest(config)
 			}
 	    }
 
-        // chamar a fun√ß√£o callback definida pelo usu√°rio
+        // chamar a funÁ„o callback definida pelo usu·rio
         if( config.callback )
         {
         	try
@@ -258,7 +258,7 @@ function fwAjaxRequest(config)
 	        	{
 	        		if( typeof config.callback !='function')
 	        		{
-						fwAlert( config.callback+' n√£o √© uma fun√ß√£o!',{'title':'Aten√ß√£o'});
+						fwAlert( config.callback+' n„o È uma funÁ„o!',{'title':'AtenÁ„o'});
 	        		}
 	        		else
 	        		{
@@ -358,7 +358,7 @@ function fwAjaxRequest(config)
 
     if( ! v_async || v_blockScreen )
     {
-	    // inicia anima√ß√£o de loading
+	    // inicia animaÁ„o de loading
 		if( v_containerId )
 		{
 			jQuery("#"+v_containerId).html(v_msgLoading);
@@ -387,7 +387,7 @@ function fwAjaxRequest(config)
 		}
 	}
 
-    // transformar os campos do formulario no formato para transmiss√£o via ajax
+    // transformar os campos do formulario no formato para transmiss„o via ajax
     var dados =  {};
     dados['ajax'] = 1;
     if( !config.data )
@@ -440,7 +440,7 @@ function fwAjaxRequest(config)
 			}
 		}
 	}
-	// adicionar a a√ß√£o no final
+	// adicionar a aÁ„o no final
 	if( config.action != null )
 	{
     	//dados +='&formDinAcao='+config.action;
@@ -458,13 +458,13 @@ function fwAjaxRequest(config)
     if( !app_url ) app_url='';
     if( !app_index_file ) app_index_file = 'index.php';
 
-    //Uso de Semaforo na requisicao ajax (semaforo fica "travado" at√© finalizar a requisicao)
+    //Uso de Semaforo na requisicao ajax (semaforo fica "travado" atÈ finalizar a requisicao)
     if (config.semaphore)
     {
     	fwSetSemaphore(config.semaphore,config.semaphoreTimeout,v_containerId);
     }
 
-    // inicia a requisi√ß√£o ajax
+    // inicia a requisiÁ„o ajax
 	ajaxRequestCount++;
     jQuery.ajax({
 		url: app_url+app_index_file,
@@ -504,10 +504,10 @@ function fwAjaxRequest(config)
 }
 //------------------------------------------------------------------------------
 /**
- * Fun√ß√£o para tornar campos obrigat√≥rio via js
+ * FunÁ„o para tornar campos obrigatÛrio via js
  * ex:
- * fwSetRequired('des_nivel') => tornar des_nivel obrigat√≥rio
- * fwSetRequired('des_nivel,des_obs') => tornar des_nivel e des_obs obrigat√≥rio
+ * fwSetRequired('des_nivel') => tornar des_nivel obrigatÛrio
+ * fwSetRequired('des_nivel,des_obs') => tornar des_nivel e des_obs obrigatÛrio
  */
 function fwSetRequired(fields)
 {
@@ -572,11 +572,11 @@ function fwSetRequired(fields)
 }
 
 /**
- * Fun√ß√£o para tornar campos obrigat√≥rio via js
+ * FunÁ„o para tornar campos obrigatÛrio via js
  * ex:
- * fwSetNotRequired('des_nivel') => tornar des_nivel obrigat√≥rio
+ * fwSetNotRequired('des_nivel') => tornar des_nivel obrigatÛrio
  * fwSetNotRequired('des_nivel,des_obs') => tornar des_nivel e des_obs
- * obrigat√≥rio
+ * obrigatÛrio
  */
 function fwSetNotRequired(fields)
 {
@@ -682,11 +682,11 @@ function fwChkRequestAjax()
 		var msg;
 		if( ajaxRequestCount > 1 )
 		{
-		   msg = 'Existem '+ajaxRequestCount+' requisi√ß√µes ajax pendentes!';
+		   msg = 'Existem '+ajaxRequestCount+' requisiÁıes ajax pendentes!';
 		}
 		else
 		{
-		   msg = 'Existe '+ajaxRequestCount+' requisi√ß√£o ajax pendente!';
+		   msg = 'Existe '+ajaxRequestCount+' requisiÁ„o ajax pendente!';
 		}
 		fwAlert(msg);
 		return false;
@@ -695,11 +695,11 @@ function fwChkRequestAjax()
 }
 
 /**
- * Cria (fecha) um semaforo. Utilizado para concorr√™ncia.
- * @param idSemaphore idenficador do sem√°foro
+ * Cria (fecha) um semaforo. Utilizado para concorrÍncia.
+ * @param idSemaphore idenficador do sem·foro
  * @param timeout (opcional) tempo em milisegundos para expirar o semaforo. Default: 20000 = 20 segundos.
- * @param idContainer ( opcional ) id do elemento que est√° exibindo alguma mensagem de processamento enquando aguarda o retorno da requisi√ß√£o ajax
- * @returns TRUE, se o sem√°foro foi criado; FALSE, caso contr√°rio; NULL, caso o identificador n√£o seja passado
+ * @param idContainer ( opcional ) id do elemento que est· exibindo alguma mensagem de processamento enquando aguarda o retorno da requisiÁ„o ajax
+ * @returns TRUE, se o sem·foro foi criado; FALSE, caso contr·rio; NULL, caso o identificador n„o seja passado
  */
 function fwSetSemaphore(idSemaphore, timeout, idContainer ) {
 	if(!idSemaphore)
@@ -715,9 +715,9 @@ function fwSetSemaphore(idSemaphore, timeout, idContainer ) {
 }
 
 /**
- * Cancela (abre) um sem√°foro. Utilizado para concorr√™ncia.
- * @param idSemaphore identificado do sem√°foro
- * @param idContainer ( opcional ) id do elemento que est√° exibindo alguma mensagem de processamento enquando aguarda o retorno da requisi√ß√£o ajax
+ * Cancela (abre) um sem·foro. Utilizado para concorrÍncia.
+ * @param idSemaphore identificado do sem·foro
+ * @param idContainer ( opcional ) id do elemento que est· exibindo alguma mensagem de processamento enquando aguarda o retorno da requisiÁ„o ajax
 */
 function fwCancelSemaphore(idSemaphore,idContainer) {
 	if (!semaphore[idSemaphore])
@@ -733,9 +733,9 @@ function fwCancelSemaphore(idSemaphore,idContainer) {
 }
 
 /**
- * Verifica se um sem√°foro est√° aberto ou fechado
- * @param idSemaphore identificador do sem√°foro
- * @returns TRUE, caso o sem√°foro esteja aberto; FALSE, caso esteja fechado; NULL, caso o identificador n√£o seja passado.
+ * Verifica se um sem·foro est· aberto ou fechado
+ * @param idSemaphore identificador do sem·foro
+ * @returns TRUE, caso o sem·foro esteja aberto; FALSE, caso esteja fechado; NULL, caso o identificador n„o seja passado.
  */
 function fwSemaphoreIsOpen(idSemaphore)
 {

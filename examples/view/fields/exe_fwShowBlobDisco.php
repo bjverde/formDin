@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÃ©rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,31 +19,31 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo Ã© parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
- * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
- * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
- * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm( 'Cadastro e ExibiÃ§Ã£o de LOBS Salvando Caminho no Banco de Dados' );
+$frm = new TForm( 'Cadastro e Exibição de LOBS Salvando Caminho no Banco de Dados' );
 
 $frm->addHiddenField( 'id_arquivo' ); // coluna chave da tabela
 
-$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereÃ§o do arquivo no banco de dados e depois visualiza-lo.<br>EstÃ¡ utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela Ã© a tb_arquivo.</b></h3></center>' );
+$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereço do arquivo no banco de dados e depois visualiza-lo.<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_arquivo.</b></h3></center>' );
 
 /*
-// script para a criaÃ§Ã£o da tabela no sqlite
+// script para a criação da tabela no sqlite
 CREATE TABLE [tb_arquivo] (
 [id_arquivo] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
 [nome_arquivo] varchar(200)  NULL
@@ -53,18 +53,18 @@ CREATE TABLE [tb_arquivo] (
 // campo para upload do arquivo
 $frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, 'jpg,txt,gif,doc,pdf,xls,odt', '2M', 60, null, null,'aoAnexar' );
 
-// grupo para exibir as informaÃ§Ãµes do arquivo selecionado
-$frm->addGroupField( 'gpDadosArquivo', 'InformaÃ§Ãµes do Arquivo' )->setReadOnly(true);
+// grupo para exibir as informações do arquivo selecionado
+$frm->addGroupField( 'gpDadosArquivo', 'Informações do Arquivo' )->setReadOnly(true);
 	$frm->addTextField( 'nome_arquivo', 'Nome do Arquivo:', 60, false, 60 );
 	$frm->addTextField( 'tamanho_arquivo', 'Tamanho:', 10 );
 	$frm->addTextField( 'tipo_arquivo', 'Tipo:', 60 );
 $frm->closeGroup();
 
-// criar os botÃµes no rodapÃ© do formulÃ¡rio
+// criar os botões no rodapé do formulário
 $frm->setAction( 'Salvar,Limpar' );
 
-$acao = isset($acao) ? $acao : null;
-switch( $acao ) {
+switch( $acao )
+{
     case 'Salvar':
         $vo = new Tb_arquivoVO();
         $frm->setVo( $vo );
@@ -78,33 +78,33 @@ switch( $acao ) {
 
     //--------------------------------------------------------------------
     case 'gdArquivos_excluir':
-        Tb_arquivoDAO::delete( $frm->get( 'id_arquivo' ) );
+   		Tb_arquivoDAO::delete( $frm->get( 'id_arquivo' ) );
     break;
 	//--------------------------------------------------------------------
 }
 
-// criar o gride com os arquivos jÃ¡ anexados
+// criar o gride com os arquivos já anexados
 $dados = Tb_arquivoDAO::selectAll( 'nome_arquivo' );
 $g = new TGrid( 'gdArquivos', 'Arquivos Gravados', $dados, null, null, 'ID_ARQUIVO' );
-$g->addColumn( 'id_arquivo', 'CÃ³digo', 100, 'center' );
+$g->addColumn( 'id_arquivo', 'Código', 100, 'center' );
 $g->addColumn( 'nome_arquivo', 'Nome do Arquivo', 3000 );
-$g->addColumn( 'imagem', 'ConteÃºdo', 100, 'center' );
-$g->setCreateDefaultEditButton( false ); // nÃ£o exibir o botÃ£o de ediÃ§Ã£o no gride
+$g->addColumn( 'imagem', 'Conteúdo', 100, 'center' );
+$g->setCreateDefaultEditButton( false ); // não exibir o botão de edição no gride
 $g->setOnDrawCell( 'configurarCelula' ); // colocar uma imagem com o link para visualizar o conteudo do arquivo na coluna "imagem" do gride
 
 // exibir o gride na tela dentro do campo html
 $frm->addHtmlField( 'gride', $g );
 
-// exibir o formulÃ¡rio
+// exibir o formulário
 $frm->show();
 
-// funÃ§Ã£o chamada pela classe TGrid para manipulaÃ§Ã£o dos dados das celulas
+// função chamada pela classe TGrid para manipulação dos dados das celulas
 function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aData = null, $edit = null )
 {
-	// se for a coluna imagem, adicionar um botÃ£o
+	// se for a coluna imagem, adicionar um botão
     if ( $objColumn->getFieldName() == 'imagem' )
     {
-        $btn = new TButton( 'btn' . $rowNum, null, null, 'fwModalBox("VisualizaÃ§Ã£o do Arquivo","arquivos/'. $aData[ 'NOME_ARQUIVO' ] . '")', null, 'analise.gif', null, 'Visualizar o Arquivo' );
+        $btn = new TButton( 'btn' . $rowNum, null, null, 'fwModalBox("Visualização do Arquivo","arquivos/'. $aData[ 'NOME_ARQUIVO' ] . '")', null, 'analise.gif', null, 'Visualizar o Arquivo' );
         $cell->add( $btn );
     }
 }
