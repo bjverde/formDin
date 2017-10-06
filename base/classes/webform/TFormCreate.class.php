@@ -311,6 +311,7 @@ class TFormCreate {
 		$this->addBasicaViewController();
 		$this->addBasicaGrid();
 		//-------- FIM
+		$this->addLine('$frm->setAction( \'Salvar,Limpar\' );');
 		$this->addLine('$frm->show();');
 		$this->addLine("?>");
         
