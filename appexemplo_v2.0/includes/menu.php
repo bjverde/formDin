@@ -45,6 +45,12 @@
   $menu->add('2',null,'Autoridades',null,null);
   $menu->add('21','2','Cadastro Autoridades','modulos/autoridades.php',null);
 
+
+  $menu->add('9',null,'Tabelas de Apoio',null,null,'table16.gif');
+  $menu->add('91','9','Região','modulos/regiao.php',null);
+  $menu->add('92','9','UF','modulos/uf.php',null);
+  $menu->add('93','9','Município ','modulos/municipio.php',null);
+
   
   $menu->add('10',null,'Config Ambiente',null,null,'setting-gear-512.png');
   $menu->add('101','10','Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg');
