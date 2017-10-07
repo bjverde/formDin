@@ -26,8 +26,8 @@
  * do Software Livre (FSF).
  *
  * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * GARANTIA; sem uma garantia implícita de ADEQUA�?�?O a qualquer MERCADO ou
+ * APLICA�?�?O EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -35,29 +35,29 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
- 
-  $menu = new TMenuDhtmlx();
-  $menu->add('1',null,'Menu',null,null,'menu-alt-512.png');
-  $menu->add('11','1','Pessoa','view/pessoa.php',null,'user916.gif');
-  $menu->add('12','1','Tipos de Tipos','view/tipo_tipos.php',null);
-  
-  
-  $menu->add('2',null,'Autoridades',null,null);
-  $menu->add('21','2','Cadastro Autoridades','modulos/autoridades.php',null);
+
+$menu = new TMenuDhtmlx();
+$menu->add('1', null, 'Menu', null, null, 'menu-alt-512.png');
+$menu->add('11', '1', 'Pessoa', 'view/pessoa.php', null, 'user916.gif');
+$menu->add('12', '1', 'Tipos de Tipos', 'view/tipo_tipos.php', null);
 
 
-  $menu->add('9',null,'Tabelas de Apoio',null,null,'table16.gif');
-  $menu->add('91','9','Regi�o','modulos/regiao.php',null);
-  $menu->add('92','9','UF','modulos/uf.php',null);
-  $menu->add('93','9','Munic�pio ','modulos/municipio.php',null);
+$menu->add('2', null, 'Autoridades', null, null);
+$menu->add('21', '2', 'Cadastro Autoridades', 'modulos/autoridades.php', null);
 
-  
-  $menu->add('10',null,'Config Ambiente',null,null,'setting-gear-512.png');
-  $menu->add('101','10','Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg');
-  $menu->add('102','10','Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png');
-  $menu->add('103','10','Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png');
-  $menu->add('104','10','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
-  $menu->add('105','10','Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png');
-  
-  $menu->getXml();
+
+$menu->add('9', null, 'Tabelas de Apoio', null, null, 'table16.gif');
+$menu->add('91', '9', 'Regi�o', 'modulos/regiao.php', null);
+$menu->add('92', '9', 'UF', 'modulos/uf.php', null);
+$menu->add('93', '9', 'Munic�pio ', 'modulos/municipio.php', null);
+
+
+$menu->add('10', null, 'Config Ambiente', null, null, 'setting-gear-512.png');
+$menu->add('101', '10', 'Ambiente Resumido', 'view/ambiente_resumido.php', null, 'information-circle.jpg');
+$menu->add('102', '10', 'Ambiente PHPInfo em IFrame', 'view/ambiente_phpinfo.php', null, 'php_logo.png');
+$menu->add('103', '10', 'Banco MySQL', 'view/exe_teste_conexao.php', null, 'data_base.png');
+$menu->add('104', '10', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php');
+$menu->add('105', '10', 'Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, 'smiley-1-512.png');
+
+$menu->getXml();
 ?>

@@ -26,8 +26,8 @@
  * do Software Livre (FSF).
  *
  * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * GARANTIA; sem uma garantia implícita de ADEQUA�?�?O a qualquer MERCADO ou
+ * APLICA�?�?O EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -35,13 +35,13 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-include('../base/classes/webform/TApplication.class.php');
+include ('../base/classes/webform/TApplication.class.php');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 //$app->setSigla('formdin');
-$app->setUnit('Departamento de Informática - DI - 2011');
+$app->setUnit('Departamento de Inform�tica - DI - 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
