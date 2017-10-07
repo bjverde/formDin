@@ -5640,3 +5640,43 @@ INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (1,
 INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (2,2);
 INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (3,3);
 INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,4);
+
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,null,null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(101,10,'Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg',null,null,null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(102,10,'Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png',null,null,null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(103,10,'Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png',null,null,null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,null,null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+VALUES
+(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,null,null,null);
+
+
+
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,10);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,101);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,102);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,103);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,104);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,105);

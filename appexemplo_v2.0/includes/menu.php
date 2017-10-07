@@ -54,7 +54,7 @@ $menu->add('83', '8', 'Município ', 'modulos/municipio.php', null);
 $menu->add('9', null, 'Acesso', null, null, 'icon-key-yellow.png');
 $menu->add('91', '9', 'User', 'modulos/acesso_user.php', null, 'user916.gif');
 $menu->add('92', '9', 'Pefil', 'modulos/acesso_perfil.php', null, 'icon_mask.png');
-$menu->add('92', '9', 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png');
+$menu->add('93', '9', 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png');
 
 
 
