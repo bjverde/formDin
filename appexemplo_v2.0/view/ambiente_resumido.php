@@ -21,7 +21,7 @@
 
 function testar($extensao=null,$html){
 	if( !extension_loaded($extensao) )	{
-		$html->add('<b>'.$extensao.'</b>: <span class="vermelho">N√£o instalada</span><br>');
+		$html->add('<b>'.$extensao.'</b>: <span class="vermelho">N„o instalada</span><br>');
 		return true;
 	}else {
 		$html->add('<b>'.$extensao.'</b>: <span class="verde">Instalada.</span><br>');
@@ -31,14 +31,14 @@ function testar($extensao=null,$html){
 
 function infoSQLServer(){
 	if(PHP_OS == "Linux"){
-		$msg = "Para utilizar Linux com Microsoft SQL Server ser√° utilizado o PDO com o drive dblib";
+		$msg = "Para utilizar Linux com Microsoft SQL Server ser· utilizado o PDO com o drive dblib";
 	}else{
 		switch(PHP_INT_SIZE) {
 			case 4:
 				$msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
 				break;
 			case 8:
-				$msg = '<span class="vermelho">ATEN√á√ÉO o Drive da Microsoft n√£o funciona em Windows 64 bits</span>, instale o drive n√£o oficial';
+				$msg = '<span class="vermelho">ATEN«√O o Drive da Microsoft n„o funciona em Windows 64 bits</span>, instale o drive n„o oficial';
 				break;
 			default:
 				$msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
@@ -64,7 +64,7 @@ function phpVersionOK(){
 	$html->add(phpVersionOK());
 	$html->add('<b>Seu Ip</b>: <span class="versao">'.$_SERVER['REMOTE_ADDR'].'</span><br>');
 
-	$html->add('<br><b>Extens√µes:</b><br>');
+	$html->add('<br><b>ExtensÁıes:</b><br>');
 
 	testar('gd',$html);
 	testar('pdf',$html);
