@@ -28,3 +28,9 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 ## Instalação.
 
 Baixe o projeto em coloque um servidor PHP.
+
+O que tem em cada pasta
+* appexemplo_form_alone - exemplo de uma pagina sem sistema.
+* appexemplo_v1.0 - Exemplos simples de quase todos os recurso possíveis.
+* appexemplo_v2.0 - Exemplo de uma sistema conectando no mysql com telas totalmente funcionais. EM CONSTRUÇÃO
+* appexemplo_v2.5 - Mesmo sistema que a versão 2.0 só que com o todo controle de acesso e segurança. EM CONSTRUÇÃO
