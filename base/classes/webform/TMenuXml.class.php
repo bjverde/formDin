@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 Minist?rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo ? parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin ? um software livre; voc? pode redistribu?-lo e/ou
+ * modific?-lo dentro dos termos da GNU LGPL vers?o 3 como publicada pela Funda??o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa ? distribu?do na esperan?a que possa ser ?til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl?cita de ADEQUA??O a qualquer MERCADO ou
+ * APLICA??O EM PARTICULAR. Veja a Licen?a P?blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * Voc? deve ter recebido uma c?pia da GNU LGPL vers?o 3, sob o t?tulo
+ * "LICENCA.txt", junto com esse programa. Se n?o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda??o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para gerar o xml para criação de menus verticais utilizando a bibliotaca DHTMLX
+* Classe para gerar o xml para cria??o de menus verticais utilizando a bibliotaca DHTMLX
 * Link: http://www.dhtmlx.com/docs/products/docsExplorer/index.shtml?node=dhtmlxmenu
 * Ex:
 * 	$menu = new TMenuDhtmlx();
@@ -51,8 +51,7 @@
 * 	ou echo $menu->getXml()
 *
 */
-class TMenuDhtmlx
-{
+class TMenuDhtmlx {
     private $arrMenu;
     private $arrOrphan;
     private $strId;
@@ -68,28 +67,35 @@ class TMenuDhtmlx
 	private $boolSeparator;
 	private $arrUserData;
 
-    public function __construct($data=null,$boolIgnoreOrphans=null)
-    {
+    public function __construct($data=null,$boolIgnoreOrphans=null) {
     	$this->boolIgnoreOrphans = $boolIgnoreOrphans === null ? true : $boolIgnoreOrphans;
         $this->arrMenu=null;
     }
     /**
-    * Método para adicionar itens de menu
+    * M?todo para adicionar itens de menu
     *
     * @param string $strId
     * @param string $strIdParent
     * @param string $strText
     * @param string $strUrl
-    * @param string $strToolTip
-    * @param string $strImg
+    * @param string $strToolTip uma expli??o maior sobre o item
+    * @param string $strImg  imagem ser? utilizada como icone
     * @param string $strImgDisabled
     * @param boolean $boolDisabled
     * @param string $strHotKey
     * @param boolean $boolSeparator
     * @return TMenuDhtmlx
     */
-    public function add($strId, $strIdParent,$strText,$strUrl=null,$strToolTip=null,$strImg=null,$strImgDisabled=null,$boolDisabled=null,$strHotKey=null,$boolSeparator=null)
-    {
+    public function add($strId
+                      , $strIdParent
+                      , $strText
+                      , $strUrl=null
+                      , $strToolTip=null
+                      , $strImg=null
+                      , $strImgDisabled=null
+                      , $boolDisabled=null
+                      , $strHotKey=null
+                      , $boolSeparator=null) {
         $menu = new TMenuDhtmlx();
         $menu->setText($strText);
         $menu->setId($strId);
@@ -102,22 +108,18 @@ class TMenuDhtmlx
         $menu->setHotKey($strHotKey);
         $menu->setSeparator($boolSeparator);
 
-        // verificar se o pai já está adicionado
+        // verificar se o pai j? est? adicionado
         $objMenu = $this->getMenuById($strIdParent);
-        if( $strIdParent && $objMenu )
-        {
+        if ($strIdParent && $objMenu) {
             $objMenu->addMenu($menu);
         }
-        else
-        {
-        	// se tiver idparent então é orfão
-            if( !$strIdParent )
-            {
+        else {
+        	// se tiver idparent ent?o ? orf?o
+            if (!$strIdParent) {
             	// item pai ou filho
                 $this->addMenu($menu);
             }
-            else
-            {
+            else {
                 // Orphan
                 $this->addOrphan($menu);
             }
@@ -126,8 +128,7 @@ class TMenuDhtmlx
     }
     protected function addMenu(TMenuDhtmlx $objMenu)
     {
-        if( $Orphan = $this->getOrphanByIdParent($objMenu->getId()))
-        {
+        if ($Orphan = $this->getOrphanByIdParent($objMenu->getId())) {
             $objMenu->addMenu($Orphan);
         }
         $this->arrMenu[] = $objMenu;
@@ -328,7 +329,7 @@ class TMenuDhtmlx
     }
     public function addOrphan(TMenuDhtmlx $menu)
     {
-        // se existir filhos orfão, adicionar todos os filhos
+        // se existir filhos orf?o, adicionar todos os filhos
         while( $objMenu = $this->getOrphanByIdParent($menu->getId()) )
         {
             $menu->addMenu($objMenu);
@@ -340,7 +341,7 @@ class TMenuDhtmlx
         }
         else
         {
-        	// adicionar a lista de orfãos
+        	// adicionar a lista de orf?os
             $this->arrOrphan[] = $menu;
         }
     }
@@ -354,7 +355,7 @@ class TMenuDhtmlx
                 if( $objMenu->getIdParent() == $strId)
                 {
                     $result=$objMenu;
-                    // remover o registro órfão
+                    // remover o registro ?rf?o
                     array_splice($this->arrOrphan,$k,1);
                     break;
                 }
@@ -453,7 +454,7 @@ class TMenuDhtmlx
 		}
         /*
 		echo '<menu>
-		<item id="file" text="Administração">
+		<item id="file" text="Administra??o">
 			<item id="new" text="New" img="new.gif"/>
 			<item id="file_sep_1" type="separator"/>
 			<item id="open" text="Open" img="open.gif">
@@ -496,7 +497,7 @@ $menu->add(7,5,'2.1');
 $menu->add(8,7,'2.1.1');
 $menu->add(9,7,'2.1.2');
 $menu->add(10,7,'2.1.3');
-$menu->add(5,0,'2 - Relatório',null,null,'save.gif');
+$menu->add(5,0,'2 - Relat?rio',null,null,'save.gif');
 */
 
 /*
