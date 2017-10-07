@@ -34,3 +34,5 @@ O que tem em cada pasta
 * appexemplo_v1.0 - Exemplos simples de quase todos os recurso possíveis.
 * appexemplo_v2.0 - Exemplo de uma sistema conectando no mysql com telas totalmente funcionais. EM CONSTRUÇÃO
 * appexemplo_v2.5 - Mesmo sistema que a versão 2.0 só que com o todo controle de acesso e segurança. EM CONSTRUÇÃO
+* base - é o local onde toda a magica acontece. Aquim tem o FormDin propriamente dito.
+* documents - Documentos e informações.
