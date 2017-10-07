@@ -46,10 +46,16 @@ $menu->add('2', null, 'Autoridades', null, null);
 $menu->add('21', '2', 'Cadastro Autoridades', 'modulos/autoridades.php', null);
 
 
-$menu->add('9', null, 'Tabelas de Apoio', null, null, 'table16.gif');
-$menu->add('91', '9', 'Região', 'modulos/regiao.php', null);
-$menu->add('92', '9', 'UF', 'modulos/uf.php', null);
-$menu->add('93', '9', 'Município ', 'modulos/municipio.php', null);
+$menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
+$menu->add('81', '8', 'Região', 'modulos/regiao.php', null,null,null,false,null);
+$menu->add('82', '8', 'UF', 'modulos/uf.php', null);
+$menu->add('83', '8', 'Município ', 'modulos/municipio.php', null);
+
+$menu->add('9', null, 'Acesso', null, null, 'icon-key-yellow.png');
+$menu->add('91', '9', 'User', 'modulos/acesso_user.php', null, 'user916.gif');
+$menu->add('92', '9', 'Pefil', 'modulos/acesso_perfil.php', null, 'icon_mask.png');
+$menu->add('92', '9', 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png');
+
 
 
 $menu->add('10', null, 'Config Ambiente', null, null, 'setting-gear-512.png');
