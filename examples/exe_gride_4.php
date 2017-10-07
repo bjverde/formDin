@@ -45,14 +45,8 @@ $frm->addHtmlField('campo_gride');
 // quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formul·rio
 $_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 if( $_REQUEST['action'] == 'atualizar_gride' ) {
-<<<<<<< HEAD
 	// criaÁ„o do array de dados
-	for( $i=0; $i<30; $i++ )
-	{
-=======
-	// cria√ß√£o do array de dados
-	for( $i=0; $i<30; $i++ ) {
->>>>>>> 859734e... corre√ß√£o de Notice: Undefined variable ou undefined index
+	for( $i=0; $i<30; $i++ ){
 		$res['SEQ_GRIDE'][] = ($i+1);
 		$res['NOM_LINHA'][] = 'Linha n∫ '. (10-$i+1);
 		$res['DES_LINHA'][] = $i.' - '.str_repeat('Linha ',20);
