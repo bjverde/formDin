@@ -5624,3 +5624,19 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5222303,52,'ARANTINA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5300108,53,'BRASÍLIA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',9999999,53,'MUNICIPIO PROVISÓRIO');
+
+
+INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('root','root');
+INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('admin','admin');
+INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('user','user');
+INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('trainee','trainee');
+
+INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Root');
+INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Admin');
+INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('User');
+INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('trainee');
+
+INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (1,1);
+INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (2,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (3,3);
+INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,4);
