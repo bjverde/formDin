@@ -4,10 +4,12 @@ $frm = new TForm('Cadastro de Municípios',600);
 $frm->setFlat(true);
 
 
-$frm->addHiddenField( $primaryKey ); // coluna chave da tabela
-$frm->addTextField('COD_UF', 'COD_UF',50,true);
-$frm->addTextField('NOM_MUNICIPIO', 'NOM_MUNICIPIO',50,true);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',50,true);
+$frm->addHiddenField($primaryKey); // coluna chave da tabela
+
+$dadosUf = UfDAO::selectAll('NOM_UF');
+$frm->addSelectField('COD_UF','Estado:',true,$dadosUf);
+$frm->addTextField('NOM_MUNICIPIO', 'Nome município:', 50, true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -42,21 +44,52 @@ switch( $acao ) {
 	break;
 }
 
-$dados = MunicipioDAO::selectAll($primaryKey);
-$mixUpdateFields = $primaryKey.'|'.$primaryKey.',COD_UF|COD_UF,NOM_MUNICIPIO|NOM_MUNICIPIO,SIT_ATIVO|SIT_ATIVO';
-$gride = new TGrid( 'gd'        // id do gride
-				   ,'Gride'     // titulo do gride
-				   ,$dados 	      // array de dados
-				   ,null		  // altura do gride
-				   ,null		  // largura do gride
-				   ,$primaryKey   // chave primaria
-				   ,$mixUpdateFields
-				   );
-$gride->addColumn($primaryKey,'id',50,'center');
-$gride->addColumn('COD_UF','COD_UF',50,'center');
-$gride->addColumn('NOM_MUNICIPIO','NOM_MUNICIPIO',50,'center');
-$gride->addColumn('SIT_ATIVO','SIT_ATIVO',50,'center');
-$frm->addHtmlField('gride',$gride);
+
+
+if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
+	$dados = MunicipioDAO::selectAll('NOM_MUNICIPIO');
+	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',COD_UF|COD_UF,NOM_MUNICIPIO|NOM_MUNICIPIO,SIT_ATIVO|SIT_ATIVO';
+	$gride = new TGrid( 'gd'          // id do gride
+					   ,'Gride'       // titulo do gride
+					   ,$dados 	      // array de dados
+					   ,null		  // altura do gride
+					   ,null		  // largura do gride
+					   ,$primaryKey   // chave primaria
+					   ,$mixUpdateFields
+					   ,15
+					   ,'municipio.php'
+					   );
+	$gride->addColumn($primaryKey, 'id', 50, 'center');
+	$gride->addColumn('COD_UF', 'COD_UF', 50, 'center');
+	$gride->addColumn('SIG_UF', 'UF', 50, 'center');
+	$gride->addColumn('NOM_MUNICIPIO', 'Nome município', 200);
+	$gride->addColumn('SIT_ATIVO', 'Ativo', 50, 'center');
+	$gride->show();
+	die();
+}
+$frm->addHtmlField('html_gride');
+$frm->setAction("Refresh");
 $frm->setAction( 'Salvar,Limpar' );
+$frm->addJavascript('init()');
 $frm->show();
+
+
+function onDraw( $rowNum,$button,$objColumn,$aData) {
+	//$button->setEnabled( false );
+	if( $button->getName() == 'btnAlterar') {
+		if( $rowNum == 1 ) {
+			$button->setEnabled( false );
+		}
+	}
+}
 ?>
+<script>
+function init() {
+	fwGetGrid("municipio.php",'html_gride');
+}
+// recebe fields e values do grid
+function alterar(f,v){
+	var dados = fwFV2O(f,v);
+	fwModalBox('Alteração','index.php?modulo=municipio.php',300,800,null,dados);
+}
+</script>

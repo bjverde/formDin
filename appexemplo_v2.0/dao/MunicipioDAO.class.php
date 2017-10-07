@@ -42,11 +42,12 @@ class MunicipioDAO extends TPDOConnection
 	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
-								 cod_municipio
-								,cod_uf
-								,nom_municipio
-								,sit_ativo
-								from municipio'.
+								 m.cod_municipio
+								,m.cod_uf
+								,(select sig_uf from uf where cod_uf = m.cod_uf) as sig_uf
+								,m.nom_municipio
+								,m.sit_ativo
+								from municipio as m'.
 		( ($where)? ' where '.$where:'').
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
