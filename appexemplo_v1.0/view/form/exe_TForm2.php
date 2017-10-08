@@ -67,7 +67,7 @@ function subcadastro()
 	// Passsando o campo nome como json. Se não for informado o valor, será lido do formulário
 	//fwModalBox('Este é um Subcadastro','../teste.php');
 	//fwModalBox('Este é um Subcadastro','www.globo.com.br');
-	fwModalBox('Este é um Subcadastro',app_index_file+'?modulo=exe_TForm.php',380,820,callbackModaBox,{'nome':''});
+	fwModalBox('Este é um Subcadastro',app_index_file+'?view/form=exe_TForm.php',380,820,callbackModaBox,{'nome':''});
 }
 
 /**
