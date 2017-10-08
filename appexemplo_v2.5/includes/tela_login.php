@@ -52,21 +52,36 @@ $frm->hideCloseButton();
 $frm->addTextField('login'		,'Login:',20,true,20);
 $frm->addPasswordField('senha'	,'Senha:',20,true,20);
 $frm->addHtmlField('msg',$html);
-$frm->addButton('Entrar','login',null);
+//$frm->addButton('Entrar','login',null);
+$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informações','json',false);
 
 if( $acao =='login'){
     sleep(1);
     $nom_user = $frm->get('login');
     $pwd_user = $frm->get('senha');
     $msg = loginService::validarLogin($nom_user,$pwd_user);
-    if( $msg == 1 )    {
+    if( $msg == 1 ) {
         $_SESSION[APLICATIVO]['conectado']=true;
+        prepareReturnAjax(1);
     }
     else {
         //$frm->setShowMessageForm(true);
         $frm->setMessage('Login Inválido');
+        prepareReturnAjax(0);
     }
 }
 
 $frm->show();
 ?>
+
+<script>
+
+function resultado(res) {
+    if( res.status==1) {
+        fwApplicationRestart();    
+    }
+    else {
+        fwAlert('Login Inválido');
+    }
+}
+</script>
