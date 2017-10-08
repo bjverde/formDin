@@ -1,7 +1,4 @@
 <?php
-//phpinfo();
-//die;
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministï¿½rio do Planejamento
@@ -22,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo ï¿½ parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin ï¿½ um software livre; vocï¿½ pode redistribuï¿½-lo e/ou
- * modificï¿½-lo dentro dos termos da GNU LGPL versï¿½o 3 como publicada pela Fundaï¿½ï¿½o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa ï¿½ distribuï¿½do na esperanï¿½a que possa ser ï¿½til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implï¿½cita de ADEQUAï¿½ï¿½O a qualquer MERCADO ou
- * APLICAï¿½ï¿½O EM PARTICULAR. Veja a Licenï¿½a Pï¿½blica Geral GNU/LGPL em portuguï¿½s
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * Vocï¿½ deve ter recebido uma cï¿½pia da GNU LGPL versï¿½o 3, sob o tï¿½tulo
- * "LICENCA.txt", junto com esse programa. Se nï¿½o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundaï¿½ï¿½o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -124,9 +121,8 @@ die('fim');
 set_error_handler("exception_error_handler");
 $app->run();
 
-function minhaFuncaoLogin()
-{
-    return 'Olï¿½';
+function minhaFuncaoLogin() {
+    return 'Olá';
 }
 
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {
