@@ -37,10 +37,16 @@
  */
 include ('../base/classes/webform/TApplication.class.php');
 
+
+define('APLICATIVO','APPEV25');
+define('FORMDIN',1);
+define('DECIMAL_SEPARATOR',',');
+
+
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
-//$app->setSigla('formdin');
+$app->setSigla(APLICATIVO);
 $app->setUnit('Departamento de Informática - DI - 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setLoginFile('includes/tela_login.php');
