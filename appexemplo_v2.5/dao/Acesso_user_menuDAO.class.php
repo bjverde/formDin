@@ -45,7 +45,7 @@ class Acesso_user_menuDAO extends TPDOConnection
 	}
 	//--------------------------------------------------------------------------------
 	public static function selectByLogin( $login_user ){
-		$values = array($id);
+		$values = array($login_user);
 		return self::executeSql('select
 								 iduser
 								,login_user
@@ -53,7 +53,7 @@ class Acesso_user_menuDAO extends TPDOConnection
 								,nom_perfil
 								,idmenu
 								,nom_menu
-								from acesso_user_menu where login_user = ?', $login_user );
+								from acesso_user_menu where login_user = ?', $values );
 	}
 	//--------------------------------------------------------------------------------	
 	public static function selectAll( $orderBy=null, $where=null )

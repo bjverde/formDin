@@ -1,7 +1,4 @@
 <?php
-require_once('services/acessoUserMenuService.php');
-acessoUserMenuService::getAcessoUserMenuByLogin();
-
 $primaryKey = 'IDUSER';
 $frm = new TForm('Cadastro de usuários ',600);
 $frm->setFlat(true);

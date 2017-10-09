@@ -48,8 +48,7 @@ class Acesso_menuDAO extends TPDOConnection
 		return self::executeSql('delete from acesso_menu where idmenu = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public static function select( $id )
-	{
+	public static function select( $id ){
 		$values = array($id);
 		return self::executeSql('select
 								 idmenu
@@ -68,6 +67,30 @@ class Acesso_menuDAO extends TPDOConnection
 								,dat_update
 								from acesso_menu where idmenu = ?', $values );
 	}
+	//--------------------------------------------------------------------------------
+	public static function selectMenuByLogin( $login_user ){
+		$values = array($login_user);
+		$sql = 'select
+				 m.idmenu
+				,m.idmenu_pai
+				,m.nom_menu
+				,m.url
+				,m.tooltip
+				,m.img_menu
+				,m.imgdisabled
+				,m.dissabled
+				,m.hotkey
+				,m.boolseparator
+				,m.jsonparams
+				,m.sit_ativo
+				,m.dat_inclusao
+				,m.dat_update
+				from acesso_menu as m 
+					,acesso_user_menu as um 
+				where um.idmenu = m.idmenu 
+				AND um.login_user = ?';
+		return self::executeSql($sql, $values );
+	}	
 	//--------------------------------------------------------------------------------
 	public static function selectAll( $orderBy=null, $where=null )
 	{

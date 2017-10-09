@@ -36,7 +36,17 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+
+require_once('services/acessoUserMenuService.php');
+$userMenu = acessoUserMenuService::getAcessoUserMenuByLogin();
+
 $menu = new TMenuDhtmlx();
+
+foreach ($userMenu['IDMENU'] as $key => $value){
+    $menu->add($userMenu['IDMENU'][$key], $userMenu['IDMENU_PAI'][$key], $userMenu['NOM_MENU'][$key], $userMenu['URL'][$key], $userMenu['TOOLTIP'][$key], $userMenu['IMG_MENU'][$key]);
+}
+
+/*
 $menu->add('1', null, 'Menu', null, null, 'menu-alt-512.png');
 $menu->add('11', '1', 'Pessoa', 'view/pessoa.php', null, 'user916.gif');
 $menu->add('12', '1', 'Tipos de Tipos', 'view/tipo_tipos.php', null);
@@ -64,6 +74,7 @@ $menu->add('102', '10', 'Ambiente PHPInfo em IFrame', 'view/ambiente_phpinfo.php
 $menu->add('103', '10', 'Banco MySQL', 'view/exe_teste_conexao.php', null, 'data_base.png');
 $menu->add('104', '10', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php');
 $menu->add('105', '10', 'Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, 'smiley-1-512.png');
+*/
 
 $menu->getXml();
 ?>
