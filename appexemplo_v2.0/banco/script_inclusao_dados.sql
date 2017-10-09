@@ -5626,10 +5626,10 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',9999999,53,'MUNICIPIO PROVISÓRIO');
 
 
-INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('root','root');
-INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('admin','admin');
-INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('user','user');
-INSERT INTO `form_exemplo`.`acesso_user` (`nom_user`, `pwd_user`) VALUES ('trainee','trainee');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('root','root');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('admin','admin');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('user','user');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('trainee','trainee');
 
 INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Root');
 INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Admin');
@@ -5643,32 +5643,32 @@ INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,
 
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (101,10,'Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (102,10,'Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (103,10,'Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`toolpip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
 VALUES
 (105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,null,null,null);
 

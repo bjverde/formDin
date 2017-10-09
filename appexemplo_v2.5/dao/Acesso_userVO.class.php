@@ -2,15 +2,15 @@
 class Acesso_userVO
 {
 	private $iduser = null;
-	private $nom_user = null;
+	private $login_user = null;
 	private $pwd_user = null;
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function Acesso_userVO( $iduser=null, $nom_user=null, $pwd_user=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+	public function Acesso_userVO( $iduser=null, $login_user=null, $pwd_user=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
 	{
 		$this->setIduser( $iduser );
-		$this->setNom_user( $nom_user );
+		$this->setlogin_user( $login_user );
 		$this->setPwd_user( $pwd_user );
 		$this->setSit_ativo( $sit_ativo );
 		$this->setDat_inclusao( $dat_inclusao );
@@ -26,13 +26,13 @@ class Acesso_userVO
 		return $this->iduser;
 	}
 	//--------------------------------------------------------------------------------
-	function setNom_user( $strNewValue = null )
+	function setlogin_user( $strNewValue = null )
 	{
-		$this->nom_user = $strNewValue;
+		$this->login_user = $strNewValue;
 	}
-	function getNom_user()
+	function getlogin_user()
 	{
-		return $this->nom_user;
+		return $this->login_user;
 	}
 	//--------------------------------------------------------------------------------
 	function setPwd_user( $strNewValue = null )
