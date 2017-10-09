@@ -8,8 +8,8 @@ $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addTextField('LOGIN_USER', 'Login',50,true);
 $frm->addTextField('PWD_USER', 'Senha',50,true);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=N?o', true);
-$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão',50,true)->setReadOnly(true);
-$frm->addTextField('DAT_UPDATE', 'Data Update',50,true)->setReadOnly(true);
+$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão',15,false,null,null,true)->setReadOnly(true);
+$frm->addTextField('DAT_UPDATE', 'Data Update',15,false,null,null,false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -55,11 +55,11 @@ $gride = new TGrid( 'gd'        // id do gride
 				   ,$mixUpdateFields
 				   );
 $gride->addColumn($primaryKey,'id',50,'center');
-$gride->addColumn('LOGIN_USER','LOGIN_USER',50,'center');
-$gride->addColumn('PWD_USER','PWD_USER',50,'center');
-$gride->addColumn('SIT_ATIVO','SIT_ATIVO',50,'center');
-$gride->addColumn('DAT_INCLUSAO','Data Inclusão',50,'center');
-$gride->addColumn('DAT_UPDATE','Data Update',50,'center');
+$gride->addColumn('LOGIN_USER','Login',100,'center');
+$gride->addColumn('PWD_USER','Senha',200,'center');
+$gride->addColumn('SIT_ATIVO','Ativo',30,'center');
+$gride->addColumn('DAT_INCLUSAO','Data Inclusão',100,'center');
+$gride->addColumn('DAT_UPDATE','Data Update',100,'center');
 $frm->addHtmlField('gride',$gride);
 $frm->setAction( 'Salvar,Limpar' );
 $frm->show();
