@@ -55,7 +55,8 @@ switch( $acao ) {
 $dados = Acesso_menuDAO::selectAll($primaryKey);
 
 $frm->addGroupField('gpTree','Menus Treeview')->setcloseble(true);
-$tree = $frm->addTreeField('tree',null,$dados,'IDMENU_PAI',$primaryKey,'NOM_MENU',null, array('IMG_MENU','URL') );
+$userData = array('IDMENU_PAI','NOM_MENU','URL','TOOLTIP','IMG_MENU','IMGDISABLED','DISSABLED','HOTKEY','BOOLSEPARATOR','JSONPARAMS','SIT_ATIVO','DAT_INCLUSAO','DAT_UPDATE');
+$tree = $frm->addTreeField('tree',null,$dados,'IDMENU_PAI',$primaryKey,'NOM_MENU',null, $userData);
 $tree->setStartExpanded(true);
 $tree->setOnClick('treeClick'); // fefinir o evento que ser? chamado ao clicar no item da treeview
 $frm->closeGroup();
@@ -102,6 +103,7 @@ function treeClick(id) {
 	/*
 	alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
 	'Item text:'+treeJs.getItemText(id )+'\n'+
+	'User pai:'+treeJs.getUserData(id,'IDMENU_PAI')+'\n'+
 	'User data URL:'+treeJs.getUserData(id,'URL')+'\n'+
 	'IMG:'+treeJs.getUserData(id,'IMG_MENU')
 	);
@@ -109,8 +111,8 @@ function treeClick(id) {
 	
 	// atualizar os campos do formul?rio
 	jQuery("#IDMENU").val(treeJs.getSelectedItemId());
-	jQuery("#IDMENU_PAI").val(treeJs.getUserData(id,'IDMENU_PAI'));
 	jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
+	jQuery("#IDMENU_PAI").val(treeJs.getUserData(id,'IDMENU_PAI'));
 	jQuery("#URL").val(treeJs.getUserData(id,'URL'));
 	jQuery("#IMG_MENU").val(treeJs.getUserData(id,'IMG_MENU'));
 	
