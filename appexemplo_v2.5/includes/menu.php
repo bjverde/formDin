@@ -38,43 +38,15 @@
 
 
 require_once('services/acessoUserMenuService.php');
+//Pega a lista de Menus do Banco em função do usuario logado
 $userMenu = acessoUserMenuService::getAcessoUserMenuByLogin();
 
 $menu = new TMenuDhtmlx();
 
+//Gera o menu Basico
 foreach ($userMenu['IDMENU'] as $key => $value){
     $menu->add($userMenu['IDMENU'][$key], $userMenu['IDMENU_PAI'][$key], $userMenu['NOM_MENU'][$key], $userMenu['URL'][$key], $userMenu['TOOLTIP'][$key], $userMenu['IMG_MENU'][$key]);
 }
-
-/*
-$menu->add('1', null, 'Menu', null, null, 'menu-alt-512.png');
-$menu->add('11', '1', 'Pessoa', 'view/pessoa.php', null, 'user916.gif');
-$menu->add('12', '1', 'Tipos de Tipos', 'view/tipo_tipos.php', null);
-
-
-$menu->add('2', null, 'Autoridades', null, null);
-$menu->add('21', '2', 'Cadastro Autoridades', 'modulos/autoridades.php', null);
-
-
-$menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
-$menu->add('81', '8', 'Região', 'modulos/regiao.php', null,null,null,false,null);
-$menu->add('82', '8', 'UF', 'modulos/uf.php', null);
-$menu->add('83', '8', 'Município ', 'modulos/municipio.php', null);
-
-$menu->add('9', null, 'Acesso', null, null, 'icon-key-yellow.png');
-$menu->add('91', '9', 'User', 'modulos/acesso_user.php', null, 'user916.gif');
-$menu->add('92', '9', 'Pefil', 'modulos/acesso_perfil.php', null, 'icon_mask.png');
-$menu->add('93', '9', 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png');
-
-
-
-$menu->add('10', null, 'Config Ambiente', null, null, 'setting-gear-512.png');
-$menu->add('101', '10', 'Ambiente Resumido', 'view/ambiente_resumido.php', null, 'information-circle.jpg');
-$menu->add('102', '10', 'Ambiente PHPInfo em IFrame', 'view/ambiente_phpinfo.php', null, 'php_logo.png');
-$menu->add('103', '10', 'Banco MySQL', 'view/exe_teste_conexao.php', null, 'data_base.png');
-$menu->add('104', '10', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php');
-$menu->add('105', '10', 'Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, 'smiley-1-512.png');
-*/
 
 $menu->getXml();
 ?>
