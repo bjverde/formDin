@@ -7,9 +7,9 @@ $frm->setFlat(true);
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addTextField('LOGIN_USER', 'Login',50,true);
 $frm->addTextField('PWD_USER', 'Senha',50,true);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=N?o', true);
-$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão',15,false,null,null,true)->setReadOnly(true);
-$frm->addTextField('DAT_UPDATE', 'Data Update',15,false,null,null,false)->setReadOnly(true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão:',null,false,null,null,true)->setReadOnly(true);
+$frm->addTextField('DAT_UPDATE', 'Data Update: ',null,false,null,null,false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
