@@ -10,11 +10,12 @@ class Acesso_menuVO
 	private $imgdisabled = null;
 	private $dissabled = null;
 	private $hotkey = null;
-	private $separator = null;
+	private $boolseparator = null;
+	private $jsonparams = null;
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function Acesso_menuVO( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $separator=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+	public function Acesso_menuVO( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
 	{
 		$this->setIdmenu( $idmenu );
 		$this->setIdmenu_pai( $idmenu_pai );
@@ -25,7 +26,8 @@ class Acesso_menuVO
 		$this->setImgdisabled( $imgdisabled );
 		$this->setDissabled( $dissabled );
 		$this->setHotkey( $hotkey );
-		$this->setSeparator( $separator );
+		$this->setBoolseparator( $boolseparator );
+		$this->setJsonparams( $jsonparams );
 		$this->setSit_ativo( $sit_ativo );
 		$this->setDat_inclusao( $dat_inclusao );
 		$this->setDat_update( $dat_update );
@@ -112,13 +114,22 @@ class Acesso_menuVO
 		return $this->hotkey;
 	}
 	//--------------------------------------------------------------------------------
-	function setSeparator( $strNewValue = null )
+	function setBoolseparator( $strNewValue = null )
 	{
-		$this->separator = $strNewValue;
+		$this->boolseparator = $strNewValue;
 	}
-	function getSeparator()
+	function getBoolseparator()
 	{
-		return $this->separator;
+		return $this->boolseparator;
+	}
+	//--------------------------------------------------------------------------------
+	function setJsonparams( $strNewValue = null )
+	{
+		$this->jsonparams = $strNewValue;
+	}
+	function getJsonparams()
+	{
+		return $this->jsonparams;
 	}
 	//--------------------------------------------------------------------------------
 	function setSit_ativo( $strNewValue = null )

@@ -1,5 +1,5 @@
 <?php
-class User_menuVO
+class Acesso_user_menuVO
 {
 	private $iduser = null;
 	private $login_user = null;
@@ -7,7 +7,7 @@ class User_menuVO
 	private $nom_perfil = null;
 	private $idmenu = null;
 	private $nom_menu = null;
-	public function User_menuVO( $iduser=null, $login_user=null, $idperfil=null, $nom_perfil=null, $idmenu=null, $nom_menu=null )
+	public function acesso_user_menuVO( $iduser=null, $login_user=null, $idperfil=null, $nom_perfil=null, $idmenu=null, $nom_menu=null )
 	{
 		$this->setIduser( $iduser );
 		$this->setLogin_user( $login_user );

@@ -19,7 +19,8 @@ class Acesso_menuDAO extends TPDOConnection
 						, $objVo->getImgdisabled() 
 						, $objVo->getDissabled() 
 						, $objVo->getHotkey() 
-						, $objVo->getSeparator() 
+						, $objVo->getBoolseparator() 
+						, $objVo->getJsonparams() 
 						, $objVo->getSit_ativo() 
 						, $objVo->getDat_inclusao() 
 						, $objVo->getDat_update() 
@@ -33,11 +34,12 @@ class Acesso_menuDAO extends TPDOConnection
 								,imgdisabled
 								,dissabled
 								,hotkey
-								,separator
+								,boolseparator
+								,jsonparams
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								) values (?,?,?,?,?,?,?,?,?,?,?,?)', $values );
+								) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function delete( $id )
@@ -59,7 +61,8 @@ class Acesso_menuDAO extends TPDOConnection
 								,imgdisabled
 								,dissabled
 								,hotkey
-								,separator
+								,boolseparator
+								,jsonparams
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
@@ -78,7 +81,8 @@ class Acesso_menuDAO extends TPDOConnection
 								,imgdisabled
 								,dissabled
 								,hotkey
-								,separator
+								,boolseparator
+								,jsonparams
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
@@ -97,7 +101,8 @@ class Acesso_menuDAO extends TPDOConnection
 						,$objVo->getImgdisabled()
 						,$objVo->getDissabled()
 						,$objVo->getHotkey()
-						,$objVo->getSeparator()
+						,$objVo->getBoolseparator()
+						,$objVo->getJsonparams()
 						,$objVo->getSit_ativo()
 						,$objVo->getDat_inclusao()
 						,$objVo->getDat_update()
@@ -111,7 +116,8 @@ class Acesso_menuDAO extends TPDOConnection
 								,imgdisabled = ?
 								,dissabled = ?
 								,hotkey = ?
-								,separator = ?
+								,boolseparator = ?
+								,jsonparams = ?
 								,sit_ativo = ?
 								,dat_inclusao = ?
 								,dat_update = ?

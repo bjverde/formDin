@@ -1,7 +1,7 @@
 <?php
-class User_menuDAO extends TPDOConnection
+class Acesso_user_menuDAO extends TPDOConnection
 {
-	public function user_menuDAO()
+	public function acesso_user_menuDAO()
 	{
 	}
 	//--------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class User_menuDAO extends TPDOConnection
 						, $objVo->getIdmenu() 
 						, $objVo->getNom_menu() 
 						);
-		return self::executeSql('insert into user_menu(
+		return self::executeSql('insert into acesso_user_menu(
 								 login_user
 								,idperfil
 								,nom_perfil
@@ -29,11 +29,10 @@ class User_menuDAO extends TPDOConnection
 	public static function delete( $id )
 	{
 		$values = array($id);
-		return self::executeSql('delete from user_menu where iduser = ?',$values);
+		return self::executeSql('delete from acesso_user_menu where iduser = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
-	public static function select( $id )
-	{
+	public static function select( $id ){
 		$values = array($id);
 		return self::executeSql('select
 								 iduser
@@ -42,9 +41,21 @@ class User_menuDAO extends TPDOConnection
 								,nom_perfil
 								,idmenu
 								,nom_menu
-								from user_menu where iduser = ?', $values );
+								from acesso_user_menu where iduser = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectByLogin( $login_user ){
+		$values = array($id);
+		return self::executeSql('select
+								 iduser
+								,login_user
+								,idperfil
+								,nom_perfil
+								,idmenu
+								,nom_menu
+								from acesso_user_menu where login_user = ?', $login_user );
+	}
+	//--------------------------------------------------------------------------------	
 	public static function selectAll( $orderBy=null, $where=null )
 	{
 		return self::executeSql('select
@@ -54,7 +65,7 @@ class User_menuDAO extends TPDOConnection
 								,nom_perfil
 								,idmenu
 								,nom_menu
-								from user_menu'.
+								from acesso_user_menu'.
 		( ($where)? ' where '.$where:'').
 		( ($orderBy) ? ' order by '.$orderBy:''));
 	}
@@ -67,7 +78,7 @@ class User_menuDAO extends TPDOConnection
 						,$objVo->getIdmenu()
 						,$objVo->getNom_menu()
 						,$objVo->getIduser() );
-		return self::executeSql('update user_menu set 
+		return self::executeSql('update acesso_user_menu set 
 								 login_user = ?
 								,idperfil = ?
 								,nom_perfil = ?

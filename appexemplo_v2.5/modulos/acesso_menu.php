@@ -13,7 +13,8 @@ $frm->addTextField('IMG_MENU', 'IMG_MENU',50,true);
 $frm->addTextField('IMGDISABLED', 'IMGDISABLED',50,true);
 $frm->addTextField('DISSABLED', 'DISSABLED',50,true);
 $frm->addTextField('HOTKEY', 'HOTKEY',50,true);
-$frm->addTextField('SEPARATOR', 'SEPARATOR',50,true);
+$frm->addTextField('BOOLSEPARATOR', 'BOOLSEPARATOR',50,true);
+$frm->addTextField('JSONPARAMS', 'JSONPARAMS',50,true);
 $frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',50,true);
 $frm->addTextField('DAT_INCLUSAO', 'DAT_INCLUSAO',50,true);
 $frm->addTextField('DAT_UPDATE', 'DAT_UPDATE',50,true);
@@ -52,7 +53,7 @@ switch( $acao ) {
 }
 
 $dados = Acesso_menuDAO::selectAll($primaryKey);
-$mixUpdateFields = $primaryKey.'|'.$primaryKey.',IDMENU_PAI|IDMENU_PAI,NOM_MENU|NOM_MENU,URL|URL,TOOLTIP|TOOLTIP,IMG_MENU|IMG_MENU,IMGDISABLED|IMGDISABLED,DISSABLED|DISSABLED,HOTKEY|HOTKEY,SEPARATOR|SEPARATOR,SIT_ATIVO|SIT_ATIVO,DAT_INCLUSAO|DAT_INCLUSAO,DAT_UPDATE|DAT_UPDATE';
+$mixUpdateFields = $primaryKey.'|'.$primaryKey.',IDMENU_PAI|IDMENU_PAI,NOM_MENU|NOM_MENU,URL|URL,TOOLTIP|TOOLTIP,IMG_MENU|IMG_MENU,IMGDISABLED|IMGDISABLED,DISSABLED|DISSABLED,HOTKEY|HOTKEY,BOOLSEPARATOR|BOOLSEPARATOR,JSONPARAMS|JSONPARAMS,SIT_ATIVO|SIT_ATIVO,DAT_INCLUSAO|DAT_INCLUSAO,DAT_UPDATE|DAT_UPDATE';
 $gride = new TGrid( 'gd'        // id do gride
 				   ,'Gride'     // titulo do gride
 				   ,$dados 	      // array de dados
@@ -70,7 +71,8 @@ $gride->addColumn('IMG_MENU','IMG_MENU',50,'center');
 $gride->addColumn('IMGDISABLED','IMGDISABLED',50,'center');
 $gride->addColumn('DISSABLED','DISSABLED',50,'center');
 $gride->addColumn('HOTKEY','HOTKEY',50,'center');
-$gride->addColumn('SEPARATOR','SEPARATOR',50,'center');
+$gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR',50,'center');
+$gride->addColumn('JSONPARAMS','JSONPARAMS',50,'center');
 $gride->addColumn('SIT_ATIVO','SIT_ATIVO',50,'center');
 $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO',50,'center');
 $gride->addColumn('DAT_UPDATE','DAT_UPDATE',50,'center');
