@@ -5643,32 +5643,32 @@ INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,
 
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (101,10,'Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (102,10,'Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (103,10,'Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png',null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`separator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
 (105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,null,null,null);
 
