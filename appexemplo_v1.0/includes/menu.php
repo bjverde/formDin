@@ -144,10 +144,64 @@ $menu->add('103',null,'Formulário');
 
 
 $menu->add('104',null,'TZip','exe_TZip.php');
-
 $menu->add('199',null,'Temas do Menu','exe_menu_tema.php');
 
 
-//$menu->add('520','5','Exemplo Select Combinado','exe_select_combinado_ajax.php');
+$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formul?rio Din?mico IV','ajudaonline.gif');
+$menu->add(-260,-20,'Grides');
+	$menu->add(-26001,-260	,'Cria??o de Gride','exe_gride.inc');
+	$menu->add(-26002,-260	,'Grid Off-Line - Formdin3','exe_gride_off_line.inc');
+	$menu->add(-26003,-260	,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
+	$menu->add(-26004,-260	,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
+	$menu->add(-26005,-260	,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
+
+$menu->add(-270,-20,'Outros');
+	$menu->add(-27001,-270,'Banco Textual DBM (db4)','exe_db4.inc');
+	$menu->add(-27002,-270,'Cadastro on-line (CRUD)','exe_crud_online.inc');
+	$menu->add(-27003,-270,'Documenta??o on-line','exe_documentacao_online.inc');
+	$menu->add(-27004,-270,'Select Combinado','exe_select_combinado.inc');
+	$menu->add(-27005,-270,'Select Combinado F3','exe_select_combinado_f3.inc');
+	$menu->add(-27006,-270,'Select Combinado Ajax','exe_select_combinado_ajax.php');
+	$menu->add(-27009,-270,'FormDin 3','exe_formDin3.inc');
+	$menu->add(-27010,-270,'PDF','exe_pdf.inc');
+	$menu->add(-27011,-270,'HINT','exe_hint.inc');
+	//$menu->add(-27012,-270,'TreeView Taxonomia','exe_tree_view.inc');
+	$menu->add(-27012,-270,'TreeView Unidade Ibama','exe_tree_view_unid_ibama.inc');
+	$menu->add(-27013,-270,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
+	$menu->add(-27014,-270,'Campo Select Ajax','exe_fill_select_ajax.inc');
+	$menu->add(-27015,-270,'Redirect','exe_redirect.inc');
+	$menu->add(-27016,-270,'Javascript/Css Externos','exe_javascript_externo.inc');
+	$menu->add(-27017,-270,'Definir Colunas no Formul?rio','exe_colunas.inc');
+	$menu->add(-27018,-270,'Tela de Confirma??o','exe_confirm_dialog.php');
+	// parametros da janela
+	$params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
+	$menu->add(-27019,-270,'Site da Google','http://www.google.com','Site do Google',null,null,null,null,null,json_encode($params));
+
+	$menu->add(-27019,-270,'Postgres Lob','exe_postgres.php');
+	$menu->add(-27020,-270,'Exemplo de Mensagens','exe_mensagem.php');
+
+$menu->add(-2001,-20,'Cria??o de Abas','exe_aba.inc');
+$menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
+$menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
+$menu->add(-2004,-20,'Campo com Consulta On-line','exe_onlinesearch.inc');
+$menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
+$menu->add(-2006,-20,'Campo Select','exe_select.inc');
+$menu->add(-2007,-20,'Campo Cep','exe_campo_cep.inc');
+$menu->add(-2008,-20,'Campo Link','exe_campo_link.inc');
+$menu->add(-2009,-20,'Campo Hora','exe_campo_hora.inc');
+$menu->add(-2010,-20,'Campo Cor','exe_campo_cor.inc');
+$menu->add(-2011,-20,'Campo Memo / Editor HTML','exe_campo_memo.inc');
+$menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
+$menu->add(-2013,-20,'Campo N?mero','exe_campo_numero.inc');
+$menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
+$menu->add(-2015,-20,'Campo Grupo','exe_campo_grupo.inc');
+$menu->add(-2016,-20,'Campo Telefone','exe_telefone.inc');
+$menu->add(-2017,-20,'Campo Arquivo','exe_campo_arquivo.inc');
+$menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
+$menu->add(-2019,-20,'Campo Autocompletar'	,'exe_autocomplete.php');
+$menu->add(-2099,-20,'Testes Laborat?rio','exe_teste.inc');
+
+
+
 $menu->getXml();
 ?>
