@@ -1,5 +1,46 @@
 <?php
-$frm = new TForm('Teste de Conexão',500,900);
+/*
+ * Formdin Framework
+ * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
+ * ----------------------------------------------------------------------------
+ * This file is part of Formdin Framework.
+ *
+ * Formdin Framework is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License version 3
+ * along with this program; if not,  see <http://www.gnu.org/licenses/>
+ * or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA  02110-1301, USA.
+ * ----------------------------------------------------------------------------
+ * Este arquivo é parte do Framework Formdin.
+ *
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * do Software Livre (FSF).
+ *
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+ */
+
+$frm = new TForm('Teste de Conexão',650,900);
+$frm->setFlat(true);
 $frm->setAutoSize(true);
 
 $pc = $frm->addPageControl('pc');
@@ -49,13 +90,21 @@ $pc->addPage('ORACLE',true,true,'abaora');
 
 
 $pc->addPage('SQLSERVER',true,true,'abass');
+    $info_sqlserver = '<p>Para usar Microsoft SQL Server superior 5.4 e inferior a 7.0!'
+                    . '<ul>'
+                    . '    <li>Linux: PDO com drive dblib</li>'
+                    . '    <li>Windows: PDO com drive sqlsrv</li>'
+                    . '<ul>'
+                    . '</p><p>ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits com PHP 64Bits, se deseja usar essa configuração instale o drive não oficial. Porém recomendo Win 64 Bits com PHP 32Bits</p>';
+
 	$frm->addHiddenField('ssDbType','sqlserver');
+	$frm->addHtmlField('msg',$info_sqlserver);
 	$frm->addTextField('ssHost'    ,'Host:',50,true,50,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('ssDb'      ,'Database:',20,true,20,'Northwind',true,null,null,true);
 	$frm->addTextField('ssUser'    ,'User:',40,true,20,'sa',false,null,null,true);
 	$frm->addTextField('ssPass'	   ,'Password:',40,true,20,'123456',false,null,null,true);
 	$frm->addTextField('ssPort'    ,'Porta:',6,false,6,'1433',false,null,null,true,false);
-    $frm->addButton('Testar ConexÃ£o',null,'btnTestarss','testarConexao("ss")',null,true,false);
+    $frm->addButton('Testar Conexão',null,'btnTestarss','testarConexao("ss")',null,true,false);
 	$frm->addMemoField('oraSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlss','executarSql("ss")',null,true,false);
 	$frm->addHtmlField('ssGride'	,'');
