@@ -113,7 +113,7 @@ function cabecalho(TPDF $pdf)
 function rodape(TPDF $pdf)
 {
 
-		$fs=$pdf->FontSizePt;
+        $fs=$pdf->getFontSize();
         $pdf->SetY(-15);
         $pdf->SetFont('','',8);
 	    $pdf->Cell(0,5,'Rodapé do Relatório','T',0,'L');

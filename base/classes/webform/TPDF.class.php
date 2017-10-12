@@ -45,8 +45,8 @@
  */
 // artificio para encontrar a pasta base
 $e = new TElement();
-define( 'FPDF_FONTPATH', $e->getBase() . 'classes/fpdf16/fonts/' );
-require_once( $e->getBase() . 'classes/fpdf16/fpdf.php' );
+define( 'FPDF_FONTPATH', $e->getBase() . 'lib_fpdf181/font/' );
+require_once( $e->getBase() . 'lib_fpdf181/fpdf.php' );
 
 class TPDF extends FPDF
 {
@@ -81,7 +81,7 @@ class TPDF extends FPDF
     public function __construct( $strOrientation = 'P', $strUnit = 'mm', $strFormat = 'A4', $strFontFamily = 'arial',
         $intFontSize = 8 )
     {
-        parent::FPDF( $strOrientation, $strUnit, $strFormat );
+        parent::__construct( $strOrientation, $strUnit, $strFormat );
         $this->SetFont( ( is_null( $strFontFamily ) ? 'Arial' : $strFontFamily ), '', ( is_null( $intFontSize ) ? 8 : $intFontSize ) );
         $this->SetFillColor( 255 ); // fundo branco
         $this->AliasNbPages();
@@ -146,11 +146,21 @@ class TPDF extends FPDF
         //print '3)'.$file.'<br>';
 
         }
-        $this->Output( $file, ( $boolPrint ? null : 'F' ) );
+
+        if ($boolPrint){
+            if ($boolPrint==true){
+                $dest = 'F';
+            }else{
+                $dest = 'D';
+            }
+        }else{
+            $dest = 'F';
+        }
+        
+        $this->Output( $dest, $file );
         $file = $tmpDir . basename( $file );
 
-        if ( $boolPrint )
-        {
+        if ( $boolPrint ) {
             header( "Location: $file" );
         }
         return $file;
@@ -176,13 +186,13 @@ class TPDF extends FPDF
      * @param string $strOrientation P/L
      * @param boolean $boolBorder
      */
-    function AddPage( $strOrientation = null, $boolBorder = false )
+    //function AddPage( $strOrientation = null, $boolBorder = false )
+    function AddPage( $strOrientation='', $size='', $rotation=0 ) 
     {
     	$strOrientation = ( is_null($strOrientation) ? '' : $strOrientation );
         parent::AddPage( $strOrientation );
 
-        if ( $this->getPageBorder() || $boolBorder === true )
-        {
+        if ( $this->getPageBorder()) {
             $yy = $this->GetY();
             $h = ( $this->h - $yy - $this->bMargin );
             $this->cell( 0, $h, '', 1, 0, 'L', 0 );
