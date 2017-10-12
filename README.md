@@ -33,6 +33,11 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
     * retorno do carro formato Windows
 * PHP 5.4.x ou superior
 
+### Bibliotecas utilizadas
+* fPDF 1.81
+* Ckeditor 3
+* JQuery 1.6
+
 ## Instalação.
 
 Baixe o projeto em coloque um servidor PHP.
