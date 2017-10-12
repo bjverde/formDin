@@ -5,3 +5,5 @@
 base/tmp/
 .vscode/
 appexemplo_mssql/
+/.settings/
+/.project
