@@ -40,11 +40,13 @@
 session_cache_limiter("none");
 error_reporting(E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR);
 session_start();
-define('FPDF_FONTPATH','../base/classes/fpdf/fonts/');
-require('../includes/config.inc');
 if (!defined('PASTA_BASE') )
-	define('PASTA_BASE','base/');
-require(PASTA_BASE.'classes/BoletoFpdf.class.php');
+    define('PASTA_BASE','../base');
+
+//require(PASTA_BASE.'/includes/config.inc');
+
+define('FPDF_FONTPATH',PASTA_BASE.'/classes/fpdf/fonts/');
+require(PASTA_BASE.'/classes/BoletoFpdf.class.php');
 
 $pdf=new boleto();
 
