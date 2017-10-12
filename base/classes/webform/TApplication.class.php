@@ -38,10 +38,18 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+define('DS', DIRECTORY_SEPARATOR);
+$currentl_dir = dirname(__FILE__);
+$helps_dir = $currentl_dir.DS.'..'.DS.'helpers'.DS;
+
+require_once( $helps_dir.'ArrayHelper.class.php');
+require_once( $helps_dir.'GetHelper.class.php');
+require_once( $helps_dir.'PostHelper.class.php');
+require_once( $helps_dir.'RequestHelper.class.php');
+require_once( $helps_dir.'ServerHelper.class.php');
 
 include_once( 'autoload_formdin.php');
-class TApplication extends TLayout
-{
+class TApplication extends TLayout {
 	private $strTitle;
 	private $strTitleTag;
 	private $strSubtitle;

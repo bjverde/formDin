@@ -39,8 +39,7 @@
 
 
 //error_reporting(~E_NOTICE);
-if( $_REQUEST['formDinAcao'] == 'gerar_pdf' )
-{
+if( RequestHelper::get('formDinAcao') == 'gerar_pdf' ) {
    	gerar_pdf();
    	return;
 }
@@ -51,8 +50,7 @@ $frm->addTextField('des_marcadagua','Marca d´agua:',30,null,null,'RELATÓRIO EXEM
 $frm->addButton('Gerar Pdf',null,'btnPdf','exibir_pdf()');
 $frm->show();
 
-function gerar_pdf()
-{
+function gerar_pdf() {
 	$rel = new TPDF('P','mm','A4');
 
 	/*
@@ -126,10 +124,9 @@ function rodape(TPDF $pdf)
 }
 ?>
 <script>
-function exibir_pdf()
-{
+function exibir_pdf() {
 	//fwFaceBox(  pastaBase+'js/jquery/facebox/stairs.jpg');
-	fwShowPdf({"modulo" : pastaBase + "exemplos/exe_pdf_1.php","des_marcadagua":jQuery("#des_marcadagua").val()});
+	fwShowPdf({"modulo" : "exe_pdf_1.php","des_marcadagua":jQuery("#des_marcadagua").val()});
 }
 </script>
 
