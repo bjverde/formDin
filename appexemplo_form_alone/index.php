@@ -18,6 +18,49 @@
 
 </style>
 <?php
+/*
+ * Formdin Framework
+ * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
+ * ----------------------------------------------------------------------------
+ * This file is part of Formdin Framework.
+ *
+ * Formdin Framework is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License version 3
+ * along with this program; if not,  see <http://www.gnu.org/licenses/>
+ * or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA  02110-1301, USA.
+ * ----------------------------------------------------------------------------
+ * Este arquivo é parte do Framework Formdin.
+ *
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * do Software Livre (FSF).
+ *
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * para maiores detalhes.
+ *
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+ */
+
+header("Content-Type: text/html; charset=ISO-8859-1",true);
+require_once('../base/classes/webform/TApplication.class.php');
+require_once('includes/info.php');
 
 function testar($extensao=null,$html){
 	if( !extension_loaded($extensao) )	{
@@ -29,40 +72,17 @@ function testar($extensao=null,$html){
 	}
 }
 
-function infoSQLServer(){
-	if(PHP_OS == "Linux"){
-		$msg = "Para utilizar Linux com Microsoft SQL Server será utilizado o PDO com o drive dblib";
-	}else{
-		switch(PHP_INT_SIZE) {
-			case 4:
-				$msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
-				break;
-			case 8:
-				$msg = '<span class="vermelho">ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits</span>, instale o drive não oficial';
-				break;
-			default:
-				$msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
-		}
-	}
-	return $msg;
-}
 
-function phpVersionOK(){
-	$texto = '<b>VersÃ£o do PHP</b>: ';
-	if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-		$texto =  $texto.'<span class="verde">'.phpversion().'</span><br>';
-	}else{
-		$texto =  $texto.'<span class="vermelho">'.phpversion().' atualize seu sistema para o PHP 5.4.0 ou seperior </span><br>';
-	}
-	return $texto;
-}
+    
+	$frm = new TForm('Configurações do PHP');
+	$frm->setFlat(true);
+	$frm->setAutoSize(true);
 	
-	$frm = new TForm('ConfiguraÃ§Ãµes do PHP',null,800,600);
 	$html = $frm->addHtmlField('conf','');
 	$html->setCss('font-size','14px');
 
-	$html->add(phpVersionOK());
-	$html->add('<b>Seu Ip</b>: <span class="versao">'.$_SERVER['REMOTE_ADDR'].'</span><br>');
+	$html->add(info::phpVersionOK());
+	$html->add('<b>Seu IP</b>: <span class="versao">'.$_SERVER['REMOTE_ADDR'].'</span><br>');
 
 	$html->add('<br><b>Extensções:</b><br>');
 
@@ -82,7 +102,7 @@ function phpVersionOK(){
 	$html->add('<br>');
 	testar('pdo',$html);
 	testar('PDO_Firebird',$html);
-	$html->add(infoSQLServer()); testar('pdo_sqlsrv',$html);
+	$html->add(info::infoSQLServer()); testar('pdo_sqlsrv',$html);
 	testar('pdo_mysql',$html);
 	testar('PDO_OCI',$html);
 	testar('PDO_ODBC',$html);
