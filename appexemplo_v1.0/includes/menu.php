@@ -144,6 +144,7 @@ $menu->add('1034','103','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre
 $menu->add('1035','103','Imagem de Fundo','view/form/exe_TFormImage.php');
 $menu->add('1036','103','Customizado com CSS','view/form/exe_TForm3.php');
 $menu->add('1037','103','Recurso de Autosize','view/form/exe_TForm_autosize.php');
+$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
 
 
 $menu->add('104',null,'TZip','exe_TZip.php');
