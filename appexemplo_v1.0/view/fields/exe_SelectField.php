@@ -1,8 +1,10 @@
 <?php
-TPDOConnection::test(false);
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -26,9 +28,9 @@ TPDOConnection::test(false);
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -36,6 +38,8 @@ TPDOConnection::test(false);
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+TPDOConnection::test(false);
+
 $frm = new TForm('Exemplo do Campo Select',450);
 
 $frm->addHtmlField('html_gp2','<center><b>Este exemplos estão utilizando o banco de dados local "base/exemplos/bdApoio.s3db" (sqlite)</center></b><br/>');
