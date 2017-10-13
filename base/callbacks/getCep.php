@@ -1,36 +1,38 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
- * 
+ *
  * Formdin Framework is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License version 3
  * as published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License version 3
  * along with this program; if not,  see <http://www.gnu.org/licenses/>
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
  * Este arquivo é parte do Framework Formdin.
- * 
+ *
  * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
- * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ *
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
- * 
+ *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
  * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
@@ -41,6 +43,7 @@
 Módulo utilizado para preenchimento dos campos de endereço utilizando consulta do cep, via
 ajax, ao serviço www.bucacep.com.br
 Data:22-03-2010
+atulizado em : 13-10-2017
 Teste: cep=74265010
 */
 error_reporting(0);
@@ -79,11 +82,16 @@ function getCep()
 	}
 }
 */
+function limpaCep($param) {
+    $cep = preg_replace('/[^0-9]/','',$param);
+    return $cep;
+}
+
 // chamada ajax
 if(isset($_REQUEST['cep']))
 {
 
-	$cep = preg_replace('/[^0-9]/','',$_REQUEST['cep']);
+    $cep = limpaCep($_REQUEST['cep']);
 	header ("content-type: text/xml; charset=ISO-8859-1");
 	if( function_exists('curl_init'))
 	{
@@ -100,7 +108,9 @@ if(isset($_REQUEST['cep']))
 			CURLOPT_TIMEOUT => 120, // timeout on response
 			CURLOPT_MAXREDIRS => 10, // stop after 10 redirects
 		);
-		$ch = curl_init('http://www.buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=1vVU3UcKFHfVhFxBSlWWM4kqUREbBu/');
+		//$ch = curl_init('http://www.buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=1vVU3UcKFHfVhFxBSlWWM4kqUREbBu/');
+		$ch = curl_init('http://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
+		
 		curl_setopt_array( $ch, $options );
 		$content = curl_exec( $ch );
 		if( !$errmsg = curl_error( $ch ) )
@@ -123,11 +133,13 @@ if(isset($_REQUEST['cep']))
 		* utilizando file_get_contents()
 		* não vai funcionar se a opção URL file-access estiver desabilitada no servidor.
 		*/
-		$cep = ereg_replace('[^0-9]','',$_POST['cep']);
+	    $cep = limpaCep($_REQUEST['cep']);
 		header ("content-type: text/xml; charset=UTF-8");
 		header("Content-Type:text/xml");
 		//echo file_get_contents('http://www.buscarcep.com.br/?chave=1N4geWh.fwv1HeoCFNpBMsG1Cn1Gxf0&cep='.$cep.'&formato=xml');
-		$res = file_get_contents('http://www.buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=1vVU3UcKFHfVhFxBSlWWM4kqUREbBu/');
+		//echo file_get_contents('https://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
+		//$res = file_get_contents('http://www.buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=1vVU3UcKFHfVhFxBSlWWM4kqUREbBu/');
+		$res = file_get_contents('http://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
 		echo utf8_decode($res);
 	}
 

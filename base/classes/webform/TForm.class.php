@@ -6452,6 +6452,9 @@ class TForm Extends TBox
 	 * informar o campo do formulário que deverá ser preenchido na lista de parametros.
 	 * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
 	 * 	$frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+	 * 
+	 * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o serviço buscarcep.com.br 
+	 * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
 	 *
 	 * @param string $strName
 	 * @param string $strLabel

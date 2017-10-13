@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -25,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -37,9 +40,20 @@
  */
 
 // chamada ajax
+
+
+/***
+* Observação o campo addCepField 
+* Chama FormDin4.js getCepJquery que chama getCep.php 
+* que utiliza o serviço buscarcep.com.br 
+*
+* Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
+**/
+
+
 if(isset($_POST['num_cep'])){
 	header("Content-Type:text/xml");
-	echo file_get_contents('http://www.buscarcep.com.br/?cep='.$_POST['num_cep'].'&formato=xml');
+	echo file_get_contents('http://buscarcep.com.br/?cep='.$_POST['num_cep'].'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
 	exit;
 }
 $frm = new TForm('Exemplo Campo CEP',400,600);
@@ -80,18 +94,15 @@ $fldCep = $frm->addCepField('num_cep2','Cep:',true,null,null
 $frm->show();
 ?>
 <script>
-function pesquisarCepCallback(xml)
-{
+function pesquisarCepCallback(xml){
 	alert( 'Evento callback do campo cep foi chamada com sucesso');
 }
 
-function pesquisarCepBeforeSend(id)
-{
+function pesquisarCepBeforeSend(id){
 	alert( 'Evento beforeSend do campo cep '+id+' foi chamado com sucesso');
 }
 
-function myCallback(dataset)
-{
+function myCallback(dataset){
 	console.log(jQuery("#cod_municipio2_temp").val());
 	jQuery("#cod_uf2").change();
 }
