@@ -1,10 +1,10 @@
 <?php
 class RequestHelper {
 	static function get($atributeName) {
-		if(!isset($_GET[$atributeName])){
-			$_GET[$atributeName]=null;
+	    if(!isset($_REQUEST[$atributeName])){
+		    $_REQUEST[$atributeName]=null;
 		}
-		return is_null($_GET[$atributeName])?null:trim($_GET[$atributeName]);
+		return is_null($_REQUEST[$atributeName])?null:trim($_REQUEST[$atributeName]);
 	}
 }
 ?>
