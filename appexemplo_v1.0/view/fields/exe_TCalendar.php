@@ -37,16 +37,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-<<<<<<< HEAD
- // criar 2 eventos no calend·rio
- $_REQUEST['ajax'] = isset( $_REQUEST['ajax']) ?  $_REQUEST['ajax'] : null;
- if( $_REQUEST['ajax'] ){
-=======
- // criar 2 eventos no calend√°rio
- $_REQUEST['ajax'] = isset( $_REQUEST['ajax']) ?  $_REQUEST['ajax'] : null;
-if( $_REQUEST['ajax'] ) {
->>>>>>> 3866555... corre√ß√£o de Notice: Undefined variable ou undefined index
 
+ // criar 2 eventos no calend·rio
+ if( RequestHelper::get('ajax') ){
 	// ver todos os atributos do evento em : http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
 	echo json_encode(array(
 
