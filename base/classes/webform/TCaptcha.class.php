@@ -45,6 +45,8 @@ class TCaptcha extends TButton
 	{
         $intCaracters = is_null($intCaracters) ? 6 : $intCaracters;
         $intCaracters = $intCaracters > 10 ? 10 : $intCaracters;
+        $strName = isset($strName) ? $strName : null;
+        
         $url = $this->getBase().'classes/captcha/CaptchaSecurityImages.class.php?field='.$this->removeIllegalChars($strName).( is_null( $intCaracters ) ? '' : '&characters='.$intCaracters);
         parent::__construct($strName.'_img',$strValue,null,"javascript:this.src='".$url."&'+ Math.random()",null,null,null,'Código de Segurança - Digite no campo ao lado os caracteres que estão impressos nesta imagem!');
         //parent::__construct($strName.'_img',$strValue,null,"javascript:document.getElementById('".$strName."_img').src = '".$url."&'+ Math.random()",null,null,null,'Clique aqui para atualizar a imagem!');

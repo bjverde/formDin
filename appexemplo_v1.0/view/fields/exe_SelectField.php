@@ -84,8 +84,8 @@ $frm->setAction('Atualizar,Validar');
 $frm->addButton('Limpar',null,'btnLimpar','btnLimparClick()');
 $frm->addButton('Iniciar Estado 2',null,'btnUF2','btnUF2Click()');
 
-if( $acao=='Validar' )
-{
+$acao = isset($acao) ? $acao : null;
+if( $acao=='Validar' ) {
 	//d($_POST);
 	$frm->validate();
 
