@@ -7,3 +7,4 @@ base/tmp/
 appexemplo_mssql/
 /.settings/
 /.project
+/.buildpath
