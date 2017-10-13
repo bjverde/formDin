@@ -64,8 +64,8 @@ $frm->closeGroup();
 // criar os botões no rodapé do formulário
 $frm->setAction( 'Salvar,Limpar' );
 
-switch( $acao )
-{
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
     case 'Salvar':
         $vo = new Tb_blobVO();
         $frm->setVo( $vo );
