@@ -62,7 +62,7 @@ class TFone extends TEdit
 
 		if( $this->getValue() )
 		{
-			$value = ereg_replace("[^0-9]","",$this->getValue());
+		    $value = preg_replace("[^0-9]","",$this->getValue());
 			// nao pode comecar com zero
 			while ( substr($value,0,1)==="0" )
 			{

@@ -163,7 +163,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			//	Gerar os campos de retorno
 			foreach ( $arrIdRetorno as $k1=>$v1 ) {
 				$campoRetorno = $arrCampoRetorno[$k1];
-				$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".utf8_encode(ereg_replace("'","\\'",$res[$campoRetorno][$k]))."'";
+				$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".utf8_encode(preg_replace("'","\\'",$res[$campoRetorno][$k]))."'";
 			}
 			//	Formar os links que retornam os dados
 			$dadoMarcado = preg_replace("'(".preg_quote($arrBusca[0],"'").")'i","<span style=\"color:black;font-weight:bold;\">\\1</span>",$v,1);
@@ -172,7 +172,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 				if(!strpos($funcaoExecutar,'()'))
 					$funcaoExecutar.='()';
 			}
-			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".ereg_replace("'","\\'",utf8_encode($v))."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
+			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".preg_replace("'","\\'",utf8_encode($v))."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
 		}
 		if(strlen($sRet) > 0)  {
 
@@ -210,11 +210,11 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$campoDescricao = $arrCampoDescricao[0];
 		// Se tiver so uma linha de retorno, podemos auto-completar os campos
 		$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"none\"");
-		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".utf8_encode(ereg_replace("'","\\'",$res[$campoDescricao][0]))."\"");
+		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".utf8_encode(preg_replace("'","\\'",$res[$campoDescricao][0]))."\"");
 		//	Gerar os campos de retorno
 		foreach ( $arrIdRetorno as $k=>$v ) {
 			$campoRetorno = $arrCampoRetorno[$k];
-			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".utf8_encode(ereg_replace("'","\\'",$res[$campoRetorno][0]))."\"");
+			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".utf8_encode(preg_replace("'","\\'",$res[$campoRetorno][0]))."\"");
 		}
 		$objResponse->addScript("formDinAutoSugestao.clearBuffer()");
 	} elseif ($nCnt < 1 ) {

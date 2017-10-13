@@ -188,7 +188,7 @@ class TMenu
 		{
 			$strExcept = str_replace(array('[',']','^'),array('\\[','\\]','\\^'),$strExcept);
 		}
-		return $word = ereg_replace("[^a-zA-Z0-9_".$strExcept."]", "", strtr($word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_"));
+		return $word = preg_replace("[^a-zA-Z0-9_".$strExcept."]", "", strtr($word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_"));
 	}
  	//-------------------------------------------------------------------------
 	public function getBase()

@@ -69,7 +69,7 @@ class TProcesso extends TEdit
 
 		if( $this->getValue() )
 		{
-			$value = ereg_replace("[^0-9]","",$this->getValue());
+		    $value = preg_replace("[^0-9]","",$this->getValue());
 			if ( ! $value) // nenhum valor informado
 			{
 				return null;
