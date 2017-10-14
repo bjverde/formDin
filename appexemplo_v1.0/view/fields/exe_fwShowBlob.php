@@ -39,20 +39,19 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm( 'Cadastro e Exibição de LOBS no Banco de Dados' );
-
-$frm->addHiddenField( 'id_blob' ); // coluna chave da tabela
-
-$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar um arquivo binário no banco de dados e exibi-lo utilizando a função fwShowBlob().<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_blob.</b></h3></center>' );
 
 /*
-// script para a criação da tabela no sqlite
-CREATE TABLE [tb_blob] (
-[id_blob] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
-[nome_arquivo] varchar(200)  NULL,
-[conteudo_arquivo] BLOB  NULL
-)
-*/
+ // script para a criação da tabela no sqlite
+ CREATE TABLE [tb_blob] (
+ [id_blob] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
+ [nome_arquivo] varchar(200)  NULL,
+ [conteudo_arquivo] BLOB  NULL
+ )
+ */
+
+$frm = new TForm( 'Cadastro e Exibição de LOBS no Banco de Dados' );
+$frm->addHiddenField( 'id_blob' ); // coluna chave da tabela
+$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar um arquivo binário no banco de dados e exibi-lo utilizando a função fwShowBlob().<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_blob.</b></h3></center>' );
 
 // campo para upload do arquivo
 $frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, 'jpg,txt,gif,doc,pdf,xls,odt', '2M', 60, null, null,'aoAnexar' );
@@ -72,7 +71,7 @@ switch( $acao ) {
     case 'Salvar':
         $vo = new Tb_blobVO();
         $frm->setVo( $vo );
-        $vo->setTempName( '../' . $_POST[ 'conteudo_arquivo_temp_name' ] );
+        $vo->setTempName( $frm->getBase() . $_POST[ 'conteudo_arquivo_temp_name' ] );
         Tb_blobDAO::insert( $vo );
 
     //------------------------------------------------------------------
@@ -115,27 +114,22 @@ function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aDa
 ?>
 
 <script>
-    function Visualizar(id_blob)
-        {
-        	fwShowBlob('tb_blob', 'conteudo_arquivo', 'nome_arquivo', 'id_blob', id_blob,800,600);
-        }
+    function Visualizar(id_blob) {
+        fwShowBlob('tb_blob', 'conteudo_arquivo', 'nome_arquivo', 'id_blob', id_blob,800,600);
+    }
 
-    function aoAnexar(temp, nome, tipo, tamanho)
-        {
+    function aoAnexar(temp, nome, tipo, tamanho) {
         //alert( temp+'\n'+file+'\n'+type+'\n'+size);
         jQuery("#nome_arquivo").val(nome);
         jQuery("#tamanho_arquivo").val(tamanho);
         jQuery("#tipo_arquivo").val(tipo);
 
-        if (tamanho > 0)
-            {
-            fwConfirm('Deseja visualizar o arquivo ' + nome, function(resposta)
-                {
-                if (resposta == true)
-                    {
+        if (tamanho > 0) {
+            fwConfirm('Deseja visualizar o arquivo ' + nome, function(resposta) {
+                if (resposta == true) {
                     	fwShowTempFile(temp, tipo, nome);
                     }
                 });
             }
-        }
+    }
 </script>
