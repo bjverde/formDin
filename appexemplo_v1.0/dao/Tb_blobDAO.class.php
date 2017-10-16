@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -25,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -44,8 +47,7 @@ class Tb_blobDAO extends TPDOConnection
 	//--------------------------------------------------------------------------------
 	public static function insert( Tb_blobVO $objVo )
 	{
-		if( $objVo->getId_blob() )
-		{
+		if( $objVo->getId_blob() ) {
 			return self::update($objVo);
 		}
 
@@ -56,8 +58,12 @@ class Tb_blobDAO extends TPDOConnection
 
 		// para sqlite
        	$query = self::prepare("insert into tb_blob (nome_arquivo,conteudo_arquivo) values (?,?)");
-		$query->bindParam(1, $objVo->getNome_arquivo()				, PDO::PARAM_STR);
-		$query->bindParam(2, fopen( $objVo->getTempName(), "rb")	, PDO::PARAM_LOB);
+       	
+       	$fileName = $objVo->getNome_arquivo();
+       	$fileOpen = fopen( $objVo->getTempName(), "rb");
+       	
+       	$query->bindParam(1, $fileName, PDO::PARAM_STR);
+       	$query->bindParam(2, $fileOpen, PDO::PARAM_LOB);
 		$query->execute();
 
 	}

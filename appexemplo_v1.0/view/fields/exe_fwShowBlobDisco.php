@@ -39,19 +39,18 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm( 'Cadastro e Exibição de LOBS Salvando Caminho no Banco de Dados' );
-
-$frm->addHiddenField( 'id_arquivo' ); // coluna chave da tabela
-
-$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereço do arquivo no banco de dados e depois visualiza-lo.<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_arquivo.</b></h3></center>' );
 
 /*
-// script para a criação da tabela no sqlite
-CREATE TABLE [tb_arquivo] (
-[id_arquivo] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
-[nome_arquivo] varchar(200)  NULL
-)
-*/
+ // script para a criação da tabela no sqlite
+ CREATE TABLE [tb_arquivo] (
+ [id_arquivo] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
+ [nome_arquivo] varchar(200)  NULL
+ )
+ */
+
+$frm = new TForm( 'Cadastro e Exibição de LOBS Salvando Caminho no Banco de Dados' );
+$frm->addHiddenField( 'id_arquivo' ); // coluna chave da tabela
+$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereço do arquivo no banco de dados e depois visualiza-lo.<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_arquivo.</b></h3></center>' );
 
 // campo para upload do arquivo
 $frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, 'jpg,txt,gif,doc,pdf,xls,odt', '2M', 60, null, null,'aoAnexar' );
@@ -71,7 +70,7 @@ switch( $acao ) {
     case 'Salvar':
         $vo = new Tb_arquivoVO();
         $frm->setVo( $vo );
-        $vo->setTempName( '../' . $_POST[ 'conteudo_arquivo_temp_name' ] );
+        $vo->setTempName( $frm->getBase() . $_POST[ 'conteudo_arquivo_temp_name' ] );
         Tb_arquivoDAO::insert( $vo );
 
     //------------------------------------------------------------------
@@ -102,11 +101,9 @@ $frm->addHtmlField( 'gride', $g );
 $frm->show();
 
 // função chamada pela classe TGrid para manipulação dos dados das celulas
-function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aData = null, $edit = null )
-{
+function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aData = null, $edit = null ) {
 	// se for a coluna imagem, adicionar um botão
-    if ( $objColumn->getFieldName() == 'imagem' )
-    {
+    if ( $objColumn->getFieldName() == 'imagem' )  {
         $btn = new TButton( 'btn' . $rowNum, null, null, 'fwModalBox("Visualização do Arquivo","arquivos/'. $aData[ 'NOME_ARQUIVO' ] . '")', null, 'analise.gif', null, 'Visualizar o Arquivo' );
         $cell->add( $btn );
     }
@@ -114,22 +111,19 @@ function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aDa
 ?>
 
 <script>
-    function aoAnexar(temp, nome, tipo, tamanho)
-        {
+    function aoAnexar(temp, nome, tipo, tamanho)  {
         //alert( temp+'\n'+file+'\n'+type+'\n'+size);
         jQuery("#nome_arquivo").val(nome);
         jQuery("#tamanho_arquivo").val(tamanho);
         jQuery("#tipo_arquivo").val(tipo);
 
-        if (tamanho > 0)
-            {
-            fwConfirm('Deseja visualizar o arquivo ' + nome, function(resposta)
-                {
-                if (resposta == true)
-                    {
+        if (tamanho > 0) {
+            fwConfirm('Deseja visualizar o arquivo ' + nome, function(resposta) {
+                if (resposta == true) {
                     	fwShowTempFile(temp, tipo, nome);
                     }
-                });
+                }
+                );
             }
         }
 </script>
