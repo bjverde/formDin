@@ -41,7 +41,7 @@
 
 define('EOL',"\n");
 define('TAB',chr(9));
-define('DS',DIRECTORY_SEPARATOR);
+if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
 class TFormCreate {
 	private $formTitle;
 	private $formPath;
