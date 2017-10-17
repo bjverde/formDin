@@ -55,6 +55,7 @@ class TApplication extends TLayout {
 	private $strSubtitle;
 	private $strSigla;
 	private $strUnit;
+	private $strVersionSystem;
 	private $defaultModule;
 	private $showMenu;
 	private $formDin3Compatible;
@@ -117,26 +118,19 @@ class TApplication extends TLayout {
 		session_start();
 
 		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
-		if ( defined( 'E_DEPRECATED' ) )
-		{
-
- 			if ( defined( 'E_STRICT' ) )
-			{
+		if ( defined( 'E_DEPRECATED' ) ) {
+ 			if ( defined( 'E_STRICT' ) ) {
 				error_reporting( E_ALL & ~E_NOTICE & ~E_DEPRECATED  & ~E_STRICT);
 			}
-			else
-			{
+			else {
 				error_reporting( E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 			}
 		}
-		else
-		{
- 			if ( defined( 'E_STRICT' ) )
-			{
+		else {
+ 			if ( defined( 'E_STRICT' ) ) {
 				error_reporting( E_ALL & ~E_NOTICE & ~E_STRICT );
 			}
-			else
-			{
+			else{
 				error_reporting( E_ALL & ~E_NOTICE );
 			}
 		}
@@ -262,16 +256,24 @@ class TApplication extends TLayout {
 		}
 	}
 
-	public function setUnit( $strNewValue = null )
-	{
+	public function setUnit( $strNewValue = null ){
 		$this->strUnit = $strNewValue;
 	}
 
-	public function getUnit()
-	{
+	public function getUnit() {
 		return $this->strUnit;
 	}
 
+	
+	public function setVersionSystem( $strVersionSystem = null ){
+	    $this->strVersionSystem = $strVersionSystem;
+	}
+	
+	public function getVersionSystem() {
+	    return $this->strVersionSystem;
+	}
+	
+	
 	/**
 	 * Permite ocultar ou exibir o menu principal da aplicação
 	 */
@@ -1599,17 +1601,14 @@ class TApplication extends TLayout {
 		$tbFooter->setProperty( 'cellspacing', '0px' );
 		$this->getSouthArea()->add( $tbFooter );
 
-		if ( $this->getFooterContent() )
-		{
+		if ( $this->getFooterContent() ) {
 			$row = $tbFooter->addRow();
 			// app_footer_message
 			$cellFooter = $row->addCell( $this->getFooterContent() );
 			$cellFooter->setId( 'app_footer' );
 			$cellFooter->setCss( 'width', '100%' );
 			$cellFooter->setCss( 'Height', '30' );
-		}
-		else
-		{
+		} else {
 			$row = $tbFooter->addRow();
 			// app_footer_message
 			$app_footer_message = $row->addCell( '' );
@@ -1617,7 +1616,8 @@ class TApplication extends TLayout {
 			$app_footer_message->setCss( 'width', '300' );
 			$app_footer_message->setCss( 'Height', '20' );
 			// app_footer_company
-			$app_footer_company = $row->addCell( $this->getUnit() );
+			$info_company = $this->getUnit().' '.$this->getVersionSystem();
+			$app_footer_company = $row->addCell( $info_company );
 			$app_footer_company->setId( 'app_footer_company' );
 			$app_footer_company->setCss( 'width', '*' );
 			// app_footer_module
