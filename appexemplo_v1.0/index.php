@@ -1,7 +1,10 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministï¿½rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -25,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -42,7 +45,8 @@ define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
 include('../base/classes/webform/TApplication.class.php');
-$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de TelemÃ¡tica - CNT');
+$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
+$app->setVersionSystem('v 1.0.0.0');
 $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);
