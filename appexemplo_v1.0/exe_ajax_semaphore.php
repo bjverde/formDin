@@ -1,8 +1,10 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -26,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -48,6 +50,7 @@ $frm->addHtmlField('msg', '<p>Ao fazer uma requisição Ajax com semáforo, o semáf
 $frm->addButton('Chamar ajax com Semáforo', null, 'btnAjax', 'chamarAjax()');
 $frm->addButton('Verificar Semáforo', null, 'btnVerfificar', 'verificarSemaforo()');
 
+$acao = isset($acao) ? $acao : null;
 if( $acao == 'ajax_lento') {
 	sleep(20);
 	echo 'Voltei depois de 20 segundos!';
