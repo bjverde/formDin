@@ -108,8 +108,7 @@ switch( $acao ) {
 				$frm->setMessage('Diretório '.$diretorio.' não existe!');
 				break;
 			}
-
-			require_once('../base/classes/webform/TFormCreate.class.php');
+			
 			$geradorForm = new TFormCreate();
 			$geradorForm ->setFormTitle( $frm->get('form_title') );
 			$geradorForm ->setFormPath( $diretorio );
