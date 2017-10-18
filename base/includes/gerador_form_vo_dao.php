@@ -1,8 +1,10 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -26,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -53,6 +55,10 @@ $frm->addGroupField('gpx1','Informações do form');
 	$frm->addTextField('form_title','Título do formulario:',50,true,50);
 	$frm->addTextField('form_dir','Diretório do formulário:',50,true,150,'modulos/');
 	$frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
+$frm->closeGroup();
+$frm->addGroupField('gpxE','Informações do Esquema');
+$frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
+$frm->addSelectField('sit_const_scheme','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
 $frm->closeGroup();
 $frm->addGroupField('gpx2','Informações do VO e DAO');
 	$frm->addTextField('diretorio','Diretório:',50,true);
@@ -91,6 +97,8 @@ switch( $acao ) {
 			foreach($listColumns as $k=>$v) {
 				$gerador->addColumn($v);
 			}
+			$showScheme = $frm->get('sit_const_scheme');
+			$gerador->setShowScheme($showScheme);
 			$gerador->saveVO();
 			$gerador->saveDAO();
 

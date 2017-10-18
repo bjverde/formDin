@@ -49,6 +49,7 @@ class TDAOCreate
 	private $keyColumnName;
 	private $path;
 	private $bdType;
+	private $showScheme;
 	private $charParam = '?';
 
 	public function __construct($strTableName=null,$strkeyColumnName=null,$strPath=null,$bdType=null)
@@ -73,6 +74,22 @@ class TDAOCreate
 	public function getTableName()
 	{
 		return $this->tableName;
+	}
+	//------------------------------------------------------------------------------------
+	public function setShowScheme($showScheme){
+	    return $this->showScheme = $showScheme;
+	}
+	//------------------------------------------------------------------------------------
+	public function getShowScheme(){
+	    return $this->showScheme;
+	}
+	//------------------------------------------------------------------------------------
+	public function hasScheme(){
+	    $result = '';
+	    if($this->getShowScheme() == true){
+	        $result = '\'.SCHEME.\'';
+	    }	    
+	    return $result;
 	}
 	//------------------------------------------------------------------------------------
 	public function addColumn($strColumnName)
@@ -192,7 +209,7 @@ class TDAOCreate
 			}
 		}
 		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.');');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->getTableName().'(');
+		$this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->hasScheme().$this->getTableName().'(');
 		$cnt=0;
 		foreach($this->getColumns() as $k=>$v)
 		{
@@ -211,7 +228,7 @@ class TDAOCreate
 		$this->addLine(TAB.'public static function delete( $id )');
 		$this->addLine(TAB.'{');
 		$this->addLine(TAB.TAB.'$values = array($id);');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'delete from '.$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
+		$this->addLine(TAB.TAB.'return self::executeSql(\'delete from '.$this->hasScheme().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
 		$this->addLine(TAB.'}');
 		$this->addLine();
 		//FIM excluir
@@ -226,7 +243,7 @@ class TDAOCreate
 		{
 			$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
 		}
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\', $values );');
+		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasScheme().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\', $values );');
 		$this->addLine(TAB.'}');
 		$this->addLine();
 		// fim select
@@ -240,7 +257,7 @@ class TDAOCreate
 		{
 			$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
 		}
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->getTableName().'\'.');
+		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasScheme().$this->getTableName().'\'.');
 		$this->addLine(TAB.TAB.'( ($where)? \' where \'.$where:\'\').');
 		$this->addLine(TAB.TAB.'( ($orderBy) ? \' order by \'.$orderBy:\'\'));');
 		$this->addLine(TAB.'}');
@@ -261,7 +278,7 @@ class TDAOCreate
 			}
 		}
 		$this->addline(TAB.TAB.TAB.TAB.TAB.TAB.',$objVo->get'.ucfirst($this->keyColumnName).'() );');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'update '.$this->getTableName().' set ');
+		$this->addLine(TAB.TAB.'return self::executeSql(\'update '.$this->hasScheme().$this->getTableName().' set ');
 		$count=0;
 		foreach($this->getColumns() as $k=>$v)
 		{
