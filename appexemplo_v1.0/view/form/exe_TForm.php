@@ -88,9 +88,8 @@ $frm->show();
 ?>
 <script>
 //Window.keepMultiModalWindow=true;
-function openModal()
-{
-  	fwModalBox('Janela Modal 2','index.php?modulo=exe_TForm.php');
+function openModal() {
+  	fwModalBox('Janela Modal 2','index.php?view/form/modulo=exe_TForm.php');
 	//top.app_open_modal_window({url:'http://localhost/fontes/base/exemplos/index.php?modulo=exe_TForm.php'});
 }
 function onMaximize(res)
