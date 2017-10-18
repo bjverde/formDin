@@ -40,7 +40,7 @@
 //error_reporting(E_ALL);
 $frm = new TForm('Exemplo Utilização de Abas',600,800);
 $frm->setMaximize(true);
-//$frm->setflat(true);
+$frm->setflat(true);
 //$pc = $frm->addPageControl('pc',null,null,'pcBeforeClick','pcAfterClick');
 
 //$frm->addGroupField('gpAba','Grupo Com Aba');
