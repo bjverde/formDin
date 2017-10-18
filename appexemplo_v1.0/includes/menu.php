@@ -187,7 +187,6 @@ $menu->add(-27020,-270,'Exemplo de Mensagens','exe_mensagem.php');
 $menu->add(-2001,-20,'Cria??o de Abas','exe_aba.inc');
 $menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
 $menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
-$menu->add(-2004,-20,'Campo com Consulta On-line','exe_onlinesearch.inc');
 $menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
 $menu->add(-2006,-20,'Campo Select','exe_select.inc');
 $menu->add(-2007,-20,'Campo Cep','exe_campo_cep.inc');
