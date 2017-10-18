@@ -175,6 +175,7 @@ class TFormCreate {
         $this->addLine('$primaryKey = \''.$this->primaryKeyTable.'\';');
         $this->addLine('$frm = new TForm(\''.$this->formTitle.'\',600);');
 		$this->addLine('$frm->setFlat(true);');
+		$this->addLine('$frm->setMaximize(true);');
 		$this->addBasicaFields();
 		$this->addBasicaViewController();
 		$this->addBasicaGrid();
