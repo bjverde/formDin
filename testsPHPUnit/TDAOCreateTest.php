@@ -31,36 +31,36 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
-    public function testSetShowScheme_true(){
+    public function testSetShowSchema_true(){
         $esperado = true;
         $tDAOCreate = $this->tDAOCreate;
-        $tDAOCreate->setShowScheme(true);
-        $retorno = $tDAOCreate->getShowScheme();
-        //$this->tDAOCreate->setShowScheme(true);
-        //$retorno = $this->tDAOCreate->getShowScheme();        
+        $tDAOCreate->setShowSchema(true);
+        $retorno = $tDAOCreate->getShowSchema();
+        //$this->tDAOCreate->setShowSchema(true);
+        //$retorno = $this->tDAOCreate->getShowSchema();        
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testSetShowScheme_false(){
+    public function testSetShowSchema_false(){
         $esperado = false;
-        $this->tDAOCreate->setShowScheme(false);
-        $retorno = $this->tDAOCreate->getShowScheme();
+        $this->tDAOCreate->setShowSchema(false);
+        $retorno = $this->tDAOCreate->getShowSchema();
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testHasScheme_yes(){
-        $esperado = '\'.SCHEME.\'';        
+    public function testHasSchema_yes(){
+        $esperado = '\'.SCHEMA.\'';        
         $tDAOCreate = $this->tDAOCreate;
-        $tDAOCreate->setShowScheme(true);
-        $retorno = $tDAOCreate->hasScheme();        
+        $tDAOCreate->setShowSchema(true);
+        $retorno = $tDAOCreate->hasSchema();        
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testHasScheme_no(){
+    public function testHasSchema_no(){
         $esperado = '';
         $tDAOCreate = $this->tDAOCreate;
-        $tDAOCreate->setShowScheme(false);
-        $retorno = $tDAOCreate->hasScheme();  
+        $tDAOCreate->setShowSchema(false);
+        $retorno = $tDAOCreate->hasSchema();  
         $this->assertEquals($esperado, $retorno);
     }
 
