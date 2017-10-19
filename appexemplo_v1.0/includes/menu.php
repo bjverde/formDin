@@ -170,8 +170,6 @@ $menu->add(-27005,-20,'Select Combinado F3','exe_select_combinado_f3.inc');
 $menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
 $menu->add(-27009,-20,'FormDin 3','exe_formDin3.inc');
 $menu->add(-27010,-20,'PDF','exe_pdf.inc');
-$menu->add(-27012,-20,'TreeView Taxonomia','exe_tree_view.inc');
-$menu->add(-27012,-20,'TreeView Unidade Ibama','exe_tree_view_unid_ibama.inc');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
 $menu->add(-27015,-20,'Redirect','exe_redirect.inc');
