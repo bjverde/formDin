@@ -44,5 +44,5 @@ $rel->cell(0,5,'Exemplo do relatório utilizando FPDF',1,1,'C');
 $rel->ln(3);
 $rel->cell(0,5,'Parâmetros Recebidos',1,1,'C');
 $rel->multiCell(0,4,print_r($_REQUEST,true),1);
-$rel->output_ibama();
+$rel->show();
 ?>

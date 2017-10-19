@@ -38,6 +38,6 @@
  */
 
 $frm = new TForm('Exemplo PDF',200);
-$frm->addPdfFile('base/exemplos/relatorio_pdf.php?param1=1&param2=2');
+$frm->addPdfFile('relatorio_pdf.php?param1=1&param2=2');
 $frm->show();
 ?>
