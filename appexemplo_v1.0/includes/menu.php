@@ -143,7 +143,6 @@ $menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 $menu->add('101',null,'Hints');
 $menu->add('1011','101','Exemplo I','exe_hint.php');
 
-$menu->add('102',null,'Teste','teste.php');
 $menu->add('103',null,'Formulário');
 	$menu->add('1031','103','Normal','view/form/exe_TForm.php');
 	$menu->add('1032','103','Subcadastro','view/form/exe_TForm2.php');
