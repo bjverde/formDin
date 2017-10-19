@@ -72,12 +72,11 @@ switch( $acao ) {
         $frm->setVo( $vo );
         $vo->setTempName( $frm->getBase() . $_POST[ 'conteudo_arquivo_temp_name' ] );
         Tb_arquivoDAO::insert( $vo );
-
+        break;
     //------------------------------------------------------------------
     case 'Limpar':
         $frm->clearFields();
         break;
-
     //--------------------------------------------------------------------
     case 'gdArquivos_excluir':
    		Tb_arquivoDAO::delete( $frm->get( 'id_arquivo' ) );

@@ -194,12 +194,8 @@ $menu->add(-2006,-20,'Campo Select','exe_select.inc');
 $menu->add(-2007,-20,'Campo Cep','exe_campo_cep.inc');
 $menu->add(-2008,-20,'Campo Link','exe_campo_link.inc');
 $menu->add(-2009,-20,'Campo Hora','exe_campo_hora.inc');
-$menu->add(-2010,-20,'Campo Cor','exe_campo_cor.inc');
-$menu->add(-2011,-20,'Campo Memo / Editor HTML','exe_campo_memo.inc');
 $menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
-$menu->add(-2013,-20,'Campo N?mero','exe_campo_numero.inc');
 $menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
-$menu->add(-2015,-20,'Campo Grupo','exe_campo_grupo.inc');
 $menu->add(-2017,-20,'Campo Arquivo','exe_campo_arquivo.inc');
 $menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
 
