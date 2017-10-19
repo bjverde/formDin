@@ -119,6 +119,7 @@ $menu->add('85','8','Paginação','exe_gride_paginacao.php');
 $menu->add('86','8','Função getGrid()','exe_gride_4.php');
 $menu->add('87','8','Gride com Campos 1','exe_gride_10.php');
 $menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
+$menu->add('89','8','Gride com campos 3','view/exe_gride_campos3.php');
 
 $menu->add('9',null,'PDO');
 $menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
@@ -158,6 +159,7 @@ $menu->add(-26002,-260	,'Grid Off-Line - Formdin3','exe_gride_off_line.inc');
 $menu->add(-26003,-260	,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
 $menu->add(-26004,-260	,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
 $menu->add(-26005,-260	,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
+
 
 $menu->add(-270,-20,'Outros');
 $menu->add(-27001,-270,'Banco Textual DBM (db4)','exe_db4.inc');
@@ -202,7 +204,7 @@ $menu->add(-2016,-20,'Campo Telefone','exe_telefone.inc');
 $menu->add(-2017,-20,'Campo Arquivo','exe_campo_arquivo.inc');
 $menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
 $menu->add(-2019,-20,'Campo Autocompletar'	,'exe_autocomplete.php');
-$menu->add(-2099,-20,'Testes Laborat?rio','exe_teste.inc');
+
 
 
 
