@@ -62,12 +62,10 @@ $menu->add('18','1','Campo Numúrico','view/fields/exe_NumberField.php');
 $menu->add('19','1','Campo CEP'	,'view/fields/exe_CepField.php');
 $menu->add('20','1','Campo Telefone'	,'view/fields/exe_FoneField.php');
 $menu->add('21','1','Campo Cpf/Cnpj'	,'view/fields/exe_campo_cpf_cnpj.php');
-
 $menu->add('110','1','Campos Data e hora');
 	$menu->add('1101','110','Campo Data'	,'view/fields/exe_DateField.php');
 	$menu->add('1102','110','Campo Hora','view/fields/exe_campo_hora.php');
 	$menu->add('1103','110','Campo Fuso Horário - ERRO'	,'exe_TTimeZoneField.php');
-
 $menu->add('111','1','Campo Select Diretorio/Pasta'	,'view/fields/exe_OpenDirField.php');
 $menu->add('113','1','Campo Editor'	,'view/fields/exe_TTextEditor.php');
 $menu->add('114','1','Campo Memo'	,'view/fields/exe_TMemo.php');
@@ -75,10 +73,11 @@ $menu->add('115','1','Campo Senha'	,'view/fields/exe_TPasswordField.php');
 $menu->add('116','1','Campo Agenda'	,'view/fields/exe_TCalendar.php');
 $menu->add('117','1','Campo Captcha'	,'view/fields/exe_TCaptchaField.php');
 $menu->add('118','1','Campo Blob'	);
-$menu->add('1181','118','Campo Blob Salvo no Banco'		,'view/fields/exe_fwShowBlob.php');
-$menu->add('1182','118','Campo Blob Salvo no Disco'		,'view/fields/exe_fwShowBlobDisco.php');
+	$menu->add('1181','118','Campo Blob Salvo no Banco'		,'view/fields/exe_fwShowBlob.php');
+	$menu->add('1182','118','Campo Blob Salvo no Disco'		,'view/fields/exe_fwShowBlobDisco.php');
 $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
-$menu->add('120','1','Tecla de Atalho'		,'view/fields/exe_Shortcut.php');
+$menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
+$menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
 
 
 
@@ -115,15 +114,15 @@ $menu->add('72','7','Caixa de Confirmação','view/messages/exe_confirmDialog.php'
 $menu->add('73','7','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 
 $menu->add('8',null,'Gride');
-$menu->add('81','8','Exemplo 1','exe_gride_1.php');
-$menu->add('82','8','Exemplo 2 - Anexos - Ajax','exe_gride_2.php');
-$menu->add('83','8','Grid Offline','exe_gride_3.php');
-$menu->add('84','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
-$menu->add('85','8','Paginação','exe_gride_paginacao.php');
-$menu->add('86','8','Função getGrid()','exe_gride_4.php');
-$menu->add('87','8','Gride com Campos 1','exe_gride_10.php');
-$menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
-$menu->add('89','8','Gride com campos 3','view/exe_gride_campos3.php');
+	$menu->add('81','8','Exemplo 1','exe_gride_1.php');
+	$menu->add('82','8','Exemplo 2 - Anexos - Ajax','exe_gride_2.php');
+	$menu->add('83','8','Grid Offline','exe_gride_3.php');
+	$menu->add('84','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
+	$menu->add('85','8','Paginação','exe_gride_paginacao.php');
+	$menu->add('86','8','Função getGrid()','exe_gride_4.php');
+	$menu->add('87','8','Gride com Campos 1','exe_gride_10.php');
+	$menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
+	$menu->add('89','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
 
 $menu->add('9',null,'PDO');
 $menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
@@ -186,21 +185,15 @@ $menu->add(-27018,-270,'Tela de Confirma??o','exe_confirm_dialog.php');
 // parametros da janela
 $params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
 $menu->add(-27019,-270,'Site da Google','http://www.google.com','Site do Google',null,null,null,null,null,json_encode($params));
-
 $menu->add(-27019,-270,'Postgres Lob','exe_postgres.php');
 $menu->add(-27020,-270,'Exemplo de Mensagens','exe_mensagem.php');
-
 $menu->add(-2001,-20,'Cria??o de Abas','exe_aba.inc');
 $menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
 $menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
 $menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
 $menu->add(-2006,-20,'Campo Select','exe_select.inc');
-$menu->add(-2007,-20,'Campo Cep','exe_campo_cep.inc');
-$menu->add(-2008,-20,'Campo Link','exe_campo_link.inc');
-
 $menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
 $menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
-$menu->add(-2017,-20,'Campo Arquivo','exe_campo_arquivo.inc');
 $menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
 
 
