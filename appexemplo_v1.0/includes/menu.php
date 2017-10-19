@@ -66,7 +66,7 @@ $menu->add('110','1','Campo Data'	,'view/fields/exe_DateField.php');
 $menu->add('111','1','Campo Select Diretorio/Pasta'	,'view/fields/exe_OpenDirField.php');
 $menu->add('112','1','Campo Fuso Horário - ERRO'	,'exe_TTimeZoneField.php');
 $menu->add('113','1','Campo Editor'	,'view/fields/exe_TTextEditor.php');
-$menu->add('114','1','Campo Memo - ERRO'	,'exe_TMemo.php');
+$menu->add('114','1','Campo Memo'	,'view/fields/exe_TMemo.php');
 $menu->add('115','1','Campo Senha'	,'view/fields/exe_TPasswordField.php');
 $menu->add('116','1','Campo Agenda'	,'view/fields/exe_TCalendar.php');
 $menu->add('117','1','Campo Captcha'	,'view/fields/exe_TCaptchaField.php');
