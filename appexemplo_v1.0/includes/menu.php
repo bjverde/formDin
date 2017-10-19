@@ -79,40 +79,43 @@ $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
 $menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
 
-
-
-
+//-----------------------------------------------------------------------------
 $menu->add('2',null,'Containers');
-$menu->add('22','2','Grupo');
-$menu->add('221','22','Grupo Normal','exe_GroupField.php');
-$menu->add('222','22','Grupo Combinados ( Efeito Sanfona )','exe_GroupField_2.php');
+	$menu->add('22','2','Grupo');
+		$menu->add('221','22','Grupo Normal','exe_GroupField.php');
+		$menu->add('222','22','Grupo Combinados ( Efeito Sanfona )','exe_GroupField_2.php');
+	$menu->add('23','2','Abas');
+		$menu->add('231','23','Aba'		,'exe_aba_1.php');
+		$menu->add('232','23','Aba2'	,'view/containers/exe_aba_2.php');
+	$menu->add('24','2','TreeView');
+		$menu->add('241','24','Dentro do Formulário' ,'exe_tree_view_1.php');
+		$menu->add('242','24','Fora do Formulário'	,'exe_tree_view_2.php');
+		$menu->add('243','24','User Data - Array'	,'exe_tree_view_3.php');
+		$menu->add('244','24','Uf x Municípios'		,'exe_tree_view_4.php');
+		$menu->add('245','24','Uf x Municípios com SetXmlFile()' ,'exe_tree_view_5.php');
 
-$menu->add('23','2','Aba'		,'exe_aba_1.php');
-$menu->add('24','2','TreeView');
-$menu->add('241','24','Dentro do Formulário' ,'exe_tree_view_1.php');
-$menu->add('242','24','Fora do Formulário'	,'exe_tree_view_2.php');
-$menu->add('243','24','User Data - Array'	,'exe_tree_view_3.php');
-$menu->add('244','24','Uf x Municípios'		,'exe_tree_view_4.php');
-$menu->add('245','24','Uf x Municípios com SetXmlFile()' ,'exe_tree_view_5.php');
-
+//-----------------------------------------------------------------------------
 $menu->add('4',null,'Ajuda On-line (sqlite)','exe_documentacao_online.inc','Confe??o do texto de ajuda gravando no banco de dados sqlite');
 
-
+//-----------------------------------------------------------------------------
 $menu->add('5',null,'Ajax');
 $menu->add('51','5','Exemplo 1','exe_ajax_1.php');
 $menu->add('52','5','Atualizar Campos','exe_ajax_2.php');
 $menu->add('53','5','Botão Ajax','exe_TButtonAjax.php');
 $menu->add('54','5','Ajax com Sem?foro','exe_ajax_semaphore.php');
 
+//-----------------------------------------------------------------------------
 $menu->add('6',null,'PDF');
 $menu->add('61','6','Exemplo 1','exe_pdf_1.php');
 $menu->add('62','6','Exemplo 2','exe_pdf_2.php');
 
+//-----------------------------------------------------------------------------
 $menu->add('7',null,'Mensagens');
 $menu->add('71','7','Exemplo 1','view/messages/exe_mensagem.php');
 $menu->add('72','7','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
 $menu->add('73','7','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 
+//-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
 	$menu->add('81','8','Exemplo 1','exe_gride_1.php');
 	$menu->add('82','8','Exemplo 2 - Anexos - Ajax','exe_gride_2.php');
@@ -124,6 +127,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
 	$menu->add('89','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
 
+//-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
 $menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
 $menu->add('92','9','Exemplo Sqlite e Mysql','exe_pdo_2.php');
