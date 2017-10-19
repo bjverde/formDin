@@ -44,12 +44,21 @@ $frm->addTextField('nom_pessoa3','Teste 3:',20);
 
 $frm->setHint('nom_pessoa','Teste');
 $frm->addHtmlField('html','Este é o form <blink>1</blink>, clique no botão Ir para exibir o form <blink>2</blink>')->setCss('color','blue');
-$frm->setAction('Ir');
-if($acao =='Ir')
-{
-  //$frm->redirect('base/exemplos/exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.');
-  $frm->redirect('base/exemplos/exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',false,null);
+$frm->setAction('Ir submit,Ir Ajax');
+
+
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+	case 'Ir submit':
+		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',true);
+		break;
+		//------------------------------------------------------------------
+	case 'Ir Ajax':
+		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
+		break;
+		//--------------------------------------------------------------------
 }
+
 $frm->show();
 ?>
 
