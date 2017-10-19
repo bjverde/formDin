@@ -79,6 +79,9 @@ $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
 $menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
 
+//Redirect só funciona se o arquivo estiver na pasta modulos
+$menu->add('122','1','Redirect','exe_redirect.inc');
+
 //-----------------------------------------------------------------------------
 $menu->add('2',null,'Containers');
 	$menu->add('22','2','Grupo');
