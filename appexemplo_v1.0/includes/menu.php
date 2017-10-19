@@ -4,7 +4,7 @@
  * Copyright (C) 2012 Ministério do Planejamento
  * Criado por Luís Eugênio Barbosa
  * Essa versão é um Fork https://github.com/bjverde/formDin
- * 
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -28,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -88,7 +88,7 @@ $menu->add('2',null,'Containers');
 		$menu->add('221','22','Grupo Normal','exe_GroupField.php');
 		$menu->add('222','22','Grupo Combinados ( Efeito Sanfona )','exe_GroupField_2.php');
 	$menu->add('23','2','Abas');
-		$menu->add('231','23','Aba'		,'exe_aba_1.php');
+		$menu->add('231','23','Aba'		,'view/containers/exe_aba_1.php');
 		$menu->add('232','23','Aba2'	,'view/containers/exe_aba_2.php');
 	$menu->add('24','2','TreeView');
 		$menu->add('241','24','Dentro do Formulário' ,'exe_tree_view_1.php');
