@@ -6,7 +6,7 @@ $frm->setFlat(true);
 
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
-$frm->addDateField('DAT_INCLUSAO', 'Data inclusÃ£o',false,null,null,null,null,null,false)->setReadOnly(true);;
+$frm->addDateField('DAT_INCLUSAO', 'Data inclusão',false,null,null,null,null,null,false)->setReadOnly(true);;
 $frm->addDateField('DAT_EVENTO','Data Evento:',true);
 $frm->addNumberField('ordem', 'Ordem:',10,true,0,true,null,1,5,true);
 $frm->addTextField('cargo', 'Cargo:',50,true);
