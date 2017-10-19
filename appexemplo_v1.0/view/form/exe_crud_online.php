@@ -43,7 +43,7 @@ $frm = new TForm('Exemplo Cadastro On-line (CRUD)',200,500);
 $frm->addTextField('nom_pessoa','Nome:',50,false);
 $frm->addHtmlField('txt','<br><b>Este exemplo utiliza o metodo setOnlineCrud() da classe TForm para adicionar o recurso de cadastramento on-line ao campo Nome:</b>');
 // adiciona botão ao campo para permitir fazer o cadastro on-line
-$frm->setOnlineCrud('nom_pessoa','cad_exemplo.inc','adicionar_pasta.gif',null,'Cadastrar pessoa','Cadastro de Pessoa',350,820);
+$frm->setOnlineCrud('nom_pessoa','view/form/exe_crud_online_chamado.php','adicionar_pasta.gif',null,'Cadastrar pessoa','Cadastro de Pessoa',350,820);
 $frm->setAction('Atualizar');
 $frm->show();
 ?>

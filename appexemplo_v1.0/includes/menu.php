@@ -145,15 +145,15 @@ $menu->add('1011','101','Exemplo I','exe_hint.php');
 
 $menu->add('102',null,'Teste','teste.php');
 $menu->add('103',null,'Formulário');
-$menu->add('1031','103','Normal','view/form/exe_TForm.php');
-$menu->add('1032','103','Subcadastro','view/form/exe_TForm2.php');
-$menu->add('1033','103','Boxes','view/form/exe_TBox.php');
-$menu->add('1034','103','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
-$menu->add('1035','103','Imagem de Fundo','view/form/exe_TFormImage.php');
-$menu->add('1036','103','Customizado com CSS','view/form/exe_TForm3.php');
-$menu->add('1037','103','Recurso de Autosize','view/form/exe_TForm_autosize.php');
-$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
-
+	$menu->add('1031','103','Normal','view/form/exe_TForm.php');
+	$menu->add('1032','103','Subcadastro','view/form/exe_TForm2.php');
+	$menu->add('1033','103','Boxes','view/form/exe_TBox.php');
+	$menu->add('1034','103','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
+	$menu->add('1035','103','Imagem de Fundo','view/form/exe_TFormImage.php');
+	$menu->add('1036','103','Customizado com CSS','view/form/exe_TForm3.php');
+	$menu->add('1037','103','Recurso de Autosize','view/form/exe_TForm_autosize.php');
+	$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
+	$menu->add('1039','103','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
 
 $menu->add('104',null,'TZip','exe_TZip.php');
 $menu->add('199',null,'Temas do Menu','exe_menu_tema.php');
@@ -166,7 +166,6 @@ $menu->add(-26003,-20,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
 $menu->add(-26004,-20,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
 $menu->add(-26005,-20,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
 $menu->add(-27001,-20,'Banco Textual DBM (db4)','exe_db4.inc');
-$menu->add(-27002,-20,'Cadastro on-line (CRUD)','exe_crud_online.inc');
 $menu->add(-27003,-20,'Documentação on-line','exe_documentacao_online.inc');
 $menu->add(-27004,-20,'Select Combinado','exe_select_combinado.inc');
 $menu->add(-27005,-20,'Select Combinado F3','exe_select_combinado_f3.inc');
