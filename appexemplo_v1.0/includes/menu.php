@@ -142,10 +142,11 @@ $menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 $menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
 $menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 
-
+//-----------------------------------------------------------------------------
 $menu->add('101',null,'Hints');
 $menu->add('1011','101','Exemplo I','exe_hint.php');
 
+//-----------------------------------------------------------------------------
 $menu->add('103',null,'Formulário');
 	$menu->add('1031','103','Normal','view/form/exe_TForm.php');
 	$menu->add('1032','103','Subcadastro','view/form/exe_TForm2.php');
@@ -156,6 +157,7 @@ $menu->add('103',null,'Formulário');
 	$menu->add('1037','103','Recurso de Autosize','view/form/exe_TForm_autosize.php');
 	$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('1039','103','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
+	$menu->add('1040','103','Definir Colunas no Formulário','view/form/exe_colunas.php');
 
 $menu->add('104',null,'TZip','exe_TZip.php');
 $menu->add('199',null,'Temas do Menu','exe_menu_tema.php');
@@ -174,9 +176,8 @@ $menu->add(-27009,-20,'FormDin 3','exe_formDin3.inc');
 $menu->add(-27010,-20,'PDF','exe_pdf.inc');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
-$menu->add(-27015,-20,'Redirect','exe_redirect.inc');
 $menu->add(-27016,-20,'Javascript/Css Externos','exe_javascript_externo.inc');
-$menu->add(-27017,-20,'Definir Colunas no Formul?rio','exe_colunas.inc');
+
 $menu->add(-27018,-20,'Tela de Confirma??o','exe_confirm_dialog.php');
 // parametros da janela
 $params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
