@@ -4271,11 +4271,13 @@ class TForm Extends TBox
 	 * @param mixed $arrVars
 	 * @param boolean $boolRedirect
 	 */
-	public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )
-	{
+	public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
 		$boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
-		if( file_exists( $filePath = $this->getRealPath( $strModule ) ) )
-		{
+		
+		$filePath = $this->getRealPath( $strModule );
+		$fileExists = file_exists( $filePath );
+		
+		if( $fileExists ) {
 			$currentModule = $this->getRealPath( $_POST['modulo'] );
 			// guardar na sessão somente se estiver indo, na volta não precisa
 			if( $boolSaveData )
