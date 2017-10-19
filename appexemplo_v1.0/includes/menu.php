@@ -200,10 +200,9 @@ $menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
 $menu->add(-2013,-20,'Campo N?mero','exe_campo_numero.inc');
 $menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
 $menu->add(-2015,-20,'Campo Grupo','exe_campo_grupo.inc');
-$menu->add(-2016,-20,'Campo Telefone','exe_telefone.inc');
 $menu->add(-2017,-20,'Campo Arquivo','exe_campo_arquivo.inc');
 $menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
-$menu->add(-2019,-20,'Campo Autocompletar'	,'exe_autocomplete.php');
+
 
 
 
