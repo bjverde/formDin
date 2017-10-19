@@ -52,22 +52,19 @@ $frm->addHtmlField('campo_moeda', montar_gride() );
 $frm->setAction('Gravar,Novo');
 $frm->addButton('Validar com Js',null,'btnValidarJs','fwValidateFields()');
 $frm->show();
-if($acao == 'Novo')
-{
-	$frm->clearFields();
-}
-else if($acao == 'Gravar')
-{
-	if( $frm->validate() )
-	{
 
-		//d($_SESSION[APLICATIVO]);
-		$res = $frm->createBvars('campo_moeda');
-		//d($res);
-		foreach($res as $k=>$v)
-		{
-			//d($k,'$k');
-			//d($v,'$v');
+$acao = isset($acao) ? $acao : null;
+if ($acao == 'Novo') {
+	$frm->clearFields ();
+} else if ($acao == 'Gravar') {
+	if ($frm->validate ()) {
+		
+		// d($_SESSION[APLICATIVO]);
+		$res = $frm->createBvars ( 'campo_moeda' );
+		// d($res);
+		foreach ( $res as $k => $v ) {
+			// d($k,'$k');
+			// d($v,'$v');
 		}
 	}
 }
