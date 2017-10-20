@@ -5412,8 +5412,7 @@ function fwGetFields(contentId,delimiter,onlyNames) {
 	onlyNames = onlyNames || false;
 	contentId = contentId || 'formdin';
 	var result='';
-	if( contentId )
-	{
+	if( contentId ) {
 		var aFields=[];
 		jQuery( "#"+contentId+" *").each( function() {
 			var type 	= this.type;
@@ -5425,25 +5424,18 @@ function fwGetFields(contentId,delimiter,onlyNames) {
 				if( ! onlyNames ) {
 					id += '='+this.value;
 				}
-			}
-			else if (type == 'checkbox' || type == 'radio')
-			{
+			} else if (type == 'checkbox' || type == 'radio') {
 				id = this.id;
-				if( ! onlyNames )
-				{
+				if( ! onlyNames ){
+					id += '='+this.value;
+				}
+			} else if (tag == 'select') {
+				id = this.id;
+				if( ! onlyNames ){
 					id += '='+this.value;
 				}
 			}
-			else if (tag == 'select')
-			{
-				id = this.id;
-				if( ! onlyNames )
-				{
-					id += '='+this.value;
-				}
-			}
-			if( id )
-			{
+			if( id ) {
 				aFields.push(id);
 			}
 		});
