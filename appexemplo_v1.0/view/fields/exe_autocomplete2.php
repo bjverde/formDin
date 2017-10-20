@@ -49,6 +49,8 @@ A consulta esta configurada para disparar quando for digitado o terceiro caracte
 $frm->addSelectField( 'cod_uf', 'Estado:')->addEvent('onChange','jQuery("#nom_municipio").val("");fwAutoCompleteClearCache("nom_municipio")');
 $frm->addTextField( 'nom_municipio', 'Cidade:', 60 )->setExampleText( 'Digite os 3 primeiros caracteres.');
 $frm->addHiddenField('cod_municipio','');
+
+//Deve sempre ficar depois da definição dos campos
 $frm->setAutoComplete( 'nom_municipio'
 			, 'tb_municipio'	// tabela de municipios
 			, 'nom_municipio'	// campo de pesquisa

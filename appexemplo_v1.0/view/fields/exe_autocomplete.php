@@ -47,9 +47,21 @@ TPDOConnection::test(false);
  O campo Cod Uf será preenchido automaticamente quando a cidade for encontrada ou selecionada</h3>');
  
  
- $frm->addTextField( 'nom_municipio', 'Cidade:', 60 )->setExampleText( 'Digite os 3 primeiros caracteres.')->addEvent('onblur','validarMunicipio(this)');
- $frm->addTextField('cod_uf','Cód Uf:',false);
-$frm->setAutoComplete( 'nom_municipio', 'tb_municipio', 'nom_municipio', 'cod_municipio,cod_uf', true,null, 'callback_autocomplete_municipio()', 3, 1000, 50, null, null, null, null, true );
+$frm->addTextField( 'nom_municipio', 'Cidade:', 60 )->setExampleText( 'Digite os 3 primeiros caracteres.')->addEvent('onblur','validarMunicipio(this)');
+$frm->addTextField('cod_uf','Cód Uf:',false);
+
+//Deve sempre ficar depois da definição dos campos
+$frm->setAutoComplete( 'nom_municipio'
+                     , 'tb_municipio'
+                     , 'nom_municipio'
+                     , 'cod_municipio,cod_uf'
+                     , true
+                     , null
+                     , 'callback_autocomplete_municipio()'
+                    , 3
+                    , 1000
+                    , 50
+                    , null, null, null, null, true );
 
 $frm->setAction( 'Refresh' );
 $frm->show();
