@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo Utilização de Abas');
+$frm = new TForm('Exemplo - Utilização de Abas 02');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->setAutoSize(true);
