@@ -145,18 +145,19 @@ $frm->show();
 <script>
 
 function select_change(e) {
-        if( e.id == 'TPPESSOA'){
-                var valor = jQuery("#"+e.id).find(":selected").val();
-                if (valor=='F'){
-                        fwHabilitarAba('pessoaFisica','pc');
-                        fwSelecionarAba('pessoaFisica');
-                        fwDesabilitarAba('pessoaJuridica');
-                        jQuery("#NMCPF").prop("needed", true);
-                }else{
-                        fwHabilitarAba('pessoaJuridica','pc');
-                        fwSelecionarAba('pessoaJuridica');
-                        fwDesabilitarAba('pessoaFisica');
-                }
-        }
+	if( e.id == 'TPPESSOA'){
+		var valor = jQuery("#"+e.id).find(":selected").val();
+		if (valor=='F'){
+			fwSetRequired('NMCPF');
+			fwHabilitarAba('pessoaFisica','pc');
+			fwSelecionarAba('pessoaFisica');
+			fwDesabilitarAba('pessoaJuridica');
+		}else{
+			fwSetRequired('NMCNPJ');
+			fwHabilitarAba('pessoaJuridica','pc');
+			fwSelecionarAba('pessoaJuridica');
+			fwDesabilitarAba('pessoaFisica');
+		}
+	}
 }
 </script>
