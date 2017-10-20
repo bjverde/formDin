@@ -90,6 +90,7 @@ $menu->add('2',null,'Containers');
 	$menu->add('23','2','Abas');
 		$menu->add('231','23','Aba'		,'view/containers/exe_aba_1.php');
 		$menu->add('232','23','Aba2'	,'view/containers/exe_aba_2.php');
+		$menu->add('233','23','Aba3'	,'view/containers/exe_aba_3.php');
 	$menu->add('24','2','TreeView');
 		$menu->add('241','24','Dentro do Formulário' ,'exe_tree_view_1.php');
 		$menu->add('242','24','Fora do Formulário'	,'exe_tree_view_2.php');
@@ -102,21 +103,21 @@ $menu->add('4',null,'Ajuda On-line (sqlite)','exe_documentacao_online.inc','Conf
 
 //-----------------------------------------------------------------------------
 $menu->add('5',null,'Ajax');
-$menu->add('51','5','Exemplo 1','exe_ajax_1.php');
-$menu->add('52','5','Atualizar Campos','exe_ajax_2.php');
-$menu->add('53','5','Botão Ajax','exe_TButtonAjax.php');
-$menu->add('54','5','Ajax com Sem?foro','exe_ajax_semaphore.php');
+	$menu->add('51','5','Exemplo 1','exe_ajax_1.php');
+	$menu->add('52','5','Atualizar Campos','exe_ajax_2.php');
+	$menu->add('53','5','Botão Ajax','exe_TButtonAjax.php');
+	$menu->add('54','5','Ajax com Sem?foro','exe_ajax_semaphore.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('6',null,'PDF');
-$menu->add('61','6','Exemplo 1','exe_pdf_1.php');
-$menu->add('62','6','Exemplo 2','exe_pdf_2.php');
+	$menu->add('61','6','Exemplo 1','exe_pdf_1.php');
+	$menu->add('62','6','Exemplo 2','exe_pdf_2.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('7',null,'Mensagens');
-$menu->add('71','7','Exemplo 1','view/messages/exe_mensagem.php');
-$menu->add('72','7','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
-$menu->add('73','7','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
+	$menu->add('71','7','Exemplo 1','view/messages/exe_mensagem.php');
+	$menu->add('72','7','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
+	$menu->add('73','7','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
@@ -132,15 +133,15 @@ $menu->add('8',null,'Gride');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
-$menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
-$menu->add('92','9','Exemplo Sqlite e Mysql','exe_pdo_2.php');
-$menu->add('93','9','Exemplo Postgres');
-$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
-$menu->add('94','9','Exemplo Firebird');
-$menu->add('941','94','Conexão','exe_firebird_1.php');
-$menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
-$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
-$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
+	$menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
+	$menu->add('92','9','Exemplo Sqlite e Mysql','exe_pdo_2.php');
+	$menu->add('93','9','Exemplo Postgres');
+		$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
+	$menu->add('94','9','Exemplo Firebird');
+		$menu->add('941','94','Conexão','exe_firebird_1.php');
+	$menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+	$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
+	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('101',null,'Hints');
@@ -163,7 +164,7 @@ $menu->add('104',null,'TZip','exe_TZip.php');
 $menu->add('199',null,'Temas do Menu','exe_menu_tema.php');
 
 
-$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formul?rio Din?mico IV','ajudaonline.gif');
+$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','ajudaonline.gif');
 $menu->add(-26001,-20,'Criação de Gride','exe_gride.inc');
 $menu->add(-26002,-20,'Grid Off-Line - Formdin3','exe_gride_off_line.inc');
 $menu->add(-26003,-20,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
@@ -177,7 +178,6 @@ $menu->add(-27010,-20,'PDF','exe_pdf.inc');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
 $menu->add(-27016,-20,'Javascript/Css Externos','exe_javascript_externo.inc');
-
 $menu->add(-27018,-20,'Tela de Confirma??o','exe_confirm_dialog.php');
 // parametros da janela
 $params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
