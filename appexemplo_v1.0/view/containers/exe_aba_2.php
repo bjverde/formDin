@@ -41,6 +41,7 @@
 
 $frm = new TForm('Exemplo Utilização de Abas');
 $frm->setFlat(true);
+$frm->setMaximize(true);
 $frm->setAutoSize(true);
 $frm->addTextField('nom_pessoa','Nome:',50,true);
 
@@ -50,12 +51,12 @@ $pc = $frm->addPageControl('pc',null,null,'pcBeforeClick','pcAfterClick');
 //$pc = $frm->addPageControl('pc');
 $p = $pc->addPage('Cadastro Ação',true,true,null,false);
 	$frm->addTextField('cadastro','Cadastro:',20,true);
-	//$frm->addHtmlField('html_texto',null,null,"Observação:",200,500);//->setCss('background-color','yellow');
+	//$frm->addHtmlField('html_texto',null,null,"Observação:",200,500)->setCss('background-color','yellow');
 	$frm->addButton('Selecionar a aba relatório',null,'btnAtivarAba','btnClick()',null,true,false);
-	$frm->addButton('Desabilitar aba histórico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,true,false);
-	$frm->addButton('Habilitar aba histórico',null,'btnHabilitarAba','btnHabilitarClick()',null,true,false);
+	$frm->addButton('Desabilitar aba histórico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,false,false);
+	$frm->addButton('Habilitar aba histórico',null,'btnHabilitarAba','btnHabilitarClick()',null,false,false);
 	$frm->addButton('Mostrar Erros',null,'btnMostrarErro','MostrarErros()');
-	$frm->addMemoField('memo','Obs:',1000,true,60,10);
+	$frm->addMemoField('memo','Obs:',1000,true,50,5);
 
 $pc->addPage('Relatório',false,true,'abaRelatorio');
 	$frm->addTextField('relatorio','Relatório:',20);
@@ -70,7 +71,7 @@ $frm->closeGroup();
 $frm->addTextField('cadastro2','Cadastro:',20);
 //$pc->setActivePage('abaHistorico',true);
 $frm->closeGroup();
-//$frm->addTextField('descricao','Descrição:',50);
+$frm->addTextField('descricao','Descrição:',50);
 $frm->setAction('Atualizar,Gravar');
 //$frm->setMessage('Gravarção realizada com sucesso');
 
@@ -85,55 +86,49 @@ if ($acao == 'Gravar') {
 $frm->show();
 ?>
 <script>
-function pcBeforeClick(rotulo,container,id)
-{
-	if( id == 'abarelatorio' )
-	{
+function pcBeforeClick(rotulo,container,id){
+	if( id == 'abarelatorio' ){
 		//alert('Não é permito acesso a esta aba via mouse');
 		return false;
 	}
 	return true;
 }
-function btnClick()
-{
+
+function btnClick(){
 	//fwGetObj('pc_container_page_abarelatorio_link').onclick();
 	//ou
 	fwSelecionarAba(fwGetObj('pc_container_page_abarelatorio_link'));
 }
-function btnDesabilitarClick()
-{
+
+function btnDesabilitarClick(){
 	fwDesabilitarAba('aHist');
 }
 
-function btnHabilitarAbaClick()
-{
+function btnHabilitarAbaClick(){
 	fwDesabilitarAba('aHist');
 }
 
-function btnHabilitarClick()
-{
+function btnHabilitarClick(){
 	fwHabilitarAba('aHist','pc');
-
 }
-function fwAdjustHeight2(frmId,jsonParams)
-{
+
+function fwAdjustHeight2(frmId,jsonParams){
 	alert( frmId );
 }
-function pcAfterClick(aba,pageControl,id)
-{
+
+function pcAfterClick(aba,pageControl,id){
 	alert('A função definida no evento afterClick do pageControl,\nfoi chamada e recebeu os seguintes parametros:\n\n'+
 	'aba='+aba+'\n'+
 	'pageControls='+pageControl+'\n'+
 	'id='+id);
 }
-function MostrarErros()
-{
+
+function MostrarErros() {
 	var obj = jQuery("#formdin_msg_area");
 	alert( obj.length );
 	obj.addClass("fwMessageAreaError");
 	obj.height(150);
 	obj.show();
 	alert( 'ok');
-
 }
 </script>
