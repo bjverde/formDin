@@ -5399,8 +5399,15 @@ function fwShowPdf( jsonParams )
 	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,null);
 }
 
-function fwGetFields(contentId,delimiter,onlyNames)
-{
+
+/**
+ * Simplified way to get the value of a field
+ * @param contentId field identifier
+ * @param delimiter
+ * @param onlyNames
+ * @returns   value of a field
+ */
+function fwGetFields(contentId,delimiter,onlyNames) {
 	delimiter = delimiter || '&';
 	onlyNames = onlyNames || false;
 	contentId = contentId || 'formdin';
@@ -5408,17 +5415,14 @@ function fwGetFields(contentId,delimiter,onlyNames)
 	if( contentId )
 	{
 		var aFields=[];
-		jQuery( "#"+contentId+" *").each( function()
-		{
+		jQuery( "#"+contentId+" *").each( function() {
 			var type 	= this.type;
 			var tag 	= this.tagName.toLowerCase();
 			var id		= ''
 			var value	= '';
-			if (type == 'text' || type == 'password' || tag == 'textarea')
-			{
+			if (type == 'text' || type == 'password' || tag == 'textarea') {
 				id = this.id;
-				if( ! onlyNames )
-				{
+				if( ! onlyNames ) {
 					id += '='+this.value;
 				}
 			}

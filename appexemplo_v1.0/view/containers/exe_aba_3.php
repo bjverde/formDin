@@ -147,6 +147,19 @@ $frm->show();
 function select_change(e) {
 	if( e.id == 'TPPESSOA'){
 		var valor = jQuery("#"+e.id).find(":selected").val();
+		//var fwg = fwGetFields("#TPPESSOA",null,null);
+		//console.log ( fwg );
+		
+		jQuery( "#TPPESSOA *").each(  function() {
+			var type 	= this.type;
+			var tag 	= this.tagName.toLowerCase();
+			var id		= ''
+			var value	= '';
+			console.log ( this );
+		}
+		);
+			
+		
 		if (valor=='F'){
 			fwSetRequired('NMCPF');
 			fwHabilitarAba('pessoaFisica','pc');
