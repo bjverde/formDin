@@ -5118,18 +5118,19 @@ class TForm Extends TBox
 	 * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
 	 * definir o parametro boolLabelAbove do botão para true tambem.
 	 *
-	 * @param mixed  $mixValue
-	 * @param string $strName
-	 * @param string $strAction
-	 * @param string $strOnClick
-	 * @param string $strConfirmMessage
-	 * @param boolean $boolNewLine
-	 * @param boolean $boolFooter
+	 * @param mixed   $mixValue
+	 * @param string  $strName
+	 * @param string  $strAction  - Nome da ação
+	 * @param string  $strOnClick
+	 * @param string  $strConfirmMessage
+	 * @param boolean $boolNewLine  - em nova linha
+	 * @param boolean $boolFooter   - mostrar no fim do form
 	 * @param string  $strImage
+	 * @param string  $strImageDisabled
 	 * @param string  $strHint
 	 * @param string  $strVerticalAlign
-	 * @param string $strLabel
-	 * @param bool $boolLabelAbove
+	 * @param string  $strLabel
+	 * @param bool    $boolLabelAbove
 	 * @return TButton
 	 */
 	public function addButton( $mixValue=null, $strAction=null, $strName=null, $strOnClick=null, $strConfirmMessage=null, $boolNewLine=null, $boolFooter=null, $strImage=null, $strImageDisabled=null, $strHint=null, $strVerticalAlign=null, $boolLabelAbove=null, $strLabel=null, $strHorizontalAlign=null)
