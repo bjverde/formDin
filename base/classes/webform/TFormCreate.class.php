@@ -177,10 +177,13 @@ class TFormCreate {
 		$this->addLine('$frm->setFlat(true);');
 		$this->addLine('$frm->setMaximize(true);');
 		$this->addBasicaFields();
+		$this->addBlankLine();
+		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, true, false);');
+		$this->addLine('$frm->addButton(\'Limpar\', null, \'Limpar\', null, null, false, false);');		
 		$this->addBasicaViewController();
 		$this->addBasicaGrid();
 		//-------- FIM
-		$this->addLine('$frm->setAction( \'Salvar,Limpar\' );');
+		//$this->addLine('$frm->setAction( \'Salvar,Limpar\' );');
 		$this->addLine('$frm->show();');
 		$this->addLine("?>");
         
