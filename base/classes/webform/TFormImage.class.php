@@ -59,7 +59,7 @@
     	$this->setBgPosition($strBgPosition);
     	$this->setRequiredFieldText('');
 	}
-	public function show( $print=true )
+	public function show( $print=true, $flat=false  )
 	{
 		$this->setFlat(true);
 		$this->body->setCss('border-top','0px');
