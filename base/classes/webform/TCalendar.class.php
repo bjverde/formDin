@@ -187,7 +187,7 @@ if (selecionavel) {
 		$this->height = (int) ($newHeight - 10);
         return $this;
 	}
-	public function getHeight()
+	public function getHeight($strMinHeight = null)
 	{
 		return ( is_integer($this->height) ) ? $this->height : null;
 	}
