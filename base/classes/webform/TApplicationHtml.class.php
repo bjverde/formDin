@@ -281,7 +281,12 @@ class TApplicationHtml
 		$this->page->addJsCssFile($this->page->getBase().'js/dhtmlx/menu/skins/'.$menuTheme.'/'.$menuTheme.'.css');
 		$this->page->addJsCssFile('app.js');
 		$this->page->addJsCssFile('jquery/jquery.js');
-		$this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		
+		if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }
+		if(MIGRATE_JQUERY){
+		  $this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		}
+		
 		$this->page->addJsCssFile('jquery/jquery.corner.js');
 		//$this->page->addJsCssFile('jquery/jquery.dimensions.min.js');
 		/*
