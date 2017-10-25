@@ -184,7 +184,7 @@ class TLayout extends THtmlPage {
 	
 	if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }	
 	if(MIGRATE_JQUERY){
-	    $this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		$this->addJsFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
 	}
 	
 	$this->addJsFile( 'jquery/jquery.corner.js' );
