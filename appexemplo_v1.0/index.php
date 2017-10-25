@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-define('MIGRATE_JQUERY',TRUE);
+define('MIGRATE_JQUERY',FALSE);
 
 define('APLICATIVO','TESTE');
 define('FORMDIN',1);

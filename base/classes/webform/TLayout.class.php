@@ -178,19 +178,19 @@ class TLayout extends THtmlPage {
 	//$this->addJsFile('prototype/window_effects.js');
 	$this->addCssFile('prototype/themes/default.css');
 	$this->addCssFile('prototype/themes/alphacube.css');
-
-  	// adicionar jquery
-	
-	
+		
 	if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }	
 	if(MIGRATE_JQUERY){
+		// Tentaiva de Migrar para Jquery 1.9.1 
 		$this->addJsFile('http://code.jquery.com/jquery-1.9.1.js');
 		$this->addJsFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		$this->addJsFile('jquery/js_new/jquery.corner.js' );
 	}else{
+		// adicionar jquery
 		$this->addJsFile( 'jquery/jquery.js' );
+		$this->addJsFile( 'jquery/jquery.corner.js' );
 	}
 	
-	$this->addJsFile( 'jquery/jquery.corner.js' );
 	$this->addJsFile('jquery/jlayout/jquery.jlayout-1.3.js');
 	$this->addJsFile('jquery/jquery-ui-all.js');
 	$this->addJsFile( 'jquery/blockui/jquery.blockUI.js' );

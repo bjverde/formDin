@@ -223,12 +223,13 @@ class TForm Extends TBox
 			if(MIGRATE_JQUERY){
 				$this->addJsFile('http://code.jquery.com/jquery-1.9.1.js');
 				$this->addJsFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+				$this->addJsFile( 'jquery/js_new/jquery.metadata.js' );
+				$this->addJsFile( 'jquery/js_new/jquery.corner.js' );
 			}else{
 				$this->addJsFile( 'jquery/jquery.js' );
+				$this->addJsFile( 'jquery/jquery.metadata.js' );
+				$this->addJsFile( 'jquery/jquery.corner.js' );
 			}
-			
-			$this->addJsFile( 'jquery/jquery.metadata.js' );
-			$this->addJsFile( 'jquery/jquery.corner.js' );
 			$this->addJsFile( 'jquery/jlayout/jquery.jlayout-1.3.js');
 			$this->addJsFile( 'jquery/jquery-ui-all.js');
 			$this->addJsFile( 'jquery/jAlert/jquery.alerts.js' );

@@ -240,31 +240,28 @@ class TApplicationHtml
 		$this->page->addJsCssFile('FormDin4.css');
 		//$this->page->addJsCssFile('greybox/gb_styles.css');
 		$menuTheme = 'clear_silver'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		if($this->windowApp)
-		{
-			$this->page->addJsCssFile('prototype/themes/default.css');
-			$this->page->addJsCssFile('prototype/themes/lighting.css');
-			//$this->page->addJsCssFile('prototype/themes/mac_os_x.css');
-			$this->page->addJsCssFile('prototype/themes/mac_os_x_right.css');
-			$this->page->addJsCssFile('prototype/themes/alphacube.css');
-			$this->page->addJsCssFile('app_prototype.css');
-			$this->page->addJsCssFile('js/dhtmlx/menu/skins/'.$menuTheme.'/'.$menuTheme.'.css');
-			$this->page->addJsCssFile('prototype/prototype.js');
-			$this->page->addJsCssFile('prototype/effects.js');
-			$this->page->addJsCssFile('prototype/window.js');
-			$this->page->addJsCssFile('prototype/window_ext.js');
-			$this->page->addJsCssFile('prototype/window_effects.js');
-			$this->page->addJsCssFile('prototype/javascripts/debug.js');
-			$this->page->addJsCssFile('dhtmlx/dhtmlxcommon.js');
-			$this->page->addJsCssFile('dhtmlx/menu/dhtmlxmenu_cas.js');
-			$this->page->addJsCssFile('app_prototype.js');
-			$this->page->addJsCssFile('FormDin4.js'); // necessário para funcionar o searchonline
-		}
-		else
-		{
+		if ($this->windowApp) {
+			$this->page->addJsCssFile ( 'prototype/themes/default.css' );
+			$this->page->addJsCssFile ( 'prototype/themes/lighting.css' );
+			// $this->page->addJsCssFile('prototype/themes/mac_os_x.css');
+			$this->page->addJsCssFile ( 'prototype/themes/mac_os_x_right.css' );
+			$this->page->addJsCssFile ( 'prototype/themes/alphacube.css' );
+			$this->page->addJsCssFile ( 'app_prototype.css' );
+			$this->page->addJsCssFile ( 'js/dhtmlx/menu/skins/' . $menuTheme . '/' . $menuTheme . '.css' );
+			$this->page->addJsCssFile ( 'prototype/prototype.js' );
+			$this->page->addJsCssFile ( 'prototype/effects.js' );
+			$this->page->addJsCssFile ( 'prototype/window.js' );
+			$this->page->addJsCssFile ( 'prototype/window_ext.js' );
+			$this->page->addJsCssFile ( 'prototype/window_effects.js' );
+			$this->page->addJsCssFile ( 'prototype/javascripts/debug.js' );
+			$this->page->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
+			$this->page->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
+			$this->page->addJsCssFile ( 'app_prototype.js' );
+			$this->page->addJsCssFile ( 'FormDin4.js' ); // necessário para funcionar o searchonline
+		} else {
 			// javascript
-			$this->page->addJsCssFile('dhtmlx/dhtmlxcommon.js');
-			$this->page->addJsCssFile('dhtmlx/menu/dhtmlxmenu_cas.js');
+			$this->page->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
+			$this->page->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
 		}
 		// o nome do estilo tem que ser alterado no arquivo app.js tambem
 		$this->page->addJavascript("pastaBase='{$this->page->getBase()}';");
@@ -281,19 +278,13 @@ class TApplicationHtml
 		if(MIGRATE_JQUERY){
 			$this->page->addJsCssFile('http://code.jquery.com/jquery-1.9.1.js');
 			$this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+			$this->page->addJsCssFile('jquery/js_new/jquery.corner.js');
 		}else{
 			$this->page->addJsCssFile('jquery/jquery.js');
+			$this->page->addJsCssFile('jquery/jquery.corner.js');
 		}
 		
-		$this->page->addJsCssFile('jquery/jquery.corner.js');
-		//$this->page->addJsCssFile('jquery/jquery.dimensions.min.js');
-		/*
-		$this->page->addJsCssFile('greybox/AJS.js');
-		$this->page->addJsCssFile('greybox/AJS_fx.js');
-		$this->page->addJsCssFile('greybox/gb_scripts.js');
-		*/
 		$this->page->addJsCssFile('lazyload/lazyload-min.js');
-		//$this->page->addJsCssFile('lazyload.js');
 
 		// criar o layout da aplicação
 		$table = new TTable();
