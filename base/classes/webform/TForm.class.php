@@ -217,11 +217,14 @@ class TForm Extends TBox
 			$this->addJsFile( 'FormDin3.js' );
 			$this->addJsFile( 'FormDin4.js' );
 			$this->addJsFile( 'FormDin4Ajax.js' );
-			$this->addJsFile( 'jquery/jquery.js' );
+			
 			
 			if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }
 			if(MIGRATE_JQUERY){
+				$this->addJsFile('http://code.jquery.com/jquery-1.9.1.js');
 				$this->addJsFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+			}else{
+				$this->addJsFile( 'jquery/jquery.js' );
 			}
 			
 			$this->addJsFile( 'jquery/jquery.metadata.js' );

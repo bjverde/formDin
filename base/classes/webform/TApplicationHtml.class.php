@@ -226,19 +226,14 @@ class TApplicationHtml
 		}
 		//******************************************************************************************
 		$this->processRequest(); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
-		//******************************************************************************************
-
-		if( !$this->getLoginFile() && !$this->getMainMenuFile() && !$this->getDefaultModule() )
-		{
-			$_SESSION[APLICATIVO]=null;
+			                         // ******************************************************************************************
+		if (! $this->getLoginFile () && ! $this->getMainMenuFile () && ! $this->getDefaultModule ()) {
+			$_SESSION [APLICATIVO] = null;
 		}
-		if($this->getSubtitle() )
-		{
-			$this->page->addInTitle($this->getSubtitle());
-		}
-		else
-		{
-			$this->page->addInTitle($this->getTitle());
+		if ($this->getSubtitle ()) {
+			$this->page->addInTitle ( $this->getSubtitle () );
+		} else {
+			$this->page->addInTitle ( $this->getTitle () );
 		}
 		// css
 		$this->page->addJsCssFile($this->getCssFile());
@@ -280,11 +275,14 @@ class TApplicationHtml
 		$this->page->addJavascript("background_image='".$this->getBackgroundImage()."';");
 		$this->page->addJsCssFile($this->page->getBase().'js/dhtmlx/menu/skins/'.$menuTheme.'/'.$menuTheme.'.css');
 		$this->page->addJsCssFile('app.js');
-		$this->page->addJsCssFile('jquery/jquery.js');
+		
 		
 		if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }
 		if(MIGRATE_JQUERY){
-		  $this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+			$this->page->addJsCssFile('http://code.jquery.com/jquery-1.9.1.js');
+			$this->page->addJsCssFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		}else{
+			$this->page->addJsCssFile('jquery/jquery.js');
 		}
 		
 		$this->page->addJsCssFile('jquery/jquery.corner.js');
