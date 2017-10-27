@@ -110,13 +110,14 @@ switch( $acao ) {
             }
             
             $geradorForm = new TFormCreate();
-            $geradorForm ->setFormTitle( $frm->get('form_title') );
-            $geradorForm ->setFormPath( $diretorio );
-            $geradorForm ->setFormFileName($frm->get('form_name'));
-            $geradorForm ->setPrimaryKeyTable($frm->get('coluna_chave'));
-            $geradorForm ->setTableRef($frm->get('tabela'));
-            $geradorForm ->setListColunnsName($listColumns);
-            $geradorForm ->saveForm();
+            $geradorForm->setFormTitle( $frm->get('form_title') );
+            $geradorForm->setFormPath( $diretorio );
+            $geradorForm->setFormFileName($frm->get('form_name'));
+            $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
+            $geradorForm->setTableRef($frm->get('tabela'));
+            $geradorForm->setListColunnsName($listColumns);
+            $geradorForm->saveForm();
+            
             $frm->setMessage('Fim');
         }
         break;
