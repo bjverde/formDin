@@ -1,5 +1,5 @@
 <?php
-require_once 'base/classes/webform/TDAOCreate.class.php';
+require_once '../base/classes/webform/TDAOCreate.class.php';
 
 /**
  * TDAOCreate test case.
