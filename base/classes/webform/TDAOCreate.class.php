@@ -71,9 +71,12 @@ class TDAOCreate
 		$this->tableName=$strNewValue;
 	}
 	//------------------------------------------------------------------------------------
-	public function getTableName()
-	{
+	public function getTableName() {
 		return $this->tableName;
+	}
+	//------------------------------------------------------------------------------------
+	public function getKeyColumnName() {
+		return $this->keyColumnName;
 	}
 	//------------------------------------------------------------------------------------
 	public function setShowSchema($showSchema){
@@ -92,6 +95,19 @@ class TDAOCreate
 	    return $result;
 	}
 	//------------------------------------------------------------------------------------
+	public function getCharParam() {
+		return $this->charParam;
+	}
+	//------------------------------------------------------------------------------------
+	public function getLinesArray(){
+		return $this->lines;
+	}
+	//------------------------------------------------------------------------------------
+	public function getLinesString(){
+		$string = implode($this->lines);
+		return trim($string);
+	}
+	//------------------------------------------------------------------------------------
 	public function addColumn($strColumnName)
 	{
 		if ( !in_array($strColumnName,$this->aColumns))
@@ -105,8 +121,7 @@ class TDAOCreate
 		return $this->aColumns;
 	}
 	//--------------------------------------------------------------------------------------
-	private function addLine($strNewValue=null,$boolNewLine=true)
-	{
+	public function addLine($strNewValue=null,$boolNewLine=true){
 		$strNewValue = is_null( $strNewValue ) ? TAB.'//' . str_repeat( '-', 80 ) : $strNewValue;
 		$this->lines[] = $strNewValue.( $boolNewLine ? EOL : '');
 	}
@@ -157,12 +172,9 @@ class TDAOCreate
 		}
 		$this->addLine("}");
 		$this->addLine('?>');
-		if( $print)
-		{
+		if( $print) {
 			echo trim(implode($this->lines));
-		}
-		else
-		{
+		}else {
 			return trim(implode($this->lines));
 		}
 	}
@@ -178,21 +190,46 @@ class TDAOCreate
 			file_put_contents($fileName,$this->showVO(false));
 		}
 	}
+	
 	//--------------------------------------------------------------------------------------
-	public function showDAO($print=false)
-	{
+	/***
+	 * Create function for sql count rows of table
+	 **/
+	public function addSqlSelectCount() {
+		$this->addLine( TAB.'public static function selectCount(){');
+		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->keyColumnName.') as qtd from '.$this->hasSchema().$this->getTableName() );
+		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
+		$this->addLine( TAB.TAB.'return $result[\'qtd\'];');
+		$this->addLine( TAB.'}');
+	}
+	
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql delete
+	 **/
+	public function addSqlDelete() {
+		$this->addLine( TAB.'public static function delete( $id ){');
+		$this->addLine( TAB.TAB.'$values = array($id);');
+		$this->addLine( TAB.TAB.'return self::executeSql(\'delete from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
+		$this->addLine( TAB.'}');
+	}
+	
+	//--------------------------------------------------------------------------------------
+	public function showDAO($print=false) {
 		$this->lines=null;
 		$this->addLine('<?php');
-		$this->addLine('class '.ucfirst($this->getTableName()).'DAO extends TPDOConnection');
-		$this->addLine('{');
+		$this->addLine('class '.ucfirst($this->getTableName()).'DAO extends TPDOConnection {');
 
 		// construct
-		$this->addLine(TAB.'public function '.$this->getTableName().'DAO()');
-		$this->addLine(TAB.'{');
+		$this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
 		$this->addLine(TAB.'}');
+		
+		// Select
 		$this->addLine();
-
+		$this->addSqlSelectCount();
+		
 		// insert
+		$this->addLine();
 		$this->addLine(TAB.'public static function insert( '.ucfirst($this->tableName).'VO $objVo )');
 		$this->addLine(TAB.'{');
 		$this->addLine(TAB.TAB.'if( $objVo->get'.ucFirst($this->keyColumnName).'() )');
@@ -222,17 +259,14 @@ class TDAOCreate
 		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values ('.$this->getParams().')\', $values );');
 		$this->addLine(TAB.'}');
 		//FIM INSERT
-
+		
+		
 		// EXCLUIR
 		$this->addLine();
-		$this->addLine(TAB.'public static function delete( $id )');
-		$this->addLine(TAB.'{');
-		$this->addLine(TAB.TAB.'$values = array($id);');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'delete from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
-		$this->addLine(TAB.'}');
+		$this->addSqlDelete();
 		$this->addLine();
 		//FIM excluir
-
+		
 
 		// select
 		$this->addLine(TAB.'public static function select( $id )');
@@ -300,15 +334,13 @@ class TDAOCreate
 		//-------- FIM
 		$this->addLine("}");
 		$this->addLine("?>");
-		if( $print)
-		{
-			echo trim(implode($this->lines));
-		}
-		else
-		{
-			return trim(implode($this->lines));
+		if ($print) {
+			echo $this->getLinesString();
+		} else {
+			return $this->getLinesString();
 		}
 	}
+
 	//---------------------------------------------------------------------------------------
 	public function saveDAO($fileName=null)
 	{
