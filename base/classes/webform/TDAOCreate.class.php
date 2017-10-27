@@ -178,13 +178,13 @@ class TDAOCreate
 			return trim(implode($this->lines));
 		}
 	}
-	public function saveVO($fileName=null)
-	{
+	
+	//--------------------------------------------------------------------------------------
+	public function saveVO($fileName=null) {
 		$fileName = $this->path.( is_null($fileName) ? ucfirst($this->getTableName()).'VO.class.php' : $tableName);
-		if($fileName)
-		{
-			if( file_exists($fileName))
-			{
+		
+		if($fileName) {
+			if( file_exists($fileName)) {
 				unlink($fileName);
 			}
 			file_put_contents($fileName,$this->showVO(false));
@@ -201,6 +201,98 @@ class TDAOCreate
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result[\'qtd\'];');
 		$this->addLine( TAB.'}');
+	}
+		
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql select by id
+	 **/
+	public function addSqlSelectById() {
+	    $this->addLine(TAB.'public static function select( $id )');
+	    $this->addLine(TAB.'{');
+	    $this->addLine(TAB.TAB.'$values = array($id);');
+	    $this->addLine(TAB.TAB.'return self::executeSql(\'select');
+	    foreach($this->getColumns() as $k=>$v) {
+	        $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
+	    }
+	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\', $values );');
+	    $this->addLine(TAB.'}');
+	}
+	
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql select all 
+	 **/
+	public function addSqlSelectAll() {
+	    $this->addLine(TAB.'public static function selectAll( $orderBy=null, $where=null )');
+	    $this->addLine(TAB.'{');
+	    $this->addLine(TAB.TAB.'return self::executeSql(\'select');
+	    foreach($this->getColumns() as $k=>$v) {
+	        $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
+	    }
+	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().'\'.');
+	    $this->addLine(TAB.TAB.'( ($where)? \' where \'.$where:\'\').');
+	    $this->addLine(TAB.TAB.'( ($orderBy) ? \' order by \'.$orderBy:\'\'));');
+	    $this->addLine(TAB.'}');
+	}
+	
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql insert
+	 **/
+	public function addSqlInsert() {
+	    $this->addLine(TAB.'public static function insert( '.ucfirst($this->tableName).'VO $objVo ) {');
+	    $this->addLine(TAB.TAB.'if( $objVo->get'.ucFirst($this->keyColumnName).'() ) {');
+	    $this->addLine(TAB.TAB.'	return self::update($objVo);');
+	    $this->addLine(TAB.TAB.'}');
+	    $this->addLine(TAB.TAB.'$values = array(',false);
+	    $cnt=0;
+	    foreach($this->getColumns() as $k=>$v) {
+	        if( $v != $this->keyColumnName) {
+	            $this->addLine(( $cnt++==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').' $objVo->get'.ucfirst($v).'() ');
+	        }
+	    }
+	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.');');
+	    $this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->hasSchema().$this->getTableName().'(');
+	    $cnt=0;
+	    foreach($this->getColumns() as $k=>$v) {
+	        if( $v != $this->keyColumnName) {
+	            $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $cnt++==0 ? ' ' : ',').$v);
+	        }
+	    }
+	    //$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values (?'.str_repeat(',?',count($this->getColumns())-1 ).')\', $values );');
+	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values ('.$this->getParams().')\', $values );');
+	    $this->addLine(TAB.'}');
+	}
+	
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql update
+	 **/
+	public function addSqlUpdate() {
+	    $this->addLine(TAB.'public static function update ( '.ucfirst($this->tableName).'VO $objVo )');
+	    $this->addLine(TAB.'{');
+	    $this->addLine(TAB.TAB.'$values = array(',false);
+	    $count=0;
+	    foreach($this->getColumns() as $k=>$v) {
+	        if( strtolower($v) != strtolower($this->keyColumnName)) {
+	            $this->addLine(( $count==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').'$objVo->get'.ucfirst($v).'()');
+	            $count++;
+	        }
+	    }
+	    $this->addline(TAB.TAB.TAB.TAB.TAB.TAB.',$objVo->get'.ucfirst($this->keyColumnName).'() );');
+	    $this->addLine(TAB.TAB.'return self::executeSql(\'update '.$this->hasSchema().$this->getTableName().' set ');
+	    $count=0;
+	    foreach($this->getColumns() as $k=>$v) {
+	        if( strtolower($v) != strtolower($this->keyColumnName)) {
+	            $param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
+	            $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $count==0 ? ' ' : ',').$v.' = '.$param);
+	            $count++;
+	        }
+	    }
+	    $param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
+	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'where '.$this->keyColumnName.' = '.$param.'\',$values);');
+	    $this->addLine(TAB.'}');
 	}
 	
 	//--------------------------------------------------------------------------------------
@@ -224,113 +316,37 @@ class TDAOCreate
 		$this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
 		$this->addLine(TAB.'}');
 		
-		// Select
+		// Select Count
 		$this->addLine();
 		$this->addSqlSelectCount();
+		// fim Select Count
+		
+		// select by Id
+		$this->addLine();
+		$this->addSqlSelectById();
+		// fim select
+		
+		// select where		
+		$this->addLine();
+		$this->addSqlSelectAll();
+		// fim select
 		
 		// insert
 		$this->addLine();
-		$this->addLine(TAB.'public static function insert( '.ucfirst($this->tableName).'VO $objVo )');
-		$this->addLine(TAB.'{');
-		$this->addLine(TAB.TAB.'if( $objVo->get'.ucFirst($this->keyColumnName).'() )');
-		$this->addLine(TAB.TAB.'{');
-		$this->addLine(TAB.TAB.'	return self::update($objVo);');
-		$this->addLine(TAB.TAB.'}');
-		$this->addLine(TAB.TAB.'$values = array(',false);
-		$cnt=0;
-		foreach($this->getColumns() as $k=>$v)
-		{
-			if( $v != $this->keyColumnName)
-			{
-				$this->addLine(( $cnt++==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').' $objVo->get'.ucfirst($v).'() ');
-			}
-		}
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.');');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->hasSchema().$this->getTableName().'(');
-		$cnt=0;
-		foreach($this->getColumns() as $k=>$v)
-		{
-			if( $v != $this->keyColumnName)
-			{
-				$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $cnt++==0 ? ' ' : ',').$v);
-			}
-		}
-		//$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values (?'.str_repeat(',?',count($this->getColumns())-1 ).')\', $values );');
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values ('.$this->getParams().')\', $values );');
-		$this->addLine(TAB.'}');
+		$this->addSqlInsert();
 		//FIM INSERT
 		
+		// update
+		$this->addLine();
+		$this->addSqlUpdate();
+		//FIM UPDATE
 		
 		// EXCLUIR
 		$this->addLine();
 		$this->addSqlDelete();
-		$this->addLine();
 		//FIM excluir
 		
-
-		// select
-		$this->addLine(TAB.'public static function select( $id )');
-		$this->addLine(TAB.'{');
-		$this->addLine(TAB.TAB.'$values = array($id);');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'select');
-		foreach($this->getColumns() as $k=>$v)
-		{
-			$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
-		}
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\', $values );');
-		$this->addLine(TAB.'}');
-		$this->addLine();
-		// fim select
-
-
-		// select where
-		$this->addLine(TAB.'public static function selectAll( $orderBy=null, $where=null )');
-		$this->addLine(TAB.'{');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'select');
-		foreach($this->getColumns() as $k=>$v)
-		{
-			$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
-		}
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().'\'.');
-		$this->addLine(TAB.TAB.'( ($where)? \' where \'.$where:\'\').');
-		$this->addLine(TAB.TAB.'( ($orderBy) ? \' order by \'.$orderBy:\'\'));');
-		$this->addLine(TAB.'}');
-		$this->addLine();
-		// fim select
-
-		// update
-		$this->addLine(TAB.'public static function update ( '.ucfirst($this->tableName).'VO $objVo )');
-		$this->addLine(TAB.'{');
-		$this->addLine(TAB.TAB.'$values = array(',false);
-		$count=0;
-		foreach($this->getColumns() as $k=>$v)
-		{
-			if( strtolower($v) != strtolower($this->keyColumnName))
-			{
-				$this->addLine(( $count==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').'$objVo->get'.ucfirst($v).'()');
-				$count++;
-			}
-		}
-		$this->addline(TAB.TAB.TAB.TAB.TAB.TAB.',$objVo->get'.ucfirst($this->keyColumnName).'() );');
-		$this->addLine(TAB.TAB.'return self::executeSql(\'update '.$this->hasSchema().$this->getTableName().' set ');
-		$count=0;
-		foreach($this->getColumns() as $k=>$v)
-		{
-
-			if( strtolower($v) != strtolower($this->keyColumnName))
-			{
-				$param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
-				$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $count==0 ? ' ' : ',').$v.' = '.$param);
-				$count++;
-			}
-		}
-		$param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
-		$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'where '.$this->keyColumnName.' = '.$param.'\',$values);');
-		$this->addLine(TAB.'}');
-		$this->addLine();
-
-
-
+		
 		//-------- FIM
 		$this->addLine("}");
 		$this->addLine("?>");
@@ -342,17 +358,16 @@ class TDAOCreate
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function saveDAO($fileName=null)
-	{
+	public function saveDAO($fileName=null) {
+	    
 		$fileName = $this->path.(is_null($fileName) ? ucfirst($this->getTableName()).'DAO.class.php' : $tableName);
-		if($fileName)
-		{
-			if( file_exists($fileName))
-			{
+		if($fileName) {
+			if( file_exists($fileName) ) {
 				unlink($fileName);
 			}
 			file_put_contents($fileName,$this->showDAO(false));
 		}
+		
 	}
 	//--------------------------------------------------------------------------------------
 	public  function getParams()
