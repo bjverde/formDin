@@ -197,7 +197,7 @@ class TDAOCreate
 	 **/
 	public function addSqlSelectCount() {
 		$this->addLine( TAB.'public static function selectCount(){');
-		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->keyColumnName.') as qtd from '.$this->hasSchema().$this->getTableName() );
+		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->keyColumnName.') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result[\'qtd\'];');
 		$this->addLine( TAB.'}');
