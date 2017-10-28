@@ -24,16 +24,12 @@ class UfDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectAll( $orderBy=null, $where=null )
-	{
-		return self::executeSql('select
-								 cod_uf
-								,nom_uf
-								,sig_uf
-								,cod_regiao
-								from uf'.
-		( ($where)? ' where '.$where:'').
-		( ($orderBy) ? ' order by '.$orderBy:''));
+	public static function selectAll( $orderBy=null, $where=null ) {
+		$sql = self::$sqlBasicSelect
+		.( ($where)? ' where '.$where:'')
+		.( ($orderBy) ? ' order by '.$orderBy:'');
+		$result = self::executeSql($sql);
+		return $result;
 	}
 	//--------------------------------------------------------------------------------
 	public static function insert( UfVO $objVo ) {
