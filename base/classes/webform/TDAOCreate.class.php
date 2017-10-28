@@ -238,16 +238,13 @@ class TDAOCreate
 	 * Create function for sql select all 
 	 **/
 	public function addSqlSelectAll() {
-	    $this->addLine(TAB.'public static function selectAll( $orderBy=null, $where=null )');
-	    $this->addLine(TAB.'{');
-	    $this->addLine(TAB.TAB.'return self::executeSql(\'select');
-	    foreach($this->getColumns() as $k=>$v) {
-	        $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
-	    }
-	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().'\'.');
-	    $this->addLine(TAB.TAB.'( ($where)? \' where \'.$where:\'\').');
-	    $this->addLine(TAB.TAB.'( ($orderBy) ? \' order by \'.$orderBy:\'\'));');
-	    $this->addLine(TAB.'}');
+	    $this->addLine( TAB.'public static function selectAll( $orderBy=null, $where=null ) {');
+	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
+	    $this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
+	    $this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
+	    $this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
+	    $this->addLine( TAB.TAB.'return $result;');
+	    $this->addLine( TAB.'}');
 	}
 	
 	//--------------------------------------------------------------------------------------
