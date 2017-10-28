@@ -28,7 +28,7 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
  * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
@@ -126,6 +126,10 @@ class TDAOCreate
 		$this->lines[] = $strNewValue.( $boolNewLine ? EOL : '');
 	}
 	//--------------------------------------------------------------------------------------
+	private function addBlankLine(){
+		$this->addLine('');
+	}
+	//--------------------------------------------------------------------------------------
 	public function showVO($print=false)
 	{   $this->addLine('<?php');
 		$this->addLine("class ".ucfirst($this->getTableName())."VO");
@@ -193,13 +197,26 @@ class TDAOCreate
 	
 	//--------------------------------------------------------------------------------------
 	/***
+	 * Create variable with string sql basica
+	 **/
+	public function addSqlVariable() {
+		$indent = TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.' ';
+		$this->addLine( TAB.'private static $sqlBasicSelect = \'select');
+		foreach($this->getColumns() as $k=>$v) {
+			$this->addLine($indent.( $k==0 ? ' ' : ',').$v);
+		}
+		$this->addLine($indent.'from '.$this->hasSchema().$this->getTableName().' \';' );
+	}
+	
+	//--------------------------------------------------------------------------------------
+	/***
 	 * Create function for sql count rows of table
 	 **/
 	public function addSqlSelectCount() {
 		$this->addLine( TAB.'public static function selectCount(){');
-		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->keyColumnName.') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
+		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
-		$this->addLine( TAB.TAB.'return $result[\'qtd\'];');
+		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
 		$this->addLine( TAB.'}');
 	}
 		
@@ -208,15 +225,12 @@ class TDAOCreate
 	 * Create function for sql select by id
 	 **/
 	public function addSqlSelectById() {
-	    $this->addLine(TAB.'public static function select( $id )');
-	    $this->addLine(TAB.'{');
-	    $this->addLine(TAB.TAB.'$values = array($id);');
-	    $this->addLine(TAB.TAB.'return self::executeSql(\'select');
-	    foreach($this->getColumns() as $k=>$v) {
-	        $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $k==0 ? ' ' : ',').$v);
-	    }
-	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\', $values );');
-	    $this->addLine(TAB.'}');
+	    $this->addLine( TAB.'public static function select( $id ) {');
+	    $this->addLine( TAB.TAB.'$values = array($id);');
+	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect.\' where '.$this->getKeyColumnName().' = '.$this->charParam.'\';');
+		$this->addLine( TAB.TAB.'$result = self::executeSql($sql, $values );');
+		$this->addLine( TAB.TAB.'return $result;');
+	    $this->addLine( TAB.'}');
 	}
 	
 	//--------------------------------------------------------------------------------------
@@ -311,7 +325,9 @@ class TDAOCreate
 		$this->lines=null;
 		$this->addLine('<?php');
 		$this->addLine('class '.ucfirst($this->getTableName()).'DAO extends TPDOConnection {');
-
+		$this->addBlankLine();
+		$this->addSqlVariable();
+		$this->addBlankLine();		
 		// construct
 		$this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
 		$this->addLine(TAB.'}');
