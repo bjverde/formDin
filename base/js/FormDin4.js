@@ -7168,7 +7168,7 @@ function fwGridChangePage(params)
 }
 
 /**
-* Fun��o utilizada pela classe TGrid quando o gride possuir pagina��o e a p�gina for modificada
+* Funcao utilizada pela classe TGrid quando o gride possuir pagina��o e a pagina for modificada
 *
 * @param params
 */
@@ -7186,7 +7186,7 @@ function fwGridPageChange(page,params)
 			,'callback': function( html ){
 				jQuery("#"+params.gridId+"_table tbody").remove();
 				try{
-					jQuery("#"+params.gridId+"_table").trigger("update"); // fun��o do TableSorter
+					jQuery("#"+params.gridId+"_table").trigger("update"); // funcao do TableSorter
 				}catch(e){}
             	jQuery("#"+params.gridId+"_table").append(html);
 				fwLockUnlockArea(params.gridId,false);

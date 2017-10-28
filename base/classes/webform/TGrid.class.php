@@ -28,7 +28,7 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
  * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
@@ -210,21 +210,18 @@ class TGrid extends TTable
 		$this->currentPage = 1;
 		$this->numPages = 0;
 
-		if ( isset( $_REQUEST[ 'TGrid' ] ) && $_REQUEST[ 'TGrid' ] > 0 )
-		{
+		if ( isset( $_REQUEST[ 'TGrid' ] ) && $_REQUEST[ 'TGrid' ] > 0 ) {
 			/**
 			* @todo alterar a chamada do gride para fwAjaxRequest e não mais pela json.onLoad();
 			*/
 			$_REQUEST[ 'dataType' ] = 'text'; // evitar problema com a chamada pela fwAjaxRequest
 		}
 
-		if ( isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] > 0 )
-		{
+		if ( isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] > 0 ) {
 			// chamada via ajax
 			$this->currentPage = ( int ) $_REQUEST[ 'page' ];
 		}
-		else if( isset( $_REQUEST[ $this->getId() . '_jumpToPage' ] ) && $_REQUEST[ $this->getId() . '_jumpToPage' ] > 0 )
-		{
+		else if( isset( $_REQUEST[ $this->getId() . '_jumpToPage' ] ) && $_REQUEST[ $this->getId() . '_jumpToPage' ] > 0 ) {
 			// chamada via post
 			$this->currentPage = ( int ) $_REQUEST[ $this->getId() . '_jumpToPage' ];
 		}
