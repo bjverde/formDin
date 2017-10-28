@@ -24,7 +24,7 @@ class UfDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $sizePerpage= null) {
+	public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) {
 		$sql = self::$sqlBasicSelect
 		.( ($where)? ' where '.$where:'')
 		.( ($orderBy) ? ' order by '.$orderBy:'');
