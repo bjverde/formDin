@@ -2,6 +2,7 @@
 $primaryKey = 'COD_UF';
 $frm = new TForm('Cadastro de Uf',600);
 $frm->setFlat(true);
+$frm->setMaximize(true);
 
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
@@ -10,6 +11,9 @@ $frm->addTextField('SIG_UF', 'Sigla',50,true);
 
 $dadosRegiao = RegiaoDAO::selectAll('COD_REGIAO');
 $frm->addSelectField('COD_REGIAO','Região:',true,$dadosRegiao);
+
+$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -59,6 +63,5 @@ $gride->addColumn('NOM_UF','Nome',100,'center');
 $gride->addColumn('SIG_UF','Sigla',50,'center');
 $gride->addColumn('COD_REGIAO','COD_REGIAO',50,'center');
 $frm->addHtmlField('gride',$gride);
-$frm->setAction( 'Salvar,Limpar' );
 $frm->show();
 ?>
