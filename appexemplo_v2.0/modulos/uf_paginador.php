@@ -47,17 +47,19 @@ switch( $acao ) {
 		}
 	break;
 }
-
+//d($_POST);
 
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
-	d($_POST);
+
 	
+	$maxRows = 3;
+	$page = PostHelper::get('page'); 
 	$dados = UfDAO::selectAll($primaryKey);
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',NOM_UF|NOM_UF,SIG_UF|SIG_UF,COD_REGIAO|COD_REGIAO';
 	$gride = new TGrid( 'gd'        // id do gride
 					   ,'Gride'     // titulo do gride
 					   );
-	$gride->setMaxRows( 3 );
+	$gride->setMaxRows( $maxRows );
 	$gride->setData( $dados ); // array de dados
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setUpdateFields( $mixUpdateFields );
