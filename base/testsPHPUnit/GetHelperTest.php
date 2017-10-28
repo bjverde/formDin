@@ -1,5 +1,5 @@
 <?php
-require_once '../base/classes/helpers/GetHelper.class.php';
+require_once '../classes/helpers/GetHelper.class.php';
 
 /**
  * GetHelper test case.

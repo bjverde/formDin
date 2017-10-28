@@ -1,5 +1,5 @@
 <?php
-require_once '../base/classes/helpers/ArrayHelper.class.php';
+require_once '../classes/helpers/ArrayHelper.class.php';
 
 /**
  * ArrayHelper test case.

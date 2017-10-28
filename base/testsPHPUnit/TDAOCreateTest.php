@@ -1,5 +1,5 @@
 <?php
-require_once '../base/classes/webform/TDAOCreate.class.php';
+require_once '../classes/webform/TDAOCreate.class.php';
 
 define('TEOL',"\n");
 define('TTAB',chr(9));
