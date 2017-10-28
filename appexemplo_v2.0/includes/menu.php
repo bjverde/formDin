@@ -53,6 +53,7 @@ $menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
 $menu->add('81', '8', 'Região', 'modulos/regiao.php', null,null,null,false,null);
 $menu->add('82', '8', 'UF', 'modulos/uf.php', null);
 $menu->add('83', '8', 'Município ', 'modulos/municipio.php', null);
+$menu->add('84', '8', 'UF com paginador', 'modulos/uf_paginador.php', null);
 
 $menu->add('9', null, 'Acesso', null, null, 'icon-key-yellow.png');
 $menu->add('91', '9', 'User', 'modulos/acesso_user.php', null, 'user916.gif');
