@@ -1,8 +1,10 @@
 <?php
-
 /*
  * Formdin Framework
- * Copyright (C) 2012 Minist?rio do Planejamento
+ * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo ? parte do Framework Formdin.
+ * Este arquivo é parte do Framework Formdin.
  *
- * O Framework Formdin ? um software livre; voc? pode redistribu?-lo e/ou
- * modific?-lo dentro dos termos da GNU LGPL vers?o 3 como publicada pela Funda??o
+ * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
+ * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa ? distribu?do na esperan?a que possa ser ?til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia impl?cita de ADEQUA??O a qualquer MERCADO ou
- * APLICA??O EM PARTICULAR. Veja a Licen?a P?blica Geral GNU/LGPL em portugu?s
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
- * Voc? deve ter recebido uma c?pia da GNU LGPL vers?o 3, sob o t?tulo
- * "LICENCA.txt", junto com esse programa. Se n?o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Funda??o do Software Livre (FSF) Inc.,
+ * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 

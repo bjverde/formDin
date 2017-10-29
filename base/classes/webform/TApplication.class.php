@@ -28,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -44,6 +44,7 @@ $helps_dir = $currentl_dir.DS.'..'.DS.'helpers'.DS;
 
 require_once( $helps_dir.'ArrayHelper.class.php');
 require_once( $helps_dir.'GetHelper.class.php');
+require_once( $helps_dir.'PaginationMySQLHelper.class.php');
 require_once( $helps_dir.'PostHelper.class.php');
 require_once( $helps_dir.'RequestHelper.class.php');
 require_once( $helps_dir.'ServerHelper.class.php');

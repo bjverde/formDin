@@ -1,8 +1,10 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
