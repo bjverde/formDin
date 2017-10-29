@@ -25,9 +25,13 @@ class UfDAO extends TPDOConnection {
 	}
 	//--------------------------------------------------------------------------------
 	public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) {
+		$rowStart = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
+		
 		$sql = self::$sqlBasicSelect
 		.( ($where)? ' where '.$where:'')
-		.( ($orderBy) ? ' order by '.$orderBy:'');
+		.( ($orderBy) ? ' order by '.$orderBy:'')
+		.( ' LIMIT '.$rowStart.','.$rowsPerPage);
+		
 		$result = self::executeSql($sql);
 		return $result;
 	}

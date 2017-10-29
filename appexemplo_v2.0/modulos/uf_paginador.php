@@ -54,7 +54,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	
 	$maxRows = 3;
 	$page = PostHelper::get('page'); 
-	$dados = UfDAO::selectAll($primaryKey);
+	//$dados = UfDAO::selectAll($primaryKey);
+	$dados = UfDAO::selectAllPagination( $primaryKey, null, $page,  10);
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',NOM_UF|NOM_UF,SIG_UF|SIG_UF,COD_REGIAO|COD_REGIAO';
 	$gride = new TGrid( 'gd'        // id do gride
 					   ,'Gride'     // titulo do gride
