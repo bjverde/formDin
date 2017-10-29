@@ -121,7 +121,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     
     public function testAddLine_nameFunction(){
     	$tDAOCreate = $this->tDAOCreate;
-    	$esperado = TAB.'public function '.$tDAOCreate->getTableName().'DAO() {';
+    	$esperado = TTAB.'public function '.$tDAOCreate->getTableName().'DAO() {';
     	$tDAOCreate->addLine($esperado);    	
     	$retorno = $tDAOCreate->getLinesString();
     	$this->assertEquals( trim($esperado), $retorno);
@@ -164,10 +164,10 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     public function testAddSqlDelete_string(){
     	$tDAOCreate = $this->tDAOCreate;
     	
-    	$expectedArray[] = TAB.'public static function delete( $id ){'.TEOL;
-    	$expectedArray[] = TAB.TAB.'$values = array($id);'.TEOL;
-    	$expectedArray[] = TAB.TAB.'return self::executeSql(\'delete from '.$tDAOCreate->hasSchema().$tDAOCreate->getTableName().' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\',$values);'.TEOL;
-    	$expectedArray[] = TAB.'}'.TEOL;
+    	$expectedArray[] = TTAB.'public static function delete( $id ){'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'return self::executeSql(\'delete from '.$tDAOCreate->hasSchema().$tDAOCreate->getTableName().' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\',$values);'.TEOL;
+    	$expectedArray[] = TTAB.'}'.TEOL;
     	$expectedString = trim( implode($expectedArray) );
     	
     	$tDAOCreate->addSqlDelete();
