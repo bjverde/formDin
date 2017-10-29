@@ -82,7 +82,7 @@ class paginationMySQLHelperTest extends PHPUnit_Framework_TestCase {
 	
 	public function testGetRowStart_page2AndRowsPerPage30() {
 		$expected = 30;
-		$page = 1;
+		$page = 2;
 		$rowsPerPage =  30;
 		$result = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
@@ -96,8 +96,24 @@ class paginationMySQLHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected , $result);
 	}
 	
+	public function testGetRowStart_page2AndRowsPerPage13() {
+		$expected = 13;
+		$page = 2;
+		$rowsPerPage =  13;
+		$result = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page3AndRowsPerPage13() {
+		$expected = 26;
+		$page = 3;
+		$rowsPerPage =  13;
+		$result = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
 	public function testGetRowStart_page10AndRowsPerPage13() {
-		$expected = 20;
+		$expected = 117;
 		$page = 10;
 		$rowsPerPage =  13;
 		$result = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
