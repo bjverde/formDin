@@ -242,11 +242,29 @@ class TDAOCreate
 	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
 	    $this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
 	    $this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
+	    $this->addBlankLine();
 	    $this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 	    $this->addLine( TAB.TAB.'return $result;');
 	    $this->addLine( TAB.'}');
 	}
 	
+	
+	/***
+	 * Create function for sql select all with Pagination
+	 **/
+	public function addSqlSelectAllPagination() {
+		$this->addLine( TAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {');
+		$this->addLine( TAB.TAB.'$rowStart = paginationMySQLHelper::getRowStart($page,$rowsPerPage);');
+		$this->addBlankLine();
+		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
+		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
+		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
+		$this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
+		$this->addBlankLine();
+		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
+		$this->addLine( TAB.TAB.'return $result;');
+		$this->addLine( TAB.'}');
+	}
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql insert
