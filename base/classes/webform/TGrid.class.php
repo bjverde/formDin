@@ -539,27 +539,21 @@ class TGrid extends TTable
 				$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de paginação, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
 			}
 
-			if ( is_array( $this->getData() ) )
-			{
+			if ( is_array( $this->getData() ) ) {
 				$res = $this->getData();
 
-				if( isset($_REQUEST[$this->getId().'_sorted_column'] ) )
-				{
-					$res = $this->sortArray($res,$_REQUEST[$this->getId().'_sorted_column'],$_REQUEST[$this->getId().'_sorted_column_order']);
-				}
+				$res = $this->sortDataByColum ( $res );
 
 				$rowNum = 0;
 				$rowStart = 0;
 				$totalRows = $this->getRowCount();
 				$rowEnd = $totalRows;
 
-				if ( $this->getMaxRows() > 0 )
-				{
+				if ( $this->getMaxRows() > 0 ) {
 					$this->numPages = ceil( $rowEnd / $this->getMaxRows() );
 
 					// controle de paginacao
-					if ( $this->currentPage > 0 )
-					{
+					if ( $this->currentPage > 0 ) {
 						$rowStart = ( $this->currentPage - 1 ) * $this->getMaxRows();
 						$rowEnd = $rowStart + $this->getMaxRows();
 					}
@@ -1132,40 +1126,9 @@ class TGrid extends TTable
 				}
 
 				// adicionar a imagem do excel no rodapé
-				if ( $this->getExportExcel() )
-				{
-					//$_SESSION['fwGrid'][$this->getId()] = $this->getData2Excel();
-					//$_SESSION['fwGrid'][$this->getId()]['titulo'] =$this->getTitle();
-					$excel = new TElement( 'a' );
-					$excel->setProperty( 'href', 'javascript: void(0)' );
-					$arrParams = null;
-					$arrParams[ 'id' ] 		= utf8_encode($this->getId());
-					$arrParams[ 'head' ] 	= $this->getExcelHeadField('utf8');
-					$arrParams[ 'title' ] 	= utf8_encode($this->getTitle() );
-					$excel->addEvent( 'onclick', 'fwExportGrid2Excel(' . json_encode( $arrParams ) . ')' );
-					//$excel->addEvent('onclick','alert("base/classes/FormDin3.xls.php?gride='.$this->getID().'")');
-					$img = new TElement( 'img' );
-					$img->setProperty( 'src', $this->getBase() . 'imagens/planilha.png' );
-					$img->setCss( 'border', 'none' );
-					$img->setCss( 'width', '16' );
-					$img->setCss( 'height', '13' );
-					$excel->setProperty( 'title', 'Exportar planilha' );
-					$excel->add( $img );
-					$excel->setCss( 'float', 'right' );
-					$this->footerCell->add( $excel );
-
-					// salvar o array em disco
-					$tmpName = $excel->getBase().'tmp/tmp_'.$this->getId().'_'.session_id().'.go';
-					if( file_exists( $tmpName ))
-					{
-						@unlink($tmpName);
-					}
-					if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) )
-					{
-						$excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,'ISO-8859-1'));
-					}
+				if ( $this->getExportExcel() ) {
+					$this->generateFileExcel ();
 				}
-
 				//$btnExcel = new TButton('btnExcel','Excel',null,'alert("excel")',null,'excel.gif',null,'Exportar dados para o excel');
 				// adicionar a barra de navegação no fim do gride
 				if ( $this->getMaxRows() )
@@ -1199,6 +1162,50 @@ class TGrid extends TTable
 			$tbody->add( '<script>jQuery(document).ready(function() {' . $js . '});</script>' );
 		}
 		return parent::show( $boolPrint );
+	}
+	
+	/**
+	 * sort Data Gride by colum
+	 */
+	public function sortDataByColum($res) {
+	 	if( isset($_REQUEST[$this->getId().'_sorted_column'] ) ) {
+	 		$res = $this->sortArray($res,$_REQUEST[$this->getId().'_sorted_column'],$_REQUEST[$this->getId().'_sorted_column_order']);
+	 	}
+	 	return $res;
+	}
+	
+	/**
+	 * Generate File Excel
+	 */
+	 public function generateFileExcel() {
+		//$_SESSION['fwGrid'][$this->getId()] = $this->getData2Excel();
+		//$_SESSION['fwGrid'][$this->getId()]['titulo'] =$this->getTitle();
+		$excel = new TElement( 'a' );
+		$excel->setProperty( 'href', 'javascript: void(0)' );
+		$arrParams = null;
+		$arrParams[ 'id' ] 		= utf8_encode($this->getId());
+		$arrParams[ 'head' ] 	= $this->getExcelHeadField('utf8');
+		$arrParams[ 'title' ] 	= utf8_encode($this->getTitle() );
+		$excel->addEvent( 'onclick', 'fwExportGrid2Excel(' . json_encode( $arrParams ) . ')' );
+		//$excel->addEvent('onclick','alert("base/classes/FormDin3.xls.php?gride='.$this->getID().'")');
+		$img = new TElement( 'img' );
+		$img->setProperty( 'src', $this->getBase() . 'imagens/planilha.png' );
+		$img->setCss( 'border', 'none' );
+		$img->setCss( 'width', '16' );
+		$img->setCss( 'height', '13' );
+		$excel->setProperty( 'title', 'Exportar planilha' );
+		$excel->add( $img );
+		$excel->setCss( 'float', 'right' );
+		$this->footerCell->add( $excel );
+
+		// salvar o array em disco
+		$tmpName = $excel->getBase().'tmp/tmp_'.$this->getId().'_'.session_id().'.go';
+		if( file_exists( $tmpName ) ) {
+			@unlink($tmpName);
+		}
+		if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
+			$excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,'ISO-8859-1'));
+		}
 	}
 
 	//------------------------------------------------------------------------------------
@@ -1289,21 +1296,17 @@ class TGrid extends TTable
 	/**
 	* Retorna o array de dados do gride
 	*/
-	public function getData()
-	{
+	public function getData() {
 		$res = null;
 
-		if ( is_array( $this->data ) )
-		{
+		if ( is_array( $this->data ) ) {
 			$keys = array_keys( $this->data );
-			if( ! is_array($this->data[$keys[0]] ) || isset($this->data[$keys[0]][0] ) )
-			{
+			if( ! is_array($this->data[$keys[0]] ) || isset($this->data[$keys[0]][0] ) ) {
 				return $this->data;
 			}
 			return $this->data;
 		}
-		else if( strpos( strtolower( $this->data ), 'select ' ) !== false )
-		{
+		else if( strpos( strtolower( $this->data ), 'select ' ) !== false ) {
 
 			$bvars = null;
 			$bvars = $this->getBvars();
@@ -1352,8 +1355,7 @@ class TGrid extends TTable
 			}
 		}
 
-		if ( $res )
-		{
+		if ( $res ) {
 			$this->setData( $res );
 		}
 		return $res;
@@ -1789,12 +1791,10 @@ class TGrid extends TTable
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function getRowCount()
-	{
+	public function getRowCount() {
 		$res = $this->getData();
 
-		if ( $res )
-		{
+		if ( $res ) {
 			$keys = array_keys($res);
 			return count( $res[ $keys[0] ] );
 		}
@@ -1815,22 +1815,18 @@ class TGrid extends TTable
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function setMaxRows( $intNewValue = null )
-	{
+	public function setMaxRows( $intNewValue = null ) {
 		$this->maxRows = $intNewValue;
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function getMaxRows()
-	{
+	public function getMaxRows() {
 		return ( int ) $this->maxRows;
 	}
 
 	//---------------------------------------------------------------------------------------
-	protected function setNavButtons( $tbody, $qtdColumns )
-	{
-		if ( !$this->url || !$this->getMaxRows() || $this->numPages == 1 )
-		{
+	protected function setNavButtons( $tbody, $qtdColumns ) {
+		if ( !$this->url || !$this->getMaxRows() || $this->numPages == 1 ) {
 			return;
 		}
 		/*
@@ -2046,8 +2042,7 @@ class TGrid extends TTable
 		$this->exportExcel = is_null( $boolNewValue ) ? true : $boolNewValue;
 	}
 
-	public function getExportExcel()
-	{
+	public function getExportExcel() {
 		return $this->exportExcel;
 	}
 
@@ -2847,6 +2842,7 @@ class TGrid extends TTable
 		if( count($array[$coluna])==1)
 			return $array;
 
+		$tipoString = isset($tipoString) ? $tipoString : null;
 		if($tipoString || $tipoString === null)
 			$tipo = 'SORT_STRING';
 		else
