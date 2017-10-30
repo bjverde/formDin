@@ -1,1 +1,1 @@
-C:\wamp\bin\php\php5.6.31\php.exe C:\wamp\bin\php\php5.6.31\phpunit\phpunit-4.8.36.phar --coverage-html C:\wamp\www\formDin\base\testsPHPUnit\cover C:\wamp\www\formDin\base\testsPHPUnit\
+C:\wamp\bin\php\php5.6.31\php.exe C:\wamp\bin\php\phpunit\phpunit-4.8.36.phar --coverage-html C:\wamp\www\formDin\base\testsPHPUnit\cover C:\wamp\www\formDin\base\testsPHPUnit\
