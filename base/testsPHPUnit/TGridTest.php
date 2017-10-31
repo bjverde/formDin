@@ -145,5 +145,55 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected['NMPESSOA'][1] , $result['NMPESSOA'][1]);
 		$this->assertEquals( $expected['NMPESSOA'][2] , $result['NMPESSOA'][2]);
 	}
+	
+	public function testSortArray_parameterColunaBlank() {
+		$expected = $this->dataGrid;
+		
+		$res = $this->dataGrid;
+		$tGrid = $this->tGrid;
+		$result = $tGrid->sortArray($res,'','SORT_ASC');
+		
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testSortArray_columNotExist() {
+		$expected = $this->dataGrid;
+		
+		$res = $this->dataGrid;
+		$tGrid = $this->tGrid;
+		$result = $tGrid->sortArray($res,'xx','SORT_ASC');
+		
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testSortArray_OneRow() {
+		$expected = isset($expected) ? $expected : null;
+		$expected = $this->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
+		
+		$res = isset($res) ? $res : null;
+		$res = $this->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
+		$tGrid = $this->tGrid;
+		$result = $tGrid->sortArray($res,'NMPESSOA','SORT_ASC');
+		
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testSortArray_RequestNmpessoaOrderASC() {
+		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
+		$expected['NMPESSOA'][1] = $this->dataGrid['NMPESSOA'][0];
+		$expected['NMPESSOA'][2] = $this->dataGrid['NMPESSOA'][1];
+		
+		$_REQUEST['gd_sorted_column']='NMPESSOA';
+		$_REQUEST['gd_sorted_column_order']='SORT_ASC';
+		
+		$tGrid = $this->tGrid;
+		$res = $tGrid->getData();
+		$result = $tGrid->sortDataByColum($res);
+		
+		$this->assertEquals( $expected['NMPESSOA'][0] , $result['NMPESSOA'][0]);
+		$this->assertEquals( $expected['NMPESSOA'][1] , $result['NMPESSOA'][1]);
+		$this->assertEquals( $expected['NMPESSOA'][2] , $result['NMPESSOA'][2]);
+	}
+	
 }
 

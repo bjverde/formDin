@@ -260,44 +260,35 @@ class TGrid extends TTable
 		$this->add($fldCollapsed);
 
 		// esconder o titulo se o titulo do gride for null
-		if ( is_null( $this->getTitle() ) )
-		{
+		if ( is_null( $this->getTitle() ) ){
 			$this->titleCell->setCss( 'display', 'none' );
 		}
 
-		if ( $this->getColumnCount() == 0 )
-		{
+		if ( $this->getColumnCount() == 0 ){
 			// tentar criar as colunas automaticamente utilizando o array de dados
 			$this->autoCreateColumns();
 		}
 
-		if ( $this->getColumnCount() == 0 )
-		{
+		if ( $this->getColumnCount() == 0 ){
 			// nenhuma coluna adicionada
 			$row = $this->addRow();
 			$row->addCell( 'nenhuma coluna adicionada' );
-		}
-		else
-		{
+		}else{
 			// adicionar os botões Alterar e Excluir
-			if ( $this->getCreateDefaultButtons() )
-			{
+			if ( $this->getCreateDefaultButtons() ) {
 				$imgEdit = null;
 				$imgDeleter = null;
 
-				if ( $this->getUseDefaultImages() )
-				{
+				if ( $this->getUseDefaultImages() ) {
 					$imgEdit = 'alterar.gif';
 					$imgDelete = 'lixeira.gif';
 				}
 
-				if ( $this->getCreateDefaultEditButton() )
-				{
+				if ( $this->getCreateDefaultEditButton() ) {
 					$this->addbutton( 'Alterar', $this->getId() . '_alterar', null, null, null, $imgEdit, null, 'Alterar' );
 				}
 
-				if ( $this->getCreateDefaultDeleteButton() )
-				{
+				if ( $this->getCreateDefaultDeleteButton() ) {
 					//$this->addButton('Excluir',$this->getId().'_excluir',null,null,'Confirma exclusão ?',$imgDelete,null,'Excluir');
 					$this->addButton( 'Excluir', $this->getId() . '_excluir', null, 'fwGridConfirmDelete()', null, $imgDelete, null, 'Excluir' );
 				}
@@ -312,10 +303,8 @@ class TGrid extends TTable
 			// exibir o titulo do gride
 			$this->titleCell->add( $this->getTitle() );
 
-			if ( $this->getCss( 'font-size' ) )
-			{
-				if ( !$this->titleCell->getCss( 'font-size' ) )
-				{
+			if ( $this->getCss( 'font-size' ) ) {
+				if ( !$this->titleCell->getCss( 'font-size' ) ) {
 					$this->titleCell->setcss( 'font-size', $this->getCss( 'font-size' ) );
 				}
 			}
@@ -526,18 +515,12 @@ class TGrid extends TTable
 			}
 
             $tableSorterCfg = '';
-			if( $headersSortable != '' )
-			{
+			if( $headersSortable != '' ) {
 				$tableSorterCfg .= 'headers:{'.$headersSortable.'}';
 			}
-
         	$this->javaScript[] = 'jQuery("#'.$this->getId().'_table").tablesorter({textExtraction: fwTableSorter ,'.$tableSorterCfg.'});';
 
-			// avisar erro se tiver passado o parametro maxRows e não tiver informado a url
-			if ( $this->getMaxRows() && !$this->url )
-			{
-				$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de paginação, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
-			}
+			$this->validateMaxRowsWithoutUrl();
 
 			if ( is_array( $this->getData() ) ) {
 				$res = $this->getData();
@@ -612,17 +595,12 @@ class TGrid extends TTable
 						$fieldName = $objColumn->getFieldName();
 
 						// zebrar o gride se nao existir a funcao ondrawrow definida pelo usuario
-						if ( $this->getZebrarColors( 0 ) )
-						{
+						if ( $this->getZebrarColors( 0 ) ) {
 							// não sobrepor se o background color estiver definido
-							if ( !$row->getCss( 'background-color' ) )
-							{
-								if ( $rowNum % 2 != 0 )
-								{
+							if ( !$row->getCss( 'background-color' ) ) {
+								if ( $rowNum % 2 != 0 ) {
 									$row->setCss( 'background-color', $this->getZebrarColors( 0 ) );
-								}
-								else
-								{
+								}else {
 									$row->setCss( 'background-color', $this->getZebrarColors( 1 ) );
 								}
 							}
@@ -1162,6 +1140,14 @@ class TGrid extends TTable
 			$tbody->add( '<script>jQuery(document).ready(function() {' . $js . '});</script>' );
 		}
 		return parent::show( $boolPrint );
+	}
+	
+	
+	private function validateMaxRowsWithoutUrl() {
+		// avisar erro se tiver passado o parametro maxRows e não tiver informado a url
+		if ( $this->getMaxRows() && !$this->url ) {
+			$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de paginação, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
+		}
 	}
 	
 	/**
@@ -2823,24 +2809,21 @@ class TGrid extends TTable
 	* @param string $coluna
 	* @param string $order
 	*/
-	public function sortArray($array=null,$coluna=null,$order=null)
-	{
-		if(!is_array($array) || is_null( $coluna ) || $coluna == '' )
-		{
+	public function sortArray($array=null,$coluna=null,$order=null) {
+		if(!is_array($array) || is_null( $coluna ) || $coluna == '' ) {
 			return $array;
 		}
-		if(!$array[$coluna])
-		{
+		if( !isset($array[$coluna]) ) {
 			$coluna = strtoupper( $coluna );
-			if( !$array[$coluna])
-			{
+			if( !isset($array[$coluna]) ) {
 				return $array;
 			}
 		}
 		$order = is_null($order) ? 'up': $order;
 
-		if( count($array[$coluna])==1)
+		if( count($array[$coluna])==1) {
 			return $array;
+		}
 
 		$tipoString = isset($tipoString) ? $tipoString : null;
 		if($tipoString || $tipoString === null)
