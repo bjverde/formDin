@@ -66,6 +66,7 @@ class TGrid extends TTable
 	private $hiddenField;
 	private $readOnly;
 	private $maxRows;
+	private $totalRowsWithoutPaginator;
 	private $url;
 	private $bvars;
 	private $cache;
@@ -227,6 +228,16 @@ class TGrid extends TTable
 		}
 	}
 
+	//------------------------------------------------------------------------------------
+	public function getTotalRowsWithoutPaginator(){
+		return $this->totalRowsWithoutPaginator;
+	}
+	
+	//------------------------------------------------------------------------------------
+	public function setTotalRowsWithoutPaginator($totalRowsWithoutPaginator){
+		$this->totalRowsWithoutPaginator = $totalRowsWithoutPaginator;
+	}
+	
 	//------------------------------------------------------------------------------------
 	public function show( $boolPrint = true )
 	{
@@ -1264,14 +1275,10 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------
-	public function setData( $mixValue = null )
-	{
-		if ( is_array( $mixValue ) )
-		{
+	public function setData( $mixValue = null ){
+		if ( is_array( $mixValue ) ) {
 			$keys = array_keys($mixValue);
-			//if ( !key( $mixValue ) )
-			if ( ! $keys[0] )
-			{
+			if ( ! $keys[0] ) {
 				$mixValue = null;
 			}
 		}
@@ -1778,13 +1785,17 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	public function getRowCount() {
-		$res = $this->getData();
-
-		if ( $res ) {
-			$keys = array_keys($res);
-			return count( $res[ $keys[0] ] );
+		$result = 0;
+		if( !empty($this->getTotalRowsWithoutPaginator()) ){
+			$result = $this->getTotalRowsWithoutPaginator();
+		}else{
+			$res = $this->getData();
+			if ( $res ) {
+				$keys = array_keys($res);
+				$result = count( $res[ $keys[0] ] );
+			}
 		}
-		return 0;
+		return $result;
 	}
 
 	//---------------------------------------------------------------------------------------

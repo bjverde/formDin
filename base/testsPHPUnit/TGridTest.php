@@ -193,6 +193,28 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected['NMPESSOA'][0] , $result['NMPESSOA'][0]);
 		$this->assertEquals( $expected['NMPESSOA'][1] , $result['NMPESSOA'][1]);
 		$this->assertEquals( $expected['NMPESSOA'][2] , $result['NMPESSOA'][2]);
+	}	
+	
+	public function testGetRowCount_NoDataGrid() {
+		$tGrid = $this->tGrid;
+		$tGrid->setData(null);
+		$result = $tGrid->getRowCount();
+		
+		$this->assertEquals( 0 , $result);
+	}
+	
+	public function testGetRowCount_3Rows() {		
+		$tGrid = $this->tGrid;
+		$result = $tGrid->getRowCount();		
+		$this->assertEquals( 3 , $result);
+	}
+	
+	public function testGetRowCount_with_TotalRowsWithoutPaginator() {
+		$expected = 30;
+		$tGrid = $this->tGrid;
+		$tGrid->setTotalRowsWithoutPaginator($expected);
+		$result = $tGrid->getRowCount();
+		$this->assertEquals( $expected , $result);
 	}
 	
 }

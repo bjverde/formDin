@@ -52,18 +52,20 @@ switch( $acao ) {
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 	
-	$maxRows = 3;
+	$maxRows = 5;
 	$page = PostHelper::get('page'); 
-	//$dados = UfDAO::selectAll($primaryKey);
-	$dados = UfDAO::selectAllPagination( $primaryKey, null, $page,  10);
+	$dados = UfDAO::selectAll($primaryKey);
+	//$dados = UfDAO::selectAllPagination( $primaryKey, null, $page,  $maxRows);
+	//$TotalRowsWithoutPaginator = UfDAO::selectCount();
+	//d($TotalRowsWithoutPaginator);
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',NOM_UF|NOM_UF,SIG_UF|SIG_UF,COD_REGIAO|COD_REGIAO';
 	$gride = new TGrid( 'gd'        // id do gride
 					   ,'Gride'     // titulo do gride
 					   );
-	$gride->setMaxRows( $maxRows );
-	$gride->setData( $dados ); // array de dados
 	$gride->addKeyField( $primaryKey ); // chave primaria
-	$gride->setUpdateFields( $mixUpdateFields );
+	$gride->setData( $dados ); // array de dados
+	$gride->setTotalRowsWithoutPaginator( $TotalRowsWithoutPaginator );
+	$gride->setMaxRows( $maxRows );
 	$gride->setUrl( 'uf_paginador.php' );
 	$gride->setOnDrawActionButton('onDraw');
 	
