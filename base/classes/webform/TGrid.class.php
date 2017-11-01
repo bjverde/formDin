@@ -104,6 +104,7 @@ class TGrid extends TTable
 	private $columnConfig;
 	
 	private $qtdColumns;
+	private $tbody;
 
 
 	/**
@@ -310,8 +311,9 @@ class TGrid extends TTable
 			$thead->setClass( 'fwHeaderBar' );
 			$thead->add( $row = new TTableRow() );
 			$row->clearCss();
-			$tableGrid->add( $tbody = new TElement( 'tbody' ) );
-			$tbody->clearCss();
+			$this->tbody = new TElement( 'tbody' );
+			$tableGrid->add( $this->tbody );
+			$this->tbody->clearCss();
 
 			$this->showValidateDraws();
 			$this->showColumnActionGrid();
@@ -484,7 +486,7 @@ class TGrid extends TTable
 						break;
 					}
 					// adicionar uma linha na tabela ( tr )
-					$tbody->add( $row = new TTableRow() );
+					$this->tbody->add( $row = new TTableRow() );
 					$row->setProperty( 'id', strtolower( $this->getId() . '_tr_' . $rowNum ) );
 					$row->setProperty( 'grid_id', $this->getId() );
 					$row->clearCss();
@@ -1028,23 +1030,22 @@ class TGrid extends TTable
 				}
 				//$btnExcel = new TButton('btnExcel','Excel',null,'alert("excel")',null,'excel.gif',null,'Exportar dados para o excel');
 				// adicionar a barra de navegação no fim do gride
-				if ( $this->getMaxRows() )
-				{
+				if ( $this->getMaxRows() ) {
 					//$this->setNavButtons($tbody,$qtdColumns);
-					$this->setNavButtons( $this->footerCell, $qtdColumns );
+					$this->setNavButtons( $this->footerCell, $this->getQtdColumns() );
 				}
 			}
 			else
 			{
 				// nenhum registro encontrado
-				$tbody->add( $row = new TTableRow() );
+				$this->tbody->add( $row = new TTableRow() );
 				$row->clearCss();
 				$cell = $row->addCell( '<center>'.$this->getNoDataMessage().'</center>' );
 				$cell->clearCss();
 				$cell->setClass( 'fwGridCell' );
 				$cell->setCss( 'color', '#ff0000' );
 				$cell->setCss( 'width', 'auto' );
-				$cell->setProperty( 'colspan', $qtdColumns );
+				$cell->setProperty( 'colspan', $this->getQtdColumns() );
 			}
 		}
 
@@ -1053,10 +1054,9 @@ class TGrid extends TTable
 			$tbody->show( true );
 			return;
 		}
-		if ( $this->javaScript )
-		{
+		if ( $this->javaScript ) {
 			$js = str_replace( ';;', ';', implode( ';', $this->javaScript ) );
-			$tbody->add( '<script>jQuery(document).ready(function() {' . $js . '});</script>' );
+			$this->tbody->add( '<script>jQuery(document).ready(function() {' . $js . '});</script>' );
 		}
 		return parent::show( $boolPrint );
 	}
