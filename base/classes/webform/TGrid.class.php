@@ -102,6 +102,8 @@ class TGrid extends TTable
 	private $disableButtonImage=null;
 	private $exportFullData;
 	private $columnConfig;
+	
+	private $qtdColumns;
 
 
 	/**
@@ -242,6 +244,16 @@ class TGrid extends TTable
 	}
 	
 	//------------------------------------------------------------------------------------
+	public function getQtdColumns(){
+		return $this->qtdColumns;
+	}
+	
+	//------------------------------------------------------------------------------------
+	public function setQtdColumns($qtdColumns){
+		$this->qtdColumns = $qtdColumns;
+	}
+	
+	//------------------------------------------------------------------------------------
 	public function show( $boolPrint = true ) {
 		// quando for requisição de paginação do gride, limpar o buffer de saida
 		if( isset($_REQUEST['page'] ) && isset( $_REQUEST['TGrid'] ) ) {
@@ -258,10 +270,11 @@ class TGrid extends TTable
 			$this->showButonsUpdateDelete();
 			// calcular a quantidade de colunas
 			$qtdColumns = $this->getColumnCount() + ( count( $this->getButtons() ) > 0 ? 1 : 0 );
+			$this->setQtdColumns($qtdColumns);
 
 			// ajustar colspan do header e footer
-			$this->titleCell->setProperty( 'colspan', $qtdColumns );
-			$this->footerCell->setProperty( 'colspan', $qtdColumns );
+			$this->titleCell->setProperty( 'colspan',  $this->getQtdColumns() );
+			$this->footerCell->setProperty( 'colspan', $this->getQtdColumns() );
 
 			// exibir o titulo do gride
 			$this->titleCell->add( $this->getTitle() );
