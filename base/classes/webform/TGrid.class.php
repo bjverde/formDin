@@ -391,23 +391,18 @@ class TGrid extends TTable
 					}
 					$th->add( $objHeader );
 
-					if ( $this->getOnDrawHeaderCell() && function_exists( $this->getOnDrawHeaderCell() ) )
-					{
+					if ( $this->getOnDrawHeaderCell() && function_exists( $this->getOnDrawHeaderCell() ) ) {
 						call_user_func( $this->onDrawHeaderCell, $objHeader, $objColumn, $th );
-					}
-					else
-					{
+					}else{
 						$th->add( $th->getValue() );
 					}
 
-					if ( $this->getReadOnly() )
-					{
+					if ( $this->getReadOnly() ) {
 						$objColumn->setReadOnly( true );
 					}
 
 					// colcocar checkbox no titulo se a coluna for do tipo checkbox
-					if ( $objColumn->getDataType() == 'checkbox' )
-					{
+					if ( $objColumn->getDataType() == 'checkbox' ) {
 						if ( $objColumn->getAllowCheckAll() )
 						{
 							$chk = new TElement( 'input' );
@@ -436,9 +431,7 @@ class TGrid extends TTable
 						}
 					}
 					$row->add( $th );
-				}
-				else
-				{
+				}else{
 					$colIndex++;
 				}
 			}
@@ -451,7 +444,10 @@ class TGrid extends TTable
 
 			$this->validateMaxRowsWithoutUrl();
 
-			if ( is_array( $this->getData() ) ) {
+			//Incluir linhas do gride
+			if ( !is_array( $this->getData() ) ) {
+				$this->showNoRowsFound();
+			}else{
 				$res = $this->getData();
 
 				$res = $this->sortDataByColum ( $res );
@@ -1035,18 +1031,6 @@ class TGrid extends TTable
 					$this->setNavButtons( $this->footerCell, $this->getQtdColumns() );
 				}
 			}
-			else
-			{
-				// nenhum registro encontrado
-				$this->tbody->add( $row = new TTableRow() );
-				$row->clearCss();
-				$cell = $row->addCell( '<center>'.$this->getNoDataMessage().'</center>' );
-				$cell->clearCss();
-				$cell->setClass( 'fwGridCell' );
-				$cell->setCss( 'color', '#ff0000' );
-				$cell->setCss( 'width', 'auto' );
-				$cell->setProperty( 'colspan', $this->getQtdColumns() );
-			}
 		}
 
 		if ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] && isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] && $_REQUEST[ 'page' ] > 0 )
@@ -1060,6 +1044,21 @@ class TGrid extends TTable
 		}
 		return parent::show( $boolPrint );
 	}
+	/**
+	 * @param cell
+	 */
+	 private function showNoRowsFound() {
+		// nenhum registro encontrado
+		$this->tbody->add( $row = new TTableRow() );
+		$row->clearCss();
+		$cell = $row->addCell( '<center>'.$this->getNoDataMessage().'</center>' );
+		$cell->clearCss();
+		$cell->setClass( 'fwGridCell' );
+		$cell->setCss( 'color', '#ff0000' );
+		$cell->setCss( 'width', 'auto' );
+		$cell->setProperty( 'colspan', $this->getQtdColumns() );
+	}
+
 	/**
 	 * @param colAction
 	 */
