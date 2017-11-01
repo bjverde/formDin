@@ -38,6 +38,9 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
+if(!defined('ENCODINGS')){ define('ENCODINGS','ISO-8859-1'); }
+
 /**
 * @todo	- possibilitar exibir ou não o botão editar e excluir do grid-offline
 * @todo	- definir o foco para o primeiro campo do formulario do grid-ofline se não tiver sido informado pelo usuario
@@ -1196,7 +1199,7 @@ class TGrid extends TTable
 			@unlink($tmpName);
 		}
 		if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
-			$excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,'ISO-8859-1'));
+		    $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,ENCODINGS));
 		}
 	}
 
@@ -1620,9 +1623,9 @@ class TGrid extends TTable
 	{
 		if ( is_null( $this->actionColumnTitle ) )
 		{
-			return htmlentities( 'Ação',null,'ISO-8859-1' );
+		    return htmlentities( 'Ação',null, ENCODINGS );
 		}
-		return htmlentities( $this->actionColumnTitle,null,'ISO-8859-1' );
+		return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
 	}
 
 	//---------------------------------------------------------------------------------------
