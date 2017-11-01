@@ -239,71 +239,20 @@ class TGrid extends TTable
 	}
 	
 	//------------------------------------------------------------------------------------
-	public function show( $boolPrint = true )
-	{
+	public function show( $boolPrint = true ) {
 		// quando for requisição de paginação do gride, limpar o buffer de saida
-		if( isset($_REQUEST['page'] ) && isset( $_REQUEST['TGrid'] ) )
-		{
+		if( isset($_REQUEST['page'] ) && isset( $_REQUEST['TGrid'] ) ) {
 			ob_clean();
 		}
-		// se o grid for offline, criar as colunas e configurar o form
-		if ( $this->getForm() )
-		{
-			$this->configOffLine();
-		}
-
-        if( $this->getWidth() == '100px')
-        {
-			$this->setProperty('fullwidth','true');
-        }
-		// definir as medidas do gride
-		$this->setProperty( 'width', $this->getWidth() );
-		$this->setProperty( 'height', $this->getHeight() );
-		$this->setProperty( 'row_count', $this->getRowCount() );
-		$this->setProperty('fieldtype','grid' );
-
-		$fldSortedColumn = new THidden( $this->getId() . '_sorted_column' );
-		$fldSortedColumnOrder = new THidden( $this->getId() . '_sorted_column_order' );
-		$fldCollapsed 			= new THidden( $this->getId() . '_collapsed' );
-		//$this->add('<input id="'.$this->getId().'_sorted_column" type="hidden" value="">');
-		$this->add($fldSortedColumn);
-		$this->add($fldSortedColumnOrder);
-		$this->add($fldCollapsed);
-
-		// esconder o titulo se o titulo do gride for null
-		if ( is_null( $this->getTitle() ) ){
-			$this->titleCell->setCss( 'display', 'none' );
-		}
-
-		if ( $this->getColumnCount() == 0 ){
-			// tentar criar as colunas automaticamente utilizando o array de dados
-			$this->autoCreateColumns();
-		}
+		
+		$this->showGridProperty();
 
 		if ( $this->getColumnCount() == 0 ){
 			// nenhuma coluna adicionada
 			$row = $this->addRow();
 			$row->addCell( 'nenhuma coluna adicionada' );
 		}else{
-			// adicionar os botões Alterar e Excluir
-			if ( $this->getCreateDefaultButtons() ) {
-				$imgEdit = null;
-				$imgDeleter = null;
-
-				if ( $this->getUseDefaultImages() ) {
-					$imgEdit = 'alterar.gif';
-					$imgDelete = 'lixeira.gif';
-				}
-
-				if ( $this->getCreateDefaultEditButton() ) {
-					$this->addbutton( 'Alterar', $this->getId() . '_alterar', null, null, null, $imgEdit, null, 'Alterar' );
-				}
-
-				if ( $this->getCreateDefaultDeleteButton() ) {
-					//$this->addButton('Excluir',$this->getId().'_excluir',null,null,'Confirma exclusão ?',$imgDelete,null,'Excluir');
-					$this->addButton( 'Excluir', $this->getId() . '_excluir', null, 'fwGridConfirmDelete()', null, $imgDelete, null, 'Excluir' );
-				}
-			}
+			$this->showButonsUpdateDelete();
 			// calcular a quantidade de colunas
 			$qtdColumns = $this->getColumnCount() + ( count( $this->getButtons() ) > 0 ? 1 : 0 );
 
@@ -348,39 +297,10 @@ class TGrid extends TTable
 			$tableGrid->add( $tbody = new TElement( 'tbody' ) );
 			$tbody->clearCss();
 
-			// se a funcao ondrawRow estiver definia e nao existir, retirar o evento
-			if ( $this->getOnDrawRow() && !function_exists( $this->getOnDrawRow() ) )
-			{
-				$this->setOnDrawRow( null );
-			}
-
-			// se a funcao ondrawcell estiver definia e nao existir, retirar o evento
-			if ( $this->getOnDrawCell() && !function_exists( $this->getOnDrawCell() ) )
-			{
-				$this->setOnDrawCell( null );
-			}
-
-			// se a funcao ondrawcell estiver definia e nao existir, retirar o evento
-			if ( $this->getOnDrawHeaderCell() && !function_exists( $this->getOnDrawHeaderCell() ) )
-			{
-				$this->setOnDrawHeaderCell( null );
-			}
-
-			// se a funcao ondrawActionButton estiver definia e nao existir, retirar o evento
-			if ( $this->getOnDrawActionButton() && !function_exists( $this->getOnDrawActionButton() ) )
-			{
-				$this->setOnDrawActionButton( null );
-			}
-
-			// se a funcao onGetAutocompleteCallBackParameters estiver definia e nao existir, retirar o evento
-			if ( $this->getOnGetAutocompleteCallBackParameters && !function_exists( $this->getOnGetAutocompleteCallBackParameters() ) )
-			{
-				$this->setOnGetAutocompleteCallBackParameters( null );
-			}
+			$this->showValidateDraws();
 
 			// adicionar a coluna de ações do gride se tiver botoes adicionados
-			if ( $this->getButtons() )
-			{
+			if ( $this->getButtons() ) {
 				$colAction = $this->addColumn( null, $this->getActionColumnTitle(), 'auto' );
 				$colAction->setId('col_action');
 				$colAction->setColumnType( 'action' );
@@ -393,45 +313,33 @@ class TGrid extends TTable
 			$colSort  = null;
 			$headersSortable = '';
 			// criar as colunas titulo do gride
-			foreach( $this->getColumns() as $name => $objColumn )
-			{
+			foreach( $this->getColumns() as $name => $objColumn ) {
                 // aplicar as configurações definidas pelo usuário
                 $objConfig = $this->getColumnConfig($colIndex);
 
-                if( !is_null( $objConfig ))
-                {
-	                if( $objConfig->width)
-	                {
+                if( !is_null( $objConfig ) ) {
+	                if( $objConfig->width) {
 						$objColumn->setWidth( $objConfig->width);
 	                }
-	                if( $objConfig->align )
-	                {
+	                if( $objConfig->align ) {
 						$objColumn->setTextAlign( $objConfig->align);
 	                }
-	                if( $objConfig->arrCss )
-	                {
+	                if( $objConfig->arrCss ){
 						$objColumn->setCss( $objConfig->arrCss);
 	                }
-	                if( $objConfig->visible === false )
-	                {
+	                if( $objConfig->visible === false ) {
 						$objColumn->setVisible( false );
 	                }
 				}
-            	if( $objColumn->getVisible() )
-                {
-					if ( ! $this->getSortable()  )
-					{
+            	if( $objColumn->getVisible() ) {
+					if ( ! $this->getSortable()  ) {
 						$objColumn->setSortable( false );
 					}
-					if( ! $objColumn->getSortable() )
-					{
+					if( ! $objColumn->getSortable() ) {
 						$headersSortable .= ( ($headersSortable == '' ) ? '' :',' );
 						$headersSortable .= $colIndex.': {sorter: false}';
-					}
-					else
-					{
-						if( is_null($colSort))
-						{
+					} else {
+						if( is_null($colSort)) {
 							$colSort = $colIndex;
 						}
 					}
@@ -556,17 +464,14 @@ class TGrid extends TTable
 
 
 				$keys = array_keys($res);
-				foreach( $res[ $keys[0] ] as $k => $v )
-				{
+				foreach( $res[ $keys[0] ] as $k => $v ) {
 					$rowNum++;
 
-					if ( ( $rowNum - 1 ) < $rowStart )
-					{
+					if ( ( $rowNum - 1 ) < $rowStart ) {
 						continue;
 					}
 
-					if ( ( $rowNum - 1 ) >= $rowEnd )
-					{
+					if ( ( $rowNum - 1 ) >= $rowEnd ) {
 						break;
 					}
 					// adicionar uma linha na tabela ( tr )
@@ -580,13 +485,11 @@ class TGrid extends TTable
 					$row->setProperty( 'row_count', $totalRows );
 					//$row->setProperty( 'num_rows', $totalRows );
 
-					if ( $this->onDrawRow )
-					{
+					if ( $this->onDrawRow ) {
 						call_user_func( $this->onDrawRow, $row, $rowNum, $this->getRowData( $k ) );
 					}
 
-					if ( !$row->getVisible() )
-					{
+					if ( !$row->getVisible() ) {
 						continue;
 					}
 					$arrColunms = $this->getColumns();
@@ -597,10 +500,8 @@ class TGrid extends TTable
 					*/
 
 					// adicionar as colunas ( td )
-					foreach( $arrColunms as $columnId => $objColumn )
-					{
-                        if( !$objColumn->getVisible() )
-                        {
+					foreach( $arrColunms as $columnId => $objColumn ) {
+                        if( !$objColumn->getVisible() ) {
                         	continue;
 						}
 						$fieldName = $objColumn->getFieldName();
@@ -623,15 +524,13 @@ class TGrid extends TTable
 						//$cell->clearCss();
 						$cell->setClass( 'fwGridCell', false );
 
-						if ( $objColumn->getNoWrap() || ( is_null( $objColumn->getNoWrap() ) && $this->getNoWrap() === true ) )
-						{
+						if ( $objColumn->getNoWrap() || ( is_null( $objColumn->getNoWrap() ) && $this->getNoWrap() === true ) ) {
 							$cell->setProperty( 'nowrap', 'nowrap' );
 						}
 						$cell->setCss( $objColumn->getCss() );
 						$cell->setCss( 'width', null ); // a largura é dada pelo titulo (head)
 
-						if ( $objColumn->getTextAlign() )
-						{
+						if ( $objColumn->getTextAlign() ) {
 							$cell->setCss( 'text-align', $objColumn->getTextAlign() );
 						}
 
@@ -1153,9 +1052,105 @@ class TGrid extends TTable
 		return parent::show( $boolPrint );
 	}
 	
+	/***
+	 * esconder o titulo se o titulo do gride for null
+	 */
+	protected function showTitle() {
+		if ( is_null( $this->getTitle() ) ){
+			$this->titleCell->setCss( 'display', 'none' );
+		}
+	}
 	
+	/**
+	 * tentar criar as colunas automaticamente utilizando o array de dados
+	 */
+	protected function showColumn() {
+		if ( $this->getColumnCount() == 0 ){
+			$this->autoCreateColumns();
+		}
+	}	
+
+	protected function showGridProperty() {
+		// se o grid for offline, criar as colunas e configurar o form
+		if ( $this->getForm() ) {
+			$this->configOffLine();
+		}
+
+        if( $this->getWidth() == '100px' ){
+			$this->setProperty('fullwidth','true');
+        }
+		// definir as medidas do gride
+		$this->setProperty( 'width', $this->getWidth() );
+		$this->setProperty( 'height', $this->getHeight() );
+		$this->setProperty( 'row_count', $this->getRowCount() );
+		$this->setProperty('fieldtype','grid' );
+
+		$fldSortedColumn      = new THidden( $this->getId() . '_sorted_column' );
+		$fldSortedColumnOrder = new THidden( $this->getId() . '_sorted_column_order' );
+		$fldCollapsed 		  = new THidden( $this->getId() . '_collapsed' );
+		//$this->add('<input id="'.$this->getId().'_sorted_column" type="hidden" value="">');
+		$this->add($fldSortedColumn);
+		$this->add($fldSortedColumnOrder);
+		$this->add($fldCollapsed);
+
+		$this->showTitle();
+		$this->showColumn();
+	}
+	
+	protected function showButonsUpdateDelete() {
+		// adicionar os botões Alterar e Excluir
+		if ( $this->getCreateDefaultButtons() ) {
+			$imgEdit = null;
+			$imgDeleter = null;
+			
+			if ( $this->getUseDefaultImages() ) {
+				$imgEdit = 'alterar.gif';
+				$imgDelete = 'lixeira.gif';
+			}
+			
+			if ( $this->getCreateDefaultEditButton() ) {
+				$this->addbutton( 'Alterar', $this->getId() . '_alterar', null, null, null, $imgEdit, null, 'Alterar' );
+			}
+			
+			if ( $this->getCreateDefaultDeleteButton() ) {
+				//$this->addButton('Excluir',$this->getId().'_excluir',null,null,'Confirma exclusão ?',$imgDelete,null,'Excluir');
+				$this->addButton( 'Excluir', $this->getId() . '_excluir', null, 'fwGridConfirmDelete()', null, $imgDelete, null, 'Excluir' );
+			}
+		}
+	}
+	
+	protected function showValidateDraws() {
+		// se a funcao ondrawRow estiver definia e nao existir, retirar o evento
+		if ( $this->getOnDrawRow() && !function_exists( $this->getOnDrawRow() ) ) {
+			$this->setOnDrawRow( null );
+		}
+		
+		// se a funcao ondrawcell estiver definia e nao existir, retirar o evento
+		if ( $this->getOnDrawCell() && !function_exists( $this->getOnDrawCell() ) ) {
+			$this->setOnDrawCell( null );
+		}
+		
+		// se a funcao ondrawcell estiver definia e nao existir, retirar o evento
+		if ( $this->getOnDrawHeaderCell() && !function_exists( $this->getOnDrawHeaderCell() ) ) {
+			$this->setOnDrawHeaderCell( null );
+		}
+		
+		// se a funcao ondrawActionButton estiver definia e nao existir, retirar o evento
+		if ( $this->getOnDrawActionButton() && !function_exists( $this->getOnDrawActionButton() ) ){
+			$this->setOnDrawActionButton( null );
+		}
+		
+		// se a funcao onGetAutocompleteCallBackParameters estiver definia e nao existir, retirar o evento
+		if ( $this->getOnGetAutocompleteCallBackParameters && !function_exists( $this->getOnGetAutocompleteCallBackParameters() ) ) {
+			$this->setOnGetAutocompleteCallBackParameters( null );
+		}
+	}
+	
+	
+	/***
+	 * avisar erro se tiver passado o parametro maxRows e não tiver informado a url
+	 */
 	private function validateMaxRowsWithoutUrl() {
-		// avisar erro se tiver passado o parametro maxRows e não tiver informado a url
 		if ( $this->getMaxRows() && !$this->url ) {
 			$this->footerCell->add( '<blink><span style="color:red;font-weight:bold;">Para utilizar o recurso de paginação, o parametro strRequestUrl, tambem dever ser informado</span></blink>' );
 		}
