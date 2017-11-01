@@ -481,6 +481,7 @@ class TGrid extends TTable
 
 				$keys = array_keys($res);
 				foreach( $res[ $keys[0] ] as $k => $v ) {
+					$rowNum = $this->getRowNumWithPaginator($rowStart);
 					$rowNum++;
 
 					if ( ( $rowNum - 1 ) < $rowStart ) {
@@ -1794,6 +1795,15 @@ class TGrid extends TTable
 		return $col;
 	}
 
+	//---------------------------------------------------------------------------------------
+	public function getRowNumWithPaginator($rowStart){
+		$result = 0;
+		if( !empty($this->getTotalRowsWithoutPaginator()) ){
+			$result = $rowStart;
+		}
+		return $result;
+	}
+	
 	//---------------------------------------------------------------------------------------
 	public function getRowCount() {
 		$result = 0;
