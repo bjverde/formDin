@@ -52,5 +52,5 @@ Baixe o projeto em coloque um servidor PHP.
 * modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
 
 ## Versões
-4.1.0 - tag v4.1.0 com paginação via MySQL
-4.0.0 - Versão orignal, Brach copyLEB 
+* 4.1.0 - tag v4.1.0 com paginação via MySQL
+* 4.0.0 - Versão orignal, Brach copyLEB 
