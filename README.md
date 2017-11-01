@@ -22,7 +22,7 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 
 ## Sobre as branchs
 * Master - tem as modificações e novidades
-* copyLEB - copia de versão original, congelada e sem alterações.
+* copyLEB - copia de versão original, congelada e sem alterações. Conforme Luís Eugênio Barbosa
 * UTF-8 - Um tentativa para deixar o projeto com o formato UTF-8. 
 * ANSI - Uma copia do master
 
@@ -42,10 +42,15 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 
 Baixe o projeto em coloque um servidor PHP.
 
-O que tem em cada pasta
+### O que tem em cada pasta
 * appexemplo_form_alone - exemplo de uma pagina sem sistema.
 * appexemplo_v1.0 - Exemplos simples de quase todos os recurso possíveis.
 * appexemplo_v2.0 - Exemplo de uma sistema conectando no mysql com telas totalmente funcionais. EM CONSTRUÇÃO
 * appexemplo_v2.5 - Mesmo sistema que a versão 2.0 só que com o todo controle de acesso e segurança. EM CONSTRUÇÃO
 * base - é o local onde toda a magica acontece. Aquim tem o FormDin propriamente dito.
 * documents - Documentos e informações.
+* modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
+
+## Versões
+4.1.0 - tag v4.1.0 com paginação via MySQL
+4.0.0 - Versão orignal, Brach copyLEB 
