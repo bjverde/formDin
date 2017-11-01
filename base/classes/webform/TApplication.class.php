@@ -38,6 +38,10 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
+define('FORMDIN_VERSION','4.1.0');
+
+
 if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
 $currentl_dir = dirname(__FILE__);
 $helps_dir = $currentl_dir.DS.'..'.DS.'helpers'.DS;

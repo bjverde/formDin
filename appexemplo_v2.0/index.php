@@ -37,11 +37,15 @@
  */
 include ('../base/classes/webform/TApplication.class.php');
 
+define('APLICATIVO','APPEV20');
+
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Instituto Brasileiro de Meio Ambiente - IBAMA');
+$app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
-//$app->setSigla('formdin');
-$app->setUnit('Departamento de Informática - DI - 2011');
+//$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
+$app->setSigla(APLICATIVO);
+$app->setVersionSystem('v 2.0.0.0');
+$app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
