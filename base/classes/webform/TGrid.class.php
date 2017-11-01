@@ -1035,7 +1035,7 @@ class TGrid extends TTable
 
 		if ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] && isset( $_REQUEST[ 'page' ] ) && $_REQUEST[ 'page' ] && $_REQUEST[ 'page' ] > 0 )
 		{
-			$tbody->show( true );
+			$this->tbody->show( true );
 			return;
 		}
 		if ( $this->javaScript ) {
