@@ -2,14 +2,18 @@
 $primaryKey = 'COD_MUNICIPIO';
 $frm = new TForm('Cadastro de Municípios',600);
 $frm->setFlat(true);
+$frm->setMaximize(true);
 
 
-$frm->addHiddenField($primaryKey); // coluna chave da tabela
+$frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 
 $dadosUf = UfDAO::selectAll('NOM_UF');
 $frm->addSelectField('COD_UF','Estado:',true,$dadosUf);
 $frm->addTextField('NOM_MUNICIPIO', 'Nome município:', 50, true);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+
+$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -44,21 +48,23 @@ switch( $acao ) {
 	break;
 }
 
-
-
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
-	$dados = MunicipioDAO::selectAll('NOM_MUNICIPIO');
+	$maxRows = 17;
+	$page = PostHelper::get('page');
+	$dados = MunicipioDAO::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);
+	$realTotalRowsWithoutPaginator = MunicipioDAO::selectCount();
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',COD_UF|COD_UF,NOM_MUNICIPIO|NOM_MUNICIPIO,SIT_ATIVO|SIT_ATIVO';
 	$gride = new TGrid( 'gd'          // id do gride
-					   ,'Gride com Paginador Tela'       // titulo do gride
-					   ,$dados 	      // array de dados
-					   ,null		  // altura do gride
-					   ,null		  // largura do gride
-					   ,$primaryKey   // chave primaria
-					   ,$mixUpdateFields
-					   ,17
-					   ,'municipio.php'
+					   ,'Gride com Paginador SQL'       // titulo do gride
 					   );
+	$gride->addKeyField( $primaryKey ); // chave primaria
+	$gride->setData( $dados ); // array de dados
+	$gride->setRealTotalRowsWithoutPaginator( $realTotalRowsWithoutPaginator );
+	$gride->setMaxRows( $maxRows );
+	$gride->setUpdateFields($mixUpdateFields);
+	$gride->setUrl( 'municipio_sql.php' );
+	$gride->setOnDrawActionButton('onDraw');
+	
 	$gride->addColumn($primaryKey, 'id', 50, 'center');
 	$gride->addColumn('COD_UF', 'COD_UF', 50, 'center');
 	$gride->addColumn('SIG_UF', 'UF', 50, 'center');
@@ -67,9 +73,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->show();
 	die();
 }
-$frm->addHtmlField('html_gride');
-$frm->setAction("Refresh");
-$frm->setAction( 'Salvar,Limpar' );
+
+$frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
 
@@ -85,11 +90,11 @@ function onDraw( $rowNum,$button,$objColumn,$aData) {
 ?>
 <script>
 function init() {
-	fwGetGrid("municipio.php",'html_gride');
+	fwGetGrid("municipio_sql.php",'gride');
 }
 // recebe fields e values do grid
 function alterar(f,v){
 	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=municipio.php',300,800,null,dados);
+	fwModalBox('Alteração','index.php?modulo=municipio_sql.php',300,800,null,dados);
 }
 </script>
