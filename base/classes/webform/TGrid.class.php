@@ -69,7 +69,7 @@ class TGrid extends TTable
 	private $hiddenField;
 	private $readOnly;
 	private $maxRows;
-	private $totalRowsWithoutPaginator;
+	private $realTotalRowsWithoutPaginator;
 	private $url;
 	private $bvars;
 	private $cache;
@@ -234,13 +234,13 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------
-	public function getTotalRowsWithoutPaginator(){
-		return $this->totalRowsWithoutPaginator;
+	public function getRealTotalRowsWithoutPaginator(){
+		return $this->realTotalRowsWithoutPaginator;
 	}
 	
 	//------------------------------------------------------------------------------------
-	public function setTotalRowsWithoutPaginator($totalRowsWithoutPaginator){
-		$this->totalRowsWithoutPaginator = $totalRowsWithoutPaginator;
+	public function setRealTotalRowsWithoutPaginator($realTotalRowsWithoutPaginator){
+		$this->realTotalRowsWithoutPaginator = $realTotalRowsWithoutPaginator;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -314,16 +314,8 @@ class TGrid extends TTable
 			$tbody->clearCss();
 
 			$this->showValidateDraws();
-
-			// adicionar a coluna de ações do gride se tiver botoes adicionados
-			if ( $this->getButtons() ) {
-				$colAction = $this->addColumn( null, $this->getActionColumnTitle(), 'auto' );
-				$colAction->setId('col_action');
-				$colAction->setColumnType( 'action' );
-				$colAction->setCss( 'text-align', 'center' );
-				// distãncia entre a borda e os botões
-				$colAction->setCss( 'padding', '2.5px' );
-			}
+			$this->showColumnActionGrid();
+			
 			// contador de colunas
 			$colIndex = 0;
 			$colSort  = null;
@@ -481,7 +473,7 @@ class TGrid extends TTable
 
 				$keys = array_keys($res);
 				foreach( $res[ $keys[0] ] as $k => $v ) {
-					$rowNum = $this->getRowNumWithPaginator($rowStart);
+					$rowNum = $this->getRowNumWithPaginator( $rowNum ,$rowStart );
 					$rowNum++;
 
 					if ( ( $rowNum - 1 ) < $rowStart ) {
@@ -1067,6 +1059,20 @@ class TGrid extends TTable
 			$tbody->add( '<script>jQuery(document).ready(function() {' . $js . '});</script>' );
 		}
 		return parent::show( $boolPrint );
+	}
+	/**
+	 * @param colAction
+	 */
+	 protected function showColumnActionGrid() {
+		// adicionar a coluna de ações do gride se tiver botoes adicionados
+		if ( $this->getButtons() ) {
+			$colAction = $this->addColumn( null, $this->getActionColumnTitle(), 'auto' );
+			$colAction->setId('col_action');
+			$colAction->setColumnType( 'action' );
+			$colAction->setCss( 'text-align', 'center' );
+			// distãncia entre a borda e os botões
+			$colAction->setCss( 'padding', '2.5px' );
+		}
 	}
 	
 	/***
@@ -1796,10 +1802,11 @@ class TGrid extends TTable
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function getRowNumWithPaginator($rowStart){
-		$result = 0;
-		if( !empty($this->getTotalRowsWithoutPaginator()) ){
+	public function getRowNumWithPaginator($rowNum,$rowStart){
+		if( !empty($this->getRealTotalRowsWithoutPaginator()) ){
 			$result = $rowStart;
+		}else {
+			$result = $rowNum;
 		}
 		return $result;
 	}
@@ -1807,8 +1814,8 @@ class TGrid extends TTable
 	//---------------------------------------------------------------------------------------
 	public function getRowCount() {
 		$result = 0;
-		if( !empty($this->getTotalRowsWithoutPaginator()) ){
-			$result = $this->getTotalRowsWithoutPaginator();
+		if( !empty($this->getRealTotalRowsWithoutPaginator()) ){
+			$result = $this->getRealTotalRowsWithoutPaginator();
 		}else{
 			$res = $this->getData();
 			if ( $res ) {

@@ -193,7 +193,23 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected['NMPESSOA'][0] , $result['NMPESSOA'][0]);
 		$this->assertEquals( $expected['NMPESSOA'][1] , $result['NMPESSOA'][1]);
 		$this->assertEquals( $expected['NMPESSOA'][2] , $result['NMPESSOA'][2]);
-	}	
+	}
+	
+	public function testGetRowNumWithPaginator_without_RealTotalRowsWithoutPaginator() {
+		$expected = 30;
+		$tGrid = $this->tGrid;
+		$result = $tGrid->getRowNumWithPaginator($expected,40);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	
+	public function testGetRowNumWithPaginator_with_RealTotalRowsWithoutPaginator() {
+		$expected = 30;
+		$tGrid = $this->tGrid;
+		$tGrid->setRealTotalRowsWithoutPaginator(30);
+		$result = $tGrid->getRowNumWithPaginator(20,$expected);
+		$this->assertEquals( $expected , $result);
+	}
 	
 	public function testGetRowCount_NoDataGrid() {
 		$tGrid = $this->tGrid;
@@ -209,10 +225,10 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 3 , $result);
 	}
 	
-	public function testGetRowCount_with_TotalRowsWithoutPaginator() {
+	public function testGetRowCount_with_RealTotalRowsWithoutPaginator() {
 		$expected = 30;
 		$tGrid = $this->tGrid;
-		$tGrid->setTotalRowsWithoutPaginator($expected);
+		$tGrid->setRealTotalRowsWithoutPaginator($expected);
 		$result = $tGrid->getRowCount();
 		$this->assertEquals( $expected , $result);
 	}
