@@ -254,7 +254,7 @@ class TDAOCreate
 	 **/
 	public function addSqlSelectAllPagination() {
 		$this->addLine( TAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {');
-		$this->addLine( TAB.TAB.'$rowStart = paginationMySQLHelper::getRowStart($page,$rowsPerPage);');
+		$this->addLine( TAB.TAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);');
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
 		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');

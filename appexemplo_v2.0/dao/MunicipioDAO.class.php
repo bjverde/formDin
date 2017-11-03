@@ -26,7 +26,7 @@ class MunicipioDAO extends TPDOConnection {
 	}
 	//--------------------------------------------------------------------------------
 	public static function selectAllSqlPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) {
-		$rowStart = paginationMySQLHelper::getRowStart($page,$rowsPerPage);
+		$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);
 		
 		$sql = self::$sqlBasicSelect
 		.( ($where)? ' where '.$where:'')
