@@ -45,40 +45,6 @@ require_once '../classes/helpers/paginationSQLHelper.class.php';
  */
 class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 	
-	/**
-	 *
-	 * @var paginationSQLHelper
-	 */
-	private $paginationSQLHelper;
-	
-	/**
-	 * Prepares the environment before running a test.
-	 */
-	protected function setUp() {
-		parent::setUp ();
-		
-		// TODO Auto-generated paginationSQLHelperTest::setUp()
-		
-		$this->paginationSQLHelper = new paginationSQLHelper(/* parameters */);
-	}
-	
-	/**
-	 * Cleans up the environment after running a test.
-	 */
-	protected function tearDown() {
-		// TODO Auto-generated paginationSQLHelperTest::tearDown()
-		$this->paginationSQLHelper = null;
-		
-		parent::tearDown ();
-	}
-	
-	/**
-	 * Constructs the test case.
-	 */
-	public function __construct() {
-		// TODO Auto-generated constructor
-	}
-	
 	public function testGetRowStart_pageNullAndRowsPerPageNull() {
 		$expected = 0;
 		$page = null;
