@@ -1,7 +1,7 @@
 <?php
 if(!defined('ROWS_PER_PAGE')){ define('ROWS_PER_PAGE',20); }
 
-class paginationMySQLHelper {
+class paginationSQLHelper {
 	
 	static function getRowStart($page,$rowsPerPage) {
 		$rowStart = 0;

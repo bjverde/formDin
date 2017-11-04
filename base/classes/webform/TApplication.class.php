@@ -48,7 +48,7 @@ $helps_dir = $currentl_dir.DS.'..'.DS.'helpers'.DS;
 
 require_once( $helps_dir.'ArrayHelper.class.php');
 require_once( $helps_dir.'GetHelper.class.php');
-require_once( $helps_dir.'PaginationMySQLHelper.class.php');
+require_once( $helps_dir.'paginationSQLHelper.class.php');
 require_once( $helps_dir.'PostHelper.class.php');
 require_once( $helps_dir.'RequestHelper.class.php');
 require_once( $helps_dir.'ServerHelper.class.php');
