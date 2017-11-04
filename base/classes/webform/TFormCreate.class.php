@@ -52,23 +52,39 @@ class TFormCreate {
 	private $voTableRef;
 	private $listColumnsName;
     private $lines;
+    private $gridType;
 
 	public function __construct(){
+	    $this->setFormTitle(null);
+	    $this->setFormPath(null);
+	    $this->setFormFileName(null);
 	}
 	//--------------------------------------------------------------------------------------
 	public function setFormTitle($formTitle) {
-		$formTitle = ( isset($formTitle) ) ? $formTitle : "titulo";
+		$formTitle = ( empty($formTitle) ) ? $formTitle : "titulo";
 		$this->formTitle    = $formTitle;
+	}
+	//--------------------------------------------------------------------------------------
+	public function getFormTitle() {
+	    return $this->formTitle;
 	}
 	//--------------------------------------------------------------------------------------
 	public function setFormPath($formPath) {
 		$formPath = ( isset($formPath) ) ?$formPath : "/modulos";
 		$this->formPath    = $formPath;
-	}	
+	}
+	//--------------------------------------------------------------------------------------
+	public function getFormPath() {
+	    return $this->formPath;
+	}
 	//--------------------------------------------------------------------------------------
 	public function setFormFileName($formFileName) {
 		$formFileName = ( isset($formFileName) ) ?$formFileName : "form-".date('Ymd-Gis');
 		$this->formFileName    = $formFileName;
+	}
+	//--------------------------------------------------------------------------------------
+	public function getFormFileName() {
+	    return $this->formFileName;
 	}
 	//--------------------------------------------------------------------------------------
 	public function setPrimaryKeyTable($primaryKeyTable) {
@@ -80,10 +96,15 @@ class TFormCreate {
 		$this->daoTableRef= ucfirst($tableRef).'DAO';
 		$this->voTableRef = ucfirst($tableRef).'VO';
 	}
+	//--------------------------------------------------------------------------------------
 	public function setListColunnsName($listColumnsName) {
 		array_shift($listColumnsName);
 		$this->listColumnsName = array_map('strtoupper', $listColumnsName);
-	}	
+	}
+	//--------------------------------------------------------------------------------------
+	public function setGridType($gridType) {
+	    $this->gridType = $gridType;
+	}
 	//--------------------------------------------------------------------------------------	
 	private function addLine($strNewValue=null,$boolNewLine=true){
 		$strNewValue = is_null( $strNewValue ) ? TAB.'//' . str_repeat( '-', 80 ) : $strNewValue;
@@ -167,6 +188,53 @@ class TFormCreate {
 			}
 		}
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
+	}
+	//--------------------------------------------------------------------------------------
+	/**
+
+
+<script>
+function init() {
+	fwGetGrid("municipio_sql.php",'gride');
+}
+// recebe fields e values do grid
+function alterar(f,v){
+	var dados = fwFV2O(f,v);
+	fwModalBox('Alteração','index.php?modulo=municipio_sql.php',300,800,null,dados);
+}
+</script>
+
+
+	 */
+	
+	public function addGridPagination_jsScript() {
+	    $this->addLine('<script>');
+	    $this->addLine('function init() {');
+	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'.php\',\'gride\');');
+	    $this->addLine('}');
+	    $this->addBlankLine();
+	    $this->addLine('function alterar(f,v){');
+	    $this->addLine(TAB.'var dados = fwFV2O(f,v);');
+	    $this->addLine(TAB.'fwModalBox(\'Alteração\',\'index.php?modulo='.$this->formFileName.'.php\',300,800,null,dados);');
+	    $this->addLine('}');
+	    $this->addLine('</script>');
+	}
+	
+	
+	//--------------------------------------------------------------------------------------
+	public function addGrid() {
+	    if( empty($this->gridType) ) {
+	        $this->setGridType(GRID_SIMPLE);
+	    }
+	    
+	    if($this->gridType == GRID_SIMPLE){
+	        $this->addBasicaGrid();
+	        $this->addBlankLine();
+	        $this->addLine('$frm->show();');
+	        $this->addLine("?>");
+	    }else if($this->gridType == GRID_SCREEN_PAGINATION){
+	        
+	    }
 	}
 	//--------------------------------------------------------------------------------------
 	public function showForm($print=false) {

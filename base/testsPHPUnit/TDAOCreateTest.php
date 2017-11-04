@@ -38,6 +38,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
+require_once '../classes/constants.php';
 require_once '../classes/webform/TDAOCreate.class.php';
 
 define('TEOL',"\n");
@@ -150,7 +152,76 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     	$resultArray = $tDAOCreate->getLinesArray();
     	$size = count($resultArray);
     	$this->assertEquals( 5, $size);
-    }    
+    }
+
+    public function testAddSqlSelectAllPagination_sizeArrayNoDBMS(){
+        $tDAOCreate = $this->tDAOCreate;        
+        $tDAOCreate->addSqlSelectAllPagination();
+        
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals( 10, $size);
+    }
+    
+    public function testAddSqlSelectAllPagination_sizeArrayMySQL(){
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->setDatabaseManagementSystem('mysql');
+        $tDAOCreate->addSqlSelectAllPagination();
+        
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals( 11, $size);
+    }
+    
+    public function testAddSqlSelectAllPagination_stringMySQL(){
+        $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = ''.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);'.TEOL;
+        $expectedArray[] = ''.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
+        $expectedArray[] = TTAB.'}'.TEOL;
+        
+        
+        $expectedString = trim( implode($expectedArray) );
+        
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->setDatabaseManagementSystem('mysql');
+        $tDAOCreate->addSqlSelectAllPagination();        
+        
+        $result = $tDAOCreate->getLinesString();
+        
+        $this->assertEquals( $expectedString , $result);
+    }
+    
+    public function testAddSqlSelectAllPagination_stringMSSQL(){
+        $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = ''.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ONLY \');'.TEOL;
+        $expectedArray[] = ''.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
+        $expectedArray[] = TTAB.'}'.TEOL;
+        
+        
+        $expectedString = trim( implode($expectedArray) );
+        
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->setDatabaseManagementSystem('mssql');
+        $tDAOCreate->addSqlSelectAllPagination();
+        
+        $result = $tDAOCreate->getLinesString();
+        
+        $this->assertEquals( $expectedString , $result);
+    }
     
     public function testAddSqlDelete_sizeArray(){
     	$tDAOCreate = $this->tDAOCreate;

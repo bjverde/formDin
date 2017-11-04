@@ -41,33 +41,30 @@
 
 define('EOL',"\n");
 define('TAB',chr(9));
-class TDAOCreate
-{
+
+class TDAOCreate {
 	private $tableName;
 	private $aColumns;
 	private $lines;
 	private $keyColumnName;
 	private $path;
-	private $bdType;
+	private $databaseManagementSystem;
 	private $showSchema;
+	private $withSqlPagination;
 	private $charParam = '?';
 
-	public function __construct($strTableName=null,$strkeyColumnName=null,$strPath=null,$bdType=null)
-	{
+	public function __construct($strTableName=null,$strkeyColumnName=null,$strPath=null,$databaseManagementSystem=null) {
 		$this->aColumns=array();
 		$this->setTableName($strTableName);
 		$this->keyColumnName = $strkeyColumnName;
 		$this->path = $strPath;
-		$this->bdType = strtoupper($bdType);
-		if( $bdType == 'POSTGRES' )
-		{
+		$this->databaseManagementSystem = strtoupper($databaseManagementSystem);
+		if( $databaseManagementSystem == DBMS_POSTGRES ) {
 			$this->charParam = '$1';
 		}
-
 	}
 	//-----------------------------------------------------------------------------------
-	public function setTableName($strNewValue)
-	{
+	public function setTableName($strNewValue) {
 		$this->tableName=$strNewValue;
 	}
 	//------------------------------------------------------------------------------------
@@ -77,6 +74,14 @@ class TDAOCreate
 	//------------------------------------------------------------------------------------
 	public function getKeyColumnName() {
 		return $this->keyColumnName;
+	}
+	//------------------------------------------------------------------------------------
+	public function setDatabaseManagementSystem($databaseManagementSystem) {
+	    return $this->databaseManagementSystem = strtoupper($databaseManagementSystem);
+	}
+	//------------------------------------------------------------------------------------
+	public function getDatabaseManagementSystem() {
+	    return $this->databaseManagementSystem;
 	}
 	//------------------------------------------------------------------------------------
 	public function setShowSchema($showSchema){
@@ -95,8 +100,16 @@ class TDAOCreate
 	    return $result;
 	}
 	//------------------------------------------------------------------------------------
+	public function setWithSqlPagination($withSqlPagination) {
+	    return $this->withSqlPagination = $withSqlPagination;
+	}
+	//------------------------------------------------------------------------------------
+	public function getWithSqlPagination() {
+	    return $this->withSqlPagination;
+	}
+	//------------------------------------------------------------------------------------
 	public function getCharParam() {
-		return $this->charParam;
+	    return $this->charParam;
 	}
 	//------------------------------------------------------------------------------------
 	public function getLinesArray(){
@@ -258,8 +271,13 @@ class TDAOCreate
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
 		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
-		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
-		$this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
+		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');		
+		if($this->getDatabaseManagementSystem() == DBMS_MYSQL){
+		    $this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
+		}
+		if($this->getDatabaseManagementSystem() == DBMS_MSSQL){
+		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ONLY \');');
+		}		
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result;');
@@ -314,12 +332,12 @@ class TDAOCreate
 	    $count=0;
 	    foreach($this->getColumns() as $k=>$v) {
 	        if( strtolower($v) != strtolower($this->keyColumnName)) {
-	            $param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
+	            $param = $this->databaseManagementSystem == DBMS_POSTGRES ? '$'.($count+1) : '?';
 	            $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $count==0 ? ' ' : ',').$v.' = '.$param);
 	            $count++;
 	        }
 	    }
-	    $param = $this->bdType=='POSTGRES' ? '$'.($count+1) : '?';
+	    $param = $this->databaseManagementSystem == DBMS_POSTGRES ? '$'.($count+1) : '?';
 	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'where '.$this->keyColumnName.' = '.$param.'\',$values);');
 	    $this->addLine(TAB.'}');
 	}
@@ -356,6 +374,10 @@ class TDAOCreate
 		$this->addLine();
 		$this->addSqlSelectById();
 		// fim select
+
+		if( $this->getWithSqlPagination() == true ){
+		    $this->addSqlSelectAllPagination();
+		}
 		
 		// select where		
 		$this->addLine();
@@ -411,7 +433,7 @@ class TDAOCreate
 			if( $cols[$i-1] != $this->keyColumnName)
 			{
 				$result .= ($result=='') ? '' : ',';
-				if( $this->bdType == 'POSTGRES' )
+				if( $this->databaseManagementSystem == DBMS_POSTGRES )
 				{
 					$result .= '$'.$i;
 				}

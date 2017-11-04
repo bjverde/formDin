@@ -49,22 +49,44 @@ function verifyPath($path){
 }
 
 
+$dbms_html = 'O FormDin 4.1.0 ou superior tem 3 tipos de grids.'
+            .'<ul>'
+            .'<li>Grid Simples - sem paginação mostrando todos os registros</li>'
+            .'<li>Grid Paginado via Tela - A paginação acontece apenas em tela. Todos os registros são carregados na memoria e paginados via JQuery</li>'
+            .'<li>Grid Paginado via SQL - A paginação acontece via banco de dados. Bem mais rapido que paginação via tela, porém no momento disponivel apenas para MySQL e MS SQL Server 2012 ou superior</li>'
+            .'</ul>';
+
+
 $frm = new TForm('Gerador de From, VO e DAO',650,700);
 $frm->setFlat(true);
-$frm->addGroupField('gpx1','Informações do form');
-$frm->addTextField('form_title','Título do formulario:',50,true,50);
-$frm->addTextField('form_dir','Diretório do formulário:',50,true,150,'modulos/');
-$frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
+$frm->setMaximize(true);
+
+$frm->addGroupField('gpxForm','Informações do form');
+    $frm->addTextField('form_title','Título do formulario:',50,true,50);
+    $frm->addTextField('form_dir','Diretório do formulário:',50,true,150,'modulos/');
+    $frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
 $frm->closeGroup();
-$frm->addGroupField('gpxE','Informações do Esquema');
-$frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
-$frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
+
+$frm->addGroupField('gpxEsquema','Informações do Esquema');
+    $frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
+    $frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
 $frm->closeGroup();
-$frm->addGroupField('gpx2','Informações do VO e DAO');
-$frm->addTextField('diretorio','Diretório:',50,true);
-$frm->addTextField('tabela','Nome da Tabela:',30,true);
-$frm->addTextField('coluna_chave','Nome da Coluna Chave:',30);
-$frm->addMemoField('colunas','Colunas:',5000,true,45,20);
+
+$frm->addGroupField('gpxFormPag','Form com paginação');
+    $frm->addHtmlField('html',$dbms_html,null,null,100)->setCss('border','1px solid blue');
+    $gridType = array(GRID_SIMPLE=>'Simples',GRID_SCREEN_PAGINATION=>'Paginação via Tela',GRID_SQL_PAGINATION=>'Paginação via SQL');
+    $frm->addSelectField('TPGRID','Escolha o tipo de Gride:',true,$gridType,null,null,'0')->addEvent('onChange','select_change(this)');
+    $frm->addGroupField('gpxDBMS');
+        $frm->addSelectField('TPBANCO','Escolha o tipo de Bando de dados:',null,'MYSQL=MySQL,MSQL=MS SQL SERVER',null,null,'0');
+    $frm->closeGroup();
+$frm->closeGroup();
+
+
+$frm->addGroupField('gpxDAO','Informações do VO e DAO');
+    $frm->addTextField('diretorio','Diretório:',50,true);
+    $frm->addTextField('tabela','Nome da Tabela:',30,true);
+    $frm->addTextField('coluna_chave','Nome da Coluna Chave:',30);
+    $frm->addMemoField('colunas','Colunas:',5000,true,45,20);
 $frm->closeGroup();
 
 $frm->setAction('Gerar');
@@ -93,12 +115,21 @@ switch( $acao ) {
             }
             $listColumns = explode(',',$txt);
             $coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];
+            $TPGRID  = $frm->get('TPGRID');
+            $TPBANCO = $frm->get('TPBANCO');
+            
             $gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
             foreach($listColumns as $k=>$v) {
                 $gerador->addColumn($v);
             }
             $showSchema = $frm->get('sit_const_schema');
             $gerador->setShowSchema($showSchema);
+            if( $TPGRID == GRID_SQL_PAGINATION){
+                $gerador->setWithSqlPagination(TRUE);
+                $gerador->setDatabaseManagementSystem($TPBANCO);
+            }else{
+                $gerador->setWithSqlPagination(FALSE);
+            }
             $gerador->saveVO();
             $gerador->saveDAO();
             
@@ -123,5 +154,24 @@ switch( $acao ) {
         break;
 }
 
+$frm->addJavascript('init()');
 $frm->show();
 ?>
+<script>
+function init() {
+	//fwReadOnly(true,'gpxDBMS', null);
+	jQuery("#TPBANCO").attr( 'disabled' , true );
+}
+function select_change(e) {
+	if( e.id == 'TPGRID'){		
+		var valueTPGRID = fwGetObj('TPGRID').value;
+		if (valueTPGRID == '3'){
+			//fwReadOnly(false,'gpxDBMS', null);
+			jQuery("#TPBANCO").attr( 'disabled' , false );
+		}else{
+			//fwReadOnly(true,'gpxDBMS', null);
+			jQuery("#TPBANCO").attr( 'disabled' , true );
+		}
+	}
+}
+</script>
