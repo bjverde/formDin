@@ -38,7 +38,6 @@
  */
 
 
-include('base/classes/FormDin3.func.inc');
 $frm = new TForm('Gride OFF-LINE',300,600);
 $frm->addSelectField('seq_impureza_metal','Metal',false,'1=Chumbo,2=Arsenio,3=Cromo')->addEvent('onChange','this.form.chave_gride_impureza_metalica.value=this.options[this.selectedIndex].value');
 $frm->addSelectField('cod_impureza_comp','Valor (mg/kg)',false,array('='=>'=','>'=>'&gt;','<'=>'&lt;'),false,false,null,null,null,null,'--');
@@ -79,17 +78,6 @@ $frm->setValue('gride_impureza'
 	,false,null,null,null,null ,null,null ,null,null,null,null,false,null,false));
 $frm->show();
 
-
-/*
-include('base/classes/FormDin3.func.inc');
-include('base/classes/FormDin3.class.php');
-$aCampos['val_salario'] = new CampoDecimal('val_salario','Salário:',false,null,null,null,null,15,null,null,null,null,2,null,null,true);
-$aCampos['des_email']	= new CampoEmail('des_email','Email:');
-$frm = new FormDin3($aCampos,'Teste Decimal',$_POST);
-$frm->adicionarCampoDecimal('val_salario2','Salário2:',false,null,null,2,15);
-$frm->setEvento('des_email',array('onKeyPress'=>'return disabilitarTeclaCtrl(event,"v");'));
-print $frm->criarForm();
-*/
 ?>
 <script>
 function disabilitarTeclaCtrl(e,teclas)

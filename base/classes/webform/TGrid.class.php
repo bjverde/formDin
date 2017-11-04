@@ -1201,7 +1201,6 @@ class TGrid extends TTable
 		$arrParams[ 'head' ] 	= $this->getExcelHeadField('utf8');
 		$arrParams[ 'title' ] 	= utf8_encode($this->getTitle() );
 		$excel->addEvent( 'onclick', 'fwExportGrid2Excel(' . json_encode( $arrParams ) . ')' );
-		//$excel->addEvent('onclick','alert("base/classes/FormDin3.xls.php?gride='.$this->getID().'")');
 		$img = new TElement( 'img' );
 		$img->setProperty( 'src', $this->getBase() . 'imagens/planilha.png' );
 		$img->setCss( 'border', 'none' );

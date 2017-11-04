@@ -88,14 +88,7 @@ if ( $_POST['modulo'] or $_POST['btnCadastrar']) {
     		include_once($arquivo);
 	    else
 		   imp('módulo funcoes.inc não encontrado para incluir');
-		if( $arquivo = encontrarArquivoIframeConsultaDinamica(PASTA_BASE.'classes/FormDin3.class.php') )
-    		include_once($arquivo);
-	    else
-		   imp('módulo '.PASTA_BASE.'classes/FormDin3.class.php não encontrado para incluir');
-		if( $arquivo = encontrarArquivoIframeConsultaDinamica(PASTA_BASE.'classes/FormDin3.func.inc') )
-    		include_once($arquivo);
-	    else
-		   imp('módulo '.PASTA_BASE.'classes/FormDin3.func.inc não encontrado para incluir');
+
 		// nome do módulo de cadastro on-line
 		$a=explode('|',$_GET['nomePacote']);
 		if( !$arquivo = encontrarArquivoIframeConsultaDinamica($a[1]) )
@@ -353,14 +346,7 @@ if( $arquivo = encontrarArquivoIframeConsultaDinamica('conexao.inc') )
     include_once($arquivo);
  else
 	imp('módulo '.$arquivo.' não encontrado para incluir');
-if( $arquivo = encontrarArquivoIframeConsultaDinamica('js/FormDin3.js') )
-    print '<script language="JavaScript" src="'.$arquivo.'"></script>';
- else
-	imp('módulo '.$arquivo.' não encontrado para incluir');
-if( $arquivo = encontrarArquivo(PASTA_BASE.'classes/FormDin3.func.inc') )
-	include_once($arquivo);
- else
-	imp('módulo '.$arquivo.' não encontrado para incluir');
+
 
 $executarFuncao = str_replace('"',"'",$_GET['executarFuncao']); // não obrigatorio
 // colocar o titulo da janela
