@@ -39,8 +39,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-define('EOL',"\n");
-define('TAB',chr(9));
+if(!defined('EOL')){ define('EOL',"\n"); }
+if(!defined('TAB')){ define('TAB',chr(9)); }
 if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
 class TFormCreate {
 	private $formTitle;
@@ -58,10 +58,12 @@ class TFormCreate {
 	    $this->setFormTitle(null);
 	    $this->setFormPath(null);
 	    $this->setFormFileName(null);
+	    $this->setPrimaryKeyTable(null);
+	    $this->setGridType(null);
 	}
 	//--------------------------------------------------------------------------------------
 	public function setFormTitle($formTitle) {
-		$formTitle = ( empty($formTitle) ) ? $formTitle : "titulo";
+		$formTitle = ( !empty($formTitle) ) ? $formTitle : "titulo";
 		$this->formTitle    = $formTitle;
 	}
 	//--------------------------------------------------------------------------------------
@@ -70,7 +72,7 @@ class TFormCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public function setFormPath($formPath) {
-		$formPath = ( isset($formPath) ) ?$formPath : "/modulos";
+		$formPath = ( !empty($formPath) ) ?$formPath : "/modulos";
 		$this->formPath    = $formPath;
 	}
 	//--------------------------------------------------------------------------------------
@@ -79,7 +81,7 @@ class TFormCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public function setFormFileName($formFileName) {
-		$formFileName = ( isset($formFileName) ) ?$formFileName : "form-".date('Ymd-Gis');
+		$formFileName = ( !empty($formFileName) ) ?$formFileName : "form-".date('Ymd-Gis');
 		$this->formFileName    = $formFileName;
 	}
 	//--------------------------------------------------------------------------------------
@@ -88,8 +90,12 @@ class TFormCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public function setPrimaryKeyTable($primaryKeyTable) {
-		$primaryKeyTable = ( isset($primaryKeyTable) ) ?$primaryKeyTable : "id";
+		$primaryKeyTable = ( !empty($primaryKeyTable) ) ?$primaryKeyTable : "id";
 		$this->primaryKeyTable    = strtoupper($primaryKeyTable);
+	}
+	//--------------------------------------------------------------------------------------
+	public function getPrimaryKeyTable() {
+		return $this->primaryKeyTable;
 	}
 	//--------------------------------------------------------------------------------------
 	public function setTableRef($tableRef) {
@@ -103,7 +109,21 @@ class TFormCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public function setGridType($gridType) {
+		$gridType = ( !empty($gridType) ) ?$gridType : GRID_SIMPLE;
 	    $this->gridType = $gridType;
+	}
+	//--------------------------------------------------------------------------------------
+	public function getGridType() {
+		return $this->gridType;
+	}
+	//------------------------------------------------------------------------------------
+	public function getLinesArray(){
+		return $this->lines;
+	}
+	//------------------------------------------------------------------------------------
+	public function getLinesString(){
+		$string = implode($this->lines);
+		return trim($string);
 	}
 	//--------------------------------------------------------------------------------------	
 	private function addLine($strNewValue=null,$boolNewLine=true){
@@ -190,23 +210,6 @@ class TFormCreate {
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
-	/**
-
-
-<script>
-function init() {
-	fwGetGrid("municipio_sql.php",'gride');
-}
-// recebe fields e values do grid
-function alterar(f,v){
-	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=municipio_sql.php',300,800,null,dados);
-}
-</script>
-
-
-	 */
-	
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
 	    $this->addLine('function init() {');
@@ -256,9 +259,9 @@ function alterar(f,v){
 		$this->addLine("?>");
         
         if( $print){
-			echo trim(implode($this->lines));
+        	echo $this->getLinesString();
 		}else{
-			return trim(implode($this->lines));
+			return $this->getLinesString();
 		}
 	}
     

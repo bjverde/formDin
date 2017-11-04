@@ -39,9 +39,6 @@
 
 $_REQUEST['subform'] = isset($_REQUEST['subform']) ? $_REQUEST['subform'] : '';
 if( $_REQUEST['subform'] == 1){
-	//require_once('../classes/FormDin3.class.php');
-	//$f = new FormDin3(null,'Teste');
-	//echo $f->criarForm();
 	//die();
 }
 

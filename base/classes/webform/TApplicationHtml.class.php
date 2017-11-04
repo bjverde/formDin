@@ -81,7 +81,6 @@ class TApplicationHtml
 		$this->setUnit( $strUnit);
 		$this->setSigla($strSigla);
 		$this->setShowMenu(true);
-		$this->setFormDin3Compatible(false);
 		$this->page = new THtmlPage();
 		// arquivo css padrão localizado na base base/css
 		$this->setCssFile('app.css');
@@ -166,14 +165,6 @@ class TApplicationHtml
 	public function getShowMenu()
 	{
 		return $this->showMenu;
-	}
-	public function setFormDin3Compatible($boolNewValue=null)
-	{
-		$this->formDin3Compatible = $boolNewValue;
-	}
-	public function getFormDin3Compatible()
-	{
-		return $this->formDin3Compatible;
 	}
 	/**
 	* Este método inicializa a aplicação e cria a interface da aplicação.
@@ -628,15 +619,7 @@ class TApplicationHtml
 				$_REQUEST['modulo']=null;
 				$_SESSION[APLICATIVO]['modulo']=null;
 				unset($_SESSION[APLICATIVO]['modulo']);
-			}
-			else
-			{
-
-				if( $this->getFormDin3Compatible())
-				{
-					require_once($this->page->getBase().'classes/FormDin3.class.php');
-					require_once($this->page->getBase().'classes/FormDin3.func.inc');
-				}
+			}else {
 				$this->includeConnectionFile();
 				if(isset($_REQUEST['fpdf']) && $_REQUEST['fpdf'] )
 				{

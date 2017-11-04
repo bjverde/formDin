@@ -75,8 +75,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
      */
     public function testSetFormTitle_null(){
         $expected = 'titulo';
-        //$this->tFormCreate->setFormTitle(null);
-        $result = $this->tFormCreate->getFormTitle();        
+        $result = $this->tFormCreate->getFormTitle();
         $this->assertEquals( $expected, $result);
     }
 
@@ -93,111 +92,87 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     /**
      * Tests TFormCreate->setFormPath()
      */
-    public function testSetFormPath()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetFormPath()
-        $this->markTestIncomplete("setFormPath test not implemented");
-        
-        $this->tFormCreate->setFormPath(/* parameters */);
+    public function testSetFormPath_null(){
+    	$expected = '/modulos';
+    	$result = $this->tFormCreate->getFormPath();
+    	$this->assertEquals( $expected, $result);
     }
 
     /**
+     * Tests TFormCreate->setFormPath()
+     */
+    public function testSetFormPath_setValue(){
+    	$expected = '/modsw';
+    	$this->tFormCreate->setFormPath($expected);
+    	$result = $this->tFormCreate->getFormPath();
+    	$this->assertEquals( $expected, $result);
+    }
+    
+    /**
      * Tests TFormCreate->setFormFileName()
      */
-    public function testSetFormFileName()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetFormFileName()
-        $this->markTestIncomplete("setFormFileName test not implemented");
-        
-        $this->tFormCreate->setFormFileName(/* parameters */);
+    public function testSetFormFileName_null() {
+        $expected = "form-".date('Ymd-Gis');
+        $result = $this->tFormCreate->getFormFileName();        
+        $this->assertEquals( $expected, $result);
+    }
+    
+    /**
+     * Tests TFormCreate->setFormFileName()
+     */
+    public function testSetFormFileName_setValue() {
+    	$expected = "lolo";
+    	$result = $this->tFormCreate->setFormFileName($expected);
+    	$result = $this->tFormCreate->getFormFileName();
+    	$this->assertEquals( $expected, $result);
     }
 
     /**
      * Tests TFormCreate->setPrimaryKeyTable()
      */
-    public function testSetPrimaryKeyTable()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetPrimaryKeyTable()
-        $this->markTestIncomplete("setPrimaryKeyTable test not implemented");
-        
-        $this->tFormCreate->setPrimaryKeyTable(/* parameters */);
+    public function testSetPrimaryKeyTable_null(){
+    	$expected = "ID";
+    	$result = $this->tFormCreate->getPrimaryKeyTable();
+    	$this->assertEquals( $expected, $result);
     }
-
+    
     /**
-     * Tests TFormCreate->setTableRef()
+     * Tests TFormCreate->setPrimaryKeyTable()
      */
-    public function testSetTableRef()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetTableRef()
-        $this->markTestIncomplete("setTableRef test not implemented");
-        
-        $this->tFormCreate->setTableRef(/* parameters */);
-    }
-
-    /**
-     * Tests TFormCreate->setListColunnsName()
-     */
-    public function testSetListColunnsName()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetListColunnsName()
-        $this->markTestIncomplete("setListColunnsName test not implemented");
-        
-        $this->tFormCreate->setListColunnsName(/* parameters */);
+    public function testSetPrimaryKeyTable_setValue(){
+    	$expected = "COD";
+    	$result = $this->tFormCreate->setPrimaryKeyTable($expected);
+    	$result = $this->tFormCreate->getPrimaryKeyTable();
+    	$this->assertEquals( $expected, $result);
     }
 
     /**
      * Tests TFormCreate->setGridType()
      */
-    public function testSetGridType()
-    {
-        // TODO Auto-generated TFormCreateTest->testSetGridType()
-        $this->markTestIncomplete("setGridType test not implemented");
-        
-        $this->tFormCreate->setGridType(/* parameters */);
+    public function testSetGridType_null(){
+    	$result = $this->tFormCreate->getGridType();
+    	$this->assertEquals( GRID_SIMPLE, $result);
+    }
+    
+    /**
+     * Tests TFormCreate->setGridType()
+     */
+    public function testSetGridType_setValue(){
+    	$expected = GRID_SQL_PAGINATION;
+    	$this->tFormCreate->setGridType($expected);
+    	$result = $this->tFormCreate->getGridType();
+    	$this->assertEquals( $expected, $result);
     }
 
     /**
      * Tests TFormCreate->addGridPagination_jsScript()
      */
-    public function testAddGridPagination_jsScript()
-    {
-        // TODO Auto-generated TFormCreateTest->testAddGridPagination_jsScript()
-        $this->markTestIncomplete("addGridPagination_jsScript test not implemented");
-        
-        $this->tFormCreate->addGridPagination_jsScript(/* parameters */);
-    }
-
-    /**
-     * Tests TFormCreate->addGrid()
-     */
-    public function testAddGrid()
-    {
-        // TODO Auto-generated TFormCreateTest->testAddGrid()
-        $this->markTestIncomplete("addGrid test not implemented");
-        
-        $this->tFormCreate->addGrid(/* parameters */);
-    }
-
-    /**
-     * Tests TFormCreate->showForm()
-     */
-    public function testShowForm()
-    {
-        // TODO Auto-generated TFormCreateTest->testShowForm()
-        $this->markTestIncomplete("showForm test not implemented");
-        
-        $this->tFormCreate->showForm(/* parameters */);
-    }
-
-    /**
-     * Tests TFormCreate->saveForm()
-     */
-    public function testSaveForm()
-    {
-        // TODO Auto-generated TFormCreateTest->testSaveForm()
-        $this->markTestIncomplete("saveForm test not implemented");
-        
-        $this->tFormCreate->saveForm(/* parameters */);
+    public function testAddGridPagination_jsScript_sizeArray() {
+    	$this->tFormCreate->setFormFileName('xxx');        
+        $this->tFormCreate->addGridPagination_jsScript();
+        $resultArray = $this->tFormCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals( 10, $size);
     }
 }
 

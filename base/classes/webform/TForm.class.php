@@ -214,7 +214,6 @@ class TForm Extends TBox
 			$this->disableF5(); // não permitir atualizar a página com F5
 			$this->setFade( 150 ); // habilitar o efeito fade-in para exibir o formulario
 			$this->addJsFile( 'ajax.js' );
-			$this->addJsFile( 'FormDin3.js' );
 			$this->addJsFile( 'FormDin4.js' );
 			$this->addJsFile( 'FormDin4Ajax.js' );
 			
@@ -251,7 +250,6 @@ class TForm Extends TBox
 			$this->addCssFile( 'calendario/calendar-win2k-cold-1.css' );
 			$this->addCssFile( 'jquery/ui/base/base.css' );
 			//$this->addJsFile( 'sorttable.js' );
-			$this->addCssFile( 'FormDin3.css' );
 			$this->addCssFile( 'FormDin4.css' );
 			$this->addJsFile( 'lazyload/lazyload-min.js' );
 			$this->addJsFile( 'jquery/jquery.qtip.min.js' );;

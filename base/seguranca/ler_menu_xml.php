@@ -163,7 +163,6 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
    	$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Dinâmico IV','ajudaonline.gif');
 	$menu->add(-260,-20,'Grides');
 	$menu->add(-26001,-260	,'Criação de Gride','base/exemplos/exe_gride.inc');
-	$menu->add(-26002,-260	,'Grid Off-Line - Formdin3','base/exemplos/exe_gride_off_line.inc');
 	$menu->add(-26003,-260	,'Grid Off-Line - FormDin4','base/exemplos/exe_gride_off_line_novo.inc');
 	$menu->add(-26004,-260	,'Grid Com Coluna Checkbox','base/exemplos/exe_gride_checkbox.inc');
 	$menu->add(-26005,-260	,'Grid com Arquivos Anexados ( ajax )','base/exemplos/exe_gride_anexo.inc');

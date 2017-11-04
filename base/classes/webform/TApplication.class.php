@@ -158,7 +158,6 @@ class TApplication extends TLayout {
 		$this->setUnit( $strUnit );
 		$this->setSigla( $strSigla );
 		$this->setShowMenu( true );
-		$this->setFormDin3Compatible( false );
 
 		// arquivo css padrão localizado na base base/css
 		$this->addCssFile( 'app.css' );
@@ -288,19 +287,8 @@ class TApplication extends TLayout {
 		$this->showMenu = $boolNewValue;
 	}
 
-	public function getShowMenu()
-	{
+	public function getShowMenu() {
 		return $this->showMenu;
-	}
-
-	public function setFormDin3Compatible( $boolNewValue = null )
-	{
-		$this->formDin3Compatible = $boolNewValue;
-	}
-
-	public function getFormDin3Compatible()
-	{
-		return $this->formDin3Compatible;
 	}
 
 	/**
@@ -831,27 +819,16 @@ class TApplication extends TLayout {
 				$_REQUEST[ 'modulo' ] = null;
 				$_SESSION[ APLICATIVO ][ 'modulo' ] = null;
 				unset( $_SESSION[ APLICATIVO ][ 'modulo' ] );
-			}
-			else
-			{
-				if ( $this->getFormDin3Compatible() )
-				{
-					require_once( $this->getBase() . 'classes/FormDin3.class.php' );
-					require_once( $this->getBase() . 'classes/FormDin3.func.inc' );
-				}
+			}else {
 
 				$this->includeConnectionFile();
-
 				if ( ( isset( $_REQUEST[ 'fpdf' ] ) && $_REQUEST[ 'fpdf' ] ) || ( isset( $_REQUEST[ 'pdf' ] ) && $_REQUEST[ 'pdf' ] ) )
 				{
 					require_once( $modulo );
 					exit();
 				}
 
-				//require_once($this->getBase().'includes/funcoes.inc');
-				//require_once($this->getBase().'includes/conexao.inc');
-				if ( file_exists( $this->getBase() . 'includes/formDin4Ajax.php' ) )
-				{
+				if ( file_exists( $this->getBase() . 'includes/formDin4Ajax.php' ) ) {
 					require_once( $this->getBase() . 'includes/formDin4Ajax.php' );
 				}
 

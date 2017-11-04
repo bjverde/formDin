@@ -37,20 +37,6 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-	/*
-  $frm = new FormDin3(null,'Teste Campo Hora',$_POST);
-  $frm->adicionarCampoHora('hor_inicial','Hora:',false,null,null,5,5,null,null);
-  $frm->adicionarCampoInteiro('qtd_total','Qtd:',true,null,null,8,10,null,null,null,null,null,null,null);
-  $frm->adicionarCampoDecimal('val_total','Valor:',true,null,null,2,10,12);
-
-  $frm->botaoAcao[''] = array( 'Gravar');
-  $frm->validar();
-  print $frm->criarForm();
-  /*print 'Total:'.$frm->get('qtd_total');
-  print ' e '.$frm->getFormated('qtd_total');
-  */
-  //print_r($_POST);
-
 include("../classes/webform/TForm.class.php");
 $frm = new TForm('Exemplo Campo Hora');
 $frm->addTextField('nom_pessoa','Nome:',50,false)->setEnabled(false);
