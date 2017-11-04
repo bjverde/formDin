@@ -42,7 +42,7 @@
 /*
 Biblioteca de Funções JavaScript utilizadas pela classe FormDin4
 Versão:1.0
-Ultima Atualiza�ao:31/05/2009    Por:Luís Eugênio Barbosa
+Ultima Atualizacao:31/05/2009    Por:Luís Eugênio Barbosa
 */
 
 
@@ -4021,7 +4021,7 @@ function fwFieldCoordShowMap(id,height,width,jsonParams)
 	var w= width  || jQuery("body").width()-100;
 	var url = "?modulo="+pastaBase+"includes/ponto_google_map.php&ajax=1&h=+"+(h-50)+"&prototypeId=&updateField="+id;
 
-    // se o campo estiver readonly via fun��o fwReadOnly(), n�o permitir clicar no mapa para retornar a coordenada
+    // se o campo estiver readonly via funcao fwReadOnly(), nao permitir clicar no mapa para retornar a coordenada
     if( jQuery("#"+id+"_lat_grau").attr('readonly') == 'readonly' )
     {
     	jsonParams['readonly'] = 'true';
@@ -5650,17 +5650,15 @@ function fwLockUnlockArea(areaId,lock)
 }
 
 /**
- * Fun��o utilizada para bloquear ou desbloquear campos
+ * Funcao utilizada para bloquear ou desbloquear campos
  * containerId = id do campo, grupo ou aba para bloquear somente campos filhos
- * except = lista de campos que n�o dever�o ser desabilitados, separados por virgula.
+ * except = lista de campos que nao deverao ser desabilitados, separados por virgula.
  * lock = true para bloquear ou false para desbloquear
  */
-function fwLockFields(containerId, except, lock )
-{
+function fwLockFields(containerId, except, lock ){
 	var tag;
 	var obj;
-	if( containerId )
-	{
+	if( containerId ) {
 		obj = jQuery( "#"+containerId );
 		if( !obj.get(0) ) // radio
 		{
@@ -5680,12 +5678,13 @@ function fwLockFields(containerId, except, lock )
 				obj=null;
 			}
 		}
-		if( !obj )
-		{
+		if( !obj ) {
 			return null;
 		}
-		if( obj.get(0).tagName.toLowerCase()=='input' ||  obj.get(0).tagName.toLowerCase()=='textarea' ||  obj.get(0).tagName.toLowerCase()=='select' )
-		{
+		var typeInput    = obj.get(0).tagName.toLowerCase()=='input';
+		var typeTextArea = obj.get(0).tagName.toLowerCase()=='textarea';
+		var typeSelect   = obj.get(0).tagName.toLowerCase()=='select';
+		if( typeInput ||  typeTextArea ||  typeSelect ) {
 			fwLockFields(obj.parent().get(0).id);
 		}
 	}
@@ -6623,7 +6622,7 @@ function fwGridShowColumn( colName, idGrid )
 }
 
 /**
-* Fun��o para habilitar/desabilitar a edi��o de campos
+* Funcao para habilitar/desabilitar a edicao de campos
 * @example fwReadOnly() para proteger, fwReadOnly(false) para desproteger
 * @example fwReadOnly(null,'gp1'); para proteger os campos do grupo gp1
 *
