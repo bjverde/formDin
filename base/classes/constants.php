@@ -52,6 +52,8 @@ define('GRID_SIMPLE','1');
 define('GRID_SCREEN_PAGINATION','2');
 define('GRID_SQL_PAGINATION','3');
 
+define('ROWS_PER_PAGE',20);
+
 
 if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
 ?>
