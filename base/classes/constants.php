@@ -55,7 +55,7 @@ define('GRID_SQL_PAGINATION','3');
 define('ROWS_PER_PAGE',20);
 
 
-define('DS',DIRECTORY_SEPARATOR);
+if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
 define('EOL',"\n");
 define('TAB',chr(9));
 ?>
