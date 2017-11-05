@@ -82,7 +82,7 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	public function setFormFileName($formFileName) {
 		$formFileName = ( !empty($formFileName) ) ?$formFileName : "form-".date('Ymd-Gis');
-		$this->formFileName    = $formFileName;
+		$this->formFileName    = $formFileName.'.php';
 	}
 	//--------------------------------------------------------------------------------------
 	public function getFormFileName() {
@@ -182,17 +182,31 @@ class TFormCreate {
 		$this->addLine('}');
 	}
 	//--------------------------------------------------------------------------------------
-	private function addBasicaGrid() {
-		$this->addBlankLine();
-		$this->addLine('$dados = '.$this->daoTableRef.'::selectAll($primaryKey);');
+	public function getMixUpdateFields() {
 		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
 			$mixUpdateFields = '$primaryKey.\'|\'.$primaryKey.\'';
 			foreach($this->listColumnsName as $key=>$value){
 				$mixUpdateFields = $mixUpdateFields.','.$value.'|'.$value;
 			}
 			$mixUpdateFields = $mixUpdateFields.'\';';
-			$this->addLine('$mixUpdateFields = '.$mixUpdateFields);
+			$mixUpdateFields = '$mixUpdateFields = '.$mixUpdateFields;
 		}
+		return $mixUpdateFields;
+	}
+	//--------------------------------------------------------------------------------------
+	public function addColumnsGrid($qtdTab) {
+		$this->addLine($qtdTab.'$gride->addColumn($primaryKey,\'id\',50,\'center\');');
+		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+			foreach($this->listColumnsName as $key=>$value){
+				$this->addLine($qtdTab.'$gride->addColumn(\''.$value.'\',\''.$value.'\',50,\'center\');');
+			}
+		}
+	}
+	//--------------------------------------------------------------------------------------
+	private function addBasicaGrid() {
+		$this->addBlankLine();
+		$this->addLine('$dados = '.$this->daoTableRef.'::selectAll($primaryKey);');
+		$this->addLine($this->getMixUpdateFields());
 		$this->addLine('$gride = new TGrid( \'gd\'        // id do gride');
 		$this->addLine('				   ,\'Gride\'     // titulo do gride');
 		$this->addLine('				   ,$dados 	      // array de dados');
@@ -201,24 +215,19 @@ class TFormCreate {
 		$this->addLine('				   ,$primaryKey   // chave primaria');
 		$this->addLine('				   ,$mixUpdateFields');
 		$this->addLine('				   );');
-		$this->addLine('$gride->addColumn($primaryKey,\'id\',50,\'center\');');
-		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
-			foreach($this->listColumnsName as $key=>$value){
-				$this->addLine('$gride->addColumn(\''.$value.'\',\''.$value.'\',50,\'center\');');
-			}
-		}
+		$this->addColumnsGrid(null);
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
 	    $this->addLine('function init() {');
-	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'.php\',\'gride\');');
+	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\');');
 	    $this->addLine('}');
 	    $this->addBlankLine();
 	    $this->addLine('function alterar(f,v){');
 	    $this->addLine(TAB.'var dados = fwFV2O(f,v);');
-	    $this->addLine(TAB.'fwModalBox(\'Alteração\',\'index.php?modulo='.$this->formFileName.'.php\',300,800,null,dados);');
+	    $this->addLine(TAB.'fwModalBox(\'Alteração\',\'index.php?modulo='.$this->formFileName.'\',300,800,null,dados);');
 	    $this->addLine('}');
 	    $this->addLine('</script>');
 	}
@@ -237,6 +246,32 @@ class TFormCreate {
 	        $this->addLine("?>");
 	    }else if($this->gridType == GRID_SCREEN_PAGINATION){
 	        
+	    }else if ($this->gridType == GRID_SQL_PAGINATION){
+	    	$this->addLine('if( isset( $_REQUEST[\'ajax\'] )  && $_REQUEST[\'ajax\'] ) {');
+	    	$this->addLine(TAB.'$maxRows = ROWS_PER_PAGE;');
+	    	$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
+	    	$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);');
+	    	$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount();');
+	    	$this->addLine(TAB.$this->getMixUpdateFields());
+	    	$this->addLine(TAB.'$gride = new TGrid( \'gd\'                        // id do gride');
+	    	$this->addLine(TAB.'				   ,\'Gride with SQL Pagination\' // titulo do gride');
+	    	$this->addLine(TAB.'				   );');
+	    	$this->addLine(TAB.'$gride->addKeyField( $primaryKey ); // chave primaria');
+	    	$this->addLine(TAB.'$gride->setData( $dados ); // array de dados');
+	    	$this->addLine(TAB.'$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );');
+	    	$this->addLine(TAB.'$gride->setMaxRows( $maxRows );');
+	    	$this->addLine(TAB.'$gride->setUpdateFields($mixUpdateFields);');
+	    	$this->addLine(TAB.'$gride->setUrl( \''.$this->getFormFileName().'\' );');
+	    	$this->addLine(TAB.'$gride->setOnDrawActionButton(\'onDraw\');');
+	    	$this->addBlankLine();
+	    	$this->addColumnsGrid(TAB);
+	    	$this->addLine(TAB.'$gride->show();');
+	    	$this->addLine(TAB.'die();');
+	    	$this->addLine('}');
+	    	$this->addBlankLine();
+	    	$this->addLine('$frm->addHtmlField(\'gride\');');
+	    	$this->addLine('$frm->addJavascript(\'init()\');');
+	    	$this->addLine('$frm->show();');	    	
 	    }
 	}
 	//--------------------------------------------------------------------------------------
@@ -267,7 +302,7 @@ class TFormCreate {
     
 	//---------------------------------------------------------------------------------------
 	public function saveForm(){
-		$fileName = $this->formPath.DS.$this->formFileName.'.php';
+		$fileName = $this->formPath.DS.$this->formFileName;
 		if($fileName){
 			if( file_exists($fileName)){
 				unlink($fileName);

@@ -112,7 +112,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
      * Tests TFormCreate->setFormFileName()
      */
     public function testSetFormFileName_null() {
-        $expected = "form-".date('Ymd-Gis');
+        $expected = "form-".date('Ymd-Gis').'.php';
         $result = $this->tFormCreate->getFormFileName();        
         $this->assertEquals( $expected, $result);
     }
@@ -124,7 +124,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$expected = "lolo";
     	$result = $this->tFormCreate->setFormFileName($expected);
     	$result = $this->tFormCreate->getFormFileName();
-    	$this->assertEquals( $expected, $result);
+    	$this->assertEquals( $expected.'.php', $result);
     }
 
     /**
@@ -163,7 +163,55 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getGridType();
     	$this->assertEquals( $expected, $result);
     }
+    
+    public function testGetMixUpdateFields_3Column() {
+    	$expected = '$mixUpdateFields = $primaryKey.\'|\'.$primaryKey.\',NOM|NOM,DATE|DATE,FLAG|FLAG\';';
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$result = $this->tFormCreate->getMixUpdateFields();
+    	$this->assertEquals( $expected, $result);
+    }
+    
+    public function testAddColumnsGrid_4Column_qtdNUll_arraysize() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addColumnsGrid(null);
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 4, $size);
+    }
 
+    
+    public function testAddColumnsGrid_4Column_qtdNull_string() {
+    	$expectedArray[] = '$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
+    	$expectedArray[] = '$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
+    	$expectedArray[] = '$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
+    	$expectedArray[] = '$gride->addColumn(\'FLAG\',\'FLAG\',50,\'center\');'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addColumnsGrid(null);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    
+    public function testAddColumnsGrid_4Column_qtd2_string() {
+    	$expectedArray[] = TAB.TAB.'$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
+    	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
+    	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
+    	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'FLAG\',\'FLAG\',50,\'center\');'.EOL;    	
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addColumnsGrid(TAB.TAB);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }    
+    
     /**
      * Tests TFormCreate->addGridPagination_jsScript()
      */
