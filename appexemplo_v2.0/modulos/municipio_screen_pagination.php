@@ -47,21 +47,20 @@ switch( $acao ) {
 	break;
 }
 
-
-
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
+	$maxRows = 17;
 	$dados = MunicipioDAO::selectAll('NOM_MUNICIPIO');
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',COD_UF|COD_UF,NOM_MUNICIPIO|NOM_MUNICIPIO,SIT_ATIVO|SIT_ATIVO';
 	$gride = new TGrid( 'gd'          // id do gride
-					   ,'Gride com Paginador Tela'       // titulo do gride
-					   ,$dados 	      // array de dados
-					   ,null		  // altura do gride
-					   ,null		  // largura do gride
-					   ,$primaryKey   // chave primaria
-					   ,$mixUpdateFields
-					   ,17
-					   ,'municipio_screen_pagination.php'
-					   );
+			,'Gride com Paginador Tela'       // titulo do gride
+			);
+	$gride->addKeyField( $primaryKey ); // chave primaria
+	$gride->setData( $dados ); // array de dados
+	$gride->setMaxRows( $maxRows );
+	$gride->setUpdateFields($mixUpdateFields);
+	$gride->setUrl( 'municipio_screen_pagination.php' );
+	$gride->setOnDrawActionButton('onDraw');
+	
 	$gride->addColumn($primaryKey, 'id', 50, 'center');
 	$gride->addColumn('COD_UF', 'COD_UF', 50, 'center');
 	$gride->addColumn('SIG_UF', 'UF', 50, 'center');
