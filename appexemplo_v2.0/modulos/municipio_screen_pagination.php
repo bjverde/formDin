@@ -60,7 +60,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					   ,$primaryKey   // chave primaria
 					   ,$mixUpdateFields
 					   ,17
-					   ,'municipio.php'
+					   ,'municipio_screen_pagination.php'
 					   );
 	$gride->addColumn($primaryKey, 'id', 50, 'center');
 	$gride->addColumn('COD_UF', 'COD_UF', 50, 'center');
@@ -86,11 +86,11 @@ function onDraw( $rowNum,$button,$objColumn,$aData) {
 ?>
 <script>
 function init() {
-	fwGetGrid("municipio.php",'html_gride');
+	fwGetGrid("municipio_screen_pagination.php",'html_gride');
 }
 // recebe fields e values do grid
 function alterar(f,v){
 	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=municipio.php',300,800,null,dados);
+	fwModalBox('Alteração','index.php?modulo=municipio_screen_pagination.php',300,800,null,dados);
 }
 </script>

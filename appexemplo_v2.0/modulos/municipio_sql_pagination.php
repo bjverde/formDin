@@ -61,7 +61,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
 	$gride->setMaxRows( $maxRows );
 	$gride->setUpdateFields($mixUpdateFields);
-	$gride->setUrl( 'municipio_sql.php' );
+	$gride->setUrl( 'municipio_sql_pagination.php' );
 	$gride->setOnDrawActionButton('onDraw');
 	
 	$gride->addColumn($primaryKey, 'id', 50, 'center');
@@ -89,11 +89,11 @@ function onDraw( $rowNum,$button,$objColumn,$aData) {
 ?>
 <script>
 function init() {
-	fwGetGrid("municipio_sql.php",'gride');
+	fwGetGrid("municipio_sql_pagination.php",'gride');
 }
 // recebe fields e values do grid
 function alterar(f,v){
 	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=municipio_sql.php',300,800,null,dados);
+	fwModalBox('Alteração','index.php?modulo=municipio_sql_pagination.php',300,800,null,dados);
 }
 </script>
