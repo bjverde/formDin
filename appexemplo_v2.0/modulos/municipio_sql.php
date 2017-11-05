@@ -59,7 +59,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
-	$gride->setRealTotalRowsWithoutPaginator( $realTotalRowsWithoutPaginator );
+	$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
 	$gride->setMaxRows( $maxRows );
 	$gride->setUpdateFields($mixUpdateFields);
 	$gride->setUrl( 'municipio_sql.php' );
