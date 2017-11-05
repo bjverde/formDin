@@ -2,14 +2,17 @@
 $primaryKey = 'COD_MUNICIPIO';
 $frm = new TForm('Cadastro de Municípios',600);
 $frm->setFlat(true);
+$frm->setMaximize(true);
 
-
-$frm->addHiddenField($primaryKey); // coluna chave da tabela
+$frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 
 $dadosUf = UfDAO::selectAll('NOM_UF');
 $frm->addSelectField('COD_UF','Estado:',true,$dadosUf);
 $frm->addTextField('NOM_MUNICIPIO', 'Nome município:', 50, true);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+
+$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -68,8 +71,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	die();
 }
 $frm->addHtmlField('html_gride');
-$frm->setAction("Refresh");
-$frm->setAction( 'Salvar,Limpar' );
 $frm->addJavascript('init()');
 $frm->show();
 

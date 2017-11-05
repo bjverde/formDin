@@ -4,7 +4,6 @@ $frm = new TForm('Cadastro de Municípios',600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 
 $dadosUf = UfDAO::selectAll('NOM_UF');
