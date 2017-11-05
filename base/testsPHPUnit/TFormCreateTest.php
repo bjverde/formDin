@@ -222,5 +222,68 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
         $size = count($resultArray);
         $this->assertEquals( 10, $size);
     }
+    
+    /**
+     * Tests TFormCreate->addGridPagination_jsScript()
+     */
+    public function testAddGridPagination_jsScript_string() {
+    	$expectedArray[] ='<script>'.EOL;
+    	$expectedArray[] ='function init() {'.EOL;
+    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\');'.EOL;
+    	$expectedArray[] ='}'.EOL;
+    	$expectedArray[] ='// recebe fields e values do grid'.EOL;
+    	$expectedArray[] ='function alterar(f,v){'.EOL;
+    	$expectedArray[] =TAB.'var dados = fwFV2O(f,v);'.EOL;
+    	$expectedArray[] =TAB.'fwModalBox(\'Alteração\',\'index.php?modulo=xxx.php\',300,800,null,dados);'.EOL;
+    	$expectedArray[] ='}'.EOL;
+    	$expectedArray[] ='</script>'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$this->tFormCreate->setFormFileName('xxx');
+    	$this->tFormCreate->addGridPagination_jsScript();
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    
+    public function testAddGrid_sizeArray_null() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGrid();
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 19, $size);
+    }
+    
+    public function testAddGrid_sizeArray_setGRID_SIMPLE() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->setGridType(GRID_SIMPLE);
+    	$this->tFormCreate->addGrid();
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 19, $size);
+    }
+    
+    public function testAddGrid_sizeArray_setGRID_SCREEN_PAGINATION() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->setGridType(GRID_SCREEN_PAGINATION);
+    	$this->tFormCreate->setFormFileName('xxx');
+    	$this->tFormCreate->addGrid();
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 44, $size);
+    }
+    
+    public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->setGridType(GRID_SQL_PAGINATION);
+    	$this->tFormCreate->setFormFileName('xxx');
+    	$this->tFormCreate->addGrid();
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 45, $size);
+    }
 }
-

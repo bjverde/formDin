@@ -219,20 +219,26 @@ class TFormCreate {
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
+	public function addOnDraw() {
+		$this->addLine('function onDraw( $rowNum,$button,$objColumn,$aData) {');
+		$this->addLine(TAB.'if( $button->getName() == \'btnAlterar\') {');
+		$this->addLine(TAB.TAB.'if( $rowNum == 1 ) { $button->setEnabled( false ); }');
+		$this->addLine(TAB.'}');
+		$this->addLine('}');
+	}
+	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
 	    $this->addLine('function init() {');
 	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\');');
 	    $this->addLine('}');
-	    $this->addBlankLine();
+	    $this->addLine('// recebe fields e values do grid');
 	    $this->addLine('function alterar(f,v){');
 	    $this->addLine(TAB.'var dados = fwFV2O(f,v);');
 	    $this->addLine(TAB.'fwModalBox(\'Alteração\',\'index.php?modulo='.$this->formFileName.'\',300,800,null,dados);');
 	    $this->addLine('}');
 	    $this->addLine('</script>');
-	}
-	
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	public function addGrid() {
 	    if( empty($this->gridType) ) {
@@ -244,27 +250,32 @@ class TFormCreate {
 	        $this->addBlankLine();
 	        $this->addLine('$frm->show();');
 	        $this->addLine("?>");
-	    }else if($this->gridType == GRID_SCREEN_PAGINATION){
-	        
-	    }else if ($this->gridType == GRID_SQL_PAGINATION){
+	    }else{
 	    	$this->addLine('if( isset( $_REQUEST[\'ajax\'] )  && $_REQUEST[\'ajax\'] ) {');
 	    	$this->addLine(TAB.'$maxRows = ROWS_PER_PAGE;');
-	    	$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
-	    	$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);');
-	    	$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount();');
+	    	if($this->gridType == GRID_SQL_PAGINATION){
+	    		$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
+	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);');
+	    		$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount();');
+	    	}else if($this->gridType == GRID_SCREEN_PAGINATION){
+	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAll( $primaryKey);');
+	    	}
 	    	$this->addLine(TAB.$this->getMixUpdateFields());
 	    	$this->addLine(TAB.'$gride = new TGrid( \'gd\'                        // id do gride');
 	    	$this->addLine(TAB.'				   ,\'Gride with SQL Pagination\' // titulo do gride');
 	    	$this->addLine(TAB.'				   );');
 	    	$this->addLine(TAB.'$gride->addKeyField( $primaryKey ); // chave primaria');
 	    	$this->addLine(TAB.'$gride->setData( $dados ); // array de dados');
-	    	$this->addLine(TAB.'$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );');
+	    	if($this->gridType == GRID_SCREEN_PAGINATION){
+	    		$this->addLine(TAB.'$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );');
+	    	}
 	    	$this->addLine(TAB.'$gride->setMaxRows( $maxRows );');
 	    	$this->addLine(TAB.'$gride->setUpdateFields($mixUpdateFields);');
 	    	$this->addLine(TAB.'$gride->setUrl( \''.$this->getFormFileName().'\' );');
 	    	$this->addLine(TAB.'$gride->setOnDrawActionButton(\'onDraw\');');
 	    	$this->addBlankLine();
 	    	$this->addColumnsGrid(TAB);
+	    	$this->addBlankLine();
 	    	$this->addLine(TAB.'$gride->show();');
 	    	$this->addLine(TAB.'die();');
 	    	$this->addLine('}');
@@ -272,6 +283,9 @@ class TFormCreate {
 	    	$this->addLine('$frm->addHtmlField(\'gride\');');
 	    	$this->addLine('$frm->addJavascript(\'init()\');');
 	    	$this->addLine('$frm->show();');
+	    	$this->addBlankLine();
+	    	$this->addOnDraw();
+	    	$this->addLine("?>");
 	    	$this->addGridPagination_jsScript();
 	    }
 	}
