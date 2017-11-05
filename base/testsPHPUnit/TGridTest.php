@@ -206,7 +206,7 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	public function testGetRowNumWithPaginator_with_RealTotalRowsWithoutPaginator() {
 		$expected = 30;
 		$tGrid = $this->tGrid;
-		$tGrid->setRealTotalRowsWithoutPaginator(30);
+		$tGrid->setRealTotalRowsSqlPaginator(30);
 		$result = $tGrid->getRowNumWithPaginator(20,$expected);
 		$this->assertEquals( $expected , $result);
 	}
@@ -228,7 +228,7 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	public function testGetRowCount_with_RealTotalRowsWithoutPaginator() {
 		$expected = 30;
 		$tGrid = $this->tGrid;
-		$tGrid->setRealTotalRowsWithoutPaginator($expected);
+		$tGrid->setRealTotalRowsSqlPaginator($expected);
 		$result = $tGrid->getRowCount();
 		$this->assertEquals( $expected , $result);
 	}

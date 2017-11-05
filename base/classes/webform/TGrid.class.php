@@ -69,7 +69,7 @@ class TGrid extends TTable
 	private $hiddenField;
 	private $readOnly;
 	private $maxRows;
-	private $realTotalRowsWithoutPaginator;
+	private $realTotalRowsSqlPaginator;
 	private $url;
 	private $bvars;
 	private $cache;
@@ -235,13 +235,13 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------
-	public function getRealTotalRowsWithoutPaginator(){
-		return $this->realTotalRowsWithoutPaginator;
+	public function getRealTotalRowsSqlPaginator(){
+		return $this->realTotalRowsSqlPaginator;
 	}
 	
 	//------------------------------------------------------------------------------------
-	public function setRealTotalRowsWithoutPaginator($realTotalRowsWithoutPaginator){
-		$this->realTotalRowsWithoutPaginator = $realTotalRowsWithoutPaginator;
+	public function setRealTotalRowsSqlPaginator($realTotalRowsSqlPaginator){
+		$this->realTotalRowsSqlPaginator = $realTotalRowsSqlPaginator;
 	}
 	
 	//------------------------------------------------------------------------------------
@@ -1801,7 +1801,7 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	public function getRowNumWithPaginator($rowNum,$rowStart){
-		if( !empty($this->getRealTotalRowsWithoutPaginator()) ){
+		if( !empty($this->getRealTotalRowsSqlPaginator()) ){
 			$result = $rowStart;
 		}else {
 			$result = $rowNum;
@@ -1812,8 +1812,8 @@ class TGrid extends TTable
 	//---------------------------------------------------------------------------------------
 	public function getRowCount() {
 		$result = 0;
-		if( !empty($this->getRealTotalRowsWithoutPaginator()) ){
-			$result = $this->getRealTotalRowsWithoutPaginator();
+		if( !empty($this->getRealTotalRowsSqlPaginator()) ){
+			$result = $this->getRealTotalRowsSqlPaginator();
 		}else{
 			$res = $this->getData();
 			if ( $res ) {
