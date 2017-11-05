@@ -271,7 +271,8 @@ class TFormCreate {
 	    	$this->addBlankLine();
 	    	$this->addLine('$frm->addHtmlField(\'gride\');');
 	    	$this->addLine('$frm->addJavascript(\'init()\');');
-	    	$this->addLine('$frm->show();');	    	
+	    	$this->addLine('$frm->show();');
+	    	$this->addGridPagination_jsScript();
 	    }
 	}
 	//--------------------------------------------------------------------------------------

@@ -126,7 +126,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getFormFileName();
     	$this->assertEquals( $expected.'.php', $result);
     }
-
+    
     /**
      * Tests TFormCreate->setPrimaryKeyTable()
      */
@@ -145,7 +145,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getPrimaryKeyTable();
     	$this->assertEquals( $expected, $result);
     }
-
+    
     /**
      * Tests TFormCreate->setGridType()
      */
