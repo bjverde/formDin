@@ -252,7 +252,7 @@ class TFormCreate {
 	    	$this->addLine(TAB.'$maxRows = ROWS_PER_PAGE;');
 	    	if($this->gridType == GRID_SQL_PAGINATION){
 	    		$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
-	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);');
+	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllPagination( $primaryKey, null, $page,  $maxRows);');
 	    		$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount();');
 	    	}else if($this->gridType == GRID_SCREEN_PAGINATION){
 	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAll( $primaryKey);');
@@ -263,7 +263,7 @@ class TFormCreate {
 	    	$this->addLine(TAB.'				   );');
 	    	$this->addLine(TAB.'$gride->addKeyField( $primaryKey ); // chave primaria');
 	    	$this->addLine(TAB.'$gride->setData( $dados ); // array de dados');
-	    	if($this->gridType == GRID_SCREEN_PAGINATION){
+	    	if($this->gridType == GRID_SQL_PAGINATION){
 	    		$this->addLine(TAB.'$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );');
 	    	}
 	    	$this->addLine(TAB.'$gride->setMaxRows( $maxRows );');
@@ -299,11 +299,7 @@ class TFormCreate {
 		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, true, false);');
 		$this->addLine('$frm->addButton(\'Limpar\', null, \'Limpar\', null, null, false, false);');		
 		$this->addBasicaViewController();
-		$this->addBasicaGrid();
-		//-------- FIM
-		//$this->addLine('$frm->setAction( \'Salvar,Limpar\' );');
-		$this->addLine('$frm->show();');
-		$this->addLine("?>");
+		$this->addGrid();
         
         if( $print){
         	echo $this->getLinesString();

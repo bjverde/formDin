@@ -147,6 +147,7 @@ switch( $acao ) {
             $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
             $geradorForm->setTableRef($frm->get('tabela'));
             $geradorForm->setListColunnsName($listColumns);
+            $geradorForm->setGridType($TPGRID);
             $geradorForm->saveForm();
             
             $frm->setMessage('Fim');
