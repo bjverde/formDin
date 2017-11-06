@@ -471,7 +471,7 @@ class TGrid extends TTable
 
 				$keys = array_keys($res);
 				foreach( $res[ $keys[0] ] as $k => $v ) {
-					$rowNum = $this->getRowNumWithPaginator( $rowNum ,$rowStart );
+					$rowNum = $this->getRowNumWithPaginator( $rowNum ,$rowStart ,$k );
 					$rowNum++;
 
 					if ( ( $rowNum - 1 ) < $rowStart ) {
@@ -513,17 +513,7 @@ class TGrid extends TTable
 						}
 						$fieldName = $objColumn->getFieldName();
 
-						// zebrar o gride se nao existir a funcao ondrawrow definida pelo usuario
-						if ( $this->getZebrarColors( 0 ) ) {
-							// não sobrepor se o background color estiver definido
-							if ( !$row->getCss( 'background-color' ) ) {
-								if ( $rowNum % 2 != 0 ) {
-									$row->setCss( 'background-color', $this->getZebrarColors( 0 ) );
-								}else {
-									$row->setCss( 'background-color', $this->getZebrarColors( 1 ) );
-								}
-							}
-						}
+						$this->backgroundColorRowGrid ( $row, $rowNum );
 						$cell = $row->addCell();
 						$cell->setAttribute('column_index',$objColumn->getColIndex() );
 						$cell->setAttribute('grid_id',$this->getId() );
@@ -542,10 +532,8 @@ class TGrid extends TTable
 						}
 
 						// alterar o tamanho da fonte para o tamanho definido para o gride todo
-						if ( $this->getCss( 'font-size' ) )
-						{
-							if ( !$cell->getCss( 'font-size' ) )
-							{
+						if ( $this->getCss( 'font-size' ) ) {
+							if ( !$cell->getCss( 'font-size' ) ) {
 								$cell->setcss( 'font-size', $this->getCss( 'font-size' ) );
 							}
 						}
@@ -1044,6 +1032,24 @@ class TGrid extends TTable
 		}
 		return parent::show( $boolPrint );
 	}
+	/**
+	 * @param row
+	 * @param rowNum
+	 */
+	 public function backgroundColorRowGrid($row, $rowNum) {
+		// zebrar o gride se nao existir a funcao ondrawrow definida pelo usuario
+		if ( $this->getZebrarColors( 0 ) ) {
+			// não sobrepor se o background color estiver definido
+			if ( !$row->getCss( 'background-color' ) ) {
+				if ( $rowNum % 2 != 0 ) {
+					$row->setCss( 'background-color', $this->getZebrarColors( 0 ) );
+				}else {
+					$row->setCss( 'background-color', $this->getZebrarColors( 1 ) );
+				}
+			}
+		}
+	 }
+
 	/**
 	 * @param cell
 	 */
@@ -1800,9 +1806,9 @@ class TGrid extends TTable
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function getRowNumWithPaginator($rowNum,$rowStart){
+	public function getRowNumWithPaginator($rowNum,$rowStart, $index){
 		if( !empty($this->getRealTotalRowsSqlPaginator()) ){
-			$result = $rowStart;
+			$result = $rowStart+$index;
 		}else {
 			$result = $rowNum;
 		}

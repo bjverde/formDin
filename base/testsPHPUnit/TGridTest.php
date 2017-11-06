@@ -195,19 +195,19 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected['NMPESSOA'][2] , $result['NMPESSOA'][2]);
 	}
 	
-	public function testGetRowNumWithPaginator_without_RealTotalRowsWithoutPaginator() {
+	public function testGetRowNumWithPaginator_without_RealTotalRowsSqlPaginator() {
 		$expected = 30;
 		$tGrid = $this->tGrid;
-		$result = $tGrid->getRowNumWithPaginator($expected,40);
+		$result = $tGrid->getRowNumWithPaginator($expected,40,0);
 		$this->assertEquals( $expected , $result);
 	}
 	
 	
-	public function testGetRowNumWithPaginator_with_RealTotalRowsWithoutPaginator() {
+	public function testGetRowNumWithPaginator_with_RealTotalRowsSqlPaginator() {
 		$expected = 30;
 		$tGrid = $this->tGrid;
 		$tGrid->setRealTotalRowsSqlPaginator(30);
-		$result = $tGrid->getRowNumWithPaginator(20,$expected);
+		$result = $tGrid->getRowNumWithPaginator(20,$expected,0);
 		$this->assertEquals( $expected , $result);
 	}
 	
