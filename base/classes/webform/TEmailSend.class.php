@@ -57,7 +57,7 @@ class TEmailSend {
 
     public function send() {
         $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $headers .= 'Content-type: text/html; charset='.ENCODINGS . "\r\n";
         $headers .= 'From: '.$this->nome_remetente.' <'.$this->email_remetente.'>' . "\r\n";
         if (mail($this->email_destinatario, $this->assunto, $this->mensagem, $headers)) {
             return null;

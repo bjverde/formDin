@@ -453,13 +453,10 @@ class TMenuDhtmlx
 			}
 		}
 		$print = $print === null ? true : $print;
-		if( $print)
-		{
-			header ("content-type: text/xml; charset=ISO-8859-1");
+		if( $print) {
+			header ("content-type: text/xml; charset=".ENCODINGS);
 			echo str_replace("'",'"',$this->getStructure());
-		}
-		else
-		{
+		}else {
 			return str_replace("'",'"',$this->getStructure());
 		}
         /*

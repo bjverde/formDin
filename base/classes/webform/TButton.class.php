@@ -122,7 +122,7 @@ class TButton extends TControl
 			//Alterado para padronizar as mensagens utilizando o fwConfirm
 			//Por Diego Barreto e Felipe Colares
 // 			$jsConfirm = 'if( !confirm("'.$this->getConfirmMessage().'")){return false;} ';
-			$jsConfirmBegin = 'fwConfirm("'.htmlentities($this->getConfirmMessage(),null,'ISO-8859-1').'", function() { ';
+		    $jsConfirmBegin = 'fwConfirm("'.htmlentities($this->getConfirmMessage(),null,ENCODINGS).'", function() { ';
 			$jsConfirmEnd	= '}, function() {})';
 		}
 
@@ -152,7 +152,7 @@ class TButton extends TControl
 			$this->setCss('cursor','default');
 			if( ! $this->getProperty('title') )
 			{
-				$this->setProperty('title',htmlentities('Ação desabilitada',null,'ISO-8859-1') );
+			    $this->setProperty('title',htmlentities('Ação desabilitada',null,ENCODINGS) );
 			}
 			$this->setAttribute('disabled','true');
 			if( $this->getOnClick() && $this->getImage() != '' )

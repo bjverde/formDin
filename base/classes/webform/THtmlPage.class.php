@@ -422,11 +422,9 @@ class THtmlPage extends TElement
 	{
 	}
 
-	public function getCharset()
-	{
-  		if ( ! defined('CHARSET') )
-		{
-			define('CHARSET','iso-8859-1');
+	public function getCharset() {
+  		if ( ! defined('CHARSET') ) {
+  		    define('CHARSET', ENCODINGS);
 		}
 		return CHARSET;
 	}

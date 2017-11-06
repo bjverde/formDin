@@ -955,7 +955,7 @@ class TApplication extends TLayout {
 				//$xajax->configure('errorHandler', true);
 				//$xajax->configure('logFile', 'xajax_error_log.log');
 				//$xajax->configure('debug', true);
-				$xajax->setCharEncoding( 'ISO-8859-1' );
+				$xajax->setCharEncoding( ENCODINGS );
 				$xajax->setFlag( "decodeUTF8Input", true );
 				require_once( $moduloXajax );
 				$lines = file( $moduloXajax, FILE_SKIP_EMPTY_LINES );

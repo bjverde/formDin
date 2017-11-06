@@ -359,17 +359,13 @@ abstract class TOption extends TControl
 					$this->add( $opt = new TElement( 'option' ) );
 					$opt->setProperty( 'value', $k );
 					$opt->clearCss();
-					if( !is_array( $this->getValue() ) )
-					{
-						if( html_entity_decode( ( string ) $k ) == html_entity_decode( ( string ) $this->getValue(),null,'ISO-8859-1' ) )
-						{
+					if( !is_array( $this->getValue() ) ) {
+					    if( html_entity_decode( ( string ) $k ) == html_entity_decode( ( string ) $this->getValue(),null, ENCODINGS ) ) {
 							$opt->setProperty( 'selected', "true" );
 						}
 					}
-					else
-					{
-						if( ( string ) array_search( $k, $this->getValue() ) != "" )
-						{
+					else {
+						if( ( string ) array_search( $k, $this->getValue() ) != "" ) {
 							$opt->setProperty( 'selected', "true" );
 						}
 					}

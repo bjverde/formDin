@@ -1343,23 +1343,20 @@ class TForm Extends TBox
 
 									if( $childField->getValue() )
 									{
-										if( is_array( $childField->getValue() ) )
-										{
+										if( is_array( $childField->getValue() ) ){
 											//list($aDados['valorInicial']) = implode('|',$childField->getValue());
 											$aDados[ 'valorInicial' ] = implode( '|', $childField->getValue() );
-										}
-										else
-										{
+										}else{
 											$aDados[ 'valorInicial' ] = $childField->getValue();
 										}
 									}
 								}
-								foreach($aDados as $k=>$v)
-								{
-									$aDados[$k] = htmlentities($v,null,'ISO-8859-1');
+								
+								foreach($aDados as $k=>$v){
+								    $aDados[$k] = htmlentities($v,null,ENCODINGS);
 								}
-								if( $this->getPublicMode() )
-								{
+								
+								if( $this->getPublicMode() ) {
 									$aDados['fwPublicMode']='S';
 								}
 								$parametros.= ( $parametros == "") ? "" : ";";
@@ -6160,7 +6157,7 @@ class TForm Extends TBox
 					$obj->setProperty('shortcut','ALT+'.$char.'|'.$target);
 					//$obj->setValue(preg_replace('/&/','',$label) );
 					$label = preg_replace('/&/','',$label);
-					$label = htmlentities( $label,null,'ISO-8859-1' );
+					$label = htmlentities( $label,null,ENCODINGS );
 					$label = str_replace( $arrSpecialCharTo,$arrSpecialCharFrom,$label);
 					if( $obj->getFieldType() == 'tabsheet')
 					{

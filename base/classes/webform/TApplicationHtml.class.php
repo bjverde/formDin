@@ -172,7 +172,7 @@ class TApplicationHtml
 	*/
 	public function run()
 	{
-		ini_set('default_charset','iso-8859-1');
+	    ini_set('default_charset',ENCODINGS);
 		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
 		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 //error_reporting(E_ALL);
@@ -579,7 +579,7 @@ class TApplicationHtml
 					header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 					header("Cache-Control: no-cache");
 					header("Pragma: no-cache");
-					header("content-type: text/xml; charset=ISO-8859-1");
+					header("content-type: text/xml; charset=".ENCODINGS);
 					echo '<menu>
 							<item id="cadastro" img="error16.gif" text="Arquivo: '.$modulo.' não existe."/>
 							<item id="verifique" text="Verifique as configurações no index.php"/>
@@ -593,7 +593,7 @@ class TApplicationHtml
 					header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 					header("Cache-Control: no-cache");
 					header("Pragma: no-cache");
-					header("content-type: text/xml; charset=ISO-8859-1");
+					header("content-type: text/xml; charset=".ENCODINGS);
 					$this->includeConnectionFile();
 					require_once($modulo);
 				}
@@ -739,7 +739,7 @@ class TApplicationHtml
 				//$xajax->configure('errorHandler', true);
 				//$xajax->configure('logFile', 'xajax_error_log.log');
 				//$xajax->configure('debug', true);
-				$xajax->setCharEncoding('ISO-8859-1');
+				$xajax->setCharEncoding(ENCODINGS);
 				$xajax->setFlag("decodeUTF8Input",true);
 				require_once($moduloXajax);
 				$lines = file($moduloXajax, FILE_SKIP_EMPTY_LINES);
