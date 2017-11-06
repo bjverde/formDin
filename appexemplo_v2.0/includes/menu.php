@@ -51,10 +51,11 @@ $menu->add('21', '2', 'Cadastro Autoridades', 'modulos/autoridades.php', null);
 
 $menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
 $menu->add('81', '8', 'Região', 'modulos/regiao.php', null,null,null,false,null);
-$menu->add('82', '8', 'UF gride simples', 'modulos/uf.php', null);
+$menu->add('82', '8', 'UF gride simples', 'modulos/uf_grid_simples.php', null);
 $menu->add('83', '8', 'UF com paginador SQL', 'modulos/uf_paginador.php', null);
 $menu->add('84', '8', 'Município com paginador SQL', 'modulos/municipio_sql_pagination.php', null);
 $menu->add('85', '8', 'Município com paginador Tela', 'modulos/municipio_screen_pagination.php', null);
+$menu->add('86', '8', 'uf - gerado', 'modulos/uf.php', null);
 
 $menu->add('9', null, 'Acesso', null, null, 'icon-key-yellow.png');
 $menu->add('91', '9', 'User', 'modulos/acesso_user.php', null, 'user916.gif');
