@@ -276,7 +276,7 @@ class TDAOCreate {
 		    $this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
 		}
 		if($this->getDatabaseManagementSystem() == DBMS_MSSQL){
-		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ONLY \');');
+		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ROWS ONLY \');');
 		}		
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
