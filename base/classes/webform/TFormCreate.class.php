@@ -241,9 +241,6 @@ class TFormCreate {
 	}	
 	//--------------------------------------------------------------------------------------
 	public function addGrid() {
-	    if( empty($this->gridType) ) {
-	        $this->setGridType(GRID_SIMPLE);
-	    }
 	    
 	    if($this->gridType == GRID_SIMPLE){
 	        $this->addBasicaGrid();
@@ -316,6 +313,9 @@ class TFormCreate {
 	}
     
 	//---------------------------------------------------------------------------------------
+	/**
+	 * @codeCoverageIgnore
+	 */
 	public function saveForm(){
 		$fileName = $this->formPath.DS.$this->formFileName;
 		if($fileName){

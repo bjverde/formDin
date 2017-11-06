@@ -246,15 +246,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->assertEquals( $expectedString, $result);
     }
     
-    public function testAddGrid_sizeArray_null() {
-    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
-    	$this->tFormCreate->setListColunnsName($listColumnsName);
-    	$this->tFormCreate->addGrid();
-    	$resultArray = $this->tFormCreate->getLinesArray();
-    	$size = count($resultArray);
-    	$this->assertEquals( 19, $size);
-    }
-    
     public function testAddGrid_sizeArray_setGRID_SIMPLE() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
     	$this->tFormCreate->setListColunnsName($listColumnsName);
