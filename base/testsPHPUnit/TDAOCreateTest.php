@@ -175,11 +175,11 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     
     public function testAddSqlSelectAllPagination_stringMySQL(){
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
-        $expectedArray[] = TTAB.TTAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
-        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\')'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql);'.TEOL;
@@ -200,11 +200,11 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     
     public function testAddSqlSelectAllPagination_stringMSSQL(){
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
-        $expectedArray[] = TTAB.TTAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
-        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\')'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ONLY \');'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql);'.TEOL;

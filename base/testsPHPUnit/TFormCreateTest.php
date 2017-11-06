@@ -264,7 +264,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 44, $size);
+    	$this->assertEquals( 43, $size);
     }
     
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
@@ -275,6 +275,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 45, $size);
+    	$this->assertEquals( 46, $size);
     }
 }
