@@ -205,7 +205,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\')'.TEOL;
-        $expectedArray[] = TTAB.TTAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ONLY \');'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ROWS ONLY \');'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
