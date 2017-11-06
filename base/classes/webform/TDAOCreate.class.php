@@ -267,11 +267,11 @@ class TDAOCreate {
 	 **/
 	public function addSqlSelectAllPagination() {
 		$this->addLine( TAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {');
-		$this->addLine( TAB.TAB.'$rowStart = paginationSQLHelper::getRowStart($page,$rowsPerPage);');
+		$this->addLine( TAB.TAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);');
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
 		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
-		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');		
+		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\')');		
 		if($this->getDatabaseManagementSystem() == DBMS_MYSQL){
 		    $this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
 		}
