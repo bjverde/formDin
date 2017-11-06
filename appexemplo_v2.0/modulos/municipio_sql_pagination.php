@@ -51,7 +51,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = 17;
 	$page = PostHelper::get('page');
 	$dados = MunicipioDAO::selectAllSqlPagination( $primaryKey, null, $page,  $maxRows);
-	$realTotalRowsWithoutPaginator = MunicipioDAO::selectCount();
+	$realTotalRowsSqlPaginator = MunicipioDAO::selectCount();
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey.',COD_UF|COD_UF,NOM_MUNICIPIO|NOM_MUNICIPIO,SIT_ATIVO|SIT_ATIVO';
 	$gride = new TGrid( 'gd'          // id do gride
 					   ,'Gride com Paginador SQL'       // titulo do gride
