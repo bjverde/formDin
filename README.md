@@ -52,5 +52,9 @@ Baixe o projeto em coloque um servidor PHP.
 * modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
 
 ## Versões
+* 4.1.1 - 06/11/2017 tag v4.1.1 
+   * paginação via SQL para MS SQL Server 2012 ou superior
+   * gerador crud para paginação via SQL para MySQL e MSSQL
+   * correção do bug do zebrado no grid paginado
 * 4.1.0 - 31/10/2017 tag v4.1.0 com paginação via SQL para o MySQL
 * 4.0.0 - Versão orignal, Brach copyLEB 
