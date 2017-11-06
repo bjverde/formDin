@@ -48,7 +48,6 @@ class TApplicationHtml
 	private $page;
 	private $defaultModule;
 	private $showMenu;
-	private $formDin3Compatible;
 	private $connectionFile;
 	private $loginFile;
 	private $mainMenuFile;

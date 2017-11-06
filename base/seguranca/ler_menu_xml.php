@@ -174,7 +174,6 @@ if( ( preg_replace('/[^0-9]/','',$_SESSION[APLICATIVO]['login']['num_cpf'] == '4
 	$menu->add(-27004,-270,'Select Combinado','base/exemplos/exe_select_combinado.inc');
 	$menu->add(-27005,-270,'Select Combinado F3','base/exemplos/exe_select_combinado_f3.inc');
 	$menu->add(-27006,-270,'Select Combinado Ajax','base/exemplos/exe_select_combinado_ajax.php');
-	$menu->add(-27009,-270,'FormDin 3','base/exemplos/exe_formDin3.inc');
 	$menu->add(-27010,-270,'PDF','base/exemplos/exe_pdf.inc');
 	$menu->add(-27011,-270,'HINT','base/exemplos/exe_hint.inc');
 	//$menu->add(-27012,-270,'TreeView Taxonomia','base/exemplos/exe_tree_view.inc');

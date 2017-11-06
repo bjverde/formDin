@@ -36,21 +36,12 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if( !session_id() )
-{
+if( !session_id() ) {
 	session_start();
 }
 error_reporting ( 0 );
 
-
-// manter a compatibilidade com FORMDIN3 - $_SESSION[ 'frm' ]
-if ( isset( $_SESSION[ 'frm' ] ) )
-{
-	$_SESSION[ 'frmFileAsync' ] = $_SESSION[ 'frm' ];
-}
-
-if ( $_REQUEST[ 'tamanhoMaxAlert' ] )
-{
+if ( $_REQUEST[ 'tamanhoMaxAlert' ] ) {
 	$tamanho_msg = $_REQUEST[ 'tamanhoMaxAlert' ];
 	$tamanhoKb = $_REQUEST[ 'tamanhoMaxBytes' ];
 	$tamanho_max = $tamanhoKb;

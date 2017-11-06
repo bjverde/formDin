@@ -63,7 +63,6 @@ class TApplication extends TLayout {
 	private $strVersionSystem;
 	private $defaultModule;
 	private $showMenu;
-	private $formDin3Compatible;
 	private $connectionFile;
 	private $loginFile;
 	private $mainMenuFile;

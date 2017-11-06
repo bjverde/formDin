@@ -1603,13 +1603,10 @@ class TForm Extends TBox
 			if( isset( $_POST[ 'modulo' ] ) && isset( $_REQUEST[ 'redirect' ] ) )
 			{
 				//if( !isset($_REQUEST['gridOffline']))
-				if( ! $this->getFormGridOffLine() )
-				{
+				if( ! $this->getFormGridOffLine() ) {
 					$this->addJavascript( 'try{ parent.app_setFooterModule("' . $_POST[ 'modulo' ] . '","' . (isset( $_POST[ 'acao' ] ) ? $_POST[ 'acao' ] : '') . '");}catch(e){}' );
-					// compatibilidade com formdin3
-					$this->addJavascript( 'try{ parent.setmodulo("' . $_POST[ 'modulo' ] . '");}catch(e){} // formdin3' );
-					if( isset( $_REQUEST[ 'redirect_message' ] ) && $_REQUEST[ 'redirect_message' ] != '' )
-					{
+					
+					if( isset( $_REQUEST[ 'redirect_message' ] ) && $_REQUEST[ 'redirect_message' ] != '' ) {
 						$this->addJavascript( 'try{alert("' . $_REQUEST[ 'redirect_message' ] . '");}catch(e){}' );
 					}
 				}
