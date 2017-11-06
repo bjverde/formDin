@@ -39,6 +39,13 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+// ============= PROJECT CONSTANTS =================//
+
+define('ROWS_PER_PAGE',20);
+define('ENCODINGS','ISO-8859-1');
+
+// ============= FORMDIN FRAMEWORK CONSTANTS =================//
+
 define('FORMDIN_VERSION','4.1.1');
 
 define('DBMS_MSSQL','MSSQL');
@@ -47,12 +54,9 @@ define('DBMS_ORACLE','ORACLE');
 define('DBMS_POSTGRES','POSTGRES');
 define('DBMS_SQLITE','SQLITE');
 
-
 define('GRID_SIMPLE','1');
 define('GRID_SCREEN_PAGINATION','2');
 define('GRID_SQL_PAGINATION','3');
-
-define('ROWS_PER_PAGE',20);
 
 
 if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
