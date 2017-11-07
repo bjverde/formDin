@@ -1,4 +1,6 @@
 <?php
+// Mail Mine
+//https://pear.php.net/package/Mail_Mime/
 require_once('Mail.php');
 require_once('Mail/mime.php');
 
@@ -35,7 +37,10 @@ $headers['Subject'] = $assunto;
 $headers['MIME-Version'] = '1.0';
 $headers['Content-Type'] = 'TEXT/HTML; charset=ISO-8859-1';
 $headers['Content-Transfer-Encoding'] = '8BIT';
-//		Criando uma nova instancia da classe mime
+
+
+// Criando uma nova instancia da classe mime
+// https://pear.php.net/package/Mail_Mime/
 $mime = new Mail_Mime();
 
 
