@@ -40,7 +40,13 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 
 ## Instalação.
 
-Baixe o projeto em coloque um servidor PHP.
+[Manual antigo para instalação](https://github.com/bjverde/formDin/blob/master/documents/Manual_Instalacao_FormDin.pdf)
+
+1. Tenho um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendavel xDebug para ambiente de desenvolvimeto.
+2. Descompactar o projeto em um pasta.
+3. Rodar os script SQL da pasta modelo_banco_exemplos
+4. Acessar as pastas appexemplo_v para ver os exemplos.
+
 
 ### O que tem em cada pasta
 * appexemplo_form_alone - exemplo de uma pagina sem sistema.
