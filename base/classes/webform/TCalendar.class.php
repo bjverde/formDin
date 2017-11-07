@@ -364,7 +364,7 @@ if (selecionavel) {
 	}
 	/**
 	 *
-	 * @param unknown_type $jsOnResize
+	 * @param string $jsOnResize
 	 */
 	public function setJsOnResize($jsOnResize=null)
 	{
@@ -376,7 +376,7 @@ if (selecionavel) {
 	}
 	/**
 	 *
-	 * @param unknown_type $jsOnDrag
+	 * @param string $jsOnDrag
 	 */
 	public function setJsOnDrag($jsOnDrag=null)
 	{
@@ -388,7 +388,7 @@ if (selecionavel) {
 	}
 	/**
 	 *
-	 * @param unknown_type $jsOnDrop
+	 * @param string $jsOnDrop
 	 */
 	public function setJsOnDrop($jsOnDrop=null)
 	{
@@ -400,7 +400,7 @@ if (selecionavel) {
 	}
 
 	/**
-	 * @param str $jsOnEventClick Informa qual metodo javascript tratara o evento de clicar sobre um evento
+	 * @param string $jsOnEventClick Informa qual metodo javascript tratara o evento de clicar sobre um evento
 	 *
 	 * Deve possuir a assinatura(calEvent, jsEvent, view)
 	 * calEvent -> possui os dados do evento. (Padrão: calEvent.title, calEvent.start, calEvent.end) ou os que definiu ex. calEvent.descricao
@@ -419,7 +419,7 @@ if (selecionavel) {
 		}
 
 	/**
-	 * @param str $jsMouseOver Informa qual metodo javascript tratara o evento mouseover
+	 * @param string $jsMouseOver Informa qual metodo javascript tratara o evento mouseover
 	 *
 	 * Deve possuir a assinatura ( event, jsEvent, view )
 	 * @return TCalendar
@@ -434,7 +434,7 @@ if (selecionavel) {
 		}
 
 	/**
-	 * @param str $defaultView Informa qual deve ser a visualização padrão do calendário, padrão month. ex:(basicWeek, basicDay, agendaWeek, agendaDay).
+	 * @param string $defaultView Informa qual deve ser a visualização padrão do calendário, padrão month. ex:(basicWeek, basicDay, agendaWeek, agendaDay).
 	 * @return TCalendar
 	 */
 		public function setDefaultView($defaultView=null)
