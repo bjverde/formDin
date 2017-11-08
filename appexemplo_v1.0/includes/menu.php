@@ -106,8 +106,9 @@ $menu->add('2',null,'Containers');
 //$menu->add('4',null,'Ajuda',null,'Exemplo de tipos de ajuda','help16.gif');
 //$menu->add('1', null, 'Menu', null, null, 'menu-alt-512.png');
 $menu->add('4',null,'Ajuda', null, null, 'help16.gif');
-	$menu->add('41','4','Ajuda On-line (sqlite)','exe_documentacao_online.inc','Confe??o do texto de ajuda gravando no banco de dados sqlite');
-	$menu->add('42','4','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
+	$menu->add('41','4','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
+	$menu->add('42','4','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');
+	
 
 //-----------------------------------------------------------------------------
 $menu->add('5',null,'Ajax');
