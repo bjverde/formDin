@@ -320,11 +320,9 @@ abstract class TControl extends TElement
         return false;
     }
 
-    public function getError()
-    { return $this->error; }
+    public function getError() { return $this->error; }
 
-    public function setEnabled( $newBoolValue = null )
-    {
+    public function setEnabled( $newBoolValue = null )  {
         //print $this->getFieldType();
         if ( !strpos( '(hidden,html)', $this->getFieldType() ) )
         {
@@ -333,63 +331,18 @@ abstract class TControl extends TElement
         return $this;
     }
 
-    public function getEnabled()
-    { return $this->enabled; }
+    public function getEnabled() { return $this->enabled; }
 
-    public function clear()
-    { $this->setValue( null ); }
+    public function clear() { $this->setValue( null ); }
 
-    public function setHint( $strNewHint = null )
-    { $this->setProperty( 'title', $strNewHint ); return $this;}
+    public function setHint( $strNewHint = null ){ 
+    	$this->setProperty( 'title', $strNewHint );
+    	return $this;
+    }
 
-    public function getHint()
-    { return $this->getProperty( 'title' ); }
+    public function getHint() { return $this->getProperty( 'title' ); }
 
     //-----------------------------------------------------------------------------
-    /**
-    * Método para criar ajuda on-line em um campo
-    * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
-    * se não for informado assume o id do campo.
-    * O arquivo deverá estar no diretório ajuda/ na raiz da aplicação.
-    * Poder ser informada tambem o endereço (url) da pagina de help
-    * Exemplo: $nom->setHelpFile('nom_pessoa','Nome da Pessoa',200,500);
-    * Exemplo: $nom->setHelpFile('http://localhost/sistema/texto_ajuda.html','Exemplo de help on-line',200,500);
-    * @param mixed $strWindowHeader
-    * @param mixed $intShowHeight
-    * @param mixed $intShowWidth
-    * @param mixed $strHelpFile
-    * @param mixed $strButtonImage
-    */
-    /*public function setHelpFile($strWindowHeader=null,$intShowHeight=null,$intShowWidth=null,$strHelpFile=null,$strButtonImage=null)
-    {
-        $strHelpFile = is_null($strHelpFile) ? $this->getId() : $strHelpFile;
-        $this->helpFile[0] = $strHelpFile;
-        if( $strHelpFile)
-        {
-            $this->helpFile[1] = is_null( $strWindowHeader ) 	? "Ajuda on-line" 	: $strWindowHeader;
-            $this->helpFile[2] = is_null( $intShowHeight )		? 250 		: $intShowHeight;
-            $this->helpFile[3] = is_null( $intShowWidth ) 		? 500 		: $intShowWidth;
-            $this->helpFile[4] = is_null( $strButtonImage ) 	? $this->getBase().'imagens/fwajuda.gif' : $strButtonImage;
-        }
-    }
-    //-----------------------------------------------------------------------------
-    public function getHelpFile()
-    {
-        return $this->helpFile;
-    }
-    //-----------------------------------------------------------------------------
-    public function getLinkHelpFile()
-    {
-        if($this->getHelpFile())
-        {
-            $helpFile = $this->getHelpFile();
-            //return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$helpFile[1]}\" onClick=\"fwModalBox('Ajuda','{$helpFile[0]}',{$helpFile[2]},{$helpFile[3]})\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" src=\"{$helpFile[4]}\"></a>";
-            //return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$helpFile[1]}\" onClick=\"top.app_modalBox('{$helpFile[1]}','{$helpFile[0]}',{$helpFile[2]},{$helpFile[3]})\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" src=\"{$helpFile[4]}\"></a>";
-            return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$helpFile[1]}\" onClick=\"top.app_modalBox('{$helpFile[1]}','".$this->getBase()."callbacks/helpOnLineLoad.php?file={$helpFile[0]}',{$helpFile[2]},{$helpFile[3]})\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" src=\"{$helpFile[4]}\"></a>";
-        }
-        return null;
-    }
-    */
     /**
     * Método para criar ajuda on-line em um campo
     * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
@@ -429,8 +382,7 @@ abstract class TControl extends TElement
     }
 
     //-----------------------------------------------------------------------------
-    public function getHelpOnLine()
-    {
+    public function getHelpOnLine() {
         if ( is_array( $this->helpFile ) )
         {
    	        //style="float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar"
