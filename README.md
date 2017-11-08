@@ -40,13 +40,15 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 
 ## Instalação.
 
-[Manual antigo para instalação](https://github.com/bjverde/formDin/blob/master/documents/Manual_Instalacao_FormDin.pdf)
+[Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
 
+**Visão geral da instalação**
 1. Tenho um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendavel xDebug para ambiente de desenvolvimeto.
 2. Descompactar o projeto em um pasta.
 3. Rodar os script SQL da pasta modelo_banco_exemplos
 4. Acessar as pastas appexemplo_v para ver os exemplos.
 
+[Manual antigo para instalação](https://github.com/bjverde/formDin/blob/master/documents/Manual_Instalacao_FormDin.pdf)
 
 ### O que tem em cada pasta
 * appexemplo_form_alone - exemplo de uma pagina sem sistema.
@@ -58,6 +60,8 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 * modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
 
 ## Versões
+* 4.1.2 - 06/11/2017 tag v4.1.2
+   * :bug: correção Bug critico no gerador crud com paginação via SQL para MSSQL
 * 4.1.1 - 06/11/2017 tag v4.1.1 
    * paginação via SQL para MS SQL Server 2012 ou superior
    * gerador crud para paginação via SQL para MySQL e MSSQL
