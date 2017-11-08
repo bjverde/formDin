@@ -81,9 +81,9 @@ $menu->add('118','1','Campo Blob'	);
 $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
 $menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
-
 //Redirect só funciona se o arquivo estiver na pasta modulos
 $menu->add('122','1','Redirect','exe_redirect.inc');
+$menu->add('123','1','TZip','exe_TZip.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('2',null,'Containers');
@@ -164,9 +164,12 @@ $menu->add('103',null,'Formulário');
 	$menu->add('1039','103','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
 	$menu->add('1040','103','Definir Colunas no Formulário','view/form/exe_colunas.php');
 
-$menu->add('104',null,'TZip','exe_TZip.php');
-$menu->add('199',null,'Temas do Menu','exe_menu_tema.php');
+//-----------------------------------------------------------------------------
+$menu->add('200',0,'Layout');
+	$menu->add('201','200','Layout','layouts.php');
+	$menu->add('202','200','Temas do Menu','exe_menu_tema.php');
 
+//-----------------------------------------------------------------------------
 $menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
 $menu->add(-26020,-20,'editor','exe_editor_html.inc');
 $menu->add(-26001,-20,'Criação de Gride','exe_gride.inc');
@@ -192,9 +195,9 @@ $menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
 $menu->add(-2006,-20,'Campo Select','exe_select.inc');
 $menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
 $menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
-$menu->add(-2018,-20,'Cad Funcionario F3','base/seguranca/cad_funcionario.inc');
-
-
+$menu->add(-2018,-20,'cad_departamento.php','cad_departamento.php');
+$menu->add(-2019,-20,'cad_fruta.inc','cad_fruta.inc');
+$menu->add(-2020,-20,'cad_fruta.inc','cad_fruta.inc');
 
 
 

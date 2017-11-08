@@ -7221,5 +7221,24 @@ class TForm Extends TBox
 		$this->addDisplayControl( new TDisplayControl( null, $field, false,true,true  ) );
 		return $field;
 	}
+	
+	public function curPageURL() {
+		$pageURL = 'http';		
+		$https = ServerHelper::get('HTTPS');
+		if ($https == "on") {$pageURL .= "s";}
+		$pageURL .= "://";
+		if ($_SERVER["SERVER_PORT"] != "80") {
+			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		} else {
+			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		}
+		return $pageURL;
+	}
+	
+	public function homeUrl() {
+		$curPageURL = $this->curPageURL();
+		$res = explode('index.php', $curPageURL);
+		return $res[0];
+	}
 }
 ?>
