@@ -60,9 +60,9 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 * modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
 
 ## Versões
-* 4.1.2 - 06/11/2017 tag v4.1.2
+* [4.1.2 - 06/11/2017 tag v4.1.2](https://github.com/bjverde/formDin/releases/tag/v4.1.2)
    * :bug: correção Bug critico no gerador crud com paginação via SQL para MSSQL
-* 4.1.1 - 06/11/2017 tag v4.1.1 
+* [4.1.1 - 06/11/2017 tag v4.1.1](https://github.com/bjverde/formDin/releases/tag/v4.1.1)
    * paginação via SQL para MS SQL Server 2012 ou superior
    * gerador crud para paginação via SQL para MySQL e MSSQL
    * correção do bug do zebrado no grid paginado
