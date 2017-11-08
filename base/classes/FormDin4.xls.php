@@ -91,10 +91,9 @@ if($excel==false)
 $keys = array_keys($dadosGride);
 
 // escrever o titulo do gride
-if( $tituloGride )
-{
+if( $tituloGride ) {
 	$excel->writeRow();
-	$excel->writeCol(htmlentities( $tituloGride,null,'ISO-8859-1' ),count($keys));
+	$excel->writeCol(htmlentities( $tituloGride,null, ENCODINGS ),count($keys));
 }
 
 $count=0;
@@ -106,9 +105,9 @@ foreach( $_REQUEST as $k => $v )
 		{
 			$count++;
 			$excel->writeRow();
-			$excel->writeCol(htmlentities("Critério(s) de Seleção:",null,'ISO-8859-1'),count($keys));
+			$excel->writeCol(htmlentities("Critério(s) de Seleção:",null, ENCODINGS),count($keys));
 		}
-		$excel->writeLine(array( htmlentities( preg_replace( '/(w_|:)/', '', $k  ),null,'ISO-8859-1'  ),array( htmlentities( $v,null,'ISO-8859-1' ),(count($keys)-1) ) ) );
+		$excel->writeLine(array( htmlentities( preg_replace( '/(w_|:)/', '', $k  ),null, ENCODINGS ),array( htmlentities( $v,null, ENCODINGS ),(count($keys)-1) ) ) );
 	}
 }
 
