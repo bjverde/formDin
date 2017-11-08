@@ -53,7 +53,11 @@ $frm->addBoxField('bxAjax',null,"http://localhost",'ajax','Visualizar Ajax:',nul
 
 
 $frm->setAction('Atualizar');
-$frm->addButton('Teste',null,'btnTeste','showAjuda()');
+
+// Firefox aparece o erro
+//Load denied by X-Frame-Options: https://www.google.com.br/?modalbox=1&subform=1&facebox=1 does not permit cross-origin framing.
+//$frm->addButton('Teste',null,'btnTeste','showAjuda()');
+
 $frm->show();
 ?>
 <script>
