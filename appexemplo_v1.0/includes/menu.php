@@ -134,6 +134,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('87','8','Gride com Campos 1','exe_gride_10.php');
 	$menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
 	$menu->add('89','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
+	$menu->add('90','8','exe_gride_09','view/grid/exe_gride_09.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
