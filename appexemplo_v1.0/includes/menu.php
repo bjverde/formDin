@@ -102,13 +102,14 @@ $menu->add('2',null,'Containers');
 		$menu->add('245','24','Uf x Municípios com SetXmlFile()' ,'exe_tree_view_5.php');
 
 //-----------------------------------------------------------------------------
-//$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
-//$menu->add('4',null,'Ajuda',null,'Exemplo de tipos de ajuda','help16.gif');
-//$menu->add('1', null, 'Menu', null, null, 'menu-alt-512.png');
-$menu->add('4',null,'Ajuda', null, null, 'help16.gif');
-	$menu->add('41','4','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
-	$menu->add('42','4','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');
-	
+$menu->add('4',null,'Mensagens e Ajuda');
+	$menu->add('41','4','Mensagens');
+		$menu->add('411','41','Exemplo 1','view/messages/exe_mensagem.php');
+		$menu->add('412','41','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
+		$menu->add('413','41','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
+	$menu->add('42','4','Ajuda');
+		$menu->add('421','42','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
+		$menu->add('422','42','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');		
 
 //-----------------------------------------------------------------------------
 $menu->add('5',null,'Ajax');
@@ -121,12 +122,6 @@ $menu->add('5',null,'Ajax');
 $menu->add('6',null,'PDF');
 	$menu->add('61','6','Exemplo 1','exe_pdf_1.php');
 	$menu->add('62','6','Exemplo 2','exe_pdf_2.php');
-
-//-----------------------------------------------------------------------------
-$menu->add('7',null,'Mensagens');
-	$menu->add('71','7','Exemplo 1','view/messages/exe_mensagem.php');
-	$menu->add('72','7','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
-	$menu->add('73','7','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
