@@ -46,7 +46,7 @@ define('ENCODINGS','ISO-8859-1');
 
 // ============= FORMDIN FRAMEWORK CONSTANTS =================//
 
-define('FORMDIN_VERSION','4.1.2');
+define('FORMDIN_VERSION','4.1.3-alpha');
 
 define('DBMS_MSSQL','MSSQL');
 define('DBMS_MYSQL','MYSQL');
