@@ -167,6 +167,7 @@ $menu->add('103',null,'Formulário');
 	$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('1039','103','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
 	$menu->add('1040','103','Definir Colunas no Formulário','view/form/exe_colunas.php');
+	$menu->add('1040','103','Local Destino','view/form/exe_form_local_destino.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('200',0,'Layout');

@@ -101,7 +101,7 @@ $frm->closeGroup();
 $frm->addGroupField('gp_tipo','Tipo da instituição para onde o material foi destinado', null, $largura_grupo);
 
     // o Pacote abaixo retorna a descricao do tipo de solicitacao, concatenada com o campo HELP
-    $erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_TIPO_DESTINO', $bvars, $res);
+    //$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_TIPO_DESTINO', $bvars, $res);
     if (!$erro) {
         /// Gerando um array com todas as opcoes de marcar que irao formar o campo RADIO
         foreach ($res['COD_TIPO_DESTINO'] as $k_array => $v_array) {
@@ -122,7 +122,7 @@ $frm->addHtmlField('campo_gride_destino');
 
 
 //preenchimento dos selects (combos)
-$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_PAIS', $bvars, $res_pais);
+//$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_PAIS', $bvars, $res_pais);
 $frm->setOptionsSelect('cod_pais', $res_pais);//, 'COD_PAIS', 'NOM_PAIS');
 
 $frm->combinarSelects('cod_uf' // select pai
