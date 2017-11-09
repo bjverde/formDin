@@ -94,6 +94,7 @@ $menu->add('2',null,'Containers');
 		$menu->add('231','23','Aba'		,'view/containers/exe_aba_1.php');
 		$menu->add('232','23','Aba2'	,'view/containers/exe_aba_2.php');
 		$menu->add('233','23','Aba3'	,'view/containers/exe_aba_3.php');
+		$menu->add('234','23','Aba4'	,'view/containers/exe_aba_4.php');
 	$menu->add('24','2','TreeView');
 		$menu->add('241','24','Dentro do Formulário' ,'exe_tree_view_1.php');
 		$menu->add('242','24','Fora do Formulário'	,'exe_tree_view_2.php');
