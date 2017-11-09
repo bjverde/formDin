@@ -43,7 +43,7 @@ $html = '<b>Exemplo de utilização do DBM Database</b>'
 
 $frm = new TForm('Campo Banco de Dados Textual DB4',400,600);
 $frm->addHtmlField('texto',$html);
-$frm->addButton('Ver PHP Info', null, 'PHPinfo', null, null, true, false);
+$frm->addButton('PHPinfo', null, 'PHPinfo', null, null, true, false);
 $frm->addHtmlField('html1','');
 $frm->addMemoField('obs','Observação:',1000,false,50,5);
 $frm->setAction('Gravar,Recuperar');
@@ -52,7 +52,8 @@ $frm->setAction('Gravar,Recuperar');
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
 	case 'PHPinfo':
-		$frm->redirect('modulos/iframe_phpinfo/ambiente_phpinfo.php', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
+		$frm->redirect('iframe_phpinfo/ambiente_phpinfo.php', 'Redirect realizado com sucesso.', false, null );
+		//$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',true);
 		break;
 		//--------------------------------------------------------------------------------
 	case 'Recuperar':
