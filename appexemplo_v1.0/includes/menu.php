@@ -142,15 +142,17 @@ $menu->add('8',null,'Gride');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
-	$menu->add('91','9','Exemplo Mysql','exe_pdo_1.php');
-	$menu->add('92','9','Exemplo Sqlite e Mysql','exe_pdo_2.php');
+	$menu->add('91','9','Exemplo Mysql','pdo/exe_pdo_1.php');
+	$menu->add('92','9','Exemplo Sqlite e Mysql','pdo/exe_pdo_2.php');
 	$menu->add('93','9','Exemplo Postgres');
 		$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
+		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
 	$menu->add('94','9','Exemplo Firebird');
 		$menu->add('941','94','Conexão','exe_firebird_1.php');
 	$menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 	$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
+	
 
 //-----------------------------------------------------------------------------
 $menu->add('101',null,'Hints');
