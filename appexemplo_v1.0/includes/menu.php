@@ -101,6 +101,7 @@ $menu->add('2',null,'Containers');
 		$menu->add('243','24','User Data - Array'	,'tree/exe_tree_view_3.php');
 		$menu->add('244','24','Uf x Municípios'		,'tree/exe_tree_view_4.php');
 		$menu->add('245','24','Uf x Municípios com SetXmlFile()' ,'tree/exe_tree_view_5.php');
+		$menu->add('246','24','Fora do Formulário' ,'exe_tree_view.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('4',null,'Mensagens e Ajuda');
