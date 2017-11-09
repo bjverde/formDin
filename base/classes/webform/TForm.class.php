@@ -4198,10 +4198,10 @@ class TForm Extends TBox
 			{
 				//if( strpos($fileName,'http')===false )
 				$fileName = trim( $fileName );
-				if( !strpos( strtolower( $fileName ), '.pdf' ) )
 				//if(	preg_match('/(?i)^https*:\/\/.+\pdf$/',$fileName )== 0 )
-				{
-					$fileName = $_SERVER[ 'SCRIPT_URI' ] . '?modulo=' . $fileName . '&ajax=1&fpdf=1';
+				if( !strpos( strtolower( $fileName ), '.pdf' ) ) {
+					$script_uri = ServerHelper::get('SCRIPT_URI');
+					$fileName = $script_uri . '?modulo=' . $fileName . '&ajax=1&fpdf=1';
 				}
 				$aDados[ 1 ] = $aDados[ 1 ] ? $aDados[ 1 ] : 700;
 				$aDados[ 2 ] = $aDados[ 2 ] ? $aDados[ 2 ] : $this->getWidth();
