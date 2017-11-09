@@ -128,7 +128,7 @@ function rodape(TPDF $pdf)
 <script>
 function exibir_pdf() {
 	//fwFaceBox(  pastaBase+'js/jquery/facebox/stairs.jpg');
-	fwShowPdf({"modulo" : "exe_pdf_1.php","des_marcadagua":jQuery("#des_marcadagua").val()});
+	fwShowPdf({"modulo" : "pdf/exe_pdf01.php","des_marcadagua":jQuery("#des_marcadagua").val()});
 }
 </script>
 

@@ -122,8 +122,8 @@ $menu->add('5',null,'Ajax');
 
 //-----------------------------------------------------------------------------
 $menu->add('6',null,'PDF');
-	$menu->add('61','6','Exemplo 1','exe_pdf_1.php');
-	$menu->add('62','6','Exemplo 2','exe_pdf_2.php');
+	$menu->add('61','6','Exemplo 1','pdf/exe_pdf01.php');
+	$menu->add('62','6','Exemplo 2','pdf/exe_pdf02.php');
 	$menu->add('63','6','Exemplo 3, com passagem de parametros via Json','pdf/exe_pdf03.php');
 	$menu->add('64','6','Exemplo 4','pdf/exe_pdf04.php');
 
