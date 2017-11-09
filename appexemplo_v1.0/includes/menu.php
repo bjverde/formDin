@@ -51,7 +51,9 @@ $menu->add('11','1','Campo Texto',null,'Declaração de texto' );
 	$menu->add('11.5','11','Entrada com Máscara','view/fields/exe_maskField.php');
 	$menu->add('11.6','11','Campo Editor'	,'view/fields/exe_TTextEditor.php');
 	$menu->add('11.7','11','Campo Memo'	,'view/fields/exe_TMemo.php');
-$menu->add('12','1','Campo HTML','view/fields/exe_HtmlField.php');
+$menu->add('12','1','Campo HTML');
+	$menu->add('12.1','12','Campo HTML','view/fields/exe_HtmlField.php');
+	$menu->add('12.2','12','Campo HTML com iFrame','modulos/iframe_phpinfo/ambiente_phpinfo.php');
 $menu->add('13','1','Campo Coord GMS','view/fields/exe_CoordGmsField.php');
 $menu->add('14','1','Campo Select','view/fields/exe_SelectField.php');
 $menu->add('15','1','Campo Radio','view/fields/exe_RadioField.php');
@@ -152,6 +154,7 @@ $menu->add('9',null,'PDO');
 	$menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 	$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
+	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
 	
 
 //-----------------------------------------------------------------------------
@@ -184,7 +187,7 @@ $menu->add(-26001,-20,'Criação de Gride','exe_gride.inc');
 $menu->add(-26003,-20,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
 $menu->add(-26004,-20,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
 $menu->add(-26005,-20,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
-$menu->add(-27001,-20,'Banco Textual DBM (db4)','exe_db4.inc');
+
 $menu->add(-27005,-20,'Select Combinado F3','exe_select_combinado_f3.inc');
 $menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
