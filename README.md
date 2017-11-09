@@ -2,7 +2,11 @@
 
 ![Logo formDin](https://raw.githubusercontent.com/bjverde/formDin/master/base/imagens/formdin_logo.png)
 
-formDin ou Formulário Dinâmico - Framework PHP para desenvolvimento rápido de sistemas web. Essa versão é **Fork do FormDin 4 do [portal do software publico.](https://softwarepublico.gov.br/social/formdin)**
+FormDin or Dynamic Form is a simple php Framework for creating web system quickly and easily.
+
+FormDin ou Formulário Dinâmico é um Framework php simples para criar sistema web de forma rápida e fácil.
+
+Essa versão é **Fork do FormDin 4 do [portal do software publico.](https://softwarepublico.gov.br/social/formdin)**
 
 
 ## Sobre o Software
@@ -13,11 +17,11 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 
 A estrutura da aplicação utilizada pelo FormDin é composta por três classes a saber: TApplication, TForm e TPDOConnection. Elas são responsáveis pela implementação do padrão MVC ( Model, View e Controller). A classe TApplication (controller) é a responsável por receber as requisições e executar as ações pertinentes. A classe TForm ( view ) é a responsável pela criação dos formulários de entrada de dados. A classe TPDOConnection (model) é a responsável em recuperar e gravar as informações no banco de dados.
 
-O FormDin inciou em 2004, a versão 4 é baseada nas idéias do [Adianti Framework do Pablo Dall'Oglio](http://www.adianti.com.br/framework-library).  
+O FormDin iniciou em 2004, a versão 4 é baseada nas ideias do [Adianti Framework do Pablo Dall'Oglio](http://www.adianti.com.br/framework-library). 
 
-### Comparação radipa FormDin x Adianti
+### Comparação rápida FormDin x Adianti
 
-O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versão atual está praticamente congelada em 2012. O Adianti continou evoluindo e tem muito mais recursos. Programadores menos experientes o FormDin pode ser melhor que o Adianti por ser mais simples exigindo um curva menor de aprendizagem.
+O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versão atual está praticamente congelada em 2012. O Adianti continuou evoluindo e tem muito mais recursos. Programadores menos experientes o FormDin pode ser melhor que o Adianti por ser mais simples exigindo um curva menor de aprendizagem.
 
 
 ## Sobre as branchs
@@ -43,7 +47,7 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 [Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
 
 **Visão geral da instalação**
-1. Tenho um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendavel xDebug para ambiente de desenvolvimeto.
+1. Tenho um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendável xDebug para ambiente de desenvolvimento.
 2. Descompactar o projeto em um pasta.
 3. Rodar os script SQL da pasta modelo_banco_exemplos
 4. Acessar as pastas appexemplo_v para ver os exemplos.
