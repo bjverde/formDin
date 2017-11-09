@@ -65,7 +65,7 @@ $frm->show();
 <script>
 function setMenu(tema)
 {
-	top.app_change_menu_theme(tema,'menu_principal.php');
+	top.app_change_menu_theme(tema,'includes/menu.php');
 	jQuery("#current").html(tema);
 	jQuery("#exemplo").html('$app->setMenuTheme("'+tema+'");');
 
