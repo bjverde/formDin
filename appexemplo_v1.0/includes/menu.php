@@ -123,6 +123,7 @@ $menu->add('5',null,'Ajax');
 $menu->add('6',null,'PDF');
 	$menu->add('61','6','Exemplo 1','exe_pdf_1.php');
 	$menu->add('62','6','Exemplo 2','exe_pdf_2.php');
+	$menu->add('63','6','Exemplo 3, com passagem de parametros via Json','pdf/exe_pdf03.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
@@ -181,7 +182,6 @@ $menu->add(-26005,-20,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc
 $menu->add(-27001,-20,'Banco Textual DBM (db4)','exe_db4.inc');
 $menu->add(-27005,-20,'Select Combinado F3','exe_select_combinado_f3.inc');
 $menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
-$menu->add(-27010,-20,'PDF','exe_pdf.inc');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
 $menu->add(-27016,-20,'Javascript/Css Externos','exe_javascript_externo.inc');
