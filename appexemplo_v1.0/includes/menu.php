@@ -131,16 +131,17 @@ $menu->add('6',null,'PDF');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
-	$menu->add('81','8','Exemplo 1','exe_gride_1.php');
-	$menu->add('82','8','Exemplo 2 - Anexos - Ajax','exe_gride_2.php');
-	$menu->add('83','8','Grid Offline','exe_gride_3.php');
-	$menu->add('84','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
-	$menu->add('85','8','Paginação','exe_gride_paginacao.php');
-	$menu->add('86','8','Função getGrid()','exe_gride_4.php');
-	$menu->add('87','8','Gride com Campos 1','exe_gride_10.php');
-	$menu->add('88','8','Gride com Campos 2','exe_gride_11.php');
-	$menu->add('89','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
-	$menu->add('90','8','exe_gride_09','view/grid/exe_gride_09.php');
+	$menu->add('8.1','8','Exemplo 1','exe_gride_1.php');
+	$menu->add('8.2','8','Exemplo 2 - Anexos - Ajax','exe_gride_2.php');
+	$menu->add('8.3','8','Grid Offline','exe_gride_3.php');
+	$menu->add('8.4','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
+	$menu->add('8.5','8','Paginação','exe_gride_paginacao.php');
+	$menu->add('8.6','8','Função getGrid()','exe_gride_4.php');
+	$menu->add('8.7','8','Gride com Campos 1','exe_gride_10.php');
+	$menu->add('8.8','8','Gride com Campos 2','exe_gride_11.php');
+	$menu->add('8.9','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
+	$menu->add('8.10','8','exe_gride_09','view/grid/exe_gride_09.php');
+	$menu->add('8.11','8','Criação de Gride','grid/exe_gride.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
@@ -183,7 +184,6 @@ $menu->add('200',0,'Layout');
 //-----------------------------------------------------------------------------
 $menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
 $menu->add(-26020,-20,'editor','exe_editor_html.inc');
-$menu->add(-26001,-20,'Criação de Gride','exe_gride.inc');
 $menu->add(-26003,-20,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
 $menu->add(-26004,-20,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
 $menu->add(-26005,-20,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
