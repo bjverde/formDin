@@ -97,7 +97,7 @@ function montar_gride()
 	$res['OBS_ANEXO'][0] 		= 'asdçfkasd fasdfasdfasdfasdfasd fasdf asdf asdf';
 	$res['DES_NOME_POPULAR'][0] 		= 'Nome popular teste';
 	$res['SIT_CANCELADO'][0] 	= 'N';
-	$grid = new TGrid('gdx','Gride Off-line',$res,null,550,'SEQ_MOEDA',null,null,'base/exemplos/gride_offline.php');
+	$grid = new TGrid('gdx','Gride Off-line',$res,null,550,'SEQ_MOEDA',null,null,'modulos/grid/exe_gride12.php');
 	$grid->setForm($frm,false);
 	return $grid->show(false);
 }
