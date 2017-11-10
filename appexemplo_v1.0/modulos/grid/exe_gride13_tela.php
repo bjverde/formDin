@@ -64,13 +64,13 @@ $frm->show();
 ?>
 <script>
 function init() {
-	fwGetGrid("modulos/grid/exe_gride14.php","campo_gride",{"seq_propriedade":""});
+	fwGetGrid("modulos/grid/exe_gride13_grid_anexos.php","campo_gride",{"seq_propriedade":""});
 }
 function callBackAnexar(tempName,fileName,type,size) {
 	jQuery('#nom_arquivo').val(fileName);
 	jQuery('#nom_temp').val(tempName);
 	jQuery.post(app_url+app_index_file,	{
-		'modulo':'modulos/grid/exe_gride13.php'
+		'modulo':'modulos/grid/exe_gride13_tela.php'
 		,'formDinAcao':'gravar_anexo'
 		,'nom_arquivo':fileName
 		,'ajax':1
@@ -94,7 +94,7 @@ function btnVisualizarClick(campos,valores) {
 }
 function btnLimparTudoClick() {
 	jQuery.post(app_url+app_index_file, {
-		'modulo':'modulos/grid/exe_gride13.php'
+		'modulo':'modulos/grid/exe_gride13_tela.php'
 		,'formDinAcao':'limpar_tudo'
 		,'ajax':1
 	}
