@@ -877,13 +877,11 @@ class TGrid extends TTable
 												    $jsFunction = substr( $jsFunction, 0, $pos );
 											    }
 
-											    if ( !$this->getForm() )
-											    {
+											    if ( !$this->getForm() ) {
 												    $jsFunction .= '("' . $strFields . '","' . $strValues . '","' . $this->getId() . '","' . $rowNum . '")';
-											    }
-											    else
-											    {
-												    $jsFunction = 'jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","subform":1,"' . $this->getId() . 'Width":"' . $this->getWidth() . '","action":"' . $newButton->getAction() . '"' . $strJquery . '} );';
+											    }else {
+											    	$postParentField = PostHelper::get('parent_field');
+												    $jsFunction = 'jQuery("#' . $postParentField . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $postParentField . '","subform":1,"' . $this->getId() . 'Width":"' . $this->getWidth() . '","action":"' . $newButton->getAction() . '"' . $strJquery . '} );';
 											    }
 										    }
 										    else
@@ -2339,13 +2337,14 @@ class TGrid extends TTable
 				$strJquery .= ',"' . $this->getId() . 'Width":"' . $frm->getWidth() . '"';
 				// definir a largura do grid
 				$this->setWidth( $frm->getWidth() );
-
-				if ( $this->getShowAdicionarButton() )
-				{
-					$frm->addButton( ($_REQUEST['action']=='edit'?"Salvar Alteração":"Adicionar"), null, 'btn' . $this->getId() . 'Save', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"save","subform":1,' . $strJquery . '} );' );
+				
+				$requestAction = RequestHelper::get('action');
+				$postParentField = PostHelper::get('parent_field');
+				if ( $this->getShowAdicionarButton() ) {
+					$frm->addButton( ($requestAction =='edit'?"Salvar Alteração":"Adicionar"), null, 'btn' . $this->getId() . 'Save', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $postParentField . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $postParentField . '","action":"save","subform":1,' . $strJquery . '} );' );
 				}
-				$frm->addButton( ($_REQUEST['action']=='edit'?"Cancelar Alteração":"Limpar"), null, 'btn' . $this->getId() . 'Clear', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clear","subform":1,' . $strJquery . '} );' );
-				$frm->addButton( 'Desfazer', null, 'btn' . $this->getId() . 'ClearAll', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $_POST[ 'parent_field' ] . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $_POST[ 'parent_field' ] . '","action":"clearAll","subform":1,' . $strJquery . '} );', 'Esta ação cancela todas as operações de inclusão, alteração e exclusão\nrealizadas no gride antes da última gravação.\n\n Confirma ?\n', null, null, null, null, 'Desfazer todas as alterações/inclusões e voltar os dados para a situação original!' );
+				$frm->addButton( ($requestAction=='edit'?"Cancelar Alteração":"Limpar"), null, 'btn' . $this->getId() . 'Clear', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $postParentField . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $postParentField . '","action":"clear","subform":1,' . $strJquery . '} );' );
+				$frm->addButton( 'Desfazer', null, 'btn' . $this->getId() . 'ClearAll', 'jQuery("#' . $frm->getId() . '_footer").html(fw_img_processando2);jQuery("#' . $postParentField . '").load(app_url+app_index_file,{"ajax":0,"gridOffline":"1","modulo":"' . $this->getUrl() . '","parent_field":"' . $postParentField . '","action":"clearAll","subform":1,' . $strJquery . '} );', 'Esta ação cancela todas as operações de inclusão, alteração e exclusão\nrealizadas no gride antes da última gravação.\n\n Confirma ?\n', null, null, null, null, 'Desfazer todas as alterações/inclusões e voltar os dados para a situação original!' );
 				$this->bodyCell->add( '<span id="' . $this->getId() . '_form_area">' );
 				$this->bodyCell->add( $frm );
 				$this->bodyCell->add( '</span>' );
