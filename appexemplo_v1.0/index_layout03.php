@@ -47,7 +47,10 @@ define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
 include('../base/classes/webform/TApplication.class.php');
-$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
+$app = new TApplication(); // criar uma instancia do objeto aplicacao
+$app->setTitle('Exemplos das Funcionalidades '.FORMDIN_VERSION);
+$app->setSigla(APLICATIVO);
+$app->setUnit('FormDin Version'.FORMDIN_VERSION);
 $app->setVersionSystem('v 1.0.0.0');
 $app->setMenuIconsPath('imagem/');
 

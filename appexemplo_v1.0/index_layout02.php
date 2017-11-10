@@ -40,6 +40,7 @@
 error_reporting(E_ALL);
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication();
+$app->setUnit('FormDin Version'.FORMDIN_VERSION);
 $app->setVersionSystem('v 1.0.0.0');
 $app->setMenuIconsPath('imagem/');
 
