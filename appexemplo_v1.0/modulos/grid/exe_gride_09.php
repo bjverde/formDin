@@ -77,7 +77,7 @@ return;
 $frm->addHtmlField('campo_gride1');
 $frm->addHtmlField('campo_gride2',null,null,null,null,320);
 
-//$frm->addHtmlGride('campo_gride3','base/exemplos/gride3.php',null,250);
+$frm->addHtmlGride('campo_gride3','modulos/grid/exe_gride03_old.php',null,250);
 $frm->addHtmlField('campo_gride4','Clique no botão Criar Gride 4 Abaixo',null,null,null,300,false);
 $frm->addHtmlField('campo_gride5');
 $frm->addHtmlField('campo_gride6');

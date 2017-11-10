@@ -140,7 +140,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.7','8','Gride com Campos 1','exe_gride_10.php');
 	$menu->add('8.8','8','Gride com Campos 2','exe_gride_11.php');
 	$menu->add('8.9','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
-	$menu->add('8.10','8','exe_gride_09','view/grid/exe_gride_09.php');
+	$menu->add('8.10','8','exe_gride_09','grid/exe_gride_09.php');
 	$menu->add('8.11','8','Criação de Gride','grid/exe_gride.php');
 
 //-----------------------------------------------------------------------------
