@@ -2682,7 +2682,7 @@ function fwSetSelectedIndex(idCampo,valor)
 * 	ser� assumido como a a��o a ser executada pelo formul�rio
 * 	obs:se o parametro estiver sem valor definido, a fun��o tentara encontrar nos campos do formul�rio
 *	Ex: fwGetGrid("gride4.php","campo_gride4",{"num_pessoa":""}); // pegar o valor de num_pessoa no formulario
-*	Ex: fwGetGrid("gride4.php","campo_gride4","criar_gride"); // o parametro jsonData como sendo a a��o
+*	Ex: fwGetGrid("gride4.php","campo_gride4","criar_gride"); // o parametro jsonData como sendo a acao
 */
 function fwGetGrid(phpFile,idContainer,jsonData,clearContainer,callback)
 {
