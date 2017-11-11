@@ -38,18 +38,18 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+include('../base/classes/webform/TApplication.class.php');
 
 define('MIGRATE_JQUERY',FALSE);
 
-define('APLICATIVO','FORMDIN 4');
-define('FORMDIN',1);
+define('APLICATIVO','FormDin '.FORMDIN_VERSION);
 define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
-include('../base/classes/webform/TApplication.class.php');
+
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Exemplos das Funcionalidades '.FORMDIN_VERSION);
+$app->setTitle('Exemplos das Funcionalidades');
 $app->setSigla(APLICATIVO);
 $app->setUnit('Centro Nacional de Telemática - CNT');
 $app->setVersionSystem('v 1.0.0.0');
@@ -64,13 +64,10 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 //$app->setConnectionFile(null);
 
 //$app->addIncludeFile('config.php');
-//$app->setHeaderContent('header.php');
 //$app->getLoCenter()->setCss('background-color','blue');
 //$app->setBackgroundImage(null);
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
-//$app->setHeaderBgImage('imagem/h2.jpg');
-//$app->setHeaderBgImage('imagem/spoa-cabec.gif');
-//$app->setMenuTheme('standard');
+
 
 //TPDOConnection::Test(true);
 
