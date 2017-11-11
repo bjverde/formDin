@@ -532,34 +532,43 @@ class TPDOConnection
 		{
 			$stmt = self::getInstance()->prepare( $sql );
 
-			if ( !$stmt )
-			{
-				self::$error = 'Erro no comando sql';
-				self::showError();
-				return false;
+			if ( !$stmt ) {
+			    self::$error = 'Erro no comando sql';
+			    self::showError();
+			    return false;
 			}
+			
 			$result = $stmt->execute( $arrParams );
-
-			if ( $result )
-			{
-				// em caso select ou insert com returning, processa o resultado
-				if ( preg_match( '/^select/i', $sql ) > 0 || preg_match( '/returning/i', $sql ) > 0 || preg_match( '/^with/i', $sql ) > 0 )
-				{
-					$res = $stmt->fetchAll( $fetchMode );
-					$res = self::processResult( $res, $fetchMode, $boolUtfDecode );
-
-					if ( is_array( $res ) || is_object( $res ) )
-					{
-						return $res;
-					}
-					else
-					{
-						return null;
-					}
-				}
+			
+			if ( $result ) {
+			    // em caso select ou insert com returning, processa o resultado
+			    if ( preg_match( '/^select/i', $sql ) > 0 || preg_match( '/returning/i', $sql ) > 0 || preg_match( '/^with/i', $sql ) > 0 ) {
+			        $res = $stmt->fetchAll( $fetchMode );
+			        $res = self::processResult( $res, $fetchMode, $boolUtfDecode );
+			        
+			        if ( is_array( $res ) || is_object( $res ) ){
+			            return $res;
+			        }else {
+			            return null;
+			        }
+			        
+			    // Para stored procedure do MS SQL Server
+			    }else if( preg_match( '/^exec/i', $sql ) > 0  ){
+			        $res = array();
+			        do {
+			            $results = $stmt->fetchAll( $fetchMode );
+			            $res[] = self::processResult( $results, $fetchMode, $boolUtfDecode );
+			        } while ($stmt->nextRowset());
+			        
+			        if ( is_array( $res ) || is_object( $res ) ){
+			            return $res;
+			        }else {
+			            return null;
+			        }
+			    }
 			}
 			return $result;
-		}
+		}		
 		catch( PDOException $e )
 		{
 			self::$error = $e->getMessage();
