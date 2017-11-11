@@ -86,7 +86,7 @@ $frm->show();
 <script>
 function init()
 { 	// monta o gride passando o campo seq_propriedade com o seu valor atual do formulário.
-	fwGetGrid("exe_gride_2_callback.php","campo_gride",{"seq_propriedade":""});
+	fwGetGrid("modulos/grid/exe_gride02_callback.php","campo_gride",{"seq_propriedade":""});
 }
 
 // Quando terminiar de fazer o upload do arquivo anexado, esta função é chamada
@@ -96,7 +96,7 @@ function callBackAnexar(tempName,fileName,type,size,extension)
 	alert( 'A função de callback callBackAnexar() foi chamada.\n\nParametros recebidos:\n1) TempName='+tempName+'\n2) FileName='+fileName+'\n3)Tamanho:'+size+' bytes\n4) Extensão:'+extension);
 
     fwAjaxRequest({
-    	"modulo":"exe_gride_2.php"
+    	"modulo":"grid/exe_gride02.php"
     	,"dataType":"text"
     	,"action":"gravar_anexo"
     	,"data":{"nom_arquivo":fileName,"nom_temp":tempName,"seq_propriedade":""}
@@ -120,7 +120,7 @@ function callBackAnexar(tempName,fileName,type,size,extension)
 	// executa a ação gravar_anexo do formulario
 	jQuery.post(app_url+app_index_file,
 	{
-		'modulo':'exe_gride_2.php' // chamada ajax para si próprio passando a ação gravar_anexo
+		'modulo':'grid/exe_gride02.php' // chamada ajax para si próprio passando a ação gravar_anexo
 		,'formDinAcao':'gravar_anexo'
 		,'ajax':1
 		,'nom_arquivo':fileName
@@ -161,7 +161,7 @@ function btnRemoverClick(campos,valores)
 	}
 	jQuery.post(app_url+app_index_file,
 	{
-		'modulo':'exe_gride_2.php'
+		'modulo':'grid/exe_gride02.php'
 		,'formDinAcao':'remover_anexo'
 		,"nom_arquivo":$aValores[1]
 		,'ajax':1
@@ -182,7 +182,7 @@ function btnLimparTudoClick()
 {
 	jQuery.post(app_url+app_index_file,
 	{
-		'modulo':'exe_gride_2.php'
+		'modulo':'grid/exe_gride02.php'
 		,'formDinAcao':'limpar_tudo'
 		,'async':false
 		,'ajax':1
