@@ -131,8 +131,8 @@ $menu->add('6',null,'PDF');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride');
-	$menu->add('8.1','8','Exemplo 1 - botões sobre grid','grid/exe_gride01.php');
-	$menu->add('8.2','8','Exemplo 2 - Anexos - Ajax','grid/exe_gride02.php');
+	$menu->add('8.1','8','Gride 01 - botões sobre grid','grid/exe_gride01.php');
+	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Grid Offline','exe_gride_3.php');
 	$menu->add('8.4','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
 	$menu->add('8.5','8','Paginação','exe_gride_paginacao.php');
@@ -143,7 +143,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.10','8','exe_gride_09','grid/exe_gride_09.php');
 	$menu->add('8.11','8','Criação de Gride','grid/exe_gride.php');
 	$menu->add('8.12','8','Gride 12 offline','grid/exe_gride12.php');
-	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13_tela.php');
+	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride03_old.php');
 	$menu->add('8.14','8','Gride 11','grid/exe_gride11.php');
 
 //-----------------------------------------------------------------------------
