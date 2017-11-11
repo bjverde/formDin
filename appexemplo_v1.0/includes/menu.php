@@ -187,11 +187,7 @@ $menu->add('200',0,'Layout');
 //-----------------------------------------------------------------------------
 $menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
 $menu->add(-26020,-20,'editor','exe_editor_html.inc');
-$menu->add(-26003,-20,'Grid Off-Line - FormDin4','exe_gride_off_line_novo.inc');
-$menu->add(-26004,-20,'Grid Com Coluna Checkbox','exe_gride_checkbox.inc');
-$menu->add(-26005,-20,'Grid com Arquivos Anexados ( ajax )','exe_gride_anexo.inc');
 
-$menu->add(-27005,-20,'Select Combinado F3','exe_select_combinado_f3.inc');
 $menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
