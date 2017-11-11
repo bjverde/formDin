@@ -47,16 +47,17 @@ $frm->addCssFile($this->getBase() .'/js/jquery/tablesorter/themes/blue/formdin.c
 $frm->addCssFile('table.css');
 $frm->addJsFile($this->getBase() .'/js/jquery/tablesorter/jquery.tablesorter.min.js');
 $frm->addButton('Botão Teste',null,'btnTestar','alert("oi")',null,true,false)->setEnabled( false );
-$frm->addButtonAjax('Ajax Request',null,null,null,'testar',null,null,null,null,null,null,false,false)->setEnabled( false );
-//$frm->setcss('background-color','yellow');
+$frm->addButton('Botão Teste Habilitado',null,'btnTestar','alert("oi")',null,true,false);
+$frm->addButtonAjax('Ajax Request desabilitado',null,null,null,'testar',null,null,null,null,null,null,false,false)->setEnabled( false );
+$frm->addButtonAjax('Ajax Request Habilitado',null,null,null,'testar',null,null,null,null,null,null,false,false);
+$frm->setcss('background-color','yellow');
 $frm->setAutoSize(true);
 
 // html dentro do form
 $frm->addHtmlField('campo_gride');
 
 // criação do array de dados
-for( $i=0; $i<300; $i++ )
-{
+for( $i=0; $i<300; $i++ ){
 	$res['SEQ_GRIDE'][] = ($i+1);
 	//$res['NOM_LINHA'][] = print_r($_REQUEST,TRUE);//'Linha nº '. ($i+1);
 	$res['NOM_LINHA'][] = 'Linha nº '. ($i+1);
@@ -65,14 +66,12 @@ for( $i=0; $i<300; $i++ )
 	$res['VAL_PAGO'][]  =  number_format(($i*54787/4),2,'.',',');
 	$res['SIT_CANCELADO'][] = $i;
 	$res['DES_AJUDA'][] = 'Ajuda - Este é o "texto" <B>que</B> será exibido quando o usuário posicionar o mouse sobre a imagem, referente a linha '.($i+1);
-	//$res['DES_AJUDA'][] = 'Ajuda - Este é o texto <B>que</B> será exibido quando o usuário posicionar o mouse sobre a imagem, referente a linha '.($i+1);
 	$res['VAL_ZERO'][] = '0';
 	$res['VAL_NULL'][] = NULL;
 
 }
 
-if( isset( $_REQUEST['idGride_serted_column']))
-{
+if( isset( $_REQUEST['idGride_serted_column'])) {
 	$res = ordenarArrayBanco($res, strtoupper($_REQUEST['idGride_serted_column']),'SORT_ASC');
 	/*
 	if( $_REQUEST['idGride_sorted_column_order'] == 'down')
@@ -96,7 +95,7 @@ $gride = new TGrid( 'idGride' // id do gride
 					,null
 					);
 
-//$gride->setCss('background-clor','red');
+$gride->setCss('background-clor','red');
 $gride->setOnDrawCell('confGride');
 $gride->setOnDrawActionButton('confButton');
 //$gride->setOnDrawHeaderCell('confHeader');
@@ -258,8 +257,7 @@ function confGride(  $rowNum,$cell,$objColumn,$aData, $edit)
 
 ?>
 <script>
-function init()
-{
+function init() {
     return;
 	jQuery('body').bind('keydown', function() { cancelBack() } );
 }
@@ -282,8 +280,7 @@ function opa(e,rownum)
             event.returnValue = false;
         }
     }
-function aplicarSort()
-{
+function aplicarSort() {
 	jQuery("#idGride_table").tablesorter({
 	 0: {
          sorter: false
@@ -293,18 +290,15 @@ function aplicarSort()
      },
 	});
 }
-function testeX(a,b,c)
-{
+function testeX(a,b,c) {
 	alert( a );
 }
-function antesAjax()
-{
+function antesAjax() {
     alert( 'Antes ajax executado');
     jQuery("#btnTestar").get(0).disabled = false;
     return true;
 }
-function depoisAjax( res )
-{
+function depoisAjax( res ){
 	jQuery("#campo_gride").html( res );
 }
 
