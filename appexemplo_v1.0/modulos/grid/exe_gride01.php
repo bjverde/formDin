@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -25,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -36,20 +39,20 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(E_ALL);
-//d($_REQUEST);
+d($_REQUEST);
 
 $frm= new TForm('Exemplo de Criação de Gride',450,900);
 $frm->addTextField('nome','Nome:',20);
-$frm->addCssFile('jquery/tablesorter/themes/blue/formdin.css');
+$frm->addCssFile($this->getBase() .'/js/jquery/tablesorter/themes/blue/formdin.css');
 $frm->addCssFile('table.css');
-$frm->addJsFile('jquery/tablesorter/jquery.tablesorter.min.js');
+$frm->addJsFile($this->getBase() .'/js/jquery/tablesorter/jquery.tablesorter.min.js');
 $frm->addButton('Botão Teste',null,'btnTestar','alert("oi")',null,true,false)->setEnabled( false );
 $frm->addButtonAjax('Ajax Request',null,null,null,'testar',null,null,null,null,null,null,false,false)->setEnabled( false );
 //$frm->setcss('background-color','yellow');
 $frm->setAutoSize(true);
 
 // html dentro do form
-//$frm->addHtmlField('campo_gride');
+$frm->addHtmlField('campo_gride');
 
 // criação do array de dados
 for( $i=0; $i<300; $i++ )
@@ -89,7 +92,7 @@ $gride = new TGrid( 'idGride' // id do gride
 					,'SEQ_GRIDE'
 					,'VAL_PAGO,SIT_CANCELADO'
 					,10
-					,'exe_gride_1.php'
+					,'grid/exe_gride01.php'
 					,null
 					);
 
