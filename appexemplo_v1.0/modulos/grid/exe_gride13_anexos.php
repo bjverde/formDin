@@ -63,7 +63,7 @@ $gride = new TGrid('gd4','Arquivos Anexados'
 				,'SEQ_ARQUIVO'
 				,'NOM_TEMP,NOM_ARQUIVO'
 				,10
-				,'modulos/grid/gride4.php');
+				,'modulos/grid/exe_gride13_anexos.php');
 $gride->addButton('Visualizar',null,'btnVisualizar','btnVisualizarClick()');
 $gride->addRowNumColumn();
 $gride->addColumn('NOM_ARQUIVO','Nome do Arquivo',800,'left');

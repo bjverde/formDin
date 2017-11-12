@@ -68,13 +68,13 @@ $gride->setCache(-1);
 $gride->autoCreateColumns();
 $frm->addHtmlField('campo_gride7',$gride);
 
-$frm->addButton('Criar Gride 4',null,'btnCriarGride4','fwGetGrid("modulos/grid/exe_gride04_anexos.php","campo_gride4",{"num_pessoa":""});');
+$frm->addButton('Criar Gride 4',null,'btnCriarGride4','fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"num_pessoa":""});');
 $frm->show();
 ?>
 <script>
 function init() {
     alert( 'o');
-	fwGetGrid("modulos/grid/exe_gride04_anexos.php","campo_gride4",{"seq_propriedade":""});
+	fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"seq_propriedade":""});
 }
 function callBackAnexar(tempName,fileName,type,size)
 {
@@ -86,7 +86,7 @@ function callBackAnexar(tempName,fileName,type,size)
 	if( confirm('Visualizar o arquivo anexado ?')) {
 		fwShowTempFile(tempName,type,fileName);
 	}
-	jQuery.post(app_index_file,{'modulo':'modulos/grid/exe_gride.php','formDinAcao':'gravar_anexo'},function()
+	jQuery.post(app_index_file,{'modulo':'modulos/grid/exe_gride13.php','formDinAcao':'gravar_anexo'},function()
 	{
 		alert( 'atualizar o gride');
 	});
