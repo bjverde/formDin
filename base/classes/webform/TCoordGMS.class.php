@@ -495,7 +495,7 @@ class TCoordGMS extends TGroup
 	 * Valida se os campos estão preenchidos coretamente.
 	 *
 	 */
-	public function validate()
+	public function validate($strPage=null, $strFields=null, $strIgnoreFields=null)
 	{
 		$this->setCss('border', '1px solid #c0c0c0');
 		$this->latGrau->setCss('border', '1px solid #c0c0c0');
