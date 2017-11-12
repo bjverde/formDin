@@ -179,7 +179,7 @@ class TCoordGMS extends TGroup
 	 * @param boolean $print
 	 * @return string
 	 */
-	function show($print=true)
+	function show($print=true,$flat=false)
 	{
 		if (!$this->getButtonGMap()->getOnClick())
 		{
