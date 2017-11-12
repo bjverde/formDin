@@ -134,7 +134,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.1','8','Gride 01 - botões sobre grid','grid/exe_gride01.php');
 	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
-	$menu->add('8.4','8','Grid Offline com fwGetGrid()','exe_gride_4.php');
+	$menu->add('8.4','8','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
 	$menu->add('8.5','8','Paginação','exe_gride_paginacao.php');
 	$menu->add('8.6','8','Função getGrid()','exe_gride_4.php');
 	$menu->add('8.7','8','Gride com Campos 1','exe_gride_10.php');

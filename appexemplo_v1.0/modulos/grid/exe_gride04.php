@@ -79,6 +79,6 @@ $frm->show();
 <script>
 function atualizar_gride()
 {
-	fwGetGrid('exe_gride_4.php','campo_gride',{"action":"atualizar_gride"},true);
+	fwGetGrid('grid/exe_gride04.php','campo_gride',{"action":"atualizar_gride"},true);
 }
 </script>
