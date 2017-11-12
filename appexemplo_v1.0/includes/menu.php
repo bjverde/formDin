@@ -201,8 +201,6 @@ $menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
 $menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
 $menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
 $menu->add(-2006,-20,'Campo Select','exe_select.inc');
-$menu->add(-2012,-20,'Campo Coordenada Geogr?fica','exe_campo_coordGMS.inc');
-$menu->add(-2014,-20,'Campo Ajuda (facebox)','exe_campo_ajuda.inc');
 $menu->add(-2018,-20,'cad_departamento.php','cad_departamento.php');
 $menu->add(-2019,-20,'cad_fruta.inc','cad_fruta.inc');
 $menu->add(-2020,-20,'cad_fruta.inc','cad_fruta.inc');

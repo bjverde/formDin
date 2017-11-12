@@ -42,7 +42,7 @@ include('../base/classes/webform/TApplication.class.php');
 
 define('MIGRATE_JQUERY',FALSE);
 
-define('APLICATIVO','FormDin '.FORMDIN_VERSION);
+define('APLICATIVO','APPEV1.0');
 define('DECIMAL_SEPARATOR',',');
 //session_start();
 //session_destroy();
@@ -127,7 +127,7 @@ set_error_handler("exception_error_handler");
 $app->run();
 
 function minhaFuncaoLogin() {
-    return 'Olá';
+    return 'Olá, FormDin '.FORMDIN_VERSION;
 }
 
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {
