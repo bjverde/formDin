@@ -13,7 +13,14 @@ $dados['NM_TABELA'][] = 'Linha2';
 $dados['ST_TABELA'][] = 'S';
 $dados['SIT_OPCOES'][] = '3=Tres,4=>Quatro';
 
+$dados['ID_TABELA'][] = 3;
+$dados['NM_TABELA'][] = 'Linha3';
+$dados['ST_TABELA'][] = 'N';
+$dados['SIT_OPCOES'][] = '3=Tres,4=>Quatro';
 
+
+$html ='Os botões só funcionam depois das linha dos gride selecionadas'; 
+$frm->addHtmlField('html1',$html,null,'Dica:',null,200)->setCss('border','1px dashed blue');
 $gride = new TGrid( 'gdTeste' // id do gride
 					,'Título do Gride' // titulo do gride
 					,$dados 	// array de dados
@@ -37,21 +44,18 @@ $frm->addHtmlField('gride',$gride);
 
 // exibir o formulário
 $frm->show();
-function gdAoDesenharCelula($rowNum,$cell,$objColumn,$aData,$edit)
-{
-	if( $objColumn->getFieldName() == 'SIT_OPCOES')
-	{
+
+
+function gdAoDesenharCelula($rowNum,$cell,$objColumn,$aData,$edit){
+	if( $objColumn->getFieldName() == 'SIT_OPCOES')	{
 		$edit->setVisible( false );
 	}
-
 }
 ?>
 <script>
-function chkClic(e, linha)
-{
+function chkClic(e, linha) {
 	// mostrar o campo select
-    if( jQuery(e).is(':checked') )
-    {
+    if( jQuery(e).is(':checked') )   {
     	jQuery("#sit_opcoes_"+linha).show();
 
     	// mostrar o botão alterar da linha
@@ -71,8 +75,7 @@ function chkClic(e, linha)
     }
 }
 
-function grideAlterar(fields, values, idGride, linha)
-{
+function grideAlterar(fields, values, idGride, linha) {
 	alert( 'Alterar..Linha: '+linha);
 }
 
