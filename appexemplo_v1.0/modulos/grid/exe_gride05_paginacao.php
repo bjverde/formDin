@@ -43,7 +43,7 @@ $frm->addHtmlField('mensagem',"<h3>Este exemplo utiliza a tabela tb_paginacao do
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] )
 {
 				$res = TPDOConnection::executeSql("select * from tb_paginacao");
-				$g = new TGrid('gd','Gride com Paginação',$res,200,null,'ID','descricao',10,'exe_gride_paginacao.php');
+				$g = new TGrid('gd','Gride com Paginação',$res,200,null,'ID','descricao',10,'grid/exe_gride05_paginacao.php');
 				$g->setOnDrawActionButton('onDraw');
 				$g->addColumn('id','Id',50,'center');
 				$g->addColumn('descricao','Descrição',1200,'left');
@@ -78,7 +78,7 @@ function onDraw( $rowNum,$button,$objColumn,$aData)
 <script>
 function init()
 {
-				fwGetGrid("exe_gride_paginacao.php",'html_gride');
+				fwGetGrid("grid/exe_gride05_paginacao.php",'html_gride');
 }
 // recebe fields e values do grid
 function alterar(f,v)

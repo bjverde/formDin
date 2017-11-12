@@ -135,16 +135,15 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
 	$menu->add('8.4','8','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
-	$menu->add('8.5','8','Paginação','exe_gride_paginacao.php');
+	$menu->add('8.5','8','Gride 05 - Paginação','grid/exe_gride05_paginacao.php');
 	$menu->add('8.6','8','Função getGrid()','exe_gride_4.php');
 	$menu->add('8.7','8','Gride com Campos 1','exe_gride_10.php');
 	$menu->add('8.8','8','Gride com Campos 2','exe_gride_11.php');
 	$menu->add('8.9','8','Gride com campos 3','view/grid/exe_gride_campos3.php');
 	$menu->add('8.10','8','exe_gride_09','grid/exe_gride_09.php');
-	$menu->add('8.11','8','Criação de Gride','grid/exe_gride.php');
+	$menu->add('8.11','8','Gride 11','grid/exe_gride11.php');
 	$menu->add('8.12','8','Gride 12 offline','grid/exe_gride12.php');
 	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
-	$menu->add('8.14','8','Gride 11','grid/exe_gride11.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'PDO');
