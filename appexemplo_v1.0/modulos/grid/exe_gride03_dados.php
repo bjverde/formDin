@@ -100,7 +100,7 @@ $grid = new TGrid('gdx','Dados Off-line'
 					,'SEQ_MOEDA,SEQ_DOCUMENTO'
 					,null
 					,null
-					,'exe_gride_3_dados.php');
+					,'grid/exe_gride03_dados.php');
 
 // adicionar o formulário ao gride para criar o gride offline
 $grid->setForm($frm,false);

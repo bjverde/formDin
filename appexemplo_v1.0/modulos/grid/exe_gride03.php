@@ -53,7 +53,7 @@ $frm->addDateField('dat_nascimento','Data:',true);
 $frm->addMemoField('obs'		,'Obs:',1000,true,20,3,true);
 
 // subformulário com campos "offline" 1-N
-$frm->addHtmlGride('campo_moeda','exe_gride_3_dados.php','gdx');
+$frm->addHtmlGride('campo_moeda','grid/exe_gride03_dados.php','gdx');
 
 $frm->setAction('Gravar,Novo');
 
