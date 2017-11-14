@@ -154,7 +154,7 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 		$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
 		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
 	$menu->add('94','9','PDO Firebird','pdo/exe_pdo_firebird01.php');	
-	$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
+	$menu->add('96','9','Testar Conexão','pdo/exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
 	
