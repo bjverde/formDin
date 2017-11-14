@@ -11,5 +11,9 @@ $sql = 'SELECT * from tb_uf';
 	}
 */
 
-print_r( TPDOConnection::executeSql("SELECT * FROM TB_UF"));
+print_r( TPDOConnection::executeSql("SELECT * FROM TB_UF") );
+
+$frm = new TForm('Exemplo PDO Firebird');
+$frm->addHtmlField('html','Olhe o codigo desse arquivo');
+$frm->show();
 ?>
