@@ -38,7 +38,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-
+d($_REQUEST);
 $frm = new TForm('Exemplo de Redirect - Form 2',200,600);
 $frm->addTextField('nom_pessoa2','Nome:',20);
 $frm->addHtmlField('html','Este é o form 2, clique no botão Ir para VOLTAR para o form 1')->setCss('color','red');

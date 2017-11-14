@@ -143,8 +143,7 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.8','8','Gride 08 - Campos 3','grid/exe_gride08.php');
 	$menu->add('8.9','8','Gride 09 - erro','grid/exe_gride_09.php');
 	$menu->add('8.10','8','Gride 10 - erro','grid/exe_gride10.php');
-	$menu->add('8.11','8','Gride 11','grid/exe_gride11.php');
-	$menu->add('8.12','8','Gride 12 offline','grid/exe_gride12.php');
+	$menu->add('8.11','8','Gride 11 Offine 02 - erro','grid/exe_gride11.php');
 	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
 
 //-----------------------------------------------------------------------------

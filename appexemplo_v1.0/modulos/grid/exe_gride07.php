@@ -1,4 +1,5 @@
 <?php
+d($_REQUEST);
 $frm = new TForm('Exemplo Gride Evento',300,500);
 
 // simulação de dados para o gride
@@ -35,12 +36,30 @@ $gride->addSelectColumn('sit_opcoes' ,'Opções','SIT_OPCOES','1=Amarelo,2=Verde')
 $gride->addButton('Alterar 1', NULL, 'btnAlterar1', 'grideAlterar()', NULL, 'editar.gif','editar.gif', 'Alterar registro')->setEnabled( false );
 $gride->addButton('Alterar 2', NULL, 'btnAlterar2', 'grideAlterar()', NULL, null,null, 'Alterar registro')->setEnabled( false );
 $gride->addButton('Excluir', NULL, 'btnExcluir', 'grideAlterar()', NULL, null,null)->setEnabled( false )->setCss('color','red');
+//$gride->addButton('Abrir Redirect 2', 'btnRedirect2', 'btnRedirect2', 'grideRedirect2()', 'Redirecionar ?', null,null,null,true)->setCss('color','blue');
+$gride->addButton('Ir para Redirect 2', 'btnRedirect2', null, null, null, null,null,null,true)->setCss('color','blue');
 
 // função de callback da criação das celulas
 $gride->setOnDrawCell('gdAoDesenharCelula');
-
 // campo html para exibir o gride
 $frm->addHtmlField('gride',$gride);
+
+
+$acao = isset($acao) ? $acao : null;
+d($acao);
+switch( $acao ) {
+	case 'Ir submit':
+		//Redirect só funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',true);
+		break;
+		//------------------------------------------------------------------
+	case 'Ir Ajax':
+		//Redirect só funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
+		break;
+		//--------------------------------------------------------------------
+}
+
 
 // exibir o formulário
 $frm->show();
@@ -77,6 +96,10 @@ function chkClic(e, linha) {
 
 function grideAlterar(fields, values, idGride, linha) {
 	alert( 'Alterar..Linha: '+linha);
+}
+
+function grideRedirect2(fields, values, idGride, linha) {
+	alert( 'Cliclou na linha: '+linha+', agora será redirecionado para o modulo Redirect2');
 }
 
 // esconder todos os botoes alterar ao iniciar o formulário
