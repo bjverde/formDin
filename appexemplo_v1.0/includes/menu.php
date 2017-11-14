@@ -147,15 +147,13 @@ $menu->add('8',null,'Gride');
 	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('9',null,'PDO');
+$menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos bancos de dados','data_base.png');
 	$menu->add('91','9','Exemplo Mysql','pdo/exe_pdo_1.php');
 	$menu->add('92','9','Exemplo Sqlite e Mysql','pdo/exe_pdo_2.php');
 	$menu->add('93','9','Exemplo Postgres');
 		$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
 		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
-	$menu->add('94','9','Exemplo Firebird');
-		$menu->add('941','94','Conexão','exe_firebird_1.php');
-	$menu->add('95','9','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+	$menu->add('94','9','PDO Firebird','pdo/exe_pdo_firebird01.php');	
 	$menu->add('96','9','Testar Conex?o','exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
@@ -166,19 +164,23 @@ $menu->add('101',null,'Hints');
 $menu->add('1011','101','Exemplo I','exe_hint.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('103',null,'Formulário');
-	$menu->add('1031','103','Normal','view/form/exe_TForm.php');
-	$menu->add('1032','103','Subcadastro','view/form/exe_TForm2.php');
-	$menu->add('1033','103','Boxes','view/form/exe_TBox.php');
-	$menu->add('1034','103','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
-	$menu->add('1035','103','Imagem de Fundo','view/form/exe_TFormImage.php');
-	$menu->add('1036','103','Customizado com CSS','view/form/exe_TForm3.php');
-	$menu->add('1037','103','Recurso de Autosize','view/form/exe_TForm_autosize.php');
-	$menu->add('1038','103','Tela Login','view/form/exe_tela_login.php');
-	$menu->add('1039','103','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
-	$menu->add('1040','103','Definir Colunas no Formulário','view/form/exe_colunas.php');
-	$menu->add('1040','103','Local Destino','view/form/exe_form_local_destino.php');
+$menu->add('10',null,'Formulário');
+	$menu->add('10.1','10','Normal','view/form/exe_TForm.php');
+	$menu->add('10.2','10','Subcadastro','view/form/exe_TForm2.php');
+	$menu->add('10.3','10','Boxes','view/form/exe_TBox.php');
+	$menu->add('10.4','10','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
+	$menu->add('10.5','10','Imagem de Fundo','view/form/exe_TFormImage.php');
+	$menu->add('10.6','10','Customizado com CSS','view/form/exe_TForm3.php');
+	$menu->add('10.7','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
+	$menu->add('10.8','10','Tela Login','view/form/exe_tela_login.php');
+	$menu->add('10.9','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
+	$menu->add('10.10','10','Definir Colunas no Formulário','view/form/exe_colunas.php');
+	$menu->add('10.11','10','Local Destino','view/form/exe_form_local_destino.php');
 
+$menu->add('199',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
+	$menu->add('199.1','199','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../base/imagens/smiley-1-512.png');
+	
 //-----------------------------------------------------------------------------
 $menu->add('200',0,'Layout');
 	$menu->add('201','200','Layout','layouts.php');
