@@ -250,7 +250,7 @@ class TApplication extends TLayout {
 	 * Se for passado o modulo ele apenas inclui módulo e sai funcionando como o modulo ler_modulo.php antigo
 	 */
 	public function run() {
-		ini_set ( 'default_charset', $this->getCharset () );
+		ini_set ( 'default_charset', $this->getCharset() );
 		ob_start (); // arquivos includes podem conter espaços no final que causam erros nas chamadas ajax
 		            // adicionar os arquivos definidos no setIncludeFile()
 		if ($this->getIncludeFiles ()) {
@@ -270,21 +270,7 @@ class TApplication extends TLayout {
 			define ( 'TITULO_SISTEMA', $this->getTitle () );
 		}
 		
-		if (isset ( $_REQUEST ['app_action'] ) && $_REQUEST ['app_action']) {
-			$this->includeConnectionFile ();
-			
-			// arquivo de actions gerais
-			if (file_exists ( $this->getBase () . 'includes/app_action.php' )) {
-				include ($this->getBase () . 'includes/app_action.php');
-			}
-			
-			// arquivo de actions da aplicação
-			if (file_exists ( 'includes/app_action.php' )) {
-				include ('includes/app_action.php');
-			}
-			
-			exit ();
-		}
+		$this->includesAppAction ();
 		
 		if ($this->getBeforeActionFunction ()) {
 			$this->includeConnectionFile ();
@@ -570,6 +556,27 @@ class TApplication extends TLayout {
 		}
 		$this->show ();
 	}
+	
+	// -----------------------------------------------------------------
+	/**
+	 * Adicionar os arquivos de Actions Gerais ou da aplicação
+	 * @codeCoverageIgnore
+	 */
+	private function includesAppAction() {
+		if (isset ( $_REQUEST ['app_action'] ) && $_REQUEST ['app_action']) {
+			$this->includeConnectionFile ();
+			// arquivo de actions gerais
+			if (file_exists ( $this->getBase () . 'includes/app_action.php' )) {
+				include ($this->getBase () . 'includes/app_action.php');
+			}
+			// arquivo de actions da aplicação
+			if (file_exists ( 'includes/app_action.php' )) {
+				include ('includes/app_action.php');
+			}
+			exit ();
+		}
+	}
+
 	
 	// -----------------------------------------------------------------
 	/**
