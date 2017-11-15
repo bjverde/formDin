@@ -172,21 +172,9 @@ class TApplicationHtml
 		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
 		error_reporting ( E_ALL & ~E_NOTICE & ~E_DEPRECATED );
 		$this->checkIfExistConfigFile ();
-		$this->defineConstantAplicativo ();		
+		$this->defineConstantAplicativo ();
 		$this->includeFiles();
-		
-		if( isset($_REQUEST['app_action']) && $_REQUEST['app_action'] ) {
-			$this->includeConnectionFile();
-			// arquivo de actions gerais
-			if( file_exists($this->page->getBase().'includes/app_action.php') ) {
-				include( $this->page->getBase().'includes/app_action.php' );
-			}
-			// arquivo de actions da aplicação
-			if( file_exists('includes/app_action.php') ) {
-				include('includes/app_action.php');
-			}
-			exit();
-		}
+		$this->includesAppAction ();
 		//******************************************************************************************
 		$this->processRequest(); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
 			                         // ******************************************************************************************
@@ -500,6 +488,25 @@ class TApplicationHtml
 			}
 		}
 		$this->page->show();
+	}
+	
+	/**
+	 * Adicionar os arquivos de Actions Gerais ou da aplicação
+	 * @codeCoverageIgnore
+	 */
+	private function includesAppAction() {
+		if (isset ( $_REQUEST ['app_action'] ) && $_REQUEST ['app_action']) {
+			$this->includeConnectionFile ();
+			// arquivo de actions gerais
+			if (file_exists ( $this->page->getBase () . 'includes/app_action.php' )) {
+				include ($this->page->getBase () . 'includes/app_action.php');
+			}
+			// arquivo de actions da aplicação
+			if (file_exists ( 'includes/app_action.php' )) {
+				include ('includes/app_action.php');
+			}
+			exit ();
+		}
 	}
 	
 	/**
