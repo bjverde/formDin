@@ -156,60 +156,48 @@ class TApplicationHtml
 	/**
 	* Permite ocultar ou exibir o menu principal da aplicação
 	*/
-	public function setShowMenu($boolNewValue=null)
-	{
+	public function setShowMenu($boolNewValue=null) {
 		$boolNewValue = is_null($boolNewValue) ? true : $boolNewValue;
 		$this->showMenu = $boolNewValue;
 	}
-	public function getShowMenu()
-	{
+	public function getShowMenu() {
 		return $this->showMenu;
 	}
 	/**
-	* Este método inicializa a aplicação e cria a interface da aplicação.
-	* Se for passado o modulo ele apenas inclui módulo e sai funcionando como o modulo ler_modulo.php antigo
-	*
-	*/
-	public function run()
-	{
-	    ini_set('default_charset',ENCODINGS);
+	 * Este método inicializa a aplicação e cria a interface da aplicação.
+	 * Se for passado o modulo ele apenas inclui módulo e sai funcionando como o modulo ler_modulo.php antigo
+	 */
+	public function run() {
+		ini_set ( 'default_charset', ENCODINGS );
 		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
-		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-//error_reporting(E_ALL);
-		if($this->getConfigFile())
-		{
-			if( file_exists($this->getConfigFile()))
-			{
-				require_once($this->getConfigFile());
+		error_reporting ( E_ALL & ~E_NOTICE & ~E_DEPRECATED );
+		//error_reporting(E_ALL);
+		if ( $this->getConfigFile () ) {
+			if( file_exists( $this->getConfigFile() ) ) {
+				require_once( $this->getConfigFile() );
 			}
 		}
 		// definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
-		if(!defined('APLICATIVO'))
-		{
+		if( !defined('APLICATIVO') ) {
 			define('APLICATIVO','FORMDIN');
 		}
 		// adicionar os arquivos definidos no setIncludeFile()
-		if($this->getIncludeFiles())
-		{
-			foreach($this->getIncludeFiles() as $k=>$v)
-			{
-				if( file_exists($v))
-				{
+		if( $this->getIncludeFiles() ) {
+			foreach($this->getIncludeFiles() as $k=>$v){
+				if( file_exists($v)){
 					require_once($v);
 				}
 			}
 		}
-		if( isset($_REQUEST['app_action']) && $_REQUEST['app_action'] )
-		{
+		
+		if( isset($_REQUEST['app_action']) && $_REQUEST['app_action'] ) {
 			$this->includeConnectionFile();
 			// arquivo de actions gerais
-			if( file_exists($this->page->getBase().'includes/app_action.php'))
-			{
-				include($this->page->getBase().'includes/app_action.php');
+			if( file_exists($this->page->getBase().'includes/app_action.php') ) {
+				include( $this->page->getBase().'includes/app_action.php' );
 			}
 			// arquivo de actions da aplicação
-			if( file_exists('includes/app_action.php'))
-			{
+			if( file_exists('includes/app_action.php') ) {
 				include('includes/app_action.php');
 			}
 			exit();
