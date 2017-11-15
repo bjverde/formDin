@@ -76,4 +76,10 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
    * :bug: correção do bug do zebrado no grid paginado
 * [4.1.0 - 31/10/2017 tag v4.1.0](https://github.com/bjverde/formDin/releases/tag/v4.1.0) 
    * :hammer: Gerador de código crud, com paginação via SQL para MySQL 5.4 ou superior
+   * :hammer: Phpunit primeiros testes
+   * :hammer: Phpunit code coverage
+   * :hammer: Correção para funcionar MS SQL Server 2012 ou superior no Windows e Linux com DBLib
+   * :hammer: Sistema de exemplos 2.0 completamente funcional
+   * :hammer: Sistema de exemplos 2.5 completamente funcional com auteticação e perfis de acesso.
+   * :bug: Correção de diversos bugs para tornar compativel com PHP 5.6.30
 * 4.0.0 - Versão orignal, Brach copyLEB 
