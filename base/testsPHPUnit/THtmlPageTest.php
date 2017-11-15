@@ -61,17 +61,19 @@ class THtmlPageTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * Tests THtmlPage->addJavascript()
 	 */
+	/*
 	public function testAddJsCssFile_SingleFile() {
 		$expected = null;
 		$input = 'scripthfdka.js';
 		$expected[] = $input;		
 		
-		$this->tHtmlPage = new THtmlPage(/* parameters */);
+		$this->tHtmlPage = new THtmlPage();
 		$this->tHtmlPage->addJsCssFile($input);
 		$result =  $this->tHtmlPage->getArrJsCssFile();
 		print_r($result);
 		$this->assertEquals( $expected[0] , $result[0]);
 	}
+	*/
 	
 	/**
 	 * Tests THtmlPage->getCharset()
