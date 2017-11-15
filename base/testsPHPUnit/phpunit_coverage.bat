@@ -1,1 +1,1 @@
-D:\wamp\bin\php\php5.6.31\php.exe D:\wamp\bin\php\phpunit\phpunit-4.8.36.phar --coverage-html D:\wamp\www\formDin\base\testsPHPUnit\cover D:\wamp\www\formDin\base\testsPHPUnit\
+D:\wamp\bin\php\php5.6.31\php.exe D:\wamp\bin\php\phpunit\phpunit-4.8.36.phar --coverage-html D:\wamp\www\formDin\phpunit-code-coverage D:\wamp\www\formDin\base\testsPHPUnit\
