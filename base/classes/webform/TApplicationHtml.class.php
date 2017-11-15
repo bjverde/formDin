@@ -1154,21 +1154,27 @@ class TApplicationHtml
 		}
 		return $this->footerContent;
 	}
+	
 	/**
-	* Retorna o objeto THtmlPage da estrutura da página
-	*
-	*/
-	public function getPage()
-	{
+	 * Retorna o objeto THtmlPage da estrutura da página
+	 * @codeCoverageIgnore
+	 */
+	public function getPage() {
 		return $this->page;
 	}
-	public function getBase()
-	{
-		return $this->page->getBase();
+	
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function getBase() {
+		return $this->page->getBase ();
 	}
-	public function getRoot()
-	{
-		return $this->page->getRoot();
+	
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function getRoot() {
+		return $this->page->getRoot ();
 	}
 		//-----------------------------------------------------------------------------
 	/**
