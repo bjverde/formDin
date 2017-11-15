@@ -343,22 +343,15 @@ class THtmlPage extends TElement
 	 * @param mixed $mixJs
 	 * @param integer $intIndex
 	 */
-	public function addJavascript($mixJs,$intIndex=null)
-	{
-		if(isset($intIndex))
-		{
+	public function addJavascript( $mixJs ,$intIndex=null ) {
+		if( isset($intIndex) ) {
 			self::$arrJsOnLoad[$intIndex] = $mixJs;
-		}
-		else
-		{
-			if( !is_array(self::$arrJsOnLoad) )
-			{
+		} else {
+			if( !is_array(self::$arrJsOnLoad) ) {
 				// começar no indice 20 para poder inserir algum javascript que precise
 				// ser executado primeiro
 				self::$arrJsOnLoad[20] = $mixJs;
-			}
-			else
-			{
+			} else {
 				self::$arrJsOnLoad[] = $mixJs;
 			}
 		}
