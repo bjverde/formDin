@@ -181,34 +181,4 @@ class THtml extends TControl
 		$this->gridFile['formFields'] = $mixFormFields;
 	}
 }
-/*
-// teste do campo html
-$html = new THtmlField('html_teste','Luis Eugenio',null,800,600);
-//$html = new THtmlField('html_teste','Luis Eugenio','t.html',600,200);
-//$html = new THtmlField('html_teste','Luis Eugenio','teste.inc',600,200);
-//$html->setValue('asçdkflaskdfjakldjfaskdfj');
-//$html->setIncludeFile('y.html');
-$html->show();
-*/
-
-/*
-$frm = new TForm('Campo Html',100,800);
-$f = $frm->addHtmlField('url_arquivo'		,'http://siscom.ibama.gov.br/mapoteca_img/landsat_origin_html/228-71.html');
-		$f->setcss('color','blue');
-		$f->setcss('text-decoration','underline');
-		$f->setcss('cursor','pointer');
-		$f->setEvent('onclick','alert("abrir janela")');
-$frm->setAction('GRAVA');
-$frm->show();
-print_r($_POST);
-*/
-/*
-$h = new THtml('obs','Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div Observação oara teste de quebra do campo html dento de uma div ',null,100,500);
-print $h->getValue();
-//$h->show();
-print '<hr>';
-$h = new THtml('obs',null,'ajuda/nom_pessoa.html',100,500);
-//$h->show();
-print $h->getValue();
-*/
 ?>
