@@ -56,21 +56,30 @@ class THtmlPage extends TElement
 	private $objForm;
 	private $favIcon;
 
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct('DOCTYPE');
 
 		// elstilo da página
         self::$style = new TElement('style');
         // scripts da página
         self::$js = new TElement('script');
-		$this->objHtml 	= new TElement('html');$this->objHtml->clearCss();$this->add($this->objHtml);
+		$this->objHtml 	= new TElement('html');
+		$this->objHtml->clearCss();
+		$this->add($this->objHtml);
 		//$this->objHtml->setProperty('lang','pt-br');
-		$this->objHead 	= new TElement('head');$this->objHead->clearCss();$this->objHtml->add($this->objHead);
-		$this->objBody 	= new TElement('body');$this->objBody->clearCss();$this->objHtml->add($this->objBody);
+		$this->objHead 	= new TElement('head');
+		$this->objHead->clearCss();
+		$this->objHtml->add($this->objHead);
+		
+		$this->objBody 	= new TElement('body');
+		$this->objBody->clearCss();
+		$this->objHtml->add($this->objBody);
 		$this->objHead->add('<meta http-equiv="Expires" content="Tue, 20 Aug 1996 14:25:27 GMT">');
 		$this->objHead->add('<meta http-equiv="Content-Type" content="text/html; charset='.$this->getCharset().'">');
-		$this->objTitle = new TElement('title');$this->objTitle->clearCss();$this->objHead->add($this->objTitle);
+		
+		$this->objTitle = new TElement('title');
+		$this->objTitle->clearCss();
+		$this->objHead->add($this->objTitle);
 	}
 	/**
 	* Método para gerar o html da página
