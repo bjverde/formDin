@@ -79,13 +79,10 @@ class THtmlPage extends TElement
 	* @param boolean $print
 	* @return mixed
 	*/
-	public function show($print=true)
-	{
-		if( !$this->getParentControl() )
-		{
+	public function show($print=true) {
+		if( !$this->getParentControl() ) {
 			$this->includeJsCssFiles();
-			if( self::$style->getChildren())
-			{
+			if( self::$style->getChildren()) {
 				$this->addInHead(self::$style);
 			}
 			$this->getJavascript();
@@ -153,24 +150,24 @@ class THtmlPage extends TElement
 	*
 	* @param string $mixJsCssFile
 	*/
-	public function addJsCssFile($mixJsCssFile)
-	{
-		if( is_array($mixJsCssFile))
-		{
-			foreach($mixJsCssFile as $k=>$file)
-			{
+	public function addJsCssFile($mixJsCssFile) {
+		if( is_array($mixJsCssFile) ) {
+			foreach($mixJsCssFile as $k=>$file) {
 				$this->addJsCssFile($file);
 			}
-		}
-		else if( is_string($mixJsCssFile))
-		{
+		} else if( is_string($mixJsCssFile) ) {
 			// ignorar se já tiver adicionado
-			if( !is_array(self::$arrJsCssFile) || !isset($mixJsCssFile) || array_search($mixJsCssFile,self::$arrJsCssFile,true) === false)
-			{
+			$notArray = !is_array(self::$arrJsCssFile);
+			if( $notArray || !isset($mixJsCssFile) || array_search($mixJsCssFile,self::$arrJsCssFile,true) === false) {
 				self::$arrJsCssFile[] = $mixJsCssFile;
 			}
 		}
 	}
+	
+	public function getArrJsCssFile() {
+		return self::$arrJsCssFile;
+	}
+	
 	/**
 	* Método interno para gerar o codigo html de inserção do arquivo js
 	*
@@ -405,22 +402,26 @@ class THtmlPage extends TElement
 		}
 		return null;
 	}
-	public function getBody()
-	{
+	public function getBody() {
 		return $this->objBody;
 	}
-	public function addStyle($strStyle)
-	{
+	
+	public function addStyle($strStyle) {
 		self::$style->add($strStyle);
 	}
-	// compatibilidade com jLayou
-	public function getJsOnLoad()
-	{
+
+	/**
+	 * compatibilidade com jLayou
+	 * @codeCoverageIgnore
+	 */	
+	public function getJsOnLoad() {
 		return null;
 	}
-	public function setJsOnLoad()
-	{
-	}
+	
+	/**
+	 * @codeCoverageIgnore
+	 */
+	public function setJsOnLoad(){}
 
 	public function getCharset() {
   		if ( ! defined('CHARSET') ) {
@@ -430,9 +431,9 @@ class THtmlPage extends TElement
 	}
 	/**
 	* @deprecated - substituido pelo método getCharset();
+	* @codeCoverageIgnore
 	*/
-	public function getContentType()
-	{
+	public function getContentType() {
 		return $this->getCharset();
 	}
 
