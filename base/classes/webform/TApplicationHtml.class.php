@@ -171,24 +171,9 @@ class TApplicationHtml
 		ini_set ( 'default_charset', ENCODINGS );
 		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
 		error_reporting ( E_ALL & ~E_NOTICE & ~E_DEPRECATED );
-		//error_reporting(E_ALL);
-		if ( $this->getConfigFile () ) {
-			if( file_exists( $this->getConfigFile() ) ) {
-				require_once( $this->getConfigFile() );
-			}
-		}
-		// definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
-		if( !defined('APLICATIVO') ) {
-			define('APLICATIVO','FORMDIN');
-		}
-		// adicionar os arquivos definidos no setIncludeFile()
-		if( $this->getIncludeFiles() ) {
-			foreach($this->getIncludeFiles() as $k=>$v){
-				if( file_exists($v)){
-					require_once($v);
-				}
-			}
-		}
+		$this->checkIfExistConfigFile ();
+		$this->defineConstantAplicativo ();		
+		$this->includeFiles();
 		
 		if( isset($_REQUEST['app_action']) && $_REQUEST['app_action'] ) {
 			$this->includeConnectionFile();
@@ -516,6 +501,42 @@ class TApplicationHtml
 		}
 		$this->page->show();
 	}
+	
+	/**
+	 * adicionar os arquivos definidos no setIncludeFile()
+	 * @codeCoverageIgnore
+	 */
+	private function includeFiles() {
+		if ($this->getIncludeFiles ()) {
+			foreach ( $this->getIncludeFiles () as $k => $v ) {
+				if (file_exists ( $v )) {
+					require_once ($v);
+				}
+			}
+		}
+	}
+
+	/**
+	 * definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
+	 */
+	public function defineConstantAplicativo() {
+		if (! defined ( 'APLICATIVO' )) {
+			define ( 'APLICATIVO', 'FORMDIN' );
+		}
+	}
+
+	/**
+	 * @codeCoverageIgnore
+	 */
+	private function checkIfExistConfigFile() {
+		// error_reporting(E_ALL);
+		if ($this->getConfigFile ()) {
+			if (file_exists ( $this->getConfigFile () )) {
+				require_once ($this->getConfigFile ());
+			}
+		}
+	}
+
 	//-----------------------------------------------------------------
 	/**
 	* Este método é responsável por processar as requisições web
