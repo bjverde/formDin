@@ -27,8 +27,7 @@ O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versã
 ## Sobre as branchs
 * Master - tem as modificações e novidades
 * copyLEB - copia de versão original, congelada e sem alterações. Conforme Luís Eugênio Barbosa
-* UTF-8 - Um tentativa para deixar o projeto com o formato UTF-8. 
-* ANSI - Uma copia do master
+Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas-e-Arquitetura#sobre-as-branchs)
 
 ## Informações
 
