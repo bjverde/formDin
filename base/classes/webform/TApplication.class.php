@@ -252,28 +252,14 @@ class TApplication extends TLayout {
 	public function run() {
 		ini_set ( 'default_charset', $this->getCharset() );
 		ob_start (); // arquivos includes podem conter espaços no final que causam erros nas chamadas ajax
-		            // adicionar os arquivos definidos no setIncludeFile()
-		if ($this->getIncludeFiles ()) {
-			foreach ( $this->getIncludeFiles () as $k => $v ) {
-				if (file_exists ( $v )) {
-					require_once ($v);
-				}
-			}
-		}
+		$this->checkIfExistConfigFile();
 		ob_clean ();
-		// definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
-		if (! defined ( 'APLICATIVO' )) {
-			define ( 'APLICATIVO', 'FORMDIN' );
-		}
+		$this->defineConstantAplicativo();		
+		$this->defineConstantSystemTitle();
+		$this->includesAppAction();
 		
-		if (! defined ( 'TITULO_SISTEMA' )) {
-			define ( 'TITULO_SISTEMA', $this->getTitle () );
-		}
-		
-		$this->includesAppAction ();
-		
-		if ($this->getBeforeActionFunction ()) {
-			$this->includeConnectionFile ();
+		if ($this->getBeforeActionFunction()) {
+			$this->includeConnectionFile();
 			$action = null;
 			$module = null;
 			if (isset ( $_REQUEST ['modulo'] )) {
@@ -555,6 +541,41 @@ class TApplication extends TLayout {
 			$this->addJavascript ( 'app_load_module("' . $loadModule . '")' );
 		}
 		$this->show ();
+	}
+	
+	/**
+	 * adicionar os arquivos definidos no setIncludeFile()
+	 * @codeCoverageIgnore
+	 */
+	private function checkIfExistConfigFile() {
+		if ($this->getIncludeFiles ()) {
+			foreach ( $this->getIncludeFiles () as $k => $v ) {
+				if (file_exists ( $v )) {
+					require_once ($v);
+				}
+			}
+		}
+	}
+	
+	// -----------------------------------------------------------------
+	/**
+	 * Definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
+	 * @codeCoverageIgnore
+	 */
+	private function defineConstantSystemTitle() {
+		if (! defined ( 'TITULO_SISTEMA' )) {
+			define ( 'TITULO_SISTEMA', $this->getTitle () );
+		}
+	}
+	
+	// -----------------------------------------------------------------
+	/**
+	 * Definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
+	 */
+	public function defineConstantAplicativo() {
+		if (! defined ( 'APLICATIVO' )) {
+			define ( 'APLICATIVO', 'FORMDIN' );
+		}
 	}
 	
 	// -----------------------------------------------------------------
