@@ -1,8 +1,10 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -48,13 +50,10 @@ $frm->setOnClose('depoisFechar()');
 
 
 $frm->addTextField('nome','Nome:',60);
-if( $frm->get('flat')=='1')
-{
+if( $frm->get('flat')=='1') {
 	$frm->setFlat(true);
 	$frm->addButton('Com bordas',null,'btn2','jQuery("#flat").val(0);fwDoAction();');
-}
-else
-{
+} else {
 	$frm->addButton('Sem bordas',null,'btn2','jQuery("#flat").val(1);fwDoAction();');
 }
 $frm->addRadioField('sexo','Sexo:',false,'M=masculino,F=Feminino');
@@ -76,7 +75,7 @@ $frm->setOnlineSearch('municipio','tb_municipio'
 	,false // caseSensitive
 	);
 
-
+$frm->addLinkField('idLink1','Conteudo da Modal','Abre o conteudo da modal em nova janela',null,'index.php?modulo=view/form/exe_TForm.php','new');
 
 $frm->setonMaximize('onMaximize');
 $frm->addButton('Fechar Modal',null,'btnFechar','fecharModal()');
@@ -89,39 +88,28 @@ $frm->show();
 <script>
 //Window.keepMultiModalWindow=true;
 function openModal() {
-  	fwModalBox('Janela Modal 2','index.php?view/form/modulo=exe_TForm.php');
+  	fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
 	//top.app_open_modal_window({url:'http://localhost/fontes/base/exemplos/index.php?modulo=exe_TForm.php'});
 }
-function onMaximize(res)
-{
-	if( res == 0 )
-	{
+function onMaximize(res) {
+	if( res == 0 ) {
 		jQuery('#btn2').val('Maximizar');
-	}
-	else
-	{
+	}else {
 		jQuery('#btn1').val('Minimizar');
 	}
 }
-function fecharModal()
-{
+function fecharModal() {
 	alert( 'fechar');
 	fwClose_window();
 }
 
-function funcaoRetorno()
-{
+function funcaoRetorno() {
 	alert('funcaoRetorno() executada!');
 }
-
-function antesFechar()
-{
+function antesFechar() {
 	return confirm('Prosseguir com o fechamento do Formulário ?');
 }
-
-function depoisFechar()
-{
+function depoisFechar() {
 	alert( 'Formulário será fechado');
 }
 </script>
-
