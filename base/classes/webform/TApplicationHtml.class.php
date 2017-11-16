@@ -208,8 +208,8 @@ class TApplicationHtml {
 			define ( 'MIGRATE_JQUERY', FALSE );
 		}
 		if (MIGRATE_JQUERY) {
-			$this->page->addJsCssFile ( 'http://code.jquery.com/jquery-1.9.1.js' );
-			$this->page->addJsCssFile ( 'http://code.jquery.com/jquery-migrate-1.4.1.js' );
+			$this->page->addJsCssFile ( 'jquery-1.9/jquery-1.9.1.js' );
+			$this->page->addJsCssFile ( 'jquery-1.9/jquery-migrate-1.4.1.js' );
 			$this->page->addJsCssFile ( 'jquery/js_new/jquery.corner.js' );
 		} else {
 			$this->page->addJsCssFile ( 'jquery/jquery.js' );
