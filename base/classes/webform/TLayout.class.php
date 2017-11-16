@@ -1009,86 +1009,69 @@ class TLayout extends THtmlPage {
     //-------------------------------------------------------------------------------------------
 
     public function setEastSlidable($boolNewValue=null) {
-	$this->eastSlidable = $boolNewValue;
+		$this->eastSlidable = $boolNewValue;
     }
 
     public function getEastSlidable() {
-	return $this->eastSlidable;
+		return $this->eastSlidable;
     }
 
     //-------------------------------------------------------------------------------------------
-
     public function setWestSlidable($boolNewValue=null) {
-	$this->westSlidable = $boolNewValue;
+		$this->westSlidable = $boolNewValue;
     }
-
     public function getWestSlidable() {
-	return $this->westSlidable;
+		return $this->westSlidable;
     }
-
     //-------------------------------------------------------------------------------------------
-
     public function setNorthClosable($boolNewValue=null) {
-	$this->northClosable = $boolNewValue;
+		$this->northClosable = $boolNewValue;
     }
-
     public function getNorthClosable() {
-	return $this->northClosable;
+		return $this->northClosable;
     }
-
     //-------------------------------------------------------------------------------------------
-
     public function setSouthClosable($boolNewValue=null) {
-	$this->southClosable = $boolNewValue;
+		$this->southClosable = $boolNewValue;
     }
-
     public function getSouthClosable() {
-	return $this->southClosable;
+		return $this->southClosable;
     }
-
     //-------------------------------------------------------------------------------------------
-
     public function setEastClosable($boolNewValue=null) {
-	$this->eastClosable = $boolNewValue;
+		$this->eastClosable = $boolNewValue;
     }
 
     public function getEastClosable() {
-	return $this->eastClosable;
+		return $this->eastClosable;
     }
-
-    //-------------------------------------------------------------------------------------------
-
-    public function setWestClosable($boolNewValue=null) {
-	$this->westClosable = $boolNewValue;
-    }
-
-    public function getWestClosable() {
-	return $this->westClosable;
-    }
-
-    //-------------------------------------------------------------------------------------------
-    public function addJsFile($strJsFile=null) {
-	if (!is_null($strJsFile)) {
-	    $this->addJsCssFile($strJsFile);
+    // -------------------------------------------------------------------------------------------
+	public function setWestClosable($boolNewValue = null) {
+		$this->westClosable = $boolNewValue;
 	}
-    }
-
-    //-------------------------------------------------------------------------------
-    public function addCssFile($strCssFile=null) {
-	if (!is_null($strCssFile)) {
-	    $this->addJsCssFile($strCssFile);
+	public function getWestClosable() {
+		return $this->westClosable;
 	}
-    }
-    //-------------------------------------------------------------------------------------------
-    public function getContainer()
-    {
-	return $this->container;
-    }
-    //-------------------------------------------------------------------------------------------
-    public function setContainer(TELEMENT $objNewContainer)
-    {
-	$this->container = $objNewContainer;
-    }
+	// -------------------------------------------------------------------------------------------
+	public function addJsFile($strJsFile = null) {
+		if (! is_null ( $strJsFile )) {
+			$this->addJsCssFile ( $strJsFile );
+		}
+	}
+	// -------------------------------------------------------------------------------
+	public function addCssFile($strCssFile = null) {
+		if (! is_null ( $strCssFile )) {
+			$this->addJsCssFile ( $strCssFile );
+		}
+	}
+	// -------------------------------------------------------------------------------------------
+	public function getContainer() {
+		return $this->container;
+	}
+	// -------------------------------------------------------------------------------------------
+	public function setContainer(TELEMENT $objNewContainer) {
+		$this->container = $objNewContainer;
+	}
     //-------------------------------------------------------------------------------------------
 }
 
