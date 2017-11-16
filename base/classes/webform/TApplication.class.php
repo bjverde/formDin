@@ -107,30 +107,10 @@ class TApplication extends TLayout {
 		ini_set ( 'xdebug.max_nesting_level', 150 );
 		date_default_timezone_set ( 'America/Sao_Paulo' );
 		
-		if (file_exists ( 'dao/' )) {
-			$this->includePath ( 'dao/' );
-		}
-		
-		if (file_exists ( 'classes/' )) {
-			$this->includePath ( 'classes/' );
-		}
+		$this->includePathDao();
+		$this->includePathClasses();
 		
 		session_start ();
-		
-		// não exibir as mensagens de E_NOTICE para evitar os aviso de redefinição das constantes BANCO_USUARIO E BANCO_SENHA do config.php
-		if (defined ( 'E_DEPRECATED' )) {
-			if (defined ( 'E_STRICT' )) {
-				error_reporting ( E_ALL & ~ E_NOTICE & ~ E_DEPRECATED & ~ E_STRICT );
-			} else {
-				error_reporting ( E_ALL & ~ E_NOTICE & ~ E_DEPRECATED );
-			}
-		} else {
-			if (defined ( 'E_STRICT' )) {
-				error_reporting ( E_ALL & ~ E_NOTICE & ~ E_STRICT );
-			} else {
-				error_reporting ( E_ALL & ~ E_NOTICE );
-			}
-		}
 		
 		// desenv: error_reporting( E_ALL | E_STRICT );
 		// error_reporting( E_ALL | E_STRICT );
@@ -158,6 +138,19 @@ class TApplication extends TLayout {
 		// biblioteca de funções geral
 		$this->addIncludeFile ( $this->getBase () . 'includes/funcoes.inc' );
 	}
+
+	private function includePathClasses() {
+		if (file_exists ( 'classes/' )) {
+			$this->includePath ( 'classes/' );
+		}
+	}
+
+	private function includePathDao() {
+		if (file_exists ( 'dao/' )) {
+			$this->includePath ( 'dao/' );
+		}
+	}
+
 	public function setTitle($strNewValue = null) {
 		$this->strTitle = $strNewValue;
 	}
@@ -285,33 +278,10 @@ class TApplication extends TLayout {
 		
 		// ******************************************************************************************
 		$this->processRequest (); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
-		                         // ******************************************************************************************
-		                         // limpar arquivos temporários mas de 2 dias
-		                         // $h=opendir(getcwd().'/../tmp');
-		$tmpDir = preg_replace ( '/\/\//', '/', $this->getBase () . '/tmp/' );
-		if (is_dir ( $tmpDir )) {
-			$h = opendir ( $tmpDir );
-			if ($h) {
-				$t = time (); // agora
-				while ( $filetmp = readdir ( $h ) ) {
-					if ($filetmp != '.' && $filetmp != '..') {
-						$filepath = $tmpDir . $filetmp;
-						if (! is_dir ( $filepath ) && file_exists ( $filepath )) {
-							$lastModified = @filemtime ( $filepath );
-							if ($lastModified == NULL)
-								$lastModified = @filemtime ( utf8_decode ( $filepath ) );
-							if ($lastModified) {
-								if ($t - $lastModified > 172800) // 172800 seconds = 2 dias
-{
-									@unlink ( $filepath );
-								}
-							}
-						}
-					}
-				}
-				closedir ( $h );
-			}
-		}
+		// ******************************************************************************************
+		
+        $this->clearTempFiles();
+		
 		if (! $this->getLoginFile () && ! $this->getMainMenuFile () && ! $this->getDefaultModule ()) {
 			$_SESSION [APLICATIVO] = null;
 		}
@@ -540,6 +510,38 @@ class TApplication extends TLayout {
 		}
 		$this->show ();
 	}
+	
+	/**
+	 * Limpar arquivos temporários mas de 2 dias
+	 */
+	private function clearTempFiles() {
+		// $h=opendir(getcwd().'/../tmp');
+		$tmpDir = preg_replace ( '/\/\//', '/', $this->getBase () . '/tmp/' );
+		if (is_dir ( $tmpDir )) {
+			$h = opendir ( $tmpDir );
+			if ($h) {
+				$t = time (); // agora
+				while ( $filetmp = readdir ( $h ) ) {
+					if ($filetmp != '.' && $filetmp != '..') {
+						$filepath = $tmpDir . $filetmp;
+						if (! is_dir ( $filepath ) && file_exists ( $filepath )) {
+							$lastModified = @filemtime ( $filepath );
+							if ($lastModified == NULL)
+								$lastModified = @filemtime ( utf8_decode ( $filepath ) );
+							if ($lastModified) {
+								// 172800 seconds = 2 dias
+								if ($t - $lastModified > 172800) {
+									@unlink ( $filepath );
+								}
+							}
+						}
+					}
+				}
+				closedir ( $h );
+			}
+		}
+	}
+
 	
 	/**
 	 * adicionar os arquivos definidos no setIncludeFile()
