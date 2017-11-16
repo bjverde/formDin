@@ -36,8 +36,6 @@ class TApplicationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testSetTitle_NotDefined() {
-		$expected= 'xxxTest95784';
-		
 		$this->tApplication->setTitle(null);
 		$result = $this->tApplication->getTitle();
 		$this->assertNull($result);
