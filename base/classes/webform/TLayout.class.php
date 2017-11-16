@@ -182,8 +182,8 @@ class TLayout extends THtmlPage {
 	if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }	
 	if(MIGRATE_JQUERY){
 		// Tentaiva de Migrar para Jquery 1.9.1 
-		$this->addJsFile('http://code.jquery.com/jquery-1.9.1.js');
-		$this->addJsFile('http://code.jquery.com/jquery-migrate-1.4.1.js');
+		$this->addJsFile('jquery-1.9/jquery-1.9.1.js');
+		$this->addJsFile('jquery-1.9/jquery-migrate-1.4.1.js');
 		$this->addJsFile('jquery/js_new/jquery.corner.js' );
 	}else{
 		// adicionar jquery
