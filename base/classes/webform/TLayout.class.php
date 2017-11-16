@@ -261,51 +261,47 @@ class TLayout extends THtmlPage {
     }
 
     public function show($print=true) {
-	$id = $this->getId();
-	$this->centerArea->setClass('ui-' . $id . '-center', false);
-	$this->northArea->setClass('ui-' . $id . '-north', false);
-	$this->southArea->setClass('ui-' . $id . '-south', false);
-	$this->eastArea->setClass('ui-' . $id . '-east', false);
-	$this->westArea->setClass('ui-' . $id . '-west', false);
-	if (is_null($this->parent)) {
-	    $arrJsOnLoad = $this->getJsOnLoad();
-	    $this->setJsOnLoad(null);
-	    $this->addJsCssFile('jlayout.css');
-	    $this->addStyle($this->getStyle());
-	    $this->addJavascript($this->getJs());
-	    if (is_array(self::$arrLayout)) {
-		foreach (self::$arrLayout as $k => $objLayout) {
-		    $this->addJavascript($objLayout->getJs());
-		    $this->addStyle($objLayout->getStyle());
+		$id = $this->getId();
+		$this->centerArea->setClass('ui-' . $id . '-center', false);
+		$this->northArea->setClass('ui-' . $id . '-north', false);
+		$this->southArea->setClass('ui-' . $id . '-south', false);
+		$this->eastArea->setClass('ui-' . $id . '-east', false);
+		$this->westArea->setClass('ui-' . $id . '-west', false);
+		if (is_null ( $this->parent )) {
+			$arrJsOnLoad = $this->getJsOnLoad ();
+			$this->setJsOnLoad ( null );
+			$this->addJsCssFile ( 'jlayout.css' );
+			$this->addStyle ( $this->getStyle () );
+			$this->addJavascript ( $this->getJs () );
+			if (is_array ( self::$arrLayout )) {
+				foreach ( self::$arrLayout as $k => $objLayout ) {
+					$this->addJavascript ( $objLayout->getJs () );
+					$this->addStyle ( $objLayout->getStyle () );
+				}
+			}
+			if (is_array ( $arrJsOnLoad )) {
+				$arrJsOnLoad = array_merge ( $this->getJsOnLoad (), $arrJsOnLoad );
+				$this->setJsOnLoad ( $arrJsOnLoad );
+			}
 		}
-	    }
-	    if (is_array($arrJsOnLoad)) {
-		$arrJsOnLoad = array_merge($this->getJsOnLoad(), $arrJsOnLoad);
-		$this->setJsOnLoad($arrJsOnLoad);
-	    }
-	}
-
-	if( $this->getContainer())
-	{
-	    $container = $this->getContainer();
-	    $container->setId($this->getId().'_container');
-	    $container->add($this->getNorthArea());
-	    $container->add($this->getSouthArea());
-	    $container->add($this->getEastArea());
-	    $container->add($this->centerArea);
-	    $container->add($this->getWestArea());
-	    $this->addInBody($container);
-	}
-	else
-	{
-
-	    $this->addInBody($this->centerArea);
-	    $this->addInBody($this->getNorthArea());
-	    $this->addInBody($this->getSouthArea());
-	    $this->addInBody($this->getEastArea());
-	    $this->addInBody($this->getWestArea());
-	}
-	return parent::show($print);
+	
+		if( $this->getContainer()) {
+		    $container = $this->getContainer();
+		    $container->setId($this->getId().'_container');
+		    $container->add($this->getNorthArea());
+		    $container->add($this->getSouthArea());
+		    $container->add($this->getEastArea());
+		    $container->add($this->centerArea);
+		    $container->add($this->getWestArea());
+		    $this->addInBody($container);
+		} else {
+		    $this->addInBody($this->centerArea);
+		    $this->addInBody($this->getNorthArea());
+		    $this->addInBody($this->getSouthArea());
+		    $this->addInBody($this->getEastArea());
+		    $this->addInBody($this->getWestArea());
+		}
+		return parent::show($print);
     }
 
     public function getJs() {
