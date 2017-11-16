@@ -28,47 +28,6 @@ class THtmlPageTest extends PHPUnit_Framework_TestCase {
 		parent::tearDown ();
 	}
 	
-
-	/**
-	 * Tests THtmlPage->addJavascript()
-	 */
-	public function testAddJsCssFile_array() {
-		$expected[] = 'script01.js';
-		$expected[] = 'script02.js';
-		
-		$this->tHtmlPage->addJsCssFile($expected);
-		$result =  $this->tHtmlPage->getArrJsCssFile();
-		$this->assertEquals( $expected , $result);
-	}
-	
-	/**
-	 * Tests THtmlPage->addJavascript()
-	 */
-	public function testAddJsCssFile_SemRepetidos() {
-		$expected[] = 'script01.js';
-		$expected[] = 'script02.js';
-		
-		$input = $expected;
-		$input[]= 'script01.js';
-		$input[]= 'script01.js';
-		$input[]= 'script01.js';
-		
-		$this->tHtmlPage->addJsCssFile($input);
-		$result =  $this->tHtmlPage->getArrJsCssFile();
-		$this->assertEquals( $expected , $result);
-	}
-	
-	/**
-	 * Tests THtmlPage->addJavascript()
-	 */
-	public function testAddJsCssFile_SingleFile() {
-		$expected = 'scripthfdka.js';		
-		
-		$this->tHtmlPage->addJsCssFile($expected);
-		$result =  $this->tHtmlPage->getArrJsCssFile();
-		$this->assertEquals( $expected , $result[2]);
-	}
-	
 	/**
 	 * Tests THtmlPage->getCharset()
 	 */

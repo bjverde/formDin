@@ -164,8 +164,7 @@ class TApplication extends TLayout {
 	public function getTitle() {
 		if (is_null ( $this->strTitle ) && defined ( 'TITULO_SISTEMA' )) {
 			return TITULO_SISTEMA;
-		}
-		
+		}		
 		return $this->strTitle;
 	}
 	/**
@@ -180,7 +179,6 @@ class TApplication extends TLayout {
 		if (is_null ( $this->strTitleTag ) && defined ( 'APLICATIVO' )) {
 			return APLICATIVO;
 		}
-		
 		return $this->strTitleTag;
 	}
 	public function setSubtitle($strNewValue) {
@@ -559,10 +557,9 @@ class TApplication extends TLayout {
 	
 	// -----------------------------------------------------------------
 	/**
-	 * Definir a constante de controle de sessão do aplicativo caso não tenha sido definido no config.inc (php)
-	 * @codeCoverageIgnore
+	 * Definir o Titulo do sistema
 	 */
-	private function defineConstantSystemTitle() {
+	public function defineConstantSystemTitle() {
 		if (! defined ( 'TITULO_SISTEMA' )) {
 			define ( 'TITULO_SISTEMA', $this->getTitle () );
 		}
