@@ -44,8 +44,7 @@ define('MIGRATE_JQUERY',FALSE);
 define('APLICATIVO','TESTE');
 define('FORMDIN',1);
 define('DECIMAL_SEPARATOR',',');
-//session_start();
-//session_destroy();
+
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Exemplos das Funcionalidades '.FORMDIN_VERSION);
@@ -60,70 +59,14 @@ $app->getNorthArea()->setCss('border','0px');
 
 $app->setMainMenuFile('includes/menu.php');
 $app->setConfigFile(null);
-//$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
-//$app->setConnectionFile(null);
 
-//$app->addIncludeFile('config.php');
+
 $app->setHeaderContent('header.php');
 $app->getLoCenter()->setCss('background-color','blue');
-//$app->setBackgroundImage(null);
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
 $app->setHeaderBgImage('imagem/h2.jpg');
 $app->setMenuTheme('dhx_black');
-
-//TPDOConnection::Test(true);
-
-//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
-/*
-//$_SESSION[APLICATIVO]["login"]["username"]='postgres';
-//$_SESSION[APLICATIVO]["login"]["password"]='123456';
-//$_SESSION[APLICATIVO]["database"]='teste';
-$pdo1=TPDOConnection::connect();
-print_r($pdo1);
-$conn1 = TPDOConnection::getInstance();
-$pdo2=TPDOConnection::setDataBaseName('teste');
-$conn2 = TPDOConnection::getInstance();
-
-$stmt=$conn1->query('select * from tbteste');
-$res = $stmt->fetchAll();
-print_r($res);
-print '<hr>';
-$stmt=$conn2->query('select * from tbteste');
-$res = $stmt->fetchAll();
-print_r($res);
-print '<hr>';
-print_r( $pdo1->executeSql('select * from tbteste') );
-print '<hr>';
-print_r( $pdo2->executeSq1('select * from tbteste') );
-print '<hr>';
-
-
-
-return;
-TPDOConnection::Test(false);
-/*
-$sql = "SELECT schemaname AS esquema, tablename AS tabela, tableowner AS dono
- 						FROM pg_catalog.pg_tables
- 						WHERE schemaname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
- 						ORDER BY schemaname, tablename";
-
-print_r( TPDOConnection::executeSql($sql));
-
-print 'Banco:postgres esquema:public<br>';
-TPDOConnection::setDataBaseName('postgres');
-print_r( TPDOConnection::executeSql('select * from tbteste ') );
-print '<hr>';
-print 'Banco:teste esquema:public<br>';
-TPDOConnection::setDataBaseName('teste');
-TPDOConnection::setDieOnError(false);
-print_r( TPDOConnection::executeSql('select * from tbteste ') );
-print '<hr>';
-print 'Banco:teste esquiema:producao<br>';
-//TPDOConnection::setDataBaseName('producao');
-print_r( TPDOConnection::executeSql('select * from producao.usuario ') );
-die('fim');
-*/
 
 // testar prototy�
 set_error_handler("exception_error_handler");
