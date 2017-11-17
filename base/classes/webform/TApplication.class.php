@@ -243,38 +243,12 @@ class TApplication extends TLayout {
 	public function run() {
 		ini_set ( 'default_charset', $this->getCharset() );
 		ob_start (); // arquivos includes podem conter espaços no final que causam erros nas chamadas ajax
-		$this->checkIfExistConfigFile();
+			$this->checkIfExistConfigFile();
 		ob_clean ();
 		$this->defineConstantAplicativo();		
 		$this->defineConstantSystemTitle();
 		$this->includesAppAction();
-		
-		if ($this->getBeforeActionFunction()) {
-			$this->includeConnectionFile();
-			$action = null;
-			$module = null;
-			if (isset ( $_REQUEST ['modulo'] )) {
-				$module = $_REQUEST ['modulo'];
-			} else if (isset ( $_POST ['modulo'] )) {
-				$module = $_POST ['modulo'];
-			}
-			if (isset ( $_POST ['formDinAcao'] )) {
-				$action = $_POST ['formDinAcao'];
-			}
-			$params = ( object ) array (
-					'module' => $module,
-					'action' => $action 
-			);
-			if (! call_user_func ( $this->getBeforeActionFunction (), $this, $params )) {
-				exit ();
-			}
-			$module = $params->module;
-			$action = $params->action;
-			// echo 'Novo:'.$module.',';
-			$_REQUEST ['modulo'] = $module;
-			$_POST ['modulo'] = $module;
-			$_POST ['formDinAcao'] = $action;
-		}
+		$this->setOnPostModuloAndAction();
 		
 		// ******************************************************************************************
 		$this->processRequest (); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
@@ -355,72 +329,8 @@ class TApplication extends TLayout {
 			parent::setTitle ( $this->getTitleTag () );
 		}
 		
-		// $this->addJsCssFile('greybox/gb_styles.css');
-		// $menuTheme = 'clear_silver'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'aqua_dark'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'aqua_orange'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'aqua_sky'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'aqua_sky'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'clear_blue'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'clear_green'; // Estilos válidos: clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 		
-		// ajustar css. o height do item pricipal esta muito pequeno
-		// $menuTheme = 'dhx_black'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		// $menuTheme = 'dhx_blue'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		
-		// estes estão com o funco combinando com o tema, ver como fazer para os outros que estão cinza
-		// $menuTheme = 'glassy_blue'; // glassy_blue,modern_black,modern_blue,modern_red,clear_silver
-		
-		// heihght ok, falta o fundo na cor do thema
-		// $menuTheme = 'modern_black'; // modern_blue,modern_red,clear_silver
-		// $menuTheme = 'modern_blue'; // modern_red,clear_silver
-		// $menuTheme = 'modern_red';
-		// $menuTheme = 'standard';
-		
-		$menuTheme = $this->getMenuTheme ();
-		
-		// javascript
-		$this->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
-		$this->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
-		
-		// o nome do estilo tem que ser alterado no arquivo app.js tambem
-		$this->addJavascript ( "app_layout=true;" );
-		$this->addJavascript ( "pastaBase='{$this->getBase()}';" );
-		$this->addJavascript ( 'GB_ROOT_DIR 	= pastaBase+\'js/greybox/\';' );
-		$this->addJavascript ( "menuTheme='{$menuTheme}';" );
-		$this->addJavascript ( "menuIconsPath='" . $this->getMenuIconsPath () . "';" );
-		$this->addJavascript ( "aplicativo='" . APLICATIVO . "';" );
-		$this->addJavascript ( "marca_dagua='" . $this->getWaterMark () . "';" );
-		$this->addJavascript ( "background_image='" . $this->getBackgroundImage () . "';" );
-		$this->addJavascript ( "background_repeat='" . $this->getBackgroundRepeat () . "';" );
-		$this->addJavascript ( "background_position='" . $this->getBackgroundPosition () . "';" );
-		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $menuTheme . '/' . $menuTheme . '.css' );
-		$this->addJsCssFile ( 'app.js' );
-		
-		$this->addJsCssFile ( $this->getCssFile () );
-		$this->addJsCssFile ( 'FormDin4.css' );
-		
-		// arquivo js que será carregado por último se existir
-		$this->addJsCssFile ( 'js/main.js' );
-		
-		// arquivo css que será carregado por último se existir
-		$this->addJsCssFile ( 'css/main.css' );
-		
-		/*
-		 * $this->addJsCssFile( 'jquery/jquery.js' );
-		 * $this->addJsCssFile( 'jquery/jquery.corner.js' );
-		 * $this->addJsCssFile( 'jquery/jAlert/jquery.alerts.js' );
-		 * $this->addJsCssFile( 'jquery/jAlert/jquery.alerts.css' );
-		 * $this->addJsCssFile( 'lazyload/lazyload-min.js' );
-		 */
-		
-		if (! $this->getShowMenu ()) {
-			$this->addJavascript ( 'showMenu = false;' );
-		} else {
-			$this->addJavascript ( 'showMenu = true;' );
-		}
-		
-		$this->addJavascript ( 'app_init()' );
+		$this->setJavaScriptCss();
 		
 		if ($this->getLoginDone ()) {
 			// montar o cabeçalho da pagina
@@ -510,6 +420,106 @@ class TApplication extends TLayout {
 		}
 		$this->show ();
 	}
+	
+	/**
+	 * 
+	 */
+	 private function setOnPostModuloAndAction() {
+		if ($this->getBeforeActionFunction()) {
+			$this->includeConnectionFile();
+			$action = null;
+			$module = null;
+			if (isset ( $_REQUEST ['modulo'] )) {
+				$module = $_REQUEST ['modulo'];
+			} else if (isset ( $_POST ['modulo'] )) {
+				$module = $_POST ['modulo'];
+			}
+			if (isset ( $_POST ['formDinAcao'] )) {
+				$action = $_POST ['formDinAcao'];
+			}
+			$params = ( object ) array (
+					'module' => $module,
+					'action' => $action 
+			);
+			if (! call_user_func ( $this->getBeforeActionFunction (), $this, $params )) {
+				exit ();
+			}
+			$module = $params->module;
+			$action = $params->action;
+			// echo 'Novo:'.$module.',';
+			$_REQUEST ['modulo'] = $module;
+			$_POST ['modulo'] = $module;
+			$_POST ['formDinAcao'] = $action;
+		}
+	 }
+	 
+	 private function setJavaScriptCss() {
+		// $this->addJsCssFile('greybox/gb_styles.css');
+		// $menuTheme = 'clear_silver'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'aqua_dark'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'aqua_orange'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'aqua_sky'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'aqua_sky'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'clear_blue'; // Estilos válidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'clear_green'; // Estilos válidos: clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		
+		// ajustar css. o height do item pricipal esta muito pequeno
+		// $menuTheme = 'dhx_black'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		// $menuTheme = 'dhx_blue'; // dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		
+		// estes estão com o funco combinando com o tema, ver como fazer para os outros que estão cinza
+		// $menuTheme = 'glassy_blue'; // glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		
+		// heihght ok, falta o fundo na cor do thema
+		// $menuTheme = 'modern_black'; // modern_blue,modern_red,clear_silver
+		// $menuTheme = 'modern_blue'; // modern_red,clear_silver
+		// $menuTheme = 'modern_red';
+		// $menuTheme = 'standard';
+		
+		// javascript
+		$this->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
+		$this->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
+		
+		// o nome do estilo tem que ser alterado no arquivo app.js tambem
+		$this->addJavascript ( "app_layout=true;" );
+		$this->addJavascript ( "pastaBase='{$this->getBase()}';" );
+		$this->addJavascript ( 'GB_ROOT_DIR 	= pastaBase+\'js/greybox/\';' );
+		$this->addJavascript ( "menuTheme='{$this->getMenuTheme()}';" );
+		$this->addJavascript ( "menuIconsPath='" . $this->getMenuIconsPath () . "';" );
+		$this->addJavascript ( "aplicativo='" . APLICATIVO . "';" );
+		$this->addJavascript ( "marca_dagua='" . $this->getWaterMark () . "';" );
+		$this->addJavascript ( "background_image='" . $this->getBackgroundImage () . "';" );
+		$this->addJavascript ( "background_repeat='" . $this->getBackgroundRepeat () . "';" );
+		$this->addJavascript ( "background_position='" . $this->getBackgroundPosition () . "';" );
+		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
+		$this->addJsCssFile ( 'app.js' );
+		
+		$this->addJsCssFile ( $this->getCssFile () );
+		$this->addJsCssFile ( 'FormDin4.css' );
+		
+		// arquivo js que será carregado por último se existir
+		$this->addJsCssFile ( 'js/main.js' );
+		
+		// arquivo css que será carregado por último se existir
+		$this->addJsCssFile ( 'css/main.css' );
+		
+		/*
+		 * $this->addJsCssFile( 'jquery/jquery.js' );
+		 * $this->addJsCssFile( 'jquery/jquery.corner.js' );
+		 * $this->addJsCssFile( 'jquery/jAlert/jquery.alerts.js' );
+		 * $this->addJsCssFile( 'jquery/jAlert/jquery.alerts.css' );
+		 * $this->addJsCssFile( 'lazyload/lazyload-min.js' );
+		 */
+		
+		if (! $this->getShowMenu ()) {
+			$this->addJavascript ( 'showMenu = false;' );
+		} else {
+			$this->addJavascript ( 'showMenu = true;' );
+		}
+		
+		$this->addJavascript ( 'app_init()' );
+	}
+
 	
 	/**
 	 * Limpar arquivos temporários mas de 2 dias
@@ -1474,19 +1484,18 @@ class TApplication extends TLayout {
 	}
 	public function setMenuTheme($strNewValue = 'standard | aqua_dark | aqua_sky | aqua_orange | clear_blue | clear_green | dhx_black | dhx_blue | glassy_blue | modern_black | modern_blue | modern_red | clear_silver') {
 		$aThemes = explode ( ',', 'standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver' );
-		if (array_search ( $strNewValue, $aThemes )=== false )
-		{
+		if (array_search ( $strNewValue, $aThemes )=== false ) {
 			$strNewValue = 'clear_silver';
 		}
 		$this->menuTheme = $strNewValue;
 	}
-	public function getMenuTheme()
-	{
-		if( ! is_null( $this->menuTheme ) )
-		{
+	public function getMenuTheme() {
+		if( ! is_null( $this->menuTheme ) ) {
 			return $this->menuTheme;
+		}else{
+			$this->setMenuTheme('clear_silver');
 		}
-		return 'clear_silver';
+		return $this->menuTheme;
 	}
 	public function getCellLogo()
 	{
