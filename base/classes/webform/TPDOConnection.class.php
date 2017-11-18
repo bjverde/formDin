@@ -86,7 +86,7 @@ class TPDOConnection {
 	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null ) {
 
 		self::setUtfDecode( $boolUtfDecode );
-		self::validateConnect ( $configFile ,$boolRequired);
+		self::validateConnect( $configFile ,$boolRequired);
 		try {			
 			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
 			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -161,6 +161,22 @@ class TPDOConnection {
 		} else {
 			require_once( $configFile );
 
+			if ( !defined( 'BANCO' ) ) {
+				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados' ));
+			}else{
+				self::$banco = strtoupper( BANCO );
+			}
+			
+			if ( !defined( 'DATABASE' ) ) {
+				$configErrors[] = 'Falta informar o DATABASE';
+			}else{
+				self::setDataBaseName( DATABASE );
+			}
+			
+			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
+				self::setUtfDecode( UTF8_DECODE );
+			}			
+			
 			if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 				define( 'USE_SESSION_LOGIN', 0 );
 			}
@@ -172,16 +188,6 @@ class TPDOConnection {
 			if ( !defined( 'USUARIO' ) ) {
 				define( 'USUARIO', NULL );
 			}
-
-			if ( !defined( 'BANCO' ) ) {
-				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados' ));
-			}
-
-			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
-				self::setUtfDecode( UTF8_DECODE );
-			}
-
-			self::$banco = strtoupper( BANCO );
 
 			if ( USE_SESSION_LOGIN ) {
 				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
@@ -232,86 +238,36 @@ class TPDOConnection {
 	private static function defineDsnPDO($configErrors) {
 		switch( self::$banco ) {
 			case DBMS_MYSQL:
-				if ( !defined( 'PORT' ) )
-				{
+				if ( !defined( 'PORT' ) ) {
 					define( 'PORT', '3306' );
-				}
-
-				if ( !defined( 'DATABASE' ) )
-				{
-					$configErrors[] = 'Falta informar o DATABASE';
-				}
-
-				if ( count( $configErrors ) > 0 )
-				{
-					self::showExemplo( 'MYSQL', $configErrors );
 				}
 				self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 				break;
-
 			//-----------------------------------------------------------------------
 			case DBMS_POSTGRES :
-				if ( !defined( 'PORT' ) )
-				{
+				if ( !defined( 'PORT' ) ) {
 					define( 'PORT', '5432' );
 				}
-
-				if ( !self::getDataBaseName() )
-				{
-					$configErrors[] = 'Falta informar o nome do DATABASE';
-				}
-				if ( defined( 'SCHEMA' ) )
-				{
+				if ( defined( 'SCHEMA' ) ) {
 					self::setSchema(SCHEMA);
-				}
-
-				if ( count( $configErrors ) > 0 )
-				{
-					self::showExemplo( 'POSTGRES', $configErrors );
 				}
 				self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
 				break;
-
 			//-----------------------------------------------------------------------
 			case DBMS_SQLITE:
-				$configErrors = null;
-
-				if ( !defined( 'DATABASE' ) )
-				{
-					$configErrors[] = 'Falta informar o caminho do banco de dados.';
-				}
-
-				if ( count( $configErrors ) > 0 )
-				{
-					self::showExemplo( 'SQLITE', $configErrors );
-				}
-
-				if ( !file_exists( DATABASE ) )
-				{
-					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-				}
+				//self::fileDataBaseExists ( $configErrors );
 				self::$dsn = 'sqlite:' . DATABASE;
 				break;
-
 			//-----------------------------------------------------------------------
 			case DBMS_ORACLE:
-				if ( !defined( 'PORT' ) ) {
+				if ( !defined( 'PORT' ) ) {  
 					define( 'PORT', '1521' );
-				}
-
-				if ( !defined( 'SERVICE_NAME' ) ) {
-					$configErrors[] = 'Falta informar o SERVICE_NAME';
 				}
 				self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
 				//self::$dsn = "oci:dbname=".SERVICE_NAME;
 				break;
-
 			//----------------------------------------------------------
 			case DBMS_SQLSERVER:
-				if ( !defined( 'DATABASE' ) ) {
-					$configErrors[] = 'Falta informar o DATABASE';
-				}
-				
 				if ( !defined( 'PORT' ) ) {
 					define( 'PORT', '1433' );
 				}
@@ -330,38 +286,15 @@ class TPDOConnection {
 				break;
 			//----------------------------------------------------------
 			case DBMS_FIREBIRD:
-				$configErrors = null;
-				if ( !defined( 'DATABASE' ) ) {
-					$configErrors[] = 'Falta informar o caminho do banco de dados.';
-				}
-
-				if ( count( $configErrors ) > 0 ) {
-					self::showExemplo( 'FIREBIRD', $configErrors );
-				}
-
-				if ( !file_exists( DATABASE ) ) {
-					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-				}
+				//self::fileDataBaseExists ( $configErrors );
 				self::$dsn = 'firebird:dbname='.DATABASE;
 				break;
 			//----------------------------------------------------------
 			case 'MSACCESS':
 			case DBMS_ACCESS:
-				$configErrors = null;
-				if ( !defined( 'DATABASE' ) ) {
-					$configErrors[] = 'Falta informar o caminho do banco de dados.';
-				}
-
-				if ( count( $configErrors ) > 0 ) {
-					self::showExemplo( 'ACCESS', $configErrors );
-				}
-
-				if ( !file_exists( DATABASE ) ) {
-					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-				}
+				//self::fileDataBaseExists ( $configErrors );
 				self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
 				break;
-
 			//----------------------------------------------------------
 			default:
 				$configErrors[] = 'Falta informar o sistema gerenciador de Banco de Dados: Access, Firebird, MySQL, Oracle, PostGresSQL, SQL Lite ou SQL Server';
@@ -370,7 +303,16 @@ class TPDOConnection {
 		}
 		return $configErrors;
 	}
-
+	/**
+	 * @param configErrors
+	 */
+	 private static function fileDataBaseExists($configErrors) {
+		$dataBaseName = self::getDataBaseName();
+		$file_exists = file_exists( $dataBaseName );
+		if ( !$file_exists ) {
+			$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+		}
+	}
 
 	//-------------------------------------------------------------------------------------------
 	public static function showError( $error = null )
