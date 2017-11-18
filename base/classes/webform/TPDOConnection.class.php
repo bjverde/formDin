@@ -201,159 +201,17 @@ class TPDOConnection
 				}
 				self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
 				self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
-			}
-			else
-			{
+			} else {
 				self::$password = SENHA;
 				self::$username = USUARIO;
 			}
-			switch( self::$banco )
-			{
-				case 'MYSQL':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '3306' );
-					}
-
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o DATABASE';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'MYSQL', $configErrors );
-					}
-					self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'POSTGRES':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '5432' );
-					}
-
-					if ( !self::getDataBaseName() )
-					{
-						$configErrors[] = 'Falta informar o nome do DATABASE';
-					}
-					if ( defined( 'SCHEMA' ) )
-					{
-						self::setSchema(SCHEMA);
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'POSTGRES', $configErrors );
-					}
-					self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'SQLITE':
-					$configErrors = null;
-
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'SQLITE', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'sqlite:' . DATABASE;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'ORACLE':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '1521' );
-					}
-
-					if ( !defined( 'SERVICE_NAME' ) )
-					{
-						$configErrors[] = 'Falta informar o SERVICE_NAME';
-					}
-					self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
-					//self::$dsn = "oci:dbname=".SERVICE_NAME;
-					break;
-
-				//----------------------------------------------------------
-				case 'SQLSERVER':
-					if ( !defined( 'DATABASE' ) ) {
-						$configErrors[] = 'Falta informar o DATABASE';
-					}
-					
-					if ( !defined( 'PORT' ) ) {
-						define( 'PORT', '1433' );
-					}
-					/**
-					 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
-					 * 
-					 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-					 * */
-					if (PHP_OS == "Linux") {
-						$driver = 'dblib';
-						self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-					} else {
-						$driver = 'sqlsrv';
-						self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
-					}
-					break;
-				//----------------------------------------------------------
-				case 'FIREBIRD':
-					$configErrors = null;
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'FIREBIRD', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'firebird:dbname='.DATABASE;
-					break;
-				//----------------------------------------------------------
-				case 'MSACCESS':
-				case 'ACCESS':
-					$configErrors = null;
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'ACCESS', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
-					break;
-
-				//----------------------------------------------------------
-				default:
-					$configErrors[] = 'Falta informar o BANCO';
-					break;
-			//----------------------------------------------------------
+			
+			$configErrorsDsn = self::defineDsnPDO($configErrors);
+			if ( count( $configErrorsDsn ) > 0 ) {
+				$configErrors = $configErrors + $configErrorsDsn;
 			}
+			
+			
 		}
 
 		try
@@ -374,6 +232,153 @@ class TPDOConnection
 
 		return true;
 	}
+	
+	
+	/**
+	 * 
+	 */
+	private static function defineDsnPDO($configErrors) {
+		switch( self::$banco ) {
+			case 'MYSQL':
+				if ( !defined( 'PORT' ) )
+				{
+					define( 'PORT', '3306' );
+				}
+
+				if ( !defined( 'DATABASE' ) )
+				{
+					$configErrors[] = 'Falta informar o DATABASE';
+				}
+
+				if ( count( $configErrors ) > 0 )
+				{
+					self::showExemplo( 'MYSQL', $configErrors );
+				}
+				self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+				break;
+
+			//-----------------------------------------------------------------------
+			case 'POSTGRES':
+				if ( !defined( 'PORT' ) )
+				{
+					define( 'PORT', '5432' );
+				}
+
+				if ( !self::getDataBaseName() )
+				{
+					$configErrors[] = 'Falta informar o nome do DATABASE';
+				}
+				if ( defined( 'SCHEMA' ) )
+				{
+					self::setSchema(SCHEMA);
+				}
+
+				if ( count( $configErrors ) > 0 )
+				{
+					self::showExemplo( 'POSTGRES', $configErrors );
+				}
+				self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
+				break;
+
+			//-----------------------------------------------------------------------
+			case 'SQLITE':
+				$configErrors = null;
+
+				if ( !defined( 'DATABASE' ) )
+				{
+					$configErrors[] = 'Falta informar o caminho do banco de dados.';
+				}
+
+				if ( count( $configErrors ) > 0 )
+				{
+					self::showExemplo( 'SQLITE', $configErrors );
+				}
+
+				if ( !file_exists( DATABASE ) )
+				{
+					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+				}
+				self::$dsn = 'sqlite:' . DATABASE;
+				break;
+
+			//-----------------------------------------------------------------------
+			case 'ORACLE':
+				if ( !defined( 'PORT' ) ) {
+					define( 'PORT', '1521' );
+				}
+
+				if ( !defined( 'SERVICE_NAME' ) ) {
+					$configErrors[] = 'Falta informar o SERVICE_NAME';
+				}
+				self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
+				//self::$dsn = "oci:dbname=".SERVICE_NAME;
+				break;
+
+			//----------------------------------------------------------
+			case 'SQLSERVER':
+				if ( !defined( 'DATABASE' ) ) {
+					$configErrors[] = 'Falta informar o DATABASE';
+				}
+				
+				if ( !defined( 'PORT' ) ) {
+					define( 'PORT', '1433' );
+				}
+				/**
+				 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+				 * 
+				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
+				 * */
+				if (PHP_OS == "Linux") {
+					$driver = 'dblib';
+					self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+				} else {
+					$driver = 'sqlsrv';
+					self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
+				}
+				break;
+			//----------------------------------------------------------
+			case 'FIREBIRD':
+				$configErrors = null;
+				if ( !defined( 'DATABASE' ) ) {
+					$configErrors[] = 'Falta informar o caminho do banco de dados.';
+				}
+
+				if ( count( $configErrors ) > 0 ) {
+					self::showExemplo( 'FIREBIRD', $configErrors );
+				}
+
+				if ( !file_exists( DATABASE ) ) {
+					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+				}
+				self::$dsn = 'firebird:dbname='.DATABASE;
+				break;
+			//----------------------------------------------------------
+			case 'MSACCESS':
+			case 'ACCESS':
+				$configErrors = null;
+				if ( !defined( 'DATABASE' ) ) {
+					$configErrors[] = 'Falta informar o caminho do banco de dados.';
+				}
+
+				if ( count( $configErrors ) > 0 ) {
+					self::showExemplo( 'ACCESS', $configErrors );
+				}
+
+				if ( !file_exists( DATABASE ) ) {
+					$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+				}
+				self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
+				break;
+
+			//----------------------------------------------------------
+			default:
+				$configErrors[] = 'Falta informar o BANCO';
+				break;
+			//----------------------------------------------------------
+		}
+		return $configErrors;
+	}
+
 
 	//-------------------------------------------------------------------------------------------
 	public static function showError( $error = null )
