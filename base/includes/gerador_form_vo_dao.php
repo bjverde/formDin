@@ -77,7 +77,7 @@ $frm->addGroupField('gpxFormPag','Form com paginação');
     $gridType = array(GRID_SIMPLE=>'Simples',GRID_SCREEN_PAGINATION=>'Paginação via Tela',GRID_SQL_PAGINATION=>'Paginação via SQL');
     $frm->addSelectField('TPGRID','Escolha o tipo de Gride:',true,$gridType,null,null,'0')->addEvent('onChange','select_change(this)');
     $frm->addGroupField('gpxDBMS');
-    $dbType = array(DBMS_MYSQL=>'MySQL',DBMS_MSSQL=>'MS SQL SERVER');
+    $dbType = array(DBMS_MYSQL=>'MySQL',DBMS_SQLSERVER=>'MS SQL SERVER');
     $frm->addSelectField('TPBANCO','Escolha o tipo de Bando de dados:',null,$dbType,null,null,'0');
     $frm->closeGroup();
 $frm->closeGroup();

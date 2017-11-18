@@ -215,7 +215,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedString = trim( implode($expectedArray) );
         
         $tDAOCreate = $this->tDAOCreate;
-        $tDAOCreate->setDatabaseManagementSystem('mssql');
+        $tDAOCreate->setDatabaseManagementSystem('sqlserver');
         $tDAOCreate->addSqlSelectAllPagination();
         
         $result = $tDAOCreate->getLinesString();

@@ -275,7 +275,7 @@ class TDAOCreate {
 		if($this->getDatabaseManagementSystem() == DBMS_MYSQL){
 		    $this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
 		}
-		if($this->getDatabaseManagementSystem() == DBMS_MSSQL){
+		if($this->getDatabaseManagementSystem() == DBMS_SQLSERVER){
 		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ROWS ONLY \');');
 		}		
 		$this->addBlankLine();

@@ -48,7 +48,7 @@ define('ENCODINGS','ISO-8859-1');
 
 define('FORMDIN_VERSION','4.1.4-alpha');
 
-define('DBMS_MSSQL','MSSQL');
+define('DBMS_SQLSERVER','SQLSERVER');
 define('DBMS_MYSQL','MYSQL');
 define('DBMS_ORACLE','ORACLE');
 define('DBMS_POSTGRES','POSTGRES');
