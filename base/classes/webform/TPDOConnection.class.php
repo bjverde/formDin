@@ -78,46 +78,33 @@ class TPDOConnection
 	}
 
 	//------------------------------------------------------------------------------------------
-	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null )
-	{
+	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null ) {
 
-		$configErrors = array();
 		self::setUtfDecode( $boolUtfDecode );
-
-		if ( self::getDataBaseName() )
-		{
+		
+		$configErrors = array();
+		if ( self::getDataBaseName() ) {
 			$configFileDb = $configFile;
 
-			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) )
-			{
+			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) ) {
 				$configFileDb = is_null( $configFileDb ) ? 'config_conexao_' . self::getDataBaseName() . '.php' : $configFileDb;
 
-				if ( !file_exists( $configFileDb ) )
-				{
+				if ( !file_exists( $configFileDb ) ) {
 					$configFileDb = 'includes/' . $configFileDb;
 
-					if ( !file_exists( $configFileDb ) )
-					{
+					if ( !file_exists( $configFileDb ) ) {
 						$root = self::getRoot();
 						$configFileDb = $root . $configFileDb;
-
-						if ( file_exists( $configFileDb ) )
-						{
+						if ( file_exists( $configFileDb ) ) {
 							$configFile = $configFileDb;
 						}
-					}
-					else
-					{
+					} else {
 						$configFile = $configFileDb;
 					}
-				}
-				else
-				{
+				} else {
 					$configFile = $configFileDb;
 				}
-			}
-			else
-			{
+			} else {
 				$configFile = $configFileDb;
 			}
 		}
@@ -149,45 +136,35 @@ class TPDOConnection
 
         self::$configFile = $configFile;
 
-		if ( !file_exists( $configFile ) )
-		{
-			if ( $boolRequired )
-			{
+		if ( !file_exists( $configFile ) ) {
+			if ( $boolRequired ) {
 				self::showExemplo( 'MYSQL', array( "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!" ));
 			}
 			return false;
-		}
-		else
-		{
+		} else {
 			require_once( $configFile );
 
-			if ( !defined( 'USE_SESSION_LOGIN' ) )
-			{
+			if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 				define( 'USE_SESSION_LOGIN', 0 );
 			}
 
-			if ( !defined( 'SENHA' ) )
-			{
+			if ( !defined( 'SENHA' ) ) {
 				define( 'SENHA', NULL );
 			}
 
-			if ( !defined( 'USUARIO' ) )
-			{
+			if ( !defined( 'USUARIO' ) ) {
 				define( 'USUARIO', NULL );
 			}
 
-			if ( !defined( 'HOST' ) )
-			{
+			if ( !defined( 'HOST' ) ) {
 				$configErrors[] = 'Falta informar o HOST';
 			}
 
-			if ( !defined( 'BANCO' ) )
-			{
+			if ( !defined( 'BANCO' ) ) {
 				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente!' ));
 			}
 
-			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) )
-			{
+			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
 				self::setUtfDecode( UTF8_DECODE );
 			}
 
@@ -206,6 +183,14 @@ class TPDOConnection
 				self::$username = USUARIO;
 			}
 			
+			if( empty(self::$username) ){
+				$configErrors[] = 'Falta informar um usuario para logar no banco';
+			}
+			
+			if( empty(self::$password) ){
+				$configErrors[] = 'Falta informar uma senha para logar no banco';
+			}
+			
 			$configErrorsDsn = self::defineDsnPDO($configErrors);
 			if ( count( $configErrorsDsn ) > 0 ) {
 				$configErrors = $configErrors + $configErrorsDsn;
@@ -214,17 +199,14 @@ class TPDOConnection
 			
 		}
 
-		try
-		{
-			if ( count( $configErrors ) > 0 )
-			{
+		try {
+			if ( count( $configErrors ) > 0 ) {
 				self::showExemplo( self::$banco, $configErrors );
 			}
 			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
 			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-		}
-		catch( PDOException $e )
-		{
+			
+		} catch( PDOException $e ){
 			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
 				. $e->getMessage() );
 			return false;
