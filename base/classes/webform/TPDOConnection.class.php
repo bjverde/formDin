@@ -288,22 +288,21 @@ class TPDOConnection
 
 				//----------------------------------------------------------
 				case 'SQLSERVER':
-					if ( !defined( 'PORT' ) ) {
-						define( 'PORT', '1433' );
-					}
-
 					if ( !defined( 'DATABASE' ) ) {
 						$configErrors[] = 'Falta informar o DATABASE';
 					}
-
+					
+					if ( !defined( 'PORT' ) ) {
+						define( 'PORT', '1433' );
+					}
 					/**
-					 * Dica de Reinaldo A. Barr?to Junior para utilizar o sql server no linux
+					 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
 					 * 
 					 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
 					 * */
 					if (PHP_OS == "Linux") {
 						$driver = 'dblib';
-						self::$dsn = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+						self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 					} else {
 						$driver = 'sqlsrv';
 						self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
