@@ -53,6 +53,8 @@ foreach($dbh->errorInfo() as $error)
 	}
 
 */
+
+require_once '../classes/constants.php';
 class TPDOConnection
 {
 	private static $error = null;
@@ -220,7 +222,7 @@ class TPDOConnection
 	 */
 	private static function defineDsnPDO($configErrors) {
 		switch( self::$banco ) {
-			case 'MYSQL':
+			case DBMS_MYSQL:
 				if ( !defined( 'PORT' ) )
 				{
 					define( 'PORT', '3306' );
@@ -239,7 +241,7 @@ class TPDOConnection
 				break;
 
 			//-----------------------------------------------------------------------
-			case 'POSTGRES':
+			case DBMS_POSTGRES :
 				if ( !defined( 'PORT' ) )
 				{
 					define( 'PORT', '5432' );
@@ -262,7 +264,7 @@ class TPDOConnection
 				break;
 
 			//-----------------------------------------------------------------------
-			case 'SQLITE':
+			case DBMS_SQLITE:
 				$configErrors = null;
 
 				if ( !defined( 'DATABASE' ) )
@@ -283,7 +285,7 @@ class TPDOConnection
 				break;
 
 			//-----------------------------------------------------------------------
-			case 'ORACLE':
+			case DBMS_ORACLE:
 				if ( !defined( 'PORT' ) ) {
 					define( 'PORT', '1521' );
 				}
@@ -296,7 +298,7 @@ class TPDOConnection
 				break;
 
 			//----------------------------------------------------------
-			case 'SQLSERVER':
+			case DBMS_SQLSERVER:
 				if ( !defined( 'DATABASE' ) ) {
 					$configErrors[] = 'Falta informar o DATABASE';
 				}
@@ -756,7 +758,7 @@ class TPDOConnection
 		$html .= '<div style="border-bottom:1px solid blue;color:red;text-align:center;"><blink>' . $msgErro . '</blink></div>';
 
 		switch( $banco ) {
-			case 'ORACLE':
+			case DBMS_ORACLE:
 				$html .= "<center>Exemplo de configuração para conexão com banco ORACLE</center><br>
 					define('BANCO','ORACLE');<br>
 					define('HOST','192.168.0.132');<br>
@@ -767,7 +769,7 @@ class TPDOConnection
 
 				break;
 
-			case 'MYSQL':
+			case DBMS_MYSQL:
 				$html .= "<center>Exemplo de configuração para conexão com banco MYSQL</center><br>
 					 define('BANCO','MYSQL');<br>
 					 define('HOST','192.168.0.132');<br>
@@ -777,7 +779,7 @@ class TPDOConnection
 					 define('SENHA','root');<br><br>";
 				break;
 
-			case 'POSTGRES':
+			case DBMS_POSTGRES:
 				$html .= "<center>Exemplo de configuração para conexão com banco POSTGRES</center><br>
 					 define('BANCO','POSTGRES');<br>
 					 define('HOST','192.168.0.132');<br>
@@ -788,7 +790,7 @@ class TPDOConnection
 					 define('SENHA','123456');<br><br>";
 				break;
 
-			case 'SQLITE':
+			case DBMS_SQLITE:
 				$html .= "<center>Exemplo de configuração para conexão com banco SQLITE</center><br>
 					 define('DATABASE','includes/exemplo.s3db');<br>";
 				break;
@@ -798,7 +800,7 @@ class TPDOConnection
 					 define('DATABASE','C://bd//DBTESTE.FDB');<br>";
 				break;
 
-			case 'SQLSERVER':
+			case DBMS_SQLSERVER:
 				$html .= "<center>Exemplo de configuração para conexão com banco SQLSERVER</center><br>
 					 define('BANCO','SQLSERVER');<br>
 					 define('HOST','192.168.0.132');<br>

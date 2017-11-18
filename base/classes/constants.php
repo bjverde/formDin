@@ -41,8 +41,8 @@
 
 // ============= PROJECT CONSTANTS =================//
 
-define('ROWS_PER_PAGE',20);
-define('ENCODINGS','ISO-8859-1');
+if( !defined('ROWS_PER_PAGE') ){ define('ROWS_PER_PAGE',20); }
+if( !defined('ENCODINGS') ){ define('ENCODINGS','ISO-8859-1'); }
 
 // ============= FORMDIN FRAMEWORK CONSTANTS =================//
 
