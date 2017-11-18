@@ -54,9 +54,12 @@ foreach($dbh->errorInfo() as $error)
 
 */
 
-require_once '../classes/constants.php';
-class TPDOConnection
-{
+if ( !defined ( 'DS' ) ) { define( 'DS', DIRECTORY_SEPARATOR ); }
+$currentl_dir = dirname ( __FILE__ );
+
+require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
+
+class TPDOConnection {
 	private static $error = null;
 	private static $instance = null;
 	private static $banco;
@@ -170,10 +173,6 @@ class TPDOConnection
 				define( 'USUARIO', NULL );
 			}
 
-			if ( !defined( 'HOST' ) ) {
-				$configErrors[] = 'Falta informar o HOST';
-			}
-
 			if ( !defined( 'BANCO' ) ) {
 				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados' ));
 			}
@@ -195,12 +194,18 @@ class TPDOConnection
 				self::$username = USUARIO;
 			}
 			
-			if( empty(self::$username) ){
-				$configErrors[] = 'Falta informar um usuario para logar no banco';
-			}
-			
-			if( empty(self::$password) ){
-				$configErrors[] = 'Falta informar uma senha para logar no banco';
+			if ( !self::simpleDBMS() ) {
+				if ( !defined( 'HOST' ) ) {
+					$configErrors[] = 'Falta informar o HOST';
+				}
+				
+				if( empty(self::$username) ){
+					$configErrors[] = 'Falta informar um usuario para logar no banco';
+				}
+				
+				if( empty(self::$password) ){
+					$configErrors[] = 'Falta informar uma senha para logar no banco';
+				}
 			}
 			
 			$configErrorsDsn = self::defineDsnPDO($configErrors);
@@ -214,12 +219,16 @@ class TPDOConnection
 			self::showExemplo( self::$banco, $configErrors );
 		}
 	}
-
 	
-	
-	/**
-	 * 
+	/***
+	 *  Data Base Management System is simple or not.
+	 *  Simple does not have user and password or host
+	 * @return boolean
 	 */
+	private static function simpleDBMS() {
+		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
+	}
+	
 	private static function defineDsnPDO($configErrors) {
 		switch( self::$banco ) {
 			case DBMS_MYSQL:
@@ -320,7 +329,7 @@ class TPDOConnection
 				}
 				break;
 			//----------------------------------------------------------
-			case 'FIREBIRD':
+			case DBMS_FIREBIRD:
 				$configErrors = null;
 				if ( !defined( 'DATABASE' ) ) {
 					$configErrors[] = 'Falta informar o caminho do banco de dados.';
@@ -337,7 +346,7 @@ class TPDOConnection
 				break;
 			//----------------------------------------------------------
 			case 'MSACCESS':
-			case 'ACCESS':
+			case DBMS_ACCESS:
 				$configErrors = null;
 				if ( !defined( 'DATABASE' ) ) {
 					$configErrors[] = 'Falta informar o caminho do banco de dados.';
@@ -355,7 +364,7 @@ class TPDOConnection
 
 			//----------------------------------------------------------
 			default:
-				$configErrors[] = 'Falta informar o BANCO';
+				$configErrors[] = 'Falta informar o sistema gerenciador de Banco de Dados: Access, Firebird, MySQL, Oracle, PostGresSQL, SQL Lite ou SQL Server';
 				break;
 			//----------------------------------------------------------
 		}
@@ -766,7 +775,6 @@ class TPDOConnection
 					define('SERVICE_NAME','xe');<br>
 					define('USUARIO','root');<br>
 					define('SENHA','root');<br><br>";
-
 				break;
 
 			case DBMS_MYSQL:
@@ -792,11 +800,14 @@ class TPDOConnection
 
 			case DBMS_SQLITE:
 				$html .= "<center>Exemplo de configuração para conexão com banco SQLITE</center><br>
-					 define('DATABASE','includes/exemplo.s3db');<br>";
+					 define('BANCO','SQLITE');<br>					 
+					 define('DATABASE','includes/exemplo.s3db');<br>
+					 define('UTF8_DECODE',0);<br>";
 				break;
 
-			case 'FIREBIRD':
+			case DBMS_FIREBIRD:
 				$html .= "<center>Exemplo de configuração para conexão com banco FIREBIRD</center><br>
+					 define('BANCO','FIREBIRD');<br>
 					 define('DATABASE','C://bd//DBTESTE.FDB');<br>";
 				break;
 
@@ -1037,13 +1048,12 @@ class TPDOConnection
 	}
 	public static function getDataBaseName() {
 		$retorno = null;
-		if ( !isset( self::$databaseName ) && !defined( 'DATABASE' ) ) {
-			$retorno = '';
-		}
-		if ( is_null ( self::$databaseName ) ){
-			$retorno = DATABASE;
-		} else {
+		if ( isset( self::$databaseName ) ){
 			$retorno = self::$databaseName;
+		} else {
+			if ( defined( 'DATABASE' ) ){
+				$retorno = DATABASE;
+			}			
 		}
 		return  $retorno;
 	}
