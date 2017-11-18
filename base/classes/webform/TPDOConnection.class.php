@@ -81,8 +81,25 @@ class TPDOConnection
 	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null ) {
 
 		self::setUtfDecode( $boolUtfDecode );
-		
+		self::validateConnect ( $configFile ,$boolRequired);
+		try {			
+			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
+			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			
+		} catch( PDOException $e ){
+			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
+				. $e->getMessage() );
+			return false;
+		}
+
+		return true;
+	}
+	
+	
+	private static function validateConnect($configFile ,$boolRequired) {
 		$configErrors = array();
+		$root = null;
+		
 		if ( self::getDataBaseName() ) {
 			$configFileDb = $configFile;
 
@@ -161,7 +178,7 @@ class TPDOConnection
 			}
 
 			if ( !defined( 'BANCO' ) ) {
-				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente!' ));
+				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados' ));
 			}
 
 			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
@@ -195,25 +212,14 @@ class TPDOConnection
 			if ( count( $configErrorsDsn ) > 0 ) {
 				$configErrors = $configErrors + $configErrorsDsn;
 			}
-			
-			
 		}
-
-		try {
-			if ( count( $configErrors ) > 0 ) {
-				self::showExemplo( self::$banco, $configErrors );
-			}
-			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
-			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			
-		} catch( PDOException $e ){
-			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
-				. $e->getMessage() );
-			return false;
+		
+		
+		if ( count( $configErrors ) > 0 ) {
+			self::showExemplo( self::$banco, $configErrors );
 		}
-
-		return true;
 	}
+
 	
 	
 	/**
