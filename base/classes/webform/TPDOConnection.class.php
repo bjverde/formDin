@@ -126,25 +126,20 @@ class TPDOConnection
 			}
 		}
 
-		if ( is_null( $configFile ) || !file_exists( $configFile ) )
-		{
+		if ( is_null( $configFile ) || !file_exists( $configFile ) ) {
 			$configFile = is_null( $configFile ) ? 'config_conexao.php' : $configFile;
 
-			if ( !file_exists( $configFile ) )
-			{
+			if ( !file_exists( $configFile ) ) {
 				$configFile = 'includes/config_conexao.php';
 
                 // procurar o arquivo padrão de conexão em até 5 niveis acima
-                for( $i = 1; $i < 6; $i++ )
-                {
-                    if( file_exists( str_repeat( '../', $i ) . $configFile ) )
-                    {
+                for( $i = 1; $i < 6; $i++ ) {
+                    if( file_exists( str_repeat( '../', $i ) . $configFile ) ) {
                         $configFile = str_repeat( '../', $i ) . $configFile;
                         break;
                     }
                 }
-				if ( !file_exists( $configFile ) )
-				{
+				if ( !file_exists( $configFile ) ) {
 					$root = self::getRoot();
 					$configFile = $root . 'includes/config_conexao.php';
 				}
@@ -187,10 +182,8 @@ class TPDOConnection
 
 			self::$banco = strtoupper( BANCO );
 
-			if ( USE_SESSION_LOGIN )
-			{
-				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) )
-				{
+			if ( USE_SESSION_LOGIN ) {
+				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
 					die ( 'Para utilizar usuário e senha do usuário logado,<br>defina as varíaveis de sessão:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
 				}
 				self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
@@ -1041,10 +1034,16 @@ class TPDOConnection
 		self::$databaseName = $strNewValue;
 	}
 	public static function getDataBaseName() {
-		if ( !isset( self::$databaseName ) && ! defined ( 'DATABASE' )) {
-			return '';
+		$retorno = null;
+		if ( !isset( self::$databaseName ) && !defined( 'DATABASE' ) ) {
+			$retorno = '';
 		}
-		return is_null ( self::$databaseName ) ? DATABASE : self::$databaseName;
+		if ( is_null ( self::$databaseName ) ){
+			$retorno = DATABASE;
+		} else {
+			$retorno = self::$databaseName;
+		}
+		return  $retorno;
 	}
 	public static function setMessage( $strNewValue = null) {
 		self::$message = $strNewValue;
