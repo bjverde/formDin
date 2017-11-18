@@ -578,28 +578,21 @@ class TPDOConnection
 	}
 
 	//--------------------------------------------------------------------------
-	public static function prepare( $strSql )
-	{
-		if ( !self::getInstance() )
-		{
+	public static function prepare( $strSql ) {
+		if ( !self::getInstance() ) {
 			return false;
 		}
 		return self::getInstance()->prepare( $strSql );
 	}
 
 	//---------------------------------------------------------------------------
-	public static function encodeArray( $arrDados = null )
-	{
+	public static function encodeArray( $arrDados = null ) {
 		$result = array();
 
-		if ( is_array( $arrDados ) )
-		{
-			if ( is_string( key( $arrDados ) ) )
-			{
-				foreach( $arrDados as $k => $v )
-				{
-					if ( ! is_null( $v )  )
-					{
+		if ( is_array( $arrDados ) ) {
+			if ( is_string( key( $arrDados ) ) ) {
+				foreach( $arrDados as $k => $v ) {
+					if ( ! is_null( $v )  ) {
 						$arrDados[ $k ] = utf8_encode( $v );
 
 						// inverter campo data
@@ -768,19 +761,16 @@ class TPDOConnection
 	}
 
 	//------------------------------------------------------------------------------------------
-	public static function showExemplo( $banco, $arrErros = null )
-	{
+	public static function showExemplo( $banco, $arrErros = null ) {
 		$msgErro = '';
 
-		if ( is_array( $arrErros ) )
-		{
+		if ( is_array( $arrErros ) ) {
 			$msgErro = implode( '<br>', $arrErros );
 		}
 		$html = '<div style="padding:5px;border:1px solid red;background-color:lightyellow;width:400px;color:blue;">';
 		$html .= '<div style="border-bottom:1px solid blue;color:red;text-align:center;"><blink>' . $msgErro . '</blink></div>';
 
-		switch( $banco )
-		{
+		switch( $banco ) {
 			case 'ORACLE':
 				$html .= "<center>Exemplo de configuração para conexão com banco ORACLE</center><br>
 					define('BANCO','ORACLE');<br>
@@ -972,79 +962,58 @@ class TPDOConnection
 	}
 
 	//-----------------------------------------------------
-	public static function processResult( $result, $fetchMode, $boolUtfDecode = null )
-	{
+	public static function processResult( $result, $fetchMode, $boolUtfDecode = null ) {
 		$boolUtfDecode = ( $boolUtfDecode === null ? self::getUtfDecode() : $boolUtfDecode );
-
+			
 		// formato vo
-		if ( $result && $fetchMode == PDO::FETCH_OBJ )
-		{
-			if ( count( $result ) == 1 )
-			{
-				return $result[ 0 ];
+		if ($result && $fetchMode == PDO::FETCH_OBJ) {
+			if (count ( $result ) == 1) {
+				return $result [0];
 			}
 			return $result;
 		}
 		$res = null;
 
-		if ( is_array( $result ) )
-		{
-			foreach( $result as $key => $val )
-			{
-				foreach( $val as $k => $v )
-				{
-					if ( $boolUtfDecode )
-					{
+		if ( is_array( $result ) ) {
+			foreach( $result as $key => $val ) {
+				foreach( $val as $k => $v ) {
+					if ( $boolUtfDecode ) {
 						$k = strtoupper( utf8_decode( $k ) );
-					}
-					else
-					{
+					} else {
 						$k = strtoupper( $k );
 					}
 
 					// transformar tags"< >" em codigo html para não serem interpretadas
-					if ( is_string( $v ) )
-					{
-						if ( $boolUtfDecode )
-						{
+					if ( is_string( $v ) ) {
+						if ( $boolUtfDecode ) {
 							$res[ $k ][ $key ] = utf8_decode( $v );
-						}
-						else
-						{
+						} else {
 							$res[ $k ][ $key ] = $v;
 						}
 
 						//$res[ $k ][ $key ] = utf8_decode($v);
 						// consertar ordem do campo data
-						if ( preg_match( '/DAT/i', $k ) > 0 )
-						{
+						if ( preg_match( '/DAT/i', $k ) > 0 ) {
 							$delim = null;
 
-							if ( preg_match( '/\//', $v ) > 0 )
-							{
+							if ( preg_match( '/\//', $v ) > 0 ) {
 								$delim = '/';
-							}
-							else if( preg_match( '/-/', $v ) > 0 )
-							{
+							} else if( preg_match( '/-/', $v ) > 0 ) {
 								$delim = '-';
 							}
 
-							if ( $delim )
-							{
+							if ( $delim ) {
 								$aDataHora = explode( ' ', $v );
 								$aDMY = explode( $delim, $aDataHora[ 0 ] );
 								// verificar se está invertida
 								$delim = '/';
 
-								if ( preg_match( '/^[0-9]{4}/', $v ) )
-								{
+								if ( preg_match( '/^[0-9]{4}/', $v ) ) {
 									$res[ $k ][ $key ] = $aDMY[ 2 ] . $delim . $aDMY[ 1 ] . $delim . $aDMY[ 0 ] . ( isset( $aDataHora[ 1 ] ) ? ' ' . $aDataHora[ 1 ] : '' );
 								}
 							}
 						}
-					}
-					else
-					{
+					} else {
 						$res[ $k ][ $key ] = $v;
 					}
 				}
@@ -1052,76 +1021,49 @@ class TPDOConnection
 		}
 		return $res;
 	}
-
-	public static function setUtfDecode( $boolNewValue = null )
-	{
+	public static function setUtfDecode( $boolNewValue = null ) {
 		self::$utfDecode = $boolNewValue;
 	}
-
-	public static function getUtfDecode()
-	{
+	public static function getUtfDecode() {
 		return is_null( self::$utfDecode ) ? true : self::$utfDecode;
 	}
-
-	public static function pgsqlLOBOpen( $oid = null, $mode = null )
-	{
-		return self::getInstance()->pgsqlLOBOpen( $oid, $mode );
+	public static function pgsqlLOBOpen($oid = null, $mode = null) {
+		return self::getInstance()->pgsqlLOBOpen ( $oid, $mode );
 	}
-
-	public static function pgsqlLOBCreate()
-	{
-		return self::getInstance()->pgsqlLOBCreate();
+	public static function pgsqlLOBCreate() {
+		return self::getInstance()->pgsqlLOBCreate ();
 	}
-
-	public static function setDieOnError( $boolNewValue = null )
-	{
+	public static function setDieOnError( $boolNewValue = null ) {
 		self::$dieOnError = $boolNewValue;
 	}
-
-	public static function getDieOnError()
-	{
+	public static function getDieOnError() {
 		return is_null( self::$dieOnError ) ? true : self::$dieOnError;
 	}
-
-	public static function setShowFormErrors( $boolNewValue = null )
-	{
+	public static function setShowFormErrors( $boolNewValue = null ) {
 		self::$showFormErrors = $boolNewValue;
 	}
-
-	public static function getShowFormErrors()
-	{
+	public static function getShowFormErrors() {
 		return is_null( self::$showFormErrors ) ? true : self::$showFormErrors;
 	}
-
-	public static function setDataBaseName( $strNewValue = null )
-	{
+	public static function setDataBaseName( $strNewValue = null ) {
 		self::$databaseName = $strNewValue;
 	}
-
-	public static function getDataBaseName()
-	{
-		if ( !isset( self::$databaseName ) && !defined( 'DATABASE' ) )
-		{
+	public static function getDataBaseName() {
+		if ( !isset( self::$databaseName ) && ! defined ( 'DATABASE' )) {
 			return '';
 		}
-		return is_null( self::$databaseName ) ? DATABASE : self::$databaseName;
+		return is_null ( self::$databaseName ) ? DATABASE : self::$databaseName;
 	}
-
-	public static function setMessage( $strNewValue = null )
-	{
+	public static function setMessage( $strNewValue = null) {
 		self::$message = $strNewValue;
 	}
-
-	public static function getMessage()
-	{
+	public static function getMessage() {
 		return self::$message;
 	}
-	public static function setSchema($newSchema=null)
-	{
+	public static function setSchema( $newSchema = null) {
 		self::$schema = $newSchema;
 	}
-	public static function getSchema()
-	{
+	public static function getSchema() {
 		return self::$schema;
 	}
 }
