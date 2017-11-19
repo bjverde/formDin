@@ -757,7 +757,10 @@ class TPDOConnection {
 			case DBMS_FIREBIRD:
 				$html .= "<center>Exemplo de configuração para conexão com banco FIREBIRD</center><br>
 					 define('BANCO','FIREBIRD');<br>
-					 define('DATABASE','C://bd//DBTESTE.FDB');<br>";
+					 define('DATABASE','C://bd//DBTESTE.FDB');<br>;
+					 define('UTF8_DECODE',0);<br>
+					 define('USUARIO','SYSDBA');<br>
+					 define('SENHA','masterkey');<br>";
 				break;
 
 			case DBMS_SQLSERVER:
