@@ -987,6 +987,9 @@ class TPDOConnection {
 	public static function getShowFormErrors() {
 		return is_null( self::$showFormErrors ) ? true : self::$showFormErrors;
 	}
+	public static function setBanco( $banco = null ) {
+		self::$banco = $banco;
+	}	
 	public static function setDataBaseName( $strNewValue = null ) {
 		self::$databaseName = $strNewValue;
 	}
