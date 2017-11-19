@@ -155,14 +155,16 @@ class TPDOConnection {
 
 		if ( !file_exists( $configFile ) ) {
 			if ( $boolRequired ) {
-				self::showExemplo( 'MYSQL', array( "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!" ));
+				$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!";
+				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}
 			return false;
 		} else {
 			require_once( $configFile );
 
 			if ( !defined( 'BANCO' ) ) {
-				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados' ));
+				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
+				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}else{
 				self::$banco = strtoupper( BANCO );
 			}
