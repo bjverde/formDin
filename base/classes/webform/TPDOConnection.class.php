@@ -317,6 +317,7 @@ class TPDOConnection {
 		$file_exists = file_exists( $dataBaseName );
 		if ( !$file_exists ) {
 			$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+			self::showExemplo( self::$banco, $configErrors );
 		}
 	}
 
