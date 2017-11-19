@@ -45,6 +45,15 @@ if( $_REQUEST['subform'] == 1){
 	//die();
 }
 
+$html = '<br><br><b>Regra de Negocio</b>'
+		.'<br>o campo "nome subcadastro" é somente leitura. Ele será preenchido com o subformulario.';
+		
+
+$box3 = new TBox('bx3',300,100);
+$box3->add($html);
+$box3->setFlat(true);
+$box3->setPosition('tl');
+
 $frm = new TForm('Exemplo de Subcadastro',200);
 
 
@@ -53,11 +62,10 @@ $frm->addJsFile('prototype/window.js');
 $frm->addJsFile('prototype/window_ext.js');
 $frm->addCssFile('prototype/themes/alphacube.css');
   */
-$html = '<b>Regra de Negocio</b>'
-		.'<br>o campo "nome subcadastro" é somente leitura. Ele será preenchido com o subformulario.';
 
+$frm->addOutside($box3);
+//$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');;
 
-$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');;
 $frm->addTextField('nome','Nome:',null,false);
 //$frm->addTextField('nome2','Nome Subcadastro:',null,false)->setReadOnly(true);
 $frm->addTextField('nome2','Nome Subcadastro:',50,false,50,null,true,'Somente leitura','Abrir Subform',false);
