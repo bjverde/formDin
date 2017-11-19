@@ -1,5 +1,5 @@
 <?php
-require_once('servicos/autoridades.php');
+require_once('services/autoridades.php');
 $primaryKey = 'IDAUTORIDADE';
 $frm = new TForm('Cadastro de Autoridades',600);
 $frm->setFlat(true);
