@@ -51,6 +51,10 @@ $sql = 'SELECT * from tb_uf';
 	}
 */
 
+//TPDOConnection::connect('config_conexao_firebird.php',true,false);
+//TPDOConnection::setBanco(DBMS_FIREBIRD);
+//TPDOConnection::setDataBaseName('BDAPOIO.GDB');
+
 print_r( TPDOConnection::executeSql("SELECT * FROM TB_UF") );
 
 $frm = new TForm('Exemplo PDO Firebird');
