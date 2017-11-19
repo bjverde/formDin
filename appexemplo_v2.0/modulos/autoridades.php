@@ -1,15 +1,20 @@
 <?php
 require_once('services/autoridades.php');
 $primaryKey = 'IDAUTORIDADE';
-$frm = new TForm('Cadastro de Autoridades',600);
+$frm = new TForm('Ordem da leitura das Autoridades',600);
 $frm->setFlat(true);
 
+$html = '<b>Regra de Negocio</b>'
+		.'<br>Varias autoridades estarão presentes em um evento no dia X.'
+		.'O cerimonial precisa da ordem das autoridades, da mais importante para menos importante. Para fazer a leitura.';
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
+$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');;
+$frm->addHtmlField('separador',null);
 $frm->addDateField('DAT_INCLUSAO', 'Data inclusão',false,null,null,null,null,null,false)->setReadOnly(true);;
 $frm->addDateField('DAT_EVENTO','Data Evento:',true);
 $frm->addNumberField('ordem', 'Ordem:',10,true,0,true,null,1,5,true);
-$frm->addTextField('cargo', 'Cargo:',50,true);
+$frm->addTextField('cargo', 'Nome do Cargo:',50,true);
 $frm->addTextField('nome_pessoa', 'Nome Pessoa:',50,true);
 
 $acao = isset($acao) ? $acao : null;
