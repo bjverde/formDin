@@ -168,7 +168,11 @@ class TPDOConnection {
 			}
 			
 			if ( !defined( 'DATABASE' ) ) {
-				$configErrors[] = 'Falta informar o DATABASE';
+				$dataBaseName = self::getDataBaseName();
+				if( empty($dataBaseName) ){
+					$configErrors[] = 'Falta informar o DATABASE';
+					self::showExemplo( self::$banco, $configErrors );
+				}
 			}else{
 				self::setDataBaseName( DATABASE );
 			}
