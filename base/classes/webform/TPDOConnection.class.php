@@ -40,19 +40,11 @@
  */
 
 
-/*
-//http://www.phpro.org/tutorials/Introduction-to-PHP-PDO.html
-foreach(PDO::getAvailableDrivers() as $driver)
-{
-	  echo $driver.'<br />';
-}
-$result = $dbh->query($sql);
-foreach($dbh->errorInfo() as $error)
-	{
-	echo $error.'<br />';
-	}
+/**
+ * Sobre o PDO
+ * http://www.phpro.org/tutorials/Introduction-to-PHP-PDO.html
+ **/
 
-*/
 
 if ( !defined ( 'DS' ) ) { define( 'DS', DIRECTORY_SEPARATOR ); }
 $currentl_dir = dirname ( __FILE__ );
