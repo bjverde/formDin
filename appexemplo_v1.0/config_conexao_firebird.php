@@ -40,7 +40,7 @@
  */
 // firebird
 define('BANCO','FIREBIRD');
-define('DATABASE','C://xampp//htdocs//formdin//base//exemplos//BDAPOIO.GDB');
+define('DATABASE','BDAPOIO.GDB');
 define('UTF8_DECODE',0);
 define('USUARIO','SYSDBA');
 define('SENHA','masterkey');
