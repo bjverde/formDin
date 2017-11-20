@@ -42,7 +42,7 @@
 
 $frm = new TForm('Exemplos links');
 
-$homeUrl = $frm->homeUrl();
+$homeUrl = UrlHelper::homeUrl();
 
 $frm->addLinkField('idLink0','labelLink0','Layout 00 - Default',null, $homeUrl.'index.php','new');
 $frm->addLinkField('idLink1','labelLink1','Layout 01',null, $homeUrl.'index_layout01.php','new');
