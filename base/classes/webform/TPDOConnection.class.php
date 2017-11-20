@@ -253,7 +253,7 @@ class TPDOConnection {
 				break;
 			//-----------------------------------------------------------------------
 			case DBMS_SQLITE:
-				//self::fileDataBaseExists ( $configErrors );
+				//self::validateFileDataBaseExists ( $configErrors );
 				self::$dsn = 'sqlite:' . DATABASE;
 				break;
 			//-----------------------------------------------------------------------
@@ -284,7 +284,7 @@ class TPDOConnection {
 				break;
 			//----------------------------------------------------------
 			case DBMS_FIREBIRD:
-				//self::fileDataBaseExists ( $configErrors );
+				//self::validateFileDataBaseExists ( $configErrors );
 				self::$dsn = 'firebird:dbname='.DATABASE;
 				break;
 			//----------------------------------------------------------
@@ -304,9 +304,11 @@ class TPDOConnection {
 	/**
 	 * @param configErrors
 	 */
-	 private static function fileDataBaseExists($configErrors) {
+	 private static function validateFileDataBaseExists($configErrors) {
 		$dataBaseName = self::getDataBaseName();
-		$file_exists = file_exists( $dataBaseName );
+		$homeUrl = UrlHelper::homeUrl();
+		$path = $homeUrl.$dataBaseName;
+		$file_exists = file_exists( $path );
 		if ( !$file_exists ) {
 			$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
 			self::showExemplo( self::$banco, $configErrors );
