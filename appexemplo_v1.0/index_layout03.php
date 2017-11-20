@@ -41,7 +41,7 @@
 
 define('MIGRATE_JQUERY',FALSE);
 
-define('APLICATIVO','TESTE');
+define('APLICATIVO','APPEV1.0_layout03');
 define('FORMDIN',1);
 define('DECIMAL_SEPARATOR',',');
 

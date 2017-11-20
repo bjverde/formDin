@@ -38,10 +38,15 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-
 error_reporting(E_ALL);
+
+
+define('APLICATIVO','APPEV1.0_layout02');
+define('DECIMAL_SEPARATOR',',');
+
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication();
+$app->setSigla(APLICATIVO);
 $app->setUnit('FormDin Version'.FORMDIN_VERSION);
 $app->setVersionSystem('v 1.0.0.0');
 $app->setMenuIconsPath('imagem/');
