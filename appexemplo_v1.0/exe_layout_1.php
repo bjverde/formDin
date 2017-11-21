@@ -40,7 +40,7 @@
 $lo = new TLayout('xx',50,20,400,100,true,false,true,true);
 
 $lo->seturl('about:blank');
-//$lo->getEastArea()->setUrl('http://localhost');
+$lo->getEastArea()->setUrl('http://localhost');
 
 
 $lo->show();

@@ -184,26 +184,55 @@ $menu->add('200',0,'Layout');
 
 //-----------------------------------------------------------------------------
 $menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
-$menu->add(-26020,-20,'editor','exe_editor_html.inc');
-
 $menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
 $menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
 $menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
 $menu->add(-27016,-20,'Javascript/Css Externos','exe_javascript_externo.inc');
-$menu->add(-27018,-20,'Tela de Confirma??o','exe_confirm_dialog.php');
 // parametros da janela
 $params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
 $menu->add(-27019,-20,'Site da Google','http://www.google.com','Site do Google',null,null,null,null,null,json_encode($params));
 $menu->add(-27019,-20,'Postgres Lob','exe_postgres.php');
-$menu->add(-27020,-20,'Exemplo de Mensagens','exe_mensagem.php');
 $menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
 $menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
 $menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
-$menu->add(-2006,-20,'Campo Select','exe_select.inc');
-$menu->add(-2018,-20,'cad_departamento.php','cad_departamento.php');
-$menu->add(-2019,-20,'cad_fruta.inc','cad_fruta.inc');
-$menu->add(-2020,-20,'cad_fruta.inc','cad_fruta.inc');
-
+$menu->add(-2022,-20,'cad_apoio_pdo.php','cad_apoio_pdo.php');
+$menu->add(-2023,-20,'cad_departamento.php','cad_departamento.php');
+$menu->add(-2024,-20,'cad_fruta.inc','cad_fruta.inc');
+$menu->add(-2032,-20,'conn_default.php','conn_default.php');
+$menu->add(-2033,-20,'conn_mysql.ini','conn_mysql.ini');
+$menu->add(-2034,-20,'conn_sqlite.ini','conn_sqlite.ini');
+$menu->add(-2035,-20,'conn_sqlite.php','conn_sqlite.php');
+$menu->add(-2036,-20,'crosshatch.jpg','crosshatch.jpg');
+$menu->add(-2037,-20,'exe_ajax_1.php','exe_ajax_1.php');
+$menu->add(-2038,-20,'exe_ajax_2.php','exe_ajax_2.php');
+$menu->add(-2039,-20,'exe_ajax_semaphore.php','exe_ajax_semaphore.php');
+$menu->add(-2040,-20,'exe_campo_grupo.php','exe_campo_grupo.php');
+$menu->add(-2041,-20,'exe_checkbox.inc','exe_checkbox.inc');
+$menu->add(-2042,-20,'exe_dao_4.php','exe_dao_4.php');
+$menu->add(-2043,-20,'exe_editor_html.inc','exe_editor_html.inc');
+$menu->add(-2044,-20,'exe_fill_select_ajax.inc','exe_fill_select_ajax.inc');
+$menu->add(-2045,-20,'exe_formulario.php','exe_formulario.php');
+$menu->add(-2046,-20,'exe_GroupField.php','exe_GroupField.php');
+$menu->add(-2047,-20,'exe_GroupField_2.php','exe_GroupField_2.php');
+$menu->add(-2048,-20,'exe_help_online_1.php','exe_help_online_1.php');
+$menu->add(-2049,-20,'exe_hint.php','exe_hint.php');
+$menu->add(-2050,-20,'exe_javascript_externo.inc','exe_javascript_externo.inc');
+$menu->add(-2051,-20,'exe_layout_1.php','exe_layout_1.php');
+$menu->add(-2052,-20,'exe_PageControl.php','exe_PageControl.php');
+$menu->add(-2053,-20,'exe_pg_dao_vo_1.php','exe_pg_dao_vo_1.php');
+$menu->add(-2054,-20,'exe_postgres.php','exe_postgres.php');
+$menu->add(-2055,-20,'exe_postgres_anexo.php','exe_postgres_anexo.php');
+$menu->add(-2056,-20,'exe_select_combinado_ajax.php','exe_select_combinado_ajax.php');
+$menu->add(-2057,-20,'exe_TConnection.php','exe_TConnection.php');
+$menu->add(-2058,-20,'exe_tree_view.php','exe_tree_view.php');
+$menu->add(-2059,-20,'exe_tree_view_on_line.php','exe_tree_view_on_line.php');
+$menu->add(-2060,-20,'exe_xajax.inc','exe_xajax.inc');
+$menu->add(-2061,-20,'exe_xajax_xajax.php','exe_xajax_xajax.php');
+$menu->add(-2062,-20,'form-field-bg.gif','form-field-bg.gif');
+$menu->add(-2063,-20,'gride_anexo.php','gride_anexo.php');
+$menu->add(-2064,-20,'header.php','header.php');
+$menu->add(-2065,-20,'HOBD','HOBD');
+$menu->add(-2070,-20,'ler_menu_xml.php','ler_menu_xml.php');
 
 
 $menu->getXml();
