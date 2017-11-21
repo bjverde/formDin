@@ -77,7 +77,7 @@ class TTime extends TMask
 		return parent::show($print);
 	}
 	//--------------------------------------------------------------------------
-	public function setMask($strNewMaskType)
+	public function setMask($strNewMaskType=null)
 	{
 		$strNewMaskType = strtolower($strNewMaskType);
 		$arrMasksTypes = array(
