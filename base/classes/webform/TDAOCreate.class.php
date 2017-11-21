@@ -238,7 +238,7 @@ class TDAOCreate {
 	 * Create function for sql select by id
 	 **/
 	public function addSqlSelectById() {
-	    $this->addLine( TAB.'public static function select( $id ) {');
+	    $this->addLine( TAB.'public static function selectById( $id ) {');
 	    $this->addLine( TAB.TAB.'$values = array($id);');
 	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect.\' where '.$this->getKeyColumnName().' = '.$this->charParam.'\';');
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql, $values );');
