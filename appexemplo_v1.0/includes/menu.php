@@ -72,7 +72,6 @@ $menu->add('19','1','Campo Brasil');
 $menu->add('110','1','Campos Data e hora');
 	$menu->add('1101','110','Campo Data' ,'view/fields/exe_DateField.php');
 	$menu->add('1102','110','Campo Hora' ,'view/fields/exe_campo_hora.php');
-	$menu->add('1103','110','Campo Fuso Horário - ERRO'	,'exe_TTimeZoneField.php');
 	$menu->add('1104','110','Campo Agenda'	,'view/fields/exe_TCalendar.php');
 $menu->add('111','1','Campo Select Diretorio/Pasta'	,'view/fields/exe_OpenDirField.php');
 
