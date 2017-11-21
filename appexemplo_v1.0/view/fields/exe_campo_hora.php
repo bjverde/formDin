@@ -39,15 +39,22 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-include("../classes/webform/TForm.class.php");
+$html = '<br><br><b>Regra de Negocio</b>'
+		.'<br>Passe o mouse no balões de ajuda e descubra a regra';
+
 $frm = new TForm('Exemplo Campo Hora');
+$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');
 $frm->addTextField('nom_pessoa','Nome:',50,false)->setEnabled(false);
 $fld = $frm->addTimeField('hor_entrada','Hora Entrada:',true,'05:00','23:00','99:99');
-$frm->addTimeField('hor_inicio2','Hora:',false,'12:00:00','15:00:00','HMS');
+$fld->setToolTip('Hora no formato HH:MM entre 05:00 e 23:00');
+$frm->addTimeField('hor_inicio2','Hora:',false,'12:00:00','15:00:00','HMS')->setToolTip('Hora no formato HH:MM:SS entre 12:00 e 15:00');
 $frm->addButton('Validar','validar','btnValidar');
-if( $acao=='validar' )
-{
-	$frm->validate();
+
+$acao = isset($acao) ? $acao : null;
+if( $acao=='validar' ){
+	if( $frm->validate() ){
+		$frm->setMessage('Dados Ok');
+	}
 }
 $frm->show();
 ?>
