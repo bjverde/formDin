@@ -208,7 +208,6 @@ $menu->add(-2038,-20,'exe_ajax_2.php','exe_ajax_2.php');
 $menu->add(-2039,-20,'exe_ajax_semaphore.php','exe_ajax_semaphore.php');
 $menu->add(-2040,-20,'exe_campo_grupo.php','exe_campo_grupo.php');
 $menu->add(-2041,-20,'exe_checkbox.inc','exe_checkbox.inc');
-$menu->add(-2042,-20,'exe_dao_4.php','exe_dao_4.php');
 $menu->add(-2043,-20,'exe_editor_html.inc','exe_editor_html.inc');
 $menu->add(-2044,-20,'exe_fill_select_ajax.inc','exe_fill_select_ajax.inc');
 $menu->add(-2045,-20,'exe_formulario.php','exe_formulario.php');
