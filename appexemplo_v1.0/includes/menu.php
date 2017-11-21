@@ -108,6 +108,7 @@ $menu->add('2',null,'Containers');
 
 //-----------------------------------------------------------------------------
 $menu->add('4',null,'Mensagens e Ajuda');
+	$menu->add('40','4','Hints / Tooltips','exe_hint.php');
 	$menu->add('41','4','Mensagens');
 		$menu->add('411','41','Exemplo 1','view/messages/exe_mensagem.php');
 		$menu->add('412','41','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
@@ -156,11 +157,7 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 	$menu->add('96','9','Testar Conexão','pdo/exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
 	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
-	
 
-//-----------------------------------------------------------------------------
-$menu->add('101',null,'Hints');
-$menu->add('1011','101','Exemplo I','exe_hint.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('10',null,'Formulário');
