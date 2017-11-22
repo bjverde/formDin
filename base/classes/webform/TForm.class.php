@@ -4987,19 +4987,12 @@ class TForm Extends TBox
 	 *
 	 * @param array $arrNewColumns
 	 */
-	public function setColumns( $arrNewColumns )
-	{
-		if( is_string( $arrNewColumns ) )
-		{
-			$this->columns = explode( ',', $arrNewColumns );
-		}
-		else if( is_integer( $arrNewColumns ) )
-		{
-
-			$this->columns = array( $arrNewColumns );
-		}
-		else if( is_array( $arrNewColumns ) )
-		{
+	public function setColumns( $arrNewColumns ) {
+		if ( is_string ( $arrNewColumns ) ) {
+			$this->columns = explode ( ',', $arrNewColumns );
+		} else if (is_integer ( $arrNewColumns )) {			
+			$this->columns = array ($arrNewColumns );
+		} else if (is_array ( $arrNewColumns )) {
 			$this->columns = $arrNewColumns;
 		}
 		return $this;
@@ -5008,8 +5001,7 @@ class TForm Extends TBox
 	 * Retorna o array com as larguras das colunas do layout do formulario
 	 *
 	 */
-	public function getColumns()
-	{
+	public function getColumns() {
 		return $this->columns;
 	}
 	/**
