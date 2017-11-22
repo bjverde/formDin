@@ -214,7 +214,7 @@ class TCoordGMS extends TGroup
 	 * Retorna o array contendo o valor da latitude (y) e da longitude (x)
 	 *
 	 */
-	function getValue()
+	function getValue($strField=null)
 	{
 		if ( ! is_null( $this->latGrau->getValue() ) )
 		{
@@ -466,7 +466,7 @@ class TCoordGMS extends TGroup
 	 * @param mixed $strValue
 	 * @param string $strLatLon
 	 */
-	public function setValue($strFieldName, $strValue=null, $strLatLon=null)
+	public function setValue($strFieldName=null, $strValue=null, $strLatLon=null)
 	{
 		if ($strFieldName == $this->getFieldNameLat())
 		{
