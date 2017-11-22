@@ -158,7 +158,7 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 		$menu->add('931','93','DAO e VO','pdo/pg/exe_pgsql01.php');
 		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
 		$menu->add('933','93','Postgres SQL 02','pdo/pg/exe_pgsql02.php');
-		$menu->add('933','93','Postgres SQL 03','pdo/pg/exe_pgsql03.php');
+		$menu->add('934','93','Postgres SQL 03','pdo/pg/exe_pgsql03.php');
 	$menu->add('94','9','PDO Firebird','pdo/exe_pdo_firebird01.php');	
 	$menu->add('96','9','Testar Conexão','pdo/exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','pdo/exe_pdo_6_apoio.php');
