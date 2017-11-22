@@ -99,6 +99,7 @@ $menu->add('2',null,'Containers');
 		$menu->add('232','23','Aba2'	,'view/containers/exe_aba_2.php');
 		$menu->add('233','23','Aba3'	,'view/containers/exe_aba_3.php');
 		$menu->add('234','23','Aba4'	,'view/containers/exe_aba_4.php');
+		$menu->add('235','23','Aba5'	,'view/containers/exe_aba05_pagacontrol.php');
 	$menu->add('24','2','TreeView');
 		$menu->add('241','24','Dentro do Formulário' ,'tree/exe_tree_view_1.php');
 		$menu->add('242','24','Fora do Formulário'	,'tree/exe_tree_view_2.php');
@@ -116,14 +117,16 @@ $menu->add('4',null,'Mensagens e Ajuda');
 		$menu->add('413','41','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 	$menu->add('42','4','Ajuda');
 		$menu->add('421','42','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
-		$menu->add('422','42','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');		
+		$menu->add('422','42','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');
+		$menu->add('423','42','Ajuda On-line (sqlite) - ERRO','exe_help_online_1.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('5',null,'Ajax');
-	$menu->add('51','5','Exemplo 1','exe_ajax_1.php');
-	$menu->add('52','5','Atualizar Campos','exe_ajax_2.php');
-	$menu->add('53','5','Botão Ajax','exe_TButtonAjax.php');
-	$menu->add('54','5','Ajax com Sem?foro','exe_ajax_semaphore.php');
+	$menu->add('51','5','Exemplo 1','ajax/exe_ajax01.php');
+	$menu->add('52','5','Atualizar Campos','ajax/exe_ajax02.php');
+	$menu->add('53','5','Ajax com Semáforo','ajax/exe_ajax03_semaphore.php');
+	$menu->add('54','5','Ajax 04','ajax/exe_ajax04.php');
+	$menu->add('55','5','Ajax 05','ajax/exe_ajax05.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('6',null,'PDF');
@@ -152,11 +155,13 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 	$menu->add('91','9','Exemplo Mysql','pdo/exe_pdo_1.php');
 	$menu->add('92','9','Exemplo Sqlite e Mysql','pdo/exe_pdo_2.php');
 	$menu->add('93','9','Exemplo Postgres');
-		$menu->add('931','93','DAO e VO','exe_pg_dao_vo_1.php');
+		$menu->add('931','93','DAO e VO','pdo/pg/exe_pgsql01.php');
 		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
+		$menu->add('933','93','Postgres SQL 02','pdo/pg/exe_pgsql02.php');
+		$menu->add('933','93','Postgres SQL 03','pdo/pg/exe_pgsql03.php');
 	$menu->add('94','9','PDO Firebird','pdo/exe_pdo_firebird01.php');	
 	$menu->add('96','9','Testar Conexão','pdo/exe_teste_conexao.php');
-	$menu->add('97','9','Dados de Apoio','cad_apoio_pdo.php');
+	$menu->add('97','9','Dados de Apoio','pdo/exe_pdo_6_apoio.php');
 	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
 
 
@@ -180,56 +185,9 @@ $menu->add('199',null,'Gerador de Código',null,'Formularios geradores de codigo'
 	
 //-----------------------------------------------------------------------------
 $menu->add('200',0,'Layout');
-	$menu->add('201','200','Layout','layouts.php');
+	$menu->add('201','200','Layout index','layouts.php');	
 	$menu->add('202','200','Temas do Menu','exe_menu_tema.php');
-
-//-----------------------------------------------------------------------------
-$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Diâmico IV','acessibilidade-brasil.gif');
-$menu->add(-27006,-20,'Select Combinado Ajax','exe_select_combinado_ajax.php');
-$menu->add(-27013,-20,'TreeView Unidade Ibama On Line','exe_tree_view_on_line.php');
-$menu->add(-27014,-20,'Campo Select Ajax','exe_fill_select_ajax.inc');
-$menu->add(-27016,-20,'Javascript/Css Externos','exe_javascript_externo.inc');
-// parametros da janela
-$params = array('width'=>800,'height'=>500,'resizeble'=>true,'confirmClose'=>false,'modal'=>true);
-$menu->add(-27019,-20,'Site da Google','http://www.google.com','Site do Google',null,null,null,null,null,json_encode($params));
-$menu->add(-27019,-20,'Postgres Lob','exe_postgres.php');
-$menu->add(-2002,-20,'Campo/Gride com Autocompletar','exe_autocompletar.inc');
-$menu->add(-2003,-20,'Campo Checkbox','exe_checkbox.inc');
-$menu->add(-2005,-20,'Campo Texto e Tag','exe_campo_texto.inc');
-$menu->add(-2022,-20,'cad_apoio_pdo.php','cad_apoio_pdo.php');
-$menu->add(-2023,-20,'cad_departamento.php','cad_departamento.php');
-$menu->add(-2024,-20,'cad_fruta.inc','cad_fruta.inc');
-$menu->add(-2032,-20,'conn_default.php','conn_default.php');
-$menu->add(-2033,-20,'conn_mysql.ini','conn_mysql.ini');
-$menu->add(-2034,-20,'conn_sqlite.ini','conn_sqlite.ini');
-$menu->add(-2035,-20,'conn_sqlite.php','conn_sqlite.php');
-$menu->add(-2036,-20,'crosshatch.jpg','crosshatch.jpg');
-$menu->add(-2037,-20,'exe_ajax_1.php','exe_ajax_1.php');
-$menu->add(-2038,-20,'exe_ajax_2.php','exe_ajax_2.php');
-$menu->add(-2039,-20,'exe_ajax_semaphore.php','exe_ajax_semaphore.php');
-$menu->add(-2041,-20,'exe_checkbox.inc','exe_checkbox.inc');
-$menu->add(-2043,-20,'exe_editor_html.inc','exe_editor_html.inc');
-$menu->add(-2044,-20,'exe_fill_select_ajax.inc','exe_fill_select_ajax.inc');
-$menu->add(-2045,-20,'exe_formulario.php','exe_formulario.php');
-$menu->add(-2048,-20,'exe_help_online_1.php','exe_help_online_1.php');
-$menu->add(-2049,-20,'exe_hint.php','exe_hint.php');
-$menu->add(-2050,-20,'exe_javascript_externo.inc','exe_javascript_externo.inc');
-$menu->add(-2051,-20,'exe_layout_1.php','exe_layout_1.php');
-$menu->add(-2052,-20,'exe_PageControl.php','exe_PageControl.php');
-$menu->add(-2053,-20,'exe_pg_dao_vo_1.php','exe_pg_dao_vo_1.php');
-$menu->add(-2054,-20,'exe_postgres.php','exe_postgres.php');
-$menu->add(-2055,-20,'exe_postgres_anexo.php','exe_postgres_anexo.php');
-$menu->add(-2056,-20,'exe_select_combinado_ajax.php','exe_select_combinado_ajax.php');
-$menu->add(-2057,-20,'exe_TConnection.php','exe_TConnection.php');
-$menu->add(-2058,-20,'exe_tree_view.php','exe_tree_view.php');
-$menu->add(-2059,-20,'exe_tree_view_on_line.php','exe_tree_view_on_line.php');
-$menu->add(-2060,-20,'exe_xajax.inc','exe_xajax.inc');
-$menu->add(-2061,-20,'exe_xajax_xajax.php','exe_xajax_xajax.php');
-$menu->add(-2062,-20,'form-field-bg.gif','form-field-bg.gif');
-$menu->add(-2063,-20,'gride_anexo.php','gride_anexo.php');
-$menu->add(-2064,-20,'header.php','header.php');
-$menu->add(-2065,-20,'HOBD','HOBD');
-$menu->add(-2070,-20,'ler_menu_xml.php','ler_menu_xml.php');
+	$menu->add('203','200','Esqueleto do Layout','exe_layout_1.php');
 
 
 $menu->getXml();
