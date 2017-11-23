@@ -63,7 +63,7 @@ $frm->addTextField('municipio','Municipio',60,false,60);
 
 $frm->setOnlineSearch('municipio'
     ,'tb_municipio'               //$strPackageFunction
-    ,'nom_municipio|Município:'   //$strFilterFields
+    ,'nom_municipio|Município:||||||like'   //$strFilterFields
     ,false                        //$strAutoFillFilterField
     ,false                        //$boolAutoStart
 	,true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
