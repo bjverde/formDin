@@ -1963,7 +1963,7 @@ class TForm Extends TBox
 	 * @param string $strTablePackageFuncion
 	 * @param string $strSearchField
 	 * @param mixed $mixUpdateFields
-	 * @param boolea $boolDisableUpdateFields
+	 * @param boolean $boolDisableUpdateFields
 	 * @param mixed $mixExtraSearchFields
 	 * @param string $strCallBackFunctionJs
 	 * @param integer $intMinChars
