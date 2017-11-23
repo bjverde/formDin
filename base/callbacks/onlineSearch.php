@@ -243,10 +243,10 @@ switch( $acao )
 				$res = TPDOConnection::executeSql( $sql );
 				TPDOConnection::showError();
 			}
-			if ( $res )
-			{
-                if( preg_match('/LIMIT/i',$sql ) == 0 )
-                {
+			
+			
+			if ( $res ) {
+                if( preg_match('/LIMIT/i',$sql ) == 0 ) {
 				    // limitar na quantidade de registros informada
 				    if ( ( int ) $aParams[ 'maxRecords' ] > 0 )
 				    {
@@ -259,14 +259,11 @@ switch( $acao )
 				//$html->setValue(gride($res,$aParams,$form,null,null,$form->getWidth()-7,250));
 
 				setGrid( $res, $aParams, $form );
-			}
-			else
-			{
+			} else {
 				//$form->setMessage('Nenhum registro encontrado');
 				$form->addHtmlField( 'html_msg', '<center><b><br>Nenhum registro encontrado!<b></center>' )->setCss( 'font-size', '18px' );
 
-				if ( isset( $aParams[ 'crudModule' ] ) && $aParams[ 'crudModule' ] )
-				{
+				if ( isset( $aParams[ 'crudModule' ] ) && $aParams[ 'crudModule' ] ) {
 					$form->addButton( 'Cadastrar', 'cadastrar_online', 'btnCadastrar', null, null, true, false );
 				}
 			}
