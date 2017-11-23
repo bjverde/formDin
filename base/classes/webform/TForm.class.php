@@ -1384,8 +1384,7 @@ class TForm Extends TBox
 				//$this->body->add( '</div>' );
 			}
 			// adicionar javascript para serchs online aos campos ( consulta Dinamica )
-			if( is_array( $this->onlineSearchs ) )
-			{
+			if( is_array( $this->onlineSearchs ) ) {
 				if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
 				{
 					$this->clearOnlineSearch();
@@ -2895,6 +2894,7 @@ class TForm Extends TBox
 	 *
 	 * O parametro $strCrudModuleName deve ser utilizado para quando for necessãrio permitir ao usuário
 	 * fazer o cadastramento on-line do item não encontrado na pesquisa. Basta passar o nome do módulo a ser chamado.
+	 * 
 	 * @param string $strFieldName
 	 * @param string $strPackageFunction
 	 * @param string $strFilterFields
@@ -4149,14 +4149,11 @@ class TForm Extends TBox
 	 *
 	 * @param string $strFieldName
 	 */
-	public function clearOnlineSearch( $strFieldName=null )
-	{
-		if( is_null( $strFieldName ) )
-		{
+	public function clearOnlineSearch( $strFieldName=null ) {
+		if( is_null( $strFieldName ) ) {
 			$this->onlineSearchs = null;
 		}
-		else
-		{
+		else {
 			$this->onlineSearchs[ $strFieldName ] = null;
 			unset( $this->onlineSearchs[ $strFieldName ] );
 		}

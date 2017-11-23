@@ -39,7 +39,10 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Consulta Dinâmica');
+$frm = new TForm('Consulta Dinâmica',600);
+$frm->setFlat(true);
+$frm->setMaximize(true);
+
 $frm->setColumns(array(200));
 $frm->addTextField('id','id:',10);
 
