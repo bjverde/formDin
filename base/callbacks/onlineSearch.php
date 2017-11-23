@@ -207,21 +207,7 @@ switch( $acao )
 									$value = $dc->getField()->getValue();
 								}
 								
-								if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] ) {
-									if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 ) {
-										$where .= "(upper(" . $name . ") like upper('%" . $value . "%'))";
-									} else {
-										$where .= "(upper(" . $name . ")=upper('" . $value . "'))";
-									}
-								} else {
-									if ( $dc->getField()->getProperty( 'partialKey' ) == 'true' ) {
-										$where .= "(" . $name . " like '%" . $value . "%')";
-									} else {
-								        $where .= "(" . $name . "='" . $value . "')";
-							        }
-						        }
-						        
-						        
+								$where = generatorWhere( $where ,$aParams ,$dc ,$name ,$value );
 					        }
 				        }
                     }
@@ -308,6 +294,25 @@ else
 *********************************                                 *******************************
 *************************************************************************************************
 */
+function generatorWhere( $where ,$aParams ,$dc ,$name ,$value ){
+	
+	if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] ) {
+		if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 ) {
+			$where .= "(upper(" . $name . ") like upper('%" . $value . "%'))";
+		} else {
+			$where .= "(upper(" . $name . ")=upper('" . $value . "'))";
+		}
+	} else {
+		if ( $dc->getField()->getProperty( 'partialKey' ) == 'true' ) {
+			$where .= "(" . $name . " like '%" . $value . "%')";
+		} else {
+			$where .= "(" . $name . "='" . $value . "')";
+		}
+	}
+	
+	return $where;
+}
+
 // criar os campos no formulario
 function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 {
