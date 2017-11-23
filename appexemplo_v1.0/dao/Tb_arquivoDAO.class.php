@@ -43,14 +43,16 @@ class Tb_arquivoDAO extends TPDOConnection
 								from tb_arquivo where id_arquivo = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectAll( $orderBy=null, $where=null )
-	{
-		return self::executeSql('select
-								 id_arquivo
-								,nome_arquivo
-								from tb_arquivo'.
-		( ($where)? ' where '.$where:'').
-		( ($orderBy) ? ' order by '.$orderBy:''));
+	public static function selectAll( $orderBy=null, $where=null ) {
+		
+		$sql = 'select id_arquivo
+					  ,nome_arquivo
+					   from tb_arquivo '
+		.( ($where)? ' where '.$where:'')
+		.( ($orderBy) ? ' order by '.$orderBy:'');
+		
+		$result = self::executeSql($sql);
+		return $result;
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Tb_arquivoVO $objVo )
