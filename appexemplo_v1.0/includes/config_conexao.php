@@ -50,7 +50,7 @@
 
 // sqlite
 define('BANCO','SQLITE');
-define('DATABASE','bdApoio.s3db');
+define('DATABASE','bancos_locais/bdApoio.s3db');
 define('UTF8_DECODE',0);
 
 
