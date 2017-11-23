@@ -69,9 +69,9 @@ $frm->setOnlineSearch('municipio'
 	,true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
 	,'cod_municipio|Código,nom_municipio|Município'
     ,'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
-    ,null                         //$strWindowHeader
-    ,null                         //$strGridHeader
-    ,null                         //$strFocusFieldName
+    ,'Pesquisar Municípios'       //$strWindowHeader -  Titulo da janela de pesquisa
+	,'Registros'                  //$strGridHeader   -  Titulo do Gride
+    ,'nom_municipio'              //$strFocusFieldName - Seta o Foco no campo definido 
     ,null                         //$strWindowHeight
     ,null                         //$strWindowWidth
     ,null                         //$strSearchButtonLabel

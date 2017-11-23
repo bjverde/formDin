@@ -2896,7 +2896,7 @@ class TForm Extends TBox
 	 * fazer o cadastramento on-line do item não encontrado na pesquisa. Basta passar o nome do módulo a ser chamado.
 	 * 
 	 * @param string $strFieldName
-	 * @param string $strPackageFunction
+	 * @param string $strPackageFunction  - Nome do pacote Orecla OU tabela em outro banco
 	 * @param string $strFilterFields
 	 * @param string $strAutoFillFilterField
 	 * @param bool $boolAutoStart
