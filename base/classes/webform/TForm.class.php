@@ -2902,11 +2902,11 @@ class TForm Extends TBox
 	 * @param string $strAutoFillFilterField
 	 * @param bool $boolAutoStart
 	 * @param bool $boolAutoSelect
-	 * @param string $strGridColumns
-	 * @param string $strUpdateFormFields
-	 * @param string $strWindowHeader
-	 * @param string $strGridHeader
-	 * @param string $strFocusFieldName
+	 * @param string $strGridColumns - colunas que irão aparecer no grid
+	 * @param string $strUpdateFormFields  - coluna busca | campo form destino, coluna busca | campo form destino
+	 * @param string $strWindowHeader -  Titulo da janela de pesquisa
+	 * @param string $strGridHeader   -  Titulo do Gride
+	 * @param string $strFocusFieldName - Seta o Foco no campo definido 
 	 * @param bool $strWindowHeight
 	 * @param bool $strWindowWidth
 	 * @param string $strSearchButtonLabel

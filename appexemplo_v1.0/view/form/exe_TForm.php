@@ -67,7 +67,7 @@ $frm->setOnlineSearch('municipio'
     ,false                        //$strAutoFillFilterField
     ,false                        //$boolAutoStart
 	,true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
-	,'cod_municipio|Código,nom_municipio|Município'
+    ,'cod_municipio|Código,nom_municipio|Município' //$strGridColumns - colunas que irão aparecer no grid
     ,'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
     ,'Pesquisar Municípios'       //$strWindowHeader -  Titulo da janela de pesquisa
 	,'Registros'                  //$strGridHeader   -  Titulo do Gride
