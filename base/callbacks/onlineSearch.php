@@ -191,50 +191,42 @@ switch( $acao )
 				}
 
 			}
-			else if( class_exists( 'TPDOConnection' ) && TPDOConnection::getInstance() )
-			{
+			else if( class_exists( 'TPDOConnection' ) && TPDOConnection::getInstance() ) {
 				$where = '';
 
-				if ( is_array( $form->getDisplayControls() ) )
-				{
-					foreach( $form->getDisplayControls() as $name => $dc )
-					{
-						if ( $dc->getField()->getProperty( 'filter' ) == 'true' )
-						{
-							if ( trim( $dc->getField()->getValue() ) != '' )
-							{
+				if ( is_array( $form->getDisplayControls() ) ) {
+					foreach( $form->getDisplayControls() as $name => $dc ) {
+						if ( $dc->getField()->getProperty( 'filter' ) == 'true' ) {
+							if ( trim( $dc->getField()->getValue() ) != '' ) {
 								$where .= $where == '' ? '' : ' and ';
+								
 								if( $dc->getField()->getProperty( 'searchFormated' ) == 'true' && method_exists( $dc->getField(),'getFormated') )
 								{
 									$value=$dc->getField()->getFormated();
-								}
-								else
-								{
+								} else {
 									$value = $dc->getField()->getValue();
 								}
-								if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] )
-								{
-									if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 )
-                                    {
+								
+								if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] ) {
+									if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 ) {
 										$where .= "(upper(" . $name . ") like upper('%" . $value . "%'))";
 									} else {
 										$where .= "(upper(" . $name . ")=upper('" . $value . "'))";
 									}
-								}
-								else
-								{
+								} else {
 									if ( $dc->getField()->getProperty( 'partialKey' ) == 'true' ) {
 										$where .= "(" . $name . " like '%" . $value . "%')";
-									}
-                                    else
-                                    {
+									} else {
 								        $where .= "(" . $name . "='" . $value . "')";
 							        }
 						        }
+						        
+						        
 					        }
 				        }
                     }
 				}
+				
 				$sql = "select * from " . $aParams[ 'packageFunction' ] . ( ( $where == '' ) ? '' : ' where ' . $where );
                 if( (integer) $aParams[ 'maxRecords' ] > 0 && DEFINED('BANCO') && preg_match('/MYSQL|SQLITE|POSTGRE/i',BANCO) == 1 )
                 {
