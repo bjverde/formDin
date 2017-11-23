@@ -2869,6 +2869,7 @@ class TForm Extends TBox
 	 * automaticamente selecionado e retornado para a tela
 	 *
 	 * Ex: strFilterFields (campoBanco|Rotulo|caracteres|tamanho|obrigatorio|tipo|casas decimais|parte do campo|pesquisar formatado )
+	 *                     (name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated)
 	 * 	NOM_INTERRESSADO|Nome Interessado:|45||||true,NUM_ORIGINAL|Nº Original:,DES_ASSUNTO|Assunto,COD_UF|Estado:||||uf'
 	 * 	o tipo pode ser: char, uf, cpf, cnpj, cpfcnpj, data, int, dec, select ou hidden
 	 * 	o padrao é char de 30
@@ -2897,7 +2898,7 @@ class TForm Extends TBox
 	 * 
 	 * @param string $strFieldName
 	 * @param string $strPackageFunction  - Nome do pacote Orecla OU tabela em outro banco
-	 * @param string $strFilterFields
+	 * @param string $strFilterFields - Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
 	 * @param string $strAutoFillFilterField
 	 * @param bool $boolAutoStart
 	 * @param bool $boolAutoSelect
