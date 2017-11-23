@@ -512,27 +512,22 @@ function setGrid( $res, $aParams, $form )
 	{
 		$aColumns = explode( ',', $aParams[ 'gridColumns' ] );
 
-		forEach( $aColumns as $k => $v )
-		{
-			@list( $field, $label, $width, $align ) = explode( "|", $v );
-			$align = isset( $align ) ? $align : 'l';
+		forEach( $aColumns as $k => $v ) {
 
-			if ( strtolower( $align ) == 'l' || strtolower( $align ) == 'left' )
-			{
-				$align = 'left';
+			$variables = explode( "|", $v );
+			$field = null;
+			$label = null;
+			$width = null;
+			$align = null;
+			
+			if( count($variables) == 2 ){
+				list( $field, $label ) = $variables;
+			} else {
+				list( $field, $label, $width, $align ) = $variables;
 			}
-			else if( strtolower( $align ) == 'r' || strtolower( $align ) == 'right' )
-			{
-				$align = 'right';
-			}
-			else if( strtolower( $align ) == 'c' || strtolower( $align ) == 'center' )
-			{
-				$align = 'center';
-			}
-			else
-			{
-				$align = 'left';
-			}
+			
+			$align = defineAlineGridColumn ($align);
+			
 			// se a coluna de link não existir ou for informada uma inválida, assumir a primeira coluna do gride
 			$aParams[ 'columnLink' ] = is_null( $aParams[ 'columnLink' ] ) ? $field : $aParams[ 'columnLink' ];
 
@@ -589,6 +584,25 @@ function setGrid( $res, $aParams, $form )
 		}
 	}
 }
+
+
+function defineAlineGridColumn ($align){
+	
+	$align = isset( $align ) ? $align : 'l';
+	
+	if ( strtolower( $align ) == 'l' || strtolower( $align ) == 'left' ) {
+		$align = 'left';
+	} else if( strtolower( $align ) == 'r' || strtolower( $align ) == 'right' ) {
+		$align = 'right';
+	} else if( strtolower( $align ) == 'c' || strtolower( $align ) == 'center' ) {
+		$align = 'center';
+	} else {
+		$align = 'left';
+	}
+	
+	return $align;
+}
+
 
 function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 {
