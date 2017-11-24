@@ -1960,15 +1960,15 @@ class TForm Extends TBox
 	 * </code>
 	 *
 	 * @param string $strFieldName
-	 * @param string $strTablePackageFuncion
-	 * @param string $strSearchField
-	 * @param mixed $mixUpdateFields
+	 * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
+	 * @param string $strSearchField                - campo de pesquisa
+	 * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. separados por virgulas
 	 * @param boolean $boolDisableUpdateFields
-	 * @param mixed $mixExtraSearchFields
+	 * @param mixed $mixExtraSearchFields            - campo do formulário que será adicionado como filtro
 	 * @param string $strCallBackFunctionJs
-	 * @param integer $intMinChars
-	 * @param integer $intDelay
-	 * @param integer $intMaxItensToShow
+	 * @param integer $intMinChars                   - Default 3, numero de caracteres minimos para disparar a pesquisa
+	 * @param integer $intDelay                      - Default 1000, tempo após a digitação para disparar a consulta
+	 * @param integer $intMaxItensToShow             - máximo de registros que deverá ser retornado
 	 * @param integer $intCacheTime default = 0 ( sessão )
 	 * @param boolean $boolRemoveMask
 	 * @param string $strUrl
@@ -5976,7 +5976,7 @@ class TForm Extends TBox
 	* como serparador decimal
 	*
 	* @param mixed $number
-	* @param str $strDecimalSeparator
+	* @param string $strDecimalSeparator
 	* @return mixed
 	*/
 	function unformatNumber($number=null, $strDecimalSeparator=null)
@@ -6343,7 +6343,7 @@ class TForm Extends TBox
 	 * @param string $strHeight
 	 * @param boolean $boolNewLine
 	 * @param boolean $boolLabelAbove
-	 * @return THtmlField
+	 * @return THtml Field
 	 */
 	public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
@@ -6389,7 +6389,7 @@ class TForm Extends TBox
 	 * @param string $strValue
 	 * @param boolean $boolNewLine
 	 * @param boolean $boolLabelAbove
-	 * @return TCpfField
+	 * @return TCpf Field
 	 */
 	public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
 	{
@@ -6409,7 +6409,7 @@ class TForm Extends TBox
 	 * @param string $strValue
 	 * @param boolean $boolNewLine
 	 * @param boolean $boolLabelAbove
-	 * @return TCnpjField
+	 * @return TCnpj Field
 	 */
 	public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
 	{
@@ -6429,7 +6429,7 @@ class TForm Extends TBox
 	 * @param string $strValue
 	 * @param boolean $boolNewLine
 	 * @param boolean $boolLabelAbove
-	 * @return TCpfCnpjField
+	 * @return TCpfCnpj Field
 	 */
 	public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
 	{
@@ -6790,9 +6790,9 @@ class TForm Extends TBox
 	 * @param mixed $intMapWidth
 	 * @param mixed $boolLabelAbove
 	 * @param mixed $boolNoWrapLabel
-	 * @param type $strMapHeaderText
-	 * @param type $strMapHeaderFontColor
-	 * @param type $strMapHeaderFontSize
+	 * @param string $strMapHeaderText
+	 * @param string $strMapHeaderFontColor
+	 * @param string $strMapHeaderFontSize
 	 * @return TCoordGMS
 	 */
 	public function addCoordGMSField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strLatY=null, $strLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strMapHeaderText=null,$strMapHeaderFontColor=null,$strMapHeaderFontSize=null)
@@ -7028,7 +7028,7 @@ class TForm Extends TBox
 	 * 			$t = $frm->addTag('</div>'); // para fechar
 	 * @param string $strTagType
 	 * @param string $strId
-	 * @return mull
+	 * @return null
 	 */
 	public function addTag( $strTagType, $strId = null,$boolNewLine=null )
 	{
@@ -7117,14 +7117,14 @@ class TForm Extends TBox
 	}
 	/**
 	 * Campo para seleção de Diretório ou Pasta
-	 * @param type $strName
+	 * @param string $strName
 	 * @param type $rootDir
-	 * @param type $strValue
+	 * @param string $strValue
 	 * @param type $intMaxLength
-	 * @param type $boolRequired
+	 * @param bool $boolRequired
 	 * @param type $intSize
-	 * @param type $boolLabelAbove
-	 * @param type $boolNewLine
+	 * @param bool $boolLabelAbove
+	 * @param bool $boolNewLine
 	 * @return TOpenDir
 	 */
 	public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null, $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
