@@ -62,12 +62,12 @@ $frm->setAutoComplete( 'nom_municipio'
                      , 'callback_autocomplete_municipio()'
                      , 3
                      , 1000
-                    , 50
-                    , null
-                    , null
-                    , null
-                    , null
-                    , true );
+		             , 50                         // máximo de registros que deverá ser retornado
+                     , null
+                     , null
+		             , null                       //url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+		             , null
+                     , true );
 
 $frm->setAction( 'Refresh' );
 $frm->show();

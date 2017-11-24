@@ -152,10 +152,8 @@ else
 	}
 	//$where = "upper({$strSearchField}) like '".strtoupper($_REQUEST['q'])."%'";
 	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ). utf8_encode($_REQUEST['q'])."%')";
-	if( is_array($bvars))
-	{
-		foreach($bvars as $k=>$v)
-		{
+	if( is_array($bvars) ) {
+		foreach($bvars as $k=>$v) {
 			$where .=" and {$k} = '{$v}'";
 		}
 	}
@@ -182,9 +180,7 @@ else
 				return;
 			}
 		}
-	}
-	else
-	{
+	} else {
 		$res = TPDOConnection::executeSql($sql);
 		//echo utf8_encode($sql."\n");
 		//return;

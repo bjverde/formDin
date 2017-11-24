@@ -1959,7 +1959,7 @@ class TForm Extends TBox
 	 *                   true );
 	 * </code>
 	 *
-	 * @param string $strFieldName
+	 * @param string $strFieldName                  - nome do campo irá funcionar com autocomplete
 	 * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
 	 * @param string $strSearchField                - campo de pesquisa
 	 * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. separados por virgulas
@@ -1971,8 +1971,8 @@ class TForm Extends TBox
 	 * @param integer $intMaxItensToShow             - máximo de registros que deverá ser retornado
 	 * @param integer $intCacheTime default = 0 ( sessão )
 	 * @param boolean $boolRemoveMask
-	 * @param string $strUrl
-	 * @param string $strMessageNotFound
+	 * @param string $strUrl                         - url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+	 * @param string $strMessageNotFound             - Mesagem caso não encontre nenhum registro
 	 * @params boolean $boolKeepFieldValuesOnPost
 	 * @params boolean $boolClearOnNotFound
      * @params boolean $boolClearUpdateFields
@@ -1982,13 +1982,15 @@ class TForm Extends TBox
 	{
 
 		// não criar o autocomplente se o campo não existir
-		if( !$this->getField( $strFieldName ) )
-		{
+		if( !$this->getField( $strFieldName ) ) {
 			return;
 		}
-		//$strUrl						= $strUrl					=== null	? $this->getBase().'callbacks/autocomplete.php' : $strUrl;
+		
 		//$strUrl = $strUrl === null ? 'app_url+app_index_file+"?modulo=' . $this->getBase() . 'callbacks/autocomplete.php' : $strUrl;
-		$strUrl = $strUrl === null ? 'app_index_file+"?modulo=' . $this->getBase() . 'callbacks/autocomplete.php' : $strUrl;
+		
+		$urlCallBack = 'app_index_file+"?modulo=' . $this->getBase() . 'callbacks/autocomplete.php';
+		
+		$strUrl   = $strUrl === null ? $urlCallBack : $strUrl;
 		$intDelay = $intDelay === null ? 1000 : ( int ) $intDelay; // 1000 = 1 segund
 		$intMaxItensToShow = $intMaxItensToShow === null ? 50 : ( int ) $intMaxItensToShow;
 		$intMinChars = $intMinChars === null ? 3 : ( int ) $intMinChars;
