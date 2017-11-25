@@ -158,10 +158,8 @@ return;
 * @param string $strTexto
 * @param string $boolDebug
 */
-function impAutocomplete($strText, $boolDebug)
-{
-	if($boolDebug)
-	{
+function impAutocomplete($strText, $boolDebug) {
+	if($boolDebug) {
 		print $strText."\n";
 	}
 }
@@ -227,10 +225,8 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 	$bvars	=null;
 	$res	=null;
 	$nrows	=null;
-    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() )
-    {
-		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) )
-		{
+    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
+		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
 			// a variavel erro esta recebendo um numero de erro como retorno mesmo a query ser bem sucesdida
             //$boolDebug=true;
 			//impAutocomplete($sql,$boolDebug);
@@ -238,8 +234,7 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 			//impAutocomplete('nrows='.$nrows,$boolDebug);
 			//impAutocomplete('intCacheTime='.$intCacheTime,$boolDebug);
 			//impAutocomplete('Erro='.$erro,$boolDebug);
-			if( preg_match('/falha/i',$erro ) > 0 )
-			{
+			if( preg_match('/falha/i',$erro ) > 0 ) {
 				echo utf8_encode("Erro na função autocomplete(). Erro:".$erro)."\n".$sql;
 				return;
 			}
@@ -253,4 +248,3 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 }
 
 ?>
-
