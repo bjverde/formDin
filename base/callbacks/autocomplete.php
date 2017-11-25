@@ -79,73 +79,49 @@ foreach($_REQUEST as $k=>$v)
 		}
 	}
 	// os parametros para atualizar os campos ao selecionar uma opção veem com _u_  ( de update )
-	else if(substr($k,0,3)=="_u_")
-	{
+	else if(substr($k,0,3)=="_u_") {
 		$arrUpdateFields[strtoupper(substr($k,3))]=$v;
 		impAutocomplete("upd:".strtoupper(substr($k,3)).'='.$v,$boolDebug);
 	}
-	else if($k=='functionJs')
-	{
+	else if($k=='functionJs') {
 		$strFunctionJs=$v;
 		impAutocomplete("functionJs:".$strFunctionJs,$boolDebug);
 	}
-	else if($k=='searchField')
-	{
+	else if($k=='searchField') {
 		$strSearchField=$v;
 		impAutocomplete("searchField:".$strSearchField."\n",$boolDebug);
 	}
-	else if($k=='tablePackageFunction')
-	{
+	else if($k=='tablePackageFunction') {
 		$strTablePackageFuncion=$v;
 		impAutocomplete("tablePackageFunction:".$strTablePackageFuncion,$boolDebug);
-	}
-	else
-	{
+	} else {
 		impAutocomplete( $k.'='.$v,$boolDebug);
 	}
 }
-if($boolDebug)
-{
+if($boolDebug) {
 	return;
 }
 // se for passado o nome de uma tabela, criar o comando select
-if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0)
-{
-	if($strSearchField)
-	{
+if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0) {
+	if($strSearchField) {
 		$bvars[$strSearchField]=$_REQUEST['q'];
 	}
-
 	// Por razões de segurança, o variável num_pessoa tem que ser lido da sessão
 	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
 		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
 	} else {
 		$bvars['NUM_PESSOA'] = $_SESSION['num_pessoa'];
 	}
-    //$intCacheTime=-1;
-	//echo '0|'.print_r($bvars,true)."\n";
-	//echo '1|'.$strTablePackageFuncion."\n";
-	//return;
-
-
-
-
-	//executar_pacote_func_proc($strTablePackageFuncion,$bvars,$intCacheTime))
-	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime))
-	{
+	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime)) {
 		echo utf8_encode("Erro na função autocomplete(). Erro:".$erro[0])."\n";
 		return;
 	}
-}
-else
-{
+} else {
 	$selectColumns=$strSearchField;
-	if( is_array($arrUpdateFields))
-	{
-		foreach($arrUpdateFields as $k=>$v)
-		{
-			if( strtoupper($k) != strtoupper( $strSearchField ) )
-			{
+	
+	if( is_array($arrUpdateFields)) {
+		foreach($arrUpdateFields as $k=>$v) {
+			if( strtoupper($k) != strtoupper( $strSearchField ) ) {
 				$selectColumns.=','.$k;
 			}
 		}
