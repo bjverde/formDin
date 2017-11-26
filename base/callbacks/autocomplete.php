@@ -39,14 +39,15 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() )
-{
-	if( !function_exists('recuperarPacote') )
-	{
+require_once 'autocomplete_functions.php';
+
+if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
+	if( !function_exists('recuperarPacote') ) {
 		print 'Faltou include da conexão|';
 		return;
 	}
 }
+
 $boolDebug=false;
 $bvars=null;
 $intCacheTime = isset( $_REQUEST['cacheTime'] ) ? $_REQUEST['cacheTime'] : -1; // sem cache
@@ -58,20 +59,16 @@ $boolSearchAnyPosition = isset( $_REQUEST['searchAnyPosition'] ) ? ( $_REQUEST['
 
 $strFunctionJs = null;
 //----------------------------------------------------------------------------------
-foreach($_REQUEST as $k=>$v)
-{
+foreach($_REQUEST as $k=>$v) {
 	// decodificar os parametros recebidos
 	$v = utf8_decode($v);
 	$_REQUEST[$k] = $v;
 
 	// os parametros para adicionar ao bvars vem prefixados com _w_   ( de where )
-	if(substr($k,0,3)=="_w_")
-	{
-		if( $v )
-		{
+	if(substr($k,0,3)=="_w_") {
+		if( $v ) {
 			$aTemp = explode('|',$k);
-			if( ! isset($aTemp[1] ) )
-			{
+			if( ! isset($aTemp[1] ) ) {
 				$aTemp[1]=substr($aTemp[0],3);
 			}
 			$bvars[strtoupper($aTemp[1])]= $v;
@@ -106,7 +103,7 @@ if($boolDebug) {
 if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0) {
 	$res = recuperaPacoteOracleAutoComplete ( $strSearchField, $intCacheTime, $strTablePackageFuncion );
 } else {
-	$res = tableRecoverResult( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion, $erro );
+	$res = tableRecoverResult( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
 }
 
 //----------------------------------------------------------------------------------
@@ -118,133 +115,29 @@ if( is_array( $res ) ) {
 	if ( !array_key_exists($strSearchField ,$res) ) {
 		$strSearchField = strtoupper($strSearchField);
 	}
-	if ( !array_key_exists($strSearchField ,$res) )
-	{
+	if ( !array_key_exists($strSearchField ,$res) ) {
 		echo utf8_encode('Coluna '.$strSearchField.' não existe na tabela');
 		return;
 	}
-	foreach($res[key($res)] as $k=>$v)
-	{
+	foreach($res[key($res)] as $k=>$v) {
 		$upd=array();
-		if(is_array($arrUpdateFields))
-		{
-			foreach($arrUpdateFields as $fieldOracle=>$fieldForm)
-			{
+		if( is_array($arrUpdateFields) ) {
+			foreach($arrUpdateFields as $fieldOracle=>$fieldForm) {
 				$upd[$fieldForm] = utf8_encode($res[$fieldOracle][$k]);
 			}
-			if(isset($strFunctionJs))
-			{
+			
+			if(isset($strFunctionJs)) {
 				$upd['fwCallbackAc']= $strFunctionJs;
 				//$upd[$strFunctionJs]='';
 			}
 		}
-		if( isset($res[$strSearchField][$k]))
-		{
+		if( isset($res[$strSearchField][$k]) ){
 			echo $res[$strSearchField][$k].'|'.json_encode($upd)."\n";
-		}
-		else
-		{
+		} else {
 			echo $res[$strSearchField][$k].'|'.json_encode($upd)."\n";
 		}
 		//echo json_encode($upd)."\n";
 	}
 }
 return;
-
-//--------------------------------------------------------
-/**
-* Função para ajudar na depuração do retorno do autocomplete
-*
-* @param string $strTexto
-* @param string $boolDebug
-*/
-function impAutocomplete($strText, $boolDebug) {
-	if($boolDebug) {
-		print $strText."\n";
-	}
-}
-
-/**
- * Recupera o pacote Oracle e retorna o resultado.
- * 
- * @param strSearchField
- * @param intCacheTime
- * @param strSearchField
- * @param strTablePackageFuncion
- */
-
-function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTablePackageFuncion) {
-	if($strSearchField) {
-		$bvars[$strSearchField]=$_REQUEST['q'];
-	}
-	// Por razões de segurança, o variável num_pessoa tem que ser lido da sessão
-	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
-		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
-	} else {
-		$bvars['NUM_PESSOA'] = $_SESSION['num_pessoa'];
-	}
-	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime)) {
-		echo utf8_encode("Erro na função autocomplete(). Erro:".$erro[0])."\n";
-		return;
-	}
-	
-	return $res;
-}
-
-
-/**
- * Recupera o resultado da tabela 
- * @param bvars
- * @param boolSearchAnyPosition
- * @param arrUpdateFields
- * @param strSearchField
- * @param strTablePackageFuncion
- * @param erro
- */
-
-function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion, $erro) {
-	$selectColumns=$strSearchField;
-	
-	if( is_array($arrUpdateFields)) {
-		foreach($arrUpdateFields as $k=>$v) {
-			if( strtoupper($k) != strtoupper( $strSearchField ) ) {
-				$selectColumns.=','.$k;
-			}
-		}
-	}
-	//$where = "upper({$strSearchField}) like '".strtoupper($_REQUEST['q'])."%'";
-	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ). utf8_encode($_REQUEST['q'])."%')";
-	if( is_array($bvars) ) {
-		foreach($bvars as $k=>$v) {
-			$where .=" and {$k} = '{$v}'";
-		}
-	}
-	$sql 	= "select {$selectColumns} from {$strTablePackageFuncion} where {$where} order by {$strSearchField}";
-	//impAutocomplete( $sql,true);return;
-
-	$bvars	=null;
-	$res	=null;
-	$nrows	=null;
-    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
-		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
-			// a variavel erro esta recebendo um numero de erro como retorno mesmo a query ser bem sucesdida
-            //$boolDebug=true;
-			//impAutocomplete($sql,$boolDebug);
-			//impAutocomplete('$bvars='.print_r($bvars,true),$boolDebug);
-			//impAutocomplete('nrows='.$nrows,$boolDebug);
-			//impAutocomplete('intCacheTime='.$intCacheTime,$boolDebug);
-			//impAutocomplete('Erro='.$erro,$boolDebug);
-			if( preg_match('/falha/i',$erro ) > 0 ) {
-				echo utf8_encode("Erro na função autocomplete(). Erro:".$erro)."\n".$sql;
-				return;
-			}
-		}
-	} else {
-		$res = TPDOConnection::executeSql($sql);
-		//echo utf8_encode($sql."\n");
-		//return;
-	}
-	return $res;
-}
-
 ?>
