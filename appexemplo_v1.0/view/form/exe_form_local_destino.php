@@ -1,36 +1,38 @@
 <?php
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
- * 
+ *
  * Formdin Framework is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License version 3
  * as published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License version 3
  * along with this program; if not,  see <http://www.gnu.org/licenses/>
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
  * Este arquivo é parte do Framework Formdin.
- * 
+ *
  * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
- * 
+ *
  * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
  * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
- * 
+ *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
  * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
@@ -39,10 +41,8 @@
 
 //error_reporting(E_ALL);
 $frm = new TForm('RELATÓRIO: Destino do material coletado');
-
 $frm->setWidth(700);
 $frm->setHeight(400);
-
 $frm->setAutoSize(true);
 
 //Não quebra o rotulo em linhas. Mantem o campo perto do rotulo
@@ -101,14 +101,17 @@ $frm->closeGroup();
 $frm->addGroupField('gp_tipo','Tipo da instituição para onde o material foi destinado', null, $largura_grupo);
 
     // o Pacote abaixo retorna a descricao do tipo de solicitacao, concatenada com o campo HELP
-    //$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_TIPO_DESTINO', $bvars, $res);
+    /*
+	$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_TIPO_DESTINO', $bvars, $res);
     if (!$erro) {
         /// Gerando um array com todas as opcoes de marcar que irao formar o campo RADIO
         foreach ($res['COD_TIPO_DESTINO'] as $k_array => $v_array) {
             $opcoes_marcar[$v_array] = $res['DES_TIPO_DESTINO'][$k_array];
         }
     }
+    */
 
+	$opcoes_marcar = array();
     $frm->addRadioField('cod_tipo_destino', '',true,$opcoes_marcar,null,false,null,3,null,null,null,false);
 
     $frm->addTextField('nom_local_destino','Nome da coleção:',50,true,null,null,true);
@@ -123,6 +126,7 @@ $frm->addHtmlField('campo_gride_destino');
 
 //preenchimento dos selects (combos)
 //$erro = recuperarPacote('PESQUISA.PKE_CAD_PRJ_LOCAL_DESTINO.SEL_PAIS', $bvars, $res_pais);
+$res_pais = array();
 $frm->setOptionsSelect('cod_pais', $res_pais);//, 'COD_PAIS', 'NOM_PAIS');
 
 $frm->combinarSelects('cod_uf' // select pai
@@ -159,7 +163,10 @@ $frm->processAction();
 $frm->setFieldEvent('flg_propria_instituicao', 'onChange', 'esconderCamposCadastroInstituicao()');
 $frm->setFieldEvent('cod_tipo_destino', 'onChange', 'tipoInstituicao()');
 
-$formDinAcao = $_POST['formDinBotao'] . $_POST['formDinAcao'];
+$fdBotao = PostHelper::get('formDinBotao');
+$fdAcao  = PostHelper::get('formDinAcao');
+$formDinAcao = $fdBotao.$fdAcao;
+
 
 // preencher o campo seq_relato_arquivo_tipo
 //$frm->setOptionsSelect('tip_documento','PESQUISA.PK_RELATO_ARQUIVO_TIPO.SEL_GRIDE',
@@ -172,7 +179,7 @@ $frm->addJsFile('base_extra/funcoes.js');
 $frm->addJavascript('getGrideDestino();');
 
 //menu slide
-include 'modulos/menu/menu_slide.php';
+//include 'modulos/menu/menu_slide.php';
 
 //$frm->setAction('Salvar,Novo');
 
