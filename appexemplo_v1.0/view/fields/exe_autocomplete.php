@@ -38,6 +38,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
+//Info sobre a conecao
 TPDOConnection::test(false);
 
  $frm = new TForm( 'Exemplo Campo Texto com Autocompletar',220 );
@@ -52,16 +54,20 @@ $frm->addTextField('cod_uf','Cód Uf:',false);
 
 //Deve sempre ficar depois da definição dos campos
 $frm->setAutoComplete( 'nom_municipio'
-                     , 'tb_municipio'
-                     , 'nom_municipio'
-                     , 'cod_municipio,cod_uf'
+		             , 'tb_municipio'            // tabela alvo da pesquisa
+		             , 'nom_municipio'           // campo de pesquisa
+		             , 'cod_municipio,cod_uf'    // campos que serão atualizados ao selecionar o nome do município. separados por virgulas
                      , true
-                     , null
+		             , null                      // campo do formulário que será adicionado como filtro
                      , 'callback_autocomplete_municipio()'
-                    , 3
-                    , 1000
-                    , 50
-                    , null, null, null, null, true );
+                     , 3
+                     , 1000
+		             , 50                         // máximo de registros que deverá ser retornado
+                     , null
+                     , null
+		             , null                       //url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+		             , null
+                     , true );
 
 $frm->setAction( 'Refresh' );
 $frm->show();
