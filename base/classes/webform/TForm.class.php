@@ -1938,7 +1938,6 @@ class TForm Extends TBox
 	//-----------------------------------------------------------------------------
 	/**
 	 * Implementa o recurso de autosugestão a um campo texto do formulário utilizando jquery
-	 *
 	 * @link http://www.pengoworks.com/workshop/jquery/autocomplete_docs.txt
 	 *
 	 * @strUrl - se for informada a url que devolverá os dados para o autocomplete, o retorno deverá ser no seguinte formato:
@@ -1962,7 +1961,7 @@ class TForm Extends TBox
 	 * @param string $strFieldName                  - nome do campo irá funcionar com autocomplete
 	 * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
 	 * @param string $strSearchField                - campo de pesquisa
-	 * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. separados por virgulas
+	 * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
 	 * @param boolean $boolDisableUpdateFields
 	 * @param mixed $mixExtraSearchFields            - campo do formulário que será adicionado como filtro
 	 * @param string $strCallBackFunctionJs
