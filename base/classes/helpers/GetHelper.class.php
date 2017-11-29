@@ -9,7 +9,7 @@ class GetHelper {
 	
 	static function getDefaultValeu($atributeName,$DefaultValue) {
 	    $value = null;
-	    if(isset($_GET[$atributeName])){
+	    if(isset($_GET[$atributeName]) && ($_GET[$atributeName]<>'') ){
 	        $value = $_GET[$atributeName];
 	    }else{
 	        $value = $DefaultValue;

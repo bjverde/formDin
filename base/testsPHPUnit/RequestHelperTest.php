@@ -38,64 +38,67 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/GetHelper.class.php';
+require_once '../classes/helpers/RequestHelper.class.php';
 
 /**
  * GetHelper test case.
  */
-class GetHelperTest extends PHPUnit_Framework_TestCase {
+class RequestHelperTest extends PHPUnit_Framework_TestCase {
 
     public function testGet_tem() {
         $esperado = 10;
-        $_GET['x']= $esperado;
-        $retorno = GetHelper::get('x');        
+        $_REQUEST['x']= $esperado;
+        $retorno = RequestHelper::get('x');        
         $this->assertEquals($esperado, $retorno);
     }
     
     public function testGet_Naotem() {
         $esperado = '';
-        $_GET['x']= 123;
-        $retorno = GetHelper::get('z');
+        $_REQUEST['x']= 123;
+        $retorno = RequestHelper::get('z');
         $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGet_Branco() {
+    	$esperado = '';
+    	$_REQUEST['x']= '';
+    	$retorno = RequestHelper::get('x');
+    	$this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGet_null() {
+    	$esperado = '';
+    	$_REQUEST['x']= null;
+    	$retorno = RequestHelper::get('x');
+    	$this->assertEquals($esperado, $retorno);
     }
     
     public function testGetDefaultValeu_temValor(){
         $esperado = 10;
-        $_GET['x']= $esperado;
-        $retorno = GetHelper::getDefaultValeu('x','padrao');        
+        $_REQUEST['x']= $esperado;
+        $retorno = RequestHelper::getDefaultValeu('x','padrao');        
         $this->assertEquals($esperado, $retorno);
     }
 
     public function testGetDefaultValeu_NaoValor(){
         $esperado = 'padrao';
-        $_GET['x']= 10;
-        $retorno = GetHelper::getDefaultValeu('y','padrao');
+        $_REQUEST['x']= 10;
+        $retorno = RequestHelper::getDefaultValeu('y','padrao');
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_GetBranco(){
+    public function testGetDefaultValeu_Branco(){
     	$esperado = 'padrao';
-    	$_GET['x']= '';
-    	$retorno = GetHelper::getDefaultValeu('x','padrao');
+    	$_REQUEST['x']= '';
+    	$retorno = RequestHelper::getDefaultValeu('x','padrao');
     	$this->assertEquals($esperado, $retorno);
     }
     
     public function testGetDefaultValeu_GetNull(){
     	$esperado = 'padrao';
-    	$_GET['x']= null;
-    	$retorno = GetHelper::getDefaultValeu('x','padrao');
+    	$_REQUEST['x']= null;
+    	$retorno = RequestHelper::getDefaultValeu('x','padrao');
     	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testHas_true() {
-        $_GET['parametro']='tem';
-        $retorno = GetHelper::has('parametro');
-        $this->assertTrue($retorno);
-    }
-    
-    public function testHas_false() {
-        $retorno = GetHelper::has('naotem');
-        $this->assertFalse($retorno);
     }
 }
 

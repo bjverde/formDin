@@ -6,5 +6,15 @@ class RequestHelper {
 		}
 		return is_null($_REQUEST[$atributeName])?null:trim($_REQUEST[$atributeName]);
 	}
+	
+	static function getDefaultValeu($atributeName,$DefaultValue) {
+		$value = null;
+		if(isset($_REQUEST[$atributeName]) && ($_REQUEST[$atributeName]<>'') ){
+			$value = $_REQUEST[$atributeName];
+		}else{
+			$value = $DefaultValue;
+		}
+		return $value;
+	}
 }
 ?>

@@ -13,6 +13,16 @@ class PostHelper {
 		}
 		return is_null($_POST[$atributeName])?"":trim($_POST[$atributeName]);
 	}
+	
+	static function getDefaultValeu($atributeName,$DefaultValue) {
+		$value = null;
+		if(isset($_POST[$atributeName]) && ($_POST[$atributeName]<>'') ){
+			$value = $_POST[$atributeName];
+		}else{
+			$value = $DefaultValue;
+		}
+		return $value;
+	}
 
 	static function getInt($atributeName) {
 		if(!isset($_POST[$atributeName])){
