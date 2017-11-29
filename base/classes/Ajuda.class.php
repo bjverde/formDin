@@ -226,20 +226,15 @@ class Ajuda {
 			return $this->strValorChave;
 		}
 		//-------------------------------------------------------
-		public function setPastaBase($strPastaBase=null)
-		{
-			if((string)$strPastaBase<>'')
-			{
-				if(!file_exists($strPastaBase))
-				{
+		public function setPastaBase($strPastaBase=null) {
+			if( (string)$strPastaBase<>'' ) {
+				if( !file_exists($strPastaBase) ) {
 					$strPastaBase = '../'.$strPastaBase;
 				}
-				if(!file_exists($strPastaBase))
-				{
+				if( !file_exists($strPastaBase) ){
 					$strPastaBase = '../'.$strPastaBase;
 				}
-				if(!file_exists($strPastaBase))
-				{
+				if( !file_exists($strPastaBase) ){
 					print 'Classe Ajuda: Não foi possível encotnrar a pasta base:'.$strPastaBase;
 					return;
 				}
