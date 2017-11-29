@@ -38,40 +38,65 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../callbacks/autocomplete_functions.php';
 
-/**
- * GetHelper test case.
- */
-class autocomplete_functionsTest extends PHPUnit_Framework_TestCase {
+require_once '../classes/Ajuda.class.php';
 
-	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
-		$_REQUEST['q'] = 'x';
-        $bvars = null;
-        $boolSearchAnyPosition = false;
-        $arrUpdateFields = null;
-        $strSearchField = 'nome_camplo_coluna';
-        $strTablePackageFuncion = 'table_sys';
-      
-        $esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'x%\') order by nome_camplo_coluna';
-        
-        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testTableRecoverCreateSql_boolSearchAnyPositionTRUE() {
-    	$_REQUEST['q'] = 'x';
-    	$bvars = null;
-    	$boolSearchAnyPosition = true;
-    	$arrUpdateFields = null;
-    	$strSearchField = 'nome_camplo_coluna';
-    	$strTablePackageFuncion = 'table_sys';
-    	
-    	$esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
-    	
-    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
-    	
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
+class AjudaTest extends PHPUnit_Framework_TestCase {
+	
+	/**
+	 *
+	 * @var Ajuda
+	 */
+	private $ajuda;
+	
+	/**
+	 * Prepares the environment before running a test.
+	 */
+	protected function setUp() {
+		parent::setUp ();
+		$this->ajuda = new Ajuda('Nome','Texto');
+		$this->ajuda->setValorChave('valeuKey');
+	}
+	
+	/**
+	 * Cleans up the environment after running a test.
+	 */
+	protected function tearDown() {
+		$this->ajuda = null;
+		parent::tearDown ();
+	}
+	
+	public function testSetCorFundo_valor() {
+		$esperado = '#EEFFE4';
+		$this->ajuda->setCorFundo('#EEFFE4');
+		$retorno = $this->ajuda->getCorFundo();
+		
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	public function testSetCorFundo_null() {
+		$esperado = '#FFFFE4';
+		$retorno = $this->ajuda->getCorFundo();
+		
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	/**
+	 * Tests Ajuda->setCorFonte()
+	 */
+	public function testSetCorFonte() {
+		$esperado = '#EEFFE4';
+		$this->ajuda->setCorFonte('#EEFFE4');
+		$retorno = $this->ajuda->getCorFonte();
+		
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	public function testSetCorFonte_null() {
+		$esperado = '#0000FF';
+		$retorno = $this->ajuda->getCorFonte();
+		
+		$this->assertEquals($esperado, $retorno);
+	}
 }
+
