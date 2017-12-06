@@ -6714,14 +6714,14 @@ class TForm Extends TBox
 	 *
 	 * @param string $strName
 	 * @param string $strValue
-	 * @param integer $intMaxLength
+	 * @param integer $intMaxLength       - Quantidade maxima de digitos.
 	 * @param boolean $boolRequired
-	 * @param integer $intDecimalPlaces
+	 * @param integer $intDecimalPlaces   - Quantidade de casas decimais.
 	 * @param boolean $boolNewLine
 	 * @param boolean $boolLabelAbove
-	 * @param string $strMinValue
-	 * @param string $strMaxValue
-	 * @param boolean $boolFormatInteger
+	 * @param string $strMinValue         - Valor minimo permitido. Null = não tem limite.
+	 * @param string $strMaxValue         - Valor maximo permitido. Null = não tem limite.
+	 * @param boolean $boolFormatInteger  - Inteiros com ou sem ponto de separação
 	 * @param string $strDirection
 	 * @param boolean $boolAllowZero
 	 * @param boolean $boolAllowNull
