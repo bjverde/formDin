@@ -83,7 +83,7 @@ switch( $acao ) {
 				$gerador->addColumn($v);
 			}
 			$showScheme = $frm->get('sit_const_scheme');
-			$gerador->setShowScheme($showScheme);
+			$gerador->setShowSchema($showScheme);
 			$gerador->saveVO();
 			$gerador->saveDAO();
 			$frm->setMessage('Fim');

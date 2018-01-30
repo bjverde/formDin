@@ -55,6 +55,7 @@ $frm->addHtmlField('msg',$html);
 //$frm->addButton('Entrar','login',null);
 $frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informações','json',false);
 
+$acao = isset($acao) ? $acao : null;
 if( $acao =='login'){
     sleep(1);
     $nom_user = $frm->get('login');

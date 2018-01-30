@@ -67,11 +67,6 @@ $frm->addGroupField('gpxForm','Informações do form');
     $frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
 $frm->closeGroup();
 
-$frm->addGroupField('gpxEsquema','Informações do Esquema');
-    $frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
-    $frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
-$frm->closeGroup();
-
 $frm->addGroupField('gpxFormPag','Form com paginação');
     $frm->addHtmlField('html',$dbms_html,null,null,100)->setCss('border','1px solid blue');
     $gridType = array(GRID_SIMPLE=>'Simples',GRID_SCREEN_PAGINATION=>'Paginação via Tela',GRID_SQL_PAGINATION=>'Paginação via SQL');
@@ -82,6 +77,10 @@ $frm->addGroupField('gpxFormPag','Form com paginação');
     $frm->closeGroup();
 $frm->closeGroup();
 
+$frm->addGroupField('gpxEsquema','Informações do Esquema');
+	$frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
+	$frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
+$frm->closeGroup();
 
 $frm->addGroupField('gpxDAO','Informações do VO e DAO');
     $frm->addTextField('diretorio','Diretório:',50,true);
