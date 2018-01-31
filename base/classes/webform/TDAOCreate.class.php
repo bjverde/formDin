@@ -353,6 +353,16 @@ class TDAOCreate {
 		$this->addLine( TAB.'}');
 	}
 	
+	/**
+	 * No PHP 7.1 classes com construtores ficou deprecated 
+	 */
+	 public function addConstruct() {
+	    if (version_compare(phpversion(), '5.6.0', '>')) {
+	        $this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
+	        $this->addLine(TAB.'}');
+	    }
+	}
+	
 	//--------------------------------------------------------------------------------------
 	public function showDAO($print=false) {
 		$this->lines=null;
@@ -360,10 +370,10 @@ class TDAOCreate {
 		$this->addLine('class '.ucfirst($this->getTableName()).'DAO extends TPDOConnection {');
 		$this->addBlankLine();
 		$this->addSqlVariable();
-		$this->addBlankLine();		
+		$this->addBlankLine();
+		
 		// construct
-		$this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
-		$this->addLine(TAB.'}');
+		$this->addConstruct();
 		
 		// Select Count
 		$this->addLine();
