@@ -143,26 +143,22 @@ class TDAOCreate {
 		$this->addLine('');
 	}
 	//--------------------------------------------------------------------------------------
-	public function showVO($print=false)
-	{   $this->addLine('<?php');
-		$this->addLine("class ".ucfirst($this->getTableName())."VO");
-		$this->addLine("{");
-		$cols='';
-		$sets='';
-		foreach($this->getColumns() as $k => $v )
-		{
-			$this->addLine(TAB.'private $'.$v.' = null;');
-			$cols .= $cols == '' ? '' : ', ';
-			$cols .='$'.$v.'=null';
-			$sets .= ($k == 0 ? '' : EOL ).TAB.TAB.'$this->set'.ucFirst($v).'( $'.$v.' );';
-		}
-		$this->addLine(TAB.'public function '.ucfirst($this->getTableName()).'VO( '.$cols.' )');
-		$this->addLine(TAB.'{');
-		$this->addLine($sets);
-		$this->addLine(TAB.'}');
-		$this->addLine();
-		foreach($this->getColumns() as $k=>$v)
-		{
+	public function showVO($print=false){
+	    $this->addLine('<?php');
+	    $this->addLine("class ".ucfirst($this->getTableName())."VO {");
+	    $cols='';
+	    $sets='';
+	    foreach($this->getColumns() as $k => $v ){
+	        $this->addLine(TAB.'private $'.$v.' = null;');
+	        $cols .= $cols == '' ? '' : ', ';
+	        $cols .='$'.$v.'=null';
+	        $sets .= ($k == 0 ? '' : EOL ).TAB.TAB.'$this->set'.ucFirst($v).'( $'.$v.' );';
+	    }
+	    $this->addLine(TAB.'public function __construct( '.$cols.' ) {');
+	    $this->addLine($sets);
+	    $this->addLine(TAB.'}');
+	    $this->addLine();
+	    foreach($this->getColumns() as $k=>$v) {
 			$this->addLine(TAB.'function set'.ucfirst($v).'( $strNewValue = null )');
 			$this->addLine(TAB."{");
 			if( preg_match('/cpf|cnpj/i',$v) > 0 )
@@ -295,7 +291,7 @@ class TDAOCreate {
 	    $this->addLine(TAB.TAB.'$values = array(',false);
 	    $cnt=0;
 	    foreach($this->getColumns() as $k=>$v) {
-	        if( $v != $this->keyColumnName) {
+	        if( $v != strtolower($this->keyColumnName) ) {
 	            $this->addLine(( $cnt++==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').' $objVo->get'.ucfirst($v).'() ');
 	        }
 	    }
@@ -303,7 +299,7 @@ class TDAOCreate {
 	    $this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->hasSchema().$this->getTableName().'(');
 	    $cnt=0;
 	    foreach($this->getColumns() as $k=>$v) {
-	        if( $v != $this->keyColumnName) {
+	        if( $v != strtolower($this->keyColumnName) ) {
 	            $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $cnt++==0 ? ' ' : ',').$v);
 	        }
 	    }
@@ -354,10 +350,10 @@ class TDAOCreate {
 	}
 	
 	/**
-	 * No PHP 7.1 classes com construtores ficou deprecated 
+	 * No PHP 7.1 classes com construtores ficou deprecated
 	 */
-	 public function addConstruct() {
-	    if (version_compare(phpversion(), '5.6.0', '>')) {
+	public function addConstruct() {
+	    if (version_compare(phpversion(), '5.6.0', '<')) {
 	        $this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
 	        $this->addLine(TAB.'}');
 	    }
@@ -433,28 +429,25 @@ class TDAOCreate {
 		
 	}
 	//--------------------------------------------------------------------------------------
-	public  function getParams()
-	{
-		$cols = $this->getColumns();
-		$qtd = count($cols);
-		$result = '';
-		for($i = 1; $i <= $qtd ; $i++)
-		{
-			if( $cols[$i-1] != $this->keyColumnName)
-			{
-				$result .= ($result=='') ? '' : ',';
-				if( $this->databaseManagementSystem == DBMS_POSTGRES )
-				{
-					$result .= '$'.$i;
-				}
-				else
-				{
-					$result.='?';
-				}
-			}
-		}
-		return $result;
-
+	/**
+	 * Returns the number of parameters
+	 * @return string
+	 */
+	public  function getParams() {
+	    $cols = $this->getColumns();
+	    $qtd = count($cols);
+	    $result = '';
+	    for($i = 1; $i <= $qtd ; $i++) {
+	        if( $cols[$i-1] != strtolower($this->keyColumnName) ){
+	            $result .= ($result=='') ? '' : ',';
+	            if( $this->databaseManagementSystem == DBMS_POSTGRES ){
+	                $result .= '$'.$i;
+	            } else {
+	                $result.='?';
+	            }
+	        }
+	    }
+	    return $result;
 	}
 	//--------------------------------------------------------------------------------------
 	public  function removeUnderline($txt) {
