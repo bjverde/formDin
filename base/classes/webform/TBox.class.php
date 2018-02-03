@@ -89,36 +89,28 @@
 
 		$this->outside = new TElement();
 	}
-	public function showFlat($print=true)
-	{
+	public function showFlat($print=true) {
 
-		if(is_object($this->openCloseButton ) )
-		{
+		if(is_object($this->openCloseButton ) ) {
 			parent::add($this->openCloseButton);
 		}
-		if(is_object($this->legend))
-		{
+		if(is_object($this->legend)) {
 			//parent::add('<img class="fwGroupBoxImage" src="base/imagens/folder.gif">');
 			parent::add($this->legend);
 		}
-		if( (string)$this->divBody->getCss('width')=="")
-		{
+		if( (string)$this->divBody->getCss('width')=="") {
 			$this->divBody->setCss('width',$this->divBox->getCss('width'));
 		}
-		if( (string)$this->divBody->getCss('height')=="")
-		{
+		if( (string)$this->divBody->getCss('height')=="") {
 			$this->divBody->setCss('height',$this->divContent->getCss('height'));
 		}
-		if( $this->divBody->getCss('background-color') == "")
-		{
+		if( $this->divBody->getCss('background-color') == "") {
 			$this->divBody->setCss('background-color',$this->getCss('background-color'));
 		}
-		if($this->getCss('border')=='none')
-		{
+		if($this->getCss('border')=='none') {
 			$this->setCss('border','1px solid #c0c0c0');
 		}
-		if( $this->getPosition() )
-		{
+		if( $this->getPosition() ) {
 			$this->divBody->add('<script>window.setTimeout(\'fwSet_position("'.$this->getId().'","'.$this->getPosition().'")\',100);</script>');
 		}
 		parent::add($this->divBody);
@@ -255,14 +247,10 @@
 	{
 		return $this->divContent->getCss('height');
 	}
-	public function add($value,$body=true)
-	{
-		if( $body )
-		{
+	public function add($value,$body=true){
+		if( $body ){
 			$this->divBody->add($value);
-		}
-		else
-		{
+		}else{
 			parent::add($value);
 		}
 	}
@@ -272,8 +260,7 @@
 	* @param string $strCssProperty
 	* @param string $strValue
 	*/
-	public function setCssBody($strCssProperty,$strValue)
-	{
+	public function setCssBody($strCssProperty,$strValue){
 		$this->divBody->setCss($strCssProperty,$strValue);
 	}
 
@@ -282,8 +269,7 @@
 	*
 	* @param boolean $boolNewValue
 	*/
-	public function setFlat($boolNewValue=null)
-	{
+	public function setFlat($boolNewValue=null){
 		$this->flat = (bool)$boolNewValue;
 	}
 
@@ -291,8 +277,7 @@
 	* Retorna true ou false para exibir a caixa com borda 3D ou Simples
 	*
 	*/
-	public function getFlat()
-	{
+	public function getFlat(){
 		return $this->flat;
 	}
 	/**

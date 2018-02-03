@@ -40,9 +40,9 @@
  */
 
 $frm = new TForm('Campo Numérico');
-$frm->addNumberField('num_pessoa'			,'Qtd:',9,false,2,true,null,5,null,null,null,true,true);
-$frm->addNumberField('num_peso',             'Peso Unitário:',4,true,2,false)->setExampleText('Kg');
-$frm->addNumberField('num_peso2',            'Peso Unitário:',9,true,2,false)->setExampleText('Kg');
+$frm->addNumberField('num_pessoa'			,'Quantidade de pessoas:',9,false,0,true,null,5,null,null,null,true,true);
+$frm->addNumberField('num_peso',             'Peso Unitário:',5,true,2,true)->setExampleText('Kg');
+$frm->addNumberField('num_preco',            'Preço Unitário:',9,true,2,false)->setExampleText('R$');
 $frm->set('num_peso','2.9');
 $frm->setAction('Gravar,Testar');
 

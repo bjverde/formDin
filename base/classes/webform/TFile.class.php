@@ -101,28 +101,22 @@ class TFile extends TEdit
 	{
 		if( parent::validate())
 		{
-			if( isset($_POST[$this->getId().'_size']))
-			{
+			if( isset($_POST[$this->getId().'_size'])) {
 				$maxSize = preg_replace('[^0-9]','',$this->getMaxSize());
-				if( strpos(strtoupper($this->getMaxSize()),'M')!==false )
-				{
+				if( strpos(strtoupper($this->getMaxSize()),'M')!==false ) {
 					// megabytes
 					$fator = pow(1024,2);
 					$this->setMaxSize($maxSize.'Mb');
-				}
-				else if( strpos(strtoupper($this->getMaxSize()),'G')!==false )
-				{
+				} else if( strpos(strtoupper($this->getMaxSize()),'G')!==false ) {
 					// gigabytes
 					$fator = pow(1024,3);
 					$this->setMaxSize($maxSize.'Gb');
-				}
-				else
-				{
+				} else {
 					// padrão é kilbytes
 					$fator = 1024;
 					$this->setMaxSize($maxSize.'Kb');
 				}
-				$maxSize *= $fator;
+				$maxSize *= (int)$fator;
 				if( (int)$_POST[$this->getId().'_size'] > (int)$maxSize)
 				{
 					$this->addError('Tamanho máximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
