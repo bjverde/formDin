@@ -522,24 +522,18 @@ class TTreeView extends TControl
 	public function addItem( $idParent = null, $id, $text, $open = null, $hint = null, $arrUserData = null, $boolSelect = null, $boolChecked = null )
 	{
 		$idParent = is_null($idParent) ? '' : $idParent.'';
- 		if ( !$this->itens )
-		{
+ 		if ( !$this->itens ) {
 
-		    if( $idParent == $this->initialParentKey && ! isset($_REQUEST['id'] ) )
-		    {
-				$expand = is_null( $this->getStartExpanded() ) ? true : $this->getStartExpanded();
-				if ( $this->getRootLabel() )
-				{
+ 			$expand = is_null( $this->getStartExpanded() ) ? true : $this->getStartExpanded();
+		    if( $idParent == $this->initialParentKey && ! isset($_REQUEST['id'] ) ) {				
+				if ( $this->getRootLabel() ) {
 					$this->itens = new TTreeViewData( '0', 'root', true, '' ); // nivel obrigatório
 					$this->itens->addItem($this->rootNode = new TTreeViewData( $this->getRandomChars(10)  , $this->getRootLabel(), true, 'Item Raiz' )); //raiz
 				}
-				else
-				{
+				else {
 					$this->itens = $this->rootNode = new TTreeViewData( '0', 'root', $expand, '' ); // nivel obrigatório
 				}
-			}
-			else
-			{
+			} else {
 				$this->itens = $this->rootNode = new TTreeViewData( $idParent, 'root', $expand, '' ); // nivel obrigatório
 			}
 

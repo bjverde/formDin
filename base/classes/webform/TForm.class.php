@@ -5099,6 +5099,7 @@ class TForm Extends TBox
 	{
 		return $this->displayControls;
 	}
+	
 	/**
 	 * Adicionar botão no layout
 	 *

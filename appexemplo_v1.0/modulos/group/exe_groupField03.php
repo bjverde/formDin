@@ -49,11 +49,11 @@
   $frm->closeGroup();
 
 
-  $frm->addGroupField('gp01','Grupo Teste I',null,null,null,true,true,'gx',true);
+  $frm->addGroupField('gp01','Grupo Teste II',null,null,null,true,true,'gx',true)->setCss('background-color','red');
   	$frm->addHtmlField('html_1','<b>Campo grupo SEM quebra na coluna do rótulo</b>');
   	$frm->addTextField('txt_nome','Nome completo da pessoa física:',60);
   $frm->closeGroup();
-  $frm->addGroupField('gp02','Grupo Teste II',null,null,null,null,true,'gx')->setCss('background-color','white');
+  $frm->addGroupField('gp02','Grupo Teste III',null,null,null,null,true,'gx')->setCss('background-color','white');
   	$frm->addHtmlField('html_2','<b>Campo grupo com fundo branco e COM quebra na coluna do rótulo</b>');
   	$frm->addTextField('txt_nome','Nome completo da pessoa física:',60);
   $frm->closeGroup();

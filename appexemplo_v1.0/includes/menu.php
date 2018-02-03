@@ -100,13 +100,12 @@ $menu->add('2',null,'Containers');
 		$menu->add('233','23','Aba3'	,'view/containers/exe_aba_3.php');
 		$menu->add('234','23','Aba4'	,'view/containers/exe_aba_4.php');
 		$menu->add('235','23','Aba5'	,'view/containers/exe_aba05_pagacontrol.php');
-	$menu->add('24','2','TreeView');
+	$menu->add('24','2','TreeView', null, null, '../../base/imagens/folder-39-128.png');
 		$menu->add('241','24','Dentro do Formulário' ,'tree/exe_tree_view_1.php');
-		$menu->add('242','24','Fora do Formulário'	,'tree/exe_tree_view_2.php');
+		$menu->add('242','24','Fora do Formulário'	,'tree/exe_tree_view_2.php',null, '../../base/imagens/folder-bw.png');
 		$menu->add('243','24','User Data - Array'	,'tree/exe_tree_view_3.php');
 		$menu->add('244','24','Uf x Municípios'		,'tree/exe_tree_view_4.php');
 		$menu->add('245','24','Uf x Municípios com SetXmlFile()' ,'tree/exe_tree_view_5.php');
-		$menu->add('246','24','Fora do Formulário' ,'exe_tree_view.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('4',null,'Mensagens e Ajuda', null, null, '../../base/imagens/feedback-512.png');

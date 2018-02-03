@@ -330,10 +330,10 @@
 			$this->legend->add($strLegend);
 		}
 	}
-	public function setOpenCloseButton($objNewValue=null)
-	{
+	public function setOpenCloseButton($objNewValue=null){
 		$this->openCloseButton = $objNewValue;
 	}
+	
 	/**
 	* Define a posição do box na tela. Os valores possíveis são:
 	*
