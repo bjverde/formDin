@@ -34,7 +34,9 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * arquivos do projeto
     * ANSI
     * retorno do carro formato Windows
-* PHP 5.4.x ou superior
+* PHP 5.4.x ou superior (compativel como 7.1.19)
+
+![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
 
 ### Bibliotecas utilizadas
 * fPDF 1.81
@@ -64,6 +66,9 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
+* [4.1.3 - 03/02/2018 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
+   * :hammer: Compativel com PHP 7.1.9.
+   * :bug: Correção dos código de exemplo
 * [4.1.3 - 10/11/2017 tag v4.1.3](https://github.com/bjverde/formDin/releases/tag/v4.1.3)
    * :hammer: Gerador de código crud, escolhendo o tipo de grid.
    * :bug: inclusão do xajax
