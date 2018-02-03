@@ -1,10 +1,6 @@
 <?php
-class PessoaDAO extends TPDOConnection
-{
-	public function pessoaDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class PessoaDAO extends TPDOConnection {
+
 	public static function insert( PessoaVO $objVo )
 	{
 		if( $objVo->getIdpessoa() )

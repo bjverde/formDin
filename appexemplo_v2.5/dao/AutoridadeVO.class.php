@@ -7,7 +7,7 @@ class AutoridadeVO
 	private $ordem = null;
 	private $cargo = null;
 	private $nome_pessoa = null;
-	public function AutoridadeVO( $idautoridade=null, $dat_inclusao=null, $dat_evento=null, $ordem=null, $cargo=null, $nome_pessoa=null )
+	public function __construct( $idautoridade=null, $dat_inclusao=null, $dat_evento=null, $ordem=null, $cargo=null, $nome_pessoa=null )
 	{
 		$this->setIdautoridade( $idautoridade );
 		$this->setDat_inclusao( $dat_inclusao );

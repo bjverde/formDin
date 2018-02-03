@@ -1,10 +1,6 @@
 <?php
-class RegiaoDAO extends TPDOConnection
-{
-	public function regiaoDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class RegiaoDAO extends TPDOConnection {
+	
 	public static function insert( RegiaoVO $objVo )
 	{
 		if( $objVo->getCod_regiao() )

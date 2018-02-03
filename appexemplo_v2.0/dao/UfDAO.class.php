@@ -8,9 +8,6 @@ class UfDAO extends TPDOConnection {
 									 ,cod_regiao
 									 from uf ';
 
-	public function ufDAO() {
-	}
-	//--------------------------------------------------------------------------------
 	public static function selectCount(){
 		$sql = 'select count(cod_uf) as qtd from uf';
 		$result = self::executeSql($sql);

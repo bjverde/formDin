@@ -5,7 +5,7 @@ class PessoaVO
 	private $nome = null;
 	private $tipo = null;
 	private $dat_inclusao = null;
-	public function PessoaVO( $idpessoa=null, $nome=null, $tipo=null, $dat_inclusao=null )
+	public function __construct( $idpessoa=null, $nome=null, $tipo=null, $dat_inclusao=null )
 	{
 		$this->setIdpessoa( $idpessoa );
 		$this->setNome( $nome );

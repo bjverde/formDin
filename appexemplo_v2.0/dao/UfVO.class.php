@@ -5,7 +5,7 @@ class UfVO
 	private $nom_uf = null;
 	private $sig_uf = null;
 	private $cod_regiao = null;
-	public function UfVO( $cod_uf=null, $nom_uf=null, $sig_uf=null, $cod_regiao=null )
+	public function __construct( $cod_uf=null, $nom_uf=null, $sig_uf=null, $cod_regiao=null )
 	{
 		$this->setCod_uf( $cod_uf );
 		$this->setNom_uf( $nom_uf );
