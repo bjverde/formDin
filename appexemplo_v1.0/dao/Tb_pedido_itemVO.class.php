@@ -43,7 +43,7 @@ class Tb_pedido_itemVO
 	private $produto = null;
 	private $quantidade = null;
 	private $preco = null;
-	public function Tb_pedido_itemVO( $id_item=null, $id_pedido=null, $produto=null, $quantidade=null, $preco=null )
+	public function __construct( $id_item=null, $id_pedido=null, $produto=null, $quantidade=null, $preco=null )
 	{
 		$this->setId_item( $id_item );
 		$this->setId_pedido( $id_pedido );

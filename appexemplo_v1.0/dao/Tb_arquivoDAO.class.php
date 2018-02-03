@@ -1,14 +1,8 @@
 <?php
-class Tb_arquivoDAO extends TPDOConnection
-{
-	public function tb_arquivoDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
-	public static function insert( Tb_arquivoVO $objVo )
-	{
-		if( $objVo->getId_arquivo() )
-		{
+class Tb_arquivoDAO extends TPDOConnection {
+
+	public static function insert( Tb_arquivoVO $objVo ) {
+		if( $objVo->getId_arquivo() ) {
 			return self::update($objVo);
 		}
 		$values = array(  $objVo->getNome_arquivo()

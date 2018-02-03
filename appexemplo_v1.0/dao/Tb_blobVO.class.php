@@ -36,14 +36,13 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_blobVO
-{
+class Tb_blobVO {
 	private $id_blob = null;
 	private $nome_arquivo = null;
 	private $conteudo_arquivo = null;
 	private $tempName = null;
 
-	public function Tb_blobVO( $id_blob=null, $nome_arquivo=null, $conteudo_arquivo=null )
+	public function __construct( $id_blob=null, $nome_arquivo=null, $conteudo_arquivo=null )
 	{
 		$this->setId_blob( $id_blob );
 		$this->setNome_arquivo( $nome_arquivo );

@@ -39,12 +39,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_blobDAO extends TPDOConnection
-{
-	public function tb_blobDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class Tb_blobDAO extends TPDOConnection {
+
 	public static function insert( Tb_blobVO $objVo )
 	{
 		if( $objVo->getId_blob() ) {
