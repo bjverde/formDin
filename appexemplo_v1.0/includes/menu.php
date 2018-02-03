@@ -64,7 +64,7 @@ $menu->add('17','1','Campo Arquivo');
 	$menu->add('171','17','Assincrono','view/fields/exe_FileAsync.php');
 	$menu->add('172','17','Normal','view/fields/exe_TFile.php');
 	$menu->add('173','17','TAssincrono','view/fields/exe_TFileAsync.php');
-$menu->add('18','1','Campo Numúrico','view/fields/exe_NumberField.php');
+$menu->add('18','1','Campo Numérico','view/fields/exe_NumberField.php');
 $menu->add('19','1','Campo Brasil');
 	$menu->add('191','19','Campo CEP'	,'view/fields/exe_CepField.php');
 	$menu->add('292','19','Campo Telefone'	,'view/fields/exe_FoneField.php');
@@ -109,7 +109,7 @@ $menu->add('2',null,'Containers');
 		$menu->add('246','24','Fora do Formulário' ,'exe_tree_view.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('4',null,'Mensagens e Ajuda');
+$menu->add('4',null,'Mensagens e Ajuda', null, null, '../../base/imagens/feedback-512.png');
 	$menu->add('40','4','Hints / Tooltips','exe_hint.php');
 	$menu->add('41','4','Mensagens');
 		$menu->add('411','41','Exemplo 1','view/messages/exe_mensagem.php');
@@ -129,14 +129,14 @@ $menu->add('5',null,'Ajax');
 	$menu->add('55','5','Ajax 05','ajax/exe_ajax05.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('6',null,'PDF');
+	$menu->add('6',null,'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
 	$menu->add('61','6','Exemplo 1','pdf/exe_pdf01.php');
 	$menu->add('62','6','Exemplo 2','pdf/exe_pdf02.php');
 	$menu->add('63','6','Exemplo 3, com passagem de parametros via Json','pdf/exe_pdf03.php');
 	$menu->add('64','6','Exemplo 4','pdf/exe_pdf04.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('8',null,'Gride');
+$menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
 	$menu->add('8.1','8','Gride 01 - botões sobre grid','grid/exe_gride01.php');
 	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
@@ -152,8 +152,8 @@ $menu->add('8',null,'Gride');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos bancos de dados','data_base.png');
-	$menu->add('91','9','Exemplo Mysql','pdo/exe_pdo_1.php');
-	$menu->add('92','9','Exemplo Sqlite e Mysql','pdo/exe_pdo_2.php');
+	$menu->add('91','9','Exemplo Mysql','pdo/exe_pdo_1.php', null, '../../base/imagens/MySQL-Database-512.png');
+	$menu->add('92','9','Exemplo Sqlite e Mysql','pdo/exe_pdo_2.php', null, '../../base/imagens/MySQL-Database-512.png');
 	$menu->add('93','9','Exemplo Postgres');
 		$menu->add('931','93','DAO e VO','pdo/pg/exe_pgsql01.php');
 		$menu->add('932','93','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php');
@@ -166,7 +166,7 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 
 
 //-----------------------------------------------------------------------------
-$menu->add('10',null,'Formulário');
+$menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-512.png');
 	$menu->add('10.1','10','Normal','view/form/exe_TForm.php');
 	$menu->add('10.2','10','Subcadastro','view/form/exe_TForm2.php');
 	$menu->add('10.3','10','Boxes','view/form/exe_TBox.php');
@@ -182,7 +182,7 @@ $menu->add('10',null,'Formulário');
 
 $menu->add('199',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
 	$menu->add('199.1','199','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
-	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../base/imagens/smiley-1-512.png');
+	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
 	
 //-----------------------------------------------------------------------------
 $menu->add('200',0,'Layout App');
