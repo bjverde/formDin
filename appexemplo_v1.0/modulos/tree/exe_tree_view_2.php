@@ -45,8 +45,9 @@ $frm->setPosition('TC');
 $frm->setAutoSize(true);
 $frm->setMaximize(true);
 
+$frm->addTextField('item', 'Item:',50);
 $frm->addTextField('NOM_MENU', 'Nome do Menu:',50);
-$frm->addTextField('URL', 'URL',50);
+$frm->addTextField('link', 'URL',50);
 
 
 $frm->addButton('Limpar', null, 'Limpar');
@@ -109,8 +110,9 @@ function treeClick(id) {
 	alert( treeJs.getItemText(id ) );
 	alert( treeJs.getUserData(id,'URL') );
 
+	jQuery("#item").val(treeJs.getSelectedItemId());
 	jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
-	jQuery("#URL").val(treeJs.getUserData(id,'URL'));
+	jQuery("#link").val(treeJs.getUserData(id,'URL'));
 }
 </script>
 

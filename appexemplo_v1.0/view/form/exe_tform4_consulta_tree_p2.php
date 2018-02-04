@@ -22,8 +22,8 @@ $frm->addGroupField('gpx1','Pedido');
 	$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cartão')->setEnabled(false);
 $frm->closeGroup();
 $frm->addGroupField('gpx2','Visualização do Item');
-	$frm->addTextField('item'		,'item:',10,false,null)->setEnabled(false);
-	$frm->addTextField('produto'	,'Produto:',30,false,null)->setEnabled(false);
+	$frm->addTextField('item'		,'item:',10,false,null);
+	$frm->addTextField('produto'	,'Produto:',30,false,null);
 	$frm->addNumberField('quantidade'	,'Quantidade:',5,true,1,true)->setEnabled(false);
 	$frm->addNumberField('preco'		,'Preço:',10,true,2,true)->setEnabled(false);
 $frm->closeGroup();
@@ -93,13 +93,11 @@ $frm->show();
 ?>
 <script>
 function treeClick(id) {
-
-	alert( treeJs.getSelectedItemId());
-	alert( treeJs.getItemText(id ) );
-	alert( treeJs.getUserData(id,'TEXT') );
-	alert( treeJs.getUserData(id,'IDPARENT') );
+	//alert( treeJs.getSelectedItemId());
+	//alert( treeJs.getItemText(id ) );
 	
-	jQuery("#ID").val(treeJs.getItemText(id));
-	jQuery("#TEXT").val(treeJs.getUserData(id,'produto'));
+	jQuery("#item").val(treeJs.getSelectedItemId());
+	jQuery("#produto").val(treeJs.getItemText(id ));
+	//jQuery("#link").val(treeJs.getUserData(id,'URL'));
 }
 </script>

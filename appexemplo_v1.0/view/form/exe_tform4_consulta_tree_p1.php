@@ -17,8 +17,8 @@ $frm->addTextField('nome_comprador'		,'Comprador:',60,false,null);
 $frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cartão');
 $frm->addTextField('QTD', 'Quantidade de Itens',50,false);
 
-//$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
-$frm->addButton('Limpar', null, 'Limpar', null, null, true, false);
+$frm->addButton('Ver Mestre visão com Ajax','redirectMestreAjax', null, null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -41,9 +41,12 @@ switch( $acao ) {
 	break;
 	//--------------------------------------------------------------------------------
 	case 'redirectForm4p2':
-		//Redirect só funciona se o arquivo estiver na pasta modulos
 		$frm->redirect('view/form/exe_tform4_consulta_tree_p2.php',null,true);
-		break;
+	break;
+	//--------------------------------------------------------------------------------
+	case 'redirectMestreAjax':
+		$frm->redirect('../cad_mestre_detalhe/cad_mestre_detalhe.php',null,true);
+	break;
 }
 
 $dados = Vw_pedido_qtd_itensDAO::selectAll($primaryKey);
