@@ -166,11 +166,12 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 
 //-----------------------------------------------------------------------------
 $menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-512.png');
-	$menu->add('10.1','10','Normal','view/form/exe_TForm.php');
-	$menu->add('10.2','10','Subcadastro','view/form/exe_TForm2.php');
+	$menu->add('10.1','10','Form 01 - Normal','view/form/exe_TForm.php');
+	$menu->add('10.2','10','Form 02 - Subcadastro','view/form/exe_TForm2.php');
 	$menu->add('10.3','10','Boxes','view/form/exe_TBox.php');
 	$menu->add('10.4','10','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
-	$menu->add('10.5','10','Form4 Consulta Pedidoos','view/form/exe_tform4_consulta_tree_p1.php');
+	$menu->add('10.5','10','Form 04 - Consulta Pedidos','view/form/exe_tform4_consulta_tree_p1.php');
+	$menu->add('10.6','10','Form 04 - Visualizar Item','view/form/exe_tform4_consulta_tree_p2.php');
 	$menu->add('10.7','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
 	$menu->add('10.8','10','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('10.9','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');

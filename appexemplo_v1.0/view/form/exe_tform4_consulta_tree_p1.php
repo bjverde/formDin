@@ -1,4 +1,9 @@
 <?php
+
+$html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax"</i>.
+          <br>
+          <br>Este exemplo utiliza as tabelas tb_pedido e tb_pedido_item do banco de dados bdApoio.s3db ( sqlite )  ';
+
 $primaryKey = 'ID_PEDIDO';
 $frm = new TForm('Exemplo Form4 - Consulta Grid',600);
 $frm->setFlat(true);
@@ -6,6 +11,7 @@ $frm->setMaximize(true);
 
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
+$frm->addHtmlField('html1',$html1,null,null,null,null)->setCss('border','1px solid #ffeb3b')->setCss('background-color','#ffffcc')->setCss('margin-bottom','10px');
 $frm->addDateField('data_pedido'		,'Data:',false);
 $frm->addTextField('nome_comprador'		,'Comprador:',60,false,null);
 $frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cartão');
@@ -34,7 +40,7 @@ switch( $acao ) {
 		$frm->clearFields();
 	break;
 	//--------------------------------------------------------------------------------
-	case 'redirect':
+	case 'redirectForm4p2':
 		//Redirect só funciona se o arquivo estiver na pasta modulos
 		$frm->redirect('view/form/exe_tform4_consulta_tree_p2.php',null,true);
 		break;
@@ -57,7 +63,7 @@ $gride->addColumn('DES_FORMA_PAGAMENTO','Forma Pagamento',100,'center');
 $gride->addColumn('QTD','Qtd Itens',50,'center');
 
 $gride->enableDefaultButtons(false);
-$gride->addButton('Visualizar','redirect','btnVisualizar');
+$gride->addButton('Visualizar','redirectForm4p2','btnVisualizar');
 
 
 $frm->addHtmlField('gride',$gride);
