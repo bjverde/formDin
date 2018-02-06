@@ -6853,7 +6853,7 @@ class TForm Extends TBox
 	 * @param integer $intFieldSize
 	 * @param boolean $boolNewLine
 	 * @param string  $strAllowedFileTypes
-	 * @param string  $strMaxFileSize
+	 * @param string  $strMaxFileSize  - Input the max size file with M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
 	 * @param boolean $boolLabelAbove
 	 * @param boolean $boolNoWrapLabel
 	 * @return TFile / TFileAsyn
