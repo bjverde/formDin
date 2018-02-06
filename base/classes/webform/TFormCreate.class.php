@@ -219,23 +219,10 @@ class TFormCreate {
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
-	public function addOnDraw() {
-		$this->addLine('function onDraw( $rowNum,$button,$objColumn,$aData) {');
-		$this->addLine(TAB.'if( $button->getName() == \'btnAlterar\') {');
-		$this->addLine(TAB.TAB.'if( $rowNum == 1 ) { $button->setEnabled( false ); }');
-		$this->addLine(TAB.'}');
-		$this->addLine('}');
-	}
-	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
 	    $this->addLine('function init() {');
 	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\');');
-	    $this->addLine('}');
-	    $this->addLine('// recebe fields e values do grid');
-	    $this->addLine('function alterar(f,v){');
-	    $this->addLine(TAB.'var dados = fwFV2O(f,v);');
-	    $this->addLine(TAB.'fwModalBox(\'Alteração\',\'index.php?modulo='.$this->formFileName.'\',300,800,null,dados);');
 	    $this->addLine('}');
 	    $this->addLine('</script>');
 	}	
@@ -269,7 +256,6 @@ class TFormCreate {
 	    	$this->addLine(TAB.'$gride->setMaxRows( $maxRows );');
 	    	$this->addLine(TAB.'$gride->setUpdateFields($mixUpdateFields);');
 	    	$this->addLine(TAB.'$gride->setUrl( \''.$this->getFormFileName().'\' );');
-	    	$this->addLine(TAB.'$gride->setOnDrawActionButton(\'onDraw\');');
 	    	$this->addBlankLine();
 	    	$this->addColumnsGrid(TAB);
 	    	$this->addBlankLine();
@@ -281,7 +267,6 @@ class TFormCreate {
 	    	$this->addLine('$frm->addJavascript(\'init()\');');
 	    	$this->addLine('$frm->show();');
 	    	$this->addBlankLine();
-	    	$this->addOnDraw();
 	    	$this->addLine("?>");
 	    	$this->addGridPagination_jsScript();
 	    }

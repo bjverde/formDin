@@ -220,7 +220,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
         $this->tFormCreate->addGridPagination_jsScript();
         $resultArray = $this->tFormCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 10, $size);
+        $this->assertEquals( 5, $size);
     }
     
     /**
@@ -230,11 +230,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$expectedArray[] ='<script>'.EOL;
     	$expectedArray[] ='function init() {'.EOL;
     	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\');'.EOL;
-    	$expectedArray[] ='}'.EOL;
-    	$expectedArray[] ='// recebe fields e values do grid'.EOL;
-    	$expectedArray[] ='function alterar(f,v){'.EOL;
-    	$expectedArray[] =TAB.'var dados = fwFV2O(f,v);'.EOL;
-    	$expectedArray[] =TAB.'fwModalBox(\'Alteração\',\'index.php?modulo=xxx.php\',300,800,null,dados);'.EOL;
     	$expectedArray[] ='}'.EOL;
     	$expectedArray[] ='</script>'.EOL;
     	
@@ -264,7 +259,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 43, $size);
+    	$this->assertEquals( 32, $size);
     }
     
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
@@ -275,6 +270,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 46, $size);
+    	$this->assertEquals( 35, $size);
     }
 }
