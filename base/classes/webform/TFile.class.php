@@ -39,12 +39,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class TFile extends TEdit
-{
+class TFile extends TEdit {
 	private $maxSize;
+	private $maxSizeKb;
 	private $allowedFileTypes;
-	public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null)
-	{
+	public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null) {
 		$intSize= is_null($intSize) ? 50 : $intSize;
 		parent::__construct($strName,null,5000,$boolRequired,$intSize);
 		$this->setFieldType('file');
@@ -88,19 +87,18 @@ class TFile extends TEdit
 		$this->add($name);
 	}
 	//-------------------------------------------------------------------------------------------
-	public function setMaxSize($strMaxSize=null)
-	{
-		$strMaxSize = is_null($strMaxSize) ? ini_get('post_max_size') : $strMaxSize;
+	public function setMaxSize($strMaxSize=null){
+		$post_max_size = ini_get('post_max_size');
+		$strMaxSize = is_null($strMaxSize) ? $post_max_size : $strMaxSize;
 		$this->maxSize = $strMaxSize;
 	}
-	public function getMaxSize()
-	{
+	//-------------------------------------------------------------------------------------------
+	public function getMaxSize(){
 		return $this->maxSize;
 	}
-	public function validate()
-	{
-		if( parent::validate())
-		{
+	//-------------------------------------------------------------------------------------------
+	public function validate() {
+		if( parent::validate()) {
 			if( isset($_POST[$this->getId().'_size'])) {
 				$maxSize = preg_replace('[^0-9]','',$this->getMaxSize());
 				if( strpos(strtoupper($this->getMaxSize()),'M')!==false ) {
@@ -117,14 +115,11 @@ class TFile extends TEdit
 					$this->setMaxSize($maxSize.'Kb');
 				}
 				$maxSize *= (int)$fator;
-				if( (int)$_POST[$this->getId().'_size'] > (int)$maxSize)
-				{
+				if( (int)$_POST[$this->getId().'_size'] > (int)$maxSize) {
 					$this->addError('Tamanho máximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
 					$this->clear();
 					$this->setCss('border','1px solid #ff0000');
-				}
-				else
-				{
+				} else {
 					// validar extensão
 					if( $this->getAllowedFileTypes() )
 					{
