@@ -138,7 +138,7 @@ class TFormCreate {
 	private function addBasicaFields() {
 		$this->addBlankLine();
 		$this->addBlankLine();
-		$this->addLine('$frm->addHiddenField( $primaryKey ); // coluna chave da tabela');
+		$this->addLine('$frm->addHiddenField( $primaryKey );   // coluna chave da tabela');
 		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
 			foreach($this->listColumnsName as $key=>$value){
 				$this->addLine('$frm->addTextField(\''.$value.'\', \''.$value.'\',50,true);');
@@ -146,39 +146,51 @@ class TFormCreate {
 		}		
 	}
 	//--------------------------------------------------------------------------------------
+	private function addBasicaViewController_salvar() {
+	    $this->addLine(TAB.'case \'Salvar\':');
+	    $this->addLine(TAB.TAB.'if ( $frm->validate() ) {');
+	    $this->addLine(TAB.TAB.TAB.'$vo = new '.$this->voTableRef.'();');
+	    $this->addLine(TAB.TAB.TAB.'$frm->setVo( $vo );');
+	    $this->addLine(TAB.TAB.TAB.'$resultado = '.$this->daoTableRef.'::insert( $vo );');
+	    $this->addLine(TAB.TAB.TAB.'if($resultado==1) {');
+	    $this->addLine(TAB.TAB.TAB.TAB.'$frm->setMessage(\'Registro gravado com sucesso!!!\');');
+	    $this->addLine(TAB.TAB.TAB.TAB.'$frm->clearFields();');
+	    $this->addLine(TAB.TAB.TAB.'}else{');
+	    $this->addLine(TAB.TAB.TAB.TAB.'$frm->setMessage($resultado);');
+	    $this->addLine(TAB.TAB.TAB.'}');
+	    $this->addLine(TAB.TAB.'}');
+	    $this->addLine(TAB.'break;');
+	}
+	//--------------------------------------------------------------------------------------
+	private function addBasicaViewController_limpar() {
+	    $this->addLine();
+	    $this->addLine(TAB.'case \'Limpar\':');
+	    $this->addLine(TAB.TAB.'$frm->clearFields();');
+	    $this->addLine(TAB.'break;');
+	}
+	//--------------------------------------------------------------------------------------
+	private function addBasicaViewController_gdExcluir() {
+	    $this->addLine();
+	    $this->addLine(TAB.'case \'gd_excluir\':');
+	    $this->addLine(TAB.TAB.'$id = $frm->get( $primaryKey ) ;');
+	    $this->addLine(TAB.TAB.'$resultado = '.$this->daoTableRef.'::delete( $id );;');
+	    $this->addLine(TAB.TAB.'if($resultado==1) {');
+	    $this->addLine(TAB.TAB.TAB.'$frm->setMessage(\'Registro excluido com sucesso!!!\');');
+	    $this->addLine(TAB.TAB.TAB.'$frm->clearFields();');
+	    $this->addLine(TAB.TAB.'}else{');
+	    $this->addLine(TAB.TAB.TAB.'$frm->clearFields();');
+	    $this->addLine(TAB.TAB.TAB.'$frm->setMessage($resultado);');
+	    $this->addLine(TAB.TAB.'}');
+	    $this->addLine(TAB.'break;');
+	}
+	//--------------------------------------------------------------------------------------
 	private function addBasicaViewController() {
 		$this->addBlankLine();
 		$this->addLine('$acao = isset($acao) ? $acao : null;');
 		$this->addLine('switch( $acao ) {');
-		$this->addLine(TAB.'case \'Salvar\':');
-		$this->addLine(TAB.TAB.'if ( $frm->validate() ) {');
-		$this->addLine(TAB.TAB.TAB.'$vo = new '.$this->voTableRef.'();');
-		$this->addLine(TAB.TAB.TAB.'$frm->setVo( $vo );');
-		$this->addLine(TAB.TAB.TAB.'$resultado = '.$this->daoTableRef.'::insert( $vo );');
-		$this->addLine(TAB.TAB.TAB.'if($resultado==1) {');
-		$this->addLine(TAB.TAB.TAB.TAB.'$frm->setMessage(\'Registro gravado com sucesso!!!\');');
-		$this->addLine(TAB.TAB.TAB.TAB.'$frm->clearFields();');
-		$this->addLine(TAB.TAB.TAB.'}else{');
-		$this->addLine(TAB.TAB.TAB.TAB.'$frm->setMessage($resultado);');
-		$this->addLine(TAB.TAB.TAB.'}');
-		$this->addLine(TAB.TAB.'}');
-		$this->addLine(TAB.'break;');
-		$this->addLine();
-		$this->addLine(TAB.'case \'Limpar\':');
-		$this->addLine(TAB.TAB.'$frm->clearFields();');
-		$this->addLine(TAB.'break;');
-		$this->addLine();
-		$this->addLine(TAB.'case \'gd_excluir\':');
-		$this->addLine(TAB.TAB.'$id = $frm->get( $primaryKey ) ;');
-		$this->addLine(TAB.TAB.'$resultado = '.$this->daoTableRef.'::delete( $id );;');
-		$this->addLine(TAB.TAB.'if($resultado==1) {');
-		$this->addLine(TAB.TAB.TAB.'$frm->setMessage(\'Registro excluido com sucesso!!!\');');
-		$this->addLine(TAB.TAB.TAB.'$frm->clearFields();');
-		$this->addLine(TAB.TAB.'}else{');
-		$this->addLine(TAB.TAB.TAB.'$frm->clearFields();');
-		$this->addLine(TAB.TAB.TAB.'$frm->setMessage($resultado);');
-		$this->addLine(TAB.TAB.'}');		
-		$this->addLine(TAB.'break;');		
+		$this->addBasicaViewController_salvar();
+		$this->addBasicaViewController_limpar();
+		$this->addBasicaViewController_gdExcluir();
 		$this->addLine('}');
 	}
 	//--------------------------------------------------------------------------------------
@@ -219,13 +231,50 @@ class TFormCreate {
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_init() {
+	    $this->addLine('function init() {');
+	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\',{"whereGrid":""},true);');
+	    $this->addLine('}');
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_whereClauses() {
+	    $this->addLine('function whereClauses(whereGrid,attribute,isTrue,isFalse) {');
+	    $this->addLine(TAB.'var retorno = whereGrid;');
+	    $this->addLine(TAB.'if(attribute != null){');
+	    $this->addLine(TAB.TAB.'if(attribute != 0){');
+	    $this->addLine(TAB.TAB.TAB.'retorno = retorno+isTrue;');
+	    $this->addLine(TAB.TAB.'}');
+	    $this->addLine(TAB.'}else{');
+	    $this->addLine(TAB.TAB.'retorno = retorno+isFalse;');
+	    $this->addLine(TAB.'}');
+	    $this->addLine('}');
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_buscar_columnsGrid($qtdTab) {
+	    if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+	        foreach($this->listColumnsName as $key=>$value){
+	            $this->addLine($qtdTab.'var '.$value.' = jQuery("#'.$value.'").val();');
+	            $this->addLine($qtdTab.'whereGrid = whereClauses(whereGrid, '.$value.'," AND upper('.$value.') like \'%"+'.$value.'+"%\'",\'\');');
+	        }
+	    }
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_buscar() {
+	    $this->addLine('function buscar() {');
+	    $this->addLine(TAB.'var whereGrid = " 1=1 ";');
+	    $this->addGridPagination_jsScript_buscar_columnsGrid(TAB);
+	    $this->addLine(TAB.'jQuery("#whereGrid").val(whereGrid);');
+	    $this->addLine(TAB.'init();');
+	    $this->addLine('}');
+	}
+	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
-	    $this->addLine('function init() {');
-	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\');');
-	    $this->addLine('}');
+	    $this->addGridPagination_jsScript_init();
+	    $this->addGridPagination_jsScript_whereClauses();
+	    $this->addGridPagination_jsScript_buscar();
 	    $this->addLine('</script>');
-	}	
+	}
 	//--------------------------------------------------------------------------------------
 	public function addGrid() {
 	    
@@ -237,12 +286,13 @@ class TFormCreate {
 	    }else{
 	    	$this->addLine('if( isset( $_REQUEST[\'ajax\'] )  && $_REQUEST[\'ajax\'] ) {');
 	    	$this->addLine(TAB.'$maxRows = ROWS_PER_PAGE;');
-	    	if($this->gridType == GRID_SQL_PAGINATION){
+	    	$this->addLine(TAB.'$whereGrid = $frm->get(\'whereGrid\');');
+	    	if($this->gridType == GRID_SQL_PAGINATION){	    	    
 	    		$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
-	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllPagination( $primaryKey, null, $page,  $maxRows);');
-	    		$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount();');
+	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);');
+	    		$this->addLine(TAB.'$realTotalRowsSqlPaginator = '.$this->daoTableRef.'::selectCount( $whereGrid );');
 	    	}else if($this->gridType == GRID_SCREEN_PAGINATION){
-	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAll( $primaryKey);');
+	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAll( $primaryKey, $whereGrid );');
 	    	}
 	    	$this->addLine(TAB.$this->getMixUpdateFields());
 	    	$this->addLine(TAB.'$gride = new TGrid( \'gd\'                        // id do gride');
@@ -272,16 +322,41 @@ class TFormCreate {
 	    }
 	}
 	//--------------------------------------------------------------------------------------
+	public function addVoIssetOrZero() {
+		$this->addLine('function voIssetOrZero($attribute,$isTrue,$isFalse){');
+		$this->addLine(TAB.'$retorno = $isFalse;');
+		$this->addLine(TAB.'if(isset($attribute) && ($attribute<>\'\') ){');
+		$this->addLine(TAB.TAB.'if( $attribute<>\'0\' ){');
+		$this->addLine(TAB.TAB.TAB.'$retorno = $isTrue;');
+		$this->addLine(TAB.TAB.'}');
+		$this->addLine(TAB.'}');
+		$this->addLine(TAB.'return $retorno;');
+		$this->addLine('}');
+	}
+	//--------------------------------------------------------------------------------------
 	public function showForm($print=false) {
 		$this->lines=null;
-        $this->addLine('<?php');
+        $this->addLine('<?php');        
+        if($this->gridType == GRID_SIMPLE){
+        	$this->addVoIssetOrZero();
+        	$this->addBlankLine();
+        	$this->addLine('$whereGrid = \' 1=1 \';');
+        }
         $this->addLine('$primaryKey = \''.$this->primaryKeyTable.'\';');
         $this->addLine('$frm = new TForm(\''.$this->formTitle.'\',600);');
 		$this->addLine('$frm->setFlat(true);');
 		$this->addLine('$frm->setMaximize(true);');
+		if($this->gridType != GRID_SIMPLE){
+			$this->addLine('$frm->addHiddenField( \'whereGrid\' ); // campo para busca');
+		}
 		$this->addBasicaFields();
 		$this->addBlankLine();
-		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, true, false);');
+		if($this->gridType == GRID_SIMPLE){
+		    $this->addLine('$frm->addButton(\'Buscar\', null, \'Buscar\', null, null, true, false);');
+		}else{
+		    $this->addLine('$frm->addButton(\'Buscar\', null, \'btnBuscar\', \'buscar()\', null, true, false);');
+		}
+		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, false, false);');
 		$this->addLine('$frm->addButton(\'Limpar\', null, \'Limpar\', null, null, false, false);');		
 		$this->addBasicaViewController();
 		$this->addGrid();
