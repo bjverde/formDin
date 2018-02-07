@@ -5112,9 +5112,9 @@ class TForm Extends TBox
 	 * definir o parametro boolLabelAbove do botão para true tambem.
 	 *
 	 * @param mixed   $mixValue
-	 * @param string  $strName
+	 * @param string  $strName    - Nome da ação com submit, ignorando strOnClick 
 	 * @param string  $strAction  - Nome da ação
-	 * @param string  $strOnClick
+	 * @param string  $strOnClick - Nome da função javascript
 	 * @param string  $strConfirmMessage
 	 * @param boolean $boolNewLine  - em nova linha
 	 * @param boolean $boolFooter   - mostrar no fim do form
@@ -5145,32 +5145,23 @@ class TForm Extends TBox
 		{
 			// passar o objeto e o nome do botão se for informado o nome de uma função para tratamento do click
 			$onClick = $strOnClick;
-			if( ( string ) $strOnClick != '' )
-			{
+			if( ( string ) $strOnClick != '' ) {
 				// retirar os parenteses do nome da função para poder adicionar os parametros padrão
-				if( $posParentese = strpos( $onClick, '(' ) )
-				{
+				if( $posParentese = strpos( $onClick, '(' ) ) {
 					$onClick = substr( $onClick, 0, $posParentese );
 				}
 			}
-			foreach( $mixValue as $k=>$value )
-			{
+			foreach( $mixValue as $k=>$value ) {
 				//$strName	= $this->removeIllegalChars($value).'_'.mt_rand(1, 100);
 				$strName = strtolower( $this->removeIllegalChars( $value ) );
 				$strValue = $value;
-				if( !$onClick )
-				{
-					if( $this->getFieldType() != 'form' )
-					{
+				if( !$onClick ) {
+					if( $this->getFieldType() != 'form' ) {
 						$strAction = $this->getId() . '_' . $value;
-					}
-					else
-					{
+					} else {
 						$strAction = $value;
 					}
-				}
-				else
-				{
+				} else {
 					$strAction = null;
 					$strOnClick = $onClick . '("' . $value . '",this)';
 				}
