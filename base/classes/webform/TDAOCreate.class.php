@@ -222,8 +222,9 @@ class TDAOCreate {
 	 * Create function for sql count rows of table
 	 **/
 	public function addSqlSelectCount() {
-		$this->addLine( TAB.'public static function selectCount(){');
+		$this->addLine( TAB.'public static function selectCount( $where=null ){');
 		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
+		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\')');
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
 		$this->addLine( TAB.'}');

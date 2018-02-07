@@ -151,7 +151,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     	
     	$resultArray = $tDAOCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 5, $size);
+    	$this->assertEquals( 6, $size);
     }
 
     public function testAddSqlSelectById_sizeArray(){
