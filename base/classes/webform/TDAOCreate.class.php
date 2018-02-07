@@ -224,7 +224,7 @@ class TDAOCreate {
 	public function addSqlSelectCount() {
 		$this->addLine( TAB.'public static function selectCount( $where=null ){');
 		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
-		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\')');
+		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\');');
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
 		$this->addLine( TAB.'}');
@@ -256,9 +256,8 @@ class TDAOCreate {
 	    $this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 	    $this->addLine( TAB.TAB.'return $result;');
 	    $this->addLine( TAB.'}');
-	}
-	
-	
+	}	
+	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql select all with Pagination
 	 **/
@@ -307,8 +306,7 @@ class TDAOCreate {
 	    //$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values (?'.str_repeat(',?',count($this->getColumns())-1 ).')\', $values );');
 	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values ('.$this->getParams().')\', $values );');
 	    $this->addLine(TAB.'}');
-	}
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql update
@@ -337,8 +335,7 @@ class TDAOCreate {
 	    $param = $this->databaseManagementSystem == DBMS_POSTGRES ? '$'.($count+1) : '?';
 	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'where '.$this->keyColumnName.' = '.$param.'\',$values);');
 	    $this->addLine(TAB.'}');
-	}
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql delete
@@ -349,7 +346,7 @@ class TDAOCreate {
 		$this->addLine( TAB.TAB.'return self::executeSql(\'delete from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
 		$this->addLine( TAB.'}');
 	}
-	
+	//--------------------------------------------------------------------------------------
 	/**
 	 * No PHP 7.1 classes com construtores ficou deprecated
 	 */
@@ -358,8 +355,7 @@ class TDAOCreate {
 	        $this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
 	        $this->addLine(TAB.'}');
 	    }
-	}
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	public function showDAO($print=false) {
 		$this->lines=null;
@@ -383,6 +379,7 @@ class TDAOCreate {
 		// fim select
 
 		if( $this->getWithSqlPagination() == true ){
+		    $this->addLine();
 		    $this->addSqlSelectAllPagination();
 		}
 		
