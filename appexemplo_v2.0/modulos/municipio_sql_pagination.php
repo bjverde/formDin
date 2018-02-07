@@ -8,9 +8,9 @@ $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addHiddenField( 'whereGrid');
 
 $dadosUf = UfDAO::selectAll('NOM_UF');
-$frm->addSelectField('COD_UF','Estado:',true,$dadosUf);
+$frm->addSelectField('COD_UF','Estado:',true,$dadosUf,null,null,null,null,null,null,'-- selecione um item --',0);
 $frm->addTextField('NOM_MUNICIPIO', 'Nome município:', 50, true);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true,null,null,null,null,null,'-- selecione um item --',0);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -81,14 +81,30 @@ $frm->show();
 ?>
 <script>
 function init() {
-	fwGetGrid("municipio_sql_pagination.php",'gride');
+	//fwGetGrid("municipio_sql_pagination.php",'gride');
+	fwGetGrid("municipio_sql_pagination.php",'gride',{"whereGrid":""},true);
+}
+function whereClauses(whereGrid,attribute,isTrue,isFalse) {
+	var retorno = whereGrid;
+	if(attribute != null){
+		if(attribute != 0){
+			retorno = retorno+isTrue;
+		}
+	}else{
+		retorno = retorno+isFalse;
+	}
+	return retorno;
 }
 function buscar() {
 	var cod_uf = jQuery("#COD_UF").val();
+	var nom_municipio = jQuery("#NOM_MUNICIPIO").val();
+	var sit_ativo = jQuery("#SIT_ATIVO").val();
 	var whereGrid = ' 1=1 ';
-	whereGrid = whereGrid+'AND COD_UF='+cod_uf;
+	whereGrid = whereClauses(whereGrid,cod_uf,' AND COD_UF='+cod_uf,'');
+	whereGrid = whereClauses(whereGrid,nom_municipio," AND upper(nom_municipio) like '%"+nom_municipio+"%'",'');
+	whereGrid = whereClauses(whereGrid,sit_ativo," AND sit_ativo='"+sit_ativo+"'",'');
 	jQuery("#whereGrid").val(whereGrid);
-	fwGetGrid("municipio_sql_pagination.php",'gride',{"whereGrid":""},true);
 	//alert(whereGrid);
+	init();	
 }
 </script>
