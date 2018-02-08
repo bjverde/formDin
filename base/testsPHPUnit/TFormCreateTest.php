@@ -245,7 +245,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
         $this->tFormCreate->addGridPagination_jsScript_whereClauses();
         $resultArray = $this->tFormCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 10, $size);
+        $this->assertEquals( 11, $size);
     }
     //----------------------------------------------------------
     /**
@@ -276,7 +276,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 54, $size);
+    	$this->assertEquals( 55, $size);
     }
     //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
@@ -287,6 +287,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 57, $size);
+    	$this->assertEquals( 58, $size);
     }
 }

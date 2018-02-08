@@ -247,6 +247,7 @@ class TFormCreate {
 	    $this->addLine(TAB.'}else{');
 	    $this->addLine(TAB.TAB.'retorno = retorno+isFalse;');
 	    $this->addLine(TAB.'}');
+	    $this->addLine(TAB.'return retorno;');
 	    $this->addLine('}');
 	}
 	//--------------------------------------------------------------------------------------
