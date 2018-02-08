@@ -66,7 +66,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
-* [4.1.3 - 03/02/2018 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
+* [4.1.4 - 03/02/2018 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
    * :hammer: Compativel com PHP 7.1.9.
    * :bug: Correção dos código de exemplo
 * [4.1.3 - 10/11/2017 tag v4.1.3](https://github.com/bjverde/formDin/releases/tag/v4.1.3)
