@@ -115,7 +115,7 @@ $menu->add('4',null,'Mensagens e Ajuda', null, null, '../../base/imagens/feedbac
 		$menu->add('412','41','Caixa de Confirmação','view/messages/exe_confirmDialog.php');
 		$menu->add('413','41','Caixa de Confirmação 2','view/messages/exe_confirm_dialog.php');
 	$menu->add('42','4','Ajuda');
-		$menu->add('421','42','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado');
+	    $menu->add('421','42','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado', '../../base/imagens/icon_help.png');
 		$menu->add('422','42','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');
 		$menu->add('423','42','Ajuda On-line (sqlite) - ERRO','exe_help_online_1.php');
 
