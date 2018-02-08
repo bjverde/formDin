@@ -88,4 +88,5 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
    * :hammer: Sistema de exemplos 2.5 completamente funcional com auteticação e perfis de acesso.
    * :bug: Correção de diversos bugs para tornar compativel com PHP 5.6.30
    * 304 commits de alterações
-* 4.0.0 - Versão orignal, Brach copyLEB 
+* [4.0.0 - 22/09/2017 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
+   * Versão orignal, Brach copyLEB 
