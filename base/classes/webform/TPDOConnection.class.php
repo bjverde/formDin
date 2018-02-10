@@ -499,6 +499,16 @@ class TPDOConnection {
 			        }else {
 			            return null;
 			        }
+			    // Para stored procedure do MySQL
+			    }else if( preg_match( '/^call/i', $sql ) > 0  ){
+			        $res = $stmt->fetchAll( $fetchMode );
+			        $res = self::processResult( $res, $fetchMode, $boolUtfDecode );
+			        
+			        if ( is_array( $res ) || is_object( $res ) ){
+			            return $res;
+			        }else {
+			            return null;
+			        }
 			    }
 			}
 			return $result;
