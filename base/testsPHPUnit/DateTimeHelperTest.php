@@ -1,6 +1,4 @@
 <?php
-use base\classes\helpers\DateTimeHelper;
-
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
@@ -47,6 +45,20 @@ require_once '../classes/helpers/DateTimeHelper.class.php';
  */
 class DateTimeHelperTest extends PHPUnit_Framework_TestCase {
 
+    public function testDate_null() {
+        $esperado = null;
+        $estrada = null;
+        $retorno = DateTimeHelper::date2Mysql($estrada);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDate_white() {
+        $esperado = null;
+        $estrada = '';
+        $retorno = DateTimeHelper::date2Mysql($estrada);
+        $this->assertEquals($esperado, $retorno);
+    }    
+    
     public function testDate_01() {
         $esperado = '2019-10-02';
         $estrada = '02/10/2019';
@@ -55,8 +67,8 @@ class DateTimeHelperTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testDate_02() {
-        $esperado = '1900-10-02';
-        $estrada = '02/10/1900';
+        $esperado = '1900-01-02';
+        $estrada = '02/01/1900';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }

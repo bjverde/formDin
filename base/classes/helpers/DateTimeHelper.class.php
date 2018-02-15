@@ -38,7 +38,6 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-namespace base\classes\helpers;
 
 /**
  * Classe que faz varias transformações de data e hora
@@ -52,10 +51,14 @@ class DateTimeHelper {
      * @return string
      */
     public static function date2Mysql($dateSql){
-        $ano= substr($dateSql, 6);
-        $mes= substr($dateSql, 3,-5);
-        $dia= substr($dateSql, 0,-8);
-        return $ano."-".$mes."-".$dia;
+        $retorno = null;
+        if(isset($dateSql) && ($dateSql<>'') ){
+            $ano= substr($dateSql, 6);
+            $mes= substr($dateSql, 3,-5);
+            $dia= substr($dateSql, 0,-8);
+            $retorno = $ano."-".$mes."-".$dia;
+        }
+        return $retorno;
     }
     
 }
