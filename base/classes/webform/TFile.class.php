@@ -100,6 +100,7 @@ class TFile extends TEdit {
     //-------------------------------------------------------------------------------------------
     public function setMaxSizeKb($strMaxSize=null){
         $this->setMaxSize($strMaxSize);
+        
         $maxSize = preg_replace('/[^0-9]/','',$this->getMaxSize());
         $fator = null;
         $sizeKilbytes = 1024;
@@ -116,6 +117,7 @@ class TFile extends TEdit {
             $fator = $sizeKilbytes;
             $this->setMaxSize($maxSize.'Kb');
         }
+        
         $maxSize = $maxSize*$fator;
         $this->maxSizeKb = $maxSize;
     }
