@@ -60,14 +60,21 @@ $menu->add('13','1','Campo Coord GMS');
 $menu->add('14','1','Campo Select','view/fields/exe_SelectField.php');
 $menu->add('15','1','Campo Radio','view/fields/exe_RadioField.php');
 $menu->add('16','1','Campo Check','view/fields/exe_CheckField.php');
-$menu->add('17','1','Campo Arquivo');
-	$menu->add('171','17','Assincrono','view/fields/exe_FileAsync.php');
-	$menu->add('172','17','Normal','view/fields/exe_TFile.php');
-	$menu->add('173','17','TAssincrono','view/fields/exe_TFileAsync.php');
+$menu->add('17','1','Campo Arquivo ou Blob');
+    $menu->add('171','17','Campo Blob'	);
+        $menu->add('1171','171','Campo Blob Salvo no Banco'		,'view/fields/exe_fwShowBlob.php');
+        $menu->add('1172','171','Campo Blob Salvo no Disco'		,'view/fields/exe_fwShowBlobDisco.php');
+    $menu->add('172','17','Campo Arquivo simples');
+       $menu->add('1721','172','Assincrono','view/fields/exe_FileAsync.php');
+	   $menu->add('1722','172','Normal','view/fields/exe_TFile.php');
+	   $menu->add('1723','172','TAssincrono','view/fields/exe_TFileAsync.php');
+
+
+	
 $menu->add('18','1','Campo Numérico','view/fields/exe_NumberField.php');
 $menu->add('19','1','Campo Brasil');
 	$menu->add('191','19','Campo CEP'	,'view/fields/exe_CepField.php');
-	$menu->add('292','19','Campo Telefone'	,'view/fields/exe_FoneField.php');
+	$menu->add('192','19','Campo Telefone'	,'view/fields/exe_FoneField.php');
 	$menu->add('193','19','Campo Cpf/Cnpj'	,'view/fields/exe_campo_cpf_cnpj.php');
 $menu->add('110','1','Campos Data e hora');
 	$menu->add('1101','110','Campo Data' ,'view/fields/exe_DateField.php');
@@ -78,9 +85,7 @@ $menu->add('111','1','Campo Select Diretorio/Pasta'	,'view/fields/exe_OpenDirFie
 $menu->add('115','1','Campo Senha'	,'view/fields/exe_TPasswordField.php');
 
 $menu->add('117','1','Campo Captcha'	,'view/fields/exe_TCaptchaField.php');
-$menu->add('118','1','Campo Blob'	);
-	$menu->add('1181','118','Campo Blob Salvo no Banco'		,'view/fields/exe_fwShowBlob.php');
-	$menu->add('1182','118','Campo Blob Salvo no Disco'		,'view/fields/exe_fwShowBlobDisco.php');
+
 $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
 $menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
