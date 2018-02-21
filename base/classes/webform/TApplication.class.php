@@ -45,6 +45,9 @@ $currentl_dir = dirname ( __FILE__ );
 
 require_once ($currentl_dir . DS . '..' . DS . 'constants.php');
 
+$exeptions_dir = $currentl_dir . DS . '..' . DS . 'exeptions' . DS;
+require_once ($exeptions_dir . 'UploadException.class.php');
+
 $helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
 require_once ($helps_dir . 'ArrayHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');

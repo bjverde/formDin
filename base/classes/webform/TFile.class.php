@@ -43,6 +43,10 @@ class TFile extends TEdit {
     private $maxSize;
     private $maxSizeKb;
     private $allowedFileTypes;
+    private $msgUploadException;
+    
+    
+    
     public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null) {
         $intSize= is_null($intSize) ? 50 : $intSize;
         parent::__construct($strName,null,5000,$boolRequired,$intSize);
@@ -53,21 +57,12 @@ class TFile extends TEdit {
         $this->setAllowedFileTypes($strAllowedFileTypes);
         $this->addEvent('onchange','fwCampoArquivoChange(this)');
         // guardar os dados do arquivo temporário postado em campos ocultos
-        if(isset($_FILES[$this->getId()]))
-        {
-            if( isset( $_FILES[$this->getId()]['size'] ) > 0 && $_FILES[$this->getId()]['error'] == 0 )
-            {
-                $to = $this->getBase().'tmp/'.$_FILES[$this->getId()]['name'];
-                if( move_uploaded_file( $_FILES[$this->getId()]['tmp_name'],$to ) )
-                {
-                    // define os valores dos campos ocultos que serão adicionados ao form
-                    $_POST[$this->getId().'_temp'] 	= $to;
-                    $_POST[$this->getId().'_type'] 	= $_FILES[$this->getId()]['type'];
-                    $_POST[$this->getId().'_size'] 	= $_FILES[$this->getId()]['size'];
-                    $_POST[$this->getId().'_name']	= $_FILES[$this->getId()]['name'];
-                }
-            }
+        try {
+            $this->setPostFileInfo();
+        } catch (Exception $e) {
+            $this->setMsgUploadException($e->getMessage());
         }
+        
         $temp= new THidden($this->getId().'_temp');
         $this->setValue($temp->getValue());
         $btnClear = new TButton($this->getId().'_clear','Apagar',null,'fwLimparCampoAnexo(this,"'.$this->getId().'")',null,'lixeira.gif','lixeira_bw.gif');
@@ -86,6 +81,31 @@ class TFile extends TEdit {
         $this->add($size);
         $name= new THidden($this->getId().'_name');
         $this->add($name);
+    }
+    //-------------------------------------------------------------------------------------------
+    protected function setPostFileInfo(){
+        if(isset($_FILES[$this->getId()])) {
+            if( $_FILES[$this->getId()]['error'] == UPLOAD_ERR_OK ) {
+                $to = $this->getBase().'tmp/'.$_FILES[$this->getId()]['name'];
+                if( move_uploaded_file( $_FILES[$this->getId()]['tmp_name'],$to ) ) {
+                    // define os valores dos campos ocultos que serão adicionados ao form
+                    $_POST[$this->getId().'_temp'] 	= $to;
+                    $_POST[$this->getId().'_type'] 	= $_FILES[$this->getId()]['type'];
+                    $_POST[$this->getId().'_size'] 	= $_FILES[$this->getId()]['size'];
+                    $_POST[$this->getId().'_name']	= $_FILES[$this->getId()]['name'];
+                }
+            }else{
+                throw new UploadException($_FILES[$this->getId()]['error']);
+            }
+        }
+    }
+    //-------------------------------------------------------------------------------------------
+    public function getMsgUploadException() {
+        return $this->msgUploadException;
+    }
+    //-------------------------------------------------------------------------------------------
+    public function setMsgUploadException($msgUploadException) {
+        $this->msgUploadException = $msgUploadException;
     }
     //-------------------------------------------------------------------------------------------
     public function setMaxSize($strMaxSize=null){
@@ -128,19 +148,23 @@ class TFile extends TEdit {
     //-------------------------------------------------------------------------------------------
     public function validate() {
         if( parent::validate()) {
-            $fileSizeKb = PostHelper::get($this->getId().'_size');
-            if( $fileSizeKb ) {
-                $maxSize = $this->getMaxSizeKb();
-                if( (int)$fileSizeKb > (int)$maxSize) {
-                    $this->addError('Tamanho máximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
-                    $this->clear();
-                    $this->setCss('border','1px solid #ff0000');
-                } else {
-                    // validar extensão
-                    if( $this->getAllowedFileTypes() ) {
-                        $aExtensions = explode(',',strtolower($this->getAllowedFileTypes()));
-                        if( array_search($this->getFileExtension(),$aExtensions)===false) {
-                            $this->addError('Arquivo inválido. Tipo(s) válido(s):'.$this->getAllowedFileTypes());
+            if($this->getMsgUploadException()){
+                $this->addError('ERRO interno: '.$this->getMsgUploadException());
+            }else{
+                $fileSizeKb = PostHelper::get($this->getId().'_size');
+                if( $fileSizeKb ) {
+                    $maxSize = $this->getMaxSizeKb();
+                    if( (int)$fileSizeKb > (int)$maxSize) {
+                        $this->addError('Tamanho máximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
+                        $this->clear();
+                        $this->setCss('border','1px solid #ff0000');
+                    } else {
+                        // validar extensão
+                        if( $this->getAllowedFileTypes() ) {
+                            $aExtensions = explode(',',strtolower($this->getAllowedFileTypes()));
+                            if( array_search($this->getFileExtension(),$aExtensions)===false) {
+                                $this->addError('Arquivo inválido. Tipo(s) válido(s):'.$this->getAllowedFileTypes());
+                            }
                         }
                     }
                 }
