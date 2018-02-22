@@ -44,7 +44,29 @@
  * @author reinaldo.junior        
  */
 class DateTimeHelper {
- 
+    const DEFAULT_TIME_ZONE = 'America/Sao_Paulo';
+    
+    /**
+     * Getter para criar uma instância de um objeto do tipo DateTime.
+     * @return DateTime
+     */
+    public static function getCurrentDateTime() {
+        $dateTime = new DateTime();
+        $dateTime->setTimezone(new DateTimeZone(self::DEFAULT_TIME_ZONE));
+        
+        return $dateTime;
+    }
+    
+    /**
+     *  Retorn Data e hora no formato 'Y-m-d H:i:s'
+     * @return string 'Y-m-d H:i:s'
+     */
+    public static function getNow() {
+        $dateTime = self::getCurrentDateTime();
+        $retorno = $dateTime->format('Y-m-d H:i:s');
+        return $retorno;
+    }    
+    
     /**
      * Converter data no formato dd/mm/yyyy para yyyy-mm-dd
      * @param string $dateSql
