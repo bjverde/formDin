@@ -42,7 +42,7 @@
 // ============= PROJECT CONSTANTS =================//
 
 if( !defined('ROWS_PER_PAGE') ){ define('ROWS_PER_PAGE',20); }
-if( !defined('ENCODINGS') ){ define('ENCODINGS','ISO-8859-1'); }
+if( !defined('ENCODINGS') ){ define('ENCODINGS','UTF-8'); }
 
 
 
