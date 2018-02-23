@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para criaÁ„o de Abas ( pagecontrol )
+* Classe para cria√ß√£o de Abas ( pagecontrol )
 *
 * Sintaxe para definir a aba ativa utilizando o $_POST
 *
@@ -61,11 +61,11 @@ class TPageControl extends TTable
 	private $columns;
 	private $labelsAlign;
 	/**
-	* classe para criaÁ„o de tab
+	* classe para cria√ß√£o de tab
 	*
 	* Widgh null para ficar com a largura do form
-	* Se for informado somente o nome da funÁ„o, sem os parentes, no paramentro onBeforeClick
-	* a funÁ„o receber· o rÛtulo da aba clicada,o nome do pagecontrol e o id da abaClicada. Se a funÁ„o retorna false
+	* Se for informado somente o nome da fun√ß√£o, sem os parentes, no paramentro onBeforeClick
+	* a fun√ß√£o receber√° o r√≥tulo da aba clicada,o nome do pagecontrol e o id da abaClicada. Se a fun√ß√£o retorna false
 	*
 	* @param string $strName
 	* @param string $strHeight
@@ -87,7 +87,7 @@ class TPageControl extends TTable
 	//----------------------------------------------------------------------------------------------
 	/**
 	* Adicionar aba ao pageControl
-	* boolDefaut - indica se a aba ser· a seleciona na criaÁ„o do formul„rio
+	* boolDefaut - indica se a aba ser√° a seleciona na cria√ß√£o do formul√£rio
 	* @param mixed $strLabel
 	* @param mixed $boolDefault
 	* @param mixed $boolVisible
@@ -131,7 +131,7 @@ class TPageControl extends TTable
 		return $page;
 	}
 	/**
-	* Habilitar/desabilitar a Aba mas n„o os campos
+	* Habilitar/desabilitar a Aba mas n√£o os campos
 	*
 	* @param mixed $boolNewValue
 	*/
@@ -155,7 +155,7 @@ class TPageControl extends TTable
 		}
 	}
 	/**
-	* Desabilitar a aba para n„o poder ser acessada
+	* Desabilitar a aba para n√£o poder ser acessada
 	*
 	* @param string $tabName
 	*/
@@ -168,7 +168,7 @@ class TPageControl extends TTable
 		}
 	}
 	/**
-	* Tornar a aba invisÌvel
+	* Tornar a aba invis√≠vel
 	*
 	* @param string $tabName
 	*/
@@ -182,7 +182,7 @@ class TPageControl extends TTable
 		}
 	}
 	/**
-	* Tornar a aba visÌvel
+	* Tornar a aba vis√≠vel
 	*
 	* @param string $tabName
 	*/
@@ -208,7 +208,7 @@ class TPageControl extends TTable
     	$this->setCss('width','auto');
     	$this->setCss('height','auto');
     	$this->setCss('border','1px solid silver');
-    	// se n„o especificar a largura, assumir 100 %
+    	// se n√£o especificar a largura, assumir 100 %
     	if(!$width)
     	{
 	    	$this->setCss('width','100%');
@@ -274,17 +274,17 @@ class TPageControl extends TTable
     	}
 		foreach( $this->pages as $name=>$page)
 		{
-			// configurar as p·ginas
+			// configurar as p√°ginas
 			$page->setCss('width',$width);
 			$page->setCss('height',$height);
 
-			// definir o alinhamento dos rÛtulos
+			// definir o alinhamento dos r√≥tulos
 			if( ! $page->getLabelsAlign() && $this->getLabelsAlign() )
 			{
 				$page->setLabelsAlign($this->getLabelsAlign());
 			}
 
-			// definir a cor de fundo da aba com a cor de fundo do pagecontrols se a aba n„o tiver cor prÛpria
+			// definir a cor de fundo da aba com a cor de fundo do pagecontrols se a aba n√£o tiver cor pr√≥pria
 			if( !$page->getCss('background-color'))
 			{
 				$page->setCss('background-color','transparent');
@@ -302,7 +302,7 @@ class TPageControl extends TTable
 			if( $this->getId().'_'.$page->getId() == $this->getActivePage())
 			{
 				$li->setProperty('class','activePageControl');
-				// mostrar o conte˙do da aba
+				// mostrar o conte√∫do da aba
 				//$page->setCss('display','block');
 				$page->setVisible(true);
 			}
@@ -342,7 +342,7 @@ class TPageControl extends TTable
 			$span->setCss('white-space','nowrap');
 			$span->setId($li->getId().'_span');
 			$span->add($page->getValue());
-			// se a pagina estiver desabilitada, n„o adicionar o evento onBeforeclick e alterar a cor da fonte para cinza
+			// se a pagina estiver desabilitada, n√£o adicionar o evento onBeforeclick e alterar a cor da fonte para cinza
 			$a->addEvent('onclick',$onBeforeClick.';fwSelecionarAba(this,"","'.$onAfterClick.'")');
 			if( !$page->getProperty('disabled') )
 			{
@@ -363,13 +363,13 @@ class TPageControl extends TTable
 	}
 	/**
 	* Define a aba inicial
-	* Por padr„o a aba postada sempre vir· selecionada.
+	* Por padr√£o a aba postada sempre vir√° selecionada.
 	* Para selecionar a aba ativa independente da aba postada
 	* passe true para boolIgnorePost
 	*
 	* @param string $strPageName
 	* @param bool $boolIgnorePost
-	* @example $pg->setActivePate('RelatÛrio',true);
+	* @example $pg->setActivePate('Relat√≥rio',true);
 	*
 	*/
 	public function setActivePage($strPageName=null,$boolIgnorePost=null)
@@ -398,7 +398,7 @@ class TPageControl extends TTable
 		return $this->activePage;
 	}
 	/**
-	 * Habilitar/Desabilitar a exibiÁ„o das orelhas
+	 * Habilitar/Desabilitar a exibi√ß√£o das orelhas
 	*/
 	public function setShowTabs($boolShow=null)
 	{
@@ -494,7 +494,7 @@ class TPageControl extends TTable
     	{
 			if(is_array($this->pages))
 			{
-				// adicionar as p·ginas ( elementos li )
+				// adicionar as p√°ginas ( elementos li )
 				forEach( $this->pages as $name=>$page)
 				{
 					if($field = $page->getField($strFieldName) )
@@ -516,7 +516,7 @@ class TPageControl extends TTable
     	return $this->focusField;
     }
 	/**
-	 * Desabilitar/Habilitar campos do formul·rio
+	 * Desabilitar/Habilitar campos do formul√°rio
 	 * Pode ser passado um campo ou varios separados por virgula,
 	 * tambem pode ser um array de campos
 	 *
@@ -531,7 +531,7 @@ class TPageControl extends TTable
 	{
 		if(is_array($this->getPages()))
 		{
-			// adicionar as p·ginas ( elementos li )
+			// adicionar as p√°ginas ( elementos li )
 			forEach( $this->pages as $name=>$page)
 			{
 				$page->disableFields($mixFields,$mixIgnoreFields,$boolNewValue);
@@ -543,7 +543,7 @@ class TPageControl extends TTable
 	{
 		if(is_array($this->getPages()))
 		{
-			// adicionar as p·ginas ( elementos li )
+			// adicionar as p√°ginas ( elementos li )
 			forEach( $this->pages as $name=>$page)
 			{
 				$page->clearFields($mixFields,$mixIgnoreFields,$boolNewValue);
@@ -570,7 +570,7 @@ class TPageControl extends TTable
 	{
 		if(is_array($this->getPages()))
 		{
-			// adicionar as p·ginas ( elementos li )
+			// adicionar as p√°ginas ( elementos li )
 			forEach( $this->pages as $name=>$page)
 			{
 				$page->deleteField($mixFields,$mixIgnoreFields);
@@ -596,7 +596,7 @@ class TPageControl extends TTable
 	{
 		if(is_array($this->getPages()))
 		{
-			// adicionar as p·ginas ( elementos li )
+			// adicionar as p√°ginas ( elementos li )
 			forEach( $this->pages as $name=>$page)
 			{
 				$this->disableTab($name);
@@ -655,7 +655,7 @@ class TPageControl extends TTable
 		$label=null;
 		if(is_array($this->getPages()))
 		{
-			// adicionar as p·ginas ( elementos li )
+			// adicionar as p√°ginas ( elementos li )
 			forEach( $this->pages as $name=>$page)
 			{
 				if( $label = $page->getLabel($strFieldName) )
@@ -667,9 +667,9 @@ class TPageControl extends TTable
 		return $label;
 	}
 		/**
-	* Define o alinhamento dos rÛtulos dos campos.
-	* Os valores v·lidos s„o:center,left ou right.
-	* O padr„o È left
+	* Define o alinhamento dos r√≥tulos dos campos.
+	* Os valores v√°lidos s√£o:center,left ou right.
+	* O padr√£o √© left
 	*
 	* @param string $strNewValue
 	*/

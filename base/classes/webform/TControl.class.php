@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 /**
@@ -93,7 +93,7 @@ abstract class TControl extends TElement
         if ( !$this->getEnabled() )
         { $this->setProperty( 'disabled', 'true' ); }
 
-        // como os campos desabilitados, n„o s„o postados,
+        // como os campos desabilitados, n√£o s√£o postados,
         // criar os campos ocultos para nao perder os valores quando o form for postado
         $disableHtml=null;
 
@@ -101,7 +101,7 @@ abstract class TControl extends TElement
         {
             if ( $this->getTagType() == 'img' )
             {
-            // ainda n„o tenho o que fazer com uma imagem desabilitada
+            // ainda n√£o tenho o que fazer com uma imagem desabilitada
             }
             else
             {
@@ -127,7 +127,7 @@ abstract class TControl extends TElement
                 $this->setEvent( null );
                 $value=$this->getValue();
 
-                // campo memo È uma tag textarea ent„o n„o pode ter um campo oculto relacionado a ele, basta colocar readonly
+                // campo memo √© uma tag textarea ent√£o n√£o pode ter um campo oculto relacionado a ele, basta colocar readonly
                 if ( $this->getFieldType() == 'memo' )
                 {
                     $this->setProperty( 'disabled', null );
@@ -141,7 +141,7 @@ abstract class TControl extends TElement
                     {
 			   			$h->setProperty('needed','true');
 					}
-					// se o campo estiver em um gride ele È um array ent„o fazer a jogada com o neme e id conforma abaixo
+					// se o campo estiver em um gride ele √© um array ent√£o fazer a jogada com o neme e id conforma abaixo
                     $h->setId( $this->getId() );
                     $this->setName( $this->getId() );
                     $h->clearCss();
@@ -173,7 +173,7 @@ abstract class TControl extends TElement
                 	if( $this->getTagType() != 'button' )
                 	{
 	                    $h=new THidden( $this->getName() );
-	                    // se o campo estiver em um gride ele È um array ent„o fazer a jogada com o neme e id conforma abaixo
+	                    // se o campo estiver em um gride ele √© um array ent√£o fazer a jogada com o neme e id conforma abaixo
 	                    $h->setId( $this->getId() );
 	                    $this->setName( $this->getId() );
 
@@ -285,7 +285,7 @@ abstract class TControl extends TElement
 
     //-------------------------------------------------------------------------
     /**
-    * Metodo adicionado apenas para n„o dar conflito com a funÁ„o de validaÁ„o do TForm
+    * Metodo adicionado apenas para n√£o dar conflito com a fun√ß√£o de valida√ß√£o do TForm
     *
     */
     public function getRequired()
@@ -344,11 +344,11 @@ abstract class TControl extends TElement
 
     //-----------------------------------------------------------------------------
     /**
-    * MÈtodo para criar ajuda on-line em um campo
+    * M√©todo para criar ajuda on-line em um campo
     * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
-    * se n„o for informado assume o id do campo.
-    * O arquivo dever· estar no diretÛrio ajuda/ na raiz da aplicaÁ„o.
-    * Poder ser informada tambem o endereÁo (url) da pagina de help
+    * se n√£o for informado assume o id do campo.
+    * O arquivo dever√° estar no diret√≥rio ajuda/ na raiz da aplica√ß√£o.
+    * Poder ser informada tambem o endere√ßo (url) da pagina de help
     * Exemplo: $nom->setHelpFile('nom_pessoa','Nome da Pessoa',200,500);
     * Exemplo: $nom->setHelpFile('http://localhost/sistema/texto_ajuda.html','Exemplo de help on-line',200,500);
     * @param mixed $strWindowHeader

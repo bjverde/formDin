@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 include_once( 'autoload_formdin.php');
@@ -70,7 +70,7 @@ final class TConnection
 			//die( $configFile);
 			if( ! file_exists( $configFile ) )
 			{
-				self::showExemple(array("Classe TConnection.class.php - Arquivo {$configFile} n„o encontrado!"));
+				self::showExemple(array("Classe TConnection.class.php - Arquivo {$configFile} n√£o encontrado!"));
 				return false;
 			}
 			try
@@ -133,7 +133,7 @@ final class TConnection
 			case 'sqlite':
 				if( !file_exists( $database ) )
 				{
-					$configErrors[] = 'Arquivo '.$database.' n„o encontrado!';
+					$configErrors[] = 'Arquivo '.$database.' n√£o encontrado!';
 				}
 				$dsn='sqlite:'.$database;
 			break;
@@ -158,7 +158,7 @@ final class TConnection
 					$port = '1433';
 				}
 				/**
-				 * Dica de Reinaldo A. Barr√™to Junior para utilizar o sql server no linux
+				 * Dica de Reinaldo A. Barr√É¬™to Junior para utilizar o sql server no linux
 				 * 
 				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
 				 * */
@@ -175,7 +175,7 @@ final class TConnection
 			break;
 			//----------------------------------------------------------
 			default:
-				$configErrors[] = 'Variavel $dbType n„o definida no arquivo de configuraÁ„o!';
+				$configErrors[] = 'Variavel $dbType n√£o definida no arquivo de configura√ß√£o!';
 		}
 
 		if( count( $configErrors ) > 0 )
@@ -184,8 +184,8 @@ final class TConnection
 		}
         if( !$dsn)
         {
-            //die('Tipo do banco de dados '.$dbType.' n„o reconhecido. Ex: postgres, mysql, sqlite, oracle.');
-			throw new Exception('Tipo do banco de dados '.$dbType.' n„o reconhecido. Ex: postgres, mysql, sqlite, oracle.');
+            //die('Tipo do banco de dados '.$dbType.' n√£o reconhecido. Ex: postgres, mysql, sqlite, oracle.');
+			throw new Exception('Tipo do banco de dados '.$dbType.' n√£o reconhecido. Ex: postgres, mysql, sqlite, oracle.');
         }
 		//print 'dns:'.$dsn.'<br>User:'.$username.'<br>Senha:'.$password.'<br>';
         //die();
@@ -249,7 +249,7 @@ final class TConnection
 		$msgErro =  implode('<br>',$arrErros);
 		$html='</pre><div style="padding:5px;border:1px solid red;background-color:lightyellow;width:400px;color:blue;overflow:auto;">';
 		$html.='<div style="border-bottom:1px solid blue;color:red;text-align:center;"><blink>'.$msgErro.'</blink></div>';
-		$html.='<center>Exemplo de configuraÁ„o para conex„o com banco ORACLE. Arquivo: conn_oracle.php</center><br>
+		$html.='<center>Exemplo de configura√ß√£o para conex√£o com banco ORACLE. Arquivo: conn_oracle.php</center><br>
                     $dbType = "oracle"<br>
 					$host = "192.168.1.140";<br>
 					$port = "1521";<br>
@@ -257,7 +257,7 @@ final class TConnection
 					$username = "root";<br>
 					$password = "123456";<br>
 					$utf8=0;<br><hr>
-				<center>Exemplo de configuraÁ„o para conex„o com banco MYSQL. Arquivo: conn_mysql.php</center><br>
+				<center>Exemplo de configura√ß√£o para conex√£o com banco MYSQL. Arquivo: conn_mysql.php</center><br>
 					$dbType = "mysql";<br>
 					$host = "192.168.1.140";<br>
 					$port = "3306";<br>
@@ -265,7 +265,7 @@ final class TConnection
 					$username = "root";<br>
 					$password = "";<br>
 					$utf8=1;<br><br><hr>
-				<center>Exemplo de configuraÁ„o para conex„o com banco POSTGRES. Arquivo: conn_postgres.php</center><br>
+				<center>Exemplo de configura√ß√£o para conex√£o com banco POSTGRES. Arquivo: conn_postgres.php</center><br>
                     $dbType = "postgres";<br>
 					$host = "192.168.1.140";<br>
 					$port = "5432";<br>
@@ -274,10 +274,10 @@ final class TConnection
 					$password = "123456";<br>
 					$utf8=1;<br>
                     schema   = sisteste<br<br><hr>
-				<center>Exemplo de configuraÁ„o para conex„o com banco SQLITE. Arquivo: conn_sqlite.php</center><br>
+				<center>Exemplo de configura√ß√£o para conex√£o com banco SQLITE. Arquivo: conn_sqlite.php</center><br>
                     dbtype="sqlite"<br>
 					database = "includes/exemplo.s3db"<hr>
-				<center>Exemplo de configuraÁ„o para conex„o com banco SQLSERVER. Arquivo: conn_sqlserver.php</center><br>
+				<center>Exemplo de configura√ß√£o para conex√£o com banco SQLSERVER. Arquivo: conn_sqlserver.php</center><br>
                     $dbType = "sqlserver";<br>
 					$host = "192.168.1.140";<br>
 					$port = "1433";<br>

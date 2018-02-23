@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -84,7 +84,7 @@ class TPDOConnection {
 			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			
 		} catch( PDOException $e ){
-			self::$error = utf8_encode( 'Erro de conex„o.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
+			self::$error = utf8_encode( 'Erro de conex√£o.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
 				. $e->getMessage() );
 			return false;
 		}
@@ -129,7 +129,7 @@ class TPDOConnection {
 			if ( !file_exists( $configFile ) ) {
 				$configFile = 'includes/config_conexao.php';
 
-                // procurar o arquivo padr„o de conex„o em atÈ 5 niveis acima
+                // procurar o arquivo padr√£o de conex√£o em at√© 5 niveis acima
                 for( $i = 1; $i < 6; $i++ ) {
                     if( file_exists( str_repeat( '../', $i ) . $configFile ) ) {
                         $configFile = str_repeat( '../', $i ) . $configFile;
@@ -147,7 +147,7 @@ class TPDOConnection {
 
 		if ( !file_exists( $configFile ) ) {
 			if ( $boolRequired ) {
-				$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} n„o encontrado!";
+				$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} n√£o encontrado!";
 				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}
 			return false;
@@ -155,7 +155,7 @@ class TPDOConnection {
 			require_once( $configFile );
 
 			if ( !defined( 'BANCO' ) ) {
-				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php n„o est· configurado corretamente! Definal o tipo de banco de dados';
+				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php n√£o est√° configurado corretamente! Definal o tipo de banco de dados';
 				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}else{
 				self::$banco = strtoupper( BANCO );
@@ -189,7 +189,7 @@ class TPDOConnection {
 
 			if ( USE_SESSION_LOGIN ) {
 				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
-					die ( 'Para utilizar usu·rio e senha do usu·rio logado,<br>defina as varÌaveis de sess„o:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
+					die ( 'Para utilizar usu√°rio e senha do usu√°rio logado,<br>defina as var√≠aveis de sess√£o:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
 				}
 				self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
 				self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
@@ -270,7 +270,7 @@ class TPDOConnection {
 					define( 'PORT', '1433' );
 				}
 				/**
-				 * Dica de Reinaldo A. BarrÍto Junior para utilizar o sql server no linux
+				 * Dica de Reinaldo A. Barr√™to Junior para utilizar o sql server no linux
 				 * 
 				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
 				 * */
@@ -310,7 +310,7 @@ class TPDOConnection {
 		$path = $homeUrl.$dataBaseName;
 		$file_exists = file_exists( $path );
 		if ( !$file_exists ) {
-			$configErrors[] = 'Arquivo ' . DATABASE . ' n„o encontrado!';
+			$configErrors[] = 'Arquivo ' . DATABASE . ' n√£o encontrado!';
 			self::showExemplo( self::$banco, $configErrors );
 		}
 	}
@@ -435,7 +435,7 @@ class TPDOConnection {
 		}
 		$result = null;
 
-		// n·s chamadas ajax, n„o precisa aplicar utf8
+		// n√°s chamadas ajax, n√£o precisa aplicar utf8
 		if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) )
 		{
 			if ( self::getUtfDecode() )
@@ -449,13 +449,13 @@ class TPDOConnection {
 		self::$lastParams = $arrParams;
 		self::$lastSql = $sql;
 
-		// verificar se a quantidade de parametros È igual a quantidade de variaveis
+		// verificar se a quantidade de parametros √© igual a quantidade de variaveis
 		if ( strpos( $sql, '?' ) > 0 && is_array( $arrParams ) && count( $arrParams ) > 0 ) {
 			$qtd1 = substr_count( $sql, '?' );
 			$qtd2 = count( $arrParams );
 
 			if ( $qtd1 != $qtd2 ) {
-				self::$error = 'Quantidade de parametros diferente da quantidade utilizada na instruÁ„o sql.';
+				self::$error = 'Quantidade de parametros diferente da quantidade utilizada na instru√ß√£o sql.';
 				self::showError();
 				return false;
 			}
@@ -695,7 +695,7 @@ class TPDOConnection {
 
 		if ( !file_exists( $base ) )
 		{
-			die ( 'pasta base/ n„o encontrada' );
+			die ( 'pasta base/ n√£o encontrada' );
 		}
 		$base = str_replace( 'base', '', $base );
 		$base = str_replace( '//', '/', $base );
@@ -715,7 +715,7 @@ class TPDOConnection {
 
 		switch( $banco ) {
 			case DBMS_ORACLE:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco ORACLE</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco ORACLE</center><br>
 					define('BANCO','ORACLE');<br>
 					define('HOST','192.168.0.132');<br>
 					define('PORT','1521');<br>
@@ -725,7 +725,7 @@ class TPDOConnection {
 				break;
 
 			case DBMS_MYSQL:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco MYSQL</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco MYSQL</center><br>
 					 define('BANCO','MYSQL');<br>
 					 define('HOST','192.168.0.132');<br>
 					 define('PORT','3306');<br>
@@ -735,7 +735,7 @@ class TPDOConnection {
 				break;
 
 			case DBMS_POSTGRES:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco POSTGRES</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco POSTGRES</center><br>
 					 define('BANCO','POSTGRES');<br>
 					 define('HOST','192.168.0.132');<br>
 					 define('PORT','5432');<br>
@@ -746,14 +746,14 @@ class TPDOConnection {
 				break;
 
 			case DBMS_SQLITE:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco SQLITE</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco SQLITE</center><br>
 					 define('BANCO','SQLITE');<br>					 
 					 define('DATABASE','includes/exemplo.s3db');<br>
 					 define('UTF8_DECODE',0);<br>";
 				break;
 
 			case DBMS_FIREBIRD:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco FIREBIRD</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco FIREBIRD</center><br>
 					 define('BANCO','FIREBIRD');<br>
 					 define('DATABASE','C://bd//DBTESTE.FDB');<br>;
 					 define('UTF8_DECODE',0);<br>
@@ -762,7 +762,7 @@ class TPDOConnection {
 				break;
 
 			case DBMS_SQLSERVER:
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco SQLSERVER</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco SQLSERVER</center><br>
 					 define('BANCO','SQLSERVER');<br>
 					 define('HOST','192.168.0.132');<br>
 					 define('PORT','1433');<br>
@@ -772,7 +772,7 @@ class TPDOConnection {
 				break;
 
 			case 'ACCESS':
-				$html .= "<center>Exemplo de configuraÁ„o para conex„o com banco ACCES</center><br>
+				$html .= "<center>Exemplo de configura√ß√£o para conex√£o com banco ACCES</center><br>
 					 define('DATABASE','C://bd//DBTESTE.MDB');<br>
 					 define('USUARIO','admin');<br>
 					 define('SENHA','123456');<br><br>";
@@ -790,12 +790,12 @@ class TPDOConnection {
         $res = self::executeSql( 'select 1 as teste' );
 		if ( $res )
 		{
-			echo '<H2>FORMDIN - Teste de conex„o com banco de dados.<br>Arquivo de ConfiguraÁ„o utilizado: '.self::$configFile.'<br></h2><h3>DNS:'.self::$dsn.'</h3><h1>Conex„o com ' . BANCO . ' est· Ok!!!!</h1>';
+			echo '<H2>FORMDIN - Teste de conex√£o com banco de dados.<br>Arquivo de Configura√ß√£o utilizado: '.self::$configFile.'<br></h2><h3>DNS:'.self::$dsn.'</h3><h1>Conex√£o com ' . BANCO . ' est√° Ok!!!!</h1>';
 		}
 		else
 		{
-			echo '<H2>FORMDIN - Teste de conex„o com banco de dados.<br>Arquivo de ConfiguraÁ„o utilizado: '.self::$configFile.'<br></h2></h3>';
-            echo '<br><h3>Falha na conex„o.<br/><br/>' . self::getError().'</h3>';
+			echo '<H2>FORMDIN - Teste de conex√£o com banco de dados.<br>Arquivo de Configura√ß√£o utilizado: '.self::$configFile.'<br></h2></h3>';
+            echo '<br><h3>Falha na conex√£o.<br/><br/>' . self::getError().'</h3>';
 		}
 
 		if ( is_null( $boolDie ) || $boolDie )
@@ -889,7 +889,7 @@ class TPDOConnection {
 	{
 		if ( $date )
 		{
-			// verificar se n„o est· invertida
+			// verificar se n√£o est√° invertida
 			if ( !preg_match( '/^[0-9]{4}/', $date ) )
 			{
 				// inverter campo data
@@ -931,7 +931,7 @@ class TPDOConnection {
 						$k = strtoupper( $k );
 					}
 
-					// transformar tags"< >" em codigo html para n„o serem interpretadas
+					// transformar tags"< >" em codigo html para n√£o serem interpretadas
 					if ( is_string( $v ) ) {
 						if ( $boolUtfDecode ) {
 							$res[ $k ][ $key ] = utf8_decode( $v );
@@ -953,7 +953,7 @@ class TPDOConnection {
 							if ( $delim ) {
 								$aDataHora = explode( ' ', $v );
 								$aDMY = explode( $delim, $aDataHora[ 0 ] );
-								// verificar se est· invertida
+								// verificar se est√° invertida
 								$delim = '/';
 
 								if ( preg_match( '/^[0-9]{4}/', $v ) ) {

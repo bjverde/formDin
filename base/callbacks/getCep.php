@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,33 +22,33 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /*
-MÛdulo utilizado para preenchimento dos campos de endereÁo utilizando consulta do cep, via
-ajax, ao serviÁo www.bucacep.com.br
+M√≥dulo utilizado para preenchimento dos campos de endere√ßo utilizando consulta do cep, via
+ajax, ao servi√ßo www.bucacep.com.br
 Data:22-03-2010
 atulizado em : 13-10-2017
 Teste: cep=74265010
 */
 error_reporting(0);
 /*
-//Utilizando o serviÁo: http://viavirtual.com.br/webservicecep.php
+//Utilizando o servi√ßo: http://viavirtual.com.br/webservicecep.php
 $consulta = 'http://viavirtual.com.br/webservicecep.php?cep='.$_GET['cep'];
 $consulta = file($consulta);
 $consulta = explode('||',$consulta[0]);
@@ -99,7 +99,7 @@ if(isset($_REQUEST['cep']))
 	    // utilizando curl()
 		$options = array(
 			CURLOPT_RETURNTRANSFER => true, // return web page
-			CURLOPT_HEADER => false, // donít return headers
+			CURLOPT_HEADER => false, // don‚Äôt return headers
 			CURLOPT_FOLLOWLOCATION => true, // follow redirects
 			CURLOPT_ENCODING => '', // handle all encodings
 			CURLOPT_USERAGENT => 'formdin', // who am i
@@ -131,7 +131,7 @@ if(isset($_REQUEST['cep']))
 	{
 		/**
 		* utilizando file_get_contents()
-		* n„o vai funcionar se a opÁ„o URL file-access estiver desabilitada no servidor.
+		* n√£o vai funcionar se a op√ß√£o URL file-access estiver desabilitada no servidor.
 		*/
 	    $cep = limpaCep($_REQUEST['cep']);
 		header ("content-type: text/xml; charset=UTF-8");
@@ -155,7 +155,7 @@ if(isset($_REQUEST['cep']))
 				<cep>71505030</cep>
 				<uf>DF</uf>
 				<cidade>Lago Norte</cidade>
-				<bairro>Setor de HabitaÁıes Individuais Norte</bairro>
+				<bairro>Setor de Habita√ß√µes Individuais Norte</bairro>
 				<tipo_logradouro>Conjunto</tipo_logradouro>
 				<logradouro>SHIN QI 1  3</logradouro>
 				<data>2010-06-12 00:18:12</data>

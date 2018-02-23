@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,32 +22,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm('Gerador de Objeto VO e DAO',550,600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
-$frm->addGroupField('gpxE','InformaÁıes do Esquema');
-    $frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informaÁ„o do esquema È nescessaria para as intruÁıes de banco. SE Marcar a opÁ„o SIM nas DAOs ser· incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
-    $frm->addSelectField('sit_const_scheme','Constante Esquema:',null,'0=N„o,1=Sim',null,null,'0');
+$frm->addGroupField('gpxE','Informa√ß√µes do Esquema');
+    $frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informa√ß√£o do esquema √© nescessaria para as intru√ß√µes de banco. SE Marcar a op√ß√£o SIM nas DAOs ser√° incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
+    $frm->addSelectField('sit_const_scheme','Constante Esquema:',null,'0=N√£o,1=Sim',null,null,'0');
 $frm->closeGroup();
-$frm->addGroupField('gpx2','InformaÁıes do VO e DAO');
-	$frm->addTextField('diretorio','DiretÛrio:',50,true);	
+$frm->addGroupField('gpx2','Informa√ß√µes do VO e DAO');
+	$frm->addTextField('diretorio','Diret√≥rio:',50,true);	
 	$frm->addTextField('tabela','Nome da Tabela:',30,true);
 	$frm->addTextField('coluna_chave','Nome da Coluna Chave:',30);
 	$frm->addMemoField('colunas','Colunas:',5000,true,45,20);
@@ -65,7 +65,7 @@ switch( $acao ) {
 			$diretorio = str_replace('//','/',$frm->get('diretorio').'/');
 			@mkdir($diretorio,"775",true);
 			if( ! file_exists( $diretorio ) ) {
-				$frm->setMessage('DiretÛrio '.$diretorio.' n„o existe!');
+				$frm->setMessage('Diret√≥rio '.$diretorio.' n√£o existe!');
 				break;
 			}
 			$txt = preg_replace('/'.chr(13).'/',',',$frm->get('colunas'));

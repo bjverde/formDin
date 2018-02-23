@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -59,9 +59,9 @@ class THtmlPage extends TElement
 	public function __construct() {
 		parent::__construct('DOCTYPE');
 
-		// elstilo da p·gina
+		// elstilo da p√°gina
         self::$style = new TElement('style');
-        // scripts da p·gina
+        // scripts da p√°gina
         self::$js = new TElement('script');
 		$this->objHtml 	= new TElement('html');
 		$this->objHtml->clearCss();
@@ -82,7 +82,7 @@ class THtmlPage extends TElement
 		$this->objHead->add($this->objTitle);
 	}
 	/**
-	* MÈtodo para gerar o html da p·gina
+	* M√©todo para gerar o html da p√°gina
 	* Se $print for false retorna o html se for true manda para o browser
 	*
 	* @param boolean $print
@@ -113,7 +113,7 @@ class THtmlPage extends TElement
 				{
 					//print 'tem um formulario';
 					$this->addJsCssFile($child->getJsCss());
-					// o form j· esta dentro de uma tag html, ent„o nao precisa imprimir a tag html nes os js e css dele
+					// o form j√° esta dentro de uma tag html, ent√£o nao precisa imprimir a tag html nes os js e css dele
 					if ( method_exists( $child, 'autoIncludeJsCss' ) )
 					{
 						$child->autoIncludeJsCss(false);
@@ -125,13 +125,13 @@ class THtmlPage extends TElement
 				}
 			}
 		}
-		// inserir no HEAD as funÁıes e comandos javascripts
+		// inserir no HEAD as fun√ß√µes e comandos javascripts
 		//if( $js = $this->getJavascript())
 		//{
 			/*$js = new TElement('script');
 			$js->clearCss();
 			$js->add('jQuery(document).ready(function() {');
-			$js->add(chr(9).'// javasripts que ser„o executados depois que o documento estiver 100% carregado.');
+			$js->add(chr(9).'// javasripts que ser√£o executados depois que o documento estiver 100% carregado.');
    			foreach($this->getJavascript() as $k=>$strJs)
 			{
 				$js->add(chr(9).str_replace(";;",";",$strJs.";"));
@@ -152,9 +152,9 @@ class THtmlPage extends TElement
 		}
 	}
 	/**
-	* MÈdoto para adicionar um arquivo javascript ou css na p·gina
-	* se o arquivo estiver na pasta padr„o base/js ou base/css
-	* n„o precisa informar o caminho
+	* M√©doto para adicionar um arquivo javascript ou css na p√°gina
+	* se o arquivo estiver na pasta padr√£o base/js ou base/css
+	* n√£o precisa informar o caminho
 	* Pode ser informado um array de arquivos no formato key/value
 	*
 	* @param string $mixJsCssFile
@@ -165,7 +165,7 @@ class THtmlPage extends TElement
 				$this->addJsCssFile($file);
 			}
 		} else if( is_string($mixJsCssFile) ) {
-			// ignorar se j· tiver adicionado
+			// ignorar se j√° tiver adicionado
 			$notArray = !is_array(self::$arrJsCssFile);
 			if( $notArray || !isset($mixJsCssFile) || array_search($mixJsCssFile,self::$arrJsCssFile,true) === false) {
 				self::$arrJsCssFile[] = $mixJsCssFile;
@@ -178,7 +178,7 @@ class THtmlPage extends TElement
 	}
 	
 	/**
-	* MÈtodo interno para gerar o codigo html de inserÁ„o do arquivo js
+	* M√©todo interno para gerar o codigo html de inser√ß√£o do arquivo js
 	*
 	*/
 	protected function includeJsCssFiles()
@@ -333,10 +333,10 @@ class THtmlPage extends TElement
 	}
 	//-----------------------------------------------------------------------------
 	/**
-	 * MÈtodo para adicionar funÁıes javascript na pagina que ser„o executadas
-	 * apÛs o mesmo tiver sido completamente carregado pelo browser
+	 * M√©todo para adicionar fun√ß√µes javascript na pagina que ser√£o executadas
+	 * ap√≥s o mesmo tiver sido completamente carregado pelo browser
 	 * O parametro, opcional, $intIndex deve ser utilizado para estabelecer a ordem de
-	 * execuÁ„o, os menores ser„o executados primeiro;
+	 * execu√ß√£o, os menores ser√£o executados primeiro;
 	 * ex:	addJavascript("alert('mensagem 1')");
 	 * 		addJavascript("alert('mensagem 2')",10);
 	 *
@@ -348,7 +348,7 @@ class THtmlPage extends TElement
 			self::$arrJsOnLoad[$intIndex] = $mixJs;
 		} else {
 			if( !is_array(self::$arrJsOnLoad) ) {
-				// comeÁar no indice 20 para poder inserir algum javascript que precise
+				// come√ßar no indice 20 para poder inserir algum javascript que precise
 				// ser executado primeiro
 				self::$arrJsOnLoad[20] = $mixJs;
 			} else {
@@ -369,7 +369,7 @@ class THtmlPage extends TElement
 		if(is_array(self::$arrJsOnLoad))
 		{
 			$arrTemp = (array)self::$arrJsOnLoad;
-			// colocar em ordem crescente de execuÁ„o
+			// colocar em ordem crescente de execu√ß√£o
 			ksort($arrTemp);
 			self::$js->setProperty('language','javascript');
 			self::$js->clearCss();
@@ -377,7 +377,7 @@ class THtmlPage extends TElement
 			{
 				self::$js->add('if( typeof jQuery=="function" ){try{ jQuery(document).ready(function() {');
 			}
-			self::$js->add(chr(9).'// javasripts que ser„o executados depois que o documento estiver 100% carregado.');
+			self::$js->add(chr(9).'// javasripts que ser√£o executados depois que o documento estiver 100% carregado.');
    			foreach($arrTemp as $k=>$mixJs)
 			{
 				if( is_object( $mixJs ) )
@@ -432,7 +432,7 @@ class THtmlPage extends TElement
 		return CHARSET;
 	}
 	/**
-	* @deprecated - substituido pelo mÈtodo getCharset();
+	* @deprecated - substituido pelo m√©todo getCharset();
 	* @codeCoverageIgnore
 	*/
 	public function getContentType() {
