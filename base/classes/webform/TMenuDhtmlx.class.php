@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Classe para gerar o xml para criaÁ„o de menus verticais utilizando a bibliotaca DHTMLX
+* Classe para gerar o xml para cria√ß√£o de menus verticais utilizando a bibliotaca DHTMLX
 * Link: http://www.dhtmlx.com/docs/products/docsExplorer/index.shtml?node=dhtmlxmenu
 * Ex:
 * 	$menu = new TMenuDhtmlx();
@@ -76,7 +76,7 @@ class TMenuDhtmlx
         $this->arrMenu=null;
     }
     /**
-    * MÈtodo para adicionar itens de menu
+    * M√©todo para adicionar itens de menu
     *
     * @param string $strId
     * @param string $strIdParent
@@ -107,7 +107,7 @@ class TMenuDhtmlx
 
         if( $menu->getIdParent() )
         {
-	        // verificar se o pai j· est· adicionado
+	        // verificar se o pai j√° est√° adicionado
 	        $objMenu = $this->getMenuById($strIdParent);
 	        if( ! is_null( $objMenu ) )
 	        {
@@ -123,7 +123,7 @@ class TMenuDhtmlx
 			$this->addMenu( $menu );
 		}
 		/*
-        // verificar se o pai j· est· adicionado
+        // verificar se o pai j√° est√° adicionado
         $objMenu = $this->getMenuById($strIdParent);
         if( ! is_null( $objMenu ) )
         {
@@ -132,7 +132,7 @@ class TMenuDhtmlx
         else
         {
         	$this->addOrphan($menu);
-        	// se tiver idparent ent„o È orf„o
+        	// se tiver idparent ent√£o √© orf√£o
             if( !$strIdParent )
             {
             	// item pai ou filho
@@ -263,7 +263,7 @@ class TMenuDhtmlx
 				}
             }
         }
-        // ver como resolver esse problema, se retornar o $o diretamente n„o funciona
+        // ver como resolver esse problema, se retornar o $o diretamente n√£o funciona
         $oo=$o;
         $o=null;
         return $oo;
@@ -321,7 +321,7 @@ class TMenuDhtmlx
     }
     function addOrphan(TMenuDhtmlx $menu)
     {
-        // se existir filhos orf„o, adicionar todos os filhos
+        // se existir filhos orf√£o, adicionar todos os filhos
         while( $objMenu = $this->getOrphanByIdParent($menu->getId()) )
         {
             $menu->addMenu($objMenu);
@@ -333,7 +333,7 @@ class TMenuDhtmlx
         }
         else
         {
-        	// adicionar a lista de orf„os
+        	// adicionar a lista de orf√£os
             $this->arrOrphan[] = $menu;
         }
     }
@@ -347,7 +347,7 @@ class TMenuDhtmlx
                 if( $objMenu->getIdParent() == $strId)
                 {
                     $result=$objMenu;
-                    // remover o registro Ûrf„o
+                    // remover o registro √≥rf√£o
                     array_splice($this->arrOrphan,$k,1);
                     break;
                 }
@@ -373,7 +373,7 @@ class TMenuDhtmlx
 				{
 					foreach($this->getOrphans() as $k=>$objMenu)
 					{
-						// n„o adicionar o item 2 vezes
+						// n√£o adicionar o item 2 vezes
 						if( ! $this->getMenuById( $objMenu->getId() ) )
 						{
 							$objMenu->setIdParent(0);
@@ -440,7 +440,7 @@ class TMenuDhtmlx
 	//--------------------------------------------------------------------------------------
 	function getXml($print=true)
 	{
-		// adicionar os itens orf„os
+		// adicionar os itens orf√£os
 		if($this->getOrphans())
 		{
 			foreach( $this->getOrphans() as $k=>$objMenu)
@@ -461,7 +461,7 @@ class TMenuDhtmlx
 		}
         /*
 		echo '<menu>
-		<item id="file" text="AdministraÁ„o">
+		<item id="file" text="Administra√ß√£o">
 			<item id="new" text="New" img="new.gif"/>
 			<item id="file_sep_1" type="separator"/>
 			<item id="open" text="Open" img="open.gif">

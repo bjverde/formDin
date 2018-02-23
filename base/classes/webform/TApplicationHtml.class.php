@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA 02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 include_once ('autoload_formdin.php');
@@ -63,7 +63,7 @@ class TApplicationHtml {
 	private $horizontalAlign;
 	private $verticalAlign;
 	/**
-	 * classe para criaÁ„o da aplicaÁ„o
+	 * classe para cria√ß√£o da aplica√ß√£o
 	 *
 	 * @param string $strTitle
 	 * @param string $strSubtitle
@@ -79,16 +79,16 @@ class TApplicationHtml {
 		$this->setSigla ( $strSigla );
 		$this->setShowMenu ( true );
 		$this->page = new THtmlPage ();
-		// arquivo css padr„o localizado na base base/css
+		// arquivo css padr√£o localizado na base base/css
 		$this->setCssFile ( 'app.css' );
 		// desabilitar tecla F5
 		$this->page->getBody ()->setProperty ( 'onKeyDown', "javascript:try{ return fwCancelRefresh(event); } catch(e){};" );
 		
 		$this->setBackgroundImage ( $this->page->getBase () . 'css/imagens/app/bg_listrado.jpg' );
 		
-		// biblioteca de funÁıes geral
+		// biblioteca de fun√ß√µes geral
 		$this->addIncludeFile ( $this->page->getBase () . 'includes/funcoes.inc' );
-		// posiÁ„o padr„o dos formul·rio - centralizado na tela
+		// posi√ß√£o padr√£o dos formul√°rio - centralizado na tela
 		$this->setHorizontalAlign ( 'center' );
 		$this->setVerticalAlign ( 'middle' );
 	}
@@ -134,7 +134,7 @@ class TApplicationHtml {
 		$this->strUnit = $strNewValue;
 	}
 	/**
-	 * Permite ocultar ou exibir o menu principal da aplicaÁ„o
+	 * Permite ocultar ou exibir o menu principal da aplica√ß√£o
 	 */
 	public function setShowMenu($boolNewValue = null) {
 		$boolNewValue = is_null ( $boolNewValue ) ? true : $boolNewValue;
@@ -144,19 +144,19 @@ class TApplicationHtml {
 		return $this->showMenu;
 	}
 	/**
-	 * Este mÈtodo inicializa a aplicaÁ„o e cria a interface da aplicaÁ„o.
-	 * Se for passado o modulo ele apenas inclui mÛdulo e sai funcionando como o modulo ler_modulo.php antigo
+	 * Este m√©todo inicializa a aplica√ß√£o e cria a interface da aplica√ß√£o.
+	 * Se for passado o modulo ele apenas inclui m√≥dulo e sai funcionando como o modulo ler_modulo.php antigo
 	 */
 	public function run() {
 		ini_set ( 'default_charset', ENCODINGS );
-		// n„o exibir as mensagens de E_NOTICE para evitar os aviso de redefiniÁ„o das constantes BANCO_USUARIO E BANCO_SENHA do config.php
+		// n√£o exibir as mensagens de E_NOTICE para evitar os aviso de redefini√ß√£o das constantes BANCO_USUARIO E BANCO_SENHA do config.php
 		error_reporting ( E_ALL & ~ E_NOTICE & ~ E_DEPRECATED );
 		$this->checkIfExistConfigFile ();
 		$this->defineConstantAplicativo ();
 		$this->includeFiles ();
 		$this->includesAppAction ();
 		// ******************************************************************************************
-		$this->processRequest (); // se existir modulo postado, a aplicaÁ„o termina nesta linha sen„o cria a tela b·sica do aplicativo
+		$this->processRequest (); // se existir modulo postado, a aplica√ß√£o termina nesta linha sen√£o cria a tela b√°sica do aplicativo
 		                         // ******************************************************************************************
 		if (! $this->getLoginFile () && ! $this->getMainMenuFile () && ! $this->getDefaultModule ()) {
 			$_SESSION [APLICATIVO] = null;
@@ -170,7 +170,7 @@ class TApplicationHtml {
 		$this->page->addJsCssFile ( $this->getCssFile () );
 		$this->page->addJsCssFile ( 'FormDin4.css' );
 		// $this->page->addJsCssFile('greybox/gb_styles.css');
-		$menuTheme = 'clear_silver'; // Estilos v·lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
+		$menuTheme = 'clear_silver'; // Estilos v√°lidos: standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver
 		if ($this->windowApp) {
 			$this->page->addJsCssFile ( 'prototype/themes/default.css' );
 			$this->page->addJsCssFile ( 'prototype/themes/lighting.css' );
@@ -188,7 +188,7 @@ class TApplicationHtml {
 			$this->page->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
 			$this->page->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
 			$this->page->addJsCssFile ( 'app_prototype.js' );
-			$this->page->addJsCssFile ( 'FormDin4.js' ); // necess·rio para funcionar o searchonline
+			$this->page->addJsCssFile ( 'FormDin4.js' ); // necess√°rio para funcionar o searchonline
 		} else {
 			// javascript
 			$this->page->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );
@@ -218,7 +218,7 @@ class TApplicationHtml {
 		
 		$this->page->addJsCssFile ( 'lazyload/lazyload-min.js' );
 		
-		// criar o layout da aplicaÁ„o
+		// criar o layout da aplica√ß√£o
 		$table = new TTable ();
 		$table->setId ( 'app_main_table' );
 		$table->clearCss ();
@@ -229,7 +229,7 @@ class TApplicationHtml {
 		$table->setProperty ( 'cellpadding', '0' );
 		$table->setProperty ( 'cellspacing', '0' );
 		
-		// criar o cabeÁalho da p·gina
+		// criar o cabe√ßalho da p√°gina
 		$rowHeader = $table->addRow ();
 		$cellHeader = $rowHeader->addCell ( '' );
 		$cellHeader->setProperty ( 'width', '100%' );
@@ -254,7 +254,7 @@ class TApplicationHtml {
 		$cellBody->setProperty ( 'id', 'app_center' );
 		$cellBody->setCss ( 'background-color', 'white' );
 		
-		// rodape da p·gina
+		// rodape da p√°gina
 		$rowFooter = $table->addRow ();
 		$cellFooter = $rowFooter->addCell ( '' );
 		$cellFooter->setProperty ( 'width', '100%' );
@@ -305,7 +305,7 @@ class TApplicationHtml {
 			$cell->setProperty ( 'id', 'app_header_title' );
 			$cell->setProperty ( 'width', '*' );
 			
-			// area para informaÁıes do usu·rio logado
+			// area para informa√ß√µes do usu√°rio logado
 			$cellLogin = $row->addCell ();
 			$cellLogin->clearCss ();
 			$cellLogin->setCss ( 'background-color', 'transparent' );
@@ -313,7 +313,7 @@ class TApplicationHtml {
 			$cellLogin->setProperty ( 'width', '200px' );
 		}
 		
-		// corpo da p·gina
+		// corpo da p√°gina
 		if (! $this->windowApp) {
 			if ($this->getBodyContent ()) {
 				$cellBody->add ( $this->getBodyContent () );
@@ -325,7 +325,7 @@ class TApplicationHtml {
 			$cellBody->add ( '<div id="app_div_message" title="Fechar este aviso" style="display:none;top:0px;left:0px;position:absolute;">' . "\n" . '<img onClick="jQuery(\'#app_div_message\').hide();" src="' . $this->page->getBase () . '/imagens/icon_alert.png" style="float:left;margin-right:10px;vertical-align:middle;cursor:pointer;"><span></span></div>' );
 		}
 		
-		// rodapÈ da p·gina
+		// rodap√© da p√°gina
 		if ($this->windowApp) {
 			// mostrar as janelas prototype minimizadas
 			$this->page->addJavascript ( 'app_prototype = true;' );
@@ -369,7 +369,7 @@ class TApplicationHtml {
 		}
 		if (isset ( $_SESSION [APLICATIVO] ["conectado"] ) && $_SESSION [APLICATIVO] ["conectado"]) {
 			if (isset ( $cellLogin )) {
-				$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sess„o" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
+				$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sess√£o" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
 				if ($this->getLoginInfo ()) {
 					$cellLogin->add ( $this->getLoginInfo () );
 				} else if (isset ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) && $_SESSION [APLICATIVO] ["login"] ["num_cpf"]) {
@@ -390,7 +390,7 @@ class TApplicationHtml {
 				if (file_exists ( $this->getLoginFile () )) {
 					$this->page->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . $this->getLoginInfo () . '")' );
 				} else {
-					$this->page->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicaÁ„o, n„o existe.")' );
+					$this->page->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 				}
 				$this->page->show ();
 				exit ();
@@ -400,17 +400,17 @@ class TApplicationHtml {
 		if ($this->getShowMenu ()) {
 			if ($this->getMainMenuFile ()) {
 				if (file_exists ( $this->getMainMenuFile () )) {
-					$this->page->addJavascript ( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. N„o foi possÌvel instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
+					$this->page->addJavascript ( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. N√£o foi poss√≠vel instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
 					$this->page->addJavascript ( 'app_build_menu(false,null,"' . $this->getMainMenuFile () . '")' );
 				} else {
-					$this->page->addJavascript ( 'alert("MÛdulo de menu:' . $this->getMainMenuFile () . ', defindo para a aplicaÁ„o, n„o existe.")' );
+					$this->page->addJavascript ( 'alert("M√≥dulo de menu:' . $this->getMainMenuFile () . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 				}
 			}
 		}
-		// se pressionar F5, recarregar o ultimo mÛdulo solicitado
+		// se pressionar F5, recarregar o ultimo m√≥dulo solicitado
 		if (isset ( $_SESSION [APLICATIVO] ['modulo'] ) && $_SESSION [APLICATIVO] ['modulo']) {
 			if ($_SESSION [APLICATIVO] ['modulo'] != $this->getLoginFile ()) {
-				$this->page->addJavascript ( '//se pressionar F5, recarregar o ultimo mÛdulo solicitado' );
+				$this->page->addJavascript ( '//se pressionar F5, recarregar o ultimo m√≥dulo solicitado' );
 				$this->page->addJavascript ( 'app_load_module("' . $_SESSION [APLICATIVO] ['modulo'] . '")' );
 			}
 		} else {
@@ -423,7 +423,7 @@ class TApplicationHtml {
 	}
 	
 	/**
-	 * Adicionar os arquivos de Actions Gerais ou da aplicaÁ„o
+	 * Adicionar os arquivos de Actions Gerais ou da aplica√ß√£o
 	 * @codeCoverageIgnore
 	 */
 	private function includesAppAction() {
@@ -433,7 +433,7 @@ class TApplicationHtml {
 			if (file_exists ( $this->page->getBase () . 'includes/app_action.php' )) {
 				include ($this->page->getBase () . 'includes/app_action.php');
 			}
-			// arquivo de actions da aplicaÁ„o
+			// arquivo de actions da aplica√ß√£o
 			if (file_exists ( 'includes/app_action.php' )) {
 				include ('includes/app_action.php');
 			}
@@ -456,7 +456,7 @@ class TApplicationHtml {
 	}
 	
 	/**
-	 * definir a constante de controle de sess„o do aplicativo caso n„o tenha sido definido no config.inc (php)
+	 * definir a constante de controle de sess√£o do aplicativo caso n√£o tenha sido definido no config.inc (php)
 	 */
 	public function defineConstantAplicativo() {
 		if (! defined ( 'APLICATIVO' )) {
@@ -478,7 +478,7 @@ class TApplicationHtml {
 	
 	// -----------------------------------------------------------------
 	/**
-	 * Este mÈtodo È respons·vel por processar as requisiÁıes web
+	 * Este m√©todo √© respons√°vel por processar as requisi√ß√µes web
 	 */
 	private function processRequest() {
 		$modulo = '';
@@ -517,8 +517,8 @@ class TApplicationHtml {
 					header ( "Pragma: no-cache" );
 					header ( "content-type: text/xml; charset=" . ENCODINGS );
 					echo '<menu>
-							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' n„o existe."/>
-							<item id="verifique" text="Verifique as configuraÁıes no index.php"/>
+							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' n√£o existe."/>
+							<item id="verifique" text="Verifique as configura√ß√µes no index.php"/>
 						</menu>';
 					exit ();
 				}
@@ -541,7 +541,7 @@ class TApplicationHtml {
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
-				$this->page->addJavascript ( 'top.app_show_message("Modulo ' . $_POST ['modulo'] . ' n„o encontrado","ERROR",8)' );
+				$this->page->addJavascript ( 'top.app_show_message("Modulo ' . $_POST ['modulo'] . ' n√£o encontrado","ERROR",8)' );
 				$this->page->addJavascript ( 'top.app_setFooterModule();' );
 				echo $this->page->getJavascript ( true, false );
 				$_POST ['modulo'] = null;
@@ -563,12 +563,12 @@ class TApplicationHtml {
 					require_once ($modulo);
 					exit ();
 				}
-				// se existir o modulo terminado com xajax este ser· chamado
+				// se existir o modulo terminado com xajax este ser√° chamado
 				if ($xajax = $this->processXajaxRequest ( $modulo )) {
 					$xajax->processRequest ();
 				}
 				if (! isset ( $_REQUEST ['subform'] ) || ! $_REQUEST ['subform']) {
-					// guardar o modulo na sess„o para reexibir a p·gina se o usuario pressionar F5
+					// guardar o modulo na sess√£o para reexibir a p√°gina se o usuario pressionar F5
 					$_SESSION [APLICATIVO] ['modulo'] = $_POST ['modulo'];
 				}
 				echo $htmlScript;
@@ -576,7 +576,7 @@ class TApplicationHtml {
 				// enquete - ibama
 				if (defined ( 'COD_PSQ' ) && defined ( 'SEQ_CONTEXTO' ) && $_SESSION ['num_pessoa']) {
 					if (function_exists ( 'executarPacote' )) {
-						// verificar se j· respondeu
+						// verificar se j√° respondeu
 						$bvars = array (
 								'NUM_PESSOA' => $_SESSION ['num_pessoa'],
 								'COD_PSQ_PESQUISA' => COD_PSQ,
@@ -596,7 +596,7 @@ class TApplicationHtml {
 				if (! isset ( $acao )) {
 					$acao = null;
 				}
-				// quando for subformularios dentro de um facebox, n„o sobrepor o nome do modulo principal aberto guardado na sess„o
+				// quando for subformularios dentro de um facebox, n√£o sobrepor o nome do modulo principal aberto guardado na sess√£o
 				if (! isset ( $_REQUEST ['subform'] )) {
 					$this->page->addJavascript ( "try{ parent.app_setFooterModule(\"{$modulo}\",\"{$acao}\");}catch(e){}" );
 				}
@@ -608,12 +608,12 @@ class TApplicationHtml {
 					echo "
 					<script>
 					//http://xajaxproject.org/en/docs-tutorials/upgrading-from-xajax-0-2-x-to-0-5/
-					// fazer controle de requisiÁıes xajax
+					// fazer controle de requisi√ß√µes xajax
 					var globalXajaxRequests	= 0;
 					xajax.callback.global.onRequest = function()
 					{
 						globalXajaxRequests++;
-						//alert('RequisiÁ„o n. '+globalXajaxRequests);
+						//alert('Requisi√ß√£o n. '+globalXajaxRequests);
 						try{parent.app_setFooterMessage('Xajax:'+globalXajaxRequests);}catch(e){}
 						//xajax.$('loadingMsg').style.display = 'block';
 					};
@@ -640,15 +640,15 @@ class TApplicationHtml {
 		}
 	}
 	/**
-	 * Este mÈtodo faz a integraÁ„o da aplicaÁ„o com a classe XAJAX
+	 * Este m√©todo faz a integra√ß√£o da aplica√ß√£o com a classe XAJAX
 	 * Ao receber o modulo, ela verifica se existe o arquivo correspondente terminado em _xajax.
-	 * Se existir este ser· incluido e todas as suas funÁıes ser„o extraidas e registradas automaticamente.
+	 * Se existir este ser√° incluido e todas as suas fun√ß√µes ser√£o extraidas e registradas automaticamente.
 	 *
 	 * @param string $modulo
 	 * @return object xajax
 	 */
 	protected function processXajaxRequest($modulo) {
-		// fazer integraÁ„o com a classe XAJAX
+		// fazer integra√ß√£o com a classe XAJAX
 		$moduloXajax = str_replace ( '.inc', '_xajax.php', str_replace ( '.php', '_xajax.php', $modulo ) );
 		$xajax = null;
 		if (strpos ( $moduloXajax, 'xajax.php' ) > 0) {
@@ -718,7 +718,7 @@ class TApplicationHtml {
 		$this->connectionFile = $strNewValue;
 		if ($strNewValue) {
 			if (! file_exists ( $strNewValue )) {
-				die ( 'Arquivo ' . $strNewValue . ' informado n„o existe!' );
+				die ( 'Arquivo ' . $strNewValue . ' informado n√£o existe!' );
 			}
 		}
 	}
@@ -769,13 +769,13 @@ class TApplicationHtml {
 			if (file_exists ( $this->getConnectionFile () )) {
 				require_once ($this->getConnectionFile ());
 			} else {
-				$this->page->addJavascript ( 'alert("Arquivo de conex„o:' . $this->getConnectionFile () . ', defindo para a aplicaÁ„o, n„o existe.")' );
+				$this->page->addJavascript ( 'alert("Arquivo de conex√£o:' . $this->getConnectionFile () . ', defindo para a aplica√ß√£o, n√£o existe.")' );
 			}
 		}
 	}
 	// -----------------------------------------------------------------------------
 	/**
-	 * MÈtodo para encontrar e retornar o caminho correto do mÛdulo dentro do diretÛrio modulos/ da aplicaÁ„o
+	 * M√©todo para encontrar e retornar o caminho correto do m√≥dulo dentro do diret√≥rio modulos/ da aplica√ß√£o
 	 *
 	 * @param string $strFileName
 	 */
@@ -795,19 +795,19 @@ class TApplicationHtml {
 		$baseName = $aFileParts ['basename'];
 		$fileName = $aFileParts ['filename'];
 		$dirName = $aFileParts ['dirname'];
-		// extens„o padr„o È inc
+		// extens√£o padr√£o √© inc
 		$extName = isset ( $aFileParts ['extension'] ) ? $aFileParts ['extension'] : 'inc';
 		$dirName = ($dirName == '.') ? '' : $dirName;
 		$dirName = ($dirName == './') ? '' : $dirName;
 		$dirName .= ($dirName != '') ? '/' : '';
-		// se exisiter o diretÛrio, n„o acrescenter o diretÛrio modulos/
+		// se exisiter o diret√≥rio, n√£o acrescenter o diret√≥rio modulos/
 		if ($dirName != '' && is_dir ( $dirName )) {
 			$pathModulos = '';
 		}
 		if (! $fileName) {
 			$fileName = basename ( $baseName, '.' . $extName );
 		}
-		// 1∫ possibilidade: Estrutura de Vis„o e Controle
+		// 1¬∫ possibilidade: Estrutura de Vis√£o e Controle
 		$file = $pathModulos . $dirName . $fileName;
 		if (is_dir ( $file )) {
 			$fileOut = $file . '/' . $fileName . '.' . $extName;
@@ -820,7 +820,7 @@ class TApplicationHtml {
 				return $fileOut;
 			}
 		}
-		// 2∫ possibilidade modelo normal na pasta modulos
+		// 2¬∫ possibilidade modelo normal na pasta modulos
 		$fileOut = $pathModulos . $dirName . $fileName . '.' . $extName;
 		if (file_exists ( $fileOut )) {
 			return $fileOut;
@@ -836,7 +836,7 @@ class TApplicationHtml {
 		return null;
 	}
 	/**
-	 * Adicinar diretÛrios no caminho de pesquisa de arquivos do php
+	 * Adicinar diret√≥rios no caminho de pesquisa de arquivos do php
 	 *
 	 * @param string $path
 	 */
@@ -847,8 +847,8 @@ class TApplicationHtml {
 		return $this;
 	}
 	/**
-	 * Define a imagem que ser· exibida no fundo da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Define a imagem que ser√° exibida no fundo da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -857,8 +857,8 @@ class TApplicationHtml {
 		// $this->waterMark=null;
 	}
 	/**
-	 * Retorna a imagem que ser· exibida no fundo da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Retorna a imagem que ser√° exibida no fundo da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -877,8 +877,8 @@ class TApplicationHtml {
 		return null;
 	}
 	/**
-	 * Define a imagem que ser· exibida no centro da tela principal da aplicaÁ„o
-	 * Se for uma imagem do diretÛrio base/imagem/ ou ./imagem/ basta informar o nome da imagem
+	 * Define a imagem que ser√° exibida no centro da tela principal da aplica√ß√£o
+	 * Se for uma imagem do diret√≥rio base/imagem/ ou ./imagem/ basta informar o nome da imagem
 	 *
 	 * @param string $strNewValue
 	 */
@@ -904,8 +904,8 @@ class TApplicationHtml {
 		return null;
 	}
 	/**
-	 * Altera o estilo da aplicaÁ„o para a execuÁ„o dos mÛdulos em janelas flutuantes e independentes, com recurso de minimizar, maximizar e arrastar e soltar.
-	 * Este modo permite a execuÁ„o de v·rios mÛdulos ao mesmo tempo.
+	 * Altera o estilo da aplica√ß√£o para a execu√ß√£o dos m√≥dulos em janelas flutuantes e independentes, com recurso de minimizar, maximizar e arrastar e soltar.
+	 * Este modo permite a execu√ß√£o de v√°rios m√≥dulos ao mesmo tempo.
 	 */
 	public function setWindowApp() {
 		$this->windowApp = true;
@@ -929,7 +929,7 @@ class TApplicationHtml {
 		return $this->loginInfo;
 	}
 	/**
-	 * Define o conetudo ou o arquivo para montagem do cabeÁalho da p·gina
+	 * Define o conetudo ou o arquivo para montagem do cabe√ßalho da p√°gina
 	 *
 	 * @param string $strNewValue
 	 */
@@ -941,13 +941,13 @@ class TApplicationHtml {
 			if (file_exists ( $this->headerContent )) {
 				return file_get_contents ( $this->headerContent );
 			} else {
-				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabeÁalho n„o encontrado.';
+				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabe√ßalho n√£o encontrado.';
 			}
 		}
 		return $this->headerContent;
 	}
 	/**
-	 * Define o conetudo ou o arquivo para montagem do corpo da p·gina
+	 * Define o conetudo ou o arquivo para montagem do corpo da p√°gina
 	 *
 	 * @param string $strNewValue
 	 */
@@ -959,13 +959,13 @@ class TApplicationHtml {
 			if (file_exists ( $this->bodyContent )) {
 				return file_get_contents ( $this->bodyContent );
 			} else {
-				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo n„o encontrado.';
+				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo n√£o encontrado.';
 			}
 		}
 		return $this->bodyContent;
 	}
 	/**
-	 * Define o conetudo ou o arquivo para montagem do rodapÈ
+	 * Define o conetudo ou o arquivo para montagem do rodap√©
 	 *
 	 * @param string $strNewValue
 	 */
@@ -980,14 +980,14 @@ class TApplicationHtml {
 			}
 			else
 			{
-				return 'Arquivo <b>'.$this->footerContent.'<b> definido para o rodapÈ n„o encontrado.';
+				return 'Arquivo <b>'.$this->footerContent.'<b> definido para o rodap√© n√£o encontrado.';
 			}
 		}
 		return $this->footerContent;
 	}
 	
 	/**
-	 * Retorna o objeto THtmlPage da estrutura da p·gina
+	 * Retorna o objeto THtmlPage da estrutura da p√°gina
 	 * @codeCoverageIgnore
 	 */
 	public function getPage() {
@@ -1009,7 +1009,7 @@ class TApplicationHtml {
 	}
 		//-----------------------------------------------------------------------------
 	/**
-	* Define o alinhamento vertical dos formul·rios na tela
+	* Define o alinhamento vertical dos formul√°rios na tela
 	*
 	* @param mixed $strNewValue - top,center,bottom
 	*/
@@ -1018,14 +1018,14 @@ class TApplicationHtml {
 		$this->verticalAlign = $strNewValue;
 	}
 	/**
-	* Recupera o valor definido para o alinhamento vertical dos formul·rios na tela
+	* Recupera o valor definido para o alinhamento vertical dos formul√°rios na tela
 	*/
 	public function getVerticalAlign()
 	{
 		return ( is_null( $this->verticalAlign ) || strtolower($this->verticalAlign) == 'center') ? 'middle' : $this->verticalAlign;
 	}
 	/**
-	* Define o alinhamento horizontal dos formul·rios na tela
+	* Define o alinhamento horizontal dos formul√°rios na tela
 	*
 	* @param mixed $strNewValue
 	*/
@@ -1034,7 +1034,7 @@ class TApplicationHtml {
 		$this->horizontalAlign = $strNewValue;
 	}
 	/**
-	* Recupera o valor do alinhamento vertical dos formul·rios na tela
+	* Recupera o valor do alinhamento vertical dos formul√°rios na tela
 	*/
 	public function getHorizontalAlign()
 	{

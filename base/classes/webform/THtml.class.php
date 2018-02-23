@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-*	Classe criar campos de conte˙do livre ( html )
+*	Classe criar campos de conte√∫do livre ( html )
 */
 class THtml extends TControl
 {
@@ -77,7 +77,7 @@ class THtml extends TControl
 	{
 		if( !is_null($this->includeFile) && !file_exists($this->includeFile) )
 		{
-			$this->setValue('Arquivo '.$this->includeFile.' n„o encontrado');
+			$this->setValue('Arquivo '.$this->includeFile.' n√£o encontrado');
 		}
 		else
 		{
@@ -117,7 +117,7 @@ class THtml extends TControl
 		{
 			return $this->parseFile();
 		}
-		// o campo html n„o possui um value e sim um array de values ( childrens )
+		// o campo html n√£o possui um value e sim um array de values ( childrens )
 		$value = $this->getChildren();
 		if( is_array( $value ) && count( $value ) == 1 )
 		{
@@ -130,7 +130,7 @@ class THtml extends TControl
 	//-----------------------------------------------------------------------------------
 	/**
 	* Define o nome de um arquivo que cria um gride utilizando a classe TGrid
-	* Se for definido este parametro, o TForm criar· o javascript para carregamento do gride via ajax
+	* Se for definido este parametro, o TForm criar√° o javascript para carregamento do gride via ajax
 	*
 	* @param mixed $strGridFile
 	*/
@@ -146,7 +146,7 @@ class THtml extends TControl
 		}
 	}
 	/**
-	* Retonra o array com as informaÁıes do ID e FILE do arquivo do gride
+	* Retonra o array com as informa√ß√µes do ID e FILE do arquivo do gride
 	* se for passado null como parametro.
 	* Se for passado id, retorna o ID
 	* Se for passado file, retorna o FILE

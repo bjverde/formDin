@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -51,28 +51,28 @@ $pastaBase			= isset($_REQUEST['pastaBase']) ? $_REQUEST['pastaBase'] :'base/';
 
 if( ! file_exists($pastaBase.'tmp') )
 {
-	die('<h3>Diretoiro '.$pastaBase.'tmp n„o encontrado!</h3>');
+	die('<h3>Diretoiro '.$pastaBase.'tmp n√£o encontrado!</h3>');
 }
 
 if( !$table_name)
 {
-	die('Necess·rio informar o nome da tabela. Parametro: table_name');
+	die('Necess√°rio informar o nome da tabela. Parametro: table_name');
 }
 if( !$blob_column_name)
 {
-	die('Necess·rio informar o nome da coluna que contem os dados binarios ( blob ). Parametro: blob_column_name');
+	die('Necess√°rio informar o nome da coluna que contem os dados binarios ( blob ). Parametro: blob_column_name');
 }
 if( !$file_column_name && !$type_column_name && !$file_extension )
 {
-	die('Necess·rio informar o nome da coluna ou o tipo do arquivo ou a extens„o do arquivo que ser· exibido. Parametro: file_column_name ou type_colum_name ou file_extension');
+	die('Necess√°rio informar o nome da coluna ou o tipo do arquivo ou a extens√£o do arquivo que ser√° exibido. Parametro: file_column_name ou type_colum_name ou file_extension');
 }
 if( !$key_column_name )
 {
-	die('Necess·rio informar o nome da coluna chave da tabela. Parametro: key_column_name');
+	die('Necess√°rio informar o nome da coluna chave da tabela. Parametro: key_column_name');
 }
 if( !$key_value )
 {
-	die('Necess·rio informar o id do registro que ser· consultado. key_value');
+	die('Necess√°rio informar o id do registro que ser√° consultado. key_value');
 }
 
 $aKey_column_name 	= explode('|',$key_column_name);
@@ -125,7 +125,7 @@ else
 {
 		$res = TPDOConnection::executeSql($sql);
 }
-// limpar arquivos tempor·rios antigos
+// limpar arquivos tempor√°rios antigos
 $t=time();
 $h = opendir( $pastaBase . "tmp" );
 while ( $file = readdir( $h ) )
@@ -188,7 +188,7 @@ if( $res )
 }
 else
 {
-	print 'Anexo n„o existe';
+	print 'Anexo n√£o existe';
 }
 function setHeader($fileName)
 {
@@ -286,7 +286,7 @@ function setHeader($fileName)
     {
 		header("Content-Type: application/download");
 		header("Content-Disposition:attachment; filename=\"".preg_replace('/^tmp_/','',baseName($fileName))."\"");
-		header("Content-Transfer-Encoding:≠ binary");
+		header("Content-Transfer-Encoding:¬≠ binary");
 		header("Content-Description: File Transfer");
 		header("Content-Length: ".filesize($fileName));
 
@@ -304,7 +304,7 @@ function setHeader($fileName)
 		}
 		else
 		{
-			readfile($fileName); // para arquivos muito grandes n„o funciona
+			readfile($fileName); // para arquivos muito grandes n√£o funciona
 		}
 	}
     else

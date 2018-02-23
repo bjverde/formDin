@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
- * Classe para criaÁ„o de formul·rio para entrada de dados
+ * Classe para cria√ß√£o de formul√°rio para entrada de dados
  */
 $acao = !isset( $acao ) ? '' : $acao;
 
@@ -77,8 +77,8 @@ if ( !function_exists( 'formdin_autoload') )
     spl_autoload_register('formdin_autoload');
 }
 /**
- * Classe para criaÁ„o de formul·rios web para entrada de dados
- * @author Luis EugÍnio Barbosa
+ * Classe para cria√ß√£o de formul√°rios web para entrada de dados
+ * @author Luis Eug√™nio Barbosa
  */
 class TForm Extends TBox
 {
@@ -101,10 +101,10 @@ class TForm Extends TBox
     private $name;
     private $displayControls;
     private $method;
-    private $action; // arquivo para onde ser· submetido o formul·rio
+    private $action; // arquivo para onde ser√° submetido o formul√°rio
     private $columns;
     private $footerButtons;
-    private $actions; // botıes das aÁıes do formul·rio.
+    private $actions; // bot√µes das a√ß√µes do formul√°rio.
     public $flat;
     private $focusField;
     private $messages;
@@ -156,22 +156,22 @@ class TForm Extends TBox
     
     
     /**
-     * MÈtodo construtor da classe
+     * M√©todo construtor da classe
      *
      * <code>
-     * 	$frm = new TForm('TÌtulo do Formul·io');
+     * 	$frm = new TForm('T√≠tulo do Formul√°io');
      * 	$frm->show();
      * </code>
      *
-     * @param string $strTitle - titulo do formul·rio
-     * @param string $strHeight - altura em pixels - padr„o=400px
-     * @param string $strWidth - largura em pixels - padr„o=800px
-     * @param bool $strFormName - nome do formulario para criaÁ„o da tag form. Padr„o=formdin
-     * @param string $strMethod - metodo GET ou POST, utilizado pelo formulario para submeter as informaÁıes. padr„o=POST
-     * @param string $strAction - p·gina/url para onde os dados ser„o enviados. Padr„o = propria p·gina
-     * @param boolean $boolPublicMode - ignorar mensagem fwSession_exprired da aplicaÁ„o e n„o chamar atela de login
+     * @param string $strTitle - titulo do formul√°rio
+     * @param string $strHeight - altura em pixels - padr√£o=400px
+     * @param string $strWidth - largura em pixels - padr√£o=800px
+     * @param bool $strFormName - nome do formulario para cria√ß√£o da tag form. Padr√£o=formdin
+     * @param string $strMethod - metodo GET ou POST, utilizado pelo formulario para submeter as informa√ß√µes. padr√£o=POST
+     * @param string $strAction - p√°gina/url para onde os dados ser√£o enviados. Padr√£o = propria p√°gina
+     * @param boolean $boolPublicMode - ignorar mensagem fwSession_exprired da aplica√ß√£o e n√£o chamar atela de login
      *
-     * @return TForm - insta‚ncia da classe
+     * @return TForm - insta√¢ncia da classe
      */
     public function __construct( $strTitle=null, $strHeight=null, $strWidth=null, $strFormName=null, $strMethod=null, $strAction=null,$boolPublicMode=null )
     {
@@ -179,12 +179,12 @@ class TForm Extends TBox
         //$strWidth = ( int ) $strWidth == 0 ? 800 : $strWidth;
         //$strHeight = ( int ) $strHeight == 0 ? 400 : $strHeight;
         $strFormName = is_null( $strFormName ) ? "formdin" : $strFormName;
-        // se n„o tiver sido informado o nome, gerar um aleatoriamente
+        // se n√£o tiver sido informado o nome, gerar um aleatoriamente
         $strFormName = (( string ) $strFormName == "") ? "form" . mt_rand( 1, 100 ) : $strFormName;
         parent::__construct( $strFormName, $strWidth, $strHeight );
         $this->setFieldType( 'form' );
         $this->setFlat( false );
-        $this->setMaximize(false); // n„o permitir maximizar com duplo clique
+        $this->setMaximize(false); // n√£o permitir maximizar com duplo clique
         $this->setShowHtmlTag( true );
         $this->setShowCloseButton( true );
         $this->setShowMessageAlert(true);
@@ -193,7 +193,7 @@ class TForm Extends TBox
         $this->method = ($strMethod === null) ? 'POST' : $strMethod;
         $this->action = $strAction;
         
-        $this->setRequiredFieldText('Preenchimento ObrigatÛrio');
+        $this->setRequiredFieldText('Preenchimento Obrigat√≥rio');
         $isForm=false; // pode ser uma aba ou um grupo
         $isAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] === 1 );
         if( ! self::$instance )
@@ -211,7 +211,7 @@ class TForm Extends TBox
             self::$hasRequiredField=false;
             $this->setPosition(null);
             $this->pdfs = null;
-            $this->disableF5(); // n„o permitir atualizar a p·gina com F5
+            $this->disableF5(); // n√£o permitir atualizar a p√°gina com F5
             $this->setFade( 150 ); // habilitar o efeito fade-in para exibir o formulario
             $this->addJsFile( 'ajax.js' );
             $this->addJsFile( 'FormDin4.js' );
@@ -254,7 +254,7 @@ class TForm Extends TBox
             $this->addJsFile( 'lazyload/lazyload-min.js' );
             $this->addJsFile( 'jquery/jquery.qtip.min.js' );;
             
-            // area de mensagem no topo do formul·rio
+            // area de mensagem no topo do formul√°rio
             $this->message_area = $this->addHtmlField( $this->getId() . '_msg_area',null,null,null);
             
             $btn = new TButton( 'btn_close_' . $this->getId() . '_msg_area', 'Fechar', null, 'fwHideMsgArea("'.$this->getName().'")', null, 'fwbtnclosered.jpg', null, 'Fechar mensagem' );
@@ -267,17 +267,17 @@ class TForm Extends TBox
             $this->message_area->setCss( 'visibility', 'visible' );
             $this->message_area->setCss( 'width', '0px' );
             $this->setPublicMode($boolPublicMode);
-            // campo oculto para guardar a p·gina que chamou;
+            // campo oculto para guardar a p√°gina que chamou;
             $this->addHiddenField( 'fw_back_to' )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo
-            // se for uma requisiÁ„o ajax, capturar as saidas, para que a funÁ„o prepareReturnAjax possa processar o cont˙do
+            // se for uma requisi√ß√£o ajax, capturar as saidas, para que a fun√ß√£o prepareReturnAjax possa processar o cont√∫do
             if( $isAjax  && ob_get_level() == 0 )
             {
                 ob_start();
             }
         }
-        // exibir o titulo do formul·rio
+        // exibir o titulo do formul√°rio
         $this->setShowHeader( true );
-        // controle interno para utilizaÁ„o dos recursos de janela da biblioteca prototype
+        // controle interno para utiliza√ß√£o dos recursos de janela da biblioteca prototype
         if( isset( $_REQUEST[ 'modalWinId' ] ) )
         {
             $this->addHiddenField( 'modalWinId')->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo
@@ -286,21 +286,21 @@ class TForm Extends TBox
         {
             $this->setPrototypeId( $_REQUEST[ 'prototypeId' ] );
         }
-        $this->setAutoIncludeJsCss( true );  // incluir os arquivos css e javascripts necess·rios para o funcionamento do formul·rio
-        $this->enableCustomHint(); // habilitar os tooltips personalizados estilo bal„o
+        $this->setAutoIncludeJsCss( true );  // incluir os arquivos css e javascripts necess√°rios para o funcionamento do formul√°rio
+        $this->enableCustomHint(); // habilitar os tooltips personalizados estilo bal√£o
         
         // definir fundo azul claro para os campos que possuirem title ( tooltip )
         $this->setColorHighlightBackground( '#E4F2FF' );
         
-        // largura padr„o para os campos da primeira coluna do formul·rio
+        // largura padr√£o para os campos da primeira coluna do formul√°rio
         $this->setColumns( array( 120 ) );
-        // criar a estrutura da tabela que formar· o formul·rio
+        // criar a estrutura da tabela que formar√° o formul√°rio
         $this->table = new TTable( $this->getId() . '_table' );
         $this->table->setCss( 'width', '100%' );
         $this->table->setCss( 'height', '100%' );
         $this->table->setAttribute('width','100%'); // a table de dentro do grupo deve ocupar a largura toda do grupo ou formulario
         $this->table->setCss( "background-color", "transparent" );
-        $this->table->setCss( 'text-align', 'left' ); // alinhar os campos ‡ esquerda
+        $this->table->setCss( 'text-align', 'left' ); // alinhar os campos √† esquerda
         $this->table->setProperty( "cellspacing", "0" );
         $this->table->setProperty( "cellpadding", "0" );
         $this->table->setProperty( "border", "0" );
@@ -333,7 +333,7 @@ class TForm Extends TBox
             $this->body->setCss( "border-top", '1px solid silver' );
             $this->body->setCss( "border-bottom", '1px solid silver' );
         }
-        // criar o rodapÈ
+        // criar o rodap√©
         $this->footer = new TTableCell();
         $this->footer->setId( $this->getId() . '_footer' );
         $this->footer->setProperty( "colspan", "2" );
@@ -371,15 +371,15 @@ class TForm Extends TBox
          //$this->message_area->setCss( 'visibility', 'visible' );
          $this->message_area->setCss( 'visibility', 'visible' );
          //$this->message_area->setCss( 'height', '1' );
-         // campo oculto para guardar quem chamou o formul·rio
+         // campo oculto para guardar quem chamou o formul√°rio
          $this->addHiddenField( 'fw_back_to' );
          */
     }
     /**
-     * Exibe no browser ou devolve o html do formul·rio dependendo do parametro $print
+     * Exibe no browser ou devolve o html do formul√°rio dependendo do parametro $print
      *
-     * $print = true - exibe o formul·rio no browser
-     * $print = false - retorna o html do formul·rio
+     * $print = true - exibe o formul√°rio no browser
+     * $print = false - retorna o html do formul√°rio
      *
      * @param boolean $print
      * @return mixed
@@ -392,14 +392,14 @@ class TForm Extends TBox
         $this->header->setId( $this->getId() . '_header' );
         $this->body->setId( $this->getId() . '_body' );
         $this->footer->setId( $this->getId() . '_footer' );
-        // ajustar a variavel $_POST['modulo']. Quando o $_POST È passado para a classe banco
+        // ajustar a variavel $_POST['modulo']. Quando o $_POST √© passado para a classe banco
         // no lugar do bvars, os valores das chaves retornam em caixa alta
         if( isset( $_POST[ 'MODULO' ] ) )
         {
             $_POST[ 'modulo' ] = $_POST[ 'MODULO' ];
             $_GET[ 'modulo' ] = $_POST[ 'MODULO' ];
         }
-        // n„o deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
+        // n√£o deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
         if( $this->getFieldType() != 'group' )
         {
             $this->divBody->setCss( 'overflow', 'hidden' );
@@ -433,11 +433,11 @@ class TForm Extends TBox
                 prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
                 die;
             }
-            // verificar se a classe TApplication (controller detectou que a sess„o est· expirdada
+            // verificar se a classe TApplication (controller detectou que a sess√£o est√° expirdada
             if( !$this->getPublicMode() && isset( $_POST['fwSession_expired'] ) && $_POST['fwSession_expired']== true )
             {
-                // configurar o formul·rio para exibir somente a mensagem
-                $this->setTitle('Sess„o Encerrada');
+                // configurar o formul√°rio para exibir somente a mensagem
+                $this->setTitle('Sess√£o Encerrada');
                 $this->setWidth(300);
                 $this->setHeight(120);
                 $this->hideCloseButton();
@@ -470,11 +470,11 @@ class TForm Extends TBox
             {
                 $this->setOnDrawField(null);
             }
-            // o form do grid offline n„o precisa destes scripts
+            // o form do grid offline n√£o precisa destes scripts
             //if( !isset($_REQUEST['gridOffline']) && ! $this->getFormGridOffLine() )
             if( ! $this->getFormGridOffLine() )
             {
-                $this->addJavascript( '// vari·veis javascript de auxÌlio', -90 );
+                $this->addJavascript( '// vari√°veis javascript de aux√≠lio', -90 );
                 if( $this->getVerticalAlign() || $this->getHorizontalAlign() )
                 {
                     $this->addJavascript( 'fwSetFormAlignment("' . $this->getVerticalAlign() . '","' . $this->getHorizontalAlign() . '")' );
@@ -491,11 +491,11 @@ class TForm Extends TBox
                 $this->addJavascript( 'jQuery(document).keydown(function(event) { fwCancelRefresh(event,' . $this->getF5Enabled() . ') } )', -85 );
                 $this->addJavascript( 'fwAttatchTooltip({"container":"'.$this->getId().'"})' );
                 $this->addJavascript('try{fwUnblockUI()}catch(e){}',-99);
-                // criar link para exibir a planhila com os pontos de funÁ„o
+                // criar link para exibir a planhila com os pontos de fun√ß√£o
                 $this->processApf();
             }
-            // implementaÁ„o para permitir aplicativos com a estrutura de vis„o e controle separados
-            // se existir arquivo js/css externo com o mesmo nome do modulo, no mesmo diretorio ou no diretorio js/ fazer a inclus„o autom·tica
+            // implementa√ß√£o para permitir aplicativos com a estrutura de vis√£o e controle separados
+            // se existir arquivo js/css externo com o mesmo nome do modulo, no mesmo diretorio ou no diretorio js/ fazer a inclus√£o autom√°tica
             $this->addJsCssModule();
             
             // remover/exibir as barras de rolagem
@@ -518,7 +518,7 @@ class TForm Extends TBox
                 $this->setOverflowY( 'auto' );
             }
             
-            // alterar a aparÍncia do formulario se ele estiver sendo executado como subform - modal
+            // alterar a apar√™ncia do formulario se ele estiver sendo executado como subform - modal
             if( isset( $_REQUEST[ 'facebox' ] ) && $_REQUEST[ 'facebox' ] )
             {
                 $this->hideCloseButton();
@@ -547,7 +547,7 @@ class TForm Extends TBox
             }
             // este javascript tem que ser o ultimo a ser adicionado, por isso coloquei aqui
             $this->addJsFile( 'funcoes.js' );
-            // se o formulario estiver fora de um objeto THtmlPage, inserir os javascripts e css necess·rios
+            // se o formulario estiver fora de um objeto THtmlPage, inserir os javascripts e css necess√°rios
             if( $this->getAutoIncludeJsCss() )
             {
                 $this->includeJsCss();
@@ -556,7 +556,7 @@ class TForm Extends TBox
             $this->setTagType( 'div' );
             $this->setCss( 'width', $this->getWidth() );
             //$this->setCss('border','0px solid red');
-            // centralizar o formul·rio na tela - no IE n„o funcionou
+            // centralizar o formul√°rio na tela - no IE n√£o funcionou
             //$this->setCss('margin','auto');
             $this->table->setCss( 'background-color', $this->getCss( 'background-color' ) );
             
@@ -588,7 +588,7 @@ class TForm Extends TBox
             $cell = $this->table->addRow()->addCell( $this->body );
             $cell->setProperty( 'colspan', 2 );
             $this->table->addRow()->add( $this->footer );
-            // criar os campos ocultos padr„o do modulo e da acao
+            // criar os campos ocultos padr√£o do modulo e da acao
             if ( !$this->getFormGridOffLine())
             {
                 $this->addHiddenField( 'moduloId' )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
@@ -610,7 +610,7 @@ class TForm Extends TBox
                 foreach( $this->getErrors() as $idField=>$msgError )
                 {
                     // definir o foco do formulario para o primeiro campo com erro de validacao
-                    // ignorar a mensagem que tiver com espaÁo representando o nome da aba onode ocorreu o erro
+                    // ignorar a mensagem que tiver com espa√ßo representando o nome da aba onode ocorreu o erro
                     if( $flag == 0 && !strpos( $idField, " " ) )
                     {
                         $this->setFocusField( $idField );
@@ -625,7 +625,7 @@ class TForm Extends TBox
         }
         else
         {
-            // abas, grupos n„o precisam da area de mensagem
+            // abas, grupos n√£o precisam da area de mensagem
             if( $this->message_area )
             {
                 $this->removeField( $this->message_area->getId() );
@@ -677,7 +677,7 @@ class TForm Extends TBox
         }
         // adicionar a tag form ao html final
         $this->add( $form );
-        // o formulario ser· estruturado em uma Table com cabecalho ,corpo e rodape
+        // o formulario ser√° estruturado em uma Table com cabecalho ,corpo e rodape
         $form->add( $this->table );
         // adicionar o botao fechar
         if( $this->getShowCloseButton() )
@@ -688,7 +688,7 @@ class TForm Extends TBox
                 $this->addHiddenField( 'subform', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
                 $sub = '1';
             }
-            // integraÁ„o com o modulo onlinesearch que possibilita fazer cadastro on-line quando a pesquisa retorna sem resultado
+            // integra√ß√£o com o modulo onlinesearch que possibilita fazer cadastro on-line quando a pesquisa retorna sem resultado
             if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
             {
                 $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">' );
@@ -736,25 +736,25 @@ class TForm Extends TBox
              $tableFields->setProperty('cellpadding','3px');
              $tableFields->setProperty('cellspacing','0px');
              */
-            // adicionar a table do layout no corpo do formul·rio
+            // adicionar a table do layout no corpo do formul√°rio
             $this->body->add($tableLayout);
             
             /*			if( defined('REQUIRED_FIELD_MARK') && $this->getFieldType() == 'form' )
              {
-             $this->addHtmlField('teste','(*) Preenchimento obrigatÛrio')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
+             $this->addHtmlField('teste','(*) Preenchimento obrigat√≥rio')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
              }
              */
             // inicio
             $rows=0;
             foreach( $this->displayControls as $name=>$dc )
             {
-                // se falso ent„o campo tambem falso
+                // se falso ent√£o campo tambem falso
                 if( $this->getEnabled() == false )
                 {
                     $dc->getField()->setEnabled( false );
                 }
                 
-                // se o formul·rio tiver documentaÁ„o on-line, ativar no displaycontrol
+                // se o formul√°rio tiver documenta√ß√£o on-line, ativar no displaycontrol
                 if( $this->getOnlineDoc() )
                 {
                     if( !self::$onlineDocIgnoreFields || preg_match('/,'.$dc->getField()->getId().',/',','.self::$onlineDocIgnoreFields.',' ) == 0 )
@@ -765,7 +765,7 @@ class TForm Extends TBox
                         }
                     }
                 }
-                // se o formul·rio estiver definido com required, todos os campos ser„o obrigatÛrios
+                // se o formul√°rio estiver definido com required, todos os campos ser√£o obrigat√≥rios
                 if( $this->getRequired() == true )
                 {
                     if( method_exists( $dc->getField(), 'setRequired' ) )
@@ -799,7 +799,7 @@ class TForm Extends TBox
                     {
                         $dcLabel->setcss('text-align',$this->getLabelsAlign());
                     }
-                    // verificar se o label est· com shortcut ( tecla de atalho "&" )
+                    // verificar se o label est√° com shortcut ( tecla de atalho "&" )
                     $this->parseShortcut( $dcLabel, $dcField->getId() );
                 }
                 $dcFieldType	= strtolower( $dc->getField()->getFieldType() );
@@ -822,7 +822,7 @@ class TForm Extends TBox
                     }
                     else
                     {
-                        // height = auto n„o precisa do overflow
+                        // height = auto n√£o precisa do overflow
                         $this->body->setcss('overflow'	,'hidden');
                         $this->body->setCss('overflow-x','hidden');
                         $this->body->setCss('overflow-y','hidden');
@@ -1048,7 +1048,7 @@ class TForm Extends TBox
                 }
                 if( $dcFieldType == "cep" )
                 {
-                    // retirar o bot„o consultar cep
+                    // retirar o bot√£o consultar cep
                     if( $dcField->getEnabled() == false )
                     {
                         $dcField->clearChildren();
@@ -1065,10 +1065,10 @@ class TForm Extends TBox
                 {
                     continue;
                 }
-                // ajustar campo html se n„o tiver label e for newLine = true
+                // ajustar campo html se n√£o tiver label e for newLine = true
                 else if( $dcFieldType == 'html' )
                 {
-                    // se dentro do campo html tiver um objeto treeview, adicionar o javascript do objeto no onload da p·gina
+                    // se dentro do campo html tiver um objeto treeview, adicionar o javascript do objeto no onload da p√°gina
                     $arr = $dcField->getChildren();
                     if( is_array( $arr ) )
                     {
@@ -1164,7 +1164,7 @@ class TForm Extends TBox
                 }
                 else if( $dcFieldType == 'button' )
                 {
-                    // alinhar o bot„o com o campo quando o campo estiver com labelabove=true
+                    // alinhar o bot√£o com o campo quando o campo estiver com labelabove=true
                     if( $lastDisplayControl )
                     {
                         if( $lastDisplayControl->getLabelAbove() )
@@ -1185,7 +1185,7 @@ class TForm Extends TBox
                     if( $dcField->getHint() )
                     {
                         $hint = trim( $dcField->getHint() );
-                        // destacar os campos com ajuda ao usu·rio alterando a cor de fundo
+                        // destacar os campos com ajuda ao usu√°rio alterando a cor de fundo
                         if( $this->getColorHighlightBackground() )
                         {
                             if( $dcField->getFieldType() != 'link')
@@ -1290,7 +1290,7 @@ class TForm Extends TBox
                         call_user_func($this->getOnDrawField(),$dc,$loCell,$rows);
                     }
                     
-                    // fazer o controle das larguras das colunas do formul·rio
+                    // fazer o controle das larguras das colunas do formul√°rio
                     $column = $currentCol;
                     if( $column > 0 )
                     {
@@ -1326,7 +1326,7 @@ class TForm Extends TBox
                                 }
                                 $aDados[ 'valorInicial' ] = null;
                                 $childField = $this->getField( $aDados[ 'selectFilho' ] );
-                                if( ! $childField ) 	//procurar no formul·rio inteiro
+                                if( ! $childField ) 	//procurar no formul√°rio inteiro
                                 {
                                     $childField = self::$instance->getField( $aDados[ 'selectFilho' ] );
                                 }
@@ -1388,7 +1388,7 @@ class TForm Extends TBox
                 if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
                 {
                     $this->clearOnlineSearch();
-                    $this->addMessage( 'O formul·rio de cadastro on-line (' . $_REQUEST[ 'modulo' ] . '), possui campos com recurso de consulta on-line.\nN„o È permitido realizar uma consulta on-line dentro de outra consulta on-line j· em execuÁ„o, portanto, utilize o recurso de autocomplete se possÌvel.\nOutra forma seria adicionar um bot„o no formul·rio principal para fazer o cadastramento on-line.' );
+                    $this->addMessage( 'O formul√°rio de cadastro on-line (' . $_REQUEST[ 'modulo' ] . '), possui campos com recurso de consulta on-line.\nN√£o √© permitido realizar uma consulta on-line dentro de outra consulta on-line j√° em execu√ß√£o, portanto, utilize o recurso de autocomplete se poss√≠vel.\nOutra forma seria adicionar um bot√£o no formul√°rio principal para fazer o cadastramento on-line.' );
                 }
                 else
                 {
@@ -1404,7 +1404,7 @@ class TForm Extends TBox
                                 $jsBefore = "if( typeof({$aData[ 'beforeExecuteJs' ]})=='function' && !{$aData[ 'beforeExecuteJs' ]}()){return false} ";
                             }
                             $img1 = '<img id="' . $field->getId() . '_search" style="width:12px;height:13px;cursor:pointer;" title="Consulta on-line" onClick="' . $jsBefore . 'fwModalBox(\'Consulta on-line\',\'?subform=1&modulo=' . $this->getBase() . 'callbacks/onlineSearch.php&subform=1&sessionField=' . $sessionField . '\',' . $aData[ 'windowHeight' ] . ',' . $aData[ 'windowWidth' ] . ')" src="' . $this->getBase() . 'imagens/search.gif">';
-                            // textarea n„o pode utilizar o metodo add para adicionar imagens na frente do campo
+                            // textarea n√£o pode utilizar o metodo add para adicionar imagens na frente do campo
                             if( $field->getFieldType() != 'memo' )
                             {
                                 $field->add( $img1 );
@@ -1421,7 +1421,7 @@ class TForm Extends TBox
                             }
                             if( $aData[ 'updateFormFields' ] )
                             {
-                                // criar a string com os nomes dos campos que ser„o limpos quando clicar na lixeira
+                                // criar a string com os nomes dos campos que ser√£o limpos quando clicar na lixeira
                                 $aTemp = explode( ',', $aData[ 'updateFormFields' ] );
                                 $formFields = $fieldName;
                                 foreach( $aTemp as $i=>$fld )
@@ -1451,7 +1451,7 @@ class TForm Extends TBox
                     }
                 }
             }
-            // adicionar os botıes aos campos que possuem cadastro on-line
+            // adicionar os bot√µes aos campos que possuem cadastro on-line
             if( is_array( $this->onlineCruds ) )
             {
                 foreach( $this->onlineCruds as $fieldName=>$aData )
@@ -1479,25 +1479,25 @@ class TForm Extends TBox
         {
             if( $this->getRequiredFieldText() )
             {
-                //$this->addHtmlField('teste','(*) Preenchimento obrigatÛrio')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
+                //$this->addHtmlField('teste','(*) Preenchimento obrigat√≥rio')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
                 $this->body->add( '<center><span style="margin:0px; padding:0px;margin-top:5px;color:red;font-size:10px;">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
             }
         }
-        // adicionar os botıes das aÁıes
+        // adicionar os bot√µes das a√ß√µes
         if( ( string ) $this->actions != '' )
         {
             $this->addButton( $this->actions );
         }
-        // adicionar os botoes no rodapÈ
+        // adicionar os botoes no rodap√©
         if( is_array( $this->footerButtons ) && $this->getEnabled() )
         {
-            // criar shortcuts para os botıes do rodapÈ
+            // criar shortcuts para os bot√µes do rodap√©
             foreach( $this->footerButtons as $id=>$button )
             {
                 $this->parseShortcut($button,$id );
             }
             
-            $this->footer->add( '<!-- Botıes do formul·rio -->' );
+            $this->footer->add( '<!-- Bot√µes do formul√°rio -->' );
             if( $this->getFieldType() == 'form' )
             {
                 foreach( $this->footerButtons as $id=>$button )
@@ -1571,9 +1571,9 @@ class TForm Extends TBox
                 {
                     $aMsg[ 3 ] = 'ruim.gif';
                 }
-                $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // duraÁ„o
+                $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // dura√ß√£o
                 $aMsg[ 3 ] = isset( $aMsg[ 3 ] ) ? $aMsg[ 3 ] : 'sucess.gif';
-                // se n„o foi informado o endereÁo manualmente, encontrar na pasta base
+                // se n√£o foi informado o endere√ßo manualmente, encontrar na pasta base
                 if( strpos( $aMsg[ 3 ], '/' ) === false )
                 {
                     if( !file_exists( $aMsg[ 3 ] ) )
@@ -1583,7 +1583,7 @@ class TForm Extends TBox
                 }
                 $this->addJavascript( 'try{ parent.app_show_message("' . $aMsg[ 0 ] . '","' . $aMsg[ 1 ] . '","' . $aMsg[ 2 ] . '","' . $aMsg[ 3 ] . '");}catch(e){alert("' . $aMsg[ 0 ] . '")}' );
             }
-            // definir o campo que receber· o foco unicial
+            // definir o campo que receber√° o foco unicial
             $jsFocusField = '';
             if( !$this->getFormGridOffLine() )
             {
@@ -1608,7 +1608,7 @@ class TForm Extends TBox
                 }
             }
         }
-        // os campos que forem autocomplete e tiverem valor, disparar o evento de validaÁ„o
+        // os campos que forem autocomplete e tiverem valor, disparar o evento de valida√ß√£o
         if( is_array( $this->autocompleteFields ) )
         {
             $this->addJavascript( '// Inicializar e validar os campos com auto-complete' );
@@ -1620,7 +1620,7 @@ class TForm Extends TBox
                 }
                 if( method_exists($this->getField( $fieldName ),'setAutoTab'))
                 {
-                    $this->getField( $fieldName )->setAutoTab(false);// campo autocomplete n„o pode ter autotab
+                    $this->getField( $fieldName )->setAutoTab(false);// campo autocomplete n√£o pode ter autotab
                 }
                 if( $this->getField( $fieldName )->value )
                 {
@@ -1662,7 +1662,7 @@ class TForm Extends TBox
             $this->addJavascript('try{fwApplyShortcuts();} catch(e) {}');
             $scriptAfterShow = '';
             $_POST[ 'ajax' ] = isset( $_POST[ 'ajax' ] ) ? $_POST[ 'ajax' ] : false;
-            // javascript para ajustar a altura da area body em funÁ„o da altura do header e footer do formul·rio
+            // javascript para ajustar a altura da area body em fun√ß√£o da altura do header e footer do formul√°rio
             //if( !$this->showOnlyTagForm && !$_POST[ 'ajax' ] && ! isset($_REQUEST['gridOffline'] ) )
             if( !$this->showOnlyTagForm && !$_POST[ 'ajax' ] && ! $this->getFormGridOffLine() )
             {
@@ -1692,7 +1692,7 @@ class TForm Extends TBox
                  */
             }
             //$this->addJavascript('jQuery("#'.$this->getId().'").show("slow",function () {'.$scriptAfterShow.'})');
-            // formulario ser· exibido depois do parse via jquery
+            // formulario ser√° exibido depois do parse via jquery
             if( $this->getVisible() )
             {
                 // esconder e mostrar o form com efeito de fade-in
@@ -1719,11 +1719,11 @@ class TForm Extends TBox
                     $this->addJavascript( 'try{ fwFormDinAutoSize(' . json_encode( $aParams ) . ');} catch(e) {}' );
                     //$this->addJavascript('jQuery("#'.$this->name.'_body").bind("overflow",function (e) { '.$overFlowFunction.'});');
                 }
-                // ajustar a largura dos grupos e das abas ‡ largura do formul·rio.
+                // ajustar a largura dos grupos e das abas √† largura do formul√°rio.
                 $this->addJavascript( 'try{ fwAdjustGroupsWidth(); fwAdjustTabsWidth(); fwAdjustHtmlFieldsWidth(); } catch(e) {}' );
                 
             }
-            // integraÁ„o com o gride off-line vers„o antiga
+            // integra√ß√£o com o gride off-line vers√£o antiga
             if( isset( $GLOBALS[ 'jsgride' ] ) && is_array( $GLOBALS[ 'jsgride' ] ) )
             {
                 $js = '';
@@ -1734,7 +1734,7 @@ class TForm Extends TBox
                 }
                 if( $js )
                 {
-                    $this->addJavascript( '// script necess·rio para o grid off-line' );
+                    $this->addJavascript( '// script necess√°rio para o grid off-line' );
                     $this->addJavascript( $js );
                 }
             }
@@ -1745,7 +1745,7 @@ class TForm Extends TBox
             $js = new TElement( 'script' );
             $js->clearCss();
             $js->add( 'jQuery(document).ready(function() {' );
-            $js->add( chr( 9 ) . '// javasripts que ser„o executados depois que o documento estiver 100% carregado. Utilizando o jquery.' );
+            $js->add( chr( 9 ) . '// javasripts que ser√£o executados depois que o documento estiver 100% carregado. Utilizando o jquery.' );
             $alerts = array( );
             foreach( $this->getJavascript() as $k=>$strJs )
             {
@@ -1775,7 +1775,7 @@ class TForm Extends TBox
             }
         }
         
-        // tem que habilitar o container sen„o ele n„o È exibido
+        // tem que habilitar o container sen√£o ele n√£o √© exibido
         $this->setEnabled( true );
         
         /* if( $this->getFieldType() == "form" )
@@ -1797,10 +1797,10 @@ class TForm Extends TBox
             $page->addJsCssFile( $this->getJsCss() );
             return $page->show( $print );
         }
-        // se for aba ou groupbox n„o precisa das tags html, head e body
+        // se for aba ou groupbox n√£o precisa das tags html, head e body
         else if( $this->getFieldType() == "tabsheet" )
         {
-            // configurar a apresentaÁ„o do form quando for um tabsheet ( aba )
+            // configurar a apresenta√ß√£o do form quando for um tabsheet ( aba )
             /*
              $this->setTagType( 'div' );
              $this->body->setClass( $this->getClass() );
@@ -1839,7 +1839,7 @@ class TForm Extends TBox
         }
         else if( $this->getFieldType() == "groupbox" || $this->getFieldType() == "coordgmsx" )
         {
-            // configurar a apresentaÁ„o do form quando for um groupbox
+            // configurar a apresenta√ß√£o do form quando for um groupbox
             $this->divBody->clearCss();
             //$this->divBody->setCss('width',$this->getWidth());
             $this->divBody->setCss( 'height', $this->getHeight() );
@@ -1868,7 +1868,7 @@ class TForm Extends TBox
             }
             
             
-            // configurar a apresentaÁ„o do form quando for um groupbox
+            // configurar a apresenta√ß√£o do form quando for um groupbox
             //$this->divBody->clearCss();
             //$this->divBody->setCss('width',$this->getWidth());
             //$this->divBody->setCss( 'height', $this->getHeight() );
@@ -1903,7 +1903,7 @@ class TForm Extends TBox
     }
     //-----------------------------------------------------------------------------
     /**
-     * Define a largura do formul·rio
+     * Define a largura do formul√°rio
      *
      * @param integer $strNewValue
      */
@@ -1920,7 +1920,7 @@ class TForm Extends TBox
     }
     //-----------------------------------------------------------------------------
     /**
-     * Define a altura do formul·rio
+     * Define a altura do formul√°rio
      *
      * @param integer $strNewValue
      */
@@ -1937,11 +1937,11 @@ class TForm Extends TBox
     }
     //-----------------------------------------------------------------------------
     /**
-     * Implementa o recurso de autosugest„o a um campo texto do formul·rio utilizando jquery
+     * Implementa o recurso de autosugest√£o a um campo texto do formul√°rio utilizando jquery
      * @link http://www.pengoworks.com/workshop/jquery/autocomplete_docs.txt
      *
-     * @strUrl - se for informada a url que devolver· os dados para o autocomplete, o retorno dever· ser no seguinte formato:
-     * "descriÁao|chave\n"  exemplo: echo "Abacate|123\n"
+     * @strUrl - se for informada a url que devolver√° os dados para o autocomplete, o retorno dever√° ser no seguinte formato:
+     * "descri√ßao|chave\n"  exemplo: echo "Abacate|123\n"
      *
      * <code>
      * 	$frm->setAutoComplete( 'num_cpf',
@@ -1958,20 +1958,20 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - nome do campo ir· funcionar com autocomplete
+     * @param string $strFieldName                  - nome do campo ir√° funcionar com autocomplete
      * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
      * @param string $strSearchField                - campo de pesquisa
-     * @param mixed $mixUpdateFields                - campos do form origem que ser„o atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padr„o <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param mixed $mixUpdateFields                - campos do form origem que ser√£o atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padr√£o <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields
-     * @param mixed $mixExtraSearchFields            - campo do formul·rio que ser· adicionado como filtro
+     * @param mixed $mixExtraSearchFields            - campo do formul√°rio que ser√° adicionado como filtro
      * @param string $strCallBackFunctionJs
      * @param integer $intMinChars                   - Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                      - Default 1000, tempo apÛs a digitaÁ„o para disparar a consulta
-     * @param integer $intMaxItensToShow             - m·ximo de registros que dever· ser retornado
-     * @param integer $intCacheTime default = 0 ( sess„o )
+     * @param integer $intDelay                      - Default 1000, tempo ap√≥s a digita√ß√£o para disparar a consulta
+     * @param integer $intMaxItensToShow             - m√°ximo de registros que dever√° ser retornado
+     * @param integer $intCacheTime default = 0 ( sess√£o )
      * @param boolean $boolRemoveMask
-     * @param string $strUrl                         - url da funÁ„o de callbacks, se ficar em branco ser· tratado por callbacks/autocomplete.php
-     * @param string $strMessageNotFound             - Mesagem caso n„o encontre nenhum registro
+     * @param string $strUrl                         - url da fun√ß√£o de callbacks, se ficar em branco ser√° tratado por callbacks/autocomplete.php
+     * @param string $strMessageNotFound             - Mesagem caso n√£o encontre nenhum registro
      * @params boolean $boolKeepFieldValuesOnPost
      * @params boolean $boolClearOnNotFound
      * @params boolean $boolClearUpdateFields
@@ -1980,7 +1980,7 @@ class TForm Extends TBox
     public function setAutoComplete( $strFieldName, $strTablePackageFuncion, $strSearchField, $mixUpdateFields=null, $boolDisableUpdateFields=null, $mixExtraSearchFields=null, $strCallBackFunctionJs=null, $intMinChars=null, $intDelay=null, $intMaxItensToShow=null, $intCacheTime=null, $boolRemoveMask=null, $strUrl=null, $strMessageNotFound=null, $boolKeepFieldValuesOnPost=null, $boolClearOnNotFound=null, $boolClearUpdateFields=null,$boolSearchAnyPosition=null )
     {
         
-        // n„o criar o autocomplente se o campo n„o existir
+        // n√£o criar o autocomplente se o campo n√£o existir
         if( !$this->getField( $strFieldName ) ) {
             return;
         }
@@ -1993,7 +1993,7 @@ class TForm Extends TBox
         $intDelay = $intDelay === null ? 1000 : ( int ) $intDelay; // 1000 = 1 segund
         $intMaxItensToShow = $intMaxItensToShow === null ? 50 : ( int ) $intMaxItensToShow;
         $intMinChars = $intMinChars === null ? 3 : ( int ) $intMinChars;
-        $intCacheTime = $intCacheTime === null ? 0 : ( int ) $intCacheTime; // 0 = sess„o
+        $intCacheTime = $intCacheTime === null ? 0 : ( int ) $intCacheTime; // 0 = sess√£o
         $boolRemoveMask = $boolRemoveMask === null ? false : ( bool ) $boolRemoveMask;
         $boolDisableUpdateFields = $boolDisableUpdateFields === null ? true : ( bool ) $boolDisableUpdateFields;
         $boolClearOnNotFound = $boolClearOnNotFound === null ? true : ( bool ) $boolClearOnNotFound;
@@ -2042,7 +2042,7 @@ class TForm Extends TBox
                     $k = strtoupper( $aField[ 0 ] );
                     $v = $aField[ 1 ];
                 }
-                // o campo que recebe o autocomplete n„o pode estar na lista dos campos que ser„o atualizados no formul·rio.
+                // o campo que recebe o autocomplete n√£o pode estar na lista dos campos que ser√£o atualizados no formul√°rio.
                 if( $v != $strFieldName )
                 {
                     $strExtraParams = (isset( $strExtraParams ) && strlen( $strExtraParams ) > 0 ? $strExtraParams . "," : "");
@@ -2055,10 +2055,10 @@ class TForm Extends TBox
         }
         if( $mixExtraSearchFields )
         {
-            /* o parametro $mixExtraParams deve ser utilizado para passagem de parametros extras para a url alem do conte˙do digitado no campo
+            /* o parametro $mixExtraParams deve ser utilizado para passagem de parametros extras para a url alem do conte√∫do digitado no campo
              O formato pode ser uma string ou um array de string com ou sem valores fixos
              Ex: "cod_uf:53" ou  array("cod_uf",'sig_uf'=>'GO')
-             Se o parametro passado n„o tiver um valor fixado, este valor ser· lido dinamicamente de um campo do formulario que
+             Se o parametro passado n√£o tiver um valor fixado, este valor ser√° lido dinamicamente de um campo do formulario que
              possua o mesmo nome.
              */
             if( is_array( $mixExtraSearchFields ) )
@@ -2095,7 +2095,7 @@ class TForm Extends TBox
                     $aTemp[ '_w_' . $mixExtraSearchFields ] = '';
                     if( !$this->getField( $field[0] ) )
                     {
-                        print 'SetAutoComplete: O campo ' . $field[0] . ' n„o exite no formul·rio.';
+                        print 'SetAutoComplete: O campo ' . $field[0] . ' n√£o exite no formul√°rio.';
                     }
                     
                     $mixExtraSearchFields = '"' . $mixExtraSearchFields . '":' . $v = 'jQuery("#' . $mixExtraSearchFields . '").get(0).value';
@@ -2117,12 +2117,12 @@ class TForm Extends TBox
         
         if( !$this->getField( $strFieldName )->getProperty( 'title' ) )
         {
-            // colocar hint no input para auxiliar o usu·rio
+            // colocar hint no input para auxiliar o usu√°rio
             if( ( int ) $intMinChars < 5 )
             {
                 if( !$this->getField( $strFieldName )->getTooltip() )
                 {
-                    $this->getField( $strFieldName )->setTooltip( 'Campo autocompletar', 'Inicie a digitaÁ„o e aguarde a lista de opÁıes!' );
+                    $this->getField( $strFieldName )->setTooltip( 'Campo autocompletar', 'Inicie a digita√ß√£o e aguarde a lista de op√ß√µes!' );
                 }
             }
         }
@@ -2130,14 +2130,14 @@ class TForm Extends TBox
     }
     //-----------------------------------------------------------------------------
     /**
-     * MÈtodo para adicionar funÁıes javascript ao formulario que ser„o executadas
-     * apÛs o mesmo tiver sido completamente carregado pelo browser
+     * M√©todo para adicionar fun√ß√µes javascript ao formulario que ser√£o executadas
+     * ap√≥s o mesmo tiver sido completamente carregado pelo browser
      *
-     * O parametro, $intIndex È opcional, e deve ser utilizado para estabelecer a ordem de
-     * execuÁ„o dos cÛdigos javascripts, do menor para o maior
+     * O parametro, $intIndex √© opcional, e deve ser utilizado para estabelecer a ordem de
+     * execu√ß√£o dos c√≥digos javascripts, do menor para o maior
      *
-     * Para retornar o conteudo das vari·veis php $_POST,$_GET ou $_REQUEST no formato json,
-     * basta passar o nome da funÁ„o no formato: minhaFuncao(POST) ou minhaFuncao(GET) ou minhaFuncao(REQUEST);
+     * Para retornar o conteudo das vari√°veis php $_POST,$_GET ou $_REQUEST no formato json,
+     * basta passar o nome da fun√ß√£o no formato: minhaFuncao(POST) ou minhaFuncao(GET) ou minhaFuncao(REQUEST);
      *
      * <code>
      * 	addJavascript("alert('mensagem 1')");
@@ -2156,7 +2156,7 @@ class TForm Extends TBox
         
         if( $strJs )
         {
-            // adicionar parentes se tiver passado o nome da funÁ„o
+            // adicionar parentes se tiver passado o nome da fun√ß√£o
             if( !preg_match('/[ =\(]/',$strJs))
             {
                 //$strJs.='('.json_encode($_REQUEST).')';
@@ -2175,7 +2175,7 @@ class TForm Extends TBox
             {
                 $strJs = preg_replace('/\(REQUEST\)/','('.json_encode($_REQUEST).')',$strJs );
             }
-            // adicionar ; se n„o tiver
+            // adicionar ; se n√£o tiver
             if( preg_match( '/;\z/', $strJs ) == 0 )
             {
                 $strJs .= ';';
@@ -2200,7 +2200,7 @@ class TForm Extends TBox
         {
             if( !is_array( $this->getJavascript() ) )
             {
-                // comeÁar no indice 20 para poder inserir algum javascript que precise
+                // come√ßar no indice 20 para poder inserir algum javascript que precise
                 // ser executado primeiro
                 $this->javascript[ 20 ] = $strJs;
             }
@@ -2345,7 +2345,7 @@ class TForm Extends TBox
     /**
      * Validar os campos do formulario,Abas ou Grupos
      *
-     * Os erros encontrados ser„o adicionados ao array est·tico self::errors
+     * Os erros encontrados ser√£o adicionados ao array est√°tico self::errors
      *
      * O parametro $strPage deve ser utilizado para validar os campos de uma aba/grupo quando
      * necessario
@@ -2371,15 +2371,15 @@ class TForm Extends TBox
          {
              
              $field = $dc->getField();
-             if( $field->getFieldType() == 'tag' ) // n„o possui validaÁ„o
+             if( $field->getFieldType() == 'tag' ) // n√£o possui valida√ß√£o
              {
                  
              }
-             else if( $field->getFieldType() == 'helpbox' ) // n„o possui validaÁ„o
+             else if( $field->getFieldType() == 'helpbox' ) // n√£o possui valida√ß√£o
              {
                  
              }
-             else if( $field->getFieldType() == 'link' ) //n„o possui validaÁ„o
+             else if( $field->getFieldType() == 'link' ) //n√£o possui valida√ß√£o
              {
                  
              }
@@ -2411,10 +2411,10 @@ class TForm Extends TBox
                      {
                          $tbsName = '';
                          $tab = '';
-                         // adicionar o nome da aba na mensagem de campos inv·lidos do formul·rio
+                         // adicionar o nome da aba na mensagem de campos inv√°lidos do formul√°rio
                          //if($this->getFieldType()=='tabsheet')
                          //{
-                         // a variavel $tbsName tem que conter um espaÁo para diferenciar do nome de um campo com erro
+                         // a variavel $tbsName tem que conter um espa√ßo para diferenciar do nome de um campo com erro
                          // e permitir setar o foco no primeiro campo que contiver um erro.
                          //print $this->getId().'<br>';
                          //$tbsName = '(Aba '.substr($this->getId(),(strpos($this->getId(),'_'))).'):';
@@ -2459,7 +2459,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Define o campo que receber· o foco inicial quando o formul·rio for exibido
+      * Define o campo que receber√° o foco inicial quando o formul√°rio for exibido
       *
       * @param mixed $strFieldName
       */
@@ -2489,7 +2489,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Retorna o campo definido para receber o foco inicial quando o formul·rio for exibido
+      * Retorna o campo definido para receber o foco inicial quando o formul√°rio for exibido
       *
       */
      public function getFocusField()
@@ -2497,7 +2497,7 @@ class TForm Extends TBox
          return $this->focusField;
      }
      /**
-      * Define ou limpa as mensagens que ser„o exibidas na tela via alert() em javascript
+      * Define ou limpa as mensagens que ser√£o exibidas na tela via alert() em javascript
       *
       * <code>
       * 	$frm->setMessage(); // limpar todas as mensagns
@@ -2532,9 +2532,9 @@ class TForm Extends TBox
      /**
       * Define a mensagem para ser exibida no topo da tela em uma div com efeito de auto-esconder
       *
-      * intSeconds -> tempo em segundos que a mensagem ficar· visÌvel na tela. Default: 5
+      * intSeconds -> tempo em segundos que a mensagem ficar√° vis√≠vel na tela. Default: 5
       * strType -> define a cor de fundo e boda, pode ser ERROR, SUCESS. Default: SUCESS
-      * strImage -> icone que ser· exibido ‡ esquerda da mensagem . Default:sucess.gif
+      * strImage -> icone que ser√° exibido √† esquerda da mensagem . Default:sucess.gif
       * <code>
       * 	$frm->setPopupMessge('Dados gravados corretamente');
       * </code>
@@ -2556,7 +2556,7 @@ class TForm Extends TBox
          return $this->messagePopUp;
      }
      /**
-      * Adiciona uma mensagem ‡ lista, para ser exibida na tela via alert() em javascript quando o formul·rio for exibido
+      * Adiciona uma mensagem √† lista, para ser exibida na tela via alert() em javascript quando o formul√°rio for exibido
       *
       * <code>
       * 	$frm->addMessae('Mensagem nova');
@@ -2586,10 +2586,10 @@ class TForm Extends TBox
          return $this->messages;
      }
      /**
-      * Desabilitar/Habilitar campos do formul·rio
+      * Desabilitar/Habilitar campos do formul√°rio
       * Pode ser passado um campo ou varios, separados por virgula,
       * tambem pode ser um array de campos.
-      * Se for passado null, todos os campos ser„o desabilitados.
+      * Se for passado null, todos os campos ser√£o desabilitados.
       *
       * <code>
       * 	$form->disableFields('nom_pessoa');
@@ -2676,7 +2676,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * MÈtodo para retornar um array com dados das UFs
+      * M√©todo para retornar um array com dados das UFs
       *
       * <code>
       * 	$frm->getUfs("COD_UF,SIG_UF"); // retorna array com codigo e sigla
@@ -2717,10 +2717,10 @@ class TForm Extends TBox
          $aUf[ "NOM_UF" ][ 18 ] = "ESPIRITO SANTO";
          $aUf[ "COD_UF" ][ 26 ] = "52";
          $aUf[ "SIG_UF" ][ 26 ] = "GO";
-         $aUf[ "NOM_UF" ][ 26 ] = "GOI¡S";
+         $aUf[ "NOM_UF" ][ 26 ] = "GOI√ÅS";
          $aUf[ "COD_UF" ][ 8 ] = "21";
          $aUf[ "SIG_UF" ][ 8 ] = "MA";
-         $aUf[ "NOM_UF" ][ 8 ] = "MARANH√O";
+         $aUf[ "NOM_UF" ][ 8 ] = "MARANH√ÉO";
          $aUf[ "COD_UF" ][ 25 ] = "51";
          $aUf[ "SIG_UF" ][ 25 ] = "MT";
          $aUf[ "NOM_UF" ][ 25 ] = "MATO GROSSO";
@@ -2780,19 +2780,19 @@ class TForm Extends TBox
          return $result;
      }
      /**
-      * MÈtodo para fazer campos selects em cascata, onde o valor do select filho depende
+      * M√©todo para fazer campos selects em cascata, onde o valor do select filho depende
       * do valor do select pai
-      * O parametro pacoteFuncaoOracle pode ser o nome de uma tabela ou vis„o
+      * O parametro pacoteFuncaoOracle pode ser o nome de uma tabela ou vis√£o
       * Se for utilizar a classe banco, pode ser passado o tempo do cache separado com pipe
-      * Ex: sisteste.pkg_geral.sel_municipio|60 ( chave de 60 segundos ), para n„o utilizar cache
-      * passe -1, para utilizar a sess„o passe 0 ( zero )
+      * Ex: sisteste.pkg_geral.sel_municipio|60 ( chave de 60 segundos ), para n√£o utilizar cache
+      * passe -1, para utilizar a sess√£o passe 0 ( zero )
       *
-      * O parametro $strFuncaoExecutar È o nome de uma funÁ„o que ser· chamada quando o campo pai for alterado ( onChange ).
+      * O parametro $strFuncaoExecutar √© o nome de uma fun√ß√£o que ser√° chamada quando o campo pai for alterado ( onChange ).
       *
       * o Parametro $campoFormFiltro dever estar no formato: campo_formulario|campo_banco. Ex: nome_usuario|NOM_USUARIO, quando
-      * o nome do formul·rio for diferente do nome do parametro do banco de dados
+      * o nome do formul√°rio for diferente do nome do parametro do banco de dados
       *
-      * O parametro $boolSelectUniqueOption ativa a seleÁ„o autom·tica quando houver apenas uma opÁ„o disponÌvel
+      * O parametro $boolSelectUniqueOption ativa a sele√ß√£o autom√°tica quando houver apenas uma op√ß√£o dispon√≠vel
       *
       * @example exemple/exCampoSelectAgrupado.php
       *
@@ -2812,7 +2812,7 @@ class TForm Extends TBox
       */
      function combinarSelects( $selectPai='cod_uf', $selectFilho='cod_municipio', $TabelaPacoteFuncao=null, $colunaFiltro='COD_UF', $colunaCodigo='COD_MUNICIPIO', $colunaDescricao='NOM_MUNICIPIO', $descPrimeiraOpcao='-- Selecione --', $valorPrimeiraOpcao='', $descNenhumaOpcao='-- vazio --', $campoFormFiltro='', $funcaoExecutar='',$boolSelectUniqueOption=null )
      {
-         // se o campo estiver dentro de uma aba ou de cum container, chamar o mÈtodo combinar select destes
+         // se o campo estiver dentro de uma aba ou de cum container, chamar o m√©todo combinar select destes
          $parentField = $this->getField( $selectPai );
          if( $parentField )
          {
@@ -2827,7 +2827,7 @@ class TForm Extends TBox
              return;
          }
          //die($selectPai);
-         // inicializar com os valores padr„o
+         // inicializar com os valores padr√£o
          $descNenhumaOpcao = $descNenhumaOpcao == null ? '-- vazio --' : $descNenhumaOpcao;
          $descPrimeiraOpcao = is_null( $descPrimeiraOpcao ) ? '-- selecione --' : $descPrimeiraOpcao;
          $valorPrimeiraOpcao = $valorPrimeiraOpcao == null ? '' : $valorPrimeiraOpcao;
@@ -2857,45 +2857,45 @@ class TForm Extends TBox
          $this->selectsCombinados[ $selectPai ][ $selectFilho ] = $arrDados;
      }
      /**
-      * Adiciona bot„o ‡ frente do campo para fazer pesquisa on-line no banco de dados e retornar valores
+      * Adiciona bot√£o √† frente do campo para fazer pesquisa on-line no banco de dados e retornar valores
       * para os campos do formulario
       *
-      * O parametro strAutoFillFilterField informa o nome do campo de filtro que receber· o valor digitado
-      * pelo usu·rio ao chamar a consulta on-line.
+      * O parametro strAutoFillFilterField informa o nome do campo de filtro que receber√° o valor digitado
+      * pelo usu√°rio ao chamar a consulta on-line.
       *
       * O parametro $boolAutoStart - informa que a pesquisa deve iniciada assim que a tela for
-      * aberta sem precisar pressionar o bot„o pesquisar.
+      * aberta sem precisar pressionar o bot√£o pesquisar.
       *
-      * O parametro $boolAutoSelect - informa que se a consulta retornar apenas um resultado este dever· ser
+      * O parametro $boolAutoSelect - informa que se a consulta retornar apenas um resultado este dever√° ser
       * automaticamente selecionado e retornado para a tela
       *
       * Ex: strFilterFields (campoBanco|Rotulo|caracteres|tamanho|obrigatorio|tipo|casas decimais|parte do campo|pesquisar formatado )
       *                     (name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated)
-      * 	NOM_INTERRESSADO|Nome Interessado:|45||||true,NUM_ORIGINAL|N∫ Original:,DES_ASSUNTO|Assunto,COD_UF|Estado:||||uf'
+      * 	NOM_INTERRESSADO|Nome Interessado:|45||||true,NUM_ORIGINAL|N¬∫ Original:,DES_ASSUNTO|Assunto,COD_UF|Estado:||||uf'
       * 	o tipo pode ser: char, uf, cpf, cnpj, cpfcnpj, data, int, dec, select ou hidden
-      * 	o padrao È char de 30
+      * 	o padrao √© char de 30
       *
       * Ex: $strFormFilterFields  (campoForm|campoBanco)
       * 	NUM_PESSOA,NUM_PESSOA=2,num_pessoa|COD_PESSOA
       *
       * O parametro @arrSql dever ser utilizado para popular os campos do tipo select.
-      * Deve ser informado o nome do campo e a instruÁ„o sql ou o nome do pacote
+      * Deve ser informado o nome do campo e a instru√ß√£o sql ou o nome do pacote
       * Ex: array('COD_UF'=>"SELECT COD_UF,NOM_UF||'/'||SIG_UF AS SIG_UF FROM UF ORDER BY SIG_UF")
       * 	   array('COD_UF'=>"TESTE.PKG_MOEDA.SEL_UF,0,COD_UF,SIG_UF")
       * Juntamente com o nome do pacote, pode ser informado o tempo de cache, o campo chave, o campo descricao
       * separados por virgula
       *
-      * O parametro $strClickCondition informa  uma condiÁ„o para habilitar ou n„o o hiperlink nos itens do resultado da consulta
-      * para que o usu·rio possa selecinar ou n„o aquele item
+      * O parametro $strClickCondition informa  uma condi√ß√£o para habilitar ou n√£o o hiperlink nos itens do resultado da consulta
+      * para que o usu√°rio possa selecinar ou n√£o aquele item
       *
-      * O parametro $strOnClickJs deve ser utilizado para chamar uma funÁ„o js antes de abrir a consulta dinamica.
-      * Se esta funÁ„o retornar false a tela de consulta din„mica n„o ser· aberta
+      * O parametro $strOnClickJs deve ser utilizado para chamar uma fun√ß√£o js antes de abrir a consulta dinamica.
+      * Se esta fun√ß√£o retornar false a tela de consulta din√£mica n√£o ser√° aberta
       *
       * o parametro boolDisableEnterKey - desabilita/habilita a tecla Enter para chamar a consulta dinamica do campo
       * deve ser utilizado em conjunto com os parametros strAutoFillFilterField,$boolAutoStart e $boolAutoSelect
       *
-      * O parametro $strCrudModuleName deve ser utilizado para quando for necess„rio permitir ao usu·rio
-      * fazer o cadastramento on-line do item n„o encontrado na pesquisa. Basta passar o nome do mÛdulo a ser chamado.
+      * O parametro $strCrudModuleName deve ser utilizado para quando for necess√£rio permitir ao usu√°rio
+      * fazer o cadastramento on-line do item n√£o encontrado na pesquisa. Basta passar o nome do m√≥dulo a ser chamado.
       *
       * @param string $strFieldName
       * @param string $strPackageFunction  - Nome do pacote Orecla OU tabela em outro banco
@@ -2903,7 +2903,7 @@ class TForm Extends TBox
       * @param string $strAutoFillFilterField
       * @param bool $boolAutoStart
       * @param bool $boolAutoSelect
-      * @param string $strGridColumns - colunas que ir„o aparecer no grid
+      * @param string $strGridColumns - colunas que ir√£o aparecer no grid
       * @param string $strUpdateFormFields  - coluna busca | campo form destino, coluna busca | campo form destino
       * @param string $strWindowHeader -  Titulo da janela de pesquisa
       * @param string $strGridHeader   -  Titulo do Gride
@@ -2926,7 +2926,7 @@ class TForm Extends TBox
       */
      public function setOnlineSearch( $strFieldName, $strPackageFunction=null, $strFilterFields=null, $strAutoFillFilterField=null, $boolAutoStart=null, $boolAutoSelect=null, $strGridColumns=null, $strUpdateFormFields=null, $strWindowHeader=null, $strGridHeader=null, $strFocusFieldName=null, $strWindowHeight=null, $strWindowWidth=null, $strSearchButtonLabel=null, $strFormFilterFields=null, $strFunctionExecute=null, $intMaxRecord=null, $strClickCondition=null, $strMultiSelectKeyField=null, $strColumnLink=null, $arrSqls=null, $strBeforeExecuteJs=null, $boolDisableEnterKey=null, $strCrudModuleName=null,$boolCaseSensitive=null )
      {
-         // valores padr„o;
+         // valores padr√£o;
          $strWindowHeight = ( is_null( $strWindowHeight )) ? 400 : $strWindowHeight;
          $strWindowHeight = ( ( int ) $strWindowHeight < 100 ) ? 400 : $strWindowHeight;
          $strWindowWidth = ( is_null( $strWindowWidth ) ) ? 600 : $strWindowWidth;
@@ -2980,7 +2980,7 @@ class TForm Extends TBox
          $this->onlineSearchs[ $strFieldName ] = $arrData;
      }
      /**
-      * MÈtodo para implementaÁ„o de cadastro on-line durante o preenchimento do formulario.
+      * M√©todo para implementa√ß√£o de cadastro on-line durante o preenchimento do formulario.
       *
       * <code>
       * 	$frm->setOnlineCrud('nom_pessoa','cad_pessoa','adicionar_pasta.gif',null,'Cadastrar pessoa','Cadastro de Pessoa',350,820);
@@ -3009,10 +3009,10 @@ class TForm Extends TBox
          $this->onlineCruds[ $strFieldName ] = $arrData;
      }
      /**
-      * MÈtodo para limpar os campos do formulario
+      * M√©todo para limpar os campos do formulario
       * Pode ser passado um campo ou varios separados por virgula.
-      * TambÈm pode ser um array de campos. Se for passado null,
-      * todos os campos ser„o lipos
+      * Tamb√©m pode ser um array de campos. Se for passado null,
+      * todos os campos ser√£o lipos
       *
       * <code>
       * 	$form->clearFields('nom_pessoa');
@@ -3097,9 +3097,9 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * MÈtodo para definir o valor de um campo
-      * O parametro strTag pode ser utilizado para passar um valor a mais para a funÁ„o
-      * setValue do campo. No caso do campo coordGMS È utilizado para passar LAT ou LON
+      * M√©todo para definir o valor de um campo
+      * O parametro strTag pode ser utilizado para passar um valor a mais para a fun√ß√£o
+      * setValue do campo. No caso do campo coordGMS √© utilizado para passar LAT ou LON
       * <code>
       * 	$form->setFieldValue('coord2',-28.4541666667,'LAT');
       * </code>
@@ -3135,7 +3135,7 @@ class TForm Extends TBox
          return $this->getValue( $strField );
      }
      /**
-      * Define o valor de um campo do formul·rio ( equivalente a setFieldValue() )
+      * Define o valor de um campo do formul√°rio ( equivalente a setFieldValue() )
       *
       * @param string $strFieldName
       * @param mixed $mixValue
@@ -3155,7 +3155,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Retorna o valor de um campo do formul·rio ( equivalente ao getFieldValue())
+      * Retorna o valor de um campo do formul√°rio ( equivalente ao getFieldValue())
       *
       * @param string $strField
       */
@@ -3176,15 +3176,15 @@ class TForm Extends TBox
          return null;
      }
      /**
-      * Este mÈtodo deve ser utilizado para criar o array com os nomes e valores dos campos que
-      * ser· utilizado como parametro "$bvars" no metodo executarPacote ou recuperarPacote
+      * Este m√©todo deve ser utilizado para criar o array com os nomes e valores dos campos que
+      * ser√° utilizado como parametro "$bvars" no metodo executarPacote ou recuperarPacote
       *
       * <code>
       * 	$bvars = $frm->createBvars('num_pessoa,nom_pessoa,uf|COD_UF');
       * </code>
       *
-      * Quando o nome do campo do formul·rio n„o for igual ao nome do campo da tabela do banco
-      * de dados, deve ser informado o nome do campo do formul·rio e o nome do campo da tabela
+      * Quando o nome do campo do formul√°rio n√£o for igual ao nome do campo da tabela do banco
+      * de dados, deve ser informado o nome do campo do formul√°rio e o nome do campo da tabela
       *
       * O parametro boolPDO retorna o array simples para ser passado como parametro das queries da
       * classe pdo.
@@ -3309,10 +3309,10 @@ class TForm Extends TBox
      }
      /**
       * Define um array no formato "key=>value" ou string no formato "S=SIM,N=NAO,..." ou
-      * o nome de um pacoteFunÁ„o para recuperar do banco de dados para alimentar as opÁıes dos
+      * o nome de um pacoteFun√ß√£o para recuperar do banco de dados para alimentar as op√ß√µes dos
       * campos selects.
-      * Quando for utilizado o pacote/funÁ„o, pode ser especificada a coluna chave, a coluna descriÁ„o e
-      * searchFields como parametros para a funÁ„o do pacote que ser· executada.
+      * Quando for utilizado o pacote/fun√ß√£o, pode ser especificada a coluna chave, a coluna descri√ß√£o e
+      * searchFields como parametros para a fun√ß√£o do pacote que ser√° executada.
       *
       * <code>
       * 	$mixSearchFields="cod_uf=53,num_pessoa=20" ou array('COD_UF'=53,'NUM_PESSOA'=>20)
@@ -3335,7 +3335,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Define se os campos do formulario ou a aba ou o grupo ser„o todos obrigatÛrios.
+      * Define se os campos do formulario ou a aba ou o grupo ser√£o todos obrigat√≥rios.
       *
       * @param boolean $boolValue
       */
@@ -3344,8 +3344,8 @@ class TForm Extends TBox
          $this->setAttribute('needed', ( ( bool ) $boolValue ? 'true' : 'false' ) );
      }
      /**
-      * Retorna se o form ou grupo ou aba est„o definido como obrigatÛrios.
-      * Se estiverem obrigatÛrio, todos os seus campos ser„o defindos como obrigatÛrios.
+      * Retorna se o form ou grupo ou aba est√£o definido como obrigat√≥rios.
+      * Se estiverem obrigat√≥rio, todos os seus campos ser√£o defindos como obrigat√≥rios.
       *
       */
      public function getRequired()
@@ -3353,8 +3353,8 @@ class TForm Extends TBox
          return $this->getAttribute('needed') == "true";
      }
      /**
-      * Este mÈtodo fecha um campo grupo ou um campo aba para que os campos
-      * seguintes fique abaixo dos mesmos e n„o dentro deles.
+      * Este m√©todo fecha um campo grupo ou um campo aba para que os campos
+      * seguintes fique abaixo dos mesmos e n√£o dentro deles.
       *
       */
      public function closeGroup()
@@ -3367,7 +3367,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Define se o bot„o fechar do formul·rio estar· visÌvel ou n„o.
+      * Define se o bot√£o fechar do formul√°rio estar√° vis√≠vel ou n√£o.
       *
       * @param boolean $boolNewValue
       */
@@ -3377,7 +3377,7 @@ class TForm Extends TBox
          $this->showCloseButton = $boolNewValue;
      }
      /**
-      * Desativa a exibiÁ„o do bot„o fechar  no canto superior direito do formulario. ( equivalente a setShowCloseButton(false); )
+      * Desativa a exibi√ß√£o do bot√£o fechar  no canto superior direito do formulario. ( equivalente a setShowCloseButton(false); )
       *
       */
      public function hideCloseButton()
@@ -3385,7 +3385,7 @@ class TForm Extends TBox
          $this->showCloseButton = false;
      }
      /**
-      * Ativa o modo de exibiÁ„o do bot„o fechar no canto superior direito do formul·rio. ( equivalente a setShowCloseButton(true); )
+      * Ativa o modo de exibi√ß√£o do bot√£o fechar no canto superior direito do formul√°rio. ( equivalente a setShowCloseButton(true); )
       *
       */
      public function showCloseButton()
@@ -3393,7 +3393,7 @@ class TForm Extends TBox
          $this->showCloseButton = true;
      }
      /**
-      * Retorna se a exibiÁ„o do bot„o fechar no canto superior direito do formul·rio est· ativada ou n„o.
+      * Retorna se a exibi√ß√£o do bot√£o fechar no canto superior direito do formul√°rio est√° ativada ou n√£o.
       *
       */
      public function getShowCloseButton()
@@ -3405,7 +3405,7 @@ class TForm Extends TBox
          return $this->showCloseButton;
      }
      /**
-      * Atualiza os valores dos campos do formul·rio com os valores do array recebido.
+      * Atualiza os valores dos campos do formul√°rio com os valores do array recebido.
       *
       *
       * <code>
@@ -3512,7 +3512,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Elimina o array de botıes que ser„o exibidos no rodapÈ do formul·rio.
+      * Elimina o array de bot√µes que ser√£o exibidos no rodap√© do formul√°rio.
       *
       */
      public function clearButtons()
@@ -3520,7 +3520,7 @@ class TForm Extends TBox
          $this->footerButtons = null;
      }
      /**
-      * Elimina todos os campos do formul·rio ou apenas os campos informados no parametro mixFields, ignorando
+      * Elimina todos os campos do formul√°rio ou apenas os campos informados no parametro mixFields, ignorando
       * os campos informados no parametro mixIgnoreFields.
       *
       * <code>
@@ -3598,7 +3598,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Exclui um campo ou os campos informados do formul·rio, ignorando os que estiverem no parametro $mixIgnoreFields
+      * Exclui um campo ou os campos informados do formul√°rio, ignorando os que estiverem no parametro $mixIgnoreFields
       *
       * <code>
       * 	$frm->deleteFields('campo1,campo2,campo3');
@@ -3613,7 +3613,7 @@ class TForm Extends TBox
          $this->removeField( $mixFields = null, $mixIgnoreFields = null );
      }
      /**
-      * Define se o formu·rio dever· ou n„o exibir o tÌtulo.
+      * Define se o formu√°rio dever√° ou n√£o exibir o t√≠tulo.
       *
       * @param boolean $boolShow
       */
@@ -3626,7 +3626,7 @@ class TForm Extends TBox
          return $this->showHeader = ( bool ) $boolShow;
      }
      /**
-      * Retorna se o formul·rio deve ou n„o exibir o tÌtulo.
+      * Retorna se o formul√°rio deve ou n√£o exibir o t√≠tulo.
       *
       */
      public function getShowHeader()
@@ -3634,8 +3634,8 @@ class TForm Extends TBox
          return $this->showHeader;
      }
      /**
-      * Define se o formul·rio dever· incluir os arquivos base/js/... necess·rios automaticamente em
-      * funÁ„o dos campos que foram adicionados.
+      * Define se o formul√°rio dever√° incluir os arquivos base/js/... necess√°rios automaticamente em
+      * fun√ß√£o dos campos que foram adicionados.
       *
       * @param boolean $boolAutoInclude
       */
@@ -3648,7 +3648,7 @@ class TForm Extends TBox
          return $this->autoIncludeJsCss;
      }
      /**
-      * Define o valor que set· exibido no titulo do formul·rio.
+      * Define o valor que set√° exibido no titulo do formul√°rio.
       *
       * @param string $strNewText
       */
@@ -3658,7 +3658,7 @@ class TForm Extends TBox
          return $this;
      }
      /**
-      * Retorna o valor do titulo do formul·rio
+      * Retorna o valor do titulo do formul√°rio
       *
       */
      public function getTitle()
@@ -3666,7 +3666,7 @@ class TForm Extends TBox
          return $this->title;
      }
      /**
-      * Define o formato das bordas do formul·rio.
+      * Define o formato das bordas do formul√°rio.
       * True = borda simples
       * False = borda 3d
       *
@@ -3678,7 +3678,7 @@ class TForm Extends TBox
          return $this;
      }
      /**
-      * Retona se o formul·rio dever ser exibido com ou sem as bordas 3d
+      * Retona se o formul√°rio dever ser exibido com ou sem as bordas 3d
       *
       */
      public function getFlat()
@@ -3686,7 +3686,7 @@ class TForm Extends TBox
          return $this->flat;
      }
      /**
-      * Define se a classe dever· adicionar cÛdigo javascript para compatibilidade
+      * Define se a classe dever√° adicionar c√≥digo javascript para compatibilidade
       * com a biblioteca prototype window.
       *
       * @param boolean $boolNewValue
@@ -3696,7 +3696,7 @@ class TForm Extends TBox
          $this->prototypeId = $strNewValue;
      }
      /**
-      * Retorna se o formul·rio dever· ser ou n„o compativel com a biblioteca prototype window
+      * Retorna se o formul√°rio dever√° ser ou n√£o compativel com a biblioteca prototype window
       *
       */
      public function getPrototypeId()
@@ -3704,7 +3704,7 @@ class TForm Extends TBox
          return $this->prototypeId;
      }
      /**
-      * Retorna se o formul·rio dever· ser ou n„o compativel com a biblioteca prototype window
+      * Retorna se o formul√°rio dever√° ser ou n√£o compativel com a biblioteca prototype window
       *
       */
      public function getDialogId()
@@ -3716,8 +3716,8 @@ class TForm Extends TBox
          return null;
      }
      /**
-      * Retorna array como os arquivos js e css necess·rios para funcionamento
-      * dos campos adicionados ao formul·rio.
+      * Retorna array como os arquivos js e css necess√°rios para funcionamento
+      * dos campos adicionados ao formul√°rio.
       */
      public function getJsCss()
      {
@@ -3817,7 +3817,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Adiciona um ou v·rios arquivos js ao formul·rio
+      * Adiciona um ou v√°rios arquivos js ao formul√°rio
       *
       * @param mixed $mixJsFile
       */
@@ -3854,7 +3854,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Adiciona um ou v·rios arquivos CSS ao formul·rio.
+      * Adiciona um ou v√°rios arquivos CSS ao formul√°rio.
       *
       * @param mixed $mixCssFile
       */
@@ -3886,7 +3886,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Define se o html gerado dever· ser somente da tag form ou o codigo html da pagina completo.
+      * Define se o html gerado dever√° ser somente da tag form ou o codigo html da pagina completo.
       *
       * @param boolean $boolShow
       */
@@ -3899,12 +3899,12 @@ class TForm Extends TBox
          return $this->showHtmlTag;
      }
      /**
-      * MÈtodo interno para gerar o codigo html de inserÁ„o dos arquivos js/css adicionados ao formul·rio
+      * M√©todo interno para gerar o codigo html de inser√ß√£o dos arquivos js/css adicionados ao formul√°rio
       *
       */
      protected function includeJsCss()
      {
-         // verificar quais css e js ser„o necess·rios de acordo com os campos adicionados
+         // verificar quais css e js ser√£o necess√°rios de acordo com os campos adicionados
          $this->getJsCss();
          $arrTemp = array_merge( $this->jsFiles, $this->cssFiles );
          if( is_array( $arrTemp ) )
@@ -3964,7 +3964,7 @@ class TForm Extends TBox
          }
      }
      /**
-      * Retorna a largura m·xima da ·rea interna do formul·rio.
+      * Retorna a largura m√°xima da √°rea interna do formul√°rio.
       *
       */
      public function getMaxWidth($controlType=null)
@@ -4103,7 +4103,7 @@ class TForm Extends TBox
          
      }
      /**
-      * Retorna o campo aba ou o campo grupo que est· aberto no momento
+      * Retorna o campo aba ou o campo grupo que est√° aberto no momento
       *
       */
      public function getCurrentContainer()
@@ -4112,7 +4112,7 @@ class TForm Extends TBox
          {
              if( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getFieldType() == "pagecontrol" )
              {
-                 // retornar a ˙ltima aba aberta
+                 // retornar a √∫ltima aba aberta
                  if( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getPages() )
                  {
                      $aLastPage = array_slice( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getPages(), -1, 1, true );
@@ -4128,8 +4128,8 @@ class TForm Extends TBox
          return null;
      }
      /**
-      * MÈtodo para adicionar arquivos php que geram PDF
-      * o PDF ser· exibido em um outro formul·rio, abaixo do formul·rio principal
+      * M√©todo para adicionar arquivos php que geram PDF
+      * o PDF ser√° exibido em um outro formul√°rio, abaixo do formul√°rio principal
       *
       * @param string $strFileName
       * @param string $strWindowTitle
@@ -4138,7 +4138,7 @@ class TForm Extends TBox
       */
      public function addPdfFile( $strFileName, $strWindowTitle=null, $intHeight=null, $intWidth=null )
      {
-         // aba e grupos n„o pode ter pdfs anexados
+         // aba e grupos n√£o pode ter pdfs anexados
          if( $this->getFieldType() == "form" )
          {
              $strFileName = preg_replace( '/\?/', '&', $strFileName );
@@ -4147,7 +4147,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Limpar a consulta din‚mica de um campo ou todas se o nome do campo n„o for informado
+      * Limpar a consulta din√¢mica de um campo ou todas se o nome do campo n√£o for informado
       *
       * @param string $strFieldName
       */
@@ -4162,7 +4162,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Utilizado para definr o formato de postagem do formul·rio
+      * Utilizado para definr o formato de postagem do formul√°rio
       *
       * @param string $strNewValue
       */
@@ -4172,7 +4172,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Retorna o formato de postagem do formul·rio
+      * Retorna o formato de postagem do formul√°rio
       *
       */
      public function getEncType()
@@ -4181,8 +4181,8 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Exibe os arquivos que geram pdf, adicionados pelo mÈtodo addPdfFile(), na parte
-      * inferior do formul·rio.
+      * Exibe os arquivos que geram pdf, adicionados pelo m√©todo addPdfFile(), na parte
+      * inferior do formul√°rio.
       *
       * @param mixed $print
       * @param mixed $flat
@@ -4212,7 +4212,7 @@ class TForm Extends TBox
      }
      //-----------------------------------------------------------------------------
      /**
-      * Define uma funÁ„o javascript que ser· chamada quando o formul·rio for fechado
+      * Define uma fun√ß√£o javascript que ser√° chamada quando o formul√°rio for fechado
       *
       * @param string $strJsFunction
       */
@@ -4221,7 +4221,7 @@ class TForm Extends TBox
          $this->onClose = str_replace( "'", "\'", str_replace( '"', "'", $strJsFunction ) );
      }
      /**
-      * Retorna a funÁ„o javascript que ser· chamada quando o formul·rio for fechado
+      * Retorna a fun√ß√£o javascript que ser√° chamada quando o formul√°rio for fechado
       *
       */
      public function getOnClose()
@@ -4233,8 +4233,8 @@ class TForm Extends TBox
          return is_null($this->onClose) ? 'null' : $this->onClose;
      }
      /**
-      * Define uma funÁ„o javascript que ser· chamada antes do formul·rio for fechado.
-      * Se o resultado for false o fechamento ser· cancelado
+      * Define uma fun√ß√£o javascript que ser√° chamada antes do formul√°rio for fechado.
+      * Se o resultado for false o fechamento ser√° cancelado
       *
       * @param string $strJsFunction
       */
@@ -4243,7 +4243,7 @@ class TForm Extends TBox
          $this->onBeforeClose = str_replace( "'", "\'", str_replace( '"', "'", $strJsFunction ) );
      }
      /**
-      * Retorna a funÁ„o javascript que ser· chamada quando o formul·rio for fechado
+      * Retorna a fun√ß√£o javascript que ser√° chamada quando o formul√°rio for fechado
       *
       */
      public function getOnBeforeClose()
@@ -4255,14 +4255,14 @@ class TForm Extends TBox
          return is_null($this->onBeforeClose) ? 'null' : $this->onBeforeClose;
      }
      /**
-      * O mÈtodo redirect deve ser utilizado para chamar um outro formul·rio dentro de uma aÁ„o do formul·rio
-      * corrente, sem ter que submeter a p·gina.
-      * Quando o parametro $boolSaveData for true, os dados do formul·rio ser„o salvos na sess„o para quando
-      * retornar manter os campos preenchidos. O Padr„o È true.
+      * O m√©todo redirect deve ser utilizado para chamar um outro formul√°rio dentro de uma a√ß√£o do formul√°rio
+      * corrente, sem ter que submeter a p√°gina.
+      * Quando o parametro $boolSaveData for true, os dados do formul√°rio ser√£o salvos na sess√£o para quando
+      * retornar manter os campos preenchidos. O Padr√£o √© true.
       * <code>
       * 	if($acao =='Ir')
       * 	{
-      * 		$frm->redirect('modulo2.inc','Redirect realizado com sucesso. VocÍ est· agora no 2∫ form.');
+      * 		$frm->redirect('modulo2.inc','Redirect realizado com sucesso. Voc√™ est√° agora no 2¬∫ form.');
       * 	}
       * </code>
       *
@@ -4280,7 +4280,7 @@ class TForm Extends TBox
           
           if( $fileExists ) {
               $currentModule = $this->getRealPath( $_POST['modulo'] );
-              // guardar na sess„o somente se estiver indo, na volta n„o precisa
+              // guardar na sess√£o somente se estiver indo, na volta n√£o precisa
               if( $boolSaveData )
               {
                   $_SESSION[ APLICATIVO ][ $currentModule ][ 'post' ] = $_POST;
@@ -4297,7 +4297,7 @@ class TForm Extends TBox
               {
                   //$formDinModulo = $currentModule;
                   //$acao = $_POST[ 'formDinAcao' ];
-                  // variaveis que ser„o recuperadas no formulario destino
+                  // variaveis que ser√£o recuperadas no formulario destino
                   if( is_array( $arrVars ) )
                   {
                       foreach( $arrVars as $k=>$v )
@@ -4375,7 +4375,7 @@ class TForm Extends TBox
           }
       }
       /**
-       * Adiciona um evento a um campo do formul·rio
+       * Adiciona um evento a um campo do formul√°rio
        *
        * @param string $strFieldName
        * @param string $strEventName
@@ -4397,9 +4397,9 @@ class TForm Extends TBox
           }
       }
       /**
-       * Se noWrap estiver TRUE, os rÛtulos dos campos n„o sofrer„o quebra de linha quando forem
+       * Se noWrap estiver TRUE, os r√≥tulos dos campos n√£o sofrer√£o quebra de linha quando forem
        * mais largos que as medidas defindas pelo metodo $this->setColumns(), e os campos
-       * ser„o alinhados de acordo com o comprimento dos mesmos
+       * ser√£o alinhados de acordo com o comprimento dos mesmos
        *
        * @param boolean $boolNewValue
        */
@@ -4409,7 +4409,7 @@ class TForm Extends TBox
           return $this;
       }
       /**
-       * Retora se os rÛtulos do campos do formul·rio ser„o nowrap ou n„o.
+       * Retora se os r√≥tulos do campos do formul√°rio ser√£o nowrap ou n√£o.
        *
        */
       public function getNoWrap()
@@ -4418,7 +4418,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * Adiciona ou retira o efeito de "fade" na exibiÁ„o do formul·rio.
+       * Adiciona ou retira o efeito de "fade" na exibi√ß√£o do formul√°rio.
        *
        * @param integer $intNewValue
        */
@@ -4428,7 +4428,7 @@ class TForm Extends TBox
           return $this;
       }
       /**
-       * Retorna se o efeito fade est· ligado ou desligado
+       * Retorna se o efeito fade est√° ligado ou desligado
        *
        */
       public function getFade()
@@ -4436,8 +4436,8 @@ class TForm Extends TBox
           return is_null( $this->fade ) ? 1 : (int) $this->fade;
       }
       /**
-       * Define o valor da vari·vel overflow que controla o aparecimento ou
-       * n„o da barra de rolagem vertical do formul·rio
+       * Define o valor da vari√°vel overflow que controla o aparecimento ou
+       * n√£o da barra de rolagem vertical do formul√°rio
        *
        */
       public function setOverflowY( $newValue=null )
@@ -4447,8 +4447,8 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * Retorna o valor da vari·vel overflowy que controla o aparecimento ou
-       * n„o da barra de rolagem vertical do formul·rio
+       * Retorna o valor da vari√°vel overflowy que controla o aparecimento ou
+       * n√£o da barra de rolagem vertical do formul√°rio
        *
        */
       public function getOverFlowY()
@@ -4465,8 +4465,8 @@ class TForm Extends TBox
           return $this->overflowY;
       }
       /**
-       * Define o valor da vari·vel overflow que controla o aparecimento ou
-       * n„o da barra de rolagem horizontal do formul·rio
+       * Define o valor da vari√°vel overflow que controla o aparecimento ou
+       * n√£o da barra de rolagem horizontal do formul√°rio
        *
        */
       public function setOverflowX( $newValue=null )
@@ -4476,8 +4476,8 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * Retorna o valor da vari·vel overflowy que controla o aparecimento ou
-       * n„o da barra de rolagem horizontal do formul·rio
+       * Retorna o valor da vari√°vel overflowy que controla o aparecimento ou
+       * n√£o da barra de rolagem horizontal do formul√°rio
        *
        */
       public function getOverFlowX()
@@ -4494,8 +4494,8 @@ class TForm Extends TBox
           return $this->overflowX;
       }
       /**
-       * Define o valor do atributo confirmonClose que define se a mensagem de confirmaÁ„o
-       * de fechamento do formul·rio ser· exibida ou n„o.
+       * Define o valor do atributo confirmonClose que define se a mensagem de confirma√ß√£o
+       * de fechamento do formul√°rio ser√° exibida ou n√£o.
        *
        */
       public function setConfirmOnClose( $boolNewValue=null )
@@ -4504,8 +4504,8 @@ class TForm Extends TBox
           return $this;
       }
       /**
-       * Retorna o valor do atributo confirmonClose que define se a mensagem de confirmaÁ„o
-       * de fechamento do formul·rio ser· exibida ou n„o.
+       * Retorna o valor do atributo confirmonClose que define se a mensagem de confirma√ß√£o
+       * de fechamento do formul√°rio ser√° exibida ou n√£o.
        *
        */
       public function getConfirmOnClose()
@@ -4513,9 +4513,9 @@ class TForm Extends TBox
           return is_null( $this->confirmOnClose ) ? true : $this->confirmOnClose;
       }
       /**
-       * Habilita javascript para transformaÁ„o dos campos memos
-       * em um editor de textos com recursos avanÁados de formataÁ„o ( WYSIWYG HTML ).
-       * Tambem pode ser utilizada o mÈtodo setRichEdit(true)
+       * Habilita javascript para transforma√ß√£o dos campos memos
+       * em um editor de textos com recursos avan√ßados de formata√ß√£o ( WYSIWYG HTML ).
+       * Tambem pode ser utilizada o m√©todo setRichEdit(true)
        *
        */
       public function enableRichEdit()
@@ -4523,7 +4523,7 @@ class TForm Extends TBox
           $this->richEdit = true;
       }
       /**
-       * Deabilita recurso de ediÁ„o avanÁada ( WYSIWYG HTML ).
+       * Deabilita recurso de edi√ß√£o avan√ßada ( WYSIWYG HTML ).
        * Tambem pode ser utilizado o metodo setRichEdit(false);
        *
        */
@@ -4533,7 +4533,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * Retorna se o recurso de ediÁ„o avanÁada est· habilitado ou n„o.
+       * Retorna se o recurso de edi√ß√£o avan√ßada est√° habilitado ou n√£o.
        * @return boolean
        */
       public function getRichEdit()
@@ -4542,7 +4542,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * Habilita/Desabilita o recurso de ediÁ„o de textos com recursos avanÁados de formataÁ„o ( WYSIWYG HTML ).
+       * Habilita/Desabilita o recurso de edi√ß√£o de textos com recursos avan√ßados de formata√ß√£o ( WYSIWYG HTML ).
        * Tambem pode ser utilizada o enableRichEdit() e disableRichEdit();
        *
        * @param bool $boolNewValue
@@ -4552,8 +4552,8 @@ class TForm Extends TBox
           $this->richEdit = is_null( $boolNewValue ) ? true : $boolNewValue;
       }
       /**
-       * Habilita o icone para ediÁ„o da documentÁ„o online em todos os campos do formul·rio.
-       * Se for passado readonly como true, a documentaÁ„o abrir· para somente leitura.
+       * Habilita o icone para edi√ß√£o da document√ß√£o online em todos os campos do formul√°rio.
+       * Se for passado readonly como true, a documenta√ß√£o abrir√° para somente leitura.
        *
        * @param boolean $boolReadOnly
        */
@@ -4567,7 +4567,7 @@ class TForm Extends TBox
           self::$onlineDocIgnoreFields=$strIgnoreFields;
       }
       /**
-       * Desabilitar a documentÁ„o on-line
+       * Desabilitar a document√ß√£o on-line
        *
        */
       public function disableOnlineDoc()
@@ -4575,7 +4575,7 @@ class TForm Extends TBox
           $this->onlineDoc = false;
       }
       /**
-       * Ativar/Desativar documentaÁ„o o recurso de ediÁ„o da documentÁ„o on-line dos campos
+       * Ativar/Desativar documenta√ß√£o o recurso de edi√ß√£o da document√ß√£o on-line dos campos
        *
        * @param mixed $boolEnabled
        * @param mixed $boolReadOnly
@@ -4594,7 +4594,7 @@ class TForm Extends TBox
           return $this->onlineDoc;
       }
       /**
-       * Retorna o codigo html necess·rio para exibiÁ„o/ediÁ„o da documentaÁ„o on-line
+       * Retorna o codigo html necess√°rio para exibi√ß√£o/edi√ß√£o da documenta√ß√£o on-line
        *
        * @param boolean $print
        */
@@ -4615,7 +4615,7 @@ class TForm Extends TBox
 						</td>
 						<td  id="fwOnlineDocTitulo_td" height="50px" valign="middle" align="center">
 							<div id="fwOnlineDocTituloSystemName">'.TITULO_SISTEMA.'</div>
-							<div id="fwOnlineDocTituloModuleName">Cadastro de Pessoa FÌsica</div>
+							<div id="fwOnlineDocTituloModuleName">Cadastro de Pessoa F√≠sica</div>
 							<div id="fwOnlineDocTituloFieldName">
 								<input type="text" name="fwOnlineDocInputTitle" id="fwOnlineDocInputTitle" size="100" maxlength="150"   class="fwOnlineDocInput">
 							</div>
@@ -4635,7 +4635,7 @@ class TForm Extends TBox
           }
       }
       /**
-       * MÈtodo para fazer a inclus„o do modulo de acordo com a aÁ„o solicitada
+       * M√©todo para fazer a inclus√£o do modulo de acordo com a a√ß√£o solicitada
        *
        * @param mixed $arrVar
        * @param string $strAction
@@ -4654,7 +4654,7 @@ class TForm Extends TBox
           
           
           $strModule = null;
-          // encontrar a modulo postado em uma das vari·veis: modulo, module
+          // encontrar a modulo postado em uma das vari√°veis: modulo, module
           if( isset($_POST[ 'modulo' ]) && $_POST[ 'modulo' ]  )
           {
               $strModule = $_POST[ 'modulo' ];
@@ -4679,7 +4679,7 @@ class TForm Extends TBox
           {
               $strModule = $_REQUEST[ 'module' ];
           }
-          // encontrar a aÁ„o postada em uma das vari·veis: formDinAcao, acao ou action
+          // encontrar a a√ß√£o postada em uma das vari√°veis: formDinAcao, acao ou action
           if( is_null( $strAction ) )
           {
               if( isset($_POST[ 'formDinAcao' ]) && $_POST[ 'formDinAcao' ]  )
@@ -4728,7 +4728,7 @@ class TForm Extends TBox
               $frm = $this;
               if( !is_null( $strModule ) )
               {
-                  include($strModule); // adiciona o arquivo da aÁ„o
+                  include($strModule); // adiciona o arquivo da a√ß√£o
               }
           }
           if( $boolAjax )
@@ -4750,7 +4750,7 @@ class TForm Extends TBox
           }
       }
       /**
-       * Este mÈdodo faz uma atualizaÁ„o da p·gina principal
+       * Este m√©dodo faz uma atualiza√ß√£o da p√°gina principal
        *
        */
       public function restart($strMessage=null)
@@ -4758,11 +4758,11 @@ class TForm Extends TBox
           $this->addJavascript( 'fwApplicationRestart("'.$strMessage.'")');
       }
       /**
-       * mÈtodo para registrar vari·veis na inst‚ncia da classe TForm
-       * O array de valores deve ser no formato key=>value onde key È o nome
-       * da vari·vel e value È o seu valor.
+       * m√©todo para registrar vari√°veis na inst√¢ncia da classe TForm
+       * O array de valores deve ser no formato key=>value onde key √© o nome
+       * da vari√°vel e value √© o seu valor.
        *
-       * Ex: setVar(array('nome','JosÈ da Silva'));
+       * Ex: setVar(array('nome','Jos√© da Silva'));
        *
        * @param array $arrObj
        */
@@ -4778,7 +4778,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * MÈtodo para recuperar uma vari·vel registrada pelo mÈtodo setVar()
+       * M√©todo para recuperar uma vari√°vel registrada pelo m√©todo setVar()
        *
        * Ex: $nome = getVar('nome');
        *
@@ -4791,7 +4791,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * MÈtodo para encontrar e retornar o caminho correto do mÛdulo dentro do diretÛrio modulos/ da aplicaÁ„o
+       * M√©todo para encontrar e retornar o caminho correto do m√≥dulo dentro do diret√≥rio modulos/ da aplica√ß√£o
        *
        * @param string $strFileName
        */
@@ -4813,12 +4813,12 @@ class TForm Extends TBox
           $baseName = $aFileParts[ 'basename' ];
           $fileName = $aFileParts[ 'filename' ];
           $dirName = $aFileParts[ 'dirname' ];
-          // extens„o padr„o È inc
+          // extens√£o padr√£o √© inc
           $extName = isset( $aFileParts[ 'extension' ] ) ? $aFileParts[ 'extension' ] : 'inc';
           $dirName = ($dirName == '.') ? '' : $dirName;
           $dirName = ($dirName == './') ? '' : $dirName;
           $dirName .= ( $dirName != '') ? '/' : '';
-          // se exisiter o diretÛrio, n„o acrescenter o diretÛrio modulos/
+          // se exisiter o diret√≥rio, n√£o acrescenter o diret√≥rio modulos/
           if( $dirName != '' && is_dir( $dirName ) )
           {
               $pathModulos = '';
@@ -4827,7 +4827,7 @@ class TForm Extends TBox
           {
               $fileName = basename( $baseName, '.' . $extName );
           }
-          //1∫ possibilidade: Estrutura de Vis„o e Controle
+          //1¬∫ possibilidade: Estrutura de Vis√£o e Controle
           $file = $pathModulos . $dirName . $fileName;
           if( is_dir( $file ) )
           {
@@ -4878,7 +4878,7 @@ class TForm Extends TBox
                                   $fileOut = $file . '/action/' . strtolower( $strAction ) . '.inc';
                                   if( !file_exists( $fileOut ) )
                                   {
-                                      //print 'AÁ„o: <b>'.$fileOut.' nem .php</b> n„o existe';
+                                      //print 'A√ß√£o: <b>'.$fileOut.' nem .php</b> n√£o existe';
                                       $fileOut = null;
                                   }
                               }
@@ -4891,7 +4891,7 @@ class TForm Extends TBox
                   return $fileOut;
               }
           }
-          //2∫ possibilidade modelo normal na pasta modulos
+          //2¬∫ possibilidade modelo normal na pasta modulos
           $fileOut = $pathModulos . $dirName . $fileName . '.' . $extName;
           if( file_exists( $fileOut ) )
           {
@@ -4951,7 +4951,7 @@ class TForm Extends TBox
       }
       //-----------------------------------------------------------------------------
       /**
-       * MÈtodo para procurar e incluir o arquivo css e js que possua o mesmo
+       * M√©todo para procurar e incluir o arquivo css e js que possua o mesmo
        * nome do modulo sendo executado
        *
        */
@@ -5004,7 +5004,7 @@ class TForm Extends TBox
           return $this->columns;
       }
       /**
-       * Retorna a largura definida ou o array de larguras se o valor da coluna n„o for informado
+       * Retorna a largura definida ou o array de larguras se o valor da coluna n√£o for informado
        *
        * @param integer $intColumn
        * @return mixed
@@ -5036,8 +5036,8 @@ class TForm Extends TBox
       }
       //------------------------------------------------------------------------------
       /**
-       * MÈtodo interno utilizado para adicionar um campo e um rÛtulo ao formul·rio. A classe TDisplaycontrol
-       * È respons·vel pela criaÁ„o do html do rotulo e campo que ser„o exibidos no formul·rio.
+       * M√©todo interno utilizado para adicionar um campo e um r√≥tulo ao formul√°rio. A classe TDisplaycontrol
+       * √© respons√°vel pela cria√ß√£o do html do rotulo e campo que ser√£o exibidos no formul√°rio.
        *
        * @param object $newDisplayControl
        */
@@ -5049,7 +5049,7 @@ class TForm Extends TBox
               // se for pagecontrol, adicionar na ultima aba adicionada
               if( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getFieldType() == "pagecontrol" )
               {
-                  // n„o executar se n„o tiver nenhuma aba adicionada no page control
+                  // n√£o executar se n√£o tiver nenhuma aba adicionada no page control
                   if( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getPages() )
                   {
                       $aLastPage = array_slice( $this->currentContainer[ count( $this->currentContainer ) - 1 ]->getPages(), -1, 1, true );
@@ -5069,7 +5069,7 @@ class TForm Extends TBox
               }
               else
               {
-                  // o grupo ou a aba ser· o pai do controle
+                  // o grupo ou a aba ser√° o pai do controle
                   $newDisplayControl->getField()->setParentControl( $this->currentContainer[ count( $this->currentContainer ) - 1 ] );
                   $this->currentContainer[ count( $this->currentContainer ) - 1 ]->displayControls[ $newDisplayControl->getField()->getName() ] = $newDisplayControl;
               }
@@ -5091,7 +5091,7 @@ class TForm Extends TBox
       }
       /**
        * retorna o array de objetos displaycontrol que contem os campos e os labels do
-       * formul·rio
+       * formul√°rio
        *
        * @return array
        */
@@ -5101,20 +5101,20 @@ class TForm Extends TBox
        }
        
        /**
-        * Adicionar bot„o no layout
+        * Adicionar bot√£o no layout
         *
-        * O parametro mixValue pode ser um array com os nomes dos botıes. ex: array('Gravar', 'Limpar').
-        * Nesta caso os demais parametros n„o ser„o considerados exceto o strOnClick que
-        * pode ser informado o nome de uma funÁ„o javascript para ser executada ao clicar no bot„o.
-        * Esta funÁ„o receber· o Valor do bot„o e a variavel this.
+        * O parametro mixValue pode ser um array com os nomes dos bot√µes. ex: array('Gravar', 'Limpar').
+        * Nesta caso os demais parametros n√£o ser√£o considerados exceto o strOnClick que
+        * pode ser informado o nome de uma fun√ß√£o javascript para ser executada ao clicar no bot√£o.
+        * Esta fun√ß√£o receber√° o Valor do bot√£o e a variavel this.
         *
-        * Para que o bot„o fique alinhado na frente de um campo com labelAbove=true, basta
-        * definir o parametro boolLabelAbove do bot„o para true tambem.
+        * Para que o bot√£o fique alinhado na frente de um campo com labelAbove=true, basta
+        * definir o parametro boolLabelAbove do bot√£o para true tambem.
         *
         * @param mixed   $mixValue
-        * @param string  $strName    - Nome da aÁ„o com submit, ignorando strOnClick
-        * @param string  $strAction  - Nome da aÁ„o
-        * @param string  $strOnClick - Nome da funÁ„o javascript
+        * @param string  $strName    - Nome da a√ß√£o com submit, ignorando strOnClick
+        * @param string  $strAction  - Nome da a√ß√£o
+        * @param string  $strOnClick - Nome da fun√ß√£o javascript
         * @param string  $strConfirmMessage
         * @param boolean $boolNewLine  - em nova linha
         * @param boolean $boolFooter   - mostrar no fim do form
@@ -5128,11 +5128,11 @@ class TForm Extends TBox
         */
        public function addButton( $mixValue=null, $strAction=null, $strName=null, $strOnClick=null, $strConfirmMessage=null, $boolNewLine=null, $boolFooter=null, $strImage=null, $strImageDisabled=null, $strHint=null, $strVerticalAlign=null, $boolLabelAbove=null, $strLabel=null, $strHorizontalAlign=null)
        {
-           // bot„o ser· criado no rodapÈ do formul·rio por padr„o
+           // bot√£o ser√° criado no rodap√© do formul√°rio por padr√£o
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
            $strHorizontalAlign = is_null( $strHorizontalAlign ) ? 'center' : $strHorizontalAlign;
-           // a maioria dos botıes ficam na frente dos campos
+           // a maioria dos bot√µes ficam na frente dos campos
            if( $boolNewLine === null )
            {
                $boolNewLine = false;
@@ -5143,10 +5143,10 @@ class TForm Extends TBox
            }
            if( is_array( $mixValue ) )
            {
-               // passar o objeto e o nome do bot„o se for informado o nome de uma funÁ„o para tratamento do click
+               // passar o objeto e o nome do bot√£o se for informado o nome de uma fun√ß√£o para tratamento do click
                $onClick = $strOnClick;
                if( ( string ) $strOnClick != '' ) {
-                   // retirar os parenteses do nome da funÁ„o para poder adicionar os parametros padr„o
+                   // retirar os parenteses do nome da fun√ß√£o para poder adicionar os parametros padr√£o
                    if( $posParentese = strpos( $onClick, '(' ) ) {
                        $onClick = substr( $onClick, 0, $posParentese );
                    }
@@ -5177,7 +5177,7 @@ class TForm Extends TBox
                        $btn->setAttribute('align',$strHorizontalAlign);
                    }
                    $button[ $strName ] = $btn;
-                   // colocar os botıes lado a lado na horizontal
+                   // colocar os bot√µes lado a lado na horizontal
                    $boolNewLine = false;
                }
            }
@@ -5222,7 +5222,7 @@ class TForm Extends TBox
        }
        
        /**
-        * Cria um bot„o para executar uma chamada ajax utilizando a funÁ„o fwAjaxRequest
+        * Cria um bot√£o para executar uma chamada ajax utilizando a fun√ß√£o fwAjaxRequest
         *
         *
         * @param string $strValue
@@ -5249,14 +5249,14 @@ class TForm Extends TBox
        public function addButtonAjax( $strValue=null, $strModule=null, $strJsBeforeSend=null, $strJsCallback=null, $strAction=null, $strMsgLoading=null, $strDataTypeReturn=null, $boolAsync=null, $strContainerId=null, $strName=null, $strConfirmMessage=null, $boolNewLine=null, $boolFooter=null, $strImage=null, $strImageDisabled=null, $strHint=null, $strVerticalAlign=null, $boolLabelAbove=null, $strLabel=null,$strHorizontalAlign=null,$boolBlockScreen=null )
        {
            $strOnClick = '';
-           // bot„o ser· criado no rodapÈ do formul·rio por padr„o
+           // bot√£o ser√° criado no rodap√© do formul√°rio por padr√£o
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $boolAsync = ($boolAsync === true) ? true : false;
-           $boolBlockScreen = ($boolBlockScreen === true) ? true : false; // mesmo em uma chamada assyncrona pode ser necess·rio bloquear a tela
+           $boolBlockScreen = ($boolBlockScreen === true) ? true : false; // mesmo em uma chamada assyncrona pode ser necess√°rio bloquear a tela
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
            $strHorizontalAlign = is_null( $strHorizontalAlign ) ? 'center' : $strHorizontalAlign;
            
-           // a maioria dos botıes ficam na frente dos campos
+           // a maioria dos bot√µes ficam na frente dos campos
            if( $boolNewLine === null )
            {
                $boolNewLine = false;
@@ -5328,8 +5328,8 @@ class TForm Extends TBox
            return $button;
        }
        /**
-        * Define os botıes do rodapÈ do formulario. Pode ser passado uma acao ou um array de aÁıes.
-        * Cada aÁ„o ser· um bot„o no rodapÈ do formul·rio
+        * Define os bot√µes do rodap√© do formulario. Pode ser passado uma acao ou um array de a√ß√µes.
+        * Cada a√ß√£o ser√° um bot√£o no rodap√© do formul√°rio
         *
         * @param mixed $mixActions
         */
@@ -5371,7 +5371,7 @@ class TForm Extends TBox
        }
        //-----------------------------------------------------------------------------
        /**
-        * Limpar a fila de codigos javascripts que ser„o executados no enveno on-load do formulario
+        * Limpar a fila de codigos javascripts que ser√£o executados no enveno on-load do formulario
         *
         */
        public function clearJavascript()
@@ -5379,7 +5379,7 @@ class TForm Extends TBox
            $this->javascript = null;
        }
        /**
-        * MÈtodo para habilitar a tecla F5 do navegador
+        * M√©todo para habilitar a tecla F5 do navegador
         *
         */
        public function enableF5()
@@ -5387,7 +5387,7 @@ class TForm Extends TBox
            $this->F5Enabled = true;
        }
        /**
-        * MÈtodo para desabilitar a tecla F5 do navegador
+        * M√©todo para desabilitar a tecla F5 do navegador
         *
         */
        public function disableF5()
@@ -5395,7 +5395,7 @@ class TForm Extends TBox
            $this->F5Enabled = false;
        }
        /**
-        * MÈtodo para retornar se a tecla F5 dever· ou n„o ser habilitada.
+        * M√©todo para retornar se a tecla F5 dever√° ou n√£o ser habilitada.
         *
         */
        public function getF5Enabled()
@@ -5447,19 +5447,19 @@ class TForm Extends TBox
                    $worksheet->setMerge( 0, 0, 0, 2 );
                    $worksheet->write( 1, 0, 'CAMPO', $format_title );
                    $worksheet->write( 1, 1, 'TIPO', $format_title );
-                   $worksheet->write( 1, 2, 'R”TULO', $format_title );
+                   $worksheet->write( 1, 2, 'R√ìTULO', $format_title );
                    $worksheet->line = 2;
                    //$workbook->send('base/tmp/apf.xls');
                    $aDc = $this->getDisplayControls();
                    $this->processarApfFields( $aDc, $worksheet, $format_cell, $format_group );
                    $workbook->close();
-                   $this->addLinkField( 'link_apf', '', 'Visualizar Planilha - APF', null, $fileName, null, null, null, null, 'Pontos de FunÁ„o - Clique aqui para visualizar a plinilha.' );
+                   $this->addLinkField( 'link_apf', '', 'Visualizar Planilha - APF', null, $fileName, null, null, null, null, 'Pontos de Fun√ß√£o - Clique aqui para visualizar a plinilha.' );
                }
            }
        }
        protected function processarApfFields( $aDc, $worksheet, $format_cell, $format_group )
        {
-           // n„o terminada
+           // n√£o terminada
            return;
            foreach( $aDc as $k=>$dc )
            {
@@ -5474,7 +5474,7 @@ class TForm Extends TBox
                        $worksheet->write( $worksheet->line, 2, $label->getValue(), $format_cell );
                        $worksheet->line = $worksheet->line + 1;
                    }
-                   //print 'Campo:'.$k.' RÛtulo:'.$label->getValue().'  tipo:'.$dc->getField()->getFieldType().'<br>';
+                   //print 'Campo:'.$k.' R√≥tulo:'.$label->getValue().'  tipo:'.$dc->getField()->getFieldType().'<br>';
                }
                else
                {
@@ -5501,7 +5501,7 @@ class TForm Extends TBox
            }
        }
        /**
-        * MÈtodo para adicionar texto explicativo a um campo quando o mouse for passado sobre o mesmo.
+        * M√©todo para adicionar texto explicativo a um campo quando o mouse for passado sobre o mesmo.
         *
         * @param mixed $strFieldName
         * @param mixed $strHint
@@ -5522,7 +5522,7 @@ class TForm Extends TBox
        }
        //-----------------------------------------------------------------------------
        /**
-        * Habilitar a exibiÁ„o dos hints no formato de bal„o
+        * Habilitar a exibi√ß√£o dos hints no formato de bal√£o
         *
         */
        public function enableCustomHint()
@@ -5530,7 +5530,7 @@ class TForm Extends TBox
            $this->setCustomHintEnabled( true );
        }
        /**
-        * Desabilitar a exibiÁ„o dos hints no formato de bal„o
+        * Desabilitar a exibi√ß√£o dos hints no formato de bal√£o
         *
         */
        public function disableCustomHint()
@@ -5538,7 +5538,7 @@ class TForm Extends TBox
            $this->setCustomHintEnabled( false );
        }
        /**
-        * Definir ou n„o a utilizaÁ„o dos hints dentro de um bal„o
+        * Definir ou n√£o a utiliza√ß√£o dos hints dentro de um bal√£o
         *
         * @param mixed $boolNewValue
         */
@@ -5548,7 +5548,7 @@ class TForm Extends TBox
            $this->customHintEnabled = $boolNewValue;
        }
        /**
-        * Retorna verdadeiro ou falso para utilizar os hints de ajuda no formato de bal„o customizado
+        * Retorna verdadeiro ou falso para utilizar os hints de ajuda no formato de bal√£o customizado
         *
         */
        public function getCustomHintEnabled()
@@ -5566,7 +5566,7 @@ class TForm Extends TBox
            return $this->colorHighlightBackground;
        }
        /**
-        * Define se a altura do formul·rio sera ajustada de acordo com o seu conteudo n„o
+        * Define se a altura do formul√°rio sera ajustada de acordo com o seu conteudo n√£o
         * mostrando a barra vertical de rolagem
         *
         * @param bool $boolNewValue
@@ -5577,7 +5577,7 @@ class TForm Extends TBox
            $this->autoSize = $boolNewValue;
        }
        /**
-        * Retorna se o formul·rio est· ou n„o com autosize definido
+        * Retorna se o formul√°rio est√° ou n√£o com autosize definido
         *
         */
        public function getAutoSize()
@@ -5658,7 +5658,7 @@ class TForm Extends TBox
            }
        }
        /**
-        * Retorna o objeto header (TTableCell) referente a ·rea do titulo do formul·rio.
+        * Retorna o objeto header (TTableCell) referente a √°rea do titulo do formul√°rio.
         *
         */
        public function getHeaderCell()
@@ -5666,7 +5666,7 @@ class TForm Extends TBox
            return $this->header;
        }
        /**
-        * Retorna o objeto TTableCell referente a area do bot„o fechar da janela
+        * Retorna o objeto TTableCell referente a area do bot√£o fechar da janela
         *
         */
        public function getHeaderButtonCell()
@@ -5678,7 +5678,7 @@ class TForm Extends TBox
            return $this->footerButtons;
        }
        /**
-        * Retorna o objeto TTableCell referente a area do rodapÈ da janela
+        * Retorna o objeto TTableCell referente a area do rodap√© da janela
         *
         */
        public function getFooterCell()
@@ -5686,7 +5686,7 @@ class TForm Extends TBox
            return $this->footer;
        }
        /**
-        * Habilitar/Desabilitar a exibiÁ„o de mensagens na parte de cima do formul·rio
+        * Habilitar/Desabilitar a exibi√ß√£o de mensagens na parte de cima do formul√°rio
         *
         * @param boolean $boolNewValue
         */
@@ -5700,7 +5700,7 @@ class TForm Extends TBox
            return ! $this->showMessageAlert;
        }
        /**
-        * Habilitar/Desabilitar a exibiÁ„o de mensagens com a funÁ„o alert do javascript
+        * Habilitar/Desabilitar a exibi√ß√£o de mensagens com a fun√ß√£o alert do javascript
         *
         * @param boolean $boolNewValue
         */
@@ -5714,7 +5714,7 @@ class TForm Extends TBox
        }
        //-----------------------------------------------------------------------------
        /**
-        * Define o alinhamento vertical do formul·rio na tela
+        * Define o alinhamento vertical do formul√°rio na tela
         *
         * @param string $strNewValue - top,middle,bottom
         */
@@ -5723,14 +5723,14 @@ class TForm Extends TBox
            $this->vertical_align = $strNewValue;
        }
        /**
-        * Recupera o valor definido para o alinhamento vertical do formul·rio na tela
+        * Recupera o valor definido para o alinhamento vertical do formul√°rio na tela
         */
        public function getVerticalAlign()
        {
            return $this->vertical_align;
        }
        /**
-        * Define o alinhamento horizontal do formul·rio na tela
+        * Define o alinhamento horizontal do formul√°rio na tela
         *
         * @param string $strNewValue - left,right,center
         */
@@ -5739,7 +5739,7 @@ class TForm Extends TBox
            $this->horizontal_align = $strNewValue;
        }
        /**
-        * Recupera o valor do alinhamento vertical do formul·rio na tela
+        * Recupera o valor do alinhamento vertical do formul√°rio na tela
         */
        public function getHorizontalAlign()
        {
@@ -5788,7 +5788,7 @@ class TForm Extends TBox
            self::$errors = array( $strError );
        }
        /**
-        * Retorna o array de erros de validaÁ„o gerado pelo mÈtodo validate()
+        * Retorna o array de erros de valida√ß√£o gerado pelo m√©todo validate()
         *
         */
        public function getErrors()
@@ -5803,7 +5803,7 @@ class TForm Extends TBox
        
        //-----------------------------------------------------------------------------
        /**
-        * Remove a ·rea de mensagem criada pela classe no topo do formul·rio
+        * Remove a √°rea de mensagem criada pela classe no topo do formul√°rio
         *
         */
        public function removeMessageArea()
@@ -5815,13 +5815,13 @@ class TForm Extends TBox
        }
        //-----------------------------------------------------------------------------
        /**
-        * Define nome da funÁ„o do usu·rio, que ser· chamada a cada linha adicionada ao formul·rio.
+        * Define nome da fun√ß√£o do usu√°rio, que ser√° chamada a cada linha adicionada ao formul√°rio.
         *
-        * A class passa automaticamente os seguintes par‚metros:
-        * $dc - Inst‚ncia da classe TDisplayControl
-        * $cell - Inst‚ncia da classe TTableCell
-        * $RowNum - O n˙mero da linha corrente do formul·rio, aba ou grupo que estiver sendo criado
-        * $row = Inst‚ncia do objeto TTableRow
+        * A class passa automaticamente os seguintes par√¢metros:
+        * $dc - Inst√¢ncia da classe TDisplayControl
+        * $cell - Inst√¢ncia da classe TTableCell
+        * $RowNum - O n√∫mero da linha corrente do formul√°rio, aba ou grupo que estiver sendo criado
+        * $row = Inst√¢ncia do objeto TTableRow
         *
         * <code>
         * function myFormOnDrawRow($ObjDc,$objCell,$intRowNum,$objRow)
@@ -5841,13 +5841,13 @@ class TForm Extends TBox
             $this->onDrawRow=$strFunctionName;
         }
         /**
-         * Retorna o nome da funÁ„o do usuario a ser chamada na criaÁ„o de cada linha do formul·rio
+         * Retorna o nome da fun√ß√£o do usuario a ser chamada na cria√ß√£o de cada linha do formul√°rio
          *
-         * A class passa automaticamente os seguintes par‚metros:
-         * $dc - Inst‚ncia da classe TDisplayControl
-         * $cell - Inst‚ncia da classe TTableCell
-         * $RowNum - O n˙mero da linha corrente do formul·rio, aba ou grupo que estiver sendo criado
-         * $row = Inst‚ncia do objeto TTableRow
+         * A class passa automaticamente os seguintes par√¢metros:
+         * $dc - Inst√¢ncia da classe TDisplayControl
+         * $cell - Inst√¢ncia da classe TTableCell
+         * $RowNum - O n√∫mero da linha corrente do formul√°rio, aba ou grupo que estiver sendo criado
+         * $row = Inst√¢ncia do objeto TTableRow
          *
          * <code>
          * function myFormOnDrawRow($ObjDc,$objCell,$intRowNum,$objRow)
@@ -5867,13 +5867,13 @@ class TForm Extends TBox
              return $this->onDrawRow;
          }
          /**
-          * Definie o nome da funÁ„o do usu·rio, que ser· chamada na criaÁ„o de cada campo no formul·rio
-          * A class passa automaticamente os seguintes par‚metros:
+          * Definie o nome da fun√ß√£o do usu√°rio, que ser√° chamada na cria√ß√£o de cada campo no formul√°rio
+          * A class passa automaticamente os seguintes par√¢metros:
           *
-          * $dc - Inst‚ncia da classe TDisplayControl
-          * $cell - Inst‚ncia da classe TTableCell
-          * $RowNum - O n˙mero da linha corrente do formul·rio, aba ou grupo que estiver sendo criado
-          * $row = Inst‚ncia do objeto TTableRow
+          * $dc - Inst√¢ncia da classe TDisplayControl
+          * $cell - Inst√¢ncia da classe TTableCell
+          * $RowNum - O n√∫mero da linha corrente do formul√°rio, aba ou grupo que estiver sendo criado
+          * $row = Inst√¢ncia do objeto TTableRow
           *
           * <code>
           *	function minhaFuncao($dc,$cell,$rowNum )
@@ -5892,13 +5892,13 @@ class TForm Extends TBox
               $this->onDrawField=$strFunctionName;
           }
           /**
-           * Retorna o nome da funÁ„o do usu·rio chamada na criaÁ„o de cada campo no formul·rio
-           * A class passa automaticamente os seguintes par‚metros:
+           * Retorna o nome da fun√ß√£o do usu√°rio chamada na cria√ß√£o de cada campo no formul√°rio
+           * A class passa automaticamente os seguintes par√¢metros:
            *
-           * $dc - Inst‚ncia da classe TDisplayControl
-           * $cell - Inst‚ncia da classe TTableCell
-           * $RowNum - O n˙mero da linha corrente do formul·rio, aba ou grupo que estiver sendo criado
-           * $row = Inst‚ncia do objeto TTableRow
+           * $dc - Inst√¢ncia da classe TDisplayControl
+           * $cell - Inst√¢ncia da classe TTableCell
+           * $RowNum - O n√∫mero da linha corrente do formul√°rio, aba ou grupo que estiver sendo criado
+           * $row = Inst√¢ncia do objeto TTableRow
            *
            * <code>
            *	function minhaFuncao($dc,$cell,$rowNum )
@@ -5965,7 +5965,7 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * MÈtodo utilizado para desformatar n˙meros decimas adicionando a virgula ou o ponto
+            * M√©todo utilizado para desformatar n√∫meros decimas adicionando a virgula ou o ponto
             * como serparador decimal
             *
             * @param mixed $number
@@ -6027,8 +6027,8 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * Define o formul·rio como sendo parte do gride offline para que o mesmo
-            * n„o crie campos de controles duplicados com o form principal
+            * Define o formul√°rio como sendo parte do gride offline para que o mesmo
+            * n√£o crie campos de controles duplicados com o form principal
             *
             * @param mixed $boolNewValue
             */
@@ -6042,8 +6042,8 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * Habilitar/Desabilitar o recurso de maximizar o formul·rio ao efetuar um duplo-clique
-            * na barra de tÌtulo
+            * Habilitar/Desabilitar o recurso de maximizar o formul√°rio ao efetuar um duplo-clique
+            * na barra de t√≠tulo
             *
             * @param bool $boolNewValue
             */
@@ -6052,8 +6052,8 @@ class TForm Extends TBox
                $this->maximize = $boolNewValue;
            }
            /**
-            * Recuperar o valor da propriedade maximize. Se true o formul·rio È maximizado
-            * ao efeturar um duplo-clique no tÌtulo
+            * Recuperar o valor da propriedade maximize. Se true o formul√°rio √© maximizado
+            * ao efeturar um duplo-clique no t√≠tulo
             *
             */
            public function getMaximize()
@@ -6063,8 +6063,8 @@ class TForm Extends TBox
            
            //-----------------------------------------------------------------------------
            /**
-            * Define se o formul·rio ser· exibido ou n„o ao receber o post fwSession_expired da
-            * aplicaÁ„o
+            * Define se o formul√°rio ser√° exibido ou n√£o ao receber o post fwSession_expired da
+            * aplica√ß√£o
             *
             * @param boolean $boolNewValue
             */
@@ -6073,8 +6073,8 @@ class TForm Extends TBox
                self::$publicMode = $boolNewValue;
            }
            /**
-            * Retorna se o formul·rio ser· exibido ou n„o ao receber o post fwSession_expired da
-            * aplicaÁ„o
+            * Retorna se o formul√°rio ser√° exibido ou n√£o ao receber o post fwSession_expired da
+            * aplica√ß√£o
             *
             */
            public function getPublicMode()
@@ -6156,7 +6156,7 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * Define se o form deve redimensionar a area central da aplicaÁ„o para a sua altura
+            * Define se o form deve redimensionar a area central da aplica√ß√£o para a sua altura
             * evitando a barra de rolagem vertical dentro do iframe central e exibindo
             * a barra vertical do browser.
             *
@@ -6173,9 +6173,9 @@ class TForm Extends TBox
            }
            
            /**
-            * Define o alinhamento dos rÛtulos dos campos.
-            * Os valores v·lidos s„o:center,left ou right.
-            * O padr„o È left
+            * Define o alinhamento dos r√≥tulos dos campos.
+            * Os valores v√°lidos s√£o:center,left ou right.
+            * O padr√£o √© left
             *
             * @param string $strNewValue
             */
@@ -6250,7 +6250,7 @@ class TForm Extends TBox
            }
            /**
             * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
-            * Tipo de m·scara: DMY, DM, MY
+            * Tipo de m√°scara: DMY, DM, MY
             *
             * @param string $strName
             * @param string $strLabel
@@ -6273,7 +6273,7 @@ class TForm Extends TBox
            }
            /**
             * Adiciona campo tipo grupo com legenda na parte superior
-            * Se o parametro $intHeight for null ser· auto height
+            * Se o parametro $intHeight for null ser√° auto height
             * se o parametro $intWidth for null utilizado a largura do form
             *
             * <code>
@@ -6316,15 +6316,15 @@ class TForm Extends TBox
            }
            
            /**
-            * Campo de uso geral para insers„o manual de cÛdigos html na p·gina
+            * Campo de uso geral para insers√£o manual de c√≥digos html na p√°gina
             *
-            * Se os parametros width ou height n„o forem informados, ser„o
+            * Se os parametros width ou height n√£o forem informados, ser√£o
             * definidos como "auto"
             *
-            * Se o label for null, n„o ser· criado o espaÁo referente a ele no formul·rio, para criar
-            * um label invisÌvel defina como "" o seu valor
+            * Se o label for null, n√£o ser√° criado o espa√ßo referente a ele no formul√°rio, para criar
+            * um label invis√≠vel defina como "" o seu valor
             *
-            * criado o espaÁo
+            * criado o espa√ßo
             * @param string $strName
             * @param string $strLabel
             * @param string $strValue
@@ -6343,10 +6343,10 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Cria um campo html para exibir um gride via ajax no formul·rio utilizando a classe TGrid
+            * Cria um campo html para exibir um gride via ajax no formul√°rio utilizando a classe TGrid
             *
-            * @example $mixFormFields - campos do formul·rio que ser„o enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
-            * neste caso o valor de des_x ser· lido do campo do formul·rio
+            * @example $mixFormFields - campos do formul√°rio que ser√£o enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
+            * neste caso o valor de des_x ser√° lido do campo do formul√°rio
             *
             * @param string $strName
             * @param string $strGridFile
@@ -6414,7 +6414,7 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * Adicionar campo CPF/CNPJ, fazendo a validaÁ„o do digito verificador
+            * Adicionar campo CPF/CNPJ, fazendo a valida√ß√£o do digito verificador
             *
             * @param string $strName
             * @param string $strLabel
@@ -6437,13 +6437,13 @@ class TForm Extends TBox
            /**
             * Adicionar campo para informar o CEP
             *
-            * Para preenchimento autom·tico dos campos do formul·rio relacionados ao endereÁo,
-            * informar o campo do formul·rio que dever· ser preenchido na lista de parametros.
-            * Exemplo: para informar o cep e preencher o campo des_endereco do formul·rio automaticamente, fazer assim:
+            * Para preenchimento autom√°tico dos campos do formul√°rio relacionados ao endere√ßo,
+            * informar o campo do formul√°rio que dever√° ser preenchido na lista de parametros.
+            * Exemplo: para informar o cep e preencher o campo des_endereco do formul√°rio automaticamente, fazer assim:
             * 	$frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
             *
-            * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o serviÁo buscarcep.com.br
-            * Esse serviÁo È pago em 13-10-2017 estava disponivel a consulta gratuida via xml
+            * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o servi√ßo buscarcep.com.br
+            * Esse servi√ßo √© pago em 13-10-2017 estava disponivel a consulta gratuida via xml
             *
             * @param string $strName
             * @param string $strLabel
@@ -6523,7 +6523,7 @@ class TForm Extends TBox
                if( count( $arrFields ) > 0 )
                {
                    //$field->addEvent('onBlur','getCepJquery("'.$field->getId().'",'.json_encode($arrFields).')');
-                   $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereÁo.' );
+                   $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endere√ßo.' );
                    //$button->addEvent('onclick','getCepJqueryy("'.$field->getId().'",'.json_encode($arrFields).')');
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
@@ -6537,10 +6537,10 @@ class TForm Extends TBox
            /**
             * Adicionar campo tipo combobox ou menu select
             *
-            * $mixOptions = array no formato "key=>value", nome do pacote oracle e da funÁ„o a ser executada, comando sql ou tabela|condicao
-            * $strKeyColumn = nome da coluna que ser· utilizada para preencher os valores das opÁıes
-            * $strDisplayColumn = nome da coluna que ser· utilizada para preencher as opÁıes que ser„o exibidas para o usu·rio
-            * $strDataColumns = informaÁıes extras do banco de dados que dever„o ser adicionadas na tag option do campo select
+            * $mixOptions = array no formato "key=>value", nome do pacote oracle e da fun√ß√£o a ser executada, comando sql ou tabela|condicao
+            * $strKeyColumn = nome da coluna que ser√° utilizada para preencher os valores das op√ß√µes
+            * $strDisplayColumn = nome da coluna que ser√° utilizada para preencher as op√ß√µes que ser√£o exibidas para o usu√°rio
+            * $strDataColumns = informa√ß√µes extras do banco de dados que dever√£o ser adicionadas na tag option do campo select
             *
             * <code>
             * 	// exemplos
@@ -6556,7 +6556,7 @@ class TForm Extends TBox
             * @param string  $strName
             * @param string  $strLabel
             * @param boolean $boolRequired
-            * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da funÁ„o a ser executada, comando sql ou tabela|condicao
+            * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da fun√ß√£o a ser executada, comando sql ou tabela|condicao
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove
             * @param mixed   $mixValue
@@ -6589,7 +6589,7 @@ class TForm Extends TBox
                    if( ( substr( $strName, 0, 6 ) == 'cod_uf' || $strName === 'uf') && $mixOptions === null ) {
                        $mixOptions = $this->getUfs();
                    } else if( substr( $strName, 0, 4 ) == 'sit_' && $mixOptions === null ) {
-                       $mixOptions = 'N=N„o,S=Sim';
+                       $mixOptions = 'N=N√£o,S=Sim';
                    }
                    $field = new TSelect( $strName, $mixOptions, $mixValue, $boolRequired, $boolMultiSelect, $intSize, $intWidth, $strFirstOptionText, $strFirstOptionValue, $strKeyColumn, $strDisplayColumn, $strDataColumns);
                    $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
@@ -6646,12 +6646,12 @@ class TForm Extends TBox
            }
            //-----------------------------------------------------------------------------
            /**
-            * Adicona controle de paginaÁ„o atravÈs de abas
-            * Se o parametro $intHeight for null ser· assumido o height do form, para ser auto, informar "auto";
-            * se o parametro $intWidth for null utilizado a largura m·xima do form
-            * A funÁ„o informada no parametro $strOnAfterClick e a funÁ„o onBeforeClick,
+            * Adicona controle de pagina√ß√£o atrav√©s de abas
+            * Se o parametro $intHeight for null ser√° assumido o height do form, para ser auto, informar "auto";
+            * se o parametro $intWidth for null utilizado a largura m√°xima do form
+            * A fun√ß√£o informada no parametro $strOnAfterClick e a fun√ß√£o onBeforeClick,
             * recebem 3 parametros: a rotulo da aba, o id do page control e o id da aba clicada em caixa baixa.
-            * Se a funÁ„o onBeforeClick retornar falso, n„o ocorrer· a mudanÁa de aba.
+            * Se a fun√ß√£o onBeforeClick retornar falso, n√£o ocorrer√° a mudan√ßa de aba.
             *
             * @example $pc = $frm->addPageControl('pc',null,null,'pcClick','pcAfterClick');
             * @example function pcAfterClick(aba,pageControl,id)
@@ -6723,7 +6723,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Adiciona campo de entrada de dados numÈrico
+            * Adiciona campo de entrada de dados num√©rico
             *
             * @param string $strName
             * @param string $strValue
@@ -6732,9 +6732,9 @@ class TForm Extends TBox
             * @param integer $intDecimalPlaces   - Quantidade de casas decimais.
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove
-            * @param string $strMinValue         - Valor minimo permitido. Null = n„o tem limite.
-            * @param string $strMaxValue         - Valor maximo permitido. Null = n„o tem limite.
-            * @param boolean $boolFormatInteger  - Inteiros com ou sem ponto de separaÁ„o
+            * @param string $strMinValue         - Valor minimo permitido. Null = n√£o tem limite.
+            * @param string $strMaxValue         - Valor maximo permitido. Null = n√£o tem limite.
+            * @param boolean $boolFormatInteger  - Inteiros com ou sem ponto de separa√ß√£o
             * @param string $strDirection
             * @param boolean $boolAllowZero
             * @param boolean $boolAllowNull
@@ -6752,7 +6752,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Adiciona campo para entrada de endereÁo eletrÙnico - e-mail
+            * Adiciona campo para entrada de endere√ßo eletr√¥nico - e-mail
             *
             * @param string $strName
             * @param string $strLabel
@@ -6788,7 +6788,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Adicinar campos para entrada de dados de coordenada geogr·fica no formato GMS ( GRAU, MIN E SEG )
+            * Adicinar campos para entrada de dados de coordenada geogr√°fica no formato GMS ( GRAU, MIN E SEG )
             *
             * @param mixed $strName
             * @param mixed $strLabel
@@ -6798,8 +6798,8 @@ class TForm Extends TBox
             * @param mixed $strLonX
             * @param mixed $strFieldNameLat
             * @param mixed $strFieldNameLon
-            * @param string $strLabels - rÛtulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
-            * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vÌgula:. ex: ∞,',"
+            * @param string $strLabels - r√≥tulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
+            * @param string $strSymbols - simbolo para grau, minuto e segundo separado por v√≠gula:. ex: ¬∞,',"
             * @param mixed $intMapHeight
             * @param mixed $intMapWidth
             * @param mixed $boolLabelAbove
@@ -6840,7 +6840,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Campo para entrada de numero de processo do serviÁo p˙blico
+            * Campo para entrada de numero de processo do servi√ßo p√∫blico
             *
             * @param string $strName
             * @param string $strLabel
@@ -6860,7 +6860,7 @@ class TForm Extends TBox
            /**
             * Campos para anexar arquivo. Pode ser um carregamento sincrono ou assincrono via ajax.
             *
-            * Ser· incluido no $_POST 4 elementos com os nomes:
+            * Ser√° incluido no $_POST 4 elementos com os nomes:
             * <code>
             *   $_POST['strName_temp'] - caminho temporario;
             *   $_POST['strName_type'] - mime type;
@@ -6902,7 +6902,7 @@ class TForm Extends TBox
            }
            
            /**
-            * Classe para criaÁ„o de campos de entrada de dados com m·scara de ediÁ„o
+            * Classe para cria√ß√£o de campos de entrada de dados com m√°scara de edi√ß√£o
             *
             * a - Represents an alpha character (A-Z,a-z)
             * 9 - Represents a numeric character (0-9)
@@ -6927,7 +6927,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Campo para criaÁ„o de hiperlink no formul·rio
+            * Campo para cria√ß√£o de hiperlink no formul√°rio
             *
             * @param string $strName
             * @param string $strLabel
@@ -6948,7 +6948,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * MÈtodo para criar campo de ediÁ„o de horas
+            * M√©todo para criar campo de edi√ß√£o de horas
             *
             * @param string $strName
             * @param string $strLabel
@@ -6969,7 +6969,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Adiciona campo para seleÁ„o de cor
+            * Adiciona campo para sele√ß√£o de cor
             *
             * @param string $strName
             * @param string $strLabel
@@ -6987,7 +6987,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Adicionar treeview ao formul·rio.
+            * Adicionar treeview ao formul√°rio.
             *
             * @param mixed $strName
             * @param string $strRootLabel
@@ -7050,7 +7050,7 @@ class TForm Extends TBox
                return $tree;
            }
            /**
-            * Permite abrir uma tag html entre os campos do formul·rio. Utilizado para criar ·reas ou grupos de campos
+            * Permite abrir uma tag html entre os campos do formul√°rio. Utilizado para criar √°reas ou grupos de campos
             * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
             *
             * Exemplo:  $t = $frm->addTag('<div>'); // para abrir
@@ -7069,43 +7069,43 @@ class TForm Extends TBox
                return null;
            }
            /**
-            * Este mÈtodo foi substitituido pelo addTag()
+            * Este m√©todo foi substitituido pelo addTag()
             */
            public function openTag( $strTagType, $strId=null )
            {
                //$this->addTag($strTagType,$strId);
            }
            /**
-            * Este mÈtodo foi substitituido pelo addTag()
+            * Este m√©todo foi substitituido pelo addTag()
             */
            public function closeTag()
            {
-               // n„o ser· mais necess·rio, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
+               // n√£o ser√° mais necess√°rio, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
            }
            /**
-            * Adiciona campo para exibiÁ„o de texto ou imagen dentro de um box modal
+            * Adiciona campo para exibi√ß√£o de texto ou imagen dentro de um box modal
             *
             * <code>
             * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
             * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
-            * $frm->addBoxField('campo_3','Este È o texto de ajuda que ser· exibido quando o usu·rio clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
+            * $frm->addBoxField('campo_3','Este √© o texto de ajuda que ser√° exibido quando o usu√°rio clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
             * $frm->addBoxField('campo_4',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
             * </code>
             *
             * @param mixed $strId - identificador do campo
-            * @param mixed $strText - texto para exibiÁ„o
-            * @param mixed $strFileName - nome do arquivo que ser· carregado dentro do box
-            * @param mixed $strDataType - define o conteudo que ser· carregado. Ex: image, ajax
-            * @param mixed $strLabel - rÛtulo do campo
-            * @param mixed $strImage - imagem que aparecer· na frente do label
-            * @param bool $boolNewLine - true ou false se o campo ser· colocado na frente ou abaixo do ˙ltimo campo adicionado ao formul·rio
-            * @param mixed $boolLabelAbove - true ou false para alterar o layout do rÛtulo para cima ou na frente da imagem
-            * @param mixed $boolNoWrapLabel - true ou false para quebrar ou n„o o valor do label se n„o couber na coluna do formulario
-            * @param mixed $strHint - texto de ajuda que ser· exibido ao posicinar o mouse sobre a imagem
+            * @param mixed $strText - texto para exibi√ß√£o
+            * @param mixed $strFileName - nome do arquivo que ser√° carregado dentro do box
+            * @param mixed $strDataType - define o conteudo que ser√° carregado. Ex: image, ajax
+            * @param mixed $strLabel - r√≥tulo do campo
+            * @param mixed $strImage - imagem que aparecer√° na frente do label
+            * @param bool $boolNewLine - true ou false se o campo ser√° colocado na frente ou abaixo do √∫ltimo campo adicionado ao formul√°rio
+            * @param mixed $boolLabelAbove - true ou false para alterar o layout do r√≥tulo para cima ou na frente da imagem
+            * @param mixed $boolNoWrapLabel - true ou false para quebrar ou n√£o o valor do label se n√£o couber na coluna do formulario
+            * @param mixed $strHint - texto de ajuda que ser√° exibido ao posicinar o mouse sobre a imagem
             */
            public function addBoxField( $strId, $strText=null, $strFileName=null, $strDataType=null, $strLabel=null, $strImage=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
            {
-               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padr„o È false
+               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padr√£o √© false
                $field = new THelpBox( $strId, $strText, $strFileName, $strDataType, $strImage, $strHint );
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
                return null;
@@ -7124,7 +7124,7 @@ class TForm Extends TBox
            }
            /**
             * Adiciona no form uma area para mostrar as mensagens ao usuario identica as mensagens do topo do form
-            * diferenciando que nesta pode-se definir a mensagem em qualquer lugar do form e ser· exibida com a mesma formataÁ„o da padr„o
+            * diferenciando que nesta pode-se definir a mensagem em qualquer lugar do form e ser√° exibida com a mesma formata√ß√£o da padr√£o
             * <code>
             *		$frm->addMessageField('msg_local');
             * 		<script> fwShowMessage({message:"Mensagem em local especifico<br>Linha2<br>linha3","containerId":"msg_local"});</script>
@@ -7147,7 +7147,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Campo para seleÁ„o de DiretÛrio ou Pasta
+            * Campo para sele√ß√£o de Diret√≥rio ou Pasta
             * @param string $strName
             * @param type $rootDir
             * @param string $strValue
@@ -7167,7 +7167,7 @@ class TForm Extends TBox
                return $field;
            }
            /**
-            * Campo para seleÁ„o de fuso hor·rio
+            * Campo para sele√ß√£o de fuso hor√°rio
             *
             * @param string $strName
             * @param string $strLabel
@@ -7212,7 +7212,7 @@ class TForm Extends TBox
            }
            
            /**
-            * CriaÁ„o de campo calend·rio de eventos tipo agenda
+            * Cria√ß√£o de campo calend√°rio de eventos tipo agenda
             *
             * @param string $strName
             * @param string $strUrl

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,30 +20,30 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* Em função dos parametros recibidos "pasta_base" e "app_url_root", encontrar o diretório raiz da aplicacao
+* Em funÃ§Ã£o dos parametros recibidos "pasta_base" e "app_url_root", encontrar o diretÃ³rio raiz da aplicacao
 * para poder criar o banco de dados de ajuda /ho/bdho.s3bd
 */
 /*
 $app_url_root='';
-// se a base estiver fora do diretório da aplicacao, montar a url com o nome do diretório da aplicação
+// se a base estiver fora do diretÃ³rio da aplicacao, montar a url com o nome do diretÃ³rio da aplicaÃ§Ã£o
 if ( preg_match('/\.\.\//',$_REQUEST['pastaBase']) == 1 )
 {
 	$app_url_root 	= preg_replace('/\/\//','/',$_REQUEST['app_url_root']);
@@ -74,7 +74,7 @@ $bdDirName  = str_replace('//','/',$dirName.'/ho');
 @chmod('ho/', 0777);
 if ( ! is_writable('ho/' ) )
 {
-	die ('não tem permissão');
+	die ('nÃ£o tem permissÃ£o');
 	exit();
 }
 $bdDirName  = 'ho/';
@@ -86,7 +86,7 @@ if( !file_exists($bdDirName))
 	{
 		//if ( ! mkdir($bdDirName, 0775, true ) )
     	{
- 			echo '- Não foi possivel criar o diretório do banco de dados de ajuda: '.$bdDirName;
+ 			echo '- NÃ£o foi possivel criar o diretÃ³rio do banco de dados de ajuda: '.$bdDirName;
 		}
 	}
 }
@@ -94,7 +94,7 @@ if( !file_exists($bdDirName))
 //error_reporting(E_ALL);
 if( !$db = new PDO('sqlite:'.$bdDirName.'/dbho.s3.db') )
 {
-	echo  ' - Não foi possivel conectar ao banco sqlite '.$bdDirName.'/dbho.s3.db';
+	echo  ' - NÃ£o foi possivel conectar ao banco sqlite '.$bdDirName.'/dbho.s3.db';
 }
 
 //$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -130,7 +130,7 @@ switch( $acao )
 		}
 		if( !$db->exec( $query ))
 		{
-			 print 'Erro de gravação';
+			 print 'Erro de gravaÃ§Ã£o';
 		}
 		exit(0);
 	break;
@@ -147,7 +147,7 @@ switch( $acao )
 		$data = null;
 		$_REQUEST['label'] = is_null($_REQUEST['label']) ?'&lt;CAMPO&gt;' : $_REQUEST['label'];
 		$html = '<p><span style="text-decoration: underline;"><span style="font-size: x-large;">'.$_REQUEST['label'].'</span></span></p>';
-		$data['help_text']  = utf8_decode( $html);//'Digite aqui o conteúdo do arquivo de ajuda!' );
+		$data['help_text']  = utf8_decode( $html);//'Digite aqui o conteÃºdo do arquivo de ajuda!' );
 		$data['help_title'] = '';
 		if( isset( $row['help_text']) && $row['help_text'] )
 		{
@@ -166,7 +166,7 @@ $bdFileName = str_replace('//','/',$bdDirName.'/dbho.s3.db');
 //if ( $db = sqlite_open( $bdFileName, 0666, $sqliteerror))
 if ( $db = new SQLiteDatabase($bdFileName,0666) )
 {
-	// verificar se a tabela existe e cria-la se não existir
+	// verificar se a tabela existe e cria-la se nÃ£o existir
 	$q = @$db->query('select count(*) from tb_help where 1 = 1');
     if ($q === false)
     {
@@ -221,7 +221,7 @@ switch( $acao )
 		$data = null;
 		$_REQUEST['label'] = is_null($_REQUEST['label']) ?'&lt;CAMPO&gt;' : $_REQUEST['label'];
 		$html = '<p><span style="text-decoration: underline;"><span style="font-size: x-large;">'.$_REQUEST['label'].'</span></span></p>';
-		$data['help_text']  = utf8_encode( $html);//'Digite aqui o conteúdo do arquivo de ajuda!' );
+		$data['help_text']  = utf8_encode( $html);//'Digite aqui o conteÃºdo do arquivo de ajuda!' );
 		$data['help_title'] = '';
 		if( $res->numRows() > 0)
 		{

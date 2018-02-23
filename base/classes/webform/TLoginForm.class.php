@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -56,7 +56,7 @@ Class TLoginForm extends TForm
 
 	public function __construct($strOnLoginFunction=null, $strOnExitFunction = null, $strTitle=null, $strFieldLoginLabel=null, $strFieldPasswordLabel=null, $strBtnLoginLabel=null,$strBtnExitLabel=null, $strHeight=null, $strWidth=null)
 	{
-		// valores padr„o
+		// valores padr√£o
 		$strTitle  				= is_null($strTitle) 				? 'Acesso ao Sistema' : $strTitle;
 		$strHeight 				= is_null($strHeight) 				? '160' 	: $strHeight;
 		$strWidth  				= is_null($strWidth)  				? '300'		: $strWidth;
@@ -110,7 +110,7 @@ Class TLoginForm extends TForm
 				$this->addJavascript($script);
 				$this->setTitle('');
 				$this->removeField(null,'msg');
-				$this->htmlField->setValue('<br>Validando informaÁıes!');
+				$this->htmlField->setValue('<br>Validando informa√ß√µes!');
 				$this->setAction('');
 				if( $this->onLoginFunction && function_exists($this->onLoginFunction) )
 				{
@@ -133,7 +133,7 @@ Class TLoginForm extends TForm
 					$this->addJavascript($script);
 					$this->removeField(null,'msg');
 					$this->addJavascript('fwApplicationEnd()');
-					$this->htmlField->setValue('<br>Encerrando aplicaÁ„o!');
+					$this->htmlField->setValue('<br>Encerrando aplica√ß√£o!');
 					$this->setAction('');
 					unset($_SESSION[APLICATIVO]);
 				}

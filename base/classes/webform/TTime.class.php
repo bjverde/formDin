@@ -2,9 +2,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -23,25 +23,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
   /**
- * Campo para ediÁ„o de horas.
+ * Campo para edi√ß√£o de horas.
  * maskType como hms,hm
  *
  */
@@ -69,10 +69,10 @@ class TTime extends TMask
 	//-------------------------------------------------------------------------------
 	public function show($print=true)
 	{
-		// n„o colocar a imagem no campo data se ele estiver desabilitado
+		// n√£o colocar a imagem no campo data se ele estiver desabilitado
 		if( $this->getEnabled())
 		{
-			$this->addEvent('onBlur' ,'fwValidarHora(this,this.value,"'.$this->getMaskType().'","'.$this->getMinValue().'","'.$this->getMaxValue().'","Hora inv·lida")');
+			$this->addEvent('onBlur' ,'fwValidarHora(this,this.value,"'.$this->getMaskType().'","'.$this->getMinValue().'","'.$this->getMaxValue().'","Hora inv√°lida")');
 		}
 		return parent::show($print);
 	}
@@ -117,7 +117,7 @@ class TTime extends TMask
 			$tam = strlen($hora);
 			if( $tam == 0 )
 			{
-				return true; // campo est· vazio
+				return true; // campo est√° vazio
 			}
 			if ( $tam == 5 or $tam==8 )
 			{
@@ -128,12 +128,12 @@ class TTime extends TMask
 				if ( ($h<0) || ($h>23)  || ($m<0) || ($m>59)|| ($s<0) || ($s>59) )
 				{
 
-					$this->setError('Hora inv·lida');
+					$this->setError('Hora inv√°lida');
 				}
 			}
 			else
 			{
-				$this->setError('Hora inv·lida');
+				$this->setError('Hora inv√°lida');
 			}
 			if(!$this->getError())
 			{
