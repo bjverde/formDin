@@ -169,12 +169,10 @@ class TPDOConnection {
 			}else{
 				self::setDataBaseName( DATABASE );
 			}
-			
-			/*
+
 			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
 				self::setUtfDecode( UTF8_DECODE );
-			}
-			*/			
+			}			
 			
 			if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 				define( 'USE_SESSION_LOGIN', 0 );
