@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 //error_reporting(E_ALL);
-$frm = new TForm('Exemplo - UtilizaÁ„o de Abas 01 ',600,800);
+$frm = new TForm('Exemplo - Utiliza√ß√£o de Abas 01 ',600,800);
 $frm->setMaximize(true);
 $frm->setflat(true);
 //$pc = $frm->addPageControl('pc',null,null,'pcBeforeClick','pcAfterClick');
@@ -51,17 +51,17 @@ $pc = $frm->addPageControl('pc',300,null,null,null);
 //$pc = $frm->addPageControl('pc',null,null,null,null);
 $acao='';
 
-$p = $pc->addPage('Cadastro AÁ„o',true,true,'aba1',null);
+$p = $pc->addPage('Cadastro A√ß√£o',true,true,'aba1',null);
 
 
 	$pc2 = $frm->addPageControl('pc2',300);
-	$pc2->addPage('Sub Aba AÁ„o',true,true,'aba11',null);
+	$pc2->addPage('Sub Aba A√ß√£o',true,true,'aba11',null);
 	$frm->addTextField('cadastro','Cadastro:',20,true);
-	//$frm->addHtmlField('html_texto',null,null,"ObservaÁ„o:",200,500);//->setCss('background-color','yellow');
-	$frm->addButton('Selecionar a aba relatÛrio',null,'btnAtivarAba','btnClick()',null,true,false);
-	$frm->addButton('Selecionar a aba HistÛrico',null,'btnAtivarAbaHist','btnClick2()',null,false,false);
-	$frm->addButton('Desabilitar aba histÛrico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,false,false);
-	$frm->addButton('Habilitar aba histÛrico',null,'btnHabilitarAba','btnHabilitarClick()',null,false,false);
+	//$frm->addHtmlField('html_texto',null,null,"Observa√ß√£o:",200,500);//->setCss('background-color','yellow');
+	$frm->addButton('Selecionar a aba relat√≥rio',null,'btnAtivarAba','btnClick()',null,true,false);
+	$frm->addButton('Selecionar a aba Hist√≥rico',null,'btnAtivarAbaHist','btnClick2()',null,false,false);
+	$frm->addButton('Desabilitar aba hist√≥rico',null,'btnDesabilitarAba','btnDesabilitarClick()',null,false,false);
+	$frm->addButton('Habilitar aba hist√≥rico',null,'btnHabilitarAba','btnHabilitarClick()',null,false,false);
 	$frm->addButton('Mostrar Erros',null,'btnMostrarErro','MostrarErros()');
 	$frm->addMemoField('memo','Obs:',1000,true,60,10);
 	$frm->addTextField('campo2','Campo2:',20);
@@ -69,32 +69,32 @@ $p = $pc->addPage('Cadastro AÁ„o',true,true,'aba1',null);
 
 
 
-$pc->addPage('&RelatÛrio',false,true,'abaRelatorio');
-	$frm->addGroupField('gpRelatorio','Grupo do RelatÛrio');
+$pc->addPage('&Relat√≥rio',false,true,'abaRelatorio');
+	$frm->addGroupField('gpRelatorio','Grupo do Relat√≥rio');
 		$frm->addMemoField('memo2','Obs:',1000,true,60,10);
     $frm->closeGroup();
 
-$pc->addPage('HistÛrico',false,true,'aHist');
-	$frm->addTextField('historico','HistÛrico:',20);
+$pc->addPage('Hist√≥rico',false,true,'aHist');
+	$frm->addTextField('historico','Hist√≥rico:',20);
 
 
-$pc->addPage('OrÁamento',false,false,'abaOrcamento');
+$pc->addPage('Or√ßamento',false,false,'abaOrcamento');
 	$frm->addGroupField('gpx','Grupo x');
-		$frm->addTextField('orcamento','OrÁamento:',20,true)->setHint('teste - teste');
+		$frm->addTextField('orcamento','Or√ßamento:',20,true)->setHint('teste - teste');
 	$frm->closeGroup();
 $frm->closeGroup();
 //$frm->closeGroup();
 //$frm->addTextField('cadastro2','Cadastro:',20);
 //$pc->setActivePage('abaHistorico',true);
-//$frm->addTextField('descricao','DescriÁ„o:',50);
+//$frm->addTextField('descricao','Descri√ß√£o:',50);
 $frm->setAction('Atualizar,Gravar');
-//$frm->setMessage('GravarÁ„o realizada com sucesso');
+//$frm->setMessage('Gravar√ß√£o realizada com sucesso');
 error_reporting(~E_NOTICE);
 
 if($acao=='Gravar')
 {
 	$frm->validate();
-	//$frm->validate('Cadastro AÁ„o');
+	//$frm->validate('Cadastro A√ß√£o');
 	//$frm->validate('gpx');
 	//$frm->validate('abaOrcamento');
 	$pc->getPage('aHist')->setVisible(false);
@@ -107,7 +107,7 @@ function pcBeforeClick(rotulo,container,id)
 {
 	if( id == 'abarelatorio' )
 	{
-		//alert('N„o È permito acesso a esta aba via mouse');
+		//alert('N√£o √© permito acesso a esta aba via mouse');
 		return false;
 	}
 	return true;
@@ -145,7 +145,7 @@ function fwAdjustHeight2(frmId,jsonParams)
 }
 function pcAfterClick(aba,pageControl,id)
 {
-	alert('A funÁ„o definida no evento afterClick do pageControl,\nfoi chamada e recebeu os seguintes parametros:\n\n'+
+	alert('A fun√ß√£o definida no evento afterClick do pageControl,\nfoi chamada e recebeu os seguintes parametros:\n\n'+
 	'aba='+aba+'\n'+
 	'pageControls='+pageControl+'\n'+
 	'id='+id);

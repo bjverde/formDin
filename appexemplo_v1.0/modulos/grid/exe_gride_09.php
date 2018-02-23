@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,34 +20,34 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo de Criação de Gride');
+$frm = new TForm('Exemplo de CriaÃ§Ã£o de Gride');
 
 $gride = new TGrid( 'idGride' // id do gride
-					,'Título do Gride' // titulo do gride
+					,'TÃ­tulo do Gride' // titulo do gride
 					,$dados 	// array de dados
 					,250		// altura do gride
 					,null		// largura do gride
 					,'COD_UF'
 					);
-$gride->setcss('font-size','10px'); // altera o tamanho da fonte padrão para todo o gride
-$gride->addExcelHeadField('Estado:','cod_uf'); // Informa ao gride que o campo cod_uf do formulário deve ser exportado para o excel tambem
+$gride->setcss('font-size','10px'); // altera o tamanho da fonte padrÃ£o para todo o gride
+$gride->addExcelHeadField('Estado:','cod_uf'); // Informa ao gride que o campo cod_uf do formulÃ¡rio deve ser exportado para o excel tambem
 $gride->autoCreateColumns(); // cria as colunas de acordo com o array de dados
 
 //$gride->addColumn('NOM_UF','Nome',null,'center')->setCss('font-weight','normal');
@@ -69,7 +69,7 @@ $h->setCss('font-size','14'); 			// altera o tamanho da fonte do titulo da colun
 
 
 //$gride->addSelectColumn('seq_fruta','Fruta','seq_fruta','fruta',null,null,null,null,'SEQ_FRUTA','NOM_FRUTA');
-$gride->setCache(-1); // não utiliza cache da classe banco ( IBAMA );
+$gride->setCache(-1); // nÃ£o utiliza cache da classe banco ( IBAMA );
 
 $frm->show();
 return;
@@ -78,7 +78,7 @@ $frm->addHtmlField('campo_gride1');
 $frm->addHtmlField('campo_gride2',null,null,null,null,320);
 
 $frm->addHtmlGride('campo_gride3','modulos/grid/exe_gride03_old.php',null,250);
-$frm->addHtmlField('campo_gride4','Clique no botão Criar Gride 4 Abaixo',null,null,null,300,false);
+$frm->addHtmlField('campo_gride4','Clique no botÃ£o Criar Gride 4 Abaixo',null,null,null,300,false);
 $frm->addHtmlField('campo_gride5');
 $frm->addHtmlField('campo_gride6');
 $frm->addHtmlField('campo_gride7');
@@ -87,7 +87,7 @@ $frm->addHtmlField('campo_gride7');
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
 /*
-$gride = new TGrid('gd1','Gride Nº 1','TESTE.PKG_MOEDA.SEL_UF',450);
+$gride = new TGrid('gd1','Gride NÂº 1','TESTE.PKG_MOEDA.SEL_UF',450);
 //$gride->setSortable(false);
 $frm->addButton('Ativar Sort',null,'btnAtivar','ativarSort()');
 //<div></div>$gride->setZebrarColors('#ffffff','#ffffff');
@@ -99,7 +99,7 @@ $gride->addColumn('Nome do Estado','Estado',300);
 //$gride->addColumn('Nome do Estado','ESTADO');
 //$gride->autoCreateColumns();
 
-// não mostrar os botoes de alterar e excluir padrão
+// nÃ£o mostrar os botoes de alterar e excluir padrÃ£o
 //$gride->enableDefaultButtons(false);
 //$gride->addSelectColumn('sel_sig_moeda','Sigla','SIG_MOEDA','R$=Reais,US$=Dolar',null,null,'');
 //$gride->addSelectColumn('selUF','Estado','SIG_UF','TESTE.PKG_MOEDA.SEL_UF',null,null,'-- Estados --');
@@ -111,7 +111,7 @@ $gride->addColumn('Nome do Estado','Estado',300);
 // gride 2
 //-------------------------------------------------------------------------------------------------
 /*
-$gride = new TGrid('gd2','Gride Nº 2','TESTE.PKG_MOEDA.SEL_MOEDA',250
+$gride = new TGrid('gd2','Gride NÂº 2','TESTE.PKG_MOEDA.SEL_MOEDA',250
 ,null
 ,null
 ,null
@@ -134,7 +134,7 @@ $frm->addButton('Criar Gride 4',null,'btnCriarGride4','fwGetGrid("base/exemplos/
 // gride 5
 //-------------------------------------------------------------------------------------------------
 /*
-$gride = new TGrid('gd5','Gride Nº 5'
+$gride = new TGrid('gd5','Gride NÂº 5'
 ,'TESTE.PKG_MOEDA.SEL_MOEDA',300
 ,null
 ,null
@@ -171,7 +171,7 @@ $g->setBvars(array ('COD_ORIGEM'=>$_SESSION['RECIBO_ANDAMENTO']['seq_unidade_atu
 */
 
 /*
-$g->addCheckColumn('checkbox_1','Número','SEQ_DOCUMENTO','NUM_DOCIBAMA');
+$g->addCheckColumn('checkbox_1','NÃºmero','SEQ_DOCUMENTO','NUM_DOCIBAMA');
 $g->addColumn('DES_TIPO_DOCUMENTO','Tipo');
 $g->addColumn('DES_ASSUNTO','Resumo');
 $g->addColumn('SIT_CONFIRMADO','confirmado');
@@ -186,7 +186,7 @@ $frm->setValue('campo_gride6',$g->show(false));
 /*
 $res['CD_DEMANDA'][0] 	= 1;
 $res['DEMANDA'][0] 		= 'Demanda';
-$res['DEMANDANTE'][0] 	= 'Luis Eugênio';
+$res['DEMANDANTE'][0] 	= 'Luis EugÃªnio';
 
 $g_Demanda = new TGrid('grd_Demanda','Demanda',$res);
 //$g_Demanda->addColumn('CD_CEMANDA','Demanda');
@@ -199,7 +199,7 @@ $frm->setValue('campo_gride6',$g_Demanda->show(false));
 */
 
 $frm->addSelectField('cod_uf','Estado:');
-$gride = new TGrid('gd7','Gride Nº 7','UF',450,null,'COD_UF');
+$gride = new TGrid('gd7','Gride NÂº 7','UF',450,null,'COD_UF');
 $gride->setcss('font-size','10px');
 $gride->addExcelHeadField('Estado:','cod_uf');
 $gride->addColumn('NOM_UF','Nome',null,'center')->setCss('font-weight','normal');
@@ -223,7 +223,7 @@ function gd2OnDrawHeader($header,$coluna,$th)
 		$th->setCss('background-color','yellow');
 		$th->setCss('cursor','pointer');
 		$header->setEvent('onclick','alert("cliquei na coluna")');
-		$header->setHint('Este é o hint do titulo da coluna');
+		$header->setHint('Este Ã© o hint do titulo da coluna');
 		$header->setHelpOnLine('Nome da Moeda',null,null,'nom_moeda');
 		$coluna->setSortable(false);
 
@@ -279,7 +279,7 @@ function gd5OnDrawCell($rowNum,$cell,$objColumn,$aData,$edit)
 
 		if( $edit->getProperty('checked'))
 		{
-           	print 'Linha:'.$rowNum.' está selecionada, ';
+           	print 'Linha:'.$rowNum.' estÃ¡ selecionada, ';
 		}
 	}
 }
@@ -322,7 +322,7 @@ function grideDrawButton($rowNum,$button,$objColumn,$aData)
 //----------------------------------------------------------------------
 function grideDrawRow($row,$rowNum,$aData)
 {
-	// esconder linha em função do $_POST
+	// esconder linha em funÃ§Ã£o do $_POST
 	if( is_array($_POST['checkbox_num_item']) )
 	{
 		if( ! in_array( $aData['SEQ_DOCUMENTO'], $_POST['checkbox_num_item'] ) )

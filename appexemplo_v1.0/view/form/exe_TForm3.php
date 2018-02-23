@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -49,19 +49,19 @@
 // arquivo de interno de configuracao do car(externo)
 //require_once 'modulos/car_externo/config.php';
 
-$frm = new TForm('Formul·rio de Cadastro de Clientes');
-$frm->addHtmlField('msg','Exemplo de como alterar a inteface do formul·rio utilizando um arquvo css externo');
-// adicionar o arquivo css ao formul·rio
+$frm = new TForm('Formul√°rio de Cadastro de Clientes');
+$frm->addHtmlField('msg','Exemplo de como alterar a inteface do formul√°rio utilizando um arquvo css externo');
+// adicionar o arquivo css ao formul√°rio
 $frm->addCssFile('css/css_form.css');
 
 
 // exibir bordas simples
 $frm->setFlat(true);
 
-// remover o bot„o fechar original
+// remover o bot√£o fechar original
 $frm->hideCloseButton();
 
-// adionar o conte˙do do cabeÁalho com no novo bot„o fechar
+// adionar o conte√∫do do cabe√ßalho com no novo bot√£o fechar
 $frm->getHeaderButtonCell()->add('<table border="0" width="100%" height="100%" cellpadding="0px" cellspacing="0px" style="padding-right:2px;padding-top:2px;"><tr align="right"valign="bottom"><td></td></tr><tr align="right" valign="top"><td><img style="cursor:pointer;" src="imagem/btnFecharVermelho.jpg" alt="Fechar" width="18px" height="18px"  title="Fechar" onclick="fwConfirmCloseForm(\'formdin_area\',null,null,null);"></td></tr></table>');
 
 // adicionar campo grupo para exemplo
@@ -69,6 +69,6 @@ $frm->addGroupField('bg1','Grupo de teste');
 	$frm->addTextField('nome','Nome:',60);
 $frm->closeGroup();
 
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 ?>

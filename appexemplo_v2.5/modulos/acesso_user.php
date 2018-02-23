@@ -1,14 +1,14 @@
 <?php
 $primaryKey = 'IDUSER';
-$frm = new TForm('Cadastro de usuários ',600);
+$frm = new TForm('Cadastro de usuÃ¡rios ',600);
 $frm->setFlat(true);
 
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addTextField('LOGIN_USER', 'Login',50,true);
 $frm->addTextField('PWD_USER', 'Senha',50,true);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
-$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão:',null,false,null,null,true)->setReadOnly(true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=NÃ£o', true);
+$frm->addTextField('DAT_INCLUSAO', 'Data InclusÃ£o:',null,false,null,null,true)->setReadOnly(true);
 $frm->addTextField('DAT_UPDATE', 'Data Update: ',null,false,null,null,false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
@@ -58,7 +58,7 @@ $gride->addColumn($primaryKey,'id',50,'center');
 $gride->addColumn('LOGIN_USER','Login',100,'center');
 $gride->addColumn('PWD_USER','Senha',200,'center');
 $gride->addColumn('SIT_ATIVO','Ativo',30,'center');
-$gride->addColumn('DAT_INCLUSAO','Data Inclusão',100,'center');
+$gride->addColumn('DAT_INCLUSAO','Data InclusÃ£o',100,'center');
 $gride->addColumn('DAT_UPDATE','Data Update',100,'center');
 $frm->addHtmlField('gride',$gride);
 $frm->setAction( 'Salvar,Limpar' );

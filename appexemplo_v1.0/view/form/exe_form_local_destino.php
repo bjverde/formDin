@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,33 +22,33 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 //error_reporting(E_ALL);
-$frm = new TForm('RELAT”RIO: Destino do material coletado');
+$frm = new TForm('RELAT√ìRIO: Destino do material coletado');
 $frm->setWidth(700);
 $frm->setHeight(400);
 $frm->setAutoSize(true);
 
-//N„o quebra o rotulo em linhas. Mantem o campo perto do rotulo
+//N√£o quebra o rotulo em linhas. Mantem o campo perto do rotulo
 $frm->setNoWrap(true);
 
-//$frm->enableOnlineDoc(true); // false = permitir ediÁ„o
+//$frm->enableOnlineDoc(true); // false = permitir edi√ß√£o
 
 // variavel que seta o tamanho do grupo para ser usada abaixo
 $largura_grupo = 650;
@@ -58,38 +58,38 @@ $largura_grupo = 650;
 $frm->addHiddenField('num_pessoa_instituicao');
 
 //Grupo 1: Pergunta
-$frm->addGroupField('gp_pergunta','O destino do material foi a prÛpria instituiÁ„o vinculada?', null, $largura_grupo)->setColumns(10);
+$frm->addGroupField('gp_pergunta','O destino do material foi a pr√≥pria institui√ß√£o vinculada?', null, $largura_grupo)->setColumns(10);
 
-    $frm->addRadioField('flg_propria_instituicao', '',true,'S=SIM,N=N„o',null,false,null,2,null,null,null,false)->setCss('font-size','11');
+    $frm->addRadioField('flg_propria_instituicao', '',true,'S=SIM,N=N√£o',null,false,null,2,null,null,null,false)->setCss('font-size','11');
 
 $frm->closeGroup();
 
 //Grupo 2: Busca de unidades cadastradas
-$frm->addGroupField('gp_cadastrada','InstituiÁ„o cadastrada no SISBio', null, $largura_grupo);
+$frm->addGroupField('gp_cadastrada','Institui√ß√£o cadastrada no SISBio', null, $largura_grupo);
 
-    $frm->addTextField('cpf_cnpj_num_pessoa','N∫ do CNPJ da instituiÁ„o:',14,true,null,null,true,"Informe o n˙mero do CNPJ da instituiÁ„o e click em localizar");
+    $frm->addTextField('cpf_cnpj_num_pessoa','N¬∫ do CNPJ da institui√ß√£o:',14,true,null,null,true,"Informe o n√∫mero do CNPJ da institui√ß√£o e click em localizar");
     $frm->addButton('Localizar'
-        , null // aÁ„o associada ao arquivo com mesmo nome.php, na pasta action
+        , null // a√ß√£o associada ao arquivo com mesmo nome.php, na pasta action
         , 'btnLocalizar'
         , 'localizarInstituicao()' // funcao
         , null
         , false // nova linha
         , false // nao criar o botao no rodape
     );
-    $frm->addTextField('nom_instituicao','Nome da instituiÁ„o:',60,true,null,null,true);
+    $frm->addTextField('nom_instituicao','Nome da institui√ß√£o:',60,true,null,null,true);
     $frm->addTextField('nom_sigla','Sigla:',5,false,null,null,true);
 
 $frm->closeGroup();
 
-//Grupo 3: Cadastro de instituiÁıes
-$frm->addGroupField('gp_instituicao','Cadastro da instituiÁ„o', null, $largura_grupo);
+//Grupo 3: Cadastro de institui√ß√µes
+$frm->addGroupField('gp_instituicao','Cadastro da institui√ß√£o', null, $largura_grupo);
 
-    $frm->addTextField('nom_destino','Nome da instituiÁ„o:',60,true,null,null,true);
+    $frm->addTextField('nom_destino','Nome da institui√ß√£o:',60,true,null,null,true);
     $frm->addTextField('nom_departamento','Departamento:',60,false,null,null,true);
-    $frm->addTextField('end_destino','EndereÁo:',60,true,null,null,true);
-    $frm->addSelectField('cod_pais','PaÌs:',true,null,null,null,null,null,null,null,'-- Selecione --');
+    $frm->addTextField('end_destino','Endere√ßo:',60,true,null,null,true);
+    $frm->addSelectField('cod_pais','Pa√≠s:',true,null,null,null,null,null,null,null,'-- Selecione --');
     $frm->addSelectField('cod_uf','Estado:');
-    $frm->addSelectField('cod_municipio','MunicÌpio:');
+    $frm->addSelectField('cod_municipio','Munic√≠pio:');
     $frm->addTextField('nom_cidade_estrangeira','Cidade:',30,true,null,null,true);
     $frm->addTextField('nom_estado_provincia','Estado:',30,true,null,null,true);
     $frm->addTextField('des_bairro','Bairro:',30,true,null,null,true);
@@ -97,8 +97,8 @@ $frm->addGroupField('gp_instituicao','Cadastro da instituiÁ„o', null, $largura_g
 
 $frm->closeGroup();
 
-//Grupo 4: Tipo de instituiÁ„o
-$frm->addGroupField('gp_tipo','Tipo da instituiÁ„o para onde o material foi destinado', null, $largura_grupo);
+//Grupo 4: Tipo de institui√ß√£o
+$frm->addGroupField('gp_tipo','Tipo da institui√ß√£o para onde o material foi destinado', null, $largura_grupo);
 
     // o Pacote abaixo retorna a descricao do tipo de solicitacao, concatenada com o campo HELP
     /*
@@ -114,9 +114,9 @@ $frm->addGroupField('gp_tipo','Tipo da instituiÁ„o para onde o material foi dest
 	$opcoes_marcar = array();
     $frm->addRadioField('cod_tipo_destino', '',true,$opcoes_marcar,null,false,null,3,null,null,null,false);
 
-    $frm->addTextField('nom_local_destino','Nome da coleÁ„o:',50,true,null,null,true);
+    $frm->addTextField('nom_local_destino','Nome da cole√ß√£o:',50,true,null,null,true);
     $frm->addTextField('des_complementar','Nome do curador:',50,true,null,null,true);
-    $frm->addTextField('des_tipo_destino_comp','DescriÁ„o:',100,false,50,null,true);
+    $frm->addTextField('des_tipo_destino_comp','Descri√ß√£o:',100,false,50,null,true);
 
 
 $frm->closeGroup();
@@ -138,7 +138,7 @@ $frm->combinarSelects('cod_uf' // select pai
 );
 
 $frm->addButton('Gravar'
-        , null // aÁ„o associada ao arquivo com mesmo nome.php, na pasta action
+        , null // a√ß√£o associada ao arquivo com mesmo nome.php, na pasta action
         , 'btnSalvarUnidade'
         , 'salvarUnidade()' // funcao
         , null
@@ -147,7 +147,7 @@ $frm->addButton('Gravar'
 );
 
 $frm->addButton('Novo'
-        , null // aÁ„o associada ao arquivo com mesmo nome.php, na pasta action
+        , null // a√ß√£o associada ao arquivo com mesmo nome.php, na pasta action
         , 'btnNovoArquivo'
         , 'novoArquivo()' // funcao
         , null
@@ -157,7 +157,7 @@ $frm->addButton('Novo'
 
 //$frm->addHtmlField('campo_gride_arquivo');
 
-// processando as aÁıes PHP dos botoes
+// processando as a√ß√µes PHP dos botoes
 $frm->processAction();
 
 $frm->setFieldEvent('flg_propria_instituicao', 'onChange', 'esconderCamposCadastroInstituicao()');
@@ -173,7 +173,7 @@ $formDinAcao = $fdBotao.$fdAcao;
   //                     'DES_RELATO_ARQUIVO_TIPO','SEQ_RELATO_ARQUIVO_TIPO');
 
 // adicionar um arquivo Java Script manualmente
-// O arquivo abaixo tem funcoes extras que n„o est„o contempladas no FormDin
+// O arquivo abaixo tem funcoes extras que n√£o est√£o contempladas no FormDin
 $frm->addJsFile('base_extra/funcoes.js');
 
 $frm->addJavascript('getGrideDestino();');

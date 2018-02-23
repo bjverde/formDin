@@ -9,7 +9,7 @@ $frm->addTextField('NOM_UF', 'Nome',50,true);
 $frm->addTextField('SIG_UF', 'Sigla',50,true);
 
 $dadosRegiao = RegiaoDAO::selectAll('COD_REGIAO');
-$frm->addSelectField('COD_REGIAO','Regi„o:',true,$dadosRegiao);
+$frm->addSelectField('COD_REGIAO','Regi√£o:',true,$dadosRegiao);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {

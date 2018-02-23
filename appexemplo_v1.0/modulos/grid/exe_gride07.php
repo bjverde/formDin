@@ -2,7 +2,7 @@
 d($_REQUEST);
 $frm = new TForm('Exemplo Gride Evento',300,500);
 
-// simulaÁ„o de dados para o gride
+// simula√ß√£o de dados para o gride
 $dados = null;
 $dados['ID_TABELA'][] = 1;
 $dados['NM_TABELA'][] = 'Linha1';
@@ -20,10 +20,10 @@ $dados['ST_TABELA'][] = 'N';
 $dados['SIT_OPCOES'][] = '3=Tres,4=>Quatro';
 
 
-$html ='Os botıes sÛ funcionam depois das linha dos gride selecionadas'; 
+$html ='Os bot√µes s√≥ funcionam depois das linha dos gride selecionadas'; 
 $frm->addHtmlField('html1',$html,null,'Dica:',null,200)->setCss('border','1px dashed blue');
 $gride = new TGrid( 'gdTeste' // id do gride
-					,'TÌtulo do Gride' // titulo do gride
+					,'T√≠tulo do Gride' // titulo do gride
 					,$dados 	// array de dados
 					,null		// altura do gride
 					,null		// largura do gride
@@ -32,14 +32,14 @@ $gride = new TGrid( 'gdTeste' // id do gride
 
 $gride->addCheckColumn('st_tabela','Selecione','ST_TABELA','NM_TABELA')->setEvent('onClick','chkClic()');
 $gride->addColumn('nm_tabela','Nome',100,'left');
-$gride->addSelectColumn('sit_opcoes' ,'OpÁıes','SIT_OPCOES','1=Amarelo,2=Verde');
+$gride->addSelectColumn('sit_opcoes' ,'Op√ß√µes','SIT_OPCOES','1=Amarelo,2=Verde');
 $gride->addButton('Alterar 1', NULL, 'btnAlterar1', 'grideAlterar()', NULL, 'editar.gif','editar.gif', 'Alterar registro')->setEnabled( false );
 $gride->addButton('Alterar 2', NULL, 'btnAlterar2', 'grideAlterar()', NULL, null,null, 'Alterar registro')->setEnabled( false );
 $gride->addButton('Excluir', NULL, 'btnExcluir', 'grideAlterar()', NULL, null,null)->setEnabled( false )->setCss('color','red');
 //$gride->addButton('Abrir Redirect 2', 'btnRedirect2', 'btnRedirect2', 'grideRedirect2()', 'Redirecionar ?', null,null,null,true)->setCss('color','blue');
 $gride->addButton('Ir para Redirect 2', 'btnRedirect2', null, null, null, null,null,null,true)->setCss('color','blue');
 
-// funÁ„o de callback da criaÁ„o das celulas
+// fun√ß√£o de callback da cria√ß√£o das celulas
 $gride->setOnDrawCell('gdAoDesenharCelula');
 // campo html para exibir o gride
 $frm->addHtmlField('gride',$gride);
@@ -49,19 +49,19 @@ $acao = isset($acao) ? $acao : null;
 d($acao);
 switch( $acao ) {
 	case 'Ir submit':
-		//Redirect sÛ funciona se o arquivo estiver na pasta modulos
-		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. VocÍ est· agora no 2∫ form.',true);
+		//Redirect s√≥ funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Voc√™ est√° agora no 2¬∫ form.',true);
 		break;
 		//------------------------------------------------------------------
 	case 'Ir Ajax':
-		//Redirect sÛ funciona se o arquivo estiver na pasta modulos
-		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. VocÍ est· agora no 2∫ form.', false, null );
+		//Redirect s√≥ funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Voc√™ est√° agora no 2¬∫ form.', false, null );
 		break;
 		//--------------------------------------------------------------------
 }
 
 
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 
 
@@ -77,9 +77,9 @@ function chkClic(e, linha) {
     if( jQuery(e).is(':checked') )   {
     	jQuery("#sit_opcoes_"+linha).show();
 
-    	// mostrar o bot„o alterar da linha
+    	// mostrar o bot√£o alterar da linha
 	    //jQuery("#gdteste_td_"+linha+" img").show(); // se tiver utilizando imagem
-		//jQuery("#gdteste_td_"+linha+" button").show(); // se n„o estiver utilizando imagem
+		//jQuery("#gdteste_td_"+linha+" button").show(); // se n√£o estiver utilizando imagem
 		jQuery("#gdteste_td_"+linha+" button").removeAttr('disabled');
 		jQuery("#gdteste_td_"+linha+" img").removeAttr('disabled');
     }
@@ -87,7 +87,7 @@ function chkClic(e, linha) {
     {
     	jQuery("#sit_opcoes_"+linha).hide();
 		//jQuery("#gdteste_td_"+linha+" img").hide(); // se tiver utilizando imagem
-		//jQuery("#gdteste_td_"+linha+" button").hide(); // se n„o tiver utilizando imagem
+		//jQuery("#gdteste_td_"+linha+" button").hide(); // se n√£o tiver utilizando imagem
 		jQuery("#gdteste_td_"+linha+" button").attr('disabled','true');
 		jQuery("#gdteste_td_"+linha+" img").attr('disabled','true');
 
@@ -99,10 +99,10 @@ function grideAlterar(fields, values, idGride, linha) {
 }
 
 function grideRedirect2(fields, values, idGride, linha) {
-	alert( 'Cliclou na linha: '+linha+', agora ser· redirecionado para o modulo Redirect2');
+	alert( 'Cliclou na linha: '+linha+', agora ser√° redirecionado para o modulo Redirect2');
 }
 
-// esconder todos os botoes alterar ao iniciar o formul·rio
+// esconder todos os botoes alterar ao iniciar o formul√°rio
 jQuery("[name=btnAlterar]").each(
   function()
   {

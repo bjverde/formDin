@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,26 +22,26 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 
 /*
- // script para a criaÁ„o da tabela no sqlite
+ // script para a cria√ß√£o da tabela no sqlite
  CREATE TABLE [tb_arquivo] (
  [id_arquivo] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
  [nome_arquivo] varchar(200)  NULL
@@ -51,22 +51,22 @@
 $fileFormat = 'jpg,txt,gif,doc,pdf,xls,odt';
 $fileSize = '2M';
 
-$frm = new TForm( 'Cadastro e ExibiÁ„o de LOBS Salvando Caminho no Banco de Dados',500);
+$frm = new TForm( 'Cadastro e Exibi√ß√£o de LOBS Salvando Caminho no Banco de Dados',500);
 $frm->addHiddenField( 'id_arquivo' ); // coluna chave da tabela
-$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereÁo do arquivo no banco de dados e depois visualiza-lo.<br>Est· utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela È a tb_arquivo.</b></h3></center>' );
+$frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endere√ßo do arquivo no banco de dados e depois visualiza-lo.<br>Est√° utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela √© a tb_arquivo.</b></h3></center>' );
 
 // campo para upload do arquivo
 $frm->addHtmlField('html1','Arquivo de tamanho maximo de '.$fileSize.' e nos formatos: '.$fileFormat,null,'Dica:',null,300)->setCss('border','1px dashed blue');
 $frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, $fileFormat, $fileSize, 60, null, null,'aoAnexar' );
 
-// grupo para exibir as informaÁıes do arquivo selecionado
-$frm->addGroupField( 'gpDadosArquivo', 'InformaÁıes do Arquivo' )->setReadOnly(true);
+// grupo para exibir as informa√ß√µes do arquivo selecionado
+$frm->addGroupField( 'gpDadosArquivo', 'Informa√ß√µes do Arquivo' )->setReadOnly(true);
 	$frm->addTextField( 'nome_arquivo', 'Nome do Arquivo:', 60, false, 60 );
 	$frm->addTextField( 'tamanho_arquivo', 'Tamanho:', 10 );
 	$frm->addTextField( 'tipo_arquivo', 'Tipo:', 60 );
 $frm->closeGroup();
 
-// criar os botıes no rodapÈ do formul·rio
+// criar os bot√µes no rodap√© do formul√°rio
 $frm->setAction( 'Salvar,Limpar' );
 
 $acao = isset($acao) ? $acao : null;
@@ -88,26 +88,26 @@ switch( $acao ) {
 	//--------------------------------------------------------------------
 }
 
-// criar o gride com os arquivos j· anexados
+// criar o gride com os arquivos j√° anexados
 $dados = Tb_arquivoDAO::selectAll( 'nome_arquivo' );
 $g = new TGrid( 'gdArquivos', 'Arquivos Gravados', $dados, null, null, 'ID_ARQUIVO' );
-$g->addColumn( 'id_arquivo', 'CÛdigo', 100, 'center' );
+$g->addColumn( 'id_arquivo', 'C√≥digo', 100, 'center' );
 $g->addColumn( 'nome_arquivo', 'Nome do Arquivo', 3000 );
-$g->addColumn( 'imagem', 'Conte˙do', 100, 'center' );
-$g->setCreateDefaultEditButton( false ); // n„o exibir o bot„o de ediÁ„o no gride
+$g->addColumn( 'imagem', 'Conte√∫do', 100, 'center' );
+$g->setCreateDefaultEditButton( false ); // n√£o exibir o bot√£o de edi√ß√£o no gride
 $g->setOnDrawCell( 'configurarCelula' ); // colocar uma imagem com o link para visualizar o conteudo do arquivo na coluna "imagem" do gride
 
 // exibir o gride na tela dentro do campo html
 $frm->addHtmlField( 'gride', $g );
 
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 
-// funÁ„o chamada pela classe TGrid para manipulaÁ„o dos dados das celulas
+// fun√ß√£o chamada pela classe TGrid para manipula√ß√£o dos dados das celulas
 function configurarCelula( $rowNum = null, $cell = null, $objColumn = null, $aData = null, $edit = null ) {
-	// se for a coluna imagem, adicionar um bot„o
+	// se for a coluna imagem, adicionar um bot√£o
     if ( $objColumn->getFieldName() == 'imagem' )  {
-        $btn = new TButton( 'btn' . $rowNum, null, null, 'fwModalBox("VisualizaÁ„o do Arquivo","arquivos/'. $aData[ 'NOME_ARQUIVO' ] . '")', null, 'analise.gif', null, 'Visualizar o Arquivo' );
+        $btn = new TButton( 'btn' . $rowNum, null, null, 'fwModalBox("Visualiza√ß√£o do Arquivo","arquivos/'. $aData[ 'NOME_ARQUIVO' ] . '")', null, 'analise.gif', null, 'Visualizar o Arquivo' );
         $cell->add( $btn );
     }
 }

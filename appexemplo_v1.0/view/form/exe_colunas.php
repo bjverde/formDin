@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,25 +20,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$html = '<br><br><b>Uso na codificação para melhorar Layout</b>'
-		.'<br>Com o "setColumns" é possível determinar colunas que os campos irão ficar alinhados para facilitar a criação de um melhor layout.';
+$html = '<br><br><b>Uso na codificaÃ§Ã£o para melhorar Layout</b>'
+		.'<br>Com o "setColumns" Ã© possÃ­vel determinar colunas que os campos irÃ£o ficar alinhados para facilitar a criaÃ§Ã£o de um melhor layout.';
 
 $box3 = new TBox('bx3',300,100);
 $box3->add($html);
@@ -46,13 +46,13 @@ $box3->setFlat(true);
 $box3->setPosition('tc');
 $box3->setCssBody('background-color','yellow');
 
-$frm = new TForm('Teste Colunas Formulário',300,900);
+$frm = new TForm('Teste Colunas FormulÃ¡rio',300,900);
 
 $frm->addOutside($box3);
 
 $frm->setColumns('100,300,120');
 $frm->addTextField('nom_pessoa','Nome da Pessoa:',30);
-$frm->addTextField('des_endereco','Endereço Comercial:',60,false,null,null,false);
+$frm->addTextField('des_endereco','EndereÃ§o Comercial:',60,false,null,null,false);
 $frm->addTextField('nom_bairro','Bairro:',30);
 $frm->addTextField('num_cep','CEP:',40,false,null,null,false);
 

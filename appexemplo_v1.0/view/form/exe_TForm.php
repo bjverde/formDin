@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,26 +22,26 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 //d($_REQUEST);
 
-$frm = new TForm('Exemplos de Formul·rio',300);
+$frm = new TForm('Exemplos de Formul√°rio',300);
 $frm->addHiddenField('flat');
 
 // adicinoar eventos ao fechar e antes de fechar
@@ -63,13 +63,13 @@ $frm->addTextField('municipio','Municipio',60,false,60);
 
 $frm->setOnlineSearch('municipio'
     ,'tb_municipio'               //$strPackageFunction
-    ,'nom_municipio|MunicÌpio:||||||like'   //$strFilterFields
+    ,'nom_municipio|Munic√≠pio:||||||like'   //$strFilterFields
     ,false                        //$strAutoFillFilterField
     ,false                        //$boolAutoStart
-	,true                         //se for encontrada apenas 1 opÁ„o fazer a seleÁ„o automaticamente
-    ,'cod_municipio|CÛdigo,nom_municipio|MunicÌpio' //$strGridColumns - colunas que ir„o aparecer no grid
+	,true                         //se for encontrada apenas 1 op√ß√£o fazer a sele√ß√£o automaticamente
+    ,'cod_municipio|C√≥digo,nom_municipio|Munic√≠pio' //$strGridColumns - colunas que ir√£o aparecer no grid
     ,'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
-    ,'Pesquisar MunicÌpios'       //$strWindowHeader -  Titulo da janela de pesquisa
+    ,'Pesquisar Munic√≠pios'       //$strWindowHeader -  Titulo da janela de pesquisa
 	,'Registros'                  //$strGridHeader   -  Titulo do Gride
     ,'nom_municipio'              //$strFocusFieldName - Seta o Foco no campo definido 
     ,null                         //$strWindowHeight
@@ -120,9 +120,9 @@ function funcaoRetorno() {
 	alert('funcaoRetorno() executada!');
 }
 function antesFechar() {
-	return confirm('Prosseguir com o fechamento do Formul·rio ?');
+	return confirm('Prosseguir com o fechamento do Formul√°rio ?');
 }
 function depoisFechar() {
-	alert( 'Formul·rio ser· fechado');
+	alert( 'Formul√°rio ser√° fechado');
 }
 </script>

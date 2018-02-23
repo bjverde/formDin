@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -42,8 +42,8 @@ $frm = new TForm('Gride Com Colunas Checkbox',480,500);
 $frm->setFlat(false);
 
 $frm->addSelectField('cod_uf','Uf:');
-$frm->addTextField('nom_pessoa','Nome:','30',false,null,'Nome de Teste ação');
-$frm->addSelectField('cod_bioma','Bioma:',false,'1=Cerrado,2=Mata Atlântica,3=Bioma 3',null,null,null,true,4);
+$frm->addTextField('nom_pessoa','Nome:','30',false,null,'Nome de Teste aÃ§Ã£o');
+$frm->addSelectField('cod_bioma','Bioma:',false,'1=Cerrado,2=Mata AtlÃ¢ntica,3=Bioma 3',null,null,null,true,4);
 
 $frm->addGroupField('gp','Gr');
 	$frm->addHtmlField('gride');
@@ -53,7 +53,7 @@ $frm->addJsFile('jquery/facebox/facebox.js');
 $frm->addCssFile('jquery/facebox/facebox.css');
 $frm->addSelectField('cod_uf','Estado:')->setOptions($frm->getUfs("COD_UF,SIG_UF"));
 
-$gride = new TGrid('gd5','Gride Nº 5'
+$gride = new TGrid('gd5','Gride NÂº 5'
 			,'TESTE.PKG_MOEDA.SEL_MOEDA'
 			,50
 			,null

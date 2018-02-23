@@ -15,8 +15,8 @@ $frm->addTextField('DISSABLED', 'DISSABLED',50,false);
 $frm->addTextField('HOTKEY', 'HOTKEY',50,false);
 $frm->addTextField('BOOLSEPARATOR', 'BOOLSEPARATOR',50,false);
 $frm->addTextField('JSONPARAMS', 'JSONPARAMS',50,false);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
-$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão:',null,false,null,null,true)->setReadOnly(true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=NÃ£o', true);
+$frm->addTextField('DAT_INCLUSAO', 'Data InclusÃ£o:',null,false,null,null,true)->setReadOnly(true);
 $frm->addTextField('DAT_UPDATE', 'Data Update: ',null,false,null,null,false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
@@ -86,7 +86,7 @@ $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO',50,'center');
 $gride->addColumn('DAT_UPDATE','DAT_UPDATE',50,'center');
 
 
-$frm->addGroupField('gpGride','Menus Visão de Tabela',null,null,null,null,true,null,false)->setcloseble(true);
+$frm->addGroupField('gpGride','Menus VisÃ£o de Tabela',null,null,null,null,true,null,false)->setcloseble(true);
 $frm->addHtmlField('gride',$gride);
 $frm->closeGroup();
 

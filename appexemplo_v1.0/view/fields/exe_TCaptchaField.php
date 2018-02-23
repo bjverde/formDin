@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,30 +20,30 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm('Teste Campo Captcha',300);
-$frm->addHtmlField('texto','<p><h3>O termo, CAPTCHA, é um acrônimo para <b>Completely Automated Public Turing Test to Tell Computers and Humans Apart</b> ou, numa tradução direta, teste de Turing público completamente automatizado para diferenciação entre computadores e humanos.<br>Leia mais em: <a target="_blank" href="http://www.tecmundo.com.br/2861-o-que-e-captcha-.htm#ixzz1qVPUhQeZ">Captcha</a></h3></p>');
+$frm->addHtmlField('texto','<p><h3>O termo, CAPTCHA, Ã© um acrÃ´nimo para <b>Completely Automated Public Turing Test to Tell Computers and Humans Apart</b> ou, numa traduÃ§Ã£o direta, teste de Turing pÃºblico completamente automatizado para diferenciaÃ§Ã£o entre computadores e humanos.<br>Leia mais em: <a target="_blank" href="http://www.tecmundo.com.br/2861-o-que-e-captcha-.htm#ixzz1qVPUhQeZ">Captcha</a></h3></p>');
 
 
-$frm->addCaptchaField('campo_captcha','Cód. Segurança:','Captcha - Clique aqui para gerar nova combinação');
+$frm->addCaptchaField('campo_captcha','CÃ³d. SeguranÃ§a:','Captcha - Clique aqui para gerar nova combinaÃ§Ã£o');
 
-// centralizado no formulário
+// centralizado no formulÃ¡rio
 $frm->addCaptchaField('captcha_center',null)->setAttribute('align','center');
 
 $frm->setAction('Gravar');
