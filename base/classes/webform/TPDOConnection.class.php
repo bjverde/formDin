@@ -70,8 +70,7 @@ class TPDOConnection {
 	private static $configFile;
 
 	// construtor
-	private function __construct()
-	{
+	public function __construct(){
 	}
 
 	//------------------------------------------------------------------------------------------
@@ -171,9 +170,11 @@ class TPDOConnection {
 				self::setDataBaseName( DATABASE );
 			}
 			
+			/*
 			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
 				self::setUtfDecode( UTF8_DECODE );
-			}			
+			}
+			*/			
 			
 			if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 				define( 'USE_SESSION_LOGIN', 0 );
@@ -834,14 +835,13 @@ class TPDOConnection {
 		return false;
 	}
 
-	//---------------------------------------------------
+	//--------------------------------------------------------------------------------------
 	public static function getLastId( $strTable, $strKeyField )
 	{
 		$res = self::executeSql( "select max( {$strKeyField} ) as last_id from {$strTable}" );
 		return $res[ 'LAST_ID' ][ 0 ];
 	}
-
-	//-----------------------------------------------------
+	//--------------------------------------------------------------------------------------
 	public static function formatDate( $date = null, $format = 'dmy' )
 	{
 		if ( $date )
@@ -883,8 +883,7 @@ class TPDOConnection {
 		}
 		return $date;
 	}
-
-	//-----------------------------------------------------
+	//--------------------------------------------------------------------------------------
 	public static function dmy( $date = null )
 	{
 		if ( $date )
@@ -908,7 +907,6 @@ class TPDOConnection {
 		}
 		return $date;
 	}
-
 	//-----------------------------------------------------
 	public static function processResult( $result, $fetchMode, $boolUtfDecode = null ) {
 		$boolUtfDecode = ( $boolUtfDecode === null ? self::getUtfDecode() : $boolUtfDecode );
@@ -969,18 +967,32 @@ class TPDOConnection {
 		}
 		return $res;
 	}
+	//--------------------------------------------------------------------------------------
 	public static function setUtfDecode( $boolNewValue = null ) {
 		self::$utfDecode = $boolNewValue;
 	}
+	//--------------------------------------------------------------------------------------
 	public static function getUtfDecode() {
-		return is_null( self::$utfDecode ) ? true : self::$utfDecode;
+	    $utfDecodeReturn = self::$utfDecode;
+	    if ( is_null($utfDecodeReturn) ){
+	        if( !defined( 'UTF8_DECODE' ) ) { define( 'UTF8_DECODE', 1 ); }	        
+	        if( UTF8_DECODE ){
+	            $utfDecodeReturn = true;
+	        } else {
+	            $utfDecodeReturn = false;
+	        }
+	    }
+	    return $utfDecodeReturn;
 	}
+	//--------------------------------------------------------------------------------------
 	public static function pgsqlLOBOpen($oid = null, $mode = null) {
 		return self::getInstance()->pgsqlLOBOpen ( $oid, $mode );
 	}
+	//--------------------------------------------------------------------------------------
 	public static function pgsqlLOBCreate() {
 		return self::getInstance()->pgsqlLOBCreate ();
 	}
+	//--------------------------------------------------------------------------------------
 	public static function setDieOnError( $boolNewValue = null ) {
 		self::$dieOnError = $boolNewValue;
 	}
