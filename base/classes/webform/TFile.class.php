@@ -87,7 +87,7 @@ class TFile extends TEdit {
      * define os valores dos campos ocultos que serão adicionados ao form
      * @throws UploadException
      */
-    protected function setPostFileInfo(){
+    public function setPostFileInfo(){
         if(isset($_FILES[$this->getId()])) {
             if( $_FILES[$this->getId()]['error'] == UPLOAD_ERR_OK ) {
                 $to = $this->getBase().'tmp/'.$_FILES[$this->getId()]['name'];
