@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -45,10 +45,10 @@ if( RequestHelper::get('formDinAcao') == 'gerar_pdf' ) {
    	gerar_pdf();
    	return;
 }
-$frm = new TForm('Exemplo de GeraÁ„o de PDF',240);
-$frm->addHtmlField('msg','<b><h3>Exemplo de utilizaÁ„o da classe TPDF, utilizando o metodo Row() para criar uma listagem simpes de Nome e Cpf</h3></b>
-<br>Utilizei o mÈtodo setOnDrawCell para definir uma funÁ„o de callback para alterar as propriedade da celula do cpf quando for o usu·rio de teste.');
-$frm->addTextField('des_marcadagua','Marca d¥agua:',30,null,null,'RELAT”RIO EXEMPLO I');
+$frm = new TForm('Exemplo de Gera√ß√£o de PDF',240);
+$frm->addHtmlField('msg','<b><h3>Exemplo de utiliza√ß√£o da classe TPDF, utilizando o metodo Row() para criar uma listagem simpes de Nome e Cpf</h3></b>
+<br>Utilizei o m√©todo setOnDrawCell para definir uma fun√ß√£o de callback para alterar as propriedade da celula do cpf quando for o usu√°rio de teste.');
+$frm->addTextField('des_marcadagua','Marca d¬¥agua:',30,null,null,'RELAT√ìRIO EXEMPLO I');
 $frm->addButton('Gerar Pdf',null,'btnPdf','exibir_pdf()');
 $frm->show();
 
@@ -66,14 +66,14 @@ function gerar_pdf() {
 	*/
 	$rel->setWaterMark($_REQUEST['des_marcadagua']);
 	$rel->setOnDrawCell('myOdc');
-  	// criaÁ„o do relatÛrio em colunas utilizando row
+  	// cria√ß√£o do relat√≥rio em colunas utilizando row
   	$dados=null;
   	// CPF diferente do loop
-	$dados['NUM_CPF'][] 	= '111.111.111-11'; 	$dados['NOM_PESSOA'][]	= 'Usu·rio de teste';
+	$dados['NUM_CPF'][] 	= '111.111.111-11'; 	$dados['NOM_PESSOA'][]	= 'Usu√°rio de teste';
 
 	for($i=0;$i<100;$i++)
 	{
-		$dados['NUM_CPF'][] 	= '123.456.789-09'; 	$dados['NOM_PESSOA'][]	= 'Usu·rio de teste';
+		$dados['NUM_CPF'][] 	= '123.456.789-09'; 	$dados['NOM_PESSOA'][]	= 'Usu√°rio de teste';
 	}
 	$rel->setData( $dados );
 	$rel->addColumn('Nome'	,100,'L', 'NOM_PESSOA'	,'','I',8,'black','times');
@@ -101,24 +101,24 @@ function myOdc( TPDFColumn $oCol=null,$value=null,$colIndex=null)
 
 	}
 }
-// funÁ„o chamada automaticamente pela classe TPDF quando existir
+// fun√ß√£o chamada automaticamente pela classe TPDF quando existir
 function cabecalho(TPDF $pdf)
 {
 	$pdf->SetFont('Arial','B',14);
-	$pdf->Cell(0,5,'Cabecalho do RelatÛrio','b',1,'C');
+	$pdf->Cell(0,5,'Cabecalho do Relat√≥rio','b',1,'C');
 	$pdf->ln(3);
 	$pdf->SetFont('Times','',10);
 }
-// funÁ„o chamada automaticamente pela classe TPDF quando existir
+// fun√ß√£o chamada automaticamente pela classe TPDF quando existir
 function rodape(TPDF $pdf)
 {
 
         $fs=$pdf->getFontSize();
         $pdf->SetY(-15);
         $pdf->SetFont('','',8);
-	    $pdf->Cell(0,5,'RodapÈ do RelatÛrio','T',0,'L');
+	    $pdf->Cell(0,5,'Rodap√© do Relat√≥rio','T',0,'L');
 	    $pdf->setx(0);
-	    $pdf->Cell(0,5,'P·g '.$pdf->PageNo().'/{nb}',0,0,'C');
+	    $pdf->Cell(0,5,'P√°g '.$pdf->PageNo().'/{nb}',0,0,'C');
 	    $pdf->setx(0);
         $pdf->cell(0,5,'Emitido em:'.date('d/m/Y H:i:s'),0,0,'R');
         $pdf->setfont('','',$fs);

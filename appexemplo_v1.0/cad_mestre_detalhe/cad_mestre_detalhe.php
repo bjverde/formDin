@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,47 +19,47 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $frm = new TForm('Exemplo de Cadastramento Mestre - Detalhe',240);
 $frm->addHtmlField('obs','<b>Este exemplo utiliza as tabelas tb_pedido e tb_pedido_item do banco de dados bdApoio.s3db ( sqlite )</b>');
 $frm->addGroupField('gpPedido','Pedido'); // criar um grupo para os campos da tabela MESTRE
-	$frm->addTextField('id_pedido'			,'N∫'	,5,true,5)->setReadOnly(true)->setCss('font-size','14')->setcss('color','blue')->setCss('text-align','center')->setCss('font-weight','bold'); // coluna chave da tabela de pedido
+	$frm->addTextField('id_pedido'			,'N¬∫'	,5,true,5)->setReadOnly(true)->setCss('font-size','14')->setcss('color','blue')->setCss('text-align','center')->setCss('font-weight','bold'); // coluna chave da tabela de pedido
 	$frm->addDateField('data_pedido'		,'Data:',true);
 	$frm->addTextField('nome_comprador'		,'Comprador:',60,true,null);
-	$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',true,'1=Dinheiro,2=Cheque,3=Cart„o');
+	$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',true,'1=Dinheiro,2=Cheque,3=Cart√£o');
 	$frm->addButtonAjax('Salvar Pedido'		,null,'validarPedido','depoisSalvarPedido','salvar_pedido','Salvando pedido...','json',false,null,'btnSalvarPedido',null,true,false);
 	$frm->addButton('Novo Pedido'			,null,'btnNovoPedido','novoPedido()',null,false,false);
-	$frm->addButton('Consultar N∫ Pedido'				,null,'btnConsultarPedido','consultarPedido()',null,false,false);
+	$frm->addButton('Consultar N¬∫ Pedido'				,null,'btnConsultarPedido','consultarPedido()',null,false,false);
 $frm->closeGroup(); // fechar o grupo
 
 $frm->addGroupField('gpItem','Item do Pedido'); // criar um grupo para os campos da tabela Item
 	$frm->addTextField('produto'		,'Produto:',60,true);
 	$frm->addNumberField('quantidade'	,'Quantidade:',5,true,1,true);
-	$frm->addNumberField('preco'		,'PreÁo:',10,true,2,true);
+	$frm->addNumberField('preco'		,'Pre√ßo:',10,true,2,true);
 	$frm->addButtonAjax('Salvar Item'		,null,'validarItem','depoisSalvarItem','salvar_item','Salvando item...','text',false,null,'btnSalvarItem',null,true,false);
 	$frm->addHtmlField('html_gride_itens');
 $frm->closeGroup(); // fechar o grupo
 
-$frm->processAction(); // processar a aÁ„o do usu·rio
+$frm->processAction(); // processar a a√ß√£o do usu√°rio
 
 $frm->addJavascript('inicializar()');
 $frm->setFocusField('data_pedido');
-$frm->show(); // exibir o formul·rio
+$frm->show(); // exibir o formul√°rio
 ?>
 <script>
 function inicializar()
@@ -84,15 +84,15 @@ function depoisSalvarPedido(resultado)
 {
 
 	/**
-	 	Quando utilizada a funÁ„o prepareReturnAjax() no retorno da aÁ„o, e o formato estiver definido como 'json',
-		o parametro resultado vir· com a seguinte estrutura:
+	 	Quando utilizada a fun√ß√£o prepareReturnAjax() no retorno da a√ß√£o, e o formato estiver definido como 'json',
+		o parametro resultado vir√° com a seguinte estrutura:
 		a) resultado.status
 		b) resultado.data
 		c) resultado.mensagem
 	*/
 	if( resultado.status == 1 )
 	{
-		if( jQuery('#id_pedido').val() == '' ) // quando for inclus„o
+		if( jQuery('#id_pedido').val() == '' ) // quando for inclus√£o
 		{
 			jQuery('#id_pedido').val( resultado.data.ID_PEDIDO );
 			jQuery("#html_gride_itens").html('');
@@ -111,7 +111,7 @@ function validarItem()
 {
 	if( jQuery("#id_pedido").val() == 'Novo' )
 	{
-		fwAlert('Pedido ainda n„o foi salvo!');
+		fwAlert('Pedido ainda n√£o foi salvo!');
 		return false;
 	}
 	if( !fwValidateFields(null,'gpItem'))
@@ -134,17 +134,17 @@ function depoisSalvarItem(resultado)
 }
 function novoPedido()
 {
-	fwClearChildFields(); // limpar todos os campos do formul·rio
+	fwClearChildFields(); // limpar todos os campos do formul√°rio
 	inicializar();
 }
 function atualizar_gride_itens()
 {
-	// o valor do parametro id_pedido, como est· em branco, a funÁ„o getGrid() procurar· nos campos do formul·rio e preencher· automaticamente.
+	// o valor do parametro id_pedido, como est√° em branco, a fun√ß√£o getGrid() procurar√° nos campos do formul√°rio e preencher√° automaticamente.
 	fwGetGrid('cad_mestre_detalhe/cad_mestre_detalhe.php','html_gride_itens',{'acao':'criar_gride_itens','id_pedido':''},true);
 }
 function consultarPedido()
 {
-	var id = prompt('N∫ do Pedido:');
+	var id = prompt('N¬∫ do Pedido:');
 	if( id )
 	{
         fwAjaxRequest({

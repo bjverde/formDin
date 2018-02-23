@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -43,12 +43,12 @@
 // url para teste: http://index.php?modulo=menu_principal.php&ajax=1&content-type=xml
 $menu =  new TMenuDhtmlx();
 $menu->add('1',null,'Campos',null,null,'user916.gif');
-$menu->add('11','1','Campo Texto',null,'DeclaraÁ„o de texto' );
+$menu->add('11','1','Campo Texto',null,'Declara√ß√£o de texto' );
 	$menu->add('11.1','11','Campo Texto','view/fields/exe_TextField.php')->setJsonParams("{'p1':'parametro_1','p2':'parametro_2'}");
 	$menu->add('11.2','11','Autocompletar','view/fields/exe_autocomplete.php');
 	$menu->add('11.3','11','Autocompletar II','view/fields/exe_autocomplete2.php');
 	$menu->add('11.4','11','Consulta On-line I','view/fields/exe_onlinesearch1.php');
-	$menu->add('11.5','11','Entrada com M·scara','view/fields/exe_maskField.php');
+	$menu->add('11.5','11','Entrada com M√°scara','view/fields/exe_maskField.php');
 	$menu->add('11.6','11','Campo Editor com CkEditor'	,'view/fields/exe_TTextEditor.php');
 	$menu->add('11.7','11','Campo Memo com tinyMCE'	,'view/fields/exe_TMemo.php');
 $menu->add('12','1','Campo HTML');
@@ -71,7 +71,7 @@ $menu->add('17','1','Campo Arquivo ou Blob');
 
 
 	
-$menu->add('18','1','Campo NumÈrico','view/fields/exe_NumberField.php');
+$menu->add('18','1','Campo Num√©rico','view/fields/exe_NumberField.php');
 $menu->add('19','1','Campo Brasil');
 	$menu->add('191','19','Campo CEP'	,'view/fields/exe_CepField.php');
 	$menu->add('192','19','Campo Telefone'	,'view/fields/exe_FoneField.php');
@@ -89,7 +89,7 @@ $menu->add('117','1','Campo Captcha'	,'view/fields/exe_TCaptchaField.php');
 $menu->add('119','1','Campo Cor'		,'view/fields/exe_TColorPicker.php');
 $menu->add('120','1','Tecla de Atalho'	,'view/fields/exe_Shortcut.php');
 $menu->add('121','1','Campo Link','view/fields/exe_field_link.php');
-//Redirect sÛ funciona se o arquivo estiver na pasta modulos
+//Redirect s√≥ funciona se o arquivo estiver na pasta modulos
 $menu->add('122','1','Redirect','exe_redirect.inc');
 $menu->add('123','1','TZip','exe_TZip.php');
 
@@ -106,19 +106,19 @@ $menu->add('2',null,'Containers');
 		$menu->add('234','23','Aba4'	,'view/containers/exe_aba_4.php');
 		$menu->add('235','23','Aba5'	,'view/containers/exe_aba05_pagacontrol.php');
 	$menu->add('24','2','TreeView', null, null, '../../base/imagens/folder-39-128.png');
-		$menu->add('241','24','Dentro do Formul·rio' ,'tree/exe_tree_view_1.php');
-		$menu->add('242','24','Fora do Formul·rio'	,'tree/exe_tree_view_2.php',null, '../../base/imagens/folder-bw.png');
+		$menu->add('241','24','Dentro do Formul√°rio' ,'tree/exe_tree_view_1.php');
+		$menu->add('242','24','Fora do Formul√°rio'	,'tree/exe_tree_view_2.php',null, '../../base/imagens/folder-bw.png');
 		$menu->add('243','24','User Data - Array'	,'tree/exe_tree_view_3.php');
-		$menu->add('244','24','Uf x MunicÌpios'		,'tree/exe_tree_view_4.php');
-		$menu->add('245','24','Uf x MunicÌpios com SetXmlFile()' ,'tree/exe_tree_view_5.php');
+		$menu->add('244','24','Uf x Munic√≠pios'		,'tree/exe_tree_view_4.php');
+		$menu->add('245','24','Uf x Munic√≠pios com SetXmlFile()' ,'tree/exe_tree_view_5.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('4',null,'Mensagens e Ajuda', null, null, '../../base/imagens/feedback-512.png');
 	$menu->add('40','4','Hints / Tooltips','exe_hint.php');
 	$menu->add('41','4','Mensagens');
 		$menu->add('411','41','Exemplo 1','view/messages/exe_mensagem.php');
-		$menu->add('412','41','Caixa de ConfirmaÁ„o','view/messages/exe_confirmDialog.php');
-		$menu->add('413','41','Caixa de ConfirmaÁ„o 2','view/messages/exe_confirm_dialog.php');
+		$menu->add('412','41','Caixa de Confirma√ß√£o','view/messages/exe_confirmDialog.php');
+		$menu->add('413','41','Caixa de Confirma√ß√£o 2','view/messages/exe_confirm_dialog.php');
 	$menu->add('42','4','Ajuda');
 	    $menu->add('421','42','Ajuda com arquivo HTML','exe_campo_ajuda.php','Com um arquivo HTML separado', '../../base/imagens/icon_help.png');
 		$menu->add('422','42','Ajuda On-line (sqlite)','exe_documentacao_online.php','Confe??o do texto de ajuda gravando no banco de dados sqlite');
@@ -128,7 +128,7 @@ $menu->add('4',null,'Mensagens e Ajuda', null, null, '../../base/imagens/feedbac
 $menu->add('5',null,'Ajax');
 	$menu->add('51','5','Exemplo 1','ajax/exe_ajax01.php');
 	$menu->add('52','5','Atualizar Campos','ajax/exe_ajax02.php');
-	$menu->add('53','5','Ajax com Sem·foro','ajax/exe_ajax03_semaphore.php');
+	$menu->add('53','5','Ajax com Sem√°foro','ajax/exe_ajax03_semaphore.php');
 	$menu->add('54','5','Ajax 04','ajax/exe_ajax04.php');
 	$menu->add('55','5','Ajax 05','ajax/exe_ajax05.php');
 
@@ -141,11 +141,11 @@ $menu->add('5',null,'Ajax');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
-	$menu->add('8.1','8','Gride 01 - botıes sobre grid','grid/exe_gride01.php');
+	$menu->add('8.1','8','Gride 01 - bot√µes sobre grid','grid/exe_gride01.php');
 	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
 	$menu->add('8.4','8','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
-	$menu->add('8.5','8','Gride 05 - PaginaÁ„o','grid/exe_gride05_paginacao.php');
+	$menu->add('8.5','8','Gride 05 - Pagina√ß√£o','grid/exe_gride05_paginacao.php');
 	$menu->add('8.6','8','Gride 06 - Campos 1','grid/exe_gride06.php');
 	$menu->add('8.7','8','Gride 07 - Campos 2','grid/exe_gride07.php');
 	$menu->add('8.8','8','Gride 08 - Campos 3','grid/exe_gride08.php');
@@ -164,13 +164,13 @@ $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos ba
 		$menu->add('933','93','Postgres SQL 02','pdo/pg/exe_pgsql02.php');
 		$menu->add('934','93','Postgres SQL 03','pdo/pg/exe_pgsql03.php');
 	$menu->add('94','9','PDO Firebird','pdo/exe_pdo_firebird01.php');	
-	$menu->add('96','9','Testar Conex„o','pdo/exe_teste_conexao.php');
+	$menu->add('96','9','Testar Conex√£o','pdo/exe_teste_conexao.php');
 	$menu->add('97','9','Dados de Apoio','pdo/exe_pdo_6_apoio.php');
 	$menu->add('98','9','Banco Textual DBM (db4)','pdo/exe_db4.php');
 
 
 //-----------------------------------------------------------------------------
-$menu->add('10',null,'Formul·rio', null, null, '../../base/imagens/fill_form-512.png');
+$menu->add('10',null,'Formul√°rio', null, null, '../../base/imagens/fill_form-512.png');
 	$menu->add('10.1','10','Form 01 - Normal','view/form/exe_TForm.php');
 	$menu->add('10.2','10','Form 02 - Subcadastro','view/form/exe_TForm2.php');
 	$menu->add('10.3','10','Boxes','view/form/exe_TBox.php');
@@ -181,12 +181,12 @@ $menu->add('10',null,'Formul·rio', null, null, '../../base/imagens/fill_form-512
 	$menu->add('10.8','10','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('10.9','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
 	$menu->add('1010','10','Form Layout Diferentes');
-		$menu->add('10.101','1010','Definir Colunas no Formul·rio','view/form/exe_colunas.php');
+		$menu->add('10.101','1010','Definir Colunas no Formul√°rio','view/form/exe_colunas.php');
 		$menu->add('10.102','1010','Imagem de Fundo','view/form/exe_TFormImage.php');
 		$menu->add('10.103','1010','Customizado com CSS','view/form/exe_TForm3.php');
 	$menu->add('10.11','10','ERRO - Local Destino','view/form/exe_form_local_destino.php');
 
-$menu->add('199',null,'Gerador de CÛdigo',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
+$menu->add('199',null,'Gerador de C√≥digo',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
 	$menu->add('199.1','199','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
 	

@@ -1,6 +1,6 @@
 <?php
 $primaryKey = 'COD_MUNICIPIO';
-$frm = new TForm('Cadastro de Municípios',600);
+$frm = new TForm('Cadastro de MunicÃ­pios',600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -8,8 +8,8 @@ $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 
 $dadosUf = UfDAO::selectAll('NOM_UF');
 $frm->addSelectField('COD_UF','Estado:',true,$dadosUf);
-$frm->addTextField('NOM_MUNICIPIO', 'Nome município:', 50, true);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+$frm->addTextField('NOM_MUNICIPIO', 'Nome municÃ­pio:', 50, true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=NÃ£o', true);
 
 $frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
@@ -64,7 +64,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->addColumn($primaryKey, 'id', 50, 'center');
 	$gride->addColumn('COD_UF', 'COD_UF', 50, 'center');
 	$gride->addColumn('SIG_UF', 'UF', 50, 'center');
-	$gride->addColumn('NOM_MUNICIPIO', 'Nome município', 200);
+	$gride->addColumn('NOM_MUNICIPIO', 'Nome municÃ­pio', 200);
 	$gride->addColumn('SIT_ATIVO', 'Ativo', 50, 'center');
 	$gride->show();
 	die();
@@ -90,6 +90,6 @@ function init() {
 // recebe fields e values do grid
 function alterar(f,v){
 	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=municipio_screen_pagination.php',300,800,null,dados);
+	fwModalBox('AlteraÃ§Ã£o','index.php?modulo=municipio_screen_pagination.php',300,800,null,dados);
 }
 </script>

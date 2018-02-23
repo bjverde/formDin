@@ -9,7 +9,7 @@ function voIssetOrZero($attribute,$isTrue,$isFalse){
     return $retorno;
 }
 
-$html1 = 'Esse form È um outra vis„o do form <i>"Mestre vis„o com Ajax"</i>.
+$html1 = 'Esse form √© um outra vis√£o do form <i>"Mestre vis√£o com Ajax"</i>.
           <br>
           <br>Este exemplo utiliza as tabelas tb_pedido e tb_pedido_item do banco de dados bdApoio.s3db ( sqlite )  ';
 
@@ -24,10 +24,10 @@ $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addHtmlField('html1',$html1,null,null,null,null)->setCss('border','1px solid #ffeb3b')->setCss('background-color','#ffffcc')->setCss('margin-bottom','10px');
 $frm->addDateField('data_pedido'		,'Data:',false);
 $frm->addTextField('nome_comprador'		,'Comprador:',60,false,null);
-$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cart„o');
+$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cart√£o');
 $frm->addTextField('QTD', 'Quantidade de Itens',50,false);
 
-$frm->addButton('Ver Mestre vis„o com Ajax','redirectMestreAjax', null, null, null, true, false);
+$frm->addButton('Ver Mestre vis√£o com Ajax','redirectMestreAjax', null, null, null, true, false);
 $frm->addButton('Buscar', null, 'Buscar', null, null, false, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 

@@ -1,11 +1,11 @@
 <?php
 $primaryKey = 'COD_REGIAO';
-$frm = new TForm('Cadastro de Regiões',400,500);
+$frm = new TForm('Cadastro de RegiÃµes',400,500);
 $frm->setFlat(true);
 
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
-$frm->addTextField('NOM_REGIAO', 'Nome da Região:',50,true);
+$frm->addTextField('NOM_REGIAO', 'Nome da RegiÃ£o:',50,true);
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -51,7 +51,7 @@ $gride = new TGrid( 'gd'        // id do gride
 				   ,$mixUpdateFields
 				   );
 $gride->addColumn($primaryKey,'id',50,'center');
-$gride->addColumn('NOM_REGIAO','Nome da Região',150,'center');
+$gride->addColumn('NOM_REGIAO','Nome da RegiÃ£o',150,'center');
 $frm->addHtmlField('gride',$gride);
 $frm->setAction( 'Salvar,Limpar' );
 $frm->show();

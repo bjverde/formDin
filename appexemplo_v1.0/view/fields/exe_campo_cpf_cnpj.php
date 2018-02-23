@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,31 +22,31 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 $frm = new TForm('Exemplo Campo CPF/CNPJ',220,600);
 
-//$frm->addCpfCnpjField('cpf_cnpj1','CPF/CNPJ:',false)->setExampleText('Mensagem Padr„o / Limpar se inconpleto');
+//$frm->addCpfCnpjField('cpf_cnpj1','CPF/CNPJ:',false)->setExampleText('Mensagem Padr√£o / Limpar se inconpleto');
 
 $frm->addCpfCnpjField('cpf_cnpj2','CPF/CNPJ:',false,null,true,null,null,null,null,'myCb')->setExampleText('Tratamento no callback');
 /**/
-$frm->addCpfCnpjField('cpf_cnpj3','CPF/CNPJ:',false,null,true,null,null,'CPF/CNPJ Inv·lido',false)->setExampleText('Mensagem Customizada / Limpar se inconpleto');
-$frm->addCpfCnpjField('cpf_cnpj4','CPF/CNPJ:',false,null,true,null,null,'CPF/CNPJ Inv·lido',true)->setExampleText('Mensagem Customizada / N„o limpar se inconpleto');
+$frm->addCpfCnpjField('cpf_cnpj3','CPF/CNPJ:',false,null,true,null,null,'CPF/CNPJ Inv√°lido',false)->setExampleText('Mensagem Customizada / Limpar se inconpleto');
+$frm->addCpfCnpjField('cpf_cnpj4','CPF/CNPJ:',false,null,true,null,null,'CPF/CNPJ Inv√°lido',true)->setExampleText('Mensagem Customizada / N√£o limpar se inconpleto');
 $frm->addCpfField('cpf'	,'CPF:',false);
 $frm->addCnpjField('cnpj','CNPJ:',false);
 /**/
@@ -59,12 +59,12 @@ function myCb(valido,e,event)
 	{
 		if (e.value != '' )
 		{
-			fwAlert('SUCESSO!!!! Cpf/Cnpj est· v·lido');
+			fwAlert('SUCESSO!!!! Cpf/Cnpj est√° v√°lido');
 		}
 	}
 	else
 	{
-		fwAlert('Oooooops!!! Cpf/Cnpj est· inv·lido');
+		fwAlert('Oooooops!!! Cpf/Cnpj est√° inv√°lido');
 		e.value='';
 	}
 }

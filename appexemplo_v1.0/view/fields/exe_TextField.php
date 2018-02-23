@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,24 +22,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
- // marcar os campos obrigatÛrios com Asterisco na frente
+ // marcar os campos obrigat√≥rios com Asterisco na frente
 define('REQUIRED_FIELD_MARK','*');
 
 $frm = new TForm('Exemplo do Campo Texto');
@@ -54,14 +54,14 @@ $res['DESC'][] = 'Um';
 $res['COD'][] = '2';
 $res['DESC'][] = 'Dois';
 
-// definir consulta din‚mica no campo municÌpio
+// definir consulta din√¢mica no campo munic√≠pio
 $frm->setOnlineSearch('municipio'
-    ,'tb_municipio' // tabela de municÌpios
-	,'nom_municipio|MunicÌpio:||||||like,cod_estado|Uf:||||select'  // campos para seleÁ„o do municÌpio. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+    ,'tb_municipio' // tabela de munic√≠pios
+	,'nom_municipio|Munic√≠pio:||||||like,cod_estado|Uf:||||select'  // campos para sele√ß√£o do munic√≠pio. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
 	,false
 	,false
-	,true // se for encontrada apenas 1 opÁ„o fazer a seleÁ„o automaticamente
-	,'cod_municipio|CÛdigo,nom_municipio|MunicÌpio'
+	,true // se for encontrada apenas 1 op√ß√£o fazer a sele√ß√£o automaticamente
+	,'cod_municipio|C√≥digo,nom_municipio|Munic√≠pio'
 	,'NOM_MUNICIPIO|municipio'
 	,null
 	,null,null,null,null,null,null
@@ -79,21 +79,21 @@ $frm->setOnlineSearch('municipio'
 $frm->addTextField('nome2','Nome Desabilitado:',80,null,null,'Desabilitado',true,null,null,true)->setEnabled(false);
 $frm->addTextField('nome3','Nome Somente Leitura:',80,true,null,'Somente leitura',true,null,null,true)->setReadOnly(true);
 
-// botıes de aÁ„o
+// bot√µes de a√ß√£o
 $frm->setAction('Atualizar');
 $frm->addButton('Validar',null,null,'fwValidateFields()');
 $frm->addButton('Limpar',null,'btnLimpar','fwClearChildFields()');
 
-// funÁ„o chamada no carregamento da p·gina
+// fun√ß√£o chamada no carregamento da p√°gina
 $frm->addJavascript('init()');
 
-// criar o html do formul·rio
+// criar o html do formul√°rio
 $frm->show();
 ?>
 <script>
 function init()
 {
-	fwAlert('Formul·rio foi carregado!')
+	fwAlert('Formul√°rio foi carregado!')
 }
 
 // Online Search callback

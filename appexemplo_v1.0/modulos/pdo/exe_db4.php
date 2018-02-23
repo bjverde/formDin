@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,32 +22,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$html = '<b>Exemplo de utilizaÁ„o do DBM Database</b>'
-		.'<br> ATEN«√O : Esse exemplo sÛ ir· funcionar se tiver o modulo dbase. Clique no bot„o ver PHPInfo e verifique'
-        .'<br>Clique no bot„o gravar para gravar o texto do campo observaÁ„o em disco e Recuperar para trazer o<br>texto salvo para o campo novamente.</b>';
+$html = '<b>Exemplo de utiliza√ß√£o do DBM Database</b>'
+		.'<br> ATEN√á√ÉO : Esse exemplo s√≥ ir√° funcionar se tiver o modulo dbase. Clique no bot√£o ver PHPInfo e verifique'
+        .'<br>Clique no bot√£o gravar para gravar o texto do campo observa√ß√£o em disco e Recuperar para trazer o<br>texto salvo para o campo novamente.</b>';
 
 $frm = new TForm('Campo Banco de Dados Textual DB4',400,600);
 $frm->addHtmlField('texto',$html);
 $frm->addButton('PHPinfo', null, 'PHPinfo', null, null, true, false);
 $frm->addHtmlField('html1','');
-$frm->addMemoField('obs','ObservaÁ„o:',1000,false,50,5);
+$frm->addMemoField('obs','Observa√ß√£o:',1000,false,50,5);
 $frm->setAction('Gravar,Recuperar');
 
 
@@ -55,7 +55,7 @@ $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
 	case 'PHPinfo':
 		$frm->redirect('iframe_phpinfo/ambiente_phpinfo.php', 'Redirect realizado com sucesso.', false, null );
-		//$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. VocÍ est· agora no 2∫ form.',true);
+		//$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Voc√™ est√° agora no 2¬∫ form.',true);
 		break;
 		//--------------------------------------------------------------------------------
 	case 'Recuperar':
@@ -119,6 +119,6 @@ switch( $acao ) {
 		 */
 		break;
 }
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 ?>

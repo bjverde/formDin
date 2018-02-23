@@ -1,7 +1,7 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 if (!session_id())
@@ -41,7 +41,7 @@ if (!session_id())
 }
 
 $frm = new TForm('Exemplo de Gride com Campo Anexo - Ajax');
-// como os dados est„o sendo jogados na sess„o, ao sair do formul·rio fazer a limpeza
+// como os dados est√£o sendo jogados na sess√£o, ao sair do formul√°rio fazer a limpeza
 $frm->setOnClose('limpar_sessao()');
 
 // campo chave da tabela pai. Ex: seq_propriedade=22
@@ -50,27 +50,27 @@ $frm->addHiddenField('seq_propriedade',22);
 // campo anexo
 $frm->addFileField('anexo','Anexo:',true,'doc,xls,odt,zip,rar,pdf,gif,txt,jpg','5M',60,true,null,'callBackAnexar');
 
-// bot„o para limpar o gride e os dados da sess„o
+// bot√£o para limpar o gride e os dados da sess√£o
 $frm->addButton('Limpar Tudo',null,'btnLimparTudo','btnLimparTudoClick()','Tem Certeza?',true,false);
 
 //--------------------
-// campo html onde ser· exibido o gride com os anexo
+// campo html onde ser√° exibido o gride com os anexo
 $frm->addHtmlField('campo_gride');
 
-// cria o gride via ajax apÛs o carregamento do formul·rio
+// cria o gride via ajax ap√≥s o carregamento do formul√°rio
 $frm->addJavascript('init()');
 $acao = isset($acao) ? $acao : null;
-// aÁıes chamadas via ajax
+// a√ß√µes chamadas via ajax
 if( $acao == 'gravar_anexo')
 {
-	// grava na sess„o os dados do arquivo anexado. A chave È o nome do arquivo
+	// grava na sess√£o os dados do arquivo anexado. A chave √© o nome do arquivo
 	// para evitar anexar o mesmo arquivo 2 vezes
 	$_SESSION['meus_anexos'][ $_POST['nom_arquivo'] ] =  array('SEQ_PROPRIEDADE'=>$_POST['seq_propriedade'],'NOM_TEMP'=>$_POST['nom_temp']);
 	die();
 }
 else if( $acao == 'remover_anexo')
 {
-	// grava na sess„o os dados do arquivo anexado. A chave È o nome do arquivo
+	// grava na sess√£o os dados do arquivo anexado. A chave √© o nome do arquivo
 	// para evitar anexar o mesmo arquivo 2 vezes
 	$_SESSION['meus_anexos'][ $_POST['nom_arquivo'] ] =  null;
 	unset($_SESSION['meus_anexos'][ $_POST['nom_arquivo'] ]);
@@ -85,15 +85,15 @@ $frm->show();
 ?>
 <script>
 function init()
-{ 	// monta o gride passando o campo seq_propriedade com o seu valor atual do formul·rio.
+{ 	// monta o gride passando o campo seq_propriedade com o seu valor atual do formul√°rio.
 	fwGetGrid("modulos/grid/exe_gride02_callback.php","campo_gride",{"seq_propriedade":""});
 }
 
-// Quando terminiar de fazer o upload do arquivo anexado, esta funÁ„o È chamada
-// recebendo o nome tempor·rio do arquivo, o nome do arquivo, o tipo e o tamanho
+// Quando terminiar de fazer o upload do arquivo anexado, esta fun√ß√£o √© chamada
+// recebendo o nome tempor√°rio do arquivo, o nome do arquivo, o tipo e o tamanho
 function callBackAnexar(tempName,fileName,type,size,extension)
 {
-	alert( 'A funÁ„o de callback callBackAnexar() foi chamada.\n\nParametros recebidos:\n1) TempName='+tempName+'\n2) FileName='+fileName+'\n3)Tamanho:'+size+' bytes\n4) Extens„o:'+extension);
+	alert( 'A fun√ß√£o de callback callBackAnexar() foi chamada.\n\nParametros recebidos:\n1) TempName='+tempName+'\n2) FileName='+fileName+'\n3)Tamanho:'+size+' bytes\n4) Extens√£o:'+extension);
 
     fwAjaxRequest({
     	"modulo":"grid/exe_gride02.php"
@@ -102,7 +102,7 @@ function callBackAnexar(tempName,fileName,type,size,extension)
     	,"data":{"nom_arquivo":fileName,"nom_temp":tempName,"seq_propriedade":""}
     	,"callback":function( erro )
 		{
-				if( ! erro ) // se n„o deu erro
+				if( ! erro ) // se n√£o deu erro
 				{
 					if( confirm('Visualizar o arquivo anexado ?'))
 					{
@@ -117,10 +117,10 @@ function callBackAnexar(tempName,fileName,type,size,extension)
 		}
 	})
     return;
-	// executa a aÁ„o gravar_anexo do formulario
+	// executa a a√ß√£o gravar_anexo do formulario
 	jQuery.post(app_url+app_index_file,
 	{
-		'modulo':'grid/exe_gride02.php' // chamada ajax para si prÛprio passando a aÁ„o gravar_anexo
+		'modulo':'grid/exe_gride02.php' // chamada ajax para si pr√≥prio passando a a√ß√£o gravar_anexo
 		,'formDinAcao':'gravar_anexo'
 		,'ajax':1
 		,'nom_arquivo':fileName
@@ -130,7 +130,7 @@ function callBackAnexar(tempName,fileName,type,size,extension)
 	,function( erro )
 	{
 
-		if( ! erro ) // se n„o deu erro
+		if( ! erro ) // se n√£o deu erro
 		{
 			if( confirm('Visualizar o arquivo anexado ?'))
 			{
@@ -155,7 +155,7 @@ function btnVisualizarClick(campos,valores)
 function btnRemoverClick(campos,valores)
 {
 	$aValores = valores.split('|'); // valores enviados pelo gride.
-	if( !confirm( 'Confirma a remoÁ„o do arquivo:\n'+$aValores[1]+'?'))
+	if( !confirm( 'Confirma a remo√ß√£o do arquivo:\n'+$aValores[1]+'?'))
 	{
 		return;
 	}

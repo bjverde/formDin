@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,24 +22,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Consulta Din‚mica',600);
+$frm = new TForm('Consulta Din√¢mica',600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -49,7 +49,7 @@ $frm->addTextField('id','id:',10);
 $frm->addCpfField('num_cpf1','CPF:',null,null,false)->setExampleText('Informe o cpf e tecle &lt;enter&gt;')->setEnabled(false);;
 $frm->addTextField('nom_pessoa1','Nome 1:',50,false);
 $frm->addTextField('nom_pessoa','Nome:',50,false);
-$frm->addTextField('end_pessoa_eugenio','EndereÁo:',50,false);
+$frm->addTextField('end_pessoa_eugenio','Endere√ßo:',50,false);
 $frm->addTextField('des_bairro','Bairro:',50,false);
 $frm->addTextField('cod_matricula_eugenio','Matricula:',10,false);
 $frm->addTextField('num_cep','Cep:',10,false);
@@ -59,7 +59,7 @@ $frm->addCpfField('campo_teste1','Teste Evento Before Execute:');
 $frm->addCpfField('campo_teste2','Teste com Multi Select:',null,null,false);
 $frm->addTextField('nom_fruta','Fruta:',20)->setExampleText('Com cadastro on-line de frutas se a pesquisa retornar vazia');
 $frm->addTextField('num_pessoa','Pessoas Selecionadas:',50)->setEnabled(false);
-$frm->addMemoField('obs','ObservaÁ„o:',2000,false);
+$frm->addMemoField('obs','Observa√ß√£o:',2000,false);
 $_POST['fw_back_to'] = 'modulos/teste.php';
 $frm->set('fw_back_to','modulos/teste.php');
 
@@ -74,7 +74,7 @@ $frm->setOnlineSearch('num_cpf1'
 	, null
 	,'NUM_CPF|Cpf,NOM_PESSOA|Nome'
 	,'NUM_PESSOA|id,NOM_PESSOA,COD_MATRICULA|cod_matricula_eugenio,END_PESSOA|end_pessoa_eugenio,DES_BAIRRO,NUM_CEP,DAT_NASC,NUM_CPF'
-	,'Consulta Pessoa FÌsica'
+	,'Consulta Pessoa F√≠sica'
 	,'Registros Encontrados'
 	,'des_endereco'
 	,400
@@ -82,7 +82,7 @@ $frm->setOnlineSearch('num_cpf1'
 	,"Consultar"
 	,null
 	,'fwFazerAcao("Nova Acao")'
-	,10 // m·ximo de registros retorno
+	,10 // m√°ximo de registros retorno
 	,null
 	,null
 	,'NOM_PESSOA'
@@ -100,7 +100,7 @@ $frm->setOnlineSearch('campo_teste1'
 	, true
 	,'NUM_CPF|Cpf,NOM_PESSOA|Nome'
 	,'NUM_PESSOA|id,NOM_PESSOA'
-	,'Consulta Pessoa FÌsica'
+	,'Consulta Pessoa F√≠sica'
 	,'Registros Encontrados'
 	,'des_endereco'
 	,400
@@ -108,7 +108,7 @@ $frm->setOnlineSearch('campo_teste1'
 	,"Consultar"
 	,'id'
 	,'retorno()'
-	,10 // m·ximo de registros retorno
+	,10 // m√°ximo de registros retorno
 	,null
 	,null
 	,'NOM_PESSOA'
@@ -123,7 +123,7 @@ $frm->setOnlineSearch('campo_teste2'
 	, true
 	,'NUM_CPF|Cpf,NOM_PESSOA|Nome'
 	,'NUM_PESSOA|id,NOM_PESSOA'
-	,'Consulta Pessoa FÌsica'
+	,'Consulta Pessoa F√≠sica'
 	,'Registros Encontrados'
 	,'des_endereco'
 	,400
@@ -131,9 +131,9 @@ $frm->setOnlineSearch('campo_teste2'
 	,"Consultar"
 	,null
 	,null// 'retorno()'
-	,10 // m·ximo de registros retorno
+	,10 // m√°ximo de registros retorno
 	,null
-	,'NUM_PESSOA' // campo que receber· as linhas selecinadas na consulta dinamica
+	,'NUM_PESSOA' // campo que receber√° as linhas selecinadas na consulta dinamica
 	,'NOM_PESSOA'
 	,null
 	,null
@@ -155,7 +155,7 @@ $frm->setOnlineSearch('nom_fruta'
 	,"Consultar"
 	,null
 	,null// 'retorno()'
-	,10 // m·ximo de registros retorno
+	,10 // m√°ximo de registros retorno
 	,'$res["NOM_FRUTA"][$k]!="Banana"'
 	,null
 	,null
@@ -174,7 +174,7 @@ $frm->setOnlineSearch('obs'
 	, true
 	,'NUM_CPF|Cpf,NOM_PESSOA|Nome'
 	,'NOM_PESSOA|obs'
-	,'Consulta Pessoa FÌsica'
+	,'Consulta Pessoa F√≠sica'
 	,'Registros Encontrados'
 	,'des_endereco'
 	,400
@@ -182,7 +182,7 @@ $frm->setOnlineSearch('obs'
 	,"Consultar"
 	,null
 	,null
-	,10 // m·ximo de registros retorno
+	,10 // m√°ximo de registros retorno
 	,null
 	,null
 	,'NOM_PESSOA'

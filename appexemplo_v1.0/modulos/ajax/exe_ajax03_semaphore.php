@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,33 +22,33 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo de Ajax usando Sem·foro', 400, 600);
+$frm = new TForm('Exemplo de Ajax usando Sem√°foro', 400, 600);
 
-$frm->addTextField('id_semaforo','ID sem·foro:',20,true,20,'semaforo_1',null,'Informe uma string para identificar o semaforo')->add('<span id="imagem"></span>');
+$frm->addTextField('id_semaforo','ID sem√°foro:',20,true,20,'semaforo_1',null,'Informe uma string para identificar o semaforo')->add('<span id="imagem"></span>');
 
-$frm->addHtmlField('msg', '<p>Ao fazer uma requisiÁ„o Ajax com sem·foro, o sem·foro fica "fechado" atÈ que a chamada retorne.<BR />
-						   Uma nova chamada com o mesmo sem·foro sÛ È realizada se o sem·foro estiver aberto.<BR />
-						   Utilizando a funÁ„o javascript "fwSemaphoreIsOpen(idSemaphore)" È possÌvel verifiar se o sem·foro est· aberto ou fecahdo.</p>')->setcss('font-size','12px');
+$frm->addHtmlField('msg', '<p>Ao fazer uma requisi√ß√£o Ajax com sem√°foro, o sem√°foro fica "fechado" at√© que a chamada retorne.<BR />
+						   Uma nova chamada com o mesmo sem√°foro s√≥ √© realizada se o sem√°foro estiver aberto.<BR />
+						   Utilizando a fun√ß√£o javascript "fwSemaphoreIsOpen(idSemaphore)" √© poss√≠vel verifiar se o sem√°foro est√° aberto ou fecahdo.</p>')->setcss('font-size','12px');
 
-$frm->addButton('Chamar ajax com Sem·foro', null, 'btnAjax', 'chamarAjax()');
-$frm->addButton('Verificar Sem·foro', null, 'btnVerfificar', 'verificarSemaforo()');
+$frm->addButton('Chamar ajax com Sem√°foro', null, 'btnAjax', 'chamarAjax()');
+$frm->addButton('Verificar Sem√°foro', null, 'btnVerfificar', 'verificarSemaforo()');
 
 $acao = isset($acao) ? $acao : null;
 if( $acao == 'ajax_lento') {
@@ -67,7 +67,7 @@ function chamarAjax()
 	var id = jQuery('#id_semaforo').val();
 	if( ! fwSemaphoreIsOpen( id ) )
 	{
-		jAlert('Esta aÁ„o j· esta sendo executada');
+		jAlert('Esta a√ß√£o j√° esta sendo executada');
 		return;
 	}
 	var chamada = fwAjaxRequest({
@@ -79,15 +79,15 @@ function chamarAjax()
 		'containerId':'imagem',
 		'msgLoading':fw_img_processando1,
 		'callback':function(res) {
-			fwAlert('RequisiÁ„o com sem·foro "' + id + '" retornada!\n\nMensagem de retorno:\n' + res);
+			fwAlert('Requisi√ß√£o com sem√°foro "' + id + '" retornada!\n\nMensagem de retorno:\n' + res);
 		}
 	});
-	fwAlert(chamada !== false? 'RequisiÁ„o Ajax chamada com o sem·foro "' + id + '"': 'RequisiÁ„o Ajax N√O foi chamada pois o sem·foro "' + id + '" est· FECHADO!');
+	fwAlert(chamada !== false? 'Requisi√ß√£o Ajax chamada com o sem√°foro "' + id + '"': 'Requisi√ß√£o Ajax N√ÉO foi chamada pois o sem√°foro "' + id + '" est√° FECHADO!');
 }
 
 function verificarSemaforo() {
 	var id = jQuery('#id_semaforo').val();
 	var status = fwSemaphoreIsOpen(id);
-	fwAlert('Sem·foro "' + id + '" est· ' + (status ? 'ABERTO' : 'FECHADO') );
+	fwAlert('Sem√°foro "' + id + '" est√° ' + (status ? 'ABERTO' : 'FECHADO') );
 }
 </script>

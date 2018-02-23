@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,35 +22,35 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo DocumentaÁ„o On-line');
+$frm = new TForm('Exemplo Documenta√ß√£o On-line');
 $frm->addHiddenField('oculto');
-//$frm->enableOnlineDoc(false,400,600,'des_bairro','data,sit_cancelado'); // false = permitir ediÁ„o. Tela com 200px de altura por 600px de largura
-$frm->enableOnlineDoc(false,400,600,'nom_pessoa,des_endereco'); // false = permitir ediÁ„o. Tela com 200px de altura por 600px de largura
+//$frm->enableOnlineDoc(false,400,600,'des_bairro','data,sit_cancelado'); // false = permitir edi√ß√£o. Tela com 200px de altura por 600px de largura
+$frm->enableOnlineDoc(false,400,600,'nom_pessoa,des_endereco'); // false = permitir edi√ß√£o. Tela com 200px de altura por 600px de largura
 $pc = $frm->addPageControl('pc');
 $pc->addPage('Cadastro',true,true);
-$frm->addTextField('nom_pessoa','Nome da pessoa:',50,true,50,null,true,'Este È um campo texto','Ex:Jo„o',false);
-$frm->addTextField('des_endereco','EnderÁo:',50,false,50,null,true,null,null,false);
+$frm->addTextField('nom_pessoa','Nome da pessoa:',50,true,50,null,true,'Este √© um campo texto','Ex:Jo√£o',false);
+$frm->addTextField('des_endereco','Ender√ßo:',50,false,50,null,true,null,null,false);
 $frm->addTextField('des_bairro','Bairro:',50,false,50,null,true,null,null,true);
-$frm->addMemoField('obs','ObservaÁ„o:',200,false,80,5,null,true,true);
+$frm->addMemoField('obs','Observa√ß√£o:',200,false,80,5,null,true,true);
 $frm->addDateField('data','Data:',true);
-$frm->addSelectField('sit_cancelado','Cancelado ?',true,'S=Sim,N=N„o');
+$frm->addSelectField('sit_cancelado','Cancelado ?',true,'S=Sim,N=N√£o');
 $frm->setAction('Gravar');
 $frm->show();
 ?>

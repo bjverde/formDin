@@ -4,5 +4,5 @@ if( $res )
 {
 	prepareReturnAjax(1,$res);
 }
-prepareReturnAjax(0,null,'Pedido não encontrado');
+prepareReturnAjax(0,null,'Pedido nÃ£o encontrado');
 ?>

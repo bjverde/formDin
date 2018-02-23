@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,24 +22,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Teste de Conex„o',650,900);
+$frm = new TForm('Teste de Conex√£o',650,900);
 $frm->setFlat(true);
 $frm->setAutoSize(true);
 
@@ -51,7 +51,7 @@ $pc->addPage('MYSQL',true,true,'abamy');
 	$frm->addTextField('myUser'	,'User:',40,true,20,'root',false,null,null,true);
 	$frm->addTextField('myPass'	,'Password:',40,true,20,'',false,null,null,true);
 	$frm->addTextField('myPort'	,'Porta:',6,false,6,'3306',false,null,null,true,false);
-	$frm->addButton('Testar Conex„o',null,'btnTestarmy','testarConexao("my")',null,true,false);
+	$frm->addButton('Testar Conex√£o',null,'btnTestarmy','testarConexao("my")',null,true,false);
 	$frm->addMemoField('mySql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlmy','executarSql("my")',null,true,false);
 	$frm->addHtmlField('myGride'	,'');
@@ -64,7 +64,7 @@ $pc->addPage('POSTGRES',false,true,'abapg');
 	$frm->addTextField('pgPass','Password:',40,true,20,'123456',false,null,null,true);
 	$frm->addTextField('pgSchema','Esquema:',20,true,20,'public',false,null,null,true);
 	$frm->addTextField('pgPort','Porta:',6,false,6,'5432',false,null,null,true,false);
-	$frm->addButton('Testar Conex„o',null,'btnTestarPg','testarConexao("pg")',null,true,false);
+	$frm->addButton('Testar Conex√£o',null,'btnTestarPg','testarConexao("pg")',null,true,false);
 	$frm->addMemoField('pgSql','Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlPg','executarSql("pg")',null,true,false);
 	$frm->addHtmlField('pgGride','');
@@ -72,7 +72,7 @@ $pc->addPage('POSTGRES',false,true,'abapg');
 $pc->addPage('SQLITE',false,true,'abaSqlite');
 	$frm->addHiddenField('sqDbType','sqlite');
 	$frm->addTextField('sqDb	','Database:',80,true,80,'bdApoio.s3db',false,null,null,true);
-	$frm->addButton('Testar Conex„o',null,'btnTestarsq','testarConexao("sq")',null,true,false);
+	$frm->addButton('Testar Conex√£o',null,'btnTestarsq','testarConexao("sq")',null,true,false);
 	$frm->addMemoField('sqSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlsq','executarSql("sq")',null,true,false);
 	$frm->addHtmlField('sqGride'	,'');
@@ -83,7 +83,7 @@ $pc->addPage('ORACLE',true,true,'abaora');
 	$frm->addTextField('oraDb'		,'Database:',20,true,20,'xe',true,null,null,true);
 	$frm->addTextField('oraUser'	,'User:',40,true,20,'root',false,null,null,true);
 	$frm->addTextField('oraPass'	,'Password:',40,true,20,'123456',false,null,null,true);
-    $frm->addButton('Testar Conex„o',null,'btnTestarora','testarConexao("ora")',null,true,false);
+    $frm->addButton('Testar Conex√£o',null,'btnTestarora','testarConexao("ora")',null,true,false);
 	$frm->addMemoField('oraSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlOra','executarSql("ora")',null,true,false);
 	$frm->addHtmlField('oraGride'	,'');
@@ -95,7 +95,7 @@ $pc->addPage('SQLSERVER',true,true,'abass');
                     . '    <li>Linux: PDO com drive dblib</li>'
                     . '    <li>Windows: PDO com drive sqlsrv</li>'
                     . '<ul>'
-                    . '</p><p>ATEN«√O o Drive da Microsoft n„o funciona em Windows 64 bits com PHP 64Bits, se deseja usar essa configuraÁ„o instale o drive n„o oficial. PorÈm recomendo Win 64 Bits com PHP 32Bits</p>';
+                    . '</p><p>ATEN√á√ÉO o Drive da Microsoft n√£o funciona em Windows 64 bits com PHP 64Bits, se deseja usar essa configura√ß√£o instale o drive n√£o oficial. Por√©m recomendo Win 64 Bits com PHP 32Bits</p>';
 
 	$frm->addHiddenField('ssDbType','sqlserver');
 	$frm->addHtmlField('msg',$info_sqlserver);
@@ -104,7 +104,7 @@ $pc->addPage('SQLSERVER',true,true,'abass');
 	$frm->addTextField('ssUser'    ,'User:',40,true,20,'sa',false,null,null,true);
 	$frm->addTextField('ssPass'	   ,'Password:',40,true,20,'123456',false,null,null,true);
 	$frm->addTextField('ssPort'    ,'Porta:',6,false,6,'1433',false,null,null,true,false);
-    $frm->addButton('Testar Conex„o',null,'btnTestarss','testarConexao("ss")',null,true,false);
+    $frm->addButton('Testar Conex√£o',null,'btnTestarss','testarConexao("ss")',null,true,false);
 	$frm->addMemoField('oraSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlss','executarSql("ss")',null,true,false);
 	$frm->addHtmlField('ssGride'	,'');
@@ -120,13 +120,13 @@ switch($acao) {
 		//prepareReturnAjax(0,null, $banco.print_r($_POST,TRUE) );
 		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora'|| $banco == 'ss'){
 			if( ! $_POST[$banco.'User'] ){
-				prepareReturnAjax(0,null,'Informe o Usu·rio');
+				prepareReturnAjax(0,null,'Informe o Usu√°rio');
 			}
 		}
 		
 		$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$Schema);
 		if( $dao->connect() ) {
-			prepareReturnAjax(2,null,'Conex„o OK!');
+			prepareReturnAjax(2,null,'Conex√£o OK!');
 		}
 		prepareReturnAjax(0,null, $dao->getError());
 

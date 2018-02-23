@@ -38,11 +38,11 @@
  */
 
 require_once('services/loginService.php');
-$html = '<br><br>Existem 4 usu·rios, cada um com um perfil diferete!'
+$html = '<br><br>Existem 4 usu√°rios, cada um com um perfil diferete!'
        . '<br>'
        . '<ul>'
-       . '    <li>login: root e senha: root &rarr; È o super usu·rio, que pode criar novas telas com o gerador </li>'
-       . '    <li>login: admin e senha: admin &rarr; È o super administrador, pode incluir outros usuarios e conceder acesso </li>'
+       . '    <li>login: root e senha: root &rarr; √© o super usu√°rio, que pode criar novas telas com o gerador </li>'
+       . '    <li>login: admin e senha: admin &rarr; √© o super administrador, pode incluir outros usuarios e conceder acesso </li>'
        . '    <li>login: user e senha: user &rarr; usario comum pode operar todas as telas</li>'
        . '    <li>login: trainee e senha: trainee &rarr; tem acesso apenas uma tela</li>'
        . '<ul>';
@@ -53,7 +53,7 @@ $frm->addTextField('login'		,'Login:',20,true,20);
 $frm->addPasswordField('senha'	,'Senha:',20,true,20);
 $frm->addHtmlField('msg',$html);
 //$frm->addButton('Entrar','login',null);
-$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informaÁıes','json',false);
+$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informa√ß√µes','json',false);
 
 $acao = isset($acao) ? $acao : null;
 if( $acao =='login'){
@@ -67,7 +67,7 @@ if( $acao =='login'){
     }
     else {
         //$frm->setShowMessageForm(true);
-        $frm->setMessage('Login Inv·lido');
+        $frm->setMessage('Login Inv√°lido');
         prepareReturnAjax(0);
     }
 }
@@ -82,7 +82,7 @@ function resultado(res) {
         fwApplicationRestart();    
     }
     else {
-        fwAlert('Login Inv·lido');
+        fwAlert('Login Inv√°lido');
     }
 }
 </script>

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,27 +20,27 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $strHeight = 300;
 $strWidth  = 500;
 $frm = new TForm('Campos Campo Ajuda e campo BoxField', $strHeight, $strWidth);
 $frm->setMaximize(true);
-$frm->setHelpOnLine('Titulo',$strHeight,$strWidth,'setHelpOnLine está com problemas, esse problema já foi cadastrado no https://github.com/bjverde/formDin/issues/21',null);
+$frm->setHelpOnLine('Titulo',$strHeight,$strWidth,'setHelpOnLine estÃ¡ com problemas, esse problema jÃ¡ foi cadastrado no https://github.com/bjverde/formDin/issues/21',null);
 
 $frm->addHtmlField('html1','Exemplo de ajuda utilizando boxField com arquivo.')->setCss('color','blue');
 $frm->addTextField('nome','Nome:',50,false,50,'',true,null,null,false);
@@ -48,7 +48,7 @@ $frm->addBoxField('bxNome',null,'ajuda/ajuda.html','ajax',null,null,null,null,nu
 
 $frm->addHtmlField('html2','Exemplo de ajuda utilizando boxField com texto.')->setCss('color','blue');
 $frm->addTextField('nome2','Nome:',50,false,50,'',true,null,null,false);
-$frm->addBoxField('bxNome2','Informe o nome completo do proprietário do terreno',null,null,null,null,null,null,null,'Ver texto de ajuda');
+$frm->addBoxField('bxNome2','Informe o nome completo do proprietÃ¡rio do terreno',null,null,null,null,null,null,null,'Ver texto de ajuda');
 
 
 $frm->addHtmlField('html3','Exemplo de ajuda utilizando boxField com imagem.')->setCss('color','blue');
@@ -56,8 +56,8 @@ $frm->addBoxField('bxImagem',null,$this->getBase()."js/jquery/facebox/stairs.jpg
 
 
 $frm->addHtmlField('html4','Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color','blue');
-$frm->addTextField('endereco01','Endereço:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'Informe o endereço completo do proprietário do terreno');
-$frm->addTextField('endereco02','Endereço:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda/ajuda.html');
+$frm->addTextField('endereco01','EndereÃ§o:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo EndereÃ§o ?',300,800,'Informe o endereÃ§o completo do proprietÃ¡rio do terreno');
+$frm->addTextField('endereco02','EndereÃ§o:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo EndereÃ§o ?',300,800,'ajuda/ajuda.html');
 $frm->addBoxField('bxAjax',null,"http://localhost",'ajax','Visualizar Ajax:',null,true,null,null,'Conteudo ajax');
 
 
