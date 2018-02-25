@@ -4,8 +4,8 @@
 
 base/tmp/
 .vscode/
-appexemplo_mssql/
 /.settings/
 /.project
 /.buildpath
 /semadprod/
+/diarioeletronico_adm/
