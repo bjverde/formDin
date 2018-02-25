@@ -47,7 +47,7 @@ class DateTimeHelper {
     const DEFAULT_TIME_ZONE = 'America/Sao_Paulo';
     
     /**
-     * Getter para criar uma inst‚ncia de um objeto do tipo DateTime.
+     * Getter para criar uma inst√¢ncia de um objeto do tipo DateTime.
      * @return DateTime
      */
     public static function getCurrentDateTime() {
