@@ -259,7 +259,7 @@ jQuery.autocomplete = function(input, options) {
 			
 			
 			//------------------------------------------------------------------------------
-			// adaptação eugênio para retirar a mascara antes de procurar
+			// adaptaÃ§Ã£o eugÃªnio para retirar a mascara antes de procurar
 			//var isCPFCNPJ=false;
 			var currentVal = q;
 			//if( q.indexOf('.'))
