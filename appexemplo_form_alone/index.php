@@ -1,21 +1,17 @@
 <style type="">
-.vermelho
-{
+.vermelho {
 	color:#ff0000;
 	font-weight:bold;
 }
-.verde
-{
+.verde {
 	color:#008000;
 	font-weight:bold;
 }
-.versao
-{
+.versao {
 	color:#0000FF;
 	font-weight:bold;
 	font-size:16px;
 }
-
 </style>
 <?php
 /*
@@ -47,9 +43,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -58,7 +54,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-header("Content-Type: text/html; charset=ISO-8859-1",true);
+//header("Content-Type: text/html; charset=UTF-8",true);
 require_once('../base/classes/webform/TApplication.class.php');
 require_once('includes/info.php');
 
@@ -72,8 +68,6 @@ function testar($extensao=null,$html){
 	}
 }
 
-
-    
 	$frm = new TForm('Configurações do PHP');
 	$frm->setFlat(true);
 	$frm->setAutoSize(true);
