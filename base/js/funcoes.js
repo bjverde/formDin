@@ -1,7 +1,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -44,24 +44,24 @@ jQuery.noConflict();
 Fonte: http://jsfromhell.com/geral/event-listener
 addEvent e removeEvent cross-browser.
 addEvent(object: Object, event: String, handler: Function(e: Event): Boolean, [scope: Object = object]): Boolean
-	Adiciona uma funÁ„o que ser· disparada quando ocorrer determinado evento no objeto.
-			object objeto que receber· o listener
+	Adiciona uma fun√ß√£o que ser√° disparada quando ocorrer determinado evento no objeto.
+			object objeto que receber√° o listener
 			event nome do evento sem o prefixo "on" (click, mouseover, ...)
 			handler
-			funÁ„o que ser· chamada quando o evento ocorrer, ser· enviado como argumento
-				para esta funÁ„o o objeto de evento, que alÈm das propriedades normais, *sempre* ir· conter:
+			fun√ß√£o que ser√° chamada quando o evento ocorrer, ser√° enviado como argumento
+				para esta fun√ß√£o o objeto de evento, que al√©m das propriedades normais, *sempre* ir√° conter:
 					target: objeto que gerou o evento
-					key: cÛdigo do caractere em eventos de teclado
-					stopPropagation: mÈtodo para evitar a propagaÁ„o do evento
-					preventDefault: mÈtodo para evitar que a aÁ„o default ocorra
-				o preventDefault pode ser emulado retornando "false" na funÁ„o
-			scope escopo (quem o "this" ir· referenciar dentro do handler) que ser· usado quando a funÁ„o for chamada, o default È o objeto no primeiro argumento
+					key: c√≥digo do caractere em eventos de teclado
+					stopPropagation: m√©todo para evitar a propaga√ß√£o do evento
+					preventDefault: m√©todo para evitar que a a√ß√£o default ocorra
+				o preventDefault pode ser emulado retornando "false" na fun√ß√£o
+			scope escopo (quem o "this" ir√° referenciar dentro do handler) que ser√° usado quando a fun√ß√£o for chamada, o default √© o objeto no primeiro argumento
 removeEvent(object: Object, event: String, handler: function(e: Event): Boolean, [scope: Object = object]): Boolean
 		Remove um listener previamente adicionado em um objeto e retorna true em caso de sucesso.
 			object objeto que recebeu o listener
 			event nome do evento sem o prefixo "on" (click, mouseover, ...)
-			handler mesma funÁ„o que foi atribuida no addEvent
-			scope escopo em que a funÁ„o foi adicionada, caso vocÍ tenha fornecido um escopo diferente no addEvent, È necess·rio que vocÍ passe como par‚metro o mesmo objeto, caso contr·rio a remoÁ„o do evento n„o ser· realizada
+			handler mesma fun√ß√£o que foi atribuida no addEvent
+			scope escopo em que a fun√ß√£o foi adicionada, caso voc√™ tenha fornecido um escopo diferente no addEvent, √© necess√°rio que voc√™ passe como par√¢metro o mesmo objeto, caso contr√°rio a remo√ß√£o do evento n√£o ser√° realizada
 */
 addEvent = function(o, e, f, s){
 	var r = o[r = "_" + (e = "on" + e)] = o[r] || (o[e] ? [[o[e], o]] : []), a, c, d;
@@ -85,13 +85,13 @@ removeEvent = function(o, e, f, s){
 /*
 site: http://jsfromhell.com/string/mask
 String.mask(mask: String): String
-			Retorna a string com a m·scara j· aplicada.
+			Retorna a string com a m√°scara j√° aplicada.
 	mask
-		m·scara a ser utilizada
-ObservaÁıes
-A m·scara substitui as ocorrÍncias de "#" pelos caracteres da string, sendo assim, se vocÍ precisar utilizar o caracter "#" como parte da m·scara, basta "coment·-lo" com "\\", ex: "\\#".
-A m·scara È aplicada da esquerda para a direita, se a string contiver menos caracteres que a m·scara, os caracteres "extras" da m·scara ser„o ignorados.
-Se a string contiver mais caracteres que a m·scara, os caracteres restantes da string ser„o adicionados ao fim da m·scara.
+		m√°scara a ser utilizada
+Observa√ß√µes
+A m√°scara substitui as ocorr√™ncias de "#" pelos caracteres da string, sendo assim, se voc√™ precisar utilizar o caracter "#" como parte da m√°scara, basta "coment√°-lo" com "\\", ex: "\\#".
+A m√°scara √© aplicada da esquerda para a direita, se a string contiver menos caracteres que a m√°scara, os caracteres "extras" da m√°scara ser√£o ignorados.
+Se a string contiver mais caracteres que a m√°scara, os caracteres restantes da string ser√£o adicionados ao fim da m√°scara.
 */
 String.prototype.mask = function(m)
 {
@@ -114,16 +114,16 @@ String.prototype.mask = function(m)
 //------------------------------------------------------------------------------
 /*
 site:http://jsfromhell.com/string/extensoString.extenso([currency: Boolean = false]): String
-	Retorna um n˙mero escrito por extenso em PortuguÍs. Pode ser ou n„o em formato moeda.
+	Retorna um n√∫mero escrito por extenso em Portugu√™s. Pode ser ou n√£o em formato moeda.
 	currency
-		 indica se o valor ser· escrito como moeda, seu valor padr„o È false.
+		 indica se o valor ser√° escrito como moeda, seu valor padr√£o √© false.
 */
 String.prototype.extenso = function(c){
 	var ex = [
-		["zero", "um", "dois", "trÍs", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
-		["dez", "vinte", "trinta", "quarenta", "cinq¸enta", "sessenta", "setenta", "oitenta", "noventa"],
+		["zero", "um", "dois", "tr√™s", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
+		["dez", "vinte", "trinta", "quarenta", "cinq√ºenta", "sessenta", "setenta", "oitenta", "noventa"],
 		["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"],
-		["mil", "milh„o", "bilh„o", "trilh„o", "quadrilh„o", "quintilh„o", "sextilh„o", "setilh„o", "octilh„o", "nonilh„o", "decilh„o", "undecilh„o", "dodecilh„o", "tredecilh„o", "quatrodecilh„o", "quindecilh„o", "sedecilh„o", "septendecilh„o", "octencilh„o", "nonencilh„o"]
+		["mil", "milh√£o", "bilh√£o", "trilh√£o", "quadrilh√£o", "quintilh√£o", "sextilh√£o", "setilh√£o", "octilh√£o", "nonilh√£o", "decilh√£o", "undecilh√£o", "dodecilh√£o", "tredecilh√£o", "quatrodecilh√£o", "quindecilh√£o", "sedecilh√£o", "septendecilh√£o", "octencilh√£o", "nonencilh√£o"]
 	];
 	var a, n, v, i, n = this.replace(c ? /[^,\d]/g : /\D/g, "").split(","), e = " e ", $ = "real", d = "centavo", sl;
 	for(var f = n.length - 1, l, j = -1, r = [], s = [], t = ""; ++j <= f; s = []){
@@ -134,7 +134,7 @@ String.prototype.extenso = function(c){
 			i % 100 < 20 && (t += ex[0][i % 100]) ||
 			i % 100 + 1 && (t += ex[1][(i % 100 / 10 >> 0) - 1] + (i % 10 ? e + ex[0][i % 10] : ""));
 			s.push((i < 100 ? t : !(i % 100) ? ex[2][i == 100 ? 0 : i / 100 >> 0] : (ex[2][i / 100 >> 0] + e + t)) +
-			((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("„o", "ıes") : ex[3][t]) : ""));
+			((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("√£o", "√µes") : ex[3][t]) : ""));
 		}
 		a = ((sl = s.length) > 1 ? (a = s.pop(), s.join(" ") + e + a) : s.join("") || ((!j && (+n[j + 1] > 0) || r.length) ? "" : ex[0][0]));
 		a && r.push(a + (c ? (" " + (+v.join("") > 1 ? j ? d + "s" : ((n = (n = n + "").substr(n.length - 6)).length == 6 && !+n ? "de " : "") + $.replace("l", "is") : j ? d : $)) : ""));
@@ -150,8 +150,8 @@ String.prototype.capitalize = function(){
 //-------------------------------------------------------------------------------------
 /*
 fonte: http://jsfromhell.com/forms/masked-input
-Classe para mascarar inputs (n„o funciona corretamente no opera).
-Regras Padrıes
+Classe para mascarar inputs (n√£o funciona corretamente no opera).
+Regras Padr√µes
 	a = A-Z e 0-9
 	A = A-Z, acentos e 0-9
 	9 = 0-9
@@ -159,27 +159,27 @@ Regras Padrıes
 	c = A-Z
 	* = qualquer coisa
 Regras Especiais
-	E = (Except) exceÁ„o
+	E = (Except) exce√ß√£o
 	O = (Only) somente
-CriaÁ„o de M·scaras
-	M·scara simples:
-	nesse tipo de m·scara o usu·rio pode digitar no m·ximo a mesma
-	quantidade de caracteres que a m·scara contÈm.
+Cria√ß√£o de M√°scaras
+	M√°scara simples:
+	nesse tipo de m√°scara o usu√°rio pode digitar no m√°ximo a mesma
+	quantidade de caracteres que a m√°scara cont√©m.
 	Exemplo:
 	Telefone = (99)9999-9999
 	Data = 99/99/9999
-	M·scara especial "regra^exceÁıes":
-	esse tipo de m·scara È composto por 2 partes, separadas por "^",
-	o lado esquerdo especifica a regra e o direito as exceÁıes para a regra selecionada.
+	M√°scara especial "regra^exce√ß√µes":
+	esse tipo de m√°scara √© composto por 2 partes, separadas por "^",
+	o lado esquerdo especifica a regra e o direito as exce√ß√µes para a regra selecionada.
 	Exemplo:
-	9^abc = a regra È aceitar somente n˙meros "9" e a exceÁ„o s„o os caracteres a, b e c
-	c^123 = aceita somente caracteres de a-z e a exceÁ„o s„o os n˙meros 1, 2 e 3
+	9^abc = a regra √© aceitar somente n√∫meros "9" e a exce√ß√£o s√£o os caracteres a, b e c
+	c^123 = aceita somente caracteres de a-z e a exce√ß√£o s√£o os n√∫meros 1, 2 e 3
 	Uso das regras especiais:
-	ela È semelhante a m·scara especial, porÈm o lado esquerdo tem um significado diferente,
+	ela √© semelhante a m√°scara especial, por√©m o lado esquerdo tem um significado diferente,
 	podendo ser "E" (qualquer coisa, exceto...) ou "O" (somente...)
 	Exemplo:
 	E^abc: aceita qualquer coisa, menos a, b e c
-	O^123: sÛ permite os caracteres 1, 2 e 3
+	O^123: s√≥ permite os caracteres 1, 2 e 3
 	EXEMPLO:
 	var f = document.forms[0];
 	MaskInput(f.fone, "(99)9999-9999");
@@ -213,13 +213,13 @@ MaskInput = function(f, m){
 //-------------------------------------------------------------------------------------
 /*
 fonte:http://jsfromhell.com/string/trim
-Remove caracteres indesej·veis ‡ esquerda, direita ou ambos.
+Remove caracteres indesej√°veis √† esquerda, direita ou ambos.
 String.prototype.trim([chars: String = " "], [type: Integer = 0]): String
 Remove caracteres na esquerda, direita ou ambos os lados da string.
 	caracteres
-		sequÍncia de caracteres que dever„o ser removidos
+		sequ√™ncia de caracteres que dever√£o ser removidos
 	type
-		especifica onde ir· ocorrer o trim, possÌveis valores s„o:
+		especifica onde ir√° ocorrer o trim, poss√≠veis valores s√£o:
 
 			* 					0 = remove em ambos os lados
 			* 					1 = remove caracteres na esquerda
@@ -236,11 +236,11 @@ fonte: http://jsfromhell.com/string/pad
 String.pad(length: Integer, [substring: String = " "], [type: Integer = 0]): String
 	Retorna a string padificada a esquerda, direita ou ambos os lados.
 	length
-		quantidade de caracteres que a string dever· ter apÛs executar a funÁ„o
+		quantidade de caracteres que a string dever√° ter ap√≥s executar a fun√ß√£o
 	substring
-		string que ser· concatenada
+		string que ser√° concatenada
 	type
-		especifica em o lado em que dever· ocorrer a concatenaÁ„o, onde: 0 = esquerda, 1 = direita e 2 = ambos os lados
+		especifica em o lado em que dever√° ocorrer a concatena√ß√£o, onde: 0 = esquerda, 1 = direita e 2 = ambos os lados
 */
 String.prototype.pad = function(l, s, t){
 	return s || (s = " "), (l -= this.length) > 0 ? (s = new Array(Math.ceil(l / s.length)
@@ -250,7 +250,7 @@ String.prototype.pad = function(l, s, t){
 //-------------------------------------------------------------------------------------
 /*
 fonte:
-codifica e decodifica strings no formato ROT13 (rotaÁ„o dos 26 caracteres do alfabeto em 13 posiÁıes).
+codifica e decodifica strings no formato ROT13 (rota√ß√£o dos 26 caracteres do alfabeto em 13 posi√ß√µes).
 String.rot13(void): String
 Codifica/decodifica a string no formato rot13.
 */
@@ -263,13 +263,13 @@ String.prototype.rot13 = function(){
 //-------------------------------------------------------------------------------------
 /*
 Number.formatMoney([floatPoint: Integer = 2], [decimalSep: String = ","], [thousandsSep: String = "."]): String
-Retorna o n˙mero no formato monet·rio.
+Retorna o n√∫mero no formato monet√°rio.
    floatPoint
-	   n˙mero de casas decimais
+	   n√∫mero de casas decimais
 	decimalSep
-		string que ser· usada como separador decimal
+		string que ser√° usada como separador decimal
 	thousandsSep
-		string que ser· usada como separador de milhar
+		string que ser√° usada como separador de milhar
 */
 Number.prototype.formatMoney = function(c, d, t)
 {
@@ -287,37 +287,37 @@ Number.prototype.formatMoney = function(c, d, t)
 //-------------------------------------------------------------------------------------
 /*
 	Date.prototype.format(format: String, [userFunctions: Object = null]): String
-		Formata uma data de acordo com uma string de formataÁ„o.
-	format string de formataÁ„o, aceita caracteres especiais, os quais devem ser circundados por "%" (para usar o "%" literalmente, use "%%"),
-	os seguintes caracteres s„o reconhecidos:
-			* 					d - dia com 2 dÌgitos (01-31)
+		Formata uma data de acordo com uma string de formata√ß√£o.
+	format string de formata√ß√£o, aceita caracteres especiais, os quais devem ser circundados por "%" (para usar o "%" literalmente, use "%%"),
+	os seguintes caracteres s√£o reconhecidos:
+			* 					d - dia com 2 d√≠gitos (01-31)
 			* 					j - dia (1-31)
-			* 					N - dia da semana 1 = segunda, 2 = terÁa, ... (1-7)
+			* 					N - dia da semana 1 = segunda, 2 = ter√ßa, ... (1-7)
 			* 					w - dia da semana 0 = domingo, 1 = segunda, ... (0-6)
 			* 					z - dia do ano (1-365)
 			* 					W - semana do ano (1-52)
-			* 					m - mÍs com 2 dÌgitos (01-12)
-			* 					n - mÍs (1-12)
-			* 					t - dias no mÍs (28-31)
-			* 					L - ano bissÍxto (0 = n„o, 1 = sim)
-			* 					Y - ano com 4 dÌgitos (Ex. 1979, 2006)
-			* 					y - ano com 2 dÌgitos (Ex. 79, 06)
+			* 					m - m√™s com 2 d√≠gitos (01-12)
+			* 					n - m√™s (1-12)
+			* 					t - dias no m√™s (28-31)
+			* 					L - ano biss√™xto (0 = n√£o, 1 = sim)
+			* 					Y - ano com 4 d√≠gitos (Ex. 1979, 2006)
+			* 					y - ano com 2 d√≠gitos (Ex. 79, 06)
 			* 					a - am ou pm
 			* 					A - AM ou PM
 			* 					g - hora (1-12)
 			* 					G - hora (0-23)
 			* 					h - hora (01-12)
-			* 					H - hora com dois dÌgitos (00-23)
-			* 					i - minuto com 2 dÌgitos (00-59)
-			* 					s - segundo com 2 dÌgitos (00-59)
-			* 					ms - milesegundos com 3 dÌgitos (000-999)
+			* 					H - hora com dois d√≠gitos (00-23)
+			* 					i - minuto com 2 d√≠gitos (00-59)
+			* 					s - segundo com 2 d√≠gitos (00-59)
+			* 					ms - milesegundos com 3 d√≠gitos (000-999)
 			* 					O - Timezone em horas
 
 	userFunctions
-	objeto onde as propriedades devem ser nomes de funÁıes do usu·rio,
-	o valor de cada propriedade deve ser uma funÁ„o que recebe 2 par‚metros, o primeiro
-	ser· o prÛprio objeto Date e o segundo È o segundo È uma funÁ„o que recebe
-	como par‚metro um dos caracteres especiais definidos acima e retorna seu valor.
+	objeto onde as propriedades devem ser nomes de fun√ß√µes do usu√°rio,
+	o valor de cada propriedade deve ser uma fun√ß√£o que recebe 2 par√¢metros, o primeiro
+	ser√° o pr√≥prio objeto Date e o segundo √© o segundo √© uma fun√ß√£o que recebe
+	como par√¢metro um dos caracteres especiais definidos acima e retorna seu valor.
 */
 Date.prototype.format = function(m, r)
 {
@@ -349,67 +349,67 @@ Date.prototype.format = function(m, r)
 /*
 site:http://jsfromhell.com/forms/restrict
 Construtor Restrict(form: String)
-Gera uma inst‚ncia de Restrict.
-form nome ou id do formul·rio que receber· as validaÁıes
+Gera uma inst√¢ncia de Restrict.
+form nome ou id do formul√°rio que receber√° as valida√ß√µes
 Propriedades
 Restrict.mask: Object
-Esta propriedade serve para adicionar m·scara aos campos e, deve ser usada
+Esta propriedade serve para adicionar m√°scara aos campos e, deve ser usada
 da seguinte forma:
 instanciaDeRestrict.mask.nomeDoCampoNoFormulario = mascara.
 Onde mascara segue as seguintes regras:
-A classe substitui cada caracter "#" na m·scara pelo que for pressionado
-pelo usu·rio.
+A classe substitui cada caracter "#" na m√°scara pelo que for pressionado
+pelo usu√°rio.
 Ex: mascara = "##/##/####" (para mascarar uma data)
-		* Como o caracter "#" È de uso especial, se vocÍ
-		 precisar utilizar ele como parte da m·scara, basta "coment·-lo"
+		* Como o caracter "#" √© de uso especial, se voc√™
+		 precisar utilizar ele como parte da m√°scara, basta "coment√°-lo"
 		 com "\\", ex: "\\#".
 		*
-			A m·scara È aplicada da esquerda para a direita, sendo assim,
-			se o campo contiver menos caracteres que a m·scara,
-			os caracteres "extras" da m·scara ser„o ignorados.
-		* 	Se a string contiver mais caracteres que a m·scara,
-		os caracteres restantes s„o simplesmente adicionados ao fim da m·scara.
+			A m√°scara √© aplicada da esquerda para a direita, sendo assim,
+			se o campo contiver menos caracteres que a m√°scara,
+			os caracteres "extras" da m√°scara ser√£o ignorados.
+		* 	Se a string contiver mais caracteres que a m√°scara,
+		os caracteres restantes s√£o simplesmente adicionados ao fim da m√°scara.
 
 Restrict.field: Object
 			Esta propriedade serve para filtrar os caracteres que podem ser inseridos no campo.
 	Deve ser usada da seguinte forma:
 	instanciaDeRestrict.field.nomeDoCampoNoFormulario = filtro.
 	Onde filtro segue as seguintes regras:
-						O filtro È aplicado apenas caracter que foi pressionado e, ele È de simples manuseio, apenas digite os caracteres que vocÍ
+						O filtro √© aplicado apenas caracter que foi pressionado e, ele √© de simples manuseio, apenas digite os caracteres que voc√™
 						quer permitir.
-		  Ex: filtro = "9aA." (permitir· a digitaÁ„o dos caracteres "9", "a", "A", e ".")
+		  Ex: filtro = "9aA." (permitir√° a digita√ß√£o dos caracteres "9", "a", "A", e ".")
 						No entanto, seria trabalhoso digitar todos os caracteres do alfabeto em um campo que deve permitir apenas letras,
-						portanto, h· expressıes regulares de filtragem prÈ-definidas na classe, s„o elas:
+						portanto, h√° express√µes regulares de filtragem pr√©-definidas na classe, s√£o elas:
 			  o 					"." = Qualquer caracter
 			  o 					"w": Somente A-z, a-z, 0-9 e _
 			  o 					"W": Qualquer caracter, exceto: A-z, a-z, 0-9 e _
 			  o 					"d": 0-9
 			  o 					"D": Qualquer caracter, exceto 0-9
-			  o 					"s": Permite espaÁo em branco, tabulaÁ„o, quebra de linha, etc (\f\n\r\t\v)
+			  o 					"s": Permite espa√ßo em branco, tabula√ß√£o, quebra de linha, etc (\f\n\r\t\v)
 			  o 					"a": Permite somente letras acentuadas
 			  o 					"A": Permite qualquer caracter, exceto letras acentuadas
-		  Se precisar de mais regras, basta definÌ-las no cÛdigo fonte.
+		  Se precisar de mais regras, basta defin√≠-las no c√≥digo fonte.
 		  Para utilizar, basta prefixar o nome da regra com "\\".
-		  Ex: filtro = "\\d\\s" (permite n˙meros e espaÁos)
-						TambÈm È possÌvel especificar exceÁıes para o filtro usando o caracter "^".
+		  Ex: filtro = "\\d\\s" (permite n√∫meros e espa√ßos)
+						Tamb√©m √© poss√≠vel especificar exce√ß√µes para o filtro usando o caracter "^".
 		  Ex: filtro = "\\d^123" (permite 0-9, menos os caractes 1, 2 e 3)
-						A barra "\\" e o "^" s„o considerados caracteres especiais no filtro, se precisar utiliz·-los, faÁa como no exemplo abaixo.
+						A barra "\\" e o "^" s√£o considerados caracteres especiais no filtro, se precisar utiliz√°-los, fa√ßa como no exemplo abaixo.
 		  Ex: filter = "\\\\" (permite a barra invertida)
 		  filter = "\\^" (permite o cincunflexo)
-MÈtodos
+M√©todos
 Restrict.start(void): void
-	Inicia o objeto. Deve ser chamado depois que todas as regras j· estiverem devidamente setadas.
+	Inicia o objeto. Deve ser chamado depois que todas as regras j√° estiverem devidamente setadas.
 Eventos
 Restrict.onKeyRefuse: function(field: HTMLInputElement, keyCode: Integer): void
-			Este evento È chamado sempre que o usu·rio digitar um caracter inv·lido.
+			Este evento √© chamado sempre que o usu√°rio digitar um caracter inv√°lido.
 	field
-		campo que est· sendo editado
+		campo que est√° sendo editado
 	keyCode
-		cÛdigo do caracter pressionado
+		c√≥digo do caracter pressionado
 Restrict.onKeyRefuse: function(field: HTMLInputElement, keyCode: Integer): void
-	Este evento È chamado sempre que o usu·rio digitar um caracter v·lido.
+	Este evento √© chamado sempre que o usu√°rio digitar um caracter v√°lido.
 	field
-		campo que est· sendo editado
+		campo que est√° sendo editado
 	keyCode
 
 
@@ -504,29 +504,29 @@ Restrict.prototype.onchanged = function(){
  site: http://jsfromhell.com/forms/selection
  Construtor
 Selection(textInput: HTMLInput)
-			Gera uma inst‚ncia de Selection.
+			Gera uma inst√¢ncia de Selection.
 	textInput
-		referÍncia para um input texto ou textarea
+		refer√™ncia para um input texto ou textarea
 Propriedades da classe
 Selection.isSupported: Boolean
-	indica se o browser suporta seleÁ„o.
+	indica se o browser suporta sele√ß√£o.
 Selection.isStandard: Boolean
-	indica se o browser suporta os mÈtodos de seleÁ„o do Gecko.
-MÈtodos
+	indica se o browser suporta os m√©todos de sele√ß√£o do Gecko.
+M√©todos
 Selection.getText(void): String
-	Retorna o texto contido na seleÁ„o.
+	Retorna o texto contido na sele√ß√£o.
 Selection.setText(text: String): void
-			Troca o texto da seleÁ„o.
+			Troca o texto da sele√ß√£o.
 	text
-		texto que ser· colocado no lugar do texto selecionado
+		texto que ser√° colocado no lugar do texto selecionado
 Selection.getCaret(void): Object
-	Retorna um objeto contendo duas propriedades: start (inÌcio da seleÁ„o) e end (fim da seleÁ„o).
+	Retorna um objeto contendo duas propriedades: start (in√≠cio da sele√ß√£o) e end (fim da sele√ß√£o).
 Selection.setCaret(start: Integer, end: Integer): void
-			Seta a seleÁ„o.
+			Seta a sele√ß√£o.
 	start
-		inÌcio da seleÁ„o
+		in√≠cio da sele√ß√£o
 	end
-		fim da seleÁ„o
+		fim da sele√ß√£o
 */
 Selection = function(input){
 	this.isTA = (this.input = input).nodeName.toLowerCase() == "textarea";
@@ -579,18 +579,18 @@ with({o: Selection.prototype}){
 }
 //-------------------------------------------------------------------------------------
 /*
-Retorna o n˙mero no formato monet·rio.
+Retorna o n√∫mero no formato monet√°rio.
 FONTE:http://jsfromhell.com/forms/format-currency
 Jonas Raoni Soares Silva
 @ http://jsfromhell.com/number/fmt-money [rev. #2]
 Number.fmtMoney([floatPoint: Integer = 2], [decimalSep: String = ","], [thousandsSep: String = "."]): String
 
     floatPoint
-        n˙mero de casas decimais
+        n√∫mero de casas decimais
     decimalSep
-        string que ser· usada como separador decimal
+        string que ser√° usada como separador decimal
     thousandsSep
-        string que ser· usada como separador de milhar
+        string que ser√° usada como separador de milhar
 */
 Number.prototype.formatMoney = function(c, d, t){
 	var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "",
@@ -600,14 +600,14 @@ Number.prototype.formatMoney = function(c, d, t){
 };
 /*
 FONTE:http://jsfromhell.com/forms/format-currency
-Transforma um input em um campo monet·rio, permitindo apenas a digitaÁ„o de n˙meros e tambÈm formata o campo.
+Transforma um input em um campo monet√°rio, permitindo apenas a digita√ß√£o de n√∫meros e tamb√©m formata o campo.
 
 formatCurrency(field: HTMLInput, [floatPoint: Integer = 2], [decimalSep: String = ","], [thousandsSep: String = "."]): String
-Formata o input de forma que ele assuma o comportamento de um campo monet·rio.
+Formata o input de forma que ele assuma o comportamento de um campo monet√°rio.
 	field
-		campo que receber· a formataÁ„o
+		campo que receber√° a formata√ß√£o
 	floatPoint
-		n˙mero de casas decimais
+		n√∫mero de casas decimais
 	decimalSep
 		string representando o separador decimal
 	thousandsSep
@@ -638,13 +638,13 @@ function formatCurrency(o, n, dig, dec){
 }
 //-------------------------------------------------------------------------------------
 /*
-TabulaÁ„o via tecla enter.
+Tabula√ß√£o via tecla enter.
 fonte: http://jsfromhell.com/forms/auto-tab
-TabulaÁ„o autom·tica para inputs com maxlenght setado.
+Tabula√ß√£o autom√°tica para inputs com maxlenght setado.
 autoTab(form: HTMLFormElement): void
-			A funÁ„o ir· adicionar a tabulaÁ„o autom·tica em todos os inputs que tiverem o atributo maxlenght setado.
+			A fun√ß√£o ir√° adicionar a tabula√ß√£o autom√°tica em todos os inputs que tiverem o atributo maxlenght setado.
 	form
-		formul·rio que receber· a tabulaÁ„o autom·tica
+		formul√°rio que receber√° a tabula√ß√£o autom√°tica
 	EXEMPLO:
 	autoTab(document.forms.form);
 */
@@ -664,12 +664,12 @@ autoTab = function(f){
 /*
 
 enterAsTab(form: HTMLFormElement, [jumpAlways: Boolean = false]): void
-A funÁ„o ir· adicionar tabulaÁ„o via enter em todos os inputs, exceto selects (pois È necess·rio utilizar o enter para selecionar uma opÁ„o) e textareas (pois o enter fornece quebra de linhas).
-Os inputs devem estar dentro de uma tag form e ao chegar no ˙ltimo input o comportamento padr„o È voltar para o primeiro ao pressionar enter.
+A fun√ß√£o ir√° adicionar tabula√ß√£o via enter em todos os inputs, exceto selects (pois √© necess√°rio utilizar o enter para selecionar uma op√ß√£o) e textareas (pois o enter fornece quebra de linhas).
+Os inputs devem estar dentro de uma tag form e ao chegar no √∫ltimo input o comportamento padr√£o √© voltar para o primeiro ao pressionar enter.
 	form
-		formul·rio que receber· a tabulaÁ„o via enter
+		formul√°rio que receber√° a tabula√ß√£o via enter
 	jumpAlways
-		se true, o enter ir· pular atÈ mesmo selects e textareas
+		se true, o enter ir√° pular at√© mesmo selects e textareas
 */
 enterAsTab = function(f, a){
 	addEvent(f, "keypress", function(e){
@@ -705,8 +705,8 @@ jQuery.fn.clearForm = function()
 Fonte:http://jsfromhell.com/geral/query
 Gera uma array associativa com os campos da query string e seus respectivos valores.
 Query([href: String = CURRENT_URL]): Object
-Retorna uma array associativa, onde os Ìndices s„o os nomes dos campos na query string. Se houver mais de um campo com o mesmo nome, vocÍ pode acess·-los como se fosse uma array.
-href=URL que ser· interpretada, se n„o for fornecido nenhum valor, o default È a url atual da p·gina
+Retorna uma array associativa, onde os √≠ndices s√£o os nomes dos campos na query string. Se houver mais de um campo com o mesmo nome, voc√™ pode acess√°-los como se fosse uma array.
+href=URL que ser√° interpretada, se n√£o for fornecido nenhum valor, o default √© a url atual da p√°gina
 EXEMPLO:
 var params = Query();
 if(params)
@@ -725,7 +725,7 @@ function Query(s){
 }
 //-------------------------------------------------------------------------------------------
 /*
-Esta funÁ„o executa um codigo javascript delimitado pelas tags: <script> e </script>
+Esta fun√ß√£o executa um codigo javascript delimitado pelas tags: <script> e </script>
 */
 var executarJavascript =  function(html) {
 	var posInicial = html.indexOf('<script>');
@@ -751,7 +751,7 @@ function getCapsLock(e,text)
 {
 	var keyCode=0;
 	var shiftKey=false;
-	var msg='A tecla Caps Lock est· ativa.\nPara evitar que vocÍ informe sua senha incorretamente, \nvocÍ deve pressionar a tecla "Caps Lock" para desativ·-la.\nUtilize a tecla "SHIFT" para informar letra(s) em caixa alta.';
+	var msg='A tecla Caps Lock est√° ativa.\nPara evitar que voc√™ informe sua senha incorretamente, \nvoc√™ deve pressionar a tecla "Caps Lock" para desativ√°-la.\nUtilize a tecla "SHIFT" para informar letra(s) em caixa alta.';
 	// Internet Explorer 4+
 	if (document.all)
 	{
@@ -765,12 +765,12 @@ function getCapsLock(e,text)
 	  keyCode=e.which;
 	}
 	shiftKey=e.shiftKey;
-	// Letras Mai˙sculas com sem shift mas com caps lock ligado
+	// Letras Mai√∫sculas com sem shift mas com caps lock ligado
 	if ((keyCode >= 65 && keyCode <= 90) && !shiftKey) {
 	  alert(msg);
 	  return false;
 
-	// Letras Mai˙sculas com shift pressionado e com caps lock ligado
+	// Letras Mai√∫sculas com shift pressionado e com caps lock ligado
 	} else if ((keyCode >= 97 && keyCode <= 122) && shiftKey) {
 	  alert(msg);
 	  return false;
@@ -802,7 +802,7 @@ jQuery.fn.getValUnmasked = function( arrAddCaracteres ) {
     return sValue;
 };
 /**
-* FunÁ„o para validar cpf
+* Fun√ß√£o para validar cpf
 * Fonte:http://jsfromhell.com/geral/query
 *
 * @param value
@@ -818,7 +818,7 @@ String.prototype.isCPF = function(){
 	return true;
 };
 /**
-* FunÁ„o para validar cnpj
+* Fun√ß√£o para validar cnpj
 * Fonte:http://jsfromhell.com/geral/query
 *
 * @param value
@@ -833,7 +833,7 @@ String.prototype.isCNPJ = function(){
 	return true;
 };
 
-// cancelar a tecla backspace do browser para n„o voltar para a pagina anterior
+// cancelar a tecla backspace do browser para n√£o voltar para a pagina anterior
 if( typeof jQuery == 'function')
 {
 	jQuery(document).unbind('keydown').bind('keydown', function (event) {
@@ -866,14 +866,14 @@ if( typeof jQuery == 'function')
 //@ http://jsfromhell.com/number/zero-format [rev. #1]
 /**
 	Number.zeroFormat(n: Integer, [fill: Boolean = false], [right: Boolean = false]): String
-    Retorna o n˙mero em forma de string com zeros ‡ esquerda ou ‡ direita.
+    Retorna o n√∫mero em forma de string com zeros √† esquerda ou √† direita.
 
     n
         quantidade de zeros a ser adicionada
     fill
-        se "true", ser„o adicionados zeros ao n˙mero atÈ que se obtenha no mÌnimo "n" digitos, caso contr·rio ser· sempre adicionado a quantidade especificada de zeros
+        se "true", ser√£o adicionados zeros ao n√∫mero at√© que se obtenha no m√≠nimo "n" digitos, caso contr√°rio ser√° sempre adicionado a quantidade especificada de zeros
     right
-        se "true" os zeros ser„o concatenados ‡ direita, caso contr·rio, ‡ esquerda*
+        se "true" os zeros ser√£o concatenados √† direita, caso contr√°rio, √† esquerda*
 * @returns {Number}
 */
 Number.prototype.zeroFormat = function(n, f, r){
