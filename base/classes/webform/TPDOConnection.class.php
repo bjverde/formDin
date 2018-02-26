@@ -407,39 +407,36 @@ class TPDOConnection {
 	}
 
 	//------------------------------------------------------------------------------------------
-	private function __clone()
-	{
+	private function __clone() {
 	}
 
 	//------------------------------------------------------------------------------------------
-	public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null )
-	{
-		if ( !self::getInstance() )
-		{
+	public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null ) {
+		if ( !self::getInstance() ) {
 			self::getError();
 			return;
 		}
 		self::$error = null;
 
 		// ajuste do teste para banco oracle
-		if ( $sql == 'select 1 as teste'  && strtolower(BANCO)== 'oracle' )
-		{
+		if ( $sql == 'select 1 as teste'  && strtolower(BANCO)== 'oracle' ) {
 			$sql .= ' from dual';
 		}
 
 		// converter o parametro passado para array
-		if ( is_string( $arrParams ) || is_numeric( $arrParams ) )
-		{
+		if ( is_string( $arrParams ) || is_numeric( $arrParams ) ) {
 			$arrParams = array( $arrParams );
 		}
 		$result = null;
 
 		// nás chamadas ajax, não precisa aplicar utf8
-		if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) )
-		{
-			if ( self::getUtfDecode() )
-			{
+		if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
+			$boolUtf8_Decode = self::getUtfDecode();
+			if ( $boolUtf8_Decode ) {
 				$sql = utf8_encode( $sql );
+				$arrParams = self::encodeArray( $arrParams );
+			} else {
+				$sql = utf8_decode( $sql );
 				$arrParams = self::encodeArray( $arrParams );
 			}
 		}
@@ -535,7 +532,9 @@ class TPDOConnection {
 			if ( is_string( key( $arrDados ) ) ) {
 				foreach( $arrDados as $k => $v ) {
 					if ( ! is_null( $v )  ) {
-						$arrDados[ $k ] = utf8_encode( $v );
+						
+						$boolUtf8_DecodeDataBase = self::getUtfDecode();
+						$arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
 
 						// inverter campo data
 						if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
@@ -578,14 +577,13 @@ class TPDOConnection {
 			{
 				foreach( $arrDados as $k => $v )
 				{
-					if ( ! is_null($v) )
-					{
+					if ( ! is_null($v) ) {
 						// campo data deve ser invertido para gravar no banco de dados.
-						if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-						{
+						if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
 							$v = self::formatDate( $v, 'ymd' );
 						}
-						$arrDados[ $k ] = utf8_encode( $v );
+						$boolUtf8_DecodeDataBase = self::getUtfDecode();
+						$arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
 					}
 					else
 					{
@@ -729,6 +727,7 @@ class TPDOConnection {
 					 define('HOST','192.168.0.132');<br>
 					 define('PORT','3306');<br>
 					 define('DATABASE','exemplo');<br>
+					 define('UTF8_DECODE',0);<br>
 					 define('USUARIO','root');<br>
 					 define('SENHA','root');<br><br>";
 				break;
@@ -766,6 +765,7 @@ class TPDOConnection {
 					 define('HOST','192.168.0.132');<br>
 					 define('PORT','1433');<br>
 					 define('DATABASE','exemplo');<br>
+					 define('UTF8_DECODE',0);<br>
 					 define('USUARIO','sa');<br>
 					 define('SENHA','123456');<br><br>";
 				break;
@@ -773,6 +773,7 @@ class TPDOConnection {
 			case 'ACCESS':
 				$html .= "<center>Exemplo de configuração para conexão com banco ACCES</center><br>
 					 define('DATABASE','C://bd//DBTESTE.MDB');<br>
+					 define('UTF8_DECODE',0);<br>
 					 define('USUARIO','admin');<br>
 					 define('SENHA','123456');<br><br>";
 				break;
@@ -905,9 +906,19 @@ class TPDOConnection {
 		}
 		return $date;
 	}
-	//-----------------------------------------------------
-	public static function processResult( $result, $fetchMode, $boolUtfDecode = null ) {
-		$boolUtfDecode = ( $boolUtfDecode === null ? self::getUtfDecode() : $boolUtfDecode );
+	//--------------------------------------------------------------------------------------
+	public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {		
+		$retorno = null;
+		if ( $boolUtf8_Decode ) {			
+			$retorno = utf8_decode( $string );
+		} else {
+			$retorno = utf8_encode( $string );
+		}
+		return $retorno;
+	}	
+	//--------------------------------------------------------------------------------------
+	public static function processResult( $result, $fetchMode, $boolUtf8_Decode = null ) {
+		$boolUtf8_Decode = ( $boolUtf8_Decode === null ? self::getUtfDecode() : $boolUtf8_Decode );
 			
 		// formato vo
 		if ($result && $fetchMode == PDO::FETCH_OBJ) {
@@ -921,19 +932,11 @@ class TPDOConnection {
 		if ( is_array( $result ) ) {
 			foreach( $result as $key => $val ) {
 				foreach( $val as $k => $v ) {
-					if ( $boolUtfDecode ) {
-						$k = strtoupper( utf8_decode( $k ) );
-					} else {
-						$k = strtoupper( $k );
-					}
+					$k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode , $k ) );
 
 					// transformar tags"< >" em codigo html para não serem interpretadas
 					if ( is_string( $v ) ) {
-						if ( $boolUtfDecode ) {
-							$res[ $k ][ $key ] = utf8_decode( $v );
-						} else {
-							$res[ $k ][ $key ] = $v;
-						}
+						$res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $v );
 
 						//$res[ $k ][ $key ] = utf8_decode($v);
 						// consertar ordem do campo data
