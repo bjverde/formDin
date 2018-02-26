@@ -6,17 +6,17 @@ You allowed to use this component or parts of it under GPL terms
 To use it on other terms or get Professional edition of the component please contact us at sales@dhtmlx.com
 */
 /*
-Dica fundamental, pra quem quer que a mensagem sai na barra de ferramentas do FIREFOX, quando utilizamos a função:
+Dica fundamental, pra quem quer que a mensagem sai na barra de ferramentas do FIREFOX, quando utilizamos a funÃ§Ã£o:
 
 windows.status("Mais por muito menos");
 
 
-Pesquisando sobre o assunto, depois de muito tempo acabei achando a solução, simples e direta, Entre no FIREFOX vá em:
+Pesquisando sobre o assunto, depois de muito tempo acabei achando a soluÃ§Ã£o, simples e direta, Entre no FIREFOX vÃ¡ em:
 
    1. FERRAMENTAS
-   2. OPÇÕES
+   2. OPÃ‡Ã•ES
    3. CONTEUDO
-   4. CLIQUE NO BOTÃO AVANÇADO DE PERMITIR JAVASCRIPT
+   4. CLIQUE NO BOTÃƒO AVANÃ‡ADO DE PERMITIR JAVASCRIPT
    5. SELECIONE MODIFICAR TEXTO NA BARRA DE STATUS.
 */
 function dhtmlXMenuObject(baseId, skin) {var main_self = this;this.addBaseIdAsContextZone = null;this.skin = (skin!=null?skin:"dhx_blue");this.skinPath = window.dhx_globalImgPath||"";;this.imagePath = this.skinPath;this._isIE6 = false;if (_isIE){this._isIE6 = (window.XMLHttpRequest==null?true:false)};if (baseId == null){this.base = document.body}else {if (document.getElementById(baseId)!= null) {this.base = document.getElementById(baseId);while (this.base.childNodes.length > 0){this.base.removeChild(this.base.childNodes[0])};this.base.className += " dhtmlxMenu_"+this.skin+"_Middle";this.base._autoSkinUpdate = true;this.addBaseIdAsContextZone = baseId}else {this.base = document.body}};this.topId = "dhxWebMenuTopId";this.menu = new Array();this.subMenuData = new Array();this.menuSelected = -1;this.menuLastClicked = -1;this.idPrefix = "";this.itemTagName = "item";this.itemTextTagName = "itemtext";this.userDataTagName = "userdata";this.itemTipTagName = "tooltip";this.itemHotKeyTagName = "hotkey";this.dirTopLevel = "bottom";this.dirSubLevel = "right";this.menuX1 = null;this.menuX2 = null;this.menuY1 = null;this.menuY2 = null;this.menuMode = "web";this.menuTimeoutMsec = 400;this.menuTimeoutHandler = null;this.idPull = {};this.itemPull = {};this.userData = {};this.radio = {};this.menuTouched = false;this.zIndInit = 1200;this.zInd = this.zIndInit;this.zIndStep = 50;this.menuModeTopLevelTimeout = true;this.menuModeTopLevelTimeoutTime = 200;this.topLevelItemPaddingIconExists = 27;this.topLevelItemPaddingIconNotExists = 6;this._topLevelBottomMargin = 1;this._topLevelRightMargin = 0;this._arrowFFFix = (_isIE?(document.compatMode=="BackCompat"?0:-4):-4);this.setSkin = function(skin) {var oldSkin = this.skin;this.skin = skin;switch (this.skin){case "standard":

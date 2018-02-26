@@ -80,7 +80,7 @@ function fwAjaxRequest(config)
    			jQuery(div).css({"visibility":"visible"});
 		}
 	 }
-    // Iniciando a requisi��o em AJAX
+    // Iniciando a requisição em AJAX
     if( ! config.module  )
     {
     	config.module = jQuery("#modulo").val();
@@ -154,7 +154,7 @@ function fwAjaxRequest(config)
     var v_containerId='';
     if( config.containerId ) v_containerId = config.containerId;
 
-    // configura chamada em paralelo ou n�o
+    // configura chamada em paralelo ou não
     var v_async = true;
     if( typeof config.async != 'undefined' ) v_async = config.async;
 
@@ -166,7 +166,7 @@ function fwAjaxRequest(config)
 		v_blockScreen = config.blockScreen;
     }
 
-    // configura e seta a fun��o de retorno
+    // configura e seta a função de retorno
     var v_callback = function(res)
     {
     	var session_expired=false;
@@ -212,11 +212,11 @@ function fwAjaxRequest(config)
 
 		if( session_expired )
 		{
-			alert('Sess�o expirada.\n\nClique Ok para reiniciar!');
+			alert('Sessão expirada.\n\nClique Ok para reiniciar!');
  			fwApplicationRestart();
  			return;
 		}
-        // tratar queda de se��o
+        // tratar queda de seção
         var message='';
         if( config.dataType == 'json')
         {
@@ -233,7 +233,7 @@ function fwAjaxRequest(config)
         // cancelar o semaforo se houver
         if ( config.semaphore )
 	    {
-	    	// se o semaphoro estiver aberto � porque atingiu o tempo limite de execu��o, ent�o cancelar a requisi��o ajax
+	    	// se o semaphoro estiver aberto é porque atingiu o tempo limite de execução, então cancelar a requisição ajax
             if( fwSemaphoreIsOpen( config.semaphore ) )
             {
             	if( v_containerId )
@@ -248,7 +248,7 @@ function fwAjaxRequest(config)
 			}
 	    }
 
-        // chamar a fun��o callback definida pelo usu�rio
+        // chamar a função callback definida pelo usuário
         if( config.callback )
         {
         	try
@@ -262,7 +262,7 @@ function fwAjaxRequest(config)
 	        	{
 	        		if( typeof config.callback !='function')
 	        		{
-						fwAlert( config.callback+' n�o � uma fun��o!',{'title':'Aten��o'});
+						fwAlert( config.callback+' não é uma função!',{'title':'Atenção'});
 	        		}
 	        		else
 	        		{
@@ -362,7 +362,7 @@ function fwAjaxRequest(config)
 
     if( ! v_async || v_blockScreen )
     {
-	    // inicia anima��o de loading
+	    // inicia animação de loading
 		if( v_containerId )
 		{
 			jQuery("#"+v_containerId).html(v_msgLoading);
@@ -391,7 +391,7 @@ function fwAjaxRequest(config)
 		}
 	}
 
-    // transformar os campos do formulario no formato para transmiss�o via ajax
+    // transformar os campos do formulario no formato para transmissão via ajax
     var dados =  {};
     dados['ajax'] = 1;
     if( !config.data )
@@ -444,7 +444,7 @@ function fwAjaxRequest(config)
 			}
 		}
 	}
-	// adicionar a a��o no final
+	// adicionar a ação no final
 	if( config.action != null )
 	{
     	//dados +='&formDinAcao='+config.action;
@@ -462,13 +462,13 @@ function fwAjaxRequest(config)
     if( !app_url ) app_url='';
     if( !app_index_file ) app_index_file = 'index.php';
 
-    //Uso de Semaforo na requisicao ajax (semaforo fica "travado" at� finalizar a requisicao)
+    //Uso de Semaforo na requisicao ajax (semaforo fica "travado" até finalizar a requisicao)
     if (config.semaphore)
     {
     	fwSetSemaphore(config.semaphore,config.semaphoreTimeout,v_containerId);
     }
 
-    // inicia a requisi��o ajax
+    // inicia a requisição ajax
 	ajaxRequestCount++;
     jQuery.ajax({
 		url: app_url+app_index_file,
@@ -643,11 +643,11 @@ function fwChkRequestAjax()
 		var msg;
 		if( ajaxRequestCount > 1 )
 		{
-		   msg = 'Existem '+ajaxRequestCount+' requisi��es ajax pendentes!';
+		   msg = 'Existem '+ajaxRequestCount+' requisições ajax pendentes!';
 		}
 		else
 		{
-		   msg = 'Existe '+ajaxRequestCount+' requisi��o ajax pendente!';
+		   msg = 'Existe '+ajaxRequestCount+' requisição ajax pendente!';
 		}
 		fwAlert(msg);
 		return false;
@@ -659,8 +659,8 @@ function fwChkRequestAjax()
  * Cria (fecha) um semaforo. Utilizado para concorrência.
  * @param idSemaphore idenficador do semáforo
  * @param timeout (opcional) tempo em milisegundos para expirar o semaforo. Default: 20000 = 20 segundos.
- * @param idContainer ( opcional ) id do elemento que est� exibindo alguma mensagem de processamento enquando aguarda o retorno da requisi��o ajax
- * @returns TRUE, se o semáforo foi criado; FALSE, caso contr�rio; NULL, caso o identificador n�o seja passado
+ * @param idContainer ( opcional ) id do elemento que está exibindo alguma mensagem de processamento enquando aguarda o retorno da requisição ajax
+ * @returns TRUE, se o semáforo foi criado; FALSE, caso contrário; NULL, caso o identificador não seja passado
  */
 function fwSetSemaphore(idSemaphore, timeout, idContainer ) {
 	if(!idSemaphore)
@@ -676,9 +676,9 @@ function fwSetSemaphore(idSemaphore, timeout, idContainer ) {
 }
 
 /**
- * Cancela (abre) um semáforo. Utilizado para concorr�ncia.
+ * Cancela (abre) um semáforo. Utilizado para concorrência.
  * @param idSemaphore identificado do semáforo
- * @param idContainer ( opcional ) id do elemento que está exibindo alguma mensagem de processamento enquando aguarda o retorno da requisi��o ajax
+ * @param idContainer ( opcional ) id do elemento que está exibindo alguma mensagem de processamento enquando aguarda o retorno da requisição ajax
 */
 function fwCancelSemaphore(idSemaphore,idContainer) {
 	if (!semaphore[idSemaphore])
@@ -694,7 +694,7 @@ function fwCancelSemaphore(idSemaphore,idContainer) {
 }
 
 /**
- * Verifica se um semáforo est� aberto ou fechado
+ * Verifica se um semáforo está aberto ou fechado
  * @param idSemaphore identificador do semáforo
  * @returns TRUE, caso o semáforo esteja aberto; FALSE, caso esteja fechado; NULL, caso o identificador não seja passado.
  */
