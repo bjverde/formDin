@@ -5558,7 +5558,7 @@ function fwGridSetRowColor(idGrid,rownum,$newColor)
 function fwGridConfirmDelete( campos, valores, idGrid, rownum )
 {
 	var bgc = fwGridSetRowColor(idGrid,rownum,'#FFFF66');
-	if( confirm('confirma Exclus?o ?') )
+	if( confirm('confirma Exclusão ?') )
 	{
 		fwGridSetRowColor(idGrid,rownum,bgc);
 		fwAtualizarCampos(campos,valores);
