@@ -43,7 +43,7 @@ function menuWebSubmit(nome_modulo,nome_titulo){
 	  	document.menuweb_submit.modulo.value=nome_modulo;
 	 	document.menuweb_submit.submit();
  	} catch(e) {
- 	alert( 'N„o foi possivel definir a vari·vel mÛdulo para: '+nome_modulo+'".\n'+
+ 	alert( 'N√£o foi possivel definir a vari√°vel m√≥dulo para: '+nome_modulo+'".\n'+
  	'Verifique se no formulario existe um <form> com o nome "menuweb_submit"\n'+
  	'contendo um campo hidden chamado "modulo" e id="modulo" ou \n'+
  	'utilize o metodo criarForm() da classe menuWeb para criar o formulario.');

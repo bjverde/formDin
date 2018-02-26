@@ -1,7 +1,7 @@
 /*--------------------------------------------------|
 | dTree 2.05 | www.destroydrop.com/javascript/tree/ |
 |---------------------------------------------------|
-| Copyright (c) 2002-2003 Geir Landrö               |
+| Copyright (c) 2002-2003 Geir LandrÃ¶               |
 |                                                   |
 | This script can be used freely as long as all     |
 | copyright messages are intact.                    |
@@ -89,7 +89,7 @@ dTree.prototype.toString = function() {
 			this.selectedNode = this.getSelected();
 		str += this.addNode(this.root);
 	} else
-		str += 'Browser não suportado.';
+		str += 'Browser nÃ£o suportado.';
 	if (!this.selectedFound)
 		this.selectedNode = null;
 	this.completed = true;
