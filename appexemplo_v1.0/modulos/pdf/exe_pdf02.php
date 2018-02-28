@@ -1,4 +1,7 @@
 <?php
+require_once 'exe_pdf_msg.php';
+$html1 = getMsgFPDF();
+
 //*** Criacao do objeto PDF ***
 $frm = new TForm();
 
@@ -39,7 +42,7 @@ $dados['DAT'][] = '01/01/2015';
 $dados['TXT_TERMO'][] = 'Termo';
 $dados['TXT_OBS'][] = 'OBS';
 $dados['NUM_VALOR'][] = '10.45';
-$dados['TXT_DESCRIMINACAO'][] = 'Descriminação';
+$dados['TXT_DESCRIMINACAO'][] = utf8_decode('Descriminação');
 
 $dados['TXT_EMPENHO'][] = '2015NE4478';
 $dados['TXT_REGISTRO'][] = 'REGNE4457';
@@ -80,6 +83,8 @@ $pdf->cell($pdf->getRowMaxWidth()-($pdf->getRowWidths(6)+$pdf->getRowWidths(7)) 
 $pdf->cell($pdf->getRowWidths(6),5,number_format($total,2,'.',','),1,0,'C',1);
 $pdf->cell($pdf->getRowWidths(7),5,'',1,1,'R',1);
 $pdf->SetFillColor(255,255,255); // fundo branco
+$pdf->ln(3);
+$pdf->multiCell(0,4,utf8_decode(getMsgFPDF()),1);
 
 
 //echo 'Pdf gerado em: '.$pdf->show('teste.pdf',false);
