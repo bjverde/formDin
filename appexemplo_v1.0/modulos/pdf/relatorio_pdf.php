@@ -39,12 +39,16 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+require_once 'exe_pdf_msg.php';
+
 $rel = new TPDF('L');
 $rel->AddPage();
 $rel->SetFont('Arial','',10);
-$rel->cell(0,5,'Exemplo do relatório utilizando FPDF',1,1,'C');
+$rel->cell(0,5,utf8_decode('Exemplo do relatório utilizando FPDF'),1,1,'C');
 $rel->ln(3);
-$rel->cell(0,5,'Parâmetros Recebidos',1,1,'C');
+$rel->cell(0,5,utf8_decode('Parâmetros Recebidos'),1,1,'C');
 $rel->multiCell(0,4,print_r($_REQUEST,true),1);
+$rel->ln(3);
+$rel->multiCell(0,4,utf8_decode(getMsgFPDF()),1);
 $rel->show();
 ?>
