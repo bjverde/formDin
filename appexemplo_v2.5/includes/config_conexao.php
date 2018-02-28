@@ -42,6 +42,7 @@ define('PORT','3306');
 define('DATABASE','form_exemplo');
 define('USUARIO','form_exemplo');
 define('SENHA','123456');
+define('UTF8_DECODE',0);
 
 /**
 * Exemplo para MySQL como banco default
