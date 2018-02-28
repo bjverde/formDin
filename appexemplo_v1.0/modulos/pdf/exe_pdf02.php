@@ -48,7 +48,7 @@ $dados['DAT'][] = '02/01/2015';
 $dados['TXT_TERMO'][] = 'Termo 2';
 $dados['TXT_OBS'][] = 'OBS 2';
 $dados['NUM_VALOR'][] = '150.47';
-$dados['TXT_DESCRIMINACAO'][] = 'Descriminação';
+$dados['TXT_DESCRIMINACAO'][] = utf8_decode('Descriminação');
 
 
 //adicionar array de objeto pdf

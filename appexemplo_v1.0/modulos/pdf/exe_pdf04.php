@@ -38,11 +38,14 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once 'exe_pdf_msg.php';
 
 $pdf = new TPDF('P');
 $pdf->AddPage();
 $pdf->SetFont('Arial','',10);
-$pdf->cell(0,5,'Exemplo do relatório utilizando FPDF',1,1,'C');
+$pdf->cell(0,5,utf8_decode('Exemplo do relatório utilizando FPDF'),1,1,'C');
+$pdf->ln(3);
+$pdf->multiCell(0,4,utf8_decode(getMsgFPDF()),1);
 $pdf->show();
 ?>
 
