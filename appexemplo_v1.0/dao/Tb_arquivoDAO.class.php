@@ -1,14 +1,8 @@
 <?php
-class Tb_arquivoDAO extends TPDOConnection
-{
-	public function tb_arquivoDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
-	public static function insert( Tb_arquivoVO $objVo )
-	{
-		if( $objVo->getId_arquivo() )
-		{
+class Tb_arquivoDAO extends TPDOConnection {
+
+	public static function insert( Tb_arquivoVO $objVo ) {
+		if( $objVo->getId_arquivo() ) {
 			return self::update($objVo);
 		}
 		$values = array(  $objVo->getNome_arquivo()
@@ -43,14 +37,16 @@ class Tb_arquivoDAO extends TPDOConnection
 								from tb_arquivo where id_arquivo = ?', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectAll( $orderBy=null, $where=null )
-	{
-		return self::executeSql('select
-								 id_arquivo
-								,nome_arquivo
-								from tb_arquivo'.
-		( ($where)? ' where '.$where:'').
-		( ($orderBy) ? ' order by '.$orderBy:''));
+	public static function selectAll( $orderBy=null, $where=null ) {
+		
+		$sql = 'select id_arquivo
+					  ,nome_arquivo
+					   from tb_arquivo '
+		.( ($where)? ' where '.$where:'')
+		.( ($orderBy) ? ' order by '.$orderBy:'');
+		
+		$result = self::executeSql($sql);
+		return $result;
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Tb_arquivoVO $objVo )

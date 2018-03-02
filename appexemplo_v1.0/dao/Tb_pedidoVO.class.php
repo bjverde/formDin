@@ -42,7 +42,7 @@ class Tb_pedidoVO
 	private $data_pedido = null;
 	private $nome_comprador = null;
 	private $forma_pagamento = null;
-	public function Tb_pedidoVO( $id_pedido=null, $data_pedido=null, $nome_comprador=null, $forma_pagamento=null )
+	public function __construct( $id_pedido=null, $data_pedido=null, $nome_comprador=null, $forma_pagamento=null )
 	{
 		$this->setId_pedido( $id_pedido );
 		$this->setData_pedido( $data_pedido );

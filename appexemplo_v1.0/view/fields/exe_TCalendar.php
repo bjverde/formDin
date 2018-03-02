@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-
+d($_REQUEST);
  // criar 2 eventos no calendário
  if( RequestHelper::get('ajax') ){
 	// ver todos os atributos do evento em : http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
@@ -65,7 +65,10 @@
 
 }
 
-$frm = new TForm('Exemplo Agenda');
+$frm = new TForm('Exemplo Agenda',500,600);
+$frm->setFlat(true);
+$frm->setMaximize(true);
+
 $f = $frm->addCalendarField('agenda','exe_TCalendar.php',400,null,null,null,null,null,'onEventClick','onSelectDay');
 $frm->setAction('Atualizar');
 $frm->show();

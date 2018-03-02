@@ -1,10 +1,6 @@
 <?php
-class Acesso_menuDAO extends TPDOConnection
-{
-	public function acesso_menuDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class Acesso_menuDAO extends TPDOConnection {
+
 	public static function insert( Acesso_menuVO $objVo )
 	{
 		if( $objVo->getIdmenu() )

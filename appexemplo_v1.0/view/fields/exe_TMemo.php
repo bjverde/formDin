@@ -40,7 +40,7 @@
  */
 
 // chamada ajax
-$frm = new TForm('Exemplo Campo Memo',1900,900);
+$frm = new TForm('Exemplo Campo Memo com tenymce',900,900);
 $frm->setRichEdit(true);
 // define a largura das colunas verticais do formulario para alinhamento dos campos
 $frm->setColumns(array(200,100));

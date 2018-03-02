@@ -41,6 +41,7 @@
 
 $frm = new TForm('Gerador de Objeto VO e DAO',550,600);
 $frm->setFlat(true);
+$frm->setMaximize(true);
 $frm->addGroupField('gpxE','Informações do Esquema');
     $frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informação do esquema é nescessaria para as intruções de banco. SE Marcar a opção SIM nas DAOs será incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
     $frm->addSelectField('sit_const_scheme','Constante Esquema:',null,'0=Não,1=Sim',null,null,'0');
@@ -83,7 +84,7 @@ switch( $acao ) {
 				$gerador->addColumn($v);
 			}
 			$showScheme = $frm->get('sit_const_scheme');
-			$gerador->setShowScheme($showScheme);
+			$gerador->setShowSchema($showScheme);
 			$gerador->saveVO();
 			$gerador->saveDAO();
 			$frm->setMessage('Fim');

@@ -37,16 +37,27 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Teste Colunas Formulário',300,1000);
+$html = '<br><br><b>Uso na codificação para melhorar Layout</b>'
+		.'<br>Com o "setColumns" é possível determinar colunas que os campos irão ficar alinhados para facilitar a criação de um melhor layout.';
+
+$box3 = new TBox('bx3',300,100);
+$box3->add($html);
+$box3->setFlat(true);
+$box3->setPosition('tc');
+$box3->setCssBody('background-color','yellow');
+
+$frm = new TForm('Teste Colunas Formulário',300,900);
+
+$frm->addOutside($box3);
 
 $frm->setColumns('100,300,120');
-$frm->addTextField('nom_pessoa','Nome da Pessoa:',50);
+$frm->addTextField('nom_pessoa','Nome da Pessoa:',30);
 $frm->addTextField('des_endereco','Endereço Comercial:',60,false,null,null,false);
 $frm->addTextField('nom_bairro','Bairro:',30);
 $frm->addTextField('num_cep','CEP:',40,false,null,null,false);
 
 $g = $frm->addGroupField('Cadastro','Cadastro');
-	$g->setColumns('80,200,120');
+	$g->setColumns('80,150,80,200');
 	$frm->addFoneField('num_fone','Telefone:');
 	$frm->addTextField('num_teste','Campo Teste',30,false,null,null,false);
 	$frm->addFoneField('num_fone2','Telefone Com:');

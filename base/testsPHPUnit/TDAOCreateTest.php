@@ -151,9 +151,37 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     	
     	$resultArray = $tDAOCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 5, $size);
+    	$this->assertEquals( 6, $size);
     }
 
+    public function testAddSqlSelectById_sizeArray(){
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->addSqlSelectById();
+        
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals( 6, $size);
+    }
+    
+    public function testAddSqlSelectById_stringMySQL(){
+        $tDAOCreate = $this->tDAOCreate;
+        
+        $expectedArray[] = TTAB.'public static function selectById( $id ) {'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect.\' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\';'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$result = self::executeSql($sql, $values );'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
+        $expectedArray[] = TTAB.'}'.TEOL;
+        
+        
+        $expectedString = trim( implode($expectedArray) );        
+
+        $tDAOCreate->addSqlSelectById();        
+        $result = $tDAOCreate->getLinesString();
+        
+        $this->assertEquals( $expectedString , $result);
+    }
+    
     public function testAddSqlSelectAllPagination_sizeArrayNoDBMS(){
         $tDAOCreate = $this->tDAOCreate;        
         $tDAOCreate->addSqlSelectAllPagination();
@@ -215,7 +243,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedString = trim( implode($expectedArray) );
         
         $tDAOCreate = $this->tDAOCreate;
-        $tDAOCreate->setDatabaseManagementSystem('mssql');
+        $tDAOCreate->setDatabaseManagementSystem('sqlserver');
         $tDAOCreate->addSqlSelectAllPagination();
         
         $result = $tDAOCreate->getLinesString();

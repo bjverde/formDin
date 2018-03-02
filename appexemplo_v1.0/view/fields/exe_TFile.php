@@ -37,11 +37,13 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+$fileFormat = 'pdf,gif,txt,jpg,rar,zip,doc';
 $frm = new TForm('Exemplo Campo Arquivo',300,700);
 
+$frm->addHtmlField('html1','Arquivo de tamanho maximo de 2MB e no formatos: '.$fileFormat,null,'Dica:',null,200)->setCss('border','1px dashed blue');
 // define a largura das colunas verticais do formulario para alinhamento dos campos
 $frm->setColumns(array(100,100));
-$frm->addFileField('anexo','Anexo Async:',true,'pdf,gif,txt,jpg,rar,zip,doc','2M',40,FALSE);
+$frm->addFileField('anexo','Anexo Async:',true,$fileFormat,'2M',40,FALSE);
 //d($_SESSION);
 //d($_POST);
 //print_r(file_put_contents($frm->getBase().'tmp/upload_'.md5(session_id().$res_alt['DES_ARQUIVO'][0]),'teste') );

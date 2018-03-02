@@ -3,7 +3,7 @@ class RegiaoVO
 {
 	private $cod_regiao = null;
 	private $nom_regiao = null;
-	public function RegiaoVO( $cod_regiao=null, $nom_regiao=null )
+	public function __construct( $cod_regiao=null, $nom_regiao=null )
 	{
 		$this->setCod_regiao( $cod_regiao );
 		$this->setNom_regiao( $nom_regiao );

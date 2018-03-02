@@ -1,10 +1,6 @@
 <?php
-class Acesso_userDAO extends TPDOConnection
-{
-	public function acesso_userDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class Acesso_userDAO extends TPDOConnection {
+
 	public static function insert( Acesso_userVO $objVo )
 	{
 		if( $objVo->getIduser() )

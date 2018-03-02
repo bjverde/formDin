@@ -19,7 +19,7 @@ class CaptchaSecurityImages {
 		}
 		return $code;
 	}
-	function CaptchaSecurityImages($width='120',$height='30',$characters='6') {
+	function __construct($width='120',$height='30',$characters='6') {
 		$code = $this->generateCode($characters);
 		/* font size will be 75% of the image height */
 		$font_size = $height * 0.80;

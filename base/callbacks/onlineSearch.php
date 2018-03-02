@@ -191,50 +191,28 @@ switch( $acao )
 				}
 
 			}
-			else if( class_exists( 'TPDOConnection' ) && TPDOConnection::getInstance() )
-			{
+			else if( class_exists( 'TPDOConnection' ) && TPDOConnection::getInstance() ) {
 				$where = '';
 
-				if ( is_array( $form->getDisplayControls() ) )
-				{
-					foreach( $form->getDisplayControls() as $name => $dc )
-					{
-						if ( $dc->getField()->getProperty( 'filter' ) == 'true' )
-						{
-							if ( trim( $dc->getField()->getValue() ) != '' )
-							{
+				if ( is_array( $form->getDisplayControls() ) ) {
+					foreach( $form->getDisplayControls() as $name => $dc ) {
+						if ( $dc->getField()->getProperty( 'filter' ) == 'true' ) {
+							if ( trim( $dc->getField()->getValue() ) != '' ) {
 								$where .= $where == '' ? '' : ' and ';
+								
 								if( $dc->getField()->getProperty( 'searchFormated' ) == 'true' && method_exists( $dc->getField(),'getFormated') )
 								{
 									$value=$dc->getField()->getFormated();
-								}
-								else
-								{
+								} else {
 									$value = $dc->getField()->getValue();
 								}
-								if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] )
-								{
-									if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 )
-                                    {
-										$where .= "(upper(" . $name . ") like upper('%" . $value . "%'))";
-									} else {
-										$where .= "(upper(" . $name . ")=upper('" . $value . "'))";
-									}
-								}
-								else
-								{
-									if ( $dc->getField()->getProperty( 'partialKey' ) == 'true' ) {
-										$where .= "(" . $name . " like '%" . $value . "%')";
-									}
-                                    else
-                                    {
-								        $where .= "(" . $name . "='" . $value . "')";
-							        }
-						        }
+								
+								$where = generatorWhere( $where ,$aParams ,$dc ,$name ,$value );
 					        }
 				        }
                     }
 				}
+				
 				$sql = "select * from " . $aParams[ 'packageFunction' ] . ( ( $where == '' ) ? '' : ' where ' . $where );
                 if( (integer) $aParams[ 'maxRecords' ] > 0 && DEFINED('BANCO') && preg_match('/MYSQL|SQLITE|POSTGRE/i',BANCO) == 1 )
                 {
@@ -243,10 +221,10 @@ switch( $acao )
 				$res = TPDOConnection::executeSql( $sql );
 				TPDOConnection::showError();
 			}
-			if ( $res )
-			{
-                if( preg_match('/LIMIT/i',$sql ) == 0 )
-                {
+			
+			
+			if ( $res ) {
+                if( preg_match('/LIMIT/i',$sql ) == 0 ) {
 				    // limitar na quantidade de registros informada
 				    if ( ( int ) $aParams[ 'maxRecords' ] > 0 )
 				    {
@@ -259,14 +237,11 @@ switch( $acao )
 				//$html->setValue(gride($res,$aParams,$form,null,null,$form->getWidth()-7,250));
 
 				setGrid( $res, $aParams, $form );
-			}
-			else
-			{
+			} else {
 				//$form->setMessage('Nenhum registro encontrado');
 				$form->addHtmlField( 'html_msg', '<center><b><br>Nenhum registro encontrado!<b></center>' )->setCss( 'font-size', '18px' );
 
-				if ( isset( $aParams[ 'crudModule' ] ) && $aParams[ 'crudModule' ] )
-				{
+				if ( isset( $aParams[ 'crudModule' ] ) && $aParams[ 'crudModule' ] ) {
 					$form->addButton( 'Cadastrar', 'cadastrar_online', 'btnCadastrar', null, null, true, false );
 				}
 			}
@@ -319,6 +294,25 @@ else
 *********************************                                 *******************************
 *************************************************************************************************
 */
+function generatorWhere( $where ,$aParams ,$dc ,$name ,$value ){
+	
+	if( isset($aParams[ 'caseSensitive' ]) &&  ! $aParams[ 'caseSensitive' ] ) {
+		if ( preg_match('/like|true/i',$dc->getField()->getProperty( 'partialKey' )) == 1 ) {
+			$where .= "(upper(" . $name . ") like upper('%" . $value . "%'))";
+		} else {
+			$where .= "(upper(" . $name . ")=upper('" . $value . "'))";
+		}
+	} else {
+		if ( $dc->getField()->getProperty( 'partialKey' ) == 'true' ) {
+			$where .= "(" . $name . " like '%" . $value . "%')";
+		} else {
+			$where .= "(" . $name . "='" . $value . "')";
+		}
+	}
+	
+	return $where;
+}
+
 // criar os campos no formulario
 function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 {
@@ -518,27 +512,22 @@ function setGrid( $res, $aParams, $form )
 	{
 		$aColumns = explode( ',', $aParams[ 'gridColumns' ] );
 
-		forEach( $aColumns as $k => $v )
-		{
-			@list( $field, $label, $width, $align ) = explode( "|", $v );
-			$align = isset( $align ) ? $align : 'l';
+		forEach( $aColumns as $k => $v ) {
 
-			if ( strtolower( $align ) == 'l' || strtolower( $align ) == 'left' )
-			{
-				$align = 'left';
+			$variables = explode( "|", $v );
+			$field = null;
+			$label = null;
+			$width = null;
+			$align = null;
+			
+			if( count($variables) == 2 ){
+				list( $field, $label ) = $variables;
+			} else {
+				list( $field, $label, $width, $align ) = $variables;
 			}
-			else if( strtolower( $align ) == 'r' || strtolower( $align ) == 'right' )
-			{
-				$align = 'right';
-			}
-			else if( strtolower( $align ) == 'c' || strtolower( $align ) == 'center' )
-			{
-				$align = 'center';
-			}
-			else
-			{
-				$align = 'left';
-			}
+			
+			$align = defineAlineGridColumn ($align);
+			
 			// se a coluna de link não existir ou for informada uma inválida, assumir a primeira coluna do gride
 			$aParams[ 'columnLink' ] = is_null( $aParams[ 'columnLink' ] ) ? $field : $aParams[ 'columnLink' ];
 
@@ -595,6 +584,25 @@ function setGrid( $res, $aParams, $form )
 		}
 	}
 }
+
+
+function defineAlineGridColumn ($align){
+	
+	$align = isset( $align ) ? $align : 'l';
+	
+	if ( strtolower( $align ) == 'l' || strtolower( $align ) == 'left' ) {
+		$align = 'left';
+	} else if( strtolower( $align ) == 'r' || strtolower( $align ) == 'right' ) {
+		$align = 'right';
+	} else if( strtolower( $align ) == 'c' || strtolower( $align ) == 'center' ) {
+		$align = 'center';
+	} else {
+		$align = 'left';
+	}
+	
+	return $align;
+}
+
 
 function gdOnDrawCell( $rowNum, $cell, $objColumn, $aData, $edit )
 {

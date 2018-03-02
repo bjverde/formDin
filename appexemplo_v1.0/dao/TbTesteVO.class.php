@@ -43,7 +43,7 @@ class TbTesteVO
 	private $nome_teste = null;
 	private $data_teste = null;
 	private $numero_teste = null;
-	public function TbTesteVO( $id=null, $nome_teste=null, $data_teste=null, $numero_teste=null )
+	public function __construct( $id=null, $nome_teste=null, $data_teste=null, $numero_teste=null )
 	{
 		$this->setId( $id );
 		$this->setNome_teste( $nome_teste );

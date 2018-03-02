@@ -9,11 +9,10 @@ class MunicipioDAO extends TPDOConnection {
 									 ,m.sit_ativo
 									 from municipio m';
 
-	public function municipioDAO() {
-	}
-	//--------------------------------------------------------------------------------
-	public static function selectCount(){
+
+	public static function selectCount($where=null){
 		$sql = 'select count(cod_municipio) as qtd from municipio';
+		$sql = $sql.( ($where)? ' where '.$where:'');		
 		$result = self::executeSql($sql);
 		return $result['QTD'][0];
 	}

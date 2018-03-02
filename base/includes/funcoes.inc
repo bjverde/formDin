@@ -40,48 +40,40 @@
 /*
 função para depuração. Exibe o modulo a linha e a variável/objeto solicitado
 */
-function d( $mixExpression,$strComentario='Debug', $boolExit=FALSE )
-{
+function d( $mixExpression,$strComentario='Debug', $boolExit=FALSE ) {
 	if (defined('DEBUGAR') && !DEBUGAR){
 	    return;
 	}
 	$arrBacktrace = debug_backtrace();
-	if( isset($_REQUEST['ajax']) && $_REQUEST['ajax'] )
-	{   echo '<pre>';
-		foreach ( $arrBacktrace[0] as $strAttribute => $mixValue )
-		{
-			echo $strAttribute .'='. $mixValue ."\n";
+	if( isset($_REQUEST['ajax']) && $_REQUEST['ajax'] ){
+	    echo '<pre>';
+		foreach ( $arrBacktrace[0] as $strAttribute => $mixValue ){
+		    if ( !is_array($mixValue) ){
+		        echo $strAttribute .'='. $mixValue ."\n";
+		    }
 		}
 		echo "---------------\n";
    		print_r( $mixExpression );
    		echo '</pre>';
 
-	}
-	else
-	{
+	} else {
 		echo "<script>try{fwUnblockUI();}catch(e){try{top.app_unblockUI();}catch(e){}}</script>";
 		echo "<fieldset style='text-align:left;'><legend><font color=\"#007000\">".$strComentario."</font></legend><pre>" ;
-		foreach ( $arrBacktrace[0] as $strAttribute => $mixValue )
-		{
-			if( is_string( $mixValue ) )
-			{
+		foreach ( $arrBacktrace[0] as $strAttribute => $mixValue ) {
+			if( is_string( $mixValue ) ) {
 				echo "<b>" . $strAttribute . "</b> ". $mixValue ."\n";
 			}
 		}
 		echo "</pre><hr />";
 		echo '<span style="color:red;"><blink>'.$strComentario.'</blink></span>'."\n";;
 		echo '<pre>';
-		if( is_object($mixExpression) )
-		{
+		if( is_object($mixExpression) ) {
     		var_dump( $mixExpression );
-		}
-		else
-		{
+		} else {
 		  print_r($mixExpression);
 		}
 		echo "</pre></fieldset>";
-		if ( $boolExit )
-		{
+		if ( $boolExit ) {
 			echo "<br /><font color=\"#700000\" size=\"4\"><b>D I E</b></font>";
 			exit();
 		}
@@ -658,70 +650,5 @@ function ulcase($variavel) {
 		} else
 			return;
 	}
-	// utilizada no sispass
-	function layer_select($var,$lista,$titulo="",$event_style="",$form="formulario",$tamanho) {
-		global ${$var};
-		if ( is_array($lista) ) {
-			list($k,$v) = each($lista);
-			// Detectamos se os dados so um array de resulatdo do Oracle
-			// convertemos numa lista para selectbox.
-			if ( is_array($v) and ($k=="CODIGO" || $k=="DESCRICAO" ) ) {
-				foreach($v as $i=>$val) {
-					$cod=$lista["CODIGO"][$i];
-					$lst[$cod] = $lista["DESCRICAO"][$i];
-				}
-				$lista = $lst;
-			}
-			$nlinhas = count($lista);
-			reset($lista);
-		}
-		if ($titulo) $title=$titulo;
-		else list($k,$title)=each($lista);
-		$maxlen=strlen($titulo)-1;
-		if ( eregi("MSIE",$_SERVER["HTTP_USER_AGENT"]) and is_array($_SESSION["menu"]) ) {
-			if ( is_array($lista) )
-				foreach ( $lista as $k=>$v ) {
-					if ( $maxlen<(strlen($v)-1) )
-						$maxlen=strlen($v)-1;
-					if ( $k == ${$var} )
-						$title0=$v;
-				}
-			$events=explode(" ",$event_style);
-			reset($events);
-			while ( list($k,$v) = each($events) ) {
-				if ( eregi("^onchange=.",$v) ) {
-				unset($events[$k]);
-				$v=eregi_replace("^onchange=['\"](javascript:)*","",$v);
-				$onchange=preg_replace("['\"]$","",$v);
-			}
-			if ( eregi("document",$v) and $k>0 ) {
-				$onchanges[]=$v;
-				unset($events[$k]);
-			}
-		}
-		if ( is_array($onchanges) ) $onchange.=implode(" ",$onchanges);
-		$event_style=implode(" ",$events);
-?>
-			<div id=<?=$var?>div style="position:absolute; visibility:hidden;z-index:1;text-align:left;"
-				onmouseover='HideItem(getRefToDiv("<?=$var?>div"));
-					ShowItem(document.<?=$form?>.<?=$var?>);'>
-			<table cellspacing=0 cellpadding=0><tr><td class="DADOS">
-				<input type=text name=<?=$var?>txt value='<?=($title0?$title0:$title)?>' class="IMAGEM" style="width:<?=$tamanho - 18?>px;text-indent:2px;" readonly>
-			</td><td><img src='imagens/botao.png'></td></tr></table></div>
-			<select name=<?=$var?>
-				onchange='document.<?=$form?>.<?=$var?>txt.value=this.options[this.selectedIndex].text;<?=$onchange?>'
-				<?=$event_style?>
-				style="visibility:visible;width:<?=$tamanho?>px;">
-<?php 		} else { ?>
-			<select name=<?=$var?> <?=$event_style?> >
-<?php 		}
-		if ( $titulo )  { ?>
-			<option value=""><?=$titulo."\n"?>
-<?php		}
-		if ( is_array($lista) ) reset($lista);
-		while ( is_array($lista) and list($k,$v) = each($lista) ) { ?>
-			<option value='<?=$k?>' <?=(${$var}==$k?"SELECTED":"")?>><?=$v."\n"?>
-<?php		} ?>
-		</select>
-<?php	}
+	
 ?>

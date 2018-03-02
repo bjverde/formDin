@@ -5,7 +5,7 @@ class MunicipioVO
 	private $cod_uf = null;
 	private $nom_municipio = null;
 	private $sit_ativo = null;
-	public function MunicipioVO( $cod_municipio=null, $cod_uf=null, $nom_municipio=null, $sit_ativo=null )
+	public function __construct( $cod_municipio=null, $cod_uf=null, $nom_municipio=null, $sit_ativo=null )
 	{
 		$this->setCod_municipio( $cod_municipio );
 		$this->setCod_uf( $cod_uf );

@@ -15,7 +15,7 @@ class Acesso_menuVO
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function Acesso_menuVO( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+	public function __construct( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
 	{
 		$this->setIdmenu( $idmenu );
 		$this->setIdmenu_pai( $idmenu_pai );

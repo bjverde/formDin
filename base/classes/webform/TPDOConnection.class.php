@@ -40,21 +40,18 @@
  */
 
 
-/*
-//http://www.phpro.org/tutorials/Introduction-to-PHP-PDO.html
-foreach(PDO::getAvailableDrivers() as $driver)
-{
-	  echo $driver.'<br />';
-}
-$result = $dbh->query($sql);
-foreach($dbh->errorInfo() as $error)
-	{
-	echo $error.'<br />';
-	}
+/**
+ * Sobre o PDO
+ * http://www.phpro.org/tutorials/Introduction-to-PHP-PDO.html
+ **/
 
-*/
-class TPDOConnection
-{
+
+if ( !defined ( 'DS' ) ) { define( 'DS', DIRECTORY_SEPARATOR ); }
+$currentl_dir = dirname ( __FILE__ );
+
+require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
+
+class TPDOConnection {
 	private static $error = null;
 	private static $instance = null;
 	private static $banco;
@@ -78,69 +75,68 @@ class TPDOConnection
 	}
 
 	//------------------------------------------------------------------------------------------
-	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null )
-	{
+	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null ) {
 
-		$configErrors = array();
 		self::setUtfDecode( $boolUtfDecode );
+		self::validateConnect( $configFile ,$boolRequired);
+		try {			
+			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
+			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+			
+		} catch( PDOException $e ){
+			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
+				. $e->getMessage() );
+			return false;
+		}
 
-		if ( self::getDataBaseName() )
-		{
+		return true;
+	}
+	
+	
+	private static function validateConnect($configFile ,$boolRequired) {
+		$configErrors = array();
+		$root = null;
+		
+		if ( self::getDataBaseName() ) {
 			$configFileDb = $configFile;
 
-			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) )
-			{
+			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) ) {
 				$configFileDb = is_null( $configFileDb ) ? 'config_conexao_' . self::getDataBaseName() . '.php' : $configFileDb;
 
-				if ( !file_exists( $configFileDb ) )
-				{
+				if ( !file_exists( $configFileDb ) ) {
 					$configFileDb = 'includes/' . $configFileDb;
 
-					if ( !file_exists( $configFileDb ) )
-					{
+					if ( !file_exists( $configFileDb ) ) {
 						$root = self::getRoot();
 						$configFileDb = $root . $configFileDb;
-
-						if ( file_exists( $configFileDb ) )
-						{
+						if ( file_exists( $configFileDb ) ) {
 							$configFile = $configFileDb;
 						}
-					}
-					else
-					{
+					} else {
 						$configFile = $configFileDb;
 					}
-				}
-				else
-				{
+				} else {
 					$configFile = $configFileDb;
 				}
-			}
-			else
-			{
+			} else {
 				$configFile = $configFileDb;
 			}
 		}
 
-		if ( is_null( $configFile ) || !file_exists( $configFile ) )
-		{
+		if ( is_null( $configFile ) || !file_exists( $configFile ) ) {
 			$configFile = is_null( $configFile ) ? 'config_conexao.php' : $configFile;
 
-			if ( !file_exists( $configFile ) )
-			{
+			if ( !file_exists( $configFile ) ) {
 				$configFile = 'includes/config_conexao.php';
 
                 // procurar o arquivo padrão de conexão em até 5 niveis acima
-                for( $i = 1; $i < 6; $i++ )
-                {
-                    if( file_exists( str_repeat( '../', $i ) . $configFile ) )
-                    {
+                for( $i = 1; $i < 6; $i++ ) {
+                    if( file_exists( str_repeat( '../', $i ) . $configFile ) ) {
                         $configFile = str_repeat( '../', $i ) . $configFile;
                         break;
                     }
                 }
-				if ( !file_exists( $configFile ) )
-				{
+				if ( !file_exists( $configFile ) ) {
 					$root = self::getRoot();
 					$configFile = $root . 'includes/config_conexao.php';
 				}
@@ -149,231 +145,174 @@ class TPDOConnection
 
         self::$configFile = $configFile;
 
-		if ( !file_exists( $configFile ) )
-		{
-			if ( $boolRequired )
-			{
-				self::showExemplo( 'MYSQL', array( "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!" ));
+		if ( !file_exists( $configFile ) ) {
+			if ( $boolRequired ) {
+				$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!";
+				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}
 			return false;
-		}
-		else
-		{
+		} else {
 			require_once( $configFile );
 
-			if ( !defined( 'USE_SESSION_LOGIN' ) )
-			{
+			if ( !defined( 'BANCO' ) ) {
+				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
+				self::showExemplo( DBMS_MYSQL, $configErrors );
+			}else{
+				self::$banco = strtoupper( BANCO );
+			}
+			
+			if ( !defined( 'DATABASE' ) ) {
+				$dataBaseName = self::getDataBaseName();
+				if( empty($dataBaseName) ){
+					$configErrors[] = 'Falta informar o DATABASE';
+					self::showExemplo( self::$banco, $configErrors );
+				}
+			}else{
+				self::setDataBaseName( DATABASE );
+			}
+			
+			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
+				self::setUtfDecode( UTF8_DECODE );
+			}			
+			
+			if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 				define( 'USE_SESSION_LOGIN', 0 );
 			}
 
-			if ( !defined( 'SENHA' ) )
-			{
+			if ( !defined( 'SENHA' ) ) {
 				define( 'SENHA', NULL );
 			}
 
-			if ( !defined( 'USUARIO' ) )
-			{
+			if ( !defined( 'USUARIO' ) ) {
 				define( 'USUARIO', NULL );
 			}
 
-			if ( !defined( 'HOST' ) )
-			{
-				$configErrors[] = 'Falta informar o HOST';
-			}
-
-			if ( !defined( 'BANCO' ) )
-			{
-				self::showExemplo( 'MYSQL', array( 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente!' ));
-			}
-
-			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) )
-			{
-				self::setUtfDecode( UTF8_DECODE );
-			}
-
-			self::$banco = strtoupper( BANCO );
-
-			if ( USE_SESSION_LOGIN )
-			{
-				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) )
-				{
+			if ( USE_SESSION_LOGIN ) {
+				if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
 					die ( 'Para utilizar usuário e senha do usuário logado,<br>defina as varíaveis de sessão:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
 				}
 				self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
 				self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
-			}
-			else
-			{
+			} else {
 				self::$password = SENHA;
 				self::$username = USUARIO;
 			}
-			switch( self::$banco )
-			{
-				case 'MYSQL':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '3306' );
-					}
-
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o DATABASE';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'MYSQL', $configErrors );
-					}
-					self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'POSTGRES':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '5432' );
-					}
-
-					if ( !self::getDataBaseName() )
-					{
-						$configErrors[] = 'Falta informar o nome do DATABASE';
-					}
-					if ( defined( 'SCHEMA' ) )
-					{
-						self::setSchema(SCHEMA);
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'POSTGRES', $configErrors );
-					}
-					self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'SQLITE':
-					$configErrors = null;
-
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'SQLITE', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'sqlite:' . DATABASE;
-					break;
-
-				//-----------------------------------------------------------------------
-				case 'ORACLE':
-					if ( !defined( 'PORT' ) )
-					{
-						define( 'PORT', '1521' );
-					}
-
-					if ( !defined( 'SERVICE_NAME' ) )
-					{
-						$configErrors[] = 'Falta informar o SERVICE_NAME';
-					}
-					self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
-					//self::$dsn = "oci:dbname=".SERVICE_NAME;
-					break;
-
-				//----------------------------------------------------------
-				case 'SQLSERVER':
-					if ( !defined( 'PORT' ) ) {
-						define( 'PORT', '1433' );
-					}
-
-					if ( !defined( 'DATABASE' ) ) {
-						$configErrors[] = 'Falta informar o DATABASE';
-					}
-
-					/**
-					 * Dica de Reinaldo A. Barr?to Junior para utilizar o sql server no linux
-					 * 
-					 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-					 * */
-					if (PHP_OS == "Linux") {
-						$driver = 'dblib';
-						self::$dsn = $driver.':host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-					} else {
-						$driver = 'sqlsrv';
-						self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
-					}
-					break;
-				//----------------------------------------------------------
-				case 'FIREBIRD':
-					$configErrors = null;
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'FIREBIRD', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'firebird:dbname='.DATABASE;
-					break;
-				//----------------------------------------------------------
-				case 'MSACCESS':
-				case 'ACCESS':
-					$configErrors = null;
-					if ( !defined( 'DATABASE' ) )
-					{
-						$configErrors[] = 'Falta informar o caminho do banco de dados.';
-					}
-
-					if ( count( $configErrors ) > 0 )
-					{
-						self::showExemplo( 'ACCESS', $configErrors );
-					}
-
-					if ( !file_exists( DATABASE ) )
-					{
-						$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
-					}
-					self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
-					break;
-
-				//----------------------------------------------------------
-				default:
-					$configErrors[] = 'Falta informar o BANCO';
-					break;
+			
+			if ( !self::simpleDBMS() ) {
+				if ( !defined( 'HOST' ) ) {
+					$configErrors[] = 'Falta informar o HOST';
+				}
+				
+				if( empty(self::$username) ){
+					$configErrors[] = 'Falta informar um usuario para logar no banco';
+				}
+				
+				if( empty(self::$password) ){
+					$configErrors[] = 'Falta informar uma senha para logar no banco';
+				}
+			}
+			
+			$configErrorsDsn = self::defineDsnPDO($configErrors);
+			if ( count( $configErrorsDsn ) > 0 ) {
+				$configErrors = $configErrors + $configErrorsDsn;
+			}
+		}
+		
+		
+		if ( count( $configErrors ) > 0 ) {
+			self::showExemplo( self::$banco, $configErrors );
+		}
+	}
+	
+	/***
+	 *  Data Base Management System is simple or not.
+	 *  Simple does not have user and password or host
+	 * @return boolean
+	 */
+	private static function simpleDBMS() {
+		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
+	}
+	
+	private static function defineDsnPDO($configErrors) {
+		switch( self::$banco ) {
+			case DBMS_MYSQL:
+				if ( !defined( 'PORT' ) ) {
+					define( 'PORT', '3306' );
+				}
+				self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+				break;
+			//-----------------------------------------------------------------------
+			case DBMS_POSTGRES :
+				if ( !defined( 'PORT' ) ) {
+					define( 'PORT', '5432' );
+				}
+				if ( defined( 'SCHEMA' ) ) {
+					self::setSchema(SCHEMA);
+				}
+				self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
+				break;
+			//-----------------------------------------------------------------------
+			case DBMS_SQLITE:
+				//self::validateFileDataBaseExists ( $configErrors );
+				self::$dsn = 'sqlite:' . DATABASE;
+				break;
+			//-----------------------------------------------------------------------
+			case DBMS_ORACLE:
+				if ( !defined( 'PORT' ) ) {  
+					define( 'PORT', '1521' );
+				}
+				self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
+				//self::$dsn = "oci:dbname=".SERVICE_NAME;
+				break;
 			//----------------------------------------------------------
-			}
+			case DBMS_SQLSERVER:
+				if ( !defined( 'PORT' ) ) {
+					define( 'PORT', '1433' );
+				}
+				/**
+				 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+				 * 
+				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
+				 * */
+				if (PHP_OS == "Linux") {
+					$driver = 'dblib';
+					self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+				} else {
+					$driver = 'sqlsrv';
+					self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
+				}
+				break;
+			//----------------------------------------------------------
+			case DBMS_FIREBIRD:
+				//self::validateFileDataBaseExists ( $configErrors );
+				self::$dsn = 'firebird:dbname='.DATABASE;
+				break;
+			//----------------------------------------------------------
+			case 'MSACCESS':
+			case DBMS_ACCESS:
+				//self::fileDataBaseExists ( $configErrors );
+				self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
+				break;
+			//----------------------------------------------------------
+			default:
+				$configErrors[] = 'Falta informar o sistema gerenciador de Banco de Dados: Access, Firebird, MySQL, Oracle, PostGresSQL, SQL Lite ou SQL Server';
+				break;
+			//----------------------------------------------------------
 		}
-
-		try
-		{
-			if ( count( $configErrors ) > 0 )
-			{
-				self::showExemplo( self::$banco, $configErrors );
-			}
-			self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
-			self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+		return $configErrors;
+	}
+	/**
+	 * @param configErrors
+	 */
+	 private static function validateFileDataBaseExists($configErrors) {
+		$dataBaseName = self::getDataBaseName();
+		$homeUrl = UrlHelper::homeUrl();
+		$path = $homeUrl.$dataBaseName;
+		$file_exists = file_exists( $path );
+		if ( !$file_exists ) {
+			$configErrors[] = 'Arquivo ' . DATABASE . ' não encontrado!';
+			self::showExemplo( self::$banco, $configErrors );
 		}
-		catch( PDOException $e )
-		{
-			self::$error = utf8_encode( 'Erro de conexão.<br><b>DNS:</b><br>' . self::$dsn . '<br><BR><b>Erro retornado:</b><br>'
-				. $e->getMessage() );
-			return false;
-		}
-
-		return true;
 	}
 
 	//-------------------------------------------------------------------------------------------
@@ -511,25 +450,20 @@ class TPDOConnection
 		self::$lastSql = $sql;
 
 		// verificar se a quantidade de parametros é igual a quantidade de variaveis
-		if ( strpos( $sql, '?' ) > 0 && is_array( $arrParams ) && count( $arrParams ) > 0 )
-		{
+		if ( strpos( $sql, '?' ) > 0 && is_array( $arrParams ) && count( $arrParams ) > 0 ) {
 			$qtd1 = substr_count( $sql, '?' );
 			$qtd2 = count( $arrParams );
 
-			if ( $qtd1 != $qtd2 )
-			{
+			if ( $qtd1 != $qtd2 ) {
 				self::$error = 'Quantidade de parametros diferente da quantidade utilizada na instrução sql.';
 				self::showError();
 				return false;
 			}
-		}
-		else
-		{
+		} else {
 			$arrParams = array();
 		}
 
-		try
-		{
+		try {
 			$stmt = self::getInstance()->prepare( $sql );
 
 			if ( !$stmt ) {
@@ -565,12 +499,21 @@ class TPDOConnection
 			        }else {
 			            return null;
 			        }
+			    // Para stored procedure do MySQL
+			    }else if( preg_match( '/^call/i', $sql ) > 0  ){
+			        $res = $stmt->fetchAll( $fetchMode );
+			        $res = self::processResult( $res, $fetchMode, $boolUtfDecode );
+			        
+			        if ( is_array( $res ) || is_object( $res ) ){
+			            return $res;
+			        }else {
+			            return null;
+			        }
 			    }
 			}
 			return $result;
 		}		
-		catch( PDOException $e )
-		{
+		catch( PDOException $e ) {
 			self::$error = $e->getMessage();
 			self::showError();
 		}
@@ -578,28 +521,21 @@ class TPDOConnection
 	}
 
 	//--------------------------------------------------------------------------
-	public static function prepare( $strSql )
-	{
-		if ( !self::getInstance() )
-		{
+	public static function prepare( $strSql ) {
+		if ( !self::getInstance() ) {
 			return false;
 		}
 		return self::getInstance()->prepare( $strSql );
 	}
 
 	//---------------------------------------------------------------------------
-	public static function encodeArray( $arrDados = null )
-	{
+	public static function encodeArray( $arrDados = null ) {
 		$result = array();
 
-		if ( is_array( $arrDados ) )
-		{
-			if ( is_string( key( $arrDados ) ) )
-			{
-				foreach( $arrDados as $k => $v )
-				{
-					if ( ! is_null( $v )  )
-					{
+		if ( is_array( $arrDados ) ) {
+			if ( is_string( key( $arrDados ) ) ) {
+				foreach( $arrDados as $k => $v ) {
+					if ( ! is_null( $v )  ) {
 						$arrDados[ $k ] = utf8_encode( $v );
 
 						// inverter campo data
@@ -768,20 +704,17 @@ class TPDOConnection
 	}
 
 	//------------------------------------------------------------------------------------------
-	public static function showExemplo( $banco, $arrErros = null )
-	{
+	public static function showExemplo( $banco, $arrErros = null ) {
 		$msgErro = '';
 
-		if ( is_array( $arrErros ) )
-		{
+		if ( is_array( $arrErros ) ) {
 			$msgErro = implode( '<br>', $arrErros );
 		}
 		$html = '<div style="padding:5px;border:1px solid red;background-color:lightyellow;width:400px;color:blue;">';
 		$html .= '<div style="border-bottom:1px solid blue;color:red;text-align:center;"><blink>' . $msgErro . '</blink></div>';
 
-		switch( $banco )
-		{
-			case 'ORACLE':
+		switch( $banco ) {
+			case DBMS_ORACLE:
 				$html .= "<center>Exemplo de configuração para conexão com banco ORACLE</center><br>
 					define('BANCO','ORACLE');<br>
 					define('HOST','192.168.0.132');<br>
@@ -789,10 +722,9 @@ class TPDOConnection
 					define('SERVICE_NAME','xe');<br>
 					define('USUARIO','root');<br>
 					define('SENHA','root');<br><br>";
-
 				break;
 
-			case 'MYSQL':
+			case DBMS_MYSQL:
 				$html .= "<center>Exemplo de configuração para conexão com banco MYSQL</center><br>
 					 define('BANCO','MYSQL');<br>
 					 define('HOST','192.168.0.132');<br>
@@ -802,7 +734,7 @@ class TPDOConnection
 					 define('SENHA','root');<br><br>";
 				break;
 
-			case 'POSTGRES':
+			case DBMS_POSTGRES:
 				$html .= "<center>Exemplo de configuração para conexão com banco POSTGRES</center><br>
 					 define('BANCO','POSTGRES');<br>
 					 define('HOST','192.168.0.132');<br>
@@ -813,17 +745,23 @@ class TPDOConnection
 					 define('SENHA','123456');<br><br>";
 				break;
 
-			case 'SQLITE':
+			case DBMS_SQLITE:
 				$html .= "<center>Exemplo de configuração para conexão com banco SQLITE</center><br>
-					 define('DATABASE','includes/exemplo.s3db');<br>";
+					 define('BANCO','SQLITE');<br>					 
+					 define('DATABASE','includes/exemplo.s3db');<br>
+					 define('UTF8_DECODE',0);<br>";
 				break;
 
-			case 'FIREBIRD':
+			case DBMS_FIREBIRD:
 				$html .= "<center>Exemplo de configuração para conexão com banco FIREBIRD</center><br>
-					 define('DATABASE','C://bd//DBTESTE.FDB');<br>";
+					 define('BANCO','FIREBIRD');<br>
+					 define('DATABASE','C://bd//DBTESTE.FDB');<br>;
+					 define('UTF8_DECODE',0);<br>
+					 define('USUARIO','SYSDBA');<br>
+					 define('SENHA','masterkey');<br>";
 				break;
 
-			case 'SQLSERVER':
+			case DBMS_SQLSERVER:
 				$html .= "<center>Exemplo de configuração para conexão com banco SQLSERVER</center><br>
 					 define('BANCO','SQLSERVER');<br>
 					 define('HOST','192.168.0.132');<br>
@@ -972,79 +910,58 @@ class TPDOConnection
 	}
 
 	//-----------------------------------------------------
-	public static function processResult( $result, $fetchMode, $boolUtfDecode = null )
-	{
+	public static function processResult( $result, $fetchMode, $boolUtfDecode = null ) {
 		$boolUtfDecode = ( $boolUtfDecode === null ? self::getUtfDecode() : $boolUtfDecode );
-
+			
 		// formato vo
-		if ( $result && $fetchMode == PDO::FETCH_OBJ )
-		{
-			if ( count( $result ) == 1 )
-			{
-				return $result[ 0 ];
+		if ($result && $fetchMode == PDO::FETCH_OBJ) {
+			if (count ( $result ) == 1) {
+				return $result [0];
 			}
 			return $result;
 		}
 		$res = null;
 
-		if ( is_array( $result ) )
-		{
-			foreach( $result as $key => $val )
-			{
-				foreach( $val as $k => $v )
-				{
-					if ( $boolUtfDecode )
-					{
+		if ( is_array( $result ) ) {
+			foreach( $result as $key => $val ) {
+				foreach( $val as $k => $v ) {
+					if ( $boolUtfDecode ) {
 						$k = strtoupper( utf8_decode( $k ) );
-					}
-					else
-					{
+					} else {
 						$k = strtoupper( $k );
 					}
 
 					// transformar tags"< >" em codigo html para não serem interpretadas
-					if ( is_string( $v ) )
-					{
-						if ( $boolUtfDecode )
-						{
+					if ( is_string( $v ) ) {
+						if ( $boolUtfDecode ) {
 							$res[ $k ][ $key ] = utf8_decode( $v );
-						}
-						else
-						{
+						} else {
 							$res[ $k ][ $key ] = $v;
 						}
 
 						//$res[ $k ][ $key ] = utf8_decode($v);
 						// consertar ordem do campo data
-						if ( preg_match( '/DAT/i', $k ) > 0 )
-						{
+						if ( preg_match( '/DAT/i', $k ) > 0 ) {
 							$delim = null;
 
-							if ( preg_match( '/\//', $v ) > 0 )
-							{
+							if ( preg_match( '/\//', $v ) > 0 ) {
 								$delim = '/';
-							}
-							else if( preg_match( '/-/', $v ) > 0 )
-							{
+							} else if( preg_match( '/-/', $v ) > 0 ) {
 								$delim = '-';
 							}
 
-							if ( $delim )
-							{
+							if ( $delim ) {
 								$aDataHora = explode( ' ', $v );
 								$aDMY = explode( $delim, $aDataHora[ 0 ] );
 								// verificar se está invertida
 								$delim = '/';
 
-								if ( preg_match( '/^[0-9]{4}/', $v ) )
-								{
+								if ( preg_match( '/^[0-9]{4}/', $v ) ) {
 									$res[ $k ][ $key ] = $aDMY[ 2 ] . $delim . $aDMY[ 1 ] . $delim . $aDMY[ 0 ] . ( isset( $aDataHora[ 1 ] ) ? ' ' . $aDataHora[ 1 ] : '' );
 								}
 							}
 						}
-					}
-					else
-					{
+					} else {
 						$res[ $k ][ $key ] = $v;
 					}
 				}
@@ -1052,76 +969,57 @@ class TPDOConnection
 		}
 		return $res;
 	}
-
-	public static function setUtfDecode( $boolNewValue = null )
-	{
+	public static function setUtfDecode( $boolNewValue = null ) {
 		self::$utfDecode = $boolNewValue;
 	}
-
-	public static function getUtfDecode()
-	{
+	public static function getUtfDecode() {
 		return is_null( self::$utfDecode ) ? true : self::$utfDecode;
 	}
-
-	public static function pgsqlLOBOpen( $oid = null, $mode = null )
-	{
-		return self::getInstance()->pgsqlLOBOpen( $oid, $mode );
+	public static function pgsqlLOBOpen($oid = null, $mode = null) {
+		return self::getInstance()->pgsqlLOBOpen ( $oid, $mode );
 	}
-
-	public static function pgsqlLOBCreate()
-	{
-		return self::getInstance()->pgsqlLOBCreate();
+	public static function pgsqlLOBCreate() {
+		return self::getInstance()->pgsqlLOBCreate ();
 	}
-
-	public static function setDieOnError( $boolNewValue = null )
-	{
+	public static function setDieOnError( $boolNewValue = null ) {
 		self::$dieOnError = $boolNewValue;
 	}
-
-	public static function getDieOnError()
-	{
+	public static function getDieOnError() {
 		return is_null( self::$dieOnError ) ? true : self::$dieOnError;
 	}
-
-	public static function setShowFormErrors( $boolNewValue = null )
-	{
+	public static function setShowFormErrors( $boolNewValue = null ) {
 		self::$showFormErrors = $boolNewValue;
 	}
-
-	public static function getShowFormErrors()
-	{
+	public static function getShowFormErrors() {
 		return is_null( self::$showFormErrors ) ? true : self::$showFormErrors;
 	}
-
-	public static function setDataBaseName( $strNewValue = null )
-	{
+	public static function setBanco( $banco = null ) {
+		self::$banco = $banco;
+	}	
+	public static function setDataBaseName( $strNewValue = null ) {
 		self::$databaseName = $strNewValue;
 	}
-
-	public static function getDataBaseName()
-	{
-		if ( !isset( self::$databaseName ) && !defined( 'DATABASE' ) )
-		{
-			return '';
+	public static function getDataBaseName() {
+		$retorno = null;
+		if ( isset( self::$databaseName ) ){
+			$retorno = self::$databaseName;
+		} else {
+			if ( defined( 'DATABASE' ) ){
+				$retorno = DATABASE;
+			}			
 		}
-		return is_null( self::$databaseName ) ? DATABASE : self::$databaseName;
+		return  $retorno;
 	}
-
-	public static function setMessage( $strNewValue = null )
-	{
+	public static function setMessage( $strNewValue = null) {
 		self::$message = $strNewValue;
 	}
-
-	public static function getMessage()
-	{
+	public static function getMessage() {
 		return self::$message;
 	}
-	public static function setSchema($newSchema=null)
-	{
+	public static function setSchema( $newSchema = null) {
 		self::$schema = $newSchema;
 	}
-	public static function getSchema()
-	{
+	public static function getSchema() {
 		return self::$schema;
 	}
 }

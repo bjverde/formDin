@@ -74,11 +74,14 @@ $frm->addGroupField('gp2','Selects Combinados');
 	$frm->combinarSelects('cod_uf_2','cod_municipio_2','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Municípios --','0','Nenhum Município Encontrado');
 $frm->closeGroup();
 
-$frm->addGroupField('gp3','Selects Ajax');
+$frm->addGroupField('gp4','Selects MultiSelect');
  	$frm->addSelectField('cod_estados_ajax'	,'Estado (ajax):');
 	$frm->addButton('Preencher',null,'btnMunAjax','lerMunAjax()',null,null,false);
 $frm->closeGroup();
 
+$frm->addGroupField('gp4','Selects MultiSelect');
+    $frm->addSelectField('estadomultiselect','Estado (todos):',true,'tb_uf',true,false,null,true,null,null,'-- selecione o Estado --',null,'COD_UF','NOM_UF',null,'cod_regiao')->addEvent('onChange','select_change(this)')->setToolTip('SELECT - esta campo MultiSelect utilize o CTRL ou shit para selecionar varias linhas.');
+$frm->closeGroup();
 
 $frm->setAction('Atualizar,Validar');
 $frm->addButton('Limpar',null,'btnLimpar','btnLimparClick()');

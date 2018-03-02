@@ -7,7 +7,7 @@ class Acesso_userVO
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function Acesso_userVO( $iduser=null, $login_user=null, $pwd_user=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+	public function __construct( $iduser=null, $login_user=null, $pwd_user=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
 	{
 		$this->setIduser( $iduser );
 		$this->setlogin_user( $login_user );

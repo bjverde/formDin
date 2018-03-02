@@ -48,12 +48,16 @@
  )
  */
 
-$frm = new TForm( 'Cadastro e Exibição de LOBS Salvando Caminho no Banco de Dados' );
+$fileFormat = 'jpg,txt,gif,doc,pdf,xls,odt';
+$fileSize = '2M';
+
+$frm = new TForm( 'Cadastro e Exibição de LOBS Salvando Caminho no Banco de Dados',500);
 $frm->addHiddenField( 'id_arquivo' ); // coluna chave da tabela
 $frm->addHtmlField( 'obs','<center><h3><b>Este exemplo mostra como salvar o endereço do arquivo no banco de dados e depois visualiza-lo.<br>Está utilizando o banco de dados bdApoio.s3db ( SQLite ) e a tabela é a tb_arquivo.</b></h3></center>' );
 
 // campo para upload do arquivo
-$frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, 'jpg,txt,gif,doc,pdf,xls,odt', '2M', 60, null, null,'aoAnexar' );
+$frm->addHtmlField('html1','Arquivo de tamanho maximo de '.$fileSize.' e nos formatos: '.$fileFormat,null,'Dica:',null,300)->setCss('border','1px dashed blue');
+$frm->addFileField( 'conteudo_arquivo', 'Anexo:', false, $fileFormat, $fileSize, 60, null, null,'aoAnexar' );
 
 // grupo para exibir as informações do arquivo selecionado
 $frm->addGroupField( 'gpDadosArquivo', 'Informações do Arquivo' )->setReadOnly(true);

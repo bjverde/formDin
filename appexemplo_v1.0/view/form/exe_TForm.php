@@ -61,18 +61,31 @@ $frm->addCheckField('cor','Cor:',false,'M=Marrom,B=Branca');
 
 $frm->addTextField('municipio','Municipio',60,false,60);
 
-$frm->setOnlineSearch('municipio','tb_municipio'
-	,'nom_municipio|Município:'
-	,false
-	,false
-	,true // se for encontrada apenas 1 opção fazer a seleção automaticamente
-	,'cod_municipio|Código,nom_municipio|Município'
-	,'NOM_MUNICIPIO|municipio'
-	,null
-	,null,null,null,null,null,null
-	,'funcaoRetorno()'
-	,null,null,null,null,null,null,null,null
-	,false // caseSensitive
+$frm->setOnlineSearch('municipio'
+    ,'tb_municipio'               //$strPackageFunction
+    ,'nom_municipio|Município:||||||like'   //$strFilterFields
+    ,false                        //$strAutoFillFilterField
+    ,false                        //$boolAutoStart
+	,true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
+    ,'cod_municipio|Código,nom_municipio|Município' //$strGridColumns - colunas que irão aparecer no grid
+    ,'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
+    ,'Pesquisar Municípios'       //$strWindowHeader -  Titulo da janela de pesquisa
+	,'Registros'                  //$strGridHeader   -  Titulo do Gride
+    ,'nom_municipio'              //$strFocusFieldName - Seta o Foco no campo definido 
+    ,null                         //$strWindowHeight
+    ,null                         //$strWindowWidth
+    ,null                         //$strSearchButtonLabel
+    ,null                         //$strFormFilterFields
+    ,'funcaoRetorno()'            //$strFunctionExecute
+    ,null                         //$intMaxRecord
+    ,null                         //$strClickCondition
+    ,null                         //$strMultiSelectKeyField
+    ,null                         //$strColumnLink
+    ,null                         //$arrSqls
+    ,null                         //$strBeforeExecuteJs
+    ,null                         //$boolDisableEnterKey
+    ,null                         //$strCrudModuleName
+    ,false                        //$boolCaseSensitive caseSensitive
 	);
 
 $frm->addLinkField('idLink1','Conteudo da Modal','Abre o conteudo da modal em nova janela',null,'index.php?modulo=view/form/exe_TForm.php','new');

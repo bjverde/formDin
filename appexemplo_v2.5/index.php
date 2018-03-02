@@ -47,7 +47,7 @@ define('DECIMAL_SEPARATOR',',');
 
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
+$app->setTitle('Sistema exemplo 2.5 com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
 $app->setVersionSystem('v 2.5.0.0');

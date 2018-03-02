@@ -36,14 +36,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_pedidoDAO extends TPDOConnection
-{
-	public function tb_pedidoDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
-	public static function insert( Tb_pedidoVO $objVo )
-	{
+class Tb_pedidoDAO extends TPDOConnection {
+	
+	public static function insert( Tb_pedidoVO $objVo )	{
 
 		if( $objVo->getId_pedido() != 'Novo' )
 		{

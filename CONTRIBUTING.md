@@ -40,3 +40,7 @@
   * Reference classes with {ClassName}
   * Reference instance methods with {ClassName::methodName}
   * Reference class methods with {ClassName.methodName}    
+
+## Example of commit message
+
+emoji BASE OR Example #ISSUE (FIXED) {ClassName.methodName} text comment

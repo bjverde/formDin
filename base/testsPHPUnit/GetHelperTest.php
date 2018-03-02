@@ -71,7 +71,21 @@ class GetHelperTest extends PHPUnit_Framework_TestCase {
         $_GET['x']= 10;
         $retorno = GetHelper::getDefaultValeu('y','padrao');
         $this->assertEquals($esperado, $retorno);
-    }    
+    }
+    
+    public function testGetDefaultValeu_GetBranco(){
+    	$esperado = 'padrao';
+    	$_GET['x']= '';
+    	$retorno = GetHelper::getDefaultValeu('x','padrao');
+    	$this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGetDefaultValeu_GetNull(){
+    	$esperado = 'padrao';
+    	$_GET['x']= null;
+    	$retorno = GetHelper::getDefaultValeu('x','padrao');
+    	$this->assertEquals($esperado, $retorno);
+    }
     
     public function testHas_true() {
         $_GET['parametro']='tem';

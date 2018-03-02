@@ -4,7 +4,7 @@ class Tipo_de_tiposVO
 	private $idtipo_de_tipos = null;
 	private $descricao = null;
 	private $sit_ativo = null;
-	public function Tipo_de_tiposVO( $idtipo_de_tipos=null, $descricao=null, $sit_ativo=null )
+	public function __construct( $idtipo_de_tipos=null, $descricao=null, $sit_ativo=null )
 	{
 		$this->setIdtipo_de_tipos( $idtipo_de_tipos );
 		$this->setDescricao( $descricao );

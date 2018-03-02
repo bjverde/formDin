@@ -1,10 +1,6 @@
 <?php
-class AutoridadeDAO extends TPDOConnection
-{
-	public function autoridadeDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class AutoridadeDAO extends TPDOConnection {
+
 	public static function insert( AutoridadeVO $objVo )
 	{
 		if( $objVo->getIdautoridade() )

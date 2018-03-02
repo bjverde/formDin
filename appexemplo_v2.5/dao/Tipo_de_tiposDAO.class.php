@@ -1,10 +1,6 @@
 <?php
-class Tipo_de_tiposDAO extends TPDOConnection
-{
-	public function tipo_de_tiposDAO()
-	{
-	}
-	//--------------------------------------------------------------------------------
+class Tipo_de_tiposDAO extends TPDOConnection {
+
 	public static function insert( Tipo_de_tiposVO $objVo )
 	{
 		if( $objVo->getIdtipo_de_tipos() )

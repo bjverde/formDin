@@ -171,7 +171,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getMixUpdateFields();
     	$this->assertEquals( $expected, $result);
     }
-    
+    //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtdNUll_arraysize() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
     	$this->tFormCreate->setListColunnsName($listColumnsName);
@@ -180,8 +180,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$size = count($resultArray);
     	$this->assertEquals( 4, $size);
     }
-
-    
+    //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtdNull_string() {
     	$expectedArray[] = '$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = '$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
@@ -196,7 +195,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
     }
-    
+    //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtd2_string() {
     	$expectedArray[] = TAB.TAB.'$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
@@ -211,41 +210,54 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
     }    
-    
+    //----------------------------------------------------------
     /**
-     * Tests TFormCreate->addGridPagination_jsScript()
+     * Tests TFormCreate->addGridPagination_jsScript_init()
      */
-    public function testAddGridPagination_jsScript_sizeArray() {
+    public function testAddGridPagination_jsScript_init_sizeArray() {
     	$this->tFormCreate->setFormFileName('xxx');        
-        $this->tFormCreate->addGridPagination_jsScript();
+    	$this->tFormCreate->addGridPagination_jsScript_init();
         $resultArray = $this->tFormCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 10, $size);
+        $this->assertEquals( 3, $size);
     }
-    
+    //----------------------------------------------------------
     /**
-     * Tests TFormCreate->addGridPagination_jsScript()
+     * Tests TFormCreate->addGridPagination_jsScript_init()
      */
-    public function testAddGridPagination_jsScript_string() {
-    	$expectedArray[] ='<script>'.EOL;
+    public function testAddGridPagination_jsScript_init_string() {
     	$expectedArray[] ='function init() {'.EOL;
-    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\');'.EOL;
+    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',{"whereGrid":""},true);'.EOL;
     	$expectedArray[] ='}'.EOL;
-    	$expectedArray[] ='// recebe fields e values do grid'.EOL;
-    	$expectedArray[] ='function alterar(f,v){'.EOL;
-    	$expectedArray[] =TAB.'var dados = fwFV2O(f,v);'.EOL;
-    	$expectedArray[] =TAB.'fwModalBox(\'Alteração\',\'index.php?modulo=xxx.php\',300,800,null,dados);'.EOL;
-    	$expectedArray[] ='}'.EOL;
-    	$expectedArray[] ='</script>'.EOL;
     	
     	$expectedString = trim( implode($expectedArray) );
     	
     	$this->tFormCreate->setFormFileName('xxx');
-    	$this->tFormCreate->addGridPagination_jsScript();
+    	$this->tFormCreate->addGridPagination_jsScript_init();
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
     }
-    
+    //----------------------------------------------------------
+    /**
+     * Tests TFormCreate->addGridPagination_jsScript_whereClauses
+     */
+    public function testaddGridPagination_jsScript_whereClauses_sizeArray() {
+        $this->tFormCreate->addGridPagination_jsScript_whereClauses();
+        $resultArray = $this->tFormCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals( 11, $size);
+    }
+    //----------------------------------------------------------
+    /**
+     * Tests TFormCreate->addVoIssetOrZero()
+     */
+    public function testAddVoIssetOrZero_sizeArray() {
+    	$this->tFormCreate->addVoIssetOrZero();
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 9, $size);
+    }    
+    //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SIMPLE() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
     	$this->tFormCreate->setListColunnsName($listColumnsName);
@@ -255,7 +267,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$size = count($resultArray);
     	$this->assertEquals( 19, $size);
     }
-    
+    //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SCREEN_PAGINATION() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
     	$this->tFormCreate->setListColunnsName($listColumnsName);
@@ -264,9 +276,9 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 43, $size);
+    	$this->assertEquals( 55, $size);
     }
-    
+    //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
     	$this->tFormCreate->setListColunnsName($listColumnsName);
@@ -275,6 +287,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 46, $size);
+    	$this->assertEquals( 58, $size);
     }
 }

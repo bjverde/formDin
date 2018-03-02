@@ -143,26 +143,22 @@ class TDAOCreate {
 		$this->addLine('');
 	}
 	//--------------------------------------------------------------------------------------
-	public function showVO($print=false)
-	{   $this->addLine('<?php');
-		$this->addLine("class ".ucfirst($this->getTableName())."VO");
-		$this->addLine("{");
-		$cols='';
-		$sets='';
-		foreach($this->getColumns() as $k => $v )
-		{
-			$this->addLine(TAB.'private $'.$v.' = null;');
-			$cols .= $cols == '' ? '' : ', ';
-			$cols .='$'.$v.'=null';
-			$sets .= ($k == 0 ? '' : EOL ).TAB.TAB.'$this->set'.ucFirst($v).'( $'.$v.' );';
-		}
-		$this->addLine(TAB.'public function '.ucfirst($this->getTableName()).'VO( '.$cols.' )');
-		$this->addLine(TAB.'{');
-		$this->addLine($sets);
-		$this->addLine(TAB.'}');
-		$this->addLine();
-		foreach($this->getColumns() as $k=>$v)
-		{
+	public function showVO($print=false){
+	    $this->addLine('<?php');
+	    $this->addLine("class ".ucfirst($this->getTableName())."VO {");
+	    $cols='';
+	    $sets='';
+	    foreach($this->getColumns() as $k => $v ){
+	        $this->addLine(TAB.'private $'.$v.' = null;');
+	        $cols .= $cols == '' ? '' : ', ';
+	        $cols .='$'.$v.'=null';
+	        $sets .= ($k == 0 ? '' : EOL ).TAB.TAB.'$this->set'.ucFirst($v).'( $'.$v.' );';
+	    }
+	    $this->addLine(TAB.'public function __construct( '.$cols.' ) {');
+	    $this->addLine($sets);
+	    $this->addLine(TAB.'}');
+	    $this->addLine();
+	    foreach($this->getColumns() as $k=>$v) {
 			$this->addLine(TAB.'function set'.ucfirst($v).'( $strNewValue = null )');
 			$this->addLine(TAB."{");
 			if( preg_match('/cpf|cnpj/i',$v) > 0 )
@@ -226,8 +222,9 @@ class TDAOCreate {
 	 * Create function for sql count rows of table
 	 **/
 	public function addSqlSelectCount() {
-		$this->addLine( TAB.'public static function selectCount(){');
+		$this->addLine( TAB.'public static function selectCount( $where=null ){');
 		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
+		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\');');
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
 		$this->addLine( TAB.'}');
@@ -238,7 +235,7 @@ class TDAOCreate {
 	 * Create function for sql select by id
 	 **/
 	public function addSqlSelectById() {
-	    $this->addLine( TAB.'public static function select( $id ) {');
+	    $this->addLine( TAB.'public static function selectById( $id ) {');
 	    $this->addLine( TAB.TAB.'$values = array($id);');
 	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect.\' where '.$this->getKeyColumnName().' = '.$this->charParam.'\';');
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql, $values );');
@@ -259,9 +256,8 @@ class TDAOCreate {
 	    $this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 	    $this->addLine( TAB.TAB.'return $result;');
 	    $this->addLine( TAB.'}');
-	}
-	
-	
+	}	
+	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql select all with Pagination
 	 **/
@@ -275,7 +271,7 @@ class TDAOCreate {
 		if($this->getDatabaseManagementSystem() == DBMS_MYSQL){
 		    $this->addLine( TAB.TAB.'.( \' LIMIT \'.$rowStart.\',\'.$rowsPerPage);');
 		}
-		if($this->getDatabaseManagementSystem() == DBMS_MSSQL){
+		if($this->getDatabaseManagementSystem() == DBMS_SQLSERVER){
 		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ROWS ONLY \');');
 		}		
 		$this->addBlankLine();
@@ -295,7 +291,7 @@ class TDAOCreate {
 	    $this->addLine(TAB.TAB.'$values = array(',false);
 	    $cnt=0;
 	    foreach($this->getColumns() as $k=>$v) {
-	        if( $v != $this->keyColumnName) {
+	        if( $v != strtolower($this->keyColumnName) ) {
 	            $this->addLine(( $cnt++==0 ? ' ' : TAB.TAB.TAB.TAB.TAB.TAB.',').' $objVo->get'.ucfirst($v).'() ');
 	        }
 	    }
@@ -303,15 +299,14 @@ class TDAOCreate {
 	    $this->addLine(TAB.TAB.'return self::executeSql(\'insert into '.$this->hasSchema().$this->getTableName().'(');
 	    $cnt=0;
 	    foreach($this->getColumns() as $k=>$v) {
-	        if( $v != $this->keyColumnName) {
+	        if( $v != strtolower($this->keyColumnName) ) {
 	            $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.( $cnt++==0 ? ' ' : ',').$v);
 	        }
 	    }
 	    //$this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values (?'.str_repeat(',?',count($this->getColumns())-1 ).')\', $values );');
 	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.') values ('.$this->getParams().')\', $values );');
 	    $this->addLine(TAB.'}');
-	}
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql update
@@ -340,8 +335,7 @@ class TDAOCreate {
 	    $param = $this->databaseManagementSystem == DBMS_POSTGRES ? '$'.($count+1) : '?';
 	    $this->addLine(TAB.TAB.TAB.TAB.TAB.TAB.TAB.TAB.'where '.$this->keyColumnName.' = '.$param.'\',$values);');
 	    $this->addLine(TAB.'}');
-	}
-	
+	}	
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql delete
@@ -352,7 +346,16 @@ class TDAOCreate {
 		$this->addLine( TAB.TAB.'return self::executeSql(\'delete from '.$this->hasSchema().$this->getTableName().' where '.$this->keyColumnName.' = '.$this->charParam.'\',$values);');
 		$this->addLine( TAB.'}');
 	}
-	
+	//--------------------------------------------------------------------------------------
+	/**
+	 * No PHP 7.1 classes com construtores ficou deprecated
+	 */
+	public function addConstruct() {
+	    if (version_compare(phpversion(), '5.6.0', '<')) {
+	        $this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
+	        $this->addLine(TAB.'}');
+	    }
+	}	
 	//--------------------------------------------------------------------------------------
 	public function showDAO($print=false) {
 		$this->lines=null;
@@ -360,10 +363,10 @@ class TDAOCreate {
 		$this->addLine('class '.ucfirst($this->getTableName()).'DAO extends TPDOConnection {');
 		$this->addBlankLine();
 		$this->addSqlVariable();
-		$this->addBlankLine();		
+		$this->addBlankLine();
+		
 		// construct
-		$this->addLine(TAB.'public function '.$this->getTableName().'DAO() {');
-		$this->addLine(TAB.'}');
+		$this->addConstruct();
 		
 		// Select Count
 		$this->addLine();
@@ -376,6 +379,7 @@ class TDAOCreate {
 		// fim select
 
 		if( $this->getWithSqlPagination() == true ){
+		    $this->addLine();
 		    $this->addSqlSelectAllPagination();
 		}
 		
@@ -423,28 +427,25 @@ class TDAOCreate {
 		
 	}
 	//--------------------------------------------------------------------------------------
-	public  function getParams()
-	{
-		$cols = $this->getColumns();
-		$qtd = count($cols);
-		$result = '';
-		for($i = 1; $i <= $qtd ; $i++)
-		{
-			if( $cols[$i-1] != $this->keyColumnName)
-			{
-				$result .= ($result=='') ? '' : ',';
-				if( $this->databaseManagementSystem == DBMS_POSTGRES )
-				{
-					$result .= '$'.$i;
-				}
-				else
-				{
-					$result.='?';
-				}
-			}
-		}
-		return $result;
-
+	/**
+	 * Returns the number of parameters
+	 * @return string
+	 */
+	public  function getParams() {
+	    $cols = $this->getColumns();
+	    $qtd = count($cols);
+	    $result = '';
+	    for($i = 1; $i <= $qtd ; $i++) {
+	        if( $cols[$i-1] != strtolower($this->keyColumnName) ){
+	            $result .= ($result=='') ? '' : ',';
+	            if( $this->databaseManagementSystem == DBMS_POSTGRES ){
+	                $result .= '$'.$i;
+	            } else {
+	                $result.='?';
+	            }
+	        }
+	    }
+	    return $result;
 	}
 	//--------------------------------------------------------------------------------------
 	public  function removeUnderline($txt) {

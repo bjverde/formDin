@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -42,6 +45,15 @@ if( $_REQUEST['subform'] == 1){
 	//die();
 }
 
+$html = '<br><br><b>Regra de Negocio</b>'
+		.'<br>o campo "nome subcadastro" é somente leitura. Ele será preenchido com o subformulario.';
+		
+
+$box3 = new TBox('bx3',300,100);
+$box3->add($html);
+$box3->setFlat(true);
+$box3->setPosition('tl');
+
 $frm = new TForm('Exemplo de Subcadastro',200);
 
 
@@ -50,8 +62,13 @@ $frm->addJsFile('prototype/window.js');
 $frm->addJsFile('prototype/window_ext.js');
 $frm->addCssFile('prototype/themes/alphacube.css');
   */
+
+$frm->addOutside($box3);
+//$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');;
+
 $frm->addTextField('nome','Nome:',null,false);
-$frm->addTextField('nome2','Nome Subcadastro:',null,false)->setReadOnly(true);
+//$frm->addTextField('nome2','Nome Subcadastro:',null,false)->setReadOnly(true);
+$frm->addTextField('nome2','Nome Subcadastro:',50,false,50,null,true,'Somente leitura','Abrir Subform',false);
 
 $frm->setonMaximize('onMaximize');
 $frm->addButton('Subcadastro',null,'btn3','subcadastro()');
@@ -64,7 +81,8 @@ function subcadastro()
 	// Passsando o campo nome como json. Se não for informado o valor, será lido do formulário
 	//fwModalBox('Este é um Subcadastro','../teste.php');
 	//fwModalBox('Este é um Subcadastro','www.globo.com.br');
-	fwModalBox('Este é um Subcadastro',app_index_file+'?view/form=exe_TForm.php',380,820,callbackModaBox,{'nome':''});
+	fwModalBox('Este é um Subcadastro',app_index_file+'?modulo=view/form/exe_TForm.php',380,820,callbackModaBox,{'nome':''});
+	//fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
 }
 
 /**

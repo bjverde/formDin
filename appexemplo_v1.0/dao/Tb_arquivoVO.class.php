@@ -5,14 +5,12 @@ class Tb_arquivoVO
 	private $nome_arquivo = null;
 	private $tempName = null;
 
-	public function Tb_arquivoVO( $id_arquivo=null, $nome_arquivo=null )
-	{
+	public function __construct( $id_arquivo=null, $nome_arquivo=null ) {
 		$this->setId_arquivo( $id_arquivo );
 		$this->setNome_arquivo( $nome_arquivo );
 	}
 	//--------------------------------------------------------------------------------
-	function setId_arquivo( $strNewValue = null )
-	{
+	function setId_arquivo( $strNewValue = null ) {
 		$this->id_arquivo = $strNewValue;
 	}
 	function getId_arquivo()
