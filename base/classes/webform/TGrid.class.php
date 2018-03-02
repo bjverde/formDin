@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if(!defined('ENCODINGS')){ define('ENCODINGS','ISO-8859-1'); }
+if(!defined('ENCODINGS')){ define('ENCODINGS','UTF-8'); }
 
 /**
 * @todo	- possibilitar exibir ou não o botão editar e excluir do grid-offline
@@ -1201,9 +1201,9 @@ class TGrid extends TTable
 		$excel = new TElement( 'a' );
 		$excel->setProperty( 'href', 'javascript: void(0)' );
 		$arrParams = null;
-		$arrParams[ 'id' ] 		= utf8_encode($this->getId());
+		$arrParams[ 'id' ] 		= $this->getId();
 		$arrParams[ 'head' ] 	= $this->getExcelHeadField('utf8');
-		$arrParams[ 'title' ] 	= utf8_encode($this->getTitle() );
+		$arrParams[ 'title' ] 	= $this->getTitle();
 		$excel->addEvent( 'onclick', 'fwExportGrid2Excel(' . json_encode( $arrParams ) . ')' );
 		$img = new TElement( 'img' );
 		$img->setProperty( 'src', $this->getBase() . 'imagens/planilha.png' );
@@ -2747,18 +2747,15 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------
-	public function getData2Excel()
-	{
+	public function getData2Excel() {
 		$res = $this->getData();
         //return $res;
 
-		if ( !is_array( $res ) )
-		{
+		if ( !is_array( $res ) ) {
 			return null;
 		}
 		$result = null;
-		if( $this->getExportFullData() )
-		{
+		if( $this->getExportFullData() ) {
 			return $res;
 		}
 		$keys =  array_keys($res);
@@ -2779,12 +2776,14 @@ class TGrid extends TTable
 			foreach( $this->getColumns() as $name => $objColumn )
 			{
 				$colName = strtoupper( $objColumn->getFieldName() );
-				if ( isset( $res[ $colName ] ) )
-				{
-					if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() )
-					{
+				if ( isset( $res[ $colName ] ) ) {
+					if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
 						$colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
-						$result[ utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+						if ( ENCODINGS == 'UTF-8'){
+							$result[ utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+						} else {
+							$result[ utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+						}						
 					}
 				}
 			}

@@ -43,22 +43,16 @@ error_reporting(0);
 include("excelwriter.inc.php");
 
 // checkboxes marcados no gride ( quando existir )
-if( isset( $_REQUEST['checkboxes'] ))
-{
+if( isset( $_REQUEST['checkboxes'] )){
 	$checkboxes = json_decode($_REQUEST['checkboxes']);
-}
-else
-{
+}else{
 	$checkboxes = json_decode("{}");
 }
 
 // radiobuttons marcados no gride ( quando existir )
-if( isset( $_REQUEST['radiobuttons'] ))
-{
+if( isset( $_REQUEST['radiobuttons'] )){
 	$radiobuttons = json_decode($_REQUEST['radiobuttons']);
-}
-else
-{
+}else{
 	$radiobuttons = json_decode("{}");
 }
 $grd = $_GET[ 'gride' ];
@@ -68,13 +62,11 @@ $tempFile = $dirBase . 'tmp/tmp_' .$grd .'_'.session_id().'.go';
 
 $dadosGride = null;
 $tituloGride = '';
-if ( file_exists( $tempFile ) )
-{
-	$dadosGride = unserialize( file_get_contents( $tempFile ) );
+if ( file_exists( $tempFile ) ) {
+	$fileContents = file_get_contents( $tempFile );
+	$dadosGride = unserialize( $fileContents );
 	$tituloGride = $_REQUEST[ 'title' ];
-}
-else
-{
+} else {
 	echo '<h2>Dados do gride não foram salvos em ' . $tempFile . '</h2>';
 	die();
 }
@@ -113,9 +105,9 @@ foreach( $_REQUEST as $k => $v )
 
 // criar os titulos das colunas
 $a=null;
-foreach($keys as $v )
-{
-	$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
+foreach($keys as $v ) {
+	//$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
+	$a[]  = htmlentities(utf8_encode($v),null,'UTF-8');
 }
 $excel->writeLine($a );
 
