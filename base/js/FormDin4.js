@@ -4230,7 +4230,7 @@ function fwSetFormWidth(w,frmId,showScrollBar)
 }
 
 /**
-Esta Função ? utilizada pela classe TGrid para exportar o dados.
+Esta Função é utilizada pela classe TGrid para exportar o dados.
 */
 function fwExportGrid2Excel(dadosJson)
 {
