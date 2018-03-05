@@ -45,17 +45,6 @@ class ArrayHelper {
 	        $array[$atributeName]=null;
 	    }
 	    return is_null($array[$atributeName])?null:trim($array[$atributeName]);
-	}
-	
-	static function has($array,$atributeName) {
-	    $value = null;
-	    if(isset($array[$atributeName])){
-	        $value = true;
-	    }else{
-	        $value = false;
-	    }
-	    return $value;
-	}
-	
+	}	
 }
 ?>
