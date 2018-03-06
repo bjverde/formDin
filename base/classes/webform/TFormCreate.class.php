@@ -108,6 +108,10 @@ class TFormCreate {
 		$this->listColumnsName = array_map('strtoupper', $listColumnsName);
 	}
 	//--------------------------------------------------------------------------------------
+	public function validateListColumnsName() {
+	 return isset($this->listColumnsName) && !empty($this->listColumnsName);
+	}
+	//--------------------------------------------------------------------------------------
 	public function setGridType($gridType) {
 		$gridType = ( !empty($gridType) ) ?$gridType : GRID_SIMPLE;
 	    $this->gridType = $gridType;
@@ -139,7 +143,7 @@ class TFormCreate {
 		$this->addBlankLine();
 		$this->addBlankLine();
 		$this->addLine('$frm->addHiddenField( $primaryKey );   // coluna chave da tabela');
-		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+		if( $this->validateListColumnsName() ){
 			foreach($this->listColumnsName as $key=>$value){
 				$this->addLine('$frm->addTextField(\''.$value.'\', \''.$value.'\',50,true);');
 			}
@@ -195,7 +199,7 @@ class TFormCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public function getMixUpdateFields() {
-		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+		if( $this->validateListColumnsName() ){
 			$mixUpdateFields = '$primaryKey.\'|\'.$primaryKey.\'';
 			foreach($this->listColumnsName as $key=>$value){
 				$mixUpdateFields = $mixUpdateFields.','.$value.'|'.$value;
@@ -208,10 +212,37 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	public function addColumnsGrid($qtdTab) {
 		$this->addLine($qtdTab.'$gride->addColumn($primaryKey,\'id\',50,\'center\');');
-		if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
+		if( $this->validateListColumnsName() ){
 			foreach($this->listColumnsName as $key=>$value){
 				$this->addLine($qtdTab.'$gride->addColumn(\''.$value.'\',\''.$value.'\',50,\'center\');');
 			}
+		}
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGetWhereGridParameters_fied($primeira, $campo, $qtdTabs) {
+		if( $primeira == TRUE ){
+			$this->addLine($qtdTabs.'\''.$campo.'\'=>$frm->get(\''.$campo.'\')');
+		} else {
+			$this->addLine($qtdTabs.',\''.$campo.'\'=>$frm->get(\''.$campo.'\')');
+		}
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGetWhereGridParametersFields( $qtdTabs ) {
+		foreach($this->listColumnsName as $key=>$value){
+			$this->addGetWhereGridParameters_fied(false, $value, $qtdTabs);
+		}
+	}	
+	//--------------------------------------------------------------------------------------
+	public function addGetWhereGridParameters() {
+		if( $this->validateListColumnsName() ){
+			$this->addBlankLine();
+			$this->addLine('function getWhereGridParameters(&$frm){');
+			$this->addLine(TAB.'$retorno = array(');
+			$this->addGetWhereGridParameters_fied(true, $this->getPrimaryKeyTable(), TAB.TAB);
+			$this->addgetWhereGridParametersFields(TAB.TAB);
+			$this->addLine(TAB.');');
+			$this->addLine(TAB.'return $retorno;');
+			$this->addLine('}');
 		}
 	}
 	//--------------------------------------------------------------------------------------
@@ -231,40 +262,37 @@ class TFormCreate {
 		$this->addLine('$frm->addHtmlField(\'gride\',$gride);');
 	}
 	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_init_parameter($frist, $parameter) {
+		$result = null;
+		if( $frist == TRUE ){
+			$result = '"'.$parameter.'":""';
+		} else {
+			$result = ',"'.$parameter.'":""';
+		}
+		return $result;
+	}	
+	//--------------------------------------------------------------------------------------
+	public function addGridPagination_jsScript_init_allparameters($qtdTab) {
+		if( $this->validateListColumnsName() ){
+			$line = null;
+			$line = $line.$this->addGridPagination_jsScript_init_parameter(true,$this->getPrimaryKeyTable());
+			foreach($this->listColumnsName as $key=>$value){
+				$line = $line.$this->addGridPagination_jsScript_init_parameter(false,$value);
+			}
+			$line = $qtdTab.'var Parameters = {'.$line.'};';
+			$this->addLine($line);
+		}
+	}
+	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript_init() {
 	    $this->addLine('function init() {');
-	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\',{"whereGrid":""},true);');
+	    $this->addGridPagination_jsScript_init_allparameters(TAB);
+	    $this->addLine(TAB.'fwGetGrid(\''.$this->formFileName.'\',\'gride\',Parameters,true);');
 	    $this->addLine('}');
-	}
-	//--------------------------------------------------------------------------------------
-	public function addGridPagination_jsScript_whereClauses() {
-	    $this->addLine('function whereClauses(whereGrid,attribute,isTrue,isFalse) {');
-	    $this->addLine(TAB.'var retorno = whereGrid;');
-	    $this->addLine(TAB.'if(attribute != null){');
-	    $this->addLine(TAB.TAB.'if(attribute != 0){');
-	    $this->addLine(TAB.TAB.TAB.'retorno = retorno+isTrue;');
-	    $this->addLine(TAB.TAB.'}');
-	    $this->addLine(TAB.'}else{');
-	    $this->addLine(TAB.TAB.'retorno = retorno+isFalse;');
-	    $this->addLine(TAB.'}');
-	    $this->addLine(TAB.'return retorno;');
-	    $this->addLine('}');
-	}
-	//--------------------------------------------------------------------------------------
-	public function addGridPagination_jsScript_buscar_columnsGrid($qtdTab) {
-	    if( isset($this->listColumnsName) && !empty($this->listColumnsName) ){
-	        foreach($this->listColumnsName as $key=>$value){
-	            $this->addLine($qtdTab.'var '.$value.' = jQuery("#'.$value.'").val();');
-	            $this->addLine($qtdTab.'whereGrid = whereClauses(whereGrid, '.$value.'," AND upper('.$value.') like \'%"+'.$value.'+"%\'",\'\');');
-	        }
-	    }
 	}
 	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript_buscar() {
 	    $this->addLine('function buscar() {');
-	    $this->addLine(TAB.'var whereGrid = " 1=1 ";');
-	    $this->addGridPagination_jsScript_buscar_columnsGrid(TAB);
-	    $this->addLine(TAB.'jQuery("#whereGrid").val(whereGrid);');
 	    $this->addLine(TAB.'init();');
 	    $this->addLine('}');
 	}
@@ -272,7 +300,6 @@ class TFormCreate {
 	public function addGridPagination_jsScript() {
 	    $this->addLine('<script>');
 	    $this->addGridPagination_jsScript_init();
-	    $this->addGridPagination_jsScript_whereClauses();
 	    $this->addGridPagination_jsScript_buscar();
 	    $this->addLine('</script>');
 	}
@@ -285,9 +312,11 @@ class TFormCreate {
 	        $this->addLine('$frm->show();');
 	        $this->addLine("?>");
 	    }else{
+	    	$this->addGetWhereGridParameters();
+	    	$this->addBlankLine();
 	    	$this->addLine('if( isset( $_REQUEST[\'ajax\'] )  && $_REQUEST[\'ajax\'] ) {');
 	    	$this->addLine(TAB.'$maxRows = ROWS_PER_PAGE;');
-	    	$this->addLine(TAB.'$whereGrid = $frm->get(\'whereGrid\');');
+	    	$this->addLine(TAB.'$whereGrid = getWhereGridParameters($frm);');
 	    	if($this->gridType == GRID_SQL_PAGINATION){	    	    
 	    		$this->addLine(TAB.'$page = PostHelper::get(\'page\');');
 	    		$this->addLine(TAB.'$dados = '.$this->daoTableRef.'::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);');
@@ -335,6 +364,16 @@ class TFormCreate {
 		$this->addLine('}');
 	}
 	//--------------------------------------------------------------------------------------
+	public function addButtons() {
+		if($this->gridType == GRID_SIMPLE){
+			$this->addLine('$frm->addButton(\'Buscar\', null, \'Buscar\', null, null, true, false);');
+		}else{
+			$this->addLine('$frm->addButton(\'Buscar\', null, \'btnBuscar\', \'buscar()\', null, true, false);');
+		}
+		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, false, false);');
+		$this->addLine('$frm->addButton(\'Limpar\', null, \'Limpar\', null, null, false, false);');
+	}
+	//--------------------------------------------------------------------------------------
 	public function showForm($print=false) {
 		$this->lines=null;
         $this->addLine('<?php');        
@@ -343,23 +382,16 @@ class TFormCreate {
         	$this->addBlankLine();
         	$this->addLine('$whereGrid = \' 1=1 \';');
         }
-        $this->addLine('$primaryKey = \''.$this->primaryKeyTable.'\';');
+        $this->addLine('$primaryKey = \''.$this->getPrimaryKeyTable().'\';');
         $this->addLine('$frm = new TForm(\''.$this->formTitle.'\',600);');
 		$this->addLine('$frm->setFlat(true);');
 		$this->addLine('$frm->setMaximize(true);');
-		if($this->gridType != GRID_SIMPLE){
-			$this->addLine('$frm->addHiddenField( \'whereGrid\' ); // campo para busca');
-		}
 		$this->addBasicaFields();
 		$this->addBlankLine();
-		if($this->gridType == GRID_SIMPLE){
-		    $this->addLine('$frm->addButton(\'Buscar\', null, \'Buscar\', null, null, true, false);');
-		}else{
-		    $this->addLine('$frm->addButton(\'Buscar\', null, \'btnBuscar\', \'buscar()\', null, true, false);');
-		}
-		$this->addLine('$frm->addButton(\'Salvar\', null, \'Salvar\', null, null, false, false);');
-		$this->addLine('$frm->addButton(\'Limpar\', null, \'Limpar\', null, null, false, false);');		
+		$this->addButtons();
+		$this->addBlankLine();
 		$this->addBasicaViewController();
+		$this->addBlankLine();
 		$this->addGrid();
         
         if( $print){

@@ -209,43 +209,115 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addColumnsGrid(TAB.TAB);
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
-    }    
-    //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addGridPagination_jsScript_init()
-     */
-    public function testAddGridPagination_jsScript_init_sizeArray() {
-    	$this->tFormCreate->setFormFileName('xxx');        
-    	$this->tFormCreate->addGridPagination_jsScript_init();
-        $resultArray = $this->tFormCreate->getLinesArray();
-        $size = count($resultArray);
-        $this->assertEquals( 3, $size);
     }
     //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addGridPagination_jsScript_init()
-     */
-    public function testAddGridPagination_jsScript_init_string() {
-    	$expectedArray[] ='function init() {'.EOL;
-    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',{"whereGrid":""},true);'.EOL;
-    	$expectedArray[] ='}'.EOL;
+    public function testAddGetWhereGridParameters_fiedFalse(){
+    	$expected = TAB.TAB.',\'NOME\'=>$frm->get(\'NOME\')'.EOL;    	
+    	$expectedString = trim( $expected );
     	
-    	$expectedString = trim( implode($expectedArray) );
+    	$this->tFormCreate->addGetWhereGridParameters_fied(FALSE, 'NOME', TAB.TAB);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGetWhereGridParameters_fiedTrue(){
+    	$expected = TAB.TAB.'\'NOME\'=>$frm->get(\'NOME\')'.EOL;
+    	$expectedString = trim( $expected );
     	
-    	$this->tFormCreate->setFormFileName('xxx');
-    	$this->tFormCreate->addGridPagination_jsScript_init();
+    	$this->tFormCreate->addGetWhereGridParameters_fied(TRUE, 'NOME', TAB.TAB);
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
     }
     //----------------------------------------------------------
     /**
-     * Tests TFormCreate->addGridPagination_jsScript_whereClauses
+     * Tests TFormCreate->addGetWhereGridParametersFields()
      */
-    public function testaddGridPagination_jsScript_whereClauses_sizeArray() {
-        $this->tFormCreate->addGridPagination_jsScript_whereClauses();
-        $resultArray = $this->tFormCreate->getLinesArray();
-        $size = count($resultArray);
-        $this->assertEquals( 11, $size);
+    public function testAddGetWhereGridParametersFields() {
+    	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParametersFields(TAB.TAB);
+    	
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGetWhereGridParameters() {
+    	$expectedArray[] = ''.EOL;
+    	$expectedArray[] = 'function getWhereGridParameters(&$frm){'.EOL;
+    	$expectedArray[] = TAB.'$retorno = array('.EOL;
+    	$expectedArray[] = TAB.TAB.'\'ID\'=>$frm->get(\'ID\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
+    	$expectedArray[] = TAB.');'.EOL;
+    	$expectedArray[] = TAB.'return $retorno;'.EOL;
+    	$expectedArray[] = '}'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParameters();
+    	
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGetWhereGridParameters_arraysize() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParameters();
+    	
+    	$resultArray = $this->tFormCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 10, $size);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_parameter_fristLineTRUE() {
+    	$parameter = 'ID';
+    	$expected  = '"'.$parameter.'":""';
+    	$result = $this->tFormCreate->addGridPagination_jsScript_init_parameter(true,$parameter);
+        $this->assertEquals( $expected  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_parameter_fristLineFALSE() {
+    	$parameter = 'NOME';
+    	$expected  = ',"'.$parameter.'":""';
+    	$result = $this->tFormCreate->addGridPagination_jsScript_init_parameter(false,$parameter);
+    	$this->assertEquals( $expected  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_allparameters() {
+    	$expected  = TAB.'var Parameters = {"ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
+    	$expectedString = trim( $expected );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGridPagination_jsScript_init_allparameters(TAB);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_string() {
+    	$expectedArray[] ='function init() {'.EOL;
+    	$expectedArray[] =TAB.'var Parameters = {"ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
+    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',Parameters,true);'.EOL;
+    	$expectedArray[] ='}'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->setFormFileName('xxx');
+    	$this->tFormCreate->addGridPagination_jsScript_init();
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
     }
     //----------------------------------------------------------
     /**
@@ -276,7 +348,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 55, $size);
+    	$this->assertEquals( 48, $size);
     }
     //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
@@ -287,6 +359,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 58, $size);
+    	$this->assertEquals( 51, $size);
     }
 }
