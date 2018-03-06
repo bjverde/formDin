@@ -216,20 +216,6 @@ class TDAOCreate {
 		}
 		$this->addLine($indent.'from '.$this->hasSchema().$this->getTableName().' \';' );
 	}
-	
-	//--------------------------------------------------------------------------------------
-	/***
-	 * Create function for sql count rows of table
-	 **/
-	public function addSqlSelectCount() {
-		$this->addLine( TAB.'public static function selectCount( $where=null ){');
-		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
-		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\');');
-		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
-		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
-		$this->addLine( TAB.'}');
-	}
-		
 	//--------------------------------------------------------------------------------------
 	/***
 	 * Create function for sql select by id
@@ -242,20 +228,32 @@ class TDAOCreate {
 		$this->addLine( TAB.TAB.'return $result;');
 	    $this->addLine( TAB.'}');
 	}
-	
+	//--------------------------------------------------------------------------------------
+	public function addProcessWhereGridParameters() {
+		$this->addLine( TAB.'private static function processWhereGridParameters( $whereGrid ) {');
+		$this->addLine( TAB.TAB.'$result = $whereGrid;');
+		$this->addLine( TAB.TAB.'if ( is_array() ){');
+		$this->addLine( TAB.TAB.TAB.'$where = \' 1=1 \';');
+		foreach($this->getColumns() as $k=>$v) {
+			$this->addLine( TAB.TAB.TAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\''.strtoupper($v).'\'],\' AND '.strtoupper($v).' like "%\'.$whereGrid[\''.strtoupper($v).'\'].\'%" \',null) );' );
+		}
+		$this->addLine( TAB.TAB.TAB.'$result = $where;');
+		$this->addLine( TAB.TAB.'}');
+		$this->addLine( TAB.TAB.'return $result;');
+		$this->addLine( TAB.'}');
+	}
 	//--------------------------------------------------------------------------------------
 	/***
-	 * Create function for sql select all 
+	 * Create function for sql count rows of table
 	 **/
-	public function addSqlSelectAll() {
-	    $this->addLine( TAB.'public static function selectAll( $orderBy=null, $where=null ) {');
-	    $this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
-	    $this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
-	    $this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
-	    $this->addBlankLine();
-	    $this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
-	    $this->addLine( TAB.TAB.'return $result;');
-	    $this->addLine( TAB.'}');
+	public function addSqlSelectCount() {
+		$this->addLine( TAB.'public static function selectCount( $where=null ){');
+		$this->addLine( TAB.TAB.'$where = self::processWhereGridParameters($where);');
+		$this->addLine( TAB.TAB.'$sql = \'select count('.$this->getKeyColumnName().') as qtd from '.$this->hasSchema().$this->getTableName().'\';' );
+		$this->addLine( TAB.TAB.'$sql = $sql.( ($where)? \' where \'.$where:\'\');');
+		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
+		$this->addLine( TAB.TAB.'return $result[\'QTD\'][0];');
+		$this->addLine( TAB.'}');
 	}	
 	//--------------------------------------------------------------------------------------
 	/***
@@ -264,6 +262,7 @@ class TDAOCreate {
 	public function addSqlSelectAllPagination() {
 		$this->addLine( TAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {');
 		$this->addLine( TAB.TAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);');
+		$this->addLine( TAB.TAB.'$where = self::processWhereGridParameters($where);');
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
 		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
@@ -274,6 +273,21 @@ class TDAOCreate {
 		if($this->getDatabaseManagementSystem() == DBMS_SQLSERVER){
 		    $this->addLine( TAB.TAB.'.( \' OFFSET \'.$rowStart.\' ROWS FETCH NEXT \'.$rowsPerPage.\' ROWS ONLY \');');
 		}		
+		$this->addBlankLine();
+		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
+		$this->addLine( TAB.TAB.'return $result;');
+		$this->addLine( TAB.'}');
+	}
+	//--------------------------------------------------------------------------------------
+	/***
+	 * Create function for sql select all
+	 **/
+	public function addSqlSelectAll() {
+		$this->addLine( TAB.'public static function selectAll( $orderBy=null, $where=null ) {');
+		$this->addLine( TAB.TAB.'$where = self::processWhereGridParameters($where);');
+		$this->addLine( TAB.TAB.'$sql = self::$sqlBasicSelect');
+		$this->addLine( TAB.TAB.'.( ($where)? \' where \'.$where:\'\')');
+		$this->addLine( TAB.TAB.'.( ($orderBy) ? \' order by \'.$orderBy:\'\');');
 		$this->addBlankLine();
 		$this->addLine( TAB.TAB.'$result = self::executeSql($sql);');
 		$this->addLine( TAB.TAB.'return $result;');
@@ -312,8 +326,7 @@ class TDAOCreate {
 	 * Create function for sql update
 	 **/
 	public function addSqlUpdate() {
-	    $this->addLine(TAB.'public static function update ( '.ucfirst($this->tableName).'VO $objVo )');
-	    $this->addLine(TAB.'{');
+	    $this->addLine(TAB.'public static function update ( '.ucfirst($this->tableName).'VO $objVo ) {');
 	    $this->addLine(TAB.TAB.'$values = array(',false);
 	    $count=0;
 	    foreach($this->getColumns() as $k=>$v) {
@@ -367,16 +380,17 @@ class TDAOCreate {
 		
 		// construct
 		$this->addConstruct();
-		
-		// Select Count
-		$this->addLine();
-		$this->addSqlSelectCount();
-		// fim Select Count
+
 		
 		// select by Id
 		$this->addLine();
 		$this->addSqlSelectById();
 		// fim select
+		
+		// Select Count
+		$this->addLine();
+		$this->addSqlSelectCount();
+		// fim Select Count	
 
 		if( $this->getWithSqlPagination() == true ){
 		    $this->addLine();
