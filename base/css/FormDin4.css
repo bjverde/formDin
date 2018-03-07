@@ -85,7 +85,10 @@ body
 	background:#ddd url(../imagens/fwbuttonbg.gif) left center repeat-x;
 	position:relative;
 }
-
+.fwTitleBarButtonArea {
+	width:60px;
+	white-space:nowrap;
+}
 .fwButton
 {
 	font-family:Arial,Helvetica, Geneva, Sans-Serif;
