@@ -166,6 +166,14 @@ class TFormCreate {
 	    $this->addLine(TAB.'break;');
 	}
 	//--------------------------------------------------------------------------------------
+	private function addBasicaViewController_buscar() {
+		$this->addLine();
+		$this->addLine(TAB.'case \'Buscar\':');
+		$this->addGetWhereGridParametersArray( TAB.TAB );
+		$this->addLine(TAB.TAB.'$whereGrid = $retorno;');
+		$this->addLine(TAB.'break;');
+	}
+	//--------------------------------------------------------------------------------------
 	private function addBasicaViewController_limpar() {
 	    $this->addLine();
 	    $this->addLine(TAB.'case \'Limpar\':');
@@ -193,6 +201,9 @@ class TFormCreate {
 		$this->addLine('$acao = isset($acao) ? $acao : null;');
 		$this->addLine('switch( $acao ) {');
 		$this->addBasicaViewController_salvar();
+		if($this->gridType == GRID_SIMPLE){
+			$this->addBasicaViewController_buscar();
+		}
 		$this->addBasicaViewController_limpar();
 		$this->addBasicaViewController_gdExcluir();
 		$this->addLine('}');
@@ -231,16 +242,20 @@ class TFormCreate {
 		foreach($this->listColumnsName as $key=>$value){
 			$this->addGetWhereGridParameters_fied(false, $value, $qtdTabs);
 		}
-	}	
+	}
+	//--------------------------------------------------------------------------------------
+	public function addGetWhereGridParametersArray( $qtdTabs ) {
+		$this->addLine($qtdTabs.'$retorno = array(');
+		$this->addGetWhereGridParameters_fied(true, $this->getPrimaryKeyTable(), $qtdTabs.TAB.TAB);
+		$this->addgetWhereGridParametersFields($qtdTabs.TAB.TAB);
+		$this->addLine($qtdTabs.');');
+	}
 	//--------------------------------------------------------------------------------------
 	public function addGetWhereGridParameters() {
 		if( $this->validateListColumnsName() ){
 			$this->addBlankLine();
 			$this->addLine('function getWhereGridParameters(&$frm){');
-			$this->addLine(TAB.'$retorno = array(');
-			$this->addGetWhereGridParameters_fied(true, $this->getPrimaryKeyTable(), TAB.TAB);
-			$this->addgetWhereGridParametersFields(TAB.TAB);
-			$this->addLine(TAB.');');
+			$this->addGetWhereGridParametersArray( TAB );
 			$this->addLine(TAB.'return $retorno;');
 			$this->addLine('}');
 		}
@@ -248,7 +263,7 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	private function addBasicaGrid() {
 		$this->addBlankLine();
-		$this->addLine('$dados = '.$this->daoTableRef.'::selectAll($primaryKey);');
+		$this->addLine('$dados = '.$this->daoTableRef.'::selectAll($primaryKey,$whereGrid);');
 		$this->addLine($this->getMixUpdateFields());
 		$this->addLine('$gride = new TGrid( \'gd\'        // id do gride');
 		$this->addLine('				   ,\'Gride\'     // titulo do gride');
@@ -352,18 +367,6 @@ class TFormCreate {
 	    }
 	}
 	//--------------------------------------------------------------------------------------
-	public function addVoIssetOrZero() {
-		$this->addLine('function voIssetOrZero($attribute,$isTrue,$isFalse){');
-		$this->addLine(TAB.'$retorno = $isFalse;');
-		$this->addLine(TAB.'if(isset($attribute) && ($attribute<>\'\') ){');
-		$this->addLine(TAB.TAB.'if( $attribute<>\'0\' ){');
-		$this->addLine(TAB.TAB.TAB.'$retorno = $isTrue;');
-		$this->addLine(TAB.TAB.'}');
-		$this->addLine(TAB.'}');
-		$this->addLine(TAB.'return $retorno;');
-		$this->addLine('}');
-	}
-	//--------------------------------------------------------------------------------------
 	public function addButtons() {
 		if($this->gridType == GRID_SIMPLE){
 			$this->addLine('$frm->addButton(\'Buscar\', null, \'Buscar\', null, null, true, false);');
@@ -378,8 +381,6 @@ class TFormCreate {
 		$this->lines=null;
         $this->addLine('<?php');        
         if($this->gridType == GRID_SIMPLE){
-        	$this->addVoIssetOrZero();
-        	$this->addBlankLine();
         	$this->addLine('$whereGrid = \' 1=1 \';');
         }
         $this->addLine('$primaryKey = \''.$this->getPrimaryKeyTable().'\';');
@@ -399,8 +400,7 @@ class TFormCreate {
 		}else{
 			return $this->getLinesString();
 		}
-	}
-    
+	}    
 	//---------------------------------------------------------------------------------------
 	/**
 	 * @codeCoverageIgnore

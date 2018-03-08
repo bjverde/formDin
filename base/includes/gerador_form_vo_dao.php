@@ -96,11 +96,13 @@ if(!$frm->get('diretorio')) {
 }
 
 function  validateBdType(&$frm){
-	$result = false;
+	$result = true;
 	if( $frm->get('TPGRID') == GRID_SQL_PAGINATION){
 		$TPBANCO = $frm->get('TPBANCO');
 		if( ($TPBANCO == DBMS_MYSQL) || ($TPBANCO == DBMS_SQLSERVER) ){
 			$result = true;
+		}else{
+			$result = false;
 		}
 	}
 	return $result;

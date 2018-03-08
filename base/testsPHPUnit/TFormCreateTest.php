@@ -251,10 +251,10 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$expectedArray[] = ''.EOL;
     	$expectedArray[] = 'function getWhereGridParameters(&$frm){'.EOL;
     	$expectedArray[] = TAB.'$retorno = array('.EOL;
-    	$expectedArray[] = TAB.TAB.'\'ID\'=>$frm->get(\'ID\')'.EOL;
-    	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
-    	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
-    	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.'\'ID\'=>$frm->get(\'ID\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
     	$expectedArray[] = TAB.');'.EOL;
     	$expectedArray[] = TAB.'return $retorno;'.EOL;
     	$expectedArray[] = '}'.EOL;
@@ -318,17 +318,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGridPagination_jsScript_init();
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
-    }
-    //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addVoIssetOrZero()
-     */
-    public function testAddVoIssetOrZero_sizeArray() {
-    	$this->tFormCreate->addVoIssetOrZero();
-    	$resultArray = $this->tFormCreate->getLinesArray();
-    	$size = count($resultArray);
-    	$this->assertEquals( 9, $size);
-    }    
+    }   
     //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SIMPLE() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
