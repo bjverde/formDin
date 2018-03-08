@@ -179,7 +179,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     public function testAddProcessWhereGridParameters_stringArray(){
     	$expectedArray[] = TTAB.'private static function processWhereGridParameters( $whereGrid ) {'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'$result = $whereGrid;'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'if ( is_array() ){'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'if ( is_array($whereGrid) ){'.TEOL;
     	$expectedArray[] = TTAB.TTAB.TTAB.'$where = \' 1=1 \';'.TEOL;
     	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'NUMERO\'],\' AND NUMERO like "%\'.$whereGrid[\'NUMERO\'].\'%" \',null) );'.TEOL;
     	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'ESTADO\'],\' AND ESTADO like "%\'.$whereGrid[\'ESTADO\'].\'%" \',null) );'.TEOL;

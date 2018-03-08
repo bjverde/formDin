@@ -232,7 +232,7 @@ class TDAOCreate {
 	public function addProcessWhereGridParameters() {
 		$this->addLine( TAB.'private static function processWhereGridParameters( $whereGrid ) {');
 		$this->addLine( TAB.TAB.'$result = $whereGrid;');
-		$this->addLine( TAB.TAB.'if ( is_array() ){');
+		$this->addLine( TAB.TAB.'if ( is_array($whereGrid) ){');
 		$this->addLine( TAB.TAB.TAB.'$where = \' 1=1 \';');
 		foreach($this->getColumns() as $k=>$v) {
 			$this->addLine( TAB.TAB.TAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\''.strtoupper($v).'\'],\' AND '.strtoupper($v).' like "%\'.$whereGrid[\''.strtoupper($v).'\'].\'%" \',null) );' );
@@ -381,6 +381,7 @@ class TDAOCreate {
 		// construct
 		$this->addConstruct();
 
+		$this->addProcessWhereGridParameters();
 		
 		// select by Id
 		$this->addLine();
@@ -392,7 +393,7 @@ class TDAOCreate {
 		$this->addSqlSelectCount();
 		// fim Select Count	
 
-		if( $this->getWithSqlPagination() == true ){
+		if( $this->getWithSqlPagination() == GRID_SQL_PAGINATION ){
 		    $this->addLine();
 		    $this->addSqlSelectAllPagination();
 		}

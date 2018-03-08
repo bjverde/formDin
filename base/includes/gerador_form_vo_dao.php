@@ -73,7 +73,7 @@ $frm->addGroupField('gpxFormPag','Form com paginação');
     $frm->addSelectField('TPGRID','Escolha o tipo de Gride:',true,$gridType,null,null,'0')->addEvent('onChange','select_change(this)');
     $frm->addGroupField('gpxDBMS');
     $dbType = array(DBMS_MYSQL=>'MySQL',DBMS_SQLSERVER=>'MS SQL SERVER');
-    $frm->addSelectField('TPBANCO','Escolha o tipo de Bando de dados:',null,$dbType,null,null,'0');
+    $frm->addSelectField('TPBANCO','Escolha o tipo de Banco de Dados:',null,$dbType,null,null,'0');
     $frm->closeGroup();
 $frm->closeGroup();
 
@@ -95,62 +95,74 @@ if(!$frm->get('diretorio')) {
     $frm->set('diretorio','dao/');
 }
 
+function  validateBdType(&$frm){
+	$result = false;
+	if( $frm->get('TPGRID') == GRID_SQL_PAGINATION){
+		$TPBANCO = $frm->get('TPBANCO');
+		if( ($TPBANCO == DBMS_MYSQL) || ($TPBANCO == DBMS_SQLSERVER) ){
+			$result = true;
+		}
+	}
+	return $result;
+}
+
 $acao = ( isset($acao) ) ? $acao : '';
 switch( $acao ) {
     case 'Gerar':
-        if( $frm->validate() ) {
-            $diretorio = str_replace('//','/',$frm->get('diretorio').'/');
-            @mkdir($diretorio,"775",true);
-            if( ! file_exists( $diretorio ) ) {
-                $frm->setMessage('Diretório '.$diretorio.' não existe!');
-                break;
-            }
-            $txt = preg_replace('/'.chr(13).'/',',',$frm->get('colunas'));
-            $txt = preg_replace('/'.chr(10).'/',',',$txt);
-            $txt = preg_replace('/\,\,/',',',$txt);
-            $txt = preg_replace('/ /','',$txt);
-            $txt = preg_replace('/\,\,/',',',$txt);
-            if( substr($txt,-1) ==',') {
-                $txt=substr($txt,0,strlen($txt)-1);
-            }
-            $listColumns = explode(',',$txt);
-            $coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];
-            $TPGRID  = $frm->get('TPGRID');
-            $TPBANCO = $frm->get('TPBANCO');
-            
-            $gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
-            foreach($listColumns as $k=>$v) {
-                $gerador->addColumn($v);
-            }
-            $showSchema = $frm->get('sit_const_schema');
-            $gerador->setShowSchema($showSchema);
-            if( $TPGRID == GRID_SQL_PAGINATION){
-                $gerador->setWithSqlPagination(TRUE);
-                $gerador->setDatabaseManagementSystem($TPBANCO);
-            }else{
-                $gerador->setWithSqlPagination(FALSE);
-            }
-            $gerador->saveVO();
-            $gerador->saveDAO();
-            
-            $diretorio = str_replace('//','/',$frm->get('form_dir').'/');
-            @mkdir($diretorio,"775",true);
-            if( ! file_exists( $diretorio ) ) {
-                $frm->setMessage('Diretório '.$diretorio.' não existe!');
-                break;
-            }
-            
-            $geradorForm = new TFormCreate();
-            $geradorForm->setFormTitle( $frm->get('form_title') );
-            $geradorForm->setFormPath( $diretorio );
-            $geradorForm->setFormFileName($frm->get('form_name'));
-            $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
-            $geradorForm->setTableRef($frm->get('tabela'));
-            $geradorForm->setListColunnsName($listColumns);
-            $geradorForm->setGridType($TPGRID);
-            $geradorForm->saveForm();
-            
-            $frm->setMessage('Fim');
+    	if( $frm->validate() ) {
+    		if ( !validateBdType($frm) ) {
+    			$frm->setMessage('Informe o tipo de Banco da Dados');
+    			$frm->setFocusField('TPBANCO');
+    		}else{
+	            $diretorio = str_replace('//','/',$frm->get('diretorio').'/');
+	            @mkdir($diretorio,"775",true);
+	            if( ! file_exists( $diretorio ) ) {
+	                $frm->setMessage('Diretório '.$diretorio.' não existe!');
+	                break;
+	            }
+	            $txt = preg_replace('/'.chr(13).'/',',',$frm->get('colunas'));
+	            $txt = preg_replace('/'.chr(10).'/',',',$txt);
+	            $txt = preg_replace('/\,\,/',',',$txt);
+	            $txt = preg_replace('/ /','',$txt);
+	            $txt = preg_replace('/\,\,/',',',$txt);
+	            if( substr($txt,-1) ==',') {
+	                $txt=substr($txt,0,strlen($txt)-1);
+	            }
+	            $listColumns = explode(',',$txt);
+	            $coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];
+	            $TPGRID  = $frm->get('TPGRID');
+	            $TPBANCO = $frm->get('TPBANCO');
+	            
+	            $gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
+	            foreach($listColumns as $k=>$v) {
+	                $gerador->addColumn($v);
+	            }
+	            $showSchema = $frm->get('sit_const_schema');
+	            $gerador->setShowSchema($showSchema);
+	            $gerador->setWithSqlPagination($TPGRID);
+	            $gerador->setDatabaseManagementSystem($TPBANCO);            
+	            $gerador->saveVO();
+	            $gerador->saveDAO();
+	            
+	            $diretorio = str_replace('//','/',$frm->get('form_dir').'/');
+	            @mkdir($diretorio,"775",true);
+	            if( ! file_exists( $diretorio ) ) {
+	                $frm->setMessage('Diretório '.$diretorio.' não existe!');
+	                break;
+	            }
+	            
+	            $geradorForm = new TFormCreate();
+	            $geradorForm->setFormTitle( $frm->get('form_title') );
+	            $geradorForm->setFormPath( $diretorio );
+	            $geradorForm->setFormFileName($frm->get('form_name'));
+	            $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
+	            $geradorForm->setTableRef($frm->get('tabela'));
+	            $geradorForm->setListColunnsName($listColumns);
+	            $geradorForm->setGridType($TPGRID);
+	            $geradorForm->saveForm();
+	            
+	            $frm->setMessage('Fim');
+    		}
         }
         break;
 }
