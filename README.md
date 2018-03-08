@@ -38,7 +38,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 ## Informações
 
 * arquivos do projeto
-    * ANSI
+    * UTF-8 
     * retorno do carro formato Windows
 * PHP 5.4.x ou superior (compativel como 7.1.19)
 
@@ -72,20 +72,26 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
-* [4.1.4 - 03/02/2018 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
+* [4.2.0 - 2018/03/08 tag v4.2.0](https://github.com/bjverde/formDin/releases/tag/v4.2.0)
+   * :hammer: files in UTF8 format.
+   * :hammer: code generator of the CRUD screen of a database entity.
+   * :hammer: Error messages in class TFile.
+   * :white_check_mark: 114 PHPUnit tests
+   * :art: small improvement of css
+* [4.1.4 - 2018/02/03 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
    * :hammer: Compativel com PHP 7.1.9.
    * :bug: Correção dos código de exemplo
-* [4.1.3 - 10/11/2017 tag v4.1.3](https://github.com/bjverde/formDin/releases/tag/v4.1.3)
+* [4.1.3 - 2017/11/10 tag v4.1.3](https://github.com/bjverde/formDin/releases/tag/v4.1.3)
    * :hammer: Gerador de código crud, escolhendo o tipo de grid.
    * :bug: inclusão do xajax
    * :bug: Correção dos código de exemplo
-* [4.1.2 - 06/11/2017 tag v4.1.2](https://github.com/bjverde/formDin/releases/tag/v4.1.2)
+* [4.1.2 - 2017/11/06 tag v4.1.2](https://github.com/bjverde/formDin/releases/tag/v4.1.2)
    * :bug: correção Bug critico no gerador crud com paginação via SQL para MSSQL
-* [4.1.1 - 06/11/2017 tag v4.1.1](https://github.com/bjverde/formDin/releases/tag/v4.1.1)
+* [4.1.1 - 2017/11/06 tag v4.1.1](https://github.com/bjverde/formDin/releases/tag/v4.1.1)
    * :hammer: Paginação via SQL para MS SQL Server 2012 ou superior
    * :hammer: Gerador crud para paginação via SQL para MySQL e MSSQL
    * :bug: correção do bug do zebrado no grid paginado
-* [4.1.0 - 31/10/2017 tag v4.1.0](https://github.com/bjverde/formDin/releases/tag/v4.1.0) 
+* [4.1.0 - 2017/10/31 tag v4.1.0](https://github.com/bjverde/formDin/releases/tag/v4.1.0) 
    * :hammer: Gerador de código crud, com paginação via SQL para MySQL 5.4 ou superior
    * :hammer: Phpunit primeiros testes
    * :hammer: Phpunit code coverage
@@ -94,5 +100,5 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
    * :hammer: Sistema de exemplos 2.5 completamente funcional com auteticação e perfis de acesso.
    * :bug: Correção de diversos bugs para tornar compativel com PHP 5.6.30
    * 304 commits de alterações
-* [4.0.0 - 22/09/2017 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
+* [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
    * Versão orignal, Brach copyLEB 
