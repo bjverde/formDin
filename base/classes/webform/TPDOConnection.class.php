@@ -274,8 +274,9 @@ class TPDOConnection {
 				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
 				 * */
 				if (PHP_OS == "Linux") {
-					$driver = 'dblib';
-					self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+					$driver = 'dblib'; 
+					//self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+					self::$dsn = $driver.':version=7.2;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
 				} else {
 					$driver = 'sqlsrv';
 					self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
@@ -909,10 +910,14 @@ class TPDOConnection {
 	//--------------------------------------------------------------------------------------
 	public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {
 		$retorno = null;
-		if ( $boolUtf8_Decode ) {
-			$retorno = utf8_decode( $string );
-		} else {
-			$retorno = utf8_encode( $string );
+		if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
+		    $retorno = $string;
+		}else{
+    		if ( $boolUtf8_Decode ) {
+    			$retorno = utf8_decode( $string );
+    		} else {
+    			$retorno = utf8_encode( $string );
+    		}
 		}
 		return $retorno;
 	}
