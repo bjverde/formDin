@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  * 
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  * 
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  * 
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -42,17 +42,17 @@ define('NOME',0); // CAR,DAT,NUM,DEC,CPF,CGC
 define('TIPO',1); // CAR,DAT,NUM,DEC,CPF,CGC
 define('CARACTERES',2); // quantidadede caracteres que podem ser digitados
 define('LARGURA',3); // largura do campo na tela
-define('NOVA_LINHA',4); // se N o proximo campo ser· criado na frente
-/* ULTIMA ALTERA«√O
+define('NOVA_LINHA',4); // se N o proximo campo ser√° criado na frente
+/* ULTIMA ALTERA√á√ÉO
 	11/08/2004 	- possibilidade de passar a coluna para ordenar o gride
 	17/08/2004 	- implementado o parametro $bvars
 				- implementada a possibilidade de passar um array no valor do campo filtro para criar um campo select
 					ex 1. array('NUM_CPF'=>'C.P.F:','DES_NOME'=>'Nome:','COD_UF|UF'=>'GO|GOIAS||MG|MINAS GERAIS'), ou
 					ex 2. array('NUM_CPF'=>'C.P.F:','DES_NOME'=>'Nome:','COD_UF|UF'=>array('GO'=>'Goias') ),
 					ex 3. array('NUM_CPF'=>'C.P.F:','DES_NOME'=>'Nome:','COD_UF|UF'=>$res), ( estilo array oracle )
-	20/08/2004	- colocada a opcao de submeter o parent form apos a seleÁ„o
+	20/08/2004	- colocada a opcao de submeter o parent form apos a sele√ß√£o
 	25/08/2004  - acertada a criacao dos campos filtro, campos select estavam acumulando as opcoes um do outro
-	23/09/2004	- alterei o parametro submeterForm para executarFuncao. Este parametro recebe o nome de uma funcao javascript que ser· chamada quando o usu·rio fizer a seleÁao do dado.
+	23/09/2004	- alterei o parametro submeterForm para executarFuncao. Este parametro recebe o nome de uma funcao javascript que ser√° chamada quando o usu√°rio fizer a sele√ßao do dado.
 	08/07/2005  - colocado ordem de tabulacao nos campos
 	21/07/2005 - implementada a possibilidade de configurar o tipo, qtd de caracteres, largura e quebra de linha nos campos de filtro.
 	               ex , array('NUM_CPF|CPF'=>'CPF'
@@ -60,12 +60,12 @@ define('NOVA_LINHA',4); // se N o proximo campo ser· criado na frente
 	                        , 'NUM_CNPJ|CNPJ|||N'=>'CNPJ'  // campo tipo cnpj e sem quebra a linha
 	                        , 'NUM_CNPJ_CNPJ|CPFCNPJ'=>'CPF/CNPJ' // campo tipo cpfcnpj
 	                        , 'DAT_NASCIMENTO|DAT|||N'=>'DATA' // campo tipo data sem quebra de linha
-	                        , 'VAL_SALARIO|DEC'=>'SAL¡RIO MÕNIMO' // campo tipo decimal
+	                        , 'VAL_SALARIO|DEC'=>'SAL√ÅRIO M√çNIMO' // campo tipo decimal
 	                        , 'NUM_IDADE|INT|||N'=>'IDADE' // campo tipo inteiro
 	                        )
-	22/07/2005 - implementada a possibilidade de passar junto com o nome do pacote separado por | o nome do mÛdulo de cadastro on-line caso a pesquisa n„o encontre nenhum registro
-	27/01/2006	- adicionado o parametro $camposBvar para especificar campos do formulario que far„o parte do filtro do pacote( bvars ) ao iniciar a pesquisa
-	              ex. COD_UF|cod_uf,TIP_PESSOA|tipo_pessoa, o primeiro parametro È o nome do parametro do pacote e o segundo È o nome do campo do formulario.
+	22/07/2005 - implementada a possibilidade de passar junto com o nome do pacote separado por | o nome do m√≥dulo de cadastro on-line caso a pesquisa n√£o encontre nenhum registro
+	27/01/2006	- adicionado o parametro $camposBvar para especificar campos do formulario que far√£o parte do filtro do pacote( bvars ) ao iniciar a pesquisa
+	              ex. COD_UF|cod_uf,TIP_PESSOA|tipo_pessoa, o primeiro parametro √© o nome do parametro do pacote e o segundo √© o nome do campo do formulario.
 	              se o campo do pacote tiver o mesmo nome do campo no formulario e o nome do campo no formulario estiver em caixa baixa, basta especificar o nome do parametro do pacote
 */
 
@@ -82,20 +82,20 @@ if ( $_POST['modulo'] or $_POST['btnCadastrar']) {
     		include_once($arquivo);
 	    else
 	    {
-		   imp('mÛdulo conexao.inc n„o encontrado para incluir');
+		   imp('m√≥dulo conexao.inc n√£o encontrado para incluir');
 		}
 		if( $arquivo = encontrarArquivoIframeConsultaDinamica('funcoes.inc') )
     		include_once($arquivo);
 	    else
-		   imp('mÛdulo funcoes.inc n„o encontrado para incluir');
+		   imp('m√≥dulo funcoes.inc n√£o encontrado para incluir');
 
-		// nome do mÛdulo de cadastro on-line
+		// nome do m√≥dulo de cadastro on-line
 		$a=explode('|',$_GET['nomePacote']);
 		if( !$arquivo = encontrarArquivoIframeConsultaDinamica($a[1]) )
 			if( !$arquivo = encontrarArquivoIframeConsultaDinamica($a[1].'.inc') )
 				if( !$arquivo = encontrarArquivoIframeConsultaDinamica('modulos/'.$a[1]) )
 					if( !$arquivo = encontrarArquivoIframeConsultaDinamica('modulos/'.$a[1].'.inc') )
-						imp('arquivo '.$a[1].' n„o encontrado.');
+						imp('arquivo '.$a[1].' n√£o encontrado.');
 		if($arquivo) {
    			imp('<table width=100% height=100% border=1><tr><td>');
     		include_once($arquivo);
@@ -108,7 +108,7 @@ $_SESSION['consulta_dinamica']['post'] = null;
 ?>
 <html>
 <head>
-<!-- funÁıes javasctipt -->
+<!-- fun√ß√µes javasctipt -->
 <script language="JavaScript">
 //-----------------------------------------------------------------------
 function btnGravarMultiClick(campo,executarFuncao)
@@ -160,7 +160,7 @@ function selecionar(campo, valor, fecharJanela,campoFoco,executarFuncao )
 		fechar();
 		}
 
-	//poder ser passado o nome de uma funÁ„o ou nome do formulario para submeter
+	//poder ser passado o nome de uma fun√ß√£o ou nome do formulario para submeter
 	if( executarFuncao != null && executarFuncao != '')
 	{
 		try
@@ -185,7 +185,7 @@ function selecionar(campo, valor, fecharJanela,campoFoco,executarFuncao )
 	     	   	try {
 	     	   		eval('parent.document.formdin.submit();');
 	     	   	} catch(e) {
-	     	   		alert("Erro na consulta din‚mica:\n"+e.message);
+	     	   		alert("Erro na consulta din√¢mica:\n"+e.message);
 	     	   	}
 				}
 			}
@@ -194,7 +194,7 @@ function selecionar(campo, valor, fecharJanela,campoFoco,executarFuncao )
 }
 //-----------------------------------------------------------------------
 function fechar(){
-	// retirar o iframe de cima dos campos porque est· escondendo o cursor do campo em ediÁ„o
+	// retirar o iframe de cima dos campos porque est√° escondendo o cursor do campo em edi√ß√£o
 	parent.document.getElementById(this.name).style.visibility='hidden';
 	parent.document.getElementById(this.name).style.top = -5000;
 
@@ -211,7 +211,7 @@ function pesquisar(campos){
 	    	var obj;
 	    	try { obj = parent.document.getElementById(c[1]); } catch(e){}
 	    	if (!obj) {
-	    		//verficar se È radio. O formulario dinamico coloca o sufixo _1 _2 _3 no id dos radiobox
+	    		//verficar se √© radio. O formulario dinamico coloca o sufixo _1 _2 _3 no id dos radiobox
 	    		try { obj = parent.document.getElementById(c[1]+'_1'); } catch(e){}
 	    	}
 	    	valor= obj.value;
@@ -268,7 +268,7 @@ function ordenarColuna(coluna){
 	pesquisar();
 }
 </script>
-<!-- definiÁ„o dos estilos -->
+<!-- defini√ß√£o dos estilos -->
 <style>
 body {
 	background-color:#F1F2F2;
@@ -345,10 +345,10 @@ body {
 if( $arquivo = encontrarArquivoIframeConsultaDinamica('conexao.inc') )
     include_once($arquivo);
  else
-	imp('mÛdulo '.$arquivo.' n„o encontrado para incluir');
+	imp('m√≥dulo '.$arquivo.' n√£o encontrado para incluir');
 
 
-$executarFuncao = str_replace('"',"'",$_GET['executarFuncao']); // n„o obrigatorio
+$executarFuncao = str_replace('"',"'",$_GET['executarFuncao']); // n√£o obrigatorio
 // colocar o titulo da janela
 $tituloJanela = $_GET['tituloJanela'];
 $numMaximoRegistros = ((integer)$_GET['qtdMaxRegistros'])==0?200:$_GET['qtdMaxRegistros'];
@@ -368,11 +368,11 @@ $bvars=$_GET['bvars'];
 $camposBvar = $_GET['camposBvar'];
 $multiSelect = $_GET['multiSelect'];
 //$multiSelect = true;
- // se foi passado os campos do formulario que far„o parate do bvars, carregar
+ // se foi passado os campos do formulario que far√£o parate do bvars, carregar
 $camposAtualizar='';
 if ( $camposBvar ) {
 	$aCampos=explode(',',$camposBvar);
-	imp('<!-- campos do formulario que ser„o incluÌdos no bvars do pacote-->');
+	imp('<!-- campos do formulario que ser√£o inclu√≠dos no bvars do pacote-->');
 	foreach($aCampos as $k=>$campo){
 		$a=explode('|',$campo); //COD_UF|cod_uf
 		$a[1]=$a[1]?$a[1]:strtolower($a[0]);
@@ -385,7 +385,7 @@ if ( $camposBvar ) {
 		}
 	}
 }
-// se tiver bvars e n„o tiver nenhum filtro, disparar consulta;
+// se tiver bvars e n√£o tiver nenhum filtro, disparar consulta;
 $dispararConsulta = false;
 $tabIndex=1;
 $campoFocoInicial='';
@@ -413,7 +413,7 @@ if( $campoFiltro ) {
 			foreach ($a as $k=>$v){
 				$b = explode('|',$v);
 				$selecionar = $_POST[$campo] == $b[0] ?' selected':'';
-				//print $campo.'->'.$_POST[$campo].'='.$b[0].' ent„o '.$selecionar.'<br>';
+				//print $campo.'->'.$_POST[$campo].'='.$b[0].' ent√£o '.$selecionar.'<br>';
 				$opcoes.='<option value="'.$b[0].'"'.$selecionar.'>'.$b[1].'</option>'."\n";
 				}
 		}
@@ -425,7 +425,7 @@ if( $campoFiltro ) {
 			$_POST[$aCampo[NOME]] = $_GET['valorCampoIframe'];
 			$dispararConsulta=true;
 		}
-		// guardar os campos filtrados para serem limpos apos a seleÁ„o se tiver somente 1 registro no retorno do banco
+		// guardar os campos filtrados para serem limpos apos a sele√ß√£o se tiver somente 1 registro no retorno do banco
 		$camposFiltro.= $camposFiltro ==''? '': ',';
 		$camposFiltro.=$aCampo[NOME];
 		$bvars[$aCampo[NOME]]=$aCampo[NOME]=='NUM_CPF' ? preg_replace('[^0-9]','',$_POST[$aCampo[NOME]]) : $_POST[$aCampo[NOME]];
@@ -525,7 +525,7 @@ imp('<td id="tdGride" colspan="3" height="*" align="center">');
 imp('<div id="divGride" style="position:relative;vertical-align:middle;overflow:auto; margin:0px; padding:0px;height:'.$grideH.';width:auto;">');
 imp('   <table width="100%">');
 
-// quando o usu·rio volta da tela de cadastro on-line, a acao = Sair
+// quando o usu√°rio volta da tela de cadastro on-line, a acao = Sair
 if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
 {
 	if(!is_array($res)) {
@@ -542,7 +542,7 @@ if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
 		ordenarArrayOracle($res,$colunaOrdenar );
 
 	if( $res ) {
-		// se n„o foi informado os campos do formulario para serem atualizados, atualizar todos os campos que possuirem o mesmo nome que os campos do pacote
+		// se n√£o foi informado os campos do formulario para serem atualizados, atualizar todos os campos que possuirem o mesmo nome que os campos do pacote
 		$campoAtualizar = $_GET['campoAtualizar'];
 		if( !$campoAtualizar ) {
 			foreach ($res as $k=>$v)
@@ -553,7 +553,7 @@ if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
 		$colunas = $_GET['coluna'];
 
         //print_r($campoAtualizar);
-		// se n„o foi informado as colunas do gride, listar todas as colunas retornadas
+		// se n√£o foi informado as colunas do gride, listar todas as colunas retornadas
 		if( !$colunas ) {
 			foreach ($res as $k=>$v)
 				$colunas[$k]=$k;
@@ -572,7 +572,7 @@ if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
 		$chave=key($res);
 		foreach ($res[$chave] as $k=>$v ) {
 			if($k >= $numMaximoRegistros){
-				$mens[]='A consulta retornou mais de '.$numMaximoRegistros.' registros. Seja mais especÌfico!';
+				$mens[]='A consulta retornou mais de '.$numMaximoRegistros.' registros. Seja mais espec√≠fico!';
 				break;
 			}
 			$i= 0;
@@ -611,7 +611,7 @@ if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
                         }
 					}
                     $listaValores = str_replace("'","`",$listaValores);
-					$listaValores = str_replace('"','ì',$listaValores);
+					$listaValores = str_replace('"','‚Äú',$listaValores);
 					$listaValores = str_replace(chr(10),'\n',$listaValores);
 					$listaValores = str_replace(chr(13),'',$listaValores);
 					if($condicao)
@@ -647,7 +647,7 @@ if( $_POST['acao']=='Pesquisar' || $formDinAcao == 'Sair')
    }
 } else {
 	imp('<td id="td_dados" colspan="'.$qtdColuna.'" style="text-align:center;vertical-align:middle;font-size:18;font-family:Arial;color:blue;height:150px">');
-	imp('Informe par‚metros e clique no bot„o PESQUISAR!!');
+	imp('Informe par√¢metros e clique no bot√£o PESQUISAR!!');
 	imp('</td>');
 }
 imp('   </table>');
@@ -673,7 +673,7 @@ else
 }
 imp('</tr>');
 
-// funÁ„o criada somente para imprimir com "\n"
+// fun√ß√£o criada somente para imprimir com "\n"
 function imp( $valor ){
 	print $valor."\n";
 }

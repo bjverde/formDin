@@ -7,8 +7,8 @@ $frm->setMaximize(true);
 
 $frm->addHiddenField( $primaryKey ); // coluna chave da tabela
 $frm->addTextField('NOM_PERFIL', 'Nome Perfil',50,true);
-$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
-$frm->addTextField('DAT_INCLUSAO', 'Data Inclusão:',null,false,null,null,true)->setReadOnly(true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=NÃ£o', true);
+$frm->addTextField('DAT_INCLUSAO', 'Data InclusÃ£o:',null,false,null,null,true)->setReadOnly(true);
 $frm->addTextField('DAT_UPDATE', 'Data Update: ',null,false,null,null,false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
@@ -57,7 +57,7 @@ $gride = new TGrid( 'gd'        // id do gride
 $gride->addColumn($primaryKey,'id',50,'center');
 $gride->addColumn('NOM_PERFIL','Nome Perfil',50,'center');
 $gride->addColumn('SIT_ATIVO','Ativo',30,'center');
-$gride->addColumn('DAT_INCLUSAO','Data Inclusão',100,'center');
+$gride->addColumn('DAT_INCLUSAO','Data InclusÃ£o',100,'center');
 $gride->addColumn('DAT_UPDATE','Data Update',100,'center');
 $frm->addHtmlField('gride',$gride);
 $frm->setAction( 'Salvar,Limpar' );

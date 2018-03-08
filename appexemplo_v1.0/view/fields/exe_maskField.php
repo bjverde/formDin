@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,36 +22,36 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-  $frm = new TForm('Exemplo de Entrada de Dados com M·scara');
+  $frm = new TForm('Exemplo de Entrada de Dados com M√°scara');
 
-  $frm->addHtmlField('ajuda','<b>Campo para entrada de dados com m·scara de ediÁ„o<br>
+  $frm->addHtmlField('ajuda','<b>Campo para entrada de dados com m√°scara de edi√ß√£o<br>
 		a - Representa uma letra (A-Z,a-z)<br>
-		9 - Representa um n˙mero (0-9)<br>
+		9 - Representa um n√∫mero (0-9)<br>
 		* - Representa um caractere (A-Z,a-z,0-9)<br>
 		<a href="http://digitalbush.com/projects/masked-input-plugin/" target="_blank">Visite o Site</a></b>')->setcss('margin-bottom',10);
 
-  $frm->addMaskField('c1','CÛdigo:',false,'99.99.99',null,null,null,null,'99.99.99');
+  $frm->addMaskField('c1','C√≥digo:',false,'99.99.99',null,null,null,null,'99.99.99');
   $frm->addMaskField('c2','Placa do Carro:',false,'aaa-9999')->setExampleText('aaa-9999');
-  $frm->addMaskField('c3','CÛdigo de Barras:',false,'9 999999 999999')->setExampleText('9 999999 999999');;
+  $frm->addMaskField('c3','C√≥digo de Barras:',false,'9 999999 999999')->setExampleText('9 999999 999999');;
 
-  $frm->addHtmlField(null,'CoraÁ„o - Neste formul·rio, os rÛtulos dos campos foram alinhados ‡ direita utilizando o mÈtodo <b>$frm->setLabelsAlign("right")</b>.');
+  $frm->addHtmlField(null,'Cora√ß√£o - Neste formul√°rio, os r√≥tulos dos campos foram alinhados √† direita utilizando o m√©todo <b>$frm->setLabelsAlign("right")</b>.');
   $frm->setAction('Atualizar');
   $frm->setLabelsAlign( 'right');
   $frm->Show();

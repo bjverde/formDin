@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -42,20 +42,20 @@
 
   $frm->addGroupField('gp00','Grupo Teste I',80,null,null,null,false,'gx',true,null,null,null,true);
 	  //$frm->addTextField('nome2','Campo nome comprido com wordwrap true:',30,null,null,null,null,null,null,null,true);
-	  $frm->addCheckField('gravar','Marque aqui para não gravar este grupo:',null,null,false,false,null,1,null,null,null,true);
-	  $frm->addTextField('nome3','Endereço:',30);
+	  $frm->addCheckField('gravar','Marque aqui para nÃ£o gravar este grupo:',null,null,false,false,null,1,null,null,null,true);
+	  $frm->addTextField('nome3','EndereÃ§o:',30);
 	  $frm->addTextField('nome4','Bairro:',40);
 	  $frm->addTextField('nome5','Cep:',50);
   $frm->closeGroup();
 
 
   $frm->addGroupField('gp01','Grupo Teste II',null,null,null,true,true,'gx',true)->setCss('background-color','red');
-  	$frm->addHtmlField('html_1','<b>Campo grupo SEM quebra na coluna do rótulo</b>');
-  	$frm->addTextField('txt_nome','Nome completo da pessoa física:',60);
+  	$frm->addHtmlField('html_1','<b>Campo grupo SEM quebra na coluna do rÃ³tulo</b>');
+  	$frm->addTextField('txt_nome','Nome completo da pessoa fÃ­sica:',60);
   $frm->closeGroup();
   $frm->addGroupField('gp02','Grupo Teste III',null,null,null,null,true,'gx')->setCss('background-color','white');
-  	$frm->addHtmlField('html_2','<b>Campo grupo com fundo branco e COM quebra na coluna do rótulo</b>');
-  	$frm->addTextField('txt_nome','Nome completo da pessoa física:',60);
+  	$frm->addHtmlField('html_2','<b>Campo grupo com fundo branco e COM quebra na coluna do rÃ³tulo</b>');
+  	$frm->addTextField('txt_nome','Nome completo da pessoa fÃ­sica:',60);
   $frm->closeGroup();
 
   $frm->setAction('Gravar,Refresh');

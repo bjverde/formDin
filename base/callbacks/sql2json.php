@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,36 +22,36 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
-* MÛdulo para executar um comando sql e retornar os dados no formato json
-* Dever ser chamado pelo index.php para que a conex„o com o banco de dados seja estabelecida
+* M√≥dulo para executar um comando sql e retornar os dados no formato json
+* Dever ser chamado pelo index.php para que a conex√£o com o banco de dados seja estabelecida
 *
 * @example http://localhost/sistemas/sisteste/index.php?modulo=base/callbacks/sql2json.php&ajax=1&table=BIOMA&columns=COD_BIOMA,NOM_BIOMA
 *
 * @param string ajax 		- deve ser informado o valor 1 sempre
 * @param string table 		- deve ser informado o nome da tabela ou do esquema.pacote.funcao.
-* @param string columns 	- nome das colunas que dever„o ser retornadas. Padr„o È *
+* @param string columns 	- nome das colunas que dever√£o ser retornadas. Padr√£o √© *
 * @param string where 		- string no formato json. Ex:{"NUM_CPF":"12345678909"} (Opcional)
 * @param string orderBy 	- nome das colunas para ordenar os dados. (Opcional)
 * @param integer cacheTime 	- tempo de cache dos dados (Opcional)
-* @param integer debug 		- se 1, retorna os parametros recebidos para depuraÁ„o (Opcional)
+* @param integer debug 		- se 1, retorna os parametros recebidos para depura√ß√£o (Opcional)
 */
 error_reporting(0);
 //sleep(2);

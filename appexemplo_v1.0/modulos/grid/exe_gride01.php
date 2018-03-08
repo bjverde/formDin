@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,32 +22,32 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(E_ALL);
 d($_REQUEST);
 
-$frm= new TForm('Exemplo de CriaÁ„o de Gride',450,900);
+$frm= new TForm('Exemplo de Cria√ß√£o de Gride',450,900);
 $frm->addTextField('nome','Nome:',20);
 $frm->addCssFile($this->getBase() .'/js/jquery/tablesorter/themes/blue/formdin.css');
 $frm->addCssFile('table.css');
 $frm->addJsFile($this->getBase() .'/js/jquery/tablesorter/jquery.tablesorter.min.js');
-$frm->addButton('Bot„o Teste',null,'btnTestar','alert("oi")',null,true,false)->setEnabled( false );
-$frm->addButton('Bot„o Teste Habilitado',null,'btnTestar','alert("oi")',null,true,false);
+$frm->addButton('Bot√£o Teste',null,'btnTestar','alert("oi")',null,true,false)->setEnabled( false );
+$frm->addButton('Bot√£o Teste Habilitado',null,'btnTestar','alert("oi")',null,true,false);
 $frm->addButtonAjax('Ajax Request desabilitado',null,null,null,'testar',null,null,null,null,null,null,false,false)->setEnabled( false );
 $frm->addButtonAjax('Ajax Request Habilitado',null,null,null,'testar',null,null,null,null,null,null,false,false);
 $frm->setcss('background-color','yellow');
@@ -56,16 +56,16 @@ $frm->setAutoSize(true);
 // html dentro do form
 $frm->addHtmlField('campo_gride');
 
-// criaÁ„o do array de dados
+// cria√ß√£o do array de dados
 for( $i=0; $i<300; $i++ ){
 	$res['SEQ_GRIDE'][] = ($i+1);
-	//$res['NOM_LINHA'][] = print_r($_REQUEST,TRUE);//'Linha n∫ '. ($i+1);
-	$res['NOM_LINHA'][] = 'Linha n∫ '. ($i+1);
+	//$res['NOM_LINHA'][] = print_r($_REQUEST,TRUE);//'Linha n¬∫ '. ($i+1);
+	$res['NOM_LINHA'][] = 'Linha n¬∫ '. ($i+1);
 	$res['DES_LINHA'][] = ($i+1).' '.str_repeat('Linha ',5);
 	//$res['VAL_PAGO'][]  = str_pad($i,5,'0',STR_PAD_LEFT);
 	$res['VAL_PAGO'][]  =  number_format(($i*54787/4),2,'.',',');
 	$res['SIT_CANCELADO'][] = $i;
-	$res['DES_AJUDA'][] = 'Ajuda - Este È o "texto" <B>que</B> ser· exibido quando o usu·rio posicionar o mouse sobre a imagem, referente a linha '.($i+1);
+	$res['DES_AJUDA'][] = 'Ajuda - Este √© o "texto" <B>que</B> ser√° exibido quando o usu√°rio posicionar o mouse sobre a imagem, referente a linha '.($i+1);
 	$res['VAL_ZERO'][] = '0';
 	$res['VAL_NULL'][] = NULL;
 
@@ -84,7 +84,7 @@ if( isset( $_REQUEST['idGride_serted_column'])) {
 //$res = ordenarArrayBanco($res, 'SEQ_GRIDE','SORT_DESC');
 
 $gride = new TGrid( 'idGride' // id do gride
-					,'TÌtulo do Gride' // titulo do gride
+					,'T√≠tulo do Gride' // titulo do gride
 					,$res 		// array de dados
 					,null		// altura do gride
 					,null		// largura do gride
@@ -103,7 +103,7 @@ $gride->setZebrarColors('#ffffff','#ffffff');
 
 $gride->addColumn('seq_gride'	,'SEQ',100);
 $gride->addColumn('nom_linha'	,'Nome',100)->setSortable(false);
-$gride->addColumn('des_linha'	,'DescriÁ„o',800);
+$gride->addColumn('des_linha'	,'Descri√ß√£o',800);
 $gride->addColumn('val_zero'	,'Zero',100);
 $gride->addColumn('val_null'	,'Val Null',100);
 $gride->addColumn('val_pago'	,'Valor',1000,'right');
@@ -140,26 +140,26 @@ $gride->addButtonAjax('Ajax2','teste_botao_ajax','lixeira.gif',null
 $gride->addButton('Normal',null,'btnNormal1','alert("normal")');
 $gride->addButton('Normal',null,'btnNormal2','alert("normal")',null,'lixeira.gif');
 
-//$gride->addMemoColumn('memox', 'ObservaÁıes','DES_LINHA', 2000, 50, 5,false)->addEvent( 'onBlur','opa()');
+//$gride->addMemoColumn('memox', 'Observa√ß√µes','DES_LINHA', 2000, 50, 5,false)->addEvent( 'onBlur','opa()');
 //$gride->addTextColumn('textx', 'Nome', 'NOM_LINHA', 20, 20)->addEvent( 'onBlur','opa()');
 //$gride->addNumberColumn('val_pago','Valor Pago','VAL_PAGO',10,2,false)->addEvent( 'onchange','opa()');;
-//$gride->addCheckColumn('chkTeste', 'V·lido','sit_cancelado');
+//$gride->addCheckColumn('chkTeste', 'V√°lido','sit_cancelado');
 //error_reporting(E_ALL);
 //$gride->addCheckColumn('chk_num_pessoa','','SEQ_GRIDE','NOM_LINHA');
 //$gride->addSelectColumn('seq_tipo','','SEQ_TIPO','1=Um,2=Dois');
-//$gride->addCheckColumn('chkTeste', 'V·lido','sit_cancelado');
+//$gride->addCheckColumn('chkTeste', 'V√°lido','sit_cancelado');
 
 //$gride->addCheckColumn('colX','?','SEQ_GRIDE','NOM_LINHA')->addEvent('onclick','alert(this.id)');
 //$gride->autoCreateColumns(); // cria as colunas de acordo com o array de dados
 //$gride->setNoWrap(false);
 */
 
-// quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formul·rio
+// quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formul√°rio
 if( isset($_REQUEST['ajax'] ) )
 {
     if( $_REQUEST['formDinAcao']=='teste_botao_ajax')
     {
-        //echo 'AÁ„o:'.$_POST['formDinAcao'].'<br>Campos:'.$_POST['fields'].'<br>Valores:'.$_POST['values'];
+        //echo 'A√ß√£o:'.$_POST['formDinAcao'].'<br>Campos:'.$_POST['fields'].'<br>Valores:'.$_POST['values'];
         echo '<pre>';
        	print_r($_REQUEST );
         echo '</pre>';
@@ -175,8 +175,8 @@ if( isset($_REQUEST['ajax'] ) )
 $frm->set('campo_gride', $gride ); // adiciona o objeto gride ao campo html
 $frm->setAction('Atualizar');
 
-$frm->addButton('Esconder Coluna AÁ„o',null,'btnEsconder','fwGridHideColumn("idGride_action","idGride")');
-$frm->addButton('Exibir Coluna AÁ„o',null,'btnExibir','fwGridShowColumn("action","idGride")');
+$frm->addButton('Esconder Coluna A√ß√£o',null,'btnEsconder','fwGridHideColumn("idGride_action","idGride")');
+$frm->addButton('Exibir Coluna A√ß√£o',null,'btnExibir','fwGridShowColumn("action","idGride")');
 
 $frm->addButton('Esconder Coluna Nome ',null,'btnEsconderNome','fwGridHideColumn("nom_linha","idGride")');
 $frm->addButton('Exibir Coluna Nome',null,'btnExibirNome','fwGridShowColumn("nom_linha","idGride")');

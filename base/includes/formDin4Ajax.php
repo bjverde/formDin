@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -20,26 +20,26 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  *
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  *
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
- * Função para ajustar o retorno da chamada ajax para ser devolvido para a
- * função callback
+ * FunÃ§Ã£o para ajustar o retorno da chamada ajax para ser devolvido para a
+ * funÃ§Ã£o callback
  *
  * @param integer $pStatus
  * @param mixed $pData
@@ -47,7 +47,7 @@
  */
 function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=null)
 {
-    if( ! isset( $_REQUEST['ajax' ] ) ) // não usar esta função quando não for uma requisição ajax
+    if( ! isset( $_REQUEST['ajax' ] ) ) // nÃ£o usar esta funÃ§Ã£o quando nÃ£o for uma requisiÃ§Ã£o ajax
     {
 		return;
     }
@@ -59,7 +59,7 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 	$buffer = ob_get_contents();
 	$buffer = trim( $buffer );
 
-	// retornos padrão para facilitar
+	// retornos padrÃ£o para facilitar
 	if( strtoupper( $pMessage ) == 'POST')
 	{
 		$pMessage = print_r($_POST,true);
@@ -81,7 +81,7 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
    	$boolAplicarUtf8  = false;
 	$boolBancoUtf8 = is_null($boolBancoUtf8) ? BANCO_UTF8 : $boolBancoUtf8;
 	$pMessage .= $buffer;
-	// tratamento para as requisições de paginação da classe TGrid.
+	// tratamento para as requisiÃ§Ãµes de paginaÃ§Ã£o da classe TGrid.
 	if( isset($_REQUEST['page']) && $_REQUEST['page']>0)
 	{
 		echo $pData.$pMessage;
@@ -210,16 +210,16 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 	die;
 }
 /**
- * Cria um array com as variáveis e seus respectivos valores oriundo do POST para
+ * Cria um array com as variÃ¡veis e seus respectivos valores oriundo do POST para
  * ser enviado para o banco
  * @param string $pFields ex: 'seq_pessoa,nom_pessoa, ...'
  * @return array Array com os dados
  *
- * @todo criar opção de colocar um valor de campo diferente em um id ex: num_pessoa|num_cliente
- * @todo add no arquivo de funções ajax
+ * @todo criar opÃ§Ã£o de colocar um valor de campo diferente em um id ex: num_pessoa|num_cliente
+ * @todo add no arquivo de funÃ§Ãµes ajax
  */
 /**
- * Cria um array com as variáveis e seus respectivos valores oriundo
+ * Cria um array com as variÃ¡veis e seus respectivos valores oriundo
  + do POST para
  * ser enviado para o banco
  * @param string $pFields ex: 'seq_pessoa,nom_pessoa, ...'
@@ -236,13 +236,13 @@ function createBvarsAjax($pFields) {
             $v = explode('|', $v);
             if (isset($_POST[strtolower($v[1])]) && $_POST[strtolower($v[1])] || trim($_POST[strtolower($v[1])]) == '0') {
                 //$bvar[strtoupper($v[0])] = utf8_decode($_POST[strtolower($v[1])]);
-                $bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v[1])])) );
+                $bvar[strtoupper($v[0])] = str_replace(array('"'),array('â€œ'),stripslashes(utf8_decode($_POST[strtolower($v[1])])) );
             } else {
                 $bvar[strtoupper($v[0])] = '';
             }
         } else {
             if (isset($_POST[strtolower($v)]) && $_POST[strtolower($v)] || trim($_POST[strtolower($v)]) == '0') {
-                $bvar[strtoupper($v)] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v)])));
+                $bvar[strtoupper($v)] = str_replace(array('"'),array('â€œ'),stripslashes(utf8_decode($_POST[strtolower($v)])));
             } else {
                 $bvar[strtoupper($v)] = '';
             }

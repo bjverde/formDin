@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -25,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUA�?�?O a qualquer MERCADO ou
- * APLICA�?�?O EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -37,7 +40,7 @@
  */
 include ('../base/classes/webform/TApplication.class.php');
 
-define('APLICATIVO','APPEV20');
+define('APLICATIVO','APPEV2.0');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
@@ -45,7 +48,7 @@ $app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
 $app->setVersionSystem('v 2.0.0.0');
-$app->setUnit('Departamento de Inform�tica - DI - IBAMA 2011');
+$app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');

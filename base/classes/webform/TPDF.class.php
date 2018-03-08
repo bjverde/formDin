@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
- * extens„o da classe FPDF v1.52 original adicionado o metodo row() e watermark
+ * extens√£o da classe FPDF v1.52 original adicionado o metodo row() e watermark
  *
  */
 // artificio para encontrar a pasta base
@@ -52,7 +52,7 @@ class TPDF extends FPDF
 {
 
     private $baseDir = null;
-    private $pageBorder = false; // adicionar borda na p·gina
+    private $pageBorder = false; // adicionar borda na p√°gina
     private $colums = null;
     private $data = null;
     private $waterMark = null;
@@ -71,7 +71,7 @@ class TPDF extends FPDF
     private $flagPrintHeader;
 
     /**
-     * Classe para criaÁ„o de relatÛrios no formato PDF
+     * Classe para cria√ß√£o de relat√≥rios no formato PDF
      *
      * @param string $strOrientation
      * @param str $strUnit
@@ -108,13 +108,13 @@ class TPDF extends FPDF
 
         if ( !file_exists( $tmpDir ) )
         {
-            die( 'DiretÛrio para arquivos tempor·rio ' . $tmpDir
-                . ' deve ser criado com permiss„o de leitura/escrita.' );
+            die( 'Diret√≥rio para arquivos tempor√°rio ' . $tmpDir
+                . ' deve ser criado com permiss√£o de leitura/escrita.' );
         }
 
         if ( !is_writable( $tmpDir ) )
         {
-            die( 'DiretÛrio ' . $tmpDir . ' n„o est· com permiss„o de leitura/escrita' );
+            die( 'Diret√≥rio ' . $tmpDir . ' n√£o est√° com permiss√£o de leitura/escrita' );
         }
 
         if ( $h = opendir( $tmpDir ) )
@@ -167,7 +167,7 @@ class TPDF extends FPDF
     }
 
     /**
-     * Retorna o diretÛrio da pasta base/ da aplicaÁ„o
+     * Retorna o diret√≥rio da pasta base/ da aplica√ß√£o
      *
      */
     public function getBaseDir()
@@ -181,7 +181,7 @@ class TPDF extends FPDF
     }
 
     /**
-     * Sobrescrita da funÁ„o addPage para possibilitar desenhar borda na p·gina
+     * Sobrescrita da fun√ß√£o addPage para possibilitar desenhar borda na p√°gina
      *
      * @param string $strOrientation P/L
      * @param boolean $boolBorder
@@ -217,7 +217,7 @@ class TPDF extends FPDF
     }
 
     /**
-     * Habilitar/desabilitar a impress„o da borda na p·gina
+     * Habilitar/desabilitar a impress√£o da borda na p√°gina
      *
      * @param mixed $boolNewValue
      */
@@ -227,7 +227,7 @@ class TPDF extends FPDF
     }
 
     /**
-     * Retorna o valor da propriedade pageBorder para impress„o da borda na p·gina
+     * Retorna o valor da propriedade pageBorder para impress√£o da borda na p√°gina
      *
      */
     function getPageBorder()
@@ -309,7 +309,7 @@ class TPDF extends FPDF
         }
         $cloneColumns = null;
 
-        // clonar as colunas para poder repetir a impress„o do grid e exibir o mesmo
+        // clonar as colunas para poder repetir a impress√£o do grid e exibir o mesmo
         // resultado, caso o usuario altera alguma propriedade original no evento onDrawCell
         if ( $this->getOnDrawCell() )
         {
@@ -351,7 +351,7 @@ class TPDF extends FPDF
         {
             call_user_func( 'cabecalho', $this );
         }
-        // imprimir o cabeÁalho do gride
+        // imprimir o cabe√ßalho do gride
 		$this->printGridHeader();
     /*
     if ($str = $this->getWaterMark())
@@ -431,8 +431,8 @@ class TPDF extends FPDF
     /**
      * Imprimir array de dados em colunas
      *
-     * O parametro $margemInferior indica o limite inferior maximo que a funÁ„o
-     * poder· utilizar para impress„o da linha,  jogando o texto para a outra p·gina se n„o couber.
+     * O parametro $margemInferior indica o limite inferior maximo que a fun√ß√£o
+     * poder√° utilizar para impress√£o da linha,  jogando o texto para a outra p√°gina se n√£o couber.
      *
      * @param mixed $data
      * @param mixed $margemInferior
@@ -457,7 +457,7 @@ class TPDF extends FPDF
           print '<br>Cor:'.print_r($this->HexToRGB($oCol->getFontColor($currentFontColor)),true);
           die();
          */
-        // calcular o espaÁo que a linha vai ocupar na p·gina
+        // calcular o espa√ßo que a linha vai ocupar na p√°gina
         for( $i = 0; $i < count( $data ); $i++ )
         {
             $oCol = $this->getColumn( $i );
@@ -478,7 +478,7 @@ class TPDF extends FPDF
 
         $lineHeight = $this->getRowLineHeight() * $nb;
 
-        //saltar p·gina se a linha for ocupar mais que o limite informado.
+        //saltar p√°gina se a linha for ocupar mais que o limite informado.
         if ( $intBottomMarginSize )
         {
             if ( ( $this->GetY() + $lineHeight ) > $intBottomMarginSize )
@@ -587,7 +587,7 @@ class TPDF extends FPDF
 	            $this->Rect( $x, $y, $colWidth, $lineHeight, 'FD' );
 			}
 
-            // centralizar verticalmente o texto na cÈlula
+            // centralizar verticalmente o texto na c√©lula
             if ( ( $c = $nb - $aNb[ $i ] ) > 0 )
             {
                 $c *= ( $this->getRowLineHeight() / 2 );
@@ -604,7 +604,7 @@ class TPDF extends FPDF
             {
                 $this->Rect( $x, $y, $colWidth, $lineHeight, 'D' );
             }
-            // voltar as configuraÁıes padr„o
+            // voltar as configura√ß√µes padr√£o
             $this->SetFont( $currentFontFamily, $currentFontStyle, $currentFontSize );
             $this->SetFillColor( $currentFillColor );
             $this->SetTextColor( $currentTextColor );
@@ -730,7 +730,7 @@ class TPDF extends FPDF
     /**
     * Retorna o array com os alinhamentos de cada coluna.
     * Se for informado o parametro $allAs, o array retornado
-    * ser· preenchido todas as posiÁıes com o valor de $allAs
+    * ser√° preenchido todas as posi√ß√µes com o valor de $allAs
     * Utilize o parametro $colIndex para tetornar o alinhamento
     * de uma determinada coluna
     *
@@ -908,7 +908,7 @@ class TPDF extends FPDF
     }
 	/*
     /**
-     * MÈtodo para impress„o do cabeÁalho do gride
+     * M√©todo para impress√£o do cabe√ßalho do gride
      */
     public function printGridHeader()
     {
@@ -977,7 +977,7 @@ class TPDF extends FPDF
 		}
 		else
 		{
-			$this->tMargin = 10.00125; // valor padr„o.
+			$this->tMargin = 10.00125; // valor padr√£o.
 		}
     }
     public function getTopMargin($intNewValue=null)

@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,20 +20,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -44,7 +44,7 @@ if(	! defined('PROJETO') )
 {
 	echo '<menu>
 			<item id="erro" text="Erro '.date('h:i:s').'">
-				<item id="erro1" text="Constante PROJETO não definida."/>
+				<item id="erro1" text="Constante PROJETO nÃ£o definida."/>
 			</item>
 		</menu>';
 	return;
@@ -53,7 +53,7 @@ if(	! defined('APLICATIVO') )
 {
 	echo '<menu>
 			<item id="erro" text="Erro '.date('h:i:s').'">
-				<item id="erro1" text="Constante APLICATIVO não definida."/>
+				<item id="erro1" text="Constante APLICATIVO nÃ£o definida."/>
 			</item>
 		</menu>';
 	return;
@@ -64,7 +64,7 @@ if( !isset($_SESSION[APLICATIVO]['login']['num_pessoa']) )
 	$_SESSION[APLICATIVO]['login']['num_pessoa'] = 0;
 	echo '<menu>
 		<item id="erro" text="Erro '.date('h:i:s').'">
-			<item id="erro1" text="Num_pessoa não encontrado. Efetue login novamente."/>
+			<item id="erro1" text="Num_pessoa nÃ£o encontrado. Efetue login novamente."/>
 		</item>
 	</menu>';
 	return;
@@ -111,8 +111,8 @@ if($res)
 	//if( isset($_SESSION[APLICATIVO]['DESENVOLVIMENTO']) && $_SESSION[APLICATIVO]['DESENVOLVIMENTO'] == true )
 	if( defined('MENU_FASIS') && MENU_FASIS )
 	{
-		$menu->add(-10,0,'F A S I S',null,'Você é um desenvolvedor','editar.gif');
-		$menu->add(-100,-10,'Módulo','base/seguranca/cad_modulo.php');
+		$menu->add(-10,0,'F A S I S',null,'VocÃª Ã© um desenvolvedor','editar.gif');
+		$menu->add(-100,-10,'MÃ³dulo','base/seguranca/cad_modulo.php');
 		$menu->add(-101,-10,'Menu Principal','base/seguranca/cad_menu_principal.php');
 		$menu->add(-102,-10,'Perfil','base/seguranca/cad_perfil.php');
 		$menu->add(-103,-10,'Perfil Acesso','base/seguranca/cad_perfil_menu.php');
@@ -120,11 +120,11 @@ if($res)
 		{
 			$menu->add(-104,-10,'Alterar Senha','base/seguranca/alt_senha_oracle.php');
 		}
-		$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do Formulário Dinâmico IV','ajudaonline.gif');
-		$menu->add(-200,-20,'Criação de Abas','exemplo/exe_aba.inc');
+		$menu->add(-20,0,'Exemplos',null,'Exemplo de Recursos do FormulÃ¡rio DinÃ¢mico IV','ajudaonline.gif');
+		$menu->add(-200,-20,'CriaÃ§Ã£o de Abas','exemplo/exe_aba.inc');
 		$menu->add(-210,-20,'Campo com Autocompletar','exemplo/exe_autocompletar.inc');
 		$menu->add(-220,-20,'Campo Checkbox','exemplo/exe_checkbox.inc');
-		$menu->add(-230,-20,'Criação de Gride','exemplo/exe_gride.inc');
+		$menu->add(-230,-20,'CriaÃ§Ã£o de Gride','exemplo/exe_gride.inc');
 		$menu->add(-240,-20,'Campo com Consulta On-line','exemplo/exe_onlinesearch.inc');
 		$menu->add(-245,-20,'Campo Texto','exemplo/exe_campo_texto.inc');
 		$menu->add(-250,-20,'Campo Select','exemplo/exe_select.inc');

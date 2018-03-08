@@ -1,6 +1,6 @@
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -18,20 +18,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -58,7 +58,7 @@ try
 	var tinyMCE;
 	//var img_carregando = '<img width="190px" height="20px" src="'+app_url_root+'base/imagens/processando.gif"/>';
 	var img_carregando = '<img width="190px" height="20px" src="base/imagens/processando.gif"/>';
-	// n„o permitir que a conex„o expire
+	// n√£o permitir que a conex√£o expire
 	// var app_refresh_seconds = 10;
 	//var timeout_refresh = window.setTimeout("app_start_refresh(0.5)", 500);
 	var ajax_count = 0;
@@ -84,7 +84,7 @@ try
 	var lapp=null;
 	var app_layout=false;
 
-    // verificar se o formul·rio est· sendo chamado pela TApplication.class.php
+    // verificar se o formul√°rio est√° sendo chamado pela TApplication.class.php
 	try
 	{
 		if( typeof top.app_init == 'function')
@@ -104,7 +104,7 @@ try
 }
 catch (e)
 {
-	alert('N„o foi possÌvel inicializar a aplicaÁ„o neste browser');
+	alert('N√£o foi poss√≠vel inicializar a aplica√ß√£o neste browser');
 }
 
 if( pathArray[pathArray.length-1].indexOf('.php') > 0 )
@@ -116,7 +116,7 @@ function app_init()
 {
 	try
 	{
-		// ajustar o tamanho do iframe/object central para ocupar toda a area meio da aplicaÁ„o.
+		// ajustar o tamanho do iframe/object central para ocupar toda a area meio da aplica√ß√£o.
 		app_adjust_middle_area_size();
 	}
 	catch(e)
@@ -132,7 +132,7 @@ function app_init()
 		app_set_background( background_image, background_repeat, background_position );
 	}
 /*
-	// criar uma janela ficticia para inicializar o overlay modal window porque sÛ bloqueia a tela inteira quando for executado pela segunda vez
+	// criar uma janela ficticia para inicializar o overlay modal window porque s√≥ bloqueia a tela inteira quando for executado pela segunda vez
 	win = new Window({onShow:function(){Windows.closeAll()},className: "alphacube", title: "Sample", width:200, height:150, destroyOnClose: true, recenterAuto:false});
 	win.getContent().update("");
 	win.setLocation(-5000,0);
@@ -267,7 +267,7 @@ function app_load_module(module,step,jsonParams)
 			{
 				app_url_root = app_url.substring(0,app_url_root.indexOf('/base/'))+'/';
 			}
-			// exibir animaÁ„o de carregando ou limpar a tela
+			// exibir anima√ß√£o de carregando ou limpar a tela
        		app_setFooterMessage('');
 			app_setFooterModule('');
 			if( module != '' )
@@ -299,7 +299,7 @@ function app_load_module(module,step,jsonParams)
 				}
 				else
 				{
-					// n„o utilizar o about:blank sen„o IE n„o mostra a marca dagua
+					// n√£o utilizar o about:blank sen√£o IE n√£o mostra a marca dagua
 					//jQuery("#app_iframe").attr("src",pastaBase+"includes/pagina_branco.html"); // limpar o conteudo
 					iframe.attr("src",pastaBase+"includes/pagina_branco.html"); // limpar o conteudo
     			}
@@ -347,7 +347,7 @@ function app_terminate(ask)
 		    return false;
 		}
 	}
-	// encerrar a sess„o e sair
+	// encerrar a sess√£o e sair
 	app_load_module('terminate',1);
 }
 //------------------------------------------------------------------------------------------------
@@ -356,7 +356,7 @@ function app_login(ask,module,loginInfo)
 	//app_stop_refresh();
 	if( ask )
 	{
-		if( !confirm('Deseja encerrar a aplicaÁ„o ?'))
+		if( !confirm('Deseja encerrar a aplica√ß√£o ?'))
 		{
 			//app_start_refresh();
 		    return false;
@@ -442,7 +442,7 @@ function app_modalBox(title,url,height,width,callBack,fullscreen)
 						}
 						else
 						{
-							alert('N„o foi possivel carregar a biblioteca graybox!');
+							alert('N√£o foi possivel carregar a biblioteca graybox!');
 						};
 					});
 				});
@@ -637,7 +637,7 @@ function app_build_menu(force, message,module)
 	var obj = jQuery("#div_main_menu");
 	if( !obj.get(0) )
 	{
-		alert('Div com id div_main_menu n„o encontrada para montagem do menu');
+		alert('Div com id div_main_menu n√£o encontrada para montagem do menu');
 		return;
 	}
 	//app_stop_refresh();
@@ -648,7 +648,7 @@ function app_build_menu(force, message,module)
 	}
 	catch(e)
 	{
-		alert( "Erro no menu. N„o foi possÌvel instanciar a classe dhtmlXMenuObject.\t"+e.message);
+		alert( "Erro no menu. N√£o foi poss√≠vel instanciar a classe dhtmlXMenuObject.\t"+e.message);
 		return;
 	};
 	menuIconsPath = menuIconsPath || pastaBase+"imagens/";
@@ -689,7 +689,7 @@ function app_build_menu(force, message,module)
  				{
  						window.status=url;
  						jQuery('#app_footer_company').html(url);
- 						// o arquivo js dhtmlxmenu_cas.js est· adaptado para mostrar a url no rodapÈ do form se a variavel menuShowLinkStatusBar for true
+ 						// o arquivo js dhtmlxmenu_cas.js est√° adaptado para mostrar a url no rodap√© do form se a variavel menuShowLinkStatusBar for true
  						menuShowLinkStatusBar=!menuShowLinkStatusBar;
  						return null;
  				}
@@ -698,7 +698,7 @@ function app_build_menu(force, message,module)
   				{
 					try {eval( url);}
 					catch(e){
-						alert( "Erro na execuÁ„o do script:\n"+url);
+						alert( "Erro na execu√ß√£o do script:\n"+url);
 					}
   				}
   				else
@@ -717,7 +717,7 @@ function app_build_menu(force, message,module)
 	//app_main_menu.loadXML( app_url + app_index_file+'?modulo=base/seguranca/ler_menu_xml.php&content-type=xml&e='+new Date().getTime());
 	if( !module )
 	{
-		alert( 'Para criaÁ„o do menu È necess·rio informar o mÛdulo que retornar· o xml com a estrutura do menu!');
+		alert( 'Para cria√ß√£o do menu √© necess√°rio informar o m√≥dulo que retornar√° o xml com a estrutura do menu!');
 	}
 	else
 	{
@@ -748,7 +748,7 @@ function app_set_position(element,position)
 {
 	try
 	{
-		// position pode ser: tl, tc, tr, cl, cc, cr, bl, bc, br e o padr„o È tc
+		// position pode ser: tl, tc, tr, cl, cc, cr, bl, bc, br e o padr√£o √© tc
 		position = position || 'tc';
 		var topReference;
 		if( jQuery("#div_main_menu").offset().top)
@@ -1116,7 +1116,7 @@ function app_window(jsonParams)
   			win.toFront();
   			if( menuShowLinkStatusBar )
   			{
-  				win.setStatusBar('MÛdulo: '+module);
+  				win.setStatusBar('M√≥dulo: '+module);
 			}
   			win.setDestroyOnClose();
 			//window.setTimeout('app_window({step:1,winId:"'+winId+'",module:"'+module+'"})',300);
@@ -1189,7 +1189,7 @@ function app_close_prototype_window(confirmClose, win )
 	{
 		result = true;
 	}
-	else if( confirm('Finalizar mÛdulo '+win.getTitle()+' ?'))
+	else if( confirm('Finalizar m√≥dulo '+win.getTitle()+' ?'))
 	{
 		result=true;
 	}
@@ -1381,7 +1381,7 @@ function app_faceBox(content,iframe,height,width,onClose,onShow,css,isImage)
 		{
 			height	= height || 200;
 			width	= width  || 500;
-			// container mostra a animaÁ„o de carregando
+			// container mostra a anima√ß√£o de carregando
 			container = '<iframe id="faceBoxIframe" scrolling="auto" frameborder="no" align="center" style="width:'+width+'px;height:'+height+'px;border:0px;padding-right:7px;'+css+'" src="'+pastaBase+'includes/carregando_cinza.html"></iframe>';
 			// mostrar a url dentro do iframe em 1 segundo
 			window.setTimeout('jQuery("#faceBoxIframe").attr("src","'+app_adjustBasePath(content)+'");',1000);
@@ -1420,14 +1420,14 @@ function app_faceBox(content,iframe,height,width,onClose,onShow,css,isImage)
 	}
 }
 /**
-FunÁ„o para fechar a faceBox aberta via javascript
+Fun√ß√£o para fechar a faceBox aberta via javascript
 */
 function app_faceBoxClose()
 {
 	try{ jQuery.facebox.close();}catch(e){}
 }
 /**
-FunÁ„o para ajustar o caminho da pasta base da url
+Fun√ß√£o para ajustar o caminho da pasta base da url
 */
 function app_adjustBasePath(url)
 {
@@ -1438,7 +1438,7 @@ function app_adjustBasePath(url)
 	return url
 }
 /**
- * FunÁ„o para retornar a largura do iframe central da aplicaÁ„o
+ * Fun√ß√£o para retornar a largura do iframe central da aplica√ß√£o
  */
 function app_getIframeH()
 {
@@ -1450,7 +1450,7 @@ function app_getIframeW()
 }
 
 /**
-	FunÁ„o utilizada para alterar o tema do menu pricipal da aplicaÁ„o
+	Fun√ß√£o utilizada para alterar o tema do menu pricipal da aplica√ß√£o
 */
 function app_change_menu_theme(theme, urlMenuFile)
 {
@@ -1465,7 +1465,7 @@ function app_change_menu_theme(theme, urlMenuFile)
 function app_open_modal_window(jsonParams)
 {
 
-	if( typeof $ != 'function') // n„o carregou a prototype
+	if( typeof $ != 'function') // n√£o carregou a prototype
 	{
 		app_modalBox(jsonParams.title,jsonParams.url,jsonParams.height,jsonParams.width,jsonParams.callback,jsonParams.data);
 		return;
@@ -1750,7 +1750,7 @@ function app_alert(message, jsonParams, theme )
 		});
 	}
  /**
- * Dialogo de confirmaÁ„o
+ * Dialogo de confirma√ß√£o
  *
  * @param message
  * @param callbackYes
@@ -1761,9 +1761,9 @@ function app_alert(message, jsonParams, theme )
  */
 function app_confirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 {
-	title 		= (!title)?'ConfirmaÁ„o':title;
+	title 		= (!title)?'Confirma√ß√£o':title;
 	yesLabel 	= (!yesLabel)?'Sim':yesLabel;
-	noLabel 	= (!noLabel)?'N„o':noLabel;
+	noLabel 	= (!noLabel)?'N√£o':noLabel;
 	app_modalGeneric(
 	{
 		data : message,
@@ -1774,7 +1774,7 @@ function app_confirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 			[ {text:noLabel,click: function()
 				{
 					jQuery(this).dialog("close");
-					var app_iframe = document.getElementById('app_iframe'); // n„o utilizar fwGetObj() aqui
+					var app_iframe = document.getElementById('app_iframe'); // n√£o utilizar fwGetObj() aqui
 
 					if( typeof callbackNo=='function')
 					{
@@ -1803,7 +1803,7 @@ function app_confirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 			   {text:yesLabel,click: function()
 				{
 					jQuery(this).dialog("close");
-					var app_iframe = document.getElementById('app_iframe'); // n„o utilizar fwGetObj() aqui
+					var app_iframe = document.getElementById('app_iframe'); // n√£o utilizar fwGetObj() aqui
 					if( app_iframe )
 					{
 	            		app_iframe.contentWindow.fwExecutarFuncao(callbackYes,true);

@@ -288,7 +288,7 @@ jQuery.autocomplete = function(input, options) {
 
 
 			//-----------------------------------------------------------------------------
-			// adaptaÁ„o feita por Luis EugÍnio para retirar a mascara antes de procurar campos formatados
+			// adapta√ß√£o feita por Luis Eug√™nio para retirar a mascara antes de procurar campos formatados
 			//-----------------------------------------------------------------------------
 			var currentVal = q;
 			if(options.removeMask || data.length == 1 )
@@ -301,7 +301,7 @@ jQuery.autocomplete = function(input, options) {
 				autoFill(data[0][0]);
 
 			//------------------------------------------------------------------------------
-			// adaptacao eugenio para selecionar automaticamente a primeira opÁ„o e retornar
+			// adaptacao eugenio para selecionar automaticamente a primeira op√ß√£o e retornar
 			//------------------------------------------------------------------------------
 			if(options.removeMask || data.length==1)
 			{
@@ -400,7 +400,7 @@ jQuery.autocomplete = function(input, options) {
 		}
 		else if( (typeof options.url == "string") && (options.url.length > 0) )
 		{
-			//alert('N„o tem data, vou buscar novamente no banco');
+			//alert('N√£o tem data, vou buscar novamente no banco');
 			jQuery.get(makeUrl(q), function(data) {
 				if( data )
 				{
@@ -431,7 +431,7 @@ jQuery.autocomplete = function(input, options) {
 
 	function makeUrl(q) {
 		var url;
-		// eugenio - alteraÁ„o para detectar ?q ou &q
+		// eugenio - altera√ß√£o para detectar ?q ou &q
 		if( options.url.indexOf('?')== -1 )
 		{
 			url = options.url + "?q=" + encodeURI(q);
@@ -440,7 +440,7 @@ jQuery.autocomplete = function(input, options) {
 		{
 			url = options.url + "&q=" + encodeURI(q);
 		}
-		// eugenio - adaptaÁ„o feita para ler os valores atuais dos campos do formul·rio que far„o parte do filtro
+		// eugenio - adapta√ß√£o feita para ler os valores atuais dos campos do formul√°rio que far√£o parte do filtro
 		for( key in options.extraParams)
 		{
 			if( key.indexOf('_w_') == 0 )
@@ -533,7 +533,7 @@ extraParams:{"tablePackageFunction":"TESTE.PKG_TESTE.SEL_MUNICIPIO","searchField
 	this.findValue = function(){
 		var q = $input.val();
 		//---------------------------------------------------------------
-		// adaptaÁ„o eugenio para remover a m·scara dos campos formatados
+		// adapta√ß√£o eugenio para remover a m√°scara dos campos formatados
 		//---------------------------------------------------------------
 		if(options.removeMask )
 		{
@@ -594,7 +594,7 @@ extraParams:{"tablePackageFunction":"TESTE.PKG_TESTE.SEL_MUNICIPIO","searchField
 			}
 		}
 		//---------------------------------------------------------------------------------
-		// adaptaÁ„o eugenio para retornar tambem o campo com o segundo parametro da funÁ„o
+		// adapta√ß√£o eugenio para retornar tambem o campo com o segundo parametro da fun√ß√£o
 		//---------------------------------------------------------------------------------
 		if( options.onFindValue )
 		{

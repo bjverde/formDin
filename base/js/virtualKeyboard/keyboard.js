@@ -90,7 +90,7 @@ var VKI_attach, VKI_close;
 
   /* ***** i18n text strings ************************************* */
   this.VKI_i18n = {
-    '00': "Exibir/Esconder o Teclado NumÈrico",
+    '00': "Exibir/Esconder o Teclado Num√©rico",
     '01': "Exibir o Teclado Virtual",
     '02': "Selecionar tipo do teclado",
     '03': "Dead keys",
@@ -99,7 +99,7 @@ var VKI_attach, VKI_close;
     '06': "Fechar o teclado",
     '07': "Limpar",
     '08': "Limpar campo",
-    '09': "Vers„o",
+    '09': "Vers√£o",
     '10': "Diminuir teclado",
     '11': "Aumentar teclado"
   };

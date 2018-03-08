@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,26 +22,26 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 //--------------------------------------------------------
 /**
-* FunÁ„o para ajudar na depuraÁ„o do retorno do autocomplete
+* Fun√ß√£o para ajudar na depura√ß√£o do retorno do autocomplete
 * a variavel erro esta recebendo um numero de erro como retorno mesmo a query ser bem sucesdida
 * $boolDebug=true;
 * impAutocomplete($sql,$boolDebug);
@@ -71,14 +71,14 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
 	if($strSearchField) {
 		$bvars[$strSearchField]=$_REQUEST['q'];
 	}
-	// Por razıes de seguranÁa, o vari·vel num_pessoa tem que ser lido da sess„o
+	// Por raz√µes de seguran√ßa, o vari√°vel num_pessoa tem que ser lido da sess√£o
 	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
 		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
 	} else {
 		$bvars['NUM_PESSOA'] = $_SESSION['num_pessoa'];
 	}
 	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime)) {
-		echo utf8_encode("Erro na funÁ„o autocomplete(). Erro:".$erro[0])."\n";
+		echo utf8_encode("Erro na fun√ß√£o autocomplete(). Erro:".$erro[0])."\n";
 		return;
 	}
 	
@@ -105,7 +105,7 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
     if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
 		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
 			if( preg_match('/falha/i',$erro ) > 0 ) {
-				echo utf8_encode("Erro na funÁ„o autocomplete(). Erro:".$erro)."\n".$sql;
+				echo utf8_encode("Erro na fun√ß√£o autocomplete(). Erro:".$erro)."\n".$sql;
 				return;
 			}
 		}

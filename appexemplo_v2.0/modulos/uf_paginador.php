@@ -10,7 +10,7 @@ $frm->addTextField('NOM_UF', 'Nome',50,true);
 $frm->addTextField('SIG_UF', 'Sigla',50,true);
 
 $dadosRegiao = RegiaoDAO::selectAll('COD_REGIAO');
-$frm->addSelectField('COD_REGIAO','Região:',true,$dadosRegiao);
+$frm->addSelectField('COD_REGIAO','RegiÃ£o:',true,$dadosRegiao);
 
 $frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
@@ -97,6 +97,6 @@ function init(){
 // recebe fields e values do grid
 function alterar(f,v) {
 	var dados = fwFV2O(f,v);
-	fwModalBox('Alteração','index.php?modulo=uf_paginador.php',300,800,null,dados);
+	fwModalBox('AlteraÃ§Ã£o','index.php?modulo=uf_paginador.php',300,800,null,dados);
 }
 </script>

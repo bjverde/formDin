@@ -1,7 +1,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  * 
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  * 
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  * 
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -104,7 +104,7 @@ function setMarkerContent(html) {
 	infowindow.setContent(html);
 }
 
-// FunÁ„o que cria o marcador e o ajusta ao evento da janela
+// Fun√ß√£o que cria o marcador e o ajusta ao evento da janela
 function createMarker(map,point,name,id,color) {
 	var marker = new google.maps.Marker({
         position: point,
@@ -132,7 +132,7 @@ function createMarker(map,point,name,id,color) {
 		infowindow.open(map,marker);
 	});
 
-	// salva a informaÁ„o q vc precisa para ser usada posteriormente na side_bar
+	// salva a informa√ß√£o q vc precisa para ser usada posteriormente na side_bar
 	gmarkers[i] = marker;
 
 	// adiciona uma linha para a side_bar-html
@@ -141,7 +141,7 @@ function createMarker(map,point,name,id,color) {
 	return marker;
 }
 
-// Esta funÁ„o È para capturar o click e abrir a info window correspondente
+// Esta fun√ß√£o √© para capturar o click e abrir a info window correspondente
 function myclick(i) {
 	google.maps.event.trigger(gmarkers[i],'click');
 }
@@ -166,7 +166,7 @@ processarDadosBanco = function(doc) {
         fwUnBlockScreen();
 		return;
 	}
-	// JSON.parse n„o funciona no mei IE 8! RFC 4627 propoe o seguinte cÛdigo:wq:wq
+	// JSON.parse n√£o funciona no mei IE 8! RFC 4627 propoe o seguinte c√≥digo:wq:wq
     var lines = !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(doc.replace(/"(\\.|[^"\\])*"/g, ''))) &&
                 eval('(' + doc + ')');
 
@@ -230,7 +230,7 @@ function processar() {
 }
 
 function inicializarMapa(pacoteFuncao,parametros,pacoteFuncaoDetalhe,parametrosDetalhe,cacheTime) {
-	// Esta vari·vel ira conter o HTML que eventualmente ser· colocado no painel Side_bar
+	// Esta vari√°vel ira conter o HTML que eventualmente ser√° colocado no painel Side_bar
 	var side_bar_html = "";
 
 	// Funcao e campos a serem usados para pesquisa em banco
@@ -242,7 +242,7 @@ function inicializarMapa(pacoteFuncao,parametros,pacoteFuncaoDetalhe,parametrosD
 	var erro = false;
 	for ( i in arrParametros ) {
 		if (  !document.getElementById(arrParametros[i]) ) {
-			alert('Campo '+arrParametros[i]+' n„o encontrado!');
+			alert('Campo '+arrParametros[i]+' n√£o encontrado!');
 			erro = true;
 		} 
 	}
@@ -251,7 +251,7 @@ function inicializarMapa(pacoteFuncao,parametros,pacoteFuncaoDetalhe,parametrosD
 	}
 
 	// arrays que contem copias dos marcadores e do html usado pela "side_bar"
-	// porque a funÁ„o closure trick n„o funciona aqui.
+	// porque a fun√ß√£o closure trick n√£o funciona aqui.
 	gmarkers = [];
 	i = 0;
 
@@ -268,9 +268,9 @@ function inicializarMapa(pacoteFuncao,parametros,pacoteFuncaoDetalhe,parametrosD
 	processar();
 }
  
-  // Referencias utilizadas por M·rio Pucci:
+  // Referencias utilizadas por M√°rio Pucci:
   // Blackpool Community Church Javascript Team
   // http://www.commchurch.freeserve.co.uk/   
-  // em 08/07/2008   -    Vers„o: 0.1
+  // em 08/07/2008   -    Vers√£o: 0.1
 
 

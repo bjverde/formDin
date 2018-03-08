@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA 02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $frm = new TForm ( 'Cadastro Exemplo', 300 );
@@ -47,11 +47,11 @@ $frm->setColumns ( array (
 
 $frm->addHiddenField ( 'seq_fruta' );
 $frm->addTextField ( 'nom_fruta', 'Nome:', 50, true, 50 );
-$frm->addNumberField ( 'val_fruta', 'PreÁo:', 10, true, 2 );
-$frm->addDateField ( 'dat_compra', 'AquisiÁ„o:', true );
+$frm->addNumberField ( 'val_fruta', 'Pre√ßo:', 10, true, 2 );
+$frm->addDateField ( 'dat_compra', 'Aquisi√ß√£o:', true );
 
 $frm->addSelectField ( 'sit_cancelado', 'Cancelado:', true );
-$frm->addMemoField ( 'obs_fruta', 'ObservaÁ„o:', 200, false, 50, 5 );
+$frm->addMemoField ( 'obs_fruta', 'Observa√ß√£o:', 200, false, 50, 5 );
 
 $frm->setAction ( 'Gravar,Limpar' );
 
@@ -65,7 +65,7 @@ switch ($acao) {
 		if ($frm->validate ()) {
 			$bvars = $frm->createBvars ( 'seq_fruta,nom_fruta,val_fruta,seq_moeda,dat_compra,sit_cancelado,obs_fruta' );
 			if (! $frm->addError ( executarPacote ( 'TESTE.PKG_FRUTA.INC_ALT', $bvars ) )) {
-				$frm->setMessage ( 'GravaÁ„o ok' );
+				$frm->setMessage ( 'Grava√ß√£o ok' );
 				// $frm->clearFields();
 				$frm->setValue ( 'seq_fruta', $bvars ['SEQ_FRUTA'] );
 			}

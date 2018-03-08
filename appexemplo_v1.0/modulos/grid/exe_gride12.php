@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -87,7 +87,7 @@ $res['NOM_MOEDA'][0] 		= 'Dollar';
 $res['SIG_MOEDA'][0] 		= 'US$';
 $res['NOM_ANEXO'][0] 		= 'imagem.jpg';
 $res['TX_ESPECIE_NATIVA'][0] = 'Nome da especie nativa';
-$res['OBS_ANEXO'][0] 		= 'asdÁfkasd fasdfasdfasdfasdfasd fasdf asdf asdf';
+$res['OBS_ANEXO'][0] 		= 'asd√ßfkasd fasdfasdfasdfasdfasd fasdf asdf asdf';
 $res['DES_NOME_POPULAR'][0] 		= 'Nome popular teste';
 $res['SIT_CANCELADO'][0] 	= 'N';
 //$res=null;
@@ -99,7 +99,7 @@ $grid->show();
  * $tb = new TTable();
 $tb->setCss('font-size','12px');
 $row = $tb->addRow();
-$row->addCell('<center>Exemplo dos dados do Grid que est„o na vari·vel de sess„o:<br><b>$_SESSION[APLICATIVO]["offline"]["gdx"]</b></center>');
+$row->addCell('<center>Exemplo dos dados do Grid que est√£o na vari√°vel de sess√£o:<br><b>$_SESSION[APLICATIVO]["offline"]["gdx"]</b></center>');
 $row = $tb->addRow();
 $row->addCell('<pre><div style="border:1px dashed black;width:540px;height:150px;overflow:hidden;overflow-y:auto;">'.print_r($_SESSION[APLICATIVO]['offline']['gdx'],true).'</div></pre>');
 $tb->show();

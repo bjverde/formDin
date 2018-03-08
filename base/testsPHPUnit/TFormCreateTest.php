@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 require_once '../classes/constants.php';
@@ -209,54 +209,116 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addColumnsGrid(TAB.TAB);
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
-    }    
-    //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addGridPagination_jsScript_init()
-     */
-    public function testAddGridPagination_jsScript_init_sizeArray() {
-    	$this->tFormCreate->setFormFileName('xxx');        
-    	$this->tFormCreate->addGridPagination_jsScript_init();
-        $resultArray = $this->tFormCreate->getLinesArray();
-        $size = count($resultArray);
-        $this->assertEquals( 3, $size);
     }
     //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addGridPagination_jsScript_init()
-     */
-    public function testAddGridPagination_jsScript_init_string() {
-    	$expectedArray[] ='function init() {'.EOL;
-    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',{"whereGrid":""},true);'.EOL;
-    	$expectedArray[] ='}'.EOL;
+    public function testAddGetWhereGridParameters_fiedFalse(){
+    	$expected = TAB.TAB.',\'NOME\'=>$frm->get(\'NOME\')'.EOL;    	
+    	$expectedString = trim( $expected );
     	
-    	$expectedString = trim( implode($expectedArray) );
+    	$this->tFormCreate->addGetWhereGridParameters_fied(FALSE, 'NOME', TAB.TAB);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGetWhereGridParameters_fiedTrue(){
+    	$expected = TAB.TAB.'\'NOME\'=>$frm->get(\'NOME\')'.EOL;
+    	$expectedString = trim( $expected );
     	
-    	$this->tFormCreate->setFormFileName('xxx');
-    	$this->tFormCreate->addGridPagination_jsScript_init();
+    	$this->tFormCreate->addGetWhereGridParameters_fied(TRUE, 'NOME', TAB.TAB);
     	$result = $this->tFormCreate->getLinesString();
     	$this->assertEquals( $expectedString, $result);
     }
     //----------------------------------------------------------
     /**
-     * Tests TFormCreate->addGridPagination_jsScript_whereClauses
+     * Tests TFormCreate->addGetWhereGridParametersFields()
      */
-    public function testaddGridPagination_jsScript_whereClauses_sizeArray() {
-        $this->tFormCreate->addGridPagination_jsScript_whereClauses();
-        $resultArray = $this->tFormCreate->getLinesArray();
-        $size = count($resultArray);
-        $this->assertEquals( 11, $size);
+    public function testAddGetWhereGridParametersFields() {
+    	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
+    	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParametersFields(TAB.TAB);
+    	
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
     }
     //----------------------------------------------------------
-    /**
-     * Tests TFormCreate->addVoIssetOrZero()
-     */
-    public function testAddVoIssetOrZero_sizeArray() {
-    	$this->tFormCreate->addVoIssetOrZero();
+    public function testAddGetWhereGridParameters() {
+    	$expectedArray[] = ''.EOL;
+    	$expectedArray[] = 'function getWhereGridParameters(&$frm){'.EOL;
+    	$expectedArray[] = TAB.'$retorno = array('.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.'\'ID\'=>$frm->get(\'ID\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
+    	$expectedArray[] = TAB.TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
+    	$expectedArray[] = TAB.');'.EOL;
+    	$expectedArray[] = TAB.'return $retorno;'.EOL;
+    	$expectedArray[] = '}'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParameters();
+    	
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGetWhereGridParameters_arraysize() {
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGetWhereGridParameters();
+    	
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 9, $size);
-    }    
+    	$this->assertEquals( 10, $size);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_parameter_fristLineTRUE() {
+    	$parameter = 'ID';
+    	$expected  = '"'.$parameter.'":""';
+    	$result = $this->tFormCreate->addGridPagination_jsScript_init_parameter(true,$parameter);
+        $this->assertEquals( $expected  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_parameter_fristLineFALSE() {
+    	$parameter = 'NOME';
+    	$expected  = ',"'.$parameter.'":""';
+    	$result = $this->tFormCreate->addGridPagination_jsScript_init_parameter(false,$parameter);
+    	$this->assertEquals( $expected  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_allparameters() {
+    	$expected  = TAB.'var Parameters = {"ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
+    	$expectedString = trim( $expected );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->addGridPagination_jsScript_init_allparameters(TAB);
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString  , $result);
+    }
+    //----------------------------------------------------------
+    public function testAddGridPagination_jsScript_init_string() {
+    	$expectedArray[] ='function init() {'.EOL;
+    	$expectedArray[] =TAB.'var Parameters = {"ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
+    	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',Parameters,true);'.EOL;
+    	$expectedArray[] ='}'.EOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	$this->tFormCreate->setListColunnsName($listColumnsName);
+    	$this->tFormCreate->setFormFileName('xxx');
+    	$this->tFormCreate->addGridPagination_jsScript_init();
+    	$result = $this->tFormCreate->getLinesString();
+    	$this->assertEquals( $expectedString, $result);
+    }   
     //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SIMPLE() {
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
@@ -276,7 +338,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 55, $size);
+    	$this->assertEquals( 48, $size);
     }
     //----------------------------------------------------------
     public function testAddGrid_sizeArray_setGRID_SQL_PAGINATION() {
@@ -287,6 +349,6 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     	$this->tFormCreate->addGrid();
     	$resultArray = $this->tFormCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 58, $size);
+    	$this->assertEquals( 51, $size);
     }
 }
