@@ -38,7 +38,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 ## Informações
 
 * arquivos do projeto
-    * ANSI
+    * UTF-8 
     * retorno do carro formato Windows
 * PHP 5.4.x ou superior (compativel como 7.1.19)
 
@@ -72,6 +72,11 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
+* [4.2.0 - 08/03/2018 tag v4.2.0](https://github.com/bjverde/formDin/releases/tag/v4.2.0)
+   * :hammer: files in UTF8 format.
+   * :hammer: code generator of the CRUD screen of a database entity.
+   * :hammer: Error messages in class TFile.
+   * :bug: Correção dos código de exemplo
 * [4.1.4 - 03/02/2018 tag v4.1.4](https://github.com/bjverde/formDin/releases/tag/v4.1.4)
    * :hammer: Compativel com PHP 7.1.9.
    * :bug: Correção dos código de exemplo
