@@ -41,17 +41,13 @@
 
 /**
  * Classe que faz varias transformações de data e hora
- * @author reinaldo.junior        
+ * @author reinaldo.junior
  */
 class DateTimeHelper {
     const DEFAULT_TIME_ZONE = 'America/Sao_Paulo';
     
     /**
-<<<<<<< HEAD
-     * Getter para criar uma inst�ncia de um objeto do tipo DateTime.
-=======
      * Getter para criar uma instância de um objeto do tipo DateTime.
->>>>>>> utf8
      * @return DateTime
      */
     public static function getCurrentDateTime() {
@@ -69,7 +65,7 @@ class DateTimeHelper {
         $dateTime = self::getCurrentDateTime();
         $retorno = $dateTime->format('Y-m-d H:i:s');
         return $retorno;
-    }    
+    }
     
     /**
      * Converter data no formato dd/mm/yyyy para yyyy-mm-dd
