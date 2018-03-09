@@ -140,8 +140,6 @@ class TFormCreate {
 	}	
 	//--------------------------------------------------------------------------------------
 	private function addBasicaFields() {
-		$this->addBlankLine();
-		$this->addBlankLine();
 		$this->addLine('$frm->addHiddenField( $primaryKey );   // coluna chave da tabela');
 		if( $this->validateListColumnsName() ){
 			foreach($this->listColumnsName as $key=>$value){
@@ -389,13 +387,16 @@ class TFormCreate {
         $this->addBlankLine();
         if($this->gridType == GRID_SIMPLE){
         	$this->addLine('$whereGrid = \' 1=1 \';');
-        }else{
-        	$this->addLine('$frm->addHiddenField( \'BUSCAR\' ); //Campo oculto para buscas');
         }
         $this->addLine('$primaryKey = \''.$this->getPrimaryKeyTable().'\';');
         $this->addLine('$frm = new TForm(\''.$this->formTitle.'\',600);');
 		$this->addLine('$frm->setFlat(true);');
 		$this->addLine('$frm->setMaximize(true);');
+		$this->addBlankLine();
+		$this->addBlankLine();
+		if($this->gridType != GRID_SIMPLE){
+		    $this->addLine('$frm->addHiddenField( \'BUSCAR\' ); //Campo oculto para buscas');
+		}
 		$this->addBasicaFields();
 		$this->addBlankLine();
 		$this->addButtons();
