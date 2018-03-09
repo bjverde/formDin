@@ -149,7 +149,7 @@ class TGrid extends TTable
 	* @param mixed $strHeight
 	* @param mixed $strWidth
 	* @param mixed $strKeyField
-	* @param mixed $mixUpdateFields
+	* @param mixed $mixUpdateFields     - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
 	* @param mixed $intMaxRows
 	* @param mixed $strOnDrawCell
 	* @param mixed $strOnDrawHeaderCell
@@ -1509,6 +1509,10 @@ class TGrid extends TTable
 	}
 
 	//------------------------------------------------------------------------------------
+	/**
+	 * Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+	 * @param string $mixUpdateFields
+	 */
 	public function setUpdateFields( $mixUpdateFields = null )
 	{
 		if ( $mixUpdateFields )
