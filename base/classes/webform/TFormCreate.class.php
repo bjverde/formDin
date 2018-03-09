@@ -379,7 +379,9 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	public function showForm($print=false) {
 		$this->lines=null;
-        $this->addLine('<?php');        
+        $this->addLine('<?php');
+        $this->addLine('defined(\'APLICATIVO\') or die();');
+        $this->addBlankLine();
         if($this->gridType == GRID_SIMPLE){
         	$this->addLine('$whereGrid = \' 1=1 \';');
         }
