@@ -255,7 +255,10 @@ class TFormCreate {
 		if( $this->validateListColumnsName() ){
 			$this->addBlankLine();
 			$this->addLine('function getWhereGridParameters(&$frm){');
-			$this->addGetWhereGridParametersArray( TAB );
+			$this->addLine(TAB.'$retorno = null;');
+			$this->addLine(TAB.'if($frm->get(\'BUSCAR\') == 1 ){');
+			$this->addGetWhereGridParametersArray( TAB.TAB );
+			$this->addLine(TAB.'}');
 			$this->addLine(TAB.'return $retorno;');
 			$this->addLine('}');
 		}
@@ -290,7 +293,8 @@ class TFormCreate {
 	public function addGridPagination_jsScript_init_allparameters($qtdTab) {
 		if( $this->validateListColumnsName() ){
 			$line = null;
-			$line = $line.$this->addGridPagination_jsScript_init_parameter(true,$this->getPrimaryKeyTable());
+			$line = $line.$this->addGridPagination_jsScript_init_parameter(true,'BUSCAR');
+			$line = $line.$this->addGridPagination_jsScript_init_parameter(false,$this->getPrimaryKeyTable());
 			foreach($this->listColumnsName as $key=>$value){
 				$line = $line.$this->addGridPagination_jsScript_init_parameter(false,$value);
 			}
@@ -308,6 +312,7 @@ class TFormCreate {
 	//--------------------------------------------------------------------------------------
 	public function addGridPagination_jsScript_buscar() {
 	    $this->addLine('function buscar() {');
+	    $this->addLine(TAB.'jQuery("#BUSCAR").val(1);');
 	    $this->addLine(TAB.'init();');
 	    $this->addLine('}');
 	}
@@ -384,6 +389,8 @@ class TFormCreate {
         $this->addBlankLine();
         if($this->gridType == GRID_SIMPLE){
         	$this->addLine('$whereGrid = \' 1=1 \';');
+        }else{
+        	$this->addLine('$frm->addHiddenField( \'BUSCAR\' ); //Campo oculto para buscas');
         }
         $this->addLine('$primaryKey = \''.$this->getPrimaryKeyTable().'\';');
         $this->addLine('$frm = new TForm(\''.$this->formTitle.'\',600);');
