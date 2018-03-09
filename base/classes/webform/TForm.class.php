@@ -1966,7 +1966,7 @@ class TForm Extends TBox
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
      * @param string $strUrl                         - url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
-     * @param string $strMessageNotFound             - Mesagem caso não encontre nenhum registro
+     * @param string $strMessageNotFound             - Mensagem caso não encontre nenhum registro
      * @params boolean $boolKeepFieldValuesOnPost
      * @params boolean $boolClearOnNotFound
      * @params boolean $boolClearUpdateFields
