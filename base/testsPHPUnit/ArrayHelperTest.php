@@ -59,6 +59,26 @@ class ArrayHelperTest extends PHPUnit_Framework_TestCase {
         $arrayTest = array();
         $retorno = ArrayHelper::validateUndefined($arrayTest,'indexNotExist');
         $this->assertEquals($esperado, $retorno);
+    }    
+    
+    public function testHas_notArray() {
+    	$esperado = FALSE;
+    	$arrayTest = null;
+    	$retorno = ArrayHelper::has('x',$arrayTest);
+    	$this->assertEquals($esperado, $retorno);
+    }    
+   
+    public function testHas_notInArray() {
+    	$esperado  = FALSE;
+    	$arrayTest = array("foo" => "bar","bar" => "foo",100=> -100,-100=> 100);
+    	$retorno = ArrayHelper::has('x',$arrayTest);
+    	$this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testHas_InArray() {
+    	$esperado  = TRUE;
+    	$arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
+    	$retorno = ArrayHelper::has('x',$arrayTest);
+    	$this->assertEquals($esperado, $retorno);
     }
 }
-

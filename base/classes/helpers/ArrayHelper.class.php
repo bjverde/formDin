@@ -45,6 +45,22 @@ class ArrayHelper {
 	        $array[$atributeName]=null;
 	    }
 	    return is_null($array[$atributeName])?null:trim($array[$atributeName]);
-	}	
+	}
+	
+	/**
+	 * Similar to array_key_exists. But it does not generate an error message
+	 *
+	 * Semelhante ao array_key_exists. Mas não gera mensagem de erro
+	 * @param string $atributeName
+	 * @param array $array
+	 * @return boolean
+	 */
+	static function has($atributeName,$array) {
+		$value = false;
+		if (is_array($array) && array_key_exists($atributeName, $array)) {
+			$value = true;
+		}
+		return $value;
+	}
 }
 ?>
