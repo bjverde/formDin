@@ -88,7 +88,7 @@ class Ajuda {
 			$this->setArquivoAjuda($strArquivoAjuda);
 			$this->setPacoteOracle($strPacoteOracle);
 			$this->setColunaChave($strColunaChave);
-			$this->setValorChave($strValorchave);
+			$this->setValorChave($strValorChave);
 			$this->setColunaAjuda($strColunaAjuda);
 			$this->setPastaBase($strPastaBase);
 			$this->setTitulo($strTitulo);
