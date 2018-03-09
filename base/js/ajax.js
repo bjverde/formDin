@@ -1,7 +1,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
+ * Copyright (C) 2012 Minist√©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -19,20 +19,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  * 
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  * 
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  * 
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -133,7 +133,7 @@ function Ajax() {
     var req = null;
     var headArr = [];
     if (!this.init()) {
-      alert('N„o foi possÌvel criar o ojeto XMLHttpRequest.');
+      alert('N√£o foi poss√≠vel criar o ojeto XMLHttpRequest.');
       return;
     }
     req = this.req;
@@ -182,7 +182,7 @@ function Ajax() {
           {
           	if(!self.idUpdate)
           	{
-               alert('Nenhuma funÁ„o de retorno definida');
+               alert('Nenhuma fun√ß√£o de retorno definida');
           	}
           	else
           	{
@@ -200,7 +200,7 @@ function Ajax() {
           		}
           		else
           		{
-          			alert( 'Ojeto '+self.idUpdate+' n„o existe no formul·rio');
+          			alert( 'Ojeto '+self.idUpdate+' n√£o existe no formul√°rio');
           		}
 
           		/*
@@ -224,7 +224,7 @@ function Ajax() {
           			}
           			else
           			{
-          				msg += "\n"+'Objeto '+aCampo[i]+' n„o encontrado!'
+          				msg += "\n"+'Objeto '+aCampo[i]+' n√£o encontrado!'
           			}
 					}
 					if( msg!='')
@@ -264,7 +264,7 @@ function Ajax() {
     }
     // If pop-up gets blocked, inform user
     catch(e) {
-      alert('Ocorreu um erro mas a mensagem n„o pode ser exibida. Provavelmente seu browser est· com pop-up bloqueado.\nCÛdigo status:'+this.req.status+'\nDescriÁ„o:'+this.req.statusText);
+      alert('Ocorreu um erro mas a mensagem n√£o pode ser exibida. Provavelmente seu browser est√° com pop-up bloqueado.\nC√≥digo status:'+this.req.status+'\nDescri√ß√£o:'+this.req.statusText);
     }
   };
   this.setMimeType = function(mimeType) {
@@ -287,15 +287,15 @@ function Ajax() {
 //---------------------------------------------------------------------
 /*
 	doAjax()
-	- modulo = nome do mÛdulo/url que ser· chamado
-	- acao  = nome da aÁ„o que ser· processada no mÛdulo (opcional)
-	- campoAtualizar = campos que ser„o atualizados no formulario de origem separados por |
-	- mensagem = mensagem que ser· exibida na tela durante o processamento (opcional)
-	- campoMensagem = campo do formul·rio onde ser· exibida a mensagem (opcional)
-	- funcaoRetorno = funÁ„o callBack (opcional)
+	- modulo = nome do m√≥dulo/url que ser√° chamado
+	- acao  = nome da a√ß√£o que ser√° processada no m√≥dulo (opcional)
+	- campoAtualizar = campos que ser√£o atualizados no formulario de origem separados por |
+	- mensagem = mensagem que ser√° exibida na tela durante o processamento (opcional)
+	- campoMensagem = campo do formul√°rio onde ser√° exibida a mensagem (opcional)
+	- funcaoRetorno = fun√ß√£o callBack (opcional)
 	- objForm = formulario (opcional
 	- metodo = get/post    (opcional)
-	- parametros = parametros que ser„o passados para a url (opcional) se for deixado em branco ser„o passados todos so campos do formul·rio
+	- parametros = parametros que ser√£o passados para a url (opcional) se for deixado em branco ser√£o passados todos so campos do formul√°rio
 	ex: 	doAjax("../includes/testeAjax.php","Gravar",'nom_cliente|num_idade|tel_cliente','<h1><center>Gravando...</center></h1>','campo_mensagem');
 */
 function doAjax(modulo,acao,campoAtualizar,mensagem,campoMensagem,funcaoRetorno,objForm,metodo,parametros)

@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,25 +22,25 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
   /**
- * Campo para ediÁ„o de data, dia/mes e mes/ano definindo o parametro
+ * Campo para edi√ß√£o de data, dia/mes e mes/ano definindo o parametro
  * maskType como dmy, dm, my
  *
  * <!--<style type="text/css">@import url(base/css/calendar-win2k-1.css);</style>-->
@@ -71,7 +71,7 @@ class TDate extends TMask
 	//-------------------------------------------------------------------------------
 	public function show($print=true)
 	{
-		// n„o colocar a imagem no campo data se ele estiver desabilitado
+		// n√£o colocar a imagem no campo data se ele estiver desabilitado
 		if( $this->getEnabled())
 		{
 			$imgCalendar = new TElement('img');
@@ -186,15 +186,15 @@ class TDate extends TMask
 				{
 					if( $this->getMaskType() == 'dm')
 					{
-						$this->setError('DIA/M S est· inv·lido');
+						$this->setError('DIA/M√äS est√° inv√°lido');
 					}
 					else if( $this->getMaskType() == 'my')
 					{
-						$this->setError('M S/ANO est· inv·lido');
+						$this->setError('M√äS/ANO est√° inv√°lido');
 					}
 					else
 					{
-						$this->setError('Valor inv·lido');
+						$this->setError('Valor inv√°lido');
 					}
 				}
 				else
@@ -204,7 +204,7 @@ class TDate extends TMask
 					{
 						if (($day==29) && ((($year % 4) != 0) || ((($year % 100) == 0) && (($year % 400) != 0))))
 						{
-							$this->setError('Dia inv·lido. Ano n„o È bissexto.');
+							$this->setError('Dia inv√°lido. Ano n√£o √© bissexto.');
 						}
 					}
 				}

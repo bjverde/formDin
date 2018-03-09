@@ -2,6 +2,9 @@
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
+ * Criado por Luís Eugênio Barbosa
+ * Essa versão é um Fork https://github.com/bjverde/formDin
+ *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -26,8 +29,8 @@
  * do Software Livre (FSF).
  *
  * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUA�?�?O a qualquer MERCADO ou
- * APLICA�?�?O EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -38,7 +41,7 @@
 
 
 require_once('services/acessoUserMenuService.php');
-//Pega a lista de Menus do Banco em fun��o do usuario logado
+//Pega a lista de Menus do Banco em função do usuario logado
 $userMenu = acessoUserMenuService::getAcessoUserMenuByLogin();
 
 $menu = new TMenuDhtmlx();

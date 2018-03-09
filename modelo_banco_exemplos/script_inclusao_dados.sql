@@ -37,7 +37,7 @@ INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (42,'SC
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (43,'RS','RIO GRANDE DO SUL',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (50,'MS','MATO GROSSO DO SUL',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (51,'MT','MATO GROSSO',4);
-INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (52,'GO','GOI¡S',4);
+INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (52,'GO','GOI√ÅS',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (53,'DF','DISTRITO FEDERAL',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (99,'UC','Unico',9);
 
@@ -97,7 +97,7 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1101708,11,'URUPA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1101757,11,'VALE DO ANARI');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1101807,11,'VALE DO PARAISO');
-INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1200013,12,'ACREL¬NDIA');
+INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1200013,12,'ACREL√ÇNDIA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1200054,12,'ASSIS BRASIL');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1200104,12,'BRASILEIA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',1200138,12,'BUJARI');
@@ -1637,7 +1637,7 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2610707,26,'PAULISTA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2610806,26,'PEDRA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2610905,26,'PESQUEIRA');
-INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2611002,26,'NOVA PETROL¬NDIA');
+INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2611002,26,'NOVA PETROL√ÇNDIA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2611101,26,'PETROLINA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2611200,26,'POCAO');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',2611309,26,'POMBOS');
@@ -3147,7 +3147,7 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3172004,31,'VISCONDE DO RIO BRANCO');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3172103,31,'VOLTA GRANDE');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3172202,31,'WENCESLAU BRAZ');
-INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3172203,31,'JUSTIN”POLIS');
+INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3172203,31,'JUSTIN√ìPOLIS');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3200102,32,'AFONSO CLAUDIO');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3200136,32,'AGUIA BRANCA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',3200169,32,'AGUA DOCE DO NORTE');
@@ -5622,8 +5622,8 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5222203,52,'VILA BOA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5222302,52,'VILA PROPICIO');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5222303,52,'ARANTINA');
-INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5300108,53,'BRASÕLIA');
-INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',9999999,53,'MUNICIPIO PROVIS”RIO');
+INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5300108,53,'BRAS√çLIA');
+INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',9999999,53,'MUNICIPIO PROVIS√ìRIO');
 
 
 INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('root','root');
@@ -5680,7 +5680,7 @@ VALUES
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(81,8,'Regi„o','modulos/regiao.php',null,null,null,null,null,null);
+(81,8,'Regi√£o','modulos/regiao.php',null,null,null,null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
@@ -5690,7 +5690,7 @@ VALUES
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(83,8,'MunicÌpio','modulos/municipio.php',null,null,null,null,null,null);
+(83,8,'Munic√≠pio','modulos/municipio.php',null,null,null,null,null,null);
 
 
 INSERT INTO `form_exemplo`.`acesso_menu`

@@ -32,7 +32,7 @@ class THtmlPageTest extends PHPUnit_Framework_TestCase {
 	 * Tests THtmlPage->getCharset()
 	 */
 	public function testGetCharset_ISO88591() {
-		$expected = 'ISO-8859-1';		
+		$expected = 'UTF-8';		
 		$result =  $this->tHtmlPage->getCharset();
 		$this->assertEquals( $expected , $result);
 	}

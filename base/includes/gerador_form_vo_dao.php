@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -51,9 +51,9 @@ function verifyPath($path){
 
 $dbms_html = 'O FormDin 4.1.0 ou superior tem 3 tipos de grids.'
             .'<ul>'
-            .'<li>Grid Simples - sem paginaÁ„o mostrando todos os registros</li>'
-            .'<li>Grid Paginado via Tela - A paginaÁ„o acontece apenas em tela. Todos os registros s„o carregados na memoria e paginados via JQuery</li>'
-            .'<li>Grid Paginado via SQL - A paginaÁ„o acontece via banco de dados. Bem mais rapido que paginaÁ„o via tela, porÈm no momento disponivel apenas para MySQL e MS SQL Server 2012 ou superior</li>'
+            .'<li>Grid Simples - sem pagina√ß√£o mostrando todos os registros</li>'
+            .'<li>Grid Paginado via Tela - A pagina√ß√£o acontece apenas em tela. Todos os registros s√£o carregados na memoria e paginados via JQuery</li>'
+            .'<li>Grid Paginado via SQL - A pagina√ß√£o acontece via banco de dados. Bem mais rapido que pagina√ß√£o via tela, por√©m no momento disponivel apenas para MySQL e MS SQL Server 2012 ou superior</li>'
             .'</ul>';
 
 
@@ -61,29 +61,29 @@ $frm = new TForm('Gerador de From, VO e DAO',650,700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-$frm->addGroupField('gpxForm','InformaÁıes do form');
-    $frm->addTextField('form_title','TÌtulo do formulario:',50,true,50);
-    $frm->addTextField('form_dir','DiretÛrio do formul·rio:',50,true,150,'modulos/');
+$frm->addGroupField('gpxForm','Informa√ß√µes do form');
+    $frm->addTextField('form_title','T√≠tulo do formulario:',50,true,50);
+    $frm->addTextField('form_dir','Diret√≥rio do formul√°rio:',50,true,150,'modulos/');
     $frm->addTextField('form_name','Nome do arquivo formulario:',50,true,50);
 $frm->closeGroup();
 
-$frm->addGroupField('gpxFormPag','Form com paginaÁ„o');
+$frm->addGroupField('gpxFormPag','Form com pagina√ß√£o');
     $frm->addHtmlField('html',$dbms_html,null,null,100)->setCss('border','1px solid blue');
-    $gridType = array(GRID_SIMPLE=>'Simples',GRID_SCREEN_PAGINATION=>'PaginaÁ„o via Tela',GRID_SQL_PAGINATION=>'PaginaÁ„o via SQL');
+    $gridType = array(GRID_SIMPLE=>'Simples',GRID_SCREEN_PAGINATION=>'Pagina√ß√£o via Tela',GRID_SQL_PAGINATION=>'Pagina√ß√£o via SQL');
     $frm->addSelectField('TPGRID','Escolha o tipo de Gride:',true,$gridType,null,null,'0')->addEvent('onChange','select_change(this)');
     $frm->addGroupField('gpxDBMS');
     $dbType = array(DBMS_MYSQL=>'MySQL',DBMS_SQLSERVER=>'MS SQL SERVER');
-    $frm->addSelectField('TPBANCO','Escolha o tipo de Bando de dados:',null,$dbType,null,null,'0');
+    $frm->addSelectField('TPBANCO','Escolha o tipo de Banco de Dados:',null,$dbType,null,null,'0');
     $frm->closeGroup();
 $frm->closeGroup();
 
-$frm->addGroupField('gpxEsquema','InformaÁıes do Esquema');
-	$frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informaÁ„o do esquema È nescessaria para as intruÁıes de banco. SE Marcar a opÁ„o SIM nas DAOs ser· incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
-	$frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=N„o,1=Sim',null,null,'0');
+$frm->addGroupField('gpxEsquema','Informa√ß√µes do Esquema');
+	$frm->addHtmlField('html','Em alguns bancos como o MS SQL Server a informa√ß√£o do esquema √© nescessaria para as intru√ß√µes de banco. SE Marcar a op√ß√£o SIM nas DAOs ser√° incluido a constante SCHEME antes do nome da tabela.',null,null,50)->setCss('border','1px solid blue');
+	$frm->addSelectField('sit_const_schema','Constante Esquema:',null,'0=N√£o,1=Sim',null,null,'0');
 $frm->closeGroup();
 
-$frm->addGroupField('gpxDAO','InformaÁıes do VO e DAO');
-    $frm->addTextField('diretorio','DiretÛrio:',50,true);
+$frm->addGroupField('gpxDAO','Informa√ß√µes do VO e DAO');
+    $frm->addTextField('diretorio','Diret√≥rio:',50,true);
     $frm->addTextField('tabela','Nome da Tabela:',30,true);
     $frm->addTextField('coluna_chave','Nome da Coluna Chave:',30);
     $frm->addMemoField('colunas','Colunas:',5000,true,45,20);
@@ -95,62 +95,76 @@ if(!$frm->get('diretorio')) {
     $frm->set('diretorio','dao/');
 }
 
+function  validateBdType(&$frm){
+	$result = true;
+	if( $frm->get('TPGRID') == GRID_SQL_PAGINATION){
+		$TPBANCO = $frm->get('TPBANCO');
+		if( ($TPBANCO == DBMS_MYSQL) || ($TPBANCO == DBMS_SQLSERVER) ){
+			$result = true;
+		}else{
+			$result = false;
+		}
+	}
+	return $result;
+}
+
 $acao = ( isset($acao) ) ? $acao : '';
 switch( $acao ) {
     case 'Gerar':
-        if( $frm->validate() ) {
-            $diretorio = str_replace('//','/',$frm->get('diretorio').'/');
-            @mkdir($diretorio,"775",true);
-            if( ! file_exists( $diretorio ) ) {
-                $frm->setMessage('DiretÛrio '.$diretorio.' n„o existe!');
-                break;
-            }
-            $txt = preg_replace('/'.chr(13).'/',',',$frm->get('colunas'));
-            $txt = preg_replace('/'.chr(10).'/',',',$txt);
-            $txt = preg_replace('/\,\,/',',',$txt);
-            $txt = preg_replace('/ /','',$txt);
-            $txt = preg_replace('/\,\,/',',',$txt);
-            if( substr($txt,-1) ==',') {
-                $txt=substr($txt,0,strlen($txt)-1);
-            }
-            $listColumns = explode(',',$txt);
-            $coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];
-            $TPGRID  = $frm->get('TPGRID');
-            $TPBANCO = $frm->get('TPBANCO');
-            
-            $gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
-            foreach($listColumns as $k=>$v) {
-                $gerador->addColumn($v);
-            }
-            $showSchema = $frm->get('sit_const_schema');
-            $gerador->setShowSchema($showSchema);
-            if( $TPGRID == GRID_SQL_PAGINATION){
-                $gerador->setWithSqlPagination(TRUE);
-                $gerador->setDatabaseManagementSystem($TPBANCO);
-            }else{
-                $gerador->setWithSqlPagination(FALSE);
-            }
-            $gerador->saveVO();
-            $gerador->saveDAO();
-            
-            $diretorio = str_replace('//','/',$frm->get('form_dir').'/');
-            @mkdir($diretorio,"775",true);
-            if( ! file_exists( $diretorio ) ) {
-                $frm->setMessage('DiretÛrio '.$diretorio.' n„o existe!');
-                break;
-            }
-            
-            $geradorForm = new TFormCreate();
-            $geradorForm->setFormTitle( $frm->get('form_title') );
-            $geradorForm->setFormPath( $diretorio );
-            $geradorForm->setFormFileName($frm->get('form_name'));
-            $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
-            $geradorForm->setTableRef($frm->get('tabela'));
-            $geradorForm->setListColunnsName($listColumns);
-            $geradorForm->setGridType($TPGRID);
-            $geradorForm->saveForm();
-            
-            $frm->setMessage('Fim');
+    	if( $frm->validate() ) {
+    		if ( !validateBdType($frm) ) {
+    			$frm->setMessage('Informe o tipo de Banco da Dados');
+    			$frm->setFocusField('TPBANCO');
+    		}else{
+	            $diretorio = str_replace('//','/',$frm->get('diretorio').'/');
+	            @mkdir($diretorio,"775",true);
+	            if( ! file_exists( $diretorio ) ) {
+	                $frm->setMessage('Diret√≥rio '.$diretorio.' n√£o existe!');
+	                break;
+	            }
+	            $txt = preg_replace('/'.chr(13).'/',',',$frm->get('colunas'));
+	            $txt = preg_replace('/'.chr(10).'/',',',$txt);
+	            $txt = preg_replace('/\,\,/',',',$txt);
+	            $txt = preg_replace('/ /','',$txt);
+	            $txt = preg_replace('/\,\,/',',',$txt);
+	            if( substr($txt,-1) ==',') {
+	                $txt=substr($txt,0,strlen($txt)-1);
+	            }
+	            $listColumns = explode(',',$txt);
+	            $coluna_chave = $frm->get('coluna_chave') ? $frm->get('coluna_chave') : $listColumns[0];
+	            $TPGRID  = $frm->get('TPGRID');
+	            $TPBANCO = $frm->get('TPBANCO');
+	            
+	            $gerador = new TDAOCreate($frm->get('tabela'), $coluna_chave, $diretorio);
+	            foreach($listColumns as $k=>$v) {
+	                $gerador->addColumn($v);
+	            }
+	            $showSchema = $frm->get('sit_const_schema');
+	            $gerador->setShowSchema($showSchema);
+	            $gerador->setWithSqlPagination($TPGRID);
+	            $gerador->setDatabaseManagementSystem($TPBANCO);            
+	            $gerador->saveVO();
+	            $gerador->saveDAO();
+	            
+	            $diretorio = str_replace('//','/',$frm->get('form_dir').'/');
+	            @mkdir($diretorio,"775",true);
+	            if( ! file_exists( $diretorio ) ) {
+	                $frm->setMessage('Diret√≥rio '.$diretorio.' n√£o existe!');
+	                break;
+	            }
+	            
+	            $geradorForm = new TFormCreate();
+	            $geradorForm->setFormTitle( $frm->get('form_title') );
+	            $geradorForm->setFormPath( $diretorio );
+	            $geradorForm->setFormFileName($frm->get('form_name'));
+	            $geradorForm->setPrimaryKeyTable($frm->get('coluna_chave'));
+	            $geradorForm->setTableRef($frm->get('tabela'));
+	            $geradorForm->setListColunnsName($listColumns);
+	            $geradorForm->setGridType($TPGRID);
+	            $geradorForm->saveForm();
+	            
+	            $frm->setMessage('Fim');
+    		}
         }
         break;
 }

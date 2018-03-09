@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -47,11 +47,11 @@ class TFileAsync extends TEdit
 	private $messageInvalidFileType;
 	/**
 	* Classe para fazer upload de arquivo de forma asyncrona
-	* $intSize = numero de caracteres do arquivo anexado que ser„o exibido na tela, pode ser utilizado
+	* $intSize = numero de caracteres do arquivo anexado que ser√£o exibido na tela, pode ser utilizado
 	* o parametro $intWidth tambem
 	*
-	* O parametro $strJsCallBack define a funÁ„o javascript que ser· chamada quando o upload assincrono terminar.
-	* Esta funÁ„o receber·, como parametros, o nome do arquivo tempor·rio e o nome do arquivo anexado.
+	* O parametro $strJsCallBack define a fun√ß√£o javascript que ser√° chamada quando o upload assincrono terminar.
+	* Esta fun√ß√£o receber√°, como parametros, o nome do arquivo tempor√°rio e o nome do arquivo anexado.
 	*
 	* @param string $strName
 	* @param integer $intSize
@@ -129,10 +129,10 @@ class TFileAsync extends TEdit
 	}
 	//-------------------------------------------------------------------------------------------
 	/**
-	* Define o tamanho m·ximo do arquivo permitido
+	* Define o tamanho m√°ximo do arquivo permitido
 	* Pode ser definido assim:
 	* ex: 1T, 2G, 30M, 1024KB
-	* se n„o for espeficificado a unidade T, G, M, KB ser· assumido KB
+	* se n√£o for espeficificado a unidade T, G, M, KB ser√° assumido KB
 	* @param string $strMaxSize
 	*/
 	public function setMaxSize($strMaxSize=null)
@@ -141,7 +141,7 @@ class TFileAsync extends TEdit
 		$this->maxSize = $strMaxSize;
 	}
 	/**
-	* Retorna o tamanho m·ximo em bytes permitido para o arquivo ser v·lido
+	* Retorna o tamanho m√°ximo em bytes permitido para o arquivo ser v√°lido
 	*
 	*/
 	public function getMaxSize()
@@ -167,24 +167,24 @@ class TFileAsync extends TEdit
 	return $bytes;
 }
 /**
-	* faz a validaÁ„o da extens„o e do tamanho m·ximo permitido
+	* faz a valida√ß√£o da extens√£o e do tamanho m√°ximo permitido
 	*
 	*/
 	public function validate()
 	{
-		//verficar se o arquivo est· no servidor
+		//verficar se o arquivo est√° no servidor
 		$filename = $this->getTempFile();
 
 		if ( !file_exists($filename) && $this->getRequired() )
 		{
-			$this->addError('Campo obrigatÛrio');
+			$this->addError('Campo obrigat√≥rio');
 		}
 		return ( (string)$this->getError()==="" );
 	}
 	//------------------------------------------------------------------------
 	public function clear()
 	{
-		// excluir o arquivo tempor·rio
+		// excluir o arquivo tempor√°rio
 		if( file_exists($this->getTempFile()))
 		{
 			@unlink($this->getTempFile());
@@ -200,7 +200,7 @@ class TFileAsync extends TEdit
 		parent::clear();
 	}
 	/**
-	* Define as extensıes de arquivos permitidas.
+	* Define as extens√µes de arquivos permitidas.
 	* Devem ser informadas separadas por virgula
 	* Ex: doc,gif,jpg
 	*
@@ -211,7 +211,7 @@ class TFileAsync extends TEdit
 		$this->allowedFileTypes = $strNewFileTypes;
 	}
 	/**
-	* Recupera os tipos de extensıes permitidas
+	* Recupera os tipos de extens√µes permitidas
 	*
 	*/
 	public function getAllowedFileTypes()
@@ -219,7 +219,7 @@ class TFileAsync extends TEdit
 		return $this->allowedFileTypes;
 	}
 	/**
-	* Retorna a extens„o do arquivo anexado
+	* Retorna a extens√£o do arquivo anexado
 	* Ex. teste.gif -> retorna: gif
 	*/
 	public function getFileExtension() {
@@ -240,7 +240,7 @@ class TFileAsync extends TEdit
 		return null;
 	}
 	/**
-	* Retorna o nome tempor·rio do arquivo gravado na pasta base/tmp
+	* Retorna o nome tempor√°rio do arquivo gravado na pasta base/tmp
 	*
 	*/
 	public function getTempFile()
@@ -280,7 +280,7 @@ class TFileAsync extends TEdit
 		return null;
 	}
 	/**
-	* Retorna o caminho completo do arquivo na pasta tempor·ria
+	* Retorna o caminho completo do arquivo na pasta tempor√°ria
 	*
 	*/
 	public function getFileName()
@@ -288,8 +288,8 @@ class TFileAsync extends TEdit
 		return $this->getValue();
 	}
 	/**
-	* Define a funÁ„o javascript que ser· chamada quando o upload assincrono terminar.
-	* Ser„o passados o nome do arquivo tempor·rio e o nome do arquivo anexado
+	* Define a fun√ß√£o javascript que ser√° chamada quando o upload assincrono terminar.
+	* Ser√£o passados o nome do arquivo tempor√°rio e o nome do arquivo anexado
 	*
 	* @param string $strNewValue
 	*/

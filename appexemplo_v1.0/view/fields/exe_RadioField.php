@@ -4,7 +4,7 @@ $acao = !isset( $acao ) ? '' : $acao;
 $frm = new TForm('Exemplo do Campo Radiobutton');
 $frm->setFlat(true);
 $frm->addGroupField('gp1','Grupo 1');
-	$frm->addRadioField('sit_cancelado1' , 'Ativo:',true,'S=SIM,N=Não',null,false,null,2,null,null,null,false);//->addEvent('onDblclick','dblClick(this)');
+	$frm->addRadioField('sit_cancelado1' , 'Ativo:',true,'S=SIM,N=NÃ£o',null,false,null,2,null,null,null,false);//->addEvent('onDblclick','dblClick(this)');
 	$frm->addRadioField('sit_genero' 	 , 'Genero:',true,array('M'=>'<span tooltip="true" title="Sexo Masculino">Masculino</span>','F'=>'<span tooltip="true" title="Sexo Feminino">Feminino</span>'),null,false,null,2,null,null,null,false);
 	$frm->addRadioField('sit_genero2' 	 , 'Genero 2 s/quebra:',true,'M=Masculino,F=Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino ',null,false,null,1,400,null,null,false,true);
 	$frm->addRadioField('sit_genero3' 	 , 'Genero 3 c/quebra:',true,'M=Masculino,F=Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino ',null,false,null,1,400,null,null,false,false);
@@ -21,7 +21,7 @@ $frm->addButton('Validar Campo Js',null,'btnValidarFieldJs','if( fwValidateField
 $frm->addButton('Validar Grupo',null,'btnValidarGrupo','fwValidateFields(null,"gp1")');
 $frm->addButton('Limpar Campo Js',null,'btnLimpar','fwSetFields("sit_cancelado")');
 
-// exibir o formulário
+// exibir o formulÃ¡rio
 $frm->show();
 ?>
 <script type="text/javascript">

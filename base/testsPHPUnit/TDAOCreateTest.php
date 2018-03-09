@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -151,9 +151,9 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     	
     	$resultArray = $tDAOCreate->getLinesArray();
     	$size = count($resultArray);
-    	$this->assertEquals( 6, $size);
+    	$this->assertEquals( 7, $size);
     }
-
+    //--------------------------------------------------------------------------------------
     public function testAddSqlSelectById_sizeArray(){
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->addSqlSelectById();
@@ -162,7 +162,45 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $size = count($resultArray);
         $this->assertEquals( 6, $size);
     }
-    
+    //--------------------------------------------------------------------------------------
+    public function testAddProcessWhereGridParameters_sizeArray(){
+    	$tDAOCreate = $this->tDAOCreate;
+    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
+    	foreach ( $listColumnsName as $k => $v ){
+    		$tDAOCreate->addColumn($v);
+    	}
+    	
+    	$tDAOCreate->addProcessWhereGridParameters();    	
+    	$resultArray = $tDAOCreate->getLinesArray();
+    	$size = count($resultArray);
+    	$this->assertEquals( 12, $size);
+    }
+    //--------------------------------------------------------------------------------------
+    public function testAddProcessWhereGridParameters_stringArray(){
+    	$expectedArray[] = TTAB.'private static function processWhereGridParameters( $whereGrid ) {'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'$result = $whereGrid;'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'if ( is_array($whereGrid) ){'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = \' 1=1 \';'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'NUMERO\'],\' AND NUMERO like \\\'%\'.$whereGrid[\'NUMERO\'].\'%\\\' \',null) );'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'ESTADO\'],\' AND ESTADO like \\\'%\'.$whereGrid[\'ESTADO\'].\'%\\\' \',null) );'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$result = $where;'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'}'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
+    	$expectedArray[] = TTAB.'}'.TEOL;
+    	
+    	$expectedString = trim( implode($expectedArray) );
+    	
+    	$tDAOCreate = $this->tDAOCreate;
+    	$listColumnsName = array("NUMERO", "ESTADO");
+    	foreach ( $listColumnsName as $k => $v ){
+    		$tDAOCreate->addColumn($v);
+    	}
+    	
+    	$tDAOCreate->addProcessWhereGridParameters();
+    	$result = $tDAOCreate->getLinesString();    	
+    	$this->assertEquals( $expectedString, $result);
+    }
+    //--------------------------------------------------------------------------------------
     public function testAddSqlSelectById_stringMySQL(){
         $tDAOCreate = $this->tDAOCreate;
         
@@ -188,7 +226,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         
         $resultArray = $tDAOCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 10, $size);
+        $this->assertEquals( 11, $size);
     }
     
     public function testAddSqlSelectAllPagination_sizeArrayMySQL(){
@@ -198,12 +236,13 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         
         $resultArray = $tDAOCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 11, $size);
+        $this->assertEquals( 12, $size);
     }
     
     public function testAddSqlSelectAllPagination_stringMySQL(){
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;
@@ -229,6 +268,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     public function testAddSqlSelectAllPagination_stringMSSQL(){
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
         $expectedArray[] = ''.TEOL;
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect'.TEOL;
         $expectedArray[] = TTAB.TTAB.'.( ($where)? \' where \'.$where:\'\')'.TEOL;

@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -47,17 +47,17 @@ $frm = new TForm('Exemplo do Campo Checkbox');
 
 $frm->addGroupField('gp1','Grupo');
 
-	//$frm->addTextField('nm_anexo_doc', 'Arquivo de Word (DOC) associado pelo Advogado ou Estagi·rio:&nbsp;&nbsp;',35,false,35,null,true,null,null,null,true);
+	//$frm->addTextField('nm_anexo_doc', 'Arquivo de Word (DOC) associado pelo Advogado ou Estagi√°rio:&nbsp;&nbsp;',35,false,35,null,true,null,null,null,true);
 	//$frm->addButton('Baixar',null,'btn_baixar_anexo',"baixar_anexo('doc')",null,false,false,'last16.gif',null,'Baixar');
   	//$frm->addHtmlField('st_publico_doc',null,null,null,20,100,false)->setCss('font','9px sans-serif')->setCss('border','1px solid red');
-	$frm->addCheckField('st_publico','Na an·lise do Advogado esta peÁa deve ser p˙blica?',false,null,null,null,null,null,null,null,null,true);
+	$frm->addCheckField('st_publico','Na an√°lise do Advogado esta pe√ßa deve ser p√∫blica?',false,null,null,null,null,null,null,null,null,true);
 
 	$frm->addCheckField('campo_1','Confirma ?',true);
-	$frm->addCheckField('campo_2','Bioma ObrigatÛrio para o cadastramentodas espÈcies:',true,'1=Cerrado,2=Mata Atl‚ntica,3=Caatinga',null,null,null,null,null,null,null,true);
-	$frm->addCheckField('campo_3','Bioma N„o ObrigatÛrio:',false,'1=Cerrado,2=Mata Atl‚ntica,3=Caatinga');
+	$frm->addCheckField('campo_2','Bioma Obrigat√≥rio para o cadastramentodas esp√©cies:',true,'1=Cerrado,2=Mata Atl√¢ntica,3=Caatinga',null,null,null,null,null,null,null,true);
+	$frm->addCheckField('campo_3','Bioma N√£o Obrigat√≥rio:',false,'1=Cerrado,2=Mata Atl√¢ntica,3=Caatinga');
 	$frm->addCheckField('campo_4','Exemplo 4:',false,'N',null,null);
 
-	$frm->addCheckField('cd_especie','EspÈcies:',false,'1=Amarela,2=Branca,3=Vermelha')->addEvent('onChange','cd_especieChange()');
+	$frm->addCheckField('cd_especie','Esp√©cies:',false,'1=Amarela,2=Branca,3=Vermelha')->addEvent('onChange','cd_especieChange()');
 $frm->closeGroup();
 
 $frm->addGroupField('gp2','Grupo 2');
@@ -85,7 +85,7 @@ if( $acao=='Validar' ){
 	$frm->validate();
 }
 
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 ?>
 <script>

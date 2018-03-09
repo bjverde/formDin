@@ -2,7 +2,7 @@
 
 /*
  * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
+ * Copyright (C) 2012 MinistÃ©rio do Planejamento
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  * 
@@ -20,41 +20,41 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo é parte do Framework Formdin.
+ * Este arquivo Ã© parte do Framework Formdin.
  * 
- * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
- * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ * O Framework Formdin Ã© um software livre; vocÃª pode redistribuÃ­-lo e/ou
+ * modificÃ¡-lo dentro dos termos da GNU LGPL versÃ£o 3 como publicada pela FundaÃ§Ã£o
  * do Software Livre (FSF).
  * 
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * Este programa Ã© distribuÃ­do na esperanÃ§a que possa ser Ãºtil, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia implÃ­cita de ADEQUAÃ‡ÃƒO a qualquer MERCADO ou
+ * APLICAÃ‡ÃƒO EM PARTICULAR. Veja a LicenÃ§a PÃºblica Geral GNU/LGPL em portuguÃªs
  * para maiores detalhes.
  * 
- * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
- * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ * VocÃª deve ter recebido uma cÃ³pia da GNU LGPL versÃ£o 3, sob o tÃ­tulo
+ * "LICENCA.txt", junto com esse programa. Se nÃ£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a FundaÃ§Ã£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm= new TForm('Exemplo de Criação de Gride',600);
+$frm= new TForm('Exemplo de CriaÃ§Ã£o de Gride',600);
 //$frm->setOverflowY(false);
 //$frm->setOverflowY(true);
 $frm->setFlat(true);
 
 
 // html dentro do form
-$frm->addHtmlField('campo_gridex',null,null,null,100)->setCss('border','1px solid green'); // cria o campo para exibição do gride
+$frm->addHtmlField('campo_gridex',null,null,null,100)->setCss('border','1px solid green'); // cria o campo para exibiÃ§Ã£o do gride
 
 //grupo dentro do form
 $frm->addGroupField('gp','Luis',150,null,null,null,true)->setOverflowY(false);
-	$frm->addHtmlField('campo_gride2',null,null,null,100)->setCss('border','1px solid green'); // cria o campo para exibição do gride
+	$frm->addHtmlField('campo_gride2',null,null,null,100)->setCss('border','1px solid green'); // cria o campo para exibiÃ§Ã£o do gride
 $frm->closeGroup();
 
 // aba dentro do form
 $pc = $frm->addPageControl('pc',150);
 $pc->addPage('Cadastro',true,true);
-   	$frm->addHtmlField('campo_gride',null,null,null,500)->setcss('border','1px solid green'); // cria o campo para exibição do gride
+   	$frm->addHtmlField('campo_gride',null,null,null,500)->setcss('border','1px solid green'); // cria o campo para exibiÃ§Ã£o do gride
 $frm->closeGroup();
 
 //**************************************************************************
@@ -104,16 +104,16 @@ $frm->closeGroup();
 
 
 
-// criação do array de dados
+// criaÃ§Ã£o do array de dados
 for( $i=0; $i<100; $i++ )
 {
 	$res['SEQ_GRIDE'][] = ($i+1);
-	$res['NOM_LINHA'][] = 'Linha nº '. ($i+1);
+	$res['NOM_LINHA'][] = 'Linha nÂº '. ($i+1);
 	$res['DES_LINHA'][] = str_repeat('Linha ',40);
 }
 
 $gride = new TGrid( 'idGride' // id do gride
-					,'Título do Gride' // titulo do gride
+					,'TÃ­tulo do Gride' // titulo do gride
 					,$res 		// array de dados
 					,250		// altura do gride
 					,'100%'		// largura do gride
@@ -129,7 +129,7 @@ $gride->addColumn('des_linha','Descricao',1200);
 //$gride->autoCreateColumns(); // cria as colunas de acordo com o array de dados
 $gride->setNoWrap(false);
 
-// quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formulário
+// quando for uma chamada ajax, devolver apenas o conteudo do gride, sem o formulÃ¡rio
 if( isset($_REQUEST['ajax'] ) )
 {
 	$gride->show();

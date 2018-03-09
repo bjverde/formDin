@@ -19,13 +19,13 @@ $frm->addGroupField('gpx1','Pedido');
 	$frm->addTextField('nome_comprador'		,'Comprador:',60,false,null)->setEnabled(false);
 	$frm->addDateField('data_pedido'		,'Data:',false)->setEnabled(false);
 	$frm->addTextField('QTD', 'Quantidade de Itens: ',10,false,null,null,false)->setEnabled(false);
-	$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cartão')->setEnabled(false);
+	$frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=CartÃ£o')->setEnabled(false);
 $frm->closeGroup();
-$frm->addGroupField('gpx2','Visualização do Item');
+$frm->addGroupField('gpx2','VisualizaÃ§Ã£o do Item');
 	$frm->addTextField('item'		,'item:',10,false,null);
 	$frm->addTextField('produto'	,'Produto:',30,false,null);
 	$frm->addNumberField('quantidade'	,'Quantidade:',5,true,1,true)->setEnabled(false);
-	$frm->addNumberField('preco'		,'Preço:',10,true,2,true)->setEnabled(false);
+	$frm->addNumberField('preco'		,'PreÃ§o:',10,true,2,true)->setEnabled(false);
 $frm->closeGroup();
 
 
@@ -57,9 +57,9 @@ switch( $acao ) {
 		break;
 }
 
-// exemplo de criação de uma treeview fora do formulário
+// exemplo de criaÃ§Ã£o de uma treeview fora do formulÃ¡rio
 
-// adicionar ao form os arquivos js e css necessários para o funcionamento da treeview
+// adicionar ao form os arquivos js e css necessÃ¡rios para o funcionamento da treeview
 $frm->addJsFile('dhtmlx/dhtmlxcommon.js');
 $frm->addJsFile('dhtmlx/treeview/dhtmlxtree.js');
 $frm->addCssFile('dhtmlx/treeview/dhtmlxtree.css');
@@ -67,8 +67,8 @@ $frm->addCssFile('dhtmlx/treeview/dhtmlxtree.css');
 // criar o objeto treeview.
 $tree = new TTreeView('tree');
 
-$tree->setWidth(200); // define a largura da área onde será exibida a treeview
-$tree->setHeight(300); // define a altura da área onde será exibida a treeview
+$tree->setWidth(200); // define a largura da Ã¡rea onde serÃ¡ exibida a treeview
+$tree->setHeight(300); // define a altura da Ã¡rea onde serÃ¡ exibida a treeview
 
 
 $idGrupo = ArrayHelper::validateUndefined($_REQUEST, 'ID_PEDIDO');
@@ -81,12 +81,12 @@ foreach ($dados['IDPARENT'] as $key => $value){
 	$tree->addItem($idParent,$id,$text,true);
 }
 
-$tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
-$frm->addJavascript($tree->getJs());// gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
+$tree->setOnClick('treeClick'); // fefinir o evento que serÃ¡ chamado ao clicar no item da treeview
+$frm->addJavascript($tree->getJs());// gerar e adicionar na criaÃ§Ã£o da pagina o codigo javascript que adiciona os itens na treeview
 $tree->setXY(0,20); // posiciona a treeview na tela. left=0, top=100
 $tree->show(); // exibe o tree view
 $frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview
-// fim criação da treeview
+// fim criaÃ§Ã£o da treeview
 
 
 $frm->show();

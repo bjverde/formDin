@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
@@ -56,7 +56,7 @@ class TFile extends TEdit {
         $this->setMaxSizeKb($strMaxSize);
         $this->setAllowedFileTypes($strAllowedFileTypes);
         $this->addEvent('onchange','fwCampoArquivoChange(this)');
-        // guardar os dados do arquivo tempor·rio postado em campos ocultos
+        // guardar os dados do arquivo tempor√°rio postado em campos ocultos
         try {
             $this->setPostFileInfo();
         } catch (Exception $e) {
@@ -84,10 +84,10 @@ class TFile extends TEdit {
     }
     //-------------------------------------------------------------------------------------------
     /**
-     * define os valores dos campos ocultos que ser„o adicionados ao form
+     * define os valores dos campos ocultos que ser√£o adicionados ao form
      * @throws UploadException
      */
-    protected function setPostFileInfo(){
+    public function setPostFileInfo(){
         if(isset($_FILES[$this->getId()])) {
             if( $_FILES[$this->getId()]['error'] == UPLOAD_ERR_OK ) {
                 $to = $this->getBase().'tmp/'.$_FILES[$this->getId()]['name'];
@@ -136,7 +136,7 @@ class TFile extends TEdit {
             $fator = pow($sizeKilbytes,3);
             $this->setMaxSize($maxSize.'Gb');
         } else {
-            // padr„o È kilbytes
+            // padr√£o √© kilbytes
             $fator = $sizeKilbytes;
             $this->setMaxSize($maxSize.'Kb');
         }
@@ -158,15 +158,15 @@ class TFile extends TEdit {
                 if( $fileSizeKb ) {
                     $maxSize = $this->getMaxSizeKb();
                     if( (int)$fileSizeKb > (int)$maxSize) {
-                        $this->addError('Tamanho m·ximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
+                        $this->addError('Tamanho m√°ximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb');
                         $this->clear();
                         $this->setCss('border','1px solid #ff0000');
                     } else {
-                        // validar extens„o
+                        // validar extens√£o
                         if( $this->getAllowedFileTypes() ) {
                             $aExtensions = explode(',',strtolower($this->getAllowedFileTypes()));
                             if( array_search($this->getFileExtension(),$aExtensions)===false) {
-                                $this->addError('Arquivo inv·lido. Tipo(s) v·lido(s):'.$this->getAllowedFileTypes());
+                                $this->addError('Arquivo inv√°lido. Tipo(s) v√°lido(s):'.$this->getAllowedFileTypes());
                             }
                         }
                     }
@@ -178,7 +178,7 @@ class TFile extends TEdit {
     //------------------------------------------------------------------------
     public function clear()
     {
-        // excluir o arquivo tempor·rio
+        // excluir o arquivo tempor√°rio
         if( file_exists($this->getValue(true)))
         {
             unlink($_POST[$this->getId().'_temp']);
@@ -193,7 +193,7 @@ class TFile extends TEdit {
         parent::clear();
     }
     /**
-     * Define as extensıes de arquivos permitidas.
+     * Define as extens√µes de arquivos permitidas.
      * Devem ser informadas separadas por virgula
      * Ex: doc,gif,jpg
      *
@@ -204,7 +204,7 @@ class TFile extends TEdit {
         $this->allowedFileTypes = $strNewFileTypes;
     }
     /**
-     * Recupera os tipos de extensıes permitidas
+     * Recupera os tipos de extens√µes permitidas
      *
      */
     public function getAllowedFileTypes()
@@ -212,7 +212,7 @@ class TFile extends TEdit {
         return $this->allowedFileTypes;
     }
     /**
-     * Retorna a extens„o do arquivo anexado
+     * Retorna a extens√£o do arquivo anexado
      * Ex. teste.gif -> retorna: gif
      */
     public function getFileExtension() {
@@ -240,7 +240,7 @@ class TFile extends TEdit {
         return null;
     }
     /**
-     * Retorna o caminho completo do arquivo na pasta tempor·ria
+     * Retorna o caminho completo do arquivo na pasta tempor√°ria
      *
      */
     public function getFileName()
@@ -248,7 +248,7 @@ class TFile extends TEdit {
         return $this->getValue(true);
     }
     /**
-     * Retorna o caminho completo do arquivo na pasta tempor·ria
+     * Retorna o caminho completo do arquivo na pasta tempor√°ria
      *
      */
     public function getTempFile()

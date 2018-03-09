@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,24 +22,24 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// quanto este arquivo for chamado pela funÁ„o registerExternalFunction() n„o precisa da include dos arquivos abaixo
+// quanto este arquivo for chamado pela fun√ß√£o registerExternalFunction() n√£o precisa da include dos arquivos abaixo
 if( file_exists('../xajax/xajax.inc.php') )
 {
 	session_start();
@@ -62,7 +62,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 
 	// verficar se o array de pesquisa tem mesmo tamanho que array dos parametros de entrada
 	if ( count($arrBusca) != count($arrCampoDescricao) ) {
-		$objResponse->addAlert(utf8_encode('Tamanho dos campos de entrada n„o s„o iguais!'));
+		$objResponse->addAlert(utf8_encode('Tamanho dos campos de entrada n√£o s√£o iguais!'));
 		return $objResponse->getXML();
 	}
 
@@ -72,7 +72,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$bvars[$v] = utf8_decode($arrBusca[$k]);
 	}
 
-	// Por razıes de seguranÁa, o vari·vel num_pessoa tem que ser lido da sess„o
+	// Por raz√µes de seguran√ßa, o vari√°vel num_pessoa tem que ser lido da sess√£o
 	if ( defined('TIPO_ACESSO') && TIPO_ACESSO=='I' ) {
 		$bvars['NUM_PESSOA_CERTIFICADO'] = $_SESSION['num_pessoa'];
 	} else {
@@ -95,7 +95,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$arquivo = md5(serialize($bvarsCache)).".cache";
 			$nome_arquivo = $pac_func_proc."/".$arquivo;
 
-			//Tentar abrir arquivo cache ou ler da sess„o
+			//Tentar abrir arquivo cache ou ler da sess√£o
 			if ( $tempoCache > 0 and is_readable($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo)
 					and (time() - filemtime($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo)) < $tempoCache ) {
 				$fp = fopen($GLOBALS['conexao']->getbase()."cache/".$nome_arquivo, "r");
@@ -152,7 +152,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 
 	// verficar se os arrays dos parametros de retorno tem mesmo tamanho
 	if ( count($arrIdRetorno) != count($arrCampoRetorno) ) {
-		$objResponse->addAlert('Tamanho dos campos de retorno n„o s„o iguais!');
+		$objResponse->addAlert('Tamanho dos campos de retorno n√£o s√£o iguais!');
 		return $objResponse->getXML();
 	}
 	if ( $nCnt > 50 ) {
@@ -185,7 +185,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"block\"");
 
 
-			// calcular a altura do div em funÁ„o da quantidade de opÁıes encontradas
+			// calcular a altura do div em fun√ß√£o da quantidade de op√ß√µes encontradas
 			$alturaDiv = (16 * $nCnt);
 
 			// limite 200
@@ -194,8 +194,8 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.height=\"".$alturaDiv."\"");
 			$objResponse->addScript("document.getElementById('".$divSelect."').style.width=6.5*getObj('".$campo_origem."').size");
 
-			// Aqui zeramos todos os parametros de retorno menos o parametro de retorno que tambÈm È parametros de pesquisa.
-			// Depois ser„o preenchidos com os valores da lista acima
+			// Aqui zeramos todos os parametros de retorno menos o parametro de retorno que tamb√©m √© parametros de pesquisa.
+			// Depois ser√£o preenchidos com os valores da lista acima
 			foreach ( $arrIdRetorno as $k1=>$v1 ) {
 				$campoRetorno = $arrCampoRetorno[$k1];
 				if ( !array_search($v1,$arrStrOrigem) ) {
@@ -205,7 +205,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
  		}
  		else
  		{
-			$objResponse->addAlert("Nenhuma OpÁ„o");
+			$objResponse->addAlert("Nenhuma Op√ß√£o");
 
  		}
 	} elseif($nCnt == 1)  {
@@ -221,7 +221,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$objResponse->addScript("formDinAutoSugestao.clearBuffer()");
 	} elseif ($nCnt < 1 ) {
 
-		//	Se n„o tiver nenhum resultado, esconder o div-select
+		//	Se n√£o tiver nenhum resultado, esconder o div-select
 		$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"none\"");
 		$objResponse->addScriptCall('setImagemFundoCampo(\''.$arrStrOrigem[0].'\',\'base/imagens/erro.gif\')');
 		foreach ( $arrIdRetorno as $k1=>$v1 ) {

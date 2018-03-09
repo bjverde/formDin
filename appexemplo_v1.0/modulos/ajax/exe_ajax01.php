@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,43 +22,43 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
 /**
 * Primeiro exemplo.
-* Adicionar bot„o ajax em um form no padr„o normal com submit
+* Adicionar bot√£o ajax em um form no padr√£o normal com submit
 */
 
-// fazer o include das funÁıes ajax quando receber uma requisiÁ„o ajax;
+// fazer o include das fun√ß√µes ajax quando receber uma requisi√ß√£o ajax;
 if( isset($_REQUEST['ajax'] ) && $_REQUEST['ajax'] == 1 )
 {
 	require_once($this->getBase().'includes/formDin4Ajax.php');
 }
 
-$frm = new TForm('Formul·rio Ajax - Exemplo N∫ 1 - MÛdulo: exe_ajax_1.php ',400,600);
-$frm->addHtmlField('html','<br><center><b>Exemplo de transformaÁ„o de um formul·rio no formato padr„o ( submit ) para ajax.</b></center><br>Os botıes abaixo foram trasnformados para o padr„o ajax, alterando a linha:<br>$frm->setActions("Gravar,Excluir"); <br>para:<br>$frm->addButtonAjax("Gravar");<br>$frm->addButtonAjax("Excluir");<br<br>');
+$frm = new TForm('Formul√°rio Ajax - Exemplo N¬∫ 1 - M√≥dulo: exe_ajax_1.php ',400,600);
+$frm->addHtmlField('html','<br><center><b>Exemplo de transforma√ß√£o de um formul√°rio no formato padr√£o ( submit ) para ajax.</b></center><br>Os bot√µes abaixo foram trasnformados para o padr√£o ajax, alterando a linha:<br>$frm->setActions("Gravar,Excluir"); <br>para:<br>$frm->addButtonAjax("Gravar");<br>$frm->addButtonAjax("Excluir");<br<br>');
 
 $frm->addTextField('nome','Nome:',100,true,50);
 $frm->addDateField('nasc','Nascimento:',true);
-$frm->addNumberField('salario','Sal·rio',10,false,2);
+$frm->addNumberField('salario','Sal√°rio',10,false,2);
 $frm->addButton('Normal',null,'btnTeste',null,null,true,false);
 $frm->addButtonAjax('Normal',null,null,null,null,null,null,null,null,'btnAjax',null,true,false);
-$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informaÁıes','text',false);
+$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informa√ß√µes','text',false);
 
 $acao = isset($acao) ? $acao : null;
 if( $acao =='login') {
@@ -91,14 +91,14 @@ switch( PostHelper::get('formDinAcao')  ) {
 	case 'Gravar':
 		/*
 		$res['DAT_ITEM'][0] = '01/01/2012';
-		$res['NOM_ITEM'][0] = "CORA«√O";
+		$res['NOM_ITEM'][0] = "CORA√á√ÉO";
 		prepareReturnAjax(1,$res);
-		prepareReturnAjax(1,"'CORA«√O'");
+		prepareReturnAjax(1,"'CORA√á√ÉO'");
 		*/
 		sleep(1); // temporizador de 1 segundo para retornar
 		if( $frm->validate() )
 		{
-			$frm->setMessage('AÁ„o salvar executada com SUCESSO!!!');
+			$frm->setMessage('A√ß√£o salvar executada com SUCESSO!!!');
 		}
 	break;
 	//---------------------------------------------------------------------------------
@@ -106,7 +106,7 @@ switch( PostHelper::get('formDinAcao')  ) {
 		//sleep(1); // temporizador de 1 segundo para retornar
 		if( $frm->validate() )
 		{
-			$frm->setMessage('AÁ„o Excluir executada com SUCESSO!!!');
+			$frm->setMessage('A√ß√£o Excluir executada com SUCESSO!!!');
 		}
 	break;
 	//---------------------------------------------------------------------------------
@@ -116,9 +116,9 @@ switch( PostHelper::get('formDinAcao')  ) {
 //$frm->setAction('Salvar,Excuir');
 
 // depois
-// bot„o ajax
+// bot√£o ajax
 $frm->addButtonAjax('Gravar',null,null,null,null,'Gravando. Aguarde...','json');
-// bot„o ajax
+// bot√£o ajax
 $frm->addButtonAjax('Excluir',null,null,null,null,'Excluindo Registro...');
 
 // chamada ajax manual
@@ -154,8 +154,8 @@ function meuCallBack(res)
 function meuBeforeSend(data)
 {
 	data['nome'] = 'parametro adicionado no evento beforeSend';
-	//alert('N„o vai passar');
-	if( confirm('FunÁ„o beforeSend foi chamada. Deseja continuar ?'))
+	//alert('N√£o vai passar');
+	if( confirm('Fun√ß√£o beforeSend foi chamada. Deseja continuar ?'))
 		return true;
 	return false;
 }
@@ -203,7 +203,7 @@ function confirmacao(status)
     status = status||null;
 	if( !status)
 	{
-		fwConfirm('Tem certeza que testou esta mensagem?', confirmacao, confirmacao, 'Sim', 'N„o', 'Salvar arquivo');
+		fwConfirm('Tem certeza que testou esta mensagem?', confirmacao, confirmacao, 'Sim', 'N√£o', 'Salvar arquivo');
 	}
     else
     {

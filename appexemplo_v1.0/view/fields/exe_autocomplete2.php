@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,45 +22,45 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 TPDOConnection::test(false);
 
 $frm = new TForm( 'Exemplo Campo Texto com Autocompletar II',220 );
-$frm->addHtmlField('msg','<h3>Este exemplo est· utilizando o banco de dados bdApoio.s3db ( sqlite) do diretÛrio exemplos.<br>
-A tabela de consulta È a tb_municipio.<br>
-A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>Se o campo Estado tiver preenchido o codigo da uf ser· utilizado no filtro.<br></h3>');
+$frm->addHtmlField('msg','<h3>Este exemplo est√° utilizando o banco de dados bdApoio.s3db ( sqlite) do diret√≥rio exemplos.<br>
+A tabela de consulta √© a tb_municipio.<br>
+A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>Se o campo Estado tiver preenchido o codigo da uf ser√° utilizado no filtro.<br></h3>');
 
 
 $frm->addSelectField( 'cod_uf', 'Estado:')->addEvent('onChange','jQuery("#nom_municipio").val("");fwAutoCompleteClearCache("nom_municipio")');
 $frm->addTextField( 'nom_municipio', 'Cidade:', 60 )->setExampleText( 'Digite os 3 primeiros caracteres.');
 $frm->addHiddenField('cod_municipio','');
 
-//Deve sempre ficar depois da definiÁ„o dos campos
+//Deve sempre ficar depois da defini√ß√£o dos campos
 $frm->setAutoComplete( 'nom_municipio'
 			, 'tb_municipio'	// tabela de municipios
 			, 'nom_municipio'	// campo de pesquisa
-			, 'cod_municipio'	// campo que ser· atualizado ao selecionar o nome do municÌpio
+			, 'cod_municipio'	// campo que ser√° atualizado ao selecionar o nome do munic√≠pio
 			, null
-			,'cod_uf'			// campo do formul·rio que ser· adicionado como filtro
+			,'cod_uf'			// campo do formul√°rio que ser√° adicionado como filtro
 			,null
 			,3					// numero de caracteres minimos para disparar a pesquisa
-			,1000				// tempo apÛs a digitaÁ„o para disparar a consulta
-			,50					// m·ximo de registros que dever· ser retornado
+			,1000				// tempo ap√≥s a digita√ß√£o para disparar a consulta
+			,50					// m√°ximo de registros que dever√° ser retornado
 			);
 $frm->show();
 ?>

@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,56 +22,56 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌ1do na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a Licen?a P˙blica Geral GNU/LGPL em portugu?s
+ * Este programa √© distribu√≠1do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen?a P√∫blica Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 TPDOConnection::test(false);
 
 $frm = new TForm('Exemplo do Campo Select',450);
 
-$frm->addHtmlField('html_gp2','<center><b>Este exemplos est„o utilizando o banco de dados local "base/exemplos/bdApoio.s3db" (sqlite)</center></b><br/>');
+$frm->addHtmlField('html_gp2','<center><b>Este exemplos est√£o utilizando o banco de dados local "base/exemplos/bdApoio.s3db" (sqlite)</center></b><br/>');
 
 
 //$frm->addSelectField('estado_norte','Estado Norte:',true,'tb_uf|cod_regiao=1',true,false,null,false,null,null,'-- selecione o Estado --',null,'COD_UF','NOM_UF',null)->setRequired(true)->setValue(12);
-$frm->addSelectField('estado','Estado (todos):',true,'tb_uf',true,false,null,false,null,null,'-- selecione o Estado --',null,'COD_UF','NOM_UF',null,'cod_regiao')->addEvent('onChange','select_change(this)')->setToolTip('SELECT - esta campo select possui o cÛdigo da regi„o adicionado em sua tag option. Para adicionar dados extras a um campo select, basta definir as colunas no par‚metro $arrDataColumns.');
+$frm->addSelectField('estado','Estado (todos):',true,'tb_uf',true,false,null,false,null,null,'-- selecione o Estado --',null,'COD_UF','NOM_UF',null,'cod_regiao')->addEvent('onChange','select_change(this)')->setToolTip('SELECT - esta campo select possui o c√≥digo da regi√£o adicionado em sua tag option. Para adicionar dados extras a um campo select, basta definir as colunas no par√¢metro $arrDataColumns.');
 
 $frm->addGroupField('gp1','Selects Normais');
-	$f = $frm->addSelectField('sit_cancelado','Cancelado:',null,'0=N„o,1=Sim',null,null,'1')->addEvent('onChange','select_change(this)');
+	$f = $frm->addSelectField('sit_cancelado','Cancelado:',null,'0=N√£o,1=Sim',null,null,'1')->addEvent('onChange','select_change(this)');
 	$f->setOptionsData(array('0'=>'Zero','1'=>'Um') );
 
-	$f=$frm->addSelectField('seq_bioma'	,'Bioma:',true,'CE=CERRADO,PA=PANTANAL,MA=MATA ATL¬NTICA',null,null,null,true,4)->setOptionsData(array('CE'=>array('seq_x'=>'147','nom_x'=>'nome x')));
+	$f=$frm->addSelectField('seq_bioma'	,'Bioma:',true,'CE=CERRADO,PA=PANTANAL,MA=MATA ATL√ÇNTICA',null,null,null,true,4)->setOptionsData(array('CE'=>array('seq_x'=>'147','nom_x'=>'nome x')));
 
 	$frm->addHtmlField('status');
 $frm->closeGroup();
 
 
 $frm->addGroupField('gp2','Selects Combinados');
-	$frm->addSelectField('cod_regiao','Regi„o:',null,'1=NORTE,2=NORDETE,3=SUDESTE,4=SUL,5=CENTRO OESTE,9=UNICA')->setEvent('onchange','regiaoChange()');
+	$frm->addSelectField('cod_regiao','Regi√£o:',null,'1=NORTE,2=NORDETE,3=SUDESTE,4=SUL,5=CENTRO OESTE,9=UNICA')->setEvent('onchange','regiaoChange()');
 	$frm->addSelectField('cod_uf','Estado(s):',false,null,FALSE);
 
-	$frm->addSelectField('cod_municipio'	,'MunicÌpio:',null,null,false);
+	$frm->addSelectField('cod_municipio'	,'Munic√≠pio:',null,null,false);
 
 	$frm->addSelectField('cod_uf_2','Estado 2:',false);
-	$frm->addSelectField('cod_municipio_2'	,'MunicÌpio 2:',null,null,false);
+	$frm->addSelectField('cod_municipio_2'	,'Munic√≠pio 2:',null,null,false);
 
 	$frm->combinarSelects('cod_regiao','cod_uf','tb_uf','cod_regiao','cod_uf','nom_uf',null,null,'Nenhum',null,null,TRUE);
 
-	$frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- MunicÌpios --','0','Nenhum MunicÌpio Encontrado','cod_regiao','callBackSelectCombinado()');
+	$frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Munic√≠pios --','0','Nenhum Munic√≠pio Encontrado','cod_regiao','callBackSelectCombinado()');
 
-	$frm->combinarSelects('cod_uf_2','cod_municipio_2','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- MunicÌpios --','0','Nenhum MunicÌpio Encontrado');
+	$frm->combinarSelects('cod_uf_2','cod_municipio_2','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Munic√≠pios --','0','Nenhum Munic√≠pio Encontrado');
 $frm->closeGroup();
 
 $frm->addGroupField('gp4','Selects MultiSelect');
@@ -103,7 +103,7 @@ $frm->set('cod_uf','32');
 $frm->set('cod_municipio','3203353');
 */
 
-// exibir o formul·rio
+// exibir o formul√°rio
 $frm->show();
 ?>
 <script>
@@ -118,11 +118,11 @@ function btnLimparClick()
 }
 function callBackSelectCombinado(pai,filho)
 {
-	alert( 'Callback combinar select.\nO campo cod_municipio agora possui '+filho.length+' municÌpios.\n\nValor do Select Pai ('+pai.id+') ='+pai.value+'\nValor do Select Filho ('+filho.id+') = '+filho.value );
+	alert( 'Callback combinar select.\nO campo cod_municipio agora possui '+filho.length+' munic√≠pios.\n\nValor do Select Pai ('+pai.id+') ='+pai.value+'\nValor do Select Filho ('+filho.id+') = '+filho.value );
 }
 function regiaoChange()
 {
-	alert( 'Rregi„o foi alterada');
+	alert( 'Rregi√£o foi alterada');
 }
 function lerMunAjax()
 {
@@ -144,7 +144,7 @@ function select_change(e)
 {
 	if( e.id == 'estado')
 	{
- 		alert( 'CÛdigo da Regi„o: '+jQuery("#"+e.id+' option:selected').attr('data-cod_regiao') );
+ 		alert( 'C√≥digo da Regi√£o: '+jQuery("#"+e.id+' option:selected').attr('data-cod_regiao') );
 	}
 	else
 	{

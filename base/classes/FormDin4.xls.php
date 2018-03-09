@@ -1,9 +1,9 @@
 <?php
 /*
  * Formdin Framework
- * Copyright (C) 2012 MinistÈrio do Planejamento
- * Criado por LuÌs EugÍnio Barbosa
- * Essa vers„o È um Fork https://github.com/bjverde/formDin
+ * Copyright (C) 2012 Minist√©rio do Planejamento
+ * Criado por Lu√≠s Eug√™nio Barbosa
+ * Essa vers√£o √© um Fork https://github.com/bjverde/formDin
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -22,20 +22,20 @@
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
- * Este arquivo È parte do Framework Formdin.
+ * Este arquivo √© parte do Framework Formdin.
  *
- * O Framework Formdin È um software livre; vocÍ pode redistribuÌ-lo e/ou
- * modific·-lo dentro dos termos da GNU LGPL vers„o 3 como publicada pela FundaÁ„o
+ * O Framework Formdin √© um software livre; voc√™ pode redistribu√≠-lo e/ou
+ * modific√°-lo dentro dos termos da GNU LGPL vers√£o 3 como publicada pela Funda√ß√£o
  * do Software Livre (FSF).
  *
- * Este programa È distribuÌdo na esperanÁa que possa ser ˙til, mas SEM NENHUMA
- * GARANTIA; sem uma garantia implÌcita de ADEQUA«√O a qualquer MERCADO ou
- * APLICA«√O EM PARTICULAR. Veja a LicenÁa P˙blica Geral GNU/LGPL em portuguÍs
+ * Este programa √© distribu√≠do na esperan√ßa que possa ser √∫til, mas SEM NENHUMA
+ * GARANTIA; sem uma garantia impl√≠cita de ADEQUA√á√ÉO a qualquer MERCADO ou
+ * APLICA√á√ÉO EM PARTICULAR. Veja a Licen√ßa P√∫blica Geral GNU/LGPL em portugu√™s
  * para maiores detalhes.
  *
- * VocÍ deve ter recebido uma cÛpia da GNU LGPL vers„o 3, sob o tÌtulo
- * "LICENCA.txt", junto com esse programa. Se n„o, acesse <http://www.gnu.org/licenses/>
- * ou escreva para a FundaÁ„o do Software Livre (FSF) Inc.,
+ * Voc√™ deve ter recebido uma c√≥pia da GNU LGPL vers√£o 3, sob o t√≠tulo
+ * "LICENCA.txt", junto com esse programa. Se n√£o, acesse <http://www.gnu.org/licenses/>
+ * ou escreva para a Funda√ß√£o do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(0);
@@ -43,22 +43,16 @@ error_reporting(0);
 include("excelwriter.inc.php");
 
 // checkboxes marcados no gride ( quando existir )
-if( isset( $_REQUEST['checkboxes'] ))
-{
+if( isset( $_REQUEST['checkboxes'] )){
 	$checkboxes = json_decode($_REQUEST['checkboxes']);
-}
-else
-{
+}else{
 	$checkboxes = json_decode("{}");
 }
 
 // radiobuttons marcados no gride ( quando existir )
-if( isset( $_REQUEST['radiobuttons'] ))
-{
+if( isset( $_REQUEST['radiobuttons'] )){
 	$radiobuttons = json_decode($_REQUEST['radiobuttons']);
-}
-else
-{
+}else{
 	$radiobuttons = json_decode("{}");
 }
 $grd = $_GET[ 'gride' ];
@@ -68,14 +62,12 @@ $tempFile = $dirBase . 'tmp/tmp_' .$grd .'_'.session_id().'.go';
 
 $dadosGride = null;
 $tituloGride = '';
-if ( file_exists( $tempFile ) )
-{
-	$dadosGride = unserialize( file_get_contents( $tempFile ) );
+if ( file_exists( $tempFile ) ) {
+	$fileContents = file_get_contents( $tempFile );
+	$dadosGride = unserialize( $fileContents );
 	$tituloGride = $_REQUEST[ 'title' ];
-}
-else
-{
-	echo '<h2>Dados do gride n„o foram salvos em ' . $tempFile . '</h2>';
+} else {
+	echo '<h2>Dados do gride n√£o foram salvos em ' . $tempFile . '</h2>';
 	die();
 }
 
@@ -105,7 +97,7 @@ foreach( $_REQUEST as $k => $v )
 		{
 			$count++;
 			$excel->writeRow();
-			$excel->writeCol(htmlentities("CritÈrio(s) de SeleÁ„o:",null, ENCODINGS),count($keys));
+			$excel->writeCol(htmlentities("Crit√©rio(s) de Sele√ß√£o:",null, ENCODINGS),count($keys));
 		}
 		$excel->writeLine(array( htmlentities( preg_replace( '/(w_|:)/', '', $k  ),null, ENCODINGS ),array( htmlentities( $v,null, ENCODINGS ),(count($keys)-1) ) ) );
 	}
@@ -113,9 +105,9 @@ foreach( $_REQUEST as $k => $v )
 
 // criar os titulos das colunas
 $a=null;
-foreach($keys as $v )
-{
-	$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
+foreach($keys as $v ) {
+	//$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
+	$a[]  = htmlentities(utf8_encode($v),null,'UTF-8');
 }
 $excel->writeLine($a );
 
@@ -159,7 +151,7 @@ $excel->close();
 //ob_clean();
 //flush();
 
-// ConfiguraÁıes header para forÁar o download
+// Configura√ß√µes header para for√ßar o download
 header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
 header ("Cache-Control: no-cache, must-revalidate");

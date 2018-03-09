@@ -4,7 +4,7 @@ $frm = new TForm('Cadastro de Pessoa');
 
 $frm->addHiddenField( 'IDPESSOA' ); // coluna chave da tabela
 $frm->addTextField('NOME', 'Nome:',50,true);
-$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',null,'PF=Pessoa física,PJ=Pessoa jurídica',false);
+$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',null,'PF=Pessoa fÃ­sica,PJ=Pessoa jurÃ­dica',false);
 $frm->addTextField('DAT_INCLUSAO', 'Data:',50,false);
 //$frm->addDateField('DAT_INCLUSAO','Data:',null);
 
@@ -54,7 +54,7 @@ $gride = new TGrid( 'gd' // id do gride
 $gride->addColumn('IDPESSOA','id',50,'center');
 $gride->addColumn('NOME','Nome Pessoa',100,'left');
 $gride->addColumn('TIPO','Tipo',50,'center');
-$gride->addColumn('DAT_INCLUSAO','Data Inclusção',100,'center');
+$gride->addColumn('DAT_INCLUSAO','Data InclusÃ§Ã£o',100,'center');
 
 
 $frm->addHtmlField('gride',$gride);
