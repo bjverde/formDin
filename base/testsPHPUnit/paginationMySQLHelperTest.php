@@ -129,6 +129,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 'ISFALSE';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
+		$whereGrid = null;
 		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid['NUMERO'],$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
