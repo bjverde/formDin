@@ -38,7 +38,8 @@
  */
 
 error_reporting(E_ALL);
-define('BDHO','./ho/bdho.s3db');
+
+HelpOnLineDAO::createFileAndTable();
 
 $frm = new TForm('Ajuda em Tempo Real',500,850);
 $frm->addTextField('help_title'	,'Título:'		,50,false);
@@ -48,45 +49,6 @@ $frm->addMemoField ('help_text','',10000,false,100,15,true,true,false);
 $frm->setRichEdit(true);
 $frm->addJavascript('fwSetHtmlEditor("help_text","callBackEditor",false)');
 
-// conectar com banco de dados
-if( !file_exists(BDHO))
-{
-	$aFileParts = pathinfo( BDHO );
-	$baseName = $aFileParts[ 'basename' ];
-	$fileName = $aFileParts[ 'filename' ];
-	$dirName = $aFileParts[ 'dirname' ];
-	if( $dirName && ! file_exists($dirName) )
-	{
-		if ( ! mkdir($dirName, 0775, true ) )
-    	{
- 			die('Não foi possivel criar o diretório '.$dirName);
-		}
-	}
-}
-//if ( $db = sqlite_open( BDHO, 0666, $sqliteerror))
-if ( $db = new SQLiteDatabase(BDHO,0666) )
-{
-	// verificar se a tabela existe e cria-la se não existir
-	$q = @$db->query('select count(*) from helponline where 1 = 1');
-    if ($q === false)
-    {
-    	$query = 'CREATE TABLE [helpOnLine] (
-					[help_form] VARCHAR(50)  NULL,
-					[help_field] VARCHAR(50)  NOT NULL,
-					[help_title] VARCHAR(50)  NULL,
-					[help_text] TEXT  NULL,
-					PRIMARY KEY ([help_form],[help_field])
-					)';
-    	if( ! $db->queryExec( $query, $error))
-		{
-			die( $error );
-		}
-	}
-}
-else
-{
-	 die( $sqliteerror );
-}
 
 $acao = isset($acao) ? $acao : '' ;
 switch( $acao )
