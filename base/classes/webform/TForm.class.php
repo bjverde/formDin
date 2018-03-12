@@ -6231,8 +6231,8 @@ class TForm Extends TBox
             * @param integer $intColumns
             * @param integer $intRows
             * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolShowCounter
+            * @param boolean $boolLabelAbove   - Label abaixo
+            * @param boolean $boolShowCounter  - Contador de caracteres ! Só funciona em campos não RichText
             * @param string $strValue
             * @return TMemo
             */
