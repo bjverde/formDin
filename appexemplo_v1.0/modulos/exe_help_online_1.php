@@ -56,48 +56,73 @@ $frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
-//$frm->setAction('Atualizar');
+$frm->setAction('Atualizar');
 //$frm->addButton('Criar BD','criarBD','btnCriarBD');
 
-$acao = isset($acao) ? $acao : '' ;
+$acao = isset($acao) ? $acao : null;
 switch( $acao ) {
-	case 'salvar';
-		ob_clean();
-		//print "select count(*) as total from helpOnLine where form_name='".$_REQUEST['form_name']."' and form_field='".$_REQUEST['form_field']."'" ;
-       	$res = $db->query("select count(*) as total from helpOnLine where help_form='".$_REQUEST['help_form']."' and help_field='".$_REQUEST['help_field']."'",SQLITE_ASSOC,$error );
-    	$row = $res->fetch();
-    	if( $row['total'] > 0) {
- 			$query = "update helpOnLine set help_title = '".$_REQUEST['help_title']."', help_text='".$_REQUEST['help_text']."' where help_form='".$_REQUEST['help_form']."' and help_field='".$_REQUEST['help_field']."'";
-	    } else{
-   			$query = "insert into helpOnLine ( help_form,help_field,help_title,help_text) values('".$_REQUEST['help_form']."','".$_REQUEST['help_field']."','".$_REQUEST['help_title']."','".$_REQUEST['help_text']."')";
-		}
-		if( ! $db->queryExec( $query, $error)) {
-			die( $error );
-		}
-   		die('Dados gravados com sucesso!');
-	break;
-	/*
-	default:
-		
-		$result = HelpOnLineDAO::selectAll('help_form',null);		
-		if( count( $result )  > 0){
-			$frm->set('HELP_FORM',$result['HELP_FORM'][0]);
-			$frm->set('HELP_TITLE',$result['HELP_TITLE'][0]);
-			$frm->set('HELP_FIELD', $result['HELP_FIELD'][0] );
-		    $frm->set('HELP_TEXT', $result['HELP_TEXT'][0] );
+	case 'Salvar':
+		if ( $frm->validate() ) {
+			$vo = new HelpOnLineVO();
+			$frm->setVo( $vo );
+			$resultado = HelpOnLineDAO::insert( $vo );
+			if($resultado==1) {
+				$frm->setMessage('Registro gravado com sucesso!!!');
+				$frm->clearFields();
+			}else{
+				$frm->setMessage($resultado);
+			}
 		}
 		break;
-	*/
+		//--------------------------------------------------------------------------------
+	case 'Buscar':
+		$retorno = array(
+		'HELP_FORM'=>$frm->get('HELP_FORM')
+		,'HELP_FIELD'=>$frm->get('HELP_FIELD')
+		,'HELP_TITLE'=>$frm->get('HELP_TITLE')
+		,'HELP_TEXT'=>$frm->get('HELP_TEXT')
+		);
+		$whereGrid = $retorno;
+		break;
+		//--------------------------------------------------------------------------------
+	case 'Limpar':
+		$frm->clearFields();
+		break;
+		//--------------------------------------------------------------------------------
+	case 'gd_excluir':
+		$id = $frm->get( $primaryKey ) ;
+		$resultado = HelpOnLineDAO::delete( $id );;
+		if($resultado==1) {
+			$frm->setMessage('Registro excluido com sucesso!!!');
+			$frm->clearFields();
+		}else{
+			$frm->clearFields();
+			$frm->setMessage($resultado);
+		}
+		break;
+		//--------------------------------------------------------------------------------
+		/*
+		 default:
+		 
+		 $result = HelpOnLineDAO::selectAll('help_form',null);
+		 if( count( $result )  > 0){
+		 $frm->set('HELP_FORM',$result['HELP_FORM'][0]);
+		 $frm->set('HELP_TITLE',$result['HELP_TITLE'][0]);
+		 $frm->set('HELP_FIELD', $result['HELP_FIELD'][0] );
+		 $frm->set('HELP_TEXT', $result['HELP_TEXT'][0] );
+		 }
+		 break;
+		 */
 }
 
 $dados = HelpOnLineDAO::selectAll($primaryKey,$whereGrid);
 $mixUpdateFields = $primaryKey.'|'.$primaryKey.',HELP_FIELD|HELP_FIELD,HELP_TITLE|HELP_TITLE,HELP_TEXT|HELP_TEXT';
 $gride = new TGrid( 'gd'        // id do gride
 		,'Gride'     // titulo do gride
-		,$dados 	      // array de dados
-		,null		  // altura do gride
-		,null		  // largura do gride
-		,$primaryKey   // chave primaria
+		,$dados 	 // array de dados
+		,null		 // altura do gride
+		,null		 // largura do gride
+		,$primaryKey // chave primaria
 		,$mixUpdateFields
 		);
 $gride->addColumn($primaryKey,'id',50,'center');
@@ -111,14 +136,13 @@ $frm->show();
 ?>
 <script>
 
-function callBackEditor(ed)
-{
-	//alert( ed);
-	//ed.windowManager.alert('Dados gravados!');
-	//var ed = tinyMCE.get('help');
-	//ed.setProgressState(1);
-	//alert( 'salvar\t\t'+ed.getContent());
-	//ed.setProgressState(0);
+function callBackEditor(ed) {
+	alert( ed);
+	ed.windowManager.alert('Dados gravados!');
+	var ed = tinyMCE.get('help');
+	ed.setProgressState(1);
+	alert( 'salvar\t\t'+ed.getContent());
+	ed.setProgressState(0);
 	jQuery('#formDinAcao').val('salvar');
     var dados = jQuery("#formdin").serialize();
     dados += '&ajax=1';
