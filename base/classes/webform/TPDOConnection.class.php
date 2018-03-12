@@ -912,6 +912,8 @@ class TPDOConnection {
         $retorno = null;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
+        } elseif (self::$banco == DBMS_SQLITE) {
+        	$retorno = $string;
         }else{
             if ( $boolUtf8_Decode ) {
                 $retorno = utf8_decode( $string );
