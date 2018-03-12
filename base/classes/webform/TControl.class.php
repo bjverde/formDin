@@ -344,21 +344,34 @@ abstract class TControl extends TElement
 
     //-----------------------------------------------------------------------------
     /**
-    * Método para criar ajuda on-line em um campo
-    * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido
-    * se não for informado assume o id do campo.
+    * Método para criar ajuda on-line em um form ou campo. Para ajuda de campo pode utilizar tambem 
+    * addBoxField
+    * O parametro $strHelpFile recebe o nome de um arquivo com conteudo html para ser exibido.
     * O arquivo deverá estar no diretório ajuda/ na raiz da aplicação.
+    *  
     * Poder ser informada tambem o endereço (url) da pagina de help
-    * Exemplo: $nom->setHelpFile('nom_pessoa','Nome da Pessoa',200,500);
-    * Exemplo: $nom->setHelpFile('http://localhost/sistema/texto_ajuda.html','Exemplo de help on-line',200,500);
+    * 
+    * <code> 
+    * Exemplo01: $nom->setHelpFile('Nome da Pessoa',200,500,'ajuda_form01.html');
+    * Exemplo02: $nom->setHelpFile('Nome da Pessoa',200,500,'http://localhost/sistema/texto_ajuda.html');
+    * Exemplo03: $nom->setHelpFile('Nome da Pessoa',200,500,'Meu texto de ajuda', null, null, false);
+    * </code>
+    * 
     * @param mixed $strWindowHeader
     * @param mixed $intShowHeight
     * @param mixed $intShowWidth
-    * @param mixed $strHelpFile
-    * @param mixed $strButtonImage
+    * @param mixed $strHelpFile    - nome do arquivo que será carregado dentro do box
+    * @param mixed $strButtonImage - imagem que aparecerá na frente do label
     * @param boolean $boolReadOnly
+    * @param boolean $showFile     - true mostra o conteudo de um arquivo, FALSE mostra a mensagem de texto informada no $strHelpFile
     */
-    public function setHelpOnLine( $strWindowHeader = null, $intShowHeight = null, $intShowWidth = null, $strHelpFile = null, $strButtonImage = null, $boolReadOnly = null )
+    public function setHelpOnLine( $strWindowHeader = null
+    							 , $intShowHeight = null
+    		                     , $intShowWidth = null
+    		                     , $strHelpFile = null
+    		                     , $strButtonImage = null
+    		                     , $boolReadOnly = null
+    							 , $showFile = true)
     {
         $strHelpFile      =is_null( $strHelpFile ) ? $this->getId() : $strHelpFile;
         $this->helpFile[0]=$strHelpFile;
@@ -371,24 +384,32 @@ abstract class TControl extends TElement
             $this->helpFile[4]=is_null( $strButtonImage ) ? $this->getBase().'imagens/icon_help-16x16.png' : $strButtonImage;
             $this->helpFile[5]=is_null( $boolReadOnly ) ? false : $boolReadOnly;
            	$this->helpFile[6]='';
-            if( preg_match('/\.\.\//',$this->getBase()) > 0 )
-            {
+           	$this->helpFile[7]=is_null( $showFile ) ? true : $showFile;
+            if( preg_match('/\.\.\//',$this->getBase()) > 0 ) {
             	$this->helpFile[6]=APLICATIVO;
 			}
-            if ( strpos( $this->helpFile[4], '/' ) === false )
-            { $this->helpFile[4] = $this->getBase().'imagens/'.$this->helpFile[4]; }
+            if ( strpos( $this->helpFile[4], '/' ) === false ) {
+            	$this->helpFile[4] = $this->getBase().'imagens/'.$this->helpFile[4];
+            }
         }
         return $this;
     }
 
     //-----------------------------------------------------------------------------
     public function getHelpOnLine() {
-        if ( is_array( $this->helpFile ) )
-        {
+        if ( is_array( $this->helpFile ) ) {
    	        //style="float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar"
         	//return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" onClick=\"top.app_modalBox('{$this->helpFile[1]}','".$this->getBase()."callbacks/helpOnLineLoad.php?file={$this->helpFile[0]}&readonly={$this->helpFile[5]}&aplicativo={$this->helpFile[6]}',{$this->helpFile[2]},{$this->helpFile[3]})\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\"></a>";
-        	//return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" onClick=\"fwOpenHelpFile('".$this->helpFile[0]."')\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\"></a>";
-        	return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" onClick=\"fwFaceBox('".$this->helpFile[0]."')\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\"></a>";
+
+        	if( $this->helpFile[7] == true ){
+        		$onClick = "onClick=\"fwOpenHelpFile('".$this->helpFile[0]."')";
+        	}else{
+        		$onClick = "onClick=\"fwFaceBox('".$this->helpFile[0]."')";
+        	}
+        	
+        	$img = "<img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\">"; 
+        	$url = "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" ".$onClick." \">".$img."</a>";
+        	return $url;
         }
 	}
 	//------------------------------------------------------------------------------

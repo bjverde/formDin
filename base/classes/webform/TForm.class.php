@@ -7078,7 +7078,9 @@ class TForm Extends TBox
                // não será mais necessário, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
            }
            /**
-            * Adiciona campo para exibição de texto ou imagen dentro de um box modal
+            * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
+            * Para incluir ajuda no form utilize setHelpOnLine
+            * 
             *
             * <code>
             * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
