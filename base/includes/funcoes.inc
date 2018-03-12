@@ -363,7 +363,7 @@ function ulcase($variavel) {
 
 	function dv_cpf_cnpj_ok($cpfcnpj) {
 		$dv = false;
-		$cpfcnpj = preg_replace("[^0-9]","",$cpfcnpj);
+		$cpfcnpj = preg_replace("/[^0-9]/","",$cpfcnpj);
 		if ( strlen($cpfcnpj) == 14 ) {
 			$cnpj_dv = substr($cpfcnpj,-2);
 			for ( $i = 0; $i < 2; $i++ ) {
@@ -396,8 +396,8 @@ function ulcase($variavel) {
 	}
 
 	function formata_fone_fax($numero) {
-	    $numero = preg_replace("[^0-9]","",$numero);
-	    $numero = preg_replace("^0+","",$numero);
+	    $numero = preg_replace("/[^0-9]/","",$numero);
+	    $numero = preg_replace("/^0+/","",$numero);
 		if ( strlen($numero) == 14 or strlen($numero) == 12 )
 			$numero = substr($numero,-10);
 		if ( strlen($numero) == 13 or strlen($numero) == 11 )
@@ -413,20 +413,20 @@ function ulcase($variavel) {
 	}
 
 	function formata_cep($num) {
-	    $num = preg_replace("[^0-9]","",$num);
+	    $num = preg_replace("/[^0-9]/","",$num);
 		$res = substr($num,0,5);
 		if ( strlen($num) > 5 ) $res.="-".substr($num,5,3);
 		return $res;
 	}
 
 	function verifica_email ($email) {
-		 return(preg_match("'^[a-z0-9_.=-]+@(?:[a-z0-9-]+\.)+([a-z]{2,3})\$'i",
+		 return(preg_match("/'^[a-z0-9_.=-]+@(?:[a-z0-9-]+\.)+([a-z]{2,3})\$'/i",
 				$email));
 	}
 
 	function verifica_cep ($cep) {
 		$res=false;
-		$cep = preg_replace("[^0-9]","",$cep);
+		$cep = preg_replace("/[^0-9]/","",$cep);
 		if ( strlen($cep) == 8 ) $res=true;
 		return $res;
 	}
@@ -434,7 +434,7 @@ function ulcase($variavel) {
 	function verifica_data($data) {
 		$dv = false;
 
-		$data = preg_replace("[^0-9]","",$data);
+		$data = preg_replace("/[^0-9]/","",$data);
 		$tam = strlen($data);
 		if ( $tam == 8 ) {
 			$dia = substr($data,0,2);
@@ -448,7 +448,7 @@ function ulcase($variavel) {
 	}
 
 	function dv_banco_11_cb($numero) {
-	    $numero = preg_replace("[^0-9]","",$numero);
+	    $numero = preg_replace("/[^0-9]/","",$numero);
 		$len = strlen($numero);
 		for ( $i = 0; $i<$len; $i++ )
 			$soma+= (($len-$i-1)%8+2) * intval(substr($numero,$i,1));
@@ -460,7 +460,7 @@ function ulcase($variavel) {
 	}
 
 	function dv_banco_11($numero,$x=false) {
-	    $numero = preg_replace("[^0-9]","",$numero);
+	    $numero = preg_replace("/[^0-9]/","",$numero);
 		$len = strlen($numero);
 		for ( $i = 0; $i<$len; $i++ )
 			$soma+= (9-($len-$i-1)%8) * intval(substr($numero,$i,1));
@@ -473,7 +473,7 @@ function ulcase($variavel) {
 	}
 
 	function dv_banco_10($numero) {
-	    $numero = preg_replace("[^0-9]","",$numero);
+	    $numero = preg_replace("/[^0-9]/","",$numero);
 		$len = strlen($numero);
 		for ( $i = 0; $i<$len; $i++ ) {
 			$s = (2-($len-$i-1)%2) * intval(substr($numero,$i,1));

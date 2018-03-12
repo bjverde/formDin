@@ -380,7 +380,7 @@ if ( $camposBvar ) {
 		imp('<input type="hidden" id="'.$a[1].'" name="'.$a[1].'" value="">');
 		if ($_POST[$a[1]]){
 			if (strtoupper($a[0])=='NUM_CPF' or strtoupper($a[0])=='NUM_CNPJ')
-			    $_POST[$a[1]]= preg_replace("[^0-9]","",$_POST[$a[1]]);
+			    $_POST[$a[1]]= preg_replace("/[^0-9]/","",$_POST[$a[1]]);
 			$bvars[$a[0] ]= $_POST[$a[1]];
 		}
 	}
@@ -428,7 +428,7 @@ if( $campoFiltro ) {
 		// guardar os campos filtrados para serem limpos apos a seleção se tiver somente 1 registro no retorno do banco
 		$camposFiltro.= $camposFiltro ==''? '': ',';
 		$camposFiltro.=$aCampo[NOME];
-		$bvars[$aCampo[NOME]]=$aCampo[NOME]=='NUM_CPF' ? preg_replace('[^0-9]','',$_POST[$aCampo[NOME]]) : $_POST[$aCampo[NOME]];
+		$bvars[$aCampo[NOME]]=$aCampo[NOME]=='NUM_CPF' ? preg_replace('/[^0-9]/','',$_POST[$aCampo[NOME]]) : $_POST[$aCampo[NOME]];
         $aCampo[TIPO]        =  $aCampo[TIPO] == NULL ?'CAR':$aCampo[TIPO];
 		if ($campoFocoInicial==''){
 			$campoFocoInicial=$aCampo[NOME];
