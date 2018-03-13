@@ -71,7 +71,7 @@ $pc->addPage('POSTGRES',false,true,'abapg');
 
 $pc->addPage('SQLITE',false,true,'abaSqlite');
 	$frm->addHiddenField('sqDbType','sqlite');
-	$frm->addTextField('sqDb	','Database:',80,true,80,'bdApoio.s3db',false,null,null,true);
+	$frm->addTextField('sqDb	','Database:',80,true,80,'bancos_locais/bdApoio.s3db',false,null,null,true);
 	$frm->addButton('Testar Conexão',null,'btnTestarsq','testarConexao("sq")',null,true,false);
 	$frm->addMemoField('sqSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
 	$frm->addButton('Executar Sql',null,'btnSqlsq','executarSql("sq")',null,true,false);
