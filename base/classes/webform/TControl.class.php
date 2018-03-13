@@ -402,11 +402,10 @@ abstract class TControl extends TElement
         	//return "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" onClick=\"top.app_modalBox('{$this->helpFile[1]}','".$this->getBase()."callbacks/helpOnLineLoad.php?file={$this->helpFile[0]}&readonly={$this->helpFile[5]}&aplicativo={$this->helpFile[6]}',{$this->helpFile[2]},{$this->helpFile[3]})\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\"></a>";
 
         	if( $this->helpFile[7] == true ){
-        		$onClick = "onClick=\"fwOpenHelpFile('".$this->helpFile[0]."')";
+        	    $onClick = "onClick=\"fwModalBox('".$this->helpFile[1]."','".$this->helpFile[0]."','".$this->helpFile[2]."','".$this->helpFile[3]."')";
         	}else{
         		$onClick = "onClick=\"fwFaceBox('".$this->helpFile[0]."')";
-        	}
-        	
+        	}        	
         	$img = "<img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" title=\"Ajuda\" src=\"{$this->helpFile[4]}\">"; 
         	$url = "<a id=\"".$this->getId()."_help_file_a\" href=\"#\" title=\"{$this->helpFile[1]}\" ".$onClick." \">".$img."</a>";
         	return $url;
