@@ -3015,8 +3015,8 @@ class TForm Extends TBox
       * 	$form->clearFields(array('nom_pessoa,des_endereco'));
       * </code>
       *
-      * @param mixed $mixFields
-      * @param mixed $mixIgnoreFields
+      * @param mixed $mixFields        - lista do campos que serão limpos. Apenas esses campos serão limpos
+      * @param mixed $mixIgnoreFields  - lista de campos ignorados
       * @param bool $boolNewValue
       */
      public function clearFields( $mixFields=null, $mixIgnoreFields=null, $boolNewValue=null )
