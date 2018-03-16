@@ -4263,8 +4263,8 @@ class TForm Extends TBox
       *
       * @param mixed $strModule
       * @param mixed $strMessage
-      * @param mixed $boolSubmit
-      * @param mixed $arrVars
+      * @param boolean $boolSubmit
+      * @param array $arrVars       - Array que será enviado via Post
       * @param boolean $boolRedirect
       */
       public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
@@ -5106,8 +5106,8 @@ class TForm Extends TBox
         * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
         * definir o parametro boolLabelAbove do botão para true tambem.
         *
-        * @param mixed   $mixValue
-        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick
+        * @param mixed   $mixValue   - Label do Botão
+        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick. Se ficar null será utilizado o valor de mixValue
         * @param string  $strAction  - Nome da ação
         * @param string  $strOnClick - Nome da função javascript
         * @param string  $strConfirmMessage
