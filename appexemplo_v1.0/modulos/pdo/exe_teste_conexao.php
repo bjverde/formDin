@@ -90,12 +90,14 @@ $pc->addPage('ORACLE',true,true,'abaora');
 
 
 $pc->addPage('SQLSERVER',true,true,'abass');
-    $info_sqlserver = '<p>Para usar Microsoft SQL Server superior 5.4 e inferior a 7.0!'
+    $info_sqlserver = '<p>Para usar Microsoft SQL Server com PHP superior 5.4 e inferior a 7.0 utilize'
                     . '<ul>'
                     . '    <li>Linux: PDO com drive dblib</li>'
                     . '    <li>Windows: PDO com drive sqlsrv</li>'
                     . '<ul>'
-                    . '</p><p>ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits com PHP 64Bits, se deseja usar essa configuração instale o drive não oficial. Porém recomendo Win 64 Bits com PHP 32Bits</p>';
+                    . '</p><p>ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits com PHP 64Bits, se deseja usar essa configuração instale o drive não oficial. Porém recomendavel Win 64 Bits com PHP 32Bits</p>'
+                    . '<p>PHP 7.0 ou superior é recomendavel utilizar o Drive oficial da Microsoft</p>'
+                    		;
 
 	$frm->addHiddenField('ssDbType','sqlserver');
 	$frm->addHtmlField('msg',$info_sqlserver);
