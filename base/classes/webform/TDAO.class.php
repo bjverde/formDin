@@ -1437,17 +1437,28 @@ class TDAO
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
-				$sql = 'SELECT  table_name
-                              , count(table_name) as COLUMN_QTD
-			            FROM INFORMATION_SCHEMA.COLUMNS
-			            WHERE TABLE_NAME in (
-					          SELECT TABLE_NAME
-					          FROM INFORMATION_SCHEMA.TABLES
-					          WHERE TABLE_TYPE = \'BASE TABLE\'
-					         OR TABLE_TYPE = \'VIEW\'
-					    )
-					    group by TABLE_NAME
-					    ORDER BY table_name';
+				$sql = 'SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                              ,qtd.COLUMN_QTD
+                              ,t.TABLE_TYPE
+                        from
+                        	(SELECT  c.TABLE_SCHEMA
+                        		   ,c.TABLE_NAME
+                        		   ,count(c.table_name) as COLUMN_QTD       
+                        	FROM INFORMATION_SCHEMA.COLUMNS as c
+                        	WHERE TABLE_NAME in (
+                        		SELECT TABLE_NAME
+                        		FROM INFORMATION_SCHEMA.TABLES
+                        		WHERE TABLE_TYPE = \'BASE TABLE\'
+                        		OR TABLE_TYPE = \'VIEW\'
+                        	)
+                        	group by c.TABLE_SCHEMA, c.TABLE_NAME
+                        	) as qtd
+                            ,INFORMATION_SCHEMA.TABLES as t
+                        where t.TABLE_NAME = qtd.TABLE_NAME 
+                        and   t.TABLE_SCHEMA = qtd.TABLE_SCHEMA
+                        and   t.TABLE_SCHEMA not in (\'sys\',\'performance_schema\',\'mysql\',\'information_schema\')
+                        order by qtd.TABLE_SCHEMA,qtd.TABLE_NAME';
 				break;
 			;
 			//--------------------------------------------------------------------------------
