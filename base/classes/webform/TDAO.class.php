@@ -1438,7 +1438,7 @@ class TDAO
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
 				$sql = 'SELECT  table_name
-                              , count(table_name) as qtdColumns
+                              , count(table_name) as COLUMN_QTD
 			            FROM INFORMATION_SCHEMA.COLUMNS
 			            WHERE TABLE_NAME in (
 					          SELECT TABLE_NAME
@@ -1450,6 +1450,31 @@ class TDAO
 					    ORDER BY table_name';
 				break;
 			;
+			//--------------------------------------------------------------------------------
+			case DBMS_SQLSERVER:
+			    $sql = 'SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                        	  ,qtd.COLUMN_QTD
+                        	  ,ty.TABLE_TYPE
+                        FROM
+                        	(SELECT TABLE_SCHEMA
+                        		  ,TABLE_NAME
+                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
+                        	FROM INFORMATION_SCHEMA.COLUMNS c
+                        	where c.TABLE_SCHEMA <> \'METADADOS\'
+                        	group by TABLE_SCHEMA, TABLE_NAME
+                        	) as qtd
+                        	,(SELECT TABLE_SCHEMA
+                        	       , TABLE_NAME
+                        		   , TABLE_TYPE
+                        	FROM INFORMATION_SCHEMA.TABLES i
+                        	where I.TABLE_SCHEMA <> \'METADADOS\'
+                        	) as ty
+                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+                        and qtd.TABLE_NAME = ty.TABLE_NAME
+                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME';
+			    break;
+			    ;
 			//--------------------------------------------------------------------------------
 			default:
 				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
