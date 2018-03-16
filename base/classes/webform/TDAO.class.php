@@ -157,8 +157,14 @@ class TDAO
 	/**
 	* Define o tipo do banco de dados que será acessado.
 	* Os tipos de banco de dados suportados atualmente são:
-	* 1) mysql 2) postgres 3) firebird 4) sqlserver 5) oracle 6) sqlite3
-	*
+	* 
+	* 1) define('DBMS_MYSQL','MYSQL');
+	* 2) define('DBMS_POSTGRES','POSTGRES');
+	* 3) define('DBMS_FIREBIRD','FIREBIRD');
+	* 4) define('DBMS_SQLITE','SQLITE');
+	* 5) define('DBMS_ORACLE','ORACLE');
+	* 6) define('DBMS_SQLSERVER','SQLSERVER');
+	* 
 	* Obs: todos utilizam a extensão PDO exceto o Oracle que utiliza as funções OCI diretamente
 	*
 	* @param string $strNewValue
@@ -274,28 +280,27 @@ class TDAO
     * Retorna a porta de comunicação utilizada pelo banco de dados
     *
     */
-	public function getPort()
-	{
+	public function getPort() {
 		if ( is_null( $this->port ) )
 		{
 			switch( strtolower( $this->getDbType() ) )
 				{
 				case 'postgre':
-				case 'postgres':
+				case DBMS_POSTGRES:
 					$this->port='5432';
 					break;
 
-				case 'mysql':
+				case DBMS_MYSQL:
 					$this->port='3306';
 
 					break;
 
-				case 'sqlserver':
+				case DBMS_SQLSERVER:
 					$this->port='1433';
 
 					break;
 
-				case 'oracle':
+				case DBMS_ORACLE:
 					$this->port='1521';
 
 					break;
@@ -581,7 +586,7 @@ class TDAO
 		{
 			$conn=$this->getConn()->connection;
 
-			if ( $this->getDbType() == 'oracle' )
+			if ( $this->getDbType() == DBMS_ORACLE )
 			{
 				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) )
 				{
@@ -935,7 +940,7 @@ class TDAO
 						$fieldType=$this->getValidFieldType( $objField->fieldType );
 						if ( $fieldType == 'date' )
 						{
-							if ( $this->getDbType() == 'oracle' )
+							if ( $this->getDbType() == DBMS_ORACLE )
 							{
 								$item = $this->parseDMY( $item );
 							}
@@ -1056,7 +1061,7 @@ class TDAO
 			}
 		}
 
-		if ( $this->getDbType() == 'oracle' )
+		if ( $this->getDbType() == DBMS_ORACLE )
 		{
 			$strValue = preg_replace( '/\./', ',', $strValue );
 		}
@@ -1436,7 +1441,7 @@ class TDAO
 		$params=null;
 
 		// ler os campos do banco de dados
-		if ( $this->getConnDbType() == 'mysql' )
+		if ( $this->getConnDbType() == DBMS_MYSQL )
 		{
 			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
 			$sql="select column_name COLUMN_NAME
@@ -1453,7 +1458,7 @@ class TDAO
 
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == 'oracle' )
+		else if( $this->getConnDbType() == DBMS_ORACLE )
 		{
 			$sql="select a.column_name COLUMN_NAME
 					, a.data_type DATA_TYPE
@@ -1468,7 +1473,7 @@ class TDAO
 
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == 'postgres' )
+		else if( $this->getConnDbType() == DBMS_POSTGRES )
 		{
 			$schema=( is_null( $this->getConnSchema() ) ? 'public' : $this->getConnSchema());
 			$sql   ="SELECT column_name \"COLUMN_NAME\"
@@ -1490,7 +1495,7 @@ class TDAO
 				$this->getTableName()
 				);
 		}
-		else if( $this->getConnDbType() == 'firebird' )
+		else if( $this->getConnDbType() == DBMS_FIREBIRD )
 		{
 			$sql='SELECT
 					RDB$RELATION_FIELDS.RDB$FIELD_NAME COLUMN_NAME,
@@ -1513,7 +1518,7 @@ class TDAO
 
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == 'sqlite')
+		else if( $this->getConnDbType() == DBMS_SQLITE)
 		{
 			$stmt = $this->getConn()->query( "PRAGMA table_info(".$this->getTableName().")");
 			$res =  $stmt->fetchAll();
@@ -1625,11 +1630,11 @@ class TDAO
 		$sql   =null;
 		$params=null;
 		$dbType = $this->getConnDbType();
-		if ( $dbType == 'mysql' )
+		if ( $dbType == DBMS_MYSQL )
 		{
 			$sql = 'SELECT LAST_INSERT_ID() as ID';
 		}
-		else if( $dbType == 'postgres' )
+		else if( $dbType == DBMS_POSTGRES )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
@@ -1642,14 +1647,14 @@ class TDAO
 					);
 			}
 		}
-		else if( $dbType == 'oracle' )
+		else if( $dbType == DBMS_ORACLE )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
 				return $this->lastId;
 			}
 		}
-		else if( $dbType == 'sqlite' )
+		else if( $dbType == DBMS_SQLITE )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
@@ -1766,7 +1771,7 @@ class TDAO
 		$this->hasActiveTransaction=false;
 		if ( $this->getConn() )
 		{
-			if ( $this->getDbType() == 'oracle' )
+			if ( $this->getDbType() == DBMS_ORACLE )
 			{
 				oci_commit( $this->getConn()->connection );
 			}
@@ -2016,7 +2021,7 @@ class TDAO
 		{
 			$userTransation = $this->getHasActiveTransaction();
 			$this->beginTransaction();
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlInsert      ="insert into " . $this->getTableName() . ' ';
 				$valuesClause   =null;
@@ -2038,7 +2043,7 @@ class TDAO
 				}
 				$columnsClause='(' . implode( ',', array_keys( $params ) ) . ')';
 				$valuesClause ='values (' . implode( ',', $valuesClause ) . ')';
-				if ( $this->getDbType() == 'postgres' && $this->getAutoincFieldName() )
+				if ( $this->getDbType() == DBMS_POSTGRES && $this->getAutoincFieldName() )
 				{
 					$returningClause = 'returning ' . $this->getAutoincFieldName();
 				}
@@ -2221,7 +2226,7 @@ class TDAO
     	$result = false;
 		try
 		{
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "delete from " . $this->getTableName();
 				$params         = null;
@@ -2351,7 +2356,7 @@ class TDAO
 				return $result;
 			}
 
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
 				$valuesClause   = null;

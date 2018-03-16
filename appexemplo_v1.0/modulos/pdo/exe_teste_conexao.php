@@ -45,7 +45,7 @@ $frm->setAutoSize(true);
 
 $pc = $frm->addPageControl('pc');
 $pc->addPage('MYSQL',true,true,'abamy');
-	$frm->addHiddenField('myDbType','mysql');
+    $frm->addHiddenField('myDbType',DBMS_MYSQL);
 	$frm->addTextField('myHost'	,'Host:',20,true,20,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('myDb	','Database:',20,true,20,'test',true,null,null,true);
 	$frm->addTextField('myUser'	,'User:',40,true,20,'root',false,null,null,true);
@@ -57,7 +57,7 @@ $pc->addPage('MYSQL',true,true,'abamy');
 	$frm->addHtmlField('myGride'	,'');
 
 $pc->addPage('POSTGRES',false,true,'abapg');
-	$frm->addHiddenField('pgDbType','postgres');
+    $frm->addHiddenField('pgDbType',DBMS_POSTGRES);
 	$frm->addTextField('pgHost','Host:',20,true,20,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('pgDb	','Database:',20,true,20,'test',true,null,null,true);
 	$frm->addTextField('pgUser','User:',40,true,20,'postgres',false,null,null,true);
@@ -70,7 +70,7 @@ $pc->addPage('POSTGRES',false,true,'abapg');
 	$frm->addHtmlField('pgGride','');
 
 $pc->addPage('SQLITE',false,true,'abaSqlite');
-	$frm->addHiddenField('sqDbType','sqlite');
+	$frm->addHiddenField('sqDbType',DBMS_SQLITE);
 	$frm->addTextField('sqDb	','Database:',80,true,80,'bancos_locais/bdApoio.s3db',false,null,null,true);
 	$frm->addButton('Testar Conexão',null,'btnTestarsq','testarConexao("sq")',null,true,false);
 	$frm->addMemoField('sqSql'	,'Sql:',10000,false,90,5,true,true,true,null,true);
@@ -78,7 +78,7 @@ $pc->addPage('SQLITE',false,true,'abaSqlite');
 	$frm->addHtmlField('sqGride'	,'');
 
 $pc->addPage('ORACLE',true,true,'abaora');
-	$frm->addHiddenField('oraDbType','oracle');
+    $frm->addHiddenField('oraDbType',DBMS_ORACLE);
 	$frm->addTextField('oraHost'	,'Host:',50,true,50,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('oraDb'		,'Database:',20,true,20,'xe',true,null,null,true);
 	$frm->addTextField('oraUser'	,'User:',40,true,20,'root',false,null,null,true);
@@ -99,7 +99,7 @@ $pc->addPage('SQLSERVER',true,true,'abass');
                     . '<p>PHP 7.0 ou superior é recomendavel utilizar o Drive oficial da Microsoft</p>'
                     		;
 
-	$frm->addHiddenField('ssDbType','sqlserver');
+    $frm->addHiddenField('ssDbType',DBMS_SQLSERVER);
 	$frm->addHtmlField('msg',$info_sqlserver);
 	$frm->addTextField('ssHost'    ,'Host:',50,true,50,'127.0.0.0.1',true,null,null,true);
 	$frm->addTextField('ssDb'      ,'Database:',20,true,20,'Northwind',true,null,null,true);
@@ -111,26 +111,24 @@ $pc->addPage('SQLSERVER',true,true,'abass');
 	$frm->addButton('Executar Sql',null,'btnSqlss','executarSql("ss")',null,true,false);
 	$frm->addHtmlField('ssGride'	,'');
 
-
-$_POST['banco'] = isset($_POST['banco']) ? $_POST['banco'] : '';
-$banco = $_POST['banco'];
-
+$banco    = PostHelper::get('banco');
+$dbType   = PostHelper::get('dbType');
+$user     = PostHelper::get($banco.'User');
+$password = PostHelper::get($banco.'Pass');
+$dataBase = PostHelper::get($banco.'Db');
+$host     = PostHelper::get($banco.'Host');
+$port     = PostHelper::get($banco.'Port');
+$schema   = PostHelper::get($banco.'Schema');
+$sql      = PostHelper::get($banco.'Sql');
 $acao = isset($acao) ? $acao : '';
 switch($acao) {
 	case 'testar_conexao':
 		//prepareReturnAjax(0,null, $banco.print_r($_POST,TRUE) );
 		if( $banco == 'my' || $banco == 'pg' || $banco == 'ora'|| $banco == 'ss'){
-			if( ! $_POST[$banco.'User'] ){
+			if( ! $user ){
 				prepareReturnAjax(0,null,'Informe o Usuário');
 			}
 		}
-		$dbType   = PostHelper::get('dbType');
-		$user     = PostHelper::get($banco.'User');
-		$password = PostHelper::get($banco.'Pass');
-		$dataBase = PostHelper::get($banco.'Db');
-		$host     = PostHelper::get($banco.'Host');
-		$port     = PostHelper::get($banco.'Port');
-		$schema   = PostHelper::get($banco.'Schema');
 		$dao = new TDAO(null,$dbType,$user,$password,$dataBase,$host,$port,$schema);
 		if( $dao->connect() ) {
 			prepareReturnAjax(2,null,'Conexão OK!',true);
@@ -144,10 +142,9 @@ switch($acao) {
 		//if( $banco == 'my' || $banco == 'pg')
 		{
 			//prepareReturnAjax(0,null,print_r($_POST,true));
-			$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$Schema);
-			$dados = $dao->executeSql($_POST[$banco.'Sql']);
-			if( ! $dao->getError() )
-			{
+			$dao = new TDAO(null,$dbType,$user,$password,$dataBase,$host,$port,$schema);
+			$dados = $dao->executeSql($sql);
+			if( ! $dao->getError() ) {
 				$g = new TGrid('gd'.$banco,'Resultado SQL',$dados);
 				$g->setCreateDefaultEditButton(false);
 				$g->setCreateDefaultDeleteButton(false);
