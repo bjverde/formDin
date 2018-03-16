@@ -4263,9 +4263,10 @@ class TForm Extends TBox
       *
       * @param mixed $strModule
       * @param mixed $strMessage
-      * @param boolean $boolSubmit
+      * @param boolean $boolSubmit  - ação de submeter
       * @param array $arrVars       - Array que será enviado via Post
-      * @param boolean $boolRedirect
+      * @param boolean $boolRedirect - TRUE igual ajax
+      * @param boolean $boolSaveData  - salva os dados formulario atual
       */
       public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
           $boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
