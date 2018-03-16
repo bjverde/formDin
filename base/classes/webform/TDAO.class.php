@@ -1426,15 +1426,46 @@ class TDAO
 
 		return $result;
 	}
+	
+	public function loadTablesFromDatabase() {
+		//$DbType = $this->getConnDbType();
+		$DbType = $this->getDbType();
+		$sql = null;
+		switch( $DbType ) {
+			case DBMS_SQLITE:
+				$sql = 'SELECT name as table_name FROM sqlite_master where type=\'table\'';
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_MYSQL:
+				$sql = 'SELECT  table_name
+                              , count(table_name) as qtdColumns
+			            FROM INFORMATION_SCHEMA.COLUMNS
+			            WHERE TABLE_NAME in (
+					          SELECT TABLE_NAME
+					          FROM INFORMATION_SCHEMA.TABLES
+					          WHERE TABLE_TYPE = \'BASE TABLE\'
+					         OR TABLE_TYPE = \'VIEW\'
+					    )
+					    group by TABLE_NAME
+					    ORDER BY table_name';
+				break;
+			;
+			//--------------------------------------------------------------------------------
+			default:
+				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
+		}
+		$result = $this->executeSql($sql);
+		return $result;
+	}
 
 	/**
 	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
 	* @return null
 	*/
-	public function loadFieldsFromDatabase()
-	{
-		if ( !$this->getTableName() )
-		{
+	public function loadFieldsFromDatabase() {
+		$DbType = $this->getConnDbType();
+		
+		if ( !$this->getTableName() ) {
 			return null;
 		}
 		$sql   =null;
