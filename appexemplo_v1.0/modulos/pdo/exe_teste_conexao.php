@@ -114,7 +114,6 @@ $pc->addPage('SQLSERVER',true,true,'abass');
 
 $_POST['banco'] = isset($_POST['banco']) ? $_POST['banco'] : '';
 $banco = $_POST['banco'];
-$Schema = isset($_POST[$banco.'Schema']) ? $_POST[$banco.'Schema'] : '';
 
 $acao = isset($acao) ? $acao : '';
 switch($acao) {
@@ -125,10 +124,16 @@ switch($acao) {
 				prepareReturnAjax(0,null,'Informe o Usuário');
 			}
 		}
-		
-		$dao = new TDAO(null,$_POST['dbType'],$_POST[$banco.'User'],$_POST[$banco.'Pass'],$_POST[$banco.'Db'],$_POST[$banco.'Host'],$_POST[$banco.'Port'],$Schema);
+		$dbType   = PostHelper::get('dbType');
+		$user     = PostHelper::get($banco.'User');
+		$password = PostHelper::get($banco.'Pass');
+		$dataBase = PostHelper::get($banco.'Db');
+		$host     = PostHelper::get($banco.'Host');
+		$port     = PostHelper::get($banco.'Port');
+		$schema   = PostHelper::get($banco.'Schema');
+		$dao = new TDAO(null,$dbType,$user,$password,$dataBase,$host,$port,$schema);
 		if( $dao->connect() ) {
-			prepareReturnAjax(2,null,'Conexão OK!');
+			prepareReturnAjax(2,null,'Conexão OK!',true);
 		}
 		prepareReturnAjax(0,null, $dao->getError());
 
