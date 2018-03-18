@@ -1517,7 +1517,7 @@ class TDAO
 			$sql="SELECT column_name COLUMN_NAME
 						, COLUMN_DEFAULT
 						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
-						, case when upper(IS_NULLABLE) = 'NO' then 0 else 1 end NULLABLE
+						, case when upper(IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
 						, data_type DATA_TYPE
 						, character_maximum_length DATA_LENGTH
 						, numeric_precision DATA_PRECISION
