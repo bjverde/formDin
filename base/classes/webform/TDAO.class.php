@@ -1450,7 +1450,7 @@ class TDAO
 				$sql = 'SELECT qtd.TABLE_SCHEMA
                               ,qtd.TABLE_NAME
                               ,qtd.COLUMN_QTD
-                              ,t.TABLE_TYPE
+                              ,case when upper(t.TABLE_TYPE) = \'BASE TABLE \' then \'TABLE\' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
                         FROM
                         	(SELECT  c.TABLE_SCHEMA
                         		   ,c.TABLE_NAME
@@ -1514,19 +1514,22 @@ class TDAO
 		// ler os campos do banco de dados
 		if ( $DbType == DBMS_MYSQL ){
 			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
-			$sql="select column_name COLUMN_NAME
-				, COLUMN_DEFAULT
-				, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
-				, case when upper(IS_NULLABLE) = 'NO' then 0 else 1 end NULLABLE
-				, data_type DATA_TYPE
-				, character_maximum_length DATA_LENGTH
-				, numeric_precision DATA_PRECISION
-				, numeric_scale DATA_SCALE
-				from information_schema.columns
-				where upper(table_name) = upper(?)
-				order by ordinal_position";
+			$sql="SELECT column_name COLUMN_NAME
+						, COLUMN_DEFAULT
+						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
+						, case when upper(IS_NULLABLE) = 'NO' then 0 else 1 end NULLABLE
+						, data_type DATA_TYPE
+						, character_maximum_length DATA_LENGTH
+						, numeric_precision DATA_PRECISION
+						, numeric_scale DATA_SCALE
+						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  PRIMARYKEY
+						, COLUMN_COMMENT
+					from information_schema.columns
+					WHERE upper(table_name) = upper('".$this->getTableName()."')
+						order by table_name
+						,ordinal_position";
 			
-			$params=array($this->getTableName());
+			$params=null;
 		}
 		else if( $DbType == DBMS_ORACLE ) {
 			$sql="select a.column_name COLUMN_NAME
