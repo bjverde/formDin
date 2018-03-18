@@ -1438,7 +1438,12 @@ class TDAO
 		$sql = null;
 		switch( $DbType ) {
 			case DBMS_SQLITE:
-				$sql = 'SELECT name as table_name FROM sqlite_master where type=\'table\'';
+				$sql = 'SELECT 
+							,\'\' as TABLE_SCHEMA
+							name as TABLE_NAME 
+							,\'\' as COLUMN_QTD
+							,type as TABLE_TYPE
+						FROM sqlite_master where type in (\'table\', \'view\')';
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
@@ -1446,7 +1451,7 @@ class TDAO
                               ,qtd.TABLE_NAME
                               ,qtd.COLUMN_QTD
                               ,t.TABLE_TYPE
-                        from
+                        FROM
                         	(SELECT  c.TABLE_SCHEMA
                         		   ,c.TABLE_NAME
                         		   ,count(c.table_name) as COLUMN_QTD       
