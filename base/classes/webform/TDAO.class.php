@@ -1439,8 +1439,8 @@ class TDAO
 		switch( $DbType ) {
 			case DBMS_SQLITE:
 				$sql = 'SELECT 
-							,\'\' as TABLE_SCHEMA
-							name as TABLE_NAME 
+							\'\' as TABLE_SCHEMA
+							,name as TABLE_NAME 
 							,\'\' as COLUMN_QTD
 							,type as TABLE_TYPE
 						FROM sqlite_master where type in (\'table\', \'view\')';
