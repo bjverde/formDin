@@ -62,5 +62,26 @@ class ArrayHelper {
 		}
 		return $value;
 	}
+	
+	/**
+	 * Convert Array PDO Format to FormDin format
+	 * @param array $array
+	 * @return array
+	 */
+	static function convertArrayPdo2FormDin($dataArray,$upperCase = true) {
+		$result = false;
+		if( is_array( $dataArray ) ) {
+			foreach( $dataArray as $k => $arr ) {
+				foreach( $arr as $fieldName => $value ) {
+					if($upperCase){
+						$result[ strtoupper($fieldName) ][ $k ] = $value;
+					}else{
+						$result[ $fieldName ][ $k ] = $value;
+					}
+				}
+			}
+		}
+		return $result;
+	}
 }
 ?>

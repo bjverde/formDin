@@ -137,8 +137,18 @@ class TDAO
 	* @param string $strMetadataDir
 	* @return object TDAO
 	*/
-	public function __construct( $strTableName = null, $strDbType = null, $strUsername = null, $strPassword = null, $strDatabase = null, $strHost = null, $strPort = null, $strSchema = null, $boolUtf8 = null, $strCharset = null, $boolAutoCommit = null, $strMetadataDir = null  )
-	{
+	public function __construct( $strTableName = null
+								, $strDbType = null
+								, $strUsername = null
+								, $strPassword = null
+								, $strDatabase = null
+								, $strHost = null
+								, $strPort = null
+								, $strSchema = null
+								, $boolUtf8 = null
+								, $strCharset = null
+								, $boolAutoCommit = null
+								, $strMetadataDir = null  )	{
 		$this->setTableName( $strTableName );
 		$this->setMetadataDir( $strMetadataDir );
 		$this->setDbType( $strDbType );
@@ -781,28 +791,23 @@ class TDAO
 	* Retorna se o banco de dados está utilizando a codificação UTF-8
 	*
 	*/
-	public function getConnUtf8()
-	{
-		if ( $this->getConn() )
-		{
+	public function getConnUtf8(){
+		if ( $this->getConn() ){
 			return $this->getConn()->utf8;
 		}
-
 		return true;
 	}
+	
 	/**
 	* Retorna o tipo de banco de dados que está sendo utilizado.
 	* Ex: mysql, postgres, oracle...
 	*
 	* @return string
 	*/
-	public function getConnDbType()
-	{
-		if ( $this->getConn() )
-		{
+	public function getConnDbType(){
+		if ( $this->getConn() ) {
 			return $this->getConn()->dbType;
 		}
-
 		return null;
 	}
 
@@ -1493,23 +1498,16 @@ class TDAO
 		$result = $this->executeSql($sql);
 		return $result;
 	}
-
-	/**
-	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
-	* @return null
-	*/
-	public function loadFieldsFromDatabase() {
-		$DbType = $this->getConnDbType();
+	
+	public function getSqlToFieldsFromDatabase() {
+		//$DbType = $this->getConnDbType();
+		$DbType = $this->getDbType();
+		$sql    = null;
+		$params = null;
+		$data   = null;
 		
-		if ( !$this->getTableName() ) {
-			return null;
-		}
-		$sql   =null;
-		$params=null;
-
 		// ler os campos do banco de dados
-		if ( $this->getConnDbType() == DBMS_MYSQL )
-		{
+		if ( $DbType == DBMS_MYSQL ){
 			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
 			$sql="select column_name COLUMN_NAME
 				, COLUMN_DEFAULT
@@ -1522,11 +1520,10 @@ class TDAO
 				from information_schema.columns
 				where upper(table_name) = upper(?)
 				order by ordinal_position";
-
+			
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == DBMS_ORACLE )
-		{
+		else if( $DbType == DBMS_ORACLE ) {
 			$sql="select a.column_name COLUMN_NAME
 					, a.data_type DATA_TYPE
 					, data_default as COLUMN_DEFAULT
@@ -1537,11 +1534,10 @@ class TDAO
 					, a.data_scale DATA_SCALE
     				from all_tab_columns a
     				where upper(a.table_name) = upper(:0)";
-
+			
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == DBMS_POSTGRES )
-		{
+		else if( $DbType == DBMS_POSTGRES ) {
 			$schema=( is_null( $this->getConnSchema() ) ? 'public' : $this->getConnSchema());
 			$sql   ="SELECT column_name \"COLUMN_NAME\"
 					,column_default \"COLUMN_DEFAULT\"
@@ -1555,15 +1551,10 @@ class TDAO
 					WHERE upper(table_schema) =  upper(?)
 					AND upper(table_name) =upper(?)
 					ORDER BY ordinal_position";
-
-			$params=array
-				(
-				$schema,
-				$this->getTableName()
-				);
+			
+			$params=array( $schema ,$this->getTableName() );
 		}
-		else if( $this->getConnDbType() == DBMS_FIREBIRD )
-		{
+		else if( $DbType == DBMS_FIREBIRD ) {
 			$sql='SELECT
 					RDB$RELATION_FIELDS.RDB$FIELD_NAME COLUMN_NAME,
 					\'\' as COLUMN_DEFAULT,
@@ -1582,65 +1573,110 @@ class TDAO
 					AND RDB$RELATIONS.RDB$SYSTEM_FLAG = 0
 					AND RDB$TYPES.RDB$FIELD_NAME=\'RDB$FIELD_TYPE\'
 					ORDER BY RDB$RELATION_FIELDS.RDB$FIELD_POSITION';
-
+			
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == DBMS_SQLITE)
-		{
+		else if( $DbType == DBMS_SQLITE) {
 			$stmt = $this->getConn()->query( "PRAGMA table_info(".$this->getTableName().")");
-			$res =  $stmt->fetchAll();
+			$res  = $stmt->fetchAll();
 			$data = null;
-			$sql = null;
+			$sql  = null;
 			foreach($res as $rownum => $row)
 			{
 				$data[$rownum]['COLUMN_NAME'] 	= $row['NAME'];
 				$data[$rownum]['COLUMN_DEFAULT']= $row['DFLT_VALUE'];
 				$data[$rownum]['AUTOINCREMENT'] = $row['PK'];
 				$data[$rownum]['NULLABLE'] 		= ( $row['NOTNULL'] == 0 ? 1 : 0 );
-  				$data[$rownum]['DATA_TYPE'] 	= $row['TYPE'];
+				$data[$rownum]['DATA_TYPE'] 	= $row['TYPE'];
 				$data[$rownum]['DATA_LENGTH'] 	= null;
 				$data[$rownum]['DATA_PRECISION']= 0;
 				$data[$rownum]['DATA_SCALE']	= 0;
 				$data[$rownum]['PRIMARYKEY']	= $row['PK'];
-			    if( preg_match('/\(/',$row['TYPE']) == 1 )
-			    {
-    				$aTemp = explode('(',$row['TYPE']);
-    				$data[$rownum]['DATA_TYPE'] = $aTemp[0];
+				if( preg_match('/\(/',$row['TYPE']) == 1 )
+				{
+					$aTemp = explode('(',$row['TYPE']);
+					$data[$rownum]['DATA_TYPE'] = $aTemp[0];
 					$type= substr($row['TYPE'],strpos($row['TYPE'],'('));
 					$type = preg_replace('/(\(|\))/','',$type);
 					@list($length,$precision) = explode(',',$type);
-					if( preg_match('/varchar/i',$aTemp[0]==1) )
-					{
-		   				$data[$rownum]['DATA_LENGTH'] = $length;
+					
+					if( preg_match('/varchar/i',$aTemp[0]==1) ) {
+						$data[$rownum]['DATA_LENGTH'] = $length;
 					}
-					else
-					{
-	   					$data[$rownum]['DATA_LENGTH'] 		= 0;
+					else {
+						$data[$rownum]['DATA_LENGTH'] 		= 0;
 						$data[$rownum]['DATA_PRECISION'] 	= $length;
 						$data[$rownum]['DATA_SCALE'] 		= $precision;
 					}
-			    }
+				}
 			}
 		}
-		if ( !is_null( $sql ) )
-		{
+		
+		$result['sql']    = $sql;
+		$result['params'] = $params;
+		$result['data']   = $data;
+		
+		return $result;
+	}
+	
+	/**
+	 * Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
+	 * @return null
+	 */
+	public function loadFieldsOneTableFromDatabase() {
+		$DbType = $this->getDbType();
+		if ( !$this->getTableName() ) {
+			throw new InvalidArgumentException('Table Name is empty');
+		}
+		$result = $this->getSqlToFieldsFromDatabase();
+		$sql    = $result['sql'];
+		$params = $result['params'];
+		$data   = $result['data'];
+		switch( $DbType ) {
+			case DBMS_SQLITE:
+				$result = ArrayHelper::convertArrayPdo2FormDin($data);
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_MYSQL:
+			case DBMS_SQLSERVER:
+				$result = $this->executeSql($sql);
+				break;
+			//--------------------------------------------------------------------------------
+			default:
+				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
+		}		
+		return $result;
+	}
+
+	/**
+	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
+	* @return null
+	*/
+	public function loadFieldsFromDatabase() {		
+		if ( !$this->getTableName() ) {
+			return null;
+		}
+		$result = $this->getSqlToFieldsFromDatabase();
+		$sql    = $result['sql'];
+		$params = $result['params'];
+		$data   = $result['data'];
+		
+		if ( !is_null( $sql ) ) {
 			$data =  $this->query( $sql, $params );
 		}
-		if ( is_array( $data ) )
-		{
-			foreach( $data as $k => $row )
-			{
+		
+		if ( is_array( $data ) ){
+			foreach( $data as $k => $row ) {
 				$this->addField( trim( $row[ 'COLUMN_NAME' ] )
-				, trim( strtolower($row[ 'DATA_TYPE' ]) )
-				, ( (int) $row[ 'DATA_PRECISION' ] > 0 ? $row[ 'DATA_PRECISION' ] : $row[ 'DATA_LENGTH' ] )
-				, $row[ 'DATA_SCALE' ]
-				, $row[ 'COLUMN_DEFAULT' ]
-				, $row[ 'NULLABLE' ]
-				, $row[ 'AUTOINCREMENT' ]
-				, $row[ 'PRIMARYKEY']);
+				               , trim( strtolower($row[ 'DATA_TYPE' ]) )
+				               , ( (int) $row[ 'DATA_PRECISION' ] > 0 ? $row[ 'DATA_PRECISION' ] : $row[ 'DATA_LENGTH' ] )
+				               , $row[ 'DATA_SCALE' ]
+				               , $row[ 'COLUMN_DEFAULT' ]
+				               , $row[ 'NULLABLE' ]
+				               , $row[ 'AUTOINCREMENT' ]
+				               , $row[ 'PRIMARYKEY']);
 			}
-			if ( is_array( $this->getfields() ) )
-			{
+			if ( is_array( $this->getfields() ) ) {
 				$this->serializeFields();
 			}
 		}
@@ -2650,31 +2686,17 @@ class TDAO
     * @param string $sql
     * @param string $params
     */
-    function executeSql($sql=null,$params=null)
-    {
-		$result = $this->query($sql,$params);
-		$data=$result;
-		if( is_array($result) )
-		{
-			$data=null;
-			foreach($result as $rowIndex => $row)
-			{
-				foreach($row as $k=>$v)
-				{
-					$data[strtoupper($k)][$rowIndex]=$v;
-				}
-			}
-		}
-		return $data;
+    function executeSql($sql=null,$params=null){
+    	$data   = $this->query($sql,$params);
+		$result = ArrayHelper::convertArrayPdo2FormDin($data);
+		return $result;
     }
 
-    function getFieldNames()
-    {
+    function getFieldNames() {
     	if( is_array($this->getFields() ))
     	{
     		$arrNames=array();
-			foreach( $this->getFields() as $fieldName => $objField )
-			{
+			foreach( $this->getFields() as $fieldName => $objField ) {
 				$arrNames[] = $objField->fieldName;
 			}
 			return implode(',',$arrNames);
@@ -2688,20 +2710,9 @@ class TDAO
     * @param mixed $params
     * @param mixed $fechMode
     */
-    function qfw($sql=null,$params=null,$fechMode=null)
-    {
-		$data = $this->query($sql,$params,$fechMode);
-		$result=null;
-		if( is_array( $data ) )
-		{
-			foreach( $data as $k => $arr )
-			{
-				foreach( $arr as $fieldName => $value )
-				{
-					$result[ $fieldName ][ $k ] = $value;
-				}
-			}
-		}
+    function qfw($sql=null,$params=null,$fechMode=null) {
+		$data   = $this->query($sql,$params,$fechMode);
+		$result = ArrayHelper::convertArrayPdo2FormDin($data);
 		return $result;
     }
 }
