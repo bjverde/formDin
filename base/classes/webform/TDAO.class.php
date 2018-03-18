@@ -1594,8 +1594,8 @@ class TDAO
 				$data[$rownum]['COLUMN_NAME'] 	= $row['NAME'];
 				$data[$rownum]['COLUMN_DEFAULT']= $row['DFLT_VALUE'];
 				$data[$rownum]['AUTOINCREMENT'] = $row['PK'];
-				$data[$rownum]['NULLABLE'] 		= ( $row['NOTNULL'] == 0 ? 1 : 0 );
-				$data[$rownum]['DATA_TYPE'] 	= $row['TYPE'];
+				$data[$rownum]['REQUIRED'] 		= ( $row['NOTNULL'] == 0 ? 'FALSE' : 'TRUE' );
+				$data[$rownum]['DATA_TYPE'] 	= strtoupper($row['TYPE']);
 				$data[$rownum]['DATA_LENGTH'] 	= null;
 				$data[$rownum]['DATA_PRECISION']= 0;
 				$data[$rownum]['DATA_SCALE']	= 0;
