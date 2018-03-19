@@ -705,7 +705,7 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
 
     //--------------------------------------------------------------------------
     /**
-    * Define uma propriedade css para criar o style da tag
+    * Define uma propriedade css para criar o style da tag. Para setar o CSS de um formulario utilize addCssFile
     *
     * O parametro $mixProperty pode ser um array de propriedades e valores de css.
     *
