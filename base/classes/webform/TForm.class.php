@@ -733,12 +733,6 @@ class TForm Extends TBox
              */
             // adicionar a table do layout no corpo do formulário
             $this->body->add($tableLayout);
-            
-            /*			if( defined('REQUIRED_FIELD_MARK') && $this->getFieldType() == 'form' )
-             {
-             $this->addHtmlField('teste','(*) Preenchimento obrigatório')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
-             }
-             */
             // inicio
             $rows=0;
             foreach( $this->displayControls as $name=>$dc )
