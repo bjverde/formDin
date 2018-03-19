@@ -6321,10 +6321,10 @@ class TForm Extends TBox
             * um label invisível defina como "" o seu valor
             *
             * criado o espaço
-            * @param string $strName
+            * @param string $strName        - Nome do campo            
+            * @param string $strValue       - Texto HTML que irá aparece dentro
+            * @param string $strIncludeFile - 
             * @param string $strLabel
-            * @param string $strValue
-            * @param string $strIncludeFile
             * @param string $strWidth
             * @param string $strHeight
             * @param boolean $boolNewLine
@@ -6864,13 +6864,13 @@ class TForm Extends TBox
             *   $_POST['strName_name'] - nome arquivo;
             * </code>
             *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param boolean $boolRequired
+            * @param string  $strName         - id do campo
+            * @param string  $strLabel        - Rotulo do campo que irá aparece na tela
+            * @param boolean $boolRequired    - Obrigatorio 
+            * @param string  $strAllowedFileTypes - Tipos de arquivos
+            * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
             * @param integer $intFieldSize
             * @param boolean $boolNewLine
-            * @param string  $strAllowedFileTypes
-            * @param string  $strMaxFileSize  - Input the max size file with M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
             * @param boolean $boolLabelAbove
             * @param boolean $boolNoWrapLabel
             * @return TFile / TFileAsyn
