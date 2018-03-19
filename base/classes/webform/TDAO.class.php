@@ -376,18 +376,20 @@ class TDAO
 	*
 	* @return boolean
 	*/
-	public function connect()
-	{
-		try
-		{
-			//$this->conn = TConnection::connect( $this->getDbType(), $this->getUsername(), $this->getPassword(), $this->getDatabase(), $this->getHost(), $this->getPort(), $this->getSchema(), $this->getUtf8() );
-			if( ! $this->conn )
-			{
-				$this->conn = TConnectionPool::connect( $this->getDbType(), $this->getUsername(), $this->getPassword(), $this->getDatabase(), $this->getHost(), $this->getPort(), $this->getSchema(), $this->getUtf8() );
+	public function connect() {
+		try {
+			if( ! $this->conn ){
+				$this->conn = TConnectionPool::connect( $this->getDbType()
+													  , $this->getUsername()
+													  , $this->getPassword()
+													  , $this->getDatabase()
+													  , $this->getHost()
+													  , $this->getPort()
+													  , $this->getSchema()
+													  , $this->getUtf8() );
 			}
 		}
-		catch( Exception $e )
-		{
+		catch( Exception $e ) {
 			$this->setError( $e->getMessage() );
 			return false;
 		}
