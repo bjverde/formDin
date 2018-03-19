@@ -1550,6 +1550,7 @@ class TDAO
                    from INFORMATION_SCHEMA.COLUMNS c
                         join sys.columns AS sc on sc.object_id = object_id(c.TABLE_SCHEMA + '.' + c.TABLE_NAME) AND sc.NAME = c.COLUMN_NAME
                         LEFT JOIN sys.extended_properties prop ON prop.major_id = sc.object_id AND prop.minor_id = sc.column_id AND prop.NAME = 'MS_Description'
+                   WHERE upper(c.table_name) = upper('".$this->getTableName()."')
                    order by c.table_name
                           , c.ORDINAL_POSITION";
 		    
