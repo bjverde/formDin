@@ -131,6 +131,7 @@ $menu->add('5',null,'Ajax');
 	$menu->add('53','5','Ajax com Semáforo','ajax/exe_ajax03_semaphore.php');
 	$menu->add('54','5','Ajax 04','ajax/exe_ajax04.php');
 	$menu->add('55','5','Ajax 05','ajax/exe_ajax05.php');
+	$menu->add('56','5','Ajax 06 - JavaScript e CSS','ajax/exe_ajax06_javascript_css.php');
 
 //-----------------------------------------------------------------------------
 	$menu->add('6',null,'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
