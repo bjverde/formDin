@@ -1469,7 +1469,7 @@ class TForm Extends TBox
             if( $this->getRequiredFieldText() )
             {
                 //$this->addHtmlField('teste','(*) Preenchimento obrigatório')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
-                $this->body->add( '<center><span style="margin:0px; padding:0px;margin-top:5px;color:red;font-size:10px;">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
+                $this->body->add( '<center><span class="fwFieldRequiredOldStyle">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
             }
         }
         // adicionar os botões das ações
