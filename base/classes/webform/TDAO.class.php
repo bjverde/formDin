@@ -1523,8 +1523,8 @@ class TDAO
 						, case when upper(IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
 						, data_type DATA_TYPE
 						, character_maximum_length CHAR_MAX
-						, numeric_precision DATA_PRECISION
-						, numeric_scale DATA_SCALE
+						, numeric_precision NUM_LENGTH
+						, numeric_scale NUM_SCALE
 						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  PRIMARYKEY
 						, COLUMN_COMMENT
 					from information_schema.columns
@@ -1541,8 +1541,8 @@ class TDAO
                         ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
                         ,c.DATA_TYPE
                         ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
-                        ,c.NUMERIC_PRECISION as DATA_PRECISION
-                    	,c.NUMERIC_SCALE as DATA_SCALE
+                        ,c.NUMERIC_PRECISION as NUM_LENGTH
+                    	,c.NUMERIC_SCALE as NUM_SCALE
                     	,'' as PRIMARYKEY
                         ,prop.value AS COLUMN_COMMENT
                     	,c.TABLE_SCHEMA
@@ -1561,10 +1561,10 @@ class TDAO
 					, a.data_type DATA_TYPE
 					, data_default as COLUMN_DEFAULT
 					, 0 AUTOINCREMENT
-					, decode(nullable,'Y',1,0) as NULLABLE
+					, decode(nullable,'Y',1,0) as REQUIRED
 					, a.data_length CHAR_MAX
-					, a.data_precision DATA_PRECISION
-					, a.data_scale DATA_SCALE
+					, a.data_precision NUM_LENGTH
+					, a.data_scale NUM_SCALE
     				from all_tab_columns a
     				where upper(a.table_name) = upper(:0)";
 			
@@ -1575,11 +1575,11 @@ class TDAO
 			$sql   ="SELECT column_name \"COLUMN_NAME\"
 					,column_default \"COLUMN_DEFAULT\"
 					,position('nextval(' in column_default)=1 as \"AUTOINCREMENT\"
-					,is_nullable  \"NULLABLE\"
+					,is_nullable  \"REQUIRED\"
 					,data_type \"DATA_TYPE\"
 					,character_maximum_length \"CHAR_MAX\"
-					,coalesce(numeric_precision, datetime_precision) as \"DATA_PRECISION\"
-					,numeric_scale as \"DATA_SCALE\"
+					,coalesce(numeric_precision, datetime_precision) as \"NUM_LENGTH\"
+					,numeric_scale as \"NUM_SCALE\"
 					FROM information_schema.columns
 					WHERE upper(table_schema) =  upper(?)
 					AND upper(table_name) =upper(?)
@@ -1592,11 +1592,11 @@ class TDAO
 					RDB$RELATION_FIELDS.RDB$FIELD_NAME COLUMN_NAME,
 					\'\' as COLUMN_DEFAULT,
 					0 AUTOINCREMENT,
-					0 NULLABLE,
+					0 REQUIRED,
 					RDB$TYPES.RDB$TYPE_NAME DATA_TYPE,
 					RDB$FIELDS.RDB$CHARACTER_LENGTH CHAR_MAX,
-					RDB$FIELDS.RDB$FIELD_PRECISION DATA_PRECISION,
-					RDB$FIELDS.RDB$FIELD_SCALE DATA_SCALE
+					RDB$FIELDS.RDB$FIELD_PRECISION NUM_LENGTH,
+					RDB$FIELDS.RDB$FIELD_SCALE NUM_SCALE
 					FROM RDB$RELATIONS
 					INNER JOIN RDB$RELATION_FIELDS ON RDB$RELATIONS.RDB$RELATION_NAME = RDB$RELATION_FIELDS.RDB$RELATION_NAME
 					LEFT JOIN RDB$FIELDS ON RDB$RELATION_FIELDS.RDB$FIELD_SOURCE = RDB$FIELDS.RDB$FIELD_NAME
@@ -1622,8 +1622,8 @@ class TDAO
 				$data[$rownum]['REQUIRED'] 		= ( $row['NOTNULL'] == 0 ? 'FALSE' : 'TRUE' );
 				$data[$rownum]['DATA_TYPE'] 	= strtoupper($row['TYPE']);
 				$data[$rownum]['CHAR_MAX'] 	= null;
-				$data[$rownum]['DATA_PRECISION']= 0;
-				$data[$rownum]['DATA_SCALE']	= 0;
+				$data[$rownum]['NUM_LENGTH']= 0;
+				$data[$rownum]['NUM_SCALE']	= 0;
 				$data[$rownum]['PRIMARYKEY']	= $row['PK'];
 				if( preg_match('/\(/',$row['TYPE']) == 1 )
 				{
@@ -1637,9 +1637,9 @@ class TDAO
 						$data[$rownum]['DATA_LENGTH'] = $length;
 					}
 					else {
-						$data[$rownum]['DATA_LENGTH'] 		= 0;
-						$data[$rownum]['DATA_PRECISION'] 	= $length;
-						$data[$rownum]['DATA_SCALE'] 		= $precision;
+						$data[$rownum]['CHAR_MAX'] 	  = 0;
+						$data[$rownum]['NUM_LENGTH']  = $length;
+						$data[$rownum]['NUM_SCALE']   = $precision;
 					}
 				}
 			}
@@ -1702,10 +1702,10 @@ class TDAO
 			foreach( $data as $k => $row ) {
 				$this->addField( trim( $row[ 'COLUMN_NAME' ] )
 				               , trim( strtolower($row[ 'DATA_TYPE' ]) )
-				               , ( (int) $row[ 'DATA_PRECISION' ] > 0 ? $row[ 'DATA_PRECISION' ] : $row[ 'DATA_LENGTH' ] )
-				               , $row[ 'DATA_SCALE' ]
+				               , ( (int) $row[ 'NUM_LENGTH' ] > 0 ? $row[ 'NUM_LENGTH' ] : $row[ 'CHAR_MAX' ] )
+				               , $row[ 'NUM_SCALE' ]
 				               , $row[ 'COLUMN_DEFAULT' ]
-				               , $row[ 'NULLABLE' ]
+				               , $row[ 'REQUIRED' ]
 				               , $row[ 'AUTOINCREMENT' ]
 				               , $row[ 'PRIMARYKEY']);
 			}
