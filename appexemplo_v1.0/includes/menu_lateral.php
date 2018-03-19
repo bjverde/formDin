@@ -37,9 +37,12 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-include('../../base/classes/webform/TTreeView.class.php');
+include('../../base/classes/webform/TApplication.class.php');
+
+
 $page = new THtmlPage();
 
+$page->addJsCssFile('../css/css_form.css');
 $page->addJsCssFile('../js/appJs.js');
 $page->addJsCssFile('dhtmlx/dhtmlxcommon.js');
 $page->addJsCssFile('dhtmlx/treeview/dhtmlxtree.js');
