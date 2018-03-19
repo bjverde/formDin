@@ -1522,7 +1522,7 @@ class TDAO
 						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
 						, case when upper(IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
 						, data_type DATA_TYPE
-						, character_maximum_length DATA_LENGTH
+						, character_maximum_length CHAR_MAX
 						, numeric_precision DATA_PRECISION
 						, numeric_scale DATA_SCALE
 						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  PRIMARYKEY
@@ -1540,7 +1540,7 @@ class TDAO
                     	,'' as AUTOINCREMENT
                         ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
                         ,c.DATA_TYPE
-                        ,c.CHARACTER_MAXIMUM_LENGTH as DATA_LENGTH
+                        ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
                         ,c.NUMERIC_PRECISION as DATA_PRECISION
                     	,c.NUMERIC_SCALE as DATA_SCALE
                     	,'' as PRIMARYKEY
@@ -1562,7 +1562,7 @@ class TDAO
 					, data_default as COLUMN_DEFAULT
 					, 0 AUTOINCREMENT
 					, decode(nullable,'Y',1,0) as NULLABLE
-					, a.data_length DATA_LENGTH
+					, a.data_length CHAR_MAX
 					, a.data_precision DATA_PRECISION
 					, a.data_scale DATA_SCALE
     				from all_tab_columns a
@@ -1577,7 +1577,7 @@ class TDAO
 					,position('nextval(' in column_default)=1 as \"AUTOINCREMENT\"
 					,is_nullable  \"NULLABLE\"
 					,data_type \"DATA_TYPE\"
-					,character_maximum_length \"DATA_LENGTH\"
+					,character_maximum_length \"CHAR_MAX\"
 					,coalesce(numeric_precision, datetime_precision) as \"DATA_PRECISION\"
 					,numeric_scale as \"DATA_SCALE\"
 					FROM information_schema.columns
@@ -1594,7 +1594,7 @@ class TDAO
 					0 AUTOINCREMENT,
 					0 NULLABLE,
 					RDB$TYPES.RDB$TYPE_NAME DATA_TYPE,
-					RDB$FIELDS.RDB$CHARACTER_LENGTH DATA_LENGTH,
+					RDB$FIELDS.RDB$CHARACTER_LENGTH CHAR_MAX,
 					RDB$FIELDS.RDB$FIELD_PRECISION DATA_PRECISION,
 					RDB$FIELDS.RDB$FIELD_SCALE DATA_SCALE
 					FROM RDB$RELATIONS
@@ -1621,7 +1621,7 @@ class TDAO
 				$data[$rownum]['AUTOINCREMENT'] = $row['PK'];
 				$data[$rownum]['REQUIRED'] 		= ( $row['NOTNULL'] == 0 ? 'FALSE' : 'TRUE' );
 				$data[$rownum]['DATA_TYPE'] 	= strtoupper($row['TYPE']);
-				$data[$rownum]['DATA_LENGTH'] 	= null;
+				$data[$rownum]['CHAR_MAX'] 	= null;
 				$data[$rownum]['DATA_PRECISION']= 0;
 				$data[$rownum]['DATA_SCALE']	= 0;
 				$data[$rownum]['PRIMARYKEY']	= $row['PK'];
