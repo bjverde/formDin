@@ -57,7 +57,7 @@ $frm->addBoxField('bxImagem',null,$this->getBase()."js/jquery/facebox/stairs.jpg
 
 $frm->addHtmlField('html4','Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color','blue');
 $frm->addTextField('endereco01','Endereço01:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'Informe o endereço completo do proprietário do terreno',null,null,false);
-$frm->addTextField('endereco02','Endereço02:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda.html');
+$frm->addTextField('endereco02','Endereço02:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda/ajuda.html');
 $frm->addBoxField('bxAjax',null,"http://localhost",'ajax','Visualizar Ajax:',null,true,null,null,'Conteudo ajax');
 
 
