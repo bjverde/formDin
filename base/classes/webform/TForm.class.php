@@ -1466,9 +1466,7 @@ class TForm Extends TBox
         
         if( defined('REQUIRED_FIELD_MARK') && $this->getFieldType() == 'form' && self::$hasRequiredField )
         {
-            if( $this->getRequiredFieldText() )
-            {
-                //$this->addHtmlField('teste','(*) Preenchimento obrigatório')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
+            if( $this->getRequiredFieldText() ) {
                 $this->body->add( '<center><span class="fwFieldRequiredOldStyle">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
             }
         }
