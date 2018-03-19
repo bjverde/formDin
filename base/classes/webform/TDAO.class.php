@@ -1475,27 +1475,28 @@ class TDAO
 			;
 			//--------------------------------------------------------------------------------
 			case DBMS_SQLSERVER:
-			    $sql = 'SELECT qtd.TABLE_SCHEMA
+			    $sql = "SELECT qtd.TABLE_SCHEMA
                               ,qtd.TABLE_NAME
                         	  ,qtd.COLUMN_QTD
                         	  ,ty.TABLE_TYPE
+							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
                         FROM
                         	(SELECT TABLE_SCHEMA
                         		  ,TABLE_NAME
                         		  ,COUNT(TABLE_NAME) COLUMN_QTD
                         	FROM INFORMATION_SCHEMA.COLUMNS c
-                        	where c.TABLE_SCHEMA <> \'METADADOS\'
+                        	where c.TABLE_SCHEMA <> 'METADADOS'
                         	group by TABLE_SCHEMA, TABLE_NAME
                         	) as qtd
                         	,(SELECT TABLE_SCHEMA
                         	       , TABLE_NAME
                         		   , TABLE_TYPE
                         	FROM INFORMATION_SCHEMA.TABLES i
-                        	where I.TABLE_SCHEMA <> \'METADADOS\'
+                        	where I.TABLE_SCHEMA <> 'METADADOS'
                         	) as ty
                         where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
                         and qtd.TABLE_NAME = ty.TABLE_NAME
-                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME';
+                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
 			    break;
 			    ;
 			//--------------------------------------------------------------------------------
@@ -1532,6 +1533,27 @@ class TDAO
 						,ordinal_position";
 			
 			$params=null;
+		}
+		else if( $DbType == DBMS_SQLSERVER ) {
+		    $sql="SELECT c.column_name as COLUMN_NAME
+                        ,c.COLUMN_DEFAULT
+                    	,'' as AUTOINCREMENT
+                        ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+                        ,c.DATA_TYPE
+                        ,c.CHARACTER_MAXIMUM_LENGTH as DATA_LENGTH
+                        ,c.NUMERIC_PRECISION as DATA_PRECISION
+                    	,c.NUMERIC_SCALE as DATA_SCALE
+                    	,'' as PRIMARYKEY
+                        ,prop.value AS COLUMN_COMMENT
+                    	,c.TABLE_SCHEMA
+                    	,c.table_name
+                   from INFORMATION_SCHEMA.COLUMNS c
+                        join sys.columns AS sc on sc.object_id = object_id(c.TABLE_SCHEMA + '.' + c.TABLE_NAME) AND sc.NAME = c.COLUMN_NAME
+                        LEFT JOIN sys.extended_properties prop ON prop.major_id = sc.object_id AND prop.minor_id = sc.column_id AND prop.NAME = 'MS_Description'
+                   order by c.table_name
+                          , c.ORDINAL_POSITION";
+		    
+		    $params=array($this->getTableName());
 		}
 		else if( $DbType == DBMS_ORACLE ) {
 			$sql="select a.column_name COLUMN_NAME
