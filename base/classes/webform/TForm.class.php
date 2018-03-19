@@ -529,7 +529,6 @@ class TForm Extends TBox
             }
             else if( isset( $_REQUEST[ 'modalbox' ] ) && $_REQUEST[ 'modalbox' ] )
             {
-                //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">');
                 $this->hideCloseButton();
                 $this->addHiddenField( 'modalbox', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
             }
@@ -1764,16 +1763,6 @@ class TForm Extends TBox
         
         // tem que habilitar o container senão ele não é exibido
         $this->setEnabled( true );
-        
-        /* if( $this->getFieldType() == "form" )
-         {
-         
-         if( $_POST['fw_back_to'] )
-         {
-         $this->getHeaderCell()->add('<img src="'.$this->getBase().'imagens/fwreturn16x16.gif" style="float:left;cursor:pointer;" alt="V" onClick="top.app_load_module(\''.$_POST['fw_back_to'].'\')">');
-         }
-         }
-         */
         
         // colocar o form dentro de uma pagina html completa com as tags html, head e body
         if( $this->getFieldType() == "form" && $this->getShowHtmlTag() )
