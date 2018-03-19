@@ -74,14 +74,14 @@ class TMenuDhtmlx {
         $this->arrMenu=null;
     }
     /**
-    * M?todo para adicionar itens de menu
+    * Método para adicionar itens de menu
     *
-    * @param string $strId
-    * @param string $strIdParent
+    * @param string $strId          - id do Menu
+    * @param string $strIdParent    - id do Item pai.
     * @param string $strText
     * @param string $strUrl
-    * @param string $strToolTip uma expli??o maior sobre o item
-    * @param string $strImg  imagem ser? utilizada como icone
+    * @param string $strToolTip     - uma explição maior sobre o item
+    * @param string $strImg         - imagem será utilizada como icone
     * @param string $strImgDisabled
     * @param boolean $boolDisabled
     * @param string $strHotKey

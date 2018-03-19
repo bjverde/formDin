@@ -78,12 +78,12 @@ class TMenuDhtmlx
     /**
     * Método para adicionar itens de menu
     *
-    * @param string $strId
-    * @param string $strIdParent
+    * @param string $strId          - id do Menu
+    * @param string $strIdParent    - id do Item pai.
     * @param string $strText
     * @param string $strUrl
-    * @param string $strToolTip
-    * @param string $strImg
+    * @param string $strToolTip     - uma explição maior sobre o item
+    * @param string $strImg         - imagem será utilizada como icone
     * @param string $strImgDisabled
     * @param boolean $boolDisabled
     * @param string $strHotKey

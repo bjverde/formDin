@@ -68,7 +68,7 @@ $menu->add('17','1','Campo Arquivo ou Blob');
        $menu->add('1721','172','Assincrono','view/fields/exe_FileAsync.php');
 	   $menu->add('1722','172','Normal','view/fields/exe_TFile.php');
 	   $menu->add('1723','172','TAssincrono','view/fields/exe_TFileAsync.php');
-
+	$menu->add('173','17','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php','Exemplo de Upload de imagem que mostra o arquivo antes de finalizar');
 
 	
 $menu->add('18','1','Campo Numérico','view/fields/exe_NumberField.php');
