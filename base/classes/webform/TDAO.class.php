@@ -1535,24 +1535,73 @@ class TDAO
 			$params=null;
 		}
 		else if( $DbType == DBMS_SQLSERVER ) {
-		    $sql="SELECT c.column_name as COLUMN_NAME
-                        ,c.COLUMN_DEFAULT
-                    	,'' as AUTOINCREMENT
-                        ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
-                        ,c.DATA_TYPE
-                        ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
-                        ,c.NUMERIC_PRECISION as NUM_LENGTH
-                    	,c.NUMERIC_SCALE as NUM_SCALE
-                    	,'' as PRIMARYKEY
-                        ,prop.value AS COLUMN_COMMENT
-                    	,c.TABLE_SCHEMA
-                    	,c.table_name
-                   from INFORMATION_SCHEMA.COLUMNS c
+			$sql="SELECT c.column_name as COLUMN_NAME
+                          ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+                          ,c.DATA_TYPE
+                          ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
+                          ,c.NUMERIC_PRECISION as NUM_LENGTH
+                          ,c.NUMERIC_SCALE as NUM_SCALE
+                    	  ,prop.value AS COLUMN_COMMENT
+                    	  ,fk2.CONSTRAINT_TYPE as KEY_TYPE
+                    	  ,fk2.REFERENCED_TABLE_NAME
+                    	  ,fk2.REFERENCED_COLUMN_NAME
+                          ,c.TABLE_SCHEMA
+                          ,c.table_name
+                    	  ,c.TABLE_CATALOG
+                    from INFORMATION_SCHEMA.COLUMNS c
                         join sys.columns AS sc on sc.object_id = object_id(c.TABLE_SCHEMA + '.' + c.TABLE_NAME) AND sc.NAME = c.COLUMN_NAME
                         LEFT JOIN sys.extended_properties prop ON prop.major_id = sc.object_id AND prop.minor_id = sc.column_id AND prop.NAME = 'MS_Description'
-                   WHERE upper(c.table_name) = upper('".$this->getTableName()."')
-                   order by c.table_name
-                          , c.ORDINAL_POSITION";
+                    	LEFT JOIN (
+                    		SELECT CT.TABLE_CATALOG
+                    			 , CT.TABLE_SCHEMA
+                    			 , CT.TABLE_NAME
+                    			 , CT.COLUMN_NAME
+                    			 , CT.CONSTRAINT_TYPE
+                    			 , FK.REFERENCED_TABLE_NAME
+                    			 , FK.REFERENCED_COLUMN_NAME
+                    		FROM ( 
+                    				SELECT kcu.TABLE_CATALOG
+                    					 , kcu.TABLE_SCHEMA
+                    					 , kcu.TABLE_NAME
+                    					 , kcu.COLUMN_NAME
+                    					 , tc.CONSTRAINT_TYPE
+                    					 , kcu.CONSTRAINT_NAME	 
+                    				FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
+                    					,INFORMATION_SCHEMA.TABLE_CONSTRAINTS  tc
+                    				where kcu.CONSTRAINT_NAME = tc.CONSTRAINT_NAME
+                    				) as CT
+                    
+                    			LEFT JOIN (
+                    				SELECT  
+                    					 KCU1.CONSTRAINT_NAME AS FK_CONSTRAINT_NAME 
+                    					,KCU1.TABLE_NAME AS FK_TABLE_NAME 
+                    					,KCU1.COLUMN_NAME AS FK_COLUMN_NAME 
+                    					,KCU2.TABLE_NAME AS REFERENCED_TABLE_NAME 
+                    					,KCU2.COLUMN_NAME AS REFERENCED_COLUMN_NAME 
+                    				FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS RC 
+                    
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU1 
+                    					ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG  
+                    					AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA 
+                    					AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME 
+                    
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU2 
+                    					ON KCU2.CONSTRAINT_CATALOG = RC.UNIQUE_CONSTRAINT_CATALOG  
+                    					AND KCU2.CONSTRAINT_SCHEMA = RC.UNIQUE_CONSTRAINT_SCHEMA 
+                    					AND KCU2.CONSTRAINT_NAME = RC.UNIQUE_CONSTRAINT_NAME 
+                    					AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION 
+                    				) as FK 
+                    		ON CT.CONSTRAINT_NAME = FK.FK_CONSTRAINT_NAME
+                    		AND CT.TABLE_NAME = FK.FK_TABLE_NAME
+                    		AND CT.COLUMN_NAME = FK.FK_COLUMN_NAME
+                    	) as FK2
+                    	on c.TABLE_SCHEMA = FK2.TABLE_SCHEMA
+                    	and c.TABLE_NAME = Fk2.TABLE_NAME
+                    	and c.COLUMN_NAME = fk2.COLUMN_NAME
+                    WHERE upper(c.table_name) = upper('".$this->getTableName()."')
+                    ORDER by   c.TABLE_SCHEMA
+                              ,c.TABLE_NAME
+                              ,c.ORDINAL_POSITION";
 		    
 		    $params=array($this->getTableName());
 		}
