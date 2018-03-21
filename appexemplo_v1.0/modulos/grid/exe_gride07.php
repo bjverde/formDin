@@ -1,6 +1,6 @@
 <?php
 d($_REQUEST);
-$frm = new TForm('Exemplo Gride Evento',300,500);
+$frm = new TForm('Gride 07 - exemplo Evento',300,700);
 
 // simulação de dados para o gride
 $dados = null;
@@ -60,7 +60,7 @@ switch( $acao ) {
 		//--------------------------------------------------------------------
 }
 
-
+$frm->setAction('POST PAGINA');
 // exibir o formulário
 $frm->show();
 
