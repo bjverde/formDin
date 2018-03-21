@@ -150,10 +150,11 @@ $menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
 	$menu->add('8.6','8','Gride 06 - Campos 1','grid/exe_gride06.php');
 	$menu->add('8.7','8','Gride 07 - Campos 2','grid/exe_gride07.php');
 	$menu->add('8.8','8','Gride 08 - Campos 3','grid/exe_gride08.php');
-	$menu->add('8.9','8','Gride 09 - erro','grid/exe_gride_09.php');
+	$menu->add('8.9','8','Gride 09 - Campos 4, CheckColumn','grid/exe_gride09.php');
 	$menu->add('8.10','8','Gride 10 - erro','grid/exe_gride10.php');
 	$menu->add('8.11','8','Gride 11 Offine 02 - erro','grid/exe_gride11.php');
 	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
+	$menu->add('8.14','8','Gride 14 - erro','grid/exe_gride14.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos bancos de dados','data_base.png');
