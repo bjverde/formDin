@@ -1730,14 +1730,16 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	/**
-	* coluna tipo checkbox
-
+	* coluna tipo checkbox. Irá criar no gride uma coluno do tipo checkbox. Quando é feito o POST
+	* será criado uma nova variavel com valor de strName
+	* 
 	*
-	* @param string $strName
-	* @param string $strTitle
-	* @param string $strKeyField
-	* @param string $strDescField
+	* @param string $strName       - Nome do variavel no POST
+	* @param string $strTitle      - Titulo do grid
+	* @param string $strKeyField   - Valor que será passado no POST
+	* @param string $strDescField  - Valor que irá aparecer o gride 
 	* @param boolean $boolReadOnly
+	* @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
 	* @return TCheckColumn
 	*/
 	public function addCheckColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null, $boolAllowCheckAll = null )
