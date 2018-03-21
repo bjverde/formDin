@@ -1444,7 +1444,7 @@ class TDAO
 							\'\' as TABLE_SCHEMA
 							,name as TABLE_NAME 
 							,\'\' as COLUMN_QTD
-							,type as TABLE_TYPE
+							,upper(type) as TABLE_TYPE
 						FROM sqlite_master where type in (\'table\', \'view\')';
 			break;
 			//--------------------------------------------------------------------------------
