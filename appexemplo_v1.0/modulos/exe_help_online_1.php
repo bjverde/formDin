@@ -55,9 +55,8 @@ $frm->addJavascript('fwSetHtmlEditor("HELP_TEXT","callBackEditor",false)');
 $frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+$frm->addButton('Atualizar', null, 'Atualizar', null, null, false, false);
 
-$frm->setAction('Atualizar');
-//$frm->addButton('Criar BD','criarBD','btnCriarBD');
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
@@ -65,6 +64,7 @@ switch( $acao ) {
 		if ( $frm->validate() ) {
 			$vo = new HelpOnLineVO();
 			$frm->setVo( $vo );
+			d( $vo );
 			$resultado = HelpOnLineDAO::insert( $vo );
 			if($resultado==1) {
 				$frm->setMessage('Registro gravado com sucesso!!!');
@@ -125,10 +125,10 @@ $gride = new TGrid( 'gd'        // id do gride
 		,$primaryKey // chave primaria
 		,$mixUpdateFields
 		);
-$gride->addColumn($primaryKey,'id',50,'center');
-$gride->addColumn('HELP_FIELD','HELP_FIELD',50,'center');
-$gride->addColumn('HELP_TITLE','HELP_TITLE',50,'center');
-$gride->addColumn('HELP_TEXT','HELP_TEXT',50,'center');
+$gride->addColumn($primaryKey,'id');
+$gride->addColumn('HELP_TITLE','Título');
+$gride->addColumn('HELP_FIELD','Campo');
+$gride->addColumn('HELP_TEXT','Texto');
 $frm->addHtmlField('gride',$gride);
 
 
