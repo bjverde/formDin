@@ -142,15 +142,16 @@ $menu->add('5',null,'Ajax');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
-	$menu->add('8.1','8','Gride 01 - botões sobre grid','grid/exe_gride01.php');
-	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
+	$menu->add('80','8','Grides com campos internos', null, null, '../../base/imagens/table16.gif');
+		$menu->add('80.1','80','Gride 01 - botões sobre grid','grid/exe_gride01.php');		
+		$menu->add('80.3','80','Gride 06 - Campos 1','grid/exe_gride06.php');
+		$menu->add('80.4','80','Gride 07 - Campos 2','grid/exe_gride07.php');
+		$menu->add('80.8','80','Gride 08 - Campos 3','grid/exe_gride08.php');
+		$menu->add('80.9','80','Gride 09 - Campos 4, CheckColumn','grid/exe_gride09.php');
+	$menu->add('8.1','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
 	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
 	$menu->add('8.4','8','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
 	$menu->add('8.5','8','Gride 05 - Paginação','grid/exe_gride05_paginacao.php');
-	$menu->add('8.6','8','Gride 06 - Campos 1','grid/exe_gride06.php');
-	$menu->add('8.7','8','Gride 07 - Campos 2','grid/exe_gride07.php');
-	$menu->add('8.8','8','Gride 08 - Campos 3','grid/exe_gride08.php');
-	$menu->add('8.9','8','Gride 09 - Campos 4, CheckColumn','grid/exe_gride09.php');
 	$menu->add('8.10','8','Gride 10 - erro','grid/exe_gride10.php');
 	$menu->add('8.11','8','Gride 11 Offine 02 - erro','grid/exe_gride11.php');
 	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
