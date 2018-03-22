@@ -1735,9 +1735,9 @@ class TGrid extends TTable
 	* 
 	*
 	* @param string $strName       - Nome do variavel no POST
-	* @param string $strTitle      - Titulo do grid
+	* @param string $strTitle      - Titulo que aparece no grid
 	* @param string $strKeyField   - Valor que será passado no POST
-	* @param string $strDescField  - Valor que irá aparecer o gride 
+	* @param string $strDescField  - Descrição do campo, valor que irá aparecer o gride 
 	* @param boolean $boolReadOnly
 	* @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
 	* @return TCheckColumn
@@ -1756,10 +1756,10 @@ class TGrid extends TTable
 	* coluna tipo radioButton
 
 	*
-	* @param string $strName
-	* @param string $strTitle
-	* @param string $strKeyField
-	* @param string $strDescField
+	* @param string $strName       - Nome do variavel no POST
+	* @param string $strTitle      - Titulo que aparece no grid
+	* @param string $strKeyField   - Valor que será passado no POST
+	* @param string $strDescField  - Descrição do campo, valor que irá aparecer o gride 
 	* @param boolean $boolReadOnly
 	* @return TRadioButton
 	*/
