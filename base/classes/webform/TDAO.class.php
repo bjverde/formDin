@@ -1507,6 +1507,14 @@ class TDAO
 		return $result;
 	}
 	
+	private function getMsSqlShema() {
+	    $result = '';
+	    if($this->getSchema()){
+	        $result = " AND upper(c.TABLE_SCHEMA) = upper('".$this->getSchema()."') ";
+	    }
+	    return $result;
+	}
+	
 	public function getSqlToFieldsFromDatabase() {
 		//$DbType = $this->getConnDbType();
 		$DbType = $this->getDbType();
@@ -1598,7 +1606,7 @@ class TDAO
                     	on c.TABLE_SCHEMA = FK2.TABLE_SCHEMA
                     	and c.TABLE_NAME = Fk2.TABLE_NAME
                     	and c.COLUMN_NAME = fk2.COLUMN_NAME
-                    WHERE upper(c.table_name) = upper('".$this->getTableName()."')
+                    WHERE upper(c.table_name) = upper('".$this->getTableName()."')".$this->getMsSqlShema()."
                     ORDER by   c.TABLE_SCHEMA
                               ,c.TABLE_NAME
                               ,c.ORDINAL_POSITION";
