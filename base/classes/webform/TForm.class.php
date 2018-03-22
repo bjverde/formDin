@@ -1934,26 +1934,43 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - nome do campo irá funcionar com autocomplete
-     * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
-     * @param string $strSearchField                - campo de pesquisa
-     * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param string $strFieldName                  - 1: nome do campo irá funcionar com autocomplete
+     * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
+     * @param string $strSearchField                - 3: campo de pesquisa
+     * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields
-     * @param mixed $mixExtraSearchFields            - campo do formulário que será adicionado como filtro
-     * @param string $strCallBackFunctionJs
-     * @param integer $intMinChars                   - Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                      - Default 1000, tempo após a digitação para disparar a consulta
-     * @param integer $intMaxItensToShow             - máximo de registros que deverá ser retornado
+     * @param mixed $mixExtraSearchFields           - 6: campo do formulário que será adicionado como filtro
+     * @param string $strCallBackFunctionJs         - 7: função javascript de callback
+     * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
+     * @param integer $intDelay                     - 9: Default 1000, tempo após a digitação para disparar a consulta
+     * @param integer $intMaxItensToShow            - 10: máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
-     * @param string $strUrl                         - url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
-     * @param string $strMessageNotFound             - Mensagem caso não encontre nenhum registro
-     * @params boolean $boolKeepFieldValuesOnPost
-     * @params boolean $boolClearOnNotFound
-     * @params boolean $boolClearUpdateFields
-     * @params boolean $boolSearchAnyPosition
+     * @param string $strUrl                        - 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+     * @param string $strMessageNotFound            - 14: Mensagem caso não encontre nenhum registro
+     * @param boolean $boolKeepFieldValuesOnPost    - 15:
+     * @param boolean $boolClearOnNotFound
+     * @param boolean $boolClearUpdateFields
+     * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
      */
-    public function setAutoComplete( $strFieldName, $strTablePackageFuncion, $strSearchField, $mixUpdateFields=null, $boolDisableUpdateFields=null, $mixExtraSearchFields=null, $strCallBackFunctionJs=null, $intMinChars=null, $intDelay=null, $intMaxItensToShow=null, $intCacheTime=null, $boolRemoveMask=null, $strUrl=null, $strMessageNotFound=null, $boolKeepFieldValuesOnPost=null, $boolClearOnNotFound=null, $boolClearUpdateFields=null,$boolSearchAnyPosition=null )
+    public function setAutoComplete( $strFieldName
+    		                       , $strTablePackageFuncion
+    		                       , $strSearchField
+    		                       , $mixUpdateFields=null
+    		                       , $boolDisableUpdateFields=null
+    		                       , $mixExtraSearchFields=null
+    		                       , $strCallBackFunctionJs=null
+    		                       , $intMinChars=null
+    		                       , $intDelay=null
+    		                       , $intMaxItensToShow=null
+    		                       , $intCacheTime=null
+    		                       , $boolRemoveMask=null
+    		                       , $strUrl=null
+    		                       , $strMessageNotFound=null
+    		                       , $boolKeepFieldValuesOnPost=null
+    		                       , $boolClearOnNotFound=null
+    		                       , $boolClearUpdateFields=null
+    		                       , $boolSearchAnyPosition=null )
     {
         
         // não criar o autocomplente se o campo não existir
