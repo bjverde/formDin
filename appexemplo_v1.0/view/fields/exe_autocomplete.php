@@ -89,11 +89,11 @@ $frm->setAutoComplete( 'nom_municipio'
                      , true );
 
 $frm->setAutoComplete( 'nom_municipio2'
-		             , 'tb_municipio'            // tabela alvo da pesquisa
-		             , 'nom_municipio'           // campo de pesquisa
-		             , 'cod_municipio|cod_municipio2,cod_uf|cod_uf2'  // campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+		             , 'tb_municipio'            // 2: tabela alvo da pesquisa
+		             , 'nom_municipio'           // 3: campo de pesquisa
+		             , 'cod_municipio|cod_municipio2,cod_uf|cod_uf2'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
 		             , true
-		             , null                      // campo do formulário que será adicionado como filtro
+		             , null                      // 6: campo do formulário que será adicionado como filtro
 		             , 'callback_autocomplete_municipio()'
 		             , 3
 		             , 1000                       // Default 1000, tempo após a digitação para disparar a consulta
