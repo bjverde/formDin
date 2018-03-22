@@ -52,18 +52,41 @@ $page->addInHead('<script>var treeView;</script>');
 // criar o objeto treeview.
 $tree = new TTreeView('treeView');
 
-$tree->setWidth(200); // define a largura da Ã¡rea onde serÃ¡ exibida a treeview
-$tree->setHeight(300); // define a altura da Ã¡rea onde serÃ¡ exibida a treeview
+$tree->setWidth(200); // define a largura da área onde será exibida a treeview
+$tree->setHeight(300); // define a altura da área onde será exibida a treeview
 
-// adicionar manualmente os Ã­tens na treeview
-$tree->addItem(null,1,'Relatorio',true);
-$tree->addItem(1,11,'Financeiro',true,null,array('URL'=>'www.bb.com.br'));
+// adicionar manualmente os ítens na treeview
+$tree->addItem(null,1,'Relatório',true);
+$tree->addItem(1,11  ,'Financeiro',true,null,array('URL'=>'www.bb.com.br'));
+$tree->addItem(1,12  ,'Orçamentário',true,null,array('URL'=>'www.bcb.gov.br'));
 
-//$tree->setOnClick('treeClick'); // fefinir o evento que serÃ¡ chamado ao clicar no item da treeview
-//$frm->addJavascript($tree->getJs());// gerar e adicionar na criaÃ§Ã£o da pagina o codigo javascript que adiciona os itens na treeview
+$tree->setOnClick('treeClick');     // Definir o evento que será chamado ao clicar no item da treeview
+//$page->addJavascript($tree->getJs());// Gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
 $tree->setXY(0,100); // posiciona a treeview na tela. left=0, top=100
-//$tree->show(); // exibe o tree view
-$page->addInBody( $tree );
+$tree->show(); // exibe o tree view
+//$page->addInBody( $tree );
 $page->addJavascript( $tree->getJs() );
 $page->show();
 ?>
+<script>
+function treeClick(id) {
+
+	/*
+	alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+	'Item text:'+treeJs.getItemText(id )+'\n'+
+	'User pai:'+treeJs.getUserData(id,'IDMENU_PAI')+'\n'+
+	'User data URL:'+treeJs.getUserData(id,'URL')+'\n'+
+	'IMG:'+treeJs.getUserData(id,'IMG_MENU')
+	);
+	*/
+
+	
+	alert( treeJs.getSelectedItemId());
+	alert( treeJs.getItemText(id ) );
+	alert( treeJs.getUserData(id,'URL') );
+
+	jQuery("#item").val(treeJs.getSelectedItemId());
+	jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
+	jQuery("#link").val(treeJs.getUserData(id,'URL'));
+}
+</script>
