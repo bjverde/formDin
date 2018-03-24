@@ -433,13 +433,8 @@ class TPDOConnection {
         // nás chamadas ajax, não precisa aplicar utf8
         if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
             $boolUtf8_Decode = self::getUtfDecode();
-            if ( $boolUtf8_Decode ) {
-                $sql = utf8_encode( $sql );
-                $arrParams = self::encodeArray( $arrParams );
-            } else {
-                $sql = utf8_decode( $sql );
-                $arrParams = self::encodeArray( $arrParams );
-            }
+            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $sql );
+            $arrParams = self::encodeArray( $arrParams );
         }
         $arrParams = self::prepareArray( $arrParams );
         // guardar os parametros recebidos
@@ -908,6 +903,12 @@ class TPDOConnection {
         return $date;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Returns the string in the appropriate format UTF8 or ANSI
+     * @param boolean $boolUtf8_Decode
+     * @param string $string
+     * @return NULL|string
+     */
     public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {
         $retorno = null;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
