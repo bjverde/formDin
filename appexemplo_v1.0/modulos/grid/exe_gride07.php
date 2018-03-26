@@ -22,6 +22,10 @@ $dados['SIT_OPCOES'][] = '3=Tres,4=>Quatro';
 
 $html ='Os botões só funcionam depois das linha dos gride selecionadas'; 
 $frm->addHtmlField('html1',$html,null,'Dica:',null,200)->setCss('border','1px dashed blue');
+
+$frm->addButton('POST Pagina', 'post', null, null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+
 $gride = new TGrid( 'gdTeste' // id do gride
 					,'Título do Gride' // titulo do gride
 					,$dados 	// array de dados
@@ -56,11 +60,14 @@ switch( $acao ) {
 	case 'Ir Ajax':
 		//Redirect só funciona se o arquivo estiver na pasta modulos
 		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
-		break;
-		//--------------------------------------------------------------------
+	break;
+	//--------------------------------------------------------------------------------
+	case 'Limpar':
+	    $frm->clearFields();
+	break;
 }
 
-$frm->setAction('POST PAGINA');
+//$frm->setAction('POST PAGINA');
 // exibir o formulário
 $frm->show();
 
