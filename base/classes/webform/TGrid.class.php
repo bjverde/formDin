@@ -1414,19 +1414,27 @@ class TGrid extends TTable
 	 *
 	 * $boolSubmitAction = adicionar/remover a função fwFazerAcao(). Padrão=true
 	 *
-	 * @param string $strRotulo
-	 * @param string $strAction
+	 * @param string $strRotulo   - label buttom 
+	 * @param string $strAction   - name action 
 	 * @param string $strName
 	 * @param string $strOnClick
 	 * @param string $strConfirmMessage
 	 * @param string $strImage
 	 * @param string $strImageDisabled
 	 * @param string $strHint
-	 * @param boolean $boolSubmitAction
+	 * @param boolean $boolSubmitAction  - TRUE post html, FALSE not post 
 	 * @return object> TButton
 	 */
-	public function addButton( $strRotulo, $strAction = null, $strName = null, $strOnClick = null, $strConfirmMessage = null, $strImage = null, $strImageDisabled = null, $strHint = null, $boolSubmitAction = null )
-	{
+	public function addButton( $strRotulo
+	                         , $strAction = null
+	                         , $strName = null
+	                         , $strOnClick = null
+	                         , $strConfirmMessage = null
+	                         , $strImage = null
+	                         , $strImageDisabled = null
+	                         , $strHint = null
+	                         , $boolSubmitAction = null
+	                         ) {
 		if ( is_null( $strName ) )
 		{
 			$strName = $this->getId() . ucwords( $this->removeIllegalChars( $strRotulo ) );
