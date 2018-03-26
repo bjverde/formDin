@@ -56,11 +56,16 @@ switch( $acao ) {
 		//Redirect só funciona se o arquivo estiver na pasta modulos
 		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',true);
 		break;
-		//------------------------------------------------------------------
+	//------------------------------------------------------------------
 	case 'Ir Ajax':
 		//Redirect só funciona se o arquivo estiver na pasta modulos
 		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
 	break;
+	//------------------------------------------------------------------
+	case 'btnRedirect2':
+	    //Redirect só funciona se o arquivo estiver na pasta modulos
+	    $frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
+	    break;
 	//--------------------------------------------------------------------------------
 	case 'Limpar':
 	    $frm->clearFields();
