@@ -550,7 +550,7 @@ class TGrid extends TTable
 								call_user_func( $this->onDrawCell, $rowNum, $cell, $objColumn, $this->getRowData( $k ), null );
 							}
 						}
-						else if( $objColumn->getColumnType() == 'plain' )
+						else if( $objColumn->getColumnType() == 'plain' or $objColumn->getColumnType() == 'columncompact')
 						{
 							$cell->setProperty( 'field_name', $objColumn->getFieldName() );
 							$cell->setProperty( 'id', strtolower( $this->getid() . '_' . $objColumn->getFieldName() . '_' . $rowNum ) );
@@ -568,6 +568,11 @@ class TGrid extends TTable
 							else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
 							{
 								$tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
+							}
+							if ($objColumn->getColumnType() == 'columncompact') 
+							{
+							    $cell->setProperty('title', $tdValue); 
+							    $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()).'...';
 							}
 							//$tdValue = isset($res[strtoupper($fieldName)][$k]) && $res[strtoupper($fieldName)][$k] ? $res[strtoupper($fieldName)][$k]: '<center>---</center>';
 							//$tdValue = ( $objColumn->getConvertHtml() ) ? htmlentities($tdValue): $tdValue;
@@ -1256,7 +1261,6 @@ class TGrid extends TTable
 	//------------------------------------------------------------------------------------
 	public function addColumn( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null )
 	{
-
 		$col = new TGridColumn( $strFieldName, $strValue, $strWidth, $strTextAlign );
 		$col->clearCss();
 		$col->setGridId($this->getId());
@@ -1264,6 +1268,16 @@ class TGrid extends TTable
 		return $col;
 	}
 
+	public function addColumnCompact( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null, $strMaxTextLength = 40  )
+	{
+	    $col = new TGridColumnCompact( $strFieldName, $strValue, $strWidth, $strTextAlign, null,null,null,$strMaxTextLength);
+	    $col->clearCss();
+	    $col->setGridId($this->getId());
+	    $this->columns[ $col->getId()] = $col;
+	    return $col;
+	}
+	
+	
 	//------------------------------------------------------------------------------------
 	public function addHiddenField( $strFieldName, $strId = null )
 	{
@@ -1414,27 +1428,19 @@ class TGrid extends TTable
 	 *
 	 * $boolSubmitAction = adicionar/remover a função fwFazerAcao(). Padrão=true
 	 *
-	 * @param string $strRotulo   - label buttom 
-	 * @param string $strAction   - name action 
+	 * @param string $strRotulo
+	 * @param string $strAction
 	 * @param string $strName
 	 * @param string $strOnClick
 	 * @param string $strConfirmMessage
 	 * @param string $strImage
 	 * @param string $strImageDisabled
 	 * @param string $strHint
-	 * @param boolean $boolSubmitAction  - TRUE post html, FALSE not post 
+	 * @param boolean $boolSubmitAction
 	 * @return object> TButton
 	 */
-	public function addButton( $strRotulo
-	                         , $strAction = null
-	                         , $strName = null
-	                         , $strOnClick = null
-	                         , $strConfirmMessage = null
-	                         , $strImage = null
-	                         , $strImageDisabled = null
-	                         , $strHint = null
-	                         , $boolSubmitAction = null
-	                         ) {
+	public function addButton( $strRotulo, $strAction = null, $strName = null, $strOnClick = null, $strConfirmMessage = null, $strImage = null, $strImageDisabled = null, $strHint = null, $boolSubmitAction = null )
+	{
 		if ( is_null( $strName ) )
 		{
 			$strName = $this->getId() . ucwords( $this->removeIllegalChars( $strRotulo ) );
