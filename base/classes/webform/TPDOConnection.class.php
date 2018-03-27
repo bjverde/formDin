@@ -641,22 +641,15 @@ class TPDOConnection {
                     }
                     $result[] = $arrDados[ $k ];
                 }
-            }
-            else
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( !is_null($v) )
-                    {
+            } else {
+                foreach( $arrDados as $k => $v ) {
+                    if ( !is_null($v) && !empty($v) ){
                         // campo data deve ser invertido para gravar no banco de dados.
-                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                        {
+                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
                             $v = self::formatDate( $v, 'ymd' );
                         }
                         $arrDados[ $k ] = $v;
-                    }
-                    else
-                    {
+                    }else {
                         $arrDados[ $k ] = null;
                     }
                 }
