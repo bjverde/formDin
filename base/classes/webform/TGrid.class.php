@@ -571,8 +571,11 @@ class TGrid extends TTable
 							}
 							if ($objColumn->getColumnType() == 'columncompact') 
 							{
-							    $cell->setProperty('title', $tdValue); 
-							    $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()).'...';
+							    if (strlen($tdValue)> $objColumn->getMaxTextLength())
+							    {
+							        $cell->setProperty('title', $tdValue); 
+    							    $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()-3).' (...)';
+							    }
 							}
 							//$tdValue = isset($res[strtoupper($fieldName)][$k]) && $res[strtoupper($fieldName)][$k] ? $res[strtoupper($fieldName)][$k]: '<center>---</center>';
 							//$tdValue = ( $objColumn->getConvertHtml() ) ? htmlentities($tdValue): $tdValue;
