@@ -5108,7 +5108,7 @@ class TForm Extends TBox
         * @param string  $strName    - Nome da ação com submit, ignorando strOnClick. Se ficar null será utilizado o valor de mixValue
         * @param string  $strAction  - Nome da ação
         * @param string  $strOnClick - Nome da função javascript
-        * @param string  $strConfirmMessage
+        * @param string  $strConfirmMessage - Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
         * @param boolean $boolNewLine  - em nova linha
         * @param boolean $boolFooter   - mostrar no fim do form
         * @param string  $strImage
