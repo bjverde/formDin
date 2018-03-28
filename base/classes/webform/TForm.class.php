@@ -4247,6 +4247,7 @@ class TForm Extends TBox
          }
          return is_null($this->onBeforeClose) ? 'null' : $this->onBeforeClose;
      }
+     
      /**
       * O método redirect deve ser utilizado para chamar um outro formulário dentro de uma ação do formulário
       * corrente, sem ter que submeter a página.
@@ -4261,10 +4262,9 @@ class TForm Extends TBox
       *
       * @param mixed $strModule
       * @param mixed $strMessage
-      * @param boolean $boolSubmit  - ação de submeter
-      * @param array $arrVars       - Array que será enviado via Post
-      * @param boolean $boolRedirect - TRUE igual ajax
-      * @param boolean $boolSaveData  - salva os dados formulario atual
+      * @param boolean $boolSubmit   - ação de submeter. TRUE = post, FALSE = ajax
+      * @param array $arrVars        - Array que será enviado via Post 
+      * @param boolean $boolSaveData - salva os dados formulario atual
       */
       public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
           $boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
@@ -4275,14 +4275,13 @@ class TForm Extends TBox
           if( $fileExists ) {
               $currentModule = $this->getRealPath( $_POST['modulo'] );
               // guardar na sessão somente se estiver indo, na volta não precisa
-              if( $boolSaveData )
-              {
+              if( $boolSaveData ) {
                   $_SESSION[ APLICATIVO ][ $currentModule ][ 'post' ] = $_POST;
               }
               $_POST[ 'fw_back_to' ] = $currentModule;
               $_REQUEST[ 'redirect_message' ] 	= $strMessage;
-              $_POST[ 'modulo' ] 					= $filePath;
-              $_GET[ 'modulo' ] 					= $filePath;
+              $_POST[ 'modulo' ] 				= $filePath;
+              $_GET[ 'modulo' ] 				= $filePath;
               $_REQUEST[ 'modulo' ]				= $filePath;
               $_REQUEST[ 'redirect' ] 			= '1';
               $_SESSION[ APLICATIVO ][ 'modulo' ] = $filePath;
@@ -5120,8 +5119,14 @@ class TForm Extends TBox
         * @param bool    $boolLabelAbove
         * @return TButton
         */
-       public function addButton( $mixValue=null, $strAction=null, $strName=null, $strOnClick=null, $strConfirmMessage=null, $boolNewLine=null, $boolFooter=null, $strImage=null, $strImageDisabled=null, $strHint=null, $strVerticalAlign=null, $boolLabelAbove=null, $strLabel=null, $strHorizontalAlign=null)
-       {
+       public function addButton( $mixValue=null
+					       		, $strAction=null, $strName=null
+					       		, $strOnClick=null, $strConfirmMessage=null
+					       		, $boolNewLine=null, $boolFooter=null
+					       		, $strImage=null, $strImageDisabled=null
+					       		, $strHint=null, $strVerticalAlign=null
+					       		, $boolLabelAbove=null, $strLabel=null
+					       		, $strHorizontalAlign=null) {
            // botão será criado no rodapé do formulário por padrão
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
