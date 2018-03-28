@@ -188,22 +188,24 @@ $menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-51
 	$menu->add('10.7','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
 	$menu->add('10.8','10','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('10.9','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
-	$menu->add('1010','10','Form Layout Diferentes');
-		$menu->add('10.101','1010','Definir Colunas no Formulário','view/form/exe_colunas.php');
-		$menu->add('10.102','1010','Imagem de Fundo','view/form/exe_TFormImage.php');
-		$menu->add('10.103','1010','Customizado com CSS','view/form/exe_TForm3.php');
 	$menu->add('10.11','10','ERRO - Local Destino','view/form/exe_form_local_destino.php');
-
-$menu->add('199',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
-	$menu->add('199.1','199','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
-	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
 	
 //-----------------------------------------------------------------------------
-$menu->add('200',0,'Layout App');
-	$menu->add('201','200','Layout index','layouts.php');	
-	$menu->add('202','200','Temas do Menu','exe_menu_tema.php');
-	$menu->add('203','200','Esqueleto do Layout','exe_layout_1.php');
+$menu->add('200',0,'Layouts', null, 'Exemplos de Layouts, CSS e apresentações diferentes', '../../base/imagens/art-1f3a8.png');
+    $menu->add('20010','200','Layout Menu Principal');
+        $menu->add('20010.1','20010','Layout index','layouts.php');
+        $menu->add('20010.2','20010','Temas do Menu','exe_menu_tema.php');
+        $menu->add('20010.3','20010','Esqueleto do Layout','exe_layout_1.php');
+    $menu->add('20020','200','Definir Colunas no Formulário','view/form/exe_colunas.php');
+    $menu->add('20021','200','Imagem de Fundo','view/form/exe_TFormImage.php');
+    $menu->add('20022','200','Customizado com CSS','view/form/exe_TForm3.php');
+    $menu->add('20023','200','Form Buttuns Customizado com CSS','view/css/exe_css_form02.php');
 
+//-----------------------------------------------------------------------------
+$menu->add('210',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
+    $menu->add('210.1','210','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+    $menu->add('210.2','210','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
+    
 
 $menu->getXml();
 ?>

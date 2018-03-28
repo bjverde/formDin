@@ -1,0 +1,40 @@
+.buttonBigGreen {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonGridBlue {
+    color: blue;
+}
+
+.buttonGridRed {
+    color: red;
+    font-size: 16px;
+}
+
+.notice {
+	width: 200px;
+	font-size: 16px;
+    border: 1px dashed blue;
+    display: inline-block;
+    text-align: center;
+    padding: 15px 32px;
+}
+
+.text {
+	margin-bottom: 20px;
+	background-color: #ffffcc;
+	border: 1px solid #ffeb3b;
+}
+
+.label {
+	font-size: 25px;
+	color: #00ff00;
+	font-style: italic;
+}

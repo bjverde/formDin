@@ -550,7 +550,7 @@ class TGrid extends TTable
 								call_user_func( $this->onDrawCell, $rowNum, $cell, $objColumn, $this->getRowData( $k ), null );
 							}
 						}
-						else if( $objColumn->getColumnType() == 'plain' )
+						else if( $objColumn->getColumnType() == 'plain' or $objColumn->getColumnType() == 'columncompact')
 						{
 							$cell->setProperty( 'field_name', $objColumn->getFieldName() );
 							$cell->setProperty( 'id', strtolower( $this->getid() . '_' . $objColumn->getFieldName() . '_' . $rowNum ) );
@@ -568,6 +568,14 @@ class TGrid extends TTable
 							else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
 							{
 								$tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
+							}
+							if ($objColumn->getColumnType() == 'columncompact') 
+							{
+							    if (strlen($tdValue)> $objColumn->getMaxTextLength())
+							    {
+							        $cell->setProperty('title', $tdValue); 
+    							    $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()-3).' (...)';
+							    }
 							}
 							//$tdValue = isset($res[strtoupper($fieldName)][$k]) && $res[strtoupper($fieldName)][$k] ? $res[strtoupper($fieldName)][$k]: '<center>---</center>';
 							//$tdValue = ( $objColumn->getConvertHtml() ) ? htmlentities($tdValue): $tdValue;
@@ -1256,7 +1264,6 @@ class TGrid extends TTable
 	//------------------------------------------------------------------------------------
 	public function addColumn( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null )
 	{
-
 		$col = new TGridColumn( $strFieldName, $strValue, $strWidth, $strTextAlign );
 		$col->clearCss();
 		$col->setGridId($this->getId());
@@ -1264,6 +1271,16 @@ class TGrid extends TTable
 		return $col;
 	}
 
+	public function addColumnCompact( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null, $strMaxTextLength = 40  )
+	{
+	    $col = new TGridColumnCompact( $strFieldName, $strValue, $strWidth, $strTextAlign, null,null,null,$strMaxTextLength);
+	    $col->clearCss();
+	    $col->setGridId($this->getId());
+	    $this->columns[ $col->getId()] = $col;
+	    return $col;
+	}
+	
+	
 	//------------------------------------------------------------------------------------
 	public function addHiddenField( $strFieldName, $strId = null )
 	{
