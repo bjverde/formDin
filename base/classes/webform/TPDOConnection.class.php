@@ -634,9 +634,7 @@ class TPDOConnection {
                             }
                             $arrDados[ $k ] = trim( $v );
                         }
-                    }
-                    else
-                    {
+                    }else{
                         $arrDados[ $k ] = null;
                     }
                     $result[] = $arrDados[ $k ];
