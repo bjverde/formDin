@@ -52,7 +52,7 @@ class TRadio extends TOption
     * @param integer $intHeight
     * @param integer $intPaddingItems
     * @example RadioButtons.php
-    * @return TEditRadio
+    * @return TRadio
     */
     public function __construct($strName,$arrOptions,$arrValues=null,$boolRequired=null,$intQtdColumns=null,$intWidth=null,$intHeight=null,$intPaddingItems=null)
     {

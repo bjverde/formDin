@@ -153,7 +153,7 @@ class TGrid extends TTable
 	* @param mixed $intMaxRows
 	* @param mixed $strOnDrawCell
 	* @param mixed $strOnDrawHeaderCell
-	* @return TGride
+	* @return TGrid
 	*/
 	public function __construct( $strName, $strTitle = null, $mixData = null, $strHeight = null, $strWidth = null, $strKeyField = null, $mixUpdateFields = null, $intMaxRows = null, $strRequestUrl = null, $strOnDrawCell = null, $strOnDrawRow = null, $strOnDrawHeaderCell = null, $strOnDrawActionButton = null )
 	{
@@ -1728,7 +1728,7 @@ class TGrid extends TTable
 	* @param mixed $strWidth
 	* @param mixed $strAlign
 	* @param mixed $boolReadOnly
-	* @return TDateColumn
+	* @return TGridDateColumn
 	*/
 	public function addDateColumn( $strName, $strTitle = null, $strFieldName = null, $maskType = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
 	{
@@ -1757,7 +1757,7 @@ class TGrid extends TTable
 	* @param string $strDescField  - Descrição do campo, valor que irá aparecer o gride 
 	* @param boolean $boolReadOnly
 	* @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
-	* @return TCheckColumn
+	* @return TGridCheckColumn
 	*/
 	public function addCheckColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null, $boolAllowCheckAll = null )
 	{
@@ -1778,7 +1778,7 @@ class TGrid extends TTable
 	* @param string $strKeyField   - Valor que será passado no POST
 	* @param string $strDescField  - Descrição do campo, valor que irá aparecer o gride 
 	* @param boolean $boolReadOnly
-	* @return TRadioButton
+	* @return TGridRadioColumn
 	*/
 	public function addRadioColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
 	{
@@ -1798,7 +1798,7 @@ class TGrid extends TTable
 	* @param mixed  $mixOptions
 	* @param mixed $width
 	* @param boolean $boolReadOnly
-	* @return TSelectColumn
+	* @return TGridSelectColumn
 	*/
 	public function addSelectColumn( $strName, $strTitle = null, $strFieldName = null, $mixOptions = null, $strWidth = null, $boolReadOnly = null, $strFirstOptionText = null, $strFirstOptionValue = null, $strKeyField = null, $strDisplayField = null, $strInitialValueField=null )
 	{

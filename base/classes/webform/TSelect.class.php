@@ -59,7 +59,7 @@ class TSelect extends TOption
     * @param mixed $strKeyColumn
     * @param mixed $strDisplayColumn
     * @param mixed $strDataColumns
-    * @return TEditSelect
+    * @return TSelect
     */
     public function __construct($strName,$mixOptions=null,$strValue=null,$boolRequired=null,$boolMultiSelect=null,$intSize=null,$intWidth=null,$strFirstOptionText=null,$strFirstOptionValue=null,$strKeyColumn=null,$strDisplayColumn=null,$strDataColumns=null)
     {

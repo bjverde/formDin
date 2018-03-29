@@ -69,7 +69,7 @@ abstract class TOption extends TControl
 	 *
 	 * @abstract
 	 * @param string $strName
-	 * @param mix $arrOptions
+	 * @param array $arrOptions
 	 * @param array $arrValues
 	 * @param boolean $boolRequired
 	 * @param integer $intQtdColumns

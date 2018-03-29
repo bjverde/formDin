@@ -7150,11 +7150,11 @@ class TForm Extends TBox
            /**
             * Campo para seleção de Diretório ou Pasta
             * @param string $strName
-            * @param type $rootDir
+            * @param string $rootDir
             * @param string $strValue
-            * @param type $intMaxLength
+            * @param int $intMaxLength
             * @param bool $boolRequired
-            * @param type $intSize
+            * @param int $intSize
             * @param bool $boolLabelAbove
             * @param bool $boolNewLine
             * @return TOpenDir
