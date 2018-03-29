@@ -592,8 +592,7 @@ class TPDOConnection {
         return $result;
     }
     
-    public static function prepareArray( $arrDados = null )
-    {
+    public static function prepareArray( $arrDados = null ) {
         $result = array();
         
         if ( is_array( $arrDados ) )
@@ -619,14 +618,10 @@ class TPDOConnection {
                             $posPonto = ( int ) strpos( $v, '.' );
                             $posVirgula = ( int ) strpos( $v, ',' );
                             
-                            if ( $posVirgula > $posPonto )
-                            {
-                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula )
-                                {
+                            if ( $posVirgula > $posPonto ) {
+                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
                                     $v = preg_replace( '/\,/', '', $v );
-                                }
-                                else
-                                {
+                                } else {
                                     $v = preg_replace( '/,/', ' ', $v );
                                     $v = preg_replace( '/\./', '', $v );
                                     $v = preg_replace( '/ /', '.', $v );
@@ -647,6 +642,8 @@ class TPDOConnection {
                             $v = self::formatDate( $v, 'ymd' );
                         }
                         $arrDados[ $k ] = $v;
+                    } else if( is_int($v) ){
+                    	$arrDados[ $k ] = $v;
                     }else {
                         $arrDados[ $k ] = null;
                     }
