@@ -1784,7 +1784,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	*   For simpleType or element, the array has different keys.
     *
     * @param string $type
-    * @return mixed
+    * @return mixed|string|boolean
     * @access public
     * @see addComplexType
     * @see addSimpleType
