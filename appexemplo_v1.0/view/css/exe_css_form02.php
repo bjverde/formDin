@@ -17,7 +17,7 @@ $dados['ST_TABELA'][] = 'N';
 $dados['SIT_OPCOES'][] = '3=Tres,4=>Quatro';
 
 
-d($_REQUEST);
+//d($_REQUEST);
 $frm = new TForm('CSS Form 02 - Exemplo de uso do CSS',300);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -35,7 +35,8 @@ $frm->addTextField('nome_comprador'		,'Comprador:',60,false,null)->setClass('tex
 $frm->addSelectField('forma_pagamento'	,'Forma Pagamento:',false,'1=Dinheiro,2=Cheque,3=Cartão');
 $frm->addTextField('QTD', 'Quantidade de Itens',50,false);
 
-$frm->addButton('POST Pagina', 'post', null, null, null, true, false);
+$frm->addButton('post', 'post', null, null, null, true, false)->setClass('btnOragen',false);
+$frm->addButton(null, 'post', null, null, null, true, false)->setClass('btnImg',false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false)->setClass('buttonBigGreen',true);
 
 $gride = new TGrid( 'gdTeste' // id do gride
