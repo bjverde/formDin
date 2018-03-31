@@ -6561,7 +6561,7 @@ class TForm Extends TBox
             * @param string  $strLabel
             * @param boolean $boolRequired
             * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine
+            * @param boolean $boolNewLine  - TRUE = cria nova linha , FALSE = fica depois do campo anterior
             * @param boolean $boolLabelAbove
             * @param mixed   $mixValue
             * @param boolean $boolMultiSelect
@@ -6729,10 +6729,10 @@ class TForm Extends TBox
            /**
             * Adiciona campo de entrada de dados numérico
             *
-            * @param string $strName
-            * @param string $strValue
+            * @param string $strName             - ID do campo
+            * @param string $strValue            - Label do campo, que irá aparecer na tela do usuario
             * @param integer $intMaxLength       - Quantidade maxima de digitos.
-            * @param boolean $boolRequired
+            * @param boolean $boolRequired       - Obrigatorio 
             * @param integer $intDecimalPlaces   - Quantidade de casas decimais.
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove
@@ -6745,7 +6745,22 @@ class TForm Extends TBox
             * @param string  $strHint
             * @return TNumber
             */
-           public function addNumberField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intDecimalPlaces=null, $boolNewLine=null, $strValue=null, $strMinValue=null, $strMaxValue=null, $boolFormatInteger=null, $strDirection=null, $boolAllowZero=null, $boolAllowNull=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+           public function addNumberField( $strName
+						           		, $strLabel=null
+						           		, $intMaxLength
+						           		, $boolRequired=null
+						           		, $intDecimalPlaces=null
+						           		, $boolNewLine=null
+						           		, $strValue=null
+						           		, $strMinValue=null
+						           		, $strMaxValue=null
+						           		, $boolFormatInteger=null
+						           		, $strDirection=null
+						           		, $boolAllowZero=null
+						           		, $boolAllowNull=null
+						           		, $boolLabelAbove=null
+						           		, $boolNoWrapLabel=null
+						           		, $strHint=null )
            {
                $field = new TNumber( $strName, $strValue, $intMaxLength, $boolRequired, $intDecimalPlaces, $strMinValue, $strMaxValue, $boolFormatInteger, $strDirection, $boolAllowZero, $boolAllowNull );
                if( $strHint )

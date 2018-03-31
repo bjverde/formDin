@@ -1778,7 +1778,12 @@ class TGrid extends TTable
 	* @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
 	* @return TGridCheckColumn
 	*/
-	public function addCheckColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null, $boolAllowCheckAll = null )
+	public function addCheckColumn( $strName
+			                      , $strTitle = null
+			                      , $strKeyField
+			                      , $strDescField = null
+			                      , $boolReadOnly = null
+			                      , $boolAllowCheckAll = null )
 	{
 		if ( !$strKeyField )
 		{
