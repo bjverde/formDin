@@ -1526,15 +1526,15 @@ class TDAO
 		if ( $DbType == DBMS_MYSQL ){
 			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
 			$sql="SELECT column_name COLUMN_NAME
-						, COLUMN_DEFAULT
-						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
 						, case when upper(IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
 						, data_type DATA_TYPE
 						, character_maximum_length CHAR_MAX
 						, numeric_precision NUM_LENGTH
 						, numeric_scale NUM_SCALE
-						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  PRIMARYKEY
 						, COLUMN_COMMENT
+						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  KEY_TYPE
+						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
+						, COLUMN_DEFAULT
 					from information_schema.columns
 					WHERE upper(table_name) = upper('".$this->getTableName()."')
 						order by table_name
