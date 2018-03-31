@@ -1525,20 +1525,29 @@ class TDAO
 		// ler os campos do banco de dados
 		if ( $DbType == DBMS_MYSQL ){
 			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
-			$sql="SELECT column_name COLUMN_NAME
-						, case when upper(IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
-						, data_type DATA_TYPE
-						, character_maximum_length CHAR_MAX
-						, numeric_precision NUM_LENGTH
-						, numeric_scale NUM_SCALE
-						, COLUMN_COMMENT
-						, case when upper(COLUMN_KEY) = 'PRI' then 'PK' when upper(COLUMN_KEY) = 'MUL' then 'FK' else 0 end  KEY_TYPE
-						, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
-						, COLUMN_DEFAULT
-					from information_schema.columns
-					WHERE upper(table_name) = upper('".$this->getTableName()."')
-						order by table_name
-						,ordinal_position";
+			$sql="SELECT c.column_name COLUMN_NAME
+						, case when upper(c.IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
+						, c.data_type DATA_TYPE
+						, c.character_maximum_length CHAR_MAX
+						, c.numeric_precision NUM_LENGTH
+						, c.numeric_scale NUM_SCALE
+						, c.COLUMN_COMMENT
+						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when upper(c.COLUMN_KEY) = 'MUL' then 'FK' else 0 end  KEY_TYPE
+						, case when lower(c.EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
+						, c.COLUMN_DEFAULT
+						, k.REFERENCED_TABLE_NAME
+						, k.REFERENCED_COLUMN_NAME
+						, c.TABLE_SCHEMA
+						, c.table_name
+						,c.TABLE_CATALOG
+				   from information_schema.columns as c
+				   left join information_schema.KEY_COLUMN_USAGE as k 
+				   on c.TABLE_SCHEMA = k.TABLE_SCHEMA
+				   and c.table_name = k.table_name 
+				   and c.column_name = k.column_name
+				   WHERE upper(c.table_name) = upper('".$this->getTableName()."')
+						 order by c.table_name
+						 ,c.ordinal_position";
 			
 			$params=null;
 		}
