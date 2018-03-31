@@ -1703,8 +1703,24 @@ class TGrid extends TTable
 	}
 
 	//---------------------------------------------------------------------------------------
-	public function addTextColumn( $strName, $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strMask = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
-	{
+	/***
+	 * Adciona um campo do tipo text Area
+	 * @param string $strName     - id do campo
+	 * @param string $strTitle    - Titulo da coluna
+	 * @param string $strFieldName - id do array que vei do banco
+	 * @param string $strSize
+	 * @param int    $intMaxLength
+	 * @param string $strMask
+	 * @param string $strWidth
+	 * @param string $strAlign
+	 * @param bool $boolReadOnly
+	 * @return TGridEditColumn
+	 */
+	public function addTextColumn( $strName, $strTitle = null
+			                     , $strFieldName = null, $strSize = null
+			                     , $intMaxLength = null, $strMask = null
+			                     , $strWidth = null, $strAlign = null
+			                     , $boolReadOnly = null ){
 		$col = new TGridEditColumn( $strName, $strTitle, $strFieldName, 'text', $strSize, $intMaxLength, $strMask, $strWidth, $strAlign, $boolReadOnly );
 		$this->columns[ strtolower( $strName )] = $col;
 		return $col;
@@ -1730,7 +1746,10 @@ class TGrid extends TTable
 	* @param mixed $boolReadOnly
 	* @return TGridDateColumn
 	*/
-	public function addDateColumn( $strName, $strTitle = null, $strFieldName = null, $maskType = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
+	public function addDateColumn( $strName, $strTitle = null
+			                     , $strFieldName = null, $maskType = null
+			                     , $strWidth = null, $strAlign = null
+			                     , $boolReadOnly = null )
 	{
 		$col = new TGridDateColumn( $strName, $strTitle, $strFieldName, $maskType, $strWidth, $strAlign, $boolReadOnly );
 		$this->columns[ strtolower( $strName )] = $col;
