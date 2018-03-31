@@ -1704,16 +1704,16 @@ class TGrid extends TTable
 
 	//---------------------------------------------------------------------------------------
 	/***
-	 * Adciona um campo do tipo text Area
-	 * @param string $strName     - id do campo
-	 * @param string $strTitle    - Titulo da coluna
+	 * Adciona um campo do tipo texto livre, equivalente ao addTextField
+	 * @param string $strName      - id do campo
+	 * @param string $strTitle     - Titulo da coluna
 	 * @param string $strFieldName - id do array que vei do banco
-	 * @param string $strSize
-	 * @param int    $intMaxLength
+	 * @param string $strSize      - tamanho do campos
+	 * @param int    $intMaxLength - tamanho maximo
 	 * @param string $strMask
 	 * @param string $strWidth
-	 * @param string $strAlign
-	 * @param bool $boolReadOnly
+	 * @param string $strAlign     - alinhamento
+	 * @param bool $boolReadOnly   - somente leitura ou não
 	 * @return TGridEditColumn
 	 */
 	public function addTextColumn( $strName, $strTitle = null

@@ -6204,11 +6204,11 @@ class TForm Extends TBox
            /**
             * Adicionar campo entrada de dados texto livre
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param integer $intMaxLength
-            * @param boolean $boolRequired
-            * @param integer $intSize
+            * @param string $strName       - id do campo
+            * @param string $strLabel      - Label do campo
+            * @param integer $intMaxLength - tamanho maximo de carateres
+            * @param boolean $boolRequired - obrigatorio ou não
+            * @param integer $intSize      - quantidade de caracteres visiveis.
             * @param string $strValue
             * @param boolean $boolNewLine
             * @param string $strHint
@@ -6217,8 +6217,13 @@ class TForm Extends TBox
             * @param boolean $boolNoWrapLabel
             * @return TEdit
             */
-           public function addTextField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $strValue=null, $boolNewLine=null, $strHint=null, $strExampleText=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
+           public function addTextField( $strName, $strLabel=null
+						           		, $intMaxLength, $boolRequired=null
+						           		, $intSize=null, $strValue=null
+						           		, $boolNewLine=null, $strHint=null
+						           		, $strExampleText=null, $boolLabelAbove=null
+						           		, $boolNoWrapLabel=null 
+						           		){
                $field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
                $field->setHint( $strHint );
                $field->setExampleText( $strExampleText );
