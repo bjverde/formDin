@@ -12,10 +12,10 @@ class HelpOnLineDAO extends TPDOConnection {
 		$result = $whereGrid;
 		if ( is_array($whereGrid) ){
 			$where = ' 1=1 ';
-			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid['HELP_FORM'],' AND HELP_FORM like \'%'.$whereGrid['HELP_FORM'].'%\' ',null) );
-			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid['HELP_FIELD'],' AND HELP_FIELD like \'%'.$whereGrid['HELP_FIELD'].'%\' ',null) );
-			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid['HELP_TITLE'],' AND HELP_TITLE like \'%'.$whereGrid['HELP_TITLE'].'%\' ',null) );
-			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid['HELP_TEXT'],' AND HELP_TEXT like \'%'.$whereGrid['HELP_TEXT'].'%\' ',null) );
+			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'HELP_FORM',' AND HELP_FORM like \'%'.$whereGrid['HELP_FORM'].'%\' ',null) );
+			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'HELP_FIELD',' AND HELP_FIELD like \'%'.$whereGrid['HELP_FIELD'].'%\' ',null) );
+			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'HELP_TITLE',' AND HELP_TITLE like \'%'.$whereGrid['HELP_TITLE'].'%\' ',null) );
+			$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'HELP_TEXT',' AND HELP_TEXT like \'%'.$whereGrid['HELP_TEXT'].'%\' ',null) );
 			$result = $where;
 		}
 		return $result;
