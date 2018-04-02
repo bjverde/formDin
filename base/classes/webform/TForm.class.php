@@ -6602,22 +6602,37 @@ class TForm Extends TBox
            //-----------------------------------------------------------------------------
            /**
             * Adicicionar campo tipo radiobutton
-            *
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param array $arrOptions
+            * 
+            * 
+            * @param string $strName        - field ID
+            * @param string $strLabel       - Label field
+            * @param boolean $boolRequired  - TRUE = Required, FALSE = not Required
+            * @param array $arrOptions      - Array Options
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove
-            * @param string $strValue
+            * @param string  $strValue
             * @param integer $intQtdColumns
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
+            * @param boolean $boolNoWrapLabel
+            * @param boolean $boolNowrapText
+            * @return TRadio
             */
-           public function addRadioField( $strName, $strLabel=null, $boolRequired=null, $arrOptions=null, $boolNewLine=null, $boolLabelAbove=null, $strValue=null, $intQtdColumns=null, $intWidth=null, $intHeight=null, $intPaddingItems=null, $boolNoWrapLabel=null,$boolNowrapText=null )
-           {
+           public function addRadioField( $strName
+						           		, $strLabel=null
+						           		, $boolRequired=null
+						           		, $arrOptions=null
+						           		, $boolNewLine=null
+						           		, $boolLabelAbove=null
+						           		, $strValue=null
+						           		, $intQtdColumns=null
+						           		, $intWidth=null
+						           		, $intHeight=null
+						           		, $intPaddingItems=null
+						           		, $boolNoWrapLabel=null
+						           		, $boolNowrapText=null
+						           		){
                $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
                $field->setNoWrapText($boolNowrapText);
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
