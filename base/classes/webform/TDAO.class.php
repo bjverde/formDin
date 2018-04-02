@@ -179,8 +179,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setDbType( $strNewValue = null )
-	{
+	public function setDbType( $strNewValue = null ){
 		$this->dbType=$strNewValue;
 	}
 
@@ -189,10 +188,8 @@ class TDAO
 	*
 	* @return string;
 	*/
-	public function getDbType()
-	{
-		if( $this->conn )
-		{
+	public function getDbType(){
+		if( $this->conn ){
 			//return $this->getConnDbType();
 		}
 		return $this->dbType;
@@ -203,8 +200,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setUsername( $strNewValue = null )
-	{
+	public function setUsername( $strNewValue = null ){
 		$this->username=$strNewValue;
 	}
 
@@ -213,9 +209,7 @@ class TDAO
 	*
 	* @return string $strNewValue
 	*/
-
-	public function getUsername()
-	{
+	public function getUsername(){
 		return $this->username;
 	}
 	/**
@@ -223,8 +217,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setPassword( $strNewValue = null )
-	{
+	public function setPassword( $strNewValue = null ){
 		$this->password=$strNewValue;
 	}
 
@@ -232,8 +225,7 @@ class TDAO
 	* Retorna  a senha de acesso do banco de dados
 	*
 	*/
-	public function getPassword()
-	{
+	public function getPassword(){
 		return $this->password;
 	}
 
@@ -243,8 +235,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setDatabase( $strNewValue = null )
-	{
+	public function setDatabase( $strNewValue = null ){
 		$this->database=$strNewValue;
 	}
     /**
@@ -282,8 +273,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setPort( $strNewValue = null )
-	{
+	public function setPort( $strNewValue = null ){
 		$this->port=$strNewValue;
 	}
     /**
@@ -291,10 +281,8 @@ class TDAO
     *
     */
 	public function getPort() {
-		if ( is_null( $this->port ) )
-		{
-			switch( strtolower( $this->getDbType() ) )
-				{
+		if ( is_null( $this->port ) ) {
+			switch( strtolower( $this->getDbType() ) ) {
 				case 'postgre':
 				case DBMS_POSTGRES:
 					$this->port='5432';
