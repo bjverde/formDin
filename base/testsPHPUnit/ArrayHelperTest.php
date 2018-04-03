@@ -81,4 +81,31 @@ class ArrayHelperTest extends PHPUnit_Framework_TestCase {
     	$retorno = ArrayHelper::has('x',$arrayTest);
     	$this->assertEquals($esperado, $retorno);
     }
+    
+    public function testGetDefaultValeu_NotInArray() {
+    	$esperado  = 'x';
+    	$array ['y'] = 123;
+    	$atributeName = 'k';
+    	$DefaultValue = 'x';    	
+    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
+    	$this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGetDefaultValeu_NotArray() {
+    	$esperado  = 'x';
+    	$array = 123;
+    	$atributeName = 'k';
+    	$DefaultValue = 'x';
+    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
+    	$this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGetDefaultValeu_InArray() {
+    	$esperado  = 123;
+    	$array ['y'] = 123;
+    	$atributeName = 'y';
+    	$DefaultValue = 'x';
+    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
+    	$this->assertEquals($esperado, $retorno);
+    }
 }

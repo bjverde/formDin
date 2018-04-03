@@ -47,6 +47,23 @@ class ArrayHelper {
 	    return is_null($array[$atributeName])?null:trim($array[$atributeName]);
 	}
 	
+	/***
+	 * 
+	 * @param array $array
+	 * @param string $atributeName
+	 * @param mixed $DefaultValue
+	 * @return mixed
+	 */
+	static function getDefaultValeu($array,$atributeName,$DefaultValue) {
+		$value = $DefaultValue;
+		if( self::has($atributeName, $array) ){
+			if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ){
+				$value = $array[$atributeName];
+			}
+		}
+		return $value;
+	}
+	
 	/**
 	 * Similar to array_key_exists. But it does not generate an error message
 	 *
