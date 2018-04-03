@@ -151,10 +151,11 @@ $menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
 	$menu->add('81','8','Grides com campos internos', null, null, '../../base/imagens/table16.gif');
 		$menu->add('81.1','81','Gride 09 - Campos 4, CheckColumn','grid/exe_gride09.php');
 		$menu->add('81.2','81','Gride Campos 02 - RadioButun','grid/exe_gride_field02.php');
-		$menu->add('81.3','81','Gride 01 - botões sobre grid','grid/exe_gride01.php');		
-		$menu->add('81.4','81','Gride 06 - Campos 1','grid/exe_gride06.php');
-		$menu->add('81.5','81','Gride 07 - Campos 2','grid/exe_gride07.php');
-		$menu->add('81.6','81','Gride 08 - Campos 3','grid/exe_gride08.php');
+		$menu->add('81.3','81','Gride Campos 03 - Select','grid/exe_gride_field03.php');
+		$menu->add('81.4','81','Gride 01 - botões sobre grid','grid/exe_gride01.php');		
+		$menu->add('81.5','81','Gride 06 - Campos 1','grid/exe_gride06.php');
+		$menu->add('81.6','81','Gride 07 - Campos 2','grid/exe_gride07.php');
+		$menu->add('81.7','81','Gride 08 - Campos 3','grid/exe_gride08.php');
 		
 	$menu->add('83','8','Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
 		$menu->add('83.1','83','Gride 10 - erro','grid/exe_gride10.php');
