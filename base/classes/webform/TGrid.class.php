@@ -1814,18 +1814,35 @@ class TGrid extends TTable
 		$this->columns[ strtolower( $strName )] = $col;
 		return $col;
 	}
-	/**
-	* coluna do tipo select
-	*
-	* @param string $strName
-	* @param string $strTitle
-	* @param mixed  $mixOptions
-	* @param mixed $width
-	* @param boolean $boolReadOnly
-	* @return TGridSelectColumn
-	*/
-	public function addSelectColumn( $strName, $strTitle = null, $strFieldName = null, $mixOptions = null, $strWidth = null, $boolReadOnly = null, $strFirstOptionText = null, $strFirstOptionValue = null, $strKeyField = null, $strDisplayField = null, $strInitialValueField=null )
-	{
+	
+	/*****
+	 * Coluna do tipo select
+	 * 
+	 * @param string $strName      - ID do campos
+	 * @param string $strTitle     - Titulo que irá aparecer no grid
+	 * @param string $strFieldName - Nome do campo do gride
+	 * @param mixed $mixOptions    - Opções caso o Campo do gride não seja um array
+	 * @param mixed $strWidth
+	 * @param boolean $boolReadOnly
+	 * @param string $strFirstOptionText
+	 * @param string $strFirstOptionValue
+	 * @param string $strKeyField
+	 * @param string $strDisplayField
+	 * @param string $strInitialValueField
+	 * @return TGridSelectColumn
+	 */
+	public function addSelectColumn( $strName
+			                       , $strTitle = null
+			                       , $strFieldName = null
+			                       , $mixOptions = null
+			                       , $strWidth = null
+			                       , $boolReadOnly = null
+			                       , $strFirstOptionText = null
+			                       , $strFirstOptionValue = null
+			                       , $strKeyField = null
+			                       , $strDisplayField = null
+			                       , $strInitialValueField=null
+			                       ){
 		$col = new TGridSelectColumn( $strName, $strTitle, $strFieldName, $mixOptions, $strWidth, $boolReadOnly, $strFirstOptionText, $strFirstOptionValue, $strKeyField, $strDisplayField, $strInitialValueField );
 		$this->columns[ strtolower( $strName )] = $col;
 		return $col;

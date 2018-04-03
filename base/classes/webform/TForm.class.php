@@ -6608,8 +6608,8 @@ class TForm Extends TBox
             * @param string $strLabel       - Label field
             * @param boolean $boolRequired  - TRUE = Required, FALSE = not Required
             * @param array $arrOptions      - Array Options
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
+            * @param boolean $boolNewLine   - TRUE = new line, FASEL = no, DEFAULT ou NULL = FALSE
+            * @param boolean $boolLabelAbove - Titulo em cima das opções
             * @param string  $strValue
             * @param integer $intQtdColumns
             * @param integer $intWidth
