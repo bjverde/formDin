@@ -57,13 +57,23 @@ class DateTimeHelper {
         return $dateTime;
     }
     
+    public static function getNowFormat($format) {
+        $dateTime = self::getCurrentDateTime();
+        $retorno = $dateTime->format($format);
+        return $retorno;
+    }
+    
     /**
      *  Retorn Data e hora no formato 'Y-m-d H:i:s'
      * @return string 'Y-m-d H:i:s'
      */
     public static function getNow() {
-        $dateTime = self::getCurrentDateTime();
-        $retorno = $dateTime->format('Y-m-d H:i:s');
+        $retorno = self::getNowFormat('Y-m-d H:i:s');
+        return $retorno;
+    }
+    
+    public static function getNowYYYYMMDD() {
+        $retorno = self::getNowFormat('Y-m-d');
         return $retorno;
     }
     
