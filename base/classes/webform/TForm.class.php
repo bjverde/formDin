@@ -6201,6 +6201,7 @@ class TForm Extends TBox
                $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
                return $field;
            }
+           
            /**
             * Adicionar campo entrada de dados texto livre
             *
@@ -6209,7 +6210,7 @@ class TForm Extends TBox
             * @param integer $intMaxLength - tamanho maximo de carateres
             * @param boolean $boolRequired - obrigatorio ou não
             * @param integer $intSize      - quantidade de caracteres visiveis.
-            * @param string $strValue
+            * @param string $strValue      - texto preenchido
             * @param boolean $boolNewLine
             * @param string $strHint
             * @param string $strExampleText
@@ -6217,24 +6218,30 @@ class TForm Extends TBox
             * @param boolean $boolNoWrapLabel
             * @return TEdit
             */
-           public function addTextField( $strName, $strLabel=null
-						           		, $intMaxLength, $boolRequired=null
-						           		, $intSize=null, $strValue=null
-						           		, $boolNewLine=null, $strHint=null
-						           		, $strExampleText=null, $boolLabelAbove=null
+           public function addTextField( $strName
+						           		, $strLabel=null
+						           		, $intMaxLength
+						           		, $boolRequired=null
+						           		, $intSize=null
+						           		, $strValue=null
+						           		, $boolNewLine=null
+						           		, $strHint=null
+						           		, $strExampleText=null
+						           		, $boolLabelAbove=null
 						           		, $boolNoWrapLabel=null 
 						           		){
                $field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
                $field->setHint( $strHint );
                $field->setExampleText( $strExampleText );
-               $dc = $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true) );
+               $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
+               $dc = $this->addDisplayControl( $tDisplayControl );
                return $field;
            }
            /**
             * Adicionar campo de entrada de texto com multiplas linhas ( memo )
             *
-            * @param string $strName
-            * @param string $strLabel
+            * @param string  $strName
+            * @param string  $strLabel
             * @param integer $intMaxLength
             * @param boolean $boolRequired
             * @param integer $intColumns
@@ -6242,7 +6249,7 @@ class TForm Extends TBox
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove   - Label abaixo
             * @param boolean $boolShowCounter  - Contador de caracteres ! Só funciona em campos não RichText
-            * @param string $strValue
+            * @param string  $strValue
             * @return TMemo
             */
            public function addMemoField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intColumns=null, $intRows=null, $boolNewLine=null, $boolLabelAbove=null, $boolShowCounter=null, $strValue=null, $boolNoWrapLabel=null )
@@ -6256,14 +6263,14 @@ class TForm Extends TBox
             * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
             * Tipo de máscara: DMY, DM, MY
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param string $strValue
+            * @param string  $strName
+            * @param string  $strLabel
+            * @param string  $strValue
             * @param boolean $boolRequired
             * @param boolean $boolNewLine
-            * @param string $strMinValue
-            * @param string $strMaxValue
-            * @param string $strMaskType
+            * @param string  $strMinValue
+            * @param string  $strMaxValue
+            * @param string  $strMaskType
             * @param boolean $boolButtonVisible
             * @param boolean $boolLabelAbove
             * @return object TDate
