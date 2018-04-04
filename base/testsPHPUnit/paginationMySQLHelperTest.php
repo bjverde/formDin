@@ -144,13 +144,31 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testAttributeIssetOrNotZero_AttributeZero_FALSE() {
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroOmitted() {
 		$expected = 'ISFALSE';
 		$whereGrid['NUMERO']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
 		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroTRUE() {
+	    $expected = 'ISFALSE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,TRUE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroFALSE() {
+	    $expected = 'ISTRUE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,FALSE);
+	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeSearchDoNotExist_FALSE() {

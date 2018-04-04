@@ -53,17 +53,21 @@ class paginationSQLHelper {
 	    return $rowStart;
 	}	
 	//--------------------------------------------------------------------------------
-	public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse){
-		$retorno = $isFalse;
-		$has = ArrayHelper::has($attribute, $whereGrid);
-		if( $has ){
-			if(isset($whereGrid[$attribute]) && ($whereGrid[$attribute]<>'') ){
-				if( $whereGrid[$attribute]<>'0' ){
-					$retorno = $isTrue;
-				}
-			}
-		}
-		return $retorno;
+	public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true){
+	    $retorno = $isFalse;
+	    $has = ArrayHelper::has($attribute, $whereGrid);
+	    if( $has ){
+	        if(isset($whereGrid[$attribute]) && ($whereGrid[$attribute]<>'') ){
+	            if($testZero){
+	                if( $whereGrid[$attribute]<>'0' ){
+	                    $retorno = $isTrue;
+	                }
+	            }else{
+	                $retorno = $isTrue;
+	            }
+	        }
+	    }
+	    return $retorno;
 	}
 	
 }
