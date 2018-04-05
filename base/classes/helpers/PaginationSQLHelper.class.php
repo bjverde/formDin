@@ -57,7 +57,7 @@ class paginationSQLHelper {
 	    $retorno = $isFalse;
 	    $has = ArrayHelper::has($attribute, $whereGrid);
 	    if( $has ){
-	        if(isset($whereGrid[$attribute]) && ($whereGrid[$attribute]<>'') ){
+	        if(isset($whereGrid[$attribute]) && !($whereGrid[$attribute]==='') ){
 	            if($testZero){
 	                if( $whereGrid[$attribute]<>'0' ){
 	                    $retorno = $isTrue;
