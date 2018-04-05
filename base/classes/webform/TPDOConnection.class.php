@@ -649,7 +649,9 @@ class TPDOConnection {
                             $v = self::formatDate( $v, 'ymd' );
                         }
                         $arrDados[ $k ] = $v;
-                    } else if( is_int($v) ){
+                    }else if( is_int($v) ){
+                    	$arrDados[ $k ] = $v;
+                    }else if( $v === '0' ){
                     	$arrDados[ $k ] = $v;
                     }else {
                         $arrDados[ $k ] = null;

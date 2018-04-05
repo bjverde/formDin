@@ -84,6 +84,17 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
 	}
 	
+	public function testPrepareArray_soNumerosStringComZero() {
+		$arrayExpected[0] = '1';
+		$arrayExpected[1] = '0';
+		
+		$arrayData[0] = '1';
+		$arrayData[1] = '0';
+		
+		$arrayActual = $this->TPDOConnection->prepareArray($arrayData);
+		$this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
+	}
+	
 	public function testPrepareArray_dateDDMMYYYY() {
 		$arrayExpected[0] = '1980-01-01';
 		
