@@ -273,7 +273,7 @@ class TApplication extends TLayout {
 					'background-color' => 'transparent',
 					'height' => '100%',
 					'margin' => '0 auto',
-					'widht' => '100%',
+					'width' => '100%',
 					'max-width' => $this->getWidth () . 'px',
 					'min-width' => '700px',
 					'_width' => '700px' 
