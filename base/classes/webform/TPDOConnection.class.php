@@ -533,12 +533,9 @@ class TPDOConnection {
                         $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
                         
                         // inverter campo data
-                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
-                        {
-                            if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                            {
-                                $arrDados[ $k ] = self::formatDate( $v, 'ymd' );
-                            }
+                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {                        	
+                        	$v = self::verifyformtDateYMD( $v );
+                        	$arrDados[ $k ] = $v;
                         }
                         else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 )
                         {
@@ -568,23 +565,19 @@ class TPDOConnection {
                     }
                     $result[] = $arrDados[ $k ];
                 }
-            }
-            else
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( ! is_null($v) ) {
-                        // campo data deve ser invertido para gravar no banco de dados.
-                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
-                            $v = self::formatDate( $v, 'ymd' );
-                        }
+            } else {
+                foreach( $arrDados as $k => $v ) {
+                	if ( !is_null($v) && !empty($v) ){
+                        $v  = self::verifyformtDateYMD( $v );
                         $boolUtf8_DecodeDataBase = self::getUtfDecode();
                         $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
-                    }
-                    else
-                    {
-                        $arrDados[ $k ] = null;
-                    }
+                	}else if( is_int($v) ){
+                		$arrDados[ $k ] = $v;
+                	}else if( $v === '0' ){
+                		$arrDados[ $k ] = $v;
+                	}else {
+                		$arrDados[ $k ] = null;
+                	}
                 }
                 $result = $arrDados;
             }
@@ -601,12 +594,9 @@ class TPDOConnection {
     		{
     			$arrDados[ $k ] = $v;
     			// inverter campo data
-    			if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
-    			{
-    				if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-    				{
-    					$arrDados[ $k ] = self::formatDate( $v, 'ymd' );
-    				}
+    			if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )    {    				
+    				$v  = self::verifyformtDateYMD( $v );
+    				$arrDados[ $k ] = $v;
     			}
     			else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
     			{
@@ -633,6 +623,18 @@ class TPDOConnection {
     	return $result;
     }
     
+    /***
+     * Campo data deve ser invertido para gravar no banco de dados.
+     * @param string $v
+     * @return string
+     */
+    public static function verifyformtDateYMD( $v ) {
+    	if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
+    		$v = self::formatDate( $v, 'ymd' );
+    	}    	
+    	return $v;
+    }
+    
     
     public static function prepareArray( $arrDados = null ) {
         $result = array();
@@ -644,10 +646,7 @@ class TPDOConnection {
             } else {
                 foreach( $arrDados as $k => $v ) {
                     if ( !is_null($v) && !empty($v) ){
-                        // campo data deve ser invertido para gravar no banco de dados.
-                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
-                            $v = self::formatDate( $v, 'ymd' );
-                        }
+                    	$v  = self::verifyformtDateYMD( $v );
                         $arrDados[ $k ] = $v;
                     }else if( is_int($v) ){
                     	$arrDados[ $k ] = $v;
