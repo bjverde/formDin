@@ -592,48 +592,55 @@ class TPDOConnection {
         return $result;
     }
     
+    public static function prepareArrayNamed( $arrDados = null ) {
+    	$result = array();
+    	
+    	foreach( $arrDados as $k => $v )
+    	{
+    		if ( !is_null($v) )
+    		{
+    			$arrDados[ $k ] = $v;
+    			// inverter campo data
+    			if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
+    			{
+    				if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
+    				{
+    					$arrDados[ $k ] = self::formatDate( $v, 'ymd' );
+    				}
+    			}
+    			else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
+    			{
+    				// alterar a virgula por ponto nos campos decimais
+    				$posPonto = ( int ) strpos( $v, '.' );
+    				$posVirgula = ( int ) strpos( $v, ',' );
+    				
+    				if ( $posVirgula > $posPonto ) {
+    					if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
+    						$v = preg_replace( '/\,/', '', $v );
+    					} else {
+    						$v = preg_replace( '/,/', ' ', $v );
+    						$v = preg_replace( '/\./', '', $v );
+    						$v = preg_replace( '/ /', '.', $v );
+    					}
+    				}
+    				$arrDados[ $k ] = trim( $v );
+    			}
+    		}else{
+    			$arrDados[ $k ] = null;
+    		}
+    		$result[] = $arrDados[ $k ];
+    	}    	
+    	return $result;
+    }
+    
+    
     public static function prepareArray( $arrDados = null ) {
         $result = array();
         
-        if ( is_array( $arrDados ) )
-        {
-            if ( is_string( key( $arrDados ) ) )
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( !is_null($v) )
-                    {
-                        $arrDados[ $k ] = $v;
-                        // inverter campo data
-                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
-                        {
-                            if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                            {
-                                $arrDados[ $k ] = self::formatDate( $v, 'ymd' );
-                            }
-                        }
-                        else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
-                        {
-                            // alterar a virgula por ponto nos campos decimais
-                            $posPonto = ( int ) strpos( $v, '.' );
-                            $posVirgula = ( int ) strpos( $v, ',' );
-                            
-                            if ( $posVirgula > $posPonto ) {
-                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
-                                    $v = preg_replace( '/\,/', '', $v );
-                                } else {
-                                    $v = preg_replace( '/,/', ' ', $v );
-                                    $v = preg_replace( '/\./', '', $v );
-                                    $v = preg_replace( '/ /', '.', $v );
-                                }
-                            }
-                            $arrDados[ $k ] = trim( $v );
-                        }
-                    }else{
-                        $arrDados[ $k ] = null;
-                    }
-                    $result[] = $arrDados[ $k ];
-                }
+        if ( is_array( $arrDados ) ) {
+        	
+            if ( is_string( key( $arrDados ) ) ) {
+            	$result = self::prepareArrayNamed($arrDados);
             } else {
                 foreach( $arrDados as $k => $v ) {
                     if ( !is_null($v) && !empty($v) ){
