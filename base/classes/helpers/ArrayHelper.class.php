@@ -39,66 +39,71 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 class ArrayHelper {
-	
-	static function validateUndefined($array,$atributeName) {
-	    if(!isset($array[$atributeName])){
-	        $array[$atributeName]=null;
-	    }
-	    return is_null($array[$atributeName])?null:trim($array[$atributeName]);
-	}
-	
-	/***
-	 * 
-	 * @param array $array
-	 * @param string $atributeName
-	 * @param mixed $DefaultValue
-	 * @return mixed
-	 */
-	static function getDefaultValeu($array,$atributeName,$DefaultValue) {
-		$value = $DefaultValue;
-		if( self::has($atributeName, $array) ){
-			if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ){
-				$value = $array[$atributeName];
-			}
-		}
-		return $value;
-	}
-	
-	/**
-	 * Similar to array_key_exists. But it does not generate an error message
-	 *
-	 * Semelhante ao array_key_exists. Mas não gera mensagem de erro
-	 * @param string $atributeName
-	 * @param array $array
-	 * @return boolean
-	 */
-	static function has($atributeName,$array) {
-		$value = false;
-		if (is_array($array) && array_key_exists($atributeName, $array)) {
-			$value = true;
-		}
-		return $value;
-	}
-	
-	/**
-	 * Convert Array PDO Format to FormDin format
-	 * @param array $array
-	 * @return array
-	 */
-	static function convertArrayPdo2FormDin($dataArray,$upperCase = true) {
-		$result = false;
-		if( is_array( $dataArray ) ) {
-			foreach( $dataArray as $k => $arr ) {
-				foreach( $arr as $fieldName => $value ) {
-					if($upperCase){
-						$result[ strtoupper($fieldName) ][ $k ] = $value;
-					}else{
-						$result[ $fieldName ][ $k ] = $value;
-					}
-				}
-			}
-		}
-		return $result;
-	}
+    
+    static function validateUndefined($array,$atributeName) {
+        if(!isset($array[$atributeName])){
+            $array[$atributeName]=null;
+        }
+        return is_null($array[$atributeName])?null:trim($array[$atributeName]);
+    }
+    
+    /**
+     * Similar to array_key_exists. But it does not generate an error message
+     *
+     * Semelhante ao array_key_exists. Mas não gera mensagem de erro
+     * @param string $atributeName
+     * @param array $array
+     * @return boolean
+     */
+    static function has($atributeName,$array) {
+        $value = false;
+        if (is_array($array) && array_key_exists($atributeName, $array)) {
+            $value = true;
+        }
+        return $value;
+    }
+    
+    /***
+     *
+     * @param array $array
+     * @param string $atributeName
+     * @param mixed $DefaultValue
+     * @return mixed
+     */
+    static function getDefaultValeu($array,$atributeName,$DefaultValue) {
+        $value = $DefaultValue;
+        if( self::has($atributeName, $array) ){
+            if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ){
+                $value = $array[$atributeName];
+            }
+        }
+        return $value;
+    }
+    
+    static function get($array,$atributeName) {
+        $result = self::getDefaultValeu($array, $atributeName, null);
+        return $result;
+    }
+    
+    /**
+     * Convert Array PDO Format to FormDin format
+     * @param array $array
+     * @return array
+     */
+    static function convertArrayPdo2FormDin($dataArray,$upperCase = true) {
+        $result = false;
+        if( is_array( $dataArray ) ) {
+            foreach( $dataArray as $k => $arr ) {
+                foreach( $arr as $fieldName => $value ) {
+                    if($upperCase){
+                        $result[ strtoupper($fieldName) ][ $k ] = $value;
+                    }else{
+                        $result[ $fieldName ][ $k ] = $value;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
 }
 ?>
