@@ -1485,11 +1485,35 @@ class TDAO
                         where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
                         and qtd.TABLE_NAME = ty.TABLE_NAME
                         order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_POSTGRES:
+			    $sql = "SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                        	  ,qtd.COLUMN_QTD
+                        	  ,ty.TABLE_TYPE
+							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+                        FROM
+                        	(SELECT TABLE_SCHEMA
+                        		  ,TABLE_NAME
+                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
+                        	FROM INFORMATION_SCHEMA.COLUMNS c
+                        	where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
+                        	group by TABLE_SCHEMA, TABLE_NAME
+                        	) as qtd
+                        	,(SELECT TABLE_SCHEMA
+                        	       , TABLE_NAME
+                        		   , TABLE_TYPE
+                        	FROM INFORMATION_SCHEMA.TABLES i
+                        	where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
+                        	) as ty
+                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+                        and qtd.TABLE_NAME = ty.TABLE_NAME
+                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
 			    break;
-			    ;
 			//--------------------------------------------------------------------------------
 			default:
-				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
+				throw new DomainException('Database '.$DbType.' not implemented ! TDAO->loadTablesFromDatabase. Contribute to the project https://github.com/bjverde/sysgen !');
 		}
 		$result = $this->executeSql($sql);
 		return $result;
@@ -1503,17 +1527,9 @@ class TDAO
 	    return $result;
 	}
 	
-	public function getSqlToFieldsFromDatabase() {
-		//$DbType = $this->getConnDbType();
-		$DbType = $this->getDbType();
-		$sql    = null;
-		$params = null;
-		$data   = null;
-		
-		// ler os campos do banco de dados
-		if ( $DbType == DBMS_MYSQL ){
-			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
-			$sql="SELECT c.column_name COLUMN_NAME
+	public function getSqlToFieldsFromDatabaseMySQL() {
+	    // http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
+	    $sql="SELECT c.column_name COLUMN_NAME
 						, case when upper(c.IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
 						, c.data_type DATA_TYPE
 						, c.character_maximum_length CHAR_MAX
@@ -1529,18 +1545,18 @@ class TDAO
 						, c.table_name
 						,c.TABLE_CATALOG
 				   from information_schema.columns as c
-				   left join information_schema.KEY_COLUMN_USAGE as k 
+				   left join information_schema.KEY_COLUMN_USAGE as k
 				   on c.TABLE_SCHEMA = k.TABLE_SCHEMA
-				   and c.table_name = k.table_name 
+				   and c.table_name = k.table_name
 				   and c.column_name = k.column_name
 				   WHERE upper(c.table_name) = upper('".$this->getTableName()."')
 						 order by c.table_name
 						 ,c.ordinal_position";
-			
-			$params=null;
-		}
-		else if( $DbType == DBMS_SQLSERVER ) {
-			$sql="SELECT c.column_name as COLUMN_NAME
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsFromDatabaseSqlServer() {
+	    $sql="SELECT c.column_name as COLUMN_NAME
                           ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
                           ,c.DATA_TYPE
                           ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
@@ -1564,38 +1580,38 @@ class TDAO
                     			 , CT.CONSTRAINT_TYPE
                     			 , FK.REFERENCED_TABLE_NAME
                     			 , FK.REFERENCED_COLUMN_NAME
-                    		FROM ( 
+                    		FROM (
                     				SELECT kcu.TABLE_CATALOG
                     					 , kcu.TABLE_SCHEMA
                     					 , kcu.TABLE_NAME
                     					 , kcu.COLUMN_NAME
                     					 , tc.CONSTRAINT_TYPE
-                    					 , kcu.CONSTRAINT_NAME	 
+                    					 , kcu.CONSTRAINT_NAME
                     				FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
                     					,INFORMATION_SCHEMA.TABLE_CONSTRAINTS  tc
                     				where kcu.CONSTRAINT_NAME = tc.CONSTRAINT_NAME
                     				) as CT
-                    
+	        
                     			LEFT JOIN (
-                    				SELECT  
-                    					 KCU1.CONSTRAINT_NAME AS FK_CONSTRAINT_NAME 
-                    					,KCU1.TABLE_NAME AS FK_TABLE_NAME 
-                    					,KCU1.COLUMN_NAME AS FK_COLUMN_NAME 
-                    					,KCU2.TABLE_NAME AS REFERENCED_TABLE_NAME 
-                    					,KCU2.COLUMN_NAME AS REFERENCED_COLUMN_NAME 
-                    				FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS RC 
-                    
-                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU1 
-                    					ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG  
-                    					AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA 
-                    					AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME 
-                    
-                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU2 
-                    					ON KCU2.CONSTRAINT_CATALOG = RC.UNIQUE_CONSTRAINT_CATALOG  
-                    					AND KCU2.CONSTRAINT_SCHEMA = RC.UNIQUE_CONSTRAINT_SCHEMA 
-                    					AND KCU2.CONSTRAINT_NAME = RC.UNIQUE_CONSTRAINT_NAME 
-                    					AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION 
-                    				) as FK 
+                    				SELECT
+                    					 KCU1.CONSTRAINT_NAME AS FK_CONSTRAINT_NAME
+                    					,KCU1.TABLE_NAME AS FK_TABLE_NAME
+                    					,KCU1.COLUMN_NAME AS FK_COLUMN_NAME
+                    					,KCU2.TABLE_NAME AS REFERENCED_TABLE_NAME
+                    					,KCU2.COLUMN_NAME AS REFERENCED_COLUMN_NAME
+                    				FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS RC
+	        
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU1
+                    					ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG
+                    					AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA
+                    					AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME
+	        
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU2
+                    					ON KCU2.CONSTRAINT_CATALOG = RC.UNIQUE_CONSTRAINT_CATALOG
+                    					AND KCU2.CONSTRAINT_SCHEMA = RC.UNIQUE_CONSTRAINT_SCHEMA
+                    					AND KCU2.CONSTRAINT_NAME = RC.UNIQUE_CONSTRAINT_NAME
+                    					AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION
+                    				) as FK
                     		ON CT.CONSTRAINT_NAME = FK.FK_CONSTRAINT_NAME
                     		AND CT.TABLE_NAME = FK.FK_TABLE_NAME
                     		AND CT.COLUMN_NAME = FK.FK_COLUMN_NAME
@@ -1607,7 +1623,27 @@ class TDAO
                     ORDER by   c.TABLE_SCHEMA
                               ,c.TABLE_NAME
                               ,c.ORDINAL_POSITION";
-		    
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsFromDatabasePostGres() {
+	    
+	}
+	
+	public function getSqlToFieldsFromDatabase() {
+		//$DbType = $this->getConnDbType();
+		$DbType = $this->getDbType();
+		$sql    = null;
+		$params = null;
+		$data   = null;
+		
+		// ler os campos do banco de dados
+		if ( $DbType == DBMS_MYSQL ){
+		    $sql   = $this->getSqlToFieldsFromDatabaseMySQL();
+			$params=null;
+		}
+		else if( $DbType == DBMS_SQLSERVER ) {
+		    $sql   = $this->getSqlToFieldsFromDatabaseSqlServer();
 		    $params=array($this->getTableName());
 		}
 		else if( $DbType == DBMS_ORACLE ) {
@@ -1625,7 +1661,7 @@ class TDAO
 			$params=array($this->getTableName());
 		}
 		else if( $DbType == DBMS_POSTGRES ) {
-			$schema=( is_null( $this->getConnSchema() ) ? 'public' : $this->getConnSchema());
+		    $schema=( is_null( $this->getSchema() ) ? 'public' : $this->getSchema());
 			$sql   ="SELECT column_name \"COLUMN_NAME\"
 					,column_default \"COLUMN_DEFAULT\"
 					,position('nextval(' in column_default)=1 as \"AUTOINCREMENT\"
