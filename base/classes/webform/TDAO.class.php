@@ -1627,7 +1627,19 @@ class TDAO
 	}
 	
 	public function getSqlToFieldsFromDatabasePostGres() {
-	    
+		$sql   ='SELECT column_name "COLUMN_NAME"
+					,column_default "COLUMN_DEFAULT"
+					,position(\'nextval(\' in column_default)=1 as "AUTOINCREMENT"
+					,is_nullable  "REQUIRED"
+					,data_type "DATA_TYPE"
+					,character_maximum_length "CHAR_MAX"
+					,coalesce(numeric_precision, datetime_precision) as "NUM_LENGTH"
+					,numeric_scale as "NUM_SCALE"
+					FROM information_schema.columns
+					WHERE upper(table_schema) =  upper(?)
+					AND upper(table_name) =upper(?)
+					ORDER BY ordinal_position';
+		return $sql;
 	}
 	
 	public function getSqlToFieldsFromDatabase() {
@@ -1662,19 +1674,7 @@ class TDAO
 		}
 		else if( $DbType == DBMS_POSTGRES ) {
 		    $schema=( is_null( $this->getSchema() ) ? 'public' : $this->getSchema());
-			$sql   ="SELECT column_name \"COLUMN_NAME\"
-					,column_default \"COLUMN_DEFAULT\"
-					,position('nextval(' in column_default)=1 as \"AUTOINCREMENT\"
-					,is_nullable  \"REQUIRED\"
-					,data_type \"DATA_TYPE\"
-					,character_maximum_length \"CHAR_MAX\"
-					,coalesce(numeric_precision, datetime_precision) as \"NUM_LENGTH\"
-					,numeric_scale as \"NUM_SCALE\"
-					FROM information_schema.columns
-					WHERE upper(table_schema) =  upper(?)
-					AND upper(table_name) =upper(?)
-					ORDER BY ordinal_position";
-			
+		    $sql   = $this->getSqlToFieldsFromDatabasePostGres();			
 			$params=array( $schema ,$this->getTableName() );
 		}
 		else if( $DbType == DBMS_FIREBIRD ) {
@@ -1762,6 +1762,7 @@ class TDAO
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
 			case DBMS_SQLSERVER:
+			case DBMS_POSTGRES:
 				$result = $this->executeSql($sql);
 				break;
 			//--------------------------------------------------------------------------------
