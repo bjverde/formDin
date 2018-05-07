@@ -1627,18 +1627,23 @@ class TDAO
 	}
 	
 	public function getSqlToFieldsFromDatabasePostGres() {
-		$sql   ='SELECT column_name "COLUMN_NAME"
-					,column_default "COLUMN_DEFAULT"
-					,position(\'nextval(\' in column_default)=1 as "AUTOINCREMENT"
-					,is_nullable  "REQUIRED"
-					,data_type "DATA_TYPE"
-					,character_maximum_length "CHAR_MAX"
-					,coalesce(numeric_precision, datetime_precision) as "NUM_LENGTH"
-					,numeric_scale as "NUM_SCALE"
-					FROM information_schema.columns
+		$sql   ="SELECT column_name as COLUMN_NAME
+					,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+					,c.IS_NULLABLE as REQUIRED2
+					,data_type as DATA_TYPE
+					,character_maximum_length CHAR_MAX
+					,coalesce(numeric_precision, datetime_precision) as NUM_LENGTH
+					,numeric_scale as NUM_SCALE
+					,column_default COLUMN_DEFAULT
+					,position('nextval(' in column_default)=1 as AUTOINCREMENT
+					,c.TABLE_SCHEMA
+					,c.table_name
+					,c.TABLE_CATALOG
+					FROM information_schema.columns as c				
+					FROM information_schema.columns as c
 					WHERE upper(table_schema) =  upper(?)
 					AND upper(table_name) =upper(?)
-					ORDER BY ordinal_position';
+					ORDER BY c.table_name,c.ordinal_position";
 		return $sql;
 	}
 	
