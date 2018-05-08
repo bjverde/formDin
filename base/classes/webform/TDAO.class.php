@@ -1543,7 +1543,7 @@ class TDAO
 						, k.REFERENCED_COLUMN_NAME
 						, c.TABLE_SCHEMA
 						, c.table_name
-						,c.TABLE_CATALOG
+						, c.TABLE_CATALOG
 				   from information_schema.columns as c
 				   left join information_schema.KEY_COLUMN_USAGE as k
 				   on c.TABLE_SCHEMA = k.TABLE_SCHEMA
@@ -1628,21 +1628,29 @@ class TDAO
 	
 	public function getSqlToFieldsFromDatabasePostGres() {
 		$sql   ="SELECT column_name as COLUMN_NAME
-					,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
-					,c.IS_NULLABLE as REQUIRED2
-					,data_type as DATA_TYPE
-					,character_maximum_length CHAR_MAX
-					,coalesce(numeric_precision, datetime_precision) as NUM_LENGTH
-					,numeric_scale as NUM_SCALE
-					,column_default COLUMN_DEFAULT
-					,position('nextval(' in column_default)=1 as AUTOINCREMENT
-					,c.TABLE_SCHEMA
-					,c.table_name
-					,c.TABLE_CATALOG
-					FROM information_schema.columns as c				
+					  , case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+					  , c.IS_NULLABLE as REQUIRED2
+					  , data_type as DATA_TYPE
+					  , character_maximum_length CHAR_MAX
+					  , coalesce(numeric_precision, datetime_precision) as NUM_LENGTH
+					  , numeric_scale as NUM_SCALE
+					  , des.description COLUMN_COMMENT
+					  , column_default COLUMN_DEFAULT
+					  , position('nextval(' in column_default)=1 as AUTOINCREMENT
+					  , c.TABLE_SCHEMA
+					  , c.table_name
+					  , c.TABLE_CATALOG
 					FROM information_schema.columns as c
-					WHERE upper(table_schema) =  upper(?)
-					AND upper(table_name) =upper(?)
+						 left join (SELECT  st.schemaname as table_schema
+							              , st.relname as table_name
+							              , pgd.objsubid
+							              , pgd.description
+							         FROM pg_catalog.pg_statio_all_tables as st
+							         inner join pg_catalog.pg_description pgd on (pgd.objoid=st.relid)
+							       ) as des
+						 on (des.objsubid=c.ordinal_position and  des.table_schema = c.table_schema and des.table_name = c.table_name)
+					WHERE upper(c.table_schema) =  upper(?)
+					AND upper(c.table_name) =upper(?)
 					ORDER BY c.table_name,c.ordinal_position";
 		return $sql;
 	}
@@ -1769,7 +1777,7 @@ class TDAO
 			case DBMS_SQLSERVER:
 			case DBMS_POSTGRES:
 				$result = $this->executeSql($sql);
-				break;
+		    break;
 			//--------------------------------------------------------------------------------
 			default:
 				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
