@@ -69,9 +69,10 @@ class DateTimeHelper {
      * @return string
      */
     public static function getDateTimeLong($date) {
-    	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+    	setlocale(LC_TIME, 'portuguese-brazilian');
     	date_default_timezone_set(self::DEFAULT_TIME_ZONE);
     	$retorno = strftime('%d de %B de %Y', strtotime($date));
+        $retorno = utf8_encode($retorno);
     	return $retorno;
     }
     
