@@ -64,6 +64,18 @@ class DateTimeHelper {
     }
     
     /**
+     * Gera a data por extenso.
+     * @param string $date YYYY-MM-DD
+     * @return string
+     */
+    public static function getDateTimeLong($date) {
+    	setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+    	date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+    	$retorno = strftime('%d de %B de %Y', strtotime($date));
+    	return $retorno;
+    }
+    
+    /**
      *  Retorn Data e hora no formato 'Y-m-d H:i:s'
      * @return string 'Y-m-d H:i:s'
      */
