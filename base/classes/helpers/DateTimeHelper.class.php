@@ -105,13 +105,6 @@ class DateTimeHelper {
         return $meses[$numeroMes];
     }
     
-    public static function strtolower_utf8($inputString) {
-        $outputString    = utf8_decode($inputString);
-        $outputString    = strtolower($outputString);
-        $outputString    = utf8_encode($outputString);
-        return $outputString;
-    }
-    
     /**
      * Gera a data por extenso.
      * @param string $date YYYY-MM-DD
@@ -127,7 +120,7 @@ class DateTimeHelper {
         $pieces = explode('-', $date);
         $mes = self::mesExtenso($pieces[1]);
         $retorno = $pieces[2].' de '.strtolower($mes).' de '.$pieces[0];
-        $retorno = self::strtolower_utf8($retorno);
+        $retorno = StringHelper::strtoupper_utf8($retorno);
         return $retorno;
     }
     
