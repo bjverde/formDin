@@ -64,19 +64,6 @@ class DateTimeHelper {
     }
     
     /**
-     * Gera a data por extenso.
-     * @param string $date YYYY-MM-DD
-     * @return string
-     */
-    public static function getDateTimeLong($date) {
-    	setlocale(LC_TIME, 'portuguese-brazilian');
-    	date_default_timezone_set(self::DEFAULT_TIME_ZONE);
-    	$retorno = strftime('%d de %B de %Y', strtotime($date));
-        $retorno = utf8_encode($retorno);
-    	return $retorno;
-    }
-    
-    /**
      *  Retorn Data e hora no formato 'Y-m-d H:i:s'
      * @return string 'Y-m-d H:i:s'
      */
@@ -87,6 +74,60 @@ class DateTimeHelper {
     
     public static function getNowYYYYMMDD() {
         $retorno = self::getNowFormat('Y-m-d');
+        return $retorno;
+    }    
+    
+    public static function mesExtenso($numeroMes) {
+        $numeroMes = intval($numeroMes);
+        $meses = array(
+             '1' => 'Janeiro'
+            ,'2' => 'Fevereiro'
+            ,'3' => 'Março'
+            ,'4' => 'Abril'
+            ,'5' => 'Maio'
+            ,'6' => 'Junho'
+            ,'7' => 'Julho'
+            ,'8' => 'Agosto'
+            ,'9' => 'Setembro'
+            ,'01' => 'Janeiro'
+            ,'02' => 'Fevereiro'
+            ,'03' => 'Março'
+            ,'04' => 'Abril'
+            ,'05' => 'Maio'
+            ,'06' => 'Junho'
+            ,'07' => 'Julho'
+            ,'08' => 'Agosto'
+            ,'09' => 'Setembro'
+            ,'10' => 'Outubro'
+            ,'11' => 'Novembro'
+            ,'12' => 'Dezembro'
+        );
+        return $meses[$numeroMes];
+    }
+    
+    public static function strtolower_utf8($inputString) {
+        $outputString    = utf8_decode($inputString);
+        $outputString    = strtolower($outputString);
+        $outputString    = utf8_encode($outputString);
+        return $outputString;
+    }
+    
+    /**
+     * Gera a data por extenso.
+     * @param string $date YYYY-MM-DD
+     * @return string
+     */
+    public static function getDateTimeLong($date) {
+        /*
+        setlocale(LC_TIME, 'portuguese-brazilian','pt_BR', 'pt_BR.utf-8');
+        date_default_timezone_set(self::DEFAULT_TIME_ZONE);
+        $retorno = strftime('%d de %B de %Y', strtotime($date));
+        $retorno = utf8_encode($retorno);
+        */
+        $pieces = explode('-', $date);
+        $mes = self::mesExtenso($pieces[1]);
+        $retorno = $pieces[2].' de '.strtolower($mes).' de '.$pieces[0];
+        $retorno = self::strtolower_utf8($retorno);
         return $retorno;
     }
     
