@@ -1627,15 +1627,17 @@ class TDAO
 	}
 	
 	public function getSqlToFieldsFromDatabasePostGres() {
-		$sql   ="SELECT column_name as COLUMN_NAME
+		$sql   ="SELECT c.column_name as COLUMN_NAME
 					  , case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
-					  , c.IS_NULLABLE as REQUIRED2
 					  , data_type as DATA_TYPE
 					  , character_maximum_length CHAR_MAX
 					  , coalesce(numeric_precision, datetime_precision) as NUM_LENGTH
 					  , numeric_scale as NUM_SCALE
 					  , des.description COLUMN_COMMENT
+					  , refe.KEY_TYPE
 					  , column_default COLUMN_DEFAULT
+					  , refe.REFERENCED_TABLE_NAME
+					  , refe.REFERENCED_COLUMN_NAME					  
 					  , position('nextval(' in column_default)=1 as AUTOINCREMENT
 					  , c.TABLE_SCHEMA
 					  , c.table_name
@@ -1649,9 +1651,32 @@ class TDAO
 							         inner join pg_catalog.pg_description pgd on (pgd.objoid=st.relid)
 							       ) as des
 						 on (des.objsubid=c.ordinal_position and  des.table_schema = c.table_schema and des.table_name = c.table_name)
-					WHERE upper(c.table_schema) =  upper(?)
-					AND upper(c.table_name) =upper(?)
-					ORDER BY c.table_name,c.ordinal_position";
+						 left join (SELECT
+										  tc.table_schema
+										, tc.table_name
+										, kcu.column_name
+										, tc.constraint_name	
+										, tc.constraint_type
+										, case when upper(tc.constraint_type) = 'PRIMARY KEY' THEN  'PK' 
+											   when upper(tc.constraint_type) = 'FOREIGN KEY' THEN 'FOREIGN KEY' 
+											   ELSE tc.constraint_type
+											   END  as KEY_TYPE	
+										, ccu.table_schema AS REFERENCED_TABLE_SCHEMA
+										, ccu.table_name AS REFERENCED_TABLE_NAME
+										, ccu.column_name AS REFERENCED_COLUMN_NAME 
+									FROM 
+										information_schema.table_constraints AS tc 
+										JOIN information_schema.key_column_usage AS kcu
+										  ON tc.constraint_name = kcu.constraint_name
+										JOIN information_schema.constraint_column_usage AS ccu
+										  ON ccu.constraint_name = tc.constraint_name
+									WHERE constraint_type in ('FOREIGN KEY' ,'PRIMARY KEY')
+							       ) as refe
+						 on (refe.table_schema = c.table_schema and refe.table_name = c.table_name and refe.column_name = c.column_name)						 
+					WHERE upper(c.table_name) =upper('".$this->getTableName()."')".$this->getMsSqlShema()." 
+					ORDER BY c.TABLE_SCHEMA
+                            ,c.table_name
+                            ,c.ordinal_position";
 		return $sql;
 	}
 	
