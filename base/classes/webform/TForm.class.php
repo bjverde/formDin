@@ -6282,49 +6282,60 @@ class TForm Extends TBox
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
                return $field;
            }
-           /**
-            * Adiciona campo tipo grupo com legenda na parte superior
-            * Se o parametro $intHeight for null será auto height
-            * se o parametro $intWidth for null utilizado a largura do form
-            *
-            * <code>
-            * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
-            *   $frm->addGroupField('gp01','Grupo Teste');
-            * 	// com quebra nos rotulos quando excederem a largura da coluna definida
-            *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
-            * </code>
-            *
-            *
-            * @param string $strName
-            * @param string $strLegend
-            * @param integer $intHeight
-            * @param integer $intWidth
-            * @param boolean $boolNewLine
-            * @param boolean $boolNoWrapLabel
-            * @param boolean $boolCloseble
-            * @param string $accordionId
-            * @param boolean $boolOpened
-            * @param string $imgOpened
-            * @param string $imgClosed
-            * @param boolean $boolOverflowX
-            * @param boolean $boolOverflowY
-            * @return TGroupBox
-            */
-           public function addGroupField( $strName, $strLegend=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolNoWrapLabel=null, $boolCloseble=null, $strAccordionId=null, $boolOpened=null, $imgOpened=null, $imgClosed=null,$boolOverflowX=null,$boolOverflowY=null )
-           {
-               
+           
+    /**
+    * Adiciona campo tipo grupo com legenda na parte superior
+    * Se o parametro $intHeight for null será auto height
+    * se o parametro $intWidth for null utilizado a largura do form
+    *
+    * <code>
+    * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
+    *   $frm->addGroupField('gp01','Grupo Teste');
+    * 	// com quebra nos rotulos quando excederem a largura da coluna definida
+    *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
+    * </code>
+    *
+    * @param string $strName          - 1: nome Id
+    * @param string $strLegend        - 2: label que irá aparecer para o usuario 
+    * @param integer $intHeight       - 3: altura do grupo. NULL = auto height
+    * @param integer $intWidth        - 4: largura do grupo. NULL = largura do form
+    * @param boolean $boolNewLine     - 5: nova linha. Default = true
+    * @param boolean $boolNoWrapLabel
+    * @param boolean $boolCloseble    - 6: pode fechar ou não
+    * @param string $accordionId      - 7:
+    * @param boolean $boolOpened      - 8: inicia aberto
+    * @param string $imgOpened        - 9:
+    * @param string $imgClosed        - 10: 
+    * @param boolean $boolOverflowX   - 11:
+    * @param boolean $boolOverflowY   - 12: 
+    * @return TGroupBox
+    */
+	public function addGroupField( $strName
+           		, $strLegend=null
+				, $strHeight=null
+				, $strWidth=null
+				, $boolNewLine=null
+				, $boolNoWrapLabel=null
+				, $boolCloseble=null
+				, $strAccordionId=null
+				, $boolOpened=null
+				, $imgOpened=null
+				, $imgClosed=null
+				, $boolOverflowX=null
+				, $boolOverflowY=null )
+           {               
                //$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
                $field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
                $field->setAccordionId($strAccordionId);
                $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
                $field->setColumns( $this->getColumns() );
-               $this->currentContainer[ ] = $field;
-               if( !is_null($strHeight))
-               {
-                   $field->setOverFlowY(true);
-               }
-               return $field;
-           }
+		$this->currentContainer[ ] = $field;
+		if( !is_null($strHeight))
+		{
+			$field->setOverFlowY(true);
+		}
+		return $field;
+	}
            
            /**
             * Campo de uso geral para insersão manual de códigos html na página
