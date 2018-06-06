@@ -41,18 +41,18 @@
 
 class TEmail extends TEdit
 {
-	/**
-	 * @param string $name
-	 * @param string $value
-	 * @param boolean $required
-	 */
-	public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intSize=null)
-	{
-		$intSize = is_null($intSize) ? 50 : $intSize;
-		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
-		$this->setFieldType('email');
-		$this->addEvent('onblur','this.value=this.value.toLowerCase();fwValidarEmail(this,true)');
-	}
+    /**
+     * @param string  $name
+     * @param string  $value
+     * @param boolean $required
+     */
+    public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intSize=null)
+    {
+        $intSize = is_null($intSize) ? 50 : $intSize;
+        parent::__construct($strName, $strValue, $intMaxLength, $boolRequired, $intSize);
+        $this->setFieldType('email');
+        $this->addEvent('onblur', 'this.value=this.value.toLowerCase();fwValidarEmail(this,true)');
+    }
 }
 /*return;
 $val = new TMail('des_email',null,100,true);

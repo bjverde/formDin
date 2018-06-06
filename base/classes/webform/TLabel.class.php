@@ -42,19 +42,19 @@
 //------------------------------------------------------------------------------
 class TLabel extends TControl
 {
-	public function __construct($name,$value=null)
-	{
-		parent::__construct('div',$name,$value);
-		parent::setFieldType('label');
-		parent::setValue($value);
-	}
-	//--------------------------------------------------------------------
-	public function show($print=true)
-	{
-		$this->clearChildren();
-		$this->add($this->getValue());
-		$this->setValue(null);
-		return parent::show($print);
-	}
+    public function __construct($name,$value=null)
+    {
+        parent::__construct('div', $name, $value);
+        parent::setFieldType('label');
+        parent::setValue($value);
+    }
+    //--------------------------------------------------------------------
+    public function show($print=true)
+    {
+        $this->clearChildren();
+        $this->add($this->getValue());
+        $this->setValue(null);
+        return parent::show($print);
+    }
 }
 ?>
