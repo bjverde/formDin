@@ -41,22 +41,26 @@
 
 /**
  * Classe que faz varias transformações de data e hora
+ *
  * @author reinaldo.junior
  */
-class StringHelper {
+class StringHelper
+{
     
-    public static function strtolower_utf8($inputString) {
+    public static function strtolower_utf8($inputString) 
+    {
         $outputString    = utf8_decode($inputString);
         $outputString    = strtolower($outputString);
         $outputString    = utf8_encode($outputString);
         return $outputString;
     }
     
-    public static function strtoupper_utf8($string){
-    	$string = utf8_decode($string);
-    	$string = strtoupper($string);
-    	$string = utf8_encode($string);
-    	return $string;
+    public static function strtoupper_utf8($string)
+    {
+        $string = utf8_decode($string);
+        $string = strtoupper($string);
+        $string = utf8_encode($string);
+        return $string;
     }
     
 }

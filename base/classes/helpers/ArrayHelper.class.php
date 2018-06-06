@@ -38,10 +38,12 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-class ArrayHelper {
+class ArrayHelper
+{
     
-    static function validateUndefined($array,$atributeName) {
-        if(!isset($array[$atributeName])){
+    static function validateUndefined($array,$atributeName) 
+    {
+        if(!isset($array[$atributeName])) {
             $array[$atributeName]=null;
         }
         return is_null($array[$atributeName])?null:trim($array[$atributeName]);
@@ -51,11 +53,13 @@ class ArrayHelper {
      * Similar to array_key_exists. But it does not generate an error message
      *
      * Semelhante ao array_key_exists. Mas não gera mensagem de erro
-     * @param string $atributeName
-     * @param array $array
+     *
+     * @param  string $atributeName
+     * @param  array  $array
      * @return boolean
      */
-    static function has($atributeName,$array) {
+    static function has($atributeName,$array) 
+    {
         $value = false;
         if (is_array($array) && array_key_exists($atributeName, $array)) {
             $value = true;
@@ -65,37 +69,41 @@ class ArrayHelper {
     
     /***
      *
-     * @param array $array
+     * @param array  $array
      * @param string $atributeName
-     * @param mixed $DefaultValue
+     * @param mixed  $DefaultValue
      * @return mixed
      */
-    static function getDefaultValeu($array,$atributeName,$DefaultValue) {
+    static function getDefaultValeu($array,$atributeName,$DefaultValue) 
+    {
         $value = $DefaultValue;
-        if( self::has($atributeName, $array) ){
-            if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ){
+        if(self::has($atributeName, $array) ) {
+            if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ) {
                 $value = $array[$atributeName];
             }
         }
         return $value;
     }
     
-    static function get($array,$atributeName) {
+    static function get($array,$atributeName) 
+    {
         $result = self::getDefaultValeu($array, $atributeName, null);
         return $result;
     }
     
     /**
      * Convert Array PDO Format to FormDin format
-     * @param array $array
+     *
+     * @param  array $array
      * @return array
      */
-    static function convertArrayPdo2FormDin($dataArray,$upperCase = true) {
+    static function convertArrayPdo2FormDin($dataArray,$upperCase = true) 
+    {
         $result = false;
-        if( is_array( $dataArray ) ) {
+        if(is_array($dataArray) ) {
             foreach( $dataArray as $k => $arr ) {
                 foreach( $arr as $fieldName => $value ) {
-                    if($upperCase){
+                    if($upperCase) {
                         $result[ strtoupper($fieldName) ][ $k ] = $value;
                     }else{
                         $result[ $fieldName ][ $k ] = $value;

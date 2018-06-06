@@ -38,22 +38,24 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-class MessageHelper {
-	
-	public static function logRecord(Exception $exception){
-		$app = $_SESSION[APLICATIVO];
-		$login = ( array_key_exists('USER',$_SESSION[APLICATIVO]) ? $_SESSION[APLICATIVO]['USER']['LOGIN']:null );
-		$grupo = null;
-		if(array_key_exists('USER',$_SESSION[APLICATIVO])){
-			$grupo = ( array_key_exists('GRUPO_NOME',$_SESSION[APLICATIVO]['USER']) ? $_SESSION[APLICATIVO]['USER']['GRUPO_NOME']:null );
-		}		
-		$log = 'formDin: '.FORMDIN_VERSION.' ,sistem: '.SYSTEM_ACRONYM.' v:'.SYSTEM_VERSION.' ,usuario: '.$login
-		.PHP_EOL.'type: '.get_class($exception).' ,Code: '.$exception->getCode().' ,file: '.$exception->getFile().' ,line: '.$exception->getLine()
-		.PHP_EOL.'mensagem: '.$exception->getMessage()
-		.PHP_EOL."Stack trace:"
-	    .PHP_EOL.$exception->getTraceAsString();
-		
-		error_log($log);
-	}
+class MessageHelper
+{
+    
+    public static function logRecord(Exception $exception)
+    {
+        $app = $_SESSION[APLICATIVO];
+        $login = ( array_key_exists('USER', $_SESSION[APLICATIVO]) ? $_SESSION[APLICATIVO]['USER']['LOGIN']:null );
+        $grupo = null;
+        if(array_key_exists('USER', $_SESSION[APLICATIVO])) {
+            $grupo = ( array_key_exists('GRUPO_NOME', $_SESSION[APLICATIVO]['USER']) ? $_SESSION[APLICATIVO]['USER']['GRUPO_NOME']:null );
+        }        
+        $log = 'formDin: '.FORMDIN_VERSION.' ,sistem: '.SYSTEM_ACRONYM.' v:'.SYSTEM_VERSION.' ,usuario: '.$login
+        .PHP_EOL.'type: '.get_class($exception).' ,Code: '.$exception->getCode().' ,file: '.$exception->getFile().' ,line: '.$exception->getLine()
+        .PHP_EOL.'mensagem: '.$exception->getMessage()
+        .PHP_EOL."Stack trace:"
+        .PHP_EOL.$exception->getTraceAsString();
+        
+        error_log($log);
+    }
 }
 ?>

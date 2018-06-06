@@ -39,31 +39,35 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class ServerHelper {
-	public static function get($atributeName) {
-	    if(!isset($_SERVER[$atributeName])){
-		    $_SERVER[$atributeName]="";
-		}
-		return is_null($_SERVER[$atributeName])?"":trim($_SERVER[$atributeName]);
-	}	
-	
-	/**
-	 * https://stackoverflow.com/questions/6768793/get-the-full-url-in-php
-	 * @param boolean $trim_query_string
-	 * @return string|mixed
-	 */
-	public static function getCurrentUrl( $trim_query_string = false ) {
-		$pageURL = (isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on') ? "https://" : "http://";
-		$pageURL = $pageURL.$_SERVER["SERVER_NAME"];
-		$pageURL = $pageURL.( ( $_SERVER["SERVER_PORT"] != 80 ) ? ":".$_SERVER["SERVER_PORT"] : "") ;
-		$pageURL = $pageURL.$_SERVER["REQUEST_URI"];
-		if( ! $trim_query_string ) {
-			return $pageURL;
-		} else {
-			$url = explode( '?', $pageURL );
-			return $url[0];
-		}
-	}
-	
+class ServerHelper
+{
+    public static function get($atributeName) 
+    {
+        if(!isset($_SERVER[$atributeName])) {
+            $_SERVER[$atributeName]="";
+        }
+        return is_null($_SERVER[$atributeName])?"":trim($_SERVER[$atributeName]);
+    }    
+    
+    /**
+     * https://stackoverflow.com/questions/6768793/get-the-full-url-in-php
+     *
+     * @param  boolean $trim_query_string
+     * @return string|mixed
+     */
+    public static function getCurrentUrl( $trim_query_string = false ) 
+    {
+        $pageURL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? "https://" : "http://";
+        $pageURL = $pageURL.$_SERVER["SERVER_NAME"];
+        $pageURL = $pageURL.( ( $_SERVER["SERVER_PORT"] != 80 ) ? ":".$_SERVER["SERVER_PORT"] : "") ;
+        $pageURL = $pageURL.$_SERVER["REQUEST_URI"];
+        if(! $trim_query_string ) {
+            return $pageURL;
+        } else {
+            $url = explode('?', $pageURL);
+            return $url[0];
+        }
+    }
+    
 }
 ?>
