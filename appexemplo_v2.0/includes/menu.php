@@ -50,7 +50,7 @@ $menu->add('21', '2', 'Cadastro Autoridades', 'modulos/autoridades.php', null);
 
 
 $menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
-$menu->add('81', '8', 'Região', 'modulos/regiao.php', null,null,null,false,null);
+$menu->add('81', '8', 'Região', 'modulos/regiao.php', null, null, null, false, null);
 $menu->add('82', '8', 'UF gride simples', 'modulos/uf_grid_simples.php', null);
 $menu->add('83', '8', 'UF com paginador SQL', 'modulos/uf_paginador.php', null);
 $menu->add('84', '8', 'Município com paginador SQL', 'modulos/municipio_sql_pagination.php', null);

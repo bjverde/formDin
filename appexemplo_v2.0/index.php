@@ -38,9 +38,9 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-include ('../base/classes/webform/TApplication.class.php');
+require '../base/classes/webform/TApplication.class.php';
 
-define('APLICATIVO','APPEV2.0');
+define('APLICATIVO', 'APPEV2.0');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
