@@ -37,10 +37,10 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $strHeight = 300;
-$strWidth  = 500;
+$strWidth  = 900;
 $frm = new TForm('Campos Campo Ajuda e campo BoxField', $strHeight, $strWidth);
 $frm->setMaximize(true);
-$frm->setHelpOnLine('Titulo',$strHeight,$strWidth,'setHelpOnLine está com problemas, esse problema já foi cadastrado no https://github.com/bjverde/formDin/issues/21',null);
+$frm->setHelpOnLine('Titulo',$strHeight,$strWidth,'ajuda',null);
 
 $frm->addHtmlField('html1','Exemplo de ajuda utilizando boxField com arquivo.')->setCss('color','blue');
 $frm->addTextField('nome','Nome:',50,false,50,'',true,null,null,false);
@@ -56,8 +56,8 @@ $frm->addBoxField('bxImagem',null,$this->getBase()."js/jquery/facebox/stairs.jpg
 
 
 $frm->addHtmlField('html4','Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color','blue');
-$frm->addTextField('endereco01','Endereço:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'Informe o endereço completo do proprietário do terreno');
-$frm->addTextField('endereco02','Endereço:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda/ajuda.html');
+$frm->addTextField('endereco01','Endereço01:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'Informe o endereço completo do proprietário do terreno',null,null,false);
+$frm->addTextField('endereco02','Endereço02:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda/ajuda.html');
 $frm->addBoxField('bxAjax',null,"http://localhost",'ajax','Visualizar Ajax:',null,true,null,null,'Conteudo ajax');
 
 

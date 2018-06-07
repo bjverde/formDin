@@ -82,10 +82,10 @@ $tree->addItem(null,1,'Relatório',true);
 $tree->addItem(1,11,'Financeiro',true,null,array('URL'=>'www.bb.com.br'));
 $tree->addItem(1,12,'Orçamentário',true,null,array('URL'=>'www.bcb.gov.br'));
 
-$tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
-$frm->addJavascript($tree->getJs());// gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
-$tree->setXY(0,20); // posiciona a treeview na tela. left=0, top=100
-$tree->show(); // exibe o tree view
+$tree->setOnClick('treeClick');     // Definir o evento que será chamado ao clicar no item da treeview
+$frm->addJavascript($tree->getJs());// Gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
+$tree->setXY(0,20);                 // Posiciona a treeview na tela. left=0, top=100
+$tree->show();                      // Exibe o tree view
 $frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview 
 // fim criação da treeview
 

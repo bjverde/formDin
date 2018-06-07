@@ -74,8 +74,8 @@ class TPDF extends FPDF
      * Classe para criação de relatórios no formato PDF
      *
      * @param string $strOrientation
-     * @param str $strUnit
-     * @param str $strFormat
+     * @param string $strUnit
+     * @param string $strFormat
      * @return TPDF
      */
     public function __construct( $strOrientation = 'P', $strUnit = 'mm', $strFormat = 'A4', $strFontFamily = 'arial',

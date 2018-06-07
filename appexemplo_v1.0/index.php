@@ -40,6 +40,7 @@
  */
 define('MIGRATE_JQUERY',FALSE);
 
+include('includes/config_conexao.php');
 include('../base/classes/webform/TApplication.class.php');
 
 define('APLICATIVO','APPEV1.0');

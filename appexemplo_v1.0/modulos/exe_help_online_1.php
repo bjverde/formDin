@@ -38,110 +38,111 @@
  */
 
 error_reporting(E_ALL);
-define('BDHO','./ho/bdho.s3db');
 
-$frm = new TForm('Ajuda em Tempo Real',500,850);
-$frm->addTextField('help_title'	,'Título:'		,50,false);
-$frm->addTextField('help_form'	,'Formulário:'	,50,true);
-$frm->addTextField('help_field'	,'Campo:'		,50,true);
-$frm->addMemoField ('help_text','',10000,false,100,15,true,true,false);
+HelpOnLineDAO::createFileAndTable();
+
+$whereGrid = ' 1=1 ';
+$primaryKey = 'HELP_FORM';
+$frm = new TForm('Ajuda em Tempo Real',600,850);
+
+$frm->addTextField($primaryKey ,'Formulário:',50,true);
+$frm->addTextField('HELP_TITLE','Título:'	 ,50,false);
+$frm->addTextField('HELP_FIELD','Campo:'	 ,50,true);
+$frm->addMemoField('HELP_TEXT' ,''           ,10000,false,100,15,true,true,false);
 $frm->setRichEdit(true);
-$frm->addJavascript('fwSetHtmlEditor("help_text","callBackEditor",false)');
+$frm->addJavascript('fwSetHtmlEditor("HELP_TEXT","callBackEditor",false)');
 
-// conectar com banco de dados
-if( !file_exists(BDHO))
-{
-	$aFileParts = pathinfo( BDHO );
-	$baseName = $aFileParts[ 'basename' ];
-	$fileName = $aFileParts[ 'filename' ];
-	$dirName = $aFileParts[ 'dirname' ];
-	if( $dirName && ! file_exists($dirName) )
-	{
-		if ( ! mkdir($dirName, 0775, true ) )
-    	{
- 			die('Não foi possivel criar o diretório '.$dirName);
+$frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
+$frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+$frm->addButton('Atualizar', null, 'Atualizar', null, null, false, false);
+
+
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+	case 'Salvar':
+		if ( $frm->validate() ) {
+			$vo = new HelpOnLineVO();
+			$frm->setVo( $vo );
+			d( $vo );
+			$resultado = HelpOnLineDAO::insert( $vo );
+			if($resultado==1) {
+				$frm->setMessage('Registro gravado com sucesso!!!');
+				$frm->clearFields();
+			}else{
+				$frm->setMessage($resultado);
+			}
 		}
-	}
-}
-//if ( $db = sqlite_open( BDHO, 0666, $sqliteerror))
-if ( $db = new SQLiteDatabase(BDHO,0666) )
-{
-	// verificar se a tabela existe e cria-la se não existir
-	$q = @$db->query('select count(*) from helponline where 1 = 1');
-    if ($q === false)
-    {
-    	$query = 'CREATE TABLE [helpOnLine] (
-					[help_form] VARCHAR(50)  NULL,
-					[help_field] VARCHAR(50)  NOT NULL,
-					[help_title] VARCHAR(50)  NULL,
-					[help_text] TEXT  NULL,
-					PRIMARY KEY ([help_form],[help_field])
-					)';
-    	if( ! $db->queryExec( $query, $error))
-		{
-			die( $error );
+		break;
+		//--------------------------------------------------------------------------------
+	case 'Buscar':
+		$retorno = array(
+		'HELP_FORM'=>$frm->get('HELP_FORM')
+		,'HELP_FIELD'=>$frm->get('HELP_FIELD')
+		,'HELP_TITLE'=>$frm->get('HELP_TITLE')
+		,'HELP_TEXT'=>$frm->get('HELP_TEXT')
+		);
+		$whereGrid = $retorno;
+		break;
+		//--------------------------------------------------------------------------------
+	case 'Limpar':
+		$frm->clearFields();
+		break;
+		//--------------------------------------------------------------------------------
+	case 'gd_excluir':
+		$id = $frm->get( $primaryKey ) ;
+		$resultado = HelpOnLineDAO::delete( $id );;
+		if($resultado==1) {
+			$frm->setMessage('Registro excluido com sucesso!!!');
+			$frm->clearFields();
+		}else{
+			$frm->clearFields();
+			$frm->setMessage($resultado);
 		}
-	}
-}
-else
-{
-	 die( $sqliteerror );
+		break;
+		//--------------------------------------------------------------------------------
+		/*
+		 default:
+		 
+		 $result = HelpOnLineDAO::selectAll('help_form',null);
+		 if( count( $result )  > 0){
+		 $frm->set('HELP_FORM',$result['HELP_FORM'][0]);
+		 $frm->set('HELP_TITLE',$result['HELP_TITLE'][0]);
+		 $frm->set('HELP_FIELD', $result['HELP_FIELD'][0] );
+		 $frm->set('HELP_TEXT', $result['HELP_TEXT'][0] );
+		 }
+		 break;
+		 */
 }
 
-$acao = isset($acao) ? $acao : '' ;
-switch( $acao )
-{
-	case 'salvar';
-		ob_clean();
-		//print "select count(*) as total from helpOnLine where form_name='".$_REQUEST['form_name']."' and form_field='".$_REQUEST['form_field']."'" ;
-       	$res = $db->query("select count(*) as total from helpOnLine where help_form='".$_REQUEST['help_form']."' and help_field='".$_REQUEST['help_field']."'",SQLITE_ASSOC,$error );
-    	$row = $res->fetch();
-    	if( $row['total'] > 0)
-    	{
- 			$query = "update helpOnLine set help_title = '".$_REQUEST['help_title']."', help_text='".$_REQUEST['help_text']."' where help_form='".$_REQUEST['help_form']."' and help_field='".$_REQUEST['help_field']."'";
-	    }
-    	else
-    	{
-   			$query = "insert into helpOnLine ( help_form,help_field,help_title,help_text) values('".$_REQUEST['help_form']."','".$_REQUEST['help_field']."','".$_REQUEST['help_title']."','".$_REQUEST['help_text']."')";
-		}
-		if( ! $db->queryExec( $query, $error))
-		{
-			die( $error );
-		}
+$dados = HelpOnLineDAO::selectAll($primaryKey,$whereGrid);
+$mixUpdateFields = $primaryKey.'|'.$primaryKey.',HELP_FIELD|HELP_FIELD,HELP_TITLE|HELP_TITLE,HELP_TEXT|HELP_TEXT';
+$gride = new TGrid( 'gd'        // id do gride
+		,'Gride'     // titulo do gride
+		,$dados 	 // array de dados
+		,null		 // altura do gride
+		,null		 // largura do gride
+		,$primaryKey // chave primaria
+		,$mixUpdateFields
+		);
+$gride->addColumn($primaryKey,'id');
+$gride->addColumn('HELP_TITLE','Título');
+$gride->addColumn('HELP_FIELD','Campo');
+$gride->addColumn('HELP_TEXT','Texto');
+$frm->addHtmlField('gride',$gride);
 
-   		die('Dados gravados com sucesso!');
-	break;
-	default:
-	$_REQUEST['help_form'] = isset($_REQUEST['help_form']) ? $_REQUEST['help_form'] : 'cad_teste' ;
-	$_REQUEST['help_field'] = isset($_REQUEST['form_field']) ? $_REQUEST['form_field'] : 'nom_pessoa' ;
 
-	   	$query = "select help_text,help_title from helpOnLine where help_form='".$_REQUEST['help_form']."' and help_field='".$_REQUEST['help_field']."'";
-		if( ! $res=$db->query( $query, SQLITE_ASSOC, $error) )
-		{
-			die( $error );
-		}
-		if( $res->numRows() > 0)
-		{
-			$row = $res->fetch();
-			$frm->set('help_text', $row['help_text'] );
-			$frm->set('hepp_title',$row['help_title']);
-		}
-	break;
-}
-$frm->setAction('Atualizar');
-$frm->addButton('Criar BD','criarBD','btnCriarBD');
 $frm->show();
 ?>
 <script>
 
-function callBackEditor(ed)
-{
-	//alert( ed);
-	//ed.windowManager.alert('Dados gravados!');
-	//var ed = tinyMCE.get('help');
-	//ed.setProgressState(1);
-	//alert( 'salvar\t\t'+ed.getContent());
-	//ed.setProgressState(0);
+function callBackEditor(ed) {
+	alert( ed);
+	ed.windowManager.alert('Dados gravados!');
+	var ed = tinyMCE.get('help');
+	ed.setProgressState(1);
+	alert( 'salvar\t\t'+ed.getContent());
+	ed.setProgressState(0);
 	jQuery('#formDinAcao').val('salvar');
     var dados = jQuery("#formdin").serialize();
     dados += '&ajax=1';

@@ -38,7 +38,7 @@ error_reporting(E_ALL);
  */
 error_reporting(E_ALL);
 
-$frm = new TForm('Exemplo de Com Campos Editáveis');
+$frm = new TForm('Gride 06 - Exemplo de Com Campos Editáveis');
 $frm->addTextField('nome','Nome:',30,true);
 
 $dados = null;

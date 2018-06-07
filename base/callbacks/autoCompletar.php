@@ -40,12 +40,26 @@
  */
 
 // quanto este arquivo for chamado pela função registerExternalFunction() não precisa da include dos arquivos abaixo
-if( file_exists('../xajax/xajax.inc.php') )
-{
+if( file_exists('../xajax/xajax.inc.php') ) {
 	session_start();
 	require_once('../xajax/xajax.inc.php');
 	require_once('../includes/conexao.inc');
 }
+
+function genFieldRetunr1($arrIdRetorno,$arrCampoRetorno,$retorno){
+	
+	foreach ( $arrIdRetorno as $k1=>$v1 ) {
+		$campoRetorno = $arrCampoRetorno[$k1];
+		$pattern = "/'/";
+		$subject = "\\'";
+		$result = preg_replace($pattern,$subject,$res[$campoRetorno][$k]);
+		$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".utf8_encode($result)."'";
+	}
+	
+	return $retorno;
+}
+
+
 function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteFuncaoCache,$camposDescricao,$camposRetorno,$funcaoExecutar=null) {
 	// formar os arrays com parametros de entrada
 	$arrCampoDescricao = explode(',',$camposDescricao);
@@ -163,18 +177,16 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		foreach($res[$campoDescricao] as $k=>$v )  {
 			$retorno = null;
 			//	Gerar os campos de retorno
-			foreach ( $arrIdRetorno as $k1=>$v1 ) {
-				$campoRetorno = $arrCampoRetorno[$k1];
-				$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".utf8_encode(preg_replace("'","\\'",$res[$campoRetorno][$k]))."'";
-			}
+			$retorno = genFieldRetunr1($arrIdRetorno,$arrCampoRetorno,$retorno);
 			//	Formar os links que retornam os dados
-			$dadoMarcado = preg_replace("'(".preg_quote($arrBusca[0],"'").")'i","<span style=\"color:black;font-weight:bold;\">\\1</span>",$v,1);
-			if((string)$funcaoExecutar<>'')
-			{
+			$pattern = "/'(".preg_quote($arrBusca[0],"'").")'/i";
+			$dadoMarcado = preg_replace($pattern,"<span style=\"color:black;font-weight:bold;\">\\1</span>",$v,1);
+			if((string)$funcaoExecutar<>'') {
 				if(!strpos($funcaoExecutar,'()'))
 					$funcaoExecutar.='()';
 			}
-			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".preg_replace("'","\\'",utf8_encode($v))."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
+			$valeu = preg_replace("/'/","\\'",utf8_encode($v));
+			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".$valeu."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
 		}
 		if(strlen($sRet) > 0)  {
 
@@ -212,11 +224,11 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$campoDescricao = $arrCampoDescricao[0];
 		// Se tiver so uma linha de retorno, podemos auto-completar os campos
 		$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"none\"");
-		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".utf8_encode(preg_replace("'","\\'",$res[$campoDescricao][0]))."\"");
+		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".utf8_encode(preg_replace("/'/","\\'",$res[$campoDescricao][0]))."\"");
 		//	Gerar os campos de retorno
 		foreach ( $arrIdRetorno as $k=>$v ) {
 			$campoRetorno = $arrCampoRetorno[$k];
-			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".utf8_encode(preg_replace("'","\\'",$res[$campoRetorno][0]))."\"");
+			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".utf8_encode(preg_replace("/'/","\\'",$res[$campoRetorno][0]))."\"");
 		}
 		$objResponse->addScript("formDinAutoSugestao.clearBuffer()");
 	} elseif ($nCnt < 1 ) {

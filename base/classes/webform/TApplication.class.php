@@ -52,10 +52,12 @@ $helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
 require_once ($helps_dir . 'ArrayHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');
 require_once ($helps_dir . 'GetHelper.class.php');
+require_once ($helps_dir . 'MessageHelper.class.php');
 require_once ($helps_dir . 'PaginationSQLHelper.class.php');
 require_once ($helps_dir . 'PostHelper.class.php');
 require_once ($helps_dir . 'RequestHelper.class.php');
 require_once ($helps_dir . 'ServerHelper.class.php');
+require_once ($helps_dir . 'StringHelper.class.php');
 require_once ($helps_dir . 'UrlHelper.class.php');
 
 include_once ('autoload_formdin.php');
@@ -272,7 +274,7 @@ class TApplication extends TLayout {
 					'background-color' => 'transparent',
 					'height' => '100%',
 					'margin' => '0 auto',
-					'widht' => '100%',
+					'width' => '100%',
 					'max-width' => $this->getWidth () . 'px',
 					'min-width' => '700px',
 					'_width' => '700px' 
@@ -879,34 +881,6 @@ class TApplication extends TLayout {
 	public function getDefaultModule() {
 		return $this->defaultModule;
 	}
-	
-	/*
-	 * //-------------------------------------------------------------------------------------------
-	 * public function setPDOConnection($dbType,$dbHost=null,$dbName=null,$dbUser=null,$dbPassword=null)
-	 * {
-	 * if( ! $conn = TPDOConnection::connect($dbType,$dbHost,$dbName,$dbUser,$dbPassword) )
-	 * {
-	 * die(TPDOConnection::showError());
-	 * }
-	 * return $conn;
-	 * }
-	 * //-------------------------------------------------------------------------------------------
-	 * public function setPDOConnectionOracle($strHost,$strServiceName,$strUserName,$strPassword,$intPort=1521)
-	 * {
-	 * $tns = "(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = {$strHost})(PORT = {$intPort})))(CONNECT_DATA =(SERVICE_NAME = {$strServiceName})))";
-	 * return $this->setPDOConnection(null,null,"oci:dbname=".$tns,$strUserName,$strPassword);
-	 * }
-	 * //-------------------------------------------------------------------------------------------
-	 * public function setPDOConnectionMySql($strHost,$strDbName,$strUserName,$strPassword)
-	 * {
-	 * return $this->setPDOConnection("mysql",$strHost,$strDbName,$strUserName,$strPassword);
-	 * }
-	 * //-------------------------------------------------------------------------------------------
-	 * public function setPDOConnectionPostgres($strHost,$strDbName,$strUserName,$strPassword)
-	 * {
-	 * return $this->setPDOConnection("pgsql",$strHost,$strDbName,$strUserName,$strPassword);
-	 * }
-	 */
 	
 	// -------------------------------------------------------------------------------------------
 	public function setConnectionFile($strNewValue = null) {

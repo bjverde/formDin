@@ -55,14 +55,16 @@ class TTextEditor extends TMemo
 	}
 
 	/**
-	 * @return the $resizeEnabled
+	 * @return $resizeEnabled
 	 */
 	public function getResizeEnabled() {
 		return $this->resizeEnabled;
 	}
 
 	/**
-	 * @param field_type $resizeEnabled
+	 * 
+	 * @param bool $boolResizeEnabled
+	 * @return TTextEditor
 	 */
 	public function setResizeEnabled($boolResizeEnabled) {
 		if (is_bool($boolResizeEnabled))

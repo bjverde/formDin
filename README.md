@@ -29,6 +29,11 @@ O FormDin iniciou em 2004, a versão 4 é baseada nas ideias do [Adianti Framewo
 
 O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versão atual está praticamente congelada em 2012. O Adianti continuou evoluindo e tem muito mais recursos. Programadores menos experientes o FormDin pode ser melhor que o Adianti por ser mais simples exigindo um curva menor de aprendizagem.
 
+## Ambiente formDin
+Além do FormDin existem mais dois projetos intimamente ligados.
+
+* [SysGen](https://github.com/bjverde/sysgen) – uma gerador de sistema para FormDin 
+* [formDocker](https://github.com/bjverde/formDocker) – arquivos do Docker Compose para levantar tudo que precisa para rodar o formDin em poucos comandos.
 
 ## Sobre as branchs
 * Master - tem as modificações e novidades
@@ -54,7 +59,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 [Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
 
 **Visão geral da instalação**
-1. Tenho um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendável xDebug para ambiente de desenvolvimento.
+1. Tenha um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendável xDebug para ambiente de desenvolvimento.
 2. Descompactar o projeto em um pasta.
 3. Rodar os script SQL da pasta modelo_banco_exemplos
 4. Acessar as pastas appexemplo_v para ver os exemplos.
@@ -72,8 +77,18 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
+* [4.2.2 - 2018/04/03 tag v4.2.2](https://github.com/bjverde/formDin/releases/tag/v4.2.2)
+   * :hammer: novo metodo para trabalhar com data
+   * :hammer: [consulta pagina aceitando Zero.](https://github.com/bjverde/formDin/commit/fb05317219c28e8b25aa9ee8f768989e2c44c86d)
+   * :bug: 3 correções
+   * :memo: melhoria na documentação interna
+* [4.2.1 - 2018/03/03 tag v4.2.1](https://github.com/bjverde/formDin/releases/tag/v4.2.1)
+   * :hammer: **SPECIAL VERSION** alterações feitas para trabalhar com o [SysGen (um gerador de sistema para formDin)](https://github.com/bjverde/sysgen)
+   * :bug: diversas correções de bugs
+   * :memo: melhoria na documentação
+   
 * [4.2.0 - 2018/03/08 tag v4.2.0](https://github.com/bjverde/formDin/releases/tag/v4.2.0)
-   * :hammer: files in UTF8 format.
+   * :hammer: **SPECIAL VERSION** files in UTF8 format.
    * :hammer: code generator of the CRUD screen of a database entity.
    * :hammer: Error messages in class TFile.
    * :white_check_mark: 114 PHPUnit tests
@@ -101,4 +116,4 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
    * :bug: Correção de diversos bugs para tornar compativel com PHP 5.6.30
    * 304 commits de alterações
 * [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
-   * Versão orignal, Brach copyLEB 
+   * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 

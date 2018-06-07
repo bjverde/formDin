@@ -109,7 +109,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 					colsInput && colsInput.enable();
 				}
 
-				// Call the onChange method for the widht and height fields so
+				// Call the onChange method for the width and height fields so
 				// they get reflected into the Advanced tab.
 				widthInput && widthInput.onChange();
 				heightInput && heightInput.onChange();

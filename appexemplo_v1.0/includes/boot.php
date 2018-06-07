@@ -37,8 +37,14 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+$frm = new TForm('Form',200,500);
+$frm->setFlat(true);
+$frm->setMaximize(true);
+$frm->setAutoSize(true);
 
+$frm->addTextField('teste', 'teste',10,false);
 
+$frm->show();
 ?>
 <script>
 	top.criarMenuLateral();

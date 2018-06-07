@@ -40,31 +40,29 @@
  */
 
 /**
-* Campo tag para inserção de tags no fluxo de criação dos campos
-* Criado para atender a necessidade de centralizar um grupo de objetos na tela
-* ou colocar obejetos dentro de uma div com cor de fundo alterado
-* Ex:	$frm->addTag('<div>','div_teste');
-*		$frm->addTag('</div>');
-*/
+ * Campo tag para inserção de tags no fluxo de criação dos campos
+ * Criado para atender a necessidade de centralizar um grupo de objetos na tela
+ * ou colocar obejetos dentro de uma div com cor de fundo alterado
+ * Ex:    $frm->addTag('<div>','div_teste');
+ *        $frm->addTag('</div>');
+ */
 class TTag extends THidden
 {
-	public function __construct($strTagType,$strId=null)
-	{
-   	 	$strTagType = str_replace('<','',$strTagType);
-   	 	$strTagType = str_replace('>','',$strTagType);
-   	 	if( $strId &&  strpos('<'.$strTagType,'</')===false && strpos(strtolower($strTagType),'id=')===false)
-   	 	{
-			$strTagType.=' id="'.$strId.'"';
-   	 	}
-   	 	$strTagType = '<'.$strTagType.'>';
-		if( is_null($strId))
-		{
-   	 		$strId 	= 'tag_'.mt_rand(1, 1000);
-		}
-		parent::__construct($strId,(string)$strTagType,false);
-		$this->clearCss();
-		$this->setProperty('type','tag');
-		$this->setFieldType('tag');
-	}
+    public function __construct($strTagType,$strId=null)
+    {
+         $strTagType = str_replace('<', '', $strTagType);
+         $strTagType = str_replace('>', '', $strTagType);
+        if($strId &&  strpos('<'.$strTagType, '</')===false && strpos(strtolower($strTagType), 'id=')===false) {
+            $strTagType.=' id="'.$strId.'"';
+        }
+         $strTagType = '<'.$strTagType.'>';
+        if(is_null($strId)) {
+             $strId     = 'tag_'.mt_rand(1, 1000);
+        }
+        parent::__construct($strId, (string)$strTagType, false);
+        $this->clearCss();
+        $this->setProperty('type', 'tag');
+        $this->setFieldType('tag');
+    }
 }
 ?>

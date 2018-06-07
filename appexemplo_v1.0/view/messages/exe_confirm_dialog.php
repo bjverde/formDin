@@ -37,21 +37,37 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-  $frm = new TForm('Exemplo de Caixa de Confirmação');
+d($_REQUEST);
+$frm = new TForm('Exemplo de Caixa de Confirmação',200,500);
 
-  $frm->addButton('Confirmar',null,'btnConfirmar','fwConfirm("Tem certeza ?","confirmSim","confirmNao")');
-  $frm->addButton('Confirmar 2',null,'btnConfirmar2','fwConfirm("Tem certeza ?",confirmSim)');
-  $frm->addButton('Confirmar 3',null,'btnConfirmar3','fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-  $frm->addButton('Confirmar 4',null,'btnConfirmar3','fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-  $frm->show();
+$frm->addTextField('field5', 'Resultado do Confirma5',40);
+
+$frm->addButton('Confirmar',null,'btnConfirmar','fwConfirm("Tem certeza ?","confirmSim","confirmNao")');
+$frm->addButton('Confirmar 2',null,'btnConfirmar2','fwConfirm("Tem certeza ?",confirmSim)');
+$frm->addButton('Confirmar 3',null,'btnConfirmar3','fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
+$frm->addButton('Confirmar 4',null,'btnConfirmar3','fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
+$frm->addButton('Confirmar 5 - submit','btn05',null,null,'Quer submeter essa pagina e evitar JavaScript explicito? ');
+$frm->addButton('Limpar'    , null, 'Limpar');
+
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+	case 'btn05':
+		$frm->setFieldValue('field5','Você falou SIM !! :-) ');
+	break;
+	//--------------------------------------------------------------------------------
+	case 'Limpar':
+		$frm->clearFields(null);
+	break;
+	//--------------------------------------------------------------------------------
+}
+
+$frm->show();
 ?>
 <script>
-function confirmSim()
-{
+function confirmSim() {
 	alert('sim');
 }
-function confirmNao()
-{
+function confirmNao() {
 	alert('nao');
 }
 </script>

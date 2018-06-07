@@ -185,7 +185,6 @@ class TDisplayControl extends TTable
 			}
 			$this->label->setCss( 'width', '100%' );
 			$this->column1->add( $this->label );
-			//$this->column3->add('<div style="margin-right:2px;float:left;cursor:pointer;" tooltip="true" class="fwFieldRequired" title="Campo obrigatório">*</div>');
 			$this->column3->add( $this->field );
 			$this->column3->setCss( 'padding-bottom', '3px' );
 

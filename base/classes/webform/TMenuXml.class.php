@@ -40,7 +40,7 @@
  */
 
 /**
-* Classe para gerar o xml para cria??o de menus verticais utilizando a bibliotaca DHTMLX
+* Classe para gerar o xml para criação de menus verticais utilizando a bibliotaca DHTMLX
 * Link: http://www.dhtmlx.com/docs/products/docsExplorer/index.shtml?node=dhtmlxmenu
 * Ex:
 * 	$menu = new TMenuDhtmlx();
@@ -74,14 +74,14 @@ class TMenuDhtmlx {
         $this->arrMenu=null;
     }
     /**
-    * M?todo para adicionar itens de menu
+    * Método para adicionar itens de menu
     *
-    * @param string $strId
-    * @param string $strIdParent
+    * @param string $strId          - id do Menu
+    * @param string $strIdParent    - id do Item pai.
     * @param string $strText
     * @param string $strUrl
-    * @param string $strToolTip uma expli??o maior sobre o item
-    * @param string $strImg  imagem ser? utilizada como icone
+    * @param string $strToolTip     - uma explição maior sobre o item
+    * @param string $strImg         - imagem será utilizada como icone
     * @param string $strImgDisabled
     * @param boolean $boolDisabled
     * @param string $strHotKey
@@ -110,7 +110,7 @@ class TMenuDhtmlx {
         $menu->setHotKey($strHotKey);
         $menu->setSeparator($boolSeparator);
 
-        // verificar se o pai j? est? adicionado
+        // verificar se o pai já está adicionado
         $objMenu = $this->getMenuById($strIdParent);
         if ($strIdParent && $objMenu) {
             $objMenu->addMenu($menu);
@@ -331,7 +331,7 @@ class TMenuDhtmlx {
     }
     public function addOrphan(TMenuDhtmlx $menu)
     {
-        // se existir filhos orf?o, adicionar todos os filhos
+    	// se existir filhos orfão, adicionar todos os filhos
         while( $objMenu = $this->getOrphanByIdParent($menu->getId()) )
         {
             $menu->addMenu($objMenu);
@@ -343,7 +343,7 @@ class TMenuDhtmlx {
         }
         else
         {
-        	// adicionar a lista de orf?os
+        	// adicionar a lista de orfãos
             $this->arrOrphan[] = $menu;
         }
     }
@@ -357,7 +357,7 @@ class TMenuDhtmlx {
                 if( $objMenu->getIdParent() == $strId)
                 {
                     $result=$objMenu;
-                    // remover o registro ?rf?o
+                    // remover o registro órfão
                     array_splice($this->arrOrphan,$k,1);
                     break;
                 }
@@ -456,7 +456,7 @@ class TMenuDhtmlx {
 		}
         /*
 		echo '<menu>
-		<item id="file" text="Administra??o">
+		<item id="file" text="Administração">
 			<item id="new" text="New" img="new.gif"/>
 			<item id="file_sep_1" type="separator"/>
 			<item id="open" text="Open" img="open.gif">

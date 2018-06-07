@@ -433,13 +433,8 @@ class TPDOConnection {
         // nás chamadas ajax, não precisa aplicar utf8
         if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
             $boolUtf8_Decode = self::getUtfDecode();
-            if ( $boolUtf8_Decode ) {
-                $sql = utf8_encode( $sql );
-                $arrParams = self::encodeArray( $arrParams );
-            } else {
-                $sql = utf8_decode( $sql );
-                $arrParams = self::encodeArray( $arrParams );
-            }
+            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $sql );
+            $arrParams = self::encodeArray( $arrParams );
         }
         $arrParams = self::prepareArray( $arrParams );
         // guardar os parametros recebidos
@@ -538,12 +533,9 @@ class TPDOConnection {
                         $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
                         
                         // inverter campo data
-                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
-                        {
-                            if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                            {
-                                $arrDados[ $k ] = self::formatDate( $v, 'ymd' );
-                            }
+                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {                        	
+                        	$v = self::verifyformtDateYMD( $v );
+                        	$arrDados[ $k ] = $v;
                         }
                         else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 )
                         {
@@ -573,23 +565,19 @@ class TPDOConnection {
                     }
                     $result[] = $arrDados[ $k ];
                 }
-            }
-            else
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( ! is_null($v) ) {
-                        // campo data deve ser invertido para gravar no banco de dados.
-                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
-                            $v = self::formatDate( $v, 'ymd' );
-                        }
+            } else {
+                foreach( $arrDados as $k => $v ) {
+                	if ( !is_null($v) && !empty($v) ){
+                        $v  = self::verifyformtDateYMD( $v );
                         $boolUtf8_DecodeDataBase = self::getUtfDecode();
                         $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
-                    }
-                    else
-                    {
-                        $arrDados[ $k ] = null;
-                    }
+                	}else if( is_int($v) ){
+                		$arrDados[ $k ] = $v;
+                	}else if( $v === '0' ){
+                		$arrDados[ $k ] = $v;
+                	}else {
+                		$arrDados[ $k ] = null;
+                	}
                 }
                 $result = $arrDados;
             }
@@ -597,71 +585,74 @@ class TPDOConnection {
         return $result;
     }
     
-    public static function prepareArray( $arrDados = null )
-    {
+    public static function prepareArrayNamed( $arrDados = null ) {
+    	$result = array();
+    	
+    	foreach( $arrDados as $k => $v )
+    	{
+    		if ( !is_null($v) )
+    		{
+    			$arrDados[ $k ] = $v;
+    			// inverter campo data
+    			if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )    {    				
+    				$v  = self::verifyformtDateYMD( $v );
+    				$arrDados[ $k ] = $v;
+    			}
+    			else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
+    			{
+    				// alterar a virgula por ponto nos campos decimais
+    				$posPonto = ( int ) strpos( $v, '.' );
+    				$posVirgula = ( int ) strpos( $v, ',' );
+    				
+    				if ( $posVirgula > $posPonto ) {
+    					if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
+    						$v = preg_replace( '/\,/', '', $v );
+    					} else {
+    						$v = preg_replace( '/,/', ' ', $v );
+    						$v = preg_replace( '/\./', '', $v );
+    						$v = preg_replace( '/ /', '.', $v );
+    					}
+    				}
+    				$arrDados[ $k ] = trim( $v );
+    			}
+    		}else{
+    			$arrDados[ $k ] = null;
+    		}
+    		$result[] = $arrDados[ $k ];
+    	}    	
+    	return $result;
+    }
+    
+    /***
+     * Campo data deve ser invertido para gravar no banco de dados.
+     * @param string $v
+     * @return string
+     */
+    public static function verifyformtDateYMD( $v ) {
+    	if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) {
+    		$v = self::formatDate( $v, 'ymd' );
+    	}    	
+    	return $v;
+    }
+    
+    
+    public static function prepareArray( $arrDados = null ) {
         $result = array();
         
-        if ( is_array( $arrDados ) )
-        {
-            if ( is_string( key( $arrDados ) ) )
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( !is_null($v) )
-                    {
+        if ( is_array( $arrDados ) ) {
+        	
+            if ( is_string( key( $arrDados ) ) ) {
+            	$result = self::prepareArrayNamed($arrDados);
+            } else {
+                foreach( $arrDados as $k => $v ) {
+                    if ( !is_null($v) && !empty($v) ){
+                    	$v  = self::verifyformtDateYMD( $v );
                         $arrDados[ $k ] = $v;
-                        // inverter campo data
-                        if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )
-                        {
-                            if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                            {
-                                $arrDados[ $k ] = self::formatDate( $v, 'ymd' );
-                            }
-                        }
-                        else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
-                        {
-                            // alterar a virgula por ponto nos campos decimais
-                            $posPonto = ( int ) strpos( $v, '.' );
-                            $posVirgula = ( int ) strpos( $v, ',' );
-                            
-                            if ( $posVirgula > $posPonto )
-                            {
-                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula )
-                                {
-                                    $v = preg_replace( '/\,/', '', $v );
-                                }
-                                else
-                                {
-                                    $v = preg_replace( '/,/', ' ', $v );
-                                    $v = preg_replace( '/\./', '', $v );
-                                    $v = preg_replace( '/ /', '.', $v );
-                                }
-                            }
-                            $arrDados[ $k ] = trim( $v );
-                        }
-                    }
-                    else
-                    {
-                        $arrDados[ $k ] = null;
-                    }
-                    $result[] = $arrDados[ $k ];
-                }
-            }
-            else
-            {
-                foreach( $arrDados as $k => $v )
-                {
-                    if ( !is_null($v) )
-                    {
-                        // campo data deve ser invertido para gravar no banco de dados.
-                        if ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 )
-                        {
-                            $v = self::formatDate( $v, 'ymd' );
-                        }
-                        $arrDados[ $k ] = $v;
-                    }
-                    else
-                    {
+                    }else if( is_int($v) ){
+                    	$arrDados[ $k ] = $v;
+                    }else if( $v === '0' ){
+                    	$arrDados[ $k ] = $v;
+                    }else {
                         $arrDados[ $k ] = null;
                     }
                 }
@@ -908,10 +899,18 @@ class TPDOConnection {
         return $date;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Returns the string in the appropriate format UTF8 or ANSI
+     * @param boolean $boolUtf8_Decode
+     * @param string $string
+     * @return NULL|string
+     */
     public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {
         $retorno = null;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
+        } elseif (self::$banco == DBMS_SQLITE) {
+        	$retorno = $string;
         }else{
             if ( $boolUtf8_Decode ) {
                 $retorno = utf8_decode( $string );

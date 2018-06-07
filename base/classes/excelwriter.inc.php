@@ -18,9 +18,10 @@
      */
 
 
-Class ExcelWriter{
+Class ExcelWriter
+{
 
-   var $fp=null;
+    var $fp=null;
     var $error;
     var $state="CLOSED";
     var $newRow=false;
@@ -30,7 +31,8 @@ Class ExcelWriter{
     * @Return : On Success Valid File Pointer to file
     *             On Failure return false
     */
-    function ExcelWriter($file="",$bsc="CELLPAR"){
+    function ExcelWriter($file="",$bsc="CELLPAR")
+    {
         return $this->open($file);
     }
 
@@ -42,38 +44,40 @@ Class ExcelWriter{
     * @Return : On Success Valid File Pointer to file
     *                On Failure return false
     */
-    function open($file){
-        if($this->state!="CLOSED"){
+    function open($file)
+    {
+        if($this->state!="CLOSED") {
             $this->error="Error : Another file is opend .Close it to save the file";
             return false;
         }
 
-        if(!empty($file)){
-           $this->fp=@fopen($file,"w+");
+        if(!empty($file)) {
+            $this->fp=@fopen($file, "w+");
         }else{
-           $this->error="Usage : New ExcelWriter('fileName')";
+            $this->error="Usage : New ExcelWriter('fileName')";
             return false;
         }
 
-      if($this->fp==false){
-         $this->error="Error: Unable to open/create File.You may not have permmsion to write the file.";
+        if($this->fp==false) {
+            $this->error="Error: Unable to open/create File.You may not have permmsion to write the file.";
             return false;
-      }
+        }
         $this->state="OPENED";
-        fwrite($this->fp,$this->GetHeader());
+        fwrite($this->fp, $this->GetHeader());
         return $this->fp;
-   }
+    }
 
-    function close(){
-       if($this->state!="OPENED"){
-          $this->error="Error : Please open the file.";
+    function close()
+    {
+        if($this->state!="OPENED") {
+            $this->error="Error : Please open the file.";
             return false;
-       }
-        if($this->newRow){
-           fwrite($this->fp,"</tr>");
+        }
+        if($this->newRow) {
+            fwrite($this->fp, "</tr>");
             $this->newRow=false;
         }
-        fwrite($this->fp,$this->GetFooter());
+        fwrite($this->fp, $this->GetFooter());
         fclose($this->fp);
         $this->state="CLOSED";
         return;
@@ -83,7 +87,8 @@ Class ExcelWriter{
         *  @return : Void
         * This function write the header of Excel file.
         */
-   function GetHeader(){
+    function GetHeader()
+    {
         $header = <<<EOH
         <html xmlns:o="urn:schemas-microsoft-com:office:office"
                xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -191,10 +196,11 @@ Class ExcelWriter{
                 <table x:str border=0 cellpadding=0 cellspacing=0 style='border-collapse: collapse;table-layout:fixed;'>
 EOH;
             return $header;
-   }
+    }
 
-    function GetFooter(){
-       return "</table></body></html>";
+    function GetFooter()
+    {
+        return "</table></body></html>";
     }
 
     /*
@@ -202,61 +208,62 @@ EOH;
     * @Return : Void
     */
 
-    function writeLine($line_arr ) {
-       if($this->state!="OPENED"){
-          $this->error="Error : Please open the file.";
-            return false;
-       }
-        if(!is_array($line_arr)){
-           $this->error="Error : Argument is not valid. Supply an valid Array.";
+    function writeLine($line_arr ) 
+    {
+        if($this->state!="OPENED") {
+            $this->error="Error : Please open the file.";
             return false;
         }
-        fwrite($this->fp,"<tr>");
+        if(!is_array($line_arr)) {
+            $this->error="Error : Argument is not valid. Supply an valid Array.";
+            return false;
+        }
+        fwrite($this->fp, "<tr>");
         foreach($line_arr as $col)
         {
-        	$colSpan=0;
-        	if( is_array( $col ) )
-        	{
-        		$colSpan = $col[1];
-        		$col=$col[0];
-        	}
-           fwrite($this->fp,"<td".( $colSpan > 0 ? ' colspan='.$colSpan:"")." class=xl24 width=64 >$col</td>");
-		}
-        fwrite($this->fp,"</tr>");
+            $colSpan=0;
+            if(is_array($col) ) {
+                $colSpan = $col[1];
+                $col=$col[0];
+            }
+            fwrite($this->fp, "<td".( $colSpan > 0 ? ' colspan='.$colSpan:"")." class=xl24 width=64 >$col</td>");
+        }
+        fwrite($this->fp, "</tr>");
     }
 
     /*
     * @Params : Void
     * @Return : Void
     */
-    function writeRow(){
-      if($this->state!="OPENED"){
-          $this->error="Error : Please open the file.";
+    function writeRow()
+    {
+        if($this->state!="OPENED") {
+            $this->error="Error : Please open the file.";
             return false;
-       }
-       if($this->newRow==false){
-         fwrite($this->fp,"<tr>");
-       }else{
-           fwrite($this->fp,"</tr><tr>");
+        }
+        if($this->newRow==false) {
+            fwrite($this->fp, "<tr>");
+        }else{
+            fwrite($this->fp, "</tr><tr>");
             $this->newRow=true;
         }
-   }
+    }
 
     /*
     * @Params : $value : Coloumn Value
     * @Return : Void
     */
-    function writeCol($value,$span=null){
-       if($this->state!="OPENED"){
-          $this->error="Error : Please open the file.";
+    function writeCol($value,$span=null)
+    {
+        if($this->state!="OPENED") {
+            $this->error="Error : Please open the file.";
             return false;
-       }
-       $spanTag='';
-       if( $span )
-       {
-		   $spanTag = 'colspan='.$span;
-       }
-        fwrite($this->fp,"<td $spanTag class=xl24 width=64 >$value</td>");
+        }
+        $spanTag='';
+        if($span ) {
+            $spanTag = 'colspan='.$span;
+        }
+        fwrite($this->fp, "<td $spanTag class=xl24 width=64 >$value</td>");
     }
 }
 ?>

@@ -39,9 +39,8 @@
 
 class TbTesteDAO extends TPDOConnection {
 	public static function insert( TbTesteVO $objVo ) {
-		if( $objVo->getId() )
-		{
-			return $this->update($objVo);
+		if( $objVo->getId() ) {
+			return self::update($objVo);
 		}
 		$values = array(  $objVo->getNome_teste() 
 						, $objVo->getData_teste() 

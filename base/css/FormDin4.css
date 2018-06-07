@@ -209,10 +209,17 @@ body
 	font-size:11px;
 }
 
-.fwFieldRequired
-{
+.fwFieldRequired {
 	color:#ff0000;
 	vertical-align: middle;
+}
+
+.fwFieldRequiredOldStyle {
+	margin:0px;
+	padding:0px;
+	margin-top:5px;
+	color:red;
+	font-size:10px;
 }
 
 .fwFieldDisabled

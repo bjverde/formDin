@@ -529,7 +529,6 @@ class TForm Extends TBox
             }
             else if( isset( $_REQUEST[ 'modalbox' ] ) && $_REQUEST[ 'modalbox' ] )
             {
-                //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">');
                 $this->hideCloseButton();
                 $this->addHiddenField( 'modalbox', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
             }
@@ -733,12 +732,6 @@ class TForm Extends TBox
              */
             // adicionar a table do layout no corpo do formulário
             $this->body->add($tableLayout);
-            
-            /*			if( defined('REQUIRED_FIELD_MARK') && $this->getFieldType() == 'form' )
-             {
-             $this->addHtmlField('teste','(*) Preenchimento obrigatório')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
-             }
-             */
             // inicio
             $rows=0;
             foreach( $this->displayControls as $name=>$dc )
@@ -1472,10 +1465,8 @@ class TForm Extends TBox
         
         if( defined('REQUIRED_FIELD_MARK') && $this->getFieldType() == 'form' && self::$hasRequiredField )
         {
-            if( $this->getRequiredFieldText() )
-            {
-                //$this->addHtmlField('teste','(*) Preenchimento obrigatório')->setCss(array('margin-top'=>'5','font-size'=>'10px','color'=>'red' ) );
-                $this->body->add( '<center><span style="margin:0px; padding:0px;margin-top:5px;color:red;font-size:10px;">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
+            if( $this->getRequiredFieldText() ) {
+                $this->body->add( '<center><span class="fwFieldRequiredOldStyle">'.REQUIRED_FIELD_MARK.' '.$this->getRequiredFieldText().'</span></center>');
             }
         }
         // adicionar os botões das ações
@@ -1773,16 +1764,6 @@ class TForm Extends TBox
         // tem que habilitar o container senão ele não é exibido
         $this->setEnabled( true );
         
-        /* if( $this->getFieldType() == "form" )
-         {
-         
-         if( $_POST['fw_back_to'] )
-         {
-         $this->getHeaderCell()->add('<img src="'.$this->getBase().'imagens/fwreturn16x16.gif" style="float:left;cursor:pointer;" alt="V" onClick="top.app_load_module(\''.$_POST['fw_back_to'].'\')">');
-         }
-         }
-         */
-        
         // colocar o form dentro de uma pagina html completa com as tags html, head e body
         if( $this->getFieldType() == "form" && $this->getShowHtmlTag() )
         {
@@ -1953,26 +1934,43 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - nome do campo irá funcionar com autocomplete
-     * @param string $strTablePackageFuncion        - tabela alvo da pesquisa ou pacote somente no oracle
-     * @param string $strSearchField                - campo de pesquisa
-     * @param mixed $mixUpdateFields                - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param string $strFieldName                  - 1: nome do campo irá funcionar com autocomplete
+     * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
+     * @param string $strSearchField                - 3: campo de pesquisa
+     * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields
-     * @param mixed $mixExtraSearchFields            - campo do formulário que será adicionado como filtro
-     * @param string $strCallBackFunctionJs
-     * @param integer $intMinChars                   - Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                      - Default 1000, tempo após a digitação para disparar a consulta
-     * @param integer $intMaxItensToShow             - máximo de registros que deverá ser retornado
+     * @param mixed $mixExtraSearchFields           - 6: campo do formulário que será adicionado como filtro
+     * @param string $strCallBackFunctionJs         - 7: função javascript de callback
+     * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
+     * @param integer $intDelay                     - 9: Default 1000, tempo após a digitação para disparar a consulta
+     * @param integer $intMaxItensToShow            - 10: máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
-     * @param string $strUrl                         - url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
-     * @param string $strMessageNotFound             - Mesagem caso não encontre nenhum registro
-     * @params boolean $boolKeepFieldValuesOnPost
-     * @params boolean $boolClearOnNotFound
-     * @params boolean $boolClearUpdateFields
-     * @params boolean $boolSearchAnyPosition
+     * @param string $strUrl                        - 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+     * @param string $strMessageNotFound            - 14: Mensagem caso não encontre nenhum registro
+     * @param boolean $boolKeepFieldValuesOnPost    - 15:
+     * @param boolean $boolClearOnNotFound
+     * @param boolean $boolClearUpdateFields
+     * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
      */
-    public function setAutoComplete( $strFieldName, $strTablePackageFuncion, $strSearchField, $mixUpdateFields=null, $boolDisableUpdateFields=null, $mixExtraSearchFields=null, $strCallBackFunctionJs=null, $intMinChars=null, $intDelay=null, $intMaxItensToShow=null, $intCacheTime=null, $boolRemoveMask=null, $strUrl=null, $strMessageNotFound=null, $boolKeepFieldValuesOnPost=null, $boolClearOnNotFound=null, $boolClearUpdateFields=null,$boolSearchAnyPosition=null )
+    public function setAutoComplete( $strFieldName
+    		                       , $strTablePackageFuncion
+    		                       , $strSearchField
+    		                       , $mixUpdateFields=null
+    		                       , $boolDisableUpdateFields=null
+    		                       , $mixExtraSearchFields=null
+    		                       , $strCallBackFunctionJs=null
+    		                       , $intMinChars=null
+    		                       , $intDelay=null
+    		                       , $intMaxItensToShow=null
+    		                       , $intCacheTime=null
+    		                       , $boolRemoveMask=null
+    		                       , $strUrl=null
+    		                       , $strMessageNotFound=null
+    		                       , $boolKeepFieldValuesOnPost=null
+    		                       , $boolClearOnNotFound=null
+    		                       , $boolClearUpdateFields=null
+    		                       , $boolSearchAnyPosition=null )
     {
         
         // não criar o autocomplente se o campo não existir
@@ -3015,8 +3013,8 @@ class TForm Extends TBox
       * 	$form->clearFields(array('nom_pessoa,des_endereco'));
       * </code>
       *
-      * @param mixed $mixFields
-      * @param mixed $mixIgnoreFields
+      * @param mixed $mixFields        - lista do campos que serão limpos. Apenas esses campos serão limpos
+      * @param mixed $mixIgnoreFields  - lista de campos ignorados
       * @param bool $boolNewValue
       */
      public function clearFields( $mixFields=null, $mixIgnoreFields=null, $boolNewValue=null )
@@ -4249,6 +4247,7 @@ class TForm Extends TBox
          }
          return is_null($this->onBeforeClose) ? 'null' : $this->onBeforeClose;
      }
+     
      /**
       * O método redirect deve ser utilizado para chamar um outro formulário dentro de uma ação do formulário
       * corrente, sem ter que submeter a página.
@@ -4263,9 +4262,9 @@ class TForm Extends TBox
       *
       * @param mixed $strModule
       * @param mixed $strMessage
-      * @param mixed $boolSubmit
-      * @param mixed $arrVars
-      * @param boolean $boolRedirect
+      * @param boolean $boolSubmit   - ação de submeter. TRUE = post, FALSE = ajax
+      * @param array $arrVars        - Array que será enviado via Post 
+      * @param boolean $boolSaveData - salva os dados formulario atual
       */
       public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
           $boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
@@ -4276,14 +4275,13 @@ class TForm Extends TBox
           if( $fileExists ) {
               $currentModule = $this->getRealPath( $_POST['modulo'] );
               // guardar na sessão somente se estiver indo, na volta não precisa
-              if( $boolSaveData )
-              {
+              if( $boolSaveData ) {
                   $_SESSION[ APLICATIVO ][ $currentModule ][ 'post' ] = $_POST;
               }
               $_POST[ 'fw_back_to' ] = $currentModule;
               $_REQUEST[ 'redirect_message' ] 	= $strMessage;
-              $_POST[ 'modulo' ] 					= $filePath;
-              $_GET[ 'modulo' ] 					= $filePath;
+              $_POST[ 'modulo' ] 				= $filePath;
+              $_GET[ 'modulo' ] 				= $filePath;
               $_REQUEST[ 'modulo' ]				= $filePath;
               $_REQUEST[ 'redirect' ] 			= '1';
               $_SESSION[ APLICATIVO ][ 'modulo' ] = $filePath;
@@ -5106,11 +5104,11 @@ class TForm Extends TBox
         * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
         * definir o parametro boolLabelAbove do botão para true tambem.
         *
-        * @param mixed   $mixValue
-        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick
+        * @param mixed   $mixValue   - Label do Botão
+        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick. Se ficar null será utilizado o valor de mixValue
         * @param string  $strAction  - Nome da ação
         * @param string  $strOnClick - Nome da função javascript
-        * @param string  $strConfirmMessage
+        * @param string  $strConfirmMessage - Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
         * @param boolean $boolNewLine  - em nova linha
         * @param boolean $boolFooter   - mostrar no fim do form
         * @param string  $strImage
@@ -5121,8 +5119,14 @@ class TForm Extends TBox
         * @param bool    $boolLabelAbove
         * @return TButton
         */
-       public function addButton( $mixValue=null, $strAction=null, $strName=null, $strOnClick=null, $strConfirmMessage=null, $boolNewLine=null, $boolFooter=null, $strImage=null, $strImageDisabled=null, $strHint=null, $strVerticalAlign=null, $boolLabelAbove=null, $strLabel=null, $strHorizontalAlign=null)
-       {
+       public function addButton( $mixValue=null
+					       		, $strAction=null, $strName=null
+					       		, $strOnClick=null, $strConfirmMessage=null
+					       		, $boolNewLine=null, $boolFooter=null
+					       		, $strImage=null, $strImageDisabled=null
+					       		, $strHint=null, $strVerticalAlign=null
+					       		, $boolLabelAbove=null, $strLabel=null
+					       		, $strHorizontalAlign=null) {
            // botão será criado no rodapé do formulário por padrão
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
@@ -6197,15 +6201,16 @@ class TForm Extends TBox
                $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
                return $field;
            }
+           
            /**
             * Adicionar campo entrada de dados texto livre
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param integer $intMaxLength
-            * @param boolean $boolRequired
-            * @param integer $intSize
-            * @param string $strValue
+            * @param string $strName       - id do campo
+            * @param string $strLabel      - Label do campo
+            * @param integer $intMaxLength - tamanho maximo de carateres
+            * @param boolean $boolRequired - obrigatorio ou não
+            * @param integer $intSize      - quantidade de caracteres visiveis.
+            * @param string $strValue      - texto preenchido
             * @param boolean $boolNewLine
             * @param string $strHint
             * @param string $strExampleText
@@ -6213,27 +6218,38 @@ class TForm Extends TBox
             * @param boolean $boolNoWrapLabel
             * @return TEdit
             */
-           public function addTextField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $strValue=null, $boolNewLine=null, $strHint=null, $strExampleText=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
+           public function addTextField( $strName
+						           		, $strLabel=null
+						           		, $intMaxLength
+						           		, $boolRequired=null
+						           		, $intSize=null
+						           		, $strValue=null
+						           		, $boolNewLine=null
+						           		, $strHint=null
+						           		, $strExampleText=null
+						           		, $boolLabelAbove=null
+						           		, $boolNoWrapLabel=null 
+						           		){
                $field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
                $field->setHint( $strHint );
                $field->setExampleText( $strExampleText );
-               $dc = $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true) );
+               $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
+               $dc = $this->addDisplayControl( $tDisplayControl );
                return $field;
            }
            /**
             * Adicionar campo de entrada de texto com multiplas linhas ( memo )
             *
-            * @param string $strName
-            * @param string $strLabel
+            * @param string  $strName
+            * @param string  $strLabel
             * @param integer $intMaxLength
             * @param boolean $boolRequired
             * @param integer $intColumns
             * @param integer $intRows
             * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolShowCounter
-            * @param string $strValue
+            * @param boolean $boolLabelAbove   - Label abaixo
+            * @param boolean $boolShowCounter  - Contador de caracteres ! Só funciona em campos não RichText
+            * @param string  $strValue
             * @return TMemo
             */
            public function addMemoField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intColumns=null, $intRows=null, $boolNewLine=null, $boolLabelAbove=null, $boolShowCounter=null, $strValue=null, $boolNoWrapLabel=null )
@@ -6247,14 +6263,14 @@ class TForm Extends TBox
             * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
             * Tipo de máscara: DMY, DM, MY
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param string $strValue
+            * @param string  $strName
+            * @param string  $strLabel
+            * @param string  $strValue
             * @param boolean $boolRequired
             * @param boolean $boolNewLine
-            * @param string $strMinValue
-            * @param string $strMaxValue
-            * @param string $strMaskType
+            * @param string  $strMinValue
+            * @param string  $strMaxValue
+            * @param string  $strMaskType
             * @param boolean $boolButtonVisible
             * @param boolean $boolLabelAbove
             * @return object TDate
@@ -6266,49 +6282,60 @@ class TForm Extends TBox
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
                return $field;
            }
-           /**
-            * Adiciona campo tipo grupo com legenda na parte superior
-            * Se o parametro $intHeight for null será auto height
-            * se o parametro $intWidth for null utilizado a largura do form
-            *
-            * <code>
-            * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
-            *   $frm->addGroupField('gp01','Grupo Teste');
-            * 	// com quebra nos rotulos quando excederem a largura da coluna definida
-            *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
-            * </code>
-            *
-            *
-            * @param string $strName
-            * @param string $strLegend
-            * @param integer $intHeight
-            * @param integer $intWidth
-            * @param boolean $boolNewLine
-            * @param boolean $boolNoWrapLabel
-            * @param boolean $boolCloseble
-            * @param string $accordionId
-            * @param boolean $boolOpened
-            * @param string $imgOpened
-            * @param string $imgClosed
-            * @param boolean $boolOverflowX
-            * @param boolean $boolOverflowY
-            * @return TGroupBox
-            */
-           public function addGroupField( $strName, $strLegend=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolNoWrapLabel=null, $boolCloseble=null, $strAccordionId=null, $boolOpened=null, $imgOpened=null, $imgClosed=null,$boolOverflowX=null,$boolOverflowY=null )
-           {
-               
+           
+    /**
+    * Adiciona campo tipo grupo com legenda na parte superior
+    * Se o parametro $intHeight for null será auto height
+    * se o parametro $intWidth for null utilizado a largura do form
+    *
+    * <code>
+    * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
+    *   $frm->addGroupField('gp01','Grupo Teste');
+    * 	// com quebra nos rotulos quando excederem a largura da coluna definida
+    *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
+    * </code>
+    *
+    * @param string $strName          - 1: nome Id
+    * @param string $strLegend        - 2: label que irá aparecer para o usuario 
+    * @param integer $intHeight       - 3: altura do grupo. NULL = auto height
+    * @param integer $intWidth        - 4: largura do grupo. NULL = largura do form
+    * @param boolean $boolNewLine     - 5: nova linha. Default = true
+    * @param boolean $boolNoWrapLabel
+    * @param boolean $boolCloseble    - 6: pode fechar ou não
+    * @param string $accordionId      - 7:
+    * @param boolean $boolOpened      - 8: inicia aberto
+    * @param string $imgOpened        - 9:
+    * @param string $imgClosed        - 10: 
+    * @param boolean $boolOverflowX   - 11:
+    * @param boolean $boolOverflowY   - 12: 
+    * @return TGroupBox
+    */
+	public function addGroupField( $strName
+           		, $strLegend=null
+				, $strHeight=null
+				, $strWidth=null
+				, $boolNewLine=null
+				, $boolNoWrapLabel=null
+				, $boolCloseble=null
+				, $strAccordionId=null
+				, $boolOpened=null
+				, $imgOpened=null
+				, $imgClosed=null
+				, $boolOverflowX=null
+				, $boolOverflowY=null )
+           {               
                //$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
                $field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
                $field->setAccordionId($strAccordionId);
                $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
                $field->setColumns( $this->getColumns() );
-               $this->currentContainer[ ] = $field;
-               if( !is_null($strHeight))
-               {
-                   $field->setOverFlowY(true);
-               }
-               return $field;
-           }
+		$this->currentContainer[ ] = $field;
+		if( !is_null($strHeight))
+		{
+			$field->setOverFlowY(true);
+		}
+		return $field;
+	}
            
            /**
             * Campo de uso geral para insersão manual de códigos html na página
@@ -6320,10 +6347,10 @@ class TForm Extends TBox
             * um label invisível defina como "" o seu valor
             *
             * criado o espaço
-            * @param string $strName
+            * @param string $strName        - Nome do campo            
+            * @param string $strValue       - Texto HTML que irá aparece dentro
+            * @param string $strIncludeFile - 
             * @param string $strLabel
-            * @param string $strValue
-            * @param string $strIncludeFile
             * @param string $strWidth
             * @param string $strHeight
             * @param boolean $boolNewLine
@@ -6552,7 +6579,7 @@ class TForm Extends TBox
             * @param string  $strLabel
             * @param boolean $boolRequired
             * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine
+            * @param boolean $boolNewLine  - TRUE = cria nova linha , FALSE = fica depois do campo anterior
             * @param boolean $boolLabelAbove
             * @param mixed   $mixValue
             * @param boolean $boolMultiSelect
@@ -6593,22 +6620,37 @@ class TForm Extends TBox
            //-----------------------------------------------------------------------------
            /**
             * Adicicionar campo tipo radiobutton
-            *
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param array $arrOptions
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param string $strValue
+            * 
+            * 
+            * @param string $strName        - field ID
+            * @param string $strLabel       - Label field
+            * @param boolean $boolRequired  - TRUE = Required, FALSE = not Required
+            * @param array $arrOptions      - Array Options
+            * @param boolean $boolNewLine   - TRUE = new line, FASEL = no, DEFAULT ou NULL = FALSE
+            * @param boolean $boolLabelAbove - Titulo em cima das opções
+            * @param string  $strValue
             * @param integer $intQtdColumns
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
+            * @param boolean $boolNoWrapLabel
+            * @param boolean $boolNowrapText
+            * @return TRadio
             */
-           public function addRadioField( $strName, $strLabel=null, $boolRequired=null, $arrOptions=null, $boolNewLine=null, $boolLabelAbove=null, $strValue=null, $intQtdColumns=null, $intWidth=null, $intHeight=null, $intPaddingItems=null, $boolNoWrapLabel=null,$boolNowrapText=null )
-           {
+           public function addRadioField( $strName
+						           		, $strLabel=null
+						           		, $boolRequired=null
+						           		, $arrOptions=null
+						           		, $boolNewLine=null
+						           		, $boolLabelAbove=null
+						           		, $strValue=null
+						           		, $intQtdColumns=null
+						           		, $intWidth=null
+						           		, $intHeight=null
+						           		, $intPaddingItems=null
+						           		, $boolNoWrapLabel=null
+						           		, $boolNowrapText=null
+						           		){
                $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
                $field->setNoWrapText($boolNowrapText);
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
@@ -6720,10 +6762,10 @@ class TForm Extends TBox
            /**
             * Adiciona campo de entrada de dados numérico
             *
-            * @param string $strName
-            * @param string $strValue
+            * @param string $strName             - ID do campo
+            * @param string $strValue            - Label do campo, que irá aparecer na tela do usuario
             * @param integer $intMaxLength       - Quantidade maxima de digitos.
-            * @param boolean $boolRequired
+            * @param boolean $boolRequired       - Obrigatorio 
             * @param integer $intDecimalPlaces   - Quantidade de casas decimais.
             * @param boolean $boolNewLine
             * @param boolean $boolLabelAbove
@@ -6736,7 +6778,22 @@ class TForm Extends TBox
             * @param string  $strHint
             * @return TNumber
             */
-           public function addNumberField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intDecimalPlaces=null, $boolNewLine=null, $strValue=null, $strMinValue=null, $strMaxValue=null, $boolFormatInteger=null, $strDirection=null, $boolAllowZero=null, $boolAllowNull=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+           public function addNumberField( $strName
+						           		, $strLabel=null
+						           		, $intMaxLength
+						           		, $boolRequired=null
+						           		, $intDecimalPlaces=null
+						           		, $boolNewLine=null
+						           		, $strValue=null
+						           		, $strMinValue=null
+						           		, $strMaxValue=null
+						           		, $boolFormatInteger=null
+						           		, $strDirection=null
+						           		, $boolAllowZero=null
+						           		, $boolAllowNull=null
+						           		, $boolLabelAbove=null
+						           		, $boolNoWrapLabel=null
+						           		, $strHint=null )
            {
                $field = new TNumber( $strName, $strValue, $intMaxLength, $boolRequired, $intDecimalPlaces, $strMinValue, $strMaxValue, $boolFormatInteger, $strDirection, $boolAllowZero, $boolAllowNull );
                if( $strHint )
@@ -6863,13 +6920,13 @@ class TForm Extends TBox
             *   $_POST['strName_name'] - nome arquivo;
             * </code>
             *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param boolean $boolRequired
+            * @param string  $strName         - id do campo
+            * @param string  $strLabel        - Rotulo do campo que irá aparece na tela
+            * @param boolean $boolRequired    - Obrigatorio 
+            * @param string  $strAllowedFileTypes - Tipos de arquivos
+            * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
             * @param integer $intFieldSize
             * @param boolean $boolNewLine
-            * @param string  $strAllowedFileTypes
-            * @param string  $strMaxFileSize  - Input the max size file with M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
             * @param boolean $boolLabelAbove
             * @param boolean $boolNoWrapLabel
             * @return TFile / TFileAsyn
@@ -6981,69 +7038,66 @@ class TForm Extends TBox
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
                return $field;
            }
-           /**
-            * Adicionar treeview ao formulário.
-            *
-            * @param mixed $strName
-            * @param string $strRootLabel
-            * @param mixed $arrData
-            * @param mixed $strParentFieldName
-            * @param mixed $strChildFieldName
-            * @param mixed $strDescFieldName
-            * @param mixed $strInitialParentKey
-            * @param mixed $mixUserDataFields
-            * @param bool $strHeight
-            * @param bool $strWidth
-            * @param mixed $jsOnClick
-            * @param mixed $jsOnCheck
-            * @param mixed $jsOnDrag
-            * @param mixed $boolEnableCheckBoxes
-            * @param mixed $boolEnableRadioButtons
-            * @param mixed $boolEnableTreeLines
-            * @param mixed $strLabel
-            * @param mixed $boolLabelAbove
-            * @param mixed $boolNewLine
-            * @param mixed $boolNoWrapLabel
-            * @param mixed $mixFormSearchFields
-            * @return TTreeView
-            */
-           public function addTreeField( $strName, $strRootLabel=null, $arrData = null, $strParentFieldName = null, $strChildFieldName = null, $strDescFieldName = null, $strInitialParentKey=null, $mixUserDataFields = null, $strHeight = null, $strWidth = null, $jsOnClick = null, $jsOnDblClick = null, $jsOnCheck = null, $jsOnDrag = null, $boolEnableCheckBoxes = null, $boolEnableRadioButtons = null, $boolEnableTreeLines = null, $strLabel = null, $boolLabelAbove = null, $boolNewLine = null, $boolNoWrapLabel = null, $mixFormSearchFields=null )
-           {
-               $this->addJsFile( 'dhtmlx/dhtmlxcommon.js' );
-               $this->addJsFile( 'dhtmlx/treeview/dhtmlxtree.js' );
-               $this->addCssFile( 'dhtmlx/treeview/dhtmlxtree.css' );
-               /*
-                if( $this->getCurrentContainer() )
-                {
-                if( $this->getCurrentContainer()->getFieldType()=='group')
-                {
-                $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
-                $strWidth = is_null( $strWidth ) ? $this->getCurrentContainer()->getWidth()-30 : $strWidth;
-                if( $this->getCurrentContainer()->getHeight() < $strHeight )
-                {
-                $this->getCurrentContainer()->setHeight(( 50+ $strHeight ));
-                }
-                }
-                else
-                {
-                $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
-                $strWidth = is_null( $strWidth ) ? $this->getCurrentContainer()->getWidth()-20 : $strWidth;
-                }
-                }
-                else
-                {
-                $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
-                $strWidth = is_null( $strWidth ) ? $this->getWidth() - 40 : $strWidth;
-                }
-                $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
-                $strWidth = is_null( $strWidth ) ? $this->getWidth() - 40 : $strWidth;
-                *
-                */
-               $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $strInitialParentKey, $mixUserDataFields, $strHeight, $strWidth, $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag, $boolEnableCheckBoxes, $boolEnableRadioButtons, $boolEnableTreeLines, $mixFormSearchFields );
-               //$tree->addItem(0,1,'Animal',true,'Animais');
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $tree;
-           }
+	
+    /**
+    * Adicionar treeview ao formulário.
+    *
+    * @param mixed $strName            - 1: id do campo
+    * @param string $strRootLabel      - 2: Nome da raiz do campo
+    * @param mixed $arrData            - 3: array de dados
+    * @param mixed $strParentFieldName - 4: 
+    * @param mixed $strChildFieldName  - 5:
+    * @param mixed $strDescFieldName   - 6:
+    * @param mixed $strInitialParentKey- 7:
+    * @param mixed $mixUserDataFields  - 8:
+    * @param bool $strHeight           - 9: altura
+    * @param bool $strWidth            -10: largura
+    * @param mixed $jsOnClick
+    * @param mixed $jsOnCheck
+    * @param mixed $jsOnDrag
+    * @param mixed $boolEnableCheckBoxes
+    * @param mixed $boolEnableRadioButtons
+    * @param mixed $boolEnableTreeLines
+    * @param mixed $strLabel
+    * @param mixed $boolLabelAbove
+    * @param mixed $boolNewLine
+    * @param mixed $boolNoWrapLabel
+    * @param mixed $mixFormSearchFields
+    * @return TTreeView
+    */
+    public function addTreeField( $strName
+                               , $strRootLabel=null
+                               , $arrData = null
+                               , $strParentFieldName = null
+                               , $strChildFieldName = null
+                               , $strDescFieldName = null
+                               , $strInitialParentKey=null
+                               , $mixUserDataFields = null
+                               , $strHeight = null
+                               , $strWidth = null
+                               , $jsOnClick = null
+                               , $jsOnDblClick = null
+                               , $jsOnCheck = null
+                               , $jsOnDrag = null
+                               , $boolEnableCheckBoxes = null
+                               , $boolEnableRadioButtons = null
+                               , $boolEnableTreeLines = null
+                               , $strLabel = null
+                               , $boolLabelAbove = null
+                               , $boolNewLine = null
+                               , $boolNoWrapLabel = null
+                               , $mixFormSearchFields=null )
+    {
+        $this->addJsFile( 'dhtmlx/dhtmlxcommon.js' );
+        $this->addJsFile( 'dhtmlx/treeview/dhtmlxtree.js' );
+        $this->addCssFile( 'dhtmlx/treeview/dhtmlxtree.css' );
+
+        $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $strInitialParentKey, $mixUserDataFields, $strHeight, $strWidth, $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag, $boolEnableCheckBoxes, $boolEnableRadioButtons, $boolEnableTreeLines, $mixFormSearchFields );
+        //$tree->addItem(0,1,'Animal',true,'Animais');
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        return $tree;
+    }
+	
            /**
             * Permite abrir uma tag html entre os campos do formulário. Utilizado para criar áreas ou grupos de campos
             * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
@@ -7078,7 +7132,9 @@ class TForm Extends TBox
                // não será mais necessário, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
            }
            /**
-            * Adiciona campo para exibição de texto ou imagen dentro de um box modal
+            * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
+            * Para incluir ajuda no form utilize setHelpOnLine
+            * 
             *
             * <code>
             * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
@@ -7144,11 +7200,11 @@ class TForm Extends TBox
            /**
             * Campo para seleção de Diretório ou Pasta
             * @param string $strName
-            * @param type $rootDir
+            * @param string $rootDir
             * @param string $strValue
-            * @param type $intMaxLength
+            * @param int $intMaxLength
             * @param bool $boolRequired
-            * @param type $intSize
+            * @param int $intSize
             * @param bool $boolLabelAbove
             * @param bool $boolNewLine
             * @return TOpenDir

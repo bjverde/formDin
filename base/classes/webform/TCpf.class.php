@@ -54,7 +54,7 @@ class TCpf extends TMask
 	* @param string $strName
 	* @param string $strValue
 	* @param boolean $boolRequired
-	* @return TCpfField
+	* @return TCpf
 	*/
 	public function __construct($strName,$strValue=null,$boolRequired=null,$strInvalidMessage=null, $boolAwaysValidate = null,$strJsCallback=null)
 	{
