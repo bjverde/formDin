@@ -137,8 +137,18 @@ class TDAO
 	* @param string $strMetadataDir
 	* @return object TDAO
 	*/
-	public function __construct( $strTableName = null, $strDbType = null, $strUsername = null, $strPassword = null, $strDatabase = null, $strHost = null, $strPort = null, $strSchema = null, $boolUtf8 = null, $strCharset = null, $boolAutoCommit = null, $strMetadataDir = null  )
-	{
+	public function __construct( $strTableName = null
+								, $strDbType = null
+								, $strUsername = null
+								, $strPassword = null
+								, $strDatabase = null
+								, $strHost = null
+								, $strPort = null
+								, $strSchema = null
+								, $boolUtf8 = null
+								, $strCharset = null
+								, $boolAutoCommit = null
+								, $strMetadataDir = null  )	{
 		$this->setTableName( $strTableName );
 		$this->setMetadataDir( $strMetadataDir );
 		$this->setDbType( $strDbType );
@@ -157,14 +167,19 @@ class TDAO
 	/**
 	* Define o tipo do banco de dados que será acessado.
 	* Os tipos de banco de dados suportados atualmente são:
-	* 1) mysql 2) postgres 3) firebird 4) sqlserver 5) oracle 6) sqlite3
-	*
+	* 
+	* 1) define('DBMS_MYSQL','MYSQL');
+	* 2) define('DBMS_POSTGRES','POSTGRES');
+	* 3) define('DBMS_FIREBIRD','FIREBIRD');
+	* 4) define('DBMS_SQLITE','SQLITE');
+	* 5) define('DBMS_ORACLE','ORACLE');
+	* 6) define('DBMS_SQLSERVER','SQLSERVER');
+	* 
 	* Obs: todos utilizam a extensão PDO exceto o Oracle que utiliza as funções OCI diretamente
 	*
 	* @param string $strNewValue
 	*/
-	public function setDbType( $strNewValue = null )
-	{
+	public function setDbType( $strNewValue = null ){
 		$this->dbType=$strNewValue;
 	}
 
@@ -173,10 +188,8 @@ class TDAO
 	*
 	* @return string;
 	*/
-	public function getDbType()
-	{
-		if( $this->conn )
-		{
+	public function getDbType(){
+		if( $this->conn ){
 			//return $this->getConnDbType();
 		}
 		return $this->dbType;
@@ -187,8 +200,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setUsername( $strNewValue = null )
-	{
+	public function setUsername( $strNewValue = null ){
 		$this->username=$strNewValue;
 	}
 
@@ -197,9 +209,7 @@ class TDAO
 	*
 	* @return string $strNewValue
 	*/
-
-	public function getUsername()
-	{
+	public function getUsername(){
 		return $this->username;
 	}
 	/**
@@ -207,8 +217,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setPassword( $strNewValue = null )
-	{
+	public function setPassword( $strNewValue = null ){
 		$this->password=$strNewValue;
 	}
 
@@ -216,8 +225,7 @@ class TDAO
 	* Retorna  a senha de acesso do banco de dados
 	*
 	*/
-	public function getPassword()
-	{
+	public function getPassword(){
 		return $this->password;
 	}
 
@@ -227,8 +235,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setDatabase( $strNewValue = null )
-	{
+	public function setDatabase( $strNewValue = null ){
 		$this->database=$strNewValue;
 	}
     /**
@@ -266,36 +273,32 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setPort( $strNewValue = null )
-	{
+	public function setPort( $strNewValue = null ){
 		$this->port=$strNewValue;
 	}
     /**
     * Retorna a porta de comunicação utilizada pelo banco de dados
     *
     */
-	public function getPort()
-	{
-		if ( is_null( $this->port ) )
-		{
-			switch( strtolower( $this->getDbType() ) )
-				{
+	public function getPort() {
+		if ( is_null( $this->port ) ) {
+			switch( strtolower( $this->getDbType() ) ) {
 				case 'postgre':
-				case 'postgres':
+				case DBMS_POSTGRES:
 					$this->port='5432';
 					break;
 
-				case 'mysql':
+				case DBMS_MYSQL:
 					$this->port='3306';
 
 					break;
 
-				case 'sqlserver':
+				case DBMS_SQLSERVER:
 					$this->port='1433';
 
 					break;
 
-				case 'oracle':
+				case DBMS_ORACLE:
 					$this->port='1521';
 
 					break;
@@ -361,18 +364,20 @@ class TDAO
 	*
 	* @return boolean
 	*/
-	public function connect()
-	{
-		try
-		{
-			//$this->conn = TConnection::connect( $this->getDbType(), $this->getUsername(), $this->getPassword(), $this->getDatabase(), $this->getHost(), $this->getPort(), $this->getSchema(), $this->getUtf8() );
-			if( ! $this->conn )
-			{
-				$this->conn = TConnectionPool::connect( $this->getDbType(), $this->getUsername(), $this->getPassword(), $this->getDatabase(), $this->getHost(), $this->getPort(), $this->getSchema(), $this->getUtf8() );
+	public function connect() {
+		try {
+			if( ! $this->conn ){
+				$this->conn = TConnectionPool::connect( $this->getDbType()
+													  , $this->getUsername()
+													  , $this->getPassword()
+													  , $this->getDatabase()
+													  , $this->getHost()
+													  , $this->getPort()
+													  , $this->getSchema()
+													  , $this->getUtf8() );
 			}
 		}
-		catch( Exception $e )
-		{
+		catch( Exception $e ) {
 			$this->setError( $e->getMessage() );
 			return false;
 		}
@@ -581,7 +586,7 @@ class TDAO
 		{
 			$conn=$this->getConn()->connection;
 
-			if ( $this->getDbType() == 'oracle' )
+			if ( $this->getDbType() == DBMS_ORACLE )
 			{
 				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) )
 				{
@@ -776,28 +781,23 @@ class TDAO
 	* Retorna se o banco de dados está utilizando a codificação UTF-8
 	*
 	*/
-	public function getConnUtf8()
-	{
-		if ( $this->getConn() )
-		{
+	public function getConnUtf8(){
+		if ( $this->getConn() ){
 			return $this->getConn()->utf8;
 		}
-
 		return true;
 	}
+	
 	/**
 	* Retorna o tipo de banco de dados que está sendo utilizado.
 	* Ex: mysql, postgres, oracle...
 	*
 	* @return string
 	*/
-	public function getConnDbType()
-	{
-		if ( $this->getConn() )
-		{
+	public function getConnDbType(){
+		if ( $this->getConn() ) {
 			return $this->getConn()->dbType;
 		}
-
 		return null;
 	}
 
@@ -935,7 +935,7 @@ class TDAO
 						$fieldType=$this->getValidFieldType( $objField->fieldType );
 						if ( $fieldType == 'date' )
 						{
-							if ( $this->getDbType() == 'oracle' )
+							if ( $this->getDbType() == DBMS_ORACLE )
 							{
 								$item = $this->parseDMY( $item );
 							}
@@ -1056,7 +1056,7 @@ class TDAO
 			}
 		}
 
-		if ( $this->getDbType() == 'oracle' )
+		if ( $this->getDbType() == DBMS_ORACLE )
 		{
 			$strValue = preg_replace( '/\./', ',', $strValue );
 		}
@@ -1421,86 +1421,310 @@ class TDAO
 
 		return $result;
 	}
-
-	/**
-	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
-	* @return null
-	*/
-	public function loadFieldsFromDatabase()
-	{
-		if ( !$this->getTableName() )
-		{
-			return null;
+	
+	public function loadTablesFromDatabase() {
+		//$DbType = $this->getConnDbType();
+		$DbType = $this->getDbType();
+		$sql = null;
+		switch( $DbType ) {
+			case DBMS_SQLITE:
+				$sql = 'SELECT 
+							\'\' as TABLE_SCHEMA
+							,name as TABLE_NAME 
+							,\'\' as COLUMN_QTD
+							,upper(type) as TABLE_TYPE
+						FROM sqlite_master where type in (\'table\', \'view\')';
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_MYSQL:
+				$sql = 'SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                              ,qtd.COLUMN_QTD
+                              ,case when upper(t.TABLE_TYPE) = \'BASE TABLE \' then \'TABLE\' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
+                        FROM
+                        	(SELECT  c.TABLE_SCHEMA
+                        		   ,c.TABLE_NAME
+                        		   ,count(c.table_name) as COLUMN_QTD       
+                        	FROM INFORMATION_SCHEMA.COLUMNS as c
+                        	WHERE TABLE_NAME in (
+                        		SELECT TABLE_NAME
+                        		FROM INFORMATION_SCHEMA.TABLES
+                        		WHERE TABLE_TYPE = \'BASE TABLE\'
+                        		OR TABLE_TYPE = \'VIEW\'
+                        	)
+                        	group by c.TABLE_SCHEMA, c.TABLE_NAME
+                        	) as qtd
+                            ,INFORMATION_SCHEMA.TABLES as t
+                        where t.TABLE_NAME = qtd.TABLE_NAME 
+                        and   t.TABLE_SCHEMA = qtd.TABLE_SCHEMA
+                        and   t.TABLE_SCHEMA not in (\'sys\',\'performance_schema\',\'mysql\',\'information_schema\')
+                        order by qtd.TABLE_SCHEMA,qtd.TABLE_NAME';
+				break;
+			;
+			//--------------------------------------------------------------------------------
+			case DBMS_SQLSERVER:
+			    $sql = "SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                        	  ,qtd.COLUMN_QTD
+                        	  ,ty.TABLE_TYPE
+							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+                        FROM
+                        	(SELECT TABLE_SCHEMA
+                        		  ,TABLE_NAME
+                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
+                        	FROM INFORMATION_SCHEMA.COLUMNS c
+                        	where c.TABLE_SCHEMA <> 'METADADOS'
+                        	group by TABLE_SCHEMA, TABLE_NAME
+                        	) as qtd
+                        	,(SELECT TABLE_SCHEMA
+                        	       , TABLE_NAME
+                        		   , TABLE_TYPE
+                        	FROM INFORMATION_SCHEMA.TABLES i
+                        	where I.TABLE_SCHEMA <> 'METADADOS'
+                        	) as ty
+                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+                        and qtd.TABLE_NAME = ty.TABLE_NAME
+                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_POSTGRES:
+			    $sql = "SELECT qtd.TABLE_SCHEMA
+                              ,qtd.TABLE_NAME
+                        	  ,qtd.COLUMN_QTD
+                        	  ,ty.TABLE_TYPE
+							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+                        FROM
+                        	(SELECT TABLE_SCHEMA
+                        		  ,TABLE_NAME
+                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
+                        	FROM INFORMATION_SCHEMA.COLUMNS c
+                        	where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
+                        	group by TABLE_SCHEMA, TABLE_NAME
+                        	) as qtd
+                        	,(SELECT TABLE_SCHEMA
+                        	       , TABLE_NAME
+                        		   , TABLE_TYPE
+                        	FROM INFORMATION_SCHEMA.TABLES i
+                        	where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
+                        	) as ty
+                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+                        and qtd.TABLE_NAME = ty.TABLE_NAME
+                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+			    break;
+			//--------------------------------------------------------------------------------
+			default:
+				throw new DomainException('Database '.$DbType.' not implemented ! TDAO->loadTablesFromDatabase. Contribute to the project https://github.com/bjverde/sysgen !');
 		}
-		$sql   =null;
-		$params=null;
-
+		$result = $this->executeSql($sql);
+		return $result;
+	}
+	
+	private function getMsSqlShema() {
+	    $result = '';
+	    if($this->getSchema()){
+	        $result = " AND upper(c.TABLE_SCHEMA) = upper('".$this->getSchema()."') ";
+	    }
+	    return $result;
+	}
+	
+	public function getSqlToFieldsFromDatabaseMySQL() {
+	    // http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
+	    $sql="SELECT c.column_name COLUMN_NAME
+						, case when upper(c.IS_NULLABLE) = 'NO' then 'TRUE' else 'FALSE' end REQUIRED
+						, c.data_type DATA_TYPE
+						, c.character_maximum_length CHAR_MAX
+						, c.numeric_precision NUM_LENGTH
+						, c.numeric_scale NUM_SCALE
+						, c.COLUMN_COMMENT
+						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when upper(c.COLUMN_KEY) = 'MUL' then 'FOREIGN KEY' else 0 end  KEY_TYPE
+						, case when lower(c.EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
+						, c.COLUMN_DEFAULT
+						, k.REFERENCED_TABLE_NAME
+						, k.REFERENCED_COLUMN_NAME
+						, c.TABLE_SCHEMA
+						, c.table_name
+						, c.TABLE_CATALOG
+				   from information_schema.columns as c
+				   left join information_schema.KEY_COLUMN_USAGE as k
+				   on c.TABLE_SCHEMA = k.TABLE_SCHEMA
+				   and c.table_name = k.table_name
+				   and c.column_name = k.column_name
+				   WHERE upper(c.table_name) = upper('".$this->getTableName()."')
+						 order by c.table_name
+						 ,c.ordinal_position";
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsFromDatabaseSqlServer() {
+	    $sql="SELECT c.column_name as COLUMN_NAME
+                          ,case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+                          ,c.DATA_TYPE
+                          ,c.CHARACTER_MAXIMUM_LENGTH as CHAR_MAX
+                          ,c.NUMERIC_PRECISION as NUM_LENGTH
+                          ,c.NUMERIC_SCALE as NUM_SCALE
+                    	  ,prop.value AS COLUMN_COMMENT
+                    	  ,fk2.CONSTRAINT_TYPE as KEY_TYPE
+                    	  ,fk2.REFERENCED_TABLE_NAME
+                    	  ,fk2.REFERENCED_COLUMN_NAME
+                          ,c.TABLE_SCHEMA
+                          ,c.table_name
+                    	  ,c.TABLE_CATALOG
+                    from INFORMATION_SCHEMA.COLUMNS c
+                        join sys.columns AS sc on sc.object_id = object_id(c.TABLE_SCHEMA + '.' + c.TABLE_NAME) AND sc.NAME = c.COLUMN_NAME
+                        LEFT JOIN sys.extended_properties prop ON prop.major_id = sc.object_id AND prop.minor_id = sc.column_id AND prop.NAME = 'MS_Description'
+                    	LEFT JOIN (
+                    		SELECT CT.TABLE_CATALOG
+                    			 , CT.TABLE_SCHEMA
+                    			 , CT.TABLE_NAME
+                    			 , CT.COLUMN_NAME
+                    			 , CT.CONSTRAINT_TYPE
+                    			 , FK.REFERENCED_TABLE_NAME
+                    			 , FK.REFERENCED_COLUMN_NAME
+                    		FROM (
+                    				SELECT kcu.TABLE_CATALOG
+                    					 , kcu.TABLE_SCHEMA
+                    					 , kcu.TABLE_NAME
+                    					 , kcu.COLUMN_NAME
+                    					 , tc.CONSTRAINT_TYPE
+                    					 , kcu.CONSTRAINT_NAME
+                    				FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE kcu
+                    					,INFORMATION_SCHEMA.TABLE_CONSTRAINTS  tc
+                    				where kcu.CONSTRAINT_NAME = tc.CONSTRAINT_NAME
+                    				) as CT
+	        
+                    			LEFT JOIN (
+                    				SELECT
+                    					 KCU1.CONSTRAINT_NAME AS FK_CONSTRAINT_NAME
+                    					,KCU1.TABLE_NAME AS FK_TABLE_NAME
+                    					,KCU1.COLUMN_NAME AS FK_COLUMN_NAME
+                    					,KCU2.TABLE_NAME AS REFERENCED_TABLE_NAME
+                    					,KCU2.COLUMN_NAME AS REFERENCED_COLUMN_NAME
+                    				FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS AS RC
+	        
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU1
+                    					ON KCU1.CONSTRAINT_CATALOG = RC.CONSTRAINT_CATALOG
+                    					AND KCU1.CONSTRAINT_SCHEMA = RC.CONSTRAINT_SCHEMA
+                    					AND KCU1.CONSTRAINT_NAME = RC.CONSTRAINT_NAME
+	        
+                    				INNER JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS KCU2
+                    					ON KCU2.CONSTRAINT_CATALOG = RC.UNIQUE_CONSTRAINT_CATALOG
+                    					AND KCU2.CONSTRAINT_SCHEMA = RC.UNIQUE_CONSTRAINT_SCHEMA
+                    					AND KCU2.CONSTRAINT_NAME = RC.UNIQUE_CONSTRAINT_NAME
+                    					AND KCU2.ORDINAL_POSITION = KCU1.ORDINAL_POSITION
+                    				) as FK
+                    		ON CT.CONSTRAINT_NAME = FK.FK_CONSTRAINT_NAME
+                    		AND CT.TABLE_NAME = FK.FK_TABLE_NAME
+                    		AND CT.COLUMN_NAME = FK.FK_COLUMN_NAME
+                    	) as FK2
+                    	on c.TABLE_SCHEMA = FK2.TABLE_SCHEMA
+                    	and c.TABLE_NAME = Fk2.TABLE_NAME
+                    	and c.COLUMN_NAME = fk2.COLUMN_NAME
+                    WHERE upper(c.table_name) = upper('".$this->getTableName()."')".$this->getMsSqlShema()."
+                    ORDER by   c.TABLE_SCHEMA
+                              ,c.TABLE_NAME
+                              ,c.ORDINAL_POSITION";
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsFromDatabasePostGres() {
+		$sql   ="SELECT c.column_name as COLUMN_NAME
+					  , case c.IS_NULLABLE WHEN 'YES' THEN 'FALSE' ELSE 'TRUE' end as REQUIRED
+					  , data_type as DATA_TYPE
+					  , character_maximum_length CHAR_MAX
+					  , coalesce(numeric_precision, datetime_precision) as NUM_LENGTH
+					  , numeric_scale as NUM_SCALE
+					  , des.description COLUMN_COMMENT
+					  , refe.KEY_TYPE
+					  , column_default COLUMN_DEFAULT
+					  , refe.REFERENCED_TABLE_NAME
+					  , refe.REFERENCED_COLUMN_NAME					  
+					  , position('nextval(' in column_default)=1 as AUTOINCREMENT
+					  , c.TABLE_SCHEMA
+					  , c.table_name
+					  , c.TABLE_CATALOG
+					FROM information_schema.columns as c
+						 left join (SELECT  st.schemaname as table_schema
+							              , st.relname as table_name
+							              , pgd.objsubid
+							              , pgd.description
+							         FROM pg_catalog.pg_statio_all_tables as st
+							         inner join pg_catalog.pg_description pgd on (pgd.objoid=st.relid)
+							       ) as des
+						 on (des.objsubid=c.ordinal_position and  des.table_schema = c.table_schema and des.table_name = c.table_name)
+						 left join (SELECT
+										  tc.table_schema
+										, tc.table_name
+										, kcu.column_name
+										, tc.constraint_name	
+										, tc.constraint_type
+										, case when upper(tc.constraint_type) = 'PRIMARY KEY' THEN  'PK' 
+											   when upper(tc.constraint_type) = 'FOREIGN KEY' THEN 'FOREIGN KEY' 
+											   ELSE tc.constraint_type
+											   END  as KEY_TYPE	
+										, ccu.table_schema AS REFERENCED_TABLE_SCHEMA
+										, ccu.table_name AS REFERENCED_TABLE_NAME
+										, ccu.column_name AS REFERENCED_COLUMN_NAME 
+									FROM 
+										information_schema.table_constraints AS tc 
+										JOIN information_schema.key_column_usage AS kcu
+										  ON tc.constraint_name = kcu.constraint_name
+										JOIN information_schema.constraint_column_usage AS ccu
+										  ON ccu.constraint_name = tc.constraint_name
+									WHERE constraint_type in ('FOREIGN KEY' ,'PRIMARY KEY')
+							       ) as refe
+						 on (refe.table_schema = c.table_schema and refe.table_name = c.table_name and refe.column_name = c.column_name)						 
+					WHERE upper(c.table_name) =upper('".$this->getTableName()."')".$this->getMsSqlShema()." 
+					ORDER BY c.TABLE_SCHEMA
+                            ,c.table_name
+                            ,c.ordinal_position";
+		return $sql;
+	}
+	
+	public function getSqlToFieldsFromDatabase() {
+		//$DbType = $this->getConnDbType();
+		$DbType = $this->getDbType();
+		$sql    = null;
+		$params = null;
+		$data   = null;
+		
 		// ler os campos do banco de dados
-		if ( $this->getConnDbType() == 'mysql' )
-		{
-			// http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
-			$sql="select column_name COLUMN_NAME
-				, COLUMN_DEFAULT
-				, case when lower(EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
-				, case when upper(IS_NULLABLE) = 'NO' then 0 else 1 end NULLABLE
-				, data_type DATA_TYPE
-				, character_maximum_length DATA_LENGTH
-				, numeric_precision DATA_PRECISION
-				, numeric_scale DATA_SCALE
-				from information_schema.columns
-				where upper(table_name) = upper(?)
-				order by ordinal_position";
-
-			$params=array($this->getTableName());
+		if ( $DbType == DBMS_MYSQL ){
+		    $sql   = $this->getSqlToFieldsFromDatabaseMySQL();
+			$params=null;
 		}
-		else if( $this->getConnDbType() == 'oracle' )
-		{
+		else if( $DbType == DBMS_SQLSERVER ) {
+		    $sql   = $this->getSqlToFieldsFromDatabaseSqlServer();
+		    $params=array($this->getTableName());
+		}
+		else if( $DbType == DBMS_ORACLE ) {
 			$sql="select a.column_name COLUMN_NAME
 					, a.data_type DATA_TYPE
 					, data_default as COLUMN_DEFAULT
 					, 0 AUTOINCREMENT
-					, decode(nullable,'Y',1,0) as NULLABLE
-					, a.data_length DATA_LENGTH
-					, a.data_precision DATA_PRECISION
-					, a.data_scale DATA_SCALE
+					, decode(nullable,'Y',1,0) as REQUIRED
+					, a.data_length CHAR_MAX
+					, a.data_precision NUM_LENGTH
+					, a.data_scale NUM_SCALE
     				from all_tab_columns a
     				where upper(a.table_name) = upper(:0)";
-
+			
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == 'postgres' )
-		{
-			$schema=( is_null( $this->getConnSchema() ) ? 'public' : $this->getConnSchema());
-			$sql   ="SELECT column_name \"COLUMN_NAME\"
-					,column_default \"COLUMN_DEFAULT\"
-					,position('nextval(' in column_default)=1 as \"AUTOINCREMENT\"
-					,is_nullable  \"NULLABLE\"
-					,data_type \"DATA_TYPE\"
-					,character_maximum_length \"DATA_LENGTH\"
-					,coalesce(numeric_precision, datetime_precision) as \"DATA_PRECISION\"
-					,numeric_scale as \"DATA_SCALE\"
-					FROM information_schema.columns
-					WHERE upper(table_schema) =  upper(?)
-					AND upper(table_name) =upper(?)
-					ORDER BY ordinal_position";
-
-			$params=array
-				(
-				$schema,
-				$this->getTableName()
-				);
+		else if( $DbType == DBMS_POSTGRES ) {
+		    $schema=( is_null( $this->getSchema() ) ? 'public' : $this->getSchema());
+		    $sql   = $this->getSqlToFieldsFromDatabasePostGres();			
+			$params=array( $schema ,$this->getTableName() );
 		}
-		else if( $this->getConnDbType() == 'firebird' )
-		{
+		else if( $DbType == DBMS_FIREBIRD ) {
 			$sql='SELECT
 					RDB$RELATION_FIELDS.RDB$FIELD_NAME COLUMN_NAME,
 					\'\' as COLUMN_DEFAULT,
 					0 AUTOINCREMENT,
-					0 NULLABLE,
+					0 REQUIRED,
 					RDB$TYPES.RDB$TYPE_NAME DATA_TYPE,
-					RDB$FIELDS.RDB$CHARACTER_LENGTH DATA_LENGTH,
-					RDB$FIELDS.RDB$FIELD_PRECISION DATA_PRECISION,
-					RDB$FIELDS.RDB$FIELD_SCALE DATA_SCALE
+					RDB$FIELDS.RDB$CHARACTER_LENGTH CHAR_MAX,
+					RDB$FIELDS.RDB$FIELD_PRECISION NUM_LENGTH,
+					RDB$FIELDS.RDB$FIELD_SCALE NUM_SCALE
 					FROM RDB$RELATIONS
 					INNER JOIN RDB$RELATION_FIELDS ON RDB$RELATIONS.RDB$RELATION_NAME = RDB$RELATION_FIELDS.RDB$RELATION_NAME
 					LEFT JOIN RDB$FIELDS ON RDB$RELATION_FIELDS.RDB$FIELD_SOURCE = RDB$FIELDS.RDB$FIELD_NAME
@@ -1510,65 +1734,111 @@ class TDAO
 					AND RDB$RELATIONS.RDB$SYSTEM_FLAG = 0
 					AND RDB$TYPES.RDB$FIELD_NAME=\'RDB$FIELD_TYPE\'
 					ORDER BY RDB$RELATION_FIELDS.RDB$FIELD_POSITION';
-
+			
 			$params=array($this->getTableName());
 		}
-		else if( $this->getConnDbType() == 'sqlite')
-		{
+		else if( $DbType == DBMS_SQLITE) {
 			$stmt = $this->getConn()->query( "PRAGMA table_info(".$this->getTableName().")");
-			$res =  $stmt->fetchAll();
+			$res  = $stmt->fetchAll();
 			$data = null;
-			$sql = null;
+			$sql  = null;
 			foreach($res as $rownum => $row)
 			{
 				$data[$rownum]['COLUMN_NAME'] 	= $row['NAME'];
 				$data[$rownum]['COLUMN_DEFAULT']= $row['DFLT_VALUE'];
 				$data[$rownum]['AUTOINCREMENT'] = $row['PK'];
-				$data[$rownum]['NULLABLE'] 		= ( $row['NOTNULL'] == 0 ? 1 : 0 );
-  				$data[$rownum]['DATA_TYPE'] 	= $row['TYPE'];
-				$data[$rownum]['DATA_LENGTH'] 	= null;
-				$data[$rownum]['DATA_PRECISION']= 0;
-				$data[$rownum]['DATA_SCALE']	= 0;
+				$data[$rownum]['REQUIRED'] 		= ( $row['NOTNULL'] == 0 ? 'FALSE' : 'TRUE' );
+				$data[$rownum]['DATA_TYPE'] 	= strtoupper($row['TYPE']);
+				$data[$rownum]['CHAR_MAX'] 	= null;
+				$data[$rownum]['NUM_LENGTH']= 0;
+				$data[$rownum]['NUM_SCALE']	= 0;
 				$data[$rownum]['PRIMARYKEY']	= $row['PK'];
-			    if( preg_match('/\(/',$row['TYPE']) == 1 )
-			    {
-    				$aTemp = explode('(',$row['TYPE']);
-    				$data[$rownum]['DATA_TYPE'] = $aTemp[0];
+				if( preg_match('/\(/',$row['TYPE']) == 1 )
+				{
+					$aTemp = explode('(',$row['TYPE']);
+					$data[$rownum]['DATA_TYPE'] = $aTemp[0];
 					$type= substr($row['TYPE'],strpos($row['TYPE'],'('));
 					$type = preg_replace('/(\(|\))/','',$type);
 					@list($length,$precision) = explode(',',$type);
-					if( preg_match('/varchar/i',$aTemp[0]==1) )
-					{
-		   				$data[$rownum]['DATA_LENGTH'] = $length;
+					
+					if( preg_match('/varchar/i',$aTemp[0]==1) ) {
+						$data[$rownum]['DATA_LENGTH'] = $length;
 					}
-					else
-					{
-	   					$data[$rownum]['DATA_LENGTH'] 		= 0;
-						$data[$rownum]['DATA_PRECISION'] 	= $length;
-						$data[$rownum]['DATA_SCALE'] 		= $precision;
+					else {
+						$data[$rownum]['CHAR_MAX'] 	  = 0;
+						$data[$rownum]['NUM_LENGTH']  = $length;
+						$data[$rownum]['NUM_SCALE']   = $precision;
 					}
-			    }
+				}
 			}
 		}
-		if ( !is_null( $sql ) )
-		{
+		
+		$result['sql']    = $sql;
+		$result['params'] = $params;
+		$result['data']   = $data;
+		
+		return $result;
+	}
+	
+	/**
+	 * Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
+	 * @return null
+	 */
+	public function loadFieldsOneTableFromDatabase() {
+		$DbType = $this->getDbType();
+		if ( !$this->getTableName() ) {
+			throw new InvalidArgumentException('Table Name is empty');
+		}
+		$result = $this->getSqlToFieldsFromDatabase();
+		$sql    = $result['sql'];
+		$params = $result['params'];
+		$data   = $result['data'];
+		switch( $DbType ) {
+			case DBMS_SQLITE:
+				$result = ArrayHelper::convertArrayPdo2FormDin($data);
+			break;
+			//--------------------------------------------------------------------------------
+			case DBMS_MYSQL:
+			case DBMS_SQLSERVER:
+			case DBMS_POSTGRES:
+				$result = $this->executeSql($sql);
+		    break;
+			//--------------------------------------------------------------------------------
+			default:
+				throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
+		}		
+		return $result;
+	}
+
+	/**
+	* Recupera as informações dos campos da tabela defida na classe diretamente do banco de dados
+	* @return null
+	*/
+	public function loadFieldsFromDatabase() {		
+		if ( !$this->getTableName() ) {
+			return null;
+		}
+		$result = $this->getSqlToFieldsFromDatabase();
+		$sql    = $result['sql'];
+		$params = $result['params'];
+		$data   = $result['data'];
+		
+		if ( !is_null( $sql ) ) {
 			$data =  $this->query( $sql, $params );
 		}
-		if ( is_array( $data ) )
-		{
-			foreach( $data as $k => $row )
-			{
+		
+		if ( is_array( $data ) ){
+			foreach( $data as $k => $row ) {
 				$this->addField( trim( $row[ 'COLUMN_NAME' ] )
-				, trim( strtolower($row[ 'DATA_TYPE' ]) )
-				, ( (int) $row[ 'DATA_PRECISION' ] > 0 ? $row[ 'DATA_PRECISION' ] : $row[ 'DATA_LENGTH' ] )
-				, $row[ 'DATA_SCALE' ]
-				, $row[ 'COLUMN_DEFAULT' ]
-				, $row[ 'NULLABLE' ]
-				, $row[ 'AUTOINCREMENT' ]
-				, $row[ 'PRIMARYKEY']);
+				               , trim( strtolower($row[ 'DATA_TYPE' ]) )
+				               , ( (int) $row[ 'NUM_LENGTH' ] > 0 ? $row[ 'NUM_LENGTH' ] : $row[ 'CHAR_MAX' ] )
+				               , $row[ 'NUM_SCALE' ]
+				               , $row[ 'COLUMN_DEFAULT' ]
+				               , $row[ 'REQUIRED' ]
+				               , $row[ 'AUTOINCREMENT' ]
+				               , $row[ 'PRIMARYKEY']);
 			}
-			if ( is_array( $this->getfields() ) )
-			{
+			if ( is_array( $this->getfields() ) ) {
 				$this->serializeFields();
 			}
 		}
@@ -1625,11 +1895,11 @@ class TDAO
 		$sql   =null;
 		$params=null;
 		$dbType = $this->getConnDbType();
-		if ( $dbType == 'mysql' )
+		if ( $dbType == DBMS_MYSQL )
 		{
 			$sql = 'SELECT LAST_INSERT_ID() as ID';
 		}
-		else if( $dbType == 'postgres' )
+		else if( $dbType == DBMS_POSTGRES )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
@@ -1642,14 +1912,14 @@ class TDAO
 					);
 			}
 		}
-		else if( $dbType == 'oracle' )
+		else if( $dbType == DBMS_ORACLE )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
 				return $this->lastId;
 			}
 		}
-		else if( $dbType == 'sqlite' )
+		else if( $dbType == DBMS_SQLITE )
 		{
 			if ( $this->getAutoincFieldName() )
 			{
@@ -1766,7 +2036,7 @@ class TDAO
 		$this->hasActiveTransaction=false;
 		if ( $this->getConn() )
 		{
-			if ( $this->getDbType() == 'oracle' )
+			if ( $this->getDbType() == DBMS_ORACLE )
 			{
 				oci_commit( $this->getConn()->connection );
 			}
@@ -2016,7 +2286,7 @@ class TDAO
 		{
 			$userTransation = $this->getHasActiveTransaction();
 			$this->beginTransaction();
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlInsert      ="insert into " . $this->getTableName() . ' ';
 				$valuesClause   =null;
@@ -2038,7 +2308,7 @@ class TDAO
 				}
 				$columnsClause='(' . implode( ',', array_keys( $params ) ) . ')';
 				$valuesClause ='values (' . implode( ',', $valuesClause ) . ')';
-				if ( $this->getDbType() == 'postgres' && $this->getAutoincFieldName() )
+				if ( $this->getDbType() == DBMS_POSTGRES && $this->getAutoincFieldName() )
 				{
 					$returningClause = 'returning ' . $this->getAutoincFieldName();
 				}
@@ -2221,7 +2491,7 @@ class TDAO
     	$result = false;
 		try
 		{
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "delete from " . $this->getTableName();
 				$params         = null;
@@ -2351,7 +2621,7 @@ class TDAO
 				return $result;
 			}
 
-			if ( $this->getDbType() != 'oracle' )
+			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
 				$valuesClause   = null;
@@ -2578,31 +2848,17 @@ class TDAO
     * @param string $sql
     * @param string $params
     */
-    function executeSql($sql=null,$params=null)
-    {
-		$result = $this->query($sql,$params);
-		$data=$result;
-		if( is_array($result) )
-		{
-			$data=null;
-			foreach($result as $rowIndex => $row)
-			{
-				foreach($row as $k=>$v)
-				{
-					$data[strtoupper($k)][$rowIndex]=$v;
-				}
-			}
-		}
-		return $data;
+    function executeSql($sql=null,$params=null){
+    	$data   = $this->query($sql,$params);
+		$result = ArrayHelper::convertArrayPdo2FormDin($data);
+		return $result;
     }
 
-    function getFieldNames()
-    {
+    function getFieldNames() {
     	if( is_array($this->getFields() ))
     	{
     		$arrNames=array();
-			foreach( $this->getFields() as $fieldName => $objField )
-			{
+			foreach( $this->getFields() as $fieldName => $objField ) {
 				$arrNames[] = $objField->fieldName;
 			}
 			return implode(',',$arrNames);
@@ -2616,20 +2872,9 @@ class TDAO
     * @param mixed $params
     * @param mixed $fechMode
     */
-    function qfw($sql=null,$params=null,$fechMode=null)
-    {
-		$data = $this->query($sql,$params,$fechMode);
-		$result=null;
-		if( is_array( $data ) )
-		{
-			foreach( $data as $k => $arr )
-			{
-				foreach( $arr as $fieldName => $value )
-				{
-					$result[ $fieldName ][ $k ] = $value;
-				}
-			}
-		}
+    function qfw($sql=null,$params=null,$fechMode=null) {
+		$data   = $this->query($sql,$params,$fechMode);
+		$result = ArrayHelper::convertArrayPdo2FormDin($data);
 		return $result;
     }
 }

@@ -62,6 +62,8 @@ class TAppSeiam extends TApplication
 		$this->setWaterMark(null);
 		$this->setBackgroundImage(null);
 		$this->addJsFile('js/appJs.js');
+		$this->addCssFile('css/css_form.css');
+		$this->setTitle('FormDin Layout01 - Menu Lateral');
 	}
 }
 $app = new TAppSeiam();

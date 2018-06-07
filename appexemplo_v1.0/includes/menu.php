@@ -68,7 +68,7 @@ $menu->add('17','1','Campo Arquivo ou Blob');
        $menu->add('1721','172','Assincrono','view/fields/exe_FileAsync.php');
 	   $menu->add('1722','172','Normal','view/fields/exe_TFile.php');
 	   $menu->add('1723','172','TAssincrono','view/fields/exe_TFileAsync.php');
-
+	$menu->add('173','17','Cadastro Arquivo Postgres','pdo/exe_pdo_4.php','Exemplo de Upload de imagem que mostra o arquivo antes de finalizar');
 
 	
 $menu->add('18','1','Campo Numérico','view/fields/exe_NumberField.php');
@@ -131,6 +131,7 @@ $menu->add('5',null,'Ajax');
 	$menu->add('53','5','Ajax com Semáforo','ajax/exe_ajax03_semaphore.php');
 	$menu->add('54','5','Ajax 04','ajax/exe_ajax04.php');
 	$menu->add('55','5','Ajax 05','ajax/exe_ajax05.php');
+	$menu->add('56','5','Ajax 06 - JavaScript e CSS','ajax/exe_ajax06_javascript_css.php');
 
 //-----------------------------------------------------------------------------
 	$menu->add('6',null,'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
@@ -141,18 +142,26 @@ $menu->add('5',null,'Ajax');
 
 //-----------------------------------------------------------------------------
 $menu->add('8',null,'Gride', null, null, '../../base/imagens/table16.gif');
-	$menu->add('8.1','8','Gride 01 - botões sobre grid','grid/exe_gride01.php');
-	$menu->add('8.2','8','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
-	$menu->add('8.3','8','Gride 03 - Offline','grid/exe_gride03.php');
-	$menu->add('8.4','8','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
-	$menu->add('8.5','8','Gride 05 - Paginação','grid/exe_gride05_paginacao.php');
-	$menu->add('8.6','8','Gride 06 - Campos 1','grid/exe_gride06.php');
-	$menu->add('8.7','8','Gride 07 - Campos 2','grid/exe_gride07.php');
-	$menu->add('8.8','8','Gride 08 - Campos 3','grid/exe_gride08.php');
-	$menu->add('8.9','8','Gride 09 - erro','grid/exe_gride_09.php');
-	$menu->add('8.10','8','Gride 10 - erro','grid/exe_gride10.php');
-	$menu->add('8.11','8','Gride 11 Offine 02 - erro','grid/exe_gride11.php');
-	$menu->add('8.13','8','Gride 13 com imagens','grid/exe_gride13.php');
+	$menu->add('80','8','Grides simples', null, null, '../../base/imagens/table16.gif');
+		$menu->add('80.1','80','Gride 02 - Anexos e imagens - Ajax','grid/exe_gride02.php');
+		$menu->add('80.2','80','Gride 03 - Offline','grid/exe_gride03.php');
+		$menu->add('80.3','80','Gride 04 - fwGetGrid()','grid/exe_gride04.php');
+		$menu->add('80.4','80','Gride 05 - Paginação','grid/exe_gride05_paginacao.php');
+		$menu->add('80.5','80','Gride 13 com imagens','grid/exe_gride13.php');	
+	$menu->add('81','8','Grides com campos internos', null, null, '../../base/imagens/table16.gif');
+		$menu->add('81.1','81','Gride 09 - Campos 4, CheckColumn','grid/exe_gride09.php');
+		$menu->add('81.2','81','Gride Campos 02 - RadioButun','grid/exe_gride_field02.php');
+		$menu->add('81.3','81','Gride Campos 03 - Select','grid/exe_gride_field03.php');
+		$menu->add('81.4','81','Gride 01 - botões sobre grid','grid/exe_gride01.php');		
+		$menu->add('81.5','81','Gride 06 - Campos 1','grid/exe_gride06.php');
+		$menu->add('81.6','81','Gride 07 - Campos 2','grid/exe_gride07.php');
+		$menu->add('81.7','81','Gride 08 - Campos 3','grid/exe_gride08.php');
+		
+	$menu->add('83','8','Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
+		$menu->add('83.1','83','Gride 10 - erro','grid/exe_gride10.php');
+		$menu->add('83.2','83','Gride 11 Offine 02 - erro','grid/exe_gride11.php');
+		$menu->add('83.3','83','Gride 14 - erro','grid/exe_gride14.php');
+
 
 //-----------------------------------------------------------------------------
 $menu->add('9',null,'Banco e PDO',null,'Exemplo de Recursos para conectar nos bancos de dados','data_base.png');
@@ -180,22 +189,24 @@ $menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-51
 	$menu->add('10.7','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
 	$menu->add('10.8','10','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('10.9','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
-	$menu->add('1010','10','Form Layout Diferentes');
-		$menu->add('10.101','1010','Definir Colunas no Formulário','view/form/exe_colunas.php');
-		$menu->add('10.102','1010','Imagem de Fundo','view/form/exe_TFormImage.php');
-		$menu->add('10.103','1010','Customizado com CSS','view/form/exe_TForm3.php');
 	$menu->add('10.11','10','ERRO - Local Destino','view/form/exe_form_local_destino.php');
-
-$menu->add('199',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
-	$menu->add('199.1','199','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
-	$menu->add('199.2','199','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
 	
 //-----------------------------------------------------------------------------
-$menu->add('200',0,'Layout App');
-	$menu->add('201','200','Layout index','layouts.php');	
-	$menu->add('202','200','Temas do Menu','exe_menu_tema.php');
-	$menu->add('203','200','Esqueleto do Layout','exe_layout_1.php');
+$menu->add('200',0,'Layouts', null, 'Exemplos de Layouts, CSS e apresentações diferentes', '../../base/imagens/art-1f3a8.png');
+    $menu->add('20010','200','Layout Menu Principal');
+        $menu->add('20010.1','20010','Layout index','layouts.php');
+        $menu->add('20010.2','20010','Temas do Menu','exe_menu_tema.php');
+        $menu->add('20010.3','20010','Esqueleto do Layout','exe_layout_1.php');
+    $menu->add('20020','200','Definir Colunas no Formulário','view/form/exe_colunas.php');
+    $menu->add('20021','200','Imagem de Fundo','view/form/exe_TFormImage.php');
+    $menu->add('20022','200','Customizado com CSS','view/form/exe_TForm3.php');
+    $menu->add('20023','200','Form Buttuns Customizado com CSS','view/css/exe_css_form02.php');
 
+//-----------------------------------------------------------------------------
+$menu->add('210',null,'Gerador de Código',null,'Formularios geradores de codigo','settings_tool_preferences-512.png');
+    $menu->add('210.1','210','Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
+    $menu->add('210.2','210','Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
+    
 
 $menu->getXml();
 ?>

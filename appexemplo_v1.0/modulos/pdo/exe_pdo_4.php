@@ -40,14 +40,14 @@
  */
 
 $frm = new TForm('Cadastro de Anexo com Postgres');
-$frm->addFileField('anexo','Arquivo:',false,'jpg,png,pdf','1k',80,true,true,'callbackAnexo',false);
+$frm->addFileField('anexo','Arquivo:',false,'jpg,png,pdf','1M',80,true,true,'callbackAnexo',false);
 $img = new TElement('img');
 $img->setId('img_preview');
 $img->setCss( array('border'=>'none','width'=>'auto','height'=>'auto') );
 $frm->addHtmlField('html_imagem',$img,null,null,250,$frm->getWidth()-80,true)->setCss('border','1px dashed blue');
 
-$acao = is_null($_POST['formDinAcao']) ? '' : $_POST['formDinAcao'];
-
+//$acao = is_null($_POST['formDinAcao']) ? '' : $_POST['formDinAcao'];
+$acao = isset($acao) ? $acao : null;
 if($acao == 'salvar_anexo')
 {
 	if( !file_exists($_REQUEST['anexo_temp_name']))

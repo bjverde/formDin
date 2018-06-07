@@ -1784,7 +1784,7 @@ class nusoap_xmlschema extends nusoap_base  {
 	*   For simpleType or element, the array has different keys.
     *
     * @param string $type
-    * @return mixed
+    * @return mixed|string|boolean
     * @access public
     * @see addComplexType
     * @see addSimpleType
@@ -3422,14 +3422,14 @@ class soap_transport_http extends nusoap_base {
 				}
 				if ((isset($cookie['domain'])) && (! empty($cookie['domain']))) {
 					$domain = preg_quote($cookie['domain']);
-					if (! preg_match("'.*$domain$'i", $this->host)) {
+					if (! preg_match("/'.*$domain$'/i", $this->host)) {
 						$this->debug('cookie has different domain');
 						continue;
 					}
 				}
 				if ((isset($cookie['path'])) && (! empty($cookie['path']))) {
 					$path = preg_quote($cookie['path']);
-					if (! preg_match("'^$path.*'i", $this->path)) {
+					if (! preg_match("/'^$path.*'/i", $this->path)) {
 						$this->debug('cookie is for a different path');
 						continue;
 					}

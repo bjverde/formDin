@@ -39,43 +39,49 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class PostHelper {
-	static function getArray($atributeName) {
-		if(!isset($_POST[$atributeName])){
-			$_POST[$atributeName]=array();
-		}
-		return is_null($_POST[$atributeName])?array():$_POST[$atributeName];
-	}
+class PostHelper
+{
+    static function getArray($atributeName) 
+    {
+        if(!isset($_POST[$atributeName])) {
+            $_POST[$atributeName]=array();
+        }
+        return is_null($_POST[$atributeName])?array():$_POST[$atributeName];
+    }
 
-	static function get($atributeName) {
-		if(!isset($_POST[$atributeName])){
-			$_POST[$atributeName]="";
-		}
-		return is_null($_POST[$atributeName])?"":trim($_POST[$atributeName]);
-	}
-	
-	static function getDefaultValeu($atributeName,$DefaultValue) {
-		$value = null;
-		if(isset($_POST[$atributeName]) && ($_POST[$atributeName]<>'') ){
-			$value = $_POST[$atributeName];
-		}else{
-			$value = $DefaultValue;
-		}
-		return $value;
-	}
+    static function get($atributeName) 
+    {
+        if(!isset($_POST[$atributeName])) {
+            $_POST[$atributeName]="";
+        }
+        return is_null($_POST[$atributeName])?"":trim($_POST[$atributeName]);
+    }
+    
+    static function getDefaultValeu($atributeName,$DefaultValue) 
+    {
+        $value = null;
+        if(isset($_POST[$atributeName]) && ($_POST[$atributeName]<>'') ) {
+            $value = $_POST[$atributeName];
+        }else{
+            $value = $DefaultValue;
+        }
+        return $value;
+    }
 
-	static function getInt($atributeName) {
-		if(!isset($_POST[$atributeName])){
-			$_POST[$atributeName]="";
-		}
-		return is_null($_POST[$atributeName])?"":trim((int)$_POST[$atributeName]);
-	}
-	
-	static function getBool($atributeName) {
-		if(!isset($_POST[$atributeName]) || is_null($_POST[$atributeName])) {
-			$_POST[$atributeName] = FALSE;
-		}
-		return strtoupper($_POST[$atributeName]) == "S" ? TRUE : FALSE;
-	}
+    static function getInt($atributeName) 
+    {
+        if(!isset($_POST[$atributeName])) {
+            $_POST[$atributeName]="";
+        }
+        return is_null($_POST[$atributeName])?"":trim((int)$_POST[$atributeName]);
+    }
+    
+    static function getBool($atributeName) 
+    {
+        if(!isset($_POST[$atributeName]) || is_null($_POST[$atributeName])) {
+            $_POST[$atributeName] = false;
+        }
+        return strtoupper($_POST[$atributeName]) == "S" ? true : false;
+    }
 }
 ?>

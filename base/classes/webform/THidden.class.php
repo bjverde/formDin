@@ -41,20 +41,19 @@
 
 //
 /**
-* Campo Oculto
-*
-*/
+ * Campo Oculto
+ */
 
 class THidden extends TEdit
 {
-	public function __construct($strName,$strValue=null,$boolRequired=null)
-	{
+    public function __construct($strName, $strValue = null, $boolRequired = null)
+    {
 
-		parent::__construct($strName,(string)$strValue,$boolRequired);
-		parent::setFieldType('hidden');
-		parent::setProperty('type','hidden');
-		parent::setRequired($boolRequired);
-	}
+        parent::__construct($strName, (string)$strValue, $boolRequired);
+        parent::setFieldType('hidden');
+        parent::setProperty('type', 'hidden');
+        parent::setRequired($boolRequired);
+    }
 }
 /*
 $t = new TTag('center');
@@ -62,4 +61,3 @@ $t->show();
 */
 //$x = new TEditHidden('num_pessoa',5478);
 //$x->show();
-?>

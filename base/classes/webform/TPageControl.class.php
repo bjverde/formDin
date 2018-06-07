@@ -88,14 +88,14 @@ class TPageControl extends TTable
 	/**
 	* Adicionar aba ao pageControl
 	* boolDefaut - indica se a aba será a seleciona na criação do formulãrio
-	* @param mixed $strLabel
-	* @param mixed $boolDefault
-	* @param mixed $boolVisible
+	* @param mixed $strLabel      - Nome da Aba
+	* @param boolean $boolDefault - indica se a aba será a seleciona na criação do formulário
+	* @param boolean $boolVisible - Visivel
 	* @param string $strName
+	* @param boolean $boolDisableTab - Desabilita 
 	* @return TForm
 	*/
-	public function addPage($strLabel,$boolDefault=null,$boolVisible=null,$strName=null,$boolDisableTab=null,$boolEnabled=null)
-	{
+	public function addPage($strLabel,$boolDefault=null,$boolVisible=null,$strName=null,$boolDisableTab=null,$boolEnabled=null) {
 		$strName	= ($strName==null) ? $strLabel : $strName;
 		$boolEnabled= ($boolEnabled===false) ? false : true;
 		$strName 	= strtolower(parent::removeIllegalChars($strName));
@@ -114,18 +114,15 @@ class TPageControl extends TTable
 		$page->setValue(null,$strLabel);
 		$page->setEnabled($boolEnabled);
 		$page->setHeight($this->getHeight());
-		if($boolVisible===false)
-		{
+		if($boolVisible===false){
 			$page->setCss('display','none');
 		}
-		if($boolDisableTab)
-		{
+		if($boolDisableTab){
 			$page->setProperty('disabled','true');
 		}
 		$this->pages[$pageName] = $page;
 		// definir como pagina default
-		if($boolDefault)
-		{
+		if($boolDefault){
 			$this->setActivePage($strName,false);
 		}
 		return $page;

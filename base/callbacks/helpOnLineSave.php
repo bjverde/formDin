@@ -57,7 +57,7 @@ if( strpos( $file, '../' ) === false)
 	$file = '../../ajuda/'.$file;
 }
 // gravar o arquivo / Remover tag iframe
-$_REQUEST['value'] = preg_replace('{(<iframe).*?(>).*?(<\/iframe>)}i', '', $_REQUEST['value']);
+$_REQUEST['value'] = preg_replace('/{(<iframe).*?(>).*?(<\/iframe>)}/i', '', $_REQUEST['value']);
 //$_REQUEST['value'] .=utf8_encode('<hr><center>Alterado por:Luis Eugênio em '.date('d/m/Y h:i:s').'</center>');
 if(!file_put_contents($file,utf8_decode($_REQUEST['value'])))
 {

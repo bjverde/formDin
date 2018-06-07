@@ -38,6 +38,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once '../classes/helpers/ArrayHelper.class.php';
 require_once '../classes/helpers/paginationSQLHelper.class.php';
 
 /**
@@ -125,38 +126,66 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testAttributeIssetOrNotZero_AttributeNUllFALSE() {
+	public function testAttributeIssetOrNotZero_AttributeNull_FALSE() {
 		$expected = 'ISFALSE';
+		$whereGrid = null;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid['NUMERO'],$isTrue,$isFalse);
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testAttributeIssetOrNotZero_AttributeWhiteFALSE() {
+	public function testAttributeIssetOrNotZero_AttributeWhite_FALSE() {
 		$expected = 'ISFALSE';
 		$whereGrid['NUMERO']='';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid['NUMERO'],$isTrue,$isFalse);
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testAttributeIssetOrNotZero_AttributeZeroFALSE() {
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroOmitted() {
 		$expected = 'ISFALSE';
 		$whereGrid['NUMERO']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid['NUMERO'],$isTrue,$isFalse);
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testAttributeIssetOrNotZero_AttributeTRUE() {
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroTRUE() {
+	    $expected = 'ISFALSE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,TRUE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroFALSE() {
+	    $expected = 'ISTRUE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,FALSE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeSearchDoNotExist_FALSE() {
+		$expected = 'ISFALSE';
+		$whereGrid['NUMBER']=0;
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'X',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_Attribute_TRUE() {
 		$expected = 'ISTRUE';
 		$whereGrid['NUMERO']='xxx';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid['NUMERO'],$isTrue,$isFalse);
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 }

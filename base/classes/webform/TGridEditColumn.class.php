@@ -62,8 +62,18 @@ class TGridEditColumn extends TGridColumn
 	* @param boolean $boolReadOnly
 	* @return TGridEditColumn
 	*/
-	public function __construct($strEditName,$strTitle=null,$strFieldName=null,$strDataType=null,$intSize=null,$intMaxLength=null,$strMask=null,$strWidth=null,$strAlign=null,$boolReadOnly=null)
-	{
+	public function __construct($strEditName
+								,$strTitle=null
+								,$strFieldName=null
+								,$strDataType=null
+								,$intSize=null
+								,$intMaxLength=null
+								,$strMask=null
+								,$strWidth=null
+								,$strAlign=null
+								,$boolReadOnly=null
+								){
+		
 		parent::__construct($strFieldName,$strTitle,$strWidth);
 		$this->setId('col_'.strtolower($strEditName));
 		$this->setColumnType('edit');

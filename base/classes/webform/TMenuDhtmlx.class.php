@@ -53,8 +53,7 @@
 * 	ou echo $menu->getXml()
 *
 */
-class TMenuDhtmlx
-{
+class TMenuDhtmlx {
     private $arrMenu;
     private $arrOrphan;
     private $strId;
@@ -70,28 +69,36 @@ class TMenuDhtmlx
 	private $boolSeparator;
 	private $jsonParams;
 
-    public function __construct($data=null,$boolIgnoreOrphans=null)
-    {
+    public function __construct($data=null,$boolIgnoreOrphans=null) {
     	$this->boolIgnoreOrphans = $boolIgnoreOrphans === null ? true : $boolIgnoreOrphans;
         $this->arrMenu=null;
     }
     /**
     * Método para adicionar itens de menu
     *
-    * @param string $strId
-    * @param string $strIdParent
+    * @param string $strId          - id do Menu
+    * @param string $strIdParent    - id do Item pai.
     * @param string $strText
     * @param string $strUrl
-    * @param string $strToolTip
-    * @param string $strImg
+    * @param string $strToolTip     - uma explição maior sobre o item
+    * @param string $strImg         - imagem será utilizada como icone
     * @param string $strImgDisabled
     * @param boolean $boolDisabled
     * @param string $strHotKey
     * @param boolean $boolSeparator
     * @return TMenuDhtmlx
     */
-    public function add($strId, $strIdParent,$strText,$strUrl=null,$strToolTip=null,$strImg=null,$strImgDisabled=null,$boolDisabled=null,$strHotKey=null,$boolSeparator=null,$jsonParams=null)
-    {
+    public function add($strId
+    		          , $strIdParent
+    		          , $strText
+    		          , $strUrl=null
+    		          , $strToolTip=null
+    		          , $strImg=null
+    		          , $strImgDisabled=null
+    		          , $boolDisabled=null
+    		          , $strHotKey=null
+    		          , $boolSeparator=null
+    		          , $jsonParams=null) {
         $menu = new TMenuDhtmlx();
         $menu->setText($strText);
         $menu->setId($strId);
@@ -105,8 +112,7 @@ class TMenuDhtmlx
         $menu->setSeparator($boolSeparator);
         $menu->setJsonParams($jsonParams);
 
-        if( $menu->getIdParent() )
-        {
+        if( $menu->getIdParent() ) {
 	        // verificar se o pai já está adicionado
 	        $objMenu = $this->getMenuById($strIdParent);
 	        if( ! is_null( $objMenu ) )
@@ -155,57 +161,57 @@ class TMenuDhtmlx
         }
         $this->arrMenu[] = $objMenu;
     }
-    function setText($strNewValue)
+    public function setText($strNewValue)
     {
         $this->text = preg_replace('/</','&lt;',$strNewValue);
         $this->text = preg_replace('/"/','&quot;',$this->text);
     }
-    function setId($strNewValue)
+    public function setId($strNewValue)
     {
         $this->id = is_null($strNewValue) ? 0 : $strNewValue;
     }
-    function setIdParent($strNewValue)
+    public function setIdParent($strNewValue)
     {
         $this->idParent = is_null($strNewValue) ? 0 : $strNewValue;
     }
-    function setUrl($strNewValue)
+    public function setUrl($strNewValue)
     {
         $this->strUrl = $strNewValue;
     }
-    function setToolTip($strNewValue)
+    public function setToolTip($strNewValue)
     {
         $this->strTooltip = $strNewValue;
     }
-    function setImg($strNewValue)
+    public function setImg($strNewValue)
     {
         $this->strImg = $strNewValue;
     }
-    function setImgDisabled($strNewValue)
+    public function setImgDisabled($strNewValue)
     {
         $this->strImgDisabled = $strNewValue;
     }
-     function setDisabled($boolNewValue)
+    public function setDisabled($boolNewValue)
     {
         $this->boolDisabled = $boolNewValue;
     }
-    function setHotKey($strNewValue)
+    public function setHotKey($strNewValue)
     {
         $this->strHotKey = $strNewValue;
     }
-    function setJsonParams($strNewValue)
+    public function setJsonParams($strNewValue)
     {
         $this->jsonParams = $strNewValue;
     }
 
-    function getText()
+    public function getText()
     {
         return $this->text;
     }
-    function getId()
+    public function getId()
     {
         return $this->id;
     }
-    function getIdParent()
+    public function getIdParent()
     {
         if( (string) $this->idParent != '' && (int) $this->idParent != 0 )
         {
@@ -217,27 +223,27 @@ class TMenuDhtmlx
     {
         return $this->strUrl;
     }
-    function getToolTip()
+    public function getToolTip()
     {
         return $this->strTooltip;
     }
-    function getImg()
+    public function getImg()
     {
         return $this->strImg;
     }
-    function getImgDisabled()
+    public function getImgDisabled()
     {
         return $this->strImgDisabled;
     }
-     function getDisabled()
+    public function getDisabled()
     {
         return $this->boolDisabled;
     }
-    function getHotKey()
+    public function getHotKey()
     {
         return $this->strHotKey;
     }
-    function getMenuById($strId)
+    public function getMenuById($strId)
     {
     	static $o = null;
 		if( (string) $strId == '0' )
@@ -269,12 +275,12 @@ class TMenuDhtmlx
         return $oo;
     }
 
-    function getOrphans()
+    public function getOrphans()
     {
     	return $this->arrOrphan;
     }
     //--------------------------------------------------------------------------------------
-    function ignoreOrphans($boolNewValue=null)
+    public function ignoreOrphans($boolNewValue=null)
     {
 	    if( $boolNewValue === null)
 	    {
@@ -302,7 +308,7 @@ class TMenuDhtmlx
         return $this->jsonParams;
     }
     //--------------------------------------------------------------------------------------
-    function getOrphanById($strId)
+    public function getOrphanById($strId)
     {
         $result = null;
         if($this->arrOrphan)
@@ -319,7 +325,7 @@ class TMenuDhtmlx
         }
         return $result;
     }
-    function addOrphan(TMenuDhtmlx $menu)
+    public function addOrphan(TMenuDhtmlx $menu)
     {
         // se existir filhos orfão, adicionar todos os filhos
         while( $objMenu = $this->getOrphanByIdParent($menu->getId()) )
@@ -337,7 +343,7 @@ class TMenuDhtmlx
             $this->arrOrphan[] = $menu;
         }
     }
-    function getOrphanByIdParent($strId)
+    public function getOrphanByIdParent($strId)
     {
         $result = null;
         if($this->arrOrphan )
@@ -438,7 +444,7 @@ class TMenuDhtmlx
 		//return str_replace("\n","",$xml .= "</item>\n");
 	}
 	//--------------------------------------------------------------------------------------
-	function getXml($print=true)
+	public function getXml($print=true)
 	{
 		// adicionar os itens orfãos
 		if($this->getOrphans())

@@ -41,34 +41,37 @@
 
 // ============= PROJECT CONSTANTS =================//
 
-if( !defined('ROWS_PER_PAGE') ){ define('ROWS_PER_PAGE',20); }
-if( !defined('ENCODINGS') ){ define('ENCODINGS','UTF-8'); }
+if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
+}
+if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
+}
 
 
 
 
 // ============= FORMDIN FRAMEWORK CONSTANTS =================//
 
-if(!defined('DS')){ define('DS',DIRECTORY_SEPARATOR); }
-define('EOL',"\n");
-define('TAB',chr(9));
+if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
+}
+define('EOL', "\n");
+define('TAB', chr(9));
 
 
-define('FORMDIN_VERSION','4.2.1-alpha');
+define('FORMDIN_VERSION', '4.2.3-alpha');
 
 // --Data Base Management System
-define('DBMS_ACCESS','ACCESS');
-define('DBMS_FIREBIRD','FIREBIRD');
-define('DBMS_MYSQL','MYSQL');
-define('DBMS_ORACLE','ORACLE');
-define('DBMS_POSTGRES','POSTGRES');
-define('DBMS_SQLITE','SQLITE');
-define('DBMS_SQLSERVER','SQLSERVER');
+define('DBMS_ACCESS', 'ACCESS');
+define('DBMS_FIREBIRD', 'FIREBIRD');
+define('DBMS_MYSQL', 'MYSQL');
+define('DBMS_ORACLE', 'ORACLE');
+define('DBMS_POSTGRES', 'POSTGRES');
+define('DBMS_SQLITE', 'SQLITE');
+define('DBMS_SQLSERVER', 'SQLSERVER');
 
 // --Type Grid
-define('GRID_SIMPLE','1');
-define('GRID_SCREEN_PAGINATION','2');
-define('GRID_SQL_PAGINATION','3');
+define('GRID_SIMPLE', '1');
+define('GRID_SCREEN_PAGINATION', '2');
+define('GRID_SQL_PAGINATION', '3');
 
 
 ?>
