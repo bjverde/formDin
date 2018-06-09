@@ -75,11 +75,14 @@ class TPDOConnection {
 	
 	//------------------------------------------------------------------------------------------
 	/***
-	 *
-	 * @param string $configFile
-	 * @param boolean $boolRequired
-	 * @param boolean $boolUtfDecode
-	 * @param array $configArray
+	 * Establishes the connection to the database. the main connection is informed in $configfile
+	 * the secondary connections are informed in $configArray. The $configArray prevails over $configfile.
+	 * In this case $configfile will be ignored.
+	 * 
+	 * @param string $configFile    - path of file with main connection, 
+	 * @param boolean $boolRequired - connection is mandatory
+	 * @param boolean $boolUtfDecode - 
+	 * @param array $configArray    - config array for others connections
 	 * @return boolean
 	 */
 	public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null ) {
