@@ -158,8 +158,12 @@ class TPDOConnection {
 	}
 	
 	private static function validateConnect($configFile ,$boolRequired ,$configArray) {
-		$configErrors = array();
+		$useConfigFile = true;
+		if( !empty($configArray) and is_array($configArray) ){
+			$useConfigFile = false;
+		}
 		
+		$configErrors = array();		
 		$configFileAndRoot = self::getConfigFileAndRoot($configFile);
 		$root = $configFileAndRoot['root'];
 		$configFile = $configFileAndRoot['configfile'];
@@ -207,7 +211,7 @@ class TPDOConnection {
 			self::useSessionLogin();
 			$configErrors = self::useSimpleDBMS($configErrors);
 			
-			$configErrorsDsn = self::defineDsnPDO($configErrors);
+			$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
 			if ( count( $configErrorsDsn ) > 0 ) {
 				$configErrors = $configErrors + $configErrorsDsn;
 			}
@@ -264,7 +268,16 @@ class TPDOConnection {
 		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
 	}
 	
-	private static function defineDsnPDO($configErrors) {
+	/**
+	 * Define DSN (Data source name) for connection.
+	 * return implicit, in attributes of class: Host, Database Name and port.
+	 * return explicit: array with errors of config.
+	 * 
+	 * @param array $configErrors
+	 * @param boolean $useConfigfile
+	 * @return string
+	 */
+	private static function defineDsnPDO($configErrors,$useConfigfile = true) {
 		switch( self::$banco ) {
 			case DBMS_MYSQL:
 				if ( !defined( 'PORT' ) ) {
