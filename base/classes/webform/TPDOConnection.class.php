@@ -54,20 +54,22 @@ require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
 class TPDOConnection {
 	private static $error = null;
 	private static $instance = null;
-	private static $banco;
-	private static $dsn;
-	private static $password;
-	private static $username;
 	private static $lastSql;
 	private static $lastParams;
-	private static $utfDecode;
 	private static $useSessionLogin;
 	private static $dieOnError;
 	private static $showFormErrors;
-	private static $databaseName;
 	private static $message;
-	private static $schema;
 	private static $configFile;
+	private static $dsn;
+	private static $banco;
+	private static $host;
+	private static $port;
+	private static $username;
+	private static $password;
+	private static $databaseName;
+	private static $schema;
+	private static $utfDecode;
 	
 	// construtor
 	public function __construct(){
@@ -266,6 +268,52 @@ class TPDOConnection {
 	 */
 	private static function simpleDBMS() {
 		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
+	}
+	
+	public static function validatePortDBMS($useConfigFile,$configArray){
+		$portDefault = self::getDefaultPortDBMS($DBMS);
+		if($useConfigFile){
+			if ( !defined( 'PORT' ) ) {
+				define( 'PORT', $portDefault );
+				self::$port  = $portDefault;
+			}
+		}else{
+			$DBMS = $configArray['BANCO'];
+			self::$port  = ArrayHelper::getDefaultValeu($configArray,'PORT',$portDefault);			
+		}
+	}
+	
+	public static function getDefaultPortDBMS($DBMS){
+		if ( empty($DBMS) ){
+			throw new InvalidArgumentException('Data Base Management System is not defined.');
+		}
+		
+		$port = null;
+		switch( strtoupper( $DBMS ) ) {
+			case DBMS_ACCESS:
+			case DBMS_FIREBIRD:
+			case DBMS_SQLITE:
+				$port=null;
+				break;
+			case DBMS_MYSQL:
+				$port='3306';
+				break;
+			case DBMS_POSTGRES:
+				$port='5432';
+				break;
+			case DBMS_ORACLE:
+				$port='1521';				
+				break;
+			case DBMS_SQLSERVER:
+				$port='1433';
+				break;
+			default:
+				$msg = 'Name of DBMS (Data Base Management System) is wrong or not defined.';
+				$msg = $msg.' Please see the list of DBMS in BASE/classes/constants.php';
+				throw new InvalidArgumentException($msg);
+				break;
+		}
+		return $port;
 	}
 	
 	/**
