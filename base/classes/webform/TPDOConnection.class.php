@@ -307,7 +307,7 @@ class TPDOConnection {
 				self::$port  = $portDefault;
 			}
 		}else{
-			$DBMS = $configArray['BANCO'];
+			$DBMS = self::getDBMS();
 			self::$port  = ArrayHelper::getDefaultValeu($configArray,'PORT',$portDefault);
 		}
 	}
