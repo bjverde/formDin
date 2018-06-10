@@ -75,10 +75,6 @@ class TPDOConnection {
 	public function __construct(){
 	}
 
-	public static function setBanco( $banco = null ) {
-		self::$banco = $banco;
-	}
-	
 	public static function getDBMS() {
 		$retorno = null;
 		if ( isset( self::$banco ) ){
@@ -90,15 +86,27 @@ class TPDOConnection {
 		}
 		return  $retorno;
 	}
+	public static function setBanco( $banco = null ) {
+		self::$banco = $banco;
+	}
 
-	public static function setPort($port) {
-		self::$port = $port;
+	//--------------------------------------------------------------------------------------
+	public static function getHost() {
+		return TPDOConnection::$host;
+	}
+	public static function setHost($host) {
+		TPDOConnection::$host = $host;
 	}
 	
+	//--------------------------------------------------------------------------------------
+	public static function setPort($port) {
+		self::$port = $port;
+	}	
 	public static function getPort() {
 		return self::$port;
 	}
 	
+	//--------------------------------------------------------------------------------------
 	public static function setDataBaseName( $strNewValue = null ) {
 		self::$databaseName = $strNewValue;
 	}
@@ -112,6 +120,23 @@ class TPDOConnection {
 			}
 		}
 		return  $retorno;
+	}
+	
+	//--------------------------------------------------------------------------------------
+	public static function setUtfDecode( $boolNewValue = null ) {
+		self::$utfDecode = $boolNewValue;
+	}
+	public static function getUtfDecode() {
+		$utfDecodeReturn = self::$utfDecode;
+		if ( is_null($utfDecodeReturn) ){
+			if( !defined( 'UTF8_DECODE' ) ) { define( 'UTF8_DECODE', 1 ); }
+			if( UTF8_DECODE ){
+				$utfDecodeReturn = true;
+			} else {
+				$utfDecodeReturn = false;
+			}
+		}
+		return $utfDecodeReturn;
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -167,16 +192,17 @@ class TPDOConnection {
 			}
 		}
 		
-		if( !is_array($configErrors) ){
+		if( count( $configErrors ) == 0 ){
 			$configErrors = self::setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root);
 			
 			self::setConfigDbmsPort($useConfigFile, $configArray);
 			
 			$configErrors = self::setConfigDatabase($useConfigFile, $configArray, $configErrors);
 			
-			self::setConfigUtf8Decode($useConfigFile, $configArray);
-			
+			self::setConfigUtf8Decode($useConfigFile, $configArray);			
+			self::setConfigHost($useConfigFile, $configArray);
 			self::setConfigUserAndPassword($useConfigFile, $configArray);
+			
 			$configErrors = self::useSimpleDBMS($configErrors);
 			
 			$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
@@ -351,7 +377,20 @@ class TPDOConnection {
 			$utf8 = ArrayHelper::get($configArray, 'UTF8_DECODE');
 			self::setUtfDecode($utf8);
 		}
-	}	
+	}
+	
+	public static function setConfigHost($useConfigFile,$configArray){
+		if(!self::simpleDBMS()){
+			if($useConfigFile){
+				if ( defined( 'HOST' ) ) {
+					self::setHost(HOST);
+				}
+			}else{
+				$host = ArrayHelper::get($configArray, 'HOST');
+				self::setHost($host);
+			}
+		}
+	}
 	
 	private static function setConfigUserAndPassword($useConfigFile, $configArray)
 	{
@@ -395,14 +434,12 @@ class TPDOConnection {
 	private static function useSimpleDBMS($configErrors)
 	{
 		if ( !self::simpleDBMS() ) {
-			if ( !defined( 'HOST' ) ) {
+			if ( empty(self::getHost()) ) {
 				$configErrors[] = 'Falta informar o HOST';
-			}
-			
+			}			
 			if( empty(self::$username) ){
 				$configErrors[] = 'Falta informar um usuario para logar no banco';
-			}
-			
+			}			
 			if( empty(self::$password) ){
 				$configErrors[] = 'Falta informar uma senha para logar no banco';
 			}
@@ -429,41 +466,30 @@ class TPDOConnection {
 	 * @return string
 	 */
 	private static function defineDsnPDO($configErrors,$useConfigfile = true) {
+		$host = self::getHost();
+		$database = self::getDataBaseName();
+		$port = self::getPort();
+		
 		switch( self::getDBMS() ) {
-			case DBMS_MYSQL:
-				if ( !defined( 'PORT' ) ) {
-					define( 'PORT', '3306' );
-				}
-				self::$dsn = 'mysql:host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+			case DBMS_MYSQL :				
+				self::$dsn = 'mysql:host='.$host.';dbname='.$database.';port='.$port;
 				break;
 				//-----------------------------------------------------------------------
 			case DBMS_POSTGRES :
-				if ( !defined( 'PORT' ) ) {
-					define( 'PORT', '5432' );
-				}
-				if ( defined( 'SCHEMA' ) ) {
-					self::setSchema(SCHEMA);
-				}
-				self::$dsn = 'pgsql:host=' . HOST . ';dbname=' . self::getDataBaseName() . ';port=' . PORT;
+				self::$dsn = 'pgsql:host='.$host.';dbname='.$database.';port='.$port;
 				break;
 				//-----------------------------------------------------------------------
 			case DBMS_SQLITE:
 				//self::validateFileDataBaseExists ( $configErrors );
-				self::$dsn = 'sqlite:' . DATABASE;
+				self::$dsn = 'sqlite:'.$database;
 				break;
 				//-----------------------------------------------------------------------
 			case DBMS_ORACLE:
-				if ( !defined( 'PORT' ) ) {
-					define( 'PORT', '1521' );
-				}
-				self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = " . HOST . ")(PORT = " . PORT . ")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
+				self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host. ")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
 				//self::$dsn = "oci:dbname=".SERVICE_NAME;
 				break;
 				//----------------------------------------------------------
 			case DBMS_SQLSERVER:
-				if ( !defined( 'PORT' ) ) {
-					define( 'PORT', '1433' );
-				}
 				/**
 				 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
 				 *
@@ -472,22 +498,22 @@ class TPDOConnection {
 				if (PHP_OS == "Linux") {
 					$driver = 'dblib';
 					//self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-					self::$dsn = $driver.':version=7.2;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+					self::$dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
 				} else {
 					$driver = 'sqlsrv';
-					self::$dsn = $driver.':Server=' . HOST . ';Database=' . DATABASE;
+					self::$dsn = $driver.':Server='.$host.';Database='.$database;
 				}
 				break;
 				//----------------------------------------------------------
 			case DBMS_FIREBIRD:
 				//self::validateFileDataBaseExists ( $configErrors );
-				self::$dsn = 'firebird:dbname='.DATABASE;
+				self::$dsn = 'firebird:dbname='.$database;
 				break;
 				//----------------------------------------------------------
 			case 'MSACCESS':
 			case DBMS_ACCESS:
 				//self::fileDataBaseExists ( $configErrors );
-				self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.DATABASE.';Uid='.self::$username.';Pwd='.self::$password;
+				self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.$database.';Uid='.self::$username.';Pwd='.self::$password;
 				break;
 				//----------------------------------------------------------
 			default:
@@ -1167,23 +1193,6 @@ class TPDOConnection {
 			}
 		}
 		return $res;
-	}
-	//--------------------------------------------------------------------------------------
-	public static function setUtfDecode( $boolNewValue = null ) {
-		self::$utfDecode = $boolNewValue;
-	}
-	//--------------------------------------------------------------------------------------
-	public static function getUtfDecode() {
-		$utfDecodeReturn = self::$utfDecode;
-		if ( is_null($utfDecodeReturn) ){
-			if( !defined( 'UTF8_DECODE' ) ) { define( 'UTF8_DECODE', 1 ); }
-			if( UTF8_DECODE ){
-				$utfDecodeReturn = true;
-			} else {
-				$utfDecodeReturn = false;
-			}
-		}
-		return $utfDecodeReturn;
 	}
 	//--------------------------------------------------------------------------------------
 	public static function pgsqlLOBOpen($oid = null, $mode = null) {
