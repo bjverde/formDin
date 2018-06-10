@@ -83,7 +83,7 @@ class TPDOConnection {
 	 * 
 	 * @param string $configFile    - path of file with main connection, 
 	 * @param boolean $boolRequired - connection is mandatory
-	 * @param boolean $boolUtfDecode - 
+	 * @param boolean $boolUtfDecode- 
 	 * @param array $configArray    - config array for others connections
 	 * @return boolean
 	 */
@@ -152,77 +152,86 @@ class TPDOConnection {
 				}
 			}
 		}
-		
 		$return['root'] = $root;
 		$return['configfile'] = $configFile;
-		
 		return $return;
 	}
-	
+		
 	private static function validateConnect($configFile ,$boolRequired ,$configArray) {
+		$configErrors = array();
+		
 		$useConfigFile = true;
-		if( !empty($configArray) and is_array($configArray) ){
+		if( !empty($configArray) && is_array($configArray) ){
 			$useConfigFile = false;
+		} else {
+			$configFileAndRoot = self::getConfigFileAndRoot($configFile);
+			$root = $configFileAndRoot['root'];
+			$configFile = $configFileAndRoot['configfile'];
+			self::$configFile = $configFile;			
+			
+			if ( !file_exists( $configFile ) ) {
+				if ( $boolRequired ) {
+					$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!";
+					self::showExemplo( DBMS_MYSQL, $configErrors );
+				}
+				return false;
+			} else {
+				require_once( $configFile );
+			}
 		}
 		
-		$configErrors = array();		
-		$configFileAndRoot = self::getConfigFileAndRoot($configFile);
-		$root = $configFileAndRoot['root'];
-		$configFile = $configFileAndRoot['configfile'];
+		$configErrors = self::setConfigDBMS($useConfigFile, $configArray,$configErrors);
+
 		
-		self::$configFile = $configFile;
+		if ( !defined( 'DATABASE' ) ) {
+			$dataBaseName = self::getDataBaseName();
+			if( empty($dataBaseName) ){
+				$configErrors[] = 'Falta informar o DATABASE';
+				self::showExemplo( self::$banco, $configErrors );
+			}
+		}else{
+			self::setDataBaseName( DATABASE );
+		}
 		
-		if ( !file_exists( $configFile ) ) {
-			if ( $boolRequired ) {
-				$configErrors[] = "Classe TPDOConnectio.class.php - Arquivo {$configFile} não encontrado!";
-				self::showExemplo( DBMS_MYSQL, $configErrors );
-			}
-			return false;
-		} else {
-			require_once( $configFile );
-			
-			if ( !defined( 'BANCO' ) ) {
-				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
-				self::showExemplo( DBMS_MYSQL, $configErrors );
-			}else{
-				self::$banco = strtoupper( BANCO );
-			}
-			
-			if ( !defined( 'DATABASE' ) ) {
-				$dataBaseName = self::getDataBaseName();
-				if( empty($dataBaseName) ){
-					$configErrors[] = 'Falta informar o DATABASE';
-					self::showExemplo( self::$banco, $configErrors );
-				}
-			}else{
-				self::setDataBaseName( DATABASE );
-			}
-			
-			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
-				self::setUtfDecode( UTF8_DECODE );
-			}
-			
-			if ( !defined( 'SENHA' ) ) {
-				define( 'SENHA', NULL );
-			}
-			
-			if ( !defined( 'USUARIO' ) ) {
-				define( 'USUARIO', NULL );
-			}
-			
-			self::useSessionLogin();
-			$configErrors = self::useSimpleDBMS($configErrors);
-			
-			$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
-			if ( count( $configErrorsDsn ) > 0 ) {
-				$configErrors = $configErrors + $configErrorsDsn;
-			}
+		if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
+			self::setUtfDecode( UTF8_DECODE );
+		}
+		
+		self::setConfigUserAndPassword($useConfigFile, $configArray);
+		$configErrors = self::useSimpleDBMS($configErrors);
+		
+		$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
+		if ( count( $configErrorsDsn ) > 0 ) {
+			$configErrors = $configErrors + $configErrorsDsn;
 		}
 		
 		if ( count( $configErrors ) > 0 ) {
 			self::showExemplo( self::$banco, $configErrors );
 		}
 	}
+
+	private static function setConfigDBMS($useConfigFile, $configArray,$configErrors)
+	{
+		if( $useConfigFile ){			
+			if ( !defined( 'BANCO' ) ) {
+				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
+				self::showExemplo( DBMS_MYSQL, $configErrors );
+			}else{
+				self::$banco = strtoupper( BANCO );
+			}
+		} else {
+			$dbms  = ArrayHelper::get($configArray, 'DBMS');
+			$banco = ArrayHelper::get($configArray, 'BANCO');
+			$dbms  = empty($dbms)?$banco:$dbms;
+			if( empty($dbms) ){
+				$configErrors[] = 'Array Config is not configured! Define DBMS';
+				self::showExemplo( DBMS_MYSQL, $configErrors );
+			}else{
+				self::$banco = $dbms;
+			}
+		}
+		return $configErrors;
+	}	
 	
 	private static function useSimpleDBMS($configErrors)
 	{
@@ -242,7 +251,7 @@ class TPDOConnection {
 		return $configErrors;
 	}
 	
-	private static function useSessionLogin()
+	private static function setConfigUserAndPassword($useConfigFile, $configArray)
 	{
 		if ( !defined( 'USE_SESSION_LOGIN' ) ) {
 			define( 'USE_SESSION_LOGIN', 0 );
@@ -255,12 +264,32 @@ class TPDOConnection {
 			self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
 			self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
 		} else {
-			self::$password = SENHA;
-			self::$username = USUARIO;
+			if( $useConfigFile ){
+
+				if ( !defined( 'SENHA' ) ) {
+					define( 'SENHA', NULL );
+				}
+				
+				if ( !defined( 'USUARIO' ) ) {
+					define( 'USUARIO', NULL );
+				}
+				
+				self::$password = SENHA;
+				self::$username = USUARIO;
+			} else {
+				$usuario = ArrayHelper::get($configArray, 'USUARIO');
+				$user    = ArrayHelper::get($configArray, 'USERNAME');
+				$username = empty($usuario)?$user:$usuario;
+				self::$username = $username;
+
+				$senha = ArrayHelper::get($configArray, 'SENHA');
+				$pass  = ArrayHelper::get($configArray, 'PASSWORD');
+				$password = empty($senha)?$pass:$senha;				
+				self::$password = $password;
+			}
 		}
 	}
-	
-	
+		
 	/***
 	 *  Data Base Management System is simple or not.
 	 *  Simple does not have user and password or host
@@ -394,6 +423,7 @@ class TPDOConnection {
 		}
 		return $configErrors;
 	}
+	
 	/**
 	 * @param configErrors
 	 */
@@ -726,8 +756,7 @@ class TPDOConnection {
 			$v = self::formatDate( $v, 'ymd' );
 		}
 		return $v;
-	}
-	
+	}	
 	
 	public static function prepareArray( $arrDados = null ) {
 		$result = array();
