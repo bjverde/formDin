@@ -128,6 +128,7 @@ class TPDOConnection {
 		}
 		
 		$configErrors = self::setConfigDBMS($useConfigFile, $configArray,$configErrors);
+		self::setConfigDbmsPort($useConfigFile, $configArray);
 
 		
 		if ( !defined( 'DATABASE' ) ) {
@@ -233,73 +234,7 @@ class TPDOConnection {
 		return $configErrors;
 	}	
 	
-	private static function useSimpleDBMS($configErrors)
-	{
-		if ( !self::simpleDBMS() ) {
-			if ( !defined( 'HOST' ) ) {
-				$configErrors[] = 'Falta informar o HOST';
-			}
-			
-			if( empty(self::$username) ){
-				$configErrors[] = 'Falta informar um usuario para logar no banco';
-			}
-			
-			if( empty(self::$password) ){
-				$configErrors[] = 'Falta informar uma senha para logar no banco';
-			}
-		}
-		return $configErrors;
-	}
-	
-	private static function setConfigUserAndPassword($useConfigFile, $configArray)
-	{
-		if ( !defined( 'USE_SESSION_LOGIN' ) ) {
-			define( 'USE_SESSION_LOGIN', 0 );
-		}
-		
-		if ( USE_SESSION_LOGIN ) {
-			if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
-				die ( 'Para utilizar usuário e senha do usuário logado,<br>defina as varíaveis de sessão:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
-			}
-			self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
-			self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
-		} else {
-			if( $useConfigFile ){
-
-				if ( !defined( 'SENHA' ) ) {
-					define( 'SENHA', NULL );
-				}
-				
-				if ( !defined( 'USUARIO' ) ) {
-					define( 'USUARIO', NULL );
-				}
-				
-				self::$password = SENHA;
-				self::$username = USUARIO;
-			} else {
-				$usuario = ArrayHelper::get($configArray, 'USUARIO');
-				$user    = ArrayHelper::get($configArray, 'USERNAME');
-				$username = empty($usuario)?$user:$usuario;
-				self::$username = $username;
-
-				$senha = ArrayHelper::get($configArray, 'SENHA');
-				$pass  = ArrayHelper::get($configArray, 'PASSWORD');
-				$password = empty($senha)?$pass:$senha;				
-				self::$password = $password;
-			}
-		}
-	}
-		
-	/***
-	 *  Data Base Management System is simple or not.
-	 *  Simple does not have user and password or host
-	 * @return boolean
-	 */
-	private static function simpleDBMS() {
-		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
-	}
-	
-	public static function validatePortDBMS($useConfigFile,$configArray){
+	private static function setConfigDbmsPort($useConfigFile,$configArray){
 		$portDefault = self::getDefaultPortDBMS($DBMS);
 		if($useConfigFile){
 			if ( !defined( 'PORT' ) ) {
@@ -308,7 +243,7 @@ class TPDOConnection {
 			}
 		}else{
 			$DBMS = $configArray['BANCO'];
-			self::$port  = ArrayHelper::getDefaultValeu($configArray,'PORT',$portDefault);			
+			self::$port  = ArrayHelper::getDefaultValeu($configArray,'PORT',$portDefault);
 		}
 	}
 	
@@ -331,7 +266,7 @@ class TPDOConnection {
 				$port='5432';
 				break;
 			case DBMS_ORACLE:
-				$port='1521';				
+				$port='1521';
 				break;
 			case DBMS_SQLSERVER:
 				$port='1433';
@@ -343,6 +278,72 @@ class TPDOConnection {
 				break;
 		}
 		return $port;
+	}
+	
+	private static function setConfigUserAndPassword($useConfigFile, $configArray)
+	{
+		if ( !defined( 'USE_SESSION_LOGIN' ) ) {
+			define( 'USE_SESSION_LOGIN', 0 );
+		}
+		
+		if ( USE_SESSION_LOGIN ) {
+			if ( !isset( $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ] ) ) {
+				die ( 'Para utilizar usuário e senha do usuário logado,<br>defina as varíaveis de sessão:<b>$_SESSION[APLICATIVO]["login"]["username"]</b> e <b>$_SESSION[APLICATIVO]["login"]["password"]</b>.' );
+			}
+			self::$password = $_SESSION[ APLICATIVO ][ 'login' ][ 'password' ];
+			self::$username = $_SESSION[ APLICATIVO ][ 'login' ][ 'username' ];
+		} else {
+			if( $useConfigFile ){
+				
+				if ( !defined( 'SENHA' ) ) {
+					define( 'SENHA', NULL );
+				}
+				
+				if ( !defined( 'USUARIO' ) ) {
+					define( 'USUARIO', NULL );
+				}
+				
+				self::$password = SENHA;
+				self::$username = USUARIO;
+			} else {
+				$usuario = ArrayHelper::get($configArray, 'USUARIO');
+				$user    = ArrayHelper::get($configArray, 'USERNAME');
+				$username = empty($usuario)?$user:$usuario;
+				self::$username = $username;
+				
+				$senha = ArrayHelper::get($configArray, 'SENHA');
+				$pass  = ArrayHelper::get($configArray, 'PASSWORD');
+				$password = empty($senha)?$pass:$senha;
+				self::$password = $password;
+			}
+		}
+	}
+	
+	private static function useSimpleDBMS($configErrors)
+	{
+		if ( !self::simpleDBMS() ) {
+			if ( !defined( 'HOST' ) ) {
+				$configErrors[] = 'Falta informar o HOST';
+			}
+			
+			if( empty(self::$username) ){
+				$configErrors[] = 'Falta informar um usuario para logar no banco';
+			}
+			
+			if( empty(self::$password) ){
+				$configErrors[] = 'Falta informar uma senha para logar no banco';
+			}
+		}
+		return $configErrors;
+	}
+		
+	/***
+	 *  Data Base Management System is simple or not.
+	 *  Simple does not have user and password or host
+	 * @return boolean
+	 */
+	private static function simpleDBMS() {
+		return (self::$banco != DBMS_FIREBIRD) || (self::$banco != DBMS_SQLITE);
 	}
 	
 	/**
