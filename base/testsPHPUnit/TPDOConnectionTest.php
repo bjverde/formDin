@@ -1,5 +1,6 @@
 <?php
 
+require_once '../classes/constants.php';
 require_once '../classes/helpers/ArrayHelper.class.php';
 require_once '../classes/webform/TPDOConnection.class.php';
 /**
@@ -51,10 +52,10 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testSetConfigDBMS_ArrayDBMS() {
-		$expected= 'test';
+		$expected= DBMS_MYSQL;
 		
 		$useConfigFile= false;
-		$configArray  = array( 'DBMS'=>'test');
+		$configArray  = array( 'DBMS'=>DBMS_MYSQL);
 		$configErrors = array();
 		$root = null;
 		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
@@ -64,16 +65,88 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testSetConfigDBMS_ArrayBanco() {
-		$expected= 'test';
+		$expected= DBMS_MYSQL;
 		
 		$useConfigFile= false;
-		$configArray  = array( 'BANCO'=>'test');
+		$configArray  = array( 'BANCO'=>DBMS_MYSQL);
 		$configErrors = array();
 		$root = null;
 		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
 		$size = count($configErrors);
 		$this->assertEquals( 0 , $size);
 		$this->assertEquals( $expected , $this->TPDOConnection->getDBMS());
+	}
+	
+	public function testSetConfigDbmsPort_Default(){
+		$expected= '3306';
+		
+		$useConfigFile= false;
+		$configArray  = array( 'BANCO'=>DBMS_MYSQL);
+		$configErrors = array();
+		$configErrors = $this->TPDOConnection->setConfigDbmsPort($useConfigFile, $configArray);
+		$size = count($configErrors);
+		$this->assertEquals( 0 , $size);
+		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
+	}
+	
+	public function testSetConfigDbmsPort_DiferentPort(){
+		$expected= '7001';
+		
+		$useConfigFile= false;
+		$configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001');
+		$configErrors = array();
+		$configErrors = $this->TPDOConnection->setConfigDbmsPort($useConfigFile, $configArray);
+		$size = count($configErrors);
+		$this->assertEquals( 0 , $size);
+		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
+	}
+	
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testgetDefaultPortDBMS_EmptyDbmsNull(){
+		$DBMS = null;
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+	
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testgetDefaultPortDBMS_EmptyDbmsWhite(){
+		$DBMS = '';
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+	
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testgetDefaultPortDBMS_WrongDbms(){
+		$DBMS = 'test';
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+	
+	public function testgetDefaultPortDBMS_MySQLDefault(){
+		$expected= '3306';
+		$DBMS = DBMS_MYSQL;
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+	
+	public function testgetDefaultPortDBMS_PostgresDefault(){
+		$expected= '5432';
+		$DBMS = DBMS_POSTGRES;
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+
+	public function testgetDefaultPortDBMS_OracleDefault(){
+		$expected= '1521';
+		$DBMS = DBMS_ORACLE;
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+	}
+	
+	public function testgetDefaultPortDBMS_SqlServerDefault(){
+		$expected= '1433';
+		$DBMS = DBMS_SQLSERVER;
+		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
 	public function testPrepareArray_string() {

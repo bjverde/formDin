@@ -91,6 +91,14 @@ class TPDOConnection {
 		return  $retorno;
 	}
 
+	public static function setPort($port) {
+		self::$port = $port;
+	}
+	
+	public static function getPort() {
+		return self::$port;
+	}
+	
 	public static function setDataBaseName( $strNewValue = null ) {
 		self::$databaseName = $strNewValue;
 	}
@@ -243,22 +251,31 @@ class TPDOConnection {
 			if ( !defined( 'BANCO' ) ) {
 				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
 			}else{
-				self::$banco = strtoupper( BANCO );
+				$DBMS = strtoupper(BANCO);
+				self::validateDBMS($DBMS);
+				self::$banco = $DBMS;
 			}
 		} else {
 			$dbms  = ArrayHelper::get($configArray, 'DBMS');
 			$banco = ArrayHelper::get($configArray, 'BANCO');
 			$dbms  = empty($dbms)?$banco:$dbms;
+			$dbms  = strtoupper($dbms);
 			if( empty($dbms) ){
 				$configErrors[] = 'Array Config is not configured! Define DBMS';
 			}else{
+				self::validateDBMS($dbms);
 				self::$banco = $dbms;
 			}
 		}
 		return $configErrors;
 	}	
+
+	public static function validateDBMS($DBMS){
+		self::getDefaultPortDBMS($DBMS);
+	}
 	
-	private static function setConfigDbmsPort($useConfigFile,$configArray){
+	public static function setConfigDbmsPort($useConfigFile,$configArray){
+		$DBMS = self::getDBMS();
 		$portDefault = self::getDefaultPortDBMS($DBMS);
 		if($useConfigFile){
 			if ( !defined( 'PORT' ) ) {
@@ -403,7 +420,7 @@ class TPDOConnection {
 	 * @return string
 	 */
 	private static function defineDsnPDO($configErrors,$useConfigfile = true) {
-		switch( self::$banco ) {
+		switch( self::getDBMS() ) {
 			case DBMS_MYSQL:
 				if ( !defined( 'PORT' ) ) {
 					define( 'PORT', '3306' );
