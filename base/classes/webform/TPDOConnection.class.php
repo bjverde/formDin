@@ -103,59 +103,6 @@ class TPDOConnection {
 		
 		return true;
 	}
-	
-	private static function getConfigFileAndRoot($configFile){
-		$root = null;
-		
-		if ( self::getDataBaseName() ) {
-			$configFileDb = $configFile;
-			
-			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) ) {
-				$configFileDb = is_null( $configFileDb ) ? 'config_conexao_' . self::getDataBaseName() . '.php' : $configFileDb;
-				
-				if ( !file_exists( $configFileDb ) ) {
-					$configFileDb = 'includes/' . $configFileDb;
-					
-					if ( !file_exists( $configFileDb ) ) {
-						$root = self::getRoot();
-						$configFileDb = $root . $configFileDb;
-						if ( file_exists( $configFileDb ) ) {
-							$configFile = $configFileDb;
-						}
-					} else {
-						$configFile = $configFileDb;
-					}
-				} else {
-					$configFile = $configFileDb;
-				}
-			} else {
-				$configFile = $configFileDb;
-			}
-		}
-		
-		if ( is_null( $configFile ) || !file_exists( $configFile ) ) {
-			$configFile = is_null( $configFile ) ? 'config_conexao.php' : $configFile;
-			
-			if ( !file_exists( $configFile ) ) {
-				$configFile = 'includes/config_conexao.php';
-				
-				// procurar o arquivo padrão de conexão em até 5 niveis acima
-				for( $i = 1; $i < 6; $i++ ) {
-					if( file_exists( str_repeat( '../', $i ) . $configFile ) ) {
-						$configFile = str_repeat( '../', $i ) . $configFile;
-						break;
-					}
-				}
-				if ( !file_exists( $configFile ) ) {
-					$root = self::getRoot();
-					$configFile = $root . 'includes/config_conexao.php';
-				}
-			}
-		}
-		$return['root'] = $root;
-		$return['configfile'] = $configFile;
-		return $return;
-	}
 		
 	private static function validateConnect($configFile ,$boolRequired ,$configArray) {
 		$configErrors = array();
@@ -208,6 +155,59 @@ class TPDOConnection {
 		if ( count( $configErrors ) > 0 ) {
 			self::showExemplo( self::$banco, $configErrors );
 		}
+	}
+	
+	private static function getConfigFileAndRoot($configFile){
+		$root = null;
+		
+		if ( self::getDataBaseName() ) {
+			$configFileDb = $configFile;
+			
+			if ( is_null( $configFileDb ) || !file_exists( $configFileDb . '_' . self::getDataBaseName() ) ) {
+				$configFileDb = is_null( $configFileDb ) ? 'config_conexao_' . self::getDataBaseName() . '.php' : $configFileDb;
+				
+				if ( !file_exists( $configFileDb ) ) {
+					$configFileDb = 'includes/' . $configFileDb;
+					
+					if ( !file_exists( $configFileDb ) ) {
+						$root = self::getRoot();
+						$configFileDb = $root . $configFileDb;
+						if ( file_exists( $configFileDb ) ) {
+							$configFile = $configFileDb;
+						}
+					} else {
+						$configFile = $configFileDb;
+					}
+				} else {
+					$configFile = $configFileDb;
+				}
+			} else {
+				$configFile = $configFileDb;
+			}
+		}
+		
+		if ( is_null( $configFile ) || !file_exists( $configFile ) ) {
+			$configFile = is_null( $configFile ) ? 'config_conexao.php' : $configFile;
+			
+			if ( !file_exists( $configFile ) ) {
+				$configFile = 'includes/config_conexao.php';
+				
+				// procurar o arquivo padrão de conexão em até 5 niveis acima
+				for( $i = 1; $i < 6; $i++ ) {
+					if( file_exists( str_repeat( '../', $i ) . $configFile ) ) {
+						$configFile = str_repeat( '../', $i ) . $configFile;
+						break;
+					}
+				}
+				if ( !file_exists( $configFile ) ) {
+					$root = self::getRoot();
+					$configFile = $root . 'includes/config_conexao.php';
+				}
+			}
+		}
+		$return['root'] = $root;
+		$return['configfile'] = $configFile;
+		return $return;
 	}
 
 	private static function setConfigDBMS($useConfigFile, $configArray,$configErrors)
