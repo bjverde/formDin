@@ -1,5 +1,6 @@
 <?php
 
+require_once '../classes/helpers/ArrayHelper.class.php';
 require_once '../classes/webform/TPDOConnection.class.php';
 /**
  * TPDOConnection test case.
@@ -34,6 +35,45 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase {
 		
 		$boolNewValue = $this->TPDOConnection->getUtfDecode();
 		$this->assertEquals( $expected , $boolNewValue);
+	}
+	
+	public function testSetConfigDBMS_ArrayWrong() {
+		$expected= 'Array Config is not configured! Define DBMS';
+		
+		$useConfigFile= false;
+		$configArray  = array( 'X'=>'A');
+		$configErrors = array();
+		$root = null;
+		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
+		$size = count($configErrors);
+		$this->assertEquals( 1 , $size);
+		$this->assertEquals( $expected , $configErrors[0]);
+	}
+	
+	public function testSetConfigDBMS_ArrayDBMS() {
+		$expected= 'test';
+		
+		$useConfigFile= false;
+		$configArray  = array( 'DBMS'=>'test');
+		$configErrors = array();
+		$root = null;
+		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
+		$size = count($configErrors);
+		$this->assertEquals( 0 , $size);
+		$this->assertEquals( $expected , $this->TPDOConnection->getDBMS());
+	}
+	
+	public function testSetConfigDBMS_ArrayBanco() {
+		$expected= 'test';
+		
+		$useConfigFile= false;
+		$configArray  = array( 'BANCO'=>'test');
+		$configErrors = array();
+		$root = null;
+		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
+		$size = count($configErrors);
+		$this->assertEquals( 0 , $size);
+		$this->assertEquals( $expected , $this->TPDOConnection->getDBMS());
 	}
 	
 	public function testPrepareArray_string() {

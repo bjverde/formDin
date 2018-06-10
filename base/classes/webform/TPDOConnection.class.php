@@ -74,6 +74,37 @@ class TPDOConnection {
 	// construtor
 	public function __construct(){
 	}
+
+	public static function setBanco( $banco = null ) {
+		self::$banco = $banco;
+	}
+	
+	public static function getDBMS() {
+		$retorno = null;
+		if ( isset( self::$banco ) ){
+			$retorno = self::$banco;
+		} else {
+			if ( defined( 'BANCO' ) ){
+				$retorno = BANCO;
+			}
+		}
+		return  $retorno;
+	}
+
+	public static function setDataBaseName( $strNewValue = null ) {
+		self::$databaseName = $strNewValue;
+	}
+	public static function getDataBaseName() {
+		$retorno = null;
+		if ( isset( self::$databaseName ) ){
+			$retorno = self::$databaseName;
+		} else {
+			if ( defined( 'DATABASE' ) ){
+				$retorno = DATABASE;
+			}
+		}
+		return  $retorno;
+	}
 	
 	//------------------------------------------------------------------------------------------
 	/***
@@ -130,7 +161,9 @@ class TPDOConnection {
 		
 		if( !is_array($configErrors) ){
 			$configErrors = self::setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root);
+			
 			self::setConfigDbmsPort($useConfigFile, $configArray);
+			
 			$configErrors = self::setConfigDatabase($useConfigFile, $configArray, $configErrors);
 			
 			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
@@ -204,12 +237,11 @@ class TPDOConnection {
 		return $return;
 	}
 
-	private static function setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root)
+	public static function setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root)
 	{
 		if( $useConfigFile ){			
 			if ( !defined( 'BANCO' ) ) {
 				$configErrors[] = 'O arquivo ' . $root . 'includes/config_conexao.php não está configurado corretamente! Definal o tipo de banco de dados';
-				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}else{
 				self::$banco = strtoupper( BANCO );
 			}
@@ -219,7 +251,6 @@ class TPDOConnection {
 			$dbms  = empty($dbms)?$banco:$dbms;
 			if( empty($dbms) ){
 				$configErrors[] = 'Array Config is not configured! Define DBMS';
-				self::showExemplo( DBMS_MYSQL, $configErrors );
 			}else{
 				self::$banco = $dbms;
 			}
@@ -1148,23 +1179,6 @@ class TPDOConnection {
 	}
 	public static function getShowFormErrors() {
 		return is_null( self::$showFormErrors ) ? true : self::$showFormErrors;
-	}
-	public static function setBanco( $banco = null ) {
-		self::$banco = $banco;
-	}
-	public static function setDataBaseName( $strNewValue = null ) {
-		self::$databaseName = $strNewValue;
-	}
-	public static function getDataBaseName() {
-		$retorno = null;
-		if ( isset( self::$databaseName ) ){
-			$retorno = self::$databaseName;
-		} else {
-			if ( defined( 'DATABASE' ) ){
-				$retorno = DATABASE;
-			}
-		}
-		return  $retorno;
 	}
 	public static function setMessage( $strNewValue = null) {
 		self::$message = $strNewValue;
