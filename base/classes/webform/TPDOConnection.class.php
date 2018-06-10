@@ -174,9 +174,7 @@ class TPDOConnection {
 			
 			$configErrors = self::setConfigDatabase($useConfigFile, $configArray, $configErrors);
 			
-			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
-				self::setUtfDecode( UTF8_DECODE );
-			}
+			self::setConfigUtf8Decode($useConfigFile, $configArray);
 			
 			self::setConfigUserAndPassword($useConfigFile, $configArray);
 			$configErrors = self::useSimpleDBMS($configErrors);
@@ -342,6 +340,17 @@ class TPDOConnection {
 			}
 		}
 		return $configErrors;
+	}	
+	
+	public static function setConfigUtf8Decode($useConfigFile,$configArray){
+		if($useConfigFile){
+			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
+				self::setUtfDecode( UTF8_DECODE );
+			}
+		}else{
+			$utf8 = ArrayHelper::get($configArray, 'UTF8_DECODE');
+			self::setUtfDecode($utf8);
+		}
 	}	
 	
 	private static function setConfigUserAndPassword($useConfigFile, $configArray)
