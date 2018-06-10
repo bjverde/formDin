@@ -108,6 +108,7 @@ class TPDOConnection {
 		$configErrors = array();
 		
 		$useConfigFile = true;
+		$root = null;
 		if( !empty($configArray) && is_array($configArray) ){
 			$useConfigFile = false;
 		} else {
@@ -127,30 +128,22 @@ class TPDOConnection {
 			}
 		}
 		
-		$configErrors = self::setConfigDBMS($useConfigFile, $configArray,$configErrors);
-		self::setConfigDbmsPort($useConfigFile, $configArray);
-
-		
-		if ( !defined( 'DATABASE' ) ) {
-			$dataBaseName = self::getDataBaseName();
-			if( empty($dataBaseName) ){
-				$configErrors[] = 'Falta informar o DATABASE';
-				self::showExemplo( self::$banco, $configErrors );
+		if( !is_array($configErrors) ){
+			$configErrors = self::setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root);
+			self::setConfigDbmsPort($useConfigFile, $configArray);
+			$configErrors = self::setConfigDatabase($useConfigFile, $configArray, $configErrors);
+			
+			if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
+				self::setUtfDecode( UTF8_DECODE );
 			}
-		}else{
-			self::setDataBaseName( DATABASE );
-		}
-		
-		if ( is_null( self::$utfDecode ) && defined( 'UTF8_DECODE' ) ) {
-			self::setUtfDecode( UTF8_DECODE );
-		}
-		
-		self::setConfigUserAndPassword($useConfigFile, $configArray);
-		$configErrors = self::useSimpleDBMS($configErrors);
-		
-		$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
-		if ( count( $configErrorsDsn ) > 0 ) {
-			$configErrors = $configErrors + $configErrorsDsn;
+			
+			self::setConfigUserAndPassword($useConfigFile, $configArray);
+			$configErrors = self::useSimpleDBMS($configErrors);
+			
+			$configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
+			if ( count( $configErrorsDsn ) > 0 ) {
+				$configErrors = $configErrors + $configErrorsDsn;
+			}
 		}
 		
 		if ( count( $configErrors ) > 0 ) {
@@ -211,7 +204,7 @@ class TPDOConnection {
 		return $return;
 	}
 
-	private static function setConfigDBMS($useConfigFile, $configArray,$configErrors)
+	private static function setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root)
 	{
 		if( $useConfigFile ){			
 			if ( !defined( 'BANCO' ) ) {
@@ -279,6 +272,29 @@ class TPDOConnection {
 		}
 		return $port;
 	}
+
+	private static function setConfigDatabase($useConfigFile ,$configArray ,$configErrors){
+		if( $useConfigFile ){
+			if ( !defined( 'DATABASE' ) ) {
+				$dataBaseName = self::getDataBaseName();
+				if( empty($dataBaseName) ){
+					$configErrors[] = 'Falta informar o DATABASE';
+					self::showExemplo( self::$banco, $configErrors );
+				}
+			}else{
+				self::setDataBaseName( DATABASE );
+			}
+		} else {
+			$database  = ArrayHelper::get($configArray, 'DATABASE');
+			if( empty($database) ){
+				$configErrors[] = 'Falta informar o DATABASE';
+				self::showExemplo( self::$banco, $configErrors );
+			}else{
+				self::setDataBaseName( $database );
+			}
+		}
+		return $configErrors;
+	}	
 	
 	private static function setConfigUserAndPassword($useConfigFile, $configArray)
 	{
