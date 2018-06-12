@@ -34,14 +34,6 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
         parent::tearDown();
     }
     
-    public function testGetUtfDecode_NotDefined()
-    {
-        $expected= true;
-        
-        $boolNewValue = $this->TPDOConnection->getUtfDecode();
-        $this->assertEquals($expected, $boolNewValue);
-    }
-    
     public function testSetConfigDBMS_ArrayWrong()
     {
         $expected= 'Array Config is not configured! Define DBMS';
@@ -165,6 +157,13 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
         $port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
     }
     
+    public function testgetDefaultPortDBMS_SqlLite()
+    {
+    	$expected= null;
+    	$DBMS = DBMS_SQLITE;
+    	$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+    }
+    
     public function testSetConfigUtf8Decode_ArrayEmpty()
     {
         $expected = true;
@@ -175,6 +174,18 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
         $utf8 = $this->TPDOConnection->getUtfDecode();
         $this->assertSame($expected, $utf8);
     }
+    
+    public function testSetConfigUtf8Decode_ArrayUtf8Null()
+    {
+    	$expected = true;
+    	
+    	$useConfigFile= false;
+    	$configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001');
+    	$this->TPDOConnection->setConfigUtf8Decode($useConfigFile, $configArray);
+    	$utf8 = $this->TPDOConnection->getUtfDecode();
+    	$this->assertSame($expected, $utf8);
+    }
+    
 
     public function testSetConfigUtf8Decode_ArrayUtf8True()
     {
@@ -189,7 +200,7 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
     
     public function testSetConfigUtf8Decode_ArrayUtf8False()
     {
-        $expected = 0;
+        $expected = false;
         
         $useConfigFile= false;
         $configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001' , 'UTF8_DECODE' => 0);

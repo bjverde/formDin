@@ -123,24 +123,13 @@ class TPDOConnection
         self::$databaseName = $strNewValue;
     }
     //--------------------------------------------------------------------------------------
-    public static function setUtfDecode($boolNewValue = null)
+    public static function setUtfDecode($utf8)
     {
-        self::$utfDecode = $boolNewValue;
+        self::$utfDecode = $utf8;
     }
     public static function getUtfDecode()
     {
-        $utfDecodeReturn = self::$utfDecode;
-        if (is_null($utfDecodeReturn)) {
-            if (!defined('UTF8_DECODE')) {
-                define('UTF8_DECODE', 1);
-            }
-            if (UTF8_DECODE) {
-                $utfDecodeReturn = true;
-            } else {
-                $utfDecodeReturn = false;
-            }
-        }
-        return $utfDecodeReturn;
+        return self::$utfDecode;
     }
     //------------------------------------------------------------------------------------------
     /***
@@ -383,11 +372,19 @@ class TPDOConnection
     public static function setConfigUtf8Decode($useConfigFile, $configArray)
     {
         if ($useConfigFile) {
-            if (is_null(self::$utfDecode) && defined('UTF8_DECODE')) {
+            if (defined('UTF8_DECODE')) {
                 self::setUtfDecode(UTF8_DECODE);
+            }else{
+            	self::setUtfDecode(true);
             }
         } else {
             $utf8 = ArrayHelper::get($configArray, 'UTF8_DECODE');
+            if( empty($utf8) ){
+            	$utf8 = true;
+            }            
+            if ( $utf8 == 0 || $utf8 == false ){
+            	$utf8 = false;
+            }
             self::setUtfDecode($utf8);
         }
     }
