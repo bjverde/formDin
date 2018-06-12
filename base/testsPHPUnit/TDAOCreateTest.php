@@ -42,12 +42,13 @@
 require_once '../classes/constants.php';
 require_once '../classes/webform/TDAOCreate.class.php';
 
-define('TEOL',"\n");
-define('TTAB',chr(9));
+define('TEOL', "\n");
+define('TTAB', chr(9));
 /**
  * TDAOCreate test case.
  */
-class TDAOCreateTest extends PHPUnit_Framework_TestCase {
+class TDAOCreateTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      *
@@ -58,150 +59,163 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp(){
-        parent::setUp();        
+    protected function setUp()
+    {
+        parent::setUp();
         // TODO Auto-generated TDAOCreateTest::setUp()
         $tableName = 'myTableTest';
         $keyColumnName = 'pkColumnName';
-        $this->tDAOCreate = new TDAOCreate($tableName,$keyColumnName);
-        
+        $this->tDAOCreate = new TDAOCreate($tableName, $keyColumnName);
     }
 
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown(){
+    protected function tearDown()
+    {
         // TODO Auto-generated TDAOCreateTest::tearDown()
-        $this->tDAOCreate = null;        
+        $this->tDAOCreate = null;
         parent::tearDown();
     }
     
-    public function testSetShowSchema_true(){
+    public function testSetShowSchema_true()
+    {
         $esperado = true;
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setShowSchema(true);
         $retorno = $tDAOCreate->getShowSchema();
         //$this->tDAOCreate->setShowSchema(true);
-        //$retorno = $this->tDAOCreate->getShowSchema();        
+        //$retorno = $this->tDAOCreate->getShowSchema();
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testSetShowSchema_false(){
+    public function testSetShowSchema_false()
+    {
         $esperado = false;
         $this->tDAOCreate->setShowSchema(false);
         $retorno = $this->tDAOCreate->getShowSchema();
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testHasSchema_yes(){
-        $esperado = '\'.SCHEMA.\'';        
+    public function testHasSchema_yes()
+    {
+        $esperado = '\'.SCHEMA.\'';
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setShowSchema(true);
-        $retorno = $tDAOCreate->hasSchema();        
+        $retorno = $tDAOCreate->hasSchema();
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testHasSchema_no(){
+    public function testHasSchema_no()
+    {
         $esperado = '';
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setShowSchema(false);
-        $retorno = $tDAOCreate->hasSchema();  
+        $retorno = $tDAOCreate->hasSchema();
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testAddLine_string(){
-    	$esperado = 'echo';
-    	$tDAOCreate = $this->tDAOCreate;
-    	$tDAOCreate->addLine($esperado);
-    	$retorno = $tDAOCreate->getLinesString();
-    	$this->assertEquals($esperado, $retorno);
-    	
-    	$retornoArray = $tDAOCreate->getLinesArray();
-    	$size = count($retornoArray);
-    	$this->assertEquals( 1, $size);
+    public function testAddLine_string()
+    {
+        $esperado = 'echo';
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->addLine($esperado);
+        $retorno = $tDAOCreate->getLinesString();
+        $this->assertEquals($esperado, $retorno);
+        
+        $retornoArray = $tDAOCreate->getLinesArray();
+        $size = count($retornoArray);
+        $this->assertEquals(1, $size);
     }
     
-    public function testAddLine_nameFunction(){
-    	$tDAOCreate = $this->tDAOCreate;
-    	$esperado = TTAB.'public function '.$tDAOCreate->getTableName().'DAO() {';
-    	$tDAOCreate->addLine($esperado);    	
-    	$retorno = $tDAOCreate->getLinesString();
-    	$this->assertEquals( trim($esperado), $retorno);
-    	
-    	$retornoArray = $tDAOCreate->getLinesArray();
-    	$size = count($retornoArray);
-    	$this->assertEquals( 1, $size);
+    public function testAddLine_nameFunction()
+    {
+        $tDAOCreate = $this->tDAOCreate;
+        $esperado = TTAB.'public function '.$tDAOCreate->getTableName().'DAO() {';
+        $tDAOCreate->addLine($esperado);
+        $retorno = $tDAOCreate->getLinesString();
+        $this->assertEquals(trim($esperado), $retorno);
+        
+        $retornoArray = $tDAOCreate->getLinesArray();
+        $size = count($retornoArray);
+        $this->assertEquals(1, $size);
     }
     
-    public function testAddLine_onlyLine(){
-    	$esperado = TTAB.'//'.str_repeat( '-', 80 ).TEOL;
-    	$tDAOCreate = $this->tDAOCreate;
-    	$tDAOCreate->addLine();
-    	$retorno = $tDAOCreate->getLinesString();
-    	$this->assertEquals( trim($esperado), $retorno);
-    	
-    	$retornoArray = $tDAOCreate->getLinesArray();
-    	$size = count($retornoArray);
-    	$this->assertEquals( 1, $size);
-    }    
+    public function testAddLine_onlyLine()
+    {
+        $esperado = TTAB.'//'.str_repeat('-', 80).TEOL;
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->addLine();
+        $retorno = $tDAOCreate->getLinesString();
+        $this->assertEquals(trim($esperado), $retorno);
+        
+        $retornoArray = $tDAOCreate->getLinesArray();
+        $size = count($retornoArray);
+        $this->assertEquals(1, $size);
+    }
     
-    public function testAddSqlSelectCount_sizeArray(){
-    	$tDAOCreate = $this->tDAOCreate;
-    	$tDAOCreate->addSqlSelectCount();
-    	
-    	$resultArray = $tDAOCreate->getLinesArray();
-    	$size = count($resultArray);
-    	$this->assertEquals( 7, $size);
+    public function testAddSqlSelectCount_sizeArray()
+    {
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->addSqlSelectCount();
+        
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals(7, $size);
     }
     //--------------------------------------------------------------------------------------
-    public function testAddSqlSelectById_sizeArray(){
+    public function testAddSqlSelectById_sizeArray()
+    {
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->addSqlSelectById();
         
         $resultArray = $tDAOCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 6, $size);
+        $this->assertEquals(6, $size);
     }
     //--------------------------------------------------------------------------------------
-    public function testAddProcessWhereGridParameters_sizeArray(){
-    	$tDAOCreate = $this->tDAOCreate;
-    	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
-    	foreach ( $listColumnsName as $k => $v ){
-    		$tDAOCreate->addColumn($v);
-    	}
-    	
-    	$tDAOCreate->addProcessWhereGridParameters();    	
-    	$resultArray = $tDAOCreate->getLinesArray();
-    	$size = count($resultArray);
-    	$this->assertEquals( 12, $size);
+    public function testAddProcessWhereGridParameters_sizeArray()
+    {
+        $tDAOCreate = $this->tDAOCreate;
+        $listColumnsName = array("ID","NOM", "DATE", "FLAG");
+        foreach ($listColumnsName as $k => $v) {
+            $tDAOCreate->addColumn($v);
+        }
+        
+        $tDAOCreate->addProcessWhereGridParameters();
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals(12, $size);
     }
     //--------------------------------------------------------------------------------------
-    public function testAddProcessWhereGridParameters_stringArray(){
-    	$expectedArray[] = TTAB.'private static function processWhereGridParameters( $whereGrid ) {'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'$result = $whereGrid;'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'if ( is_array($whereGrid) ){'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = \' 1=1 \';'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'NUMERO\'],\' AND NUMERO like \\\'%\'.$whereGrid[\'NUMERO\'].\'%\\\' \',null) );'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'ESTADO\'],\' AND ESTADO like \\\'%\'.$whereGrid[\'ESTADO\'].\'%\\\' \',null) );'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$result = $where;'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'}'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
-    	$expectedArray[] = TTAB.'}'.TEOL;
-    	
-    	$expectedString = trim( implode($expectedArray) );
-    	
-    	$tDAOCreate = $this->tDAOCreate;
-    	$listColumnsName = array("NUMERO", "ESTADO");
-    	foreach ( $listColumnsName as $k => $v ){
-    		$tDAOCreate->addColumn($v);
-    	}
-    	
-    	$tDAOCreate->addProcessWhereGridParameters();
-    	$result = $tDAOCreate->getLinesString();    	
-    	$this->assertEquals( $expectedString, $result);
+    public function testAddProcessWhereGridParameters_stringArray()
+    {
+        $expectedArray[] = TTAB.'private static function processWhereGridParameters( $whereGrid ) {'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$result = $whereGrid;'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'if ( is_array($whereGrid) ){'.TEOL;
+        $expectedArray[] = TTAB.TTAB.TTAB.'$where = \' 1=1 \';'.TEOL;
+        $expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'NUMERO\'],\' AND NUMERO like \\\'%\'.$whereGrid[\'NUMERO\'].\'%\\\' \',null) );'.TEOL;
+        $expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'ESTADO\'],\' AND ESTADO like \\\'%\'.$whereGrid[\'ESTADO\'].\'%\\\' \',null) );'.TEOL;
+        $expectedArray[] = TTAB.TTAB.TTAB.'$result = $where;'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'}'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
+        $expectedArray[] = TTAB.'}'.TEOL;
+        
+        $expectedString = trim(implode($expectedArray));
+        
+        $tDAOCreate = $this->tDAOCreate;
+        $listColumnsName = array("NUMERO", "ESTADO");
+        foreach ($listColumnsName as $k => $v) {
+            $tDAOCreate->addColumn($v);
+        }
+        
+        $tDAOCreate->addProcessWhereGridParameters();
+        $result = $tDAOCreate->getLinesString();
+        $this->assertEquals($expectedString, $result);
     }
     //--------------------------------------------------------------------------------------
-    public function testAddSqlSelectById_stringMySQL(){
+    public function testAddSqlSelectById_stringMySQL()
+    {
         $tDAOCreate = $this->tDAOCreate;
         
         $expectedArray[] = TTAB.'public static function selectById( $id ) {'.TEOL;
@@ -212,34 +226,37 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedArray[] = TTAB.'}'.TEOL;
         
         
-        $expectedString = trim( implode($expectedArray) );        
+        $expectedString = trim(implode($expectedArray));
 
-        $tDAOCreate->addSqlSelectById();        
+        $tDAOCreate->addSqlSelectById();
         $result = $tDAOCreate->getLinesString();
         
-        $this->assertEquals( $expectedString , $result);
+        $this->assertEquals($expectedString, $result);
     }
     
-    public function testAddSqlSelectAllPagination_sizeArrayNoDBMS(){
-        $tDAOCreate = $this->tDAOCreate;        
+    public function testAddSqlSelectAllPagination_sizeArrayNoDBMS()
+    {
+        $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->addSqlSelectAllPagination();
         
         $resultArray = $tDAOCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 11, $size);
+        $this->assertEquals(11, $size);
     }
     
-    public function testAddSqlSelectAllPagination_sizeArrayMySQL(){
+    public function testAddSqlSelectAllPagination_sizeArrayMySQL()
+    {
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setDatabaseManagementSystem('mysql');
         $tDAOCreate->addSqlSelectAllPagination();
         
         $resultArray = $tDAOCreate->getLinesArray();
         $size = count($resultArray);
-        $this->assertEquals( 12, $size);
+        $this->assertEquals(12, $size);
     }
     
-    public function testAddSqlSelectAllPagination_stringMySQL(){
+    public function testAddSqlSelectAllPagination_stringMySQL()
+    {
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
@@ -254,18 +271,19 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedArray[] = TTAB.'}'.TEOL;
         
         
-        $expectedString = trim( implode($expectedArray) );
+        $expectedString = trim(implode($expectedArray));
         
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setDatabaseManagementSystem('mysql');
-        $tDAOCreate->addSqlSelectAllPagination();        
+        $tDAOCreate->addSqlSelectAllPagination();
         
         $result = $tDAOCreate->getLinesString();
         
-        $this->assertEquals( $expectedString , $result);
+        $this->assertEquals($expectedString, $result);
     }
     
-    public function testAddSqlSelectAllPagination_stringMSSQL(){
+    public function testAddSqlSelectAllPagination_stringMSSQL()
+    {
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
@@ -280,7 +298,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         $expectedArray[] = TTAB.'}'.TEOL;
         
         
-        $expectedString = trim( implode($expectedArray) );
+        $expectedString = trim(implode($expectedArray));
         
         $tDAOCreate = $this->tDAOCreate;
         $tDAOCreate->setDatabaseManagementSystem('sqlserver');
@@ -288,31 +306,32 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
         
         $result = $tDAOCreate->getLinesString();
         
-        $this->assertEquals( $expectedString , $result);
+        $this->assertEquals($expectedString, $result);
     }
     
-    public function testAddSqlDelete_sizeArray(){
-    	$tDAOCreate = $this->tDAOCreate;
-    	$tDAOCreate->addSqlDelete();
-    	
-    	$resultArray = $tDAOCreate->getLinesArray();
-    	$size = count($resultArray);
-    	$this->assertEquals( 4, $size);
+    public function testAddSqlDelete_sizeArray()
+    {
+        $tDAOCreate = $this->tDAOCreate;
+        $tDAOCreate->addSqlDelete();
+        
+        $resultArray = $tDAOCreate->getLinesArray();
+        $size = count($resultArray);
+        $this->assertEquals(4, $size);
     }
     
-    public function testAddSqlDelete_string(){
-    	$tDAOCreate = $this->tDAOCreate;
-    	
-    	$expectedArray[] = TTAB.'public static function delete( $id ){'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.'return self::executeSql(\'delete from '.$tDAOCreate->hasSchema().$tDAOCreate->getTableName().' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\',$values);'.TEOL;
-    	$expectedArray[] = TTAB.'}'.TEOL;
-    	$expectedString = trim( implode($expectedArray) );
-    	
-    	$tDAOCreate->addSqlDelete();
-    	$result = $tDAOCreate->getLinesString();
-    	
-    	$this->assertEquals( $expectedString , $result);
+    public function testAddSqlDelete_string()
+    {
+        $tDAOCreate = $this->tDAOCreate;
+        
+        $expectedArray[] = TTAB.'public static function delete( $id ){'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
+        $expectedArray[] = TTAB.TTAB.'return self::executeSql(\'delete from '.$tDAOCreate->hasSchema().$tDAOCreate->getTableName().' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\',$values);'.TEOL;
+        $expectedArray[] = TTAB.'}'.TEOL;
+        $expectedString = trim(implode($expectedArray));
+        
+        $tDAOCreate->addSqlDelete();
+        $result = $tDAOCreate->getLinesString();
+        
+        $this->assertEquals($expectedString, $result);
     }
-
 }

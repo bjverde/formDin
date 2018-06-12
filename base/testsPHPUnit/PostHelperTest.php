@@ -43,62 +43,70 @@ require_once '../classes/helpers/PostHelper.class.php';
 /**
  * GetHelper test case.
  */
-class PostHelperTest extends PHPUnit_Framework_TestCase {
+class PostHelperTest extends PHPUnit_Framework_TestCase
+{
 
-    public function testGet_tem() {
+    public function testGet_tem()
+    {
         $esperado = 10;
         $_POST['x']= $esperado;
-        $retorno = PostHelper::get('x');        
+        $retorno = PostHelper::get('x');
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGet_Naotem() {
+    public function testGet_Naotem()
+    {
         $esperado = '';
         $_POST['x']= 123;
         $retorno = PostHelper::get('z');
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGet_Branco() {
-    	$esperado = '';
-    	$_POST['x']= '';
-    	$retorno = PostHelper::get('x');
-    	$this->assertEquals($esperado, $retorno);
+    public function testGet_Branco()
+    {
+        $esperado = '';
+        $_POST['x']= '';
+        $retorno = PostHelper::get('x');
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGet_null() {
-    	$esperado = '';
-    	$_POST['x']= null;
-    	$retorno = PostHelper::get('x');
-    	$this->assertEquals($esperado, $retorno);
+    public function testGet_null()
+    {
+        $esperado = '';
+        $_POST['x']= null;
+        $retorno = PostHelper::get('x');
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_temValor(){
+    public function testGetDefaultValeu_temValor()
+    {
         $esperado = 10;
         $_POST['x']= $esperado;
-        $retorno = PostHelper::getDefaultValeu('x','padrao');        
+        $retorno = PostHelper::getDefaultValeu('x', 'padrao');
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testGetDefaultValeu_NaoValor(){
+    public function testGetDefaultValeu_NaoValor()
+    {
         $esperado = 'padrao';
         $_POST['x']= 10;
-        $retorno = PostHelper::getDefaultValeu('y','padrao');
+        $retorno = PostHelper::getDefaultValeu('y', 'padrao');
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_Branco(){
-    	$esperado = 'padrao';
-    	$_POST['x']= '';
-    	$retorno = PostHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
+    public function testGetDefaultValeu_Branco()
+    {
+        $esperado = 'padrao';
+        $_POST['x']= '';
+        $retorno = PostHelper::getDefaultValeu('x', 'padrao');
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_GetNull(){
-    	$esperado = 'padrao';
-    	$_POST['x']= null;
-    	$retorno = PostHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
+    public function testGetDefaultValeu_GetNull()
+    {
+        $esperado = 'padrao';
+        $_POST['x']= null;
+        $retorno = PostHelper::getDefaultValeu('x', 'padrao');
+        $this->assertEquals($esperado, $retorno);
     }
 }
-
