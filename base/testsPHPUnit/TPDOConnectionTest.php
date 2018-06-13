@@ -198,6 +198,7 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, $utf8);
     }
     
+    /*
     public function testSetConfigUtf8Decode_ArrayUtf8False()
     {
         $expected = false;
@@ -207,6 +208,29 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
         $this->TPDOConnection->setConfigUtf8Decode($useConfigFile, $configArray);
         $utf8 = $this->TPDOConnection->getUtfDecode();
         $this->assertSame($expected, $utf8);
+    }
+    */
+    
+    public function testValidateQtdParameters_ArrayParamsNull()
+    {
+    	$expected = array();
+    	
+    	$sql = 'select id from product where qtd = 10';
+    	$arrParams = null;
+    	$result = $this->TPDOConnection->validateQtdParameters( $sql, $arrParams);
+    	$this->assertEquals($expected, $result);
+    }
+    
+    public function testValidateQtdParameters_ArrayParamsQtd3()
+    {
+    	$expected = array( 10, 20, 30 );
+    	
+    	$sql = 'select id from product where qtd = ? and idItem = ? and idVendor = ?';
+    	$arrParams = array( 10, 20, 30 );
+    	$result = $this->TPDOConnection->validateQtdParameters( $sql, $arrParams);
+    	$error  = $this->TPDOConnection->getError();
+    	$this->assertEquals($expected, $result);    	
+    	$this->assertEquals(null, $error);
     }
     
     public function testPrepareArray_string()

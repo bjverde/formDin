@@ -659,19 +659,7 @@ class TPDOConnection
         self::$lastParams = $arrParams;
         self::$lastSql = $sql;
         
-        // verificar se a quantidade de parametros é igual a quantidade de variaveis
-        if (strpos($sql, '?') > 0 && is_array($arrParams) && count($arrParams) > 0) {
-            $qtd1 = substr_count($sql, '?');
-            $qtd2 = count($arrParams);
-            
-            if ($qtd1 != $qtd2) {
-                self::$error = 'Quantidade de parametros diferente da quantidade utilizada na instrução sql.';
-                self::showError();
-                return false;
-            }
-        } else {
-            $arrParams = array();
-        }
+        $arrParams = self::validateQtdParameters ( $sql, $arrParams );
         
         try {
             $stmt = self::getInstance()->prepare($sql);
@@ -727,6 +715,28 @@ class TPDOConnection
             self::showError();
         }
         return false;
+    }
+    
+	/**
+	 * Check if the number of parameters is equal to the number of variables
+	 * @param arrParams
+	 */
+    public static function validateQtdParameters( $sql, $arrParams)
+	{
+		// verificar se a quantidade de parametros é igual a quantidade de variaveis
+        if (strpos($sql, '?') > 0 && is_array($arrParams) && count($arrParams) > 0) {
+            $qtd1 = substr_count($sql, '?');
+            $qtd2 = count($arrParams);
+            
+            if ($qtd1 != $qtd2) {
+                self::$error = 'Quantidade de parametros diferente da quantidade utilizada na instrução sql.';
+                self::showError();
+                return false;
+            }
+        } else {
+            $arrParams = array();
+        }        
+        return $arrParams;
     }
     
     //--------------------------------------------------------------------------
