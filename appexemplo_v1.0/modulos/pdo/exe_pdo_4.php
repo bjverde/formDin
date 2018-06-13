@@ -40,78 +40,70 @@
  */
 
 $frm = new TForm('Cadastro de Anexo com Postgres');
-$frm->addFileField('anexo','Arquivo:',false,'jpg,png,pdf','1M',80,true,true,'callbackAnexo',false);
+$frm->addFileField('anexo', 'Arquivo:', false, 'jpg,png,pdf', '1M', 80, true, true, 'callbackAnexo', false);
 $img = new TElement('img');
 $img->setId('img_preview');
-$img->setCss( array('border'=>'none','width'=>'auto','height'=>'auto') );
-$frm->addHtmlField('html_imagem',$img,null,null,250,$frm->getWidth()-80,true)->setCss('border','1px dashed blue');
+$img->setCss(array('border'=>'none','width'=>'auto','height'=>'auto'));
+$frm->addHtmlField('html_imagem', $img, null, null, 250, $frm->getWidth()-80, true)->setCss('border', '1px dashed blue');
 
 //$acao = is_null($_POST['formDinAcao']) ? '' : $_POST['formDinAcao'];
 $acao = isset($acao) ? $acao : null;
-if($acao == 'salvar_anexo')
-{
-	if( !file_exists($_REQUEST['anexo_temp_name']))
-	{
-		die('Arquivo inexistente');
-	}
+if ($acao == 'salvar_anexo') {
+    if (!file_exists($_REQUEST['anexo_temp_name'])) {
+        die('Arquivo inexistente');
+    }
 
     $sql = 'insert into anexo (nom_anexo,des_mime_type,des_extension,lob_anexo) values (?,?,?,?)';
     TPDOConnection::beginTransaction();
- 	$oid 		= TPDOConnection::getInstance()->pgsqlLOBCreate();
-	$stream 	= TPDOConnection::getInstance()->pgsqlLOBOpen($oid,'w');
-	$local 		= fopen($_REQUEST['anexo_temp_name'], 'rb');
-	stream_copy_to_stream($local, $stream);
-	$lob 		= null;
-	$stream 	= null;
-	$bvars = array($_REQUEST['anexo']
-				,$_REQUEST['anexo_type']
-				,'jpg'
-				,$oid);
-	$stmt = TPDOConnection::prepare($sql);
-	$stmt->execute($bvars);
-	TPDOConnection::commit();
-	if( $frm->addError(TPDOConnection::getError()))
-	{
-		TPDOConnection::rollBack();
-	}
-	else
-	{
-		$frm->setMessage('Arquivo gravado com SUCESSO');
-	}
-}
-else if( $acao=='Ler Lob')
-{
-	/* funcionando
-	TPDOConnection::beginTransaction();
-	$data = TPDOConnection::pgsqlLOBOpen(18586, 'r');
-	file_put_contents('aaa.jpg',$data);
+    $oid        = TPDOConnection::getInstance()->pgsqlLOBCreate();
+    $stream     = TPDOConnection::getInstance()->pgsqlLOBOpen($oid, 'w');
+    $local      = fopen($_REQUEST['anexo_temp_name'], 'rb');
+    stream_copy_to_stream($local, $stream);
+    $lob        = null;
+    $stream     = null;
+    $bvars = array($_REQUEST['anexo']
+                ,$_REQUEST['anexo_type']
+                ,'jpg'
+                ,$oid);
+    $stmt = TPDOConnection::prepare($sql);
+    $stmt->execute($bvars);
+    TPDOConnection::commit();
+    if ($frm->addError(TPDOConnection::getError())) {
+        TPDOConnection::rollBack();
+    } else {
+        $frm->setMessage('Arquivo gravado com SUCESSO');
+    }
+} elseif ($acao=='Ler Lob') {
+    /* funcionando
+    TPDOConnection::beginTransaction();
+    $data = TPDOConnection::pgsqlLOBOpen(18586, 'r');
+    file_put_contents('aaa.jpg',$data);
     die('aaa.jpg');
     */
 
     /* funcionando
     TPDOConnection::beginTransaction();
-	$stream = TPDOConnection::pgsqlLOBOpen(18586, 'r');
-	$data = stream_get_contents($stream);
-	file_put_contents('aaa.jpg',$data);
+    $stream = TPDOConnection::pgsqlLOBOpen(18586, 'r');
+    $data = stream_get_contents($stream);
+    file_put_contents('aaa.jpg',$data);
     die('aaa.jpg');
     */
 
     TPDOConnection::beginTransaction();
-	$stmt = TPDOConnection::prepare("select nom_anexo, lob_anexo from anexo where seq_anexo=1");
-	$stmt->execute();
-	$stmt->bindColumn(1, $fileName, PDO::PARAM_STR);
-	$stmt->bindColumn(2, $oid, PDO::PARAM_LOB);
-	$stmt->fetch(PDO::FETCH_BOUND);
-	$data = TPDOConnection::pgsqlLOBOpen($oid, 'r');
-	if( file_put_contents($fileName,$data ) )
-	{
-		//$frm->setMessage($fileName.' gravado');
-		echo $fileName;
-		$img->setAttribute('src',$fileName);
-	}
+    $stmt = TPDOConnection::prepare("select nom_anexo, lob_anexo from anexo where seq_anexo=1");
+    $stmt->execute();
+    $stmt->bindColumn(1, $fileName, PDO::PARAM_STR);
+    $stmt->bindColumn(2, $oid, PDO::PARAM_LOB);
+    $stmt->fetch(PDO::FETCH_BOUND);
+    $data = TPDOConnection::pgsqlLOBOpen($oid, 'r');
+    if (file_put_contents($fileName, $data)) {
+        //$frm->setMessage($fileName.' gravado');
+        echo $fileName;
+        $img->setAttribute('src', $fileName);
+    }
 }
 
-$frm->addButtonAjax('Salvar',null,null,null,'salvar_anexo','Salvando...','text',true,null,'btnSalvar',null,true,false);
+$frm->addButtonAjax('Salvar', null, null, null, 'salvar_anexo', 'Salvando...', 'text', true, null, 'btnSalvar', null, true, false);
 
 $frm->setAction('Atualizar,Ler Lob');
 $frm->show();
@@ -120,22 +112,22 @@ $frm->show();
 /*
 function salvar_anexo()
 {
-	 	fwAjaxRequest(
-	        {'callback':function(res)
-	        {
-            	jQuery("#img_preview").attr('src',res);
-	        }
-    		,'action':'salvar_anexo'
-	        ,'async':true
-	        ,'dataType':'text'
-	        ,'msgLoad':'Salvando Anexo.'
-	        }
-	    );
+        fwAjaxRequest(
+            {'callback':function(res)
+            {
+                jQuery("#img_preview").attr('src',res);
+            }
+            ,'action':'salvar_anexo'
+            ,'async':true
+            ,'dataType':'text'
+            ,'msgLoad':'Salvando Anexo.'
+            }
+        );
 }
 */
 function callbackAnexo(tempName,fileName,type,size)
 {
-	jQuery("#img_preview").attr('src',tempName);
+    jQuery("#img_preview").attr('src',tempName);
 }
 </script>
 

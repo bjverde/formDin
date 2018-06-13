@@ -41,10 +41,9 @@
 
 
 $frm = new TForm('Exemplos links');
-$frm->addLinkField('idLink1','labelLink1','um link simples para o google',null,'http://www.google.com.br','new');
-$frm->addLinkField('idLink2','labelLink2','um link simples para o google, com javascript',"alert('msg');",'http://www.google.com.br','new');
-$frm->addTextField('tx_especie_nativa','Espécie:',80);
+$frm->addLinkField('idLink1', 'labelLink1', 'um link simples para o google', null, 'http://www.google.com.br', 'new');
+$frm->addLinkField('idLink2', 'labelLink2', 'um link simples para o google, com javascript', "alert('msg');", 'http://www.google.com.br', 'new');
+$frm->addTextField('tx_especie_nativa', 'Espécie:', 80);
 
 
 $frm->show();
-?>

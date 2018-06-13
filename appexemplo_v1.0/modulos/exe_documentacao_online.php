@@ -42,15 +42,14 @@
 $frm = new TForm('Exemplo Documentação On-line');
 $frm->addHiddenField('oculto');
 //$frm->enableOnlineDoc(false,400,600,'des_bairro','data,sit_cancelado'); // false = permitir edição. Tela com 200px de altura por 600px de largura
-$frm->enableOnlineDoc(false,400,600,'nom_pessoa,des_endereco'); // false = permitir edição. Tela com 200px de altura por 600px de largura
+$frm->enableOnlineDoc(false, 400, 600, 'nom_pessoa,des_endereco'); // false = permitir edição. Tela com 200px de altura por 600px de largura
 $pc = $frm->addPageControl('pc');
-$pc->addPage('Cadastro',true,true);
-$frm->addTextField('nom_pessoa','Nome da pessoa:',50,true,50,null,true,'Este é um campo texto','Ex:João',false);
-$frm->addTextField('des_endereco','Enderço:',50,false,50,null,true,null,null,false);
-$frm->addTextField('des_bairro','Bairro:',50,false,50,null,true,null,null,true);
-$frm->addMemoField('obs','Observação:',200,false,80,5,null,true,true);
-$frm->addDateField('data','Data:',true);
-$frm->addSelectField('sit_cancelado','Cancelado ?',true,'S=Sim,N=Não');
+$pc->addPage('Cadastro', true, true);
+$frm->addTextField('nom_pessoa', 'Nome da pessoa:', 50, true, 50, null, true, 'Este é um campo texto', 'Ex:João', false);
+$frm->addTextField('des_endereco', 'Enderço:', 50, false, 50, null, true, null, null, false);
+$frm->addTextField('des_bairro', 'Bairro:', 50, false, 50, null, true, null, null, true);
+$frm->addMemoField('obs', 'Observação:', 200, false, 80, 5, null, true, true);
+$frm->addDateField('data', 'Data:', true);
+$frm->addSelectField('sit_cancelado', 'Cancelado ?', true, 'S=Sim,N=Não');
 $frm->setAction('Gravar');
 $frm->show();
-?>

@@ -37,34 +37,34 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(E_ALL);
-$frm = new TForm('Exemplo Mensagem',200,900);
+$frm = new TForm('Exemplo Mensagem', 200, 900);
 //$frm->setOverflowY(false);
 //$frm->setFlat(true);
 
-$frm->addTextField('nome','Nome:',30);
+$frm->addTextField('nome', 'Nome:', 30);
 $frm->addMessageField('msg_local');
 $frm->addError('Mensagem de erro utilizando o método addErro() da TForm');
-$frm->setPopUpMessage('Mensagem Utilizando o metodo setPopUpMessage da TForm',5,'sucess');
+$frm->setPopUpMessage('Mensagem Utilizando o metodo setPopUpMessage da TForm', 5, 'sucess');
 $frm->setAction('Refresh,Mensagem1,Mensagem2,Mensagem3,Mensagem4,Mensagem5,Confirmação1,Confirmação2,Popup1,Popup2,Popup3');
 $frm->show();
 ?>
 <script>
 function btnMensagem1OnClick()
 {
-	fwShowMessage('Mensagem no form utilizando a funcao fwShowMessage<br>Linha2<br>Linha3<br>linha4...');
+    fwShowMessage('Mensagem no form utilizando a funcao fwShowMessage<br>Linha2<br>Linha3<br>linha4...');
 }
 function btnMensagem2OnClick()
 {
- 	fwShowMessage({message:"Mensagem de erro no form","status":0});
+    fwShowMessage({message:"Mensagem de erro no form","status":0});
 }
 function btnMensagem3OnClick()
 {
- 	fwShowMessage({message:"Mensagem de erro com alert","status":0,"alert":1});
+    fwShowMessage({message:"Mensagem de erro com alert","status":0,"alert":1});
 }
 
 function btnMensagem4OnClick()
 {
-	fwDialog( "Janela Dialogo",'Http://localhost',600,800);
+    fwDialog( "Janela Dialogo",'Http://localhost',600,800);
 }
 function btnMensagem5OnClick()
 {
@@ -107,14 +107,14 @@ function btnConfirmacao2OnClick()
 }
 function btnPopup1OnClick()
 {
-	parent.app_show_message("Mensagem Erro, Utilizando o metodo setPopUpMessage da TForm","error","5");
+    parent.app_show_message("Mensagem Erro, Utilizando o metodo setPopUpMessage da TForm","error","5");
 }
 function btnPopup2OnClick()
 {
-	parent.app_show_message("Mensagem Sucesso, Utilizando o metodo setPopUpMessage da TForm","sucess","5");
+    parent.app_show_message("Mensagem Sucesso, Utilizando o metodo setPopUpMessage da TForm","sucess","5");
 }
 function btnPopup3OnClick()
 {
-	parent.app_show_message("Mensagem Sucesso, Utilizando o metodo setPopUpMessage da TForm","attention","5");
+    parent.app_show_message("Mensagem Sucesso, Utilizando o metodo setPopUpMessage da TForm","attention","5");
 }
 </script>

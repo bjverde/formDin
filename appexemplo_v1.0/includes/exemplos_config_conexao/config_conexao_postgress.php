@@ -39,10 +39,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-define('BANCO','POSTGRES');
-define('HOST','localhost');
-define('PORT','5432');
-define('DATABASE','teste');
-define('USUARIO','postgres');
-define('SENHA','123456');
-?>
+define('BANCO', 'POSTGRES');
+define('HOST', 'localhost');
+define('PORT', '5432');
+define('DATABASE', 'teste');
+define('USUARIO', 'postgres');
+define('SENHA', '123456');

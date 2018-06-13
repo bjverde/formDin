@@ -50,7 +50,7 @@
 //require_once 'modulos/car_externo/config.php';
 
 $frm = new TForm('Formulário de Cadastro de Clientes');
-$frm->addHtmlField('msg','Exemplo de como alterar a inteface do formulário utilizando um arquvo css externo');
+$frm->addHtmlField('msg', 'Exemplo de como alterar a inteface do formulário utilizando um arquvo css externo');
 // adicionar o arquivo css ao formulário
 $frm->addCssFile('css/css_form.css');
 
@@ -65,10 +65,9 @@ $frm->hideCloseButton();
 $frm->getHeaderButtonCell()->add('<table border="0" width="100%" height="100%" cellpadding="0px" cellspacing="0px" style="padding-right:2px;padding-top:2px;"><tr align="right"valign="bottom"><td></td></tr><tr align="right" valign="top"><td><img style="cursor:pointer;" src="imagem/btnFecharVermelho.jpg" alt="Fechar" width="18px" height="18px"  title="Fechar" onclick="fwConfirmCloseForm(\'formdin_area\',null,null,null);"></td></tr></table>');
 
 // adicionar campo grupo para exemplo
-$frm->addGroupField('bg1','Grupo de teste');
-	$frm->addTextField('nome','Nome:',60);
+$frm->addGroupField('bg1', 'Grupo de teste');
+    $frm->addTextField('nome', 'Nome:', 60);
 $frm->closeGroup();
 
 // exibir o formulário
 $frm->show();
-?>

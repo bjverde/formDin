@@ -40,12 +40,12 @@
  */
 
  // marcar os campos obrigatórios com Asterisco na frente
-define('REQUIRED_FIELD_MARK','*');
+define('REQUIRED_FIELD_MARK', '*');
 
 $frm = new TForm('Exemplo do Campo Texto');
 
-$frm->addTextField('nome','Nome da pessoa sem quebra:',60,false,60,null,null,null,null,null,true);
-$frm->addTextField('municipio','Municipio',60,true,60);
+$frm->addTextField('nome', 'Nome da pessoa sem quebra:', 60, false, 60, null, null, null, null, null, true);
+$frm->addTextField('municipio', 'Municipio', 60, true, 60);
 
 $res=null;
 $res['COD'][] = '1';
@@ -55,34 +55,24 @@ $res['COD'][] = '2';
 $res['DESC'][] = 'Dois';
 
 // definir consulta dinâmica no campo município
-$frm->setOnlineSearch('municipio'
-    ,'tb_municipio' // tabela de municípios
-	,'nom_municipio|Município:||||||like,cod_estado|Uf:||||select'  // campos para seleção do município. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
-	,false
-	,false
-	,true // se for encontrada apenas 1 opção fazer a seleção automaticamente
-	,'cod_municipio|Código,nom_municipio|Município'
-	,'NOM_MUNICIPIO|municipio'
-	,null
-	,null,null,null,null,null,null
-	,'osCallBack()'
-	,null //10
-    ,null,null,null
-    ,array('cod_estado'=>"SELECT COD_UF,NOM_UF||'/'||SIG_UF AS SIG_UF FROM TB_UF ORDER BY SIG_UF")
+$frm->setOnlineSearch('municipio', 'tb_municipio' // tabela de municípios
+, 'nom_municipio|Município:||||||like,cod_estado|Uf:||||select'  // campos para seleção do município. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+, false, false, true // se for encontrada apenas 1 opção fazer a seleção automaticamente
+, 'cod_municipio|Código,nom_municipio|Município', 'NOM_MUNICIPIO|municipio', null, null, null, null, null, null, null, 'osCallBack()', null //10
+, null, null, null, array('cod_estado'=>"SELECT COD_UF,NOM_UF||'/'||SIG_UF AS SIG_UF FROM TB_UF ORDER BY SIG_UF")
     //,array('cod_estado'=>$res)
     //,array('cod_estado'=>ARRAY(1=>"Um",2=>"Dois") )
-    ,null,null,null
-	,false // caseSensitive
-	);
+, null, null, null, false); // caseSensitive
 
 
-$frm->addTextField('nome2','Nome Desabilitado:',80,null,null,'Desabilitado',true,null,null,true)->setEnabled(false);
-$frm->addTextField('nome3','Nome Somente Leitura:',80,true,null,'Somente leitura',true,null,null,true)->setReadOnly(true);
+
+$frm->addTextField('nome2', 'Nome Desabilitado:', 80, null, null, 'Desabilitado', true, null, null, true)->setEnabled(false);
+$frm->addTextField('nome3', 'Nome Somente Leitura:', 80, true, null, 'Somente leitura', true, null, null, true)->setReadOnly(true);
 
 // botões de ação
 $frm->setAction('Atualizar');
-$frm->addButton('Validar',null,null,'fwValidateFields()');
-$frm->addButton('Limpar',null,'btnLimpar','fwClearChildFields()');
+$frm->addButton('Validar', null, null, 'fwValidateFields()');
+$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
 // função chamada no carregamento da página
 $frm->addJavascript('init()');
@@ -93,13 +83,13 @@ $frm->show();
 <script>
 function init()
 {
-	fwAlert('Formulário foi carregado!')
+    fwAlert('Formulário foi carregado!')
 }
 
 // Online Search callback
 function osCallBack(fields,doc)
 {
-	alert('Call back Chamado\n'+fields+'\n'+doc);
+    alert('Call back Chamado\n'+fields+'\n'+doc);
 
 }
 </script>
