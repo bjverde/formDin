@@ -39,40 +39,39 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if(!defined('ROWS_PER_PAGE')) { define('ROWS_PER_PAGE', 20); 
+if (!defined('ROWS_PER_PAGE')) {
+    define('ROWS_PER_PAGE', 20);
 }
 
 class paginationSQLHelper
 {
     
-    public static function getRowStart($page,$rowsPerPage) 
+    public static function getRowStart($page, $rowsPerPage)
     {
         $rowStart = 0;
         $page = isset($page) ? $page : null;
         $rowsPerPage = isset($rowsPerPage) ? $rowsPerPage : ROWS_PER_PAGE;
-        if(!empty($page)) {
+        if (!empty($page)) {
             $rowStart = ($page-1)*$rowsPerPage;
-        }        
+        }
         return $rowStart;
-    }    
+    }
     //--------------------------------------------------------------------------------
-    public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
+    public static function attributeIssetOrNotZero($whereGrid, $attribute, $isTrue, $isFalse, $testZero = true)
     {
         $retorno = $isFalse;
         $has = ArrayHelper::has($attribute, $whereGrid);
-        if($has ) {
-            if(isset($whereGrid[$attribute]) && !($whereGrid[$attribute]==='') ) {
-                if($testZero) {
-                    if($whereGrid[$attribute]<>'0' ) {
+        if ($has) {
+            if (isset($whereGrid[$attribute]) && !($whereGrid[$attribute]==='')) {
+                if ($testZero) {
+                    if ($whereGrid[$attribute]<>'0') {
                         $retorno = $isTrue;
                     }
-                }else{
+                } else {
                     $retorno = $isTrue;
                 }
             }
         }
         return $retorno;
     }
-    
 }
-?>
