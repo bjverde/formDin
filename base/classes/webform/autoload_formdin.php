@@ -44,7 +44,13 @@ if ( !function_exists( 'formdin_autoload') )
 	{
 		if (strpos($class_name, 'setasign\\') === 0) {
 			return false;
-		} else{
+		} elseif (strpos($class_name, 'PHPUnit\\') === 0) {
+			return false; 
+		} elseif (strpos($class_name, 'Symfony\\') === 0) {
+			return false;
+		}elseif (strpos($class_name, 'Composer\\') === 0) {
+			return false;
+		}else{
 			require_once $class_name . '.class.php';
 		}
 	}
