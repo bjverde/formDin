@@ -2,15 +2,15 @@
 class Acesso_perfilDAO extends TPDOConnection
 {
 
-    public static function insert( Acesso_perfilVO $objVo )
+    public static function insert(Acesso_perfilVO $objVo)
     {
-        if($objVo->getIDPERFIL() ) {
+        if ($objVo->getIDPERFIL()) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getIdperfil() 
-         , $objVo->getNom_perfil() 
-         , $objVo->getSit_ativo() 
-         , $objVo->getDat_inclusao() 
+        $values = array(  $objVo->getIdperfil()
+         , $objVo->getNom_perfil()
+         , $objVo->getSit_ativo()
+         , $objVo->getDat_inclusao()
          );
         return self::executeSql(
             'insert into acesso_perfil(
@@ -18,17 +18,18 @@ class Acesso_perfilDAO extends TPDOConnection
 								,nom_perfil
 								,sit_ativo
 								,dat_inclusao
-								) values (?,?,?,?)', $values 
+								) values (?,?,?,?)',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public static function delete($id)
     {
         $values = array($id);
         return self::executeSql('delete from acesso_perfil where IDPERFIL = ?', $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select( $id )
+    public static function select($id)
     {
         $values = array($id);
         return self::executeSql(
@@ -37,11 +38,12 @@ class Acesso_perfilDAO extends TPDOConnection
 								,nom_perfil
 								,sit_ativo
 								,dat_inclusao
-								from acesso_perfil where IDPERFIL = ?', $values 
+								from acesso_perfil where IDPERFIL = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public static function selectAll($orderBy = null, $where = null)
     {
         return self::executeSql(
             'select
@@ -55,7 +57,7 @@ class Acesso_perfilDAO extends TPDOConnection
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update( Acesso_perfilVO $objVo )
+    public static function update(Acesso_perfilVO $objVo)
     {
         $values = array( $objVo->getNom_perfil()
          ,$objVo->getSit_ativo()
@@ -66,9 +68,9 @@ class Acesso_perfilDAO extends TPDOConnection
 								 nom_perfil = ?
 								,sit_ativo = ?
 								,dat_inclusao = ?
-								where IDPERFIL = ?', $values
+								where IDPERFIL = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
 }
-?>

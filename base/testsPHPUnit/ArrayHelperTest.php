@@ -43,69 +43,78 @@ require_once '../classes/helpers/ArrayHelper.class.php';
 /**
  * ArrayHelper test case.
  */
-class ArrayHelperTest extends PHPUnit_Framework_TestCase {
+class ArrayHelperTest extends PHPUnit_Framework_TestCase
+{
 
-    public function testValidateUndefined_temValor() {
+    public function testValidateUndefined_temValor()
+    {
         $index = 'key';
         $valor = 1500;
-        $esperado = $valor;        
+        $esperado = $valor;
         $arrayTest[$index] = $valor;
-        $retorno = ArrayHelper::validateUndefined($arrayTest,$index);        
+        $retorno = ArrayHelper::validateUndefined($arrayTest, $index);
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testValidateUndefined() {
+    public function testValidateUndefined()
+    {
         $esperado = '';
         $arrayTest = array();
-        $retorno = ArrayHelper::validateUndefined($arrayTest,'indexNotExist');
+        $retorno = ArrayHelper::validateUndefined($arrayTest, 'indexNotExist');
         $this->assertEquals($esperado, $retorno);
-    }    
+    }
     
-    public function testHas_notArray() {
-    	$esperado = FALSE;
-    	$arrayTest = null;
-    	$retorno = ArrayHelper::has('x',$arrayTest);
-    	$this->assertEquals($esperado, $retorno);
-    }    
+    public function testHas_notArray()
+    {
+        $esperado = false;
+        $arrayTest = null;
+        $retorno = ArrayHelper::has('x', $arrayTest);
+        $this->assertEquals($esperado, $retorno);
+    }
    
-    public function testHas_notInArray() {
-    	$esperado  = FALSE;
-    	$arrayTest = array("foo" => "bar","bar" => "foo",100=> -100,-100=> 100);
-    	$retorno = ArrayHelper::has('x',$arrayTest);
-    	$this->assertEquals($esperado, $retorno);
+    public function testHas_notInArray()
+    {
+        $esperado  = false;
+        $arrayTest = array("foo" => "bar","bar" => "foo",100=> -100,-100=> 100);
+        $retorno = ArrayHelper::has('x', $arrayTest);
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testHas_InArray() {
-    	$esperado  = TRUE;
-    	$arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
-    	$retorno = ArrayHelper::has('x',$arrayTest);
-    	$this->assertEquals($esperado, $retorno);
+    public function testHas_InArray()
+    {
+        $esperado  = true;
+        $arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
+        $retorno = ArrayHelper::has('x', $arrayTest);
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_NotInArray() {
-    	$esperado  = 'x';
-    	$array ['y'] = 123;
-    	$atributeName = 'k';
-    	$DefaultValue = 'x';    	
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
-    	$this->assertEquals($esperado, $retorno);
+    public function testGetDefaultValeu_NotInArray()
+    {
+        $esperado  = 'x';
+        $array ['y'] = 123;
+        $atributeName = 'k';
+        $DefaultValue = 'x';
+        $retorno = ArrayHelper::getDefaultValeu($array, $atributeName, $DefaultValue);
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_NotArray() {
-    	$esperado  = 'x';
-    	$array = 123;
-    	$atributeName = 'k';
-    	$DefaultValue = 'x';
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
-    	$this->assertEquals($esperado, $retorno);
+    public function testGetDefaultValeu_NotArray()
+    {
+        $esperado  = 'x';
+        $array = 123;
+        $atributeName = 'k';
+        $DefaultValue = 'x';
+        $retorno = ArrayHelper::getDefaultValeu($array, $atributeName, $DefaultValue);
+        $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_InArray() {
-    	$esperado  = 123;
-    	$array ['y'] = 123;
-    	$atributeName = 'y';
-    	$DefaultValue = 'x';
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
-    	$this->assertEquals($esperado, $retorno);
+    public function testGetDefaultValeu_InArray()
+    {
+        $esperado  = 123;
+        $array ['y'] = 123;
+        $atributeName = 'y';
+        $DefaultValue = 'x';
+        $retorno = ArrayHelper::getDefaultValeu($array, $atributeName, $DefaultValue);
+        $this->assertEquals($esperado, $retorno);
     }
 }

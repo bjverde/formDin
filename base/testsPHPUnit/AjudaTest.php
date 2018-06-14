@@ -41,62 +41,68 @@
 
 require_once '../classes/Ajuda.class.php';
 
-class AjudaTest extends PHPUnit_Framework_TestCase {
-	
-	/**
-	 *
-	 * @var Ajuda
-	 */
-	private $ajuda;
-	
-	/**
-	 * Prepares the environment before running a test.
-	 */
-	protected function setUp() {
-		parent::setUp ();
-		$this->ajuda = new Ajuda('Nome','Texto');
-		$this->ajuda->setValorChave('valeuKey');
-	}
-	
-	/**
-	 * Cleans up the environment after running a test.
-	 */
-	protected function tearDown() {
-		$this->ajuda = null;
-		parent::tearDown ();
-	}
-	
-	public function testSetCorFundo_valor() {
-		$esperado = '#EEFFE4';
-		$this->ajuda->setCorFundo('#EEFFE4');
-		$retorno = $this->ajuda->getCorFundo();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testSetCorFundo_null() {
-		$esperado = '#FFFFE4';
-		$retorno = $this->ajuda->getCorFundo();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	/**
-	 * Tests Ajuda->setCorFonte()
-	 */
-	public function testSetCorFonte() {
-		$esperado = '#EEFFE4';
-		$this->ajuda->setCorFonte('#EEFFE4');
-		$retorno = $this->ajuda->getCorFonte();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testSetCorFonte_null() {
-		$esperado = '#0000FF';
-		$retorno = $this->ajuda->getCorFonte();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
+class AjudaTest extends PHPUnit_Framework_TestCase
+{
+    
+    /**
+     *
+     * @var Ajuda
+     */
+    private $ajuda;
+    
+    /**
+     * Prepares the environment before running a test.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->ajuda = new Ajuda('Nome', 'Texto');
+        $this->ajuda->setValorChave('valeuKey');
+    }
+    
+    /**
+     * Cleans up the environment after running a test.
+     */
+    protected function tearDown()
+    {
+        $this->ajuda = null;
+        parent::tearDown();
+    }
+    
+    public function testSetCorFundo_valor()
+    {
+        $esperado = '#EEFFE4';
+        $this->ajuda->setCorFundo('#EEFFE4');
+        $retorno = $this->ajuda->getCorFundo();
+        
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testSetCorFundo_null()
+    {
+        $esperado = '#FFFFE4';
+        $retorno = $this->ajuda->getCorFundo();
+        
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    /**
+     * Tests Ajuda->setCorFonte()
+     */
+    public function testSetCorFonte()
+    {
+        $esperado = '#EEFFE4';
+        $this->ajuda->setCorFonte('#EEFFE4');
+        $retorno = $this->ajuda->getCorFonte();
+        
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testSetCorFonte_null()
+    {
+        $esperado = '#0000FF';
+        $retorno = $this->ajuda->getCorFonte();
+        
+        $this->assertEquals($esperado, $retorno);
+    }
 }
-

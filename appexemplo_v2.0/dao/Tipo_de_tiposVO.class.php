@@ -4,14 +4,14 @@ class Tipo_de_tiposVO
     private $idtipo_de_tipos = null;
     private $descricao = null;
     private $sit_ativo = null;
-    public function __construct( $idtipo_de_tipos=null, $descricao=null, $sit_ativo=null )
+    public function __construct($idtipo_de_tipos = null, $descricao = null, $sit_ativo = null)
     {
         $this->setIdtipo_de_tipos($idtipo_de_tipos);
         $this->setDescricao($descricao);
         $this->setSit_ativo($sit_ativo);
     }
     //--------------------------------------------------------------------------------
-    function setIdtipo_de_tipos( $strNewValue = null )
+    function setIdtipo_de_tipos($strNewValue = null)
     {
         $this->idtipo_de_tipos = $strNewValue;
     }
@@ -20,7 +20,7 @@ class Tipo_de_tiposVO
         return $this->idtipo_de_tipos;
     }
     //--------------------------------------------------------------------------------
-    function setDescricao( $strNewValue = null )
+    function setDescricao($strNewValue = null)
     {
         $this->descricao = $strNewValue;
     }
@@ -29,7 +29,7 @@ class Tipo_de_tiposVO
         return $this->descricao;
     }
     //--------------------------------------------------------------------------------
-    function setSit_ativo( $strNewValue = null )
+    function setSit_ativo($strNewValue = null)
     {
         $this->sit_ativo = $strNewValue;
     }
@@ -39,4 +39,3 @@ class Tipo_de_tiposVO
     }
     //--------------------------------------------------------------------------------
 }
-?>

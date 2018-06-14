@@ -41,9 +41,9 @@
 class ArrayHelper
 {
     
-    static function validateUndefined($array,$atributeName) 
+    static function validateUndefined($array, $atributeName)
     {
-        if(!isset($array[$atributeName])) {
+        if (!isset($array[$atributeName])) {
             $array[$atributeName]=null;
         }
         return is_null($array[$atributeName])?null:trim($array[$atributeName]);
@@ -58,7 +58,7 @@ class ArrayHelper
      * @param  array  $array
      * @return boolean
      */
-    static function has($atributeName,$array) 
+    static function has($atributeName, $array)
     {
         $value = false;
         if (is_array($array) && array_key_exists($atributeName, $array)) {
@@ -74,18 +74,18 @@ class ArrayHelper
      * @param mixed  $DefaultValue
      * @return mixed
      */
-    static function getDefaultValeu($array,$atributeName,$DefaultValue) 
+    static function getDefaultValeu($array, $atributeName, $DefaultValue)
     {
         $value = $DefaultValue;
-        if(self::has($atributeName, $array) ) {
-            if(isset($array[$atributeName]) && ($array[$atributeName]<>'') ) {
+        if (self::has($atributeName, $array)) {
+            if (isset($array[$atributeName]) && ($array[$atributeName]<>'')) {
                 $value = $array[$atributeName];
             }
         }
         return $value;
     }
     
-    static function get($array,$atributeName) 
+    static function get($array, $atributeName)
     {
         $result = self::getDefaultValeu($array, $atributeName, null);
         return $result;
@@ -97,15 +97,15 @@ class ArrayHelper
      * @param  array $array
      * @return array
      */
-    static function convertArrayPdo2FormDin($dataArray,$upperCase = true) 
+    static function convertArrayPdo2FormDin($dataArray, $upperCase = true)
     {
         $result = false;
-        if(is_array($dataArray) ) {
-            foreach( $dataArray as $k => $arr ) {
-                foreach( $arr as $fieldName => $value ) {
-                    if($upperCase) {
+        if (is_array($dataArray)) {
+            foreach ($dataArray as $k => $arr) {
+                foreach ($arr as $fieldName => $value) {
+                    if ($upperCase) {
                         $result[ strtoupper($fieldName) ][ $k ] = $value;
-                    }else{
+                    } else {
                         $result[ $fieldName ][ $k ] = $value;
                     }
                 }
@@ -114,4 +114,3 @@ class ArrayHelper
         return $result;
     }
 }
-?>

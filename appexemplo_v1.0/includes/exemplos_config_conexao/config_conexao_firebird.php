@@ -39,9 +39,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 // firebird
-define('BANCO','FIREBIRD');
-define('DATABASE','BDAPOIO.GDB');
-define('UTF8_DECODE',0);
-define('USUARIO','SYSDBA');
-define('SENHA','masterkey');
-?>
+define('BANCO', 'FIREBIRD');
+define('DATABASE', 'BDAPOIO.GDB');
+define('UTF8_DECODE', 0);
+define('USUARIO', 'SYSDBA');
+define('SENHA', 'masterkey');

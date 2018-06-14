@@ -36,38 +36,26 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-if( !session_id())
-{
-	session_start();
+if (!session_id()) {
+    session_start();
 }
 $res=null;
 // ler da sessão os arquivos já anexados
-if( isset($_SESSION['meus_anexos'] ) )
-{
-	$i=0;
-	foreach($_SESSION['meus_anexos'] as $fileName=>$aDados)
-	{
-		$res['SEQ_ARQUIVO'][$i] =	( $i+1 );
-		$res['NOM_ARQUIVO'][$i] =	utf8_decode($fileName);
-		foreach($aDados as $key => $val)
-		{
-			$res[$key][$i] = $val;
-		}
-		$i++;
-	}
+if (isset($_SESSION['meus_anexos'])) {
+    $i=0;
+    foreach ($_SESSION['meus_anexos'] as $fileName => $aDados) {
+        $res['SEQ_ARQUIVO'][$i] =   ( $i+1 );
+        $res['NOM_ARQUIVO'][$i] =   utf8_decode($fileName);
+        foreach ($aDados as $key => $val) {
+            $res[$key][$i] = $val;
+        }
+        $i++;
+    }
 }
-$gride = new TGrid('gd4'
-				,null
-				,$res
-				,null
-				,null
-				,'SEQ_ARQUIVO'
-				,'NOM_TEMP,NOM_ARQUIVO'
-				);
-$gride->addButton('Visualizar',null,'btnVisualizar','btnVisualizarClick()');
-$gride->addButton('Remover',null,'btnRemover','btnRemoverClick()');
+$gride = new TGrid('gd4', null, $res, null, null, 'SEQ_ARQUIVO', 'NOM_TEMP,NOM_ARQUIVO');
+$gride->addButton('Visualizar', null, 'btnVisualizar', 'btnVisualizarClick()');
+$gride->addButton('Remover', null, 'btnRemover', 'btnRemoverClick()');
 $gride->addRowNumColumn();
-$gride->addColumn('NOM_ARQUIVO','Arquivos Anexados',800,'left');
+$gride->addColumn('NOM_ARQUIVO', 'Arquivos Anexados', 800, 'left');
 $gride->setExportExcel(false);
 $gride->show();
-?>

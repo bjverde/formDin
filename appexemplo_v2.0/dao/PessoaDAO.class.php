@@ -2,31 +2,32 @@
 class PessoaDAO extends TPDOConnection
 {
 
-    public static function insert( PessoaVO $objVo )
+    public static function insert(PessoaVO $objVo)
     {
-        if($objVo->getIdpessoa() ) {
+        if ($objVo->getIdpessoa()) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getNome() 
-         , $objVo->getTipo() 
-         , $objVo->getDat_inclusao() 
+        $values = array(  $objVo->getNome()
+         , $objVo->getTipo()
+         , $objVo->getDat_inclusao()
          );
         return self::executeSql(
             'insert into pessoa(
 								 nome
 								,tipo
 								,dat_inclusao
-								) values (?,?,?)', $values 
+								) values (?,?,?)',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public static function delete($id)
     {
         $values = array($id);
         return self::executeSql('delete from pessoa where idpessoa = ?', $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select( $id )
+    public static function select($id)
     {
         $values = array($id);
         return self::executeSql(
@@ -35,11 +36,12 @@ class PessoaDAO extends TPDOConnection
 								,nome
 								,tipo
 								,dat_inclusao
-								from pessoa where idpessoa = ?', $values 
+								from pessoa where idpessoa = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public static function selectAll($orderBy = null, $where = null)
     {
         return self::executeSql(
             'select
@@ -53,7 +55,7 @@ class PessoaDAO extends TPDOConnection
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update( PessoaVO $objVo )
+    public static function update(PessoaVO $objVo)
     {
         $values = array( $objVo->getNome()
          ,$objVo->getTipo()
@@ -64,9 +66,9 @@ class PessoaDAO extends TPDOConnection
 								 nome = ?
 								,tipo = ?
 								,dat_inclusao = ?
-								where idpessoa = ?', $values
+								where idpessoa = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
 }
-?>

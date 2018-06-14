@@ -39,18 +39,16 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 d($_REQUEST);
-$frm = new TForm('Exemplo de Redirect - Form 2',200,600);
-$frm->addTextField('nom_pessoa2','Nome:',20);
-$frm->addHtmlField('html','Este é o form 2, clique no botão Ir para VOLTAR para o form 1')->setCss('color','red');
+$frm = new TForm('Exemplo de Redirect - Form 2', 200, 600);
+$frm->addTextField('nom_pessoa2', 'Nome:', 20);
+$frm->addHtmlField('html', 'Este é o form 2, clique no botão Ir para VOLTAR para o form 1')->setCss('color', 'red');
 $frm->setAction('Voltar,Ir');
 
 $acao = isset($acao) ? $acao : null;
 if ($acao == 'Voltar') {
-	$frm->redirect ( 'exe_redirect.inc', 'Redirect realizado com sucesso. Você está agora no 1º form.' );
-} else if ($acao == 'Ir') {
-	$frm->redirect ( 'exe_redirect_form3.inc', 'Redirect realizado com sucesso. Você está agora no 3º form.', null, null, false );
+    $frm->redirect('exe_redirect.inc', 'Redirect realizado com sucesso. Você está agora no 1º form.');
+} elseif ($acao == 'Ir') {
+    $frm->redirect('exe_redirect_form3.inc', 'Redirect realizado com sucesso. Você está agora no 3º form.', null, null, false);
 }
 
 $frm->show();
-?>
-

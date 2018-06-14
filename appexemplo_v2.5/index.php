@@ -38,12 +38,12 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-include ('../base/classes/webform/TApplication.class.php');
+include('../base/classes/webform/TApplication.class.php');
 
 
-define('APLICATIVO','APPEV25');
-define('FORMDIN',1);
-define('DECIMAL_SEPARATOR',',');
+define('APLICATIVO', 'APPEV25');
+define('FORMDIN', 1);
+define('DECIMAL_SEPARATOR', ',');
 
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
@@ -57,4 +57,3 @@ $app->setLoginFile('includes/tela_login.php');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
 $app->run();
-?>

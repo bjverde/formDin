@@ -39,27 +39,27 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Estilos do Menu Principal',230,600);
-$frm->setCss('background-color','#FAFAD2');
-$frm->addHtmlField('current','')->setCss(array('font-size'=>14,'color'=>'blue','text-align'=>'center','margin-bottom'=>"10px"));
-$frm->addButton('standard',null,'btn1','setMenu("standard")',null,true,false);
-$frm->addButton('aqua_dark',null,'btn2','setMenu("aqua_dark")',null,false,false);
-$frm->addButton('aqua_sky',null,'btn3','setMenu("aqua_sky")',null,false,false);
-$frm->addButton('aqua_orange',null,'btn4','setMenu("aqua_orange")',null,false,false);
-$frm->addButton('clear_blue',null,'btn5','setMenu("clear_blue")',null,false,false);
-$frm->addButton('clear_green',null,'btn6','setMenu("clear_green")',null,false,false);
+$frm = new TForm('Estilos do Menu Principal', 230, 600);
+$frm->setCss('background-color', '#FAFAD2');
+$frm->addHtmlField('current', '')->setCss(array('font-size'=>14,'color'=>'blue','text-align'=>'center','margin-bottom'=>"10px"));
+$frm->addButton('standard', null, 'btn1', 'setMenu("standard")', null, true, false);
+$frm->addButton('aqua_dark', null, 'btn2', 'setMenu("aqua_dark")', null, false, false);
+$frm->addButton('aqua_sky', null, 'btn3', 'setMenu("aqua_sky")', null, false, false);
+$frm->addButton('aqua_orange', null, 'btn4', 'setMenu("aqua_orange")', null, false, false);
+$frm->addButton('clear_blue', null, 'btn5', 'setMenu("clear_blue")', null, false, false);
+$frm->addButton('clear_green', null, 'btn6', 'setMenu("clear_green")', null, false, false);
 
-$frm->addButton('dhx_black',null,'btn7','setMenu("dhx_black")',null,true,false);
-$frm->addButton('dhx_blue',null,'btn8','setMenu("dhx_blue")',null,false,false);
-$frm->addButton('glassy_blue',null,'btn9','setMenu("glassy_blue")',null,false,false);
-$frm->addButton('modern_black',null,'btn10','setMenu("modern_black")',null,false,false);
-$frm->addButton('modern_black',null,'btn11','setMenu("modern_black")',null,false,false);
-$frm->addButton('modern_blue',null,'btn12','setMenu("modern_blue")',null,false,false);
+$frm->addButton('dhx_black', null, 'btn7', 'setMenu("dhx_black")', null, true, false);
+$frm->addButton('dhx_blue', null, 'btn8', 'setMenu("dhx_blue")', null, false, false);
+$frm->addButton('glassy_blue', null, 'btn9', 'setMenu("glassy_blue")', null, false, false);
+$frm->addButton('modern_black', null, 'btn10', 'setMenu("modern_black")', null, false, false);
+$frm->addButton('modern_black', null, 'btn11', 'setMenu("modern_black")', null, false, false);
+$frm->addButton('modern_blue', null, 'btn12', 'setMenu("modern_blue")', null, false, false);
 
-$frm->addButton('modern_red',null,'btn13','setMenu("modern_red")',null,true,false);
-$frm->addButton('clear_silver',null,'btn14','setMenu("clear_silver")',null,false,false);
+$frm->addButton('modern_red', null, 'btn13', 'setMenu("modern_red")', null, true, false);
+$frm->addButton('clear_silver', null, 'btn14', 'setMenu("clear_silver")', null, false, false);
 
-$frm->addHtmlField('message','Para alterar o tema do menu, adicione a linha <blink><b><span id="exemplo">$app->setMenuTheme("clear_silver");</span></b></blink> no index.php')->setCss(array('font-size'=>12,'color'=>'red','text-align'=>'center','font-weight'=>'normal','margin-top'=>'10px'));
+$frm->addHtmlField('message', 'Para alterar o tema do menu, adicione a linha <blink><b><span id="exemplo">$app->setMenuTheme("clear_silver");</span></b></blink> no index.php')->setCss(array('font-size'=>12,'color'=>'red','text-align'=>'center','font-weight'=>'normal','margin-top'=>'10px'));
 
 $frm->addJavascript('jQuery("#current").html(top.menuTheme+"<br/>")');
 $frm->show();
@@ -67,9 +67,9 @@ $frm->show();
 <script>
 function setMenu(tema)
 {
-	top.app_change_menu_theme(tema,'includes/menu.php');
-	jQuery("#current").html(tema);
-	jQuery("#exemplo").html('$app->setMenuTheme("'+tema+'");');
+    top.app_change_menu_theme(tema,'includes/menu.php');
+    jQuery("#current").html(tema);
+    jQuery("#exemplo").html('$app->setMenuTheme("'+tema+'");');
 
 }
 </script>

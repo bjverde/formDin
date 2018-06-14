@@ -72,4 +72,3 @@ $menu->add('104', '10', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php')
 $menu->add('105', '10', 'Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, 'smiley-1-512.png');
 
 $menu->getXml();
-?>

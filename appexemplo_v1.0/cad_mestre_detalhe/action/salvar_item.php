@@ -38,4 +38,3 @@
 $vo = new Tb_pedido_itemVO();
 $frm->setVo($vo);
 Tb_pedido_itemDAO::insert($vo);
-?>

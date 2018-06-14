@@ -43,34 +43,38 @@ require_once '../classes/helpers/DateTimeHelper.class.php';
 /**
  * DateTimeHelper test case.
  */
-class DateTimeHelperTest extends PHPUnit_Framework_TestCase {
+class DateTimeHelperTest extends PHPUnit_Framework_TestCase
+{
 
-    public function testDate_null() {
+    public function testDate_null()
+    {
         $esperado = null;
         $estrada = null;
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testDate_white() {
+    public function testDate_white()
+    {
         $esperado = null;
         $estrada = '';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
-    }    
+    }
     
-    public function testDate_01() {
+    public function testDate_01()
+    {
         $esperado = '2019-10-02';
         $estrada = '02/10/2019';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testDate_02() {
+    public function testDate_02()
+    {
         $esperado = '1900-01-02';
         $estrada = '02/01/1900';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }
-    
 }

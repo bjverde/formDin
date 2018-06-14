@@ -41,23 +41,22 @@
 
 class RequestHelper
 {
-    static function get($atributeName) 
+    static function get($atributeName)
     {
-        if(!isset($_REQUEST[$atributeName])) {
+        if (!isset($_REQUEST[$atributeName])) {
             $_REQUEST[$atributeName]=null;
         }
         return is_null($_REQUEST[$atributeName])?null:trim($_REQUEST[$atributeName]);
     }
     
-    static function getDefaultValeu($atributeName,$DefaultValue) 
+    static function getDefaultValeu($atributeName, $DefaultValue)
     {
         $value = null;
-        if(isset($_REQUEST[$atributeName]) && ($_REQUEST[$atributeName]<>'') ) {
+        if (isset($_REQUEST[$atributeName]) && ($_REQUEST[$atributeName]<>'')) {
             $value = $_REQUEST[$atributeName];
-        }else{
+        } else {
             $value = $DefaultValue;
         }
         return $value;
     }
 }
-?>
