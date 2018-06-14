@@ -19,12 +19,12 @@
 </style>
 <?php
 
-function testar($extensao=null,$html)
+function testar($extensao = null, $html)
 {
-    if(!extension_loaded($extensao) ) {
+    if (!extension_loaded($extensao)) {
         $html->add('<b>'.$extensao.'</b>: <span class="vermelho">Não instalada</span><br>');
         return true;
-    }else {
+    } else {
         $html->add('<b>'.$extensao.'</b>: <span class="verde">Instalada.</span><br>');
         return false;
     }
@@ -32,18 +32,18 @@ function testar($extensao=null,$html)
 
 function infoSQLServer()
 {
-    if(PHP_OS == "Linux") {
+    if (PHP_OS == "Linux") {
         $msg = "Para utilizar Linux com Microsoft SQL Server será utilizado o PDO com o drive dblib";
-    }else{
-        switch(PHP_INT_SIZE) {
-        case 4:
-            $msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
-            break;
-        case 8:
-            $msg = '<span class="vermelho">ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits</span>, instale o drive não oficial';
-            break;
-        default:
-            $msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
+    } else {
+        switch (PHP_INT_SIZE) {
+            case 4:
+                $msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
+                break;
+            case 8:
+                $msg = '<span class="vermelho">ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits</span>, instale o drive não oficial';
+                break;
+            default:
+                $msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
         }
     }
     return $msg;
@@ -54,7 +54,7 @@ function phpVersionOK()
     $texto = '<b>VersÃ£o do PHP</b>: ';
     if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
         $texto =  $texto.'<span class="verde">'.phpversion().'</span><br>';
-    }else{
+    } else {
         $texto =  $texto.'<span class="vermelho">'.phpversion().' atualize seu sistema para o PHP 5.4.0 ou seperior </span><br>';
     }
     return $texto;
@@ -85,7 +85,8 @@ function phpVersionOK()
     $html->add('<br>');
     testar('pdo', $html);
     testar('PDO_Firebird', $html);
-    $html->add(infoSQLServer()); testar('pdo_sqlsrv', $html);
+    $html->add(infoSQLServer());
+testar('pdo_sqlsrv', $html);
     testar('pdo_mysql', $html);
     testar('PDO_OCI', $html);
     testar('PDO_ODBC', $html);

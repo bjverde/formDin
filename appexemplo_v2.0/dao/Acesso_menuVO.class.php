@@ -15,7 +15,7 @@ class Acesso_menuVO
     private $sit_ativo = null;
     private $dat_inclusao = null;
     private $dat_update = null;
-    public function __construct( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+    public function __construct($idmenu = null, $idmenu_pai = null, $nom_menu = null, $url = null, $tooltip = null, $img_menu = null, $imgdisabled = null, $dissabled = null, $hotkey = null, $boolseparator = null, $jsonparams = null, $sit_ativo = null, $dat_inclusao = null, $dat_update = null)
     {
         $this->setIdmenu($idmenu);
         $this->setIdmenu_pai($idmenu_pai);
@@ -33,7 +33,7 @@ class Acesso_menuVO
         $this->setDat_update($dat_update);
     }
     //--------------------------------------------------------------------------------
-    function setIdmenu( $strNewValue = null )
+    function setIdmenu($strNewValue = null)
     {
         $this->idmenu = $strNewValue;
     }
@@ -42,7 +42,7 @@ class Acesso_menuVO
         return $this->idmenu;
     }
     //--------------------------------------------------------------------------------
-    function setIdmenu_pai( $strNewValue = null )
+    function setIdmenu_pai($strNewValue = null)
     {
         $this->idmenu_pai = $strNewValue;
     }
@@ -51,7 +51,7 @@ class Acesso_menuVO
         return $this->idmenu_pai;
     }
     //--------------------------------------------------------------------------------
-    function setNom_menu( $strNewValue = null )
+    function setNom_menu($strNewValue = null)
     {
         $this->nom_menu = $strNewValue;
     }
@@ -60,7 +60,7 @@ class Acesso_menuVO
         return $this->nom_menu;
     }
     //--------------------------------------------------------------------------------
-    function setUrl( $strNewValue = null )
+    function setUrl($strNewValue = null)
     {
         $this->url = $strNewValue;
     }
@@ -69,7 +69,7 @@ class Acesso_menuVO
         return $this->url;
     }
     //--------------------------------------------------------------------------------
-    function setTooltip( $strNewValue = null )
+    function setTooltip($strNewValue = null)
     {
         $this->tooltip = $strNewValue;
     }
@@ -78,7 +78,7 @@ class Acesso_menuVO
         return $this->tooltip;
     }
     //--------------------------------------------------------------------------------
-    function setImg_menu( $strNewValue = null )
+    function setImg_menu($strNewValue = null)
     {
         $this->img_menu = $strNewValue;
     }
@@ -87,7 +87,7 @@ class Acesso_menuVO
         return $this->img_menu;
     }
     //--------------------------------------------------------------------------------
-    function setImgdisabled( $strNewValue = null )
+    function setImgdisabled($strNewValue = null)
     {
         $this->imgdisabled = $strNewValue;
     }
@@ -96,7 +96,7 @@ class Acesso_menuVO
         return $this->imgdisabled;
     }
     //--------------------------------------------------------------------------------
-    function setDissabled( $strNewValue = null )
+    function setDissabled($strNewValue = null)
     {
         $this->dissabled = $strNewValue;
     }
@@ -105,7 +105,7 @@ class Acesso_menuVO
         return $this->dissabled;
     }
     //--------------------------------------------------------------------------------
-    function setHotkey( $strNewValue = null )
+    function setHotkey($strNewValue = null)
     {
         $this->hotkey = $strNewValue;
     }
@@ -114,7 +114,7 @@ class Acesso_menuVO
         return $this->hotkey;
     }
     //--------------------------------------------------------------------------------
-    function setBoolseparator( $strNewValue = null )
+    function setBoolseparator($strNewValue = null)
     {
         $this->boolseparator = $strNewValue;
     }
@@ -123,7 +123,7 @@ class Acesso_menuVO
         return $this->boolseparator;
     }
     //--------------------------------------------------------------------------------
-    function setJsonparams( $strNewValue = null )
+    function setJsonparams($strNewValue = null)
     {
         $this->jsonparams = $strNewValue;
     }
@@ -132,7 +132,7 @@ class Acesso_menuVO
         return $this->jsonparams;
     }
     //--------------------------------------------------------------------------------
-    function setSit_ativo( $strNewValue = null )
+    function setSit_ativo($strNewValue = null)
     {
         $this->sit_ativo = $strNewValue;
     }
@@ -141,7 +141,7 @@ class Acesso_menuVO
         return $this->sit_ativo;
     }
     //--------------------------------------------------------------------------------
-    function setDat_inclusao( $strNewValue = null )
+    function setDat_inclusao($strNewValue = null)
     {
         $this->dat_inclusao = $strNewValue;
     }
@@ -150,7 +150,7 @@ class Acesso_menuVO
         return is_null($this->dat_inclusao) ? date('Y-m-d h:i:s') : $this->dat_inclusao;
     }
     //--------------------------------------------------------------------------------
-    function setDat_update( $strNewValue = null )
+    function setDat_update($strNewValue = null)
     {
         $this->dat_update = $strNewValue;
     }
@@ -160,4 +160,3 @@ class Acesso_menuVO
     }
     //--------------------------------------------------------------------------------
 }
-?>

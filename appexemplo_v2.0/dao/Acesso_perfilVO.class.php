@@ -5,7 +5,7 @@ class Acesso_perfilVO
     private $nom_perfil = null;
     private $sit_ativo = null;
     private $dat_inclusao = null;
-    public function __construct( $idperfil=null, $nom_perfil=null, $sit_ativo=null, $dat_inclusao=null )
+    public function __construct($idperfil = null, $nom_perfil = null, $sit_ativo = null, $dat_inclusao = null)
     {
         $this->setIdperfil($idperfil);
         $this->setNom_perfil($nom_perfil);
@@ -13,7 +13,7 @@ class Acesso_perfilVO
         $this->setDat_inclusao($dat_inclusao);
     }
     //--------------------------------------------------------------------------------
-    function setIdperfil( $strNewValue = null )
+    function setIdperfil($strNewValue = null)
     {
         $this->idperfil = $strNewValue;
     }
@@ -22,7 +22,7 @@ class Acesso_perfilVO
         return $this->idperfil;
     }
     //--------------------------------------------------------------------------------
-    function setNom_perfil( $strNewValue = null )
+    function setNom_perfil($strNewValue = null)
     {
         $this->nom_perfil = $strNewValue;
     }
@@ -31,7 +31,7 @@ class Acesso_perfilVO
         return $this->nom_perfil;
     }
     //--------------------------------------------------------------------------------
-    function setSit_ativo( $strNewValue = null )
+    function setSit_ativo($strNewValue = null)
     {
         $this->sit_ativo = $strNewValue;
     }
@@ -40,7 +40,7 @@ class Acesso_perfilVO
         return $this->sit_ativo;
     }
     //--------------------------------------------------------------------------------
-    function setDat_inclusao( $strNewValue = null )
+    function setDat_inclusao($strNewValue = null)
     {
         $this->dat_inclusao = $strNewValue;
     }
@@ -50,4 +50,3 @@ class Acesso_perfilVO
     }
     //--------------------------------------------------------------------------------
 }
-?>

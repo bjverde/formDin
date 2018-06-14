@@ -5,7 +5,7 @@ class PessoaVO
     private $nome = null;
     private $tipo = null;
     private $dat_inclusao = null;
-    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $dat_inclusao=null )
+    public function __construct($idpessoa = null, $nome = null, $tipo = null, $dat_inclusao = null)
     {
         $this->setIdpessoa($idpessoa);
         $this->setNome($nome);
@@ -13,7 +13,7 @@ class PessoaVO
         $this->setDat_inclusao($dat_inclusao);
     }
     //--------------------------------------------------------------------------------
-    function setIdpessoa( $strNewValue = null )
+    function setIdpessoa($strNewValue = null)
     {
         $this->idpessoa = $strNewValue;
     }
@@ -22,7 +22,7 @@ class PessoaVO
         return $this->idpessoa;
     }
     //--------------------------------------------------------------------------------
-    function setNome( $strNewValue = null )
+    function setNome($strNewValue = null)
     {
         $this->nome = $strNewValue;
     }
@@ -31,7 +31,7 @@ class PessoaVO
         return $this->nome;
     }
     //--------------------------------------------------------------------------------
-    function setTipo( $strNewValue = null )
+    function setTipo($strNewValue = null)
     {
         $this->tipo = $strNewValue;
     }
@@ -40,7 +40,7 @@ class PessoaVO
         return $this->tipo;
     }
     //--------------------------------------------------------------------------------
-    function setDat_inclusao( $strNewValue = null )
+    function setDat_inclusao($strNewValue = null)
     {
         $this->dat_inclusao = $strNewValue;
     }
@@ -50,4 +50,3 @@ class PessoaVO
     }
     //--------------------------------------------------------------------------------
 }
-?>

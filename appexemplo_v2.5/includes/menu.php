@@ -47,9 +47,8 @@ $userMenu = acessoUserMenuService::getAcessoUserMenuByLogin();
 $menu = new TMenuDhtmlx();
 
 //Gera o menu Basico
-foreach ($userMenu['IDMENU'] as $key => $value){
+foreach ($userMenu['IDMENU'] as $key => $value) {
     $menu->add($userMenu['IDMENU'][$key], $userMenu['IDMENU_PAI'][$key], $userMenu['NOM_MENU'][$key], $userMenu['URL'][$key], $userMenu['TOOLTIP'][$key], $userMenu['IMG_MENU'][$key]);
 }
 
 $menu->getXml();
-?>

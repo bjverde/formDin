@@ -2,24 +2,24 @@
 class Acesso_menuDAO extends TPDOConnection
 {
 
-    public static function insert( Acesso_menuVO $objVo )
+    public static function insert(Acesso_menuVO $objVo)
     {
-        if($objVo->getIdmenu() ) {
+        if ($objVo->getIdmenu()) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getIdmenu_pai() 
-         , $objVo->getNom_menu() 
-         , $objVo->getUrl() 
-         , $objVo->getTooltip() 
-         , $objVo->getImg_menu() 
-         , $objVo->getImgdisabled() 
-         , $objVo->getDissabled() 
-         , $objVo->getHotkey() 
-         , $objVo->getBoolseparator() 
-         , $objVo->getJsonparams() 
-         , $objVo->getSit_ativo() 
-         , $objVo->getDat_inclusao() 
-         , $objVo->getDat_update() 
+        $values = array(  $objVo->getIdmenu_pai()
+         , $objVo->getNom_menu()
+         , $objVo->getUrl()
+         , $objVo->getTooltip()
+         , $objVo->getImg_menu()
+         , $objVo->getImgdisabled()
+         , $objVo->getDissabled()
+         , $objVo->getHotkey()
+         , $objVo->getBoolseparator()
+         , $objVo->getJsonparams()
+         , $objVo->getSit_ativo()
+         , $objVo->getDat_inclusao()
+         , $objVo->getDat_update()
          );
         return self::executeSql(
             'insert into acesso_menu(
@@ -36,17 +36,18 @@ class Acesso_menuDAO extends TPDOConnection
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', $values 
+								) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public static function delete($id)
     {
         $values = array($id);
         return self::executeSql('delete from acesso_menu where idmenu = ?', $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select( $id )
+    public static function select($id)
     {
         $values = array($id);
         return self::executeSql(
@@ -65,11 +66,12 @@ class Acesso_menuDAO extends TPDOConnection
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								from acesso_menu where idmenu = ?', $values 
+								from acesso_menu where idmenu = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function selectMenuByLogin( $login_user )
+    public static function selectMenuByLogin($login_user)
     {
         $values = array($login_user);
         $sql = 'select
@@ -92,9 +94,9 @@ class Acesso_menuDAO extends TPDOConnection
 				where um.idmenu = m.idmenu 
 				AND um.login_user = ?';
         return self::executeSql($sql, $values);
-    }    
+    }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public static function selectAll($orderBy = null, $where = null)
     {
         return self::executeSql(
             'select
@@ -118,7 +120,7 @@ class Acesso_menuDAO extends TPDOConnection
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update( Acesso_menuVO $objVo )
+    public static function update(Acesso_menuVO $objVo)
     {
         $values = array( $objVo->getIdmenu_pai()
          ,$objVo->getNom_menu()
@@ -149,9 +151,9 @@ class Acesso_menuDAO extends TPDOConnection
 								,sit_ativo = ?
 								,dat_inclusao = ?
 								,dat_update = ?
-								where idmenu = ?', $values
+								where idmenu = ?',
+            $values
         );
     }
     //--------------------------------------------------------------------------------
 }
-?>

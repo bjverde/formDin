@@ -7,7 +7,7 @@ class Acesso_userVO
     private $sit_ativo = null;
     private $dat_inclusao = null;
     private $dat_update = null;
-    public function __construct( $iduser=null, $login_user=null, $pwd_user=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
+    public function __construct($iduser = null, $login_user = null, $pwd_user = null, $sit_ativo = null, $dat_inclusao = null, $dat_update = null)
     {
         $this->setIduser($iduser);
         $this->setlogin_user($login_user);
@@ -17,7 +17,7 @@ class Acesso_userVO
         $this->setDat_update($dat_update);
     }
     //--------------------------------------------------------------------------------
-    function setIduser( $strNewValue = null )
+    function setIduser($strNewValue = null)
     {
         $this->iduser = $strNewValue;
     }
@@ -26,7 +26,7 @@ class Acesso_userVO
         return $this->iduser;
     }
     //--------------------------------------------------------------------------------
-    function setlogin_user( $strNewValue = null )
+    function setlogin_user($strNewValue = null)
     {
         $this->login_user = $strNewValue;
     }
@@ -35,7 +35,7 @@ class Acesso_userVO
         return $this->login_user;
     }
     //--------------------------------------------------------------------------------
-    function setPwd_user( $strNewValue = null )
+    function setPwd_user($strNewValue = null)
     {
         $this->pwd_user = $strNewValue;
     }
@@ -44,7 +44,7 @@ class Acesso_userVO
         return $this->pwd_user;
     }
     //--------------------------------------------------------------------------------
-    function setSit_ativo( $strNewValue = null )
+    function setSit_ativo($strNewValue = null)
     {
         $this->sit_ativo = $strNewValue;
     }
@@ -53,7 +53,7 @@ class Acesso_userVO
         return $this->sit_ativo;
     }
     //--------------------------------------------------------------------------------
-    function setDat_inclusao( $strNewValue = null )
+    function setDat_inclusao($strNewValue = null)
     {
         $this->dat_inclusao = $strNewValue;
     }
@@ -62,7 +62,7 @@ class Acesso_userVO
         return is_null($this->dat_inclusao) ? date('Y-m-d h:i:s') : $this->dat_inclusao;
     }
     //--------------------------------------------------------------------------------
-    function setDat_update( $strNewValue = null )
+    function setDat_update($strNewValue = null)
     {
         $this->dat_update = $strNewValue;
     }
@@ -72,4 +72,3 @@ class Acesso_userVO
     }
     //--------------------------------------------------------------------------------
 }
-?>

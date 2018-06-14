@@ -2,8 +2,8 @@
 function autoriadeGravar(AutoridadeVO $autoridadeVO)
 {
     //Invertendo a string de data pois vem da tela dd-mm-yyyy
-    // e o mysql só entende yyyy-mm-dd    
-    $dat_evento = implode("-", array_reverse(explode("/", $autoridadeVO->getDat_evento())));    
+    // e o mysql só entende yyyy-mm-dd
+    $dat_evento = implode("-", array_reverse(explode("/", $autoridadeVO->getDat_evento())));
     
     $ordem = $autoridadeVO->getOrdem();
     $where = 'ordem ='.$ordem.' and dat_evento = \''.$dat_evento.'\'';
@@ -16,4 +16,3 @@ function autoriadeGravar(AutoridadeVO $autoridadeVO)
     }
     return $msg;
 }
-?>
