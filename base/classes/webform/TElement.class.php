@@ -394,7 +394,7 @@ class TElement
         else if( $this->tagType == 'doctype' )
         {
             $result
-                .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">'
+                .= '<!DOCTYPE html> '
                 . "\n";
         }
         else
