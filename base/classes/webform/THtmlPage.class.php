@@ -75,7 +75,7 @@ class THtmlPage extends TElement
 		$this->objBody->clearCss();
 		$this->objHtml->add($this->objBody);
 		$this->objHead->add('<meta http-equiv="Expires" content="Tue, 20 Aug 1996 14:25:27 GMT">');
-		$this->objHead->add('<meta http-equiv="Content-Type" content="text/html; charset='.$this->getCharset().'">');
+		$this->objHead->add('<meta charset="'.$this->getCharset().'">');
 		
 		$this->objTitle = new TElement('title');
 		$this->objTitle->clearCss();
