@@ -121,8 +121,21 @@ body
 	padding-top		:5px;
 	background-color:transparent;
 }
+#app_footer
+{
+	border			:0px;
+	font-size		:10px;
+	text-align		:center;
+	vertical-align	:middle;
+	color			:navy;
+	background		:#efefef;
+	background-repeat:repeat-x;
+	background-image:url('imagens/app/footerbgsilver.gif');
+}
 #app_footer_message
 {
+	float: left;
+	width: 30%;
 	border			:0px;
 	font-size		:10px;
 	color			:navy;
@@ -130,11 +143,12 @@ body
 	text-align		:center;
 	vertical-align	:middle;
 	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');
-
+	background-image:url('imagens/app/footerbgsilver.gif');	
 }
 #app_footer_company
 {
+	float: left;
+	width: 40%;
 	border			:0px;
 	font-size		:10px;
 	color			:navy;
@@ -146,16 +160,16 @@ body
 }
 #app_footer_module
 {
-	border-right	:0px solid silver;
-	border-top		:0px solid silver;
-	border-bottom	:0px solid silver;
+	float: right;
+	width: 30%;
+	border			:0px;
 	font-size		:10px;
 	color			:navy;
 	background		:white;
 	text-align		:center;
 	vertical-align	:middle;
 	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');
+	background-image:url('imagens/app/footerbgsilver.gif');	
 }
 #button_end_session
 {

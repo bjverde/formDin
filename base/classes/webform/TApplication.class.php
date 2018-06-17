@@ -1319,46 +1319,39 @@ class TApplication extends TLayout {
 			$this->cellHeader->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
 			$this->cellLogin->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
 		}
-	}
+	}	
+	
+	/**
+	 * Build defaulf page Footer  Div: app_footer
+	 * div chindren  app_footer_message,app_footer_company, app_footer_module
+	 */
 	private function buildPageFooter() {
 		if (! $this->getSouthArea ()) {
 			return;
 		}
-		/**
-		 * tabela do rodapé - app_footer
-		 * ids: app_footer_message,app_footer_company, app_footer_module
-		 */
-		$tbFooter = new TTable ( 'table_footer' );
-		$tbFooter->setProperty ( 'width', '100%' );
-		$tbFooter->setProperty ( 'border', '0' );
-		$tbFooter->setProperty ( 'cellpadding', '0px' );
-		$tbFooter->setProperty ( 'cellspacing', '0px' );
-		$this->getSouthArea ()->add ( $tbFooter );
 		
-		if ($this->getFooterContent ()) {
-			$row = $tbFooter->addRow ();
-			// app_footer_message
-			$cellFooter = $row->addCell ( $this->getFooterContent () );
-			$cellFooter->setId ( 'app_footer' );
-			$cellFooter->setCss ( 'width', '100%' );
-			$cellFooter->setCss ( 'Height', '30' );
+		$app_footer_message = new TElement( 'div' );
+		$app_footer_message->setId('app_footer_message');		
+		
+		$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
+		$app_footer_company = new TElement( 'div' );
+		$app_footer_company->setId('app_footer_company');
+		$app_footer_company->add($info_company);
+		
+		$app_footer_module = new TElement( 'div' );
+		$app_footer_module->setId('app_footer_module');
+		
+		$app_footer = new TElement( 'div' );
+		$app_footer->setId('app_footer');
+		
+		if ( $this->getFooterContent() ) {
+			$app_footer->add( $this->getFooterContent() );
 		} else {
-			$row = $tbFooter->addRow ();
-			// app_footer_message
-			$app_footer_message = $row->addCell ( '' );
-			$app_footer_message->setId ( 'app_footer_message' );
-			$app_footer_message->setCss ( 'width', '300' );
-			$app_footer_message->setCss ( 'Height', '20' );
-			// app_footer_company
-			$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
-			$app_footer_company = $row->addCell ( $info_company );
-			$app_footer_company->setId ( 'app_footer_company' );
-			$app_footer_company->setCss ( 'width', '*' );
-			// app_footer_module
-			$app_footer_module = $row->addCell ( '' );
-			$app_footer_module->setId ( '$app_footer_module' );
-			$app_footer_module->setCss ( 'width', '300' );
+			$app_footer->add($app_footer_message);
+			$app_footer->add($app_footer_company);
+			$app_footer->add($app_footer_module);
 		}
+		$this->getSouthArea()->add( $app_footer );
 	}
 	public function parsePhpFile($strFileName = null, $var = null) {
 		if (is_null ( $strFileName ) || ! file_exists ( $strFileName )) {
