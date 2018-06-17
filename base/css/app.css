@@ -121,41 +121,33 @@ body
 	padding-top		:5px;
 	background-color:transparent;
 }
-#app_footer_message
+
+#app_footer
 {
 	border			:0px;
 	font-size		:10px;
-	color			:navy;
-	background		:#efefef;
 	text-align		:center;
 	vertical-align	:middle;
+	color			:navy;
+	background		:#efefef;
+	height          :20px;
 	background-repeat:repeat-x;
 	background-image:url('imagens/app/footerbgsilver.gif');
-
+}
+#app_footer_message
+{
+	float: left;
+	width: 30%;
 }
 #app_footer_company
 {
-	border			:0px;
-	font-size		:10px;
-	color			:navy;
-	background		:#efefef;
-	text-align		:center;
-	vertical-align	:middle;
-	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');
+	float: left;
+	width: 40%;
 }
 #app_footer_module
 {
-	border-right	:0px solid silver;
-	border-top		:0px solid silver;
-	border-bottom	:0px solid silver;
-	font-size		:10px;
-	color			:navy;
-	background		:white;
-	text-align		:center;
-	vertical-align	:middle;
-	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');
+	float: right;
+	width: 30%;	
 }
 #button_end_session
 {

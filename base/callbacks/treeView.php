@@ -50,110 +50,85 @@ header("Content-type:text/xml");
 echo '<?xml version="1.0" encoding="iso-8859-1"?>';
 
 $debug=false;
-if( $debug )
-{
-	print	'<tree id="0">';
-	print	'	<item text="Tabela: '.$_REQUEST['tableName'].'" id="1"/>';
-	print	'	<item text="Coluna Pai: '.$_REQUEST['parentField'].'" id="2"/>';
-	print	'	<item text="Coluna Filha: '.$_REQUEST['childField'].'" id="3"/>';
-	print	'	<item text="Coluna Descrição: '.$_REQUEST['descField'].'" id="4"/>';
-	print	'	<item text="id request = '.$_REQUEST['id'].'" id="5"/>';
-	print 	'</tree>';
-	die();
+if ($debug) {
+    print   '<tree id="0">';
+    print   '	<item text="Tabela: '.$_REQUEST['tableName'].'" id="1"/>';
+    print   '	<item text="Coluna Pai: '.$_REQUEST['parentField'].'" id="2"/>';
+    print   '	<item text="Coluna Filha: '.$_REQUEST['childField'].'" id="3"/>';
+    print   '	<item text="Coluna Descrição: '.$_REQUEST['descField'].'" id="4"/>';
+    print   '	<item text="id request = '.$_REQUEST['id'].'" id="5"/>';
+    print   '</tree>';
+    die();
 }
 // parametro recebido pela chamada ajax
-if( isset( $_GET['id'] ) && ! is_null( $_GET['id'] ) && $_GET['id'] > '0' )
-{
-	//sleep(1);
-	$bvars = array( $_REQUEST['parentField'] => $_GET['id'] );
-	//sleep(2);
-}
-else
-{
-	$_GET['id'] = '0';
-	$bvars = null;
-	//sleep(4);
+if (isset($_GET['id']) && ! is_null($_GET['id']) && $_GET['id'] > '0') {
+    //sleep(1);
+    $bvars = array( $_REQUEST['parentField'] => $_GET['id'] );
+    //sleep(2);
+} else {
+    $_GET['id'] = '0';
+    $bvars = null;
+    //sleep(4);
 
-	foreach($_REQUEST as $k=>$v)
-	{
-		if(substr($k,0,3)=="_w_")
-		{
-			if( $_REQUEST['parentField'] != strtoupper(substr($k,3)) )
-			{
-				$bvars[strtoupper(substr($k,3))]= $v;
-			}
-		}
-	}
+    foreach ($_REQUEST as $k => $v) {
+        if (substr($k, 0, 3)=="_w_") {
+            if ($_REQUEST['parentField'] != strtoupper(substr($k, 3))) {
+                $bvars[strtoupper(substr($k, 3))]= $v;
+            }
+        }
+    }
 }
 // cria a instância do objeto treeData
-$tree = new TTreeViewData($_GET['id'],'');
+$tree = new TTreeViewData($_GET['id'], '');
 
 // recuperar os dados do banco de dados
 $res=null;
-if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 )
-{
-	$erro = recuperarPacote($_REQUEST['tableName'],$bvars,$res);
-	if( $erro )
-	{
-		$tree->addItem(new TTreeViewData($_GET['id'],$erro[ 0 ] ) );
-	}
+if (preg_match('/\.PK\a?/i', $_REQUEST['tableName']) > 0) {
+    $erro = recuperarPacote($_REQUEST['tableName'], $bvars, $res);
+    if ($erro) {
+        $tree->addItem(new TTreeViewData($_GET['id'], $erro[ 0 ]));
+    }
+} else {
+    // pdo
+    $where = '';
+    if (is_array($bvars)) {
+        foreach ($bvars as $k => $v) {
+            $where .= ($where =='' ? ' where ' :' and ').$k."='".$v."'";
+        }
+    } else {
+        if (isset($_REQUEST['initialParentKey'])) {
+            //$where =' where ('.$_REQUEST['parentField']." = '".$_REQUEST['initialParentKey']."' or ".$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
+            $where =' where ('.$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
+        } else {
+            $where =' where '.$_REQUEST['parentField'].' is null';
+        }
+    }
+    $sql = "select ".$_REQUEST['parentField'].','.$_REQUEST['childField'].",".$_REQUEST['descField']. " from ".$_REQUEST['tableName'].' '.$where;
+    //$tree->addItem(new TTreeViewData($_GET['id'],$sql ) );
+    $res = TPDOConnection::executeSql($sql);
+    //$res=null;
 }
-else
-{
-	// pdo
-	$where = '';
-	if( is_array($bvars) )
-	{
-		foreach($bvars as $k=>$v)
-		{
-			$where .= ($where =='' ? ' where ' :' and ').$k."='".$v."'";
-		}
-	}
-	else
-	{
-		if( isset($_REQUEST['initialParentKey']))
-		{
-			//$where =' where ('.$_REQUEST['parentField']." = '".$_REQUEST['initialParentKey']."' or ".$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
-			$where =' where ('.$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
-		}
-		else
-		{
-			$where =' where '.$_REQUEST['parentField'].' is null';
-		}
-	}
-	$sql = "select ".$_REQUEST['parentField'].','.$_REQUEST['childField'].",".$_REQUEST['descField']. " from ".$_REQUEST['tableName'].' '.$where;
-	//$tree->addItem(new TTreeViewData($_GET['id'],$sql ) );
-	$res = TPDOConnection::executeSql($sql);
-	//$res=null;
-}
-if( $res )
-{
-	foreach($res[ $_REQUEST['childField'] ] as $k=>$v)
-	{
-		// criar o array com userdata
-		$aUserData=null;
-		if( $_REQUEST['userDataFields'])
-		{
-			$aUserDataFields = explode(',',$_REQUEST['userDataFields']);
-			foreach( $aUserDataFields as $u => $f )
-			{
-				if( $res[ $f ][$k] )
-				{
-					$aUserData[$f]=$res[ $f ][$k];
-				}
-				else if( $res[ strtoupper( $f ) ][$k] )
-				{
-					$aUserData[$f]=$res[ strtoupper( $f ) ][$k];
-				}
-			}
-		}
-		$tree->addItem(new TTreeViewData(
-			$res[$_REQUEST['childField']][$k]
-			,(is_null($res[$_REQUEST['descField']][$k]) ? '':$res[$_REQUEST['descField']][$k] )
-			,null
-			,null
-			,$aUserData));
-	}
+if ($res) {
+    foreach ($res[ $_REQUEST['childField'] ] as $k => $v) {
+        // criar o array com userdata
+        $aUserData=null;
+        if ($_REQUEST['userDataFields']) {
+            $aUserDataFields = explode(',', $_REQUEST['userDataFields']);
+            foreach ($aUserDataFields as $u => $f) {
+                if ($res[ $f ][$k]) {
+                    $aUserData[$f]=$res[ $f ][$k];
+                } elseif ($res[ strtoupper($f) ][$k]) {
+                    $aUserData[$f]=$res[ strtoupper($f) ][$k];
+                }
+            }
+        }
+        $tree->addItem(new TTreeViewData(
+            $res[$_REQUEST['childField']][$k],
+            (is_null($res[$_REQUEST['descField']][$k]) ? '':$res[$_REQUEST['descField']][$k] ),
+            null,
+            null,
+            $aUserData
+        ));
+    }
 }
 echo $tree->getXml();
-?>

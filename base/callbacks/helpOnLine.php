@@ -39,16 +39,14 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if( $_REQUEST['id'] )
-{
-	print $_REQUEST['value'];
-	return 'luis';
+if ($_REQUEST['id']) {
+    print $_REQUEST['value'];
+    return 'luis';
 }
 $file = $_REQUEST['file'];
-if(strpos('http',$file)===0)
-{
-	header('location:'.$file);
-	die();
+if (strpos('http', $file)===0) {
+    header('location:'.$file);
+    die();
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -61,41 +59,41 @@ if(strpos('http',$file)===0)
 <script type="text/javascript" src="../js/jquery/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.jeditable.mini.js"></script>
 <script language="javascript" >
-	jQuery(document).ready(
-		function()
-		{
-			//http://www.appelsiini.net/projects/jeditable
-			/*jQuery('.editable').editable('../../modulos/gravar_ajuda.php',
-			{
-         		type	: 'textarea',
-         		submit  : 'Salvar'
-     		});
-     		*/
-			jQuery('.editInPlace').editable('../../base/callbacks/helpOnLine.php',
-			{
-         		type	: 'textarea',
-         		submit  : 'Salvar',
-				/*style  : 'inherit'*/
-				cssclass : "editable"
-				
-     		});
-		}
-	);
+    jQuery(document).ready(
+        function()
+        {
+            //http://www.appelsiini.net/projects/jeditable
+            /*jQuery('.editable').editable('../../modulos/gravar_ajuda.php',
+            {
+                type    : 'textarea',
+                submit  : 'Salvar'
+            });
+            */
+            jQuery('.editInPlace').editable('../../base/callbacks/helpOnLine.php',
+            {
+                type    : 'textarea',
+                submit  : 'Salvar',
+                /*style  : 'inherit'*/
+                cssclass : "editable"
+                
+            });
+        }
+    );
 </script>
 <style>
 .editInPlace 
 {
-	width:100%;
-	height:85%;
-	font-family: Arial;
-	font-size: 12px;
-	background-color: white;	
+    width:100%;
+    height:85%;
+    font-family: Arial;
+    font-size: 12px;
+    background-color: white;    
 }
 .editable
 {
-	background-color:yellow;
-	width:300px;
-	height:150px;
+    background-color:yellow;
+    width:300px;
+    height:150px;
 }
 </style>
 </head>
@@ -106,27 +104,23 @@ print '<pre>';
 print_r($_REQUEST);
 print '</pre>';
 /**
-* se no nome do arquivo não tiver a extensão .html, adicionar a extensão .html e se o arquivo 
+* se no nome do arquivo não tiver a extensão .html, adicionar a extensão .html e se o arquivo
 * não existir criar um em branco
 */
-if( strpos(strtolower($file),'.html') === false)
-{
-	$file.='.html';
+if (strpos(strtolower($file), '.html') === false) {
+    $file.='.html';
 }
 // se passar o nome do arquivo puro, procurar na pasta ajuda/
-if( strpos( $file, '../' ) === false) 
-{
-	$file = '../../ajuda/'.$file;	
+if (strpos($file, '../') === false) {
+    $file = '../../ajuda/'.$file;
 }
 // criar o arquivo
-if( ! file_exists($file) )
-{
-	//file_put_contents($file,'O texto de ajuda para este campo ainda não foi definido!');
+if (! file_exists($file)) {
+    //file_put_contents($file,'O texto de ajuda para este campo ainda não foi definido!');
 }
-if( file_exists($file) )
-{
-	print 'Arquivo:'.$file.'<hr>';
-	print file_get_contents($file);
+if (file_exists($file)) {
+    print 'Arquivo:'.$file.'<hr>';
+    print file_get_contents($file);
 }
 ?>
 </div>
