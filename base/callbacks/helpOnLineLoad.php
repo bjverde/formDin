@@ -40,14 +40,13 @@
  */
 
 error_reporting(0);
-ini_set('default_charset','iso-8859-1');
-$app		= mb_strtolower($_REQUEST['aplicativo']);
-$file 		= $_REQUEST['file'];
-$readOnly 	= isset($_REQUEST['readonly']) ? $_REQUEST['readonly'] : false;
-if(strpos('http',$file)===0)
-{
-	header('location:'.$file);
-	die();
+ini_set('default_charset', 'iso-8859-1');
+$app        = mb_strtolower($_REQUEST['aplicativo']);
+$file       = $_REQUEST['file'];
+$readOnly   = isset($_REQUEST['readonly']) ? $_REQUEST['readonly'] : false;
+if (strpos('http', $file)===0) {
+    header('location:'.$file);
+    die();
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -60,37 +59,37 @@ if(strpos('http',$file)===0)
 <script type="text/javascript" src="../js/jquery/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.jeditable.mini.js"></script>
 <script language="javascript" >
-	jQuery(document).ready(
-		function()
-		{
-			//site oficial: http://www.appelsiini.net/projects/jeditable
-			jQuery('.editInPlace').editable('../../base/callbacks/helpOnLineSave.php',
-			{
-         		type		:'textarea',
-         		submit  	:'Salvar',
-         		cancel		:'Cancelar',
-				cssclass	:'editable',
-				indicator	:'<br><center>Gravando...<br><img src="../imagens/processando.gif"></center>'
-				/*tooltip 	:'Clique aqui para editar o texto'*/
-     		});
-		}
-	);
+    jQuery(document).ready(
+        function()
+        {
+            //site oficial: http://www.appelsiini.net/projects/jeditable
+            jQuery('.editInPlace').editable('../../base/callbacks/helpOnLineSave.php',
+            {
+                type        :'textarea',
+                submit      :'Salvar',
+                cancel      :'Cancelar',
+                cssclass    :'editable',
+                indicator   :'<br><center>Gravando...<br><img src="../imagens/processando.gif"></center>'
+                /*tooltip   :'Clique aqui para editar o texto'*/
+            });
+        }
+    );
 </script>
 <style>
 .editInPlace
 {
-	width:100%;
-	height:80%;
-	font-family: Arial;
-	font-size: 12px;
-	background-color: transparent;
+    width:100%;
+    height:80%;
+    font-family: Arial;
+    font-size: 12px;
+    background-color: transparent;
 }
 .editable
 {
-	border:none;
-	/*width:300px;
-	height:150px;
-	*/
+    border:none;
+    /*width:300px;
+    height:150px;
+    */
 }
 </style>
 </head>
@@ -100,50 +99,40 @@ if(strpos('http',$file)===0)
 * se no nome do arquivo não tiver a extensão .html, adicionar a extensão .html e se o arquivo
 * não existir criar um em branco
 */
-if( preg_match('/\./',$file) == 0 )
-{
-	$file.='.html';
+if (preg_match('/\./', $file) == 0) {
+    $file.='.html';
 }
 
 // se passar o nome do arquivo puro, procurar na pasta ajuda/
-if( strpos( $file, '../' ) === false)
-{
-	//$dir = '../..'.( ($app) ? '/'.$app :'').'/ajuda/';
-	$dir = ( ($app) ? $app.'/' :'').'ajuda/';
+if (strpos($file, '../') === false) {
+    //$dir = '../..'.( ($app) ? '/'.$app :'').'/ajuda/';
+    $dir = ( ($app) ? $app.'/' :'').'ajuda/';
 }
-if( ! file_exists( $dir ) )
-{
-	print 'criar dir:'.$dir.'<br>';
-	mkdir($dir,'0777',true);
+if (! file_exists($dir)) {
+    print 'criar dir:'.$dir.'<br>';
+    mkdir($dir, '0777', true);
 }
-if( !file_exists($dir))
-{
-	die( 'Diretório não encontrado: '.$dir);
+if (!file_exists($dir)) {
+    die('Diretório não encontrado: '.$dir);
 }
 $file = $dir . $file;
 // abrir a div de edição
-if( !$readOnly )
-{
-	print '<div class="editInPlace" id="'.$file.'">';
+if (!$readOnly) {
+    print '<div class="editInPlace" id="'.$file.'">';
 }
 
 // criar o arquivo
-if( ! file_exists($file) )
-{
-	file_put_contents($file,'');
+if (! file_exists($file)) {
+    file_put_contents($file, '');
 }
-if( file_exists($file) )
-{
-	//print 'Arquivo:'.$file.'<hr>';
-	$html = file_get_contents($file);
-	if(!$readOnly && trim( $html)=='')
-	{
-		echo 'Clique aqui para editar o texto de ajuda!';
-	}
-	else
-	{
-		echo trim($html);
-	}
+if (file_exists($file)) {
+    //print 'Arquivo:'.$file.'<hr>';
+    $html = file_get_contents($file);
+    if (!$readOnly && trim($html)=='') {
+        echo 'Clique aqui para editar o texto de ajuda!';
+    } else {
+        echo trim($html);
+    }
 }
 ?>
 </div>
