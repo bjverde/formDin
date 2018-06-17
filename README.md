@@ -53,7 +53,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * fPDF 1.81
 * Ckeditor 3
 * JQuery 1.6
-** [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
+* [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
 
 ## Instalação.
 
