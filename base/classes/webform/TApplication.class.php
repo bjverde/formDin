@@ -1328,21 +1328,18 @@ class TApplication extends TLayout {
 	private function buildPageFooter() {
 		if (! $this->getSouthArea ()) {
 			return;
-		}
-		
-		$app_footer_message = new TElement( 'div' );
-		$app_footer_message->setId('app_footer_message');		
+		}		
+		$app_footer_message = new TDiv('app_footer_message');
 		
 		$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
-		$app_footer_company = new TElement( 'div' );
-		$app_footer_company->setId('app_footer_company');
+		$app_footer_company = new TDiv( 'app_footer_company' );
 		$app_footer_company->add($info_company);
 		
-		$app_footer_module = new TElement( 'div' );
-		$app_footer_module->setId('app_footer_module');
+		$app_footer_module = new TDiv( 'app_footer_module' );
 		
 		$app_footer = new TElement( 'div' );
 		$app_footer->setId('app_footer');
+		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
@@ -1350,7 +1347,8 @@ class TApplication extends TLayout {
 			$app_footer->add($app_footer_message);
 			$app_footer->add($app_footer_company);
 			$app_footer->add($app_footer_module);
-		}
+		}		
+		//$app_footer->add('&nbsp;');
 		$this->getSouthArea()->add( $app_footer );
 	}
 	public function parsePhpFile($strFileName = null, $var = null) {

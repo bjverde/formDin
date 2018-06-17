@@ -121,6 +121,7 @@ body
 	padding-top		:5px;
 	background-color:transparent;
 }
+
 #app_footer
 {
 	border			:0px;
@@ -129,6 +130,7 @@ body
 	vertical-align	:middle;
 	color			:navy;
 	background		:#efefef;
+	height          :20px;
 	background-repeat:repeat-x;
 	background-image:url('imagens/app/footerbgsilver.gif');
 }
@@ -136,40 +138,16 @@ body
 {
 	float: left;
 	width: 30%;
-	border			:0px;
-	font-size		:10px;
-	color			:navy;
-	background		:#efefef;
-	text-align		:center;
-	vertical-align	:middle;
-	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');	
 }
 #app_footer_company
 {
 	float: left;
 	width: 40%;
-	border			:0px;
-	font-size		:10px;
-	color			:navy;
-	background		:#efefef;
-	text-align		:center;
-	vertical-align	:middle;
-	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');
 }
 #app_footer_module
 {
 	float: right;
-	width: 30%;
-	border			:0px;
-	font-size		:10px;
-	color			:navy;
-	background		:white;
-	text-align		:center;
-	vertical-align	:middle;
-	background-repeat:repeat-x;
-	background-image:url('imagens/app/footerbgsilver.gif');	
+	width: 30%;	
 }
 #button_end_session
 {
