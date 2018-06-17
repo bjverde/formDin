@@ -53,6 +53,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * fPDF 1.81
 * Ckeditor 3
 * JQuery 1.6
+** [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
 
 ## Instalação.
 
@@ -77,6 +78,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * phpunit-code-coverage - cobertura de codigo dos testes unitarios 
 
 ## Versões
+* [4.2.3 - 2018/06/14 tag v4.2.3](https://github.com/bjverde/formDin/releases/tag/v4.2.3)
 * [4.2.2 - 2018/04/03 tag v4.2.2](https://github.com/bjverde/formDin/releases/tag/v4.2.2)
    * :hammer: novo metodo para trabalhar com data
    * :hammer: [consulta pagina aceitando Zero.](https://github.com/bjverde/formDin/commit/fb05317219c28e8b25aa9ee8f768989e2c44c86d)
