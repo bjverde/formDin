@@ -159,9 +159,9 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
     
     public function testgetDefaultPortDBMS_SqlLite()
     {
-    	$expected= null;
-    	$DBMS = DBMS_SQLITE;
-    	$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+        $expected= null;
+        $DBMS = DBMS_SQLITE;
+        $port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
     }
     
     public function testSetConfigUtf8Decode_ArrayEmpty()
@@ -177,13 +177,13 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
     
     public function testSetConfigUtf8Decode_ArrayUtf8Null()
     {
-    	$expected = true;
-    	
-    	$useConfigFile= false;
-    	$configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001');
-    	$this->TPDOConnection->setConfigUtf8Decode($useConfigFile, $configArray);
-    	$utf8 = $this->TPDOConnection->getUtfDecode();
-    	$this->assertSame($expected, $utf8);
+        $expected = true;
+        
+        $useConfigFile= false;
+        $configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001');
+        $this->TPDOConnection->setConfigUtf8Decode($useConfigFile, $configArray);
+        $utf8 = $this->TPDOConnection->getUtfDecode();
+        $this->assertSame($expected, $utf8);
     }
     
 
@@ -202,7 +202,7 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
     public function testSetConfigUtf8Decode_ArrayUtf8False()
     {
         $expected = false;
-        
+
         $useConfigFile= false;
         $configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001' , 'UTF8_DECODE' => 0);
         $this->TPDOConnection->setConfigUtf8Decode($useConfigFile, $configArray);
@@ -213,24 +213,24 @@ class TPDOConnectionTest extends PHPUnit_Framework_TestCase
     
     public function testValidateQtdParameters_ArrayParamsNull()
     {
-    	$expected = array();
-    	
-    	$sql = 'select id from product where qtd = 10';
-    	$arrParams = null;
-    	$result = $this->TPDOConnection->validateQtdParameters( $sql, $arrParams);
-    	$this->assertEquals($expected, $result);
+        $expected = array();
+        
+        $sql = 'select id from product where qtd = 10';
+        $arrParams = null;
+        $result = $this->TPDOConnection->validateQtdParameters($sql, $arrParams);
+        $this->assertEquals($expected, $result);
     }
     
     public function testValidateQtdParameters_ArrayParamsQtd3()
     {
-    	$expected = array( 10, 20, 30 );
-    	
-    	$sql = 'select id from product where qtd = ? and idItem = ? and idVendor = ?';
-    	$arrParams = array( 10, 20, 30 );
-    	$result = $this->TPDOConnection->validateQtdParameters( $sql, $arrParams);
-    	$error  = $this->TPDOConnection->getError();
-    	$this->assertEquals($expected, $result);    	
-    	$this->assertEquals(null, $error);
+        $expected = array( 10, 20, 30 );
+        
+        $sql = 'select id from product where qtd = ? and idItem = ? and idVendor = ?';
+        $arrParams = array( 10, 20, 30 );
+        $result = $this->TPDOConnection->validateQtdParameters($sql, $arrParams);
+        $error  = $this->TPDOConnection->getError();
+        $this->assertEquals($expected, $result);
+        $this->assertEquals(null, $error);
     }
     
     public function testPrepareArray_string()

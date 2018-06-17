@@ -40,30 +40,26 @@
  */
 
 sleep(1); // mostrar a imagem de processando.
-ini_set('default_charset','iso-8859-1');
+ini_set('default_charset', 'iso-8859-1');
 error_reporting(0);
 $file = $_REQUEST['id'];
 /**
 * se no nome do arquivo não tiver a extensão .html, adicionar a extensão .html e se o arquivo
 * não existir criar um em branco
 */
-if( strpos(strtolower($file),'.html') === false)
-{
-	$file.='.html';
+if (strpos(strtolower($file), '.html') === false) {
+    $file.='.html';
 }
 // se passar o nome do arquivo puro, procurar na pasta ajuda/
-if( strpos( $file, '../' ) === false)
-{
-	$file = '../../ajuda/'.$file;
+if (strpos($file, '../') === false) {
+    $file = '../../ajuda/'.$file;
 }
 // gravar o arquivo / Remover tag iframe
 $_REQUEST['value'] = preg_replace('/{(<iframe).*?(>).*?(<\/iframe>)}/i', '', $_REQUEST['value']);
 //$_REQUEST['value'] .=utf8_encode('<hr><center>Alterado por:Luis Eugênio em '.date('d/m/Y h:i:s').'</center>');
-if(!file_put_contents($file,utf8_decode($_REQUEST['value'])))
-{
-	print '<script>alert("Não foi possível gravar o texto, verifique as permissões de escrita no arquivo '.$file.')</script>';
-	return;
+if (!file_put_contents($file, utf8_decode($_REQUEST['value']))) {
+    print '<script>alert("Não foi possível gravar o texto, verifique as permissões de escrita no arquivo '.$file.')</script>';
+    return;
 }
 print utf8_decode($_REQUEST['value']);
 print '<script>alert("Gravação Ok");</script>';
-?>
