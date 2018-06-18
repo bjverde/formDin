@@ -294,6 +294,8 @@ class TPDOConnection {
             if ( !defined( 'PORT' ) ) {
                 define( 'PORT', $portDefault );
                 self::$port  = $portDefault;
+            }else{
+            	self::$port  = PORT;
             }
         }else{
             $DBMS = self::getDBMS();
