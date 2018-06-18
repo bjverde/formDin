@@ -43,12 +43,10 @@ require_once '../callbacks/autocomplete_functions.php';
 /**
  * GetHelper test case.
  */
-class autocomplete_functionsTest extends PHPUnit_Framework_TestCase
-{
+class autocomplete_functionsTest extends PHPUnit_Framework_TestCase {
 
-    public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE()
-    {
-        $_REQUEST['q'] = 'x';
+	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
+		$_REQUEST['q'] = 'x';
         $bvars = null;
         $boolSearchAnyPosition = false;
         $arrUpdateFields = null;
@@ -61,19 +59,19 @@ class autocomplete_functionsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testTableRecoverCreateSql_boolSearchAnyPositionTRUE()
-    {
-        $_REQUEST['q'] = 'x';
-        $bvars = null;
-        $boolSearchAnyPosition = true;
-        $arrUpdateFields = null;
-        $strSearchField = 'nome_camplo_coluna';
-        $strTablePackageFuncion = 'table_sys';
-        
-        $esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
-        
-        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
-        
-        $this->assertEquals($esperado, $retorno);
+    public function testTableRecoverCreateSql_boolSearchAnyPositionTRUE() {
+    	$_REQUEST['q'] = 'x';
+    	$bvars = null;
+    	$boolSearchAnyPosition = true;
+    	$arrUpdateFields = null;
+    	$strSearchField = 'nome_camplo_coluna';
+    	$strTablePackageFuncion = 'table_sys';
+    	
+    	$esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
+    	
+    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
+    	
+    	$this->assertEquals($esperado, $retorno);
     }
+    
 }

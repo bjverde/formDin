@@ -44,166 +44,148 @@ require_once '../classes/helpers/paginationSQLHelper.class.php';
 /**
  * paginationSQLHelper test case.
  */
-class paginationSQLHelperTest extends PHPUnit_Framework_TestCase
-{
-    
-    public function testGetRowStart_pageNullAndRowsPerPageNull()
-    {
-        $expected = 0;
-        $page = null;
-        $rowsPerPage =  null;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page1AndRowsPerPageNull()
-    {
-        $expected = 0;
-        $page = 1;
-        $rowsPerPage =  null;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page2AndRowsPerPageNull()
-    {
-        $expected = 20;
-        $page = 2;
-        $rowsPerPage =  null;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_pageNullAndRowsPerPage10()
-    {
-        $expected = 0;
-        $page = null;
-        $rowsPerPage =  10;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page1AndRowsPerPage30()
-    {
-        $expected = 0;
-        $page = 1;
-        $rowsPerPage =  30;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page2AndRowsPerPage30()
-    {
-        $expected = 30;
-        $page = 2;
-        $rowsPerPage =  30;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page3AndRowsPerPage10()
-    {
-        $expected = 20;
-        $page = 3;
-        $rowsPerPage =  10;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page2AndRowsPerPage13()
-    {
-        $expected = 13;
-        $page = 2;
-        $rowsPerPage =  13;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page3AndRowsPerPage13()
-    {
-        $expected = 26;
-        $page = 3;
-        $rowsPerPage =  13;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    
-    public function testGetRowStart_page10AndRowsPerPage13()
-    {
-        $expected = 117;
-        $page = 10;
-        $rowsPerPage =  13;
-        $result = paginationSQLHelper::getRowStart($page, $rowsPerPage);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeNull_FALSE()
-    {
-        $expected = 'ISFALSE';
-        $whereGrid = null;
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeWhite_FALSE()
-    {
-        $expected = 'ISFALSE';
-        $whereGrid['NUMERO']='';
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroOmitted()
-    {
-        $expected = 'ISFALSE';
-        $whereGrid['NUMERO']=0;
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroTRUE()
-    {
-        $expected = 'ISFALSE';
-        $whereGrid['NUMERO']=0;
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse, true);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroFALSE()
-    {
-        $expected = 'ISTRUE';
-        $whereGrid['NUMERO']=0;
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse, false);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_AttributeSearchDoNotExist_FALSE()
-    {
-        $expected = 'ISFALSE';
-        $whereGrid['NUMBER']=0;
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'X', $isTrue, $isFalse);
-        $this->assertEquals($expected, $result);
-    }
-    //--------------------------------------------------------------------------------
-    public function testAttributeIssetOrNotZero_Attribute_TRUE()
-    {
-        $expected = 'ISTRUE';
-        $whereGrid['NUMERO']='xxx';
-        $isTrue = 'ISTRUE';
-        $isFalse = 'ISFALSE';
-        $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid, 'NUMERO', $isTrue, $isFalse);
-        $this->assertEquals($expected, $result);
-    }
+class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
+	
+	public function testGetRowStart_pageNullAndRowsPerPageNull() {
+		$expected = 0;
+		$page = null;
+		$rowsPerPage =  null;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);		
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page1AndRowsPerPageNull() {
+		$expected = 0;
+		$page = 1;
+		$rowsPerPage =  null;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page2AndRowsPerPageNull() {
+		$expected = 20;
+		$page = 2;
+		$rowsPerPage =  null;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_pageNullAndRowsPerPage10() {
+		$expected = 0;
+		$page = null;
+		$rowsPerPage =  10;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page1AndRowsPerPage30() {
+		$expected = 0;
+		$page = 1;
+		$rowsPerPage =  30;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page2AndRowsPerPage30() {
+		$expected = 30;
+		$page = 2;
+		$rowsPerPage =  30;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page3AndRowsPerPage10() {
+		$expected = 20;
+		$page = 3;
+		$rowsPerPage =  10;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page2AndRowsPerPage13() {
+		$expected = 13;
+		$page = 2;
+		$rowsPerPage =  13;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page3AndRowsPerPage13() {
+		$expected = 26;
+		$page = 3;
+		$rowsPerPage =  13;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetRowStart_page10AndRowsPerPage13() {
+		$expected = 117;
+		$page = 10;
+		$rowsPerPage =  13;
+		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeNull_FALSE() {
+		$expected = 'ISFALSE';
+		$whereGrid = null;
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeWhite_FALSE() {
+		$expected = 'ISFALSE';
+		$whereGrid['NUMERO']='';
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroOmitted() {
+		$expected = 'ISFALSE';
+		$whereGrid['NUMERO']=0;
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroTRUE() {
+	    $expected = 'ISFALSE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,TRUE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroFALSE() {
+	    $expected = 'ISTRUE';
+	    $whereGrid['NUMERO']=0;
+	    $isTrue = 'ISTRUE';
+	    $isFalse = 'ISFALSE';
+	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,FALSE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_AttributeSearchDoNotExist_FALSE() {
+		$expected = 'ISFALSE';
+		$whereGrid['NUMBER']=0;
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'X',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testAttributeIssetOrNotZero_Attribute_TRUE() {
+		$expected = 'ISTRUE';
+		$whereGrid['NUMERO']='xxx';
+		$isTrue = 'ISTRUE';
+		$isFalse = 'ISFALSE';
+		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$this->assertEquals( $expected , $result);
+	}
 }
