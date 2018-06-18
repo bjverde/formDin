@@ -27,13 +27,21 @@ switch ($acao) {
 
 
 $dados = Tipo_de_tiposDAO::selectAll('descricao');
-$gride = new TGrid('gd' // id do gride
-, 'Lista de Pessoas' // titulo do gride
-, $dados      // array de dados
-, null        // altura do gride
-, null        // largura do gride
-, 'idtipo_de_tipos'  // chave primaria
-, 'idtipo_de_tipos|idtipo_de_tipos,descricao|descricao,sit_ativo|sit_ativo');  // update dos campos
+$gride = new TGrid(
+    'gd' // id do gride
+,
+    'Lista de Pessoas' // titulo do gride
+,
+    $dados         // array de dados
+,
+    null        // altura do gride
+,
+    null        // largura do gride
+,
+    'idtipo_de_tipos'  // chave primaria
+,
+    'idtipo_de_tipos|idtipo_de_tipos,descricao|descricao,sit_ativo|sit_ativo'  // update dos campos
+);
 
 $gride->addColumn('idtipo_de_tipos', 'id', 50, 'center');
 $gride->addColumn('descricao', 'Descrição', 100, 'left');
