@@ -42,8 +42,10 @@ require_once 'exe_pdf_msg.php';
 
 $pdf = new TPDF('P');
 $pdf->AddPage();
-$pdf->SetFont('Arial', '', 10);
-$pdf->cell(0, 5, utf8_decode('Exemplo do relatório utilizando FPDF'), 1, 1, 'C');
+$pdf->SetFont('Arial','',10);
+$pdf->cell(0,5,utf8_decode('Exemplo do relatório utilizando FPDF'),1,1,'C');
 $pdf->ln(3);
-$pdf->multiCell(0, 4, utf8_decode(getMsgFPDF()), 1);
+$pdf->multiCell(0,4,utf8_decode(getMsgFPDF()),1);
 $pdf->show();
+?>
+

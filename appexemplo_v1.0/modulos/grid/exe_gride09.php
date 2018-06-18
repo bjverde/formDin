@@ -1,6 +1,6 @@
 <?php
 d($_REQUEST);
-$frm = new TForm('Gride 09 - CheckColumn', 300, 700);
+$frm = new TForm('Gride 09 - CheckColumn',300,700);
 
 // simulação de dados para o gride
 $dados = null;
@@ -21,23 +21,24 @@ $dados['GRUPO'][] = 'C';
 
 
 $gride = new TGrid('gdTeste' // id do gride
-, 'Título do Gride' // titulo do gride
-, $dados   // array de dados
-, null     // altura do gride
-, null     // largura do gride
-, 'ID');     // chave primaria
+                  ,'Título do Gride' // titulo do gride
+                  ,$dados 	// array de dados
+                  ,null		// altura do gride
+                  ,null		// largura do gride
+                  ,'ID'     // chave primaria
+                  );
 
-
-$gride->addColumn('ID', 'id');
-$gride->addCheckColumn('idCheckColumnPost', 'Nome Título', 'ID', 'NOME', true, true);
+$gride->addColumn('ID','id');
+$gride->addCheckColumn('idCheckColumnPost','Nome Título','ID','NOME',true,true);
 //$gride->addColumn('NOME','Nome',100);
-$gride->addColumn('ATIVO', 'Ativo');
-$gride->addColumn('GRUPO', 'grupo');
+$gride->addColumn('ATIVO','Ativo');
+$gride->addColumn('GRUPO','grupo');
 
-$frm->addHtmlField('gride', $gride);
+$frm->addHtmlField('gride',$gride);
 
 
 
 
 $frm->setAction('POST PAGINA');
 $frm->show();
+?>

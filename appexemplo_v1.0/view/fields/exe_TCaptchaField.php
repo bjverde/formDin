@@ -37,29 +37,33 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Teste Campo Captcha', 300);
-$frm->addHtmlField('texto', '<p><h3>O termo, CAPTCHA, é um acrônimo para <b>Completely Automated Public Turing Test to Tell Computers and Humans Apart</b> ou, numa tradução direta, teste de Turing público completamente automatizado para diferenciação entre computadores e humanos.<br>Leia mais em: <a target="_blank" href="http://www.tecmundo.com.br/2861-o-que-e-captcha-.htm#ixzz1qVPUhQeZ">Captcha</a></h3></p>');
+$frm = new TForm('Teste Campo Captcha',300);
+$frm->addHtmlField('texto','<p><h3>O termo, CAPTCHA, é um acrônimo para <b>Completely Automated Public Turing Test to Tell Computers and Humans Apart</b> ou, numa tradução direta, teste de Turing público completamente automatizado para diferenciação entre computadores e humanos.<br>Leia mais em: <a target="_blank" href="http://www.tecmundo.com.br/2861-o-que-e-captcha-.htm#ixzz1qVPUhQeZ">Captcha</a></h3></p>');
 
 
-$frm->addCaptchaField('campo_captcha', 'Cód. Segurança:', 'Captcha - Clique aqui para gerar nova combinação');
+$frm->addCaptchaField('campo_captcha','Cód. Segurança:','Captcha - Clique aqui para gerar nova combinação');
 
 // centralizado no formulário
-$frm->addCaptchaField('captcha_center', null)->setAttribute('align', 'center');
+$frm->addCaptchaField('captcha_center',null)->setAttribute('align','center');
 
 $frm->setAction('Gravar');
-$frm->addButtonAjax('Gravar Ajax', null, 'fwValidateFields()', 'callbackGravar', 'Gravar', 'Gravando...', 'text', false, null, 'btnGravarAjax');
-if (isset($acao) && $acao == 'Gravar') {
-    if ($_POST['campo_captcha'] != $_SESSION['campo_captcha_code']) {
-        $frm->setError('Caracteres informados incorretamente!');
-    } else {
-        $frm->setMessage('Captcha OK');
-    }
+$frm->addButtonAjax('Gravar Ajax',null,'fwValidateFields()','callbackGravar','Gravar','Gravando...','text',false,null,'btnGravarAjax');
+if( isset($acao) && $acao == 'Gravar')
+{
+	if( $_POST['campo_captcha'] != $_SESSION['campo_captcha_code'] )
+	{
+		$frm->setError('Caracteres informados incorretamente!');
+	}
+	else
+	{
+		$frm->setMessage('Captcha OK');
+	}
 }
 $frm->show();
 ?>
 <script>
 function callbackGravar(res)
 {
-    alert( res );
+	alert( res );
 }
 </script>

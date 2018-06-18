@@ -38,12 +38,14 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-$frm = new TForm('Exemplo de Redirect - Form 3', 150, 400);
-$frm->addTextField('nom_pessoa3', 'Nome:', 20);
-$frm->addHtmlField('html', 'Este é o form 3, clique no botão Ir para VOLTAR para o form 2')->setCss('color', 'red');
+$frm = new TForm ( 'Exemplo de Redirect - Form 3', 150, 400 );
+$frm->addTextField ( 'nom_pessoa3', 'Nome:', 20 );
+$frm->addHtmlField ( 'html', 'Este é o form 3, clique no botão Ir para VOLTAR para o form 2' )->setCss ( 'color', 'red' );
 $acao = isset($acao) ? $acao : null;
-$frm->setAction('Voltar,Gravar');
+$frm->setAction ( 'Voltar,Gravar' );
 if ($acao == 'Voltar') {
-    $frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.');
+	$frm->redirect ( 'exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.' );
 }
-$frm->show();
+$frm->show ();
+?>
+

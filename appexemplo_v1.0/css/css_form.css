@@ -1,36 +1,36 @@
 body
 {
-    background-color: #C8DBCC;
+	background-color: #C8DBCC;
 }
 .fwTitleBar
 {
-    height:50px;
-    border:none;
-    text-align:left;
-    font-family:arial,helvetica, geneva, sans-serif;
-    /*color:#256391;*/
-    color:#000000;
-    font-size:18px;
-    font-weight:bold;
-    vertical-align:middle;
+	height:50px;
+	border:none;
+	text-align:left;
+	font-family:arial,helvetica, geneva, sans-serif;
+	/*color:#256391;*/
+	color:#000000;
+	font-size:18px;
+	font-weight:bold;
+	vertical-align:middle;
     padding-left:2px;
 
-    background-color: #7C9E7D;
+	background-color: #7C9E7D;
 }
 .fwTitleBarButtonArea
 {
-    background-color: #7C9E7D;
-    width: 0px;
+	background-color: #7C9E7D;
+	width: 0px;
 }
 .fwGroupBoxLegend
 {
-    background-color:#C8DBCC;
-    color:#000000;
+	background-color:#C8DBCC;
+	color:#000000;
 }
 
 .fwHtml
 {
-    text-align:center;
-    font-size:14px;
-    font-weight:bold;
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
 }

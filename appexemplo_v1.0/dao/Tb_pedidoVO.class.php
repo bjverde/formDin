@@ -38,52 +38,53 @@
 
 class Tb_pedidoVO
 {
-    private $id_pedido = null;
-    private $data_pedido = null;
-    private $nome_comprador = null;
-    private $forma_pagamento = null;
-    public function __construct($id_pedido = null, $data_pedido = null, $nome_comprador = null, $forma_pagamento = null)
-    {
-        $this->setId_pedido($id_pedido);
-        $this->setData_pedido($data_pedido);
-        $this->setNome_comprador($nome_comprador);
-        $this->setForma_pagamento($forma_pagamento);
-    }
-    //--------------------------------------------------------------------------------
-    function setId_pedido($strNewValue = null)
-    {
-        $this->id_pedido = $strNewValue;
-    }
-    function getId_pedido()
-    {
-        return $this->id_pedido;
-    }
-    //--------------------------------------------------------------------------------
-    function setData_pedido($strNewValue = null)
-    {
-        $this->data_pedido = $strNewValue;
-    }
-    function getData_pedido()
-    {
-        return is_null($this->data_pedido) ? date('Y-m-d') : $this->data_pedido;
-    }
-    //--------------------------------------------------------------------------------
-    function setNome_comprador($strNewValue = null)
-    {
-        $this->nome_comprador = $strNewValue;
-    }
-    function getNome_comprador()
-    {
-        return $this->nome_comprador;
-    }
-    //--------------------------------------------------------------------------------
-    function setForma_pagamento($strNewValue = null)
-    {
-        $this->forma_pagamento = $strNewValue;
-    }
-    function getForma_pagamento()
-    {
-        return $this->forma_pagamento;
-    }
-    //--------------------------------------------------------------------------------
+	private $id_pedido = null;
+	private $data_pedido = null;
+	private $nome_comprador = null;
+	private $forma_pagamento = null;
+	public function __construct( $id_pedido=null, $data_pedido=null, $nome_comprador=null, $forma_pagamento=null )
+	{
+		$this->setId_pedido( $id_pedido );
+		$this->setData_pedido( $data_pedido );
+		$this->setNome_comprador( $nome_comprador );
+		$this->setForma_pagamento( $forma_pagamento );
+	}
+	//--------------------------------------------------------------------------------
+	function setId_pedido( $strNewValue = null )
+	{
+		$this->id_pedido = $strNewValue;
+	}
+	function getId_pedido()
+	{
+		return $this->id_pedido;
+	}
+	//--------------------------------------------------------------------------------
+	function setData_pedido( $strNewValue = null )
+	{
+		$this->data_pedido = $strNewValue;
+	}
+	function getData_pedido()
+	{
+		return is_null( $this->data_pedido ) ? date( 'Y-m-d' ) : $this->data_pedido;
+	}
+	//--------------------------------------------------------------------------------
+	function setNome_comprador( $strNewValue = null )
+	{
+		$this->nome_comprador = $strNewValue;
+	}
+	function getNome_comprador()
+	{
+		return $this->nome_comprador;
+	}
+	//--------------------------------------------------------------------------------
+	function setForma_pagamento( $strNewValue = null )
+	{
+		$this->forma_pagamento = $strNewValue;
+	}
+	function getForma_pagamento()
+	{
+		return $this->forma_pagamento;
+	}
+	//--------------------------------------------------------------------------------
 }
+?>

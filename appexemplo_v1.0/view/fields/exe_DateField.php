@@ -40,5 +40,7 @@
  */
 
 $frm = new TForm('Exemplo Campo Data');
-$frm->addDateField('dat_nascimento', 'Data:', true);
+$frm->addDateField('dat_nascimento','Data:',true);
 $frm->show();
+?>
+

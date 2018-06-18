@@ -36,67 +36,67 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_pedidoDAO extends TPDOConnection
-{
-    
-    public static function insert(Tb_pedidoVO $objVo)
-    {
+class Tb_pedidoDAO extends TPDOConnection {
+	
+	public static function insert( Tb_pedidoVO $objVo )	{
 
-        if ($objVo->getId_pedido() != 'Novo') {
-            return self::update($objVo);
-        }
-        $values = array( $objVo->getData_pedido()
-                        , $objVo->getNome_comprador()
-                        , $objVo->getForma_pagamento()
-                        );
-        self::executeSql('insert into tb_pedido(
+		if( $objVo->getId_pedido() != 'Novo' )
+		{
+			return self::update($objVo);
+		}
+		$values = array( $objVo->getData_pedido()
+						, $objVo->getNome_comprador()
+						, $objVo->getForma_pagamento()
+						);
+		self::executeSql('insert into tb_pedido(
 								 data_pedido
 								,nome_comprador
 								,forma_pagamento
-								) values (?,?,?)', $values);
-        return  self::executeSql('select last_insert_rowid() as ID_PEDIDO');
-    }
-    //--------------------------------------------------------------------------------
-    public static function delete($id)
-    {
-        $values = array($id);
-        return self::executeSql('delete from tb_pedido where id_pedido = ?', $values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function select($id)
-    {
-        $values = array($id);
-        return self::executeSql('select
+								) values (?,?,?)', $values );
+		return  self::executeSql('select last_insert_rowid() as ID_PEDIDO');
+	}
+	//--------------------------------------------------------------------------------
+	public static function delete( $id )
+	{
+		$values = array($id);
+		return self::executeSql('delete from tb_pedido where id_pedido = ?',$values);
+	}
+	//--------------------------------------------------------------------------------
+	public static function select( $id )
+	{
+		$values = array($id);
+		return self::executeSql('select
 								 id_pedido
 								,data_pedido
 								,nome_comprador
 								,forma_pagamento
-								from tb_pedido where id_pedido = ?', $values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
-    {
-        return self::executeSql('select
+								from tb_pedido where id_pedido = ?', $values );
+	}
+	//--------------------------------------------------------------------------------
+	public static function selectAll( $orderBy=null, $where=null )
+	{
+		return self::executeSql('select
 								 id_pedido
 								,data_pedido
 								,nome_comprador
 								,forma_pagamento
 								from tb_pedido'.
-        ( ($where)? ' where '.$where:'').
-        ( ($orderBy) ? ' order by '.$orderBy:''));
-    }
-    //--------------------------------------------------------------------------------
-    public static function update(Tb_pedidoVO $objVo)
-    {
-        $values = array( $objVo->getData_pedido()
-                        ,$objVo->getnome_comprador()
-                        ,$objVo->getForma_pagamento()
-                        ,$objVo->getId_pedido() );
-        return self::executeSql('update tb_pedido set
+		( ($where)? ' where '.$where:'').
+		( ($orderBy) ? ' order by '.$orderBy:''));
+	}
+	//--------------------------------------------------------------------------------
+	public static function update ( Tb_pedidoVO $objVo )
+	{
+		$values = array( $objVo->getData_pedido()
+						,$objVo->getnome_comprador()
+						,$objVo->getForma_pagamento()
+						,$objVo->getId_pedido() );
+		return self::executeSql('update tb_pedido set
 								 data_pedido = ?
 								,nome_comprador = ?
 								,forma_pagamento = ?
-								where id_pedido = ?', $values);
-    }
-    //--------------------------------------------------------------------------------
+								where id_pedido = ?',$values);
+	}
+	//--------------------------------------------------------------------------------
 }
+?>

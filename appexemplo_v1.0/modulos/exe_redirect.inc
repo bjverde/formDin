@@ -39,28 +39,30 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo de Redirect - Form 1', 200, 400);
-$frm->addTextField('nom_pessoa', 'Teste:', 20);
-$frm->addTextField('nom_pessoa2', 'Teste 2:', 20);
-$frm->addTextField('nom_pessoa3', 'Teste 3:', 20);
+$frm = new TForm('Exemplo de Redirect - Form 1',200,400);
+$frm->addTextField('nom_pessoa','Teste:',20);
+$frm->addTextField('nom_pessoa2','Teste 2:',20);
+$frm->addTextField('nom_pessoa3','Teste 3:',20);
 
-$frm->setHint('nom_pessoa', 'Teste');
-$frm->addHtmlField('html', 'Este é o form <blink>1</blink>, clique no botão Ir para exibir o form <blink>2</blink>')->setCss('color', 'blue');
+$frm->setHint('nom_pessoa','Teste');
+$frm->addHtmlField('html','Este é o form <blink>1</blink>, clique no botão Ir para exibir o form <blink>2</blink>')->setCss('color','blue');
 $frm->setAction('Ir submit,Ir Ajax');
 
 
 $acao = isset($acao) ? $acao : null;
-switch ($acao) {
-    case 'Ir submit':
-        //Redirect só funciona se o arquivo estiver na pasta modulos
-        $frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', true);
-        break;
-        //------------------------------------------------------------------
-    case 'Ir Ajax':
-        //Redirect só funciona se o arquivo estiver na pasta modulos
-        $frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null);
-        break;
-        //--------------------------------------------------------------------
+switch( $acao ) {
+	case 'Ir submit':
+		//Redirect só funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc','Redirect realizado com sucesso. Você está agora no 2º form.',true);
+		break;
+		//------------------------------------------------------------------
+	case 'Ir Ajax':
+		//Redirect só funciona se o arquivo estiver na pasta modulos
+		$frm->redirect('exe_redirect_form2.inc', 'Redirect realizado com sucesso. Você está agora no 2º form.', false, null );
+		break;
+		//--------------------------------------------------------------------
 }
 
 $frm->show();
+?>
+

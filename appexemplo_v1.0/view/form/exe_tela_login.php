@@ -40,22 +40,22 @@
  */
 
 //$frm = new TForm('Acesso ao Sistema',200,300);
-$frm = new  TForm('Acesso ao Sistema', 150, 300);
+$frm = new  TForm('Acesso ao Sistema',150,300);
 $frm->hideCloseButton();
-$frm->addTextField('login', 'Nome:', 20, true, 20);
-$frm->addPasswordField('senha', 'Senha:', 20, true, 20);
-$frm->addHtmlField('msg', 'Usuário:<b>admin</b><br>Senha:<b>admin</b>');
-$frm->addButtonAjax('Entrar', null, 'fwValidateFields()', 'resultado', 'login', 'Validando informações', 'json', false);
+$frm->addTextField('login'		,'Nome:',20,true,20);
+$frm->addPasswordField('senha'	,'Senha:',20,true,20);
+$frm->addHtmlField('msg','Usuário:<b>admin</b><br>Senha:<b>admin</b>');
+$frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informações','json',false);
 
 $acao = isset($acao) ? $acao : null;
 if ($acao == 'login') {
-    sleep(1);
-    if ($frm->get('login') == 'admin' && $frm->get('senha') == 'admin') {
-        $_SESSION [APLICATIVO] ['conectado'] = true;
-        prepareReturnAjax(1);
-    } else {
-        prepareReturnAjax(0);
-    }
+	sleep ( 1 );
+	if ($frm->get ( 'login' ) == 'admin' && $frm->get ( 'senha' ) == 'admin') {
+		$_SESSION [APLICATIVO] ['conectado'] = true;
+		prepareReturnAjax ( 1 );
+	} else {
+		prepareReturnAjax ( 0 );
+	}
 }
 
 $frm->show();

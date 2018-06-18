@@ -38,27 +38,27 @@
  */
 
 // criar o formulario com os campos off-line do gride
-$frm = new TForm(null, 150);
+$frm = new TForm(null,150);
 
-$frm->setcss('background-color', '#B4CDCD');
+$frm->setcss('background-color','#B4CDCD');
 
 //$frm->addJavascript('gridCallBack(REQUEST)');
 
-$frm->addNumberField('val_salario', 'Salario:', 10, false, 2);
-$frm->addSelectField('tip_pagamento', 'Tipo Pagamento:', null, '1=Mensal,2=Semanal,3=Diário', false);
-$frm->addTextField('nom_moeda', 'Moeda:', 13, false);
-$frm->addTextField('sig_moeda', 'Sigla:', 4, true, null, null, false)->setAttribute('grid_align', 'center')->setAttribute('grid_hidden', 'true');
+$frm->addNumberField('val_salario'		, 'Salario:',10,false,2);
+$frm->addSelectField('tip_pagamento'	, 'Tipo Pagamento:',null,'1=Mensal,2=Semanal,3=Diário',false);
+$frm->addTextField('nom_moeda'			, 'Moeda:',13,false);
+$frm->addTextField('sig_moeda'			, 'Sigla:',4,true,null,null,false)->setAttribute('grid_align','center')->setAttribute('grid_hidden','true');
 
-$frm->addSelectField('cod_uf', 'Estado:', false, null, true);
-$frm->addSelectField('cod_municipio', 'Município:', null, null, false)->setAttribute('grid_column', 'NOM_MUNICIPIO');
-$frm->combinarSelects('cod_uf', 'cod_municipio', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado', 'cod_regiao', 'callBackSelectCombinado()');
+$frm->addSelectField('cod_uf','Estado:',false,null,true);
+$frm->addSelectField('cod_municipio'	,'Município:',null,null,false)->setAttribute('grid_column','NOM_MUNICIPIO');
+$frm->combinarSelects('cod_uf','cod_municipio','vw_municipios','cod_uf','cod_municipio','nom_municipio','-- Municípios --','0','Nenhum Município Encontrado','cod_regiao','callBackSelectCombinado()');
 
 // fazer a validação manualmente
 $_REQUEST['action'] = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
-if ($_REQUEST['action'] == 'save') {
-    if (! $frm->get('nom_moeda')) {
-        $frm->addError('O campo Moeda é de preenchimento Obrigatório');
-    }
+if( $_REQUEST['action'] == 'save'){
+	if( ! $frm->get('nom_moeda') ){
+		$frm->addError('O campo Moeda é de preenchimento Obrigatório');
+	}
 }
 /*session_start();
 session_destroy();
@@ -71,32 +71,39 @@ session_start();
 //$_SESSION[APLICATIVO]['offline']=NULL;
 // criar o gride
 $res = null;
-$res['SEQ_MOEDA'][0]        = 10;
-$res['SEQ_DOCUMENTO'][0]    = 12;
-$res['NOM_MOEDA'][0]        = 'Dolar';
-$res['SIG_MOEDA'][0]        = 'US$';
-$res['TIP_PAGAMENTO'][0]    = 2;
-$res['DES_OBS'][0]          = 'Valor Inicial';
-$res['VAL_SALARIO'][0]      = '80,00';
-$res['COD_UF'][0]           = '22';
-$res['COD_MUNICIPIO'][0]    = null;
-$res['NOM_MUNICIPIO'][0]    = null;
+$res['SEQ_MOEDA'][0] 		= 10;
+$res['SEQ_DOCUMENTO'][0] 	= 12;
+$res['NOM_MOEDA'][0] 		= 'Dolar';
+$res['SIG_MOEDA'][0] 		= 'US$';
+$res['TIP_PAGAMENTO'][0] 	= 2;
+$res['DES_OBS'][0]			= 'Valor Inicial';
+$res['VAL_SALARIO'][0]	  	= '80,00';
+$res['COD_UF'][0]	  		= '22';
+$res['COD_MUNICIPIO'][0]	= null;
+$res['NOM_MUNICIPIO'][0]	= null;
 
-$res['SEQ_MOEDA'][1]        = 11;
-$res['SEQ_DOCUMENTO'][1]    = 12;
-$res['NOM_MOEDA'][1]        = 'Real';
-$res['SIG_MOEDA'][1]        = 'R$';
-$res['TIP_PAGAMENTO'][1]        = 1;
-$res['DES_OBS'][1]          = 'Valor Inicial 2';
-$res['VAL_SALARIO'][1]      = '100,00';
-$res['COD_UF'][1]           = '12';
-$res['COD_MUNICIPIO'][1]    = '1200013';
-$res['NOM_MUNICIPIO'][1]    = 'ACRELANDIA';
+$res['SEQ_MOEDA'][1] 		= 11;
+$res['SEQ_DOCUMENTO'][1] 	= 12;
+$res['NOM_MOEDA'][1] 		= 'Real';
+$res['SIG_MOEDA'][1] 		= 'R$';
+$res['TIP_PAGAMENTO'][1] 		= 1;
+$res['DES_OBS'][1]			= 'Valor Inicial 2';
+$res['VAL_SALARIO'][1]	  	= '100,00';
+$res['COD_UF'][1]	  		= '12';
+$res['COD_MUNICIPIO'][1]	= '1200013';
+$res['NOM_MUNICIPIO'][1]	= 'ACRELANDIA';
 
-$grid = new TGrid('gdx', 'Dados Off-line', $res, null, null, 'SEQ_MOEDA,SEQ_DOCUMENTO', null, null, 'grid/exe_gride03_dados.php');
+$grid = new TGrid('gdx','Dados Off-line'
+					,$res
+					,null
+					,null
+					,'SEQ_MOEDA,SEQ_DOCUMENTO'
+					,null
+					,null
+					,'grid/exe_gride03_dados.php');
 
 // adicionar o formulário ao gride para criar o gride offline
-$grid->setForm($frm, false);
+$grid->setForm($frm,false);
 
 $grid->setShowAdicionarButton(true); // exibir o botão de adicionar - default =  true
 
@@ -105,12 +112,13 @@ $grid->setOnDrawHeaderCell('drawHeader');
 
 $grid->show();
 
-function drawHeader($objTh, $objCol, $objHead)
+function drawHeader($objTh,$objCol,$objHead)
 {
-    if ($objCol->getFieldName() == 'NOM_MOEDA') {
-        $objHead->setCss('width', '250px');
-        $objCol->setTextAlign('center');
-    }
+	if( $objCol->getFieldName() == 'NOM_MOEDA')
+	{
+		$objHead->setCss('width','250px');
+		$objCol->setTextAlign('center');
+	}
 }
 
 /*$tb = new TTable();
@@ -121,3 +129,4 @@ $row = $tb->addRow();
 $row->addCell('<pre><div style="border:1px dashed black;width:540px;height:150px;overflow:hidden;overflow-y:auto;">'.print_r($_SESSION[APLICATIVO]['offline']['gdx'],true).'</div></pre>');
 $tb->show();
 */
+?>

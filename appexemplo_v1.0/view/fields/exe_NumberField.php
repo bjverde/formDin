@@ -40,20 +40,22 @@
  */
 
 $frm = new TForm('Campo Numérico');
-$frm->addNumberField('num_pessoa', 'Quantidade de pessoas:', 9, false, 0, true, null, 5, null, null, null, true, true);
-$frm->addNumberField('num_peso', 'Peso Unitário:', 5, true, 2, true)->setExampleText('Kg');
-$frm->addNumberField('num_preco', 'Preço Unitário:', 9, true, 2, false)->setExampleText('R$');
-$frm->set('num_peso', '2.9');
+$frm->addNumberField('num_pessoa'			,'Quantidade de pessoas:',9,false,0,true,null,5,null,null,null,true,true);
+$frm->addNumberField('num_peso',             'Peso Unitário:',5,true,2,true)->setExampleText('Kg');
+$frm->addNumberField('num_preco',            'Preço Unitário:',9,true,2,false)->setExampleText('R$');
+$frm->set('num_peso','2.9');
 $frm->setAction('Gravar,Testar');
 
 $acao = isset($acao) ? $acao : null;
-if ($acao=='Gravar') {
-    if ($frm->validate()) {
-        //d($_POST);
-        $bvars = $frm->createBvars('num_pessoa,val_salario,val_taxa');
-        //d($bvars);
-        $frm->setPopUpMessage('Validação OK');
-    }
+if($acao=='Gravar') {
+	if( $frm->validate()) {
+		//d($_POST);
+		$bvars = $frm->createBvars('num_pessoa,val_salario,val_taxa');
+		//d($bvars);
+		$frm->setPopUpMessage('Validação OK');
+	}
 }
 // exibir o formulário
 $frm->show();
+?>
+

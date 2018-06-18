@@ -41,33 +41,33 @@
 $frm = new TForm('Exemplo do Teclas de Atalho');
 
 
-$frm->addTextField('fld_nome', 'Nome:', 60, false, 60, null, null, null, null, null);
-$frm->addTextField('fld_endereco', 'Endereço:', 40, false, 40, null, null, null, null, null);
-$frm->addTextField('fld_telefone', 'Tele&fone:', 20, false, 20, null, null, null, null, null);
-$frm->addMemoField('memo', '&Obs:', 2000, false, 30, 3);
+$frm->addTextField('fld_nome','Nome:',60,false,60,null,null,null,null,null);
+$frm->addTextField('fld_endereco','Endereço:',40,false,40,null,null,null,null,null);
+$frm->addTextField('fld_telefone','Tele&fone:',20,false,20,null,null,null,null,null);
+$frm->addMemoField('memo','&Obs:',2000,false,30,3);
 
-$pc = $frm->addPageControl('pc', null, null, null, null);
-    $p = $pc->addPage('F9|Cadastro Ação', true, true, 'aba1', null);
-        $frm->addTextField('acao', '&Ação:', 20, true);
+$pc = $frm->addPageControl('pc',null,null,null,null);
+	$p = $pc->addPage('F9|Cadastro Ação',true,true,'aba1',null);
+		$frm->addTextField('acao','&Ação:',20,true);
 
-    $p = $pc->addPage('&Pesquisa', false, true, 'aba2', false);
+	$p = $pc->addPage('&Pesquisa',false,true,'aba2',false);
 
-        $pc2 = $frm->addPageControl('pc2', null, null, null, null);
-        $pc2->addPage('&Sub Pesquisa', true, true, 'aba21');
-            $frm->addGroupField('gp1', 'Grupo');
-                $frm->addTextField('pesquisa', 'Pes&quisa:', 20, true);
-            $frm->closeGroup();
-
-
-$frm->addShortcut('F10', 'btnVoltar');
-$frm->addShortcut('F2', 'fld_nome');
-$frm->addShortcut('F8', null, null, 'alert(1)');
-$frm->addShortcut('ALT+E', 'fld_endereco');
+		$pc2 = $frm->addPageControl('pc2',null,null,null,null);
+		$pc2->addPage('&Sub Pesquisa',true,true,'aba21');
+			$frm->addGroupField('gp1','Grupo');
+   				$frm->addTextField('pesquisa','Pes&quisa:',20,true);
+   			$frm->closeGroup();
 
 
-$frm->addButton('&Salvar', null, 'btnSalvar', null, null, false, false);
-$frm->addButton('&Imprimir', null, 'btnImprimir');
-$frm->addButton('Voltar', null, 'btnVoltar');
+$frm->addShortcut('F10','btnVoltar');
+$frm->addShortcut('F2','fld_nome');
+$frm->addShortcut('F8',null,null,'alert(1)');
+$frm->addShortcut('ALT+E','fld_endereco');
+
+
+$frm->addButton('&Salvar',null,'btnSalvar',null,null,false,false);
+$frm->addButton('&Imprimir',null,'btnImprimir');
+$frm->addButton('Voltar',null,'btnVoltar');
 
 
 $frm->addJavascript('init()');
@@ -76,6 +76,6 @@ $frm->show();
 <script>
 function init()
 {
-   //   fwApplyShortcuts();
+   //	fwApplyShortcuts();
 }
 </script>

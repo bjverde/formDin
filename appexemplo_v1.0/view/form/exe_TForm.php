@@ -41,7 +41,7 @@
 
 //d($_REQUEST);
 
-$frm = new TForm('Exemplos de Formulário', 300);
+$frm = new TForm('Exemplos de Formulário',300);
 $frm->addHiddenField('flat');
 
 // adicinoar eventos ao fechar e antes de fechar
@@ -49,50 +49,51 @@ $frm->setOnBeforeClose('antesFechar()');
 $frm->setOnClose('depoisFechar()');
 
 
-$frm->addTextField('nome', 'Nome:', 60);
-if ($frm->get('flat')=='1') {
-    $frm->setFlat(true);
-    $frm->addButton('Com bordas', null, 'btn2', 'jQuery("#flat").val(0);fwDoAction();');
+$frm->addTextField('nome','Nome:',60);
+if( $frm->get('flat')=='1') {
+	$frm->setFlat(true);
+	$frm->addButton('Com bordas',null,'btn2','jQuery("#flat").val(0);fwDoAction();');
 } else {
-    $frm->addButton('Sem bordas', null, 'btn2', 'jQuery("#flat").val(1);fwDoAction();');
+	$frm->addButton('Sem bordas',null,'btn2','jQuery("#flat").val(1);fwDoAction();');
 }
-$frm->addRadioField('sexo', 'Sexo:', false, 'M=masculino,F=Feminino');
-$frm->addCheckField('cor', 'Cor:', false, 'M=Marrom,B=Branca');
+$frm->addRadioField('sexo','Sexo:',false,'M=masculino,F=Feminino');
+$frm->addCheckField('cor','Cor:',false,'M=Marrom,B=Branca');
 
-$frm->addTextField('municipio', 'Municipio', 60, false, 60);
+$frm->addTextField('municipio','Municipio',60,false,60);
 
-$frm->setOnlineSearch('municipio', 'tb_municipio'               //$strPackageFunction
-, 'nom_municipio|Município:||||||like'   //$strFilterFields
-, false                        //$strAutoFillFilterField
-, false                        //$boolAutoStart
-, true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
-, 'cod_municipio|Código,nom_municipio|Município' //$strGridColumns - colunas que irão aparecer no grid
-, 'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
-, 'Pesquisar Municípios'       //$strWindowHeader -  Titulo da janela de pesquisa
-, 'Registros'                  //$strGridHeader   -  Titulo do Gride
-, 'nom_municipio'              //$strFocusFieldName - Seta o Foco no campo definido
-, null                         //$strWindowHeight
-, null                         //$strWindowWidth
-, null                         //$strSearchButtonLabel
-, null                         //$strFormFilterFields
-, 'funcaoRetorno()'            //$strFunctionExecute
-, null                         //$intMaxRecord
-, null                         //$strClickCondition
-, null                         //$strMultiSelectKeyField
-, null                         //$strColumnLink
-, null                         //$arrSqls
-, null                         //$strBeforeExecuteJs
-, null                         //$boolDisableEnterKey
-, null                         //$strCrudModuleName
-, false);                        //$boolCaseSensitive caseSensitive
+$frm->setOnlineSearch('municipio'
+    ,'tb_municipio'               //$strPackageFunction
+    ,'nom_municipio|Município:||||||like'   //$strFilterFields
+    ,false                        //$strAutoFillFilterField
+    ,false                        //$boolAutoStart
+	,true                         //se for encontrada apenas 1 opção fazer a seleção automaticamente
+    ,'cod_municipio|Código,nom_municipio|Município' //$strGridColumns - colunas que irão aparecer no grid
+    ,'NOM_MUNICIPIO|municipio'    //$strUpdateFormFields
+    ,'Pesquisar Municípios'       //$strWindowHeader -  Titulo da janela de pesquisa
+	,'Registros'                  //$strGridHeader   -  Titulo do Gride
+    ,'nom_municipio'              //$strFocusFieldName - Seta o Foco no campo definido 
+    ,null                         //$strWindowHeight
+    ,null                         //$strWindowWidth
+    ,null                         //$strSearchButtonLabel
+    ,null                         //$strFormFilterFields
+    ,'funcaoRetorno()'            //$strFunctionExecute
+    ,null                         //$intMaxRecord
+    ,null                         //$strClickCondition
+    ,null                         //$strMultiSelectKeyField
+    ,null                         //$strColumnLink
+    ,null                         //$arrSqls
+    ,null                         //$strBeforeExecuteJs
+    ,null                         //$boolDisableEnterKey
+    ,null                         //$strCrudModuleName
+    ,false                        //$boolCaseSensitive caseSensitive
+	);
 
-
-$frm->addLinkField('idLink1', 'Conteudo da Modal', 'Abre o conteudo da modal em nova janela', null, 'index.php?modulo=view/form/exe_TForm.php', 'new');
+$frm->addLinkField('idLink1','Conteudo da Modal','Abre o conteudo da modal em nova janela',null,'index.php?modulo=view/form/exe_TForm.php','new');
 
 $frm->setonMaximize('onMaximize');
-$frm->addButton('Fechar Modal', null, 'btnFechar', 'fecharModal()');
-$frm->addButton('Maximizar', null, 'btn1', 'fwFullScreen(null,onMaximize)', 'Confirma Maximizar?');
-$frm->addButton('Open Modal', null, null, 'openModal()');
+$frm->addButton('Fechar Modal',null,'btnFechar','fecharModal()');
+$frm->addButton('Maximizar',null,'btn1','fwFullScreen(null,onMaximize)','Confirma Maximizar?');
+$frm->addButton('Open Modal',null,null,'openModal()');
 //$frm->setPrototypeId('1');
 $frm->show();
 
@@ -100,28 +101,28 @@ $frm->show();
 <script>
 //Window.keepMultiModalWindow=true;
 function openModal() {
-    fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
-    //top.app_open_modal_window({url:'http://localhost/fontes/base/exemplos/index.php?modulo=exe_TForm.php'});
+  	fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
+	//top.app_open_modal_window({url:'http://localhost/fontes/base/exemplos/index.php?modulo=exe_TForm.php'});
 }
 function onMaximize(res) {
-    if( res == 0 ) {
-        jQuery('#btn2').val('Maximizar');
-    }else {
-        jQuery('#btn1').val('Minimizar');
-    }
+	if( res == 0 ) {
+		jQuery('#btn2').val('Maximizar');
+	}else {
+		jQuery('#btn1').val('Minimizar');
+	}
 }
 function fecharModal() {
-    alert( 'fechar');
-    fwClose_window();
+	alert( 'fechar');
+	fwClose_window();
 }
 
 function funcaoRetorno() {
-    alert('funcaoRetorno() executada!');
+	alert('funcaoRetorno() executada!');
 }
 function antesFechar() {
-    return confirm('Prosseguir com o fechamento do Formulário ?');
+	return confirm('Prosseguir com o fechamento do Formulário ?');
 }
 function depoisFechar() {
-    alert( 'Formulário será fechado');
+	alert( 'Formulário será fechado');
 }
 </script>

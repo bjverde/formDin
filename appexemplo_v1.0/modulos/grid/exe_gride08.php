@@ -43,20 +43,32 @@ $res['NUM_PESSOA'][0] = 1;
 $res['NOM_PESSOA'][0] = 'Luis Eugênio';
 $res['VAL_SALARIO'][0] = '1.500,00';
 $frm = new TForm('Gride Editavel');
-$frm->addLinkField('idLink', 'labelLink', 'texto que irá aparece', null, 'http://www.google.com.br', 'new');
-$frm->addTextField('tx_especie_nativa', 'Espécie:', 80);
-$frm->setAutoComplete('tx_especie_nativa', 'CAR.PKG_CAD_CAR.SEL_TAXON', 'NOM_CIENTIFICO_POPULAR', 'SEQ_TAXONOMIA,DES_NOME_POPULAR', true, null, 'callback_autocomplete_especies()', 4, 1000, 50, null);
+$frm->addLinkField('idLink','labelLink','texto que irá aparece',null,'http://www.google.com.br','new');
+$frm->addTextField('tx_especie_nativa','Espécie:',80);
+$frm->setAutoComplete( 'tx_especie_nativa'
+                       ,'CAR.PKG_CAD_CAR.SEL_TAXON'
+                       ,'NOM_CIENTIFICO_POPULAR'
+                       ,'SEQ_TAXONOMIA,DES_NOME_POPULAR'
+                       ,true
+                       ,null
+                       ,'callback_autocomplete_especies()'
+                       ,4
+                       ,1000
+                       ,50
+                       ,null
+                       );
 
 
 
-$g = new TGrid('gd', 'Edit', $res, null, null, 'NUM_PESSOA');
+$g = new TGrid('gd','Edit',$res,null,null,'NUM_PESSOA');
 $g->addRowNumColumn();
-$g->addTextColumn('nom_pessoa', 'Nome', 'NOM_PESSOA', 20, 20);
-$col = $g->addNumberColumn('val_salario', 'Salário', 'VAL_SALARIO', 10, 2);
-$col->addEvent('onChange', 'alert("Salvar:"+this.value);this.style.fontWeight="bold"');
+$g->addTextColumn('nom_pessoa','Nome','NOM_PESSOA',20,20);
+$col = $g->addNumberColumn('val_salario','Salário','VAL_SALARIO',10,2);
+$col->addEvent('onChange','alert("Salvar:"+this.value);this.style.fontWeight="bold"');
 //$col->setCss('border','0px');
-$g->addDateColumn('dat_nascimento', 'Data:', 'DAT_NASCIMENTO');
+$g->addDateColumn('dat_nascimento','Data:','DAT_NASCIMENTO');
 
-$frm->addHtmlField('gride', $g);
+$frm->addHtmlField('gride',$g);
 $frm->setAction('Refresh');
 $frm->show();
+?>
