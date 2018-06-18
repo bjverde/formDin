@@ -8,16 +8,13 @@
  *
  * PHP Version 5.6
  */
-class UploadException extends Exception
-{
-    public function __construct($code)
-    {
+class UploadException extends Exception {
+    public function __construct($code) {
         $message = $this->codeToMessage($code);
         parent::__construct($message, $code);
     }
     
-    private function codeToMessage($code)
-    {
+    private function codeToMessage($code) {
         switch ($code) {
             case UPLOAD_ERR_INI_SIZE:
                 $message = "The uploaded file exceeds the upload_max_filesize directive in php.ini";
@@ -47,4 +44,6 @@ class UploadException extends Exception
         }
         return $message;
     }
-}
+} 
+
+?>
