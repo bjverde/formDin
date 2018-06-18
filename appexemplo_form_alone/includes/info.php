@@ -7,14 +7,14 @@ class info
             $msg = "Para utilizar Linux com Microsoft SQL Server será utilizado o PDO com o drive dblib";
         } else {
             switch (PHP_INT_SIZE) {
-                case 4:
-                    $msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
-                    break;
-                case 8:
-                    $msg = '<span class="vermelho">ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits</span>, instale o drive não oficial';
-                    break;
-                default:
-                    $msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
+            case 4:
+                $msg = 'Para utilizar Windows com Microsoft SQL Server utilize o PDO com o drive sqlsrv';
+                break;
+            case 8:
+                $msg = '<span class="vermelho">ATENÇÃO o Drive da Microsoft não funciona em Windows 64 bits</span>, instale o drive não oficial';
+                break;
+            default:
+                $msg  = 'PHP_INT_SIZE is ' . PHP_INT_SIZE;
             }
         }
         return $msg;

@@ -2,16 +2,16 @@
 class Acesso_userDAO extends TPDOConnection
 {
 
-    public static function insert(Acesso_userVO $objVo)
+    public static function insert( Acesso_userVO $objVo )
     {
-        if ($objVo->getIduser()) {
+        if($objVo->getIduser() ) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getlogin_user()
-         , $objVo->getPwd_user()
-         , $objVo->getSit_ativo()
-         , $objVo->getDat_inclusao()
-         , $objVo->getDat_update()
+        $values = array(  $objVo->getlogin_user() 
+         , $objVo->getPwd_user() 
+         , $objVo->getSit_ativo() 
+         , $objVo->getDat_inclusao() 
+         , $objVo->getDat_update() 
          );
         return self::executeSql(
             'insert into acesso_user(
@@ -20,18 +20,17 @@ class Acesso_userDAO extends TPDOConnection
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								) values (?,?,?,?,?)',
-            $values
+								) values (?,?,?,?,?)', $values 
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete($id)
+    public static function delete( $id )
     {
         $values = array($id);
         return self::executeSql('delete from acesso_user where iduser = ?', $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select($id)
+    public static function select( $id )
     {
         $values = array($id);
         return self::executeSql(
@@ -42,11 +41,10 @@ class Acesso_userDAO extends TPDOConnection
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								from acesso_user where iduser = ?',
-            $values
+								from acesso_user where iduser = ?', $values 
         );
     }
-    public static function selectUser($login_user, $pwd_user)
+    public static function selectUser( $login_user, $pwd_user)
     {
         $values = array($login_user, $pwd_user);
         return self::executeSql(
@@ -57,13 +55,12 @@ class Acesso_userDAO extends TPDOConnection
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								from acesso_user where login_user = ? and pwd_user = ?',
-            $values
+								from acesso_user where login_user = ? and pwd_user = ?', $values 
         );
     }
+    //--------------------------------------------------------------------------------    
     //--------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
+    public static function selectAll( $orderBy=null, $where=null )
     {
         return self::executeSql(
             'select
@@ -79,7 +76,7 @@ class Acesso_userDAO extends TPDOConnection
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update(Acesso_userVO $objVo)
+    public static function update( Acesso_userVO $objVo )
     {
         $values = array( $objVo->getlogin_user()
          ,$objVo->getPwd_user()
@@ -94,9 +91,9 @@ class Acesso_userDAO extends TPDOConnection
 								,sit_ativo = ?
 								,dat_inclusao = ?
 								,dat_update = ?
-								where iduser = ?',
-            $values
+								where iduser = ?', $values
         );
     }
     //--------------------------------------------------------------------------------
 }
+?>

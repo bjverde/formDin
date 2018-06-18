@@ -5,7 +5,7 @@ class MunicipioVO
     private $cod_uf = null;
     private $nom_municipio = null;
     private $sit_ativo = null;
-    public function __construct($cod_municipio = null, $cod_uf = null, $nom_municipio = null, $sit_ativo = null)
+    public function __construct( $cod_municipio=null, $cod_uf=null, $nom_municipio=null, $sit_ativo=null )
     {
         $this->setCod_municipio($cod_municipio);
         $this->setCod_uf($cod_uf);
@@ -13,7 +13,7 @@ class MunicipioVO
         $this->setSit_ativo($sit_ativo);
     }
     //--------------------------------------------------------------------------------
-    function setCod_municipio($strNewValue = null)
+    function setCod_municipio( $strNewValue = null )
     {
         $this->cod_municipio = $strNewValue;
     }
@@ -22,7 +22,7 @@ class MunicipioVO
         return $this->cod_municipio;
     }
     //--------------------------------------------------------------------------------
-    function setCod_uf($strNewValue = null)
+    function setCod_uf( $strNewValue = null )
     {
         $this->cod_uf = $strNewValue;
     }
@@ -31,7 +31,7 @@ class MunicipioVO
         return $this->cod_uf;
     }
     //--------------------------------------------------------------------------------
-    function setNom_municipio($strNewValue = null)
+    function setNom_municipio( $strNewValue = null )
     {
         $this->nom_municipio = $strNewValue;
     }
@@ -40,7 +40,7 @@ class MunicipioVO
         return $this->nom_municipio;
     }
     //--------------------------------------------------------------------------------
-    function setSit_ativo($strNewValue = null)
+    function setSit_ativo( $strNewValue = null )
     {
         $this->sit_ativo = $strNewValue;
     }
@@ -50,3 +50,4 @@ class MunicipioVO
     }
     //--------------------------------------------------------------------------------
 }
+?>

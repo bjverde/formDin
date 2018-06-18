@@ -2,15 +2,15 @@
 class AutoridadeDAO extends TPDOConnection
 {
 
-    public static function insert(AutoridadeVO $objVo)
+    public static function insert( AutoridadeVO $objVo )
     {
-        if ($objVo->getIdautoridade()) {
+        if($objVo->getIdautoridade() ) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getDat_evento()
-         , $objVo->getOrdem()
-         , $objVo->getCargo()
-         , $objVo->getNome_pessoa()
+        $values = array(  $objVo->getDat_evento() 
+         , $objVo->getOrdem() 
+         , $objVo->getCargo() 
+         , $objVo->getNome_pessoa() 
          );
         return self::executeSql(
             'insert into autoridade(
@@ -18,18 +18,17 @@ class AutoridadeDAO extends TPDOConnection
 								,ordem
 								,cargo
 								,nome_pessoa
-								) values (?,?,?,?)',
-            $values
+								) values (?,?,?,?)', $values 
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete($id)
+    public static function delete( $id )
     {
         $values = array($id);
         return self::executeSql('delete from autoridade where idautoridade = ?', $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select($id)
+    public static function select( $id )
     {
         $values = array($id);
         return self::executeSql(
@@ -40,12 +39,11 @@ class AutoridadeDAO extends TPDOConnection
 								,ordem
 								,cargo
 								,nome_pessoa
-								from autoridade where idautoridade = ?',
-            $values
+								from autoridade where idautoridade = ?', $values 
         );
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
+    public static function selectAll( $orderBy=null, $where=null )
     {
         return self::executeSql(
             'select
@@ -61,7 +59,7 @@ class AutoridadeDAO extends TPDOConnection
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update(AutoridadeVO $objVo)
+    public static function update( AutoridadeVO $objVo )
     {
         $values = array( $objVo->getDat_inclusao()
          ,$objVo->getDat_evento()
@@ -76,9 +74,9 @@ class AutoridadeDAO extends TPDOConnection
 								,ordem = ?
 								,cargo = ?
 								,nome_pessoa = ?
-								where idautoridade = ?',
-            $values
+								where idautoridade = ?', $values
         );
     }
     //--------------------------------------------------------------------------------
 }
+?>

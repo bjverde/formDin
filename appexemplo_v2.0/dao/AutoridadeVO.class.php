@@ -7,7 +7,7 @@ class AutoridadeVO
     private $ordem = null;
     private $cargo = null;
     private $nome_pessoa = null;
-    public function __construct($idautoridade = null, $dat_inclusao = null, $dat_evento = null, $ordem = null, $cargo = null, $nome_pessoa = null)
+    public function __construct( $idautoridade=null, $dat_inclusao=null, $dat_evento=null, $ordem=null, $cargo=null, $nome_pessoa=null )
     {
         $this->setIdautoridade($idautoridade);
         $this->setDat_inclusao($dat_inclusao);
@@ -17,7 +17,7 @@ class AutoridadeVO
         $this->setNome_pessoa($nome_pessoa);
     }
     //--------------------------------------------------------------------------------
-    function setIdautoridade($strNewValue = null)
+    function setIdautoridade( $strNewValue = null )
     {
         $this->idautoridade = $strNewValue;
     }
@@ -26,7 +26,7 @@ class AutoridadeVO
         return $this->idautoridade;
     }
     //--------------------------------------------------------------------------------
-    function setDat_inclusao($strNewValue = null)
+    function setDat_inclusao( $strNewValue = null )
     {
         $this->dat_inclusao = $strNewValue;
     }
@@ -35,7 +35,7 @@ class AutoridadeVO
         return is_null($this->dat_inclusao) ? date('Y-m-d h:i:s') : $this->dat_inclusao;
     }
     //--------------------------------------------------------------------------------
-    function setDat_evento($strNewValue = null)
+    function setDat_evento( $strNewValue = null )
     {
         $this->dat_evento = $strNewValue;
     }
@@ -44,7 +44,7 @@ class AutoridadeVO
         return is_null($this->dat_evento) ? date('Y-m-d h:i:s') : $this->dat_evento;
     }
     //--------------------------------------------------------------------------------
-    function setOrdem($strNewValue = null)
+    function setOrdem( $strNewValue = null )
     {
         $this->ordem = $strNewValue;
     }
@@ -53,7 +53,7 @@ class AutoridadeVO
         return $this->ordem;
     }
     //--------------------------------------------------------------------------------
-    function setCargo($strNewValue = null)
+    function setCargo( $strNewValue = null )
     {
         $this->cargo = $strNewValue;
     }
@@ -62,7 +62,7 @@ class AutoridadeVO
         return $this->cargo;
     }
     //--------------------------------------------------------------------------------
-    function setNome_pessoa($strNewValue = null)
+    function setNome_pessoa( $strNewValue = null )
     {
         $this->nome_pessoa = $strNewValue;
     }
@@ -72,3 +72,4 @@ class AutoridadeVO
     }
     //--------------------------------------------------------------------------------
 }
+?>
