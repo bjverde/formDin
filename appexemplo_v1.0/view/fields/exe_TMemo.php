@@ -40,26 +40,33 @@
  */
 
 // chamada ajax
-$frm = new TForm('Exemplo Campo Memo com tenymce',900,900);
+d($_REQUEST);
+
+$frm = new TForm('Exemplo Campo Memo com TinyMCE',600);
 $frm->setRichEdit(true);
 // define a largura das colunas verticais do formulario para alinhamento dos campos
-$frm->setColumns(array(200,100));
-$frm->addMemoField('campo_memo_1','Descrição:',300,true,80,5);
-$frm->addMemoField('campo_memo_2','Documento:',100000,false,80,5,null,null,false);
-$frm->addJavascript('fwSetHtmlEditorPreview("campo_memo_2")');
-$frm->setAction('Validar');
+//$frm->setColumns(array(200,100));
+$frm->addMemoField('campo_memo_simples','Descrição:',300,true,80,5);
+$frm->addMemoField('campo_memo_tinymce','Documento:',100000,false,80,5,null,null,false);
+$frm->addJavascript('fwSetHtmlEditorPreview("campo_memo_tinymce")');
+
+echo 'Valor do Campo: campo_memo_tinymce =<br>';
+echo htmlspecialchars($frm->get('campo_memo_tinymce'));
+
 $frm->addButton('Preview',null,'btnPreview','doPreview()');
+$frm->addButton('Post');
 
 $acao = isset($acao) ? $acao : null;
 if ($acao == 'Validar') {
     $frm->validate();
 }
-//d($acao);
+
+
 $frm->show();
 ?>
 <script>
 function doPreview(){
-	var ed = tinyMCE.get('campo_memo_2');
+	var ed = tinyMCE.get('campo_memo_tinymce');
   	//ed.execCommand('mceToggleEditor',false,'content');
 }
 

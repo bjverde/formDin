@@ -38,6 +38,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+d($_REQUEST);
+
 $frm = new TForm('Exemplo do Campo Editor com CkEditor',500);
 
 $frm->addTextEditorField('fld_texto','Descrição:',false,true);
@@ -45,6 +47,6 @@ $frm->addTextEditorField('fld_texto','Descrição:',false,true);
 echo 'Valor do Campo: fld_texto =<br>';
 echo htmlspecialchars($frm->get('fld_texto'));
 
-
+$frm->setAction('POST PAGINA');
 $frm->show();
 ?>
