@@ -1325,31 +1325,35 @@ class TApplication extends TLayout {
 	 * Build defaulf page Footer  Div: app_footer
 	 * div chindren  app_footer_message,app_footer_company, app_footer_module
 	 */
-	private function buildPageFooter() {
+	private function buildPageFooter()
+	{
 		if (! $this->getSouthArea ()) {
 			return;
-		}		
-		$app_footer_message = new TDiv('app_footer_message');
-		
-		$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
-		$app_footer_company = new TDiv( 'app_footer_company' );
-		$app_footer_company->add($info_company);
-		
-		$app_footer_module = new TDiv( 'app_footer_module' );
+		}
 		
 		$app_footer = new TDiv( 'app_footer' );		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
 		} else {
+			$app_footer_message = new TDiv('app_footer_message');
+			
+			$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
+			$app_footer_company = new TDiv( 'app_footer_company' );
+			$app_footer_company->add($info_company);
+			
+			$app_footer_module = new TDiv( 'app_footer_module' );			
+			
 			$app_footer->add($app_footer_message);
 			$app_footer->add($app_footer_company);
 			$app_footer->add($app_footer_module);
-		}		
+		}
 		//$app_footer->add('&nbsp;');
 		$this->getSouthArea()->add( $app_footer );
 	}
-	public function parsePhpFile($strFileName = null, $var = null) {
+	
+	public function parsePhpFile($strFileName = null, $var = null)
+	{
 		if (is_null ( $strFileName ) || ! file_exists ( $strFileName )) {
 			return null;
 		}
