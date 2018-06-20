@@ -58,6 +58,11 @@ body
 	/*background-image:url('imagens/app/binary.gif');*/
 	/*background-image:url('imagens/app/bg_listrado.jpg')*/;
 }
+#header
+{
+	width	:100%;
+	border	:0px;
+}
 #app_header_logo
 {
 	height		:55px;
@@ -122,7 +127,7 @@ body
 	background-color:transparent;
 }
 
-#app_footer
+#footer
 {
 	border			:0px;
 	font-size		:10px;
