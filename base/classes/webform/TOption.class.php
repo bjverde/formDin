@@ -477,7 +477,13 @@ abstract class TOption extends TControl
 	 */
 	public function getColumnCount()
 	{
-		return count( $this->columns );
+		$isArray  = is_array($this->columns);
+		$isObject = is_object($this->columns);
+		$result   = 0;
+		if( $isArray || $isObject ){
+			$result = count( $this->columns );
+		}
+		return $result;
 	}
 	/**
 	 * Define o(s) valor(es) que será(ão) selecionado(s) no campo
