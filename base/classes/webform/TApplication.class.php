@@ -1337,9 +1337,7 @@ class TApplication extends TLayout {
 		
 		$app_footer_module = new TDiv( 'app_footer_module' );
 		
-		$app_footer = new TElement( 'div' );
-		$app_footer->setId('app_footer');
-		
+		$app_footer = new TDiv( 'app_footer' );		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
