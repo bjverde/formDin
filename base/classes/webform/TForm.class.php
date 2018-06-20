@@ -375,6 +375,18 @@ class TForm Extends TBox
          $this->addHiddenField( 'fw_back_to' );
          */
     }
+    
+    public function getQtdMessages()
+    {
+    	$isArray  = is_array( $this->getMessages() );
+    	$isObject = is_object( $this->getMessages() );
+    	$result   = 0;
+    	if( $isArray || $isObject ){
+    		$result = count( $this->getMessages() );
+    	}
+    	return $result;
+    }
+    
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
@@ -617,7 +629,7 @@ class TForm Extends TBox
                     }
                     if( trim($msgError)!='' )
                     {
-                        $this->addMessage( ( count( $this->getMessages() ) + 1) . ') ' . $msgError );
+                        $this->addMessage( ( $this->getQtdMessages() + 1) . ') ' . $msgError );
                     }
                 }
             }
