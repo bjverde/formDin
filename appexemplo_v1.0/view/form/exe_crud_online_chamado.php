@@ -38,50 +38,51 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-$frm = new TForm('Cadastro Exemplo', 300);
-$frm->setColumns(array (
-        150,
-        200,
-        300
-));
+$frm = new TForm ( 'Cadastro Exemplo', 300 );
+$frm->setColumns ( array (
+		150,
+		200,
+		300 
+) );
 
-$frm->addHiddenField('seq_fruta');
-$frm->addTextField('nom_fruta', 'Nome:', 50, true, 50);
-$frm->addNumberField('val_fruta', 'Preço:', 10, true, 2);
-$frm->addDateField('dat_compra', 'Aquisição:', true);
+$frm->addHiddenField ( 'seq_fruta' );
+$frm->addTextField ( 'nom_fruta', 'Nome:', 50, true, 50 );
+$frm->addNumberField ( 'val_fruta', 'Preço:', 10, true, 2 );
+$frm->addDateField ( 'dat_compra', 'Aquisição:', true );
 
-$frm->addSelectField('sit_cancelado', 'Cancelado:', true);
-$frm->addMemoField('obs_fruta', 'Observação:', 200, false, 50, 5);
+$frm->addSelectField ( 'sit_cancelado', 'Cancelado:', true );
+$frm->addMemoField ( 'obs_fruta', 'Observação:', 200, false, 50, 5 );
 
-$frm->setAction('Gravar,Limpar');
+$frm->setAction ( 'Gravar,Limpar' );
 
-$acao = isset($acao) ? $acao : null;
+$acao = isset ( $acao ) ? $acao : null;
 switch ($acao) {
-    case 'Limpar':
-        $frm->clearFields();
-        break;
-    // -----------------------------------------------------------------------
-    case 'Gravar':
-        if ($frm->validate()) {
-            $bvars = $frm->createBvars('seq_fruta,nom_fruta,val_fruta,seq_moeda,dat_compra,sit_cancelado,obs_fruta');
-            if (! $frm->addError(executarPacote('TESTE.PKG_FRUTA.INC_ALT', $bvars))) {
-                $frm->setMessage('Gravação ok');
-                // $frm->clearFields();
-                $frm->setValue('seq_fruta', $bvars ['SEQ_FRUTA']);
-            }
-        }
-    // -----------------------------------------------------------------------
-    case 'Excluir':
-        $bvars = $frm->createBvars('seq_fruta');
-        $frm->addError(executarPacote('TESTE.PKG_FRUTA.EXC', $bvars));
-        $frm->clearFields();
-        break;
-    // ------------------------------------------------------------------------
-    case 'Alterar':
-        $bvars = $frm->createBvars('seq_fruta');
-        $frm->addError(recuperarPacote('TESTE.PKG_FRUTA.SEL', $bvars, $res, - 1));
-        $frm->update($res);
-        break;
-    // ------------------------------------------------------------------------
+	case 'Limpar' :
+		$frm->clearFields ();
+		break;
+	// -----------------------------------------------------------------------
+	case 'Gravar' :
+		if ($frm->validate ()) {
+			$bvars = $frm->createBvars ( 'seq_fruta,nom_fruta,val_fruta,seq_moeda,dat_compra,sit_cancelado,obs_fruta' );
+			if (! $frm->addError ( executarPacote ( 'TESTE.PKG_FRUTA.INC_ALT', $bvars ) )) {
+				$frm->setMessage ( 'Gravação ok' );
+				// $frm->clearFields();
+				$frm->setValue ( 'seq_fruta', $bvars ['SEQ_FRUTA'] );
+			}
+		}
+	// -----------------------------------------------------------------------
+	case 'Excluir' :
+		$bvars = $frm->createBvars ( 'seq_fruta' );
+		$frm->addError ( executarPacote ( 'TESTE.PKG_FRUTA.EXC', $bvars ) );
+		$frm->clearFields ();
+		break;
+	// ------------------------------------------------------------------------
+	case 'Alterar' :
+		$bvars = $frm->createBvars ( 'seq_fruta' );
+		$frm->addError ( recuperarPacote ( 'TESTE.PKG_FRUTA.SEL', $bvars, $res, - 1 ) );
+		$frm->update ( $res );
+		break;
+	// ------------------------------------------------------------------------
 }
-$frm->show();
+$frm->show ();
+?>

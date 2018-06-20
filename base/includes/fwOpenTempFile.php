@@ -40,127 +40,184 @@ error_reporting(0);
 /*
 Visualizar arquivo anexado ainda não salvos que ainda estão na pasta temporária
 */
-$extension      = isset($_REQUEST['extension'])   ? $_REQUEST['extension'] : '';
-$extension      = ( $extension=='undefined' ) ? '' : $extension;
-$tempName       = isset($_REQUEST['tempName'])    ? $_REQUEST['tempName'] : null;
-$contentType    = isset($_REQUEST['contentType']) ? $_REQUEST['contentType'] : null;
-$contentType    = ( $contentType=='null' ) ? null : $contentType;
-$fileName       = isset($_REQUEST['fileName'])     ? $_REQUEST['fileName']: null; // opcional se tiver o tempFile e o contentType
+$extension		= isset( $_REQUEST['extension'] ) 	? $_REQUEST['extension'] : '';
+$extension		= ( $extension=='undefined' ) ? '' : $extension;
+$tempName   	= isset( $_REQUEST['tempName'] ) 	? $_REQUEST['tempName'] : null;
+$contentType   	= isset( $_REQUEST['contentType'] ) ? $_REQUEST['contentType'] : null;
+$contentType	= ( $contentType=='null' ) ? null : $contentType;
+$fileName   	= isset( $_REQUEST['fileName']) 	? $_REQUEST['fileName']: null; // opcional se tiver o tempFile e o contentType
 
-if (! file_exists($tempName)) {
-    die('<h3>Arquivo '.$tempName.' não encontrado!</h3>');
+if( ! file_exists($tempName ) )
+{
+	die('<h3>Arquivo '.$tempName.' não encontrado!</h3>');
 }
-if ($ct = getContentType($fileName.'.'.$extension)) {
+if( $ct = getContentType( $fileName.'.'.$extension ) )
+{
     $contentType = $ct;
 }
 
-setHeader($tempName, $contentType, $extension, $fileName);
+setHeader( $tempName, $contentType, $extension, $fileName);
 
 
-function setHeader($tempName, $contentType = null, $extension = null, $fileName = null)
+function setHeader($tempName, $contentType=null, $extension=null,$fileName=null)
 {
-    $fileName = is_null($fileName) ? $tempName : $fileName;
-    if (!$extension) {
-        $aFileParts = pathinfo($fileName);
-        $extension = $aFileParts['extension'];
-        if (! file_exists($tempName.'.'.$extension)) {
-            if (copy($tempName, $tempName.'.'.$extension)) {
-                $tempName = $tempName.'.'.$extension;
-            }
-        } else {
-            $tempName = $tempName.'.'.$extension;
-        }
-    }
+	$fileName = is_null( $fileName ) ? $tempName : $fileName;
+	if( !$extension)
+	{
+		$aFileParts = pathinfo($fileName);
+		$extension = $aFileParts['extension'];
+		if( ! file_exists( $tempName.'.'.$extension) )
+		{
+			if( copy( $tempName,$tempName.'.'.$extension) )
+			{
+				$tempName = $tempName.'.'.$extension;
+			}
+		}
+		else
+		{
+			$tempName = $tempName.'.'.$extension;
+		}
+	}
 
-    /*echo 'tempName:'.$tempName.'<br>';
-    echo 'contentType:'.$contentType.'<br>';
-    echo 'extension:'.$extension.'<br>';
-    echo 'fileName:'.$fileName.'<br>';
-    die();*/
-    //d($fileName.'<hr>'.$extension.'<hr>'.$contentType.'<hr>'.$tempName,null,true);
+	/*echo 'tempName:'.$tempName.'<br>';
+	echo 'contentType:'.$contentType.'<br>';
+	echo 'extension:'.$extension.'<br>';
+	echo 'fileName:'.$fileName.'<br>';
+	die();*/
+	//d($fileName.'<hr>'.$extension.'<hr>'.$contentType.'<hr>'.$tempName,null,true);
     //die();
     header("Cache-Control: no-cache");
-    header("Pragma: no-cache");
-    header("Expires: Fri, 01 Jan 2000 05:00:00 GMT");
-    if (is_null($contentType)) {
-        header("Content-Type: application/download");
-        header("Content-Disposition:attachment; filename=\"".preg_replace('/^tmp_/', '', baseName($fileName))."\"");
-        header("Content-Transfer-Encoding: binary");
-        header("Content-Description: File Transfer");
-        header("Content-Length: ".filesize($tempName));
-    } else {
-        header("Pragma: public"); // required
-        header("Expires: 0");
-        // estes tipos abrem diretamente no browser
-        if (!preg_match('/htm|xml|pdf|jpe?g|bmp|gif|txt/i', $extension)) {
-            header("Content-Disposition:attachment; filename=\"".preg_replace('/^tmp_/', '', baseName($fileName))."\"");
-        }
-        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-        header("Cache-Control: private", false); // required for certain browsers
-        header("Content-Type: $contentType");
-        header("Content-Transfer-Encoding: binary");
-    }
-    ob_clean();
-    flush();
-    $handle = fopen($tempName, 'rb');
-    if ($handle) {
-        $buffer = '';
-        while (!feof($handle)) {
-            $buffer = fread($handle, 4096);
-            echo $buffer;
-            ob_flush();
-            flush();
-        }
-        fclose($handle);
-    } else {
-        readfile($tempName);
-    }
+ 	header("Pragma: no-cache");
+ 	header("Expires: Fri, 01 Jan 2000 05:00:00 GMT");
+    if( is_null( $contentType ) )
+    {
+		header("Content-Type: application/download");
+		header("Content-Disposition:attachment; filename=\"".preg_replace('/^tmp_/','',baseName($fileName))."\"");
+		header("Content-Transfer-Encoding: binary");
+		header("Content-Description: File Transfer");
+		header("Content-Length: ".filesize($tempName));
+	}
+    else
+    {
+		header("Pragma: public"); // required
+		header("Expires: 0");
+		// estes tipos abrem diretamente no browser
+		if( !preg_match('/htm|xml|pdf|jpe?g|bmp|gif|txt/i',$extension ) )
+		{
+			header("Content-Disposition:attachment; filename=\"".preg_replace('/^tmp_/','',baseName($fileName))."\"");
+		}
+		header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		header("Cache-Control: private",false); // required for certain browsers
+		header("Content-Type: $contentType");
+		header("Content-Transfer-Encoding: binary");
+	}
+   	ob_clean();
+	flush();
+	$handle = fopen( $tempName, 'rb' );
+	if( $handle )
+	{
+		$buffer = '';
+		while( !feof( $handle ) )
+		{
+			$buffer = fread( $handle, 4096 );
+			echo $buffer;
+			ob_flush();
+			flush();
+		}
+		fclose ( $handle );
+	}
+	else
+	{
+		readfile ( $tempName );
+	}
 }
-function getContentType($fileName = null)
+function getContentType( $fileName = null )
 {
     $contentType=null;
-    if (preg_match('/\.gif/i', $fileName) > 0) {
+    if( preg_match('/\.gif/i',$fileName) > 0  )
+    {
         $contentType="image/gif";
-    } elseif (preg_match('/\.jpe?g/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.jpe?g/i',$fileName) > 0  )
+    {
         $contentType="image/jpg";
-    } elseif (preg_match('/\.docx?/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.docx?/i',$fileName) > 0  )
+    {
         $contentType="application/msword";
-    } elseif (preg_match('/\.pdf/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.pdf/i',$fileName) > 0  )
+    {
         $contentType="application/pdf";
-    } elseif (preg_match('/\.zip/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.zip/i',$fileName) > 0  )
+    {
         $contentType="application/zip";
-    } elseif (preg_match('/\.gz/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.gz/i',$fileName) > 0  )
+    {
         $contentType="application/x-gzip";
-    } elseif (preg_match('/\.rar/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.rar/i',$fileName) > 0  )
+    {
         $contentType="application/x-rar-compressed";
-    } elseif (preg_match('/\.xls/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.xls/i',$fileName) > 0  )
+    {
         $contentType="application/ms-excel";
-    } elseif (preg_match('/\.ppt/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.ppt/i',$fileName) > 0  )
+    {
         $contentType="application/ms-powerpoint";
-    } elseif (preg_match('/\.bmp/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.bmp/i',$fileName) > 0  )
+    {
         $contentType="image/bmp";
-    } elseif (preg_match('/\.png/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.png/i',$fileName) > 0  )
+    {
         $contentType="image/png";
-    } elseif (preg_match('/\.tif/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.tif/i',$fileName) > 0  )
+    {
         $contentType="image/tif";
-    } elseif (preg_match('/\.aud?/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.aud?/i',$fileName) > 0  )
+    {
         $contentType="application/audio/basic";
-    } elseif (preg_match('/\.wav/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.wav/i',$fileName) > 0  )
+    {
         $contentType="application/audio/wav";
-    } elseif (preg_match('/\.mid/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.mid/i',$fileName) > 0  )
+    {
         $contentType="application/audio/x-mid";
-    } elseif (preg_match('/\.avi/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.avi/i',$fileName) > 0  )
+    {
         $contentType="application/video/avi";
-    } elseif (preg_match('/\.mp3/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.mp3/i',$fileName) > 0  )
+    {
         $contentType="application/audio/mp3";
-    } elseif (preg_match('/\.mpg/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.mpg/i',$fileName) > 0  )
+    {
         $contentType="application/video/mpg";
-    } elseif (preg_match('/\.mpeg/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.mpeg/i',$fileName) > 0  )
+    {
         $contentType="application/video/mpeg";
-    } elseif (preg_match('/\.swf/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.swf/i',$fileName) > 0  )
+    {
         $contentType="application/x-shockwave-flash";
-    } elseif (preg_match('/\.txt/i', $fileName) > 0) {
+    }
+    else if( preg_match('/\.txt/i',$fileName) > 0  )
+    {
         $contentType="text/plain";
     }
     return $contentType;
 }
+?>

@@ -41,21 +41,22 @@
 
 
 $html = '<br><br><b>Apenas telefones de 8 ou 9 digitos + DDD no padrão Brasil</b>';
-        
-        $box3 = new TBox('bx3', 300, 100);
-        $box3->add($html);
-        $box3->setFlat(true);
-        $box3->setPosition('TR');
-        $box3->setCssBody('background-color', '#ff6347');
+		
+		$box3 = new TBox('bx3',300,100);
+		$box3->add($html);
+		$box3->setFlat(true);
+		$box3->setPosition('TR');
+		$box3->setCssBody('background-color','#ff6347');
 
 
 //define('REQUIRED_FIELD_MARK','*');
-$frm = new TForm('Exemplo do Campo Telefone', 200, 400);
+$frm = new TForm('Exemplo do Campo Telefone',200,400);
 
 $frm->addOutside($box3);
 
-$frm->addFoneField('fone1', 'Telefone:', false, null, '6198761234');
-$frm->addFoneField('fone2', 'Fax:');
+$frm->addFoneField('fone1','Telefone:',false,null,'6198761234');
+$frm->addFoneField('fone2','Fax:');
 
 
 $frm->show();
+?>

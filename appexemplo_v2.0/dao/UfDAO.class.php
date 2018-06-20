@@ -16,7 +16,7 @@ class UfDAO extends TPDOConnection
         return $result['QTD'][0];
     }
     //--------------------------------------------------------------------------------
-    public static function select($id)
+    public static function select( $id ) 
     {
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where cod_uf = ?';
@@ -24,7 +24,7 @@ class UfDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAllPagination($orderBy = null, $where = null, $page = null, $rowsPerPage = null)
+    public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) 
     {
         $rowStart = PaginationSQLHelper::getRowStart($page, $rowsPerPage);
         
@@ -37,7 +37,7 @@ class UfDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
+    public static function selectAll( $orderBy=null, $where=null ) 
     {
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
@@ -46,26 +46,25 @@ class UfDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function insert(UfVO $objVo)
+    public static function insert( UfVO $objVo ) 
     {
-        if ($objVo->getCod_uf()) {
+        if($objVo->getCod_uf() ) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getNom_uf()
-         , $objVo->getSig_uf()
-         , $objVo->getCod_regiao()
+        $values = array(  $objVo->getNom_uf() 
+         , $objVo->getSig_uf() 
+         , $objVo->getCod_regiao() 
          );
         return self::executeSql(
             'insert into uf(
 								 nom_uf
 								,sig_uf
 								,cod_regiao
-								) values (?,?,?)',
-            $values
+								) values (?,?,?)', $values 
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update(UfVO $objVo)
+    public static function update( UfVO $objVo )
     {
         $values = array( $objVo->getNom_uf()
          ,$objVo->getSig_uf()
@@ -76,14 +75,14 @@ class UfDAO extends TPDOConnection
 								 nom_uf = ?
 								,sig_uf = ?
 								,cod_regiao = ?
-								where cod_uf = ?',
-            $values
+								where cod_uf = ?', $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete($id)
+    public static function delete( $id )
     {
         $values = array($id);
         return self::executeSql('delete from uf where cod_uf = ?', $values);
     }
 }
+?>

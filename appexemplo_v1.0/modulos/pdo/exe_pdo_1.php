@@ -39,49 +39,54 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo PDO 1', 450);
-$frm->addHtmlField('mensagem', 'Dados da conexão:<br>Banco:MYSQL<BR>Host:127.0.0.1<br>Port:3306<br>Database:text<br>Usuário:root<br>Senha:');
+$frm = new TForm('Exemplo PDO 1',450);
+$frm->addHtmlField('mensagem','Dados da conexão:<br>Banco:MYSQL<BR>Host:127.0.0.1<br>Port:3306<br>Database:text<br>Usuário:root<br>Senha:');
 $frm->addHtmlField('status');
 
 $acao = isset($acao) ? $acao : '';
-if ($acao == 'Testar') {
-    /*
-    TPDOConnection::connect('config_conexao_sqlite.php',null,false);
-    $bd1 = TPDOConnection::getInstance();
-    if( ! TPDOConnection::getError() )
-    {
-        $frm->set('status','Conexão OK');
-    }
-    else
-    {
-        TPDOConnection::showError();
-        die();
-    }
+if( $acao == 'Testar' ) {
+	/*
+	TPDOConnection::connect('config_conexao_sqlite.php',null,false);
+	$bd1 = TPDOConnection::getInstance();
+	if( ! TPDOConnection::getError() )
+	{
+		$frm->set('status','Conexão OK');
+	}
+	else
+	{
+		TPDOConnection::showError();
+		die();
+	}
 
-    $res = TPDOConnection::executeSql('select * from tb_test');
+	$res = TPDOConnection::executeSql('select * from tb_test');
 
-    $frm->set('status','Resultado:<hr><pre>'.print_r($res,true).'</pre>');
-    if( $_REQUEST['ajax'] )
-    {
-        print_r($frm->getField('status')->getChildren() );
-    }
+	$frm->set('status','Resultado:<hr><pre>'.print_r($res,true).'</pre>');
+	if( $_REQUEST['ajax'] )
+	{
+		print_r($frm->getField('status')->getChildren() );
+	}
     */
-    // mysql
-    TPDOConnection::connect('config_conexao_mysql.php', null, false);
-    if (! TPDOConnection::getError()) {
-        $frm->set('status', 'Conexão OK');
-    } else {
-        TPDOConnection::showError();
-        die();
-    }
+	// mysql
+	TPDOConnection::connect('config_conexao_mysql.php',null,false);
+	if( ! TPDOConnection::getError() )
+	{
+		$frm->set('status','Conexão OK');
+	}
+	else
+	{
+		TPDOConnection::showError();
+		die();
+	}
 
-    $res = TPDOConnection::executeSql('select * from tb_test');
-    $frm->set('status', 'Resultado:<hr><pre>'.print_r($res, true).'</pre>');
-    if ($_REQUEST['ajax']) {
-        print_r($frm->getField('status')->getChildren());
-    }
+	$res = TPDOConnection::executeSql('select * from tb_test');
+	$frm->set('status','Resultado:<hr><pre>'.print_r($res,true).'</pre>');
+	if( $_REQUEST['ajax'] )
+	{
+		print_r($frm->getField('status')->getChildren() );
+	}
 }
 
-$frm->addButtonAjax('Testar Ajax', null, null, null, 'Testar', null, 'json', true, 'status');
+$frm->addButtonAjax('Testar Ajax',null,null,null,'Testar',null,'json',true,'status');
 $frm->setAction('Testar');
 $frm->show();
+?>

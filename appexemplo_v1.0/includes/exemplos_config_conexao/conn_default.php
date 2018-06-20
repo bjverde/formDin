@@ -33,3 +33,5 @@ return;
 $dbType = "sqlite";
 $database = "bdApoio.s3db";
 $utf8=0;
+
+?>

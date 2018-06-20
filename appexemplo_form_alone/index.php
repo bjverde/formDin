@@ -58,7 +58,7 @@
 require_once '../base/classes/webform/TApplication.class.php';
 require_once 'includes/info.php';
 
-function testar($extensao = null, $html)
+function testar($extensao=null, $html)
 {
     if (!extension_loaded($extensao)) {
         $html->add('<b>'.$extensao.'</b>: <span class="vermelho">Não instalada</span><br>');
@@ -97,8 +97,7 @@ function testar($extensao = null, $html)
     $html->add('<br>');
     testar('pdo', $html);
     testar('PDO_Firebird', $html);
-    $html->add(info::infoSQLServer());
-testar('pdo_sqlsrv', $html);
+    $html->add(info::infoSQLServer()); testar('pdo_sqlsrv', $html);
     testar('pdo_mysql', $html);
     testar('PDO_OCI', $html);
     testar('PDO_ODBC', $html);

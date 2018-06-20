@@ -19,13 +19,13 @@
 }
 
 .btnImg:hover {
-    background-color:#FF9933;
-    text-decoration:none;
-    color:#FFFFFF;
+	background-color:#FF9933;
+	text-decoration:none;
+	color:#FFFFFF;
 }
 
 .btnImg {
-    background-image: url("../imagem/data_base.png");
+	background-image: url("../imagem/data_base.png");
     background-size: 100%;
     background-repeat:no-repeat;
     cursor:pointer;
@@ -33,48 +33,48 @@
     height: 32px;
     border: 2px;
     border-radius:5px;
-    border-width:1px;
-    border-style:solid;
-    border-color:#919191;
-    
-    /*
-    color: red;
-    font-size: 16px;
-    border:0;
-    background:transparent url("../imagem/data_base.png") no-repeat 0 0;
-    */
+	border-width:1px;
+	border-style:solid;
+	border-color:#919191;
+	
+	/*
+	color: red;
+	font-size: 16px;
+	border:0;
+	background:transparent url("../imagem/data_base.png") no-repeat 0 0;
+	*/
 }
 
 .btnOragen:hover{
-    background-color:#FF9933;
-    text-decoration:none;
-    color:#FFFFFF;
+	background-color:#FF9933;
+	text-decoration:none;
+	color:#FFFFFF;
 }
 
 .btnOragen{
-    padding:0 0 3px 0;
-    cursor:pointer;
-    background-color:#EC5500;
-    display:block;
-    text-align:center;
-    margin-top:8px;
-    width:174px;
-    height:21px;
-    border-radius:5px;
-    border-width:1px;
-    border-style:solid;
-    border-color:#919191;
-    font-family:Verdana;
-    font-size:13px;
-    font-style:normal;
-    line-height:normal;
-    font-weight:bold;
-    color:#FFFFFF;
+	padding:0 0 3px 0;
+	cursor:pointer;
+	background-color:#EC5500;
+	display:block;
+	text-align:center;
+	margin-top:8px;
+	width:174px;
+	height:21px;
+	border-radius:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#919191;
+	font-family:Verdana;
+	font-size:13px;
+	font-style:normal;
+	line-height:normal;
+	font-weight:bold;
+	color:#FFFFFF;
 }
 
 .notice {
-    width: 200px;
-    font-size: 16px;
+	width: 200px;
+	font-size: 16px;
     border: 1px dashed blue;
     display: inline-block;
     text-align: center;
@@ -82,13 +82,13 @@
 }
 
 .text {
-    margin-bottom: 20px;
-    background-color: #ffffcc;
-    border: 1px solid #ffeb3b;
+	margin-bottom: 20px;
+	background-color: #ffffcc;
+	border: 1px solid #ffeb3b;
 }
 
 .label {
-    font-size: 25px;
-    color: #00ff00;
-    font-style: italic;
+	font-size: 25px;
+	color: #00ff00;
+	font-style: italic;
 }

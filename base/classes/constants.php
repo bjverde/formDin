@@ -41,11 +41,9 @@
 
 // ============= PROJECT CONSTANTS =================//
 
-if (!defined('ROWS_PER_PAGE')) {
-    define('ROWS_PER_PAGE', 20);
+if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
 }
-if (!defined('ENCODINGS')) {
-    define('ENCODINGS', 'UTF-8');
+if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
 }
 
 
@@ -53,14 +51,13 @@ if (!defined('ENCODINGS')) {
 
 // ============= FORMDIN FRAMEWORK CONSTANTS =================//
 
-if (!defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
+if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
 }
 define('EOL', "\n");
 define('TAB', chr(9));
 
 
-define('FORMDIN_VERSION', '4.2.4-alpha');
+define('FORMDIN_VERSION', '4.2.5-alpha');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');
@@ -75,3 +72,6 @@ define('DBMS_SQLSERVER', 'SQLSERVER');
 define('GRID_SIMPLE', '1');
 define('GRID_SCREEN_PAGINATION', '2');
 define('GRID_SQL_PAGINATION', '3');
+
+
+?>

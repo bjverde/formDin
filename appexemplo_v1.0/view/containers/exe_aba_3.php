@@ -40,87 +40,83 @@
  */
 
 $primaryKey = 'IDPESSOA';
-$frm = new TForm('Exemplo - Utilização de Abas 03', 600);
+$frm = new TForm('Exemplo - Utilização de Abas 03',600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-$pc = $frm->addPageControl('pc', 100, null, null, null);
+$pc = $frm->addPageControl('pc',100,null,null,null);
 
-$pc->addPage('Cadastro pessoa', true, true, 'pessoa', null);
-    $frm->addHiddenField($primaryKey); // coluna chave da tabela
-    $frm->addTextField('NMPESSOA', 'Nome da Pessoa', 50, true);
-    $frm->addSelectField('TPPESSOA', 'Tipo Pessoa:', null, 'F=Pessoa física,J=Pessoa jurídica', false)->addEvent('onChange', 'select_change(this)');
-;
+$pc->addPage('Cadastro pessoa',true,true,'pessoa',null);
+	$frm->addHiddenField( $primaryKey ); // coluna chave da tabela
+	$frm->addTextField('NMPESSOA', 'Nome da Pessoa',50,true);
+	$frm->addSelectField('TPPESSOA', 'Tipo Pessoa:',null,'F=Pessoa física,J=Pessoa jurídica',false)->addEvent('onChange','select_change(this)');;
 
-$pc->addPage('Pessoa Física', false, true, 'pessoaFisica', true, true);
-    $frm->addCpfField('NMCPF', 'CPF:', false);
-    $frm->addTextField('IDUF', 'UF', 50, false);
-    $frm->addTextField('IDESTADOCIVIL', 'Estado Civil', 50, false);
-    $frm->addTextField('IDNACIONALIDADE', 'Nacionalidade', 50, false);
+$pc->addPage('Pessoa Física',false,true,'pessoaFisica',true,true);
+	$frm->addCpfField('NMCPF','CPF:',false);
+	$frm->addTextField('IDUF', 'UF',50,false);
+	$frm->addTextField('IDESTADOCIVIL', 'Estado Civil',50,false);
+	$frm->addTextField('IDNACIONALIDADE', 'Nacionalidade',50,false);
 
 
-$pc->addPage('Pessoa Jurídica', false, true, 'pessoaJuridica', true, true);
-    $frm->addCnpjField('NMCNPJ', 'CNPJ:', false);
+$pc->addPage('Pessoa Jurídica',false,true,'pessoaJuridica',true,true);
+	$frm->addCnpjField('NMCNPJ','CNPJ:',false);
 
 $frm->closeGroup();
-$frm->addButton('Salvar', 'Salvar');
-$frm->addButton('Limpar', 'Limpar');
+$frm->addButton('Salvar','Salvar');
+$frm->addButton('Limpar','Limpar');
 
 
 $acao = isset($acao) ? $acao : null;
-switch ($acao) {
-    case 'Salvar':
-        $frm->validate();
-        /*
-         $TPPESSOA = $frm->get('TPPESSOA');
-         if ( $TPPESSOA == 'F' ) {
-         $frm->validate(null,null,'NMCNPJ');
-         }else{
-         $frm->validate(null,null,'NMCPF');
-         }
-         $frm->validate();
-         */
-        /*
-         if ( $TPPESSOA == 'F' ) {
-         $vo = new PessoaVO();
-         $frm->setVo( $vo );
-         $resultado = PessoaDAO::insert( $vo );
-         if($resultado==1) {
-         $frm->setMessage('Registro gravado com sucesso!!!');
-         $frm->clearFields();
-         }else{
-         $frm->setMessage($resultado);
-         }
-         }
-         */
-        break;
-        //--------------------------------------------------------------------------------
-    case 'Limpar':
-        $frm->clearFields();
-        break;
-        //--------------------------------------------------------------------------------
-    case 'gd_excluir':
-        $id = $frm->get($primaryKey) ;
-        //$resultado = PessoaDAO::delete( $id );;
-        if ($resultado==1) {
-            $frm->setMessage('Registro excluido com sucesso!!!');
-            $frm->clearFields();
-        } else {
-            $frm->clearFields();
-            $frm->setMessage($resultado);
-        }
-        break;
+switch( $acao ) {
+	case 'Salvar':
+		$frm->validate();
+		/*
+		 $TPPESSOA = $frm->get('TPPESSOA');
+		 if ( $TPPESSOA == 'F' ) {
+		 $frm->validate(null,null,'NMCNPJ');
+		 }else{
+		 $frm->validate(null,null,'NMCPF');
+		 }
+		 $frm->validate();
+		 */
+		/*
+		 if ( $TPPESSOA == 'F' ) {
+		 $vo = new PessoaVO();
+		 $frm->setVo( $vo );
+		 $resultado = PessoaDAO::insert( $vo );
+		 if($resultado==1) {
+		 $frm->setMessage('Registro gravado com sucesso!!!');
+		 $frm->clearFields();
+		 }else{
+		 $frm->setMessage($resultado);
+		 }
+		 }
+		 */
+		break;
+		//--------------------------------------------------------------------------------
+	case 'Limpar':
+		$frm->clearFields();
+		break;
+		//--------------------------------------------------------------------------------
+	case 'gd_excluir':
+		$id = $frm->get( $primaryKey ) ;
+		//$resultado = PessoaDAO::delete( $id );;
+		if($resultado==1) {
+			$frm->setMessage('Registro excluido com sucesso!!!');
+			$frm->clearFields();
+		}else{
+			$frm->clearFields();
+			$frm->setMessage($resultado);
+		}
+		break;
 }
 
-function incluirPessoa($dadosPessoa, $id, $nome, $tipo, $cpf, $cnpj)
-{
-    $dadosPessoa['IDPESSOA'][]=$id;
-    $dadosPessoa['NMPESSOA'][]=$nome;
-    $dadosPessoa['TPPESSOA'][]=$tipo;
-    $dadosPessoa['NMCPF'][]=$cpf;
-    $dadosPessoa['NMCNPJ'][]=$cnpj;
-    
-    return $dadosPessoa;
+function incluirPessoa($dadosPessoa, $id, $nome, $tipo, $cpf, $cnpj){
+	$dadosPessoa['IDPESSOA'][]=$id;   $dadosPessoa['NMPESSOA'][]=$nome;
+	$dadosPessoa['TPPESSOA'][]=$tipo; $dadosPessoa['NMCPF'][]=$cpf;
+	$dadosPessoa['NMCNPJ'][]=$cnpj;
+	
+	return $dadosPessoa;
 }
 
 $dadosPessoa = isset($dadosPessoa) ? $dadosPessoa : null;
@@ -129,51 +125,52 @@ $dadosPessoa = incluirPessoa($dadosPessoa, 2, 'Maria Laranja', 'F', '52798074002
 $dadosPessoa = incluirPessoa($dadosPessoa, 3, 'Dell', 'J', null, '72381189000110');
 
 $mixUpdateFields = $primaryKey.'|'.$primaryKey.',NMPESSOA|NMPESSOA,TPPESSOA|TPPESSOA,NMCPF|NMCPF,NMCNPJ|NMCNPJ';
-$gride = new TGrid('gd'        // id do gride
-, 'Gride'     // titulo do gride
-, $dadosPessoa            // array de dados
-, null                  // altura do gride
-, null                  // largura do gride
-, $primaryKey   // chave primaria
-, $mixUpdateFields);
-$gride->addColumn($primaryKey, 'id', 50, 'center');
-$gride->addColumn('NMPESSOA', 'Nome', 50, 'center');
-$gride->addColumn('TPPESSOA', 'Tipo', 50, 'center');
-$gride->addColumn('NMCPF', 'CPF', 13, 'center');
-$gride->addColumn('NMCNPJ', 'CNPJ', 15, 'center');
-$frm->addHtmlField('gride', $gride);
+$gride = new TGrid( 'gd'        // id do gride
+		,'Gride'     // titulo do gride
+		,$dadosPessoa            // array de dados
+		,null                  // altura do gride
+		,null                  // largura do gride
+		,$primaryKey   // chave primaria
+		,$mixUpdateFields
+		);
+$gride->addColumn($primaryKey,'id',50,'center');
+$gride->addColumn('NMPESSOA','Nome',50,'center');
+$gride->addColumn('TPPESSOA','Tipo',50,'center');
+$gride->addColumn('NMCPF','CPF',13,'center');
+$gride->addColumn('NMCNPJ','CNPJ',15,'center');
+$frm->addHtmlField('gride',$gride);
 //$frm->setAction( 'Salvar,Limpar' );
 $frm->show();
 ?>
 <script>
 
 function select_change(e) {
-    if( e.id == 'TPPESSOA'){
-        var valor = jQuery("#"+e.id).find(":selected").val();
-        //var fwg = fwGetFields("#TPPESSOA",null,null);
-        //console.log ( fwg );
-        
-        jQuery( "#TPPESSOA *").each(  function() {
-            var type    = this.type;
-            var tag     = this.tagName.toLowerCase();
-            var id      = ''
-            var value   = '';
-            console.log ( this );
-        }
-        );
-            
-        
-        if (valor=='F'){
-            fwSetRequired('NMCPF');
-            fwHabilitarAba('pessoaFisica','pc');
-            fwSelecionarAba('pessoaFisica');
-            fwDesabilitarAba('pessoaJuridica');
-        }else{
-            fwSetRequired('NMCNPJ');
-            fwHabilitarAba('pessoaJuridica','pc');
-            fwSelecionarAba('pessoaJuridica');
-            fwDesabilitarAba('pessoaFisica');
-        }
-    }
+	if( e.id == 'TPPESSOA'){
+		var valor = jQuery("#"+e.id).find(":selected").val();
+		//var fwg = fwGetFields("#TPPESSOA",null,null);
+		//console.log ( fwg );
+		
+		jQuery( "#TPPESSOA *").each(  function() {
+			var type 	= this.type;
+			var tag 	= this.tagName.toLowerCase();
+			var id		= ''
+			var value	= '';
+			console.log ( this );
+		}
+		);
+			
+		
+		if (valor=='F'){
+			fwSetRequired('NMCPF');
+			fwHabilitarAba('pessoaFisica','pc');
+			fwSelecionarAba('pessoaFisica');
+			fwDesabilitarAba('pessoaJuridica');
+		}else{
+			fwSetRequired('NMCNPJ');
+			fwHabilitarAba('pessoaJuridica','pc');
+			fwSelecionarAba('pessoaJuridica');
+			fwDesabilitarAba('pessoaFisica');
+		}
+	}
 }
 </script>

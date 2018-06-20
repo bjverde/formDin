@@ -40,45 +40,45 @@
  */
 
 
-$frm = new TForm('Exemplo PDO Acessando MYSQL e SQLITE', 420, 650);
+$frm = new TForm('Exemplo PDO Acessando MYSQL e SQLITE',420,650);
 $frm->setOverflowX(false);
 $frm->setOverflowY(false);
-$frm->addHtmlField('mensagem1', 'Dados da conexão:<br>Banco:MYSQL<BR>Host:127.0.0.1<br>Port:3306<br>Database:text<br>Usuário:root<br>Senha:', null, null, 100, 300)->setCss('border', '1px solid green');
-$frm->addHtmlField('mensagem2', 'Dados da conexão:<br>Banco:SQLITE<BR>Database:bdApoio.s3db', null, null, 100, 300, false)->setCss('border', '1px solid blue');
-$frm->addHtmlField('resultado1', '', null, null, 220, 300)->setCss('border', '1px solid green');
-$frm->addHtmlField('resultado2', '', null, null, 220, 300, false)->setCss('border', '1px solid blue');
+$frm->addHtmlField('mensagem1','Dados da conexão:<br>Banco:MYSQL<BR>Host:127.0.0.1<br>Port:3306<br>Database:text<br>Usuário:root<br>Senha:',null,null,100,300)->setCss('border','1px solid green');
+$frm->addHtmlField('mensagem2','Dados da conexão:<br>Banco:SQLITE<BR>Database:bdApoio.s3db',NULL,NULL,100,300,false)->setCss('border','1px solid blue');
+$frm->addHtmlField('resultado1','',null,null,220,300)->setCss('border','1px solid green');
+$frm->addHtmlField('resultado2','',NULL,NULL,220,300,false)->setCss('border','1px solid blue');
 $frm->addHtmlField('status');
 error_reporting(E_ALL);
 
 $acao = isset($acao) ? $acao : '';
-if ($acao == 'Testar') {
-    try {
-        TDb::setDbType('mysql');
-        $res = TDb::sql('select * from engines');
-        $frm->set('resultado1', '<b><blink>MySql - Table: ENGINES</blink></b><hr><pre>'.print_r(converteArray($res), true).'</pre>');
-    } catch (Exception $e) {
-        $frm->set('resultado1', $e->getMessage());
-    }
+if( $acao == 'Testar' ) {
+	try	{
+		TDb::setDbType('mysql');
+		$res = TDb::sql('select * from engines');
+		$frm->set('resultado1','<b><blink>MySql - Table: ENGINES</blink></b><hr><pre>'.print_r(converteArray($res),true).'</pre>');
+	} catch (Exception $e) {
+		$frm->set('resultado1',$e->getMessage());
+	}
 
-    try {
-        TDb::setDbType('sqlite');
-        $res = TDb::sql('select * from tb_test');
-        $frm->set('resultado2', '<b><blink>Sqlite - Table: tb_test</blink></b><hr><pre>'.print_r(converteArray($res), true).'</pre>');
-    } catch (Exception $e) {
-        $frm->set('resultado2', $e->getMessage());
-    }
+	try	{
+		TDb::setDbType('sqlite');
+		$res = TDb::sql('select * from tb_test');
+		$frm->set('resultado2','<b><blink>Sqlite - Table: tb_test</blink></b><hr><pre>'.print_r(converteArray($res),true).'</pre>');
+	} catch (Exception $e) {
+		$frm->set('resultado2',$e->getMessage());
+	}
 }
 
-function converteArray($dados)
-{
-    $res=null;
-    foreach ($dados as $k => $a) {
-        foreach ($a as $k1 => $v1) {
-            $res[strtoupper($k1)][$k]=$v1;
-        }
-    }
-    return $res;
+function converteArray($dados) {
+	$res=null;
+	foreach($dados as $k=>$a) {
+		foreach($a as $k1=>$v1) {
+			$res[strtoupper($k1)][$k]=$v1;
+		}
+	}
+	return $res;
 }
 
 $frm->setAction('Testar,Refresh');
 $frm->show();
+?>

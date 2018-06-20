@@ -42,12 +42,11 @@
 class UrlHelper
 {
     
-    public static function curPageURL()
+    static public function curPageURL() 
     {
-        $pageURL = 'http';
+        $pageURL = 'http';        
         $https = ServerHelper::get('HTTPS');
-        if ($https == "on") {
-            $pageURL .= "s";
+        if ($https == "on") {$pageURL .= "s";
         }
         $pageURL .= "://";
         if ($_SERVER["SERVER_PORT"] != "80") {
@@ -58,10 +57,12 @@ class UrlHelper
         return $pageURL;
     }
     
-    public static function homeUrl()
+    static public function homeUrl() 
     {
         $curPageURL = self::curPageURL();
         $res = explode('index.php', $curPageURL);
         return $res[0];
     }
+
 }
+?>

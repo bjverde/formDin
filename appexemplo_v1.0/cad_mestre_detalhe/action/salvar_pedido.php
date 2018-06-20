@@ -39,4 +39,5 @@
 $vo = new Tb_pedidoVO();
 $frm->setVo($vo);
 $resultado = Tb_pedidoDAO::insert($vo);
-prepareReturnAjax(1, $resultado, 'Pedido Gravado com Sucesso!');
+prepareReturnAjax(1,$resultado,'Pedido Gravado com Sucesso!');
+?>
