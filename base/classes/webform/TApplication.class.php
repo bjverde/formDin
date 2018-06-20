@@ -50,6 +50,7 @@ require_once ($exeptions_dir . 'UploadException.class.php');
 
 $helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
 require_once ($helps_dir . 'ArrayHelper.class.php');
+require_once ($helps_dir . 'CountHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');
 require_once ($helps_dir . 'GetHelper.class.php');
 require_once ($helps_dir . 'MessageHelper.class.php');

@@ -376,17 +376,6 @@ class TForm Extends TBox
          */
     }
     
-    public function getQtdMessages()
-    {
-    	$isArray  = is_array( $this->getMessages() );
-    	$isObject = is_object( $this->getMessages() );
-    	$result   = 0;
-    	if( $isArray || $isObject ){
-    		$result = count( $this->getMessages() );
-    	}
-    	return $result;
-    }
-    
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
@@ -629,7 +618,8 @@ class TForm Extends TBox
                     }
                     if( trim($msgError)!='' )
                     {
-                        $this->addMessage( ( $this->getQtdMessages() + 1) . ') ' . $msgError );
+                    	$qtd = CountHelper::count( $this->getMessages() );
+                    	$this->addMessage( ( $qtd + 1) . ') ' . $msgError );
                     }
                 }
             }
@@ -2460,7 +2450,8 @@ class TForm Extends TBox
                  }
              }
          }
-         return (count( self::$errors ) == 0);
+         $qtd = CountHelper::count( self::$errors );
+         return ( $qtd == 0);
      }
      //-----------------------------------------------------------------------------
      /**
@@ -6554,7 +6545,8 @@ class TForm Extends TBox
                    $arrFields[ 'ibge_municipio_verificador' ] = $strFieldCodigoMunicipio;
                    $arrClearFields[ ] = $strFieldCodigoMunicipio;
                }
-               if( count( $arrFields ) > 0 )
+               $qtd = CountHelper::count($arrFields);
+               if( $qtd > 0 )
                {
                    //$field->addEvent('onBlur','getCepJquery("'.$field->getId().'",'.json_encode($arrFields).')');
                    $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
