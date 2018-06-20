@@ -51,9 +51,12 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 
 ### Bibliotecas utilizadas
 * fPDF 1.81
-* Ckeditor 3
+* PHPUnit
+* CaptchaSecurityImages 
 * JQuery 1.6
 * [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
+* Ckeditor 3.6
+* TinyMCE 3.3.4 (2010-04-27)
 
 ## Instalação.
 

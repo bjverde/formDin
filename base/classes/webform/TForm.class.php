@@ -7256,9 +7256,18 @@ class TForm Extends TBox
             * @param boolean $boolNoWrapLabel
             * @return TTextEditor
             */
-           public function addTextEditorField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=true )
+           public function addTextEditorField( $strName
+           		                             , $strLabel=null
+           		                             , $boolRequired=null
+           		                             , $boolNewLine=null
+           		                             , $strValue=null
+           		                             , $boolLabelAbove=null
+           		                             , $boolNoWrapLabel=true )
            {
-               $field = new TTextEditor( $strName, $strValue, null, $boolRequired, null, null, false );
+               $field = new TTextEditor( $strName
+               		                   , $strValue
+               		                   , null
+               		                   , $boolRequired, null, null, false );
                $field->setClass( 'ckeditor' );
                $field->setCss('height','0px');
                $this->addJsFile('ckeditor/ckeditor.js');
