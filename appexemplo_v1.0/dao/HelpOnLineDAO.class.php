@@ -54,11 +54,13 @@ class HelpOnLineDAO extends TPDOConnection {
 						, $objVo->getHelp_title() 
 						, $objVo->getHelp_text() 
 						);
-		return self::executeSql('insert into helpOnLine(
+		$sql = 'insert into helpOnLine(
 								 help_field
 								,help_title
 								,help_text
-								) values (?,?,?)', $values );
+								) values (?,?,?)';
+		$result = self::executeSql($sql, $values );
+		return $result;
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( HelpOnLineVO $objVo ) {
