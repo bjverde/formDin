@@ -39,11 +39,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-define('MIGRATE_JQUERY', false);
+define('MIGRATE_JQUERY',FALSE);
 
-define('APLICATIVO', 'APPEV1.0_layout03');
-define('FORMDIN', 1);
-define('DECIMAL_SEPARATOR', ',');
+define('APLICATIVO','APPEV1.0_layout03');
+define('FORMDIN',1);
+define('DECIMAL_SEPARATOR',',');
 
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
@@ -55,7 +55,7 @@ $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);
 $app->setNorthSize(100);
-$app->getNorthArea()->setCss('border', '0px');
+$app->getNorthArea()->setCss('border','0px');
 
 $app->setMainMenuFile('includes/menu.php');
 $app->setConfigFile(null);
@@ -63,7 +63,7 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 
 
 $app->setHeaderContent('header.php');
-$app->getLoCenter()->setCss('background-color', 'blue');
+$app->getLoCenter()->setCss('background-color','blue');
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
 $app->setHeaderBgImage('imagem/h2.jpg');
 $app->setMenuTheme('dhx_black');
@@ -72,14 +72,12 @@ $app->setMenuTheme('dhx_black');
 set_error_handler("exception_error_handler");
 $app->run();
 
-function minhaFuncaoLogin()
-{
+function minhaFuncaoLogin() {
     return 'Olá';
 }
 
-function exception_error_handler($errno, $errstr, $errfile, $errline)
-{
-    echo '<pre>';
+function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+	echo '<pre>';
     //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 
     echo '<div style="text-align:left;border:1px solid red;width:100%;font-size:18px;">Erro N.'.$errno.'<br>'.
@@ -88,3 +86,5 @@ function exception_error_handler($errno, $errstr, $errfile, $errline)
     'Linha:'.$errline.'</div></pre>'.
     '<script>try{top.app_unblockUI();}catch(e){};</script>';
 }
+
+?>

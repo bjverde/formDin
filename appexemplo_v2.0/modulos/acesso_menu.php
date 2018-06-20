@@ -20,37 +20,36 @@ $frm->addTextField('DAT_INCLUSAO', 'Data Inclusão:', null, false, null, null, t
 $frm->addTextField('DAT_UPDATE', 'Data Update: ', null, false, null, null, false)->setReadOnly(true);
 
 $acao = isset($acao) ? $acao : null;
-switch ($acao) {
-    case 'Salvar':
-        if ($frm->validate()) {
-            $vo = new Acesso_menuVO();
-            $frm->setVo($vo);
-            $resultado = Acesso_menuDAO::insert($vo);
-            if ($resultado==1) {
-                $frm->setMessage('Registro gravado com sucesso!!!');
-                $frm->clearFields();
-            } else {
-                $frm->setMessage($resultado);
-            }
-        }
-        break;
-    //--------------------------------------------------------------------------------
-    case 'Limpar':
-        $frm->clearFields();
-        break;
-    //--------------------------------------------------------------------------------
-    case 'gd_excluir':
-        $id = $frm->get($primaryKey);
-        $resultado = Acesso_menuDAO::delete($id);
-        ;
-        if ($resultado==1) {
-            $frm->setMessage('Registro excluido com sucesso!!!');
+switch( $acao ) {
+case 'Salvar':
+    if ($frm->validate() ) {
+        $vo = new Acesso_menuVO();
+        $frm->setVo($vo);
+        $resultado = Acesso_menuDAO::insert($vo);
+        if($resultado==1) {
+            $frm->setMessage('Registro gravado com sucesso!!!');
             $frm->clearFields();
-        } else {
-            $frm->clearFields();
+        }else{
             $frm->setMessage($resultado);
         }
-        break;
+    }
+    break;
+    //--------------------------------------------------------------------------------
+case 'Limpar':
+    $frm->clearFields();
+    break;
+    //--------------------------------------------------------------------------------
+case 'gd_excluir':
+    $id = $frm->get($primaryKey);
+    $resultado = Acesso_menuDAO::delete($id);;
+    if($resultado==1) {
+        $frm->setMessage('Registro excluido com sucesso!!!');
+        $frm->clearFields();
+    }else{
+        $frm->clearFields();
+        $frm->setMessage($resultado);
+    }
+    break;
 }
 
 $dados = Acesso_menuDAO::selectAll($primaryKey);
@@ -63,13 +62,14 @@ $tree->setOnClick('treeClick'); // fefinir o evento que ser? chamado ao clicar n
 $frm->closeGroup();
 
 $mixUpdateFields = $primaryKey.'|'.$primaryKey.',IDMENU_PAI|IDMENU_PAI,NOM_MENU|NOM_MENU,URL|URL,TOOLTIP|TOOLTIP,IMG_MENU|IMG_MENU,IMGDISABLED|IMGDISABLED,DISSABLED|DISSABLED,HOTKEY|HOTKEY,BOOLSEPARATOR|BOOLSEPARATOR,JSONPARAMS|JSONPARAMS,SIT_ATIVO|SIT_ATIVO,DAT_INCLUSAO|DAT_INCLUSAO,DAT_UPDATE|DAT_UPDATE';
-$gride = new TGrid('gd'        // id do gride
-, 'Gride'     // titulo do gride
-, $dados           // array de dados
-, null         // altura do gride
-, null         // largura do gride
-, $primaryKey   // chave primaria
-, $mixUpdateFields);
+$gride = new TGrid( 'gd'        // id do gride
+		,'Gride'     // titulo do gride
+		,$dados 	      // array de dados
+		,null		  // altura do gride
+		,null		  // largura do gride
+		,$primaryKey   // chave primaria
+		,$mixUpdateFields
+		);
 $gride->addColumn($primaryKey, 'id', 10, 'center');
 $gride->addColumn('IDMENU_PAI', 'Id Pai', 20, 'center');
 $gride->addColumn('NOM_MENU', 'Nome', 50, null);

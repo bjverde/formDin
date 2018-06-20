@@ -8,27 +8,25 @@ $frm = new TForm();
 $pdf = new TPDF('L');
 
 //a classe TPDF procura pela funcao cabecalho() e se existir sera executada recebendo a instancia da classe TPDF
-function cabecalho($pdf)
-{
-    $pdf->SetTextColor(0, 64, 128);
-    $pdf->setFont('', 'B', 14);
+function cabecalho($pdf) {
+    $pdf->SetTextColor(0,64,128);
+    $pdf->setFont('','B',14);
     $pdf->cell(0, 5, 'Sistema - v-1.0', 0, 1, 'C');
-    $pdf->setFont('', 'B', 12);
+    $pdf->setFont('','B',12);
     $pdf->cell(0, 5, 'Listagem', 0, 1, 'C');
     $pdf->ln(1);
     $pdf->setFont('', '', 10);
     //exibir criterio utilizado no filtro
     $criterio = isset($criterio) ? $criterio : null;
     $criterio = (($criterio == '') ? 'Todos os produtos' : $criterio);
-    $pdf->SetTextColor(0, 0, 255);//0,64,128);
-    $pdf->setFont('', 'B', 7);
+    $pdf->SetTextColor(0,0,255);//0,64,128);
+    $pdf->setFont('','B',7);
     $pdf->cell(0, 5, 'Criterio de Consulta: '.$criterio, 0, 1, 'L');
     $pdf->ln(1);
 }
 
 //a classe TPDF procurao pela funcao rodape() e se existir sera executada recebendo a instancia da classe TPDF
-function rodape($pdf)
-{
+function rodape($pdf) {
     $pdf->setY(- 10);
     $pdf->cell(50, 5, 'Emissao: '.date('d/m/Y h:i:s'), 'T', 0, 'L');
     $pdf->cell(0, 5, 'Pagina: '.$pdf->
@@ -64,11 +62,11 @@ $pdf->setData($dados);
  */
 $pdf->addColumn('Empenho', 20, 'C', 'TXT_EMPENHO', 'white', 'B', 8, 'black', 'times');
 $pdf->addColumn('RM', 15, 'C', 'TXT_REGISTRO', 'white', 'B', 8, 'black', 'times');
-$pdf->addColumn('Grupo', 40, 'L', 'NUM', 'white', null, 8, 'black', 'times');
-$pdf->addColumn('Dt', 15, 'C', 'DAT', 'white', null, 8, 'black', 'times');
+$pdf->addColumn('Grupo', 40, 'L', 'NUM', 'white', NULL, 8, 'black', 'times');
+$pdf->addColumn('Dt', 15, 'C', 'DAT', 'white', NULL, 8, 'black', 'times');
 $pdf->addColumn('Termo', 20, 'C', 'TXT_TERMO', 'white', 'B', 8, 'black', 'times');
-$pdf->addColumn('Obs.', 70, 'C', 'TXT_OBS', 'white', null, 8, 'black', 'times');
-$pdf->addColumn('R$ (unitario)', 15, 'C', 'NUM_VALOR', 'white', null, 8, 'black', 'times');
+$pdf->addColumn('Obs.', 70, 'C', 'TXT_OBS', 'white', NULL, 8, 'black', 'times');
+$pdf->addColumn('R$ (unitario)', 15, 'C', 'NUM_VALOR', 'white', NULL, 8, 'black', 'times');
 $pdf->addColumn('Descricao', 80, 'C', 'TXT_DESCRIMINACAO', 'white', 'B', 8, 'black', 'times');
 $pdf->printRows();  //criar a grid do pdf
 
@@ -76,16 +74,17 @@ $pdf->printRows();  //criar a grid do pdf
 // imprimir o subtotal
 $total = 0;
 $pdf->SetFillColor(240); // fundo cinza
-foreach ($dados['NUM_VALOR'] as $k => $v) {
-    $total += floatval($v); // somar a coluna NUM_VALOR
+foreach($dados['NUM_VALOR'] as $k=>$v)
+{
+	$total += floatval($v); // somar a coluna NUM_VALOR
 }
 //  imprimir a palavra subtotal ocupando as 5 primeiras colunas, o metodo getRowMaxWidth() retorna a soma de todas as larguras das colunas ou a de uma coluna especifica
-$pdf->cell($pdf->getRowMaxWidth()-($pdf->getRowWidths(6)+$pdf->getRowWidths(7)), 5, 'Subtotal:', 1, 0, 'R', 1);
-$pdf->cell($pdf->getRowWidths(6), 5, number_format($total, 2, '.', ','), 1, 0, 'C', 1);
-$pdf->cell($pdf->getRowWidths(7), 5, '', 1, 1, 'R', 1);
-$pdf->SetFillColor(255, 255, 255); // fundo branco
+$pdf->cell($pdf->getRowMaxWidth()-($pdf->getRowWidths(6)+$pdf->getRowWidths(7)) ,5,'Subtotal:',1,0,'R',1);
+$pdf->cell($pdf->getRowWidths(6),5,number_format($total,2,'.',','),1,0,'C',1);
+$pdf->cell($pdf->getRowWidths(7),5,'',1,1,'R',1);
+$pdf->SetFillColor(255,255,255); // fundo branco
 $pdf->ln(3);
-$pdf->multiCell(0, 4, utf8_decode(getMsgFPDF()), 1);
+$pdf->multiCell(0,4,utf8_decode(getMsgFPDF()),1);
 
 
 //echo 'Pdf gerado em: '.$pdf->show('teste.pdf',false);

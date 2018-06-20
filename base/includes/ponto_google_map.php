@@ -5,27 +5,27 @@
 </head>
 <body onload="start()">
 <div id="cab" style="font-family:Aria; font-size:12px;height:40px;border:none;">
-    <table border="0" width="99%" cellpadding="0" cellspacing="0" style="border:1px solid blue;background-color:#efefef;">
-        <tr>
-            <td rowspan="2" height="20px" width="*" nowrap="nowrap" style="font-size:12px;text-align:center;border-right:1px solid blue;">
+	<table border="0" width="99%" cellpadding="0" cellspacing="0" style="border:1px solid blue;background-color:#efefef;">
+		<tr>
+			<td rowspan="2" height="20px" width="*" nowrap="nowrap" style="font-size:12px;text-align:center;border-right:1px solid blue;">
                 <b><span id="fwMapHeader"></span></b>
-            </td>
-            <td style="width:100px;color:blue;border-right:1px solid blue;padding-left:5px;" id="tdLatCoord" nowrap="nowrap">
-            &nbsp;
-            </td>
-            <td style="width:100px;color:blue;padding-left:5px;" id="tdLatCoordGms" nowrap="nowrap">
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td style="width:100px;color:blue;border-right:1px solid blue;padding-left:5px;" id="tdLonCoord" nowrap="nowrap">
-            &nbsp;
-            </td>
-            <td style="width:100px;color:blue;padding-left:5px;" id="tdLonCoordGms" nowrap="nowrap">
-            &nbsp;
-            </td>
-        </tr>
-    </table>
+			</td>
+			<td style="width:100px;color:blue;border-right:1px solid blue;padding-left:5px;" id="tdLatCoord" nowrap="nowrap">
+			&nbsp;
+			</td>
+			<td style="width:100px;color:blue;padding-left:5px;" id="tdLatCoordGms" nowrap="nowrap">
+			&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td style="width:100px;color:blue;border-right:1px solid blue;padding-left:5px;" id="tdLonCoord" nowrap="nowrap">
+			&nbsp;
+			</td>
+			<td style="width:100px;color:blue;padding-left:5px;" id="tdLonCoordGms" nowrap="nowrap">
+			&nbsp;
+			</td>
+		</tr>
+	</table>
 </div>
 <div id="map" style="width:99%;height:375px;border:1px solid blue;"></div>
 </body>
@@ -34,7 +34,7 @@
 var map;
 function start()
 {
-    document.getElementById('map').style.height="<?php print($_REQUEST['h']); ?>px";
+	document.getElementById('map').style.height="<?php print($_REQUEST['h']); ?>px";
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
@@ -72,16 +72,16 @@ function start()
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
     <?php
-        $_REQUEST['zoom'] = isset($_REQUEST['zoom']) && $_REQUEST['zoom'] ? $_REQUEST['zoom'] : "4";
-        $_REQUEST['mapType'] = isset($_REQUEST['mapType']) && $_REQUEST['mapType'] ? $_REQUEST['mapType'] : "roadmap";
+    	$_REQUEST['zoom'] = isset( $_REQUEST['zoom'] ) && $_REQUEST['zoom'] ? $_REQUEST['zoom'] : "4";
+    	$_REQUEST['mapType'] = isset( $_REQUEST['mapType'] ) && $_REQUEST['mapType'] ? $_REQUEST['mapType'] : "roadmap";
     ?>
 
-    var mapCenter = new google.maps.LatLng(-14.5, -53);
-    var myOptions = {
-        zoom: 4,
-        center: mapCenter,
-        MapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+	var mapCenter = new google.maps.LatLng(-14.5, -53);
+	var myOptions = {
+  		zoom: 4,
+  		center: mapCenter,
+  		MapTypeId: google.maps.MapTypeId.ROADMAP
+	};
     /*
     MapTypeId.ROADMAP: exibe a visualização de mapas rodoviários padrão
     MapTypeId.SATELLITE: exibe imagens de satélite do Google Earth
@@ -89,7 +89,7 @@ function start()
     MapTypeId.TERRAIN: exibe um mapa físico com base nas informações do terreno.
     */
 
-    map = new google.maps.Map(document.getElementById("map"), myOptions);
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
 
     map.readonly = ( request('readonly') ==  'true' );
 
@@ -128,53 +128,53 @@ function start()
         document.getElementById('fwMapHeader').style.color = map.headerFontColor;
     }
 
-    google.maps.event.addListener(map,"mousemove",function(event)
-    {
-       document.getElementById("tdLatCoord").innerHTML = "Latitude(y):&nbsp;&nbsp;" + event.latLng.lat().toFixed(6);
-       document.getElementById("tdLonCoord").innerHTML = "Longitude(x):&nbsp;" + event.latLng.lng().toFixed(6);
-       document.getElementById("tdLatCoordGms").innerHTML = fwDecimalDegrees2Gms(event.latLng.lat().toFixed(6),"LA");
-       document.getElementById("tdLonCoordGms").innerHTML = fwDecimalDegrees2Gms(event.latLng.lng().toFixed(6),"LO");
-    });
+	google.maps.event.addListener(map,"mousemove",function(event)
+	{
+   	   document.getElementById("tdLatCoord").innerHTML = "Latitude(y):&nbsp;&nbsp;" + event.latLng.lat().toFixed(6);
+   	   document.getElementById("tdLonCoord").innerHTML = "Longitude(x):&nbsp;" + event.latLng.lng().toFixed(6);
+	   document.getElementById("tdLatCoordGms").innerHTML = fwDecimalDegrees2Gms(event.latLng.lat().toFixed(6),"LA");
+	   document.getElementById("tdLonCoordGms").innerHTML = fwDecimalDegrees2Gms(event.latLng.lng().toFixed(6),"LO");
+	});
 
     if( ! map.readonly )
     {
         google.maps.event.addListener(map, 'rightclick', updateFormField );
     }
-    var lat;
-    var lon;
-    var ponto={};
-    // ler as coordenadas informadas no formulario
-    var field       = request('updateField');
-    var winId       = request('prototypeId');
+	var lat;
+	var lon;
+	var ponto={};
+	// ler as coordenadas informadas no formulario
+	var field		= request('updateField');
+	var winId 		= request('prototypeId');
 
-    // latitude
-    var signlat;
-    var latAbs ;
-    var latGrau;
-    var latMin;
-    var latSeg;
-    var latCenter;
+	// latitude
+	var signlat;
+	var latAbs ;
+	var latGrau;
+	var latMin;
+	var latSeg;
+	var latCenter;
 
-    // longitude
-    var signlon;
-    var lonAbs;
-    var lonGrau;
-    var lonMin;
-    var lonSeg;
-    var lonCenter;
-    <?php
-        echo 'var zoom = '.$_REQUEST['zoom'].';';
-    ?>
-    //var zoom = 4;
+	// longitude
+	var signlon;
+	var lonAbs;
+	var lonGrau;
+	var lonMin;
+	var lonSeg;
+	var lonCenter;
+	<?php
+		echo 'var zoom = '.$_REQUEST['zoom'].';';
+	?>
+	//var zoom = 4;
     if( !map.lat)
     {
         if( top.app_prototype)
         {
             // latitude
             latGrau = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_grau').value;
-            latMin  = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_min').value;
-            latSeg  = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_seg').value;
-            latCenter   = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_lat_center').value;
+            latMin 	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_min').value;
+            latSeg	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_seg').value;
+            latCenter	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_lat_center').value;
             if( top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lat_hem').selectedIndex == 0 )
             {
                 signlat = -1; // norte
@@ -185,19 +185,19 @@ function start()
             }
             // longitude
             lonGrau = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lon_grau').value;
-            lonMin  = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lon_min').value;
-            lonSeg  = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lon_seg').value;
-            zoom    = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_zoom').value;
-            lonCenter   = top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_lon_center').value;
+            lonMin	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lon_min').value;
+            lonSeg	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_lon_seg').value;
+			zoom	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_zoom').value;
+            lonCenter	= top.Windows.getWindow(winId).getContent().contentWindow.fwGetObj(field+'_map_lon_center').value;
             signlon = -1;
         }
         else
         {
             // latitude
             latGrau = parent.fwGetObj(field+'_lat_grau').value;
-            latMin  = parent.fwGetObj(field+'_lat_min').value;
-            latSeg  = parent.fwGetObj(field+'_lat_seg').value;
-            latCenter   = parent.fwGetObj(field+'_map_lat_center').value;
+            latMin 	= parent.fwGetObj(field+'_lat_min').value;
+            latSeg	= parent.fwGetObj(field+'_lat_seg').value;
+            latCenter	= parent.fwGetObj(field+'_map_lat_center').value;
             if( parent.fwGetObj(field+'_lat_hem').selectedIndex == 0 )
             {
                 signlat = 'S'; // sul
@@ -209,10 +209,10 @@ function start()
             }
             // longitude
             lonGrau = parent.fwGetObj(field+'_lon_grau').value;
-            lonMin  = parent.fwGetObj(field+'_lon_min').value;
-            lonSeg  = parent.fwGetObj(field+'_lon_seg').value;
-            lonCenter   = parent.fwGetObj(field+'_map_lon_center').value;
-            zoom    = parent.fwGetObj(field+'_map_zoom').value;
+            lonMin	= parent.fwGetObj(field+'_lon_min').value;
+            lonSeg	= parent.fwGetObj(field+'_lon_seg').value;
+            lonCenter	= parent.fwGetObj(field+'_map_lon_center').value;
+            zoom	= parent.fwGetObj(field+'_map_zoom').value;
             signlon = 'W';
         }
         var lat = dms2dd(latGrau,latMin,latSeg,signlat);
@@ -224,77 +224,78 @@ function start()
         ponto.lat = map.lat;
         ponto.lon = map.lon;
     }
-    if( ponto && ponto.lat != 0 && ponto.lon !=0 )
-    {
-        point = new  google.maps.LatLng(ponto.lat,ponto.lon);
-        bounds = new google.maps.LatLngBounds();
-        bounds.extend(point);
-        // cria o marcador e coloca no mapa
-        var marker = new google.maps.Marker({
-            position: point,
-            map: map
-        });
-    }
-    else if ( latCenter && lonCenter )
-    {
-        point = new  google.maps.LatLng(latCenter, lonCenter);
-    }
-    else
-    {
-        point = new  google.maps.LatLng(-14.5, -53);
-    }
+	if( ponto && ponto.lat != 0 && ponto.lon !=0 )
+	{
+		point = new  google.maps.LatLng(ponto.lat,ponto.lon);
+		bounds = new google.maps.LatLngBounds();
+		bounds.extend(point);
+		// cria o marcador e coloca no mapa
+		var marker = new google.maps.Marker({
+    		position: point,
+	        map: map
+	    });
+	}
+	else if ( latCenter && lonCenter )
+	{
+		point = new  google.maps.LatLng(latCenter, lonCenter);
+	}
+	else
+	{
+		point = new  google.maps.LatLng(-14.5, -53);
+	}
 
-    if( zoom )
+	if( zoom )
+	{
+		map.setZoom( parseInt( zoom ) );
+	}
+	map.setCenter(point);
+	<?php
+    if( strtoupper( $_REQUEST['mapType'] ) == 'ROADMAP' || strtoupper( $_REQUEST['mapType'] ) == 'SATELLITE' || strtoupper( $_REQUEST['mapType'] ) == 'TERRAIN' || strtoupper( $_REQUEST['mapType'] ) == 'HYBRID' )
     {
-        map.setZoom( parseInt( zoom ) );
-    }
-    map.setCenter(point);
-    <?php
-    if (strtoupper($_REQUEST['mapType']) == 'ROADMAP' || strtoupper($_REQUEST['mapType']) == 'SATELLITE' || strtoupper($_REQUEST['mapType']) == 'TERRAIN' || strtoupper($_REQUEST['mapType']) == 'HYBRID') {
-        echo 'map.setMapTypeId("'.strtolower($_REQUEST['mapType']).'");';
-    }
-    ?>
+		echo 'map.setMapTypeId("'.strtolower( $_REQUEST['mapType'] ).'");';
+	}
+	?>
 }
 //-----------------------------------------------------------------------------------
 function updateFormField(event)
 
 {
-    var field       = request('updateField');
-    var winId       = request('prototypeId');
+	var field		= request('updateField');
+	var winId 		= request('prototypeId');
 
-    // ponto clicado no mapa
-    var lat         = event.latLng.lat();
-    var lon         = event.latLng.lng();
+	// ponto clicado no mapa
+	var lat 		= event.latLng.lat();
+	var lon			= event.latLng.lng();
 
-    var latDMS = dd2dms(lat,'LAT');
-    var lonDMS = dd2dms(lon,'LON');
+	var latDMS = dd2dms(lat,'LAT');
+	var lonDMS = dd2dms(lon,'LON');
 
-    parent.fwSetFields(field+'_lat_grau', latDMS.d );
+	parent.fwSetFields(field+'_lat_grau', latDMS.d );
     parent.fwSetFields(field+'_lat_min',latDMS.m);
-    parent.fwSetFields(field+'_lat_seg',String(latDMS.s).replace('.',','));
+	parent.fwSetFields(field+'_lat_seg',String(latDMS.s).replace('.',','));
     if( latDMS.h == 'S' )
-    {
-        parent.fwGetObj(field+'_lat_hem').selectedIndex=0; // sul
-    }
-    else
-    {
-        parent.fwGetObj(field+'_lat_hem').selectedIndex=1; // norte
-    }
+	{
+		parent.fwGetObj(field+'_lat_hem').selectedIndex=0; // sul
+	}
+	else
+	{
+		parent.fwGetObj(field+'_lat_hem').selectedIndex=1; // norte
+	}
     parent.fwSetFields(field+'_lon_grau',lonDMS.d);
-    parent.fwSetFields(field+'_lon_min',lonDMS.m);
-    parent.fwSetFields(field+'_lon_seg',String(lonDMS.s).replace('.',',') );
-    parent.fwSetFields(field+'_lon_hem','W');
+	parent.fwSetFields(field+'_lon_min',lonDMS.m);
+	parent.fwSetFields(field+'_lon_seg',String(lonDMS.s).replace('.',',') );
+	parent.fwSetFields(field+'_lon_hem','W');
 
-    if( map.callback )
-    {
+	if( map.callback )
+	{
         if( typeof parent.window[ map.callback ] == 'function')
         {
-            parent.window[map.callback](lat,lon,map.getZoom(),latDMS,lonDMS,event,map);
-        }
-    }
-    // enviar nivel de zoom do mapa para o formulario
-    parent.fwSetFields(field+'_map_zoom',map.getZoom());
-    parent.jQuery.facebox.close();
+			parent.window[map.callback](lat,lon,map.getZoom(),latDMS,lonDMS,event,map);
+		}
+	}
+	// enviar nivel de zoom do mapa para o formulario
+	parent.fwSetFields(field+'_map_zoom',map.getZoom());
+	parent.jQuery.facebox.close();
 }
 
 function request( name )
@@ -305,9 +306,9 @@ function request( name )
   var regex = new RegExp( regexS );
   var results = regex.exec( url );
   if( results == null )
-    return "";
+	return "";
   else
-    return results[1];
+	return results[1];
 }
 
 
@@ -359,33 +360,33 @@ var STR_PAD_BOTH = 3;
 function pad(str, len, pad, dir)
 {
 
-    if (typeof(len) == "undefined") { var len = 0; }
-    if (typeof(pad) == "undefined") { var pad = ' '; }
-    if (typeof(dir) == "undefined") { var dir = STR_PAD_LEFT; }
+	if (typeof(len) == "undefined") { var len = 0; }
+	if (typeof(pad) == "undefined") { var pad = ' '; }
+	if (typeof(dir) == "undefined") { var dir = STR_PAD_LEFT; }
 
-    if (len + 1 >= str.length)
-    {
+	if (len + 1 >= str.length)
+	{
 
-        switch (dir){
+		switch (dir){
 
-            case STR_PAD_LEFT:
-                str = Array(len + 1 - str.length).join(pad) + str;
-            break;
+			case STR_PAD_LEFT:
+				str = Array(len + 1 - str.length).join(pad) + str;
+			break;
 
-            case STR_PAD_BOTH:
-                var right = Math.ceil((padlen = len - str.length) / 2);
-                var left = padlen - right;
-                str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
-            break;
+			case STR_PAD_BOTH:
+				var right = Math.ceil((padlen = len - str.length) / 2);
+				var left = padlen - right;
+				str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
+			break;
 
-            default:
-                str = str + Array(len + 1 - str.length).join(pad);
-            break;
+			default:
+				str = str + Array(len + 1 - str.length).join(pad);
+			break;
 
-        } // switch
+		} // switch
 
-    }
-    return str;
+	}
+	return str;
 }
 
 //------------------------------------------------------------------------------------------
@@ -406,34 +407,34 @@ function dd2dms(dd,latLon) {
     }
     if( latLon.match(/lat/i) )
     {
-        dms.h = ( dd > 0 ? 'N' : 'S' ) ;
-    }
+    	dms.h = ( dd > 0 ? 'N' : 'S' ) ;
+	}
     else if(    latLon.match(/lon/i) )
     {
-        dms.h = ( dd > 0 ? 'E' : 'W' ) ;
+    	dms.h = ( dd > 0 ? 'E' : 'W' ) ;
     }
     return dms;
 }
 
 function dms2dd(d,m,s,h) {
 
-    if( d === '' )
-    {
-        return 0;
-    }
-    s = s.replace(',','.');
-    var dInt = parseInt(d);
-    var mInt = parseInt(m);
-    var sFloat = parseFloat(s);
+	if( d === '' )
+	{
+		return 0;
+	}
+	s = s.replace(',','.');
+	var dInt = parseInt(d);
+	var mInt = parseInt(m);
+	var sFloat = parseFloat(s);
 
     var ddAbs = dInt + mInt/60 + sFloat/3600;
     if ( h.match( /w|s/i) )
     {
-        return ddAbs * -1;
+     	return ddAbs * -1;
     }
     else
     {
-        return ddAbs;
-    }
+    	return ddAbs;
+	}
 }
 </script>

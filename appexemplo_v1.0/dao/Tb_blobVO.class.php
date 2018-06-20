@@ -36,54 +36,54 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_blobVO
-{
-    private $id_blob = null;
-    private $nome_arquivo = null;
-    private $conteudo_arquivo = null;
-    private $tempName = null;
+class Tb_blobVO {
+	private $id_blob = null;
+	private $nome_arquivo = null;
+	private $conteudo_arquivo = null;
+	private $tempName = null;
 
-    public function __construct($id_blob = null, $nome_arquivo = null, $conteudo_arquivo = null)
-    {
-        $this->setId_blob($id_blob);
-        $this->setNome_arquivo($nome_arquivo);
-        $this->setConteudo_arquivo($conteudo_arquivo);
-    }
-    //--------------------------------------------------------------------------------
-    function setId_blob($strNewValue = null)
-    {
-        $this->id_blob = $strNewValue;
-    }
-    function getId_blob()
-    {
-        return $this->id_blob;
-    }
-    //--------------------------------------------------------------------------------
-    function setNome_arquivo($strNewValue = null)
-    {
-        $this->nome_arquivo = $strNewValue;
-    }
-    function getNome_arquivo()
-    {
-        return $this->nome_arquivo;
-    }
-    //--------------------------------------------------------------------------------
-    function setConteudo_arquivo($strNewValue = null)
-    {
-        $this->conteudo_arquivo = $strNewValue;
-    }
-    function getConteudo_arquivo()
-    {
-        return $this->conteudo_arquivo;
-    }
-    //--------------------------------------------------------------------------------
-    function setTempName($strNewValue = null)
-    {
-        $this->tempName = $strNewValue;
-    }
-    function getTempName()
-    {
-        return $this->tempName;
-    }
-    //--------------------------------------------------------------------------------
+	public function __construct( $id_blob=null, $nome_arquivo=null, $conteudo_arquivo=null )
+	{
+		$this->setId_blob( $id_blob );
+		$this->setNome_arquivo( $nome_arquivo );
+		$this->setConteudo_arquivo( $conteudo_arquivo );
+	}
+	//--------------------------------------------------------------------------------
+	function setId_blob( $strNewValue = null )
+	{
+		$this->id_blob = $strNewValue;
+	}
+	function getId_blob()
+	{
+		return $this->id_blob;
+	}
+	//--------------------------------------------------------------------------------
+	function setNome_arquivo( $strNewValue = null )
+	{
+		$this->nome_arquivo = $strNewValue;
+	}
+	function getNome_arquivo()
+	{
+		return $this->nome_arquivo;
+	}
+	//--------------------------------------------------------------------------------
+	function setConteudo_arquivo( $strNewValue = null )
+	{
+		$this->conteudo_arquivo = $strNewValue;
+	}
+	function getConteudo_arquivo()
+	{
+		return $this->conteudo_arquivo;
+	}
+	//--------------------------------------------------------------------------------
+	function setTempName($strNewValue=null)
+	{
+		$this->tempName = $strNewValue;
+	}
+	function getTempName()
+	{
+		return $this->tempName;
+	}
+	//--------------------------------------------------------------------------------
 }
+?>

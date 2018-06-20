@@ -40,23 +40,23 @@
  */
 
 error_reporting(E_ALL);
-$frm = new TForm('Exemplo Tree View', null, 500);
+$frm = new TForm('Exemplo Tree View',null,500);
 $frm->setPosition('TC');
 $frm->setAutoSize(true);
 $frm->setMaximize(true);
 
-$frm->addTextField('item', 'Item:', 50);
-$frm->addTextField('NOM_MENU', 'Nome do Menu:', 50);
-$frm->addTextField('link', 'URL', 50);
+$frm->addTextField('item', 'Item:',50);
+$frm->addTextField('NOM_MENU', 'Nome do Menu:',50);
+$frm->addTextField('link', 'URL',50);
 
 
 $frm->addButton('Limpar', null, 'Limpar');
 
 $acao = isset($acao) ? $acao : null;
-switch ($acao) {
-    case 'Limpar':
-        $frm->clearFields();
-        break;
+switch( $acao ) {
+	case 'Limpar':
+		$frm->clearFields();
+	break;
 }
 
 
@@ -71,48 +71,48 @@ $frm->addJsFile('dhtmlx/dhtmlxcommon.js');
 $frm->addJsFile('dhtmlx/treeview/dhtmlxtree.js');
 $frm->addCssFile('dhtmlx/treeview/dhtmlxtree.css');
 
-// criar o objeto treeview.
+// criar o objeto treeview. 
 $tree = new TTreeView('tree');
 
 $tree->setWidth(200); // define a largura da área onde será exibida a treeview
 $tree->setHeight(300); // define a altura da área onde será exibida a treeview
 
 // adicionar manualmente os ítens na treeview
-$tree->addItem(null, 1, 'Relatório', true);
-$tree->addItem(1, 11, 'Financeiro', true, null, array('URL'=>'www.bb.com.br'));
-$tree->addItem(1, 12, 'Orçamentário', true, null, array('URL'=>'www.bcb.gov.br'));
+$tree->addItem(null,1,'Relatório',true);
+$tree->addItem(1,11,'Financeiro',true,null,array('URL'=>'www.bb.com.br'));
+$tree->addItem(1,12,'Orçamentário',true,null,array('URL'=>'www.bcb.gov.br'));
 
 $tree->setOnClick('treeClick');     // Definir o evento que será chamado ao clicar no item da treeview
 $frm->addJavascript($tree->getJs());// Gerar e adicionar na criação da pagina o codigo javascript que adiciona os itens na treeview
-$tree->setXY(0, 20);                 // Posiciona a treeview na tela. left=0, top=100
+$tree->setXY(0,20);                 // Posiciona a treeview na tela. left=0, top=100
 $tree->show();                      // Exibe o tree view
-$frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview
+$frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview 
 // fim criação da treeview
 
-//$frm->setAction('Atulizar');
+//$frm->setAction('Atulizar');	
 $frm->show();
 ?>
 
 <script>
 function treeClick(id) {
 
-    /*
-    alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
-    'Item text:'+treeJs.getItemText(id )+'\n'+
-    'User pai:'+treeJs.getUserData(id,'IDMENU_PAI')+'\n'+
-    'User data URL:'+treeJs.getUserData(id,'URL')+'\n'+
-    'IMG:'+treeJs.getUserData(id,'IMG_MENU')
-    );
-    */
+	/*
+	alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+	'Item text:'+treeJs.getItemText(id )+'\n'+
+	'User pai:'+treeJs.getUserData(id,'IDMENU_PAI')+'\n'+
+	'User data URL:'+treeJs.getUserData(id,'URL')+'\n'+
+	'IMG:'+treeJs.getUserData(id,'IMG_MENU')
+	);
+	*/
 
-    
-    alert( treeJs.getSelectedItemId());
-    alert( treeJs.getItemText(id ) );
-    alert( treeJs.getUserData(id,'URL') );
+	
+	alert( treeJs.getSelectedItemId());
+	alert( treeJs.getItemText(id ) );
+	alert( treeJs.getUserData(id,'URL') );
 
-    jQuery("#item").val(treeJs.getSelectedItemId());
-    jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
-    jQuery("#link").val(treeJs.getUserData(id,'URL'));
+	jQuery("#item").val(treeJs.getSelectedItemId());
+	jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
+	jQuery("#link").val(treeJs.getUserData(id,'URL'));
 }
 </script>
 

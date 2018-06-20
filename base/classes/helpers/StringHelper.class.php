@@ -47,7 +47,7 @@
 class StringHelper
 {
     
-    public static function strtolower_utf8($inputString)
+    public static function strtolower_utf8($inputString) 
     {
         $outputString    = utf8_decode($inputString);
         $outputString    = strtolower($outputString);
@@ -62,4 +62,5 @@ class StringHelper
         $string = utf8_encode($string);
         return $string;
     }
+    
 }

@@ -6,8 +6,8 @@ Copyrigth (C) White Hat Web Design - http://www.white-hat-web-design.co.uk/
 */
 
 session_start(); // tem que inicializar a sessão, senão não funciona
-class CaptchaSecurityImages {
-	var $font = 'fonts/monofont.ttf';
+class CaptchaSecurityImages {	
+	var $font = __DIR__.'/fonts/monofont.ttf';
 	function generateCode($characters) {
 		/* list all possible characters, similar looking characters and vowels have been removed */
 		$possible = '23456789bcdfghjkmnpqrstvwxyz';

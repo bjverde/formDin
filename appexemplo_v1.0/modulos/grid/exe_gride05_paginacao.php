@@ -37,23 +37,24 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo Paginação do Gride', null, 600);
-$frm->addHtmlField('mensagem', "<h3>Este exemplo utiliza a tabela tb_paginacao do banco de dados bdApoio.s3db (sqlite).</h3>");
+$frm = new TForm('Exemplo Paginação do Gride',null,600);
+$frm->addHtmlField('mensagem',"<h3>Este exemplo utiliza a tabela tb_paginacao do banco de dados bdApoio.s3db (sqlite).</h3>");
 
-if (isset($_REQUEST['ajax'])  && $_REQUEST['ajax']) {
-                $res = TPDOConnection::executeSql("select * from tb_paginacao");
-                $g = new TGrid('gd', 'Gride com Paginação', $res, 200, null, 'ID', 'descricao', 10, 'grid/exe_gride05_paginacao.php');
-                $g->setOnDrawActionButton('onDraw');
-                $g->addColumn('id', 'Id', 50, 'center');
-                $g->addColumn('descricao', 'Descrição', 1200, 'left');
-                //$g->addButton('Alterar','alterar','btnAlterar','alterar()',null,'editar.gif');
-                //$g->addButton('Excluir','excluir','btnExcluir',null,null);
-                //$g->setCreateDefaultDeleteButton(false);
-                //$g->setCreateDefaultEditButton(false);
-                $g->enableDefaultButtons(false);
+if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] )
+{
+				$res = TPDOConnection::executeSql("select * from tb_paginacao");
+				$g = new TGrid('gd','Gride com Paginação',$res,200,null,'ID','descricao',10,'grid/exe_gride05_paginacao.php');
+				$g->setOnDrawActionButton('onDraw');
+				$g->addColumn('id','Id',50,'center');
+				$g->addColumn('descricao','Descrição',1200,'left');
+				//$g->addButton('Alterar','alterar','btnAlterar','alterar()',null,'editar.gif');
+				//$g->addButton('Excluir','excluir','btnExcluir',null,null);
+				//$g->setCreateDefaultDeleteButton(false);
+				//$g->setCreateDefaultEditButton(false);
+				$g->enableDefaultButtons(false);
 
-                $g->show();
-                die();
+				$g->show();
+				die();
 }
 //print_r( $_REQUEST);
 $frm->addHtmlField('html_gride');
@@ -61,27 +62,29 @@ $frm->setAction("Refresh");
 $frm->addJavascript('init()');
 $frm->show();
 
-function onDraw($rowNum, $button, $objColumn, $aData)
+function onDraw( $rowNum,$button,$objColumn,$aData)
 {
-    //$button->setEnabled( false );
-    if ($button->getName() == 'btnAlterar') {
-        if ($rowNum == 1) {
-            $button->setEnabled(false);
-        }
-    }
+	//$button->setEnabled( false );
+	if( $button->getName() == 'btnAlterar')
+	{
+		if( $rowNum == 1 )
+		{
+			$button->setEnabled( false );
+		}
+	}
 }
 
 ?>
 <script>
 function init()
 {
-                fwGetGrid("grid/exe_gride05_paginacao.php",'html_gride');
+				fwGetGrid("grid/exe_gride05_paginacao.php",'html_gride');
 }
 // recebe fields e values do grid
 function alterar(f,v)
 {
-    var dados = fwFV2O(f,v);
-    fwModalBox('Alteração','index.php?modulo=exe_gride_form_edicao.php',300,800,null,dados);
+	var dados = fwFV2O(f,v);
+	fwModalBox('Alteração','index.php?modulo=exe_gride_form_edicao.php',300,800,null,dados);
 }
 </script>
 

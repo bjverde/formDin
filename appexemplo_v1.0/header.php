@@ -1,7 +1,7 @@
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-repeat:repeat-x; background-image: url(../imagens/bg_red.gif);">
 <tr>
-    <td height="60px" width="400px" nowrap="true">
-    <?php echo "<h1>TESTES COM FORMDIN</h1>";?>
+	<td height="60px" width="400px" nowrap="true">
+	<?php echo "<h1>TESTES COM FORMDIN</h1>";?>
 
 /*
  * Formdin Framework
@@ -40,9 +40,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-    </td>
-    <td>
-    <?php echo '<b><h2>Exemplos das funcionalidades</h2></b>';?>
-    </td>
+	</td>
+	<td>
+	<?php echo '<b><h2>Exemplos das funcionalidades</h2></b>';?>
+	</td>
 </tr>
 </table>

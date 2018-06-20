@@ -37,8 +37,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 // firebird
-define('BANCO', 'ACCESS');
-define('DATABASE', realpath(__DIR__).'\access\bd1.mdb');
-define('UTF8_DECODE', 0);
-define('USUARIO', 'admin');
-define('SENHA', '123456');
+define('BANCO','ACCESS');
+define('DATABASE', realpath( __DIR__).'\access\bd1.mdb');
+define('UTF8_DECODE',0);
+define('USUARIO','admin');
+define('SENHA','123456');
+?>

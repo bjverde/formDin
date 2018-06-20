@@ -11,15 +11,15 @@ class MunicipioDAO extends TPDOConnection
 									 from municipio m';
 
 
-    public static function selectCount($where = null)
+    public static function selectCount($where=null)
     {
         $sql = 'select count(cod_municipio) as qtd from municipio';
-        $sql = $sql.( ($where)? ' where '.$where:'');
+        $sql = $sql.( ($where)? ' where '.$where:'');        
         $result = self::executeSql($sql);
         return $result['QTD'][0];
     }
     //--------------------------------------------------------------------------------
-    public static function select($id)
+    public static function select( $id ) 
     {
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where cod_municipio = ?';
@@ -27,7 +27,7 @@ class MunicipioDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAllSqlPagination($orderBy = null, $where = null, $page = null, $rowsPerPage = null)
+    public static function selectAllSqlPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) 
     {
         $rowStart = PaginationSQLHelper::getRowStart($page, $rowsPerPage);
         
@@ -40,7 +40,7 @@ class MunicipioDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
+    public static function selectAll( $orderBy=null, $where=null ) 
     {
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
@@ -50,26 +50,25 @@ class MunicipioDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function insert(MunicipioVO $objVo)
+    public static function insert( MunicipioVO $objVo ) 
     {
-        if ($objVo->getCod_municipio()) {
+        if($objVo->getCod_municipio() ) {
             return self::update($objVo);
         }
-        $values = array(  $objVo->getCod_uf()
-         , $objVo->getNom_municipio()
-         , $objVo->getSit_ativo()
+        $values = array(  $objVo->getCod_uf() 
+         , $objVo->getNom_municipio() 
+         , $objVo->getSit_ativo() 
          );
         return self::executeSql(
             'insert into municipio(
 								 cod_uf
 								,nom_municipio
 								,sit_ativo
-								) values (?,?,?)',
-            $values
+								) values (?,?,?)', $values 
         );
     }
     //--------------------------------------------------------------------------------
-    public static function update(MunicipioVO $objVo)
+    public static function update( MunicipioVO $objVo )
     {
         $values = array( $objVo->getCod_uf()
          ,$objVo->getNom_municipio()
@@ -80,14 +79,14 @@ class MunicipioDAO extends TPDOConnection
 								 cod_uf = ?
 								,nom_municipio = ?
 								,sit_ativo = ?
-								where cod_municipio = ?',
-            $values
+								where cod_municipio = ?', $values
         );
     }
     //--------------------------------------------------------------------------------
-    public static function delete($id)
+    public static function delete( $id )
     {
         $values = array($id);
         return self::executeSql('delete from municipio where cod_municipio = ?', $values);
     }
 }
+?>

@@ -42,20 +42,31 @@
 //session_start();
 $res=null;
 // ler da sessão os arquivos já anexados
-if (isset($_SESSION['meus_anexos'])) {
-    $i=0;
-    foreach ($_SESSION['meus_anexos'] as $fileName => $aDados) {
-        $res['SEQ_ARQUIVO'][$i] =   ( $i+1 );
-        $res['NOM_ARQUIVO'][$i] =   $fileName;
-        foreach ($aDados as $key => $val) {
-            $res[$key][$i] = $val;
-        }
-        $i++;
-    }
+if( isset($_SESSION['meus_anexos'] ) )
+{
+	$i=0;
+	foreach($_SESSION['meus_anexos'] as $fileName=>$aDados)
+	{
+		$res['SEQ_ARQUIVO'][$i] =	( $i+1 );
+		$res['NOM_ARQUIVO'][$i] =	$fileName;
+		foreach($aDados as $key => $val)
+		{
+			$res[$key][$i] = $val;
+		}
+		$i++;
+	}
 }
-$gride = new TGrid('gd4', 'Arquivos Anexados', $res, null, null, 'SEQ_ARQUIVO', 'NOM_TEMP,NOM_ARQUIVO', 10, 'modulos/grid/exe_gride13_anexos.php');
-$gride->addButton('Visualizar', null, 'btnVisualizar', 'btnVisualizarClick()');
+$gride = new TGrid('gd4','Arquivos Anexados'
+				,$res
+				,null
+				,null
+				,'SEQ_ARQUIVO'
+				,'NOM_TEMP,NOM_ARQUIVO'
+				,10
+				,'modulos/grid/exe_gride13_anexos.php');
+$gride->addButton('Visualizar',null,'btnVisualizar','btnVisualizarClick()');
 $gride->addRowNumColumn();
-$gride->addColumn('NOM_ARQUIVO', 'Nome do Arquivo', 800, 'left');
+$gride->addColumn('NOM_ARQUIVO','Nome do Arquivo',800,'left');
 $gride->setExportExcel(false);
 $gride->show();
+?>

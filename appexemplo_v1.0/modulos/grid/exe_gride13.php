@@ -39,19 +39,19 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Gride', 600);
+$frm = new TForm('Gride',600);
 $frm->addJavascript('init()');
-$frm->addHiddenField('num_pessoa', 22);
-$frm->addSelectField('cod_uf', 'Estado:');
-$gride = new TGrid('gd7', 'Gride Nº 7', 'UF', 250, null, 'COD_UF');
-$gride->setcss('font-size', '10px');
-$gride->addExcelHeadField('Estado:', 'cod_uf');
+$frm->addHiddenField('num_pessoa',22);
+$frm->addSelectField('cod_uf','Estado:');
+$gride = new TGrid('gd7','Gride Nº 7','UF',250,null,'COD_UF');
+$gride->setcss('font-size','10px');
+$gride->addExcelHeadField('Estado:','cod_uf');
 $gride->autoCreateColumns();
 
-$frm->addHtmlField('campo_gride4', 'Clique no botão Criar Gride 4 Abaixo', null, null, null, 300, false);
+$frm->addHtmlField('campo_gride4','Clique no botão Criar Gride 4 Abaixo',null,null,null,300,false);
 
 // alterar a fonte do titulo do gride
-$gride->getTitleCell()->setCss('font-size', 20);
+$gride->getTitleCell()->setCss('font-size',20);
 
 // recuperar o objeto coluna NOM_UF
 $c = $gride->getColumn('NOM_UF');
@@ -63,33 +63,33 @@ $c = $gride->getColumn('NOM_UF');
 //$h->setCss('font-size','14');
 
 
-$gride->addSelectColumn('seq_fruta', 'Fruta', 'seq_fruta', 'fruta', null, null, null, null, 'SEQ_FRUTA', 'NOM_FRUTA');
+$gride->addSelectColumn('seq_fruta','Fruta','seq_fruta','fruta',null,null,null,null,'SEQ_FRUTA','NOM_FRUTA');
 $gride->setCache(-1);
 $gride->autoCreateColumns();
-$frm->addHtmlField('campo_gride7', $gride);
+$frm->addHtmlField('campo_gride7',$gride);
 
-$frm->addButton('Criar Gride 4', null, 'btnCriarGride4', 'fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"num_pessoa":""});');
+$frm->addButton('Criar Gride 4',null,'btnCriarGride4','fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"num_pessoa":""});');
 $frm->show();
 ?>
 <script>
 function init() {
     alert( 'o');
-    fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"seq_propriedade":""});
+	fwGetGrid("modulos/grid/exe_gride13_anexos.php","campo_gride4",{"seq_propriedade":""});
 }
 function callBackAnexar(tempName,fileName,type,size)
 {
-    jQuery('#arquivo').val(fileName);
-    jQuery('#local').val(tempName);
-    jQuery('#tamanho').val(size);
-    jQuery('#tipo').val(type);
-    //alert('Função de callback.\n\nTemp name:'+tempName+'\nFile name:'+fileName+'\nType:'+type+'\nSize?'+size);
-    if( confirm('Visualizar o arquivo anexado ?')) {
-        fwShowTempFile(tempName,type,fileName);
-    }
-    jQuery.post(app_index_file,{'modulo':'modulos/grid/exe_gride13.php','formDinAcao':'gravar_anexo'},function()
-    {
-        alert( 'atualizar o gride');
-    });
+	jQuery('#arquivo').val(fileName);
+	jQuery('#local').val(tempName);
+	jQuery('#tamanho').val(size);
+	jQuery('#tipo').val(type);
+	//alert('Função de callback.\n\nTemp name:'+tempName+'\nFile name:'+fileName+'\nType:'+type+'\nSize?'+size);
+	if( confirm('Visualizar o arquivo anexado ?')) {
+		fwShowTempFile(tempName,type,fileName);
+	}
+	jQuery.post(app_index_file,{'modulo':'modulos/grid/exe_gride13.php','formDinAcao':'gravar_anexo'},function()
+	{
+		alert( 'atualizar o gride');
+	});
 
 }
 </script>

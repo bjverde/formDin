@@ -40,39 +40,39 @@
  */
 
 $frm = new TForm('Exemplo de Ajax para Atualizar Campos');
-$frm->addTextField('NR_CPF', 'CPF:', 11, true);
-$frm->addTextField('NM_PESSOA', 'Nome:', 60);
+$frm->addTextField('NR_CPF','CPF:',11,true);
+$frm->addTextField('NM_PESSOA','Nome:',60);
 
-$frm->addButton('Alimentar Campos Ajax', null, 'btnAlimentar', 'alimentarAjax()');
-$frm->addButton('Alimentar Campos Post', 'alterar', 'btnAlimentarPost');
-$frm->addButton('Limpar Campos', null, 'btnAlimentarLimpar', 'fwClearChildFields()');
-$frm->addButton('Validar Campos', null, 'btnAlimentarValidar', 'fwValidateFields()');
+$frm->addButton('Alimentar Campos Ajax',null,'btnAlimentar','alimentarAjax()');
+$frm->addButton('Alimentar Campos Post','alterar','btnAlimentarPost');
+$frm->addButton('Limpar Campos',null,'btnAlimentarLimpar','fwClearChildFields()');
+$frm->addButton('Validar Campos',null,'btnAlimentarValidar','fwValidateFields()');
 
 $acao = isset($acao) ? $acao : null;
 
-if ($acao == 'alterar') {
+if( $acao == 'alterar') {
     $res['NR_CPF'][0]='12345678909';
     $res['NM_PESSOA'][0]='Nome Teste';
     $frm->setReturnAjaxData($res);
-    prepareReturnAjax(1, $res, 'Dados alterados com sucesso');
-    $frm->update($res);
+	prepareReturnAjax(1,$res,'Dados alterados com sucesso');
+	$frm->update($res);
 }
 $frm->show();
 ?>
 <script>
 function alimentarAjax() {
 
-    fwAjaxRequest({
-        'action':'alterar',
-        //'dataType':'text',
-        'beforeSend':fwValidateFields(),
-        'callback':function(res) {
-            fwUpdateFieldsJson(res);
+	fwAjaxRequest({
+		'action':'alterar',
+		//'dataType':'text',
+		'beforeSend':fwValidateFields(),
+		'callback':function(res) {
+			fwUpdateFieldsJson(res);
             if(res.message) {
                 alert( res.message);
             }
-        }
-    })
+		}
+	})
 }
 
 </script>
