@@ -1,6 +1,8 @@
 <?php
 defined('APLICATIVO') or die();
 
+d($_REQUEST);
+
 $whereGrid = ' 1=1 ';
 $primaryKey = 'IDTEXTO';
 $frm = new TForm('Exemplo Form5 - Texto Rico',600);
@@ -13,8 +15,13 @@ $frm->addTextField('TXNOME', 'Nome do Texto',50,true);
 $frm->addDateField('TXDATA', 'Data',50,true);
 $frm->addRadioField('STATIVO' , 'Ativo:',true,'S=SIM,N=Não',null,false,null,2,null,null,null,false);//->addEvent('onDblclick','dblClick(this)');
 
-$frm->setRichEdit(true);
 $frm->addMemoField('TEXTO' ,'Texto',10000,false,100,15,true,true,false);
+$frm->setRichEdit(true);
+$frm->addJavascript('fwSetHtmlEditor("TEXTO",null,false)');
+
+echo 'Valor do Campo: TEXTO =<br>';
+echo htmlspecialchars($frm->get('TEXTO'));
+
 
 $frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

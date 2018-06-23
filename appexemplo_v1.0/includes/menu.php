@@ -186,7 +186,7 @@ $menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-51
 	$menu->add('10.4','10','Mestre Detalhe com Ajax','cad_mestre_detalhe/cad_mestre_detalhe.php');
 	$menu->add('10.5','10','Form 04 - Consulta Pedidos','view/form/exe_tform4_consulta_tree_p1.php');
 	$menu->add('10.6','10','Form 04 - Visualizar Item','view/form/exe_tform4_consulta_tree_p2.php');
-	$menu->add('10.7','10','Form 05 - Editor de texto','view/form/exe_TForm5.php');
+	$menu->add('10.7','10','Form 05 - Texto Rico TinyMCE','view/form/exe_TForm5.php');
 	$menu->add('10.8','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
 	$menu->add('10.9','10','Tela Login','view/form/exe_tela_login.php');
 	$menu->add('10.10','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
