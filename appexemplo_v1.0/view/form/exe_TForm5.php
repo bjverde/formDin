@@ -5,7 +5,7 @@ d($_REQUEST);
 
 $whereGrid = ' 1=1 ';
 $primaryKey = 'IDTEXTO';
-$frm = new TForm('Exemplo Form5 - Texto Rico',600);
+$frm = new TForm('Exemplo Form5 - Texto Rico com TinyMCE',700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
