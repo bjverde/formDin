@@ -17,7 +17,7 @@ $frm->addRadioField('STATIVO' , 'Ativo:',true,'S=SIM,N=Não',null,false,null,2,n
 
 $frm->addMemoField('TEXTO' ,'Texto',10000,false,100,15,true,true,false);
 $frm->setRichEdit(true);
-$frm->addJavascript('fwSetHtmlEditor("TEXTO",null,false)');
+$frm->addJavascript('fwSetHtmlEditor("TEXTO","callBackEditor",false)');
 
 echo 'Valor do Campo: TEXTO =<br>';
 echo htmlspecialchars($frm->get('TEXTO'));
@@ -94,3 +94,29 @@ $frm->addHtmlField('gride',$gride);
 
 $frm->show();
 ?>
+
+<script>
+
+function callBackEditor(ed) {
+	ed.windowManager.alert('Texto Alterado com sucesso!');
+	var ed = tinyMCE.get('help');
+	ed.setProgressState(1);
+	alert( 'salvar\t\t'+ed.getContent());
+	ed.setProgressState(0);
+	jQuery('#formDinAcao').val('salvar');
+    var dados = jQuery("#formdin").serialize();
+    dados += '&ajax=1';
+	// inicia a requisição ajax
+    fwBlockScreen();
+    jQuery.ajax({
+          url: app_url+app_index_file,
+          type: "POST",
+          async: true,
+          data: dados,
+          dataType: 'text',
+          containerId:null,
+          success: function(res){alert(res);fwUnBlockScreen();  },
+          error: function( res ){ alert('Erro!\n\n'+res );fwUnBlockScreen(); }
+    });
+}
+</script>
