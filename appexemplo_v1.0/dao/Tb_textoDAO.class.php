@@ -58,15 +58,13 @@ class Tb_textoDAO extends TPDOConnection {
 						, $objVo->getTxdata() 
 						, $objVo->getStativo() 
 						, $objVo->getTexto() 
-						, $objVo->getTx_data_inclusao() 
 						);
 		return self::executeSql('insert into tb_texto(
 								 txnome
 								,txdata
 								,stativo
 								,texto
-								,tx_data_inclusao
-								) values (?,?,?,?,?)', $values );
+								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Tb_textoVO $objVo ) {
@@ -74,14 +72,12 @@ class Tb_textoDAO extends TPDOConnection {
 						,$objVo->getTxdata()
 						,$objVo->getStativo()
 						,$objVo->getTexto()
-						,$objVo->getTx_data_inclusao()
 						,$objVo->getIdtexto() );
 		return self::executeSql('update tb_texto set 
 								 txnome = ?
 								,txdata = ?
 								,stativo = ?
 								,texto = ?
-								,tx_data_inclusao = ?
 								where idtexto = ?',$values);
 	}
 	//--------------------------------------------------------------------------------

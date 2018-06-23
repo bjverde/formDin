@@ -3,17 +3,18 @@ defined('APLICATIVO') or die();
 
 $whereGrid = ' 1=1 ';
 $primaryKey = 'IDTEXTO';
-$frm = new TForm('Exemplo Form5 - Consulta Grid',600);
+$frm = new TForm('Exemplo Form5 - Texto Rico',600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('TXNOME', 'TXNOME',50,true);
-$frm->addTextField('TXDATA', 'TXDATA',50,true);
-$frm->addTextField('STATIVO', 'STATIVO',50,true);
-$frm->addTextField('TEXTO', 'TEXTO',50,true);
-$frm->addTextField('TX_DATA_INCLUSAO', 'TX_DATA_INCLUSAO',50,true);
+$frm->addTextField('TXNOME', 'Nome do Texto',50,true);
+$frm->addDateField('TXDATA', 'Data',50,true);
+$frm->addRadioField('STATIVO' , 'Ativo:',true,'S=SIM,N=Não',null,false,null,2,null,null,null,false);//->addEvent('onDblclick','dblClick(this)');
+
+$frm->setRichEdit(true);
+$frm->addMemoField('TEXTO' ,'Texto',10000,false,100,15,true,true,false);
 
 $frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -76,12 +77,12 @@ $gride = new TGrid( 'gd'        // id do gride
 				   ,$primaryKey   // chave primaria
 				   ,$mixUpdateFields
 				   );
-$gride->addColumn($primaryKey,'id',50,'center');
-$gride->addColumn('TXNOME','TXNOME',50,'center');
-$gride->addColumn('TXDATA','TXDATA',50,'center');
-$gride->addColumn('STATIVO','STATIVO',50,'center');
-$gride->addColumn('TEXTO','TEXTO',50,'center');
-$gride->addColumn('TX_DATA_INCLUSAO','TX_DATA_INCLUSAO',50,'center');
+$gride->addColumn($primaryKey,'id',10,'center');
+$gride->addColumn('TXNOME','Nome',50,'center');
+$gride->addColumn('TXDATA','Dat Texto',50,'center');
+$gride->addColumn('STATIVO','Ativo',20,'center');
+$gride->addColumn('TEXTO','TEXTO');
+$gride->addColumn('TX_DATA_INCLUSAO','Dat Inclusão',50,'center');
 $frm->addHtmlField('gride',$gride);
 
 $frm->show();

@@ -45,16 +45,18 @@ HelpOnLineDAO::createFileAndTable();
 
 $whereGrid = ' 1=1 ';
 $primaryKey = 'HELP_FORM';
-$frm = new TForm('Ajuda em Tempo Real',600,850);
+$frm = new TForm('Ajuda em Tempo Real',800);
 
 $frm->addTextField($primaryKey ,'Formulário:',50,true);
 $frm->addTextField('HELP_TITLE','Título:'	 ,50,false);
 $frm->addTextField('HELP_FIELD','Campo:'	 ,50,true);
 
+//$frm->addTextEditorField('HELP_TEXT','Descrição:',false,true);
+
 $frm->setRichEdit(true);
 //$frm->addMemoField('campo_memo_tinymce','Documento:',100000,false,80,5,null,null,false);
-//$frm->addMemoField('HELP_TEXT' ,'HELP_TEXT',10000,false,100,15,true,true,false);
 $frm->addMemoField('HELP_TEXT' ,'HELP_TEXT',10000,false,100,15,true,true,false);
+
 //$frm->addJavascript('fwSetHtmlEditorPreview("HELP_TEXT")');
 $frm->addJavascript('fwSetHtmlEditor("HELP_TEXT",false,false)');
 //$frm->addJavascript('fwSetHtmlEditor("HELP_TEXT","callBackEditor",false)');
