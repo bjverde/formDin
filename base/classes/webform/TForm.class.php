@@ -6243,19 +6243,29 @@ class TForm Extends TBox
            /**
             * Adicionar campo de entrada de texto com multiplas linhas ( memo )
             *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param integer $intMaxLength
-            * @param boolean $boolRequired
-            * @param integer $intColumns
-            * @param integer $intRows
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove   - Label abaixo
-            * @param boolean $boolShowCounter  - Contador de caracteres ! Só funciona em campos não RichText
+            * @param string  $strName         - 1: ID do campo
+            * @param string  $strLabel        - 2: Labal 
+            * @param integer $intMaxLength    - 3: tamanho maximo
+            * @param boolean $boolRequired    - 4: Obrigatorio
+            * @param integer $intColumns      - 5: qtd colunas
+            * @param integer $intRows         - 6: qtd linhas
+            * @param boolean $boolNewLine     - 7: nova linha
+            * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+            * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
             * @param string  $strValue
             * @return TMemo
             */
-           public function addMemoField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intColumns=null, $intRows=null, $boolNewLine=null, $boolLabelAbove=null, $boolShowCounter=null, $strValue=null, $boolNoWrapLabel=null )
+           public function addMemoField( $strName
+           		                       , $strLabel=null
+           		                       , $intMaxLength
+           		                       , $boolRequired=null
+           		                       , $intColumns=null
+           		                       , $intRows=null
+           		                       , $boolNewLine=null
+           		                       , $boolLabelAbove=null
+           		                       , $boolShowCounter=null
+           		                       , $strValue=null
+           		                       , $boolNoWrapLabel=null )
            {
                $field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
                $field->setClass( 'fwMemo' );
