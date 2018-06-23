@@ -14,6 +14,8 @@ $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('TXNOME', 'Nome do Texto',50,true);
 $frm->addDateField('TXDATA', 'Data',50,true);
 $frm->addRadioField('STATIVO' , 'Ativo:',true,'S=SIM,N=Não',null,false,null,2,null,null,null,false);//->addEvent('onDblclick','dblClick(this)');
+$html = 'Instruções. O campo Memo com TinyMCE só funciona com a função de BakcEditor habilita. O campo deve ser obrigatorio para envitar possiveis problemas.';
+$frm->addHtmlField('html1',$html,null,'Dica:',null,400)->setCss('border','1px dashed blue');
 
 $frm->addMemoField('TEXTO' ,'Texto',10000,false,100,15,true,true,false);
 $frm->setRichEdit(true);
