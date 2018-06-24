@@ -20,9 +20,9 @@ $frm->addHtmlField('html1',$html,null,'Dica:',null,400)->setCss('border','1px da
 $frm->addMemoField('TEXTO' ,'Texto',10000,false,100,15,true,true,false);
 $frm->setRichEdit(true);
 //Metodo customizado
-$frm->addJavascript('fwSetHtmlEditorPreview("TEXTO")');
+//$frm->addJavascript('fwSetHtmlEditorPreview("TEXTO")');
 
-//$frm->addJavascript('fwSetHtmlEditor("TEXTO","callBackEditor",false)');
+$frm->addJavascript('fwSetHtmlEditor("TEXTO","callBackEditor",false)');
 
 
 echo 'Valor do Campo: TEXTO =<br>';
