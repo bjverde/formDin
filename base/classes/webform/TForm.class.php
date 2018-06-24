@@ -6289,7 +6289,7 @@ class TForm Extends TBox
      * @param boolean $boolLabelAbove  - 8: Label sobre o campo
      * @param string  $strValue        - 9:
      * @param boolean $boolNoWrapLabel - 10:
-     * @return TMemo
+     * @return TRichTextEditor
      */
     public function addRichTextEditor( $strName
     		, $strLabel=null
