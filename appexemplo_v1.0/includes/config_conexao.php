@@ -49,9 +49,9 @@
  */
 
 // sqlite
-define('BANCO','SQLITE');
-define('DATABASE','bancos_locais/bdApoio.s3db');
-define('UTF8_DECODE',0);
+define('BANCO', 'SQLITE');
+define('DATABASE', 'bancos_locais/bdApoio.s3db');
+define('UTF8_DECODE', 0);
 
 
 /*
@@ -71,5 +71,3 @@ define('UTF8_DECODE',0);
  define('USUARIO','SYSDBA');
  define('SENHA','masterkey');
  */
-
-?>

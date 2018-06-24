@@ -41,19 +41,19 @@
 
 $frm = new TForm('Exemplo de Ajax usando Semáforo', 400, 600);
 
-$frm->addTextField('id_semaforo','ID semáforo:',20,true,20,'semaforo_1',null,'Informe uma string para identificar o semaforo')->add('<span id="imagem"></span>');
+$frm->addTextField('id_semaforo', 'ID semáforo:', 20, true, 20, 'semaforo_1', null, 'Informe uma string para identificar o semaforo')->add('<span id="imagem"></span>');
 
 $frm->addHtmlField('msg', '<p>Ao fazer uma requisição Ajax com semáforo, o semáforo fica "fechado" até que a chamada retorne.<BR />
 						   Uma nova chamada com o mesmo semáforo só é realizada se o semáforo estiver aberto.<BR />
-						   Utilizando a função javascript "fwSemaphoreIsOpen(idSemaphore)" é possível verifiar se o semáforo está aberto ou fecahdo.</p>')->setcss('font-size','12px');
+						   Utilizando a função javascript "fwSemaphoreIsOpen(idSemaphore)" é possível verifiar se o semáforo está aberto ou fecahdo.</p>')->setcss('font-size', '12px');
 
 $frm->addButton('Chamar ajax com Semáforo', null, 'btnAjax', 'chamarAjax()');
 $frm->addButton('Verificar Semáforo', null, 'btnVerfificar', 'verificarSemaforo()');
 
 $acao = isset($acao) ? $acao : null;
-if( $acao == 'ajax_lento') {
-	sleep(20);
-	echo 'Voltei depois de 20 segundos!';
+if ($acao == 'ajax_lento') {
+    sleep(20);
+    echo 'Voltei depois de 20 segundos!';
 }
 $frm->setAction('Atualizar');
 $frm->show();
@@ -64,30 +64,30 @@ $frm->show();
 <script>
 function chamarAjax()
 {
-	var id = jQuery('#id_semaforo').val();
-	if( ! fwSemaphoreIsOpen( id ) )
-	{
-		jAlert('Esta ação já esta sendo executada');
-		return;
-	}
-	var chamada = fwAjaxRequest({
-		'action':'ajax_lento',
-		'async':true,
-		'dataType':'text',
-		'semaphore': id,
-		'semaphoreTimeout':10000,
-		'containerId':'imagem',
-		'msgLoading':fw_img_processando1,
-		'callback':function(res) {
-			fwAlert('Requisição com semáforo "' + id + '" retornada!\n\nMensagem de retorno:\n' + res);
-		}
-	});
-	fwAlert(chamada !== false? 'Requisição Ajax chamada com o semáforo "' + id + '"': 'Requisição Ajax NÃO foi chamada pois o semáforo "' + id + '" está FECHADO!');
+    var id = jQuery('#id_semaforo').val();
+    if( ! fwSemaphoreIsOpen( id ) )
+    {
+        jAlert('Esta ação já esta sendo executada');
+        return;
+    }
+    var chamada = fwAjaxRequest({
+        'action':'ajax_lento',
+        'async':true,
+        'dataType':'text',
+        'semaphore': id,
+        'semaphoreTimeout':10000,
+        'containerId':'imagem',
+        'msgLoading':fw_img_processando1,
+        'callback':function(res) {
+            fwAlert('Requisição com semáforo "' + id + '" retornada!\n\nMensagem de retorno:\n' + res);
+        }
+    });
+    fwAlert(chamada !== false? 'Requisição Ajax chamada com o semáforo "' + id + '"': 'Requisição Ajax NÃO foi chamada pois o semáforo "' + id + '" está FECHADO!');
 }
 
 function verificarSemaforo() {
-	var id = jQuery('#id_semaforo').val();
-	var status = fwSemaphoreIsOpen(id);
-	fwAlert('Semáforo "' + id + '" está ' + (status ? 'ABERTO' : 'FECHADO') );
+    var id = jQuery('#id_semaforo').val();
+    var status = fwSemaphoreIsOpen(id);
+    fwAlert('Semáforo "' + id + '" está ' + (status ? 'ABERTO' : 'FECHADO') );
 }
 </script>

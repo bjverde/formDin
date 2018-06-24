@@ -40,15 +40,15 @@
  */
 
 
-$frm = new TForm('Exemplo Campo Arquivo Assincrono',300,700);
+$frm = new TForm('Exemplo Campo Arquivo Assincrono', 300, 700);
 
 // define a largura das colunas verticais do formulario para alinhamento dos campos
 $frm->setColumns(array(100,100));
-$frm->addFileField('anexo_async','Anexo Async:',true,'pdf,gif,txt,jpg,rar,zip,doc','2M',40,true,null,'callBackAnexar');
-$frm->addTextField('arquivo','Arquivo:',60);
-$frm->addTextField('tipo'	,'Tipo:',40);
-$frm->addTextField('tamanho','Tamanho (kb):',20);
-$frm->addTextField('local'	,'Local temp:',60);
+$frm->addFileField('anexo_async', 'Anexo Async:', true, 'pdf,gif,txt,jpg,rar,zip,doc', '2M', 40, true, null, 'callBackAnexar');
+$frm->addTextField('arquivo', 'Arquivo:', 60);
+$frm->addTextField('tipo', 'Tipo:', 40);
+$frm->addTextField('tamanho', 'Tamanho (kb):', 20);
+$frm->addTextField('local', 'Local temp:', 60);
 
 //d($_SESSION);
 //d($_POST);
@@ -57,27 +57,27 @@ $frm->addTextField('local'	,'Local temp:',60);
 $frm->setAction('Gravar,Novo');
 
 $acao = isset($acao) ? $acao : null;
-switch($acao){
-	case 'Gravar': {
-		$frm->validate();
-		//$bvars = $frm->createBvars('anexo1,anexo2');
-		//d($bvars);
-	}
+switch ($acao) {
+    case 'Gravar': {
+        $frm->validate();
+        //$bvars = $frm->createBvars('anexo1,anexo2');
+        //d($bvars);
+    }
 }
 $frm->show();
 ?>
 <script>
 function callBackAnexar(tempName,fileName,type,size)
 {
-	jQuery('#arquivo').val(fileName);
-	jQuery('#local').val(tempName);
-	jQuery('#tamanho').val(size);
-	jQuery('#tipo').val(type);
-	//alert('Função de callback.\n\nTemp name:'+tempName+'\nFile name:'+fileName+'\nType:'+type+'\nSize?'+size);
-	if( confirm('Visualizar o arquivo anexado ?'))
-	{
-		fwShowTempFile(tempName,type,fileName);
-	}
+    jQuery('#arquivo').val(fileName);
+    jQuery('#local').val(tempName);
+    jQuery('#tamanho').val(size);
+    jQuery('#tipo').val(type);
+    //alert('Função de callback.\n\nTemp name:'+tempName+'\nFile name:'+fileName+'\nType:'+type+'\nSize?'+size);
+    if( confirm('Visualizar o arquivo anexado ?'))
+    {
+        fwShowTempFile(tempName,type,fileName);
+    }
 }
 </script>
 

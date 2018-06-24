@@ -36,15 +36,13 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
- $frm = new TForm('Teste do Recurso Autosize',150);
+ $frm = new TForm('Teste do Recurso Autosize', 150);
 $frm->setColumns(150);
-$frm->addCheckField('autosize','Iniciar Redimensionado?',false)->addEvent('onclick','fwDoAction("")');
-$frm->addHtmlField('campo_html', str_repeat('a</br>',20) );
-$frm->addButton('Ajustar a Altura',null,'btn1','fwFormDinAutoSize({initialHeight:150})');
-$frm->addButton('Adicionar Linha',null,'btn2','jQuery("#campo_html").html(jQuery("#campo_html").html()+"Nova Linha</br>")');
-if( $frm->get('autosize'))
-{
-	$frm->setAutoSize(true);
+$frm->addCheckField('autosize', 'Iniciar Redimensionado?', false)->addEvent('onclick', 'fwDoAction("")');
+$frm->addHtmlField('campo_html', str_repeat('a</br>', 20));
+$frm->addButton('Ajustar a Altura', null, 'btn1', 'fwFormDinAutoSize({initialHeight:150})');
+$frm->addButton('Adicionar Linha', null, 'btn2', 'jQuery("#campo_html").html(jQuery("#campo_html").html()+"Nova Linha</br>")');
+if ($frm->get('autosize')) {
+    $frm->setAutoSize(true);
 }
 $frm->show();
-?>

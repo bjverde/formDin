@@ -41,20 +41,20 @@
 //d($_REQUEST);
 
 $_REQUEST['subform'] = isset($_REQUEST['subform']) ? $_REQUEST['subform'] : '';
-if( $_REQUEST['subform'] == 1){
-	//die();
+if ($_REQUEST['subform'] == 1) {
+    //die();
 }
 
 $html = '<br><br><b>Regra de Negocio</b>'
-		.'<br>o campo "nome subcadastro" é somente leitura. Ele será preenchido com o subformulario.';
-		
+        .'<br>o campo "nome subcadastro" é somente leitura. Ele será preenchido com o subformulario.';
+        
 
-$box3 = new TBox('bx3',300,100);
+$box3 = new TBox('bx3', 300, 100);
 $box3->add($html);
 $box3->setFlat(true);
 $box3->setPosition('tl');
 
-$frm = new TForm('Exemplo de Subcadastro',200);
+$frm = new TForm('Exemplo de Subcadastro', 200);
 
 
 /*$frm->addJsFile('prototype/prototype.js',true);
@@ -66,23 +66,23 @@ $frm->addCssFile('prototype/themes/alphacube.css');
 $frm->addOutside($box3);
 //$frm->addHtmlField('texto',$html)->setCss('border','1px solid red');;
 
-$frm->addTextField('nome','Nome:',null,false);
+$frm->addTextField('nome', 'Nome:', null, false);
 //$frm->addTextField('nome2','Nome Subcadastro:',null,false)->setReadOnly(true);
-$frm->addTextField('nome2','Nome Subcadastro:',50,false,50,null,true,'Somente leitura','Abrir Subform',false);
+$frm->addTextField('nome2', 'Nome Subcadastro:', 50, false, 50, null, true, 'Somente leitura', 'Abrir Subform', false);
 
 $frm->setonMaximize('onMaximize');
-$frm->addButton('Subcadastro',null,'btn3','subcadastro()');
+$frm->addButton('Subcadastro', null, 'btn3', 'subcadastro()');
 $frm->show();
 
 ?>
 <script>
 function subcadastro()
 {
-	// Passsando o campo nome como json. Se não for informado o valor, será lido do formulário
-	//fwModalBox('Este é um Subcadastro','../teste.php');
-	//fwModalBox('Este é um Subcadastro','www.globo.com.br');
-	fwModalBox('Este é um Subcadastro',app_index_file+'?modulo=view/form/exe_TForm.php',380,820,callbackModaBox,{'nome':''});
-	//fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
+    // Passsando o campo nome como json. Se não for informado o valor, será lido do formulário
+    //fwModalBox('Este é um Subcadastro','../teste.php');
+    //fwModalBox('Este é um Subcadastro','www.globo.com.br');
+    fwModalBox('Este é um Subcadastro',app_index_file+'?modulo=view/form/exe_TForm.php',380,820,callbackModaBox,{'nome':''});
+    //fwModalBox('Janela Modal 2','index.php?modulo=view/form/exe_TForm.php');
 }
 
 /**
@@ -92,14 +92,14 @@ function subcadastro()
 */
 function callbackModaBox(data, doc )
 {
-	var msg;
+    var msg;
     // exemplo de tratamento do retorno do subcadastro
-	msg = 'A função callbackModalBox() foi executada!\n\nAcessando os dados da janela modal:\n'+'Campo nome = '+data.nome+'\nCores:'+String(data.cor);
-	try{
-		msg+='\n\n A cor '+data.cor[0]+' foi selecionada';
-	} catch(e){};
-	jQuery("#nome2").val(data.nome);
-	msg +='\n\nUsando getElementById("nome").value='+doc.getElementById('nome').value;
-	alert( msg );
+    msg = 'A função callbackModalBox() foi executada!\n\nAcessando os dados da janela modal:\n'+'Campo nome = '+data.nome+'\nCores:'+String(data.cor);
+    try{
+        msg+='\n\n A cor '+data.cor[0]+' foi selecionada';
+    } catch(e){};
+    jQuery("#nome2").val(data.nome);
+    msg +='\n\nUsando getElementById("nome").value='+doc.getElementById('nome').value;
+    alert( msg );
 }
 </script>

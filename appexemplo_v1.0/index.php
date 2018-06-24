@@ -38,13 +38,13 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-define('MIGRATE_JQUERY',FALSE);
+define('MIGRATE_JQUERY', false);
 
 include('includes/config_conexao.php');
 include('../base/classes/webform/TApplication.class.php');
 
-define('APLICATIVO','APPEV1.0');
-define('DECIMAL_SEPARATOR',',');
+define('APLICATIVO', 'APPEV1.0');
+define('DECIMAL_SEPARATOR', ',');
 //session_start();
 //session_destroy();
 
@@ -102,9 +102,9 @@ return;
 TPDOConnection::Test(false);
 /*
 $sql = "SELECT schemaname AS esquema, tablename AS tabela, tableowner AS dono
- 						FROM pg_catalog.pg_tables
- 						WHERE schemaname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
- 						ORDER BY schemaname, tablename";
+                        FROM pg_catalog.pg_tables
+                        WHERE schemaname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
+                        ORDER BY schemaname, tablename";
 
 print_r( TPDOConnection::executeSql($sql));
 
@@ -127,12 +127,14 @@ die('fim');
 set_error_handler("exception_error_handler");
 $app->run();
 
-function minhaFuncaoLogin() {
+function minhaFuncaoLogin()
+{
     return 'Olá, FormDin '.FORMDIN_VERSION;
 }
 
-function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-	echo '<pre>';
+function exception_error_handler($errno, $errstr, $errfile, $errline)
+{
+    echo '<pre>';
     //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 
     echo '<div style="text-align:left;border:1px solid red;width:100%;font-size:18px;">Erro N.'.$errno.'<br>'.
@@ -141,5 +143,3 @@ function exception_error_handler($errno, $errstr, $errfile, $errline ) {
     'Linha:'.$errline.'</div></pre>'.
     '<script>try{top.app_unblockUI();}catch(e){};</script>';
 }
-
-?>

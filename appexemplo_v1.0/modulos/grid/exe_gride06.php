@@ -39,7 +39,7 @@ error_reporting(E_ALL);
 error_reporting(E_ALL);
 
 $frm = new TForm('Gride 06 - Exemplo de Com Campos Editáveis');
-$frm->addTextField('nome','Nome:',30,true);
+$frm->addTextField('nome', 'Nome:', 30, true);
 
 $dados = null;
 $dados['ID_TABELA'][] = 1;
@@ -77,98 +77,87 @@ $dados['VAL_PRECO'][] = '578,87';
 
 
 
-$gride = new TGrid( 'gdxy' // id do gride
-					,'Título do Gride' // titulo do gride
-					,$dados 	// array de dados
-					,250		// altura do gride
-					,null		// largura do gride
-					,'ID_TABELA'
-					,'NM_TABELA|nome'
-					);
+$gride = new TGrid('gdxy' // id do gride
+, 'Título do Gride' // titulo do gride
+, $dados     // array de dados
+, 250        // altura do gride
+, null       // largura do gride
+, 'ID_TABELA', 'NM_TABELA|nome');
 
 //$gride->addTextColumn('val_preco','Preço','VAL_PRECO',10,10)->addEvent('onClick','alert( this.value)');
 //$gride->addNumberColumn('val_preco','Preço','VAL_PRECO',10,2)->addEvent('onFocus','alert( this.value)');
 
-$gride->addRadioColumn('st_perfil','Perfil','ST_PERFIL','NM_TABELA');
-//$gride->addColumn('nm_tabela'	,'Tabela',20,20);
-$gride->addCheckColumn('st_tabela','Aprovado','ST_TABELA','NM_TABELA')->setEvent('onClick','chkClic()');
-$gride->addTextColumn('id_tabela','ID','ID_TABELA',20,20);
+$gride->addRadioColumn('st_perfil', 'Perfil', 'ST_PERFIL', 'NM_TABELA');
+//$gride->addColumn('nm_tabela' ,'Tabela',20,20);
+$gride->addCheckColumn('st_tabela', 'Aprovado', 'ST_TABELA', 'NM_TABELA')->setEvent('onClick', 'chkClic()');
+$gride->addTextColumn('id_tabela', 'ID', 'ID_TABELA', 20, 20);
 //$gride->addTextColumn('nm_tabela','Nome da Tabela','NM_TABELA',60,80);
-$gride->addColumn('link','Link',200,'center');
-$gride->addSelectColumn('sit_opcoes' ,'Opções','SIT_OPCOES','1=Amarelo,2=Verde');
+$gride->addColumn('link', 'Link', 200, 'center');
+$gride->addSelectColumn('sit_opcoes', 'Opções', 'SIT_OPCOES', '1=Amarelo,2=Verde');
 //$gride->addSelectColumn('sit_opcoes','Opções','SIT_OPCOES',null,null,null,null,null,null,null,'VAL_OPCAO');
-$gride->addNumberColumn('val_preco','Preço','VAL_PRECO',10,2)->setAttribute('required','true')->addEvent('onBlur','alert( this.value)');
+$gride->addNumberColumn('val_preco', 'Preço', 'VAL_PRECO', 10, 2)->setAttribute('required', 'true')->addEvent('onBlur', 'alert( this.value)');
 
 
 
 $gride->setOnDrawCell('gdAoDesenharCelula');
 //$gride->setOnDrawHeaderCell('gdAoDesenharCab');
 
-$frm->addHtmlField('gride',$gride);
+$frm->addHtmlField('gride', $gride);
 $frm->setAction('Atualizar');
 
 $frm->show();
 
-d($_POST,'conteúdo do $_POST');
+d($_POST, 'conteúdo do $_POST');
 
-function gdAoDesenharCab($th,$objColumn,$objHeader )
+function gdAoDesenharCab($th, $objColumn, $objHeader)
 {
-	//echo $objHeader->getId().',';
-	//echo $objColumn->getFieldName().',';
+    //echo $objHeader->getId().',';
+    //echo $objColumn->getFieldName().',';
 
-	if( $objColumn->getFieldName() == 'ST_TABELA')
-	{
-			$btn = new TButton('btn',null,null,null,null,'lixeira.gif',null,'Exemplo - texto da Dica');
-			$btn->setProperty('tooltip','true');
-			$objHeader->clearChildren();
-			$objHeader->add($btn);
-	}
-
+    if ($objColumn->getFieldName() == 'ST_TABELA') {
+            $btn = new TButton('btn', null, null, null, null, 'lixeira.gif', null, 'Exemplo - texto da Dica');
+            $btn->setProperty('tooltip', 'true');
+            $objHeader->clearChildren();
+            $objHeader->add($btn);
+    }
 }
-function gdAoDesenharCelula($rowNum,$cell,$objColumn,$aData,$edit)
+function gdAoDesenharCelula($rowNum, $cell, $objColumn, $aData, $edit)
 {
-	if( $rowNum == 0 )
-	{
-		//echo $objColumn->getFieldName().',';
-	}
+    if ($rowNum == 0) {
+        //echo $objColumn->getFieldName().',';
+    }
 
-	if( $objColumn->getFieldName() == 'ST_TABELA')
-	{
-		if( $edit )
-		{
-			$edit->setProperty( 'title','teste');
-			$edit->setProperty( 'tooltip','true');
-		}
-	}
-	else if( $objColumn->getFieldName() == 'SIT_OPCOES')
-	{
-		//$edit->setVisible( false );
-	}
-	else if( $objColumn->getFieldName() == 'link')
-	{
-		$link = new TElement('a');
-		$link->setId('link'.$rowNum);
-		$link->setProperty('href','#');
-		$link->add('Clique Aqui');
-		$link->addEvent('onclick','alert("Link '.$rowNum.' foi clicado!")');
-		$cell->setValue($link);
-	}
+    if ($objColumn->getFieldName() == 'ST_TABELA') {
+        if ($edit) {
+            $edit->setProperty('title', 'teste');
+            $edit->setProperty('tooltip', 'true');
+        }
+    } elseif ($objColumn->getFieldName() == 'SIT_OPCOES') {
+        //$edit->setVisible( false );
+    } elseif ($objColumn->getFieldName() == 'link') {
+        $link = new TElement('a');
+        $link->setId('link'.$rowNum);
+        $link->setProperty('href', '#');
+        $link->add('Clique Aqui');
+        $link->addEvent('onclick', 'alert("Link '.$rowNum.' foi clicado!")');
+        $cell->setValue($link);
+    }
 }
 ?>
 <script>
 function chkClic(e, linha)
 {
-	console.log( linha );
-	// criar o campo texto
+    console.log( linha );
+    // criar o campo texto
     if( jQuery(e).is(':checked') )
     {
-    	jQuery(e).parent().append('<input class="fwField" style="border:1px solid #c0c0c0" id="'+e.id+'_texto" type="text" size="30" value="">');
-    	jQuery("#sit_opcoes_"+linha).show();
+        jQuery(e).parent().append('<input class="fwField" style="border:1px solid #c0c0c0" id="'+e.id+'_texto" type="text" size="30" value="">');
+        jQuery("#sit_opcoes_"+linha).show();
     }
     else // remover o campo texto
     {
-    	jQuery("#"+e.id+'_texto').remove();
-    	jQuery("#sit_opcoes_"+linha).hide();
+        jQuery("#"+e.id+'_texto').remove();
+        jQuery("#sit_opcoes_"+linha).hide();
 
     }
 }

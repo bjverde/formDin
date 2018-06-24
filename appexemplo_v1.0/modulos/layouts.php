@@ -44,10 +44,9 @@ $frm = new TForm('Exemplos links');
 
 $homeUrl = UrlHelper::homeUrl();
 
-$frm->addLinkField('idLink0','labelLink0','Layout 00 - Default',null, $homeUrl.'index.php','new');
-$frm->addLinkField('idLink1','labelLink1','Layout 01',null, $homeUrl.'index_layout01.php','new');
-$frm->addLinkField('idLink2','labelLink2','Layout 02',null, $homeUrl.'index_layout02.php','new');
-$frm->addLinkField('idLink3','labelLink3','Layout 03',null, $homeUrl.'index_layout03.php','new');
+$frm->addLinkField('idLink0', 'labelLink0', 'Layout 00 - Default', null, $homeUrl.'index.php', 'new');
+$frm->addLinkField('idLink1', 'labelLink1', 'Layout 01', null, $homeUrl.'index_layout01.php', 'new');
+$frm->addLinkField('idLink2', 'labelLink2', 'Layout 02', null, $homeUrl.'index_layout02.php', 'new');
+$frm->addLinkField('idLink3', 'labelLink3', 'Layout 03', null, $homeUrl.'index_layout03.php', 'new');
 
 $frm->show();
-?>

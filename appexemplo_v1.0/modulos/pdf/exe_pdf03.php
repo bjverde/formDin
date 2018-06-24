@@ -40,8 +40,7 @@
  */
 require_once 'exe_pdf_msg.php';
 $html1 = getMsgFPDF();
-$frm = new TForm('Exemplo PDF',200);
-$frm->addHtmlField('html1',$html1,null,null,null,null)->setCss('border','1px solid #ffeb3b')->setCss('background-color','#ffffcc')->setCss('margin-bottom','10px');
+$frm = new TForm('Exemplo PDF', 200);
+$frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 $frm->addPdfFile('modulos/pdf/relatorio_pdf.php?param1=1&param2=2');
 $frm->show();
-?>

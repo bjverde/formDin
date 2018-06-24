@@ -39,67 +39,66 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_blobDAO extends TPDOConnection {
+class Tb_blobDAO extends TPDOConnection
+{
 
-	public static function insert( Tb_blobVO $objVo )
-	{
-		if( $objVo->getId_blob() ) {
-			return self::update($objVo);
-		}
+    public static function insert(Tb_blobVO $objVo)
+    {
+        if ($objVo->getId_blob()) {
+            return self::update($objVo);
+        }
 
         // para mysql
         //$values = array(  $objVo->getNome_arquivo(), file_get_contents($objVo->getTempName()) );
-		//self::executeSql("insert into tb_blob (nome_arquivo,conteudo_arquivo) values (?,?)",$values);
+        //self::executeSql("insert into tb_blob (nome_arquivo,conteudo_arquivo) values (?,?)",$values);
 
 
-		// para sqlite
-       	$query = self::prepare("insert into tb_blob (nome_arquivo,conteudo_arquivo) values (?,?)");
-       	
-       	$fileName = $objVo->getNome_arquivo();
-       	$fileOpen = fopen( $objVo->getTempName(), "rb");
-       	
-       	$query->bindParam(1, $fileName, PDO::PARAM_STR);
-       	$query->bindParam(2, $fileOpen, PDO::PARAM_LOB);
-		$query->execute();
-
-	}
-	//--------------------------------------------------------------------------------
-	public static function delete( $id )
-	{
-		$values = array($id);
-		return self::executeSql('delete from tb_blob where id_blob = ?',$values);
-	}
-	//--------------------------------------------------------------------------------
-	public static function select( $id )
-	{
-		$values = array($id);
-		return self::executeSql('select
+        // para sqlite
+        $query = self::prepare("insert into tb_blob (nome_arquivo,conteudo_arquivo) values (?,?)");
+        
+        $fileName = $objVo->getNome_arquivo();
+        $fileOpen = fopen($objVo->getTempName(), "rb");
+        
+        $query->bindParam(1, $fileName, PDO::PARAM_STR);
+        $query->bindParam(2, $fileOpen, PDO::PARAM_LOB);
+        $query->execute();
+    }
+    //--------------------------------------------------------------------------------
+    public static function delete($id)
+    {
+        $values = array($id);
+        return self::executeSql('delete from tb_blob where id_blob = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
+    public static function select($id)
+    {
+        $values = array($id);
+        return self::executeSql('select
 								 id_blob
 								,nome_arquivo
 								,conteudo_arquivo
-								from tb_blob where id_blob = ?', $values );
-	}
-	//--------------------------------------------------------------------------------
-	public static function selectAll( $orderBy=null, $where=null )
-	{
-		return self::executeSql('select
+								from tb_blob where id_blob = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectAll($orderBy = null, $where = null)
+    {
+        return self::executeSql('select
 								 id_blob
 								,nome_arquivo
 								from tb_blob'.
-		( ($where)? ' where '.$where:'').
-		( ($orderBy) ? ' order by '.$orderBy:''));
-	}
-	//--------------------------------------------------------------------------------
-	public static function update ( Tb_blobVO $objVo )
-	{
-		$values = array( $objVo->getNome_arquivo()
-						,$objVo->getConteudo_arquivo()
-						,$objVo->getId_blob() );
-		return self::executeSql('update tb_blob set
+        ( ($where)? ' where '.$where:'').
+        ( ($orderBy) ? ' order by '.$orderBy:''));
+    }
+    //--------------------------------------------------------------------------------
+    public static function update(Tb_blobVO $objVo)
+    {
+        $values = array( $objVo->getNome_arquivo()
+                        ,$objVo->getConteudo_arquivo()
+                        ,$objVo->getId_blob() );
+        return self::executeSql('update tb_blob set
 								 nome_arquivo = ?
 								,conteudo_arquivo = ?
-								where id_blob = ?',$values);
-	}
-	//--------------------------------------------------------------------------------
+								where id_blob = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
 }
-?>
