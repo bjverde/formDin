@@ -6240,23 +6240,24 @@ class TForm Extends TBox
                $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
                $dc = $this->addDisplayControl( $tDisplayControl );
                return $field;
-           }
-           /**
-            * Adicionar campo de entrada de texto com multiplas linhas ( memo )
-            *
-            * @param string  $strName         - 1: ID do campo
-            * @param string  $strLabel        - 2: Labal 
-            * @param integer $intMaxLength    - 3: tamanho maximo
-            * @param boolean $boolRequired    - 4: Obrigatorio
-            * @param integer $intColumns      - 5: qtd colunas
-            * @param integer $intRows         - 6: qtd linhas
-            * @param boolean $boolNewLine     - 7: nova linha
-            * @param boolean $boolLabelAbove  - 8: Label sobre o campo
-            * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
-            * @param string  $strValue
-            * @return TMemo
-            */
-           public function addMemoField( $strName
+    }
+           
+    /**
+     * Adicionar campo de entrada de texto com multiplas linhas ( memo ) equivalente ao html textarea
+     *
+     * @param string  $strName         - 1: ID do campo
+     * @param string  $strLabel        - 2: Labal
+     * @param integer $intMaxLength    - 3: tamanho maximo
+     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param integer $intColumns      - 5: qtd colunas
+     * @param integer $intRows         - 6: qtd linhas
+     * @param boolean $boolNewLine     - 7: nova linha
+     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
+     * @param string  $strValue
+     * @return TMemo
+     */
+    public function addMemoField( $strName
            		                       , $strLabel=null
            		                       , $intMaxLength
            		                       , $boolRequired=null
@@ -6267,35 +6268,47 @@ class TForm Extends TBox
            		                       , $boolShowCounter=null
            		                       , $strValue=null
            		                       , $boolNoWrapLabel=null )
-           {
-               $field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
-               $field->setClass( 'fwMemo' );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
-            * Tipo de máscara: DMY, DM, MY
-            *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param string  $strValue
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param string  $strMinValue
-            * @param string  $strMaxValue
-            * @param string  $strMaskType
-            * @param boolean $boolButtonVisible
-            * @param boolean $boolLabelAbove
-            * @return object TDate
-            */
-           public function addDateField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $strMinValue=null, $strMaxValue=null, $strMaskType=null, $boolButtonVisible=null, $strExampleText=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TDate( $strName, $strValue, $boolRequired, $strMinValue, $strMaxValue, $strMaskType, $boolButtonVisible );
-               $field->setExampleText( $strExampleText );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    {
+    	$field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
+    	$field->setClass( 'fwMemo' );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
+
+    /**
+     * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
+     * Tipo de máscara: DMY, DM, MY
+     *
+     * @param string  $strName
+     * @param string  $strLabel
+     * @param string  $strValue
+     * @param boolean $boolRequired
+     * @param boolean $boolNewLine
+     * @param string  $strMinValue
+     * @param string  $strMaxValue
+     * @param string  $strMaskType
+     * @param boolean $boolButtonVisible
+     * @param boolean $boolLabelAbove
+     * @return object TDate
+     */ 
+    public function addDateField( $strName
+    		, $strLabel=null
+    		, $boolRequired=null
+    		, $boolNewLine=null
+    		, $strValue=null
+    		, $strMinValue=null
+    		, $strMaxValue=null
+    		, $strMaskType=null
+    		, $boolButtonVisible=null
+    		, $strExampleText=null
+    		, $boolLabelAbove=null
+    		, $boolNoWrapLabel=null )
+    {
+    	$field = new TDate( $strName, $strValue, $boolRequired, $strMinValue, $strMaxValue, $strMaskType, $boolButtonVisible );
+    	$field->setExampleText( $strExampleText );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
            
     /**
     * Adiciona campo tipo grupo com legenda na parte superior
@@ -6337,12 +6350,12 @@ class TForm Extends TBox
 				, $imgClosed=null
 				, $boolOverflowX=null
 				, $boolOverflowY=null )
-           {               
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
-               $field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
-               $field->setAccordionId($strAccordionId);
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-               $field->setColumns( $this->getColumns() );
+    {
+		//$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
+		$field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
+		$field->setAccordionId($strAccordionId);
+		$this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+		$field->setColumns( $this->getColumns() );
 		$this->currentContainer[ ] = $field;
 		if( !is_null($strHeight))
 		{
