@@ -6274,6 +6274,41 @@ class TForm Extends TBox
     	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
     	return $field;
     }
+    
+    /**
+     * Adicionar campo de entrada de texto com multiplas linhas equivalente ao html textarea
+     * com editor TinyMCE for free, the most advanced WYSWIYG 
+     *
+     * @param string  $strName         - 1: ID do campo
+     * @param string  $strLabel        - 2: Labal
+     * @param integer $intMaxLength    - 3: tamanho maximo
+     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param integer $intColumns      - 5: qtd colunas
+     * @param integer $intRows         - 6: qtd linhas
+     * @param boolean $boolNewLine     - 7: nova linha
+     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param string  $strValue        - 9:
+     * @param boolean $boolNoWrapLabel - 10:
+     * @return TMemo
+     */
+    public function addRichTextEditor( $strName
+    		, $strLabel=null
+    		, $intMaxLength
+    		, $boolRequired=null
+    		, $intColumns=null
+    		, $intRows=null
+    		, $boolNewLine=null
+    		, $boolLabelAbove=null
+    		, $strValue=null
+    		, $boolNoWrapLabel=null )
+    {
+    	$field = new TRichTextEditor( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows );
+    	$field->setClass( 'fwMemo' );
+    	$this->setRichEdit(true);
+    	$this->addJavascript('fwSetHtmlEditor("'.$strName.'","callBackEditor",false)');
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
 
     /**
      * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
