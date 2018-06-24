@@ -187,10 +187,11 @@ $menu->add('10',null,'Formulário', null, null, '../../base/imagens/fill_form-51
 	$menu->add('10.5','10','Form 04 - Consulta Pedidos','view/form/exe_tform4_consulta_tree_p1.php');
 	$menu->add('10.6','10','Form 04 - Visualizar Item','view/form/exe_tform4_consulta_tree_p2.php');
 	$menu->add('10.7','10','Form 05 - Texto Rico TinyMCE','view/form/exe_TForm5.php');
-	$menu->add('10.8','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
-	$menu->add('10.9','10','Tela Login','view/form/exe_tela_login.php');
-	$menu->add('10.10','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
-	$menu->add('10.11','10','ERRO - Local Destino','view/form/exe_form_local_destino.php');
+	$menu->add('10.8','10','Form 05 - Texto Rico CkEditor (ERRO)','view/form/exe_TForm5_ckeditor.php');
+	$menu->add('10.9','10','Recurso de Autosize','view/form/exe_TForm_autosize.php');
+	$menu->add('10.10','10','Tela Login','view/form/exe_tela_login.php');
+	$menu->add('10.11','10','Cadastro on-line (CRUD)','view/form/exe_crud_online.php');
+	$menu->add('10.12','10','ERRO - Local Destino','view/form/exe_form_local_destino.php');
 	
 //-----------------------------------------------------------------------------
 $menu->add('200',0,'Layouts', null, 'Exemplos de Layouts, CSS e apresentações diferentes', '../../base/imagens/art-1f3a8.png');
