@@ -189,6 +189,7 @@ class TApplicationHtml {
 			$this->page->addJsCssFile ( 'dhtmlx/menu/dhtmlxmenu_cas.js' );
 			$this->page->addJsCssFile ( 'app_prototype.js' );
 			$this->page->addJsCssFile ( 'FormDin4.js' ); // necessário para funcionar o searchonline
+			$this->page->addJsCssFile ( 'FormDin4_tinymce.js' );
 		} else {
 			// javascript
 			$this->page->addJsCssFile ( 'dhtmlx/dhtmlxcommon.js' );

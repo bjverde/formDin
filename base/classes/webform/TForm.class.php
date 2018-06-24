@@ -215,6 +215,7 @@ class TForm Extends TBox
             $this->setFade( 150 ); // habilitar o efeito fade-in para exibir o formulario
             $this->addJsFile( 'ajax.js' );
             $this->addJsFile( 'FormDin4.js' );
+            $this->addJsFile( 'FormDin4_tinymce.js' );
             $this->addJsFile( 'FormDin4Ajax.js' );
             
             
