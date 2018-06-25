@@ -23,8 +23,8 @@ $frm->addHtmlField('html1', $html, null, 'Dica:', null, 400)->setCss('border', '
 $frm->addMemoField('TEXTO', 'Texto', 10000, false, 50, 10, true, true, false);
 $frm->setRichEdit(true);
 //Metodo customizado
-$frm->addJavascript('fwSetHtmlEditorPreview("TEXTO")');
-//$frm->addJavascript('fwSetHtmlEditor("TEXTO","callBackEditor",false)');
+//$frm->addJavascript('fwSetHtmlEditorPreview("TEXTO")');
+$frm->addJavascript('fwSetHtmlEditor("TEXTO","callBackEditor",false)');
 
 
 echo 'Valor do Campo: TEXTO =<br>';
