@@ -713,7 +713,11 @@ class TApplication extends TLayout {
 				
 				exit ();
 			}
-			$htmlScript = "<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" . $this->getCharset () . "\">\n<body>\n" . "<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+			$htmlScript = "<!DOCTYPE html>"
+					      ."\n<html>"
+					      ."\n<meta charset=\"".$this->getCharset()."\">"
+					      ."\n<body>"
+					      ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
