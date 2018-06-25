@@ -215,7 +215,6 @@ class TForm Extends TBox
             $this->setFade( 150 ); // habilitar o efeito fade-in para exibir o formulario
             $this->addJsFile( 'ajax.js' );
             $this->addJsFile( 'FormDin4.js' );
-            $this->addJsFile( 'FormDin4_tinymce.js' );
             $this->addJsFile( 'FormDin4Ajax.js' );
             
             
@@ -3731,14 +3730,12 @@ class TForm Extends TBox
          {
              $this->addJsFile('FormDin4OnlineDoc.js');
              $this->enableRichEdit(); // adiconar javascript para tinymce
-             //$this->addJavascript( "edOnlineReadOnly = ".( ( $this->onlineDocReadOnly ) ? 'true' : 'false') . ";" );
              $this->addJavascript( "fwInitOnlieDocEditor(".(( $this->onlineDocReadOnly ) ? 'true' : 'false').")");
-             
-             //$this->addJavascript("jQuery('#fw_div_online_doc').easydrag();jQuery('#fw_div_online_doc').setHandler('fw_div_online_doc_header');");
          }
          if( $this->getRichEdit() )
          {
              $this->addJsFile( 'jquery/tinymce/jscripts/tiny_mce/tiny_mce.js' );
+             $this->addJsFile( 'FormDin4_tinymce.js' );
          }
          if( is_array( $this->displayControls ) )
          {
