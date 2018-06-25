@@ -1,6 +1,7 @@
-<!DOCTYPE HTML PUBLIC"-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html> 
 <html>
 <head>
+<meta charset="utf-8"> 
 <script type="text/javascript" src="<?= $_SERVER["HTTPS"]=='on'?'https':'http'?>://maps.google.com/maps/api/js?v=3.1&sensor=false&language=pt_BR&region=BR"></script>
 </head>
 <body onload="start()">

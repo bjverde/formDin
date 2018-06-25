@@ -43,9 +43,10 @@ if( isset( $_REQUEST['msgLoad'] ) )
 	$msgLoad = $_REQUEST['msgLoad'];
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html> 
 <html>
 <head>
+<meta charset="utf-8"> 
 <style>
 html
 {

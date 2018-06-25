@@ -51,13 +51,13 @@ if(strpos('http',$file)===0)
 	die();
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <script type="text/javascript" src="../js/jquery/jquery.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.jeditable.mini.js"></script>
 <script language="javascript" >
