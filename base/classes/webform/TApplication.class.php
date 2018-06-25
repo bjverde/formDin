@@ -759,26 +759,8 @@ class TApplication extends TLayout {
 				
 				echo $htmlScript;
 				
-				// enquete - ibama
-				if (defined ( 'COD_PSQ' ) && defined ( 'SEQ_CONTEXTO' ) && $_SESSION ['num_pessoa']) {
-					if (function_exists ( 'executarPacote' )) {
-						// verificar se já respondeu
-						$bvars = array (
-								'NUM_PESSOA' => $_SESSION ['num_pessoa'],
-								'COD_PSQ_PESQUISA' => COD_PSQ,
-								'SEQ_CONTEXTO' => SEQ_CONTEXTO 
-						);
-						
-						executarPacote ( 'SISTAT.PK_SISREG.PESQUISA_PESSOA_RESPONDEU', $bvars, - 1 );
-						
-						if ($bvars ['SIT_RESPONDEU'] [0] == 'N') {
-							$_SESSION [APLICATIVO] ['enquete'] ['modulo'] = $modulo;
-							$modulo = $this->getBase () . 'includes/enquete.inc';
-						}
-					}
-				}
+				//TODO incluir dados estatisticos aqui
 				
-				// fim enquete
 				require_once ($modulo);
 				
 				// evitar notice do php
