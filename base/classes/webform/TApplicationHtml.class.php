@@ -538,7 +538,11 @@ class TApplicationHtml {
 				}
 				exit ();
 			}
-			$htmlScript = "<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<body>\n" . "<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->horizontalAlign . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+			$htmlScript = "<!DOCTYPE html>"
+					      ."\n<html>"
+						  ."\n<meta charset=\"".$this->getCharset()."\">"
+						  ."\n<body>"
+						  ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
@@ -574,23 +578,8 @@ class TApplicationHtml {
 				}
 				echo $htmlScript;
 				
-				// enquete - ibama
-				if (defined ( 'COD_PSQ' ) && defined ( 'SEQ_CONTEXTO' ) && $_SESSION ['num_pessoa']) {
-					if (function_exists ( 'executarPacote' )) {
-						// verificar se já respondeu
-						$bvars = array (
-								'NUM_PESSOA' => $_SESSION ['num_pessoa'],
-								'COD_PSQ_PESQUISA' => COD_PSQ,
-								'SEQ_CONTEXTO' => SEQ_CONTEXTO 
-						);
-						executarPacote ( 'SISTAT.PK_SISREG.PESQUISA_PESSOA_RESPONDEU', $bvars, - 1 );
-						if ($bvars ['SIT_RESPONDEU'] [0] == 'N') {
-							$_SESSION [APLICATIVO] ['enquete'] ['modulo'] = $modulo;
-							$modulo = $this->page->getBase () . 'includes/enquete.inc';
-						}
-					}
-				}
-				// fim enquete
+				//TODO incluir dados estatisticos aqui
+				
 				require_once ($modulo);
 				
 				// evitar notice do php
