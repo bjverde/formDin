@@ -39,25 +39,25 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo do Campo Cor',150,400);
+$frm = new TForm('Exemplo do Campo Cor', 150, 400);
 $frm->setColumns(60); // define a largura da primeira coluna ( rotulos ) do formulário.
-$frm->addColorPickerField('val_cor1','Cor 1:',false);
-$frm->addColorPickerField('val_cor2','Cor 2:',false);
-$frm->addColorPickerField('val_cor3','Cor 3:',false);
+$frm->addColorPickerField('val_cor1', 'Cor 1:', false);
+$frm->addColorPickerField('val_cor2', 'Cor 2:', false);
+$frm->addColorPickerField('val_cor3', 'Cor 3:', false);
 $arrDados = array();
 //$arrDados = null;
 
-$frm->addButton('Definir Cor',null,'btnX','definirCor()');
-$frm->addButton('Limpar',null,'btnY','fwClearChildFields()');
+$frm->addButton('Definir Cor', null, 'btnX', 'definirCor()');
+$frm->addButton('Limpar', null, 'btnY', 'fwClearChildFields()');
 $frm->setAction('Atualizar');
 $frm->setAction('Gravar');
 
 $acao = isset($acao) ? $acao : null;
 if ($acao == 'Gravar') {
-	if ($frm->validate ()) {
-		d ( $_POST );
-		$frm->setPopUpMessage ( 'Validação OK' );
-	}
+    if ($frm->validate()) {
+        d($_POST);
+        $frm->setPopUpMessage('Validação OK');
+    }
 }
 
 
@@ -70,8 +70,8 @@ fwSetColorPicker('val_cor3','#0000ff');
 
 function definirCor()
 {
-	fwSetColorPicker('val_cor1','#580000');
-	fwSetColorPicker('val_cor2','#800080');
-	fwSetColorPicker('val_cor3','#FF00FF');
+    fwSetColorPicker('val_cor1','#580000');
+    fwSetColorPicker('val_cor2','#800080');
+    fwSetColorPicker('val_cor3','#FF00FF');
 }
 </script>

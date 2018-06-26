@@ -376,17 +376,6 @@ class TForm Extends TBox
          */
     }
     
-    public function getQtdMessages()
-    {
-    	$isArray  = is_array( $this->getMessages() );
-    	$isObject = is_object( $this->getMessages() );
-    	$result   = 0;
-    	if( $isArray || $isObject ){
-    		$result = count( $this->getMessages() );
-    	}
-    	return $result;
-    }
-    
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
@@ -629,7 +618,8 @@ class TForm Extends TBox
                     }
                     if( trim($msgError)!='' )
                     {
-                        $this->addMessage( ( $this->getQtdMessages() + 1) . ') ' . $msgError );
+                    	$qtd = CountHelper::count( $this->getMessages() );
+                    	$this->addMessage( ( $qtd + 1) . ') ' . $msgError );
                     }
                 }
             }
@@ -2460,7 +2450,8 @@ class TForm Extends TBox
                  }
              }
          }
-         return (count( self::$errors ) == 0);
+         $qtd = CountHelper::count( self::$errors );
+         return ( $qtd == 0);
      }
      //-----------------------------------------------------------------------------
      /**
@@ -3739,14 +3730,12 @@ class TForm Extends TBox
          {
              $this->addJsFile('FormDin4OnlineDoc.js');
              $this->enableRichEdit(); // adiconar javascript para tinymce
-             //$this->addJavascript( "edOnlineReadOnly = ".( ( $this->onlineDocReadOnly ) ? 'true' : 'false') . ";" );
              $this->addJavascript( "fwInitOnlieDocEditor(".(( $this->onlineDocReadOnly ) ? 'true' : 'false').")");
-             
-             //$this->addJavascript("jQuery('#fw_div_online_doc').easydrag();jQuery('#fw_div_online_doc').setHandler('fw_div_online_doc_header');");
          }
          if( $this->getRichEdit() )
          {
              $this->addJsFile( 'jquery/tinymce/jscripts/tiny_mce/tiny_mce.js' );
+             $this->addJsFile( 'FormDin4_tinymce.js' );
          }
          if( is_array( $this->displayControls ) )
          {
@@ -6248,52 +6237,110 @@ class TForm Extends TBox
                $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
                $dc = $this->addDisplayControl( $tDisplayControl );
                return $field;
-           }
-           /**
-            * Adicionar campo de entrada de texto com multiplas linhas ( memo )
-            *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param integer $intMaxLength
-            * @param boolean $boolRequired
-            * @param integer $intColumns
-            * @param integer $intRows
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove   - Label abaixo
-            * @param boolean $boolShowCounter  - Contador de caracteres ! Só funciona em campos não RichText
-            * @param string  $strValue
-            * @return TMemo
-            */
-           public function addMemoField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intColumns=null, $intRows=null, $boolNewLine=null, $boolLabelAbove=null, $boolShowCounter=null, $strValue=null, $boolNoWrapLabel=null )
-           {
-               $field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
-               $field->setClass( 'fwMemo' );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
-            * Tipo de máscara: DMY, DM, MY
-            *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param string  $strValue
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param string  $strMinValue
-            * @param string  $strMaxValue
-            * @param string  $strMaskType
-            * @param boolean $boolButtonVisible
-            * @param boolean $boolLabelAbove
-            * @return object TDate
-            */
-           public function addDateField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $strMinValue=null, $strMaxValue=null, $strMaskType=null, $boolButtonVisible=null, $strExampleText=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TDate( $strName, $strValue, $boolRequired, $strMinValue, $strMaxValue, $strMaskType, $boolButtonVisible );
-               $field->setExampleText( $strExampleText );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    }
+           
+    /**
+     * Adicionar campo de entrada de texto com multiplas linhas ( memo ) equivalente ao html textarea
+     *
+     * @param string  $strName         - 1: ID do campo
+     * @param string  $strLabel        - 2: Labal
+     * @param integer $intMaxLength    - 3: tamanho maximo
+     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param integer $intColumns      - 5: qtd colunas
+     * @param integer $intRows         - 6: qtd linhas
+     * @param boolean $boolNewLine     - 7: nova linha
+     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
+     * @param string  $strValue
+     * @return TMemo
+     */
+    public function addMemoField( $strName
+           		                       , $strLabel=null
+           		                       , $intMaxLength
+           		                       , $boolRequired=null
+           		                       , $intColumns=null
+           		                       , $intRows=null
+           		                       , $boolNewLine=null
+           		                       , $boolLabelAbove=null
+           		                       , $boolShowCounter=null
+           		                       , $strValue=null
+           		                       , $boolNoWrapLabel=null )
+    {
+    	$field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
+    	$field->setClass( 'fwMemo' );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
+    
+    /**
+     * Adicionar campo de entrada de texto com multiplas linhas equivalente ao html textarea
+     * com editor TinyMCE for free, the most advanced WYSWIYG 
+     *
+     * @param string  $strName         - 1: ID do campo
+     * @param string  $strLabel        - 2: Labal
+     * @param integer $intMaxLength    - 3: tamanho maximo
+     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param integer $intColumns      - 5: qtd colunas
+     * @param integer $intRows         - 6: qtd linhas
+     * @param boolean $boolNewLine     - 7: nova linha
+     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param string  $strValue        - 9:
+     * @param boolean $boolNoWrapLabel - 10:
+     * @return TRichTextEditor
+     */
+    public function addRichTextEditor( $strName
+    		, $strLabel=null
+    		, $intMaxLength
+    		, $boolRequired=null
+    		, $intColumns=null
+    		, $intRows=null
+    		, $boolNewLine=null
+    		, $boolLabelAbove=null
+    		, $strValue=null
+    		, $boolNoWrapLabel=null )
+    {
+    	$field = new TRichTextEditor( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows );
+    	$field->setClass( 'fwMemo' );
+    	$this->setRichEdit(true);
+    	$this->addJavascript('fwSetHtmlEditor("'.$strName.'","callBackEditor",false)');
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
+
+    /**
+     * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
+     * Tipo de máscara: DMY, DM, MY
+     *
+     * @param string  $strName
+     * @param string  $strLabel
+     * @param string  $strValue
+     * @param boolean $boolRequired
+     * @param boolean $boolNewLine
+     * @param string  $strMinValue
+     * @param string  $strMaxValue
+     * @param string  $strMaskType
+     * @param boolean $boolButtonVisible
+     * @param boolean $boolLabelAbove
+     * @return object TDate
+     */ 
+    public function addDateField( $strName
+    		, $strLabel=null
+    		, $boolRequired=null
+    		, $boolNewLine=null
+    		, $strValue=null
+    		, $strMinValue=null
+    		, $strMaxValue=null
+    		, $strMaskType=null
+    		, $boolButtonVisible=null
+    		, $strExampleText=null
+    		, $boolLabelAbove=null
+    		, $boolNoWrapLabel=null )
+    {
+    	$field = new TDate( $strName, $strValue, $boolRequired, $strMinValue, $strMaxValue, $strMaskType, $boolButtonVisible );
+    	$field->setExampleText( $strExampleText );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+    	return $field;
+    }
            
     /**
     * Adiciona campo tipo grupo com legenda na parte superior
@@ -6335,12 +6382,12 @@ class TForm Extends TBox
 				, $imgClosed=null
 				, $boolOverflowX=null
 				, $boolOverflowY=null )
-           {               
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
-               $field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
-               $field->setAccordionId($strAccordionId);
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-               $field->setColumns( $this->getColumns() );
+    {
+		//$strWidth = is_null($strWidth) ? $this->getMaxWidth('group') : $strWidth;
+		$field = new TGroup( $strName, $strLegend, $strHeight, $strWidth,$boolCloseble,$boolOpened,$boolOverflowY,$boolOverflowX );
+		$field->setAccordionId($strAccordionId);
+		$this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+		$field->setColumns( $this->getColumns() );
 		$this->currentContainer[ ] = $field;
 		if( !is_null($strHeight))
 		{
@@ -6554,7 +6601,8 @@ class TForm Extends TBox
                    $arrFields[ 'ibge_municipio_verificador' ] = $strFieldCodigoMunicipio;
                    $arrClearFields[ ] = $strFieldCodigoMunicipio;
                }
-               if( count( $arrFields ) > 0 )
+               $qtd = CountHelper::count($arrFields);
+               if( $qtd > 0 )
                {
                    //$field->addEvent('onBlur','getCepJquery("'.$field->getId().'",'.json_encode($arrFields).')');
                    $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
@@ -7264,9 +7312,18 @@ class TForm Extends TBox
             * @param boolean $boolNoWrapLabel
             * @return TTextEditor
             */
-           public function addTextEditorField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=true )
+           public function addTextEditorField( $strName
+           		                             , $strLabel=null
+           		                             , $boolRequired=null
+           		                             , $boolNewLine=null
+           		                             , $strValue=null
+           		                             , $boolLabelAbove=null
+           		                             , $boolNoWrapLabel=true )
            {
-               $field = new TTextEditor( $strName, $strValue, null, $boolRequired, null, null, false );
+               $field = new TTextEditor( $strName
+               		                   , $strValue
+               		                   , null
+               		                   , $boolRequired, null, null, false );
                $field->setClass( 'ckeditor' );
                $field->setCss('height','0px');
                $this->addJsFile('ckeditor/ckeditor.js');

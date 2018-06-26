@@ -40,25 +40,25 @@ $strHeight = 300;
 $strWidth  = 900;
 $frm = new TForm('Campos Campo Ajuda e campo BoxField', $strHeight, $strWidth);
 $frm->setMaximize(true);
-$frm->setHelpOnLine('Titulo',$strHeight,$strWidth,'ajuda',null);
+$frm->setHelpOnLine('Titulo', $strHeight, $strWidth, 'ajuda', null);
 
-$frm->addHtmlField('html1','Exemplo de ajuda utilizando boxField com arquivo.')->setCss('color','blue');
-$frm->addTextField('nome','Nome:',50,false,50,'',true,null,null,false);
-$frm->addBoxField('bxNome',null,'ajuda/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
+$frm->addHtmlField('html1', 'Exemplo de ajuda utilizando boxField com arquivo.')->setCss('color', 'blue');
+$frm->addTextField('nome', 'Nome:', 50, false, 50, '', true, null, null, false);
+$frm->addBoxField('bxNome', null, 'ajuda/ajuda.html', 'ajax', null, null, null, null, null, 'Ver arquivo de ajuda');
 
-$frm->addHtmlField('html2','Exemplo de ajuda utilizando boxField com texto.')->setCss('color','blue');
-$frm->addTextField('nome2','Nome:',50,false,50,'',true,null,null,false);
-$frm->addBoxField('bxNome2','Informe o nome completo do proprietário do terreno',null,null,null,null,null,null,null,'Ver texto de ajuda');
-
-
-$frm->addHtmlField('html3','Exemplo de ajuda utilizando boxField com imagem.')->setCss('color','blue');
-$frm->addBoxField('bxImagem',null,$this->getBase()."js/jquery/facebox/stairs.jpg",null,'Visualizar Foto:','folder.gif',true,null,null,'Imagem');
+$frm->addHtmlField('html2', 'Exemplo de ajuda utilizando boxField com texto.')->setCss('color', 'blue');
+$frm->addTextField('nome2', 'Nome:', 50, false, 50, '', true, null, null, false);
+$frm->addBoxField('bxNome2', 'Informe o nome completo do proprietário do terreno', null, null, null, null, null, null, null, 'Ver texto de ajuda');
 
 
-$frm->addHtmlField('html4','Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color','blue');
-$frm->addTextField('endereco01','Endereço01:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'Informe o endereço completo do proprietário do terreno',null,null,false);
-$frm->addTextField('endereco02','Endereço02:',50,false,50,'',true,null,null,false)->setHelpOnLine('Como preencher o campo Endereço ?',300,800,'ajuda/ajuda.html');
-$frm->addBoxField('bxAjax',null,"http://localhost",'ajax','Visualizar Ajax:',null,true,null,null,'Conteudo ajax');
+$frm->addHtmlField('html3', 'Exemplo de ajuda utilizando boxField com imagem.')->setCss('color', 'blue');
+$frm->addBoxField('bxImagem', null, $this->getBase()."js/jquery/facebox/stairs.jpg", null, 'Visualizar Foto:', 'folder.gif', true, null, null, 'Imagem');
+
+
+$frm->addHtmlField('html4', 'Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color', 'blue');
+$frm->addTextField('endereco01', 'Endereço01:', 50, false, 50, '', true, null, null, false)->setHelpOnLine('Como preencher o campo Endereço ?', 300, 800, 'Informe o endereço completo do proprietário do terreno', null, null, false);
+$frm->addTextField('endereco02', 'Endereço02:', 50, false, 50, '', true, null, null, false)->setHelpOnLine('Como preencher o campo Endereço ?', 300, 800, 'ajuda/ajuda.html');
+$frm->addBoxField('bxAjax', null, "http://localhost", 'ajax', 'Visualizar Ajax:', null, true, null, null, 'Conteudo ajax');
 
 
 
@@ -72,41 +72,41 @@ $frm->show();
 ?>
 <script>
 function fwOpenHelpFile(file) {
-	fwFaceBox(app_url+'ajuda/'+file,true);
-	//fwFaceBox(app_index_file+'?modulo='+pastaBase+'callbacks/helpOnLineLoad.php&ajax=1&file=appbase/ajuda/'+file,true);
+    fwFaceBox(app_url+'ajuda/'+file,true);
+    //fwFaceBox(app_index_file+'?modulo='+pastaBase+'callbacks/helpOnLineLoad.php&ajax=1&file=appbase/ajuda/'+file,true);
 }
 function showAjuda()
 {
     /*var wTotal = document.body.clientWidth;
     var hTotal = document.body.clientHeight;
-  	var	h= jQuery("body").height()-15;
-	var	w= jQuery("body").width()-15;
+    var h= jQuery("body").height()-15;
+    var w= jQuery("body").width()-15;
     //alert( w );
-	//fwFaceBox('http://www.google.com.br',true,h,w);
-	*/
-	fwModalBox('teste','http://www.g1.com.br');
+    //fwFaceBox('http://www.google.com.br',true,h,w);
+    */
+    fwModalBox('teste','http://www.g1.com.br');
 
 
-	/*
-	if( top.app_prototype )
-	{
-		//jQuery.facebox('something cool<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>fim');
-		top.jQuery.facebox(function() {
-  		top.jQuery.get('base/js/jquery/facebox/README.txt', function(data) {
-	    top.jQuery.facebox('<div style="border:1px solid red;width:400;height:300px;">'+data+'</div>')
-		  })
-		})
-	}
-	else
-	{
-		jQuery.facebox(function() {
-  		jQuery.get('base/js/jquery/facebox/README.txt', function(data) {
-	    jQuery.facebox('<div style="border:1px solid red;width:400;height:300px;">'+data+'</div>')
-		  })
-		})
+    /*
+    if( top.app_prototype )
+    {
+        //jQuery.facebox('something cool<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>Linha<br>fim');
+        top.jQuery.facebox(function() {
+        top.jQuery.get('base/js/jquery/facebox/README.txt', function(data) {
+        top.jQuery.facebox('<div style="border:1px solid red;width:400;height:300px;">'+data+'</div>')
+          })
+        })
+    }
+    else
+    {
+        jQuery.facebox(function() {
+        jQuery.get('base/js/jquery/facebox/README.txt', function(data) {
+        jQuery.facebox('<div style="border:1px solid red;width:400;height:300px;">'+data+'</div>')
+          })
+        })
 
-	}
-	*/
+    }
+    */
 
 
 }

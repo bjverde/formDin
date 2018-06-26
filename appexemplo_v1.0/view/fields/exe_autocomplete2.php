@@ -40,27 +40,23 @@
  */
 TPDOConnection::test(false);
 
-$frm = new TForm( 'Exemplo Campo Texto com Autocompletar II',220 );
-$frm->addHtmlField('msg','<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlite) do diretório exemplos.<br>
+$frm = new TForm('Exemplo Campo Texto com Autocompletar II', 220);
+$frm->addHtmlField('msg', '<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlite) do diretório exemplos.<br>
 A tabela de consulta é a tb_municipio.<br>
 A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>Se o campo Estado tiver preenchido o codigo da uf será utilizado no filtro.<br></h3>');
 
 
-$frm->addSelectField( 'cod_uf', 'Estado:')->addEvent('onChange','jQuery("#nom_municipio").val("");fwAutoCompleteClearCache("nom_municipio")');
-$frm->addTextField( 'nom_municipio', 'Cidade:', 60 )->setExampleText( 'Digite os 3 primeiros caracteres.');
-$frm->addHiddenField('cod_municipio','');
+$frm->addSelectField('cod_uf', 'Estado:')->addEvent('onChange', 'jQuery("#nom_municipio").val("");fwAutoCompleteClearCache("nom_municipio")');
+$frm->addTextField('nom_municipio', 'Cidade:', 60)->setExampleText('Digite os 3 primeiros caracteres.');
+$frm->addHiddenField('cod_municipio', '');
 
 //Deve sempre ficar depois da definição dos campos
-$frm->setAutoComplete( 'nom_municipio'
-			, 'tb_municipio'	// tabela de municipios
-			, 'nom_municipio'	// campo de pesquisa
-			, 'cod_municipio'	// campo que será atualizado ao selecionar o nome do município
-			, null
-			,'cod_uf'			// campo do formulário que será adicionado como filtro
-			,null
-			,3					// numero de caracteres minimos para disparar a pesquisa
-			,1000				// tempo após a digitação para disparar a consulta
-			,50					// máximo de registros que deverá ser retornado
-			);
+$frm->setAutoComplete('nom_municipio', 'tb_municipio'    // tabela de municipios
+, 'nom_municipio'   // campo de pesquisa
+, 'cod_municipio'   // campo que será atualizado ao selecionar o nome do município
+, null, 'cod_uf'           // campo do formulário que será adicionado como filtro
+, null, 3                  // numero de caracteres minimos para disparar a pesquisa
+, 1000               // tempo após a digitação para disparar a consulta
+, 50);                 // máximo de registros que deverá ser retornado
+
 $frm->show();
-?>

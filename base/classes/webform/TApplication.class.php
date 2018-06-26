@@ -50,6 +50,7 @@ require_once ($exeptions_dir . 'UploadException.class.php');
 
 $helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
 require_once ($helps_dir . 'ArrayHelper.class.php');
+require_once ($helps_dir . 'CountHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');
 require_once ($helps_dir . 'GetHelper.class.php');
 require_once ($helps_dir . 'MessageHelper.class.php');
@@ -712,7 +713,11 @@ class TApplication extends TLayout {
 				
 				exit ();
 			}
-			$htmlScript = "<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Strict//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" . $this->getCharset () . "\">\n<body>\n" . "<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+			$htmlScript = "<!DOCTYPE html>"
+					      ."\n<html>"
+					      ."\n<meta charset=\"".$this->getCharset()."\">"
+					      ."\n<body>"
+					      ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
@@ -754,26 +759,8 @@ class TApplication extends TLayout {
 				
 				echo $htmlScript;
 				
-				// enquete - ibama
-				if (defined ( 'COD_PSQ' ) && defined ( 'SEQ_CONTEXTO' ) && $_SESSION ['num_pessoa']) {
-					if (function_exists ( 'executarPacote' )) {
-						// verificar se já respondeu
-						$bvars = array (
-								'NUM_PESSOA' => $_SESSION ['num_pessoa'],
-								'COD_PSQ_PESQUISA' => COD_PSQ,
-								'SEQ_CONTEXTO' => SEQ_CONTEXTO 
-						);
-						
-						executarPacote ( 'SISTAT.PK_SISREG.PESQUISA_PESSOA_RESPONDEU', $bvars, - 1 );
-						
-						if ($bvars ['SIT_RESPONDEU'] [0] == 'N') {
-							$_SESSION [APLICATIVO] ['enquete'] ['modulo'] = $modulo;
-							$modulo = $this->getBase () . 'includes/enquete.inc';
-						}
-					}
-				}
+				//TODO incluir dados estatisticos aqui
 				
-				// fim enquete
 				require_once ($modulo);
 				
 				// evitar notice do php
@@ -1325,33 +1312,35 @@ class TApplication extends TLayout {
 	 * Build defaulf page Footer  Div: app_footer
 	 * div chindren  app_footer_message,app_footer_company, app_footer_module
 	 */
-	private function buildPageFooter() {
+	private function buildPageFooter()
+	{
 		if (! $this->getSouthArea ()) {
 			return;
-		}		
-		$app_footer_message = new TDiv('app_footer_message');
+		}
 		
-		$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
-		$app_footer_company = new TDiv( 'app_footer_company' );
-		$app_footer_company->add($info_company);
-		
-		$app_footer_module = new TDiv( 'app_footer_module' );
-		
-		$app_footer = new TElement( 'div' );
-		$app_footer->setId('app_footer');
-		
+		$app_footer = new TDiv( 'footer' );		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
 		} else {
+			$app_footer_message = new TDiv('app_footer_message');
+			
+			$info_company = $this->getUnit () . ' ' . $this->getVersionSystem ();
+			$app_footer_company = new TDiv( 'app_footer_company' );
+			$app_footer_company->add($info_company);
+			
+			$app_footer_module = new TDiv( 'app_footer_module' );			
+			
 			$app_footer->add($app_footer_message);
 			$app_footer->add($app_footer_company);
 			$app_footer->add($app_footer_module);
-		}		
+		}
 		//$app_footer->add('&nbsp;');
 		$this->getSouthArea()->add( $app_footer );
 	}
-	public function parsePhpFile($strFileName = null, $var = null) {
+	
+	public function parsePhpFile($strFileName = null, $var = null)
+	{
 		if (is_null ( $strFileName ) || ! file_exists ( $strFileName )) {
 			return null;
 		}

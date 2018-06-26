@@ -36,12 +36,12 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $dados = Tb_pedido_itemDAO::select_itens_pedido($_REQUEST['id_pedido']);
-$g = new TGrid('gdItens','Itens do Pedido Nº '.$_REQUEST['id_pedido'],$dados,null,null,'ID_ITEM');
+$g = new TGrid('gdItens', 'Itens do Pedido Nº '.$_REQUEST['id_pedido'], $dados, null, null, 'ID_ITEM');
 $g->addRowNumColumn();
-$g->addColumn('produto','Produto',1500);
-$g->addColumn('quantidade','Qtd',200,'center');
-$g->addColumn('preco','Preço',200,'right');
-$g->addColumn('total','Total',200,'right');
+$g->addColumn('produto', 'Produto', 1500);
+$g->addColumn('quantidade', 'Qtd', 200, 'center');
+$g->addColumn('preco', 'Preço', 200, 'right');
+$g->addColumn('total', 'Total', 200, 'right');
 $g->setCreateDefaultDeleteButton(false);
 $g->setCreateDefaultEditButton(false);
 $g->show();

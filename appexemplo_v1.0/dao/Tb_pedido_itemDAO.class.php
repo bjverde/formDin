@@ -36,75 +36,76 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class Tb_pedido_itemDAO extends TPDOConnection {
-	
-	public static function insert( Tb_pedido_itemVO $objVo ) {
-		if( $objVo->getId_item() )
-		{
-			return self::update($objVo);
-		}
-		$values = array(  $objVo->getId_pedido()
-						, $objVo->getProduto()
-						, $objVo->getQuantidade()
-						, $objVo->getPreco()
-						);
-		return self::executeSql('insert into tb_pedido_item(
+class Tb_pedido_itemDAO extends TPDOConnection
+{
+    
+    public static function insert(Tb_pedido_itemVO $objVo)
+    {
+        if ($objVo->getId_item()) {
+            return self::update($objVo);
+        }
+        $values = array(  $objVo->getId_pedido()
+                        , $objVo->getProduto()
+                        , $objVo->getQuantidade()
+                        , $objVo->getPreco()
+                        );
+        return self::executeSql('insert into tb_pedido_item(
 								 id_pedido
 								,produto
 								,quantidade
 								,preco
-								) values (?,?,?,?)', $values );
-	}
-	//--------------------------------------------------------------------------------
-	public static function delete( $id )
-	{
-		$values = array($id);
-		return self::executeSql('delete from tb_pedido_item where id_item = ?',$values);
-	}
-	//--------------------------------------------------------------------------------
-	public static function select( $id )
-	{
-		$values = array($id);
-		return self::executeSql('select
+								) values (?,?,?,?)', $values);
+    }
+    //--------------------------------------------------------------------------------
+    public static function delete($id)
+    {
+        $values = array($id);
+        return self::executeSql('delete from tb_pedido_item where id_item = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
+    public static function select($id)
+    {
+        $values = array($id);
+        return self::executeSql('select
 								 id_item
 								,id_pedido
 								,produto
 								,quantidade
 								,preco
-								from tb_pedido_item where id_item = ?', $values );
-	}
-	//--------------------------------------------------------------------------------
-	public static function selectAll( $orderBy=null, $where=null )
-	{
-		return self::executeSql('select
+								from tb_pedido_item where id_item = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectAll($orderBy = null, $where = null)
+    {
+        return self::executeSql('select
 								 id_item
 								,id_pedido
 								,produto
 								,quantidade
 								,preco
 								from tb_pedido_item'.
-		( ($where)? ' where '.$where:'').
-		( ($orderBy) ? ' order by '.$orderBy:''));
-	}
-	//--------------------------------------------------------------------------------
-	public static function update ( Tb_pedido_itemVO $objVo )
-	{
-		$values = array( $objVo->getId_pedido()
-						,$objVo->getProduto()
-						,$objVo->getQuantidade()
-						,$objVo->getPreco()
-						,$objVo->getId_item() );
-		return self::executeSql('update tb_pedido_item set
+        ( ($where)? ' where '.$where:'').
+        ( ($orderBy) ? ' order by '.$orderBy:''));
+    }
+    //--------------------------------------------------------------------------------
+    public static function update(Tb_pedido_itemVO $objVo)
+    {
+        $values = array( $objVo->getId_pedido()
+                        ,$objVo->getProduto()
+                        ,$objVo->getQuantidade()
+                        ,$objVo->getPreco()
+                        ,$objVo->getId_item() );
+        return self::executeSql('update tb_pedido_item set
 								 id_pedido = ?
 								,produto = ?
 								,quantidade = ?
 								,preco = ?
-								where id_item = ?',$values);
-	}
-	//--------------------------------------------------------------------------------
+								where id_item = ?', $values);
+    }
+    //--------------------------------------------------------------------------------
     public static function select_itens_pedido($id_pedido = null)
-	{
-		$dados = self::executeSql('select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?',array($id_pedido) );
-		return $dados;
-	}
+    {
+        $dados = self::executeSql('select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?', array($id_pedido));
+        return $dados;
+    }
 }

@@ -73,8 +73,8 @@ class TMemo extends TEdit
 		// se for para mostrar o contador de caracteres, criar um div externo
 		if($this->getShowCounter())
 		{
-			$div = new TElement('div');
-			$div->setId($this->getId().'_div');
+			$divId = $this->getId().'_div';
+			$div = new TDiv($divId);
 			$div->setCss('display','inline');
 			$div->add( parent::show(false).$this->getOnlineSearch());
 			$counter = new TElement('span');
@@ -135,12 +135,5 @@ class TMemo extends TEdit
 	{
 		return $this->onlineSearch;
 	}
-
 }
-/*
-return;
-$memo = new TMemo('obs_exemplo','Luis',500,false,50,10);
-$memo->setValue('Luis Eugênio Barbosa, estou lhe enviando este e-mail para confirmar se o precos da propsota está de acordo com o que combinamos ontem.');
-$memo->show();
-*/
 ?>

@@ -47,49 +47,49 @@ session_destroy();
 session_start();
 */
 
-$frm = new TForm('Exemplo do Gride Offline',500,600);
+$frm = new TForm('Exemplo do Gride Offline', 500, 600);
 
-$frm->addDateField('dat_nascimento','Data:',true);
-$frm->addMemoField('obs'		,'Obs:',1000,true,20,3,true);
+$frm->addDateField('dat_nascimento', 'Data:', true);
+$frm->addMemoField('obs', 'Obs:', 1000, true, 20, 3, true);
 
 // subformulário com campos "offline" 1-N
-$frm->addHtmlGride('campo_moeda','grid/exe_gride03_dados.php','gdx');
+$frm->addHtmlGride('campo_moeda', 'grid/exe_gride03_dados.php', 'gdx');
 
 $frm->setAction('Gravar,Novo');
 
 $frm->show();
 
 $acao = isset($acao) ? $acao : '';
-if($acao == 'Novo'){
-	$frm->clearFields();
-}else if($acao == 'Gravar'){
+if ($acao == 'Novo') {
+    $frm->clearFields();
+} elseif ($acao == 'Gravar') {
     print_r($_POST);
-	$res = $frm->createBvars('campo_moeda,dat_nascimento');
-	foreach($res as $k=>$v)	{
-		d($k,'$k');
-		d($v,'$v');
-	}
+    $res = $frm->createBvars('campo_moeda,dat_nascimento');
+    foreach ($res as $k => $v) {
+        d($k, '$k');
+        d($v, '$v');
+    }
 }
 ?>
 <script>
 
 function gridCallBack(res)
 {
-	var msg='';
-	if( res && res.action )
-	{
-		for(key in res )
-		{
-			msg +='<b>'+key+'</b>='+res[key]+'\n';
-		}
-		jAlert('A função <b>callback</b> do gride offline foi chamada recebendo o <b>$_REQUEST</b>\n\nDefinição: gridCallBack(REQUEST)\nValores:\n'+msg);
-	}
+    var msg='';
+    if( res && res.action )
+    {
+        for(key in res )
+        {
+            msg +='<b>'+key+'</b>='+res[key]+'\n';
+        }
+        jAlert('A função <b>callback</b> do gride offline foi chamada recebendo o <b>$_REQUEST</b>\n\nDefinição: gridCallBack(REQUEST)\nValores:\n'+msg);
+    }
 
 }
 /*
 function btnGravarOnClick()
 {
-	fwValidateForm({"ignoreFields":"dat_nascimento"});
+    fwValidateForm({"ignoreFields":"dat_nascimento"});
 }
 */
 </script>

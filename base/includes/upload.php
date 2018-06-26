@@ -222,7 +222,7 @@ function uploadGetBase()
 }
 ?>
 
-<!doctype html public "-//w3c//dtd html 4.0 strict//en" "http://www.w3.org/tr/html4/strict.dtd">
+<!DOCTYPE html> 
 <html>
 	<head>
 		<style>

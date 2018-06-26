@@ -41,8 +41,8 @@
 error_reporting(E_ALL);
 
 
-define('APLICATIVO','APPEV1.0_layout02');
-define('DECIMAL_SEPARATOR',',');
+define('APLICATIVO', 'APPEV1.0_layout02');
+define('DECIMAL_SEPARATOR', ',');
 
 include('../base/classes/webform/TApplication.class.php');
 $app = new TApplication();
@@ -53,7 +53,7 @@ $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(779);
 $app->setNorthSize(55);
-$app->getNorthArea()->setCss('border','1px solid red');
+$app->getNorthArea()->setCss('border', '1px solid red');
 $app->getNorthArea()->add('<img style="border:none;float:right;" src="imagem/acessibilidade-brasil.gif"/>');
 $app->setHeaderBgImage('imagem/spoa-cabec.gif');
 $app->setBackgroundImage('../base/css/imagens/app/bg_listrado.jpg');
@@ -61,5 +61,3 @@ $app->setMenuTheme('clear_green');
 
 $app->setMainMenuFile('includes/menu.php');
 $app->run();
-?>
-
