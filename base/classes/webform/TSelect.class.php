@@ -149,26 +149,4 @@ class TSelect extends TOption
 		}
     }
 }
-/*
-
-//$_POST['tip_sexo']='2';
-for($i=0;$i<10;$i++)
-{
-	$arr[$i]= 'Opcao '.$i;
-}
-// multi
-$select = new TEditSelect('tip_sexo',$arr,'8',false,true,5);
-
-// normal
-$select2 = new TEditSelect('tip_sexo',$arr,'8',false,false,null,300);
-
-print '<form name="formdin" action="" method="POST">';
-$select->setEnabled(false);
-$select->show();
-$select2->show();
-print '<hr>';
-print '<input type="submit" value="Gravar">';
-print '</form>';
-print_r($_POST);
-*/
 ?>
