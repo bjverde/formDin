@@ -6682,14 +6682,14 @@ class TForm Extends TBox
             * Adicicionar campo tipo radiobutton
             * 
             * 
-            * @param string $strName        - field ID
-            * @param string $strLabel       - Label field
-            * @param boolean $boolRequired  - TRUE = Required, FALSE = not Required
-            * @param array $arrOptions      - Array Options
-            * @param boolean $boolNewLine   - TRUE = new line, FASEL = no, DEFAULT ou NULL = FALSE
-            * @param boolean $boolLabelAbove - Titulo em cima das opções
+            * @param string $strName        - 1: field ID
+            * @param string $strLabel       - 2: Label field
+            * @param boolean $boolRequired  - 3: TRUE = Required, FALSE = not Required
+            * @param array $arrOptions      - 4: Array Options
+            * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
+            * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
             * @param string  $strValue
-            * @param integer $intQtdColumns
+            * @param integer $intQtdColumns - 8: Quantidade de colunas
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
