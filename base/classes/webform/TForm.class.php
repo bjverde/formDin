@@ -6636,12 +6636,12 @@ class TForm Extends TBox
             *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
             * </code>
             *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param boolean $boolRequired
-            * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine  - TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove
+            * @param string  $strName      - 1: ID do campo
+            * @param string  $strLabel     - 2: Label do campo
+            * @param boolean $boolRequired - 3: Obrigaorio
+            * @param mixed   $mixOptions   - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+            * @param boolean $boolNewLine  - 5: TRUE = cria nova linha , FALSE = fica depois do campo anterior
+            * @param boolean $boolLabelAbove-6: Label acima
             * @param mixed   $mixValue
             * @param boolean $boolMultiSelect
             * @param integer $intSize
