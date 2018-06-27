@@ -6201,42 +6201,43 @@ class TForm Extends TBox
                $field = new THidden( $strName, $strValue, $boolRequired );
                $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
                return $field;
-           }
+    }
            
-           /**
-            * Adicionar campo entrada de dados texto livre
-            *
-            * @param string $strName       - 1: id do campo
-            * @param string $strLabel      - 2: Label do campo
-            * @param integer $intMaxLength - 3: tamanho maximo de carateres
-            * @param boolean $boolRequired - 4: obrigatorio ou não
-            * @param integer $intSize      - 5: quantidade de caracteres visiveis.
-            * @param string $strValue      - 6: texto preenchido
-            * @param boolean $boolNewLine  - 7: Nova linha
-            * @param string $strHint
-            * @param string $strExampleText - 9: Texto de exemplo
-            * @param boolean $boolLabelAbove - 10: Label sobre 
-            * @param boolean $boolNoWrapLabel
-            * @return TEdit
-            */
-           public function addTextField( $strName
-						           		, $strLabel=null
-						           		, $intMaxLength
-						           		, $boolRequired=null
-						           		, $intSize=null
-						           		, $strValue=null
-						           		, $boolNewLine=null
-						           		, $strHint=null
-						           		, $strExampleText=null
-						           		, $boolLabelAbove=null
-						           		, $boolNoWrapLabel=null 
-						           		){
-               $field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
-               $field->setHint( $strHint );
-               $field->setExampleText( $strExampleText );
-               $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
-               $dc = $this->addDisplayControl( $tDisplayControl );
-               return $field;
+    /**
+     * Adicionar campo entrada de dados texto livre
+     *
+     * @param string $strName       - 1: id do campo
+     * @param string $strLabel      - 2: Label do campo
+     * @param integer $intMaxLength - 3: tamanho maximo de carateres
+     * @param boolean $boolRequired - 4: obrigatorio ou não
+     * @param integer $intSize      - 5: quantidade de caracteres visiveis.
+     * @param string $strValue      - 6: texto preenchido
+     * @param boolean $boolNewLine  - 7: Nova linha
+     * @param string $strHint
+     * @param string $strExampleText - 9: Texto de exemplo
+     * @param boolean $boolLabelAbove - 10: Label sobre
+     * @param boolean $boolNoWrapLabel
+     * @return TEdit
+     */
+    public function addTextField( $strName
+    		                    , $strLabel=null
+    		                    , $intMaxLength
+    		                    , $boolRequired=null
+    		                    , $intSize=null
+    		                    , $strValue=null
+    		                    , $boolNewLine=null
+    		                    , $strHint=null
+    		                    , $strExampleText=null
+    		                    , $boolLabelAbove=null
+    		                    , $boolNoWrapLabel=null
+    		                    )
+    {
+		$field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
+    	$field->setHint( $strHint );
+    	$field->setExampleText( $strExampleText );
+    	$tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
+    	$dc = $this->addDisplayControl( $tDisplayControl );
+    	return $field;
     }
            
     /**
