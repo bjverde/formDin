@@ -6642,12 +6642,12 @@ class TForm Extends TBox
             * @param mixed   $mixOptions   - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
             * @param boolean $boolNewLine  - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
             * @param boolean $boolLabelAbove-6: Label acima
-            * @param mixed   $mixValue
-            * @param boolean $boolMultiSelect
-            * @param integer $intSize
-            * @param integer $intWidth
-            * @param string  $strFirstOptionText   - First Key in Display
-            * @param string  $strFirstOptionValue  - Frist Valeu in Display
+            * @param mixed   $mixValue      -7:
+            * @param boolean $boolMultiSelect-8:
+            * @param integer $intSize        -9
+            * @param integer $intWidth       -10:
+            * @param string  $strFirstOptionText - 11: First Key in Display
+            * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
             * @param string  $strKeyField
             * @param string  $strDisplayField
             * @return TSelect
