@@ -57,6 +57,7 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 * [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
 * Ckeditor 3.6
 * TinyMCE 3.3.4 (2010-04-27)
+* [Font Awesome Icons 5.0.6](https://fontawesome.com/icons?d=gallery) 
 
 ## Instalação.
 
