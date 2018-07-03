@@ -5,9 +5,12 @@ $frm = new TForm('Exemplo do Campo Radiobutton');
 $frm->setFlat(true);
 $frm->addGroupField('gp1', 'Grupo 1');
     $frm->addRadioField('sit_cancelado1', 'Ativo:', true, 'S=SIM,N=Não', null, false, null, 2, null, null, null, false);//->addEvent('onDblclick','dblClick(this)');
-    $frm->addRadioField('sit_genero', 'Genero:', true, array('M'=>'<span tooltip="true" title="Sexo Masculino">Masculino</span>','F'=>'<span tooltip="true" title="Sexo Feminino">Feminino</span>'), null, false, null, 2, null, null, null, false);
+    $listGenero = array('M'=>'<span tooltip="true" title="Sexo Masculino">Masculino</span>','F'=>'<span tooltip="true" title="Sexo Feminino">Feminino</span>');
+    $frm->addRadioField('sit_genero', 'Genero com Tooltip:', true, $listGenero, null, false, null, 2, null, null, null, false);
     $frm->addRadioField('sit_genero2', 'Genero 2 s/quebra:', true, 'M=Masculino,F=Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino ', null, false, null, 1, 400, null, null, false, true);
     $frm->addRadioField('sit_genero3', 'Genero 3 c/quebra:', true, 'M=Masculino,F=Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino Feminino ', null, false, null, 1, 400, null, null, false, false);
+    $listTipo = array(1=>'A',2=>'B',3=>'B',4=>'D',5=>'E',6=>'F',7=>'G',8=>'H',9=>'I',10=>'J');
+    $frm->addRadioField('sit_genero3', 'Em 5 Colunas:', false, $listTipo, null, true, null, 5, null, null, null, false, false);
 $frm->closeGroup();
 
 if ($acao=='Validar') {

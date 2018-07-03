@@ -42,67 +42,9 @@
 // chamada ajax
 d($_REQUEST);
 
-$frm = new TForm('Exemplo Campo Memo com TinyMCE', 600);
-$frm->setRichEdit(true);
-// define a largura das colunas verticais do formulario para alinhamento dos campos
-//$frm->setColumns(array(200,100));
-$frm->addMemoField('campo_memo_simples', 'Descrição:', 300, true, 80, 5);
-$frm->addMemoField('campo_memo_tinymce', 'Documento:', 100000, false, 80, 5, null, null, false);
-$frm->addJavascript('fwSetHtmlEditorPreview("campo_memo_tinymce")');
-
-echo 'Valor do Campo: campo_memo_tinymce =<br>';
-echo htmlspecialchars($frm->get('campo_memo_tinymce'));
-
-$frm->addButton('Preview', null, 'btnPreview', 'doPreview()');
+$frm = new TForm('Exemplo Campo Memo', 300);
+$frm->addMemoField('campo_memo_simples', 'Descrição:', 1000, true, 80, 5);
 $frm->addButton('Post');
-
-$acao = isset($acao) ? $acao : null;
-if ($acao == 'Validar') {
-    $frm->validate();
-}
-
 
 $frm->show();
 ?>
-<script>
-function doPreview(){
-    var ed = tinyMCE.get('campo_memo_tinymce');
-    //ed.execCommand('mceToggleEditor',false,'content');
-}
-
-function fwSetHtmlEditorPreview(textAreaName){
-    tinyMCE.init({
-        // General options
-        mode        : "exact",
-        elements    : textAreaName,
-        language    :'pt',          
-        theme       : "advanced",
-        //skin      : "o2k7",
-        //skin_variant : "silver",
-        
-        plugins     : "safari,spellchecker,pagebreak,style,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,tabfocus",
-        
-        // Theme options
-        /*theme_advanced_buttons1 : "preview",
-        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "",
-        theme_advanced_buttons3 : "",
-        theme_advanced_buttons4 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom"
-        */
-        content_css : pastaBase+"css/tinyMCE.css",
-
-        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-        theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : true,
-
-    })
-}
-</script>

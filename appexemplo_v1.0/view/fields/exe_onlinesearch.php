@@ -28,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em portugu?s
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -39,21 +39,54 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
- // marcar os campos obrigatórios com Asterisco na frente
-define('REQUIRED_FIELD_MARK', '*');
+TPDOConnection::test(false);
 
-$frm = new TForm('Exemplo do Campo Texto');
+$html = '<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlite) do diretório exemplos.<br>
+ A tabela de consulta é a tb_municipio.<br></h3>';
 
-$frm->addTextField('nome', 'Nome da pessoa sem quebra:', 60, false, 60, null, null, null, null, null, true);
+$frm = new TForm('Consulta Dinâmica ou OnlineSearch', 400);
+$frm->setFlat(true);
+$frm->setMaximize(true);
 
-$frm->addTextField('nome2', 'Nome Desabilitado:', 80, null, null, 'Desabilitado', true, null, null, true)->setEnabled(false);
-$frm->addTextField('nome3', 'Nome Somente Leitura:', 80, true, null, 'Somente leitura', true, null, null, true)->setReadOnly(true);
+$frm->addHtmlField('msg', $html);
 
-// botões de ação
+$frm->addTextField('municipio', 'Municipio', 60, true, 60);
+// definir consulta dinâmica no campo município
+$frm->setOnlineSearch('municipio', 'tb_municipio' // tabela de municípios
+		, 'nom_municipio|Município:||||||like,cod_uf|Uf:||||select'  // campos para seleção do município. Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+		, false
+		, false
+		, true // se for encontrada apenas 1 opção fazer a seleção automaticamente
+		, 'cod_municipio|Código,nom_municipio|Município'
+		, 'NOM_MUNICIPIO|municipio'
+		, null
+		, null
+		, null
+		, null
+		, null
+		, null
+		, null
+		, 'osCallBack()', null //10
+		, null, null, null, array('cod_uf'=>"SELECT COD_UF,NOM_UF||'/'||SIG_UF AS SIG_UF FROM TB_UF ORDER BY SIG_UF")
+		//,array('cod_estado'=>$res)
+		//,array('cod_estado'=>ARRAY(1=>"Um",2=>"Dois") )
+		, null, null, null, false); // caseSensitive
 $frm->setAction('Atualizar');
-$frm->addButton('Validar', null, null, 'fwValidateFields()');
-$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
-// criar o html do formulário
+$frm->addJavascript('init()');
+
 $frm->show();
 ?>
+<script>
+function init()
+{
+    fwAlert('Formulário foi carregado!')
+}
+
+// Online Search callback
+function osCallBack(fields,doc)
+{
+    alert('Call back Chamado\n'+fields+'\n'+doc);
+
+}
+</script>

@@ -2893,17 +2893,17 @@ class TForm Extends TBox
       * O parametro $strCrudModuleName deve ser utilizado para quando for necessãrio permitir ao usuário
       * fazer o cadastramento on-line do item não encontrado na pesquisa. Basta passar o nome do módulo a ser chamado.
       *
-      * @param string $strFieldName
-      * @param string $strPackageFunction  - Nome do pacote Orecla OU tabela em outro banco
-      * @param string $strFilterFields - Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+      * @param string $strFieldName        - 1: id do campo
+      * @param string $strPackageFunction  - 2: nome da tabela/view ou pacote Orecla
+      * @param string $strFilterFields     - 3: Ordem dos parametros separado por virgula: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated, name|label|...
       * @param string $strAutoFillFilterField
-      * @param bool $boolAutoStart
-      * @param bool $boolAutoSelect
-      * @param string $strGridColumns - colunas que irão aparecer no grid
-      * @param string $strUpdateFormFields  - coluna busca | campo form destino, coluna busca | campo form destino
-      * @param string $strWindowHeader -  Titulo da janela de pesquisa
-      * @param string $strGridHeader   -  Titulo do Gride
-      * @param string $strFocusFieldName - Seta o Foco no campo definido
+      * @param bool $boolAutoStart         - 5: incia a pesquisa quando abre a tela
+      * @param bool $boolAutoSelect        - 6: 
+      * @param string $strGridColumns      - 7: colunas que irão aparecer no grid
+      * @param string $strUpdateFormFields - 8: coluna busca | campo form destino, coluna busca | campo form destino
+      * @param string $strWindowHeader     - 9: Titulo da janela de pesquisa
+      * @param string $strGridHeader       - 10: Titulo do Gride
+      * @param string $strFocusFieldName   - 11: Seta o Foco no campo definido
       * @param bool $strWindowHeight
       * @param bool $strWindowWidth
       * @param string $strSearchButtonLabel
@@ -6201,42 +6201,43 @@ class TForm Extends TBox
                $field = new THidden( $strName, $strValue, $boolRequired );
                $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
                return $field;
-           }
+    }
            
-           /**
-            * Adicionar campo entrada de dados texto livre
-            *
-            * @param string $strName       - id do campo
-            * @param string $strLabel      - Label do campo
-            * @param integer $intMaxLength - tamanho maximo de carateres
-            * @param boolean $boolRequired - obrigatorio ou não
-            * @param integer $intSize      - quantidade de caracteres visiveis.
-            * @param string $strValue      - texto preenchido
-            * @param boolean $boolNewLine
-            * @param string $strHint
-            * @param string $strExampleText
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @return TEdit
-            */
-           public function addTextField( $strName
-						           		, $strLabel=null
-						           		, $intMaxLength
-						           		, $boolRequired=null
-						           		, $intSize=null
-						           		, $strValue=null
-						           		, $boolNewLine=null
-						           		, $strHint=null
-						           		, $strExampleText=null
-						           		, $boolLabelAbove=null
-						           		, $boolNoWrapLabel=null 
-						           		){
-               $field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
-               $field->setHint( $strHint );
-               $field->setExampleText( $strExampleText );
-               $tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
-               $dc = $this->addDisplayControl( $tDisplayControl );
-               return $field;
+    /**
+     * Adicionar campo entrada de dados texto livre
+     *
+     * @param string $strName       - 1: id do campo
+     * @param string $strLabel      - 2: Label do campo
+     * @param integer $intMaxLength - 3: tamanho maximo de carateres
+     * @param boolean $boolRequired - 4: obrigatorio ou não
+     * @param integer $intSize      - 5: quantidade de caracteres visiveis.
+     * @param string $strValue      - 6: texto preenchido
+     * @param boolean $boolNewLine  - 7: Nova linha
+     * @param string $strHint
+     * @param string $strExampleText - 9: Texto de exemplo
+     * @param boolean $boolLabelAbove - 10: Label sobre
+     * @param boolean $boolNoWrapLabel
+     * @return TEdit
+     */
+    public function addTextField( $strName
+    		                    , $strLabel=null
+    		                    , $intMaxLength
+    		                    , $boolRequired=null
+    		                    , $intSize=null
+    		                    , $strValue=null
+    		                    , $boolNewLine=null
+    		                    , $strHint=null
+    		                    , $strExampleText=null
+    		                    , $boolLabelAbove=null
+    		                    , $boolNoWrapLabel=null
+    		                    )
+    {
+		$field = new TEdit( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
+    	$field->setHint( $strHint );
+    	$field->setExampleText( $strExampleText );
+    	$tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
+    	$dc = $this->addDisplayControl( $tDisplayControl );
+    	return $field;
     }
            
     /**
@@ -6635,18 +6636,18 @@ class TForm Extends TBox
             *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
             * </code>
             *
-            * @param string  $strName
-            * @param string  $strLabel
-            * @param boolean $boolRequired
-            * @param mixed   $mixOptions - array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine  - TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove
-            * @param mixed   $mixValue
-            * @param boolean $boolMultiSelect
-            * @param integer $intSize
-            * @param integer $intWidth
-            * @param string  $strFirstOptionText   - First Key in Display
-            * @param string  $strFirstOptionValue  - Frist Valeu in Display
+            * @param string  $strName      - 1: ID do campo
+            * @param string  $strLabel     - 2: Label do campo
+            * @param boolean $boolRequired - 3: Obrigaorio
+            * @param mixed   $mixOptions   - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+            * @param boolean $boolNewLine  - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+            * @param boolean $boolLabelAbove-6: Label acima
+            * @param mixed   $mixValue      -7:
+            * @param boolean $boolMultiSelect-8:
+            * @param integer $intSize        -9
+            * @param integer $intWidth       -10:
+            * @param string  $strFirstOptionText - 11: First Key in Display
+            * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
             * @param string  $strKeyField
             * @param string  $strDisplayField
             * @return TSelect
@@ -6682,14 +6683,14 @@ class TForm Extends TBox
             * Adicicionar campo tipo radiobutton
             * 
             * 
-            * @param string $strName        - field ID
-            * @param string $strLabel       - Label field
-            * @param boolean $boolRequired  - TRUE = Required, FALSE = not Required
-            * @param array $arrOptions      - Array Options
-            * @param boolean $boolNewLine   - TRUE = new line, FASEL = no, DEFAULT ou NULL = FALSE
-            * @param boolean $boolLabelAbove - Titulo em cima das opções
+            * @param string $strName        - 1: field ID
+            * @param string $strLabel       - 2: Label field
+            * @param boolean $boolRequired  - 3: TRUE = Required, FALSE = not Required
+            * @param array $arrOptions      - 4: Array Options
+            * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
+            * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
             * @param string  $strValue
-            * @param integer $intQtdColumns
+            * @param integer $intQtdColumns - 8: Quantidade de colunas
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
