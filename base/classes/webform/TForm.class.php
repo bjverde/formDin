@@ -2893,17 +2893,17 @@ class TForm Extends TBox
       * O parametro $strCrudModuleName deve ser utilizado para quando for necessãrio permitir ao usuário
       * fazer o cadastramento on-line do item não encontrado na pesquisa. Basta passar o nome do módulo a ser chamado.
       *
-      * @param string $strFieldName
-      * @param string $strPackageFunction  - Nome do pacote Orecla OU tabela em outro banco
-      * @param string $strFilterFields - Ordem dos parametros: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated
+      * @param string $strFieldName        - 1: id do campo
+      * @param string $strPackageFunction  - 2: nome da tabela/view ou pacote Orecla
+      * @param string $strFilterFields     - 3: Ordem dos parametros separado por virgula: name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated, name|label|...
       * @param string $strAutoFillFilterField
-      * @param bool $boolAutoStart
-      * @param bool $boolAutoSelect
-      * @param string $strGridColumns - colunas que irão aparecer no grid
-      * @param string $strUpdateFormFields  - coluna busca | campo form destino, coluna busca | campo form destino
-      * @param string $strWindowHeader -  Titulo da janela de pesquisa
-      * @param string $strGridHeader   -  Titulo do Gride
-      * @param string $strFocusFieldName - Seta o Foco no campo definido
+      * @param bool $boolAutoStart         - 5: incia a pesquisa quando abre a tela
+      * @param bool $boolAutoSelect        - 6: 
+      * @param string $strGridColumns      - 7: colunas que irão aparecer no grid
+      * @param string $strUpdateFormFields - 8: coluna busca | campo form destino, coluna busca | campo form destino
+      * @param string $strWindowHeader     - 9: Titulo da janela de pesquisa
+      * @param string $strGridHeader       - 10: Titulo do Gride
+      * @param string $strFocusFieldName   - 11: Seta o Foco no campo definido
       * @param bool $strWindowHeight
       * @param bool $strWindowWidth
       * @param string $strSearchButtonLabel
