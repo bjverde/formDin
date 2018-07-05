@@ -1,4 +1,7 @@
 <?php
+//var_dump($_REQUEST);
+d($_REQUEST);
+
 function voIssetOrZero($attribute, $isTrue, $isFalse)
 {
     $retorno = $isFalse;
@@ -25,7 +28,10 @@ $frm->addHiddenField($primaryKey); // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 $frm->addDateField('data_pedido', 'Data:', false);
 $frm->addTextField('nome_comprador', 'Comprador:', 60, false, null);
-$frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, '1=Dinheiro,2=Cheque,3=Cartão');
+$listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
+$frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
+//$frm->addRadioField('forma_pagamento', 'Forma Pagamento:', false, $listFormas,null,null,null,3);
+
 $frm->addTextField('QTD', 'Quantidade de Itens', 50, false);
 
 $frm->addButton('Ver Mestre visão com Ajax', 'redirectMestreAjax', null, null, null, true, false);
@@ -70,7 +76,12 @@ switch ($acao) {
 }
 
 $dados = Vw_pedido_qtd_itensDAO::selectAll($primaryKey, $whereGrid);
-$mixUpdateFields = $primaryKey.'|'.$primaryKey.',DATA_PEDIDO|DATA_PEDIDO,NOME_COMPRADOR|NOME_COMPRADOR,FORMA_PAGAMENTO|FORMA_PAGAMENTO,DES_FORMA_PAGAMENTO|DES_FORMA_PAGAMENTO,QTD|QTD';
+$mixUpdateFields = $primaryKey.'|'.$primaryKey
+                 .',DATA_PEDIDO|DATA_PEDIDO'
+                 .',NOME_COMPRADOR|NOME_COMPRADOR'
+                 .',FORMA_PAGAMENTO|forma_pagamento'
+                 .',DES_FORMA_PAGAMENTO|DES_FORMA_PAGAMENTO'
+                 .',QTD|QTD';
 $gride = new TGrid('gd'        // id do gride
 , 'Gride'     // titulo do gride
 , $dados        // array de dados
