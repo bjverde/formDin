@@ -125,7 +125,211 @@ abstract class TOption extends TControl
 		}
 	}
 	
+	public function checkedItemRadioOrCheck( $input,$span,$k ){
+		if( $this->getFieldType() == self::RADIO ){
+			if( $k == $this->getValue() )
+			{
+				$input->setProperty( 'checked', "true" );
+				$span->setCss( 'color', '#0000ff' );
+			}
+		}else{
+			if( ( string ) array_search( $k, $this->getValue() ) != '' )
+			{
+				$input->setProperty( 'checked', "true" );
+				$span->setCss( 'color', '#0000ff' );
+			}
+		}
+	}
+	
 	public function showRadioOrCheck( $boolPrint=true ){
+		$this->setCss( 'overflow', 'auto' );
+		$this->setCss( 'border',  '1px solid transparent' );
+		// é necessário pelo menos uma coluna
+		if( ( int ) $this->getColumnCount() == 0 && ( int ) $this->getQtdColumns() == 0 )
+		{
+			$this->setQtdColumns( 1 );
+		}
+		if( $this->getColumnCount() == 0 )
+		{
+			for( $i = 0; $i < $this->getQtdColumns(); $i++ )
+			{
+				$this->addColumn( 'auto' );
+			}
+		}
+		else
+		{
+			$this->setQtdColumns( $this->getColumnCount() );
+		}
+		
+		// o campo multi deve ser construido utilizando table para fazer o layout dos itens em colunas
+		$this->add( $table = new TTable( $this->getName() . '_table' ) );
+		$table->setCss( $this->getCss() );
+		$table->setCss('border','1px solid transparent');
+		$table->setCss('background-color','transparent');
+		$table->setCss( 'display', null );
+		$this->clearCss();
+		$this->setcss( 'overflow', 'auto' );
+		$this->setcss( 'width', $table->getCss( 'width' ) );
+		$this->setcss( 'height', $table->getCss( 'height' ) );
+		$table->setCss( 'width', null );
+		$table->setCss( 'height', null );
+		$table->setCss( 'overflow', null );
+		if( !$table->getCss('font-size'))
+		{
+			$table->setCss('font-size','11px');
+		}
+		
+		$table->setProperty( 'border', 0 );
+		$table->setProperty( 'cellspacing', 0 );
+		$table->setProperty( 'cellpadding', 0 );
+		//transferir a borda do elemento container para table interna
+		if( !$this->getEnabled() )
+		{
+			$table->setProperty( 'disabled', 'true' );
+			$table->setCss( 'color', '#52A100' );
+			//$this->setId($this->getId().'_disabled');
+		}
+		if( is_array( $this->getOptions() ) )
+		{
+			$col = 0;
+			$item = 1;
+			$linkHelpFile = null;
+			foreach( $this->getOptions() as $k=>$v )
+			{
+				if( $col == 0 )
+				{
+					$row = $table->addRow();
+					$row->clearCss();
+				}
+				$k=trim($k);
+				$v=trim($v);
+				$input = new TElement( 'input' );
+				$input->clearCss();
+				$input->setProperty('label',$this->getProperty('label'));
+				$input->setCss( 'vertical-align', 'middle' );
+				if( !$this->getEnabled() )
+				{
+					$input->setProperty( 'disabled', 'true' );
+				}
+				
+				if( $this->getMultiSelect() )
+				{
+					$input->setProperty( 'type', 'checkbox' );
+					$input->setName( $this->getId() . '[]' );
+					$input->setProperty( 'id', $this->getId() . '_' . $k );
+				}
+				else
+				{
+					$input->setProperty( 'type', 'radio' );
+					$input->setName( $this->getId() );
+					$input->setProperty( 'id', $this->getId() . '_' . $k );
+					
+				}
+				$input->setProperty( 'value', $k );
+				$input->setCss( 'border', 'none' );
+				$input->setCss( 'cursor', 'pointer' );
+				$input->setEvents( $this->getEvents() );
+				$span = new TElement( 'span' );
+				$span->clearCss();
+				$span->setId( $this->getId() . '_opcao_' . $item++ );
+				$tableLayout=null;
+				if( ( string ) $v != '' )
+				{
+					$span->add($v);
+					if( $this->getWidth() && ! $this->getNowrapText() )
+					{
+						$tableLayout=new TTable();
+						$tableLayout->setAttribute('border','0');
+						$tableLayout->setAttribute('cellspacing','0');
+						$tableLayout->setAttribute('cellpadding','0');
+						$r = $tableLayout->addRow();
+						$r->addCell($input);
+						$r->addCell($span);
+					}
+					else
+					{
+						$input->add( $span );
+					}
+					
+				}
+				if( $this->getFieldType() == 'check' && $this->getEnabled() == true )
+				{
+					$span->setcss( 'cursor', 'pointer' );
+					$input->addEvent( 'onclick', "fwFieldCheckBoxClick(this,'" . $span->getId() . "')" );
+					$span->setEvent( 'onclick', "fwGetObj('" . $input->getId() . "').click();" );
+				}
+				else if( $this->getFieldType() == 'radio' && $this->getEnabled() == true )
+				{
+					$span->setcss( 'cursor', 'pointer' );
+					$input->addEvent( 'onclick', "fwFieldRadioClick(this,'" . $span->getId() . "')" );
+					$span->setEvent( 'onclick', "fwGetObj('" . $input->getId() . "').click();" );
+				}
+				
+				$this->checkedItemRadioOrCheck($input,$span,$k);
+				
+				
+				if( $this->getRequired() )
+				{
+					$input->setProperty( 'needed', 'true' );
+				}
+				if( $tableLayout )
+					$cell = $row->addCell( $tableLayout );
+					else
+						$cell = $row->addCell( $input );
+						/* if(is_null($linkHelpFile) && $this->getHelpFile())
+						 {
+						 $aHelpFile = $this->getHelpFile();
+						 $linkHelpFile = "&nbsp;&nbsp;<a href=\"{$aHelpFile[0]}\" title=\"{$aHelpFile[1]}\" rel=\"gb_page_center[{$aHelpFile[2]},{$aHelpFile[3]}]\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" src=\"{$aHelpFile[4]}\"></a>";
+						 $cell->add($linkHelpFile);
+						 }
+						 */
+						$cell->clearCss();
+						if( !$this->getWidth() || $this->getNowrapText() )
+						{
+							$cell->setProperty( 'nowrap', true );
+						}
+						$cell->setcss( 'padding-right', $this->getPaddingRight() . 'px' );
+						if( ( int ) $this->getQtdColumns() > 1 )
+						{
+							$cell->setcss( 'border-right', '0px solid #c0c0c0' );
+						}
+						
+						// definir a largura
+						if( $this->columns[ $col ][ 0 ] )
+						{
+							$cell->width = $this->columns[ $col ][ 0 ];
+						}
+						// definir a cor
+						if( $this->columns[ $col ][ 1 ] )
+						{
+							$cell->setCss( 'color', $this->columns[ $col ][ 1 ] );
+						}
+						// definir o alinhamento
+						if( $this->columns[ $col ][ 1 ] )
+						{
+							$cell->setCss( 'text-align', $this->columns[ $col ][ 2 ] );
+						}
+						$col++;
+						if( $col == $this->getQtdColumns() )
+						{
+							$col = 0;
+						}
+			}
+		}
+		// trocar o id da div para não conflitar
+		$this->setid( $this->getId() . '_container' );
+		
+		// para colocar a borda vermelha na validação do campo obrigatório tem que ter uma borda já definida
+		if( !$this->getCss('border') )
+		{
+			$this->setCss('border','1px solid transparent');
+		}
+		// retirar os eventos do objeto containter
+		$this->clearEvents();
+		if( $this->getShowMinimal() )
+		{
+			return $input->show( $boolPrint );
+		}
 		
 	}
 	
@@ -144,208 +348,7 @@ abstract class TOption extends TControl
 	{
 		if( $this->getFieldType() == 'radio' || $this->getFieldType() == 'check' )
 		{
-
-			$this->setCss( 'overflow', 'auto' );
-			$this->setCss( 'border',  '1px solid transparent' );
-			// é necessário pelo menos uma coluna
-			if( ( int ) $this->getColumnCount() == 0 && ( int ) $this->getQtdColumns() == 0 )
-			{
-				$this->setQtdColumns( 1 );
-			}
-			if( $this->getColumnCount() == 0 )
-			{
-				for( $i = 0; $i < $this->getQtdColumns(); $i++ )
-				{
-					$this->addColumn( 'auto' );
-				}
-			}
-			else
-			{
-				$this->setQtdColumns( $this->getColumnCount() );
-			}
-
-			// o campo multi deve ser construido utilizando table para fazer o layout dos itens em colunas
-			$this->add( $table = new TTable( $this->getName() . '_table' ) );
-			$table->setCss( $this->getCss() );
-			$table->setCss('border','1px solid transparent');
-			$table->setCss('background-color','transparent');
-			$table->setCss( 'display', null );
-			$this->clearCss();
-			$this->setcss( 'overflow', 'auto' );
-			$this->setcss( 'width', $table->getCss( 'width' ) );
-			$this->setcss( 'height', $table->getCss( 'height' ) );
-			$table->setCss( 'width', null );
-			$table->setCss( 'height', null );
-			$table->setCss( 'overflow', null );
-            if( !$table->getCss('font-size'))
-            {
-                $table->setCss('font-size','11px');
-            }
-
-			$table->setProperty( 'border', 0 );
-			$table->setProperty( 'cellspacing', 0 );
-			$table->setProperty( 'cellpadding', 0 );
-			//transferir a borda do elemento container para table interna
-			if( !$this->getEnabled() )
-			{
-				$table->setProperty( 'disabled', 'true' );
-				$table->setCss( 'color', '#52A100' );
-				//$this->setId($this->getId().'_disabled');
-			}
-			if( is_array( $this->getOptions() ) )
-			{
-				$col = 0;
-				$item = 1;
-				$linkHelpFile = null;
-				foreach( $this->getOptions() as $k=>$v )
-				{
-					if( $col == 0 )
-					{
-						$row = $table->addRow();
-						$row->clearCss();
-					}
-					$k=trim($k);
-					$v=trim($v);
-					$input = new TElement( 'input' );
-					$input->clearCss();
-    				$input->setProperty('label',$this->getProperty('label'));
-    				$input->setCss( 'vertical-align', 'middle' );
-					if( !$this->getEnabled() )
-					{
-						$input->setProperty( 'disabled', 'true' );
-					}
-
-					if( $this->getMultiSelect() )
-					{
-						$input->setProperty( 'type', 'checkbox' );
-						$input->setName( $this->getId() . '[]' );
-						$input->setProperty( 'id', $this->getId() . '_' . $k );
-					}
-					else
-					{
-						$input->setProperty( 'type', 'radio' );
-						$input->setName( $this->getId() );
-						$input->setProperty( 'id', $this->getId() . '_' . $k );
-
-					}
-					$input->setProperty( 'value', $k );
-					$input->setCss( 'border', 'none' );
-					$input->setCss( 'cursor', 'pointer' );
-					$input->setEvents( $this->getEvents() );
-					$span = new TElement( 'span' );
-					$span->clearCss();
-					$span->setId( $this->getId() . '_opcao_' . $item++ );
-					$tableLayout=null;
-					if( ( string ) $v != '' )
-					{
-						$span->add($v);
-  						if( $this->getWidth() && ! $this->getNowrapText() )
-  						{
-                        	$tableLayout=new TTable();
-                        	$tableLayout->setAttribute('border','0');
-                        	$tableLayout->setAttribute('cellspacing','0');
-                        	$tableLayout->setAttribute('cellpadding','0');
-                        	$r = $tableLayout->addRow();
-                        	$r->addCell($input);
-                        	$r->addCell($span);
-						}
-						else
-						{
-							$input->add( $span );
-						}
-
-					}
-					if( $this->getFieldType() == 'check' && $this->getEnabled() == true )
-					{
-						$span->setcss( 'cursor', 'pointer' );
-						$input->addEvent( 'onclick', "fwFieldCheckBoxClick(this,'" . $span->getId() . "')" );
-						$span->setEvent( 'onclick', "fwGetObj('" . $input->getId() . "').click();" );
-					}
-					else if( $this->getFieldType() == 'radio' && $this->getEnabled() == true )
-					{
-						$span->setcss( 'cursor', 'pointer' );
-						$input->addEvent( 'onclick', "fwFieldRadioClick(this,'" . $span->getId() . "')" );
-						$span->setEvent( 'onclick', "fwGetObj('" . $input->getId() . "').click();" );
-					}
-					
-					if( $this->getFieldType() == self::RADIO ){
-						if( $k == $this->getValue() )
-						{
-							$input->setProperty( 'checked', "true" );
-							$span->setCss( 'color', '#0000ff' );
-						}
-					}else{
-						if( ( string ) array_search( $k, $this->getValue() ) != '' )
-						{
-							$input->setProperty( 'checked', "true" );
-							$span->setCss( 'color', '#0000ff' );
-						}
-					}
-					
-
-					
-					if( $this->getRequired() )
-					{
-						$input->setProperty( 'needed', 'true' );
-					}
-					if( $tableLayout )
-						$cell = $row->addCell( $tableLayout );
-					else
-						$cell = $row->addCell( $input );
-					/* if(is_null($linkHelpFile) && $this->getHelpFile())
-					  {
-					  $aHelpFile = $this->getHelpFile();
-					  $linkHelpFile = "&nbsp;&nbsp;<a href=\"{$aHelpFile[0]}\" title=\"{$aHelpFile[1]}\" rel=\"gb_page_center[{$aHelpFile[2]},{$aHelpFile[3]}]\"><img style=\"vertical-align:middle;border:none;cursor:pointer;width:16px;height:16px;\" src=\"{$aHelpFile[4]}\"></a>";
-					  $cell->add($linkHelpFile);
-					  }
-					 */
-					$cell->clearCss();
-					if( !$this->getWidth() || $this->getNowrapText() )
-					{
-						$cell->setProperty( 'nowrap', true );
-					}
-					$cell->setcss( 'padding-right', $this->getPaddingRight() . 'px' );
-					if( ( int ) $this->getQtdColumns() > 1 )
-					{
-						$cell->setcss( 'border-right', '0px solid #c0c0c0' );
-					}
-
-					// definir a largura
-					if( $this->columns[ $col ][ 0 ] )
-					{
-						$cell->width = $this->columns[ $col ][ 0 ];
-					}
-					// definir a cor
-					if( $this->columns[ $col ][ 1 ] )
-					{
-						$cell->setCss( 'color', $this->columns[ $col ][ 1 ] );
-					}
-					// definir o alinhamento
-					if( $this->columns[ $col ][ 1 ] )
-					{
-						$cell->setCss( 'text-align', $this->columns[ $col ][ 2 ] );
-					}
-					$col++;
-					if( $col == $this->getQtdColumns() )
-					{
-						$col = 0;
-					}
-				}
-			}
-			// trocar o id da div para não conflitar
-			$this->setid( $this->getId() . '_container' );
-
-			// para colocar a borda vermelha na validação do campo obrigatório tem que ter uma borda já definida
-			if( !$this->getCss('border') )
-			{
-				$this->setCss('border','1px solid transparent');
-			}
-			// retirar os eventos do objeto containter
-			$this->clearEvents();
-			if( $this->getShowMinimal() )
-			{
-				return $input->show( $boolPrint );
-			}
+			$this->showRadioOrCheck($boolPrint);
 		}
 		else
 		{
