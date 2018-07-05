@@ -43,6 +43,9 @@
  */
 abstract class TOption extends TControl
 {
+	
+	const RADIO = 'radio';
+	
 	private $arrOptions;
 	private $arrValues;
 	//private $required;
@@ -121,6 +124,12 @@ abstract class TOption extends TControl
 			$this->setValue( $_POST[ $this->getId() ] );
 		}
 	}
+	
+	public function showRadioOrCheck( $boolPrint=true ){
+		
+	}
+	
+	
 	/**
 	 * cria o html do input
 	 * se $boolPrint for true, joga o html para o browser
@@ -258,11 +267,23 @@ abstract class TOption extends TControl
 						$input->addEvent( 'onclick', "fwFieldRadioClick(this,'" . $span->getId() . "')" );
 						$span->setEvent( 'onclick', "fwGetObj('" . $input->getId() . "').click();" );
 					}
-					if( ( string ) array_search( $k, $this->getValue() ) != '' )
-					{
-						$input->setProperty( 'checked', "true" );
-						$span->setCss( 'color', '#0000ff' );
+					
+					if( $this->getFieldType() == self::RADIO ){
+						if( $k == $this->getValue() )
+						{
+							$input->setProperty( 'checked', "true" );
+							$span->setCss( 'color', '#0000ff' );
+						}
+					}else{
+						if( ( string ) array_search( $k, $this->getValue() ) != '' )
+						{
+							$input->setProperty( 'checked', "true" );
+							$span->setCss( 'color', '#0000ff' );
+						}
 					}
+					
+
+					
 					if( $this->getRequired() )
 					{
 						$input->setProperty( 'needed', 'true' );
@@ -504,9 +525,9 @@ abstract class TOption extends TControl
 	 */
 	public function getValue()
 	{
-		if( $this->getFieldType() == 'select' && !$this->getMultiSelect() )
+		$type = $this->getFieldType();
+		if( $type == 'select' && !$this->getMultiSelect() )
 		{
-
 			if( $this->arrValues )
 			{
 				if( is_array( $this->arrValues ) )
@@ -519,6 +540,10 @@ abstract class TOption extends TControl
 				}
 			}
 			return null;
+		}
+		elseif ($type == self::RADIO){
+			$result = $this->arrValues[0];
+			return $result;
 		}
 		else
 		{
