@@ -140,11 +140,12 @@ $menu->add('5', null, 'Ajax');
     $menu->add('56', '5', 'Ajax 06 - JavaScript e CSS', 'ajax/exe_ajax06_javascript_css.php');
 
 //-----------------------------------------------------------------------------
-    $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
+$menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
     $menu->add('61', '6', 'Exemplo 1', 'pdf/exe_pdf01.php');
-    $menu->add('62', '6', 'Exemplo 2', 'pdf/exe_pdf02.php');
+    $menu->add('62', '6', 'Exemplo 2 - grid simples', 'pdf/exe_pdf02.php');
     $menu->add('63', '6', 'Exemplo 3, com passagem de parametros via Json', 'pdf/exe_pdf03.php');
     $menu->add('64', '6', 'Exemplo 4', 'pdf/exe_pdf04.php');
+    $menu->add('65', '6', 'Exemplo 5 - PDF diversos grids', 'pdf/exe_pdf05.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');

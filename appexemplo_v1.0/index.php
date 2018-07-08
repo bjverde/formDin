@@ -40,20 +40,17 @@
  */
 define('MIGRATE_JQUERY', false);
 
+require_once('includes/constantes.php');
 include('includes/config_conexao.php');
 include('../base/classes/webform/TApplication.class.php');
 
-define('APLICATIVO', 'APPEV1.0');
-define('DECIMAL_SEPARATOR', ',');
-//session_start();
-//session_destroy();
 
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Exemplos das Funcionalidades');
+$app->setTitle(SYSTEM_NAME);
 $app->setSigla(APLICATIVO);
 $app->setUnit('Centro Nacional de Telemática - CNT');
-$app->setVersionSystem('v 1.0.0.0');
+$app->setVersionSystem(SYSTEM_VERSION);
 $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);

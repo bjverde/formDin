@@ -12,7 +12,7 @@ function cabecalho($pdf)
 {
     $pdf->SetTextColor(0, 64, 128);
     $pdf->setFont('', 'B', 14);
-    $pdf->cell(0, 5, 'Sistema - v-1.0', 0, 1, 'C');
+    $pdf->cell(0, 5, APLICATIVO.' - v:'.SYSTEM_VERSION, 0, 1, 'C');
     $pdf->setFont('', 'B', 12);
     $pdf->cell(0, 5, 'Listagem', 0, 1, 'C');
     $pdf->ln(1);
