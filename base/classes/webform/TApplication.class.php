@@ -101,6 +101,8 @@ class TApplication extends TLayout {
 	private $footerBgRepeat;
 	private $menuTheme;
 	private $onBeforeLogin;
+	private $appRootDir;
+	private $imgLogoPath;
 	
 	/**
 	 * classe para criação da aplicação
@@ -188,6 +190,12 @@ class TApplication extends TLayout {
 	public function getSubtitle() {
 		return $this->strSubtitle;
 	}
+	
+	/***
+	 * Recebe o nome a sigla do sistema e/ou nome do arquivo
+	 * que fará aparecer o logo no cabeçalho 
+	 * @param string $strNewValue
+	 */
 	public function setSigla($strNewValue) {
 		$this->strSigla = $strNewValue;
 		if (! $this->getTitleTag ()) {
@@ -195,6 +203,10 @@ class TApplication extends TLayout {
 		}
 	}
 	public function getSigla() {
+		if( !is_null( $this->getImgLogoHtml() ) ){
+			return $this->getImgLogoHtml();
+		}
+		
 		if (is_null ( $this->strSigla )) {
 			if (! $this->getHeaderBgImage ()) {
 				$this->setSigla ( APLICATIVO );
@@ -242,6 +254,71 @@ class TApplication extends TLayout {
 	}
 	public function getShowMenu() {
 		return $this->showMenu;
+	}
+	
+	/**
+	 * @return mixed
+	 */
+	public function getAppRootDir() {
+		return $this->appRootDir;
+	}
+	
+	/**
+	 * Enter the root directory of the application.
+	 * Recommendation to use __DIR__
+	 * 
+	 * Informe o diretorio raiz da aplicação.
+	 * Recomendação usar __DIR__
+	 * 
+	 * @param mixed $appRootDir
+	 */
+	public function setAppRootDir($appRootDir) {
+		$this->appRootDir = $appRootDir;
+	}
+	
+	/**
+	 * Returns the relative path of the application logo.
+	 * 
+	 * Retorna o caminho relativo do logo da aplicação.
+	 * 
+	 * @return string
+	 */
+	public function getImgLogoPath() {
+		return $this->imgLogoPath;
+	}
+	
+	/**
+	 * Enter the relative path of the application logo image.
+	 * This setting will show the application logo in place of the acronym text.
+	 * 
+	 * Informe o caminho relativo da imagem do logo da aplicação.
+	 * Essa configuração irá mostrar a logo da aplicação no lugar do texto da sigla.
+	 * 
+	 * @param string $appImgLogoPath
+	 */
+	public function setImgLogoPath($imgLogoPath) {
+		$this->imgLogoPath = $imgLogoPath;
+	}
+	//---------------------------------------------------------------------------------
+	public function getImgLogoHtml(){
+		$stringHtml = null;
+		$appRootDir = $this->getAppRootDir();
+		$appImgLogo = $this->getImgLogoPath();
+		
+		if( !is_null($appImgLogo) ){
+			$appImgLogoExists = file_exists ( $appImgLogo );
+			if ($appImgLogoExists) {
+				$stringHtml = '<img src="'.$appImgLogo.'">';
+			}
+			
+			if ( !is_null($appRootDir) ) {
+				$appImgLogoExists = file_exists ( $appRootDir.$appImgLogo );				
+				if ($appImgLogoExists) {
+					$stringHtml = '<img src="'.$appRootDir.$appImgLogo.'">';
+				}
+			}
+		}		
+		return $stringHtml;
 	}
 	
 	/**

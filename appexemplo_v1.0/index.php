@@ -47,8 +47,11 @@ include('../base/classes/webform/TApplication.class.php');
 
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
+$app->setAppRootDir(__DIR__);
 $app->setTitle(SYSTEM_NAME);
+$app->setSubtitle(APLICATIVO);
 $app->setSigla(APLICATIVO);
+$app->setImgLogoPath('imagem/appv1_logo.png');
 $app->setUnit('Centro Nacional de Telemática - CNT');
 $app->setVersionSystem(SYSTEM_VERSION);
 $app->setMenuIconsPath('imagem/');
@@ -63,13 +66,14 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 
 //$app->addIncludeFile('config.php');
 //$app->getLoCenter()->setCss('background-color','blue');
+
 //$app->setBackgroundImage(null);
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
+//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 
 
 //TPDOConnection::Test(true);
 
-//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 /*
 //$_SESSION[APLICATIVO]["login"]["username"]='postgres';
 //$_SESSION[APLICATIVO]["login"]["password"]='123456';
