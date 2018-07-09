@@ -54,7 +54,7 @@ class TApplicationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected , $result);
 	}
 	
-	public function testGetAppImgLogoHtml_SetImg() {
+	public function testGetAppImgLogoHtml_SetImgRootDir() {
 		$expected= '<img src="/var/www/appv1/images/logo.png">';
 		
 		$this->tApplication->setAppRootDir('/var/www/appv1/');
