@@ -6,6 +6,7 @@ $html1 = getMsgFPDF();
 $frm = new TForm();
 
 $pdf = new TPDF('L');
+$pdf->AddPage();
 
 //a classe TPDF procura pela funcao cabecalho() e se existir sera executada recebendo a instancia da classe TPDF
 function cabecalho($pdf)
@@ -17,13 +18,7 @@ function cabecalho($pdf)
     $pdf->cell(0, 5, 'Listagem', 0, 1, 'C');
     $pdf->ln(1);
     $pdf->setFont('', '', 10);
-    //exibir criterio utilizado no filtro
-    $criterio = isset($criterio) ? $criterio : null;
-    $criterio = (($criterio == '') ? 'Todos os produtos' : $criterio);
-    $pdf->SetTextColor(0, 0, 255);//0,64,128);
-    $pdf->setFont('', 'B', 7);
-    $pdf->cell(0, 5, 'Criterio de Consulta: '.$criterio, 0, 1, 'L');
-    $pdf->ln(1);
+
 }
 
 //a classe TPDF procurao pela funcao rodape() e se existir sera executada recebendo a instancia da classe TPDF
@@ -54,6 +49,14 @@ $dados['TXT_TERMO'][] = 'Termo 2';
 $dados['TXT_OBS'][] = 'OBS 2';
 $dados['NUM_VALOR'][] = '150.47';
 $dados['TXT_DESCRIMINACAO'][] = utf8_decode('Descriminação');
+
+//exibir criterio utilizado no filtro
+$criterio = isset($criterio) ? $criterio : null;
+$criterio = (($criterio == '') ? 'Todos os produtos' : $criterio);
+$pdf->SetTextColor(0, 0, 255);//0,64,128);
+$pdf->setFont('', 'B', 7);
+$pdf->cell(0, 5, 'Criterio de Consulta: '.$criterio, 0, 1, 'L');
+$pdf->ln(1);
 
 
 //adicionar array de objeto pdf
@@ -90,6 +93,47 @@ $pdf->multiCell(0, 4, utf8_decode(getMsgFPDF()), 1);
 $msg02 = 'Esse exemplo utiliza os metodos: TPDF->setData e TPDF->addColumn. Para criar um grid de forma facil e semelhante ao que acontece no FormDin;';
 $pdf->multiCell(0, 4, utf8_decode($msg02), 1);
 
+$pdf->ln(4);
+$pdf->SetTextColor(0, 0, 255);//0,64,128);
+$pdf->setFont('', 'B', 7);
+$pdf->cell(0, 5, 'Grid 02 - gerador de lero Lero', 0, 1, 'L');
+$pdf->ln(1);
+
+$dados02 = null;
+$dados02['ID'][] = '20'; 
+$dados02['TEXTO'][] = 'Caros amigos, a execução dos pontos do programa garante a contribuição de um grupo importante na determinação das diretrizes de desenvolvimento para o futuro. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que o novo modelo estrutural aqui preconizado cumpre um papel essencial na formulação dos níveis de motivação departamental. É importante questionar o quanto a revolução dos costumes maximiza as possibilidades por conta de alternativas às soluções ortodoxas.';
+$dados02['ID'][] = '21'; 
+$dados02['TEXTO'][] = ' Pensando mais a longo prazo, a crescente influência da mídia auxilia a preparação e a composição do remanejamento dos quadros funcionais. É claro que o desafiador cenário globalizado nos obriga à análise das novas proposições. ';
+$dados02['ID'][] = '22';
+$dados02['TEXTO'][] = 'Desde ontem a noite o último pull request desse SCRUM causou a race condition dos argumentos que definem um schema dinâmico';
+$dados02['ID'][] = '23';
+$dados02['TEXTO'][] = 'Explica pro Product Onwer que a compilação final do programa causou o bug do fluxo de dados de forma retroativa no server.';
+$dados02['ID'][] = '24';
+$dados02['TEXTO'][] = 'Com este commit, a otimização de performance da renderização do DOM causou a race condition na estabilidade do protocolo de transferência de dados.';
+$dados02['ID'][] = '25';
+$dados02['TEXTO'][] = 'Dado o fluxo de dados atual, o deploy automatizado no Heroku complexificou o merge na compilação de templates literais.';
+$dados02['ID'][] = '26';
+$dados02['TEXTO'][] = 'Explica pro Product Onwer que a otimização de performance da renderização do DOM superou o desempenho no fechamento automático das tags.';
+$dados02['ID'][] = '27';
+$dados02['TEXTO'][] = 'Nesse pull request, um erro não identificado otimizou a renderização de uma configuração Webpack eficiente nos builds.';
+$dados02['ID'][] = '28';
+$dados02['TEXTO'][] = 'Com este commit, o último pull request desse SCRUM complexificou o merge da execução parelela de funções em multi-threads';
+$dados02['ID'][] = '29';
+$dados02['TEXTO'][] = 'Com este commit, o deploy automatizado no Heroku deletou todas as entradas no parse retroativo do DOM.';
+$dados02['ID'][] = '30';
+$dados02['TEXTO'][] = 'Fala pro cliente que um erro não identificado deletou todas as entradas na interpolação dinâmica de strings.';
+$dados02['ID'][] = '31';
+$dados02['TEXTO'][] = 'Fala pro cliente que a compilação final do programa otimizou a renderização do JSON compilado a partir de proto-buffers.';
+$dados02['ID'][] = '32';
+$dados02['TEXTO'][] = 'Desde ontem a noite o gerenciador de dependências do frontend corrigiu o bug da renderização de floats parciais.';
+
+
+$pdf->clearColumns();
+$pdf->setData($dados02);
+//$pdf->printGridHeader();
+$pdf->addColumn('id', 10, 'C', 'ID', 'white', 'B', 8, 'black', 'times');
+$pdf->addColumn('Texto', 100, 'J', 'TEXTO', 'white', 'B', 8, 'black', 'times');
+$pdf->printRows();  //criar a grid do pdf
 
 //echo 'Pdf gerado em: '.$pdf->show('teste.pdf',false);
 $pdf->show();
