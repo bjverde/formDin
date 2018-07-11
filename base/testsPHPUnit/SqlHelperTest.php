@@ -39,18 +39,18 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 require_once '../classes/helpers/ArrayHelper.class.php';
-require_once '../classes/helpers/paginationSQLHelper.class.php';
+require_once '../classes/helpers/SqlHelper.class.php';
 
 /**
  * paginationSQLHelper test case.
  */
-class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
+class SqlHelperTest extends PHPUnit_Framework_TestCase {
 	
 	public function testGetRowStart_pageNullAndRowsPerPageNull() {
 		$expected = 0;
 		$page = null;
 		$rowsPerPage =  null;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);		
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);		
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -58,7 +58,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 0;
 		$page = 1;
 		$rowsPerPage =  null;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -66,7 +66,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 20;
 		$page = 2;
 		$rowsPerPage =  null;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -74,7 +74,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 0;
 		$page = null;
 		$rowsPerPage =  10;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -82,7 +82,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 0;
 		$page = 1;
 		$rowsPerPage =  30;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -90,7 +90,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 30;
 		$page = 2;
 		$rowsPerPage =  30;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -98,7 +98,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 20;
 		$page = 3;
 		$rowsPerPage =  10;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -106,7 +106,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 13;
 		$page = 2;
 		$rowsPerPage =  13;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -114,7 +114,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 26;
 		$page = 3;
 		$rowsPerPage =  13;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	
@@ -122,7 +122,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$expected = 117;
 		$page = 10;
 		$rowsPerPage =  13;
-		$result = paginationSQLHelper::getRowStart($page,$rowsPerPage);
+		$result = SqlHelper::getRowStart($page,$rowsPerPage);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$whereGrid = null;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -140,7 +140,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$whereGrid['NUMERO']='';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$whereGrid['NUMERO']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 	    $whereGrid['NUMERO']=0;
 	    $isTrue = 'ISTRUE';
 	    $isFalse = 'ISFALSE';
-	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,TRUE);
+	    $result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,TRUE);
 	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -167,7 +167,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 	    $whereGrid['NUMERO']=0;
 	    $isTrue = 'ISTRUE';
 	    $isFalse = 'ISFALSE';
-	    $result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,FALSE);
+	    $result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse,FALSE);
 	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$whereGrid['NUMBER']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'X',$isTrue,$isFalse);
+		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'X',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ class paginationSQLHelperTest extends PHPUnit_Framework_TestCase {
 		$whereGrid['NUMERO']='xxx';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
-		$result = paginationSQLHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
+		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
 	}
 }

@@ -58,6 +58,7 @@ require_once ($helps_dir . 'PaginationSQLHelper.class.php');
 require_once ($helps_dir . 'PostHelper.class.php');
 require_once ($helps_dir . 'RequestHelper.class.php');
 require_once ($helps_dir . 'ServerHelper.class.php');
+require_once ($helps_dir . 'SqlHelper.class.php');
 require_once ($helps_dir . 'StringHelper.class.php');
 require_once ($helps_dir . 'UrlHelper.class.php');
 

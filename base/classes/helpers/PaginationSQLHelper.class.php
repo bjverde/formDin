@@ -42,35 +42,34 @@
 if(!defined('ROWS_PER_PAGE')) { define('ROWS_PER_PAGE', 20); 
 }
 
+/**
+ * @deprecated Please change to SqlHelper
+ */
 class paginationSQLHelper
 {
-    
+    /**
+     * @deprecated Please change to SqlHelper::getRowStart
+     * @param number $page
+     * @param number $rowsPerPage
+     * @return number
+     */
     public static function getRowStart($page,$rowsPerPage) 
     {
-        $rowStart = 0;
-        $page = isset($page) ? $page : null;
-        $rowsPerPage = isset($rowsPerPage) ? $rowsPerPage : ROWS_PER_PAGE;
-        if(!empty($page)) {
-            $rowStart = ($page-1)*$rowsPerPage;
-        }        
-        return $rowStart;
+        return SqlHelper::getRowStart($page, $rowsPerPage);
     }    
     //--------------------------------------------------------------------------------
+    /**
+     * @deprecated Please change to SqlHelper::attributeIssetOrNotZero
+     * @param array $whereGrid
+     * @param string $attribute
+     * @param string $isTrue
+     * @param string $isFalse
+     * @param boolean $testZero
+     * @return string
+     */
     public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
     {
-        $retorno = $isFalse;
-        $has = ArrayHelper::has($attribute, $whereGrid);
-        if($has ) {
-            if(isset($whereGrid[$attribute]) && !($whereGrid[$attribute]==='') ) {
-                if($testZero) {
-                    if($whereGrid[$attribute]<>'0' ) {
-                        $retorno = $isTrue;
-                    }
-                }else{
-                    $retorno = $isTrue;
-                }
-            }
-        }
+    	$retorno = SqlHelper::attributeIssetOrNotZero($whereGrid, $attribute, $isTrue, $isFalse, $testZero);
         return $retorno;
     }
     
