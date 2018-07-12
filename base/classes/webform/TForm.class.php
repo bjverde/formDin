@@ -7197,21 +7197,8 @@ class TForm Extends TBox
                $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine;
                $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
                return null;
-           }
-           /**
-            * Este método foi substitituido pelo addTag()
-            */
-           public function openTag( $strTagType, $strId=null )
-           {
-               //$this->addTag($strTagType,$strId);
-           }
-           /**
-            * Este método foi substitituido pelo addTag()
-            */
-           public function closeTag()
-           {
-               // não será mais necessário, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
-           }
+           }           
+           
            /**
             * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
             * Para incluir ajuda no form utilize setHelpOnLine
