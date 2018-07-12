@@ -7179,56 +7179,57 @@ class TForm Extends TBox
         return $tree;
     }
 	
-           /**
-            * Permite abrir uma tag html entre os campos do formulário. Utilizado para criar áreas ou grupos de campos
-            * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
-            *
-            * Exemplo:  $t = $frm->addTag('<div>'); // para abrir
-            * 			$t->setCss('border','1px solid blue');
-            * 			conteudo.......
-            * 			$t = $frm->addTag('</div>'); // para fechar
-            * @param string $strTagType
-            * @param string $strId
-            * @return null
-            */
-           public function addTag( $strTagType, $strId = null,$boolNewLine=null )
-           {
-               $field = new TTag( $strTagType, $strId );
-               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine;
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-               return null;
-           }           
+    /**
+     * Permite abrir uma tag html entre os campos do formulário. Utilizado para criar áreas ou grupos de campos
+     * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
+     *
+     * Exemplo:  $t = $frm->addTag('<div>'); // para abrir
+     * 			$t->setCss('border','1px solid blue');
+     * 			conteudo.......
+     * 			$t = $frm->addTag('</div>'); // para fechar
+     * @param string $strTagType
+     * @param string $strId
+     * @return null
+     */
+    public function addTag( $strTagType, $strId = null,$boolNewLine=null )
+    {
+    	$field = new TTag( $strTagType, $strId );
+    	$boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine;
+    	$this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+    	return null;
+    }
+    
+    /**
+     * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
+     * Para incluir ajuda no form utilize setHelpOnLine
+     *
+     *
+     * <code>
+     * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
+     * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
+     * $frm->addBoxField('campo_3','Este é o texto de ajuda que será exibido quando o usuário clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
+     * $frm->addBoxField('campo_4',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
+     * </code>
+     *
+     * @param mixed $strId - identificador do campo
+     * @param mixed $strText - texto para exibição
+     * @param mixed $strFileName - nome do arquivo que será carregado dentro do box
+     * @param mixed $strDataType - define o conteudo que será carregado. Ex: image, ajax
+     * @param mixed $strLabel - rótulo do campo
+     * @param mixed $strImage - imagem que aparecerá na frente do label
+     * @param bool $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
+     * @param mixed $boolLabelAbove - true ou false para alterar o layout do rótulo para cima ou na frente da imagem
+     * @param mixed $boolNoWrapLabel - true ou false para quebrar ou não o valor do label se não couber na coluna do formulario
+     * @param mixed $strHint - texto de ajuda que será exibido ao posicinar o mouse sobre a imagem
+     */
+    public function addBoxField( $strId, $strText=null, $strFileName=null, $strDataType=null, $strLabel=null, $strImage=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+    {
+    	$boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padrão é false
+    	$field = new THelpBox( $strId, $strText, $strFileName, $strDataType, $strImage, $strHint );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
+    	return null;
+    }
            
-           /**
-            * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
-            * Para incluir ajuda no form utilize setHelpOnLine
-            * 
-            *
-            * <code>
-            * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
-            * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
-            * $frm->addBoxField('campo_3','Este é o texto de ajuda que será exibido quando o usuário clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
-            * $frm->addBoxField('campo_4',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
-            * </code>
-            *
-            * @param mixed $strId - identificador do campo
-            * @param mixed $strText - texto para exibição
-            * @param mixed $strFileName - nome do arquivo que será carregado dentro do box
-            * @param mixed $strDataType - define o conteudo que será carregado. Ex: image, ajax
-            * @param mixed $strLabel - rótulo do campo
-            * @param mixed $strImage - imagem que aparecerá na frente do label
-            * @param bool $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
-            * @param mixed $boolLabelAbove - true ou false para alterar o layout do rótulo para cima ou na frente da imagem
-            * @param mixed $boolNoWrapLabel - true ou false para quebrar ou não o valor do label se não couber na coluna do formulario
-            * @param mixed $strHint - texto de ajuda que será exibido ao posicinar o mouse sobre a imagem
-            */
-           public function addBoxField( $strId, $strText=null, $strFileName=null, $strDataType=null, $strLabel=null, $strImage=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
-           {
-               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padrão é false
-               $field = new THelpBox( $strId, $strText, $strFileName, $strDataType, $strImage, $strHint );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
-               return null;
-           }
            public function addCaptchaField( $strName, $strLabel=null, $hint=null,$intCaracters=null )
            {
                $field = new TCaptcha( $strName, $hint, $intCaracters );
