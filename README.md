@@ -11,7 +11,7 @@ This version is a **FormDin 4 Fork from [Brazilian Public Software Portal.](http
 
 ## About
 
-Created in 2004 by Luís Eugênio Barbosa to increase the speed of development in IBAMA. Version 4 is based on the ideas of the [Adianti Framework of Pablo Dall'Oglio] (http://www.adianti.com.br/framework-library).
+Created in 2004 by Luís Eugênio Barbosa to increase the speed of development in IBAMA. Version 4 is based on the ideas of the [Adianti Framework of Pablo Dall'Oglio](http://www.adianti.com.br/framework-library).
 
 FormDin is made up of a set of software components that provide a basic architecture for developing web applications based on a main menu, data entry forms, and reports.
 
@@ -39,9 +39,6 @@ A estrutura da aplicação utilizada pelo FormDin é composta por três classes 
 
 ![Tela formDin 4.1.5 App02](https://raw.githubusercontent.com/bjverde/formDin/utf8/documents/img/screenshot-2018-2-4_APPEV2_01.png)
 
-### Comparação rápida FormDin x Adianti
-
-O FormDin ficou congelado por alguns anos sem melhorias ou correções, a versão atual está praticamente congelada em 2012. O Adianti continuou evoluindo e tem muito mais recursos. Programadores menos experientes o FormDin pode ser melhor que o Adianti por ser mais simples exigindo um curva menor de aprendizagem.
 
 ## Ambiente formDin
 Além do FormDin existem mais dois projetos intimamente ligados.
@@ -77,24 +74,6 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 
 [Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
 
-**Visão geral da instalação**
-1. Tenha um Servidor xAMP (x = sistema operacional, A = Apache, M = MySQL, P = PHP), recomendável xDebug para ambiente de desenvolvimento.
-2. Descompactar o projeto em um pasta.
-3. Rodar os script SQL da pasta modelo_banco_exemplos
-4. Acessar as pastas appexemplo_v para ver os exemplos.
-
-[Manual antigo para instalação](https://github.com/bjverde/formDin/blob/master/documents/Manual_Instalacao_FormDin.pdf)
-
-### O que tem em cada pasta
-* appexemplo_form_alone - exemplo de uma pagina sem sistema.
-* appexemplo_v1.0 - Exemplos simples de quase todos os recurso possíveis.
-* appexemplo_v2.0 - Exemplo de uma sistema conectando no mysql com telas totalmente funcionais. EM CONSTRUÇÃO
-* appexemplo_v2.5 - Mesmo sistema que a versão 2.0 só que com o todo controle de acesso e segurança. EM CONSTRUÇÃO
-* base - é o local onde toda a magica acontece. Aquim tem o FormDin propriamente dito.
-* documents - Documentos e informações.
-* modelo_banco_exemplos - todos os scripts do MySQL para funcionar os exemplos 2.0 e 2.5
-* phpunit-code-coverage - cobertura de codigo dos testes unitarios 
-
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 [View the full list of versions](https://github.com/bjverde/formDin/releases)
@@ -113,18 +92,6 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
    * :hammer: [consulta pagina aceitando Zero.](https://github.com/bjverde/formDin/commit/fb05317219c28e8b25aa9ee8f768989e2c44c86d)
    * :bug: 3 correções
    * :memo: melhoria na documentação interna
-
-* [4.2.1 - 2018/03/03 tag v4.2.1](https://github.com/bjverde/formDin/releases/tag/v4.2.1)
-   * :hammer: **SPECIAL VERSION** alterações feitas para trabalhar com o [SysGen (um gerador de sistema para formDin)](https://github.com/bjverde/sysgen)
-   * :bug: diversas correções de bugs
-   * :memo: melhoria na documentação
-   
-* [4.2.0 - 2018/03/08 tag v4.2.0](https://github.com/bjverde/formDin/releases/tag/v4.2.0)
-   * :hammer: **SPECIAL VERSION** files in UTF8 format.
-   * :hammer: code generator of the CRUD screen of a database entity.
-   * :hammer: Error messages in class TFile.
-   * :white_check_mark: 114 PHPUnit tests
-   * :art: small improvement of css
 
 * [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
    * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 
