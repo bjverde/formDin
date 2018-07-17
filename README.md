@@ -76,7 +76,6 @@ Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/for
 
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
-[View the full list of versions](https://github.com/bjverde/formDin/releases)
 
 * [4.2.4 - 2018/06/17 tag v4.2.4](https://github.com/bjverde/formDin/releases/tag/v4.2.4)
    * :hammer: Work with Postgres SQL 10.4
