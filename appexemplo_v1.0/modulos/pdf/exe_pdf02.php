@@ -87,6 +87,9 @@ $pdf->SetFillColor(255, 255, 255); // fundo branco
 $pdf->ln(3);
 $pdf->multiCell(0, 4, utf8_decode(getMsgFPDF()), 1);
 
+$msg02 = 'Esse exemplo utiliza os metodos: TPDF->setData e TPDF->addColumn. Para criar um grid de forma facil e semelhante ao que acontece no FormDin;';
+$pdf->multiCell(0, 4, utf8_decode($msg02), 1);
+
 
 //echo 'Pdf gerado em: '.$pdf->show('teste.pdf',false);
 $pdf->show();

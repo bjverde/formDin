@@ -19,7 +19,9 @@ $frm->addGroupField('gpx1', 'Pedido');
     $frm->addTextField('nome_comprador', 'Comprador:', 60, false, null)->setEnabled(false);
     $frm->addDateField('data_pedido', 'Data:', false)->setEnabled(false);
     $frm->addTextField('QTD', 'Quantidade de Itens: ', 10, false, null, null, false)->setEnabled(false);
-    $frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, '1=Dinheiro,2=Cheque,3=Cartão')->setEnabled(false);
+    $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
+    //$frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
+    $frm->addRadioField('forma_pagamento', 'Forma Pagamento:', false, $listFormas,null,null,null,3)->setEnabled(false);
 $frm->closeGroup();
 $frm->addGroupField('gpx2', 'Visualização do Item');
     $frm->addTextField('item', 'item:', 10, false, null);
@@ -59,6 +61,7 @@ switch ($acao) {
 
 // exemplo de criação de uma treeview fora do formulário
 
+
 // adicionar ao form os arquivos js e css necessários para o funcionamento da treeview
 $frm->addJsFile('dhtmlx/dhtmlxcommon.js');
 $frm->addJsFile('dhtmlx/treeview/dhtmlxtree.js');
@@ -87,7 +90,6 @@ $tree->setXY(0, 20); // posiciona a treeview na tela. left=0, top=100
 $tree->show(); // exibe o tree view
 $frm->addJavascript('jQuery("#tree_toolbar").hide();'); // esconder a toolbar da treeview
 // fim criação da treeview
-
 
 $frm->show();
 ?>

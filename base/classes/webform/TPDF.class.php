@@ -235,7 +235,23 @@ class TPDF extends FPDF
         return $this->pageBorder===true ? true : false;
     }
 
-    function addColumn( $strHeader = null, $intWidth = null, $strAlign = null, $strFieldName = null,
+    /****
+     * Add New Column in Grid. Need to use method printRows for show column in pdf.
+     * 
+     * Adicionar nova coluna na grade. Precisa usar o método printRows para mostrar coluna em pdf
+     * 
+     * @param string $strHeader      - 1: ID column
+     * @param string $intWidth       - 2: Size column
+     * @param string $strAlign       - 3: Align column, Values L = Left ,C= Center,R= ,J=justified
+     * @param string $strFieldName   - 4: Label column head
+     * @param string $hexFillColor
+     * @param string $strFontStyle
+     * @param string $intFontSize
+     * @param string $hexFontColor
+     * @param string $strFontFamily
+     * @return TPDFColumn
+     */
+    public function addColumn( $strHeader = null, $intWidth = null, $strAlign = null, $strFieldName = null,
         $hexFillColor = null, $strFontStyle = null, $intFontSize = null, $hexFontColor = null, $strFontFamily = null )
     {
         $column =
@@ -301,8 +317,10 @@ class TPDF extends FPDF
         $this->setRowFieldNames( $aFieldNames );
     }
 
-    function printRows( $newPage = null, $strPageOrientation = null )
+    public function printRows( $newPage = null, $strPageOrientation = null )
     {
+    	//$this->clearColumns();
+    	
         if ( !$this->getData() )
         {
             return;
@@ -415,6 +433,11 @@ class TPDF extends FPDF
     }
 
     //----------------------------------------------------------------------------------------------------
+    /**
+     * Clean coluns to new grid
+     * 
+     * Limpa as colunas para gerar novo gride
+     */    
     public function clearColumns()
     {
         $this->colums = null;

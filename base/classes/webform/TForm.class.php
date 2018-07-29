@@ -229,6 +229,12 @@ class TForm Extends TBox
                 $this->addJsFile( 'jquery/jquery.metadata.js' );
                 $this->addJsFile( 'jquery/jquery.corner.js' );
             }
+            //Font Awesome Icons
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-brands.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-regular.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-solid.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
+            
             $this->addJsFile( 'jquery/jlayout/jquery.jlayout-1.3.js');
             $this->addJsFile( 'jquery/jquery-ui-all.js');
             $this->addJsFile( 'jquery/jAlert/jquery.alerts.js' );
@@ -6820,86 +6826,100 @@ class TForm Extends TBox
                $this->currentContainer[ ] = $field;
                return $field;
            }
-           /**
-            * Adiciona campo de entrada de dados numérico
-            *
-            * @param string $strName             - ID do campo
-            * @param string $strValue            - Label do campo, que irá aparecer na tela do usuario
-            * @param integer $intMaxLength       - Quantidade maxima de digitos.
-            * @param boolean $boolRequired       - Obrigatorio 
-            * @param integer $intDecimalPlaces   - Quantidade de casas decimais.
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param string $strMinValue         - Valor minimo permitido. Null = não tem limite.
-            * @param string $strMaxValue         - Valor maximo permitido. Null = não tem limite.
-            * @param boolean $boolFormatInteger  - Inteiros com ou sem ponto de separação
-            * @param string $strDirection
-            * @param boolean $boolAllowZero
-            * @param boolean $boolAllowNull
-            * @param string  $strHint
-            * @return TNumber
-            */
-           public function addNumberField( $strName
-						           		, $strLabel=null
-						           		, $intMaxLength
-						           		, $boolRequired=null
-						           		, $intDecimalPlaces=null
-						           		, $boolNewLine=null
-						           		, $strValue=null
-						           		, $strMinValue=null
-						           		, $strMaxValue=null
-						           		, $boolFormatInteger=null
-						           		, $strDirection=null
-						           		, $boolAllowZero=null
-						           		, $boolAllowNull=null
-						           		, $boolLabelAbove=null
-						           		, $boolNoWrapLabel=null
-						           		, $strHint=null )
-           {
-               $field = new TNumber( $strName, $strValue, $intMaxLength, $boolRequired, $intDecimalPlaces, $strMinValue, $strMaxValue, $boolFormatInteger, $strDirection, $boolAllowZero, $boolAllowNull );
-               if( $strHint )
-               {
-                   $field->setHint( $strHint );
-               }
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Adiciona campo para entrada de endereço eletrônico - e-mail
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolNewLine
-            * @param integer $intMaxLength
-            * @param boolean $boolRequired
-            * @param integer $intSize
-            * @param string  $strValue
-            * @param boolean $boolLabelAbove
-            * @return TNumber
-            */
-           public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Adiciona campo de entrada para telefone e fax
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @return TFone
-            */
-           public function addFoneField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TFone( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+          
+    /**
+     * 
+     * Adiciona campo de entrada de dados numérico
+     * 
+     * @param string $strName            - 1: ID do campo
+     * @param string $strLabel           - 2: Label do campo, que irá aparecer na tela do usuario
+     * @param integer $intMaxLength      - 3: Quantidade maxima de digitos.
+     * @param boolean $boolRequired      - 4: Obrigatorio
+     * @param integer $intDecimalPlaces  - 5: Quantidade de casas decimais.
+     * @param boolean $boolNewLine       - 6: Campo em nova linha
+     * @param string $strValue           - 7: valor inicial do campo
+     * @param string $strMinValue        - 8: valor minimo permitido. Null = não tem limite.
+     * @param string $strMaxValue        - 9: valor maxima permitido. Null = não tem limite.
+     * @param boolean $boolFormatInteger -10: Inteiros com ou sem ponto de separação
+     * @param string $strDirection
+     * @param boolean $boolAllowZero
+     * @param boolean $boolAllowNull
+     * @param boolean $boolLabelAbove
+     * @param boolean $boolNoWrapLabel
+     * @param string $strHint
+     * @return TNumber
+     */       
+	public function addNumberField( $strName
+				           		, $strLabel=null
+				           		, $intMaxLength
+				           		, $boolRequired=null
+				           		, $intDecimalPlaces=null
+				           		, $boolNewLine=null
+				           		, $strValue=null
+				           		, $strMinValue=null
+				           		, $strMaxValue=null
+				           		, $boolFormatInteger=null
+				           		, $strDirection=null
+				           		, $boolAllowZero=null
+				           		, $boolAllowNull=null
+				           		, $boolLabelAbove=null
+				           		, $boolNoWrapLabel=null
+				           		, $strHint=null )
+	{
+		$field = new TNumber( $strName
+							, $strValue
+							, $intMaxLength
+							, $boolRequired
+							, $intDecimalPlaces
+							, $strMinValue
+							, $strMaxValue
+							, $boolFormatInteger
+							, $strDirection, $boolAllowZero, $boolAllowNull );
+		if( $strHint ) {
+			$field->setHint( $strHint );
+		}
+		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+		return $field;
+	}
+	
+	/**
+	 * Adiciona campo para entrada de endereço eletrônico - e-mail
+	 *
+	 * @param string $strName       - 1: ID do campo
+	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
+	 * @param boolean $boolNewLine  - 3: Campo em nova linha
+	 * @param integer $intMaxLength 
+	 * @param boolean $boolRequired - 5: Obrigatorio
+	 * @param integer $intSize      
+	 * @param string  $strValue     - 7: valor inicial do campo
+	 * @param boolean $boolLabelAbove
+	 * @return TNumber
+	 */
+	public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	{
+		$field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
+		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+		return $field;
+	}
+	
+	/**
+	 * Adiciona campo de entrada para telefone e fax
+	 *
+	 * @param string $strName       - 1: ID do campo
+	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
+	 * @param boolean $boolRequired - 3: Obrigatorio
+	 * @param boolean $boolNewLine  - 4: Campo em nova linha
+	 * @param string $strValue
+	 * @param boolean $boolLabelAbove
+	 * @return TFone
+	 */
+	public function addFoneField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	{
+		$field = new TFone( $strName, $strValue, $boolRequired );
+		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+		return $field;
+	}
+           
            /**
             * Adicinar campos para entrada de dados de coordenada geográfica no formato GMS ( GRAU, MIN E SEG )
             *
@@ -7159,69 +7179,57 @@ class TForm Extends TBox
         return $tree;
     }
 	
-           /**
-            * Permite abrir uma tag html entre os campos do formulário. Utilizado para criar áreas ou grupos de campos
-            * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
-            *
-            * Exemplo:  $t = $frm->addTag('<div>'); // para abrir
-            * 			$t->setCss('border','1px solid blue');
-            * 			conteudo.......
-            * 			$t = $frm->addTag('</div>'); // para fechar
-            * @param string $strTagType
-            * @param string $strId
-            * @return null
-            */
-           public function addTag( $strTagType, $strId = null,$boolNewLine=null )
-           {
-               $field = new TTag( $strTagType, $strId );
-               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine;
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-               return null;
-           }
-           /**
-            * Este método foi substitituido pelo addTag()
-            */
-           public function openTag( $strTagType, $strId=null )
-           {
-               //$this->addTag($strTagType,$strId);
-           }
-           /**
-            * Este método foi substitituido pelo addTag()
-            */
-           public function closeTag()
-           {
-               // não será mais necessário, utilizar o metodo metodo addTag() para adicionar a tag de fechamento
-           }
-           /**
-            * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
-            * Para incluir ajuda no form utilize setHelpOnLine
-            * 
-            *
-            * <code>
-            * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
-            * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
-            * $frm->addBoxField('campo_3','Este é o texto de ajuda que será exibido quando o usuário clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
-            * $frm->addBoxField('campo_4',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
-            * </code>
-            *
-            * @param mixed $strId - identificador do campo
-            * @param mixed $strText - texto para exibição
-            * @param mixed $strFileName - nome do arquivo que será carregado dentro do box
-            * @param mixed $strDataType - define o conteudo que será carregado. Ex: image, ajax
-            * @param mixed $strLabel - rótulo do campo
-            * @param mixed $strImage - imagem que aparecerá na frente do label
-            * @param bool $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
-            * @param mixed $boolLabelAbove - true ou false para alterar o layout do rótulo para cima ou na frente da imagem
-            * @param mixed $boolNoWrapLabel - true ou false para quebrar ou não o valor do label se não couber na coluna do formulario
-            * @param mixed $strHint - texto de ajuda que será exibido ao posicinar o mouse sobre a imagem
-            */
-           public function addBoxField( $strId, $strText=null, $strFileName=null, $strDataType=null, $strLabel=null, $strImage=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
-           {
-               $boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padrão é false
-               $field = new THelpBox( $strId, $strText, $strFileName, $strDataType, $strImage, $strHint );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
-               return null;
-           }
+    /**
+     * Permite abrir uma tag html entre os campos do formulário. Utilizado para criar áreas ou grupos de campos
+     * para que sejam exibidos/escondidos em conjunto ou delimitados por bordas ou cor de fundo diferentes
+     *
+     * Exemplo:  $t = $frm->addTag('<div>'); // para abrir
+     * 			$t->setCss('border','1px solid blue');
+     * 			conteudo.......
+     * 			$t = $frm->addTag('</div>'); // para fechar
+     * @param string $strTagType
+     * @param string $strId
+     * @return null
+     */
+    public function addTag( $strTagType, $strId = null,$boolNewLine=null )
+    {
+    	$field = new TTag( $strTagType, $strId );
+    	$boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine;
+    	$this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+    	return null;
+    }
+    
+    /**
+     * Adiciona campo para exibição de texto ou imagen dentro de um box modal.
+     * Para incluir ajuda no form utilize setHelpOnLine
+     *
+     *
+     * <code>
+     * $frm->addBoxField('campo_1','Informe o nome completo',$this->getBase().'imagens/folder.gif',null,null,null,null,null,null,'Ajuda');
+     * $frm->addBoxField('campo_2',null,$this->getBase().'exemplos/ajuda.html','ajax',null,null,null,null,null,'Ver arquivo de ajuda');
+     * $frm->addBoxField('campo_3','Este é o texto de ajuda que será exibido quando o usuário clicar na imagem',null,null,null,null,null,null,null,'Exibir ajuda');
+     * $frm->addBoxField('campo_4',null,$this->getBase()."js/jquery/facebox/stairs.jpg",'jpg','Visualizar Foto:','folder.gif',true,null,null,'Imagem');
+     * </code>
+     *
+     * @param mixed $strId - identificador do campo
+     * @param mixed $strText - texto para exibição
+     * @param mixed $strFileName - nome do arquivo que será carregado dentro do box
+     * @param mixed $strDataType - define o conteudo que será carregado. Ex: image, ajax
+     * @param mixed $strLabel - rótulo do campo
+     * @param mixed $strImage - imagem que aparecerá na frente do label
+     * @param bool $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
+     * @param mixed $boolLabelAbove - true ou false para alterar o layout do rótulo para cima ou na frente da imagem
+     * @param mixed $boolNoWrapLabel - true ou false para quebrar ou não o valor do label se não couber na coluna do formulario
+     * @param mixed $strHint - texto de ajuda que será exibido ao posicinar o mouse sobre a imagem
+     */
+    public function addBoxField( $strId, $strText=null, $strFileName=null, $strDataType=null, $strLabel=null, $strImage=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+    {
+    	$boolNewLine = is_null( $boolNewLine ) ? false : $boolNewLine; // o padrão é false
+    	$field = new THelpBox( $strId, $strText, $strFileName, $strDataType, $strImage, $strHint );
+    	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
+    	return null;
+    }
+           
            public function addCaptchaField( $strName, $strLabel=null, $hint=null,$intCaracters=null )
            {
                $field = new TCaptcha( $strName, $hint, $intCaracters );

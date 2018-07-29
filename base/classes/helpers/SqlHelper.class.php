@@ -42,35 +42,61 @@
 if(!defined('ROWS_PER_PAGE')) { define('ROWS_PER_PAGE', 20); 
 }
 
-/**
- * @deprecated Please change to SqlHelper
- */
-class paginationSQLHelper
+class SqlHelper
 {
-    /**
-     * @deprecated Please change to SqlHelper::getRowStart
-     * @param number $page
-     * @param number $rowsPerPage
-     * @return number
-     */
+	const SQL_TYPE_NUMERIC    = 'numeric';
+	const SQL_TYPE_TEXT_LIKE  = 'like';
+	const SQL_TYPE_TEXT_EQUAL = 'text';
+	
     public static function getRowStart($page,$rowsPerPage) 
     {
-        return SqlHelper::getRowStart($page, $rowsPerPage);
+        $rowStart = 0;
+        $page = isset($page) ? $page : null;
+        $rowsPerPage = isset($rowsPerPage) ? $rowsPerPage : ROWS_PER_PAGE;
+        if(!empty($page)) {
+            $rowStart = ($page-1)*$rowsPerPage;
+        }        
+        return $rowStart;
     }    
     //--------------------------------------------------------------------------------
-    /**
-     * @deprecated Please change to SqlHelper::attributeIssetOrNotZero
-     * @param array $whereGrid
-     * @param string $attribute
-     * @param string $isTrue
-     * @param string $isFalse
-     * @param boolean $testZero
-     * @return string
-     */
     public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
     {
-    	$retorno = SqlHelper::attributeIssetOrNotZero($whereGrid, $attribute, $isTrue, $isFalse, $testZero);
+        $retorno = $isFalse;
+        $has = ArrayHelper::has($attribute, $whereGrid);
+        if($has ) {
+            if(isset($whereGrid[$attribute]) && !($whereGrid[$attribute]==='') ) {
+                if($testZero) {
+                    if($whereGrid[$attribute]<>'0' ) {
+                        $retorno = $isTrue;
+                    }
+                }else{
+                    $retorno = $isTrue;
+                }
+            }
+        }
         return $retorno;
+    }
+    //----------------------------------------
+    public static function getAtributeWhereGridParameters( $stringWhere, $arrayWhereGrid, $atribute, $type ,$testZero=true ) {
+    	if( ArrayHelper::has($atribute, $arrayWhereGrid) ){
+    		$valeu = $arrayWhereGrid[$atribute];
+    		if($type == self::SQL_TYPE_NUMERIC){
+    			$isTrue = ' AND '.$atribute.' = '.$valeu.'  ';
+    			$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
+    			$stringWhere = $stringWhere.$attribute;
+    		} else {
+    			if($type == self::SQL_TYPE_TEXT_LIKE){
+    				$isTrue = ' AND '.$atribute.' like \'%'.$valeu.'%\' ';
+    				$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
+    				$stringWhere = $stringWhere.$attribute;
+    			}else{
+    				$isTrue = ' AND '.$atribute.' = \''.$valeu.'\'  ';
+    				$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
+    				$stringWhere = $stringWhere.$attribute;
+    			}
+    		}
+    	}
+    	return $stringWhere;
     }
     
 }

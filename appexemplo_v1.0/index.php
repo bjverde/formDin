@@ -40,20 +40,20 @@
  */
 define('MIGRATE_JQUERY', false);
 
+require_once('includes/constantes.php');
 include('includes/config_conexao.php');
 include('../base/classes/webform/TApplication.class.php');
 
-define('APLICATIVO', 'APPEV1.0');
-define('DECIMAL_SEPARATOR', ',');
-//session_start();
-//session_destroy();
 
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Exemplos das Funcionalidades');
+$app->setAppRootDir(__DIR__);
+$app->setTitle(SYSTEM_NAME);
+$app->setSubtitle(APLICATIVO);
 $app->setSigla(APLICATIVO);
+$app->setImgLogoPath('imagem/appv1_logo.png');
 $app->setUnit('Centro Nacional de Telemática - CNT');
-$app->setVersionSystem('v 1.0.0.0');
+$app->setVersionSystem(SYSTEM_VERSION);
 $app->setMenuIconsPath('imagem/');
 
 $app->setWidth(990);
@@ -66,13 +66,14 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 
 //$app->addIncludeFile('config.php');
 //$app->getLoCenter()->setCss('background-color','blue');
+
 //$app->setBackgroundImage(null);
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
+//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 
 
 //TPDOConnection::Test(true);
 
-//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 /*
 //$_SESSION[APLICATIVO]["login"]["username"]='postgres';
 //$_SESSION[APLICATIVO]["login"]["password"]='123456';
