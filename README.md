@@ -52,6 +52,7 @@ Além do FormDin existem mais dois projetos intimamente ligados.
     * UTF-8 
     * retorno do carro formato Windows
 * PHP 5.6.x ou superior (compativel como 7.2.0)
+
 ![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
 
 [Na Wiki terá informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informações-técnicas-e-Arquitetura):
