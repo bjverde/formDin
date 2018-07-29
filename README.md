@@ -46,19 +46,19 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 * [SysGen](https://github.com/bjverde/sysgen) – uma gerador de sistema para FormDin 
 * [formDocker](https://github.com/bjverde/formDocker) – arquivos do Docker Compose para levantar tudo que precisa para rodar o formDin em poucos comandos.
 
-## Sobre as branchs
-* Master - tem as modificações e novidades
-* copyLEB - copia de versão original, congelada e sem alterações. Conforme Luís Eugênio Barbosa
-Informações [sobre outras branchs veja na wiki](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas-e-Arquitetura#sobre-as-branchs)
-
 ## Informações
 
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* PHP 5.4.x ou superior (compativel como 7.1.19)
-
+* PHP 5.6.x ou superior (compativel como 7.2.0)
 ![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
+
+[Na Wiki terá informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informações-técnicas-e-Arquitetura):
+* Branchs
+* Arquiteturas
+* Bibliotes utilizadas
+
 
 ### Bibliotecas utilizadas
 * fPDF 1.81
