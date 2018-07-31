@@ -57,6 +57,7 @@ $app->getNorthArea()->setCss('border', '1px solid red');
 $app->getNorthArea()->add('<img style="border:none;float:right;" src="imagem/acessibilidade-brasil.gif"/>');
 $app->setHeaderBgImage('imagem/spoa-cabec.gif');
 $app->setBackgroundImage('../base/css/imagens/app/bg_listrado.jpg');
+$app->setCssFile('css/css_form.css');
 $app->setMenuTheme('clear_green');
 
 $app->setMainMenuFile('includes/menu.php');
