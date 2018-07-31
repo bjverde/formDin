@@ -2675,6 +2675,41 @@ function fwSetSelectedIndex(idCampo,valor)
 }
 
 /**
+ * Simplified way to get the value of a field
+ * @param contentId field identifier
+ * @returns   value of a field
+ */
+function fwGetFieldValue(contentId) {
+	var result='';
+	var elemForm, type, value;
+	if( contentId ) {		
+		// se não encontrar pelo id, tentar pelo name
+		elemForm = fwGetObj(contentId);
+		if( !elemForm ){
+			// para campos radio
+			elemForm = jQuery("input[name='" + contentId + "']" ).get(0);
+		}
+		if( !elemForm ){
+			// para campos check
+			elemForm = jQuery("input[name='" + contentId + "[]']" ).get(0);
+		}
+		
+		if( elemForm ){
+			type = elemForm.type;
+			if (type == 'radio') {
+				value = jQuery("input[name='" + elemForm.name + "']:checked" ).val();
+				if(value){
+					result = value;
+				}
+			}else{
+				result = jQuery("#"+contentId).val();
+			}
+		}
+	}
+	return result;
+}
+
+/**
 *	Fazer o carregamento via ajax de grides
 *	phpFile = nome do arquivo php que gera o html do gride
 *	idContainer = id do elemento html onde será inserdo o codigo html
@@ -2687,23 +2722,16 @@ function fwSetSelectedIndex(idCampo,valor)
 function fwGetGrid(phpFile,idContainer,jsonData,clearContainer,callback)
 {
 	clearContainser = clearContainer||false;
-	if( jsonData)
-	{
-		if( typeof jsonData == 'string')
-		{
+	if( jsonData) {
+		if( typeof jsonData == 'string') {
 			jsonData={'acao':jsonData};
 		}
-		for (key in jsonData)
-		{
-			if(!jsonData[key])
-			{
-				jsonData[key] = jQuery("#"+key).val();
-
+		for (key in jsonData) {
+			if(!jsonData[key]) {
+				jsonData[key] = fwGetFieldValue(key);
 			}
 		}
-	}
-	else
-	{
+	} else {
 		jsonData={};
 	}
 	jsonData.message = jsonData.message || 'Carregando...';
