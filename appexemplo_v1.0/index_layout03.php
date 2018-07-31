@@ -64,7 +64,7 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 
 $app->setHeaderContent('header.php');
 $app->getLoCenter()->setCss('background-color', 'blue');
-$app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
+$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 $app->setHeaderBgImage('imagem/h2.jpg');
 $app->setMenuTheme('dhx_black');
 
