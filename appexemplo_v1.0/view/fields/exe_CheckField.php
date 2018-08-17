@@ -39,6 +39,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+d($_REQUEST);
+
 $frm = new TForm('Exemplo do Campo Checkbox');
 //$frm->setFlat(true);
 //$pc = $frm->addPageControl('pc');
@@ -75,6 +77,13 @@ $frm->addGroupField('gp2', 'Grupo 2');
 
 $frm->closeGroup();
 
+$frm->addGroupField('gp3', 'Grupo 3');
+    $listLingProg = array('PHP','HTML','CSS','JavaScript','Ruby','Python','Java','Delphi');
+    $listLingProgSel = array(0=>'PHP');
+    $frm->addCheckField('lp', 'Linguagens de Programção:', false, $listLingProg,true,true,null,3,60);
+$frm->closeGroup();
+
+$frm->addButton('Post Pagina');
 $frm->setAction('Validar,Atualizar');
 //$c = $frm->getLabel('campo_1');
 //$c->setCss('color','blue');
