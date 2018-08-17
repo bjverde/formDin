@@ -6725,23 +6725,36 @@ class TForm Extends TBox
                return $field;
            }
            //-----------------------------------------------------------------------------
-           /**
+           /***
             * Adicicionar campo tipo checkbox
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param array $arrOptions
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param array $arrValues
-            * @param integer $intQtdColumns
+            * @param string $strName         - 1: field ID
+            * @param string $strLabel        - 2: Label field
+            * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
+            * @param array $arrOptions       - 4: Array Options
+            * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
+            * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
+            * @param array $arrValues        - 7: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+            * @param integer $intQtdColumns  - 8: Quantidade de colunas
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
+            * @param boolean $boolNoWrapLabel
+            * @param boolean $boolNowrapText
             * @return TCheck
             */
-           public function addCheckField( $strName, $strLabel=null, $boolRequired=null, $arrOptions=null, $boolNewLine=null, $boolLabelAbove=null, $arrValues=null, $intQtdColumns=null, $intWidth=null, $intHeight=null, $intPaddingItems=null, $boolNoWrapLabel=null ,$boolNowrapText=null)
+           public function addCheckField( $strName
+                                       , $strLabel=null
+                                       , $boolRequired=null
+                                       , $arrOptions=null
+                                       , $boolNewLine=null
+                                       , $boolLabelAbove=null
+                                       , $arrValues=null
+                                       , $intQtdColumns=null
+                                       , $intWidth=null
+                                       , $intHeight=null
+                                       , $intPaddingItems=null
+                                       , $boolNoWrapLabel=null 
+                                       , $boolNowrapText=null)
            {
                $field = new TCheck( $strName, $arrOptions, $arrValues, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems );
                $field->setNoWrapText($boolNowrapText);

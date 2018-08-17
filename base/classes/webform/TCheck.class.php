@@ -60,7 +60,14 @@ class TCheck extends TOption
     * @param integer $intPaddingItems
     * @return TCheck
     */
-    public function __construct($strName,$arrOptions,$arrValues=null,$boolRequired=null,$intQtdColumns=null,$intWidth=null,$intHeight=null,$intPaddingItems=null)
+    public function __construct($strName
+        , $arrOptions
+        , $arrValues=null
+        , $boolRequired=null
+        , $intQtdColumns=null
+        , $intWidth=null
+        , $intHeight=null
+        , $intPaddingItems=null)
     {
     	// no nome do campo check não precisa passar []
 		$strName = $this->removeIllegalChars($strName);
