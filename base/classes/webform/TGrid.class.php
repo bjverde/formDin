@@ -143,19 +143,34 @@ class TGrid extends TTable
      * 	4) $objColumn	- objeto TGrideColum
      *
      *
-     * @param mixed $strName
-     * @param mixed $strTitle
-     * @param mixed $mixData
-     * @param mixed $strHeight
-     * @param mixed $strWidth
-     * @param mixed $strKeyField
-     * @param mixed $mixUpdateFields     - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param string $strName          - 1: ID do campo
+     * @param string $strTitle         - 2: Titulo do campo
+     * @param array $mixData           - 3: Array Data
+     * @param mixed $strHeight         - 4: Altura 
+     * @param mixed $strWidth          - 5: Largura
+     * @param mixed $strKeyField       - 6: Chave primaria
+     * @param array $mixUpdateFields   - 7: Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param mixed $intMaxRows
+     * @param mixed $strRequestUrl
      * @param mixed $strOnDrawCell
+     * @param mixed $strOnDrawRow
      * @param mixed $strOnDrawHeaderCell
+     * @param mixed $strOnDrawActionButton
      * @return TGrid
      */
-    public function __construct( $strName, $strTitle = null, $mixData = null, $strHeight = null, $strWidth = null, $strKeyField = null, $mixUpdateFields = null, $intMaxRows = null, $strRequestUrl = null, $strOnDrawCell = null, $strOnDrawRow = null, $strOnDrawHeaderCell = null, $strOnDrawActionButton = null )
+    public function __construct( $strName
+                               , $strTitle = null
+                               , $mixData = null
+                               , $strHeight = null
+                               , $strWidth = null
+                               , $strKeyField = null
+                               , $mixUpdateFields = null
+                               , $intMaxRows = null
+                               , $strRequestUrl = null
+                               , $strOnDrawCell = null
+                               , $strOnDrawRow = null
+                               , $strOnDrawHeaderCell = null
+                               , $strOnDrawActionButton = null )
     {
         parent::__construct( $strName );
         parent::clearCss();
