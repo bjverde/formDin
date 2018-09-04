@@ -150,8 +150,8 @@ class TGrid extends TTable
      * @param mixed $strWidth          - 5: Largura
      * @param mixed $strKeyField       - 6: Chave primaria
      * @param array $mixUpdateFields   - 7: Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-     * @param mixed $intMaxRows
-     * @param mixed $strRequestUrl
+     * @param mixed $intMaxRows        - 8: Qtd Max de linhas
+     * @param mixed $strRequestUrl     - 9: Url request do form
      * @param mixed $strOnDrawCell
      * @param mixed $strOnDrawRow
      * @param mixed $strOnDrawHeaderCell
