@@ -55,7 +55,7 @@ final class TConnection
 		$boolUtf8 = ( $boolUtf8 === false ) ? false : true;
         $dbType = strtolower($dbType);
         $configFile = "conn_$dbType.php";
-		$configErrors=null;
+		$configErrors=array();
 		if( !$database && !$username )
 		{
 			if( !file_exists( $configFile ))
