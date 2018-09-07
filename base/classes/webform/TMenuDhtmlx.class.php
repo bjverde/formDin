@@ -78,11 +78,11 @@ class TMenuDhtmlx {
     *
     * @param string $strId          - 1: id do Menu
     * @param string $strIdParent    - 2: id do Item pai.
-    * @param string $strText        - 3: Texto que irá aparecer para o usuario
-    * @param string $strUrl         - 4: Caminho do modulos
-    * @param string $strToolTip     - 5: uma explição maior sobre o item
-    * @param string $strImg         - 6: imagem será utilizada como icone
-    * @param string $strImgDisabled - 7: imagem para o menu desabilitado
+    * @param string $strText        - 3: Texto que irá aparecer para o usuário
+    * @param string $strUrl         - 4: Caminho do módulos
+    * @param string $strToolTip     - 5: uma explicação maior sobre o item
+    * @param string $strImg         - 6: Caminho da imagem será utilizada como ícone
+    * @param string $strImgDisabled - 7: Caminho da imagem para o menu desabilitado
     * @param boolean $boolDisabled  - 8: Menu desabilitado
     * @param string $strHotKey
     * @param boolean $boolSeparator
