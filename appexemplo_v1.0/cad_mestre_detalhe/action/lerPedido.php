@@ -1,5 +1,5 @@
 <?php
-$res = Tb_pedidoDAO::select($_POST['id']);
+$res = Tb_pedidoDAO::selectById($_POST['id']);
 if ($res) {
     prepareReturnAjax(1, $res);
 }
