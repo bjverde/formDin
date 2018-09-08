@@ -78,7 +78,14 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
-* [4.2.4 - 2018/06/17 tag v4.2.4](https://github.com/bjverde/formDin/releases/tag/v4.2.4)
+* [4.2.5 - 2018/07/31 tag v4.2.5](https://github.com/bjverde/formDin/releases/tag/v4.2.5)
+   * :bug: radio butun
+   * :art: Font Awesome Icons
+   * :abc: Migration header HTML4 to HTML5 - Tableless footer
+   * :white_check_mark: 150 PHPUnit tests
+   * :bug: Greater compatibility with php 7.2.4
+
+* [4.2.4 - 2018/06/17 tag v4.2.4](https://github.com/bjverde/formDin/releases/tag/4.2.4)
    * :hammer: Work with Postgres SQL 10.4
    * :white_check_mark: 145 PHPUnit tests
    * :bug: Greater compatibility with php 7.2.4

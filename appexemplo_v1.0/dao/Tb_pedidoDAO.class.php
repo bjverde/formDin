@@ -49,41 +49,45 @@ class Tb_pedidoDAO extends TPDOConnection
                         , $objVo->getNome_comprador()
                         , $objVo->getForma_pagamento()
                         );
-        self::executeSql('insert into tb_pedido(
+        $sql = 'insert into tb_pedido(
 								 data_pedido
 								,nome_comprador
 								,forma_pagamento
-								) values (?,?,?)', $values);
+								) values (?,?,?)';
+        self::executeSql($sql, $values);
         return  self::executeSql('select last_insert_rowid() as ID_PEDIDO');
     }
     //--------------------------------------------------------------------------------
     public static function delete($id)
     {
         $values = array($id);
-        return self::executeSql('delete from tb_pedido where id_pedido = ?', $values);
+        $sql = 'delete from tb_pedido where id_pedido = ?';
+        return self::executeSql($sql, $values);
     }
     //--------------------------------------------------------------------------------
-    public static function select($id)
+    public static function selectById($id)
     {
         $values = array($id);
-        return self::executeSql('select
-								 id_pedido
-								,data_pedido
-								,nome_comprador
-								,forma_pagamento
-								from tb_pedido where id_pedido = ?', $values);
+        $sql = 'select
+					 id_pedido
+					,data_pedido
+					,nome_comprador
+					,forma_pagamento
+					from tb_pedido where id_pedido = ?';
+        return self::executeSql($sql, $values);
     }
     //--------------------------------------------------------------------------------
     public static function selectAll($orderBy = null, $where = null)
     {
-        return self::executeSql('select
-								 id_pedido
-								,data_pedido
-								,nome_comprador
-								,forma_pagamento
-								from tb_pedido'.
-        ( ($where)? ' where '.$where:'').
-        ( ($orderBy) ? ' order by '.$orderBy:''));
+        $sql = 'select
+					 id_pedido
+					,data_pedido
+					,nome_comprador
+					,forma_pagamento
+					from tb_pedido'.
+					( ($where)? ' where '.$where:'').
+					( ($orderBy) ? ' order by '.$orderBy:'');
+        return self::executeSql($sql);
     }
     //--------------------------------------------------------------------------------
     public static function update(Tb_pedidoVO $objVo)
@@ -92,11 +96,11 @@ class Tb_pedidoDAO extends TPDOConnection
                         ,$objVo->getnome_comprador()
                         ,$objVo->getForma_pagamento()
                         ,$objVo->getId_pedido() );
-        return self::executeSql('update tb_pedido set
-								 data_pedido = ?
-								,nome_comprador = ?
-								,forma_pagamento = ?
-								where id_pedido = ?', $values);
+        $sql = 'update tb_pedido set
+						 data_pedido = ?
+						,nome_comprador = ?
+						,forma_pagamento = ?
+						where id_pedido = ?';
+        return self::executeSql( $sql, $values);
     }
-    //--------------------------------------------------------------------------------
 }

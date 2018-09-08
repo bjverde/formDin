@@ -76,14 +76,14 @@ class TMenuDhtmlx {
     /**
     * Método para adicionar itens de menu
     *
-    * @param string $strId          - id do Menu
-    * @param string $strIdParent    - id do Item pai.
-    * @param string $strText
-    * @param string $strUrl
-    * @param string $strToolTip     - uma explição maior sobre o item
-    * @param string $strImg         - imagem será utilizada como icone
-    * @param string $strImgDisabled
-    * @param boolean $boolDisabled
+    * @param string $strId          - 1: id do Menu
+    * @param string $strIdParent    - 2: id do Item pai.
+    * @param string $strText        - 3: Texto que irá aparecer para o usuário
+    * @param string $strUrl         - 4: Caminho do módulos
+    * @param string $strToolTip     - 5: uma explicação maior sobre o item
+    * @param string $strImg         - 6: Caminho da imagem será utilizada como ícone
+    * @param string $strImgDisabled - 7: Caminho da imagem para o menu desabilitado
+    * @param boolean $boolDisabled  - 8: Menu desabilitado
     * @param string $strHotKey
     * @param boolean $boolSeparator
     * @return TMenuDhtmlx
@@ -440,8 +440,8 @@ class TMenuDhtmlx {
 				$level--;
 			}
 		}
-		return $xml.= ($level > 0 ) ? '</item>' :"\n</menu>";
-		//return str_replace("\n","",$xml .= "</item>\n");
+		$xml.= ($level > 0 ) ? '</item>' :"\n</menu>";
+		return $xml;
 	}
 	//--------------------------------------------------------------------------------------
 	public function getXml($print=true)

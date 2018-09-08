@@ -57,7 +57,18 @@ class SqlHelper
             $rowStart = ($page-1)*$rowsPerPage;
         }        
         return $rowStart;
-    }    
+    }
+    //--------------------------------------------------------------------------------
+    public static function attributeIsset($attribute,$isTrue,$isFalse)
+    {
+        $retorno = $isFalse;
+        if(isset($attribute) && ($attribute<>'') ){
+            if( $attribute<>'0' ){
+                $retorno = $isTrue;
+            }
+        }
+        return $retorno;
+    }
     //--------------------------------------------------------------------------------
     public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
     {

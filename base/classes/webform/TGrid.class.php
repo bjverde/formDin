@@ -143,19 +143,34 @@ class TGrid extends TTable
      * 	4) $objColumn	- objeto TGrideColum
      *
      *
-     * @param mixed $strName
-     * @param mixed $strTitle
-     * @param mixed $mixData
-     * @param mixed $strHeight
-     * @param mixed $strWidth
-     * @param mixed $strKeyField
-     * @param mixed $mixUpdateFields     - campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-     * @param mixed $intMaxRows
+     * @param string $strName          - 1: ID do campo
+     * @param string $strTitle         - 2: Titulo do campo
+     * @param array $mixData           - 3: Array Data
+     * @param mixed $strHeight         - 4: Altura 
+     * @param mixed $strWidth          - 5: Largura
+     * @param mixed $strKeyField       - 6: Chave primaria
+     * @param array $mixUpdateFields   - 7: Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param mixed $intMaxRows        - 8: Qtd Max de linhas
+     * @param mixed $strRequestUrl     - 9: Url request do form
      * @param mixed $strOnDrawCell
+     * @param mixed $strOnDrawRow
      * @param mixed $strOnDrawHeaderCell
+     * @param mixed $strOnDrawActionButton
      * @return TGrid
      */
-    public function __construct( $strName, $strTitle = null, $mixData = null, $strHeight = null, $strWidth = null, $strKeyField = null, $mixUpdateFields = null, $intMaxRows = null, $strRequestUrl = null, $strOnDrawCell = null, $strOnDrawRow = null, $strOnDrawHeaderCell = null, $strOnDrawActionButton = null )
+    public function __construct( $strName
+                               , $strTitle = null
+                               , $mixData = null
+                               , $strHeight = null
+                               , $strWidth = null
+                               , $strKeyField = null
+                               , $mixUpdateFields = null
+                               , $intMaxRows = null
+                               , $strRequestUrl = null
+                               , $strOnDrawCell = null
+                               , $strOnDrawRow = null
+                               , $strOnDrawHeaderCell = null
+                               , $strOnDrawActionButton = null )
     {
         parent::__construct( $strName );
         parent::clearCss();
@@ -1262,6 +1277,14 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Coluna normal para o grid
+     * @param string $strFieldName 1: ID da coluna = Nome da coluna da tabela
+     * @param string $strValue     2: Nome do Label que irá aparecer 
+     * @param integer $strWidth    3: tamanho da coluna
+     * @param string $strTextAlign 4: Alinhamento do texto left|right|center|justify
+     * @return TGridColumn
+     */
     public function addColumn( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null )
     {
         $col = new TGridColumn( $strFieldName, $strValue, $strWidth, $strTextAlign );
@@ -1270,7 +1293,16 @@ class TGrid extends TTable
         $this->columns[ $col->getId()] = $col;
         return $col;
     }
-    
+    //------------------------------------------------------------------------------------
+    /**
+     * Coluna com texto reduzido, deve ser usado quando o texto é longo. Depois do ponto de corte irá aparece ...
+     * @param string $strFieldName     1: ID da coluna = Nome da coluna da tabela
+     * @param string $strValue         2: Nome do Label que irá aparecer
+     * @param integer $strWidth        3: tamanho da coluna
+     * @param string $strTextAlign     4: Alinhamento do texto left|right|center|justify
+     * @param number $strMaxTextLength 5: tamanho do texto antes do corte
+     * @return TGridColumnCompact
+     */
     public function addColumnCompact( $strFieldName, $strValue = null, $strWidth = null, $strTextAlign = null, $strMaxTextLength = 40  )
     {
         $col = new TGridColumnCompact( $strFieldName, $strValue, $strWidth, $strTextAlign, null,null,null,$strMaxTextLength);
@@ -1279,8 +1311,6 @@ class TGrid extends TTable
         $this->columns[ $col->getId()] = $col;
         return $col;
     }
-    
-    
     //------------------------------------------------------------------------------------
     public function addHiddenField( $strFieldName, $strId = null )
     {
