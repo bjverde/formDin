@@ -68,16 +68,6 @@ class ArrayHelper
     }
     
     /**
-     * Similar to array_key_exists. But it does not generate an error message
-     *
-     * Semelhante ao array_key_exists. Mas não gera mensagem de erro
-     *
-     * @param  string $atributeName
-     * @param  array  $array
-     * @return boolean
-     */
-    
-    /**
      * Similar to array_keys. But it does not generate an Warning message in PHP7.2.X
      * 
      * Semelhante to array_keys. Mas não gera mensagem de Alerta no PHP7.2.X
