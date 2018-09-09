@@ -67,6 +67,35 @@ class ArrayHelper
         return $value;
     }
     
+    /**
+     * Similar to array_key_exists. But it does not generate an error message
+     *
+     * Semelhante ao array_key_exists. Mas não gera mensagem de erro
+     *
+     * @param  string $atributeName
+     * @param  array  $array
+     * @return boolean
+     */
+    
+    /**
+     * Similar to array_keys. But it does not generate an Warning message in PHP7.2.X
+     * 
+     * Semelhante to array_keys. Mas não gera mensagem de Alerta no PHP7.2.X
+     * 
+     * @param array $array
+     * @param mixed $search_value
+     * @param boolean $strict
+     * @return array
+     */
+    static function array_keys2($array, $search_value = null,$strict = false)
+    {
+        $value = array();
+        if (is_array($array)) {
+            $value = array_keys($array, $search_value,$strict);
+        }
+        return $value;
+    }
+    
     /***
      *
      * @param array  $array
