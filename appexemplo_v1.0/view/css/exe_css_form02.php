@@ -54,7 +54,7 @@ $gride = new TGrid('gdTeste' // id do gride
 
 
 $gride->addCheckColumn('st_tabela', 'Selecione', 'ST_TABELA', 'NM_TABELA')->setEvent('onClick', 'chkClic()');
-$gride->addColumn('nm_tabela', 'Nome');
+$gride->addColumn('NM_TABELA', 'Nome');
 $gride->addColumn('ST_TABELA', 'Status');
 $gride->addButton('Alterar 1', null, 'btnAlterar1', 'grideAlterar()', null, 'editar.gif', 'editar.gif', 'Alterar registro')->setEnabled(false);
 $gride->addButton('Alterar 2', null, 'btnAlterar2', 'grideAlterar()', null, null, null, 'Alterar registro')->setEnabled(false);
