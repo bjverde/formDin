@@ -2144,24 +2144,11 @@ class TGrid extends TTable
     {
         $this->cache = $intNewValue;
     }
-    
     //---------------------------------------------------------------------------------------
     public function getCache()
     {
         return $this->cache;
     }
-    
-    //---------------------------------------------------------------------------------------
-    /**
-     * Define se os botoes Alterar e Excluir serão exibidos quando não for
-     * adicionado nenhum botão
-     *
-     * @param mixed $boolNewValue
-     */
-    //public function setUseDefaultButtons($boolNewValue=null)
-    //{
-    //	$this->useDefaultButtons = $boolNewValue;
-    //}
     //---------------------------------------------------------------------------------------
     public function getCreateDefaultButtons()
     {
@@ -2224,6 +2211,11 @@ class TGrid extends TTable
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * adicionar o formulário ao gride para criar o gride offline
+     * @param TForm $frm
+     * @param boolean $boolShowCollapsed
+     */
     public function setForm( TForm $frm = null, $boolShowCollapsed = null )
     {
         $this->form = $frm;
@@ -2746,46 +2738,67 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo regristro
+     * @return string
+     */    
     public function setNewRecordColor( $newColor = null )
     {
         $this->newRecordColor = $newColor;
     }
-    
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo regristro
+     * @return string
+     */
     public function getNewRecordColor()
     {
         return is_null( $this->newRecordColor ) ? 'blue' : $this->newRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo alterado
+     * @return string
+     */
     public function setEditedRecordColor( $strNewValue = null )
     {
         $this->editedRecordColor = $strNewValue;
     }
     
+    /**
+     * Grid Off-line define a cor do novo alterado
+     * @return string
+     */    
     public function getEditedRecordColor()
     {
         return is_null( $this->editedRecordColor ) ? '#FF9900' : $this->editedRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo salvo
+     * @return string
+     */
     public function setSavedRecordColor( $strNewValue = null )
     {
         $this->savedRecordColor = $strNewValue;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo salvo
+     * @return string
+     */
     public function getSavedRecordColor( $strNewValue = null )
     {
         return is_null( $this->savedRecordColor ) ? '#009933' : $this->savedRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo deletado
+     * @return string
+     */
     public function getDeletedRecordColor()
     {
         return is_null( $this->deletedRecordColor ) ? '#FF0000' : $this->deletedRecordColor;
     }
-    
     //------------------------------------------------------------------------------------------------
     /**
      * Define o nome de uma função php que a classe TGrid irá executar passando a classe TAutocomplete, o array de dados ($res) referente a linha atual, o objeto celula e o objeto coluna
@@ -2946,7 +2959,11 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
-    function setShowAdicionarButton( $boolNewValue = null )
+    /**
+     * No Grid off-line Mostra o Botão adicionar
+     * @param boolean $boolNewValue
+     */
+    public function setShowAdicionarButton( $boolNewValue = null )
     {
         $this->showAdicionarButton = $boolNewValue;
     }
