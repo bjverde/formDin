@@ -23,14 +23,7 @@ $frm->addGroupField('gpx1', 'Pedido');
 $frm->closeGroup();
 $frm->addGroupField('gpx2', 'Itens');
     // subformulário com campos "offline" 1-N
-    $frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdx');
-
-    /*
-    $frm->addTextField('item', 'item:', 10, false, null);
-    $frm->addTextField('produto', 'Produto:', 30, false, null);
-    $frm->addNumberField('quantidade', 'Quantidade:', 5, true, 1, true)->setEnabled(false);
-    $frm->addNumberField('preco', 'Preço:', 10, true, 2, true)->setEnabled(false);
-    */
+    $frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem');
 $frm->closeGroup();
 
 
