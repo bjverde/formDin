@@ -1072,6 +1072,18 @@ class TGrid extends TTable
         }
     }
     
+    private function getTdValueByType($value) {
+        $tdValue = '';
+        
+        if ( is_array($value) ){
+            $tdValue = 'PHP Array';
+        } else if ( is_object ($value) ){
+            $tdValue = 'PHP Object';
+        } else {
+            $tdValue = ( ( (string) $value  <> '' ) ? $value : '' );
+        }
+        return $tdValue;
+    }    
 
     /***
      *  Return value of TD in the grid 
@@ -1082,24 +1094,21 @@ class TGrid extends TTable
      */
     private function getTdValue($res,$fieldName,$k) {
         $tdValue = '';
-        $value = $res[ $fieldName ][ $k ];
-        if ( isset( $value ) )
+        
+        if ( isset( $res[ $fieldName ][ $k ] ) )
         {
-            if ( is_array($value) ){
-                $tdValue = 'PHP Array';
-            } else if ( is_object ($value) ){
-                $tdValue = 'PHP Object';
-            } else {
-                $tdValue = ( ( (string) $value  <> '' ) ? $value : '' );
-            }
+            $value = $res[ $fieldName ][ $k ];
+            $tdValue = $this->getTdValueByType($value);
         }
         else if( isset( $res[ strtolower( $fieldName )][ $k ] ) )
         {
-            $tdValue = ( ( (string) $res[ strtolower( $fieldName )][ $k ] <> '' ) ? $res[ strtolower( $fieldName )][ $k ] : '' );
+            $value = $res[ strtolower( $fieldName )][ $k ];
+            $tdValue = $this->getTdValueByType($value);
         }
         else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
         {
-            $tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
+            $value = $res[ strtoupper( $fieldName )][ $k ];
+            $tdValue = $this->getTdValueByType($value);
         }
         return $tdValue;
     }
@@ -2860,6 +2869,7 @@ class TGrid extends TTable
     {
         if( $boolUtf8 && is_array($this->excelHeadFields ) )
         {
+            $arrTemp = array();
             foreach($this->excelHeadFields as $k=>$v)
             {
                 $arrTemp[utf8_encode($k)] = utf8_encode($v);
