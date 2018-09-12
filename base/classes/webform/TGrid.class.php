@@ -572,18 +572,8 @@ class TGrid extends TTable
                             $tdValue = '';
                             
                             // verificar o nome da coluna informado em caixa alta, baixa e normal
-                            if ( isset( $res[ $fieldName ][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) $res[ $fieldName ][ $k ]  <> '' ) ? $res[ $fieldName ][ $k ] : '' );
-                            }
-                            else if( isset( $res[ strtolower( $fieldName )][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) $res[ strtolower( $fieldName )][ $k ] <> '' ) ? $res[ strtolower( $fieldName )][ $k ] : '' );
-                            }
-                            else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
-                            }
+                            $tdValue = $this->getTdValue($res, $fieldName, $k);                            
+
                             if ($objColumn->getColumnType() == 'columncompact')
                             {
                                 if (strlen($tdValue)> $objColumn->getMaxTextLength())
@@ -873,8 +863,19 @@ class TGrid extends TTable
                                             {
                                                 if ( isset( $res[ $field ][ $k ] ) )
                                                 {
-                                                    $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($res[ $field ][ $k ],"'")) );
-                                                    $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($res[ $field ][ $k ],"'") . '"';
+                                                    $valeu  = $res[ $field ][ $k ];
+                                                    if ( is_array($valeu) ){
+                                                        $valeu  = 'PHP Array';
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    } else if ( is_object($valeu) ){
+                                                        $valeu  = 'PHP Object';
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    }else {
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -1069,6 +1070,38 @@ class TGrid extends TTable
                 }
             }
         }
+    }
+    
+
+    /***
+     *  Return value of TD in the grid 
+     * @param array $res
+     * @param string $fieldName
+     * @param number $k
+     * @return mixed
+     */
+    private function getTdValue($res,$fieldName,$k) {
+        $tdValue = '';
+        $value = $res[ $fieldName ][ $k ];
+        if ( isset( $value ) )
+        {
+            if ( is_array($value) ){
+                $tdValue = 'PHP Array';
+            } else if ( is_object ($value) ){
+                $tdValue = 'PHP Object';
+            } else {
+                $tdValue = ( ( (string) $value  <> '' ) ? $value : '' );
+            }
+        }
+        else if( isset( $res[ strtolower( $fieldName )][ $k ] ) )
+        {
+            $tdValue = ( ( (string) $res[ strtolower( $fieldName )][ $k ] <> '' ) ? $res[ strtolower( $fieldName )][ $k ] : '' );
+        }
+        else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
+        {
+            $tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
+        }
+        return $tdValue;
     }
     
     /**
