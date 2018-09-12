@@ -1,12 +1,13 @@
 <?php
 
 $primaryKey = 'ID_ITEM';
-$frm = new TForm(null, 150);
+$frm = new TForm(null,120);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-//$frm->addHiddenField($primaryKey); // coluna chave da tabela
-$frm->addTextField('PROTUDO', 'Produto:', 30, false, null);
+$frm->addHiddenField($primaryKey); // coluna chave da tabela
+//$frm->addTextField('ID_ITEM','item',30); // coluna chave da tabela
+$frm->addTextField('PRODUTO', 'Produto:', 30, false, null);
 $frm->addNumberField('QUANTIDADE', 'Quantidade:', 5, true, 1, true);
 $frm->addNumberField('PRECO', 'Preço:', 10, true, 2, true);
 
