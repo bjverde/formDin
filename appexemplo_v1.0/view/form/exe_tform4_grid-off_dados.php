@@ -13,6 +13,8 @@ $frm->addTextField('PRODUTO', 'Produto:', 30, false, null);
 $frm->addNumberField('QUANTIDADE', 'Quantidade:', 5, true, 1, true);
 $frm->addNumberField('PRECO', 'Preço:', 10, true, 2, true);
 
+d($_REQUEST);
+
 $dados = Tb_pedido_itemDAO::selectAll($primaryKey, null);
 
 $grid = new TGrid('gdItem'      // id do gride
