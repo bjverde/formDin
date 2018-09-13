@@ -25,8 +25,8 @@ $frm->addGroupField('gpx1', 'Pedido');
 $frm->closeGroup();
 $frm->addGroupField('gpx2', 'Itens');
     // subformulário com campos "offline" 1-N
-    $mix = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
-    $frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem',null,null,null,null,$mix);
+    $mixFormFields = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
+    $frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem',null,null,null,null,$mixFormFields);
 $frm->closeGroup();
 
 
