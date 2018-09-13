@@ -6436,16 +6436,24 @@ class TForm Extends TBox
             * @example $mixFormFields - campos do formulário que serão enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
             * neste caso o valor de des_x será lido do campo do formulário
             *
-            * @param string $strName
-            * @param string $strGridFile
-            * @param string $strHeight
-            * @param string $strWidth
-            * @param string  $strLoadingMessage
-            * @param boolean $boolNewLine
-            * @param mixed $mixFormFields
+            * @param string $strName            - 1: Nome do Campo
+            * @param string $strGridFile        - 2: Caminho do arquivo
+            * @param string $strGridId          - 3: Id do Grid
+            * @param string $strHeight          - 4:
+            * @param string $strWidth           - 5:
+            * @param string  $strLoadingMessage - 6:
+            * @param boolean $boolNewLine       - 7:
+            * @param mixed $mixFormFields       - 8: Exemplo de uso array( 'seq_documento'=>$frm->get('seq_documento') );
             * @return THtml
             */
-           public function addHtmlGride( $strName, $strGridFile, $strGridId, $strHeight=null, $strWidth=null, $strLoadingMessage=null, $boolNewLine=null, $mixFormFields=null )
+           public function addHtmlGride( $strName
+                                       , $strGridFile
+                                       , $strGridId
+                                       , $strHeight=null
+                                       , $strWidth=null
+                                       , $strLoadingMessage=null
+                                       , $boolNewLine=null
+                                       , $mixFormFields=null )
            {
                //$strWidth = is_null($strWidth) ? $this->getMaxWidth() : $strWidth;
                if( $strGridId )
