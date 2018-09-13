@@ -1,6 +1,6 @@
 <?php
 
-d($_REQUEST);
+//d($_REQUEST);
 
 $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Exemplo Form4 - Consulta Grid"</i>.
           <br>
@@ -8,7 +8,7 @@ $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Ex
 
 
 $primaryKey = 'ID_PEDIDO';
-$frm = new TForm('Exemplo Form4 - Grid Off', 800,1000);
+$frm = new TForm('Exemplo Form4 - Grid Off', 700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -23,11 +23,11 @@ $frm->addGroupField('gpx1', 'Pedido');
     $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
     $frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, $listFormas,false);
 $frm->closeGroup();
-$frm->addGroupField('gpx2', 'Itens');
-    // subformulário com campos "offline" 1-N
-    $mixFormFields = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
-    $frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem',null,null,null,null,$mixFormFields);
-$frm->closeGroup();
+
+//Campos que serão enviados ao subform
+$mixFormFields = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
+// subformulário com campos "offline" 1-N
+$frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem',null,null,null,null,$mixFormFields);
 
 
 $frm->addButton('Salvar', null, null, null, null, true, false);
@@ -89,10 +89,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUpdateFields($mixUpdateFields);
     $gride->setUrl( 'view/form/exe_tform4_grid-off_form.php' );
     
-    $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('DATA_PEDIDO','Data do Pedido');
-    $gride->addColumn('NOME_COMPRADOR','Nome do Comprar');
-    $gride->addColumn('FORMA_PAGAMENTO','Forma de Pagamento');
+    $gride->addColumn($primaryKey,'id',null);
+    $gride->addColumn('DATA_PEDIDO','Data do Pedido',null);
+    $gride->addColumn('NOME_COMPRADOR','Nome do Comprar',null);
+    $gride->addColumn('FORMA_PAGAMENTO','Forma de Pagamento',null);
     
     $gride->show();
     die();

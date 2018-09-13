@@ -13,7 +13,7 @@ $frm->addTextField('PRODUTO', 'Produto:', 30, false, null);
 $frm->addNumberField('QUANTIDADE', 'Quantidade:', 5, true, 1, true);
 $frm->addNumberField('PRECO', 'Preço:', 10, true, 2, true);
 
-d($_REQUEST);
+//d($_REQUEST);
 $dados = null;
 $ID_PEDIDO = RequestHelper::get('ID_PEDIDO');
 if( $ID_PEDIDO ){
@@ -21,7 +21,7 @@ if( $ID_PEDIDO ){
     $dados = Tb_pedido_itemDAO::selectAll($primaryKey, $where);
 }
 $grid = new TGrid('gdItem'      // id do gride
-                , 'Lista de Itens'          // titulo do gride
+                , 'Itens do Pedido'          // titulo do gride
                 , $dados        // array de dados
                 , null          // altura do gride
                 , null          // largura do gride
