@@ -110,6 +110,14 @@ class ArrayHelper
         return $result;
     }
     
+    static function getArray($array,$atributeName)
+    {
+        if(!isset($array[$atributeName])) {
+            $array[$atributeName]=array();
+        }
+        return is_null($array[$atributeName])?array():$array[$atributeName];
+    }
+    
     /**
      * Convert Array PDO Format to FormDin format
      *
