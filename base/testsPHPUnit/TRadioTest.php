@@ -5,7 +5,7 @@ require_once '../classes/webform/TOption.class.php';
 require_once '../classes/webform/TRadio.class.php';
 require_once '../classes/webform/TPDOConnection.class.php';
 /**
- * TDiv test case.
+ * TRadio test case.
  */
 class TRadioTest extends PHPUnit_Framework_TestCase {
 	
