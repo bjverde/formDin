@@ -42,7 +42,8 @@ class Tb_pedidoVO
     private $data_pedido = null;
     private $nome_comprador = null;
     private $forma_pagamento = null;
-    public function __construct($id_pedido = null, $data_pedido = null, $nome_comprador = null, $forma_pagamento = null)
+    private $list_pedido_item = null;
+    public function __construct($id_pedido = null, $data_pedido = null, $nome_comprador = null, $forma_pagamento = null, $list_pedido_item = null)
     {
         $this->setId_pedido($id_pedido);
         $this->setData_pedido($data_pedido);
@@ -86,4 +87,16 @@ class Tb_pedidoVO
         return $this->forma_pagamento;
     }
     //--------------------------------------------------------------------------------
+    public function setList_pedido_item($arrayNewValue = null)
+    {
+        if( is_array($arrayNewValue) || is_null($arrayNewValue) ){
+            $this->list_pedido_item = $arrayNewValue;
+        }else{
+            throw new InvalidArgumentException('Input Type ERROR: Expected an array. Input was: '.gettype($arrayNewValue));
+        }
+    }
+    public function getList_pedido_item()
+    {
+        return $this->list_pedido_item;
+    }    
 }
