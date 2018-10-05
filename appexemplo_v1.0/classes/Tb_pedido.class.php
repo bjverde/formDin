@@ -43,20 +43,23 @@ class Tb_pedido {
 	}
 	//--------------------------------------------------------------------------------
 	private static function saveGridOffItem( $idPedido , $listPedidoItens ){
-	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
-	        $idPedidoItem = $listPedidoItens['ID_ITEM'][$key];
-	        $objVo = new Tb_pedido_itemVO();
-	        $objVo->setId_item( $idPedidoItem );
-	        $objVo->setId_pedido( $idPedido );
-	        $objVo->setProduto( $listPedidoItens['PRODUTO'][$key] );
-	        $objVo->setPreco( $listPedidoItens['PRECO'][$key] );
-	        $objVo->setQuantidade( $listPedidoItens['QUANTIDADE'][$key] );
-	        
-	        if ( ($value == 'I') || ($value == 'A') ) {
-	            Tb_pedido_item::save($objVo);
-	        } elseif ($value == 'E') {
-	            Tb_pedido_item::delete($idPedidoItem);
-	        }
+	    $hasArray = ArrayHelper::has('GDITEM_AEI', $listPedidoItens);
+	    if($hasArray) {
+    	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
+    	        $idPedidoItem = $listPedidoItens['ID_ITEM'][$key];
+    	        $objVo = new Tb_pedido_itemVO();
+    	        $objVo->setId_item( $idPedidoItem );
+    	        $objVo->setId_pedido( $idPedido );
+    	        $objVo->setProduto( $listPedidoItens['PRODUTO'][$key] );
+    	        $objVo->setPreco( $listPedidoItens['PRECO'][$key] );
+    	        $objVo->setQuantidade( $listPedidoItens['QUANTIDADE'][$key] );
+    	        
+    	        if ( ($value == 'I') || ($value == 'A') ) {
+    	            Tb_pedido_item::save($objVo);
+    	        } elseif ($value == 'E') {
+    	            Tb_pedido_item::delete($idPedidoItem);
+    	        }
+    	    }
 	    }
 	}
 	//--------------------------------------------------------------------------------
@@ -66,12 +69,17 @@ class Tb_pedido {
 	    if( $idPedido ) {
 	        $result = Tb_pedidoDAO::update( $objVo );
 	        $listPedidoItens = $objVo->getList_pedido_item();
-	        self::saveGridOffItem($idPedido, $listPedidoItens);	        
+	        self::saveGridOffItem($idPedido, $listPedidoItens);
+	        $result = 1;
 	    } else {
 	        $objVo->setId_pedido( 'Novo' ); //Para manter compatibilidade com exemplo mestre detalhe
-	        $idPedido = Tb_pedidoDAO::insert( $objVo );
+	        $listLastPedido = Tb_pedidoDAO::insert( $objVo );
 	        $listPedidoItens = $objVo->getList_pedido_item();
-	        self::saveGridOffItem($idPedido, $listPedidoItens);
+	        
+	        $lastID = ArrayHelper::getArray($listLastPedido, 'ID_PEDIDO');
+	        $idPedido = ArrayHelper::get($lastID, 0);
+	        self::saveGridOffItem($idPedido[0], $listPedidoItens);
+	        $result = 1;
 	    }
 	    return $result;
 	}
