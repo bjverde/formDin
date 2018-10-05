@@ -42,7 +42,7 @@ class Tb_pedido {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function saveGridOffItem( $idPedido , $listPedidoItens ){
+	private static function saveGridOffItem( $idPedido , $listPedidoItens ){
 	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
 	        $idPedidoItem = $listPedidoItens['ID_ITEM'][$key];
 	        $objVo = new Tb_pedido_itemVO();
@@ -68,6 +68,7 @@ class Tb_pedido {
 	        $listPedidoItens = $objVo->getList_pedido_item();
 	        self::saveGridOffItem($idPedido, $listPedidoItens);	        
 	    } else {
+	        $objVo->setId_pedido( 'Novo' ); //Para manter compatibilidade com exemplo mestre detalhe
 	        $idPedido = Tb_pedidoDAO::insert( $objVo );
 	        $listPedidoItens = $objVo->getList_pedido_item();
 	        self::saveGridOffItem($idPedido, $listPedidoItens);

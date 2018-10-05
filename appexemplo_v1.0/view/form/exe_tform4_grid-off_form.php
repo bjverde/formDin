@@ -14,7 +14,7 @@ $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
-$frm->addHiddenField($primaryKey,null,true); // coluna chave da tabela
+$frm->addHiddenField($primaryKey); // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
 
@@ -43,8 +43,7 @@ switch ($acao) {
             $list_pedido_item = $frm->createBvars('grid_off');
             d($list_pedido_item['GRID_OFF']);
             $vo->setList_pedido_item($list_pedido_item['GRID_OFF']);
-            $resultado = 'Xii';
-            //$resultado = Vw_pedido_qtd_itensDAO::insert($vo);
+            $resultado = Tb_pedido::saveGridOff($vo);
             if ($resultado==1) {
                 $frm->setMessage('Registro gravado com sucesso!!!');
                 $frm->clearFields();
