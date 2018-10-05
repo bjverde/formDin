@@ -1,6 +1,7 @@
 <?php
 
-//d($_REQUEST);
+d($_REQUEST);
+//d($_SESSION['APPEV1']);
 
 $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Exemplo Form4 - Consulta Grid"</i>.
           <br>
@@ -13,7 +14,7 @@ $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
-$frm->addHiddenField($primaryKey); // coluna chave da tabela
+$frm->addHiddenField($primaryKey,null,true); // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
 
@@ -37,9 +38,13 @@ $acao = isset($acao) ? $acao : null;
 switch ($acao) {
     case 'Salvar':
         if ($frm->validate()) {
-            $vo = new Vw_pedido_qtd_itensVO();
+            $vo = new Tb_pedidoVO();
             $frm->setVo($vo);
-            $resultado = Vw_pedido_qtd_itensDAO::insert($vo);
+            $list_pedido_item = $frm->createBvars('grid_off');
+            d($list_pedido_item);
+            $vo->setList_pedido_item($list_pedido_item);
+            $resultado = 'Xii';
+            //$resultado = Vw_pedido_qtd_itensDAO::insert($vo);
             if ($resultado==1) {
                 $frm->setMessage('Registro gravado com sucesso!!!');
                 $frm->clearFields();

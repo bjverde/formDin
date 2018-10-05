@@ -63,12 +63,17 @@ $acao = isset($acao) ? $acao : '';
 if ($acao == 'Novo') {
     $frm->clearFields();
 } elseif ($acao == 'Gravar') {
+    d($_REQUEST);
+    $res = $frm->createBvars('campo_moeda');
+    d($res);
+    /*
     print_r($_POST);
     $res = $frm->createBvars('campo_moeda,dat_nascimento');
     foreach ($res as $k => $v) {
         d($k, '$k');
         d($v, '$v');
     }
+    */
 }
 ?>
 <script>
