@@ -41,8 +41,8 @@ switch ($acao) {
             $vo = new Tb_pedidoVO();
             $frm->setVo($vo);
             $list_pedido_item = $frm->createBvars('grid_off');
-            d($list_pedido_item);
-            $vo->setList_pedido_item($list_pedido_item);
+            d($list_pedido_item['GRID_OFF']);
+            $vo->setList_pedido_item($list_pedido_item['GRID_OFF']);
             $resultado = 'Xii';
             //$resultado = Vw_pedido_qtd_itensDAO::insert($vo);
             if ($resultado==1) {

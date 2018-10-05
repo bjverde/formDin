@@ -115,7 +115,9 @@ class Tb_pedido_itemDAO extends TPDOConnection
     public static function delete($id)
     {
         $values = array($id);
-        return self::executeSql('delete from tb_pedido_item where id_item = ?', $values);
+        $sql = 'delete from tb_pedido_item where id_item = ?';
+        $result = self::executeSql( $sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
     public static function update(Tb_pedido_itemVO $objVo)
@@ -135,7 +137,9 @@ class Tb_pedido_itemDAO extends TPDOConnection
     //--------------------------------------------------------------------------------
     public static function select_itens_pedido($id_pedido = null)
     {
-        $dados = self::executeSql('select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?', array($id_pedido));
+        $values = array($id_pedido);
+        $sql = 'select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?';
+        $dados = self::executeSql( $sql, $values );
         return $dados;
     }
 }
