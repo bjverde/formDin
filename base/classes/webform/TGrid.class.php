@@ -1895,17 +1895,17 @@ class TGrid extends TTable
     /*****
      * Coluna do tipo select
      *
-     * @param string $strName      - ID do campos
-     * @param string $strTitle     - Titulo que irá aparecer no grid
-     * @param string $strFieldName - Nome do campo do gride
-     * @param mixed $mixOptions    - Opções caso o Campo do gride não seja um array
-     * @param mixed $strWidth
-     * @param boolean $boolReadOnly
-     * @param string $strFirstOptionText
-     * @param string $strFirstOptionValue
-     * @param string $strKeyField
-     * @param string $strDisplayField
-     * @param string $strInitialValueField
+     * @param string $strName         - 1: ID do campos
+     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
+     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
+     * @param mixed $strWidth         - 5: largura do campos
+     * @param boolean $boolReadOnly   - 6: Somente Leiura
+     * @param string $strFirstOptionText  - 7: Label do Primeiro valor
+     * @param string $strFirstOptionValue - 8: Valor do Primeiro valor
+     * @param string $strKeyField         - 9: 
+     * @param string $strDisplayField     - 10:
+     * @param string $strInitialValueField -11: Default Valeu
      * @return TGridSelectColumn
      */
     public function addSelectColumn( $strName
@@ -1920,7 +1920,16 @@ class TGrid extends TTable
         , $strDisplayField = null
         , $strInitialValueField=null
         ){
-            $col = new TGridSelectColumn( $strName, $strTitle, $strFieldName, $mixOptions, $strWidth, $boolReadOnly, $strFirstOptionText, $strFirstOptionValue, $strKeyField, $strDisplayField, $strInitialValueField );
+            $col = new TGridSelectColumn( $strName
+                , $strTitle
+                , $strFieldName
+                , $mixOptions
+                , $strWidth
+                , $boolReadOnly
+                , $strFirstOptionText
+                , $strFirstOptionValue
+                , $strKeyField
+                , $strDisplayField, $strInitialValueField );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
