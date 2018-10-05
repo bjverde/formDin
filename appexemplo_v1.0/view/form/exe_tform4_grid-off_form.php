@@ -1,7 +1,6 @@
 <?php
 
 //d($_REQUEST);
-//d($_SESSION['APPEV1']);
 
 $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Exemplo Form4 - Consulta Grid"</i>.
           <br>
@@ -19,10 +18,10 @@ $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1
 
 
 $frm->addGroupField('gpx1', 'Pedido');
-    $frm->addTextField('nome_comprador', 'Comprador:', 60, false, null);
-    $frm->addDateField('data_pedido', 'Data:', false);
+    $frm->addTextField('nome_comprador', 'Comprador:', 60, true, null);
+    $frm->addDateField('data_pedido', 'Data:', true);
     $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
-    $frm->addSelectField('forma_pagamento', 'Forma Pagamento:', false, $listFormas,false);
+    $frm->addSelectField('forma_pagamento', 'Forma Pagamento:', true, $listFormas,false);
 $frm->closeGroup();
 
 //Campos que serão enviados ao subform
@@ -53,6 +52,7 @@ switch ($acao) {
         break;
     //--------------------------------------------------------------------------------
     case 'Limpar':
+        unset( $_SESSION[APLICATIVO]['offline'] );
         $frm->clearFields();
         break;
     //--------------------------------------------------------------------------------
@@ -63,7 +63,6 @@ switch ($acao) {
             $frm->setMessage('Registro excluido com sucesso!!!');
             $frm->clearFields();
         }else{
-            $frm->clearFields();
             $frm->setMessage($resultado);
         }
         break;
