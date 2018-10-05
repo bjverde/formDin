@@ -41,10 +41,43 @@ class Tb_pedido {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function saveGridOffItem( $idPedido , $listPedidoItens ){
+	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
+	        $idPedidoItem = $listPedidoItens['ID_ITEM'][$key];
+	        $objVo = new Tb_pedido_itemVO();
+	        $objVo->setId_item( $idPedidoItem );
+	        $objVo->setId_pedido( $idPedido );
+	        $objVo->setProduto( $listPedidoItens['PRODUTO'][$key] );
+	        $objVo->setPreco( $listPedidoItens['PRECO'][$key] );
+	        $objVo->setQuantidade( $listPedidoItens['QUANTIDADE'][$key] );
+	        
+	        if ( ($value == 'I') || ($value == 'A') ) {
+	            Tb_pedido_item::save($objVo);
+	        } elseif ($value == 'E') {
+	            Tb_pedido_item::delete($idPedidoItem);
+	        }
+	    }
+	}
+	//--------------------------------------------------------------------------------
+	public static function saveGridOff( Tb_pedidoVO $objVo ){
+	    $result = null;
+	    $idPedido = $objVo->getId_pedido();
+	    if( $idPedido ) {
+	        $result = Tb_pedidoDAO::update( $objVo );
+	        $listPedidoItens = $objVo->getList_pedido_item();
+	        self::saveGridOffItem($idPedido, $listPedidoItens);	        
+	    } else {
+	        $idPedido = Tb_pedidoDAO::insert( $objVo );
+	        $listPedidoItens = $objVo->getList_pedido_item();
+	        self::saveGridOffItem($idPedido, $listPedidoItens);
+	    }
+	    return $result;
+	}
+	//--------------------------------------------------------------------------------
 	public static function delete( $id ){
+	    $result = Tb_pedido_item::deleteByIdPedido($id);
 		$result = Tb_pedidoDAO::delete( $id );
 		return $result;
 	}
-
 }
 ?>
