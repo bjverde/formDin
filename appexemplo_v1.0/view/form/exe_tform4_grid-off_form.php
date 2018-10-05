@@ -58,8 +58,16 @@ switch ($acao) {
         $frm->clearFields();
         break;
     //--------------------------------------------------------------------------------
-    case 'backForm4p1':
-        $frm->redirect('view/form/exe_tform4_consulta_tree_p1.php', null, true);
+    case 'gd_excluir':
+        $id = $frm->get($primaryKey);
+        $resultado = Tb_pedido::delete($id);;
+        if($resultado==1) {
+            $frm->setMessage('Registro excluido com sucesso!!!');
+            $frm->clearFields();
+        }else{
+            $frm->clearFields();
+            $frm->setMessage($resultado);
+        }
         break;
 }
 
