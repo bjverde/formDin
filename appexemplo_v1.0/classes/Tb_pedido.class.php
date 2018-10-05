@@ -27,7 +27,8 @@ class Tb_pedido {
 	}
 	//--------------------------------------------------------------------------------
 	public static function selectAll( $orderBy=null, $where=null ){
-		$result = Tb_pedidoDAO::selectAll( $orderBy, $where );
+		//$result = Tb_pedidoDAO::selectAll( $orderBy, $where );
+	    $result = Vw_pedido_qtd_itensDAO::selectAll($orderBy, $where);
 		return $result;
 	}
 	//--------------------------------------------------------------------------------

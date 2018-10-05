@@ -1,6 +1,6 @@
 <?php
 
-d($_REQUEST);
+//d($_REQUEST);
 //d($_SESSION['APPEV1']);
 
 $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Exemplo Form4 - Consulta Grid"</i>.
@@ -60,7 +60,7 @@ switch ($acao) {
     //--------------------------------------------------------------------------------
     case 'gd_excluir':
         $id = $frm->get($primaryKey);
-        $resultado = Tb_pedido::delete($id);;
+        $resultado = Tb_pedido::delete($id);
         if($resultado==1) {
             $frm->setMessage('Registro excluido com sucesso!!!');
             $frm->clearFields();
@@ -103,9 +103,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'view/form/exe_tform4_grid-off_form.php' );
     
     $gride->addColumn($primaryKey,'id',null);
-    $gride->addColumn('DATA_PEDIDO','Data do Pedido',null);
+    $gride->addColumn('DATA_PEDIDO','Data do Pedido',null,'center');
     $gride->addColumn('NOME_COMPRADOR','Nome do Comprar',null);
-    $gride->addColumn('FORMA_PAGAMENTO','Forma de Pagamento',null);
+    //$gride->addColumn('FORMA_PAGAMENTO','Forma de Pagamento',null);
+    $gride->addColumn('DES_FORMA_PAGAMENTO','Forma de Pagamento',null);
+    $gride->addColumn('QTD','Qtd Itens',null,'center');    
     
     $gride->show();
     die();
