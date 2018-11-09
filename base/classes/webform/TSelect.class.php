@@ -61,7 +61,18 @@ class TSelect extends TOption
     * @param mixed $strDataColumns
     * @return TSelect
     */
-    public function __construct($strName,$mixOptions=null,$strValue=null,$boolRequired=null,$boolMultiSelect=null,$intSize=null,$intWidth=null,$strFirstOptionText=null,$strFirstOptionValue=null,$strKeyColumn=null,$strDisplayColumn=null,$strDataColumns=null)
+    public function __construct($strName
+                               ,$mixOptions=null
+                               ,$strValue=null
+                               ,$boolRequired=null
+                               ,$boolMultiSelect=null
+                               ,$intSize=null
+                               ,$intWidth=null
+                               ,$strFirstOptionText=null
+                               ,$strFirstOptionValue=null
+                               ,$strKeyColumn=null
+                               ,$strDisplayColumn=null
+                               ,$strDataColumns=null)
     {
          parent::__construct($strName,$mixOptions,$strValue,$boolRequired,null,$intWidth,null,null,$boolMultiSelect,'select',$strKeyColumn,$strDisplayColumn,null,$strDataColumns);
          parent::setSelectSize($intSize);
