@@ -1387,7 +1387,7 @@ class TGrid extends TTable
     public function setData( $mixValue = null ){
         if ( is_array( $mixValue ) ) {
             $keys = array_keys($mixValue);
-            if ( ! $keys[0] ) {
+            if ( empty($keys) ) {
                 $mixValue = null;
             }
         }
