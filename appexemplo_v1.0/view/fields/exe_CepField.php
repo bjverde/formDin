@@ -57,10 +57,17 @@ if (isset($_POST['num_cep'])) {
     exit;
 }
 $frm = new TForm('Exemplo Campo CEP', 400, 600);
+$frm->setFlat(true);
+
 // define a largura das colunas verticais do formulario para alinhamento dos campos
 $frm->setColumns(array(100,100));
-$fldCep = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto')->setExampleText('Não limpar se estiver incompleto');
-$fldCep = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend');
+
+$fldCep0 = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend');
+$fldCep0->setExampleText('Limpar o campo se estiver incompleto');
+
+$fldCep1 = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto');
+$fldCep1->setExampleText('Não limpar o campo se estiver incompleto');
+
 $frm->addTextField('des_endereco', 'Endereço:', 60);
 $frm->addTextField('num_endereco', 'Número:', 10);
 $frm->addTextField('des_complemento', 'Complemento:', 60);
