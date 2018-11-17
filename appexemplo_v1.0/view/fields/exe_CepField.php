@@ -84,6 +84,19 @@ $frm->closeGroup();
 
 $frm->addGroupField('gpx2', 'Motor de Busca BuscarCep');
     $frm->addHtmlField('html2', null, 'ajuda/cep_buscar.html','',40)->setCss('border', '1px solid blue');
+    $frm->addCepField('num_cep3'
+                     ,'Cep:'
+                     , true
+                     , null
+                     , null
+                     , 'des_endereco3'
+                     , null
+                     , NULL
+                     , 'cod_uf3', null, null, null, 'cod_municipio2_temp', null, null, 'myCallback', null,false,null,2);
+    $frm->addTextField('des_endereco3', 'Endereço:', 60);
+    $frm->addSelectField('cod_uf3', 'Estado:', false);
+    $frm->addSelectField('cod_municipio3', 'Município:', null, null, false);
+    $frm->combinarSelects('cod_uf3', 'cod_municipio3', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 $frm->closeGroup();
     
 $frm->show();
@@ -100,5 +113,6 @@ function pesquisarCepBeforeSend(id){
 function myCallback(dataset){
     console.log(jQuery("#cod_municipio2_temp").val());
     jQuery("#cod_uf2").change();
+    jQuery("#cod_uf3").change();
 }
 </script>
