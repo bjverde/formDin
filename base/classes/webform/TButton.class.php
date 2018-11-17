@@ -55,12 +55,12 @@ class TButton extends TControl
 	 *  Cria um botão 
 	 * @param string $strName           - 1: Id do botão
 	 * @param string $strValue          - 2: label do botão
-	 * @param unknown $strAction        - 3: 
-	 * @param unknown $strOnClick
-	 * @param unknown $strConfirmMessage
-	 * @param unknown $strImageEnabled
-	 * @param unknown $strImageDisabled
-	 * @param unknown $strHint
+	 * @param string $strAction         - 3: 
+	 * @param string $strOnClick
+	 * @param string $strConfirmMessage
+	 * @param string $strImageEnabled
+	 * @param string $strImageDisabled
+	 * @param string $strHint
 	 * @param boolean $boolSubmitAction
 	 */
 	public function __construct($strName
