@@ -3811,6 +3811,10 @@ class TForm Extends TBox
                  {
                      $this->addJsFile("FormDin4Geo.js");
                  }
+                 else if( $dc->getField()->getFieldType() == 'cep' )
+                 {
+                     $this->addJsFile("FormDin4Cep.js");
+                 }
              }
          }
          return array( $this->jsFiles, $this->cssFiles );
@@ -6640,7 +6644,8 @@ class TForm Extends TBox
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
                }
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+               $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+               $this->addDisplayControl( $displayControl );
                return $field;
            }
            
