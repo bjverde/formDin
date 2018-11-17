@@ -6542,7 +6542,7 @@ class TForm Extends TBox
             * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
             * 	$frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
             *
-            * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o serviço buscarcep.com.br
+            * Chama o metodo getCepJquery no arquivo FormDin4Cep.js que chama getCep.php que utiliza o serviço buscarcep.com.br
             * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
             *
             * @param string $strName       - 1: Id do campo
@@ -6639,7 +6639,9 @@ class TForm Extends TBox
                if( $qtd > 0 )
                {
                    $buttonName = $field->getId() . '_btn_consultar';
-                   $buttonOnClick = 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')';
+                   $getCepJsCallback = ($jsCallback ? $jsCallback : 'null');
+                   $getCepJsBeforeSend = ($jsBeforeSend ? $jsBeforeSend : 'null');
+                   $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
                    $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
