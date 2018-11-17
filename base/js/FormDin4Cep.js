@@ -39,6 +39,153 @@
  */
 
 
+/**
+ * limpar os campos com valor = ?
+ * @param fields array fiels
+ * @returns
+ */
+function cepLimparCampos(fields){
+	for (key in fields)
+	{
+		try
+		{
+			if( jQuery("#"+fields[key]).val()== '?' )
+			{
+				jQuery("#"+fields[key]).val('');
+			}
+		}
+		catch(e){}
+	}
+}
+//-------------------------------------------------------------------------------------------------
+/**
+ * Se não informou o cep limpar os campos e sair
+ * @param idNum_cep
+ * @param fields
+ * @returns
+ */
+function cepNaoInformadoLimparCampos(idNum_cep,fields){
+	if(!idNum_cep || jQuery('#'+idNum_cep).attr('value').replace(/[^0-9]/g,'').length != 8 ) {
+		// limpar o campos
+		for (key in fields) {
+			try{
+				JQuery("#"+fields[key]).val('');
+			}
+			catch(e){}
+		}
+		return;
+	}
+}
+//-------------------------------------------------------------------------------------------------
+function cepSetButtonCss(idNum_cep) {
+	jQuery('#'+idNum_cep+'_btn_consultar').attr("disabled", true);
+	jQuery('#'+idNum_cep+'_btn_consultar').val('Aguarde');
+	jQuery('#'+idNum_cep+'_btn_consultar').css('color','red');
+}
+//-------------------------------------------------------------------------------------------------
+function getCepJsonViaCep2(idNum_cep,fields,callback,beforeSend) {
+	var fieldCepValeu = jQuery('#'+idNum_cep).attr('value');
+
+	if(fieldCepValeu!='' && fieldCepValeu!=undefined) {
+		cepSetButtonCss(idNum_cep);
+		fwExecutarFuncao(beforeSend,idNum_cep);
+		jQuery.ajax(
+		{
+			type: 'POST',
+			dataType: 'xml',
+			//url: '?modulo='+pastaBase+'/callbacks/getCep.php',
+			url: app_index_file,
+			data: 'ajax=1&modulo='+pastaBase+'/callbacks/getCep.php&cep='+fieldCepValeu.replace(/[^0-9]/g,''),
+			error:function(erro){
+				alert(erro);
+			},
+			success:function(dataset)
+			{
+				fwSetEstilo('{"id":"'+idNum_cep+'","backgroundImage":"","backgroundRepeat":"no-repeat","backgroundPosition":"center right"}');
+				jQuery('#'+idNum_cep+'_btn_consultar').removeAttr("disabled");
+				jQuery('#'+idNum_cep+'_btn_consultar').val('Consultar');
+				jQuery('#'+idNum_cep+'_btn_consultar').css('color','blue');
+				jQuery(dataset).find('webservicecep').each(
+					function()
+					{
+
+						switch(jQuery(this).find('resultado').text())
+						{
+							case '1':
+								break;
+							case '-1':
+								alert('CEP não encontrado');
+								break;
+							case '-2':
+								alert('Formato de CEP inválido');
+								break;
+							case '-3':
+								alert('Limite de buscas de ip por minuto excedido');
+								break;
+							case '-4':
+								alert('Ip banido. Contate o administrador');
+								break;
+							default:
+								alert('Erro ao conectar-se tente novamente');
+								break;
+						}
+						if(jQuery(this).find('resultado').text()==1)
+						{
+							for (key in fields)
+							{
+								if (key == 'endereco')
+								{
+									var complemento='';
+									if (!fields['complemento'])
+									{
+										complemento = ' '+jQuery(this).find('complemento').text()
+									}
+									// campo endereco concatenar com: tipo_logradouro e logradouro
+									try{
+										jQuery("#"+fields[key]).attr({
+											value: jQuery(this).find('tipo_logradouro').text()+" "+jQuery(this).find('logradouro').text()+complemento
+										});
+									}catch(e){}
+								}
+								else
+								{
+									try{
+										jQuery("#"+fields[key]).attr({
+											value: jQuery(this).find(key).text()
+										});
+									}catch(e){}
+									try{
+										jQuery("#"+fields[key]+'_temp').attr({
+											value: jQuery(this).find(key).text()
+										});
+									}catch(e){}
+
+								}
+							}
+							fwExecutarFuncao( callback, dataset);
+						}
+					});
+			}
+		});
+	}
+}
+//-------------------------------------------------------------------------------------------------
+/***
+ * Busca o cep informado via api json no site https://viacep.com.br/ e seta os valores nos
+ * campos do form
+ * @param idNum_cep
+ * @param fields
+ * @param callback
+ * @param beforeSend
+ * @returns
+ */
+function getCepJsonViaCep(idNum_cep,fields,callback,beforeSend) {
+	cepLimparCampos(fields); 
+	cepNaoInformadoLimparCampos(idNum_cep,fields);
+	// bucar os dados de endereço
+	setTimeout( getCepJsonViaCep2(idNum_cep,fields,callback,beforeSend) ,1);
+}
+//-------------------------------------------------------------------------------------------------
 function fwFieldCepKeyUp(e,event,fields)
 {
 	var tecla = fwGetTecla(event);
@@ -84,32 +231,9 @@ Xml de retorno:
 <ibge_municipio>313130</ibge_municipio>
 <ibge_municipio_verificador>3131307</ibge_municipio_verificador>
 */
-function getCepJquery(idNum_cep,fields,callback,beforeSend)
-{
-	// limpar os campos com valor = ?
-	for (key in fields)
-	{
-		try
-		{
-			if( jQuery("#"+fields[key]).val()== '?' )
-			{
-				jQuery("#"+fields[key]).val('');
-			}
-		}
-		catch(e){}
-	}
-	// se não informou o cep limpar os campos e sair
-	if(!idNum_cep || jQuery('#'+idNum_cep).attr('value').replace(/[^0-9]/g,'').length != 8 )
-	{
-		// limpar o campos
-		for (key in fields)
-		{
-			try{
-				JQuery("#"+fields[key]).val('');
-			}catch(e){}
-		}
-		return;
-	}
+function getCepJquery(idNum_cep,fields,callback,beforeSend) {
+	cepLimparCampos(fields); 
+	cepNaoInformadoLimparCampos(idNum_cep,fields);
 	// bucar os dados de endereço
 	setTimeout( function()
 	{
