@@ -44,7 +44,7 @@
 
 /***
 * Observação o campo addCepField
-* Chama FormDin4.js getCepJquery que chama getCep.php
+* Chama FormDin4Cep.js getCepJquery que chama getCep.php
 * que utiliza o serviço buscarcep.com.br
 *
 * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml

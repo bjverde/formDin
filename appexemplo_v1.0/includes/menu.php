@@ -78,7 +78,7 @@ $menu->add('17', '1', 'Campo Arquivo ou Blob');
 
     
 $menu->add('18', '1', 'Campo Numérico', 'view/fields/exe_NumberField.php');
-$menu->add('19', '1', 'Campo Brasil');
+$menu->add('19', '1', 'Campo Brasil', null, null, '../../base/imagens/flag_brazil.png');
     $menu->add('191', '19', 'Campo CEP', 'view/fields/exe_CepField.php');
     $menu->add('192', '19', 'Campo Telefone', 'view/fields/exe_FoneField.php');
     $menu->add('193', '19', 'Campo Cpf/Cnpj', 'view/fields/exe_campo_cpf_cnpj.php');
