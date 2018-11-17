@@ -6197,9 +6197,9 @@ class TForm Extends TBox
            /**
             * Adiciona um campo oculto ao layout
             *
-            * @param string $strName
-            * @param string $strValue
-            * @param boolean $boolRequired
+            * @param string $strName       - 1: Id do Campo
+            * @param string $strValue      - 2: Valor inicial
+            * @param boolean $boolRequired - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio  
             * @return THidden
             */
            public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
@@ -6214,9 +6214,9 @@ class TForm Extends TBox
      *
      * @param string $strName       - 1: id do campo
      * @param string $strLabel      - 2: Label do campo
-     * @param integer $intMaxLength - 3: tamanho maximo de carateres
-     * @param boolean $boolRequired - 4: obrigatorio ou não
-     * @param integer $intSize      - 5: quantidade de caracteres visiveis.
+     * @param integer $intMaxLength - 3: tamanho máximo de caracteres
+     * @param boolean $boolRequired - 4: obrigatório ou não
+     * @param integer $intSize      - 5: quantidade de caracteres visíveis
      * @param string $strValue      - 6: texto preenchido
      * @param boolean $boolNewLine  - 7: Nova linha
      * @param string $strHint
@@ -6318,16 +6318,16 @@ class TForm Extends TBox
      * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
      * Tipo de máscara: DMY, DM, MY
      *
-     * @param string  $strName
-     * @param string  $strLabel
-     * @param string  $strValue
-     * @param boolean $boolRequired
-     * @param boolean $boolNewLine
+     * @param string  $strName      - 1: Id do Campo
+     * @param string  $strLabel     - 2: Label do Campo
+     * @param string  $strValue     - 3: Valor inicial
+     * @param boolean $boolRequired - 4: obrigatório ou não
+     * @param boolean $boolNewLine  - 5: Em nova linha
      * @param string  $strMinValue
      * @param string  $strMaxValue
      * @param string  $strMaskType
      * @param boolean $boolButtonVisible
-     * @param boolean $boolLabelAbove
+     * @param boolean $boolLabelAbove - 10: Label sobre
      * @return object TDate
      */ 
     public function addDateField( $strName
@@ -6541,9 +6541,9 @@ class TForm Extends TBox
             * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o serviço buscarcep.com.br
             * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
+            * @param string $strName       - 1: Id do campo
+            * @param string $strLabel      - 2: Label do campo
+            * @param boolean $boolRequired - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
             * @param string $strValue
             * @param boolean $boolNewLine
             * @param string $strFieldEndereco
@@ -6560,7 +6560,22 @@ class TForm Extends TBox
             * @param string $jsCallback
             * @return TMask
             */
-           public function addCepField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $strFieldEndereco=null, $strFieldBairro=null, $strFieldCidade=null, $strFieldCodidoUf=null, $strFieldSiglaUf=null, $strFieldNumero=null, $strFieldComplemento=null, $strFieldCodigoMunicipio=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$jsCallback=null,$jsBeforeSend=null,$boolClearIncompleteValue=null,$strIncompleteMessage=null )
+           public function addCepField( $strName
+                                      , $strLabel=null
+                                      , $boolRequired=null
+                                      , $strValue=null
+                                      , $boolNewLine=null
+                                      , $strFieldEndereco=null
+                                      , $strFieldBairro=null
+                                      , $strFieldCidade=null
+                                      , $strFieldCodidoUf=null
+                                      , $strFieldSiglaUf=null
+                                      , $strFieldNumero=null
+                                      , $strFieldComplemento=null
+                                      , $strFieldCodigoMunicipio=null
+                                      , $boolLabelAbove=null
+                                      , $boolNoWrapLabel=null
+                                      , $jsCallback=null,$jsBeforeSend=null,$boolClearIncompleteValue=null,$strIncompleteMessage=null )
            {
                $boolClearIncompleteValue = ( $boolClearIncompleteValue === false ? 'false' : 'true' );
                $field = new TMask( $strName, $strValue, '99.999-999', $boolRequired );
@@ -6619,12 +6634,11 @@ class TForm Extends TBox
                $qtd = CountHelper::count($arrFields);
                if( $qtd > 0 )
                {
-                   //$field->addEvent('onBlur','getCepJquery("'.$field->getId().'",'.json_encode($arrFields).')');
-                   $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
-                   //$button->addEvent('onclick','getCepJqueryy("'.$field->getId().'",'.json_encode($arrFields).')');
+                   $buttonName = $field->getId() . '_btn_consultar';
+                   $buttonOnClick = 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')';
+                   $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
-                   
                }
                $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
                return $field;
@@ -6650,15 +6664,15 @@ class TForm Extends TBox
             *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
             * </code>
             *
-            * @param string  $strName      - 1: ID do campo
-            * @param string  $strLabel     - 2: Label do campo
-            * @param boolean $boolRequired - 3: Obrigatorio
-            * @param mixed   $mixOptions   - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine  - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove-6: Label acima
-            * @param mixed   $mixValue      -7:
-            * @param boolean $boolMultiSelect-8:
-            * @param integer $intSize        -9
+            * @param string  $strName        - 1: ID do campo
+            * @param string  $strLabel       - 2: Label do campo
+            * @param boolean $boolRequired   - 3: Obrigatorio
+            * @param mixed   $mixOptions     - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+            * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+            * @param boolean $boolLabelAbove - 6: Label acima
+            * @param mixed   $mixValue       - 7:
+            * @param boolean $boolMultiSelect- 8: True = MultiSelect , False = SingleSelect
+            * @param integer $intSize        - 9:
             * @param integer $intWidth       -10:
             * @param string  $strFirstOptionText - 11: First Key in Display
             * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
