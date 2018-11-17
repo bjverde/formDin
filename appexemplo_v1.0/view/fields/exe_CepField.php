@@ -66,7 +66,7 @@ $fldCep0 = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco'
 $fldCep0->setExampleText('Limpar o campo se estiver incompleto');
 
 $fldCep1 = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto');
-$fldCep1->setExampleText('Não limpar o campo se estiver incompleto');
+$fldCep1->setExampleText('Não limpar o campo se estiver incompleto, tem msg de erro');
 
 $frm->addTextField('des_endereco', 'Endereço:', 60);
 $frm->addTextField('num_endereco', 'Número:', 10);
