@@ -6545,8 +6545,10 @@ class TForm Extends TBox
             * $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
             * </code>
             *
-            * Chama o metodo getCepJquery no arquivo FormDin4Cep.js que chama getCep.php que utiliza o serviço buscarcep.com.br
-            * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
+            * Chama o metodo getCepJquery no arquivo FormDin4Cep.js o parametro cepEngine irá 
+            * definir qual será o motor de consulta. ViaCep usando Json ou BuscarCep via XML.
+            * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
+            * algumas busca por dia de forma gratuita.
             *
             * @param string $strName       - 1: Id do campo
             * @param string $strLabel      - 2: Label do campo
@@ -6567,7 +6569,7 @@ class TForm Extends TBox
             * @param string $jsCallback
             * @param string $boolClearIncompleteValue
             * @param string $strIncompleteMessage
-            * @param integer $cepEngine      -  20: Define o serviço de busca que cep que será usado. Default 1 = ViaCep, 2 = Buscarcep
+            * @param integer $cepEngine      -  20: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
             * @return TMask
             */
            public function addCepField( $strName
