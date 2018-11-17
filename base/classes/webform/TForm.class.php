@@ -6246,7 +6246,7 @@ class TForm Extends TBox
     	$field->setHint( $strHint );
     	$field->setExampleText( $strExampleText );
     	$tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
-    	$dc = $this->addDisplayControl( $tDisplayControl );
+    	$this->addDisplayControl( $tDisplayControl );
     	return $field;
     }
            
@@ -6603,7 +6603,6 @@ class TForm Extends TBox
                {
                    $arrFields[ 'endereco' ] = $strFieldEndereco;
                    $arrClearFields[ ] = $strFieldEndereco;
-                   $arrClearValues[ ] = '';
                }
                if( isset( $strFieldBairro ) )
                {
