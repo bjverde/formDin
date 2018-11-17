@@ -6540,7 +6540,10 @@ class TForm Extends TBox
             * Para preenchimento automático dos campos do formulário relacionados ao endereço,
             * informar o campo do formulário que deverá ser preenchido na lista de parametros.
             * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
-            * 	$frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+            * 
+            * <code>
+            * $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+            * </code>
             *
             * Chama o metodo getCepJquery no arquivo FormDin4Cep.js que chama getCep.php que utiliza o serviço buscarcep.com.br
             * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
@@ -6562,6 +6565,9 @@ class TForm Extends TBox
             * @param boolean $boolLabelAbove
             * @param boolean $boolNoWrapLabel
             * @param string $jsCallback
+            * @param string $boolClearIncompleteValue
+            * @param string $strIncompleteMessage
+            * @param integer $cepEngine      -  20: Define o serviço de busca que cep que será usado. Default 1 = ViaCep, 2 = Buscarcep
             * @return TMask
             */
            public function addCepField( $strName
@@ -6579,7 +6585,11 @@ class TForm Extends TBox
                                       , $strFieldCodigoMunicipio=null
                                       , $boolLabelAbove=null
                                       , $boolNoWrapLabel=null
-                                      , $jsCallback=null,$jsBeforeSend=null,$boolClearIncompleteValue=null,$strIncompleteMessage=null )
+                                      , $jsCallback=null
+                                      , $jsBeforeSend=null
+                                      , $boolClearIncompleteValue=null
+                                      , $strIncompleteMessage=null
+                                      , $cepEngine=1)
            {
                $boolClearIncompleteValue = ( $boolClearIncompleteValue === false ? 'false' : 'true' );
                $field = new TMask( $strName, $strValue, '99.999-999', $boolRequired );
@@ -6641,7 +6651,11 @@ class TForm Extends TBox
                    $buttonName = $field->getId() . '_btn_consultar';
                    $getCepJsCallback = ($jsCallback ? $jsCallback : 'null');
                    $getCepJsBeforeSend = ($jsBeforeSend ? $jsBeforeSend : 'null');
-                   $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+                   if( $cepEngine == 2){
+                       $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+                   } else {
+                       $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+                   }
                    $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
