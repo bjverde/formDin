@@ -2929,38 +2929,7 @@ function fwGetTecla(event)
 	}
 	return 0;
 }
-//--------------------------------------------------------------------------------------------
-function fwFieldCepKeyUp(e,event,fields)
-{
-	var tecla = fwGetTecla(event);
-	if( (tecla > 47 && tecla < 58) || (tecla > 95 && tecla < 106) || tecla==8 || tecla==46 )
-	{
-		fwSetFields(fields,'');
-	}
-	// habilitar/desabilitar o botão de consulta
-	if( (tecla > 47 && tecla < 58) || (tecla > 95 && tecla < 106) )
-	{
-		//fwGetObj('num_endereco').value = tecla;
-		var btn = jQuery('#'+e.id+'_btn_consultar');
-		if(btn)
-		{
-			var cep = e.value.replace(/[^0-9]/g,'');
-			//fwGetObj('num_endereco').value = cep;
-			if( cep.length == 8)
-			{
-				btn.disabled=false;
-				btn.focus();
-			}
-			else
-			{
-				btn.disabled=true;
-			}
-		}
-	}
-}
-//---------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 /**
  * @deprecated
  */
