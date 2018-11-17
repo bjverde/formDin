@@ -39,12 +39,6 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-
-if (isset($_POST['num_cep'])) {
-    header("Content-Type:text/xml");
-    echo file_get_contents('http://buscarcep.com.br/?cep='.$_POST['num_cep'].'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
-    exit;
-}
 $frm = new TForm('Exemplo Campo CEP');
 $frm->setFlat(true);
 
@@ -56,6 +50,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     
     $fldCep0 = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend');
     $fldCep0->setExampleText('Limpar o campo se estiver incompleto');
+    $frm->setValue('num_cep', '71505030');
     
     $fldCep1 = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto');
     $fldCep1->setExampleText('Não limpar o campo se estiver incompleto, tem msg de erro');
@@ -68,7 +63,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     $frm->addTextField('cod_municipio', 'Cod. Município:', 10);
     $frm->addSelectField('cod_uf', 'Uf:', 2);
     $frm->addTextField('sig_uf', 'Uf:', 2);
-    $frm->setValue('num_cep', '71505030');
+    
     
     $frm->addHtmlField('linha', '<hr><b>Consulta com select combinado, motor ViaCep</b>');
     
@@ -87,12 +82,18 @@ $frm->addGroupField('gpx2', 'Motor de Busca BuscarCep');
     $frm->addCepField('num_cep3'
                      ,'Cep:'
                      , true
-                     , null
+                     , '71505030'
                      , null
                      , 'des_endereco3'
                      , null
-                     , NULL
-                     , 'cod_uf3', null, null, null, 'cod_municipio2_temp', null, null, 'myCallback', null,false,null,2);
+                     , null
+                     , 'cod_uf3'
+                     , null
+                     , null
+                     , null
+                     , 'cod_municipio2_temp'
+                     , null
+                     , null, 'myCallback', null,false,null,2);
     $frm->addTextField('des_endereco3', 'Endereço:', 60);
     $frm->addSelectField('cod_uf3', 'Estado:', false);
     $frm->addSelectField('cod_municipio3', 'Município:', null, null, false);
