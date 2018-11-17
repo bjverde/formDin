@@ -77,96 +77,84 @@ function cepNaoInformadoLimparCampos(idNum_cep,fields){
 	}
 }
 //-------------------------------------------------------------------------------------------------
-function cepSetButtonCss(idNum_cep) {
+function cepSetButtonCssPreConsulta(idNum_cep) {
 	jQuery('#'+idNum_cep+'_btn_consultar').attr("disabled", true);
 	jQuery('#'+idNum_cep+'_btn_consultar').val('Aguarde');
 	jQuery('#'+idNum_cep+'_btn_consultar').css('color','red');
 }
 //-------------------------------------------------------------------------------------------------
+function cepSetButtonCssPosConsulta(idNum_cep) {
+	fwSetEstilo('{"id":"'+idNum_cep+'","backgroundImage":"","backgroundRepeat":"no-repeat","backgroundPosition":"center right"}');
+	jQuery('#'+idNum_cep+'_btn_consultar').removeAttr("disabled");
+	jQuery('#'+idNum_cep+'_btn_consultar').val('Consultar');
+	jQuery('#'+idNum_cep+'_btn_consultar').css('color','blue');
+}
+//-------------------------------------------------------------------------------------------------
+function setField( fields, key , dataValue) {
+	try{
+		jQuery("#"+fields[key]).attr({
+			value: dataValue
+		});
+	}catch(e){}
+}
+//-------------------------------------------------------------------------------------------------
+function setFieldsValue( fields ,dadosConsulta) {
+	for (key in fields) {
+		switch(key) {
+			case 'endereco':
+				var complemento='';
+				if (!fields['complemento']) {
+					complemento = ' '+dadosConsulta.complemento
+				}
+				var dataValue = dadosConsulta.logradouro+complemento;
+				setField( fields ,key , dataValue);
+				break;
+			case 'bairro':
+				setField( fields ,key ,dadosConsulta.bairro);
+				break;
+			case 'cidade':
+				setField( fields ,key ,dadosConsulta.localidade);
+				break;
+			case 'uf':
+				setField( fields ,key ,dadosConsulta.uf);
+				break;
+			case 'ibge_municipio_verificador':
+				setField( fields ,key ,dadosConsulta.ibge);
+				break;				
+		}
+	}
+}
+//-------------------------------------------------------------------------------------------------
 function getCepJsonViaCep2(idNum_cep,fields,callback,beforeSend) {
 	var fieldCepValeu = jQuery('#'+idNum_cep).attr('value');
+	var url = `https://viacep.com.br/ws/${fieldCepValeu.replace(/[^0-9]/g,'')}/json/`;
 
 	if(fieldCepValeu!='' && fieldCepValeu!=undefined) {
-		cepSetButtonCss(idNum_cep);
+		cepSetButtonCssPreConsulta(idNum_cep);
 		fwExecutarFuncao(beforeSend,idNum_cep);
-		jQuery.ajax(
-		{
-			type: 'POST',
-			dataType: 'xml',
-			//url: '?modulo='+pastaBase+'/callbacks/getCep.php',
-			url: app_index_file,
-			data: 'ajax=1&modulo='+pastaBase+'/callbacks/getCep.php&cep='+fieldCepValeu.replace(/[^0-9]/g,''),
-			error:function(erro){
-				alert(erro);
-			},
-			success:function(dataset)
-			{
-				fwSetEstilo('{"id":"'+idNum_cep+'","backgroundImage":"","backgroundRepeat":"no-repeat","backgroundPosition":"center right"}');
-				jQuery('#'+idNum_cep+'_btn_consultar').removeAttr("disabled");
-				jQuery('#'+idNum_cep+'_btn_consultar').val('Consultar');
-				jQuery('#'+idNum_cep+'_btn_consultar').css('color','blue');
-				jQuery(dataset).find('webservicecep').each(
-					function()
-					{
 
-						switch(jQuery(this).find('resultado').text())
-						{
-							case '1':
-								break;
-							case '-1':
-								alert('CEP não encontrado');
-								break;
-							case '-2':
-								alert('Formato de CEP inválido');
-								break;
-							case '-3':
-								alert('Limite de buscas de ip por minuto excedido');
-								break;
-							case '-4':
-								alert('Ip banido. Contate o administrador');
-								break;
-							default:
-								alert('Erro ao conectar-se tente novamente');
-								break;
-						}
-						if(jQuery(this).find('resultado').text()==1)
-						{
-							for (key in fields)
-							{
-								if (key == 'endereco')
-								{
-									var complemento='';
-									if (!fields['complemento'])
-									{
-										complemento = ' '+jQuery(this).find('complemento').text()
-									}
-									// campo endereco concatenar com: tipo_logradouro e logradouro
-									try{
-										jQuery("#"+fields[key]).attr({
-											value: jQuery(this).find('tipo_logradouro').text()+" "+jQuery(this).find('logradouro').text()+complemento
-										});
-									}catch(e){}
-								}
-								else
-								{
-									try{
-										jQuery("#"+fields[key]).attr({
-											value: jQuery(this).find(key).text()
-										});
-									}catch(e){}
-									try{
-										jQuery("#"+fields[key]+'_temp').attr({
-											value: jQuery(this).find(key).text()
-										});
-									}catch(e){}
-
-								}
-							}
-							fwExecutarFuncao( callback, dataset);
-						}
-					});
+		// Copiado do https://github.com/wgenial/consultacep
+		// Request zipcode using fetch API
+		
+		fetch(url)
+		.then(response => {
+			if (response.status != 200) {
+				alert('Felha de comunicação com API do ViaCep!');
+				throw Error(response.status);
+			} else {
+				return response.json();
 			}
-		});
+		})
+		.then(data => {
+			cepSetButtonCssPosConsulta(idNum_cep);
+			if (data.erro) {
+				alert('CEP não encontrado no ViaCep!');
+			} else {
+				setFieldsValue(fields ,data);
+				fwExecutarFuncao( callback, data);
+			}
+		})
+		.catch(err => console.warn(err));
 	}
 }
 //-------------------------------------------------------------------------------------------------
