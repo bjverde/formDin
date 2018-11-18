@@ -61,7 +61,8 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     $frm->addTextField('nom_bairro', 'Bairro:', 60);
     $frm->addTextField('nom_cidade', 'Cidade:', 60);
     $frm->addTextField('cod_municipio', 'Cod. Município:', 10);
-    $frm->addSelectField('cod_uf', 'Uf:', 2);
+    $listUF = Tb_ufDAO::selectComboSigUf();
+    $frm->addSelectField('cod_uf', 'Uf:', false, $listUF);
     $frm->addTextField('sig_uf', 'Uf:', 2);
     
     
@@ -69,11 +70,25 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     
     // utilizando select combinados
     $frm->addHiddenField('cod_municipio_temp', '');
-    $fldCep = $frm->addCepField('num_cep2', 'Cep:', true, null, null, 'des_endereco2', null, null, 'cod_uf2', null, null, null, 'cod_municipio2_temp', null, null, 'myCallback');
-        $frm->addTextField('des_endereco2', 'Endereço:', 60);
-        $frm->addSelectField('cod_uf2', 'Estado:', false);
-        $frm->addSelectField('cod_municipio2', 'Município:', null, null, false);
-        $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
+    $frm->addCepField('num_cep2'
+                     , 'Cep:'
+                     , true
+                     , null
+                     , null // Nova linha
+        , 'des_endereco2'  // campo endereço
+        , null // campo bairro
+        , null // campo cidade
+        , null //campo cod uf 
+        , 'cod_uf2' // campo sig uf
+                     , null // campo logradouro
+                     , null
+                     , 'cod_municipio2_temp'
+                     , null, null, 'myCallback');
+    $frm->addTextField('des_endereco2', 'Endereço:', 60);
+    // $frm->addSelectField('cod_uf2', 'Estado:', false);
+    $frm->addSelectField('cod_uf2', 'Uf:', false, $listUF);
+    $frm->addSelectField('cod_municipio2', 'Município:', null, null, false);
+    $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 
 $frm->closeGroup();
 
