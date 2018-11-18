@@ -6550,17 +6550,17 @@ class TForm Extends TBox
             * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
             * algumas busca por dia de forma gratuita.
             *
-            * @param string $strName       - 1: Id do campo
-            * @param string $strLabel      - 2: Label do campo
-            * @param boolean $boolRequired - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
+            * @param string $strName             - 1: Id do campo
+            * @param string $strLabel            - 2: Label do campo
+            * @param boolean $boolRequired       - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
             * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param string $strFieldEndereco
-            * @param string $strFieldBairro
-            * @param string $strFieldCidade
-            * @param string $strFieldCodidoUf
-            * @param string $strFieldSiglaUf
-            * @param string $strFieldLogradouro
+            * @param boolean $boolNewLine        - 5: Nova linha 
+            * @param string $strFieldEndereco    - 6: campo endereço
+            * @param string $strFieldBairro      - 7: campo bairro
+            * @param string $strFieldCidade      - 8: campo cidade
+            * @param string $strFieldCodidoUf    - 9: campo cod uf ibge
+            * @param string $strFieldSiglaUf     -10: campo sig uf
+            * @param string $strFieldLogradouro - 11: campo logradouro
             * @param string $strFieldNumero
             * @param string $strFieldComplemento
             * @param string $strFieldCodigoMunicipio
