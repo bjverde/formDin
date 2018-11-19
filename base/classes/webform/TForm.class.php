@@ -6550,26 +6550,27 @@ class TForm Extends TBox
             * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
             * algumas busca por dia de forma gratuita.
             *
-            * @param string $strName             - 1: Id do campo
-            * @param string $strLabel            - 2: Label do campo
-            * @param boolean $boolRequired       - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
-            * @param string $strValue
-            * @param boolean $boolNewLine        - 5: Nova linha 
-            * @param string $strFieldEndereco    - 6: campo endereço
-            * @param string $strFieldBairro      - 7: campo bairro
-            * @param string $strFieldCidade      - 8: campo cidade
-            * @param string $strFieldCodidoUf    - 9: campo cod uf ibge
-            * @param string $strFieldSiglaUf     -10: campo sig uf
-            * @param string $strFieldLogradouro - 11: campo logradouro
-            * @param string $strFieldNumero
-            * @param string $strFieldComplemento
-            * @param string $strFieldCodigoMunicipio
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @param string $jsCallback
-            * @param string $boolClearIncompleteValue
-            * @param string $strIncompleteMessage
-            * @param integer $cepEngine      -  20: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
+            * @param string $strName              -  1: Id do campo
+            * @param string $strLabel             -  2: Label do campo
+            * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+            * @param string $strValue             -  4: Valor inicial do campo
+            * @param boolean $boolNewLine         -  5: Nova linha 
+            * @param string $strFieldEndereco     -  6: id do campo endereço
+            * @param string $strFieldBairro       -  7: id do campo bairro
+            * @param string $strFieldCidade       -  8: id do campo cidade
+            * @param string $strFieldCodidoUf     -  9: id do campo cod uf ibge
+            * @param string $strFieldSiglaUf      - 10: id do campo sig uf
+            * @param string $strFieldLogradouro   - 11: id do campo logradouro
+            * @param string $strFieldNumero       - 12: id do campo numero
+            * @param string $strFieldComplemento  - 13: id do complemento
+            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio
+            * @param boolean $boolLabelAbove      - 15: Label sobre campo 
+            * @param boolean $boolNoWrapLabel     - 16:
+            * @param string $jsCallback           - 17: Js Callback
+            * @param string $jsBeforeSend         - 18: Js Before Send
+            * @param string $boolClearIncompleteValue - 19: 
+            * @param string $strIncompleteMessage - 20: Mensagem se for incompleto
+            * @param integer $cepEngine           - 21: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
             * @return TMask
             */
            public function addCepField( $strName
