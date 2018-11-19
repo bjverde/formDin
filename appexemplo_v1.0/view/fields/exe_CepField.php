@@ -46,9 +46,25 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     $frm->addHtmlField('html1', null, 'ajuda/cep_via.html','',40)->setCss('border', '1px solid blue');
 
     // define a largura das colunas verticais do formulario para alinhamento dos campos
-    $frm->setColumns(array(100,100));
-    
-    $fldCep0 = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend');
+    $frm->setColumns(array(100,100));    
+    $fldCep0 = $frm->addCepField('num_cep' //id do campo
+        , 'Cep:'        //Label do campo
+        , true          //
+        , null
+        , null          // Nova linha
+        , 'des_endereco'// id do Campo endereço
+        , 'nom_bairro'  // id do Campo bairro
+        , 'nom_cidade'  // id do Campo cidade
+        , null          // id do Campo cod uf
+        , 'cod_uf'      // id do Campo sig uf
+        , null          // id do Campo logradouro
+        , null          // id do Campo complemento
+        , null          // id do Cod municipio
+        , null          // Label sobre o campo
+        , null
+        , 'pesquisarCepCallback'    //JavaScript Callback
+        , 'pesquisarCepBeforeSend'
+        );    
     $fldCep0->setExampleText('Limpar o campo se estiver incompleto');
     $frm->setValue('num_cep', '71505030');
     
@@ -75,11 +91,11 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
                      , true
                      , null
                      , null // Nova linha
-        , 'des_endereco2'  // campo endereço
-        , null // campo bairro
-        , null // campo cidade
-        , null //campo cod uf 
-        , 'cod_uf2' // campo sig uf
+                     , 'des_endereco2'  // campo endereço
+                     , null // campo bairro
+                     , null // campo cidade
+                     , null //campo cod uf 
+                     , 'cod_uf2' // campo sig uf
                      , null // campo logradouro
                      , null
                      , 'cod_municipio2_temp'
@@ -88,7 +104,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     // $frm->addSelectField('cod_uf2', 'Estado:', false);
     $frm->addSelectField('cod_uf2', 'Uf:', false, $listUF);
     $frm->addSelectField('cod_municipio2', 'Município:', null, null, false);
-    $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
+    $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'sig_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 
 $frm->closeGroup();
 
