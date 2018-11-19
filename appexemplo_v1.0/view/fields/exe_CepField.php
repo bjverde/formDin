@@ -67,8 +67,28 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
         );    
     $fldCep0->setExampleText('Limpar o campo se estiver incompleto');
     $frm->setValue('num_cep', '71505030');
+        
+    $fldCep1 = $frm->addCepField('num_cep1`' //id do campo
+        , 'Cep:'        //Label do campo
+        , true          //
+        , null
+        , null          // Nova linha
+        , 'des_endereco'// id do Campo endereço
+        , 'nom_bairro'  // id do Campo bairro
+        , 'nom_cidade'  // id do Campo cidade
+        , null          // id do Campo cod uf
+        , 'cod_uf'      // id do Campo sig uf
+        , null          // id do Campo logradouro
+        , null          // id do Campo complemento
+        , null          // id do Cod municipio
+        , null          // Label sobre o campo
+        , null
+        , 'pesquisarCepCallback'    //JavaScript Callback
+        , 'pesquisarCepBeforeSend'
+        , false
+        , 'Cep está incompleto'
+        );
     
-    $fldCep1 = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto');
     $fldCep1->setExampleText('Não limpar o campo se estiver incompleto, tem msg de erro');
     
     $frm->addTextField('des_endereco', 'Endereço:', 60);
