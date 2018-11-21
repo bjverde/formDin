@@ -3,8 +3,8 @@ class Acesso_menuDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
 									  idmenu
-									 ,idmenu_pai
 									 ,nom_menu
+									 ,idmenu_pai
 									 ,url
 									 ,tooltip
 									 ,img_menu

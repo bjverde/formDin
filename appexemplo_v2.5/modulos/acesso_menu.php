@@ -1,17 +1,31 @@
 <?php
+defined('APLICATIVO') or die();
+
 $primaryKey = 'IDMENU';
 $frm = new TForm('Cadastro de Menu',600,900);
 $frm->setFlat(true);
+$frm->setMaximize(true);
 
+$frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
+$frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 
-$frm->addHiddenField( $primaryKey ); // coluna chave da tabela
-$frm->addTextField('IDMENU_PAI', 'Id PAI',15,true);
-$frm->addTextField('NOM_MENU', 'Nome do Menu:',50,true,null,null,false);
-$frm->addTextField('URL', 'URL',80,false);
-$frm->addTextField('TOOLTIP', 'TOOLTIP',50,false);
-$frm->addTextField('IMG_MENU', 'IMG_MENU',50,false);
-$frm->addTextField('IMGDISABLED', 'IMGDISABLED',50,false);
-$frm->addTextField('DISSABLED', 'DISSABLED',50,false);
+$listAcesso_menu = Acesso_menu::selectAll();
+$frm->addSelectField('IDMENU_PAI', 'IDMENU_PAI',FALSE,$listAcesso_menu,null,null,null,null,null,null,' ',null);
+$frm->getLabel('IDMENU_PAI')->setToolTip('id do menu pai, se o pai é null então começa na raiz');
+$frm->addTextField('NOM_MENU', 'Nome do Menu:',45,TRUE,45);
+$frm->getLabel('NOM_MENU')->setToolTip('o nome que o usuario irá ver');
+$frm->addMemoField('URL', 'URL',300,FALSE,80,3);
+$frm->getLabel('URL')->setToolTip('caminho do item de menu');
+
+$frm->addMemoField('URL', 'URL',300,FALSE,80,3);
+$frm->getLabel('URL')->setToolTip('caminho do item de menu');
+$frm->addMemoField('TOOLTIP', 'TOOLTIP',300,FALSE,80,3);
+$frm->getLabel('TOOLTIP')->setToolTip('decrição mais detalhada do menu');
+$frm->addTextField('IMG_MENU', 'IMG_MENU',45,FALSE,45);
+$frm->getLabel('IMG_MENU')->setToolTip('imagem para o item de menu');
+
+//$frm->addSelectField('DISSABLED', 'DISSABLED:', false, 'S=Sim,N=Não', true);
+$frm->addTextField('DISSABLED', 'DISSABLED:',45,FALSE,45);
 $frm->addTextField('HOTKEY', 'HOTKEY',50,false);
 $frm->addTextField('BOOLSEPARATOR', 'BOOLSEPARATOR',50,false);
 $frm->addTextField('JSONPARAMS', 'JSONPARAMS',50,false);
