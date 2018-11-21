@@ -1,19 +1,18 @@
 <?php
 defined('APLICATIVO') or die();
 
-$primaryKey = 'COD_UF';
-$frm = new TForm('Cadastro de Uf',650,900);
+$primaryKey = 'IDTIPO';
+$frm = new TForm('tipo',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_UF', 'Nome',45,TRUE,45);
-$frm->addTextField('SIG_UF', 'Sigla',45,TRUE,45);
-
-$listRegiao = Regiao::selectAll();
-$frm->addSelectField('COD_REGIAO', 'Região:',TRUE,$listRegiao,null,null,null,null,null,null,' ',null);
+$listTipo_de_tipos = Tipo_de_tipos::selectAll();
+$frm->addSelectField('IDTIPO_DE_TIPOS', 'IDTIPO_DE_TIPOS',TRUE,$listTipo_de_tipos,null,null,null,null,null,null,' ',null);
+$frm->addTextField('DESCRICAO', 'DESCRICAO',100,FALSE,100);
+$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,FALSE,1);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -25,9 +24,9 @@ switch( $acao ) {
 	case 'Salvar':
 		try{
 			if ( $frm->validate() ) {
-				$vo = new UfVO();
+				$vo = new TipoVO();
 				$frm->setVo( $vo );
-				$resultado = Uf::save( $vo );
+				$resultado = Tipo::save( $vo );
 				if($resultado==1) {
 					$frm->setMessage('Registro gravado com sucesso!!!');
 					$frm->clearFields();
@@ -52,7 +51,7 @@ switch( $acao ) {
 	case 'gd_excluir':
 		try{
 			$id = $frm->get( $primaryKey ) ;
-			$resultado = Uf::delete( $id );;
+			$resultado = Tipo::delete( $id );;
 			if($resultado==1) {
 				$frm->setMessage('Registro excluido com sucesso!!!');
 				$frm->clearFields();
@@ -76,10 +75,10 @@ function getWhereGridParameters(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
-				'COD_UF'=>$frm->get('COD_UF')
-				,'NOM_UF'=>$frm->get('NOM_UF')
-				,'SIG_UF'=>$frm->get('SIG_UF')
-				,'COD_REGIAO'=>$frm->get('COD_REGIAO')
+				'IDTIPO'=>$frm->get('IDTIPO')
+				,'IDTIPO_DE_TIPOS'=>$frm->get('IDTIPO_DE_TIPOS')
+				,'DESCRICAO'=>$frm->get('DESCRICAO')
+				,'SIT_ATIVO'=>$frm->get('SIT_ATIVO')
 		);
 	}
 	return $retorno;
@@ -89,12 +88,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = ROWS_PER_PAGE;
 	$whereGrid = getWhereGridParameters($frm);
 	$page = PostHelper::get('page');
-	$dados = Uf::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
-	$realTotalRowsSqlPaginator = Uf::selectCount( $whereGrid );
+	$dados = Tipo::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
+	$realTotalRowsSqlPaginator = Tipo::selectCount( $whereGrid );
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
-					.',NOM_UF|NOM_UF'
-					.',SIG_UF|SIG_UF'
-					.',COD_REGIAO|COD_REGIAO'
+					.',IDTIPO_DE_TIPOS|IDTIPO_DE_TIPOS'
+					.',DESCRICAO|DESCRICAO'
+					.',SIT_ATIVO|SIT_ATIVO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
 					   ,'Gride with SQL Pagination' // titulo do gride
@@ -104,12 +103,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
 	$gride->setMaxRows( $maxRows );
 	$gride->setUpdateFields($mixUpdateFields);
-	$gride->setUrl( 'uf.php' );
+	$gride->setUrl( 'tipo.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_UF','Nome');
-	$gride->addColumn('SIG_UF','Sigla');
-	$gride->addColumn('COD_REGIAO','Cod Região');
+	$gride->addColumn('IDTIPO_DE_TIPOS','IDTIPO_DE_TIPOS');
+	$gride->addColumn('DESCRICAO','DESCRICAO');
+	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
 
 	$gride->show();
 	die();
@@ -123,12 +122,12 @@ $frm->show();
 <script>
 function init() {
 	var Parameters = {"BUSCAR":""
-					,"COD_UF":""
-					,"NOM_UF":""
-					,"SIG_UF":""
-					,"COD_REGIAO":""
+					,"IDTIPO":""
+					,"IDTIPO_DE_TIPOS":""
+					,"DESCRICAO":""
+					,"SIT_ATIVO":""
 					};
-	fwGetGrid('uf.php','gride',Parameters,true);
+	fwGetGrid('tipo.php','gride',Parameters,true);
 }
 function buscar() {
 	jQuery("#BUSCAR").val(1);
