@@ -36,6 +36,11 @@ class Acesso_menu {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectMenuByLogin( $login ){
+	    $result = Acesso_menuDAO::selectMenuByLogin( $login );
+	    return $result;
+	}
+	//--------------------------------------------------------------------------------
 	public static function save( Acesso_menuVO $objVo ){
 		$result = null;
 		if( $objVo->getIdmenu() ) {

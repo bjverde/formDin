@@ -36,6 +36,11 @@ class Acesso_user {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectUser( $login_user, $pwd_user ){
+	    $result = Acesso_userDAO::selectUser( $login_user, $pwd_user );
+	    return $result;
+	}
+	//--------------------------------------------------------------------------------
 	public static function save( Acesso_userVO $objVo ){
 		$result = null;
 		if( $objVo->getIduser() ) {
