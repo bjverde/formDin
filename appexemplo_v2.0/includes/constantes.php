@@ -10,12 +10,9 @@
  * System ap2v created in: 2018-11-21 23:29:28
  */
 
-define('BANCO'   , 'MYSQL');
-define('HOST'    , 'localhost');
-define('PORT'    , '3306');
-define('DATABASE', 'form_exemplo');
-define('SCHEMA'  , '');
-define('USUARIO' , 'form_exemplo');
-define('SENHA'   , '123456');
-define('UTF8_DECODE'   , 0);
+define('SYSTEM_NAME'    , 'ap2v');
+define('SYSTEM_ACRONYM' , 'ap2v');
+define('SYSTEM_VERSION' , '0.0.0');
+define('APLICATIVO'     , SYSTEM_ACRONYM);
+define('DS'   , DIRECTORY_SEPARATOR);
 ?>
