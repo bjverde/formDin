@@ -2,7 +2,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDMENU';
-$frm = new TForm('acesso_menu',800,950);
+$frm = new TForm('Cadastro de Menu',800,1000);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -22,13 +22,15 @@ $frm->addTextField('IMG_MENU', 'IMG_MENU',45,FALSE,45);
 $frm->getLabel('IMG_MENU')->setToolTip('Caminho da imagem será utilizada como ícone');
 $frm->addTextField('IMGDISABLED', 'IMGDISABLED',45,FALSE,45);
 $frm->getLabel('IMGDISABLED')->setToolTip('Caminho da imagem para o menu desabilitado');
-$frm->addTextField('DISSABLED', 'DISSABLED',1,FALSE,1);
+$frm->addSelectField('DISSABLED', 'DISSABLED:', false, 'S=Sim,N=Não', true);
+//$frm->addTextField('DISSABLED', 'DISSABLED:',45,FALSE,45);
 $frm->getLabel('DISSABLED')->setToolTip('Informa se o item de menu está habilitado ou não. N = Item de aparece porém não pode ser usada, S = Item menu aparece e pode ser clicado.');
 $frm->addTextField('HOTKEY', 'HOTKEY',45,FALSE,45);
 $frm->getLabel('HOTKEY')->setToolTip('Tecla de atalho');
 $frm->addNumberField('BOOLSEPARATOR', 'BOOLSEPARATOR',3,FALSE,0);
 $frm->addMemoField('JSONPARAMS', 'JSONPARAMS',300,FALSE,80,3);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+//$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
 $frm->getLabel('SIT_ATIVO')->setToolTip('Informa se o registro está ativo ou não. N = Item de nem aparece, S = Item menu aparece.');
 $frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
 $frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
@@ -90,6 +92,15 @@ switch( $acao ) {
 	break;
 }
 
+$dados = Acesso_menu::selectAll($primaryKey);
+
+$frm->addGroupField('gpTree','Menus em Treeview')->setcloseble(true);
+	$userData = array('IDMENU_PAI','NOM_MENU','URL','TOOLTIP','IMG_MENU','IMGDISABLED','DISSABLED','HOTKEY','BOOLSEPARATOR','JSONPARAMS','SIT_ATIVO','DAT_INCLUSAO','DAT_UPDATE');
+	$tree = $frm->addTreeField('tree',null,$dados,'IDMENU_PAI',$primaryKey,'NOM_MENU',null, $userData);
+	$tree->setStartExpanded(true);
+	$tree->setOnClick('treeClick'); // fefinir o evento que ser? chamado ao clicar no item da treeview
+$frm->closeGroup();
+
 
 function getWhereGridParameters(&$frm){
 	$retorno = null;
@@ -136,7 +147,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_UPDATE|DAT_UPDATE'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Menus em Visão de Tabela' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -164,7 +175,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	die();
 }
 
-$frm->addHtmlField('gride');
+
+$frm->addGroupField('gpGride','Menus Visão de Tabela',null,null,null,null,true,null,false)->setcloseble(true);
+	$frm->addHtmlField('gride');
+$frm->closeGroup();
+
 $frm->addJavascript('init()');
 $frm->show();
 
@@ -192,5 +207,24 @@ function init() {
 function buscar() {
 	jQuery("#BUSCAR").val(1);
 	init();
+}
+function treeClick(id) {
+	
+	/*
+	alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+	'Item text:'+treeJs.getItemText(id )+'\n'+
+	'User pai:'+treeJs.getUserData(id,'IDMENU_PAI')+'\n'+
+	'User data URL:'+treeJs.getUserData(id,'URL')+'\n'+
+	'IMG:'+treeJs.getUserData(id,'IMG_MENU')
+	);
+	*/
+	
+	// atualizar os campos do formulário
+	jQuery("#IDMENU").val(treeJs.getSelectedItemId());
+	jQuery("#NOM_MENU").val(treeJs.getItemText(id ));
+	jQuery("#IDMENU_PAI").val(treeJs.getUserData(id,'IDMENU_PAI'));
+	jQuery("#URL").val(treeJs.getUserData(id,'URL'));
+	jQuery("#IMG_MENU").val(treeJs.getUserData(id,'IMG_MENU'));
+	
 }
 </script>
