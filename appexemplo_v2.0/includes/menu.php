@@ -23,7 +23,7 @@ $menu->add('2.2',2,'pessoa_fisica','modulos/pessoa_fisica.php');
 $menu->add('2.3',2,'pessoa_juridica','modulos/pessoa_juridica.php');
 
 $menu->add('3', null, 'Autoridades', null, null);
-$menu->add('3.1', 2, 'Cadastro Autoridades', 'modulos/autoridade.php', null);
+$menu->add('3.1', 3, 'Cadastro Autoridades', 'modulos/autoridade.php', null);
 
 $menu->add('8', null, 'Tabelas de Apoio', null, null, 'table16.gif');
 $menu->add('8.1', 8,'Região', 'modulos/regiao.php', null, null, null, false, null);
