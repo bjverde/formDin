@@ -1,7 +1,15 @@
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Joao T','PF',NOW());
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Francisco X','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Dell','PJ',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Google','PJ','1098-09-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Dell','PJ','1994-02-01 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Google','PJ','1998-09-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ágata Açaí Pará','PF','1098-09-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Microsoft','PJ','1975-04-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Márcio','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ítalo','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Áurea','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Emília Javé','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ângela Estefânia Cainã','PF',NOW());
+
 
 
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (1,'Norte');
@@ -5651,12 +5659,12 @@ VALUES
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(11,1,'Pessoa','view/pessoa.php',null,null,'user916.gif',null,null,null);
+(11,1,'Pessoa','modulos/pessoa.php',null,null,'user916.gif',null,null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(12,1,'Tipos de Tipos','view/tipo_tipos.php',null,null,null,null,null,null);
+(12,1,'Tipos de Tipos','modulos/tipo_tipos.php',null,null,null,null,null,null);
 
 
 

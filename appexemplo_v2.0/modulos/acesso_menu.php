@@ -165,8 +165,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn('IMGDISABLED','IMGDISABLED');
     $gride->addColumn('DISSABLED','DISSABLED');
     $gride->addColumn('HOTKEY','HOTKEY');
-    $gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR');
-    $gride->addColumn('JSONPARAMS','JSONPARAMS');
+    //$gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR');
+    //$gride->addColumn('JSONPARAMS','JSONPARAMS');
     $gride->addColumn('SIT_ATIVO','SIT_ATIVO');
     $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
     $gride->addColumn('DAT_UPDATE','DAT_UPDATE');

@@ -120,7 +120,6 @@ class Acesso_menuDAO extends TPDOConnection {
 						, $objVo->getJsonparams() 
 						, $objVo->getSit_ativo() 
 						, $objVo->getDat_inclusao() 
-						, $objVo->getDat_update() 
 						);
 		return self::executeSql('insert into form_exemplo.acesso_menu(
 								 nom_menu
@@ -136,7 +135,7 @@ class Acesso_menuDAO extends TPDOConnection {
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', $values );
+								) values (?,?,?,?,?,?,?,?,?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Acesso_menuVO $objVo ) {
@@ -151,8 +150,6 @@ class Acesso_menuDAO extends TPDOConnection {
 						,$objVo->getBoolseparator()
 						,$objVo->getJsonparams()
 						,$objVo->getSit_ativo()
-						,$objVo->getDat_inclusao()
-						,$objVo->getDat_update()
 						,$objVo->getIdmenu() );
 		return self::executeSql('update form_exemplo.acesso_menu set 
 								 nom_menu = ?
@@ -166,8 +163,6 @@ class Acesso_menuDAO extends TPDOConnection {
 								,boolseparator = ?
 								,jsonparams = ?
 								,sit_ativo = ?
-								,dat_inclusao = ?
-								,dat_update = ?
 								where idmenu = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
