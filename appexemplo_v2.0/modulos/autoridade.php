@@ -15,11 +15,11 @@ $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addHiddenField($primaryKey); // coluna chave da tabela
 $frm->addHtmlField('texto', $html)->setCss('border', '1px solid red');;
 $frm->addHtmlField('separador', null);
-$frm->addDateField('DAT_INCLUSAO', 'Data inclusão', false, null, null, null, null, null, false)->setReadOnly(true);;
 $frm->addDateField('DAT_EVENTO', 'Data Evento:', true);
 $frm->addNumberField('ordem', 'Ordem das autoridades:', 10, true, 0, true, null, 1, 5, true);
 $frm->addTextField('cargo', 'Nome do Cargo:', 50, true);
 $frm->addTextField('nome_pessoa', 'Nome Pessoa:', 50, true);
+//$frm->addDateField('DAT_INCLUSAO', 'Data inclusão', false, null, null, null, null, null, false)->setReadOnly(true);;
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

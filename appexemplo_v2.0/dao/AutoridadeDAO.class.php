@@ -67,31 +67,29 @@ class AutoridadeDAO extends TPDOConnection {
 	}
 	//--------------------------------------------------------------------------------
 	public static function insert( AutoridadeVO $objVo ) {
-		$values = array(  $objVo->getDat_inclusao() 
-						, $objVo->getDat_evento() 
+		$values = array(  $objVo->getDat_evento() 
 						, $objVo->getOrdem() 
 						, $objVo->getCargo() 
 						, $objVo->getNome_pessoa() 
 						);
-		return self::executeSql('insert into form_exemplo.autoridade(
-								 dat_inclusao
-								,dat_evento
+		$sql = 'insert into form_exemplo.autoridade(
+								 dat_evento
 								,ordem
 								,cargo
 								,nome_pessoa
-								) values (?,?,?,?,?)', $values );
+								) values (?,?,?,?)';
+		$retorno = self::executeSql($sql, $values );
+		return $retorno;
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( AutoridadeVO $objVo ) {
-		$values = array( $objVo->getDat_inclusao()
-						,$objVo->getDat_evento()
+		$values = array( $objVo->getDat_evento()
 						,$objVo->getOrdem()
 						,$objVo->getCargo()
 						,$objVo->getNome_pessoa()
 						,$objVo->getIdautoridade() );
 		return self::executeSql('update form_exemplo.autoridade set 
-								 dat_inclusao = ?
-								,dat_evento = ?
+								 dat_evento = ?
 								,ordem = ?
 								,cargo = ?
 								,nome_pessoa = ?

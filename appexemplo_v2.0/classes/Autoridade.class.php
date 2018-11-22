@@ -45,7 +45,7 @@ class Autoridade {
 	    $where = 'ordem ='.$ordem.' and dat_evento = \''.$dat_evento.'\'';
 	    $resultado = AutoridadeDAO::selectAll(null, $where);
 	    
-	    if (count($resultado)>0) {
+	    if (is_array($resultado) && count($resultado)>0) {
 	        $msg = "No evento do mesmo dia só pode ter uma autoridade da mesma ordem";
 	        throw new DomainException($msg);
 	    }
