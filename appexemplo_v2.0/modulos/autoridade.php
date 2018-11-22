@@ -2,22 +2,24 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDAUTORIDADE';
-$frm = new TForm('autoridade',800,950);
+$frm = new TForm('Ordem da leitura das Autoridades', 600);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
+$html = '<b>Regra de Negocio</b>'
+       .'<br>Varias autoridades estarão presentes em um evento no dia X.'
+       .'O cerimonial precisa da ordem das autoridades, da mais importante para menos importante. Para fazer a leitura.';
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_EVENTO', 'DAT_EVENTO',TRUE);
-$frm->getLabel('DAT_EVENTO')->setToolTip('Data do evento');
-$frm->addNumberField('ORDEM', 'ORDEM',10,TRUE,0);
-$frm->getLabel('ORDEM')->setToolTip('ordem daa autoridades');
-$frm->addTextField('CARGO', 'CARGO',100,TRUE,100);
-$frm->getLabel('CARGO')->setToolTip('nome do cargo da autoridade');
-$frm->addTextField('NOME_PESSOA', 'NOME_PESSOA',100,TRUE,100);
-$frm->getLabel('NOME_PESSOA')->setToolTip('nome da pessoa');
+$frm->addHiddenField($primaryKey); // coluna chave da tabela
+$frm->addHtmlField('texto', $html)->setCss('border', '1px solid red');;
+$frm->addHtmlField('separador', null);
+$frm->addDateField('DAT_INCLUSAO', 'Data inclusão', false, null, null, null, null, null, false)->setReadOnly(true);;
+$frm->addDateField('DAT_EVENTO', 'Data Evento:', true);
+$frm->addNumberField('ordem', 'Ordem das autoridades:', 10, true, 0, true, null, 1, 5, true);
+$frm->addTextField('cargo', 'Nome do Cargo:', 50, true);
+$frm->addTextField('nome_pessoa', 'Nome Pessoa:', 50, true);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -95,7 +97,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = ROWS_PER_PAGE;
 	$whereGrid = getWhereGridParameters($frm);
 	$page = PostHelper::get('page');
-	$dados = Autoridade::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
+	$dados = Autoridade::selectAllPagination( 'DAT_EVENTO, ORDEM', $whereGrid, $page,  $maxRows);
 	$realTotalRowsSqlPaginator = Autoridade::selectCount( $whereGrid );
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
 					.',DAT_INCLUSAO|DAT_INCLUSAO'
@@ -105,7 +107,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',NOME_PESSOA|NOME_PESSOA'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Autoridades por data' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -114,12 +116,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUpdateFields($mixUpdateFields);
 	$gride->setUrl( 'autoridade.php' );
 
-	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-	$gride->addColumn('DAT_EVENTO','DAT_EVENTO');
-	$gride->addColumn('ORDEM','ORDEM');
-	$gride->addColumn('CARGO','CARGO');
-	$gride->addColumn('NOME_PESSOA','NOME_PESSOA');
+	$gride->addColumn($primaryKey,'id');	
+	$gride->addColumn('DAT_EVENTO','Data do Evento');
+	$gride->addColumn('ORDEM','Ordem');
+	$gride->addColumn('CARGO','Cargo');
+	$gride->addColumn('NOME_PESSOA','Nome');
+	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão');
 
 	$gride->show();
 	die();

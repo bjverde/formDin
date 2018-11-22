@@ -36,8 +36,24 @@ class Autoridade {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function validar( AutoridadeVO $objVo) {
+	    //Invertendo a string de data pois vem da tela dd-mm-yyyy
+	    // e o mysql só entende yyyy-mm-dd
+	    $dat_evento = implode("-", array_reverse(explode("/", $objVo->getDat_evento())));
+	    
+	    $ordem = $objVo->getOrdem();
+	    $where = 'ordem ='.$ordem.' and dat_evento = \''.$dat_evento.'\'';
+	    $resultado = AutoridadeDAO::selectAll(null, $where);
+	    
+	    if (count($resultado)>0) {
+	        $msg = "No evento do mesmo dia só pode ter uma autoridade da mesma ordem";
+	        throw new DomainException($msg);
+	    }
+	}
+	//--------------------------------------------------------------------------------
 	public static function save( AutoridadeVO $objVo ){
 		$result = null;
+		self::validar($objVo);
 		if( $objVo->getIdautoridade() ) {
 			$result = AutoridadeDAO::update( $objVo );
 		} else {
@@ -50,6 +66,5 @@ class Autoridade {
 		$result = AutoridadeDAO::delete( $id );
 		return $result;
 	}
-
 }
 ?>
