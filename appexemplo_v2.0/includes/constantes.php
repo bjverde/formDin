@@ -10,9 +10,9 @@
  * System ap2v created in: 2018-11-21 23:29:28
  */
 
-define('SYSTEM_NAME'    , 'ap2v');
-define('SYSTEM_ACRONYM' , 'ap2v');
-define('SYSTEM_VERSION' , '0.0.0');
+define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
+define('SYSTEM_ACRONYM' , 'APPEV2.0');
+define('SYSTEM_VERSION' , '2.0.0');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 define('DS'   , DIRECTORY_SEPARATOR);
 ?>

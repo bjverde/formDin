@@ -32,9 +32,9 @@ $frm->addMemoField('JSONPARAMS', 'JSONPARAMS',300,FALSE,80,3);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 //$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
 $frm->getLabel('SIT_ATIVO')->setToolTip('Informa se o registro está ativo ou não. N = Item de nem aparece, S = Item menu aparece.');
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
-$frm->getLabel('DAT_UPDATE')->setToolTip('data de update igual inclusao implica que nunca teve alteração');
+//$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+//$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
+//$frm->getLabel('DAT_UPDATE')->setToolTip('data de update igual inclusao implica que nunca teve alteração');
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -133,46 +133,46 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $realTotalRowsSqlPaginator = Acesso_menu::selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
     .',NOM_MENU|NOM_MENU'
-        .',IDMENU_PAI|IDMENU_PAI'
-            .',URL|URL'
-                .',TOOLTIP|TOOLTIP'
-                    .',IMG_MENU|IMG_MENU'
-                        .',IMGDISABLED|IMGDISABLED'
-                            .',DISSABLED|DISSABLED'
-                                .',HOTKEY|HOTKEY'
-                                    .',BOOLSEPARATOR|BOOLSEPARATOR'
-                                        .',JSONPARAMS|JSONPARAMS'
-                                            .',SIT_ATIVO|SIT_ATIVO'
-                                                .',DAT_INCLUSAO|DAT_INCLUSAO'
-                                                    .',DAT_UPDATE|DAT_UPDATE'
-                                                        ;
-                                                        $gride = new TGrid( 'gd'                        // id do gride
-                                                            ,'Menus em Visão de Tabela' // titulo do gride
-                                                            );
-                                                        $gride->addKeyField( $primaryKey ); // chave primaria
-                                                        $gride->setData( $dados ); // array de dados
-                                                        $gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
-                                                        $gride->setMaxRows( $maxRows );
-                                                        $gride->setUpdateFields($mixUpdateFields);
-                                                        $gride->setUrl( 'acesso_menu.php' );
-                                                        
-                                                        $gride->addColumn($primaryKey,'id');
-                                                        $gride->addColumn('NOM_MENU','NOM_MENU');
-                                                        $gride->addColumn('IDMENU_PAI','IDMENU_PAI');
-                                                        $gride->addColumn('URL','URL');
-                                                        $gride->addColumn('TOOLTIP','TOOLTIP');
-                                                        $gride->addColumn('IMG_MENU','IMG_MENU');
-                                                        $gride->addColumn('IMGDISABLED','IMGDISABLED');
-                                                        $gride->addColumn('DISSABLED','DISSABLED');
-                                                        $gride->addColumn('HOTKEY','HOTKEY');
-                                                        $gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR');
-                                                        $gride->addColumn('JSONPARAMS','JSONPARAMS');
-                                                        $gride->addColumn('SIT_ATIVO','SIT_ATIVO');
-                                                        $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-                                                        $gride->addColumn('DAT_UPDATE','DAT_UPDATE');
-                                                        
-                                                        $gride->show();
-                                                        die();
+    .',IDMENU_PAI|IDMENU_PAI'
+    .',URL|URL'
+    .',TOOLTIP|TOOLTIP'
+    .',IMG_MENU|IMG_MENU'
+    .',IMGDISABLED|IMGDISABLED'
+    .',DISSABLED|DISSABLED'
+    .',HOTKEY|HOTKEY'
+    .',BOOLSEPARATOR|BOOLSEPARATOR'
+    .',JSONPARAMS|JSONPARAMS'
+    .',SIT_ATIVO|SIT_ATIVO'
+    .',DAT_INCLUSAO|DAT_INCLUSAO'
+    .',DAT_UPDATE|DAT_UPDATE'
+                                                ;
+    $gride = new TGrid( 'gd'                        // id do gride
+        ,'Menus em Visão de Tabela' // titulo do gride
+        );
+    $gride->addKeyField( $primaryKey ); // chave primaria
+    $gride->setData( $dados ); // array de dados
+    $gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
+    $gride->setMaxRows( $maxRows );
+    $gride->setUpdateFields($mixUpdateFields);
+    $gride->setUrl( 'acesso_menu.php' );
+    
+    $gride->addColumn($primaryKey,'id');
+    $gride->addColumn('NOM_MENU','NOM_MENU');
+    $gride->addColumn('IDMENU_PAI','IDMENU_PAI');
+    $gride->addColumn('URL','URL');
+    $gride->addColumn('TOOLTIP','TOOLTIP');
+    $gride->addColumn('IMG_MENU','IMG_MENU');
+    $gride->addColumn('IMGDISABLED','IMGDISABLED');
+    $gride->addColumn('DISSABLED','DISSABLED');
+    $gride->addColumn('HOTKEY','HOTKEY');
+    $gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR');
+    $gride->addColumn('JSONPARAMS','JSONPARAMS');
+    $gride->addColumn('SIT_ATIVO','SIT_ATIVO');
+    $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
+    $gride->addColumn('DAT_UPDATE','DAT_UPDATE');
+    
+    $gride->show();
+    die();
 }
 
 
