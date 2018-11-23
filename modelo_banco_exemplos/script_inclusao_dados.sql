@@ -5633,11 +5633,12 @@ INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, 
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',5300108,53,'BRASÍLIA');
 INSERT INTO `form_exemplo`.`municipio` (`sit_ativo`, `cod_municipio`, `cod_uf`, `nom_municipio`) VALUES ('S',9999999,53,'MUNICIPIO PROVISÓRIO');
 
-
-INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('root','root');
-INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('admin','admin');
-INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('user','user');
-INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('trainee','trainee');
+-- Senhas geradas usando password_hash
+-- veja app2/ajuda/senha.php
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('root','$2y$10$rZRlCy2AV9414eAj8CeOv.l4dmPjdcTMnB4yV1VgnOAOdLSJJOPlW');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('admin','$2y$10$xInu90xW0jOAIWU7p6Oyne2bE9w.qw71g7VptJ31c4W/p43c/sQI.');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('user','$2y$10$INcEJxjWQ8leDesYxjDqIOv8ivBqlySlG41c2v/pYC..C/Cj2Dffe');
+INSERT INTO `form_exemplo`.`acesso_user` (`login_user`, `pwd_user`) VALUES ('trainee','$2y$10$T6s14LOdMknFkGl8enAVo.0DVAQmrxawEuIzGy8dlwR/Q02M.9ZeC');
 
 INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Root');
 INSERT INTO `form_exemplo`.`acesso_perfil` (`nom_perfil`) VALUES ('Admin');
