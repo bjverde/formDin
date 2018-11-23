@@ -5849,7 +5849,6 @@ INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,7);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,8);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,9);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,10);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,11);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,12);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,13);
@@ -5876,10 +5875,9 @@ INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,1);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,2);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,3);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,7);
+
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,8);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,9);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,10);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,11);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,12);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,13);
@@ -5888,11 +5886,6 @@ INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,22);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,23);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,31);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,71);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,72);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,73);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,74);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,75);
 
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,86);
 
