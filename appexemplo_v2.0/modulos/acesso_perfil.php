@@ -2,17 +2,19 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPERFIL';
-$frm = new TForm('acesso_perfil',800,950);
+$frm = new TForm('Cadastro de Perfils');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_PERFIL', 'NOM_PERFIL',45,TRUE,45);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
+$frm->addTextField('NOM_PERFIL', 'Nome Perfil', 50, true);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+//$dti = $frm->addDateField('DAT_INCLUSAO', 'Data Inclusão:');
+//$dtu = $frm->addDateField('DAT_UPDATE', 'Data Update:');
+//$dti->setToolTip('Não será usado cadastro');
+//$dtu->setToolTip('Não será usado cadastro');
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -98,7 +100,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_UPDATE|DAT_UPDATE'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de perfis' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -108,10 +110,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'acesso_perfil.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_PERFIL','NOM_PERFIL');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-	$gride->addColumn('DAT_UPDATE','DAT_UPDATE');
+	$gride->addColumn('NOM_PERFIL','Nome Perfil');
+	$gride->addColumn('SIT_ATIVO', 'Ativo', 30, 'center');
+	$gride->addColumn('DAT_INCLUSAO', 'Data Inclusão', 100, 'center');
+	$gride->addColumn('DAT_UPDATE', 'Data Update', 100, 'center');
 
 	$gride->show();
 	die();

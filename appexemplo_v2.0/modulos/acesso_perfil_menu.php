@@ -2,7 +2,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPERFILMENU';
-$frm = new TForm('acesso_perfil_menu',800,950);
+$frm = new TForm('Relacionar Perfil com Menu',700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -10,12 +10,12 @@ $frm->setMaximize(true);
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $listAcesso_perfil = Acesso_perfil::selectAll();
-$frm->addSelectField('IDPERFIL', 'IDPERFIL',TRUE,$listAcesso_perfil,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('IDPERFIL', 'Perfil',TRUE,$listAcesso_perfil,null,null,null,null,null,null,' ',null);
 $listAcesso_menu = Acesso_menu::selectAll();
-$frm->addSelectField('IDMENU', 'IDMENU',TRUE,$listAcesso_menu,null,null,null,null,null,null,' ',null);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
+$frm->addSelectField('IDMENU', 'Menu',TRUE,$listAcesso_menu,null,null,null,null,null,null,' ',null);
+//$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
+//$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+//$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -103,7 +103,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_UPDATE|DAT_UPDATE'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Relações' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -112,12 +112,14 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUpdateFields($mixUpdateFields);
 	$gride->setUrl( 'acesso_perfil_menu.php' );
 
-	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('IDPERFIL','IDPERFIL');
-	$gride->addColumn('IDMENU','IDMENU');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-	$gride->addColumn('DAT_UPDATE','DAT_UPDATE');
+	$gride->addColumn($primaryKey,'id',null,'center');
+	$gride->addColumn('IDPERFIL','Id Perfil',null,'center');
+	$gride->addColumn('NOM_PERFIL','Perfil');
+	$gride->addColumn('IDMENU','Id Menu',null,'center');
+	$gride->addColumn('NOM_MENU','Menu');
+	//$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
+	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+	$gride->addColumn('DAT_UPDATE','Data da Alteração',null,'center');
 
 	$gride->show();
 	die();

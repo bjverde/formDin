@@ -2,13 +2,15 @@
 class Acesso_perfil_menuDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
-									  idperfilmenu
-									 ,idperfil
-									 ,idmenu
-									 ,sit_ativo
-									 ,dat_inclusao
-									 ,dat_update
-									 from form_exemplo.acesso_perfil_menu ';
+									  pm.idperfilmenu
+									 ,pm.idperfil
+									 ,(select p.nom_perfil from form_exemplo.acesso_perfil as p where p.idperfil = pm.idperfil) as nom_perfil
+									 ,pm.idmenu
+									 ,(select m.nom_menu from form_exemplo.acesso_menu as m where m.idmenu = pm.idmenu) as nom_menu
+									 ,pm.sit_ativo
+									 ,pm.dat_inclusao
+									 ,pm.dat_update
+									 from form_exemplo.acesso_perfil_menu as pm';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;

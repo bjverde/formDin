@@ -2,18 +2,18 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPESSOA';
-$frm = new TForm('pessoa',800,950);
+$frm = new TForm('Cadastro de Pessoa',500);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addMemoField('NOME', 'NOME',200,TRUE,80,3);
-$frm->addTextField('TIPO', 'TIPO',2,TRUE,2);
+$frm->addMemoField('NOME', 'Nome',200,TRUE,80,3);
+$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',true,'PF=Pessoa física,PJ=Pessoa jurídica');
 $frm->getLabel('TIPO')->setToolTip('Valor permitidos PF ou PJ');
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+//$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -109,10 +109,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'pessoa.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOME','NOME');
-	$gride->addColumn('TIPO','TIPO');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
+	$gride->addColumn('NOME','Nome');
+	$gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
+	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
+	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
 
 	$gride->show();
 	die();

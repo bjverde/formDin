@@ -2,19 +2,19 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDUSER';
-$frm = new TForm('acesso_user',800,950);
+$frm = new TForm('Cadastro de usuários');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('LOGIN_USER', 'LOGIN_USER',50,TRUE,50);
-$frm->addTextField('PWD_USER', 'PWD_USER',50,FALSE,50);
+$frm->addTextField('LOGIN_USER', 'Login',50,true);
+$frm->addTextField('PWD_USER', 'Senha',50,true);
 $frm->getLabel('PWD_USER')->setToolTip('senha criptografada com password_hash');
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
+//$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+//$frm->addDateField('DAT_UPDATE', 'DAT_UPDATE',FALSE);
 $listPessoa = Pessoa::selectAll();
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',FALSE,$listPessoa,null,null,null,null,null,null,' ',null);
 
@@ -105,8 +105,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_UPDATE|DAT_UPDATE'
 					.',IDPESSOA|IDPESSOA'
 					;
-	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+	$gride = new TGrid( 'gd'                // id do gride
+					   ,'Lista de Usuários' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -116,11 +116,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'acesso_user.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('LOGIN_USER','LOGIN_USER');
-	$gride->addColumn('PWD_USER','PWD_USER');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-	$gride->addColumn('DAT_UPDATE','DAT_UPDATE');
+	$gride->addColumn('LOGIN_USER','Login');
+	$gride->addColumn('PWD_USER','Senha Criptografada');
+	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
+	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+	$gride->addColumn('DAT_UPDATE','Data da Atualização',null,'center');
 	$gride->addColumn('IDPESSOA','IDPESSOA');
 
 	$gride->show();
