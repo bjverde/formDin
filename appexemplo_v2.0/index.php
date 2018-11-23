@@ -49,7 +49,6 @@ require_once('classes/autoload_ap2v.php');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
-//$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
 $app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
