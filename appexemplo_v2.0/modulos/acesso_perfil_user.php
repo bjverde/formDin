@@ -116,7 +116,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->addColumn('IDPERFIL','IDPERFIL',null,'center');
 	$gride->addColumn('NOM_PERFIL','Perfil');
 	$gride->addColumn('IDUSER','IDUSER',null,'center');
-	$gride->addColumn('Login','Login');
+	$gride->addColumn('LOGIN_USER','Login');
 	//$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
 	$gride->addColumn('DAT_INCLUSAO','Data da inclusão',null,'center');
 	$gride->addColumn('DAT_UPDATE','Data do Update',null,'center');
