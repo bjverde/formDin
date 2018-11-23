@@ -44,7 +44,7 @@ require_once('includes/config_conexao.php');
 
 //FormDin version: 4.2.6-alpha
 require '../base/classes/webform/TApplication.class.php';
-require_once('classes/autoload_ap2v.php');
+require_once('classes/autoload_ap25v.php');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
@@ -54,8 +54,8 @@ $app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 $app->setLoginFile('includes/tela_login.php');
 $app->setMainMenuFile('includes/menu.php');
-//$login = ArrayHelper::getArray( $_SESSION[APLICATIVO],'LOGIN');
-$app->setLoginInfo('x');
+$login = ArrayHelper::getArray( $_SESSION[APLICATIVO],'LOGIN');
+//$app->setLoginInfo($login);
 $app->setWaterMark('brasao_marca_dagua.png');
 $app->run();
 ?>

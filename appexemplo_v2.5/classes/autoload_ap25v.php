@@ -10,9 +10,9 @@
  * System ap2v created in: 2018-11-21 23:29:28
  */
 
-if ( !function_exists( 'ap2v_autoload') ) {
-	function ap2v_autoload( $class_name )	{
+if ( !function_exists( 'ap25v_autoload') ) {
+	function ap25v_autoload( $class_name )	{
 		require_once $class_name . '.class.php';
 	}
-spl_autoload_register('ap2v_autoload');
+    spl_autoload_register('ap25v_autoload');
 }

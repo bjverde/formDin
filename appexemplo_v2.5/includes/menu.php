@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-
+include 'classes/Acesso_user_menu.class.php';
 //Pega a lista de Menus do Banco em função do usuario logado
 $userMenu = Acesso_user_menu::getAcessoUserMenuByLogin();
 
