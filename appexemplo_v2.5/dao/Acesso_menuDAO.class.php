@@ -23,13 +23,13 @@ class Acesso_menuDAO extends TPDOConnection {
 		if ( is_array($whereGrid) ){
 			$where = ' 1=1 ';
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMENU', SqlHelper::SQL_TYPE_NUMERIC);
-			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMENU_PAI', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOM_MENU', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMENU_PAI', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'URL', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TOOLTIP', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IMG_MENU', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IMGDISABLED', SqlHelper::SQL_TYPE_TEXT_LIKE);
-			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DISSABLED', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DISSABLED', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'HOTKEY', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'BOOLSEPARATOR', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'JSONPARAMS', SqlHelper::SQL_TYPE_TEXT_LIKE);
@@ -82,7 +82,8 @@ class Acesso_menuDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectMenuByLogin( $login_user ){
+	public static function selectMenuByLogin( $login_user )
+	{
 	    $values = array($login_user);
 	    $sql = 'select
 				 m.idmenu
@@ -103,12 +104,12 @@ class Acesso_menuDAO extends TPDOConnection {
 					,acesso_user_menu as um
 				where um.idmenu = m.idmenu
 				AND um.login_user = ?';
-	    return self::executeSql($sql, $values );
-	}
+	    return self::executeSql($sql, $values);
+	} 
 	//--------------------------------------------------------------------------------
 	public static function insert( Acesso_menuVO $objVo ) {
-		$values = array(  $objVo->getIdmenu_pai() 
-						, $objVo->getNom_menu() 
+		$values = array(  $objVo->getNom_menu() 
+						, $objVo->getIdmenu_pai() 
 						, $objVo->getUrl() 
 						, $objVo->getTooltip() 
 						, $objVo->getImg_menu() 
@@ -119,11 +120,10 @@ class Acesso_menuDAO extends TPDOConnection {
 						, $objVo->getJsonparams() 
 						, $objVo->getSit_ativo() 
 						, $objVo->getDat_inclusao() 
-						, $objVo->getDat_update() 
 						);
 		return self::executeSql('insert into form_exemplo.acesso_menu(
-								 idmenu_pai
-								,nom_menu
+								 nom_menu
+								,idmenu_pai
 								,url
 								,tooltip
 								,img_menu
@@ -135,12 +135,12 @@ class Acesso_menuDAO extends TPDOConnection {
 								,sit_ativo
 								,dat_inclusao
 								,dat_update
-								) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', $values );
+								) values (?,?,?,?,?,?,?,?,?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Acesso_menuVO $objVo ) {
-		$values = array( $objVo->getIdmenu_pai()
-						,$objVo->getNom_menu()
+		$values = array( $objVo->getNom_menu()
+						,$objVo->getIdmenu_pai()
 						,$objVo->getUrl()
 						,$objVo->getTooltip()
 						,$objVo->getImg_menu()
@@ -150,12 +150,10 @@ class Acesso_menuDAO extends TPDOConnection {
 						,$objVo->getBoolseparator()
 						,$objVo->getJsonparams()
 						,$objVo->getSit_ativo()
-						,$objVo->getDat_inclusao()
-						,$objVo->getDat_update()
 						,$objVo->getIdmenu() );
 		return self::executeSql('update form_exemplo.acesso_menu set 
-								 idmenu_pai = ?
-								,nom_menu = ?
+								 nom_menu = ?
+								,idmenu_pai = ?
 								,url = ?
 								,tooltip = ?
 								,img_menu = ?
@@ -165,8 +163,6 @@ class Acesso_menuDAO extends TPDOConnection {
 								,boolseparator = ?
 								,jsonparams = ?
 								,sit_ativo = ?
-								,dat_inclusao = ?
-								,dat_update = ?
 								where idmenu = ?',$values);
 	}
 	//--------------------------------------------------------------------------------

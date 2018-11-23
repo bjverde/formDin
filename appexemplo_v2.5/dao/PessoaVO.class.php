@@ -3,11 +3,13 @@ class PessoaVO {
 	private $idpessoa = null;
 	private $nome = null;
 	private $tipo = null;
+	private $sit_ativo = null;
 	private $dat_inclusao = null;
-	public function __construct( $idpessoa=null, $nome=null, $tipo=null, $dat_inclusao=null ) {
+	public function __construct( $idpessoa=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null ) {
 		$this->setIdpessoa( $idpessoa );
 		$this->setNome( $nome );
 		$this->setTipo( $tipo );
+		$this->setSit_ativo( $sit_ativo );
 		$this->setDat_inclusao( $dat_inclusao );
 	}
 	//--------------------------------------------------------------------------------
@@ -36,6 +38,15 @@ class PessoaVO {
 	public function getTipo()
 	{
 		return $this->tipo;
+	}
+	//--------------------------------------------------------------------------------
+	public function setSit_ativo( $strNewValue = null )
+	{
+		$this->sit_ativo = $strNewValue;
+	}
+	public function getSit_ativo()
+	{
+		return $this->sit_ativo;
 	}
 	//--------------------------------------------------------------------------------
 	public function setDat_inclusao( $strNewValue = null )

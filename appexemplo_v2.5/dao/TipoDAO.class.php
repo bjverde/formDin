@@ -3,8 +3,8 @@ class TipoDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
 									  idtipo
-									 ,idtipo_de_tipos
 									 ,descricao
+									 ,idmeta_tipo
 									 ,sit_ativo
 									 from form_exemplo.tipo ';
 
@@ -13,8 +13,8 @@ class TipoDAO extends TPDOConnection {
 		if ( is_array($whereGrid) ){
 			$where = ' 1=1 ';
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDTIPO', SqlHelper::SQL_TYPE_NUMERIC);
-			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDTIPO_DE_TIPOS', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DESCRICAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMETA_TIPO', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$result = $where;
 		}
@@ -63,25 +63,25 @@ class TipoDAO extends TPDOConnection {
 	}
 	//--------------------------------------------------------------------------------
 	public static function insert( TipoVO $objVo ) {
-		$values = array(  $objVo->getIdtipo_de_tipos() 
-						, $objVo->getDescricao() 
+		$values = array(  $objVo->getDescricao() 
+						, $objVo->getIdmeta_tipo() 
 						, $objVo->getSit_ativo() 
 						);
 		return self::executeSql('insert into form_exemplo.tipo(
-								 idtipo_de_tipos
-								,descricao
+								 descricao
+								,idmeta_tipo
 								,sit_ativo
 								) values (?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( TipoVO $objVo ) {
-		$values = array( $objVo->getIdtipo_de_tipos()
-						,$objVo->getDescricao()
+		$values = array( $objVo->getDescricao()
+						,$objVo->getIdmeta_tipo()
 						,$objVo->getSit_ativo()
 						,$objVo->getIdtipo() );
 		return self::executeSql('update form_exemplo.tipo set 
-								 idtipo_de_tipos = ?
-								,descricao = ?
+								 descricao = ?
+								,idmeta_tipo = ?
 								,sit_ativo = ?
 								where idtipo = ?',$values);
 	}

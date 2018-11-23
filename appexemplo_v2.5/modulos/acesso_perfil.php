@@ -2,19 +2,19 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPERFIL';
-$frm = new TForm('Cadastro de Perfils', 400);
+$frm = new TForm('Cadastro de Perfils');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-
+include 'modulos/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('NOM_PERFIL', 'Nome Perfil', 50, true);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
-$dti = $frm->addDateField('DAT_INCLUSAO', 'Data Inclusão:');
-$dtu = $frm->addDateField('DAT_UPDATE', 'Data Update:');
-$dti->setToolTip('Não será usado cadastro');
-$dtu->setToolTip('Não será usado cadastro');
+//$dti = $frm->addDateField('DAT_INCLUSAO', 'Data Inclusão:');
+//$dtu = $frm->addDateField('DAT_UPDATE', 'Data Update:');
+//$dti->setToolTip('Não será usado cadastro');
+//$dtu->setToolTip('Não será usado cadastro');
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -100,7 +100,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_UPDATE|DAT_UPDATE'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de perfis' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados

@@ -1,13 +1,13 @@
 <?php
 class TipoVO {
 	private $idtipo = null;
-	private $idtipo_de_tipos = null;
 	private $descricao = null;
+	private $idmeta_tipo = null;
 	private $sit_ativo = null;
-	public function __construct( $idtipo=null, $idtipo_de_tipos=null, $descricao=null, $sit_ativo=null ) {
+	public function __construct( $idtipo=null, $descricao=null, $idmeta_tipo=null, $sit_ativo=null ) {
 		$this->setIdtipo( $idtipo );
-		$this->setIdtipo_de_tipos( $idtipo_de_tipos );
 		$this->setDescricao( $descricao );
+		$this->setIdmeta_tipo( $idmeta_tipo );
 		$this->setSit_ativo( $sit_ativo );
 	}
 	//--------------------------------------------------------------------------------
@@ -20,15 +20,6 @@ class TipoVO {
 		return $this->idtipo;
 	}
 	//--------------------------------------------------------------------------------
-	public function setIdtipo_de_tipos( $strNewValue = null )
-	{
-		$this->idtipo_de_tipos = $strNewValue;
-	}
-	public function getIdtipo_de_tipos()
-	{
-		return $this->idtipo_de_tipos;
-	}
-	//--------------------------------------------------------------------------------
 	public function setDescricao( $strNewValue = null )
 	{
 		$this->descricao = $strNewValue;
@@ -36,6 +27,15 @@ class TipoVO {
 	public function getDescricao()
 	{
 		return $this->descricao;
+	}
+	//--------------------------------------------------------------------------------
+	public function setIdmeta_tipo( $strNewValue = null )
+	{
+		$this->idmeta_tipo = $strNewValue;
+	}
+	public function getIdmeta_tipo()
+	{
+		return $this->idmeta_tipo;
 	}
 	//--------------------------------------------------------------------------------
 	public function setSit_ativo( $strNewValue = null )

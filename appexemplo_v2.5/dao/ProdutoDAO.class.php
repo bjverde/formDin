@@ -6,7 +6,8 @@ class ProdutoDAO extends TPDOConnection {
 									 ,nom_produto
 									 ,modelo
 									 ,versao
-									 ,marca_idmarca
+									 ,idmarca
+									 ,idtipo_produto
 									 from form_exemplo.produto ';
 
 	private static function processWhereGridParameters( $whereGrid ) {
@@ -17,7 +18,8 @@ class ProdutoDAO extends TPDOConnection {
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOM_PRODUTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'MODELO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'VERSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
-			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'MARCA_IDMARCA', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMARCA', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDTIPO_PRODUTO', SqlHelper::SQL_TYPE_NUMERIC);
 			$result = $where;
 		}
 		return $result;
@@ -68,27 +70,31 @@ class ProdutoDAO extends TPDOConnection {
 		$values = array(  $objVo->getNom_produto() 
 						, $objVo->getModelo() 
 						, $objVo->getVersao() 
-						, $objVo->getMarca_idmarca() 
+						, $objVo->getIdmarca() 
+						, $objVo->getIdtipo_produto() 
 						);
 		return self::executeSql('insert into form_exemplo.produto(
 								 nom_produto
 								,modelo
 								,versao
-								,marca_idmarca
-								) values (?,?,?,?)', $values );
+								,idmarca
+								,idtipo_produto
+								) values (?,?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( ProdutoVO $objVo ) {
 		$values = array( $objVo->getNom_produto()
 						,$objVo->getModelo()
 						,$objVo->getVersao()
-						,$objVo->getMarca_idmarca()
+						,$objVo->getIdmarca()
+						,$objVo->getIdtipo_produto()
 						,$objVo->getIdproduto() );
 		return self::executeSql('update form_exemplo.produto set 
 								 nom_produto = ?
 								,modelo = ?
 								,versao = ?
-								,marca_idmarca = ?
+								,idmarca = ?
+								,idtipo_produto = ?
 								where idproduto = ?',$values);
 	}
 	//--------------------------------------------------------------------------------

@@ -68,20 +68,6 @@ class Acesso_userDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectUser( $login_user, $pwd_user)
-	{
-	    $values = array($login_user, $pwd_user);
-	    $sql = 'select
-								 iduser
-								,login_user
-								,pwd_user
-								,sit_ativo
-								,dat_inclusao
-								,dat_update
-								from acesso_user where login_user = ? and pwd_user = ?';
-	    return self::executeSql($sql, $values);
-	}
-	//--------------------------------------------------------------------------------
 	public static function insert( Acesso_userVO $objVo ) {
 		$values = array(  $objVo->getLogin_user() 
 						, $objVo->getPwd_user() 

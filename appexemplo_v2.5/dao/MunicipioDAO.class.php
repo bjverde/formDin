@@ -7,7 +7,7 @@ class MunicipioDAO extends TPDOConnection {
 									 ,(select sig_uf from uf where cod_uf = m.cod_uf) as sig_uf
 									 ,m.nom_municipio
 									 ,m.sit_ativo
-									 from form_exemplo.municipio as m';
+									 from municipio m';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;

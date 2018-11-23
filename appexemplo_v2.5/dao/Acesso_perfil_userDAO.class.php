@@ -4,11 +4,13 @@ class Acesso_perfil_userDAO extends TPDOConnection {
 	private static $sqlBasicSelect = 'select
 									  idperfiluser
 									 ,idperfil
+									 ,(select p.nom_perfil from form_exemplo.acesso_perfil as p where p.idperfil = pu.idperfil) as nom_perfil
 									 ,iduser
+									 ,(select u.login_user from form_exemplo.acesso_user as u where u.iduser = pu.iduser) as login_user
 									 ,sit_ativo
 									 ,dat_inclusao
 									 ,dat_update
-									 from form_exemplo.acesso_perfil_user ';
+									 from form_exemplo.acesso_perfil_user as pu';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;

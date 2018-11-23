@@ -5,6 +5,7 @@ class PessoaDAO extends TPDOConnection {
 									  idpessoa
 									 ,nome
 									 ,tipo
+									 ,sit_ativo
 									 ,dat_inclusao
 									 from form_exemplo.pessoa ';
 
@@ -15,6 +16,7 @@ class PessoaDAO extends TPDOConnection {
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOME', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TIPO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$result = $where;
 		}
@@ -65,23 +67,27 @@ class PessoaDAO extends TPDOConnection {
 	public static function insert( PessoaVO $objVo ) {
 		$values = array(  $objVo->getNome() 
 						, $objVo->getTipo() 
+						, $objVo->getSit_ativo() 
 						, $objVo->getDat_inclusao() 
 						);
 		return self::executeSql('insert into form_exemplo.pessoa(
 								 nome
 								,tipo
+								,sit_ativo
 								,dat_inclusao
-								) values (?,?,?)', $values );
+								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( PessoaVO $objVo ) {
 		$values = array( $objVo->getNome()
 						,$objVo->getTipo()
+						,$objVo->getSit_ativo()
 						,$objVo->getDat_inclusao()
 						,$objVo->getIdpessoa() );
 		return self::executeSql('update form_exemplo.pessoa set 
 								 nome = ?
 								,tipo = ?
+								,sit_ativo = ?
 								,dat_inclusao = ?
 								where idpessoa = ?',$values);
 	}

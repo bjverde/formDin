@@ -1,8 +1,8 @@
 <?php
 class Acesso_menuVO {
 	private $idmenu = null;
-	private $idmenu_pai = null;
 	private $nom_menu = null;
+	private $idmenu_pai = null;
 	private $url = null;
 	private $tooltip = null;
 	private $img_menu = null;
@@ -14,10 +14,10 @@ class Acesso_menuVO {
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function __construct( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null ) {
+	public function __construct( $idmenu=null, $nom_menu=null, $idmenu_pai=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null ) {
 		$this->setIdmenu( $idmenu );
-		$this->setIdmenu_pai( $idmenu_pai );
 		$this->setNom_menu( $nom_menu );
+		$this->setIdmenu_pai( $idmenu_pai );
 		$this->setUrl( $url );
 		$this->setTooltip( $tooltip );
 		$this->setImg_menu( $img_menu );
@@ -40,15 +40,6 @@ class Acesso_menuVO {
 		return $this->idmenu;
 	}
 	//--------------------------------------------------------------------------------
-	public function setIdmenu_pai( $strNewValue = null )
-	{
-		$this->idmenu_pai = $strNewValue;
-	}
-	public function getIdmenu_pai()
-	{
-		return $this->idmenu_pai;
-	}
-	//--------------------------------------------------------------------------------
 	public function setNom_menu( $strNewValue = null )
 	{
 		$this->nom_menu = $strNewValue;
@@ -56,6 +47,15 @@ class Acesso_menuVO {
 	public function getNom_menu()
 	{
 		return $this->nom_menu;
+	}
+	//--------------------------------------------------------------------------------
+	public function setIdmenu_pai( $strNewValue = null )
+	{
+		$this->idmenu_pai = $strNewValue;
+	}
+	public function getIdmenu_pai()
+	{
+		return $this->idmenu_pai;
 	}
 	//--------------------------------------------------------------------------------
 	public function setUrl( $strNewValue = null )

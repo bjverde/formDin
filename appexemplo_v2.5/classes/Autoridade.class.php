@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 0.9.0-alpha
+ * SysGen  Version: 0.9.0
  * FormDin Version: 4.2.6-alpha
  * 
- * System ap2v created in: 2018-11-20 23:02:02
+ * System ap2v created in: 2018-11-21 23:30:54
  */
 
 class Autoridade {
@@ -36,8 +36,24 @@ class Autoridade {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function validar( AutoridadeVO $objVo) {
+	    //Invertendo a string de data pois vem da tela dd-mm-yyyy
+	    // e o mysql só entende yyyy-mm-dd
+	    $dat_evento = implode("-", array_reverse(explode("/", $objVo->getDat_evento())));
+	    
+	    $ordem = $objVo->getOrdem();
+	    $where = 'ordem ='.$ordem.' and dat_evento = \''.$dat_evento.'\'';
+	    $resultado = AutoridadeDAO::selectAll(null, $where);
+	    
+	    if (is_array($resultado) && count($resultado)>0) {
+	        $msg = "No evento do mesmo dia só pode ter uma autoridade da mesma ordem";
+	        throw new DomainException($msg);
+	    }
+	}
+	//--------------------------------------------------------------------------------
 	public static function save( AutoridadeVO $objVo ){
 		$result = null;
+		self::validar($objVo);
 		if( $objVo->getIdautoridade() ) {
 			$result = AutoridadeDAO::update( $objVo );
 		} else {
@@ -50,6 +66,5 @@ class Autoridade {
 		$result = AutoridadeDAO::delete( $id );
 		return $result;
 	}
-
 }
 ?>

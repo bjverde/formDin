@@ -2,18 +2,18 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'COD_UF';
-$frm = new TForm('Cadastro de Uf',650,900);
+$frm = new TForm('uf',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_UF', 'Nome',45,TRUE,45);
-$frm->addTextField('SIG_UF', 'Sigla',45,TRUE,45);
-
+$frm->addTextField('NOM_UF', 'NOM_UF',45,TRUE,45);
+$frm->addTextField('SIG_UF', 'SIG_UF',45,TRUE,45);
+$frm->getLabel('SIG_UF')->setToolTip('sigla da uf');
 $listRegiao = Regiao::selectAll();
-$frm->addSelectField('COD_REGIAO', 'Região:',TRUE,$listRegiao,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('COD_REGIAO', 'COD_REGIAO',TRUE,$listRegiao,null,null,null,null,null,null,' ',null);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -107,9 +107,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'uf.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_UF','Nome');
-	$gride->addColumn('SIG_UF','Sigla');
-	$gride->addColumn('COD_REGIAO','Cod Região');
+	$gride->addColumn('NOM_UF','NOM_UF');
+	$gride->addColumn('SIG_UF','SIG_UF');
+	$gride->addColumn('COD_REGIAO','COD_REGIAO');
 
 	$gride->show();
 	die();

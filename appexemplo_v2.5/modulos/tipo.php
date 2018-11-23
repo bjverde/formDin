@@ -9,9 +9,9 @@ $frm->setMaximize(true);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$listTipo_de_tipos = Tipo_de_tipos::selectAll();
-$frm->addSelectField('IDTIPO_DE_TIPOS', 'IDTIPO_DE_TIPOS',TRUE,$listTipo_de_tipos,null,null,null,null,null,null,' ',null);
 $frm->addTextField('DESCRICAO', 'DESCRICAO',100,FALSE,100);
+$listMeta_tipo = Meta_tipo::selectAll();
+$frm->addSelectField('IDMETA_TIPO', 'IDMETA_TIPO',TRUE,$listMeta_tipo,null,null,null,null,null,null,' ',null);
 $frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,FALSE,1);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
@@ -76,8 +76,8 @@ function getWhereGridParameters(&$frm){
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
 				'IDTIPO'=>$frm->get('IDTIPO')
-				,'IDTIPO_DE_TIPOS'=>$frm->get('IDTIPO_DE_TIPOS')
 				,'DESCRICAO'=>$frm->get('DESCRICAO')
+				,'IDMETA_TIPO'=>$frm->get('IDMETA_TIPO')
 				,'SIT_ATIVO'=>$frm->get('SIT_ATIVO')
 		);
 	}
@@ -91,8 +91,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$dados = Tipo::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
 	$realTotalRowsSqlPaginator = Tipo::selectCount( $whereGrid );
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
-					.',IDTIPO_DE_TIPOS|IDTIPO_DE_TIPOS'
 					.',DESCRICAO|DESCRICAO'
+					.',IDMETA_TIPO|IDMETA_TIPO'
 					.',SIT_ATIVO|SIT_ATIVO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
@@ -106,8 +106,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'tipo.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('IDTIPO_DE_TIPOS','IDTIPO_DE_TIPOS');
 	$gride->addColumn('DESCRICAO','DESCRICAO');
+	$gride->addColumn('IDMETA_TIPO','IDMETA_TIPO');
 	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
 
 	$gride->show();
@@ -123,8 +123,8 @@ $frm->show();
 function init() {
 	var Parameters = {"BUSCAR":""
 					,"IDTIPO":""
-					,"IDTIPO_DE_TIPOS":""
 					,"DESCRICAO":""
+					,"IDMETA_TIPO":""
 					,"SIT_ATIVO":""
 					};
 	fwGetGrid('tipo.php','gride',Parameters,true);
