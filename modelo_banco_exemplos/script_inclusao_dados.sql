@@ -5655,146 +5655,253 @@ INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(1,null,'Menu',null,null,'menu-alt-512.png',null,null,null,null);
+(1, null, 'Menu', null, null, 'menu-alt-512.png',null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(11,1,'Pessoa','modulos/pessoa.php',null,null,'user916.gif',null,null,null);
+(11,1,'marca','modulos/marca.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(12,1,'Tipos de Tipos','modulos/tipo_tipos.php',null,null,null,null,null,null);
-
-
+(12,1,'pedido','modulos/pedido.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(2,null,'Autoridades',null,null,null,null,null,null,null);
+(13,1,'pedido_item','modulos/pedido_item.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(21,2,'Cadastro Autoridades','modulos/autoridades.php',null,null,null,null,null,null);
-
-
+(14,1,'produto','modulos/produto.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(8,null,'Tabelas de Apoio',null,null,'table16.gif',null,null,null,null);
+(2, null, 'Pessoas', null, null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(81,8,'Região','modulos/regiao.php',null,null,null,null,null,null);
+(21,2,'pessoa','modulos/pessoa.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(82,8,'UF','modulos/uf.php',null,null,null,null,null,null);
+(22,2,'pessoa_fisica','modulos/pessoa_fisica.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(83,8,'Município','modulos/municipio.php',null,null,null,null,null,null);
-
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(9,null,'Acesso',null,null,'icon-key-yellow.png',null,null,null,null);
+(23,2,'pessoa_juridica','modulos/pessoa_juridica.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(91,9,'User','modulos/acesso_user.php',null,'user916.gif',null,null,null,null);
+(3, null, 'Autoridades', null, null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(92,9,'Pefil','modulos/acesso_perfil.php',null,'icon_mask.png',null,null,null,null);
+(31, 3, 'Cadastro Autoridades', 'modulos/autoridade.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(93,9,'Menu','modulos/acesso_menu.php',null,'icon-menu.png',null,null,null,null);
-
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,null,null,null);
+(7, null, 'Tabelas de Apoio', null, null, 'table16.gif',null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(101,10,'Ambiente Resumido','view/ambiente_resumido.php',null,'information-circle.jpg',null,null,null,null);
+(71, 7,'Região', 'modulos/regiao.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(102,10,'Ambiente PHPInfo em IFrame','view/ambiente_phpinfo.php',null,'php_logo.png',null,null,null,null);
+(72, 7,'UF','modulos/uf.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(103,10,'Banco MySQL','view/exe_teste_conexao.php',null,'data_base.png',null,null,null,null);
+(73, 7,'Município','modulos/municipio.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,null,null,null);
+(74, 7,'Meta Tipo','modulos/meta_tipo.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,null,null,null);
+(75, 7,'Tipo','modulos/tipo.php',null,null,null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(8, null, 'Acesso', null, null, 'icon-key-yellow.png',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(81, 8, 'Usuários', 'modulos/acesso_user.php', null, 'user916.gif',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(82, 8, 'Pefil de Acesso', 'modulos/acesso_perfil.php', null, 'icon_mask.png',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(83, 8, 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(84, 8, 'Relacionar Perfil com Menu','modulos/acesso_perfil_menu.php',null,null,null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(85, 8, 'Relacionar Perfil com Usuário','modulos/acesso_perfil_user.php',null,null,null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(86, 8, 'Alterar a minha senha','modulos/acesso_senha.php',null,'lock16.gif',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(9, null, 'Sobre', 'modulos/sys_about.php', null, 'information-circle.jpg',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(101,10,'Ambiente Resumido','modulos/sys_environment_summary.php',null,'information-circle.jpg',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(102,10,'PHPInfo','modulos/sys_environment.php',null,'php_logo.png',null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,'S',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+VALUES
+(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,'S',null,null);
+
+
+-- Gerador dos inserts
+-- SELECT m.idmenu
+-- , CONCAT('INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,',m.idmenu,');') as res 
+-- FROM form_exemplo.acesso_menu as m;
+
 
 
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,1);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,3);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,7);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,8);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,9);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,10);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,11);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,12);
-
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,13);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,14);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,21);
-
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,8);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,22);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,23);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,31);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,71);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,72);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,73);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,74);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,75);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,81);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,82);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,83);
-
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,9);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,91);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,92);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,93);
-
-
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,10);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,84);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,85);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,86);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,101);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,102);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,103);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,104);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,105);
 
 
 
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,1);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,3);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,7);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,8);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,9);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,10);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,11);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,12);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,13);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,14);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,21);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,22);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,23);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,31);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,71);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,72);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,73);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,74);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,75);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,81);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,82);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,83);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,84);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,85);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (2,86);
+
+
+
 
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,1);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,3);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,7);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,8);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,9);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,10);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,11);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,12);
-
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,13);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,14);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,21);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,22);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,23);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,31);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,71);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,72);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,73);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,74);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,75);
 
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,8);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,81);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,82);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,83);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (3,86);
 
 
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,2);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,22);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,23);
 
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,1);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,11);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,8);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,86);
+
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (4,9);
