@@ -160,7 +160,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`acesso_user` (
   `iduser` INT NOT NULL AUTO_INCREMENT,
   `login_user` VARCHAR(50) NOT NULL,
-  `pwd_user` VARCHAR(50) NULL COMMENT 'senha criptografada com password_hash',
+  `pwd_user` VARCHAR(200) NULL COMMENT 'senha criptografada com password_hash',
   `sit_ativo` VARCHAR(1) NOT NULL DEFAULT 'S',
   `dat_inclusao` DATETIME NOT NULL DEFAULT NOW(),
   `dat_update` DATETIME NULL DEFAULT now() ON UPDATE now(),
