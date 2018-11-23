@@ -37,6 +37,16 @@ class Acesso_userDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectByLogin( $login ) {
+		if( empty($login) || !is_string($login) ){
+			throw new InvalidArgumentException();
+		}
+		$values = array($login);
+		$sql = self::$sqlBasicSelect.' where login_user = ?';
+		$result = self::executeSql($sql, $values );
+		return $result;
+	}	
+	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$where = self::processWhereGridParameters($where);
 		$sql = 'select count(iduser) as qtd from form_exemplo.acesso_user';
@@ -72,34 +82,26 @@ class Acesso_userDAO extends TPDOConnection {
 		$values = array(  $objVo->getLogin_user() 
 						, $objVo->getPwd_user() 
 						, $objVo->getSit_ativo() 
-						, $objVo->getDat_inclusao() 
-						, $objVo->getDat_update() 
 						, $objVo->getIdpessoa() 
 						);
 		return self::executeSql('insert into form_exemplo.acesso_user(
 								 login_user
 								,pwd_user
 								,sit_ativo
-								,dat_inclusao
-								,dat_update
 								,idpessoa
-								) values (?,?,?,?,?,?)', $values );
+								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Acesso_userVO $objVo ) {
 		$values = array( $objVo->getLogin_user()
 						,$objVo->getPwd_user()
 						,$objVo->getSit_ativo()
-						,$objVo->getDat_inclusao()
-						,$objVo->getDat_update()
 						,$objVo->getIdpessoa()
 						,$objVo->getIduser() );
 		return self::executeSql('update form_exemplo.acesso_user set 
 								 login_user = ?
 								,pwd_user = ?
 								,sit_ativo = ?
-								,dat_inclusao = ?
-								,dat_update = ?
 								,idpessoa = ?
 								where iduser = ?',$values);
 	}

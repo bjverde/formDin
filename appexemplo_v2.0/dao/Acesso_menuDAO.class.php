@@ -51,6 +51,19 @@ class Acesso_menuDAO extends TPDOConnection {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectMenuByLogin( $login ) {
+		if( empty($login) || !is_string($login) ){
+			throw new InvalidArgumentException();
+		}
+		$values = array($login);
+		$sql = self::$sqlBasicSelect
+		      .' where idmenu in ( 
+				 select idmenu from form_exemplo.acesso_user_menu as um where um.login_user = ? 
+				 )';
+		$result = self::executeSql($sql, $values );
+		return $result;
+	}	
+	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$where = self::processWhereGridParameters($where);
 		$sql = 'select count(idmenu) as qtd from form_exemplo.acesso_menu';

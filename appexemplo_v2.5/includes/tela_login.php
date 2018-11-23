@@ -60,7 +60,7 @@ if( $acao =='login'){
     sleep(1);
     $nom_user = $frm->get('login');
     $pwd_user = $frm->get('senha');
-    $msg = loginService::validarLogin($nom_user,$pwd_user);
+    $msg = Acesso_user::login($nom_user,$pwd_user);;
     if( $msg == 1 ) {
         $_SESSION[APLICATIVO]['conectado']=true;
         prepareReturnAjax(1);

@@ -35,6 +35,18 @@ class Acesso_user {
 		$result = Acesso_userDAO::selectAll( $orderBy, $where );
 		return $result;
 	}
+	//--------------------------------------------------------------------------------	
+	public static function login( $login_user, $pwd_user )	{
+		$user = Acesso_userDAO::selectByLogin($login_user);
+        if (password_verify($pwd_user, $user['PWD_USER'][0])) {
+            $_SESSION[APLICATIVO]['IDUSER'] = $dados['IDUSER'][0];
+            $_SESSION[APLICATIVO]['LOGIN']  = $dados['LOGIN_USER'][0];
+            $msg = 1;
+        }else{
+            $msg = 'Login Invalido !';
+        }
+        return $msg;
+    }	
 	//--------------------------------------------------------------------------------
 	public static function save( Acesso_userVO $objVo ){
 		$result = null;
