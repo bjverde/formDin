@@ -38,19 +38,19 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-include ('../base/classes/webform/TApplication.class.php');
 
+require_once('includes/constantes.php');
+require_once('includes/config_conexao.php');
 
-define('APLICATIVO','APPEV25');
-define('FORMDIN',1);
-define('DECIMAL_SEPARATOR',',');
-
+//FormDin version: 4.2.6-alpha
+require '../base/classes/webform/TApplication.class.php';
+require_once('classes/autoload_ap2v.php');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Sistema exemplo 2.5 com FormDin '.FORMDIN_VERSION);
+$app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
-$app->setVersionSystem('v 2.5.0.0');
+$app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 $app->setLoginInfo('Bem-vindo');
 $app->setLoginFile('includes/tela_login.php');
