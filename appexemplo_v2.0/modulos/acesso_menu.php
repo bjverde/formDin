@@ -6,7 +6,7 @@ $frm = new TForm('Cadastro de Menu',1000,1000);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-
+include 'modulos/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('NOM_MENU', 'Nome do Menu',45,TRUE,45);

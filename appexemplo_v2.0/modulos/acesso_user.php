@@ -6,7 +6,7 @@ $frm = new TForm('Cadastro de usuários');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-
+include 'modulos/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('LOGIN_USER', 'Login',50,true);

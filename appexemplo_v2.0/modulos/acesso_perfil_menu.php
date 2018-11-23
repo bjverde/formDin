@@ -6,7 +6,7 @@ $frm = new TForm('Relacionar Perfil com Menu',700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-
+include 'modulos/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $listAcesso_perfil = Acesso_perfil::selectAll();

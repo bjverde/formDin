@@ -12,7 +12,7 @@
 
 define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
 define('SYSTEM_ACRONYM' , 'APPEV2.0');
-define('SYSTEM_VERSION' , '2.0.0');
+define('SYSTEM_VERSION' , '2.0.1');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 define('DS'   , DIRECTORY_SEPARATOR);
 ?>
