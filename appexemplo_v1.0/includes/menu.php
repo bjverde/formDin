@@ -65,7 +65,7 @@ $menu->add('13', '1', 'Campo Coord GMS');
     $menu->add('13.2', '13', 'Campo Coord GMS 02', 'view/fields/exe_CoordGmsField02.php');
 $menu->add('14', '1', 'Campo Select', 'view/fields/exe_SelectField.php');
 $menu->add('15', '1', 'Campo Radio', 'view/fields/exe_RadioField.php');
-$menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php');
+$menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php',null,'../../base/imagens/iconCheckAll.gif');
 $menu->add('17', '1', 'Campo Arquivo ou Blob');
     $menu->add('171', '17', 'Campo Blob');
         $menu->add('1171', '171', 'Campo Blob Salvo no Banco', 'view/fields/exe_fwShowBlob.php');
@@ -88,7 +88,7 @@ $menu->add('110', '1', 'Campos Data e hora');
     $menu->add('1104', '110', 'Campo Agenda', 'view/fields/exe_TCalendar.php');
 $menu->add('111', '1', 'Campo Select Diretorio/Pasta', 'view/fields/exe_OpenDirField.php');
 
-$menu->add('115', '1', 'Campo Senha', 'view/fields/exe_TPasswordField.php');
+$menu->add('115', '1', 'Campo Senha', 'view/fields/exe_TPasswordField.php', null, '../../base/imagens/lock16.gif');
 
 $menu->add('117', '1', 'Campo Captcha', 'view/fields/exe_TCaptchaField.php');
 
@@ -98,6 +98,7 @@ $menu->add('121', '1', 'Campo Link', 'view/fields/exe_field_link.php');
 //Redirect só funciona se o arquivo estiver na pasta modulos
 $menu->add('122', '1', 'Redirect', 'exe_redirect.inc');
 $menu->add('123', '1', 'TZip', 'exe_TZip.php');
+$menu->add('124', '1', 'E-mail', 'view/fields/exe_TEmail.php', null, '../../base/imagens/email.png');
 
 //-----------------------------------------------------------------------------
 $menu->add('2', null, 'Containers');
