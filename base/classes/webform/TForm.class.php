@@ -6978,58 +6978,70 @@ class TForm Extends TBox
 		return $field;
 	}
            
-           /**
-            * Adicinar campos para entrada de dados de coordenada geográfica no formato GMS ( GRAU, MIN E SEG )
-            *
-            * @param mixed $strName
-            * @param mixed $strLabel
-            * @param mixed $boolRequired
-            * @param mixed $boolNewLine
-            * @param mixed $strLatY
-            * @param mixed $strLonX
-            * @param mixed $strFieldNameLat
-            * @param mixed $strFieldNameLon
-            * @param string $strLabels - rótulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
-            * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vígula:. ex: °,',"
-            * @param mixed $intMapHeight
-            * @param mixed $intMapWidth
-            * @param mixed $boolLabelAbove
-            * @param mixed $boolNoWrapLabel
-            * @param string $strMapHeaderText
-            * @param string $strMapHeaderFontColor
-            * @param string $strMapHeaderFontSize
-            * @return TCoordGMS
-            */
-           public function addCoordGMSField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strLatY=null, $strLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strMapHeaderText=null,$strMapHeaderFontColor=null,$strMapHeaderFontSize=null)
-           {
-               $field = new TCoordGMS( $strName, $boolRequired, $strLatY, $strLonX, $strFieldNameLat, $strFieldNameLon, $strLabels, $strSymbols,$intSymbolsFontSize,$intMapHeight, $intMapWidth,$strMapHeaderText,$strMapHeaderFontColor,$strMapHeaderFontSize);
-               $field->setCustomHintEnabled( $this->getCustomHintEnabled() );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Campo para entrada de senhas
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param integer $intmaxLength
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @param integer $intSize
-            * @param boolean $boolUseVirtualKeyboard
-            * @param boolean $boolShowVirtualKeyboardImage
-            * @param boolean $boolReadOnly
-            * @return TPassword
-            */
-           public function addPasswordField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $intmaxLength=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$intSize=null , $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
-           {
-               $field = new TPassword( $strName, $strValue, $intmaxLength, $boolRequired, $intSize, $boolUseVirtualKeyboard, $boolShowVirtualKeyboardImage, $boolReadOnly);
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    /**
+    * Adicinar campos para entrada de dados de coordenada geográfica no formato GMS ( GRAU, MIN E SEG )
+    *
+    * @param mixed $strName
+    * @param mixed $strLabel
+    * @param mixed $boolRequired
+    * @param mixed $boolNewLine
+    * @param mixed $strLatY
+    * @param mixed $strLonX
+    * @param mixed $strFieldNameLat
+    * @param mixed $strFieldNameLon
+    * @param string $strLabels - rótulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
+    * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vígula:. ex: °,',"
+    * @param mixed $intMapHeight
+    * @param mixed $intMapWidth
+    * @param mixed $boolLabelAbove
+    * @param mixed $boolNoWrapLabel
+    * @param string $strMapHeaderText
+    * @param string $strMapHeaderFontColor
+    * @param string $strMapHeaderFontSize
+    * @return TCoordGMS
+    */
+    public function addCoordGMSField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strLatY=null, $strLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strMapHeaderText=null,$strMapHeaderFontColor=null,$strMapHeaderFontSize=null)
+    {
+        $field = new TCoordGMS( $strName, $boolRequired, $strLatY, $strLonX, $strFieldNameLat, $strFieldNameLon, $strLabels, $strSymbols,$intSymbolsFontSize,$intMapHeight, $intMapWidth,$strMapHeaderText,$strMapHeaderFontColor,$strMapHeaderFontSize);
+        $field->setCustomHintEnabled( $this->getCustomHintEnabled() );
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        return $field;
+    }
+
+    /**
+    * Campo para entrada de senhas
+    *
+    * @param string $strName              -1: Ida do campoa
+    * @param string $strLabel             -2: Label
+    * @param boolean $boolRequired        -3: Campo obrigatorio, DEFALUT is FALSE não obrigatorio.
+    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não obrigatorio.
+    * @param integer $intmaxLength        -5: Tamanho maximo
+    * @param string $strValue
+    * @param boolean $boolLabelAbove      -7: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolNoWrapLabel
+    * @param integer $intSize
+    * @param boolean $boolUseVirtualKeyboard
+    * @param boolean $boolShowVirtualKeyboardImage
+    * @param boolean $boolReadOnly
+    * @return TPassword
+    */
+    public function addPasswordField( $strName
+                                    , $strLabel=null
+                                    , $boolRequired=null
+                                    , $boolNewLine=null
+                                    , $intmaxLength=null
+                                    , $strValue=null
+                                    , $boolLabelAbove=null
+                                    , $boolNoWrapLabel=null
+                                    , $intSize=null
+                                    , $boolUseVirtualKeyboard=null
+                                    , $boolShowVirtualKeyboardImage=null
+                                    , $boolReadOnly=null )
+    {
+        $field = new TPassword( $strName, $strValue, $intmaxLength, $boolRequired, $intSize, $boolUseVirtualKeyboard, $boolShowVirtualKeyboardImage, $boolReadOnly);
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        return $field;
+    }
            /**
             * Campo para entrada de numero de processo do serviço público
             *
