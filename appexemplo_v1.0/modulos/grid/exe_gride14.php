@@ -38,7 +38,12 @@
  */
 
 $frm = new TForm('Exemplo de Criação de Gride');
-
+$dados = array(
+     'NOM_UF'=>array(0=>'DF',1=>'GO',2=>'SP')
+    ,'COD_UF'=>array(0=>'DF',1=>'GO',2=>'SP')
+    ,'NOME'=>array(0=>'Luiz E',1=>'Kleber',2=>'Rafael')
+    ,'QTD'=>array(0=>10,1=>3,2=>89)
+);
 $gride = new TGrid('idGride' // id do gride
 , 'Título do Gride' // titulo do gride
 , $dados     // array de dados
@@ -69,6 +74,7 @@ $h->setCss('font-size', '14');           // altera o tamanho da fonte do titulo 
 
 //$gride->addSelectColumn('seq_fruta','Fruta','seq_fruta','fruta',null,null,null,null,'SEQ_FRUTA','NOM_FRUTA');
 $gride->setCache(-1); // não utiliza cache da classe banco ( IBAMA );
+$gride->show();
 
 $frm->show();
 return;
