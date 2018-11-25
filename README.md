@@ -48,28 +48,21 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 
 ## Informações
 
+![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
+
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* PHP 5.6.x ou superior (compativel como 7.2.0)
+* Compatível PHP 5.6.x, 7.0.x, 7.1.x, 7.2.x
 
-![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
+Veja na Wiki 
 
-[Na Wiki terá informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informações-técnicas-e-Arquitetura):
+[Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
 * Branchs
-* Arquiteturas
+* Banco de Dados
 * Bibliotes utilizadas
+* [Arquitetura do formDin](https://github.com/bjverde/formDin/wiki/Arquitetura-do-formDin)
 
-
-### Bibliotecas utilizadas
-* fPDF 1.81
-* PHPUnit
-* CaptchaSecurityImages 
-* JQuery 1.6
-* [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
-* Ckeditor 3.6
-* TinyMCE 3.3.4 (2010-04-27)
-* [Font Awesome Icons 5.0.6](https://fontawesome.com/icons?d=gallery) 
 
 ## Instalação.
 
