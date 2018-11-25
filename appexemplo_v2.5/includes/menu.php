@@ -39,12 +39,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-include 'classes/Acesso.class.php';
 //Pega a lista de Menus do Banco em função do usuario logado
 $userMenu = Acesso::getAcessoUserMenuByLogin();
 
 $menu = new TMenuDhtmlx();
-//Gera o menu Basico
+//Gera o menu considerando os registros de banco.
 foreach ($userMenu['IDMENU'] as $key => $value){
     $menu->add($userMenu['IDMENU'][$key], $userMenu['IDMENU_PAI'][$key], $userMenu['NOM_MENU'][$key], $userMenu['URL'][$key], $userMenu['TOOLTIP'][$key], $userMenu['IMG_MENU'][$key]);
 }

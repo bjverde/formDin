@@ -106,6 +106,16 @@ class Acesso_userDAO extends TPDOConnection {
 								where iduser = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
+	public static function updateSenha ( Acesso_userVO $objVo ) {
+	    $values = array( $objVo->getPwd_user()
+	                   , $objVo->getLogin_user()
+	    );
+	    $sql = 'update form_exemplo.acesso_user set
+								pwd_user = ?
+								where login_user = ?';
+	    return self::executeSql($sql,$values);
+	}
+	//--------------------------------------------------------------------------------
 	public static function delete( $id ){
 		$values = array($id);
 		return self::executeSql('delete from form_exemplo.acesso_user where iduser = ?',$values);

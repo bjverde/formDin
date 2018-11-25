@@ -25,15 +25,11 @@ switch( $acao ) {
 	case 'Salvar':
 		try{
 			if ( $frm->validate() ) {
+			    $login = $frm->getFieldValue('login');
+			    $senhaAtual = $frm->getFieldValue('senha');
 				$senha1 = $frm->getFieldValue('senha1');
 				$senha2 = $frm->getFieldValue('senha2');
-				if(strlen($senha1)<8){
-					throw new DomainException('A senha de ter no minomo 8 caractes');
-				}
-				if($senha1 != $senha2){
-					throw new DomainException('As senhas não iguais');
-				}
-
+				$resultado = Acesso::changePassword($login, $senhaAtual, $senha1, $senha2);
 				if($resultado==1) {
 					$frm->setMessage('Registro gravado com sucesso!!!');
 					$frm->clearFields();

@@ -33,14 +33,23 @@ class Acesso {
         $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
         return $userMenu;
     }
-	public static function changePassword($login_user, $pwd_user_old, $pwd_user_new)	{
+    public static function changePassword($login_user, $pwd_user_old, $pwd_user_new1, $pwd_user_new2)	{
+        if(strlen($pwd_user_new1)<8){
+            throw new DomainException('A senha de ter no minomo 8 caractes');
+        }
+        if($pwd_user_new1 != $pwd_user_new2){
+            throw new DomainException('As senhas não iguais');
+        }        
 		$user = Acesso_userDAO::selectByLogin($login_user);
-        if (password_verify($pwd_user, $user['PWD_USER'][0])) {
-            $_SESSION[APLICATIVO]['IDUSER'] = $user['IDUSER'][0];
-            $_SESSION[APLICATIVO]['LOGIN']  = $user['LOGIN_USER'][0];
-            $msg = 1;
+		if (password_verify($pwd_user_old, $user['PWD_USER'][0])) {
+		    $pwd_user_new_hash = password_hash($pwd_user_new1, PASSWORD_DEFAULT);
+		    $vo = new Acesso_userVO();
+		    $vo->setLogin_user($login_user);
+		    $vo->setPwd_user($pwd_user_new_hash);
+		    Acesso_userDAO::updateSenha($vo);
+		    $msg = 1;
         }else{
-            throw new DomainException('A senha atual não está valida');
+            throw new DomainException('A senha atual não está correta');
         }
         return $msg;
     }    
