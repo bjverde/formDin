@@ -34,7 +34,7 @@ class Acesso_user {
 	public static function selectAll( $orderBy=null, $where=null ){
 		$result = Acesso_userDAO::selectAll( $orderBy, $where );
 		return $result;
-	}
+	}	
 	//--------------------------------------------------------------------------------
 	public static function save( Acesso_userVO $objVo ){
 		$result = null;
