@@ -485,9 +485,14 @@ class TPDOConnection {
                  * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
                  * */
                 if (PHP_OS == "Linux") {
-                    $driver = 'dblib';
-                    //self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-                    self::$dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
+                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+                        $driver = 'sqlsrv';
+                        self::$dsn = $driver.':Server='.$host.';Database='.$database;
+                    } else {
+                        $driver = 'dblib';
+                        //self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+                        self::$dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
+                    }
                 } else {
                     $driver = 'sqlsrv';
                     self::$dsn = $driver.':Server='.$host.';Database='.$database;
