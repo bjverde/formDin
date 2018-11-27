@@ -25,7 +25,7 @@ $frm->setAutoSize(true);
 $frm->addCssFile('css/css_form02.css');
 
 
-$html ='Esse forma mostra o exemplo do uso de um css separado sobre alguns elmentos. Evite usar a funão setCSS ! O melhor é utilizar setClass com o addCssFile.';
+$html ='Esse form mostra o exemplo do uso de um css separado sobre alguns elmentos.<br>Evite usar a funão setCSS ! O melhor é utilizar setClass com o addCssFile.';
 $frm->addHtmlField('html1', $html, null, 'Dica:', null, 300)->setClass('notice');
 
 $html2 ='Font Awesome Icons !! <i class="fab fa-php"></i> <i class="fab fa-bitcoin"></i>'

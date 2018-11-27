@@ -1,6 +1,6 @@
 .gridTitle{
     font-family:Verdana;
-    font-size:13px;
+    font-size:25px;
     font-style:normal;
     line-height:normal;
     font-weight:bold;
@@ -8,7 +8,17 @@
     text-shadow: 3px 2px red;
 }
 
-
-.columRed{
+.columNome{
+	font-family:Monospace;
+	font-size:25px;
     color: #00ff00;
+}
+
+.notice {
+    width: 200px;
+    font-size: 16px;
+    border: 1px dashed blue;
+    display: inline-block;
+    text-align: center;
+    padding: 15px 32px;
 }
