@@ -210,8 +210,9 @@ $menu->add('200', 0, 'Layouts', null, 'Exemplos de Layouts, CSS e apresentaçõe
         $menu->add('20010.3', '20010', 'Esqueleto do Layout', 'exe_layout_1.php');
     $menu->add('20020', '200', 'Definir Colunas no Formulário', 'view/form/exe_colunas.php');
     $menu->add('20021', '200', 'Imagem de Fundo', 'view/form/exe_TFormImage.php');
-    $menu->add('20022', '200', 'Customizado com CSS', 'view/form/exe_TForm3.php');
-    $menu->add('20023', '200', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php');
+    $menu->add('20022', '200', 'Customizado com CSS', 'view/form/exe_TForm3.php', null, '../../base/imagens/css.png');
+    $menu->add('20023', '200', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php', null, '../../base/imagens/css.png');
+    $menu->add('20024', '200', 'Customizado grid com CSS', 'view/css/exe_css_form03.php', null, '../../base/imagens/table16.gif');
 
 //-----------------------------------------------------------------------------
 $menu->add('210', null, 'Gerador de Código', null, 'Formularios geradores de codigo', 'settings_tool_preferences-512.png');
