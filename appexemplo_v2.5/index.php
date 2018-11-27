@@ -52,10 +52,12 @@ $app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 $app->setSigla(APLICATIVO);
 $app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
+
 $app->setLoginFile('includes/tela_login.php');
-$app->setMainMenuFile('includes/menu.php');
 $login = ArrayHelper::get( $_SESSION[APLICATIVO],'LOGIN');
 $app->setLoginInfo($login);
+
+$app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
 $app->run();
 ?>
