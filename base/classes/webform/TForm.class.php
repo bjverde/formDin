@@ -5093,16 +5093,16 @@ class TForm Extends TBox
           }
           return $newDisplayControl;
       }
-      /**
-       * retorna o array de objetos displaycontrol que contem os campos e os labels do
-       * formulário
-       *
-       * @return array
-       */
-       public function getDisplayControls()
-       {
-           return $this->displayControls;
-       }
+    /**
+    * retorna o array de objetos displaycontrol que contem os campos e os labels do
+    * formulário
+    *
+    * @return array
+    */
+    public function getDisplayControls()
+    {
+       return $this->displayControls;
+    }
        
        /**
         * Adicionar botão no layout
@@ -5131,12 +5131,18 @@ class TForm Extends TBox
         * @return TButton
         */
        public function addButton( $mixValue=null
-					       		, $strAction=null, $strName=null
-					       		, $strOnClick=null, $strConfirmMessage=null
-					       		, $boolNewLine=null, $boolFooter=null
-					       		, $strImage=null, $strImageDisabled=null
-					       		, $strHint=null, $strVerticalAlign=null
-					       		, $boolLabelAbove=null, $strLabel=null
+					       		, $strAction=null
+					       		, $strName=null
+					       		, $strOnClick=null
+					       		, $strConfirmMessage=null
+					       		, $boolNewLine=null
+					       		, $boolFooter=null
+					       		, $strImage=null
+					       		, $strImageDisabled=null
+					       		, $strHint=null
+					       		, $strVerticalAlign=null
+					       		, $boolLabelAbove=null
+					       		, $strLabel=null
 					       		, $strHorizontalAlign=null) {
            // botão será criado no rodapé do formulário por padrão
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
@@ -6197,20 +6203,20 @@ class TForm Extends TBox
            public function getLabelsAlign(){
                return $this->labelsAlign;
            }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adiciona um campo oculto ao layout
-            *
-            * @param string $strName       - 1: Id do Campo
-            * @param string $strValue      - 2: Valor inicial
-            * @param boolean $boolRequired - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio  
-            * @return THidden
-            */
-           public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
-           {
-               $field = new THidden( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
-               return $field;
+   //-----------------------------------------------------------------------------
+    /**
+    * Adiciona um campo oculto ao layout
+    *
+    * @param string $strName       - 1: Id do Campo
+    * @param string $strValue      - 2: Valor inicial
+    * @param boolean $boolRequired - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio  
+    * @return THidden
+    */
+    public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
+    {
+       $field = new THidden( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
+       return $field;
     }
            
     /**
@@ -6263,19 +6269,20 @@ class TForm Extends TBox
      * @param boolean $boolLabelAbove  - 8: Label sobre o campo
      * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
      * @param string  $strValue
+     * @param unknown $boolNoWrapLabel
      * @return TMemo
      */
     public function addMemoField( $strName
-           		                       , $strLabel=null
-           		                       , $intMaxLength
-           		                       , $boolRequired=null
-           		                       , $intColumns=null
-           		                       , $intRows=null
-           		                       , $boolNewLine=null
-           		                       , $boolLabelAbove=null
-           		                       , $boolShowCounter=null
-           		                       , $strValue=null
-           		                       , $boolNoWrapLabel=null )
+   		                       , $strLabel=null
+   		                       , $intMaxLength
+   		                       , $boolRequired=null
+   		                       , $intColumns=null
+   		                       , $intRows=null
+   		                       , $boolNewLine=null
+   		                       , $boolLabelAbove=null
+   		                       , $boolShowCounter=null
+   		                       , $strValue=null
+   		                       , $boolNoWrapLabel=null )
     {
     	$field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
     	$field->setClass( 'fwMemo' );
@@ -6316,24 +6323,26 @@ class TForm Extends TBox
     	$this->addJavascript('fwSetHtmlEditor("'.$strName.'","callBackEditor",false)');
     	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
     	return $field;
-    }
-
-    /**
+    }    
+    
+    /****
      * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
      * Tipo de máscara: DMY, DM, MY
-     *
-     * @param string  $strName      - 1: Id do Campo
-     * @param string  $strLabel     - 2: Label do Campo
-     * @param string  $strValue     - 3: Valor inicial
-     * @param boolean $boolRequired - 4: obrigatório ou não
-     * @param boolean $boolNewLine  - 5: Em nova linha
+     *  
+     * @param string  $strName         - 1: Id do Campo
+     * @param string  $strLabel        - 2: Label do Campo
+     * @param boolean $boolRequired    - 3: DEFAULT = flase não obrigatório
+     * @param boolean $boolNewLine     - 4: DEFAULT = true nova linha
+     * @param string  $strValue        - 5: Valor inicial
      * @param string  $strMinValue
      * @param string  $strMaxValue
      * @param string  $strMaskType
      * @param boolean $boolButtonVisible
-     * @param boolean $boolLabelAbove - 10: Label sobre
-     * @return object TDate
-     */ 
+     * @param string  $strExampleText
+     * @param boolean $boolLabelAbove
+     * @param string  $boolNoWrapLabel
+     * @return TDate
+     */
     public function addDateField( $strName
     		, $strLabel=null
     		, $boolRequired=null
@@ -6372,7 +6381,7 @@ class TForm Extends TBox
     * @param boolean $boolNewLine     - 5: nova linha. Default = true
     * @param boolean $boolNoWrapLabel
     * @param boolean $boolCloseble    - 6: pode fechar ou não
-    * @param string $accordionId      - 7:
+    * @param string  $strAccordionId  - 7:
     * @param boolean $boolOpened      - 8: inicia aberto
     * @param string $imgOpened        - 9:
     * @param string $imgClosed        - 10: 
@@ -6407,33 +6416,33 @@ class TForm Extends TBox
 		return $field;
 	}
            
-           /**
-            * Campo de uso geral para insersão manual de códigos html na página
-            *
-            * Se os parametros width ou height não forem informados, serão
-            * definidos como "auto"
-            *
-            * Se o label for null, não será criado o espaço referente a ele no formulário, para criar
-            * um label invisível defina como "" o seu valor
-            *
-            * criado o espaço
-            * @param string $strName        - Nome do campo            
-            * @param string $strValue       - Texto HTML que irá aparece dentro
-            * @param string $strIncludeFile - 
-            * @param string $strLabel
-            * @param string $strWidth
-            * @param string $strHeight
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return THtml Field
-            */
-           public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
-               $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
-               return $field;
-           }
+   /**
+    * Campo de uso geral para insersão manual de códigos html na página
+    *
+    * Se os parametros width ou height não forem informados, serão
+    * definidos como "auto"
+    *
+    * Se o label for null, não será criado o espaço referente a ele no formulário, para criar
+    * um label invisível defina como "" o seu valor
+    *
+    * criado o espaço
+    * @param string $strName        - Nome do campo            
+    * @param string $strValue       - Texto HTML que irá aparece dentro
+    * @param string $strIncludeFile - 
+    * @param string $strLabel
+    * @param string $strWidth
+    * @param string $strHeight
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return THtml Field
+    */
+   public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+   {
+       //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
+       $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
+       return $field;
+   }
            /**
             * Cria um campo html para exibir um gride via ajax no formulário utilizando a classe TGrid
             *
