@@ -72,7 +72,7 @@ Veja na Wiki
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
 
-* [4.2.6 - 2018/07/31 tag v4.2.6](https://github.com/bjverde/formDin/releases/tag/v4.2.6)
+* [4.2.6 - 2018/11/30 tag v4.2.6](https://github.com/bjverde/formDin/releases/tag/v4.2.6)
    * :bug: FixBugs to Work with PHP 7.2.X
    * :bug: Erro Grid Mongo
    * :bug: Notice PHP 7.2.X, TGrid
