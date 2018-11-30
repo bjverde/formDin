@@ -71,6 +71,14 @@ Veja na Wiki
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
+
+* [4.2.6 - 2018/07/31 tag v4.2.6](https://github.com/bjverde/formDin/releases/tag/v4.2.6)
+   * :bug: FixBugs to Work with PHP 7.2.X
+   * :bug: Erro Grid Mongo
+   * :bug: Notice PHP 7.2.X, TGrid
+   * :hammer: Busca cep com Via cep
+   * :memo: update app exemplos 2.5
+
 * [4.2.5 - 2018/07/31 tag v4.2.5](https://github.com/bjverde/formDin/releases/tag/v4.2.5)
    * :bug: radio butun
    * :art: Font Awesome Icons
