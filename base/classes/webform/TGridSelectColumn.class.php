@@ -60,8 +60,8 @@ class TGridSelectColumn extends TGridEditColumn
 	* @param boolean $boolReadOnly      - 6: Somente Leiura
 	* @param string $strFirstOptionText
 	* @param string $strFirstOptionValue
-	* @param unknown $strKeyField
-	* @param unknown $strDisplayField
+	* @param string $strKeyField
+	* @param string $strDisplayField
 	* @param string $strInitialValueField
 	*
 	* @return TGridSelectColumn
