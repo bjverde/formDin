@@ -6784,13 +6784,13 @@ class TForm Extends TBox
             * @param string $strName         - 1: field ID
             * @param string $strLabel        - 2: Label field
             * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
-            * @param array $arrOptions       - 4: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+            * @param array $arrOptions       - 4: array no formato "key=>valeu" para identificar a(s) opção(ões) selecionada(s)
             * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do array ou os IDs para maracar mais de um valor ao mesmo tempo
+            * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>keyOption" para maracar mais de um valor ao mesmo tempo
             * @param integer $intQtdColumns  - 8: Quantidade de colunas
-            * @param integer $intWidth
-            * @param integer $intHeight
+            * @param integer $intWidth       - 9: Largura
+            * @param integer $intHeight      -10: Al
             * @param integer $intPaddingItems
             * @param boolean $boolNoWrapLabel
             * @param boolean $boolNowrapText
