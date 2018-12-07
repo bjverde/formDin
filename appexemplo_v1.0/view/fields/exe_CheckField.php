@@ -77,10 +77,15 @@ $frm->addGroupField('gp2', 'Grupo 2');
 
 $frm->closeGroup();
 
-$frm->addGroupField('gp3', 'Grupo 3');
-    $listLingProg = array('PHP','HTML','CSS','JavaScript','Ruby','Python','Java','Delphi');
-    $listLingProgSel = array(0=>'PHP');
-    $frm->addCheckField('lp', 'Linguagens de Programção:', false, $listLingProg,true,true,null,3,60);
+$listLingProg = array('Cobol','PHP','HTML','CSS','JavaScript','Ruby','Python','Java','Delphi');
+$listLingProgSel = array(0=>1,1=>4,2=>3);
+$frm->addGroupField('gp3', 'Grupo 3 - Check com valor pre-marcados');
+    $frm->addCheckField('lingProg1', 'Linguagens de Programção:', false, $listLingProg,true,true,$listLingProgSel,3,250);
+$frm->closeGroup();
+
+$frm->addGroupField('gp4', 'Grupo 4 - Check com tamnha definido');
+       $lingProg2 = $frm->addCheckField('lingProg2', 'Linguagens de Programção:', false, $listLingProg,true,true,null,3,100,200);
+       $lingProg2->setCss('background-color', '#ff6347');
 $frm->closeGroup();
 
 $frm->addButton('Post Pagina');
