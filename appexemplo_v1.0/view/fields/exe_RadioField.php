@@ -13,6 +13,8 @@ $frm->addGroupField('gp1', 'Grupo 1');
     $frm->addRadioField('sit_genero3', 'Em 5 Colunas:', false, $listTipo, null, true, null, 5, null, null, null, false, false);
 $frm->closeGroup();
 
+$frm->addRadioField('sit_genero4', 'Em 5 Colunas:', false, $listTipo, null, true, 7, 5, null, null, null, false, false);
+
 if ($acao=='Validar') {
     $frm->validate();
 }
