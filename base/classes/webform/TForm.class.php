@@ -6702,7 +6702,7 @@ class TForm Extends TBox
             * @param mixed   $mixOptions     - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
             * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
             * @param boolean $boolLabelAbove - 6: Label acima
-            * @param mixed   $mixValue       - 7:
+            * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
             * @param boolean $boolMultiSelect- 8: True = MultiSelect , False = SingleSelect
             * @param integer $intSize        - 9:
             * @param integer $intWidth       -10:
@@ -6749,7 +6749,7 @@ class TForm Extends TBox
             * @param array $arrOptions      - 4: Array Options
             * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param string  $strValue
+            * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
             * @param integer $intQtdColumns - 8: Quantidade de colunas
             * @param integer $intWidth
             * @param integer $intHeight
@@ -6784,10 +6784,10 @@ class TForm Extends TBox
             * @param string $strName         - 1: field ID
             * @param string $strLabel        - 2: Label field
             * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
-            * @param array $arrOptions       - 4: Array Options
+            * @param array $arrOptions       - 4: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
             * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param array $arrValues        - 7: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+            * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do array ou os IDs para maracar mais de um valor ao mesmo tempo
             * @param integer $intQtdColumns  - 8: Quantidade de colunas
             * @param integer $intWidth
             * @param integer $intHeight
