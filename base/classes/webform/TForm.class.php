@@ -5093,6 +5093,7 @@ class TForm Extends TBox
           }
           return $newDisplayControl;
       }
+
     /**
     * retorna o array de objetos displaycontrol que contem os campos e os labels do
     * formulário
@@ -5104,46 +5105,48 @@ class TForm Extends TBox
        return $this->displayControls;
     }
        
-       /**
-        * Adicionar botão no layout
-        *
-        * O parametro mixValue pode ser um array com os nomes dos botões. ex: array('Gravar', 'Limpar').
-        * Nesta caso os demais parametros não serão considerados exceto o strOnClick que
-        * pode ser informado o nome de uma função javascript para ser executada ao clicar no botão.
-        * Esta função receberá o Valor do botão e a variavel this.
-        *
-        * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
-        * definir o parametro boolLabelAbove do botão para true tambem.
-        *
-        * @param mixed   $mixValue   - Label do Botão
-        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick. Se ficar null será utilizado o valor de mixValue
-        * @param string  $strAction  - Nome da ação
-        * @param string  $strOnClick - Nome da função javascript
-        * @param string  $strConfirmMessage - Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
-        * @param boolean $boolNewLine  - em nova linha
-        * @param boolean $boolFooter   - mostrar no fim do form
-        * @param string  $strImage
-        * @param string  $strImageDisabled
-        * @param string  $strHint
-        * @param string  $strVerticalAlign
-        * @param string  $strLabel
-        * @param bool    $boolLabelAbove
-        * @return TButton
-        */
-       public function addButton( $mixValue=null
-					       		, $strAction=null
-					       		, $strName=null
-					       		, $strOnClick=null
-					       		, $strConfirmMessage=null
-					       		, $boolNewLine=null
-					       		, $boolFooter=null
-					       		, $strImage=null
-					       		, $strImageDisabled=null
-					       		, $strHint=null
-					       		, $strVerticalAlign=null
-					       		, $boolLabelAbove=null
-					       		, $strLabel=null
-					       		, $strHorizontalAlign=null) {
+    /**
+    * Adicionar botão no layout
+    *
+    * O parametro mixValue pode ser um array com os nomes dos botões. ex: array('Gravar', 'Limpar').
+    * Nesta caso os demais parametros não serão considerados exceto o strOnClick que
+    * pode ser informado o nome de uma função javascript para ser executada ao clicar no botão.
+    * Esta função receberá o Valor do botão e a variavel this.
+    *
+    * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
+    * definir o parametro boolLabelAbove do botão para true tambem.
+    *
+    * 
+    * @param mixed   $mixValue          - 1 :Label do Botão ou array('Gravar', 'Limpar') com nomes
+    * @param string  $strAction         - 2 :Nome da ação, ignorando $strName $strOnClick. Se ficar null será utilizado o valor de mixValue
+    * @param string  $strName           - 3 :Nome da ação com submit
+    * @param string  $strOnClick        - 4 :Nome da função javascript
+    * @param string  $strConfirmMessage - 5 :Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
+    * @param boolean $boolNewLine       - 6 :Em nova linha. DEFAULT = true
+    * @param boolean $boolFooter        - 7 :Mostrar no fim do form
+    * @param string  $strImage          - 8 :Imagem no botão. Evite usar no lugar procure usar a propriedade setClass
+    * @param string  $strImageDisabled  - 9 :
+    * @param string  $strHint           -10 :Texto para explicar
+    * @param string  $strVerticalAlign
+    * @param boolean $boolLabelAbove
+    * @param string  $strLabel
+    * @param string  $strHorizontalAlign
+    * @return TButton|string|array
+    ***/
+    public function addButton( $mixValue=null
+				       		, $strAction=null
+				       		, $strName=null
+				       		, $strOnClick=null
+				       		, $strConfirmMessage=null
+				       		, $boolNewLine=null
+				       		, $boolFooter=null
+				       		, $strImage=null
+				       		, $strImageDisabled=null
+				       		, $strHint=null
+				       		, $strVerticalAlign=null
+				       		, $boolLabelAbove=null
+				       		, $strLabel=null
+				       		, $strHorizontalAlign=null) {
            // botão será criado no rodapé do formulário por padrão
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
