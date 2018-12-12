@@ -5660,22 +5660,22 @@ VALUES
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(11,1,'marca','modulos/marca.php',null,null,null,'S',null,null);
+(11,1,'Marca','modulos/marca.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(12,1,'pedido','modulos/pedido.php',null,null,null,'S',null,null);
+(12,1,'Pedido','modulos/pedido.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(13,1,'pedido_item','modulos/pedido_item.php',null,null,null,'S',null,null);
+(13,1,'Item do Pedido','modulos/pedido_item.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(14,1,'produto','modulos/produto.php',null,null,null,'S',null,null);
+(14,1,'Produto','modulos/produto.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
