@@ -51,11 +51,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`tipo` (
   `idtipo` INT NOT NULL,
-  `descricao` VARCHAR(100) NULL,
+  `descricao` VARCHAR(100) NOT NULL,
   `idmeta_tipo` INT NOT NULL,
   `sit_ativo` CHAR(1) NULL,
   PRIMARY KEY (`idtipo`),
-  UNIQUE INDEX `descricao_UNIQUE` (`descricao` ASC),
   INDEX `fk_tipo_tipo_de_tipos_idx` (`idmeta_tipo` ASC),
   CONSTRAINT `fk_tipo_tipo_de_tipos`
     FOREIGN KEY (`idmeta_tipo`)

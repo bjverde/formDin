@@ -11,6 +11,26 @@ INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Emí
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ângela Estefânia Cainã','PF',NOW());
 
 
+INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (1,'Telefone','S');
+INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (2,'Endereço','S');
+INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (3,'Produto','S');
+INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (4,'Pagamento','S');
+
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (1,'Residencial',1,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (2,'Comercial',1,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (3,'Comercial - Atendimento',1,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (4,'Comercial - Gerente',1,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (5,'Residencial',2,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (6,'Comercial',2,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (7,'Informatica',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (8,'Livro',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (9,'Eletronico',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (10,'Dinheiro',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (11,'Debito',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (12,'Credito',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (13,'BitCoin',3,'S');
+
+
 
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (1,'Norte');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (2,'Nordeste');
