@@ -5,6 +5,8 @@ class Pessoa_juridicaDAO extends TPDOConnection {
 									  idpessoa_juridica
 									 ,cnpj
 									 ,idpessoa
+									 ,cnae
+									 ,idnatureza_juridica
 									 from form_exemplo.pessoa_juridica ';
 
 	private static function processWhereGridParameters( $whereGrid ) {
@@ -14,6 +16,8 @@ class Pessoa_juridicaDAO extends TPDOConnection {
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNAE', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDNATUREZA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
 			$result = $where;
 		}
 		return $result;
@@ -63,20 +67,28 @@ class Pessoa_juridicaDAO extends TPDOConnection {
 	public static function insert( Pessoa_juridicaVO $objVo ) {
 		$values = array(  $objVo->getCnpj() 
 						, $objVo->getIdpessoa() 
+						, $objVo->getCnae() 
+						, $objVo->getIdnatureza_juridica() 
 						);
 		return self::executeSql('insert into form_exemplo.pessoa_juridica(
 								 cnpj
 								,idpessoa
-								) values (?,?)', $values );
+								,cnae
+								,idnatureza_juridica
+								) values (?,?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
 	public static function update ( Pessoa_juridicaVO $objVo ) {
 		$values = array( $objVo->getCnpj()
 						,$objVo->getIdpessoa()
+						,$objVo->getCnae()
+						,$objVo->getIdnatureza_juridica()
 						,$objVo->getIdpessoa_juridica() );
 		return self::executeSql('update form_exemplo.pessoa_juridica set 
 								 cnpj = ?
 								,idpessoa = ?
+								,cnae = ?
+								,idnatureza_juridica = ?
 								where idpessoa_juridica = ?',$values);
 	}
 	//--------------------------------------------------------------------------------
