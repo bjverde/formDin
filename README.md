@@ -17,6 +17,13 @@ FormDin is made up of a set of software components that provide a basic architec
 
 The application structure used by FormDin consists of three classes namely: TApplication, TForm and TPDOConnection. They are responsible for implementing the MVC (Model, View and Controller) standard. The TApplication (controller) class is responsible for receiving the requisitions and performing the relevant actions. The TForm class (view) is responsible for creating the data entry forms. The TPDOConnection (model) class is responsible for retrieving and writing information to the database.
 
+## Environment formDin
+
+In addition to FormDin there are two more closely linked projects.
+
+* [SysGen](https://github.com/bjverde/sysgen) – A System Generator for FormDin
+* [formDocker](https://github.com/bjverde/formDocker) – files from Docker Compose to raise everything you need to run formDin in a few commands. 
+
 
 [Read de Ebook - Learning formDin in steps. Translate By Google Translate](https://translate.googleusercontent.com/translate_c?depth=1&rurl=translate.google.com.br&sl=pt-BR&sp=nmt4&tl=en&u=https://github.com/bjverde/formDin/wiki&xid=17259,15700022,15700124,15700149,15700186,15700190,15700201,15700237,15700242&usg=ALkJrhhZbfs18JT-mbUzWhN0PRRStza9cA)
 
@@ -24,7 +31,6 @@ The application structure used by FormDin consists of three classes namely: TApp
 
 FormDin ou Formulário Dinâmico é um Framework php simples para criar sistema web de forma rápida e fácil.
 Essa versão é um **Fork do FormDin 4 do [portal do Software Publico Brasileiro.](https://softwarepublico.gov.br/social/formdin)**
-
 
 
 ## Sobre o Software
