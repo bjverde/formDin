@@ -5868,7 +5868,7 @@ INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,73);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,74);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,75);
-INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,77);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,76);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,81);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,82);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,83);
