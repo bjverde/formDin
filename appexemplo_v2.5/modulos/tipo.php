@@ -96,7 +96,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',SIT_ATIVO|SIT_ATIVO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Tipos' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -107,6 +107,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 	$gride->addColumn($primaryKey,'id');
 	$gride->addColumn('IDMETA_TIPO','Id Meta Tipo');
+	$gride->addColumn('NOM_META_TIPO','Meta Tipo');
 	$gride->addColumn('DESCRICAO','Descrição');
 	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
 

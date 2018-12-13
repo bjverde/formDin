@@ -2,20 +2,20 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPRODUTO';
-$frm = new TForm('produto',800,950);
+$frm = new TForm('Produtos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_PRODUTO', 'NOM_PRODUTO',45,TRUE,45);
-$frm->addTextField('MODELO', 'MODELO',45,TRUE,45);
-$frm->addTextField('VERSAO', 'VERSAO',45,TRUE,45);
+$frm->addTextField('NOM_PRODUTO', 'Nome',45,TRUE,45);
+$frm->addTextField('MODELO', 'Modelo',45,TRUE,45);
+$frm->addTextField('VERSAO', 'Versão',45,TRUE,45);
 $listMarca = Marca::selectAll();
-$frm->addSelectField('IDMARCA', 'IDMARCA',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
 $listTipo = Tipo::selectAll();
-$frm->addSelectField('IDTIPO_PRODUTO', 'IDTIPO_PRODUTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('IDTIPO_PRODUTO', 'Tipo Produto',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -103,7 +103,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',IDTIPO_PRODUTO|IDTIPO_PRODUTO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Produtos' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -113,11 +113,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'produto.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_PRODUTO','NOM_PRODUTO');
-	$gride->addColumn('MODELO','MODELO');
-	$gride->addColumn('VERSAO','VERSAO');
-	$gride->addColumn('IDMARCA','IDMARCA');
-	$gride->addColumn('IDTIPO_PRODUTO','IDTIPO_PRODUTO');
+	$gride->addColumn('NOM_PRODUTO','Nome');
+	$gride->addColumn('MODELO','Modelo');
+	$gride->addColumn('VERSAO','Versão');
+	$gride->addColumn('IDMARCA','id Marca');
+	$gride->addColumn('IDTIPO_PRODUTO','id Tipo Produto');
 
 	$gride->show();
 	die();

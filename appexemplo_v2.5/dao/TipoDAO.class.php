@@ -2,11 +2,12 @@
 class TipoDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
-									  idtipo
-									 ,descricao
-									 ,idmeta_tipo
-									 ,sit_ativo
-									 from form_exemplo.tipo ';
+									  t.idtipo
+									 ,t.descricao
+									 ,t.idmeta_tipo
+									 ,(select descricao from form_exemplo.meta_tipo as mt where mt.idmetatipo = t.idmeta_tipo) as nom_meta_tipo  
+									 ,t.sit_ativo
+									 from form_exemplo.tipo as t';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;
