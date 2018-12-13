@@ -118,6 +118,24 @@ class ArrayHelper
         return is_null($array[$atributeName])?array():$array[$atributeName];
     }
     
+    /***
+     * Evita erro de notice. Recebe um array FormDin, um atributo e a chave.
+     * Verifica se o atributo e achave existem e devolve o valor
+     * @param array $array
+     * @param string $atributeName
+     * @param int $key
+     * @return NULL|mixed|array
+     */
+    static function getArrayFormKey($array,$atributeName,$key)
+    {
+        $value = null;
+        if( self::has($atributeName, $array) ) {
+            $arrayResult = self::getArray($array, $atributeName);
+            $value = self::get($arrayResult, $key);
+        }
+        return $value;
+    }
+
     /**
      * Convert Array PDO Format to FormDin format
      *
