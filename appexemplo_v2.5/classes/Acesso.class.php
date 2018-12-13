@@ -14,25 +14,52 @@ class Acesso {
 
 
 	public function __construct(){
-    }    
+    }
 	//--------------------------------------------------------------------------------	
 	public static function login( $login_user, $pwd_user )	{
 		$user = Acesso_userDAO::selectByLogin($login_user);
         if (password_verify($pwd_user, $user['PWD_USER'][0])) {
             $_SESSION[APLICATIVO]['IDUSER'] = $user['IDUSER'][0];
             $_SESSION[APLICATIVO]['LOGIN']  = $user['LOGIN_USER'][0];
+            self::setAcessoUserModulo();
             $msg = 1;
         }else{
             $msg = 'Login Invalido !';
         }
         return $msg;
-    }    
+    }
 	//--------------------------------------------------------------------------------
-	public static function getAcessoUserMenuByLogin()	{
-	    $login = $_SESSION[APLICATIVO]['LOGIN'];
-        $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
+	public static function setAcessoUserModulo(){
+        $login = $_SESSION[APLICATIVO]['LOGIN'];
+	    $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
+	    $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'] = $userMenu;
+	}
+	public static function getAcessoUserMenuByLogin(){
+        $userMenu = $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'];
         return $userMenu;
     }
+    //--------------------------------------------------------------------------------
+	/***
+	 * Recebe o $_REQUEST[modulo] e informa se usuario pode acessar ou não o modulo
+	 * @param string $dsUrl
+	 * @throws InvalidArgumentException
+	 * @return boolean
+	 */
+	public static function moduloAcessoPermitido($dsUrl){
+	    $permitido = false;
+	    if(empty($dsUrl)){
+	        throw new InvalidArgumentException('Erro: Modulo não informado');
+	    }else{
+	       $dadosMenu = self::getAcessoUserMenuByLogin();
+	       $listDsUrl = ArrayHelper::getArray($dadosMenu, 'DSURL');
+	       $permitido = in_array($dsUrl, $listDsUrl);
+	       if( $permitido==false ){
+	           $permitido = in_array('modulos/'.$dsUrl, $listDsUrl);
+	       }
+	    }
+	    return $permitido;
+	}
+    //--------------------------------------------------------------------------------
     public static function changePassword($login_user, $pwd_user_old, $pwd_user_new1, $pwd_user_new2)	{
         if(strlen($pwd_user_new1)<8){
             throw new DomainException('A senha de ter no minomo 8 caractes');
