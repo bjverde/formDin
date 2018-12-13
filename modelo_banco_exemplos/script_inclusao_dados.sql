@@ -35,8 +35,8 @@ INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (1,'Norte');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (2,'Nordeste');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (3,'Sudeste');
-INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (4,'Centro-Oeste');
-INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (5,'Sul');
+INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (5,'Centro-Oeste');
+INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (4,'Sul');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (9,'Brasil Todos');
 
 
@@ -63,10 +63,10 @@ INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (35,'SP
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (41,'PR','PARANA',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (42,'SC','SANTA CATARINA',4);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (43,'RS','RIO GRANDE DO SUL',4);
-INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (50,'MS','MATO GROSSO DO SUL',4);
-INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (51,'MT','MATO GROSSO',4);
-INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (52,'GO','GOIÁS',4);
-INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (53,'DF','DISTRITO FEDERAL',4);
+INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (50,'MS','MATO GROSSO DO SUL',5);
+INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (51,'MT','MATO GROSSO',5);
+INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (52,'GO','GOIÁS',5);
+INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (53,'DF','DISTRITO FEDERAL',5);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (99,'UC','Unico',9);
 
 
