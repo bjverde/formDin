@@ -52,6 +52,8 @@ switch( $acao ) {
 	break;
 }
 
-$frm->show();
+if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
+    $frm->show();
+}
 
 ?>

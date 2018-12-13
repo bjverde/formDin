@@ -51,7 +51,7 @@ class Acesso {
 	        throw new InvalidArgumentException('Erro: Modulo não informado');
 	    }else{
 	       $dadosMenu = self::getAcessoUserMenuByLogin();
-	       $listDsUrl = ArrayHelper::getArray($dadosMenu, 'DSURL');
+	       $listDsUrl = ArrayHelper::getArray($dadosMenu, 'URL');
 	       $permitido = in_array($dsUrl, $listDsUrl);
 	       if( $permitido==false ){
 	           $permitido = in_array('modulos/'.$dsUrl, $listDsUrl);

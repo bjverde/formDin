@@ -181,7 +181,9 @@ $frm->addHtmlField('gride');
 $frm->closeGroup();
 
 $frm->addJavascript('init()');
-$frm->show();
+if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
+    $frm->show();
+}
 
 ?>
 <script>
