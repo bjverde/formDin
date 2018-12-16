@@ -73,6 +73,7 @@ class TMenuDhtmlx {
     	$this->boolIgnoreOrphans = $boolIgnoreOrphans === null ? true : $boolIgnoreOrphans;
         $this->arrMenu=null;
     }
+    
     /**
     * Método para adicionar itens de menu
     *
@@ -84,7 +85,7 @@ class TMenuDhtmlx {
     * @param string $strImg         - 6: Caminho da imagem será utilizada como ícone
     * @param string $strImgDisabled - 7: Caminho da imagem para o menu desabilitado
     * @param boolean $boolDisabled  - 8: Menu desabilitado
-    * @param string $strHotKey
+    * @param string $strHotKey      - 9: Tecla de Atalho
     * @param boolean $boolSeparator
     * @return TMenuDhtmlx
     */
