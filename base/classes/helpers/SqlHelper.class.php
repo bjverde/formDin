@@ -88,9 +88,16 @@ class SqlHelper
         return $retorno;
     }
     //----------------------------------------
+    public static function validateString( $string) {
+        if ( preg_match('/(\')+|(")+/', $string ) > 0 ) {
+            throw new InvalidArgumentException('Não use aspas simples ou duplas na pesquisa');
+        }
+    }
+    //----------------------------------------
     public static function getAtributeWhereGridParameters( $stringWhere, $arrayWhereGrid, $atribute, $type ,$testZero=true ) {
     	if( ArrayHelper::has($atribute, $arrayWhereGrid) ){
     		$valeu = $arrayWhereGrid[$atribute];
+    		self::validateString($valeu);
     		if($type == self::SQL_TYPE_NUMERIC){
     			$isTrue = ' AND '.$atribute.' = '.$valeu.'  ';
     			$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
