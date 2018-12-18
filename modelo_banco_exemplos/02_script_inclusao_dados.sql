@@ -1,5 +1,7 @@
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Joao T','PF',NOW());
+-- Incluido Pessoa
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('João Tavares','PF',NOW());
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Francisco X','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Joceli','PF',NOW());
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Dell','PJ','1994-02-01 23:59:59');
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Google','PJ','1998-09-04 23:59:59');
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ágata Açaí Pará','PF','1098-09-04 23:59:59');
@@ -16,11 +18,13 @@ INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) V
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Mario Medeiros Andrade','PF',NOW(),'S');
 
 
+-- Incluido Meta Tipos
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (1,'Telefone','S');
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (2,'Endereço','S');
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (3,'Produto','S');
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (4,'Pagamento','S');
 
+-- Incluido Tipos
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (1,'Residencial',1,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (2,'Comercial',1,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (3,'Comercial - Atendimento',1,'S');
@@ -34,9 +38,19 @@ INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (11,'Debito',4,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (12,'Credito',4,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (13,'BitCoin',4,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (14,'Ingresso',3,'S');
 
 
+-- Incluido Pedidos
+INSERT INTO `form_exemplo`.`pedido` (`idpedido`,`idpessoa`,`idtipo_pagamento`,`dat_pedido`)
+VALUES (1, 1, 12, '2014-09-10 14:00:00');
+INSERT INTO `form_exemplo`.`pedido` (`idpedido`,`idpessoa`,`idtipo_pagamento`,`dat_pedido`)
+VALUES (2, 2, 12, '2014-09-10 14:00:00');
+INSERT INTO `form_exemplo`.`pedido` (`idpedido`,`idpessoa`,`idtipo_pagamento`,`dat_pedido`)
+VALUES (3, 3, 12, '2014-09-10 14:00:00');
 
+
+-- Incluido Região
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (1,'Norte');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (2,'Nordeste');
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (3,'Sudeste');
@@ -45,6 +59,7 @@ INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (4,'Sul')
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (9,'Brasil Todos');
 
 
+-- Incluido UF
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (11,'RO','RONDONIA',1);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (12,'AC','ACRE',1);
 INSERT INTO `form_exemplo`.`uf` (cod_uf,sig_uf,nom_uf,cod_regiao) VALUES (13,'AM','AMAZONAS',1);
