@@ -2,15 +2,33 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPEDIDO';
-$frm = new TForm('pedido',800,950);
+$frm = new TForm('Cadastro de Pedidos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$listPessoa = Pessoa::selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+//$listPessoa = Pessoa::selectAll();
+//$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
+$frm->addGroupField('gpx1','Solicitante do Pedido');
+    $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
+    $frm->addTextField('NOME', 'Nome',150,true,70,null,false);
+    //Deve sempre ficar depois da definição dos campos
+    $frm->setAutoComplete('NOME'
+        ,'pessoa'// tabela
+        ,'NOME'	 		// campo de pesquisa
+        ,'IDPESSOA|IDPESSOA,NOME|NOME' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+        ,true
+        ,null 		        // campo do formulário que será adicionado como filtro
+        ,null				// função javascript
+        ,3					// Default 3, numero de caracteres minimos para disparar a pesquisa
+        ,500				// 9: Default 1000, tempo após a digitação para disparar a consulta
+        ,50					//10: máximo de registros que deverá ser retornado
+        , null, null, null, null, true, null, null, true );
+$frm->closeGroup();
+
 $listTipo = Tipo::selectAll();
 $frm->addSelectField('IDTIPO_PAGAMENTO', 'IDTIPO_PAGAMENTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 $frm->addDateField('DAT_PEDIDO', 'DAT_PEDIDO',TRUE);

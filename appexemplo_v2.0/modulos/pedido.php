@@ -2,7 +2,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPEDIDO';
-$frm = new TForm('pedido',800,950);
+$frm = new TForm('Cadastro de Pedidos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 

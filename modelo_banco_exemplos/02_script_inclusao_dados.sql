@@ -9,6 +9,11 @@ INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Íta
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Áurea','PF',NOW());
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Emília Javé','PF',NOW());
 INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ângela Estefânia Cainã','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ana Clara Reis','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ana Carolina Mota','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Ana Caroline Medeiros','PF',NOW(),'N');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Carlos Dias Medeiros','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Mario Medeiros Andrade','PF',NOW(),'S');
 
 
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (1,'Telefone','S');
