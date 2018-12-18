@@ -9,9 +9,32 @@ $frm->setMaximize(true);
 
 $frm->addHiddenField( 'BUSCAR' );   //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );//Coluna chave da tabela
+
+$frm->addHiddenField('TIPO','PJ');
+$frm->addHiddenField('SIT_ATIVO','S');
+
+//$listPessoa = Pessoa::selectAll();
+//$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
+$frm->addGroupField('gpx1','Empresa');
+    $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
+    $frm->addTextField('NOME', 'Nome',150,true,70,null,false);
+    //Deve sempre ficar depois da definição dos campos
+    $frm->setAutoComplete('NOME'
+        ,'pessoa'// tabela
+        ,'NOME'	 		// campo de pesquisa
+        ,'IDPESSOA|IDPESSOA,NOME|NOME' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+        ,true
+        ,'TIPO' 		    // campo do formulário que será adicionado como filtro
+        ,null				// função javascript
+        ,3					// Default 3, numero de caracteres minimos para disparar a pesquisa
+        ,500				// 9: Default 1000, tempo após a digitação para disparar a consulta
+        ,50					//10: máximo de registros que deverá ser retornado
+        , null, null, null, null, true, null, null, true );
+$frm->closeGroup();
+
 $frm->addTextField('NOM_MARCA', 'Nome da Marca',45,FALSE,45);
-$listPessoa = Pessoa::selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
