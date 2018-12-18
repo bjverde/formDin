@@ -6753,7 +6753,7 @@ class TForm Extends TBox
             * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
             * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
-            * @param integer $intQtdColumns - 8: Quantidade de colunas
+            * @param integer $intQtdColumns - 8: Quantidade de colunas, valor DEFAULT = 1;
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
