@@ -5,7 +5,8 @@ class MarcaDAO extends TPDOConnection {
 									  idmarca
 									 ,nom_marca
 									 ,idpessoa
-									 from form_exemplo.marca ';
+									 ,( select p.nome from form_exemplo.pessoa as p where p.idpessoa = m.idpessoa ) as nom_pessoa
+									 from form_exemplo.marca as m';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;

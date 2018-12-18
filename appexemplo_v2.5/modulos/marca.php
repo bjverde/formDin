@@ -2,14 +2,14 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDMARCA';
-$frm = new TForm('marca',800,950);
+$frm = new TForm('Marca',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
-$frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
-$frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_MARCA', 'NOM_MARCA',45,FALSE,45);
+$frm->addHiddenField( 'BUSCAR' );   //Campo oculto para buscas
+$frm->addHiddenField( $primaryKey );//Coluna chave da tabela
+$frm->addTextField('NOM_MARCA', 'Nome da Marca',45,FALSE,45);
 $listPessoa = Pessoa::selectAll();
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
 
@@ -92,8 +92,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',NOM_MARCA|NOM_MARCA'
 					.',IDPESSOA|IDPESSOA'
 					;
-	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+	$gride = new TGrid( 'gd'              // id do gride
+					   ,'Lista de Marcas' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -103,8 +103,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'marca.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_MARCA','NOM_MARCA');
-	$gride->addColumn('IDPESSOA','IDPESSOA');
+	$gride->addColumn('NOM_MARCA','Nome da Marca');
+	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('NOM_PESSOA','Pessoa');
 
 	$gride->show();
 	die();
