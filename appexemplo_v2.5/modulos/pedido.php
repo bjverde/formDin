@@ -29,9 +29,12 @@ $frm->addGroupField('gpx1','Solicitante do Pedido');
         , null, null, null, null, true, null, null, true );
 $frm->closeGroup();
 
-$listTipo = Tipo::selectAllAtivoByMeta(Meta_tipoDAO::PAGAMENTO);
-$frm->addSelectField('IDTIPO_PAGAMENTO', 'IDTIPO_PAGAMENTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
-$frm->addDateField('DAT_PEDIDO', 'DAT_PEDIDO',TRUE);
+$frm->addGroupField('gpx2','Info Complementar');
+	$listTipo = Tipo::selectAllAtivoByMeta(Meta_tipoDAO::PAGAMENTO);
+	$frm->addRadioField('IDTIPO_PAGAMENTO', 'Forma Pagamento:', true, $listTipo,null,null,null,4);
+	//$frm->addSelectField('IDTIPO_PAGAMENTO', 'IDTIPO_PAGAMENTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+	$frm->addDateField('DAT_PEDIDO', 'Data do Pedido',TRUE);
+$frm->closeGroup();
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -115,7 +118,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',DAT_PEDIDO|DAT_PEDIDO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Pedidos' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -125,9 +128,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'pedido.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('IDPESSOA','IDPESSOA');
-	$gride->addColumn('IDTIPO_PAGAMENTO','IDTIPO_PAGAMENTO');
-	$gride->addColumn('DAT_PEDIDO','DAT_PEDIDO');
+	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('IDTIPO_PAGAMENTO','id Tipo Pagamento');
+	$gride->addColumn('DAT_PEDIDO','Data do Pedido');
 
 	$gride->show();
 	die();
