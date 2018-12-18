@@ -21,7 +21,8 @@ class Acesso {
         if (password_verify($pwd_user, $user['PWD_USER'][0])) {
             $_SESSION[APLICATIVO]['USER']['IDUSER'] = $user['IDUSER'][0];
             $_SESSION[APLICATIVO]['USER']['LOGIN']  = $user['LOGIN_USER'][0];
-            self::setAcessoUserModulo();
+			self::setAcessoUserModulo();
+			self::setAcessoUserPerfil();
             $msg = 1;
         }else{
             $msg = 'Login Invalido !';
@@ -33,7 +34,20 @@ class Acesso {
 		$user  = ArrayHelper::get( $_SESSION[APLICATIVO],'USER');
 		$login = ArrayHelper::get( $user,'LOGIN');
         return $login;
-    }	
+	}
+	//--------------------------------------------------------------------------------	
+	public static function getIdUser()	{
+		$user   = ArrayHelper::get( $_SESSION[APLICATIVO],'USER');
+		$iduser = ArrayHelper::get( $user,'IDUSER');
+        return $iduser;
+	}
+	//--------------------------------------------------------------------------------
+	public static function setAcessoUserPerfil(){
+        $iduser = self::getIdUser();
+		$perfil = Acesso_perfil_user::selectByIdUser($iduser);
+		$_SESSION[APLICATIVO]['USER']['IDPERFIL']=$perfil['IDPERFIL'][0];
+		$_SESSION[APLICATIVO]['USER']['NOM_PERFIL']=$perfil['NOM_PERFIL'][0];
+	}	
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserModulo(){
         $login = self::getLogin();
