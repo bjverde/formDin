@@ -29,7 +29,7 @@ $frm->addGroupField('gpx1','Solicitante do Pedido');
         , null, null, null, null, true, null, null, true );
 $frm->closeGroup();
 
-$listTipo = Tipo::selectAll();
+$listTipo = Tipo::selectAllAtivoByMeta(Meta_tipoDAO::PAGAMENTO);
 $frm->addSelectField('IDTIPO_PAGAMENTO', 'IDTIPO_PAGAMENTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 $frm->addDateField('DAT_PEDIDO', 'DAT_PEDIDO',TRUE);
 
