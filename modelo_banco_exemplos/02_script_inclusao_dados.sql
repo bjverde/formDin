@@ -30,10 +30,10 @@ INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (7,'Informatica',3,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (8,'Livro',3,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (9,'Eletronico',3,'S');
-INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (10,'Dinheiro',3,'S');
-INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (11,'Debito',3,'S');
-INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (12,'Credito',3,'S');
-INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (13,'BitCoin',3,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (10,'Dinheiro',4,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (11,'Debito',4,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (12,'Credito',4,'S');
+INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (13,'BitCoin',4,'S');
 
 
 

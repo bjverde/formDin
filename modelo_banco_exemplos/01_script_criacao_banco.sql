@@ -38,7 +38,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`meta_tipo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`meta_tipo` (
-  `idMetaTipo` INT NOT NULL,
+  `idMetaTipo` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(100) NOT NULL,
   `sit_ativo` CHAR(1) NULL DEFAULT 'S',
   PRIMARY KEY (`idMetaTipo`),
@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`tipo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`tipo` (
-  `idtipo` INT NOT NULL,
+  `idtipo` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(100) NOT NULL,
   `idmeta_tipo` INT NOT NULL,
   `sit_ativo` CHAR(1) NULL,
@@ -273,7 +273,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`natureza_juridica`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`natureza_juridica` (
-  `idnatureza_juridica` INT NOT NULL,
+  `idnatureza_juridica` INT NOT NULL AUTO_INCREMENT,
   `nom_natureza_juridicac` VARCHAR(300) NOT NULL COMMENT 'Natureza Jurídica ',
   `administradores` VARCHAR(1000) NULL COMMENT 'Integrantes do Quadro de Sócios e Administradores ',
   PRIMARY KEY (`idnatureza_juridica`))
@@ -352,10 +352,10 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`pedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`pedido` (
-  `idpedido` INT NOT NULL,
+  `idpedido` INT NOT NULL AUTO_INCREMENT,
   `idpessoa` INT NOT NULL COMMENT 'Pessoa que irá receber o pagamento',
-  `idtipo_pagamento` INT NOT NULL,
   `dat_pedido` DATETIME NOT NULL,
+  `idtipo_pagamento` INT NOT NULL,
   PRIMARY KEY (`idpedido`),
   INDEX `fk_pedido_tipo1_idx` (`idtipo_pagamento` ASC),
   INDEX `fk_pedido_pessoa1_idx` (`idpessoa` ASC),
@@ -376,7 +376,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`pedido_item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`pedido_item` (
-  `idpedido_item` INT NOT NULL,
+  `idpedido_item` INT NOT NULL AUTO_INCREMENT,
   `idpedido` INT NOT NULL,
   `idproduto` INT NOT NULL,
   `qtd_unidade` INT NOT NULL,
@@ -401,7 +401,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`endereco`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`endereco` (
-  `idendereco` INT NOT NULL,
+  `idendereco` INT NOT NULL AUTO_INCREMENT,
   `endereco` VARCHAR(300) NOT NULL,
   `idpessoa` INT NOT NULL,
   `idtipo_endereco` INT NOT NULL,
@@ -437,7 +437,7 @@ ENGINE = InnoDB;
 -- Table `form_exemplo`.`telefone`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`telefone` (
-  `idtelefone` INT NOT NULL,
+  `idtelefone` INT NOT NULL AUTO_INCREMENT,
   `numero` VARCHAR(45) NOT NULL,
   `idpessoa` INT NOT NULL COMMENT 'dono do telefone',
   `idtipo_telefone` INT NOT NULL COMMENT 'tipo de telefon',
