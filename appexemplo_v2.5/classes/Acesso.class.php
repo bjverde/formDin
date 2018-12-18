@@ -19,21 +19,28 @@ class Acesso {
 	public static function login( $login_user, $pwd_user )	{
 		$user = Acesso_userDAO::selectByLogin($login_user);
         if (password_verify($pwd_user, $user['PWD_USER'][0])) {
-            $_SESSION[APLICATIVO]['IDUSER'] = $user['IDUSER'][0];
-            $_SESSION[APLICATIVO]['LOGIN']  = $user['LOGIN_USER'][0];
+            $_SESSION[APLICATIVO]['USER']['IDUSER'] = $user['IDUSER'][0];
+            $_SESSION[APLICATIVO]['USER']['LOGIN']  = $user['LOGIN_USER'][0];
             self::setAcessoUserModulo();
             $msg = 1;
         }else{
             $msg = 'Login Invalido !';
         }
         return $msg;
-    }
+	}
+	//--------------------------------------------------------------------------------	
+	public static function getLogin()	{
+		$user  = ArrayHelper::get( $_SESSION[APLICATIVO],'USER');
+		$login = ArrayHelper::get( $user,'LOGIN');
+        return $login;
+    }	
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserModulo(){
-        $login = $_SESSION[APLICATIVO]['LOGIN'];
+        $login = self::getLogin();
 	    $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
 	    $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'] = $userMenu;
 	}
+	//--------------------------------------------------------------------------------	
 	public static function getAcessoUserMenuByLogin(){
         $userMenu = $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'];
         return $userMenu;

@@ -54,7 +54,7 @@ $app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 
 $app->setLoginFile('includes/tela_login.php');
-$login = ArrayHelper::get( $_SESSION[APLICATIVO],'LOGIN');
+$login = Acesso::getLogin();
 $app->setLoginInfo($login);
 
 $app->setMainMenuFile('includes/menu.php');
