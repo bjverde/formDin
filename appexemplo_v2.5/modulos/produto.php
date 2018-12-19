@@ -9,13 +9,21 @@ $frm->setMaximize(true);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+
+$listPessoa = Pessoa::selectAll('nome');
+$frm->addSelectField('IDPESSOA', 'Pessoa',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
+$listMarca = Marca::selectAll();
+$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
+
+$frm->combinarSelects('IDPESSOA', 'IDMARCA', 'vw_pessoa_marca_produto', 'IDPESSOA', 'IDMARCA', 'NOM_MARCA', null, null, 'Nenhum', null, null, true);
+
+$listTipo = Tipo::selectAll();
+$frm->addSelectField('IDTIPO_PRODUTO', 'Tipo Produto',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+
 $frm->addTextField('NOM_PRODUTO', 'Nome',45,TRUE,45);
 $frm->addTextField('MODELO', 'Modelo',45,TRUE,45);
 $frm->addTextField('VERSAO', 'Versão',45,TRUE,45);
-$listMarca = Marca::selectAll();
-$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
-$listTipo = Tipo::selectAll();
-$frm->addSelectField('IDTIPO_PRODUTO', 'Tipo Produto',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -99,6 +107,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',NOM_PRODUTO|NOM_PRODUTO'
 					.',MODELO|MODELO'
 					.',VERSAO|VERSAO'
+					.',IDPESSOA|IDPESSOA'
 					.',IDMARCA|IDMARCA'
 					.',IDTIPO_PRODUTO|IDTIPO_PRODUTO'
 					;
@@ -116,8 +125,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->addColumn('NOM_PRODUTO','Nome');
 	$gride->addColumn('MODELO','Modelo');
 	$gride->addColumn('VERSAO','Versão');
+	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('NOM_PESSOA','Pessoa');
 	$gride->addColumn('IDMARCA','id Marca');
+	$gride->addColumn('NOM_MARCA','Marca');
 	$gride->addColumn('IDTIPO_PRODUTO','id Tipo Produto');
+	$gride->addColumn('NOM_TIPO','Tipo');
 
 	$gride->show();
 	die();

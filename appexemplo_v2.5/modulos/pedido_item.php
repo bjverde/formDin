@@ -2,7 +2,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPEDIDO_ITEM';
-$frm = new TForm('pedido_item',800,950);
+$frm = new TForm('Item',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -11,10 +11,22 @@ $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $listPedido = Pedido::selectAll();
 $frm->addSelectField('IDPEDIDO', 'IDPEDIDO',TRUE,$listPedido,null,null,null,null,null,null,' ',null);
+
+$listPessoa = Pessoa::selectAll('nome');
+$frm->addSelectField('IDPESSOA', 'Pessoa',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
+$listMarca = Marca::selectAll();
+$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
+
 $listProduto = Produto::selectAll();
-$frm->addSelectField('IDPRODUTO', 'IDPRODUTO',TRUE,$listProduto,null,null,null,null,null,null,' ',null);
-$frm->addNumberField('QTD_UNIDADE', 'QTD_UNIDADE',10,TRUE,0);
-$frm->addNumberField('PRECO', 'PRECO',12,TRUE,0);
+$frm->addSelectField('IDPRODUTO', 'Produto',TRUE,$listProduto,null,null,null,null,null,null,' ',null);
+
+$frm->combinarSelects('IDPESSOA', 'IDMARCA', 'vw_pessoa_marca_produto', 'IDPESSOA', 'IDMARCA', 'NOM_MARCA', null, null, 'Nenhum', null, null, true);
+
+$frm->combinarSelects('IDMARCA', 'IDPRODUTO', 'vw_pessoa_marca_produto', 'IDMARCA', 'IDPRODUTO', 'NOM_PRODUTO', null, null, 'Nenhum', null, null, true);
+
+$frm->addNumberField('QTD_UNIDADE', 'Quantidade',10,TRUE,0);
+$frm->addNumberField('PRECO', 'Preço Unitário',12,TRUE,0,false);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -100,7 +112,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',PRECO|PRECO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Itens do Pedido' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -110,10 +122,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'pedido_item.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('IDPEDIDO','IDPEDIDO');
-	$gride->addColumn('IDPRODUTO','IDPRODUTO');
-	$gride->addColumn('QTD_UNIDADE','QTD_UNIDADE');
-	$gride->addColumn('PRECO','PRECO');
+	$gride->addColumn('IDPEDIDO','Id Pedido');
+	$gride->addColumn('IDPRODUTO','id Produto');
+	$gride->addColumn('QTD_UNIDADE','Quantidade');
+	$gride->addColumn('PRECO','Preço Unitário');
 
 	$gride->show();
 	die();
