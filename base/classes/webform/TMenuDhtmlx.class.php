@@ -87,6 +87,7 @@ class TMenuDhtmlx {
     * @param boolean $boolDisabled  - 8: Menu desabilitado
     * @param string $strHotKey      - 9: Tecla de Atalho
     * @param boolean $boolSeparator
+    * @param string $jsonParams     - 11: json como parametro de entrada
     * @return TMenuDhtmlx
     */
     public function add($strId
