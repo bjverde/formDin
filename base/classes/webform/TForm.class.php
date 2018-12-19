@@ -5123,7 +5123,7 @@ class TForm Extends TBox
     * @param string  $strOnClick        - 4 :Nome da função javascript
     * @param string  $strConfirmMessage - 5 :Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
     * @param boolean $boolNewLine       - 6 :Em nova linha. DEFAULT = true
-    * @param boolean $boolFooter        - 7 :Mostrar no fim do form
+    * @param boolean $boolFooter        - 7 :Mostrar o botão no rodapé do form. DEFAULT = true
     * @param string  $strImage          - 8 :Imagem no botão. Evite usar no lugar procure usar a propriedade setClass
     * @param string  $strImageDisabled  - 9 :
     * @param string  $strHint           -10 :Texto para explicar
