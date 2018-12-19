@@ -4,9 +4,24 @@ class PedidoDAO extends TPDOConnection {
 	private static $sqlBasicSelect = 'select
 									  idpedido
 									 ,idpessoa
+									 ,nom_pessoa
 									 ,idtipo_pagamento
+									 ,des_tipo_pagamento
 									 ,dat_pedido
-									 from form_exemplo.pedido ';
+									 from ( 
+										select
+											pe.idpedido
+									   		,pe.idpessoa
+									   		,p.nome as nom_pessoa
+									   		,pe.idtipo_pagamento
+									   		,t.descricao as des_tipo_pagamento
+									   		,DATE_FORMAT(pe.dat_pedido, \'%d/%m/%Y\') as dat_pedido
+									   from form_exemplo.pedido as pe
+									   		,form_exemplo.pessoa as p
+									   		,form_exemplo.tipo as t
+									   where p.idpessoa = pe.idpessoa
+									   and t.idtipo = pe.idtipo_pagamento
+									   ) as r';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;

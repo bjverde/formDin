@@ -2,7 +2,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPEDIDO';
-$frm = new TForm('Cadastro de Pedidos',800,950);
+$frm = new TForm('Pedido',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
@@ -14,12 +14,12 @@ $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 
 $frm->addGroupField('gpx1','Solicitante do Pedido');
     $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
-    $frm->addTextField('NOME', 'Nome',150,true,70,null,false);
+    $frm->addTextField('NOM_PESSOA', 'Nome',150,true,70,null,false);
     //Deve sempre ficar depois da definição dos campos
-    $frm->setAutoComplete('NOME'
+    $frm->setAutoComplete('NOM_PESSOA'
         ,'pessoa'// tabela
         ,'NOME'	 		// campo de pesquisa
-        ,'IDPESSOA|IDPESSOA,NOME|NOME' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+        ,'IDPESSOA|IDPESSOA,NOME|NOM_PESSOA' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
         ,true
         ,null 		        // campo do formulário que será adicionado como filtro
         ,null				// função javascript
@@ -116,6 +116,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',IDPESSOA|IDPESSOA'
 					.',IDTIPO_PAGAMENTO|IDTIPO_PAGAMENTO'
 					.',DAT_PEDIDO|DAT_PEDIDO'
+					.',NOM_PESSOA|NOM_PESSOA'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
 					   ,'Lista de Pedidos' // titulo do gride
@@ -129,7 +130,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 	$gride->addColumn($primaryKey,'id');
 	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('NOM_PESSOA','Pessoa');
 	$gride->addColumn('IDTIPO_PAGAMENTO','id Tipo Pagamento');
+	$gride->addColumn('DES_TIPO_PAGAMENTO','Tipo Pagamento');
 	$gride->addColumn('DAT_PEDIDO','Data do Pedido');
 
 	$gride->show();
