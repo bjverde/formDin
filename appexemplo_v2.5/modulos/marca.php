@@ -18,12 +18,12 @@ $frm->addHiddenField('SIT_ATIVO','S');
 
 $frm->addGroupField('gpx1','Empresa');
     $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
-    $frm->addTextField('NOME', 'Nome',150,true,70,null,false);
+    $frm->addTextField('NOM_PESSOA', 'Nome',150,true,70,null,false);
     //Deve sempre ficar depois da definição dos campos
-    $frm->setAutoComplete('NOME'
+    $frm->setAutoComplete('NOM_PESSOA'
         ,'pessoa'// tabela
         ,'NOME'	 		// campo de pesquisa
-        ,'IDPESSOA|IDPESSOA,NOME|NOME' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+        ,'IDPESSOA|IDPESSOA,NOME|NOM_PESSOA' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
         ,true
         ,'TIPO' 		    // campo do formulário que será adicionado como filtro
         ,null				// função javascript
@@ -114,6 +114,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
 					.',NOM_MARCA|NOM_MARCA'
 					.',IDPESSOA|IDPESSOA'
+					.',NOM_PESSOA|NOM_PESSOA'
 					;
 	$gride = new TGrid( 'gd'              // id do gride
 					   ,'Lista de Marcas' // titulo do gride
@@ -127,7 +128,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 	$gride->addColumn($primaryKey,'id');
 	$gride->addColumn('NOM_MARCA','Nome da Marca');
-	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('IDPESSOA','id Pessoa',null,'center');
 	$gride->addColumn('NOM_PESSOA','Pessoa');
 
 	$gride->show();
