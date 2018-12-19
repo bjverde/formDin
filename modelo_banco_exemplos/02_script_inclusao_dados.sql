@@ -5739,171 +5739,171 @@ INSERT INTO `form_exemplo`.`acesso_perfil_user` (`idperfil`,`iduser`) VALUES (4,
 
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(1, null, 'Menu', null, null, 'menu-alt-512.png',null,'S',null,null);
+(1, null, 'Menu', null, null, 'menu-alt-512.png',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(11,1,'Pedido','modulos/pedido.php',null,null,null,'S',null,null);
+(11,1,'Pedido','modulos/pedido.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(12,1,'Item do Pedido','modulos/pedido_item.php',null,null,null,'S',null,null);
+(12,1,'Item do Pedido','modulos/pedido_item.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(13,1,'Produto','modulos/produto.php',null,null,null,'S',null,null);
+(13,1,'Produto','modulos/produto.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(14,1,'Marca','modulos/marca.php',null,null,null,'S',null,null);
-
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(2, null, 'Pessoas', null, null,null,null,'S',null,null);
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(21,2,'pessoa','modulos/pessoa.php',null,null,null,'S',null,null);
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(22,2,'pessoa_fisica','modulos/pessoa_fisica.php',null,null,null,'S',null,null);
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(23,2,'pessoa_juridica','modulos/pessoa_juridica.php',null,null,null,'S',null,null);
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(24,2,'Endereço','modulos/endereco.php',null,null,null,'S',null,null);
-
-INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
-VALUES
-(25,2,'Telefone','modulos/telefone.php',null,null,null,'S',null,null);
+(14,1,'Marca','modulos/marca.php',null,null,null,'N',null,null);
 
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(3, null, 'Autoridades', null, null,null,null,'S',null,null);
+(2, null, 'Pessoas', null, null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(31, 3, 'Cadastro Autoridades', 'modulos/autoridade.php',null,null,null,'S',null,null);
+(21,2,'pessoa','modulos/pessoa.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(7, null, 'Tabelas de Apoio', null, null, 'table16.gif',null,'S',null,null);
+(22,2,'pessoa_fisica','modulos/pessoa_fisica.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(71, 7,'Região', 'modulos/regiao.php',null,null,null,'S',null,null);
+(23,2,'pessoa_juridica','modulos/pessoa_juridica.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(72, 7,'UF','modulos/uf.php',null,null,null,'S',null,null);
+(24,2,'Endereço','modulos/endereco.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(73, 7,'Município','modulos/municipio.php',null,null,null,'S',null,null);
+(25,2,'Telefone','modulos/telefone.php',null,null,null,'N',null,null);
+
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(74, 7,'Meta Tipo','modulos/meta_tipo.php',null,null,null,'S',null,null);
+(3, null, 'Autoridades', null, null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(75, 7,'Tipo','modulos/tipo.php',null,null,null,'S',null,null);
+(31, 3, 'Cadastro Autoridades', 'modulos/autoridade.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(76, 7,'Natureza Jurídica','modulos/natureza_juridica.php',null,null,null,'S',null,null);
+(7, null, 'Tabelas de Apoio', null, null, 'table16.gif',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(8, null, 'Acesso', null, null, 'icon-key-yellow.png',null,'S',null,null);
+(71, 7,'Região', 'modulos/regiao.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(81, 8, 'Usuários', 'modulos/acesso_user.php', null, 'user916.gif',null,'S',null,null);
+(72, 7,'UF','modulos/uf.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(82, 8, 'Pefil de Acesso', 'modulos/acesso_perfil.php', null, 'icon_mask.png',null,'S',null,null);
+(73, 7,'Município','modulos/municipio.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(83, 8, 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png',null,'S',null,null);
+(74, 7,'Meta Tipo','modulos/meta_tipo.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(84, 8, 'Relacionar Perfil com Menu','modulos/acesso_perfil_menu.php',null,null,null,'S',null,null);
+(75, 7,'Tipo','modulos/tipo.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(85, 8, 'Relacionar Perfil com Usuário','modulos/acesso_perfil_user.php',null,null,null,'S',null,null);
+(76, 7,'Natureza Jurídica','modulos/natureza_juridica.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(86, 8, 'Alterar a minha senha','modulos/acesso_senha.php',null,'lock16.gif',null,'S',null,null);
+(8, null, 'Acesso', null, null, 'icon-key-yellow.png',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(9, null, 'Sobre', 'modulos/sys_about.php', null, 'information-circle.jpg',null,'S',null,null);
+(81, 8, 'Usuários', 'modulos/acesso_user.php', null, 'user916.gif',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,'S',null,null);
+(82, 8, 'Pefil de Acesso', 'modulos/acesso_perfil.php', null, 'icon_mask.png',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(101,10,'Ambiente Resumido','modulos/sys_environment_summary.php',null,'information-circle.jpg',null,'S',null,null);
+(83, 8, 'Menu', 'modulos/acesso_menu.php', null, 'icon-menu.png',null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(102,10,'PHPInfo','modulos/sys_environment.php',null,'php_logo.png',null,'S',null,null);
+(84, 8, 'Relacionar Perfil com Menu','modulos/acesso_perfil_menu.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,'S',null,null);
+(85, 8, 'Relacionar Perfil com Usuário','modulos/acesso_perfil_user.php',null,null,null,'N',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
-(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
 VALUES
-(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,'S',null,null);
+(86, 8, 'Alterar a minha senha','modulos/acesso_senha.php',null,'lock16.gif',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(9, null, 'Sobre', 'modulos/sys_about.php', null, 'information-circle.jpg',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(10,null,'Config Ambiente',null,null,'setting-gear-512.png',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(101,10,'Ambiente Resumido','modulos/sys_environment_summary.php',null,'information-circle.jpg',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(102,10,'PHPInfo','modulos/sys_environment.php',null,'php_logo.png',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php',null,null,null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,'N',null,null);
 
 
 -- Gerador dos inserts
