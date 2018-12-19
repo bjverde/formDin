@@ -95,6 +95,12 @@ VALUES (2, 2, 12, '2014-09-10 14:00:00');
 INSERT INTO `form_exemplo`.`pedido` (`idpedido`,`idpessoa`,`idtipo_pagamento`,`dat_pedido`)
 VALUES (3, 3, 12, '2014-09-10 14:00:00');
 
+-- Incluir Itens do pedido
+INSERT INTO `form_exemplo`.`pedido_item` (`idpedido_item`,`idpedido`,`idproduto`,`qtd_unidade`,`preco`) VALUES(1,1,3,1,24560);
+INSERT INTO `form_exemplo`.`pedido_item` (`idpedido_item`,`idpedido`,`idproduto`,`qtd_unidade`,`preco`) VALUES(2,1,4,4,10);
+INSERT INTO `form_exemplo`.`pedido_item` (`idpedido_item`,`idpedido`,`idproduto`,`qtd_unidade`,`preco`) VALUES(3,3,5,1,50687);
+INSERT INTO `form_exemplo`.`pedido_item` (`idpedido_item`,`idpedido`,`idproduto`,`qtd_unidade`,`preco`) VALUES(4,3,6,4,15445);
+
 
 -- Incluido Região
 INSERT INTO `form_exemplo`.`regiao` (`cod_regiao`,`nom_regiao`) VALUES (1,'Norte');
