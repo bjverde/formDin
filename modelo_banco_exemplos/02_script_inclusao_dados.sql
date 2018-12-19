@@ -1,21 +1,21 @@
 -- Incluido Pessoa
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('João Tavares','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Francisco X','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Joceli','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Dell','PJ','1994-02-01 23:59:59');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Google','PJ','1998-09-04 23:59:59');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ágata Açaí Pará','PF','1098-09-04 23:59:59');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Microsoft','PJ','1975-04-04 23:59:59');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Márcio','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ítalo','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Áurea','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Emília Javé','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ângela Estefânia Cainã','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ana Clara Reis','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`) VALUES ('Ana Carolina Mota','PF',NOW());
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Ana Caroline Medeiros','PF',NOW(),'N');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Carlos Dias Medeiros','PF',NOW(),'S');
-INSERT INTO `form_exemplo`.`pessoa` (`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES ('Mario Medeiros Andrade','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (1,'João Tavares','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (2,'Francisco X','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (3,'Joceli','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (4,'Dell','PJ','1994-02-01 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (5,'Google','PJ','1998-09-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (6,'Ágata Açaí Pará','PF','1098-09-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (7,'Microsoft','PJ','1975-04-04 23:59:59');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (8,'Márcio','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (9,'Ítalo','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (10,'Áurea','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (11,'Emília Javé','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (12,'Ângela Estefânia Cainã','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (13,'Ana Clara Reis','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VALUES (14,'Ana Carolina Mota','PF',NOW());
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (15,'Ana Caroline Medeiros','PF',NOW(),'N');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (16,'Carlos Dias Medeiros','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (17,'Mario Medeiros Andrade','PF',NOW(),'S');
 
 
 -- Incluido Meta Tipos
@@ -40,6 +40,44 @@ INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (13,'BitCoin',4,'S');
 INSERT INTO `form_exemplo`.`tipo` (`idtipo`,`descricao`,`idmeta_tipo`,`sit_ativo`) VALUES (14,'Ingresso',3,'S');
 
+-- Incluir Marcas
+INSERT INTO `form_exemplo`.`marca` (`idmarca`,`nom_marca`,`idpessoa`) VALUES (1,'XPS',4);
+INSERT INTO `form_exemplo`.`marca` (`idmarca`,`nom_marca`,`idpessoa`) VALUES (2,'Alienware',4);
+INSERT INTO `form_exemplo`.`marca` (`idmarca`,`nom_marca`,`idpessoa`) VALUES (3,'Precision',4);
+INSERT INTO `form_exemplo`.`marca` (`idmarca`,`nom_marca`,`idpessoa`) VALUES (4,'EMC',4);
+INSERT INTO `form_exemplo`.`marca` (`idmarca`,`nom_marca`,`idpessoa`) VALUES (5,'PowerEdge',4);
+
+
+-- Incluir Produto
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (1,'Alienware 17 R5','cuaw17r5i7bf2','V1.0',2,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (2,'Alienware 17 R5','cuaw17r5i9bf3','V1.0',2,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (3,'Alienware 17 R5','cuaw17r5i7br1wps','V1.0',2,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (4,'XPS 13','xps-13-9370','V2.0',2,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (5,'PowerEdge R6415','R6415','V1.0',5,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (6,'PowerEdge R240','R240','V1.0',5,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (7,'PowerEdge R240','R240','V2.0',5,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (8,'PowerEdge R740','R740','V1.0',5,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (9,'PowerEdge R740xd','R740xd','V1.0',5,7);
+
+INSERT INTO `form_exemplo`.`produto` (`idproduto`,`nom_produto`,`modelo`,`versao`,`idmarca`,`idtipo_produto`)
+VALUES (10,'PowerEdge R740xd2','R740xd','V2.0',5,7);
 
 -- Incluido Pedidos
 INSERT INTO `form_exemplo`.`pedido` (`idpedido`,`idpessoa`,`idtipo_pagamento`,`dat_pedido`)
@@ -5700,22 +5738,23 @@ VALUES
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(11,1,'Marca','modulos/marca.php',null,null,null,'S',null,null);
+(11,1,'Pedido','modulos/pedido.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(12,1,'Pedido','modulos/pedido.php',null,null,null,'S',null,null);
+(12,1,'Item do Pedido','modulos/pedido_item.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(13,1,'Item do Pedido','modulos/pedido_item.php',null,null,null,'S',null,null);
+(13,1,'Produto','modulos/produto.php',null,null,null,'S',null,null);
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
 VALUES
-(14,1,'Produto','modulos/produto.php',null,null,null,'S',null,null);
+(14,1,'Marca','modulos/marca.php',null,null,null,'S',null,null);
+
 
 INSERT INTO `form_exemplo`.`acesso_menu`
 (`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`dissabled`,`hotkey`,`boolSeparator`)
