@@ -1,5 +1,5 @@
 <?php
-class Acesso_user_menuDAO extends TPDOConnection {
+class Vw_acesso_user_menuDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
 									  iduser
@@ -8,7 +8,7 @@ class Acesso_user_menuDAO extends TPDOConnection {
 									 ,nom_perfil
 									 ,idmenu
 									 ,nom_menu
-									 from form_exemplo.acesso_user_menu ';
+									 from form_exemplo.vw_acesso_user_menu ';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;
@@ -37,7 +37,7 @@ class Acesso_user_menuDAO extends TPDOConnection {
 	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$where = self::processWhereGridParameters($where);
-		$sql = 'select count(iduser) as qtd from form_exemplo.acesso_user_menu';
+		$sql = 'select count(iduser) as qtd from form_exemplo.vw_acesso_user_menu';
 		$sql = $sql.( ($where)? ' where '.$where:'');
 		$result = self::executeSql($sql);
 		return $result['QTD'][0];
