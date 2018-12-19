@@ -1,6 +1,8 @@
 <?php
 defined('APLICATIVO') or die();
 
+d($_REQUEST);
+
 $primaryKey = 'IDPEDIDO';
 $frm = new TForm('Pedido',800,950);
 $frm->setFlat(true);
@@ -93,9 +95,8 @@ switch( $acao ) {
 	break;
 	//--------------------------------------------------------------------------------
 	case 'gd_imprimir':
-	case 'Imprimir':
 	    try{
-	        $frm->redirect('relatorio.php',null,true,null,true);
+	        $frm->redirect('relatorio.php');
 	    }
 	    catch (DomainException $e) {
 	        $frm->setMessage( $e->getMessage() );
@@ -104,12 +105,24 @@ switch( $acao ) {
 	        Mensagem::reportarLog($e);
 	        $frm->setMessage( $e->getMessage() );
 	    }
-	    break;	
-
+		break;
+	//--------------------------------------------------------------------------------
+	case 'gd_itens':
+	    try{
+	        $frm->redirect('pedido_item.php');
+	    }
+	    catch (DomainException $e) {
+	        $frm->setMessage( $e->getMessage() );
+	    }
+	    catch (Exception $e) {
+	        Mensagem::reportarLog($e);
+	        $frm->setMessage( $e->getMessage() );
+	    }
+	    break;		
 }
 
 
-function getWhereGridParameters(&$frm){
+function getWhereGridParametersPedido(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
@@ -124,7 +137,7 @@ function getWhereGridParameters(&$frm){
 
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = ROWS_PER_PAGE;
-	$whereGrid = getWhereGridParameters($frm);
+	$whereGrid = getWhereGridParametersPedido($frm);
 	$page = PostHelper::get('page');
 	$dados = Pedido::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
 	$realTotalRowsSqlPaginator = Pedido::selectCount( $whereGrid );
