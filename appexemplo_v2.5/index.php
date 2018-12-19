@@ -50,6 +50,7 @@ $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 //$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
+$app->setImgLogoPath('images/appv1_logo.png');
 $app->setVersionSystem(SYSTEM_VERSION);
 $app->setUnit('Departamento de Informática - DI - IBAMA 2011');
 

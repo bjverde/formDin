@@ -5,6 +5,7 @@ $primaryKey = 'IDPEDIDO';
 $frm = new TForm('Pedido',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
+$frm->addCssFile('css/css_form02.css');
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
@@ -36,8 +37,8 @@ $frm->addGroupField('gpx2','Info Complementar');
 	$frm->addDateField('DAT_PEDIDO', 'Data do Pedido',TRUE);
 $frm->closeGroup();
 
-$frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
-$frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
+$frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false)->setClass('btnOragen', false);
+$frm->addButton('Salvar', null, 'Salvar', null, null, false, false)->setClass('btnOragen', false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 
@@ -90,6 +91,21 @@ switch( $acao ) {
 			$frm->setMessage( $e->getMessage() );
 		}
 	break;
+	//--------------------------------------------------------------------------------
+	case 'gd_imprimir':
+	case 'Imprimir':
+	    try{
+	        $frm->redirect('relatorio.php',null,true,null,true);
+	    }
+	    catch (DomainException $e) {
+	        $frm->setMessage( $e->getMessage() );
+	    }
+	    catch (Exception $e) {
+	        Mensagem::reportarLog($e);
+	        $frm->setMessage( $e->getMessage() );
+	    }
+	    break;	
+
 }
 
 
@@ -134,6 +150,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->addColumn('IDTIPO_PAGAMENTO','id Tipo Pagamento');
 	$gride->addColumn('DES_TIPO_PAGAMENTO','Tipo Pagamento');
 	$gride->addColumn('DAT_PEDIDO','Data do Pedido');
+
+	$gride->addButton('Incluir Itens','gd_itens','btnItens',null,null,'images/gtk_add_17px.png');
+	$gride->addButton('Relatório','gd_imprimir','btnImprimir',null,null,'impressora.gif');
+	$gride->addButton('Alterar','gd_alterar','btnAlterar',null,null,'alterar.gif');
+	$gride->addButton('Excluir','gd_excluir','btnExcluir',null,'Deseja Exlcuir o registro?','lixeira.gif');
 
 	$gride->show();
 	die();
