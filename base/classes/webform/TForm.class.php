@@ -2812,7 +2812,18 @@ class TForm Extends TBox
       * @param string $funcaoExecutar
       * @param boolean $boolSelectUniqueOption
       */
-     function combinarSelects( $selectPai='cod_uf', $selectFilho='cod_municipio', $TabelaPacoteFuncao=null, $colunaFiltro='COD_UF', $colunaCodigo='COD_MUNICIPIO', $colunaDescricao='NOM_MUNICIPIO', $descPrimeiraOpcao='-- Selecione --', $valorPrimeiraOpcao='', $descNenhumaOpcao='-- vazio --', $campoFormFiltro='', $funcaoExecutar='',$boolSelectUniqueOption=null )
+     function combinarSelects( $selectPai='cod_uf'
+                             , $selectFilho='cod_municipio'
+                             , $TabelaPacoteFuncao=null
+                             , $colunaFiltro='COD_UF'
+                             , $colunaCodigo='COD_MUNICIPIO'
+                             , $colunaDescricao='NOM_MUNICIPIO'
+                             , $descPrimeiraOpcao='-- Selecione --'
+                             , $valorPrimeiraOpcao=''
+                             , $descNenhumaOpcao='-- vazio --'
+                             , $campoFormFiltro=''
+                             , $funcaoExecutar=''
+                             , $boolSelectUniqueOption=null )
      {
          // se o campo estiver dentro de uma aba ou de cum container, chamar o método combinar select destes
          $parentField = $this->getField( $selectPai );
@@ -2858,6 +2869,7 @@ class TForm Extends TBox
          $arrDados[ 'selectUniqueOption' ] = $boolSelectUniqueOption;
          $this->selectsCombinados[ $selectPai ][ $selectFilho ] = $arrDados;
      }
+     
      /**
       * Adiciona botão à frente do campo para fazer pesquisa on-line no banco de dados e retornar valores
       * para os campos do formulario
