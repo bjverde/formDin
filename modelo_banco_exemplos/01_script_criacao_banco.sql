@@ -474,29 +474,40 @@ USE `form_exemplo` ;
 CREATE TABLE IF NOT EXISTS `form_exemplo`.`acesso_user_menu` (`iduser` INT, `login_user` INT, `idperfil` INT, `nom_perfil` INT, `idmenu` INT, `nom_menu` INT);
 
 -- -----------------------------------------------------
--- View `form_exemplo`.`acesso_user_menu`
+-- View `form_exemplo`.`vw_acesso_user_menu`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `form_exemplo`.`acesso_user_menu`;
-USE `form_exemplo`;
-CREATE  OR REPLACE VIEW `acesso_user_menu` AS
-select 
- u.iduser
-,u.login_user
-,p.idperfil
-,p.nom_perfil
-,m.idmenu
-,m.nom_menu
-from
-acesso_menu as m
-,acesso_perfil_menu as pm
-,acesso_perfil as p
-,acesso_perfil_user as pu
-,acesso_user as u
-where 
-m.idmenu = pm.idmenu
-and pm.idperfil = p.idperfil
-and pm.idperfil = pu.idperfiluser
-and pu.iduser = u.iduser;
+CREATE OR REPLACE VIEW `form_exemplo`.`vw_acesso_user_menu` AS
+  select 
+      u.iduser
+      ,u.login_user
+      ,p.idperfil
+      ,p.nom_perfil
+      ,m.idmenu
+      ,m.nom_menu
+  from
+      acesso_menu as m
+      ,acesso_perfil_menu as pm
+      ,acesso_perfil as p
+      ,acesso_perfil_user as pu
+      ,acesso_user as u
+  where 
+      m.idmenu = pm.idmenu
+  and pm.idperfil = p.idperfil
+  and pm.idperfil = pu.idperfiluser
+  and pu.iduser = u.iduser;
+
+CREATE OR REPLACE VIEW `form_exemplo`.`vw_pessoa_marca_produto` AS
+select pe.idpessoa
+      ,pe.nome
+      ,m.idmarca
+      ,m.nom_marca
+      ,pr.idproduto
+      ,pr.nom_produto
+from form_exemplo.pessoa as pe
+    ,form_exemplo.marca as m
+    ,form_exemplo.produto as pr
+where pe.idpessoa = m.idpessoa
+  and m.idmarca = pr.idmarca;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
