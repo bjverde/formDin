@@ -4283,13 +4283,17 @@ class TForm Extends TBox
       * 	}
       * </code>
       *
-      * @param mixed $strModule
-      * @param mixed $strMessage
-      * @param boolean $boolSubmit   - ação de submeter. TRUE = post, FALSE = ajax
-      * @param array $arrVars        - Array que será enviado via Post 
-      * @param boolean $boolSaveData - salva os dados formulario atual
+      * @param mixed $strModule      - 1: modulo de destino. Fora da pasta modulo informe o caminho completo
+      * @param mixed $strMessage     - 2: Uma mensagem
+      * @param boolean $boolSubmit   - 3: ação de submeter. TRUE = post, FALSE = ajax
+      * @param array $arrVars        - 4: Array que será enviado via Post 
+      * @param boolean $boolSaveData - 5; salva os dados formulario atual
       */
-      public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
+      public function redirect( $strModule=null
+                              , $strMessage=null
+                              , $boolSubmit=false
+                              , $arrVars=null
+                              , $boolSaveData=null )	{
           $boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
           
           $filePath = $this->getRealPath( $strModule );
