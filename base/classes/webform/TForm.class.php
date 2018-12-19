@@ -2799,10 +2799,10 @@ class TForm Extends TBox
       * @example exemple/exCampoSelectAgrupado.php
       *
       *
-      * @param string $selectPai
-      * @param string $selectFilho
-      * @param string $TabelaPacoteFuncao
-      * @param string $colunaFiltro
+      * @param string $selectPai             - 1: Id Campo pai
+      * @param string $selectFilho           - 2: Id Campo filho
+      * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
+      * @param string $colunaFiltro          - 4: campo_formulario|campo_banco
       * @param string $colunaCodigo
       * @param string $colunaDescricao
       * @param string $descPrimeiraOpcao
@@ -6906,7 +6906,7 @@ class TForm Extends TBox
      * @param integer $intMaxLength      - 3: Quantidade maxima de digitos.
      * @param boolean $boolRequired      - 4: Obrigatorio
      * @param integer $intDecimalPlaces  - 5: Quantidade de casas decimais.
-     * @param boolean $boolNewLine       - 6: Campo em nova linha
+     * @param boolean $boolNewLine       - 6: Campo em nova linha. Default = true = inicia em nova linha, false = continua na linha anterior 
      * @param string $strValue           - 7: valor inicial do campo
      * @param string $strMinValue        - 8: valor minimo permitido. Null = não tem limite.
      * @param string $strMaxValue        - 9: valor maxima permitido. Null = não tem limite.
