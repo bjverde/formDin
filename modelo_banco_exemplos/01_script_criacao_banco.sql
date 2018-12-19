@@ -505,10 +505,8 @@ select pe.idpessoa
       ,pr.idproduto
       ,pr.nom_produto
 from form_exemplo.pessoa as pe
-    ,form_exemplo.marca as m
-    ,form_exemplo.produto as pr
-where pe.idpessoa = m.idpessoa
-  and m.idmarca = pr.idmarca;
+join form_exemplo.marca as m on pe.idpessoa = m.idpessoa
+left join form_exemplo.produto as pr on m.idmarca = pr.idmarca;
 
 
 CREATE OR REPLACE VIEW `form_exemplo`.`vw_pessoa` AS
