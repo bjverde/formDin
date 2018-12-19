@@ -17,6 +17,14 @@ INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`si
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (16,'Carlos Dias Medeiros','PF',NOW(),'S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (17,'Mario Medeiros Andrade','PF',NOW(),'S');
 
+INSERT INTO `form_exemplo`.`pessoa_fisica`
+(`idpessoa_fisica`,`idpessoa`,`cpf`,`dat_nascimento`,`cod_municipio_nascimento`,`dat_inclusao`,`dat_alteracao`)
+VALUES (1,15,'34261847027','1990/02/20',null,NOW(),null);
+
+INSERT INTO `form_exemplo`.`pessoa_fisica`
+(`idpessoa_fisica`,`idpessoa`,`cpf`,`dat_nascimento`,`cod_municipio_nascimento`,`dat_inclusao`,`dat_alteracao`)
+VALUES (2,17,'82204504017','2000/08/12',null,NOW(),null);
+
 
 -- Incluido Meta Tipos
 INSERT INTO `form_exemplo`.`meta_tipo` (`idMetaTipo`,`descricao`,`sit_ativo`) VALUES (1,'Telefone','S');

@@ -496,6 +496,7 @@ CREATE OR REPLACE VIEW `form_exemplo`.`vw_acesso_user_menu` AS
   and pm.idperfil = pu.idperfiluser
   and pu.iduser = u.iduser;
 
+
 CREATE OR REPLACE VIEW `form_exemplo`.`vw_pessoa_marca_produto` AS
 select pe.idpessoa
       ,pe.nome
@@ -508,6 +509,22 @@ from form_exemplo.pessoa as pe
     ,form_exemplo.produto as pr
 where pe.idpessoa = m.idpessoa
   and m.idmarca = pr.idmarca;
+
+
+CREATE OR REPLACE VIEW `form_exemplo`.`vw_pessoa` AS
+SELECT p.idpessoa
+      ,p.nome
+      ,p.tipo
+      ,if (p.tipo = 'PF', pf.cpf, pj.cnpj) as cpfcnpj
+      ,DATE_FORMAT(pf.dat_nascimento, '%d/%m/%Y') as dat_nascimento
+      ,pf.cod_municipio_nascimento
+      ,pj.cnae
+      ,pj.idnatureza_juridica
+      ,p.dat_inclusao
+      ,p.sit_ativo
+FROM form_exemplo.pessoa as p
+    left join form_exemplo.pessoa_fisica as pf on p.idpessoa = pf.idpessoa
+    left join form_exemplo.pessoa_juridica as pj on p.idpessoa = pj.idpessoa_juridica;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
