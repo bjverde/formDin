@@ -18,7 +18,7 @@ $frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null
 
 $frm->combinarSelects('IDPESSOA', 'IDMARCA', 'vw_pessoa_marca_produto', 'IDPESSOA', 'IDMARCA', 'NOM_MARCA', null, null, 'Nenhum', null, null, true);
 
-$listTipo = Tipo::selectAll();
+$listTipo = Tipo::selectAllAtivoByMeta(Meta_tipoDAO::PRODUTO);
 $frm->addSelectField('IDTIPO_PRODUTO', 'Tipo Produto',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 
 $frm->addTextField('NOM_PRODUTO', 'Nome',45,TRUE,45);
@@ -86,12 +86,13 @@ function getWhereGridParameters(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
-				'IDPRODUTO'=>$frm->get('IDPRODUTO')
+				 'IDPRODUTO'=>$frm->get('IDPRODUTO')
 				,'NOM_PRODUTO'=>$frm->get('NOM_PRODUTO')
 				,'MODELO'=>$frm->get('MODELO')
 				,'VERSAO'=>$frm->get('VERSAO')
 				,'IDMARCA'=>$frm->get('IDMARCA')
 				,'IDTIPO_PRODUTO'=>$frm->get('IDTIPO_PRODUTO')
+		        ,'IDPESSOA'=>$frm->get('IDPESSOA')
 		);
 	}
 	return $retorno;
@@ -151,6 +152,7 @@ function init() {
 					,"VERSAO":""
 					,"IDMARCA":""
 					,"IDTIPO_PRODUTO":""
+					,"IDPESSOA":""
 					};
 	fwGetGrid('produto.php','gride',Parameters,true);
 }
