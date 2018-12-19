@@ -7,14 +7,14 @@ class Acesso_menuVO {
 	private $tooltip = null;
 	private $img_menu = null;
 	private $imgdisabled = null;
-	private $dissabled = null;
+	private $disabled = null;
 	private $hotkey = null;
 	private $boolseparator = null;
 	private $jsonparams = null;
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function __construct( $idmenu=null, $nom_menu=null, $idmenu_pai=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null ) {
+	public function __construct( $idmenu=null, $nom_menu=null, $idmenu_pai=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $disabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null ) {
 		$this->setIdmenu( $idmenu );
 		$this->setNom_menu( $nom_menu );
 		$this->setIdmenu_pai( $idmenu_pai );
@@ -22,7 +22,7 @@ class Acesso_menuVO {
 		$this->setTooltip( $tooltip );
 		$this->setImg_menu( $img_menu );
 		$this->setImgdisabled( $imgdisabled );
-		$this->setDissabled( $dissabled );
+		$this->setDisabled( $disabled );
 		$this->setHotkey( $hotkey );
 		$this->setBoolseparator( $boolseparator );
 		$this->setJsonparams( $jsonparams );
@@ -94,13 +94,13 @@ class Acesso_menuVO {
 		return $this->imgdisabled;
 	}
 	//--------------------------------------------------------------------------------
-	public function setDissabled( $strNewValue = null )
+	public function setDisabled( $strNewValue = null )
 	{
-		$this->dissabled = $strNewValue;
+		$this->disabled = $strNewValue;
 	}
-	public function getDissabled()
+	public function getDisabled()
 	{
-		return $this->dissabled;
+		return $this->disabled;
 	}
 	//--------------------------------------------------------------------------------
 	public function setHotkey( $strNewValue = null )

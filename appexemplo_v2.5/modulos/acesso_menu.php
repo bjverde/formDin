@@ -22,9 +22,9 @@ $frm->addTextField('IMG_MENU', 'IMG_MENU',45,FALSE,45);
 $frm->getLabel('IMG_MENU')->setToolTip('Caminho da imagem será utilizada como ícone');
 $frm->addTextField('IMGDISABLED', 'IMGDISABLED',45,FALSE,45);
 $frm->getLabel('IMGDISABLED')->setToolTip('Caminho da imagem para o menu desabilitado');
-$frm->addSelectField('DISSABLED', 'DISSABLED:', true, 'S=Sim,N=Não', true);
-//$frm->addTextField('DISSABLED', 'DISSABLED:',45,FALSE,45);
-$frm->getLabel('DISSABLED')->setToolTip('Informa se o item de menu está habilitado ou não. N = Item de aparece porém não pode ser usada, S = Item menu aparece e pode ser clicado.');
+$frm->addSelectField('DISABLED', 'DISABLED:', true, 'N=Não,S=Sim', true);
+//$frm->addTextField('DISABLED', 'DISABLED:',45,FALSE,45);
+$frm->getLabel('DISABLED')->setToolTip('Informa se o item de menu está habilitado ou não. N = Item de aparece porém não pode ser usada, S = Item menu aparece e pode ser clicado.');
 $frm->addTextField('HOTKEY', 'HOTKEY',45,FALSE,45);
 $frm->getLabel('HOTKEY')->setToolTip('Tecla de atalho');
 $frm->addNumberField('BOOLSEPARATOR', 'BOOLSEPARATOR',3,FALSE,0);
@@ -113,7 +113,7 @@ function getWhereGridParameters(&$frm){
             ,'TOOLTIP'=>$frm->get('TOOLTIP')
             ,'IMG_MENU'=>$frm->get('IMG_MENU')
             ,'IMGDISABLED'=>$frm->get('IMGDISABLED')
-            ,'DISSABLED'=>$frm->get('DISSABLED')
+            ,'DISABLED'=>$frm->get('DISABLED')
             ,'HOTKEY'=>$frm->get('HOTKEY')
             ,'BOOLSEPARATOR'=>$frm->get('BOOLSEPARATOR')
             ,'JSONPARAMS'=>$frm->get('JSONPARAMS')
@@ -138,7 +138,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     .',TOOLTIP|TOOLTIP'
     .',IMG_MENU|IMG_MENU'
     .',IMGDISABLED|IMGDISABLED'
-    .',DISSABLED|DISSABLED'
+    .',DISABLED|DISABLED'
     .',HOTKEY|HOTKEY'
     .',BOOLSEPARATOR|BOOLSEPARATOR'
     .',JSONPARAMS|JSONPARAMS'
@@ -163,7 +163,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn('TOOLTIP','TOOLTIP');
     $gride->addColumn('IMG_MENU','IMG_MENU');
     $gride->addColumn('IMGDISABLED','IMGDISABLED');
-    $gride->addColumn('DISSABLED','DISSABLED');
+    $gride->addColumn('DISABLED','DISABLED');
     $gride->addColumn('HOTKEY','HOTKEY');
     //$gride->addColumn('BOOLSEPARATOR','BOOLSEPARATOR');
     //$gride->addColumn('JSONPARAMS','JSONPARAMS');
@@ -196,7 +196,7 @@ function init() {
 					,"TOOLTIP":""
 					,"IMG_MENU":""
 					,"IMGDISABLED":""
-					,"DISSABLED":""
+					,"DISABLED":""
 					,"HOTKEY":""
 					,"BOOLSEPARATOR":""
 					,"JSONPARAMS":""
@@ -229,7 +229,7 @@ function treeClick(id) {
 	jQuery("#TOOLTIP").val(treeJs.getUserData(id,'TOOLTIP'));
 	jQuery("#IMG_MENU").val(treeJs.getUserData(id,'IMG_MENU'));
 	jQuery("#IMGDISABLED").val(treeJs.getUserData(id,'IMGDISABLED'));
-	jQuery("#DISSABLED").val(treeJs.getUserData(id,'DISSABLED'));
+	jQuery("#DISABLED").val(treeJs.getUserData(id,'DISABLED'));
 	jQuery("#HOTKEY").val(treeJs.getUserData(id,'HOTKEY'));
 	jQuery("#BOOLSEPARATOR").val(treeJs.getUserData(id,'BOOLSEPARATOR'));
 	jQuery("#JSONPARAMS").val(treeJs.getUserData(id,'JSONPARAMS'));
