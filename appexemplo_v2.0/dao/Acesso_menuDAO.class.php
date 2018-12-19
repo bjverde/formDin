@@ -101,7 +101,7 @@ class Acesso_menuDAO extends TPDOConnection {
 				,m.dat_inclusao
 				,m.dat_update
 				from acesso_menu as m
-					,acesso_user_menu as um
+					,vw_acesso_user_menu as um
 				where um.idmenu = m.idmenu
 				AND um.login_user = ?';
 	    return self::executeSql($sql, $values);

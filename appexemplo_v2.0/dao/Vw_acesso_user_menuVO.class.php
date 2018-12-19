@@ -1,5 +1,5 @@
 <?php
-class Acesso_user_menuVO {
+class Vw_acesso_user_menuVO {
 	private $iduser = null;
 	private $login_user = null;
 	private $idperfil = null;
