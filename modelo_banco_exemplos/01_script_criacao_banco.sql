@@ -485,11 +485,11 @@ CREATE OR REPLACE VIEW `form_exemplo`.`vw_acesso_user_menu` AS
       ,m.idmenu
       ,m.nom_menu
   from
-      acesso_menu as m
-      ,acesso_perfil_menu as pm
-      ,acesso_perfil as p
-      ,acesso_perfil_user as pu
-      ,acesso_user as u
+       form_exemplo.acesso_menu as m
+      ,form_exemplo.acesso_perfil_menu as pm
+      ,form_exemplo.acesso_perfil as p
+      ,form_exemplo.acesso_perfil_user as pu
+      ,form_exemplo.acesso_user as u
   where 
       m.idmenu = pm.idmenu
   and pm.idperfil = p.idperfil
