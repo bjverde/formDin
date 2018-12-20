@@ -3,41 +3,24 @@ defined('APLICATIVO') or die();
 
 d($_REQUEST);
 
-$primaryKey = 'IDPEDIDO';
-$frm = new TForm('Relatorio',800,950);
+$frm = new TForm('Relatório do pedido',100);
 $frm->setFlat(true);
 $frm->setMaximize(true);
-$frm->addCssFile('css/css_form02.css');
+
+$frm->addNumberField('IDPEDIDO', 'Num do Pedido',4,null,0)->setEnabled(false);
+$frm->addDateField('DAT_PEDIDO', 'Data do Pedido',null,false)->setEnabled(false);
+$frm->addTextField('NOM_PESSOA', 'Solicitante',150,null,70)->setEnabled(false);
+$frm->addPdfFile('modulos/relatorio_pedido_item.php');
 
 
-$frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
-$frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-
-$frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
-$frm->addTextField('NOM_PESSOA', 'Nome',150,true,70,null,false);
-
-
-
-$frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false)->setClass('btnOragen', false);
-$frm->addButton('Salvar', null, 'Salvar', null, null, false, false)->setClass('btnOragen', false);
-$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+$frm->addButton('Lista de pedidos', 'voltar', null, null, null, true, true);
 
 
 $acao = isset($acao) ? $acao : null;
 switch( $acao ) {
-	case 'gd_imprimir':
-	    try{
-	        $frm->redirect('relatorio.php');
-	    }
-	    catch (DomainException $e) {
-	        $frm->setMessage( $e->getMessage() );
-	    }
-	    catch (Exception $e) {
-	        Mensagem::reportarLog($e);
-	        $frm->setMessage( $e->getMessage() );
-	    }
-	    break;
+case 'voltar':
+	$frm->redirect('pedido.php',null,true,null,true);
+    break;
 }
-
 $frm->show();
 ?>
