@@ -1,8 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
 
-d($_REQUEST);
-
 $primaryKey = 'IDPEDIDO';
 $frm = new TForm('Pedido',800,950);
 $frm->setFlat(true);
@@ -96,6 +94,10 @@ switch( $acao ) {
 	//--------------------------------------------------------------------------------
 	case 'gd_imprimir':
 	    try{
+			$_SESSION[APLICATIVO]['RELATORIO']=null;
+			$_SESSION[APLICATIVO]['RELATORIO']['IDPEDIDO'] = $frm->getFieldValue('IDPEDIDO');
+			$_SESSION[APLICATIVO]['RELATORIO']['NOM_PESSOA'] = $frm->getFieldValue('NOM_PESSOA');
+			$_SESSION[APLICATIVO]['RELATORIO']['DAT_PEDIDO'] = $frm->getFieldValue('DAT_PEDIDO');
 	        $frm->redirect('relatorio.php');
 	    }
 	    catch (DomainException $e) {
