@@ -56,12 +56,12 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 
 ## Informações
 
-![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
+![Logo PHP 7.3&](https://raw.githubusercontent.com/bjverde/formDin/master/base/imagens/php73_jeqlk3.png)
 
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* Compatível PHP 5.6.x, 7.0.x, 7.1.x, 7.2.x
+* Compatível PHP **7.3.x,** 7.2.x, 7.1.x, 7.0.x e 5.6.x
 
 Veja na Wiki 
 
