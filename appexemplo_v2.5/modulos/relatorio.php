@@ -1,8 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
 
-d($_REQUEST);
-
 $frm = new TForm('Relatório do pedido',100);
 $frm->setFlat(true);
 $frm->setMaximize(true);
