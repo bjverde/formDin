@@ -7434,7 +7434,9 @@ class TForm Extends TBox
                $field->setClass( 'ckeditor' );
                $field->setCss('height','0px');
                $this->addJsFile('ckeditor/ckeditor.js');
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, is_null($boolLabelAbove) ? true : $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+               $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
+               $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+               $this->addDisplayControl( $display );
                return $field;
            }
            
