@@ -1391,7 +1391,9 @@ class TDAO
 	{
 		if ( $this->getMetadataDir() && $this->getTableName() )
 		{
-			file_put_contents( $this->getMetadataDir() . $this->getConnDbType() . '-' . $this->getTableName() . '.ser', serialize( $this->getFields() ) );
+		    $filename = $this->getMetadataDir() . $this->getConnDbType() . '-' . $this->getTableName() . '.ser';
+		    $data = serialize( $this->getFields() );
+		    file_put_contents( $filename, $data );
 		}
 	}
     /**
