@@ -21,6 +21,12 @@ class Acesso_perfil_user {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectByIdUser( $idUser ){
+		$where  = array ('IDUSER'=>$idUser);
+		$result = Acesso_perfil_userDAO::selectAll( $orderBy, $where );
+		return $result;
+	}	
+	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$result = Acesso_perfil_userDAO::selectCount( $where );
 		return $result;
@@ -50,6 +56,5 @@ class Acesso_perfil_user {
 		$result = Acesso_perfil_userDAO::delete( $id );
 		return $result;
 	}
-
 }
 ?>

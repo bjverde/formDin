@@ -21,6 +21,15 @@ class Pedido_item {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
+	public static function selectByIdPedido( $idPedido ){
+		if( empty($idPedido) ){
+			throw new InvalidArgumentException('idPedido não informado');
+		}
+		$where = array('IDPEDIDO'=>$idPedido);
+		$result = Pedido_itemDAO::selectAll( null, $where );
+		return $result;
+	}	
+	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$result = Pedido_itemDAO::selectCount( $where );
 		return $result;
