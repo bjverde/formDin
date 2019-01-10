@@ -9,7 +9,7 @@ class Acesso_menuDAO extends TPDOConnection {
 									 ,tooltip
 									 ,img_menu
 									 ,imgdisabled
-									 ,dissabled
+									 ,disabled
 									 ,hotkey
 									 ,boolseparator
 									 ,jsonparams
@@ -29,7 +29,7 @@ class Acesso_menuDAO extends TPDOConnection {
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TOOLTIP', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IMG_MENU', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IMGDISABLED', SqlHelper::SQL_TYPE_TEXT_LIKE);
-			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DISSABLED', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DISABLED', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'HOTKEY', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'BOOLSEPARATOR', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'JSONPARAMS', SqlHelper::SQL_TYPE_TEXT_LIKE);
@@ -93,7 +93,7 @@ class Acesso_menuDAO extends TPDOConnection {
 				,m.tooltip
 				,m.img_menu
 				,m.imgdisabled
-				,m.dissabled
+				,m.disabled
 				,m.hotkey
 				,m.boolseparator
 				,m.jsonparams
@@ -114,7 +114,7 @@ class Acesso_menuDAO extends TPDOConnection {
 						, $objVo->getTooltip() 
 						, $objVo->getImg_menu() 
 						, $objVo->getImgdisabled() 
-						, $objVo->getDissabled() 
+						, $objVo->getDisabled() 
 						, $objVo->getHotkey() 
 						, $objVo->getBoolseparator() 
 						, $objVo->getJsonparams() 
@@ -128,7 +128,7 @@ class Acesso_menuDAO extends TPDOConnection {
 								,tooltip
 								,img_menu
 								,imgdisabled
-								,dissabled
+								,disabled
 								,hotkey
 								,boolseparator
 								,jsonparams
@@ -145,7 +145,7 @@ class Acesso_menuDAO extends TPDOConnection {
 						,$objVo->getTooltip()
 						,$objVo->getImg_menu()
 						,$objVo->getImgdisabled()
-						,$objVo->getDissabled()
+						,$objVo->getDisabled()
 						,$objVo->getHotkey()
 						,$objVo->getBoolseparator()
 						,$objVo->getJsonparams()
@@ -158,7 +158,7 @@ class Acesso_menuDAO extends TPDOConnection {
 								,tooltip = ?
 								,img_menu = ?
 								,imgdisabled = ?
-								,dissabled = ?
+								,disabled = ?
 								,hotkey = ?
 								,boolseparator = ?
 								,jsonparams = ?

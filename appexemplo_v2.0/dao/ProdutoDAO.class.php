@@ -6,9 +6,29 @@ class ProdutoDAO extends TPDOConnection {
 									 ,nom_produto
 									 ,modelo
 									 ,versao
+                                     ,idpessoa
+                                     ,nom_pessoa
 									 ,idmarca
+                                     ,nom_marca
 									 ,idtipo_produto
-									 from form_exemplo.produto ';
+                                     ,nom_tipo
+									 from (select
+    									  p.idproduto
+    									 ,p.nom_produto
+    									 ,p.modelo
+    									 ,p.versao
+                                         ,vwpmp.idpessoa
+                                         ,vwpmp.nome as nom_pessoa
+    									 ,p.idmarca
+                                         ,vwpmp.nom_marca
+    									 ,p.idtipo_produto
+                                         ,t.descricao as nom_tipo
+    									 from form_exemplo.produto as p
+                                             ,form_exemplo.vw_pessoa_marca_produto as vwpmp
+                                             ,form_exemplo.tipo as t
+                                         where p.idproduto = vwpmp.idproduto
+                                         and t.idtipo =  p.idtipo_produto
+                                     ) as res';
 
 	private static function processWhereGridParameters( $whereGrid ) {
 		$result = $whereGrid;
@@ -20,6 +40,7 @@ class ProdutoDAO extends TPDOConnection {
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'VERSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMARCA', SqlHelper::SQL_TYPE_NUMERIC);
 			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDTIPO_PRODUTO', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
 			$result = $where;
 		}
 		return $result;
@@ -37,7 +58,23 @@ class ProdutoDAO extends TPDOConnection {
 	//--------------------------------------------------------------------------------
 	public static function selectCount( $where=null ){
 		$where = self::processWhereGridParameters($where);
-		$sql = 'select count(idproduto) as qtd from form_exemplo.produto';
+		$sql = 'select count(idproduto) as qtd 	from (select
+    									  p.idproduto
+    									 ,p.nom_produto
+    									 ,p.modelo
+    									 ,p.versao
+                                         ,vwpmp.idpessoa
+                                         ,vwpmp.nome as nom_pessoa
+    									 ,p.idmarca
+                                         ,vwpmp.nom_marca
+    									 ,p.idtipo_produto
+                                         ,t.descricao as nom_tipo
+    									 from form_exemplo.produto as p
+                                             ,form_exemplo.vw_pessoa_marca_produto as vwpmp
+                                             ,form_exemplo.tipo as t
+                                         where p.idproduto = vwpmp.idproduto
+                                         and t.idtipo =  p.idtipo_produto
+                                     ) as res';
 		$sql = $sql.( ($where)? ' where '.$where:'');
 		$result = self::executeSql($sql);
 		return $result['QTD'][0];

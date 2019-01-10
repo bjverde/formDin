@@ -3,10 +3,14 @@ class Pessoa_juridicaVO {
 	private $idpessoa_juridica = null;
 	private $cnpj = null;
 	private $idpessoa = null;
-	public function __construct( $idpessoa_juridica=null, $cnpj=null, $idpessoa=null ) {
+	private $cnae = null;
+	private $idnatureza_juridica = null;
+	public function __construct( $idpessoa_juridica=null, $cnpj=null, $idpessoa=null, $cnae=null, $idnatureza_juridica=null ) {
 		$this->setIdpessoa_juridica( $idpessoa_juridica );
 		$this->setCnpj( $cnpj );
 		$this->setIdpessoa( $idpessoa );
+		$this->setCnae( $cnae );
+		$this->setIdnatureza_juridica( $idnatureza_juridica );
 	}
 	//--------------------------------------------------------------------------------
 	public function setIdpessoa_juridica( $strNewValue = null )
@@ -34,6 +38,24 @@ class Pessoa_juridicaVO {
 	public function getIdpessoa()
 	{
 		return $this->idpessoa;
+	}
+	//--------------------------------------------------------------------------------
+	public function setCnae( $strNewValue = null )
+	{
+		$this->cnae = $strNewValue;
+	}
+	public function getCnae()
+	{
+		return $this->cnae;
+	}
+	//--------------------------------------------------------------------------------
+	public function setIdnatureza_juridica( $strNewValue = null )
+	{
+		$this->idnatureza_juridica = $strNewValue;
+	}
+	public function getIdnatureza_juridica()
+	{
+		return $this->idnatureza_juridica;
 	}
 	//--------------------------------------------------------------------------------
 }
