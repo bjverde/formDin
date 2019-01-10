@@ -1,22 +1,27 @@
 <?php
 defined('APLICATIVO') or die();
 
-$primaryKey = 'IDPESSOA_FISICA';
-$frm = new TForm('pessoa_fisica',800,950);
+$primaryKey = 'IDENDERECO';
+$frm = new TForm('endereco',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+$frm->addMemoField('ENDERECO', 'ENDERECO',300,TRUE,80,3);
 $listPessoa = Pessoa::selectAll();
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addTextField('CPF', 'CPF',11,TRUE,11);
-$frm->addDateField('DAT_NASCIMENTO', 'DAT_NASCIMENTO',FALSE);
+$listTipo = Tipo::selectAll();
+$frm->addSelectField('IDTIPO_ENDERECO', 'IDTIPO_ENDERECO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
 $listMunicipio = Municipio::selectAll();
-$frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'COD_MUNICIPIO_NASCIMENTO',FALSE,$listMunicipio,null,null,null,null,null,null,' ',null);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
-$frm->addDateField('DAT_ALTERACAO', 'DAT_ALTERACAO',FALSE);
+$frm->addSelectField('COD_MUNICIPIO', 'COD_MUNICIPIO',TRUE,$listMunicipio,null,null,null,null,null,null,' ',null);
+$frm->getLabel('COD_MUNICIPIO')->setToolTip('código do municipio');
+$frm->addTextField('CEP', 'CEP',8,FALSE,8);
+$frm->addTextField('NUMERO', 'NUMERO',5,FALSE,5);
+$frm->addMemoField('COMPLEMENTO', 'COMPLEMENTO',300,FALSE,80,3);
+$frm->addMemoField('BAIRRO', 'BAIRRO',300,FALSE,80,3);
+$frm->addMemoField('CIDADE', 'CIDADE',300,FALSE,80,3);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -28,9 +33,9 @@ switch( $acao ) {
 	case 'Salvar':
 		try{
 			if ( $frm->validate() ) {
-				$vo = new Pessoa_fisicaVO();
+				$vo = new EnderecoVO();
 				$frm->setVo( $vo );
-				$resultado = Pessoa_fisica::save( $vo );
+				$resultado = Endereco::save( $vo );
 				if($resultado==1) {
 					$frm->setMessage('Registro gravado com sucesso!!!');
 					$frm->clearFields();
@@ -55,7 +60,7 @@ switch( $acao ) {
 	case 'gd_excluir':
 		try{
 			$id = $frm->get( $primaryKey ) ;
-			$resultado = Pessoa_fisica::delete( $id );;
+			$resultado = Endereco::delete( $id );;
 			if($resultado==1) {
 				$frm->setMessage('Registro excluido com sucesso!!!');
 				$frm->clearFields();
@@ -79,13 +84,16 @@ function getWhereGridParameters(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
-				'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
+				'IDENDERECO'=>$frm->get('IDENDERECO')
+				,'ENDERECO'=>$frm->get('ENDERECO')
 				,'IDPESSOA'=>$frm->get('IDPESSOA')
-				,'CPF'=>$frm->get('CPF')
-				,'DAT_NASCIMENTO'=>$frm->get('DAT_NASCIMENTO')
-				,'COD_MUNICIPIO_NASCIMENTO'=>$frm->get('COD_MUNICIPIO_NASCIMENTO')
-				,'DAT_INCLUSAO'=>$frm->get('DAT_INCLUSAO')
-				,'DAT_ALTERACAO'=>$frm->get('DAT_ALTERACAO')
+				,'IDTIPO_ENDERECO'=>$frm->get('IDTIPO_ENDERECO')
+				,'COD_MUNICIPIO'=>$frm->get('COD_MUNICIPIO')
+				,'CEP'=>$frm->get('CEP')
+				,'NUMERO'=>$frm->get('NUMERO')
+				,'COMPLEMENTO'=>$frm->get('COMPLEMENTO')
+				,'BAIRRO'=>$frm->get('BAIRRO')
+				,'CIDADE'=>$frm->get('CIDADE')
 		);
 	}
 	return $retorno;
@@ -95,15 +103,18 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = ROWS_PER_PAGE;
 	$whereGrid = getWhereGridParameters($frm);
 	$page = PostHelper::get('page');
-	$dados = Pessoa_fisica::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
-	$realTotalRowsSqlPaginator = Pessoa_fisica::selectCount( $whereGrid );
+	$dados = Endereco::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
+	$realTotalRowsSqlPaginator = Endereco::selectCount( $whereGrid );
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
+					.',ENDERECO|ENDERECO'
 					.',IDPESSOA|IDPESSOA'
-					.',CPF|CPF'
-					.',DAT_NASCIMENTO|DAT_NASCIMENTO'
-					.',COD_MUNICIPIO_NASCIMENTO|COD_MUNICIPIO_NASCIMENTO'
-					.',DAT_INCLUSAO|DAT_INCLUSAO'
-					.',DAT_ALTERACAO|DAT_ALTERACAO'
+					.',IDTIPO_ENDERECO|IDTIPO_ENDERECO'
+					.',COD_MUNICIPIO|COD_MUNICIPIO'
+					.',CEP|CEP'
+					.',NUMERO|NUMERO'
+					.',COMPLEMENTO|COMPLEMENTO'
+					.',BAIRRO|BAIRRO'
+					.',CIDADE|CIDADE'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
 					   ,'Gride with SQL Pagination' // titulo do gride
@@ -113,15 +124,18 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
 	$gride->setMaxRows( $maxRows );
 	$gride->setUpdateFields($mixUpdateFields);
-	$gride->setUrl( 'pessoa_fisica.php' );
+	$gride->setUrl( 'endereco.php' );
 
 	$gride->addColumn($primaryKey,'id');
+	$gride->addColumn('ENDERECO','ENDERECO');
 	$gride->addColumn('IDPESSOA','IDPESSOA');
-	$gride->addColumn('CPF','CPF');
-	$gride->addColumn('DAT_NASCIMENTO','DAT_NASCIMENTO');
-	$gride->addColumn('COD_MUNICIPIO_NASCIMENTO','COD_MUNICIPIO_NASCIMENTO');
-	$gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-	$gride->addColumn('DAT_ALTERACAO','DAT_ALTERACAO');
+	$gride->addColumn('IDTIPO_ENDERECO','IDTIPO_ENDERECO');
+	$gride->addColumn('COD_MUNICIPIO','COD_MUNICIPIO');
+	$gride->addColumn('CEP','CEP');
+	$gride->addColumn('NUMERO','NUMERO');
+	$gride->addColumn('COMPLEMENTO','COMPLEMENTO');
+	$gride->addColumn('BAIRRO','BAIRRO');
+	$gride->addColumn('CIDADE','CIDADE');
 
 	$gride->show();
 	die();
@@ -129,20 +143,25 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
-$frm->show();
+if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
+    $frm->show();
+}
 ?>
 <script>
 function init() {
 	var Parameters = {"BUSCAR":""
-					,"IDPESSOA_FISICA":""
+					,"IDENDERECO":""
+					,"ENDERECO":""
 					,"IDPESSOA":""
-					,"CPF":""
-					,"DAT_NASCIMENTO":""
-					,"COD_MUNICIPIO_NASCIMENTO":""
-					,"DAT_INCLUSAO":""
-					,"DAT_ALTERACAO":""
+					,"IDTIPO_ENDERECO":""
+					,"COD_MUNICIPIO":""
+					,"CEP":""
+					,"NUMERO":""
+					,"COMPLEMENTO":""
+					,"BAIRRO":""
+					,"CIDADE":""
 					};
-	fwGetGrid('pessoa_fisica.php','gride',Parameters,true);
+	fwGetGrid('endereco.php','gride',Parameters,true);
 }
 function buscar() {
 	jQuery("#BUSCAR").val(1);

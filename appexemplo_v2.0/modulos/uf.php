@@ -118,7 +118,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
-
 ?>
 <script>
 function init() {

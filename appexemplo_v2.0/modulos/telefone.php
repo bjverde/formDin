@@ -1,32 +1,28 @@
 <?php
 defined('APLICATIVO') or die();
 
-$primaryKey = 'IDPEDIDO_ITEM';
-$frm = new TForm('Item',800,950);
+$primaryKey = 'IDTELEFONE';
+$frm = new TForm('telefone',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$listPedido = Pedido::selectAll();
-$frm->addSelectField('IDPEDIDO', 'IDPEDIDO',TRUE,$listPedido,null,null,null,null,null,null,' ',null);
-
-$listPessoa = Pessoa::selectAll('nome');
-$frm->addSelectField('IDPESSOA', 'Pessoa',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
-
-$listMarca = Marca::selectAll();
-$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
-
-$listProduto = Produto::selectAll();
-$frm->addSelectField('IDPRODUTO', 'Produto',TRUE,$listProduto,null,null,null,null,null,null,' ',null);
-
-$frm->combinarSelects('IDPESSOA', 'IDMARCA', 'vw_pessoa_marca_produto', 'IDPESSOA', 'IDMARCA', 'NOM_MARCA', null, null, 'Nenhum', null, null, true);
-
-$frm->combinarSelects('IDMARCA', 'IDPRODUTO', 'vw_pessoa_marca_produto', 'IDMARCA', 'IDPRODUTO', 'NOM_PRODUTO', null, null, 'Nenhum', null, null, true);
-
-$frm->addNumberField('QTD_UNIDADE', 'Quantidade',10,TRUE,0);
-$frm->addNumberField('PRECO', 'Preço Unitário',12,TRUE,0,false);
+$frm->addTextField('NUMERO', 'NUMERO',45,TRUE,45);
+$listPessoa = Pessoa::selectAll();
+$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+$frm->getLabel('IDPESSOA')->setToolTip('dono do telefone');
+$listTipo = Tipo::selectAll();
+$frm->addSelectField('IDTIPO_TELEFONE', 'IDTIPO_TELEFONE',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+$frm->getLabel('IDTIPO_TELEFONE')->setToolTip('tipo de telefon');
+$listEndereco = Endereco::selectAll();
+$frm->addSelectField('IDENDERECO', 'IDENDERECO',FALSE,$listEndereco,null,null,null,null,null,null,' ',null);
+$frm->addTextField('SIT_FIXO', 'SIT_FIXO',1,FALSE,1);
+$frm->addTextField('WHASTAPP', 'WHASTAPP',1,FALSE,1);
+$frm->getLabel('WHASTAPP')->setToolTip('informa se o numero tem whastapp');
+$frm->addTextField('TELEGRAM', 'TELEGRAM',1,FALSE,1);
+$frm->getLabel('TELEGRAM')->setToolTip('informa se o numero tem telegram');
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -38,9 +34,9 @@ switch( $acao ) {
 	case 'Salvar':
 		try{
 			if ( $frm->validate() ) {
-				$vo = new Pedido_itemVO();
+				$vo = new TelefoneVO();
 				$frm->setVo( $vo );
-				$resultado = Pedido_item::save( $vo );
+				$resultado = Telefone::save( $vo );
 				if($resultado==1) {
 					$frm->setMessage('Registro gravado com sucesso!!!');
 					$frm->clearFields();
@@ -65,7 +61,7 @@ switch( $acao ) {
 	case 'gd_excluir':
 		try{
 			$id = $frm->get( $primaryKey ) ;
-			$resultado = Pedido_item::delete( $id );;
+			$resultado = Telefone::delete( $id );;
 			if($resultado==1) {
 				$frm->setMessage('Registro excluido com sucesso!!!');
 				$frm->clearFields();
@@ -89,11 +85,14 @@ function getWhereGridParameters(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
-				'IDPEDIDO_ITEM'=>$frm->get('IDPEDIDO_ITEM')
-				,'IDPEDIDO'=>$frm->get('IDPEDIDO')
-				,'IDPRODUTO'=>$frm->get('IDPRODUTO')
-				,'QTD_UNIDADE'=>$frm->get('QTD_UNIDADE')
-				,'PRECO'=>$frm->get('PRECO')
+				'IDTELEFONE'=>$frm->get('IDTELEFONE')
+				,'NUMERO'=>$frm->get('NUMERO')
+				,'IDPESSOA'=>$frm->get('IDPESSOA')
+				,'IDTIPO_TELEFONE'=>$frm->get('IDTIPO_TELEFONE')
+				,'IDENDERECO'=>$frm->get('IDENDERECO')
+				,'SIT_FIXO'=>$frm->get('SIT_FIXO')
+				,'WHASTAPP'=>$frm->get('WHASTAPP')
+				,'TELEGRAM'=>$frm->get('TELEGRAM')
 		);
 	}
 	return $retorno;
@@ -103,29 +102,35 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$maxRows = ROWS_PER_PAGE;
 	$whereGrid = getWhereGridParameters($frm);
 	$page = PostHelper::get('page');
-	$dados = Pedido_item::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
-	$realTotalRowsSqlPaginator = Pedido_item::selectCount( $whereGrid );
+	$dados = Telefone::selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
+	$realTotalRowsSqlPaginator = Telefone::selectCount( $whereGrid );
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
-					.',IDPEDIDO|IDPEDIDO'
-					.',IDPRODUTO|IDPRODUTO'
-					.',QTD_UNIDADE|QTD_UNIDADE'
-					.',PRECO|PRECO'
+					.',NUMERO|NUMERO'
+					.',IDPESSOA|IDPESSOA'
+					.',IDTIPO_TELEFONE|IDTIPO_TELEFONE'
+					.',IDENDERECO|IDENDERECO'
+					.',SIT_FIXO|SIT_FIXO'
+					.',WHASTAPP|WHASTAPP'
+					.',TELEGRAM|TELEGRAM'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Itens do Pedido' // titulo do gride
+					   ,'Gride with SQL Pagination' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
 	$gride->setRealTotalRowsSqlPaginator( $realTotalRowsSqlPaginator );
 	$gride->setMaxRows( $maxRows );
 	$gride->setUpdateFields($mixUpdateFields);
-	$gride->setUrl( 'pedido_item.php' );
+	$gride->setUrl( 'telefone.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('IDPEDIDO','Id Pedido');
-	$gride->addColumn('IDPRODUTO','id Produto');
-	$gride->addColumn('QTD_UNIDADE','Quantidade');
-	$gride->addColumn('PRECO','Preço Unitário');
+	$gride->addColumn('NUMERO','NUMERO');
+	$gride->addColumn('IDPESSOA','IDPESSOA');
+	$gride->addColumn('IDTIPO_TELEFONE','IDTIPO_TELEFONE');
+	$gride->addColumn('IDENDERECO','IDENDERECO');
+	$gride->addColumn('SIT_FIXO','SIT_FIXO');
+	$gride->addColumn('WHASTAPP','WHASTAPP');
+	$gride->addColumn('TELEGRAM','TELEGRAM');
 
 	$gride->show();
 	die();
@@ -133,18 +138,24 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
-$frm->show();
+
+if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
+    $frm->show();
+}
 ?>
 <script>
 function init() {
 	var Parameters = {"BUSCAR":""
-					,"IDPEDIDO_ITEM":""
-					,"IDPEDIDO":""
-					,"IDPRODUTO":""
-					,"QTD_UNIDADE":""
-					,"PRECO":""
+					,"IDTELEFONE":""
+					,"NUMERO":""
+					,"IDPESSOA":""
+					,"IDTIPO_TELEFONE":""
+					,"IDENDERECO":""
+					,"SIT_FIXO":""
+					,"WHASTAPP":""
+					,"TELEGRAM":""
 					};
-	fwGetGrid('pedido_item.php','gride',Parameters,true);
+	fwGetGrid('telefone.php','gride',Parameters,true);
 }
 function buscar() {
 	jQuery("#BUSCAR").val(1);

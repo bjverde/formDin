@@ -2,16 +2,39 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDMARCA';
-$frm = new TForm('marca',800,950);
+$frm = new TForm('Marca',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
-$frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
-$frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_MARCA', 'NOM_MARCA',45,FALSE,45);
-$listPessoa = Pessoa::selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+$frm->addHiddenField( 'BUSCAR' );   //Campo oculto para buscas
+$frm->addHiddenField( $primaryKey );//Coluna chave da tabela
+
+$frm->addHiddenField('TIPO','PJ');
+$frm->addHiddenField('SIT_ATIVO','S');
+
+//$listPessoa = Pessoa::selectAll();
+//$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
+$frm->addGroupField('gpx1','Empresa');
+    $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
+    $frm->addTextField('NOM_PESSOA', 'Nome',150,true,70,null,false);
+    //Deve sempre ficar depois da definição dos campos
+    $frm->setAutoComplete('NOM_PESSOA'
+        ,'pessoa'// tabela
+        ,'NOME'	 		// campo de pesquisa
+        ,'IDPESSOA|IDPESSOA,NOME|NOM_PESSOA' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+        ,true
+        ,'TIPO' 		    // campo do formulário que será adicionado como filtro
+        ,null				// função javascript
+        ,3					// Default 3, numero de caracteres minimos para disparar a pesquisa
+        ,500				// 9: Default 1000, tempo após a digitação para disparar a consulta
+        ,50					//10: máximo de registros que deverá ser retornado
+        , null, null, null, null, true, null, null, true );
+$frm->closeGroup();
+
+$frm->addTextField('NOM_MARCA', 'Nome da Marca',45,FALSE,45);
+
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -91,9 +114,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$mixUpdateFields = $primaryKey.'|'.$primaryKey
 					.',NOM_MARCA|NOM_MARCA'
 					.',IDPESSOA|IDPESSOA'
+					.',NOM_PESSOA|NOM_PESSOA'
 					;
-	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+	$gride = new TGrid( 'gd'              // id do gride
+					   ,'Lista de Marcas' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -103,8 +127,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'marca.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_MARCA','NOM_MARCA');
-	$gride->addColumn('IDPESSOA','IDPESSOA');
+	$gride->addColumn('NOM_MARCA','Nome da Marca');
+	$gride->addColumn('IDPESSOA','id Pessoa',null,'center');
+	$gride->addColumn('NOM_PESSOA','Pessoa');
 
 	$gride->show();
 	die();
@@ -113,7 +138,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
-
 ?>
 <script>
 function init() {

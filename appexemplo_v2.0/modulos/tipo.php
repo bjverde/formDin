@@ -2,17 +2,17 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDTIPO';
-$frm = new TForm('tipo',800,950);
+$frm = new TForm('Cadastro de Tipos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('DESCRICAO', 'DESCRICAO',100,FALSE,100);
 $listMeta_tipo = Meta_tipo::selectAll();
-$frm->addSelectField('IDMETA_TIPO', 'IDMETA_TIPO',TRUE,$listMeta_tipo,null,null,null,null,null,null,' ',null);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,FALSE,1);
+$frm->addSelectField('IDMETA_TIPO', 'Meta Tipo',TRUE,$listMeta_tipo,null,null,null,null,null,null,' ',null);
+$frm->addTextField('DESCRICAO', 'Descrição',100,FALSE,100);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -96,7 +96,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',SIT_ATIVO|SIT_ATIVO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Tipos' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -106,9 +106,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'tipo.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('DESCRICAO','DESCRICAO');
-	$gride->addColumn('IDMETA_TIPO','IDMETA_TIPO');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
+	$gride->addColumn('IDMETA_TIPO','Id Meta Tipo');
+	$gride->addColumn('NOM_META_TIPO','Meta Tipo');
+	$gride->addColumn('DESCRICAO','Descrição');
+	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
 
 	$gride->show();
 	die();
@@ -117,7 +118,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
-
 ?>
 <script>
 function init() {

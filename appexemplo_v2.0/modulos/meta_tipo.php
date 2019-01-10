@@ -2,15 +2,15 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDMETATIPO';
-$frm = new TForm('meta_tipo',800,950);
+$frm = new TForm('Cadastro de Meta Tipo',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('DESCRICAO', 'DESCRICAO',100,TRUE,100);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,FALSE,1);
+$frm->addTextField('DESCRICAO', 'Descrição',100,TRUE,100);
+$frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -102,8 +102,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'meta_tipo.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('DESCRICAO','DESCRICAO');
-	$gride->addColumn('SIT_ATIVO','SIT_ATIVO');
+	$gride->addColumn('DESCRICAO','Descrição');
+	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
 
 	$gride->show();
 	die();
@@ -112,7 +112,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
-
 ?>
 <script>
 function init() {

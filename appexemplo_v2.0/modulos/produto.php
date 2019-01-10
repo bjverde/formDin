@@ -2,20 +2,28 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPRODUTO';
-$frm = new TForm('produto',800,950);
+$frm = new TForm('Produtos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_PRODUTO', 'NOM_PRODUTO',45,TRUE,45);
-$frm->addTextField('MODELO', 'MODELO',45,TRUE,45);
-$frm->addTextField('VERSAO', 'VERSAO',45,TRUE,45);
+
+$listPessoa = Pessoa::selectAll('nome');
+$frm->addSelectField('IDPESSOA', 'Pessoa',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
+
 $listMarca = Marca::selectAll();
-$frm->addSelectField('IDMARCA', 'IDMARCA',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
-$listTipo = Tipo::selectAll();
-$frm->addSelectField('IDTIPO_PRODUTO', 'IDTIPO_PRODUTO',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('IDMARCA', 'Marca',TRUE,$listMarca,null,null,null,null,null,null,' ',null);
+
+$frm->combinarSelects('IDPESSOA', 'IDMARCA', 'vw_pessoa_marca_produto', 'IDPESSOA', 'IDMARCA', 'NOM_MARCA', null, null, 'Nenhum', null, null, true);
+
+$listTipo = Tipo::selectAllAtivoByMeta(Meta_tipoDAO::PRODUTO);
+$frm->addSelectField('IDTIPO_PRODUTO', 'Tipo Produto',TRUE,$listTipo,null,null,null,null,null,null,' ',null);
+
+$frm->addTextField('NOM_PRODUTO', 'Nome',45,TRUE,45);
+$frm->addTextField('MODELO', 'Modelo',45,TRUE,45);
+$frm->addTextField('VERSAO', 'Versão',45,TRUE,45);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -78,12 +86,13 @@ function getWhereGridParameters(&$frm){
 	$retorno = null;
 	if($frm->get('BUSCAR') == 1 ){
 		$retorno = array(
-				'IDPRODUTO'=>$frm->get('IDPRODUTO')
+				 'IDPRODUTO'=>$frm->get('IDPRODUTO')
 				,'NOM_PRODUTO'=>$frm->get('NOM_PRODUTO')
 				,'MODELO'=>$frm->get('MODELO')
 				,'VERSAO'=>$frm->get('VERSAO')
 				,'IDMARCA'=>$frm->get('IDMARCA')
 				,'IDTIPO_PRODUTO'=>$frm->get('IDTIPO_PRODUTO')
+		        ,'IDPESSOA'=>$frm->get('IDPESSOA')
 		);
 	}
 	return $retorno;
@@ -99,11 +108,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 					.',NOM_PRODUTO|NOM_PRODUTO'
 					.',MODELO|MODELO'
 					.',VERSAO|VERSAO'
+					.',IDPESSOA|IDPESSOA'
 					.',IDMARCA|IDMARCA'
 					.',IDTIPO_PRODUTO|IDTIPO_PRODUTO'
 					;
 	$gride = new TGrid( 'gd'                        // id do gride
-					   ,'Gride with SQL Pagination' // titulo do gride
+					   ,'Lista de Produtos' // titulo do gride
 					   );
 	$gride->addKeyField( $primaryKey ); // chave primaria
 	$gride->setData( $dados ); // array de dados
@@ -113,11 +123,15 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 	$gride->setUrl( 'produto.php' );
 
 	$gride->addColumn($primaryKey,'id');
-	$gride->addColumn('NOM_PRODUTO','NOM_PRODUTO');
-	$gride->addColumn('MODELO','MODELO');
-	$gride->addColumn('VERSAO','VERSAO');
-	$gride->addColumn('IDMARCA','IDMARCA');
-	$gride->addColumn('IDTIPO_PRODUTO','IDTIPO_PRODUTO');
+	$gride->addColumn('NOM_PRODUTO','Nome');
+	$gride->addColumn('MODELO','Modelo');
+	$gride->addColumn('VERSAO','Versão');
+	$gride->addColumn('IDPESSOA','id Pessoa');
+	$gride->addColumn('NOM_PESSOA','Pessoa');
+	$gride->addColumn('IDMARCA','id Marca');
+	$gride->addColumn('NOM_MARCA','Marca');
+	$gride->addColumn('IDTIPO_PRODUTO','id Tipo Produto');
+	$gride->addColumn('NOM_TIPO','Tipo');
 
 	$gride->show();
 	die();
@@ -126,7 +140,6 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 $frm->show();
-
 ?>
 <script>
 function init() {
@@ -137,6 +150,7 @@ function init() {
 					,"VERSAO":""
 					,"IDMARCA":""
 					,"IDTIPO_PRODUTO":""
+					,"IDPESSOA":""
 					};
 	fwGetGrid('produto.php','gride',Parameters,true);
 }

@@ -127,11 +127,10 @@ $html = '<b>Regra de Negocio</b>'
                                 die();
         }
         
-        $frm->addHtmlField('gride');
-        $frm->addJavascript('init()');
-        $frm->show();
-        
-        ?>
+$frm->addHtmlField('gride');
+$frm->addJavascript('init()');
+$frm->show();
+?>
 <script>
 function init() {
 	var Parameters = {"BUSCAR":""
