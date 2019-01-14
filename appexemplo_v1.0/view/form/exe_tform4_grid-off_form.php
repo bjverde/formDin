@@ -27,7 +27,14 @@ $frm->closeGroup();
 //Campos que serão enviados ao subform
 $mixFormFields = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
 // subformulário com campos "offline" 1-N
-$frm->addHtmlGride('grid_off', 'view/form/exe_tform4_grid-off_dados.php', 'gdItem',null,null,null,null,$mixFormFields);
+$frm->addHtmlGride('grid_off'
+                  ,'view/form/exe_tform4_grid-off_dados.php'
+                  ,'gdItem'
+                  ,null
+                  ,null
+                  ,null
+                  ,null
+                  ,$mixFormFields);
 
 
 $frm->addButton('Salvar', null, null, null, null, true, false);

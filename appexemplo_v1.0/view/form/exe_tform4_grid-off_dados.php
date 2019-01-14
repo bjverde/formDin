@@ -35,7 +35,4 @@ $grid = new TGrid('gdItem'      // id do gride
 $grid->setForm($frm, false);  // adicionar o formulário ao gride para criar o gride offline
 $grid->setShowAdicionarButton(true); // exibir o botão de adicionar - default =  true
 
-// Exemplo de como alterar a largura e o alinhamento da coluna Moeda.
-//$grid->setOnDrawHeaderCell('drawHeader');
-
 $grid->show();
