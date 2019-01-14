@@ -6462,106 +6462,108 @@ class TForm Extends TBox
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
        return $field;
    }
-           /**
-            * Cria um campo html para exibir um gride via ajax no formulário utilizando a classe TGrid
-            *
-            * @example $mixFormFields - campos do formulário que serão enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
-            * neste caso o valor de des_x será lido do campo do formulário
-            *
-            * @param string $strName            - 1: Nome do Campo
-            * @param string $strGridFile        - 2: Caminho do arquivo
-            * @param string $strGridId          - 3: Id do Grid
-            * @param string $strHeight          - 4:
-            * @param string $strWidth           - 5:
-            * @param string  $strLoadingMessage - 6:
-            * @param boolean $boolNewLine       - 7:
-            * @param mixed $mixFormFields       - 8: Exemplo de uso array( 'seq_documento'=>$frm->get('seq_documento') );
-            * @return THtml
-            */
-           public function addHtmlGride( $strName
-                                       , $strGridFile
-                                       , $strGridId
-                                       , $strHeight=null
-                                       , $strWidth=null
-                                       , $strLoadingMessage=null
-                                       , $boolNewLine=null
-                                       , $mixFormFields=null )
-           {
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth() : $strWidth;
-               if( $strGridId )
-               {
-                   $field = new THtml( $strName, null, null, $strHeight, $strWidth );
-                   $field->setGridFile( $strGridFile, $strGridId, $mixFormFields );
-                   $strLoadingMessage = is_null( $strLoadingMessage ) ? '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>' : $strLoadingMessage;
-                   $field->setLoadingMessage( $strLoadingMessage );
-                   $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-                   return $field;
-               }
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CPF
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCpf Field
-            */
-           public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCpf( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CNPJ
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCnpj Field
-            */
-           public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCnpj( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CPF/CNPJ, fazendo a validação do digito verificador
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCpfCnpj Field
-            */
-           public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
+   
+   /**
+    * Cria um campo html para exibir um gride via ajax no formulário utilizando a classe TGrid
+    *
+    * @example $mixFormFields - campos do formulário que serão enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
+    * neste caso o valor de des_x será lido do campo do formulário
+    *
+    * @param string $strName            - 1: Nome do Campo
+    * @param string $strGridFile        - 2: Caminho do arquivo
+    * @param string $strGridId          - 3: Id do Grid
+    * @param string $strHeight          - 4:
+    * @param string $strWidth           - 5:
+    * @param string  $strLoadingMessage - 6:
+    * @param boolean $boolNewLine       - 7:
+    * @param mixed $mixFormFields       - 8: Exemplo de uso array( 'seq_documento'=>$frm->get('seq_documento') );
+    * @return THtml
+    */
+   public function addHtmlGride( $strName
+                               , $strGridFile
+                               , $strGridId
+                               , $strHeight=null
+                               , $strWidth=null
+                               , $strLoadingMessage=null
+                               , $boolNewLine=null
+                               , $mixFormFields=null )
+   {
+       //$strWidth = is_null($strWidth) ? $this->getMaxWidth() : $strWidth;
+       if( $strGridId )
+       {
+           $field = new THtml( $strName, null, null, $strHeight, $strWidth );
+           $field->setGridFile( $strGridFile, $strGridId, $mixFormFields );
+           $strLoadingMessage = is_null( $strLoadingMessage ) ? '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>' : $strLoadingMessage;
+           $field->setLoadingMessage( $strLoadingMessage );
+           $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+           return $field;
+       }
+   }
+           
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CPF
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCpf Field
+    */
+   public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCpf( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CNPJ
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCnpj Field
+    */
+   public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCnpj( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CPF/CNPJ, fazendo a validação do digito verificador
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCpfCnpj Field
+    */
+   public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
            /**
             * Adicionar campo para informar o CEP
             *
