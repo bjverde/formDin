@@ -3022,6 +3022,7 @@ class TForm Extends TBox
          );
          $this->onlineCruds[ $strFieldName ] = $arrData;
      }
+     
      /**
       * Método para limpar os campos do formulario
       * Pode ser passado um campo ou varios separados por virgula.
@@ -3034,9 +3035,9 @@ class TForm Extends TBox
       * 	$form->clearFields(array('nom_pessoa,des_endereco'));
       * </code>
       *
-      * @param mixed $mixFields        - lista do campos que serão limpos. Apenas esses campos serão limpos
-      * @param mixed $mixIgnoreFields  - lista de campos ignorados
-      * @param bool $boolNewValue
+      * @param mixed $mixFields        - 1: lista do campos que serão limpos. Apenas esses campos serão limpos
+      * @param mixed $mixIgnoreFields  - 2: lista de campos ignorados
+      * @param bool $boolNewValue      - 3: 
       */
      public function clearFields( $mixFields=null, $mixIgnoreFields=null, $boolNewValue=null )
      {
