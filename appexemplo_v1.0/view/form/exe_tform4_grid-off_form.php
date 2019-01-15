@@ -1,6 +1,7 @@
 <?php
 
 //d($_REQUEST);
+//d($_SESSION['APPEV1'], 'SESSION');
 
 $html1 = 'Esse form é um outra visão do form <i>"Mestre visão com Ajax" e "Exemplo Form4 - Consulta Grid"</i>.
           <br>
@@ -29,7 +30,7 @@ $mixFormFields = array('ID_PEDIDO'=> $frm->get('ID_PEDIDO'));
 // subformulário com campos "offline" 1-N
 $frm->addHtmlGride('grid_off'
                   ,'view/form/exe_tform4_grid-off_dados.php'
-                  ,'gdItem'
+                  ,'gdItem'    //Deve ter o mesmo ID do grid definio no subform
                   ,null
                   ,null
                   ,null
@@ -59,8 +60,8 @@ switch ($acao) {
         break;
     //--------------------------------------------------------------------------------
     case 'Limpar':
-        unset( $_SESSION[APLICATIVO]['offline'] );
-        $frm->clearFields();
+        //unset( $_SESSION[APLICATIVO]['offline'] );
+        $frm->clearFields(null,'gdItem');
         break;
     //--------------------------------------------------------------------------------
     case 'gd_excluir':
