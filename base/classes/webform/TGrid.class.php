@@ -2556,11 +2556,11 @@ class TGrid extends TTable
                     {
                         // inclusao
                         if ( $k === false ) {
-                            $res[ strtoupper( $fieldName )][] = utf8_decode( $_POST[ $fieldName ] );
+                            $res[ strtoupper( $fieldName )][] =  $_POST[ $fieldName ];
                         }
                         // alteração
                         else {
-                            $res[ strtoupper( $fieldName )][ $k ] = utf8_decode( $_POST[ $fieldName ] );
+                            $res[ strtoupper( $fieldName )][ $k ] = $_POST[ $fieldName ];
                         }
                         
                         $field = $frm->getField( $fieldName );
