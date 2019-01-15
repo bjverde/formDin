@@ -2554,12 +2554,12 @@ class TGrid extends TTable
                     
                     foreach( $aFieldNames as $key => $fieldName )
                     {
-                        if ( $k === false ) // inclusao
-                        {
+                        // inclusao
+                        if ( $k === false ) {
                             $res[ strtoupper( $fieldName )][] = utf8_decode( $_POST[ $fieldName ] );
                         }
-                        else // alteração
-                        {
+                        // alteração
+                        else {
                             $res[ strtoupper( $fieldName )][ $k ] = utf8_decode( $_POST[ $fieldName ] );
                         }
                         
@@ -2567,48 +2567,33 @@ class TGrid extends TTable
                         if ( $field->getFieldType() == 'select' )
                         {
                             $c = $field->getAttribute('grid_column');
-                            //$opt = $frm->getField($fieldName)->getOptions();
                             if ( $k === false )
                             {
-                                //$res[strtoupper($fieldName.'_text')][] = $opt[$frm->getField($fieldName)->getValue()];
                                 if( $c )
                                 {
                                     if( $_POST[$fieldName] )
                                     {
                                         $res[strToUpper($c)][] = $_POST[$fieldName.'_temp'];
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[strToUpper($c)][] = '';
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     $res[ strtoupper( $fieldName . '_text' )][] = $frm->getField( $fieldName )->getText();
                                 }
-                            }
-                            else
-                            {
-                                //$res[strtoupper($fieldName.'_text')][$k] = $opt[$frm->getField($fieldName)->getValue()];
+                            } else {
                                 if( $c )
                                 {
                                     if( $_POST[$fieldName] )
                                     {
                                         $res[strToUpper($c)][$k] = $_POST[$fieldName.'_temp'];
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[strToUpper($c)][$k] = '';
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     if( isset($_POST[$fieldName]) && $frm->getField( $fieldName )->getText()=='')
                                     {
                                         $res[ strtoupper( $fieldName . '_text' )][ $k ] = $this->decodeUtf8( $_POST[$fieldName] );
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[ strtoupper( $fieldName . '_text' )][ $k ] = $frm->getField( $fieldName )->getText();
                                     }
                                 }
