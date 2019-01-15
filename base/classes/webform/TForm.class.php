@@ -3070,6 +3070,7 @@ class TForm Extends TBox
              {
                  $mixIgnoreFields = explode( ',', $mixIgnoreFields );
              }
+             
              if( is_array( $mixFields ) )
              {
                  foreach( $mixFields as $k=>$v )
