@@ -85,8 +85,9 @@ Cria o script para exibir alert em javascript
 */
 function criarMensagemJS($mensagem){
 	$JS = "<script> ";
-	$JS .= " alert('".$mensagem."');";
-	return $JS .= " </script> ";
+	$JS = $JS." alert('".$mensagem."');";
+	$JS = $JS." </script> ";
+	return $JS;
 }
 /*
 Cria o codigo js para atualizar os campos do formulario que tiverem os mesmos nomes do $res
@@ -99,9 +100,10 @@ function criarAtualizacaoJS($res){
 		$res[$i][0] = str_replace(chr(13),'\n',$res[$i][0]);
 		$res[$i][0] = str_replace(chr(10),'',$res[$i][0]);
 
-		$JS .= " if (getObj('".strtolower($i)."')){ document.getElementById('".strtolower($i)."').value = '".$res[$i][0]."'; } ";
+		$JS = $JS." if (getObj('".strtolower($i)."')){ document.getElementById('".strtolower($i)."').value = '".$res[$i][0]."'; } ";
 	}
-	return $JS .= " </script> ";
+	$JS = $JS." </script> ";
+	return $JS;
 }
 
 function cortaNome($nome,$tamanho=20)
