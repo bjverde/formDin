@@ -6493,7 +6493,8 @@ class TForm Extends TBox
        {
            $field = new THtml( $strName, null, null, $strHeight, $strWidth );
            $field->setGridFile( $strGridFile, $strGridId, $mixFormFields );
-           $strLoadingMessage = is_null( $strLoadingMessage ) ? '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>' : $strLoadingMessage;
+           $msgDefault = '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>';
+           $strLoadingMessage = is_null( $strLoadingMessage ) ? $msgDefault : $strLoadingMessage;
            $field->setLoadingMessage( $strLoadingMessage );
            $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
            return $field;
