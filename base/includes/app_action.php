@@ -77,7 +77,10 @@ switch($acao)
 		$_SESSION['conexao']=null;
 		unset($_SESSION[APLICATIVO]);
 		*/
-		session_start();
+	    if ( !session_id())
+	    {
+	        session_start();
+	    }
 		if( defined('APLICATIVO') )
 		{
 			$_SESSION[APLICATIVO]["conectado"]=false;		
