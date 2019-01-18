@@ -93,14 +93,15 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
     {
     	if( !$pData )
     	{
-    		if( $_REQUEST['dataType']=='json')
-    		{
+    	    
+    	    $pData=$pMessage;
+    	    /*
+    		if( $_REQUEST['dataType']=='json'){
     			$pData=utf8_encode($pMessage);
-			}
-			else
-			{
+			}else {
     			$pData=$pMessage;
 			}
+			*/
     	}
 		$pMessage=null;
     }
@@ -114,38 +115,23 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 		    {
 		        if($_REQUEST['dataType']=='json')
 		        {
-        	    	$boolAplicarUtf8=true;
-		        	if( !is_array( $v ) )
-		        	{
-		        		if( $boolBancoUtf8 )
-		        		{
+        	    	//$boolAplicarUtf8=true;
+		        	if( !is_array( $v ) ) {
+		        	    $pData[$k]=$v ;
+		        	    /*
+		        		if( $boolBancoUtf8 ) {
 		       				$pData[$k]=utf8_encode($v) ;
-						}
-						else
-						{
+						} else {
 							$pData[$k]=$v ;
 						}
-					}
-					else
-					{
-					    $pData[ $k ] = utf8_encode_array($v);
-					   /*foreach($v as $k1=>$v1)
-						{
-			        		if( $boolBancoUtf8 )
-			        		{
-			       				$v[$k1] = utf8_encode($v1);
-			       			}
-			       			else
-			       			{
-			       				$v[$k1] = $v1;
-			       			}
-						}
-						$pData[$k]=$v;
 						*/
 					}
-				}
-				else
-	       		{
+					/*
+					else {
+					    $pData[ $k ] = utf8_encode_array($v);
+					}
+					*/
+				} else {
     		        $vData .= print_r($v,true)."\n";
 				}
 		    }
@@ -159,32 +145,30 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 		{
 			echo $pData;
 		}
+		/*
 		else
 		{
 			$pData = ($boolAplicarUtf8) ? $pData : utf8_encode($pData);
 		}
+		*/
 	}
-	if( $pMessage )
-    {
-        if( is_array( $pMessage ) )
-        {
+	if( $pMessage ) {
+        if( is_array( $pMessage ) ) {
             $vData=null;
-            foreach($pMessage as $k => $v )
-            {
+            foreach($pMessage as $k => $v ) {
    		        $vData .= $v."\n";
 			}
        		$pMessage = $vData;
         }
 		$pMessage = str_replace('\n',"\n",$pMessage);
-		if(isset($_REQUEST['dataType'] ) && $_REQUEST['dataType'] == 'text' )
-        {
+		if(isset($_REQUEST['dataType'] ) && $_REQUEST['dataType'] == 'text' ) {
 			echo $pMessage;
-
-		}
-		else
-		{
+		} 
+		/*
+		else {
 			$pMessage = utf8_encode($pMessage);
 		}
+		*/
 	}
     if(	isset($_REQUEST['dataType']) && $_REQUEST['dataType'] == 'json'	)
 	{
@@ -209,23 +193,17 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 	}
 	die;
 }
+
 /**
  * Cria um array com as variáveis e seus respectivos valores oriundo do POST para
  * ser enviado para o banco
  * @param string $pFields ex: 'seq_pessoa,nom_pessoa, ...'
  * @return array Array com os dados
  *
+ * @see ex: fwCreateBvarsAjax('nom_pessoa,des_obs|observacao, ...')
+ * 
  * @todo criar opção de colocar um valor de campo diferente em um id ex: num_pessoa|num_cliente
  * @todo add no arquivo de funções ajax
- */
-/**
- * Cria um array com as variáveis e seus respectivos valores oriundo
- + do POST para
- * ser enviado para o banco
- * @param string $pFields ex: 'seq_pessoa,nom_pessoa, ...'
- * @return array Array com os dados
- *
- * @see ex: fwCreateBvarsAjax('nom_pessoa,des_obs|observacao, ...')
  */
 function createBvarsAjax($pFields) {
     $aFields = explode(',', $pFields);
@@ -235,14 +213,17 @@ function createBvarsAjax($pFields) {
         if (strpos($v, '|')) {
             $v = explode('|', $v);
             if (isset($_POST[strtolower($v[1])]) && $_POST[strtolower($v[1])] || trim($_POST[strtolower($v[1])]) == '0') {
-                //$bvar[strtoupper($v[0])] = utf8_decode($_POST[strtolower($v[1])]);
-                $bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v[1])])) );
+                //$bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v[1])])) );
+                $text = stripslashes($_POST[strtolower($v[1])]);
+                $bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),$text);
             } else {
                 $bvar[strtoupper($v[0])] = '';
             }
         } else {
             if (isset($_POST[strtolower($v)]) && $_POST[strtolower($v)] || trim($_POST[strtolower($v)]) == '0') {
-                $bvar[strtoupper($v)] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v)])));
+                //$bvar[strtoupper($v)] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v)])));
+                $text = stripslashes($_POST[strtolower($v)]);
+                $bvar[strtoupper($v)] = str_replace(array('"'),array('“'),$text);
             } else {
                 $bvar[strtoupper($v)] = '';
             }
