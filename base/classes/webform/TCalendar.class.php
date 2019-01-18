@@ -67,6 +67,23 @@ class TCalendar extends TControl
 	private $jsViewDisplay;
 	private $defaultView;
 
+	/***
+     * Criação de campo calendário de eventos tipo agenda
+     * http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
+     * 
+	 * @param string $strName
+	 * @param string $strUrl
+	 * @param string $strHeight
+	 * @param string $strWidth
+	 * @param mixed $defaultView
+     * @param string $jsOnResize
+     * @param string $jsOnDrag
+     * @param string $jsOnDrop
+     * @param string $jsOnEventClick
+     * @param string $jsOnSelectDay
+     * @param string $jsMouseOver
+	 * @param string $jsViewDisplay
+	 */
 	public function __construct($strName, $strUrl=null,  $strHeight=null, $strWidth=null, $defaultView=null, $jsOnResize=null, $jsOnDrag=null, $jsOnDrop=null, $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null, $jsViewDisplay=null)
 	{
 		//parent::__construct('fieldset',$strName);
