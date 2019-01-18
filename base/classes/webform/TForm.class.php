@@ -7381,7 +7381,8 @@ class TForm Extends TBox
             * @param bool $boolNewLine
             * @return TOpenDir
             */
-           public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null, $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
+           public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null
+                                          , $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
            {
                $field = new TOpenDir( $strName, $rootDir, $strValue, $intMaxLength, $boolRequired, $intSize, $strTitle, $strJsCallBack);
                $boolNoWrapLabel = isset($boolNoWrapLabel) ? $boolNoWrapLabel : null;
@@ -7447,10 +7448,11 @@ class TForm Extends TBox
            
    /**
     * Criação de campo calendário de eventos tipo agenda
+    * http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
     *
-    * @param string $strName           1: 
+    * @param string $strName           - 1: id campo
     * @param string $strUrl
-    * @param string $strHeight
+    * @param string $strHeight         - 3: Tamanho do calendario 
     * @param string $strWidth
     * @param mixed $defaultView
     * @param string $jsOnResize
