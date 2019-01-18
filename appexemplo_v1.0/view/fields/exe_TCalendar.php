@@ -40,27 +40,44 @@
  */
 
 //d($_REQUEST);
- // criar 2 eventos no calendário
+// criar 2 eventos no calendário
+$fimReuniaoDateTime = DateTimeHelper::getCurrentDateTime();
+$fimReuniaoDateTime->add(new DateInterval('PT1H'));
+$fimReuniao = $fimReuniaoDateTime->format(DateTime::ATOM);
+
+$reuniao = array(
+    'id' => 110
+    ,'title' => "Reunião de Melhoria"
+    ,'allDay'=> false 
+    ,'start' => DateTimeHelper::getNowFormat(DateTime::ATOM)
+    ,'end' => $fimReuniao
+    ,'url' => "http://yahoo.com/"
+    ,'color' => '#ff0000'
+);
+
+$diaSaoForm = array(
+    'id' => 111,
+    'title' => "Dia de São FormDin Luis Eugenio",
+    'start' => date('Y-m-d'),
+    'url' => "http://yahoo.com/"
+);
+
+
+$eventos = array( $diaSaoForm
+                 ,$reuniao
+    ,array(
+        'id' => 222,
+        'title' => "Viagem a serviço",
+        'start' => "2012-04-20",
+        'end' => "2012-04-21",
+        'url' => "http://yahoo.com/"
+    )
+    
+);
+
 if (RequestHelper::get('ajax')) {
     // ver todos os atributos do evento em : http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
-    echo json_encode(array(
-
-       array(
-           'id' => 111,
-           'title' => "Reunião as 13:00",
-           'start' => date('Y-m-d'),
-           'url' => "http://yahoo.com/"
-       ),
-
-       array(
-           'id' => 222,
-           'title' => "Viagem a serviço",
-           'start' => "2012-04-20",
-           'end' => "2012-04-21",
-           'url' => "http://yahoo.com/"
-       )
-
-    ));
+    echo json_encode($eventos);
     die();
 }
 
