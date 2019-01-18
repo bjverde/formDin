@@ -23,7 +23,7 @@ class Acesso_perfil_user {
 	//--------------------------------------------------------------------------------
 	public static function selectByIdUser( $idUser ){
 		$where  = array ('IDUSER'=>$idUser);
-		$result = Acesso_perfil_userDAO::selectAll( $orderBy, $where );
+		$result = Acesso_perfil_userDAO::selectAll( null, $where );
 		return $result;
 	}	
 	//--------------------------------------------------------------------------------
