@@ -229,7 +229,7 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
  */
 function createBvarsAjax($pFields) {
     $aFields = explode(',', $pFields);
-    $bvar;
+    $bvar = null;
     foreach ($aFields as $k => $v) {
         $v = trim($v);
         if (strpos($v, '|')) {
