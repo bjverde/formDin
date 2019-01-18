@@ -7445,37 +7445,44 @@ class TForm Extends TBox
                return $field;
            }
            
-           /**
-            * Criação de campo calendário de eventos tipo agenda
-            *
-            * @param string $strName
-            * @param string $strUrl
-            * @param string $strHeight
-            * @param string $strWidth
-            * @param mixed $defaultView
-            * @param string $jsOnResize
-            * @param string $jsOnDrag
-            * @param string $jsOnDrop
-            * @param string $jsOnEventClick
-            * @param string $jsOnSelectDay
-            * @param string $jsMouseOver
-            * @return TCalendar
-            */
-           public function addCalendarField( $strName, $strUrl=null,  $strHeight=null, $strWidth=null, $defaultView=null, $jsOnResize=null, $jsOnDrag=null, $jsOnDrop=null, $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
-           {
-               if( !DEFINED('INDEX_FILE_NAME') )
-               {
-                   DEFINE('INDEX_FILE_NAME','index.php');
-               }
-               if( ! is_null($strUrl) )
-               {
-                   $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
-               }
-               $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);
-               $field->setClass( 'fwCalendar',false );
-               $this->addDisplayControl( new TDisplayControl( null, $field, false,true,true  ) );
-               return $field;
-           }
-           
+   /**
+    * Criação de campo calendário de eventos tipo agenda
+    *
+    * @param string $strName           1: 
+    * @param string $strUrl
+    * @param string $strHeight
+    * @param string $strWidth
+    * @param mixed $defaultView
+    * @param string $jsOnResize
+    * @param string $jsOnDrag
+    * @param string $jsOnDrop
+    * @param string $jsOnEventClick
+    * @param string $jsOnSelectDay
+    * @param string $jsMouseOver
+    * @return TCalendar
+    */
+    public function addCalendarField( $strName
+                                    , $strUrl=null
+                                    , $strHeight=null
+                                    , $strWidth=null
+                                    , $defaultView=null
+                                    , $jsOnResize=null
+                                    , $jsOnDrag=null
+                                    , $jsOnDrop=null
+                                    , $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
+    {
+       if( !DEFINED('INDEX_FILE_NAME') )
+       {
+           DEFINE('INDEX_FILE_NAME','index.php');
+       }
+       if( ! is_null($strUrl) )
+       {
+           $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
+       }
+       $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);
+       $field->setClass( 'fwCalendar',false );
+       $this->addDisplayControl( new TDisplayControl( null, $field, false,true,true  ) );
+       return $field;
+    }      
 }
 ?>
