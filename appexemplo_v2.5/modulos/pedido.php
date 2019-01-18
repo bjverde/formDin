@@ -104,7 +104,7 @@ switch( $acao ) {
 	        $frm->setMessage( $e->getMessage() );
 	    }
 	    catch (Exception $e) {
-	        Mensagem::reportarLog($e);
+	        MessageHelper::reportarLog($e);
 	        $frm->setMessage( $e->getMessage() );
 	    }
 		break;
@@ -117,7 +117,7 @@ switch( $acao ) {
 	        $frm->setMessage( $e->getMessage() );
 	    }
 	    catch (Exception $e) {
-	        Mensagem::reportarLog($e);
+	        MessageHelper::reportarLog($e);
 	        $frm->setMessage( $e->getMessage() );
 	    }
 	    break;		
