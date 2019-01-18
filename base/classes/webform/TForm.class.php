@@ -6290,7 +6290,7 @@ class TForm Extends TBox
      * @param boolean $boolLabelAbove  - 8: Label sobre o campo
      * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
      * @param string  $strValue
-     * @param unknown $boolNoWrapLabel
+     * @param string $boolNoWrapLabel
      * @return TMemo
      */
     public function addMemoField( $strName
