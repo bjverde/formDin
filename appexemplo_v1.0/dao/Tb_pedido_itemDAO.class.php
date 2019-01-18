@@ -39,6 +39,61 @@
 class Tb_pedido_itemDAO extends TPDOConnection
 {
     
+    private static $sqlBasicSelect = 'select
+									  id_item
+									 ,id_pedido
+									 ,produto
+									 ,quantidade
+									 ,preco
+									 from tb_pedido_item ';
+    
+    private static function processWhereGridParameters( $whereGrid ) {
+        $result = $whereGrid;
+        if ( is_array($whereGrid) ){
+            $where = ' 1=1 ';
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'ID_ITEM', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'ID_PEDIDO', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'PRODUTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'QUANTIDADE', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'PRECO', SqlHelper::SQL_TYPE_NUMERIC);
+            $result = $where;
+        }
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectById( $id ) {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException();
+        }
+        $values = array($id);
+        $sql = self::$sqlBasicSelect.' where id_item = ?';
+        $result = self::executeSql($sql, $values );
+        return $result;
+    }
+    
+    public static function select( $id ) {
+        $result = self::selectById($id);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectCount( $where=null ){
+        $where = self::processWhereGridParameters($where);
+        $sql = 'select count(id_item) as qtd from tb_pedido_item';
+        $sql = $sql.( ($where)? ' where '.$where:'');
+        $result = self::executeSql($sql);
+        return $result['QTD'][0];
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectAll( $orderBy=null, $where=null ) {
+        $where = self::processWhereGridParameters($where);
+        $sql = self::$sqlBasicSelect
+        .( ($where)? ' where '.$where:'')
+        .( ($orderBy) ? ' order by '.$orderBy:'');
+        
+        $result = self::executeSql($sql);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------    
     public static function insert(Tb_pedido_itemVO $objVo)
     {
         if ($objVo->getId_item()) {
@@ -60,32 +115,9 @@ class Tb_pedido_itemDAO extends TPDOConnection
     public static function delete($id)
     {
         $values = array($id);
-        return self::executeSql('delete from tb_pedido_item where id_item = ?', $values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function select($id)
-    {
-        $values = array($id);
-        return self::executeSql('select
-								 id_item
-								,id_pedido
-								,produto
-								,quantidade
-								,preco
-								from tb_pedido_item where id_item = ?', $values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function selectAll($orderBy = null, $where = null)
-    {
-        return self::executeSql('select
-								 id_item
-								,id_pedido
-								,produto
-								,quantidade
-								,preco
-								from tb_pedido_item'.
-        ( ($where)? ' where '.$where:'').
-        ( ($orderBy) ? ' order by '.$orderBy:''));
+        $sql = 'delete from tb_pedido_item where id_item = ?';
+        $result = self::executeSql( $sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
     public static function update(Tb_pedido_itemVO $objVo)
@@ -105,7 +137,9 @@ class Tb_pedido_itemDAO extends TPDOConnection
     //--------------------------------------------------------------------------------
     public static function select_itens_pedido($id_pedido = null)
     {
-        $dados = self::executeSql('select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?', array($id_pedido));
+        $values = array($id_pedido);
+        $sql = 'select id_item,produto,quantidade,preco,quantidade*preco as total from tb_pedido_item where id_pedido = ?';
+        $dados = self::executeSql( $sql, $values );
         return $dados;
     }
 }

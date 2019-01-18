@@ -5,7 +5,7 @@ require_once '../classes/webform/TBox.class.php';
 require_once '../classes/webform/TForm.class.php';
 require_once '../classes/webform/TRichTextEditor.class.php';
 /**
- * TDiv TForm case.
+ * TForm case.
  */
 class TFormTest extends PHPUnit_Framework_TestCase {
 	

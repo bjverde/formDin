@@ -38,17 +38,22 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require '../base/classes/webform/TApplication.class.php';
 
-define('APLICATIVO', 'APPEV2.0');
+require_once('includes/constantes.php');
+require_once('includes/config_conexao.php');
+
+//FormDin version: 4.2.6-alpha
+require '../base/classes/webform/TApplication.class.php';
+require_once('classes/autoload_ap2v.php');
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
-$app->setTitle('Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
-//$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
-//$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
+$app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
+$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
-$app->setVersionSystem('v 2.0.0.0');
-$app->setUnit('Departamento de Informática - DI - IBAMA 2011');
+$app->setImgLogoPath('images/appv1_logo.png');
+$app->setVersionSystem(SYSTEM_VERSION);
+//$app->setUnit('Departamento de Informática - DI - IBAMA 2011');
+//$app->setLoginFile('includes/tela_login.php');
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');

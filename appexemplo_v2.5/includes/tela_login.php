@@ -37,7 +37,6 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once('services/loginService.php');
 $html = '<br><br>Existem 4 usuários, cada um com um perfil diferete!'
        . '<br>'
        . '<ul>'
@@ -60,7 +59,7 @@ if( $acao =='login'){
     sleep(1);
     $nom_user = $frm->get('login');
     $pwd_user = $frm->get('senha');
-    $msg = loginService::validarLogin($nom_user,$pwd_user);
+    $msg = Acesso::login($nom_user,$pwd_user);;
     if( $msg == 1 ) {
         $_SESSION[APLICATIVO]['conectado']=true;
         prepareReturnAjax(1);

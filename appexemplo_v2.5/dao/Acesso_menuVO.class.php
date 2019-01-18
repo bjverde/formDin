@@ -1,30 +1,28 @@
 <?php
-class Acesso_menuVO
-{
+class Acesso_menuVO {
 	private $idmenu = null;
-	private $idmenu_pai = null;
 	private $nom_menu = null;
+	private $idmenu_pai = null;
 	private $url = null;
 	private $tooltip = null;
 	private $img_menu = null;
 	private $imgdisabled = null;
-	private $dissabled = null;
+	private $disabled = null;
 	private $hotkey = null;
 	private $boolseparator = null;
 	private $jsonparams = null;
 	private $sit_ativo = null;
 	private $dat_inclusao = null;
 	private $dat_update = null;
-	public function __construct( $idmenu=null, $idmenu_pai=null, $nom_menu=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $dissabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null )
-	{
+	public function __construct( $idmenu=null, $nom_menu=null, $idmenu_pai=null, $url=null, $tooltip=null, $img_menu=null, $imgdisabled=null, $disabled=null, $hotkey=null, $boolseparator=null, $jsonparams=null, $sit_ativo=null, $dat_inclusao=null, $dat_update=null ) {
 		$this->setIdmenu( $idmenu );
-		$this->setIdmenu_pai( $idmenu_pai );
 		$this->setNom_menu( $nom_menu );
+		$this->setIdmenu_pai( $idmenu_pai );
 		$this->setUrl( $url );
 		$this->setTooltip( $tooltip );
 		$this->setImg_menu( $img_menu );
 		$this->setImgdisabled( $imgdisabled );
-		$this->setDissabled( $dissabled );
+		$this->setDisabled( $disabled );
 		$this->setHotkey( $hotkey );
 		$this->setBoolseparator( $boolseparator );
 		$this->setJsonparams( $jsonparams );
@@ -33,128 +31,128 @@ class Acesso_menuVO
 		$this->setDat_update( $dat_update );
 	}
 	//--------------------------------------------------------------------------------
-	function setIdmenu( $strNewValue = null )
+	public function setIdmenu( $strNewValue = null )
 	{
 		$this->idmenu = $strNewValue;
 	}
-	function getIdmenu()
+	public function getIdmenu()
 	{
 		return $this->idmenu;
 	}
 	//--------------------------------------------------------------------------------
-	function setIdmenu_pai( $strNewValue = null )
-	{
-		$this->idmenu_pai = $strNewValue;
-	}
-	function getIdmenu_pai()
-	{
-		return $this->idmenu_pai;
-	}
-	//--------------------------------------------------------------------------------
-	function setNom_menu( $strNewValue = null )
+	public function setNom_menu( $strNewValue = null )
 	{
 		$this->nom_menu = $strNewValue;
 	}
-	function getNom_menu()
+	public function getNom_menu()
 	{
 		return $this->nom_menu;
 	}
 	//--------------------------------------------------------------------------------
-	function setUrl( $strNewValue = null )
+	public function setIdmenu_pai( $strNewValue = null )
+	{
+		$this->idmenu_pai = $strNewValue;
+	}
+	public function getIdmenu_pai()
+	{
+		return $this->idmenu_pai;
+	}
+	//--------------------------------------------------------------------------------
+	public function setUrl( $strNewValue = null )
 	{
 		$this->url = $strNewValue;
 	}
-	function getUrl()
+	public function getUrl()
 	{
 		return $this->url;
 	}
 	//--------------------------------------------------------------------------------
-	function setTooltip( $strNewValue = null )
+	public function setTooltip( $strNewValue = null )
 	{
 		$this->tooltip = $strNewValue;
 	}
-	function getTooltip()
+	public function getTooltip()
 	{
 		return $this->tooltip;
 	}
 	//--------------------------------------------------------------------------------
-	function setImg_menu( $strNewValue = null )
+	public function setImg_menu( $strNewValue = null )
 	{
 		$this->img_menu = $strNewValue;
 	}
-	function getImg_menu()
+	public function getImg_menu()
 	{
 		return $this->img_menu;
 	}
 	//--------------------------------------------------------------------------------
-	function setImgdisabled( $strNewValue = null )
+	public function setImgdisabled( $strNewValue = null )
 	{
 		$this->imgdisabled = $strNewValue;
 	}
-	function getImgdisabled()
+	public function getImgdisabled()
 	{
 		return $this->imgdisabled;
 	}
 	//--------------------------------------------------------------------------------
-	function setDissabled( $strNewValue = null )
+	public function setDisabled( $strNewValue = null )
 	{
-		$this->dissabled = $strNewValue;
+		$this->disabled = $strNewValue;
 	}
-	function getDissabled()
+	public function getDisabled()
 	{
-		return $this->dissabled;
+		return $this->disabled;
 	}
 	//--------------------------------------------------------------------------------
-	function setHotkey( $strNewValue = null )
+	public function setHotkey( $strNewValue = null )
 	{
 		$this->hotkey = $strNewValue;
 	}
-	function getHotkey()
+	public function getHotkey()
 	{
 		return $this->hotkey;
 	}
 	//--------------------------------------------------------------------------------
-	function setBoolseparator( $strNewValue = null )
+	public function setBoolseparator( $strNewValue = null )
 	{
 		$this->boolseparator = $strNewValue;
 	}
-	function getBoolseparator()
+	public function getBoolseparator()
 	{
 		return $this->boolseparator;
 	}
 	//--------------------------------------------------------------------------------
-	function setJsonparams( $strNewValue = null )
+	public function setJsonparams( $strNewValue = null )
 	{
 		$this->jsonparams = $strNewValue;
 	}
-	function getJsonparams()
+	public function getJsonparams()
 	{
 		return $this->jsonparams;
 	}
 	//--------------------------------------------------------------------------------
-	function setSit_ativo( $strNewValue = null )
+	public function setSit_ativo( $strNewValue = null )
 	{
 		$this->sit_ativo = $strNewValue;
 	}
-	function getSit_ativo()
+	public function getSit_ativo()
 	{
 		return $this->sit_ativo;
 	}
 	//--------------------------------------------------------------------------------
-	function setDat_inclusao( $strNewValue = null )
+	public function setDat_inclusao( $strNewValue = null )
 	{
 		$this->dat_inclusao = $strNewValue;
 	}
-	function getDat_inclusao()
+	public function getDat_inclusao()
 	{
 		return is_null( $this->dat_inclusao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao;
 	}
 	//--------------------------------------------------------------------------------
-	function setDat_update( $strNewValue = null )
+	public function setDat_update( $strNewValue = null )
 	{
 		$this->dat_update = $strNewValue;
 	}
-	function getDat_update()
+	public function getDat_update()
 	{
 		return is_null( $this->dat_update ) ? date( 'Y-m-d h:i:s' ) : $this->dat_update;
 	}

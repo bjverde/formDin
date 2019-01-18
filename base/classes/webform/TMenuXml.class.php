@@ -53,7 +53,7 @@
 * 	ou echo $menu->getXml()
 *
 */
-class TMenuDhtmlx {
+class TMenuXml {
     private $arrMenu;
     private $arrOrphan;
     private $strId;
@@ -73,21 +73,22 @@ class TMenuDhtmlx {
     	$this->boolIgnoreOrphans = $boolIgnoreOrphans === null ? true : $boolIgnoreOrphans;
         $this->arrMenu=null;
     }
+    
     /**
-    * Método para adicionar itens de menu
-    *
-    * @param string $strId          - id do Menu
-    * @param string $strIdParent    - id do Item pai.
-    * @param string $strText
-    * @param string $strUrl
-    * @param string $strToolTip     - uma explição maior sobre o item
-    * @param string $strImg         - imagem será utilizada como icone
-    * @param string $strImgDisabled
-    * @param boolean $boolDisabled
-    * @param string $strHotKey
-    * @param boolean $boolSeparator
-    * @return TMenuDhtmlx
-    */
+     * Método para adicionar itens de menu
+     *
+     * @param string $strId          - 1: id do Menu
+     * @param string $strIdParent    - 2: id do Item pai.
+     * @param string $strText        - 3: Texto que irá aparecer para o usuário
+     * @param string $strUrl         - 4: Caminho do módulos
+     * @param string $strToolTip     - 5: uma explicação maior sobre o item
+     * @param string $strImg         - 6: Caminho da imagem será utilizada como ícone
+     * @param string $strImgDisabled - 7: Caminho da imagem para o menu desabilitado
+     * @param boolean $boolDisabled  - 8: Menu desabilitado
+     * @param string $strHotKey      - 9: 
+     * @param boolean $boolSeparator
+     * @return TMenuDhtmlx
+     */
     public function add($strId
                       , $strIdParent
                       , $strText

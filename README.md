@@ -17,12 +17,20 @@ FormDin is made up of a set of software components that provide a basic architec
 
 The application structure used by FormDin consists of three classes namely: TApplication, TForm and TPDOConnection. They are responsible for implementing the MVC (Model, View and Controller) standard. The TApplication (controller) class is responsible for receiving the requisitions and performing the relevant actions. The TForm class (view) is responsible for creating the data entry forms. The TPDOConnection (model) class is responsible for retrieving and writing information to the database.
 
+## Environment formDin
+
+In addition to FormDin there are two more closely linked projects.
+
+* [SysGen](https://github.com/bjverde/sysgen) – A System Generator for FormDin
+* [formDocker](https://github.com/bjverde/formDocker) – files from Docker Compose to raise everything you need to run formDin in a few commands. 
+
+
+[Read de Ebook - Learning formDin in steps. Translate By Google Translate](https://translate.googleusercontent.com/translate_c?depth=1&rurl=translate.google.com.br&sl=pt-BR&sp=nmt4&tl=en&u=https://github.com/bjverde/formDin/wiki&xid=17259,15700022,15700124,15700149,15700186,15700190,15700201,15700237,15700242&usg=ALkJrhhZbfs18JT-mbUzWhN0PRRStza9cA)
 
 ---
 
 FormDin ou Formulário Dinâmico é um Framework php simples para criar sistema web de forma rápida e fácil.
 Essa versão é um **Fork do FormDin 4 do [portal do Software Publico Brasileiro.](https://softwarepublico.gov.br/social/formdin)**
-
 
 
 ## Sobre o Software
@@ -48,28 +56,21 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 
 ## Informações
 
+![Logo PHP 7.3&](https://raw.githubusercontent.com/bjverde/formDin/master/base/imagens/php73_jeqlk3.png)
+
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* PHP 5.6.x ou superior (compativel como 7.2.0)
+* Compatível PHP **7.3.x,** 7.2.x, 7.1.x, 7.0.x e 5.6.x
 
-![Logo PHP&](https://files.phpclasses.org/files/blog/file/php7.png)
+Veja na Wiki 
 
-[Na Wiki terá informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informações-técnicas-e-Arquitetura):
+[Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
 * Branchs
-* Arquiteturas
+* Banco de Dados
 * Bibliotes utilizadas
+* [Arquitetura do formDin](https://github.com/bjverde/formDin/wiki/Arquitetura-do-formDin)
 
-
-### Bibliotecas utilizadas
-* fPDF 1.81
-* PHPUnit
-* CaptchaSecurityImages 
-* JQuery 1.6
-* [jQuery UI Layout Plug-in](http://layout.jquery-dev.com/demos.cfm)
-* Ckeditor 3.6
-* TinyMCE 3.3.4 (2010-04-27)
-* [Font Awesome Icons 5.0.6](https://fontawesome.com/icons?d=gallery) 
 
 ## Instalação.
 
@@ -77,6 +78,14 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
+
+
+* [4.2.6 - 2018/11/30 tag v4.2.6](https://github.com/bjverde/formDin/releases/tag/v4.2.6)
+   * :bug: FixBugs to Work with PHP 7.2.X
+   * :bug: Erro Grid Mongo
+   * :bug: Notice PHP 7.2.X, TGrid
+   * :hammer: Busca cep com Via cep
+   * :memo: update app exemplos 2.5
 
 * [4.2.5 - 2018/07/31 tag v4.2.5](https://github.com/bjverde/formDin/releases/tag/v4.2.5)
    * :bug: radio butun
@@ -93,12 +102,6 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 * [4.2.3 - 2018/06/14 tag v4.2.3](https://github.com/bjverde/formDin/releases/tag/v4.2.3)
    * :hammer: Connect on more than database
    * :bug: Bug strtolower
-
-* [4.2.2 - 2018/04/03 tag v4.2.2](https://github.com/bjverde/formDin/releases/tag/v4.2.2)
-   * :hammer: novo metodo para trabalhar com data
-   * :hammer: [consulta pagina aceitando Zero.](https://github.com/bjverde/formDin/commit/fb05317219c28e8b25aa9ee8f768989e2c44c86d)
-   * :bug: 3 correções
-   * :memo: melhoria na documentação interna
 
 * [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
    * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 

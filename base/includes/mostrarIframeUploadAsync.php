@@ -1,5 +1,5 @@
-
-/*
+<?php 
+/**
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
  * ----------------------------------------------------------------------------
@@ -35,7 +35,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-
+?>
 <html>
 <head>
 <script language="JavaScript">

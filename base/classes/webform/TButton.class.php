@@ -50,7 +50,23 @@ class TButton extends TControl
 	private $imageEnabled;
 	private $imageDisabled;
 	private $submitAction;
-	public function __construct($strName,$strValue=null,$strAction=null,$strOnClick=null,$strConfirmMessage=null,$strImageEnabled=null,$strImageDisabled=null,$strHint=null,$boolSubmitAction=null)
+	
+	/***
+	 *  Cria um botão 
+	 * @param string $strName           - 1: Id do botão
+	 * @param string $strValue          - 2: label do botão
+	 * @param string $strAction         - 3: 
+	 * @param string $strOnClick
+	 * @param string $strConfirmMessage
+	 * @param string $strImageEnabled
+	 * @param string $strImageDisabled
+	 * @param string $strHint
+	 * @param boolean $boolSubmitAction
+	 */
+	public function __construct($strName
+	                           ,$strValue=null
+	                           ,$strAction=null
+	                           ,$strOnClick=null,$strConfirmMessage=null,$strImageEnabled=null,$strImageDisabled=null,$strHint=null,$boolSubmitAction=null)
 	{
 		$strName = is_null( $strName ) ? $this->removeIllegalChars( $strValue ) : $strName;
 		parent::__construct('button',$strName,$strValue);

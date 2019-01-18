@@ -44,10 +44,7 @@
 * Adicionar botão ajax em um form no padrão normal com submit
 */
 
-// fazer o include das funções ajax quando receber uma requisição ajax;
-if (isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == 1) {
-    require_once($this->getBase().'includes/formDin4Ajax.php');
-}
+
 
 $frm = new TForm('Formulário Ajax - Exemplo Nº 1 - Módulo: exe_ajax_1.php ', 400, 600);
 $frm->addHtmlField('html', '<br><center><b>Exemplo de transformação de um formulário no formato padrão ( submit ) para ajax.</b></center><br>Os botões abaixo foram trasnformados para o padrão ajax, alterando a linha:<br>$frm->setActions("Gravar,Excluir"); <br>para:<br>$frm->addButtonAjax("Gravar");<br>$frm->addButtonAjax("Excluir");<br<br>');
@@ -108,6 +105,13 @@ switch (PostHelper::get('formDinAcao')) {
         break;
     //---------------------------------------------------------------------------------
 }
+
+// fazer o include das funções ajax quando receber uma requisição ajax;
+if (isset($_REQUEST['ajax']) && $_REQUEST['ajax'] == 1) {
+    $path = $frm->getBase().'includes/formDin4Ajax.php';
+    require_once($path);
+}
+
 
 // antes
 //$frm->setAction('Salvar,Excuir');

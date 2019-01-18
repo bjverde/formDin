@@ -65,7 +65,7 @@ $menu->add('13', '1', 'Campo Coord GMS');
     $menu->add('13.2', '13', 'Campo Coord GMS 02', 'view/fields/exe_CoordGmsField02.php');
 $menu->add('14', '1', 'Campo Select', 'view/fields/exe_SelectField.php');
 $menu->add('15', '1', 'Campo Radio', 'view/fields/exe_RadioField.php');
-$menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php');
+$menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php',null,'../../base/imagens/iconCheckAll.gif');
 $menu->add('17', '1', 'Campo Arquivo ou Blob');
     $menu->add('171', '17', 'Campo Blob');
         $menu->add('1171', '171', 'Campo Blob Salvo no Banco', 'view/fields/exe_fwShowBlob.php');
@@ -78,7 +78,7 @@ $menu->add('17', '1', 'Campo Arquivo ou Blob');
 
     
 $menu->add('18', '1', 'Campo Numérico', 'view/fields/exe_NumberField.php');
-$menu->add('19', '1', 'Campo Brasil');
+$menu->add('19', '1', 'Campo Brasil', null, null, '../../base/imagens/flag_brazil.png');
     $menu->add('191', '19', 'Campo CEP', 'view/fields/exe_CepField.php');
     $menu->add('192', '19', 'Campo Telefone', 'view/fields/exe_FoneField.php');
     $menu->add('193', '19', 'Campo Cpf/Cnpj', 'view/fields/exe_campo_cpf_cnpj.php');
@@ -88,7 +88,7 @@ $menu->add('110', '1', 'Campos Data e hora');
     $menu->add('1104', '110', 'Campo Agenda', 'view/fields/exe_TCalendar.php');
 $menu->add('111', '1', 'Campo Select Diretorio/Pasta', 'view/fields/exe_OpenDirField.php');
 
-$menu->add('115', '1', 'Campo Senha', 'view/fields/exe_TPasswordField.php');
+$menu->add('115', '1', 'Campo Senha', 'view/fields/exe_TPasswordField.php', null, '../../base/imagens/lock16.gif');
 
 $menu->add('117', '1', 'Campo Captcha', 'view/fields/exe_TCaptchaField.php');
 
@@ -98,6 +98,7 @@ $menu->add('121', '1', 'Campo Link', 'view/fields/exe_field_link.php');
 //Redirect só funciona se o arquivo estiver na pasta modulos
 $menu->add('122', '1', 'Redirect', 'exe_redirect.inc');
 $menu->add('123', '1', 'TZip', 'exe_TZip.php');
+$menu->add('124', '1', 'E-mail', 'view/fields/exe_TEmail.php', null, '../../base/imagens/email.png');
 
 //-----------------------------------------------------------------------------
 $menu->add('2', null, 'Containers');
@@ -106,9 +107,9 @@ $menu->add('2', null, 'Containers');
         $menu->add('222', '22', 'Grupo 02 Combinados, ( Efeito Sanfona )', 'group/exe_GroupField02.php');
         $menu->add('223', '22', 'Grupo 03 Combinados, muda cor fundo', 'group/exe_groupField03.php');
     $menu->add('23', '2', 'Abas');
-        $menu->add('231', '23', 'Aba', 'view/containers/exe_aba_1.php');
-        $menu->add('232', '23', 'Aba2', 'view/containers/exe_aba_2.php');
-        $menu->add('233', '23', 'Aba3', 'view/containers/exe_aba_3.php');
+        $menu->add('231', '23', 'Aba - com tecla de atalha', 'view/containers/exe_aba_1.php');
+        $menu->add('232', '23', 'Aba2 - Botão ligando aba', 'view/containers/exe_aba_2.php');
+        $menu->add('233', '23', 'Aba3 - select chamando aba', 'view/containers/exe_aba_3.php');
         $menu->add('234', '23', 'Aba4', 'view/containers/exe_aba_4.php');
         $menu->add('235', '23', 'Aba5', 'view/containers/exe_aba05_pagacontrol.php');
     $menu->add('24', '2', 'TreeView', null, null, '../../base/imagens/folder-39-128.png');
@@ -189,13 +190,13 @@ $menu->add('9', null, 'Banco e PDO', null, 'Exemplo de Recursos para conectar no
 $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-512.png');
     $menu->add('10.1', '10', 'Form 01 - Normal', 'view/form/exe_TForm.php');
     $menu->add('10.2', '10', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
-    $menu->add('10.3', '10', 'Boxes', 'view/form/exe_TBox.php');
-    $menu->add('10.4', '10', 'Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
-    $menu->add('10.5', '10', 'Form 04 - Consulta Pedidos', 'view/form/exe_tform4_consulta_tree_p1.php');
-    $menu->add('10.6', '10', 'Form 04 - Visualizar Item', 'view/form/exe_tform4_consulta_tree_p2.php');
-    $menu->add('10.7', '10', 'Form 04 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
-    $menu->add('10.8', '10', 'Form 05 - Texto Rico TinyMCE', 'view/form/exe_TForm5.php');
-    $menu->add('10.9', '10', 'Form 05 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
+    $menu->add('10.3', '10', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
+    $menu->add('10.4', '10', 'Form 04 - Consulta Pedidos', 'view/form/exe_tform4_consulta_tree_p1.php');
+    $menu->add('10.5', '10', 'Form 04 - Visualizar Item', 'view/form/exe_tform4_consulta_tree_p2.php');
+    $menu->add('10.6', '10', 'Form 05 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
+    $menu->add('10.7', '10', 'Form 06 - Texto Rico TinyMCE', 'view/form/exe_TForm5.php');
+    $menu->add('10.8', '10', 'Form 07 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
+    $menu->add('10.9', '10', 'Boxes', 'view/form/exe_TBox.php');
     $menu->add('10.10', '10', 'Recurso de Autosize', 'view/form/exe_TForm_autosize.php');
     $menu->add('10.11', '10', 'Tela Login', 'view/form/exe_tela_login.php');
     $menu->add('10.12', '10', 'Cadastro on-line (CRUD)', 'view/form/exe_crud_online.php');
@@ -209,13 +210,15 @@ $menu->add('200', 0, 'Layouts', null, 'Exemplos de Layouts, CSS e apresentaçõe
         $menu->add('20010.3', '20010', 'Esqueleto do Layout', 'exe_layout_1.php');
     $menu->add('20020', '200', 'Definir Colunas no Formulário', 'view/form/exe_colunas.php');
     $menu->add('20021', '200', 'Imagem de Fundo', 'view/form/exe_TFormImage.php');
-    $menu->add('20022', '200', 'Customizado com CSS', 'view/form/exe_TForm3.php');
-    $menu->add('20023', '200', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php');
+    $menu->add('20022', '200', 'Customizado com CSS', 'view/form/exe_TForm3.php', null, '../../base/imagens/css.png');
+    $menu->add('20023', '200', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php', null, '../../base/imagens/css.png');
+    $menu->add('20024', '200', 'Customizado grid com CSS', 'view/css/exe_css_form03.php', null, '../../base/imagens/table16.gif');
 
 //-----------------------------------------------------------------------------
 $menu->add('210', null, 'Gerador de Código', null, 'Formularios geradores de codigo', 'settings_tool_preferences-512.png');
-    $menu->add('210.1', '210', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php');
+    $menu->add('210.1', '210', 'Gerador VO/DAO', '../base/includes/gerador_vo_dao.php', null, '../../base/imagens/Icon_35-512.png');
     $menu->add('210.2', '210', 'Gerador Form VO/DAO', '../base/includes/gerador_form_vo_dao.php', null, '../../base/imagens/smiley-1-512.png');
+    $menu->add('210.3', '210', 'Gerador de Sistemas', '../base/includes/gerador_sysgen.php', null, '../../base/imagens/oculos-de-sol-smiley-1F60E.png');
     
 
 $menu->getXml();

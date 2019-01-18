@@ -572,18 +572,8 @@ class TGrid extends TTable
                             $tdValue = '';
                             
                             // verificar o nome da coluna informado em caixa alta, baixa e normal
-                            if ( isset( $res[ $fieldName ][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) $res[ $fieldName ][ $k ]  <> '' ) ? $res[ $fieldName ][ $k ] : '' );
-                            }
-                            else if( isset( $res[ strtolower( $fieldName )][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) $res[ strtolower( $fieldName )][ $k ] <> '' ) ? $res[ strtolower( $fieldName )][ $k ] : '' );
-                            }
-                            else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
-                            {
-                                $tdValue = ( ( (string) ($res[ strtoupper( $fieldName )][ $k ] ) <> '' ) ? $res[ strtoupper( $fieldName )][ $k ] : '' );
-                            }
+                            $tdValue = $this->getTdValue($res, $fieldName, $k);                            
+
                             if ($objColumn->getColumnType() == 'columncompact')
                             {
                                 if (strlen($tdValue)> $objColumn->getMaxTextLength())
@@ -873,8 +863,19 @@ class TGrid extends TTable
                                             {
                                                 if ( isset( $res[ $field ][ $k ] ) )
                                                 {
-                                                    $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($res[ $field ][ $k ],"'")) );
-                                                    $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($res[ $field ][ $k ],"'") . '"';
+                                                    $valeu  = $res[ $field ][ $k ];
+                                                    if ( is_array($valeu) ){
+                                                        $valeu  = 'PHP Array';
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    } else if ( is_object($valeu) ){
+                                                        $valeu  = 'PHP Object';
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    }else {
+                                                        $strValues .= preg_replace('/'.chr(13).'/','', preg_replace('/'.chr(10).'/','\r',addcslashes($valeu,"'")) );
+                                                        $strJquery .= '"' . strtolower( $field ) . '":"' . addcslashes($valeu,"'") . '"';
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -1069,6 +1070,47 @@ class TGrid extends TTable
                 }
             }
         }
+    }
+    
+    private function getTdValueByType($value) {
+        $tdValue = '';
+        
+        if ( is_array($value) ){
+            $tdValue = 'PHP Array';
+        } else if ( is_object ($value) ){
+            $tdValue = 'PHP Object';
+        } else {
+            $tdValue = ( ( (string) $value  <> '' ) ? $value : '' );
+        }
+        return $tdValue;
+    }    
+
+    /***
+     *  Return value of TD in the grid 
+     * @param array $res
+     * @param string $fieldName
+     * @param number $k
+     * @return mixed
+     */
+    private function getTdValue($res,$fieldName,$k) {
+        $tdValue = '';
+        
+        if ( isset( $res[ $fieldName ][ $k ] ) )
+        {
+            $value = $res[ $fieldName ][ $k ];
+            $tdValue = $this->getTdValueByType($value);
+        }
+        else if( isset( $res[ strtolower( $fieldName )][ $k ] ) )
+        {
+            $value = $res[ strtolower( $fieldName )][ $k ];
+            $tdValue = $this->getTdValueByType($value);
+        }
+        else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
+        {
+            $value = $res[ strtoupper( $fieldName )][ $k ];
+            $tdValue = $this->getTdValueByType($value);
+        }
+        return $tdValue;
     }
     
     /**
@@ -1345,7 +1387,7 @@ class TGrid extends TTable
     public function setData( $mixValue = null ){
         if ( is_array( $mixValue ) ) {
             $keys = array_keys($mixValue);
-            if ( ! $keys[0] ) {
+            if ( empty($keys) ) {
                 $mixValue = null;
             }
         }
@@ -1853,17 +1895,17 @@ class TGrid extends TTable
     /*****
      * Coluna do tipo select
      *
-     * @param string $strName      - ID do campos
-     * @param string $strTitle     - Titulo que irá aparecer no grid
-     * @param string $strFieldName - Nome do campo do gride
-     * @param mixed $mixOptions    - Opções caso o Campo do gride não seja um array
-     * @param mixed $strWidth
-     * @param boolean $boolReadOnly
-     * @param string $strFirstOptionText
-     * @param string $strFirstOptionValue
-     * @param string $strKeyField
-     * @param string $strDisplayField
-     * @param string $strInitialValueField
+     * @param string $strName         - 1: ID do campos
+     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
+     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
+     * @param mixed $strWidth         - 5: largura do campos
+     * @param boolean $boolReadOnly   - 6: Somente Leiura
+     * @param string $strFirstOptionText  - 7: Label do Primeiro valor
+     * @param string $strFirstOptionValue - 8: Valor do Primeiro valor
+     * @param string $strKeyField         - 9: 
+     * @param string $strDisplayField     - 10:
+     * @param string $strInitialValueField -11: Default Valeu
      * @return TGridSelectColumn
      */
     public function addSelectColumn( $strName
@@ -1878,7 +1920,16 @@ class TGrid extends TTable
         , $strDisplayField = null
         , $strInitialValueField=null
         ){
-            $col = new TGridSelectColumn( $strName, $strTitle, $strFieldName, $mixOptions, $strWidth, $boolReadOnly, $strFirstOptionText, $strFirstOptionValue, $strKeyField, $strDisplayField, $strInitialValueField );
+            $col = new TGridSelectColumn( $strName
+                , $strTitle
+                , $strFieldName
+                , $mixOptions
+                , $strWidth
+                , $boolReadOnly
+                , $strFirstOptionText
+                , $strFirstOptionValue
+                , $strKeyField
+                , $strDisplayField, $strInitialValueField );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
@@ -2111,24 +2162,11 @@ class TGrid extends TTable
     {
         $this->cache = $intNewValue;
     }
-    
     //---------------------------------------------------------------------------------------
     public function getCache()
     {
         return $this->cache;
     }
-    
-    //---------------------------------------------------------------------------------------
-    /**
-     * Define se os botoes Alterar e Excluir serão exibidos quando não for
-     * adicionado nenhum botão
-     *
-     * @param mixed $boolNewValue
-     */
-    //public function setUseDefaultButtons($boolNewValue=null)
-    //{
-    //	$this->useDefaultButtons = $boolNewValue;
-    //}
     //---------------------------------------------------------------------------------------
     public function getCreateDefaultButtons()
     {
@@ -2191,6 +2229,11 @@ class TGrid extends TTable
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * adicionar o formulário ao gride para criar o gride offline
+     * @param TForm $frm
+     * @param boolean $boolShowCollapsed
+     */
     public function setForm( TForm $frm = null, $boolShowCollapsed = null )
     {
         $this->form = $frm;
@@ -2511,61 +2554,46 @@ class TGrid extends TTable
                     
                     foreach( $aFieldNames as $key => $fieldName )
                     {
-                        if ( $k === false ) // inclusao
-                        {
-                            $res[ strtoupper( $fieldName )][] = utf8_decode( $_POST[ $fieldName ] );
+                        // inclusao
+                        if ( $k === false ) {
+                            $res[ strtoupper( $fieldName )][] =  $_POST[ $fieldName ];
                         }
-                        else // alteração
-                        {
-                            $res[ strtoupper( $fieldName )][ $k ] = utf8_decode( $_POST[ $fieldName ] );
+                        // alteração
+                        else {
+                            $res[ strtoupper( $fieldName )][ $k ] = $_POST[ $fieldName ];
                         }
                         
                         $field = $frm->getField( $fieldName );
                         if ( $field->getFieldType() == 'select' )
                         {
                             $c = $field->getAttribute('grid_column');
-                            //$opt = $frm->getField($fieldName)->getOptions();
                             if ( $k === false )
                             {
-                                //$res[strtoupper($fieldName.'_text')][] = $opt[$frm->getField($fieldName)->getValue()];
                                 if( $c )
                                 {
                                     if( $_POST[$fieldName] )
                                     {
                                         $res[strToUpper($c)][] = $_POST[$fieldName.'_temp'];
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[strToUpper($c)][] = '';
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     $res[ strtoupper( $fieldName . '_text' )][] = $frm->getField( $fieldName )->getText();
                                 }
-                            }
-                            else
-                            {
-                                //$res[strtoupper($fieldName.'_text')][$k] = $opt[$frm->getField($fieldName)->getValue()];
+                            } else {
                                 if( $c )
                                 {
                                     if( $_POST[$fieldName] )
                                     {
                                         $res[strToUpper($c)][$k] = $_POST[$fieldName.'_temp'];
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[strToUpper($c)][$k] = '';
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     if( isset($_POST[$fieldName]) && $frm->getField( $fieldName )->getText()=='')
                                     {
                                         $res[ strtoupper( $fieldName . '_text' )][ $k ] = $this->decodeUtf8( $_POST[$fieldName] );
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $res[ strtoupper( $fieldName . '_text' )][ $k ] = $frm->getField( $fieldName )->getText();
                                     }
                                 }
@@ -2713,46 +2741,67 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo regristro
+     * @return string
+     */    
     public function setNewRecordColor( $newColor = null )
     {
         $this->newRecordColor = $newColor;
     }
-    
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo regristro
+     * @return string
+     */
     public function getNewRecordColor()
     {
         return is_null( $this->newRecordColor ) ? 'blue' : $this->newRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo alterado
+     * @return string
+     */
     public function setEditedRecordColor( $strNewValue = null )
     {
         $this->editedRecordColor = $strNewValue;
     }
     
+    /**
+     * Grid Off-line define a cor do novo alterado
+     * @return string
+     */    
     public function getEditedRecordColor()
     {
         return is_null( $this->editedRecordColor ) ? '#FF9900' : $this->editedRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo salvo
+     * @return string
+     */
     public function setSavedRecordColor( $strNewValue = null )
     {
         $this->savedRecordColor = $strNewValue;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo salvo
+     * @return string
+     */
     public function getSavedRecordColor( $strNewValue = null )
     {
         return is_null( $this->savedRecordColor ) ? '#009933' : $this->savedRecordColor;
     }
     
-    //------------------------------------------------------------------------------------------------
+    /**
+     * Grid Off-line define a cor do novo deletado
+     * @return string
+     */
     public function getDeletedRecordColor()
     {
         return is_null( $this->deletedRecordColor ) ? '#FF0000' : $this->deletedRecordColor;
     }
-    
     //------------------------------------------------------------------------------------------------
     /**
      * Define o nome de uma função php que a classe TGrid irá executar passando a classe TAutocomplete, o array de dados ($res) referente a linha atual, o objeto celula e o objeto coluna
@@ -2814,6 +2863,7 @@ class TGrid extends TTable
     {
         if( $boolUtf8 && is_array($this->excelHeadFields ) )
         {
+            $arrTemp = array();
             foreach($this->excelHeadFields as $k=>$v)
             {
                 $arrTemp[utf8_encode($k)] = utf8_encode($v);
@@ -2913,7 +2963,11 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
-    function setShowAdicionarButton( $boolNewValue = null )
+    /**
+     * No Grid off-line Mostra o Botão adicionar
+     * @param boolean $boolNewValue
+     */
+    public function setShowAdicionarButton( $boolNewValue = null )
     {
         $this->showAdicionarButton = $boolNewValue;
     }

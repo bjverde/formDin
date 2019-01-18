@@ -39,48 +39,118 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// chamada ajax
+$frm = new TForm('Exemplo Campo CEP');
+$frm->setFlat(true);
 
+$frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
+    $frm->addHtmlField('html1', null, 'ajuda/cep_via.html','',40)->setCss('border', '1px solid blue');
 
-/***
-* Observação o campo addCepField
-* Chama FormDin4.js getCepJquery que chama getCep.php
-* que utiliza o serviço buscarcep.com.br
-*
-* Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
-**/
-
-
-if (isset($_POST['num_cep'])) {
-    header("Content-Type:text/xml");
-    echo file_get_contents('http://buscarcep.com.br/?cep='.$_POST['num_cep'].'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
-    exit;
-}
-$frm = new TForm('Exemplo Campo CEP', 400, 600);
-// define a largura das colunas verticais do formulario para alinhamento dos campos
-$frm->setColumns(array(100,100));
-$fldCep = $frm->addCepField('num_cep1', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend', false, 'Cep está incompleto')->setExampleText('Não limpar se estiver incompleto');
-$fldCep = $frm->addCepField('num_cep', 'Cep:', true, null, null, 'des_endereco', 'nom_bairro', 'nom_cidade', 'cod_uf', null, null, null, null, null, null, 'pesquisarCepCallback', 'pesquisarCepBeforeSend');
-$frm->addTextField('des_endereco', 'Endereço:', 60);
-$frm->addTextField('num_endereco', 'Número:', 10);
-$frm->addTextField('des_complemento', 'Complemento:', 60);
-$frm->addTextField('nom_bairro', 'Bairro:', 60);
-$frm->addTextField('nom_cidade', 'Cidade:', 60);
-$frm->addTextField('cod_municipio', 'Cod. Município:', 10);
-$frm->addSelectField('cod_uf', 'Uf:', 2);
-$frm->addTextField('sig_uf', 'Uf:', 2);
-$frm->setValue('num_cep', '71505030');
-
-$frm->addHtmlField('linha', '<hr><b>Consulta com select combinado</b>');
-
-// utilizando select combinados
-$frm->addHiddenField('cod_municipio_temp', '');
-$fldCep = $frm->addCepField('num_cep2', 'Cep:', true, null, null, 'des_endereco2', null, null, 'cod_uf2', null, null, null, 'cod_municipio2_temp', null, null, 'myCallback');
+    // define a largura das colunas verticais do formulario para alinhamento dos campos
+    $frm->setColumns(array(100,100));    
+    $fldCep0 = $frm->addCepField('num_cep' //id do campo
+        , 'Cep:'        //Label do campo
+        , true          //
+        , null
+        , null          // Nova linha
+        , 'des_endereco'// id do Campo endereço
+        , 'nom_bairro'  // id do Campo bairro
+        , 'nom_cidade'  // id do Campo cidade
+        , null          // id do Campo cod uf
+        , 'cod_uf'      // id do Campo sig uf
+        , null          // id do Campo logradouro
+        , null          // id do Campo complemento
+        , null          // id do Cod municipio
+        , null          // Label sobre o campo
+        , null
+        , 'pesquisarCepCallback'    //JavaScript Callback
+        , 'pesquisarCepBeforeSend'
+        );    
+    $fldCep0->setExampleText('Limpar o campo se estiver incompleto');
+    $frm->setValue('num_cep', '71505030');
+        
+    $fldCep1 = $frm->addCepField('num_cep1`' //id do campo
+        , 'Cep:'        //Label do campo
+        , true          //
+        , null
+        , null          // Nova linha
+        , 'des_endereco'// id do Campo endereço
+        , 'nom_bairro'  // id do Campo bairro
+        , 'nom_cidade'  // id do Campo cidade
+        , null          // id do Campo cod uf
+        , 'cod_uf'      // id do Campo sig uf
+        , null          // id do Campo logradouro
+        , null          // id do Campo complemento
+        , null          // id do Cod municipio
+        , null          // Label sobre o campo
+        , null
+        , 'pesquisarCepCallback'    //JavaScript Callback
+        , 'pesquisarCepBeforeSend'
+        , false
+        , 'Cep está incompleto'
+        );
+    
+    $fldCep1->setExampleText('Não limpar o campo se estiver incompleto, tem msg de erro');
+    
+    $frm->addTextField('des_endereco', 'Endereço:', 60);
+    $frm->addTextField('num_endereco', 'Número:', 10);
+    $frm->addTextField('des_complemento', 'Complemento:', 60);
+    $frm->addTextField('nom_bairro', 'Bairro:', 60);
+    $frm->addTextField('nom_cidade', 'Cidade:', 60);
+    $frm->addTextField('cod_municipio', 'Cod. Município:', 10);
+    $listUF = Tb_ufDAO::selectComboSigUf();
+    $frm->addSelectField('cod_uf', 'Uf:', false, $listUF);
+    $frm->addTextField('sig_uf', 'Uf:', 2);
+    
+    
+    $frm->addHtmlField('linha', '<hr><b>Consulta com select combinado, motor ViaCep</b>');
+    
+    // utilizando select combinados
+    $frm->addHiddenField('cod_municipio_temp', '');
+    $frm->addCepField('num_cep2'
+                     , 'Cep:'
+                     , true
+                     , null
+                     , null // Nova linha
+                     , 'des_endereco2'  // campo endereço
+                     , null // campo bairro
+                     , null // campo cidade
+                     , null //campo cod uf 
+                     , 'cod_uf2' // campo sig uf
+                     , null // campo logradouro
+                     , null
+                     , 'cod_municipio2_temp'
+                     , null, null, 'myCallback');
     $frm->addTextField('des_endereco2', 'Endereço:', 60);
-    $frm->addSelectField('cod_uf2', 'Estado:', false);
+    // $frm->addSelectField('cod_uf2', 'Estado:', false);
+    $frm->addSelectField('cod_uf2', 'Uf:', false, $listUF);
     $frm->addSelectField('cod_municipio2', 'Município:', null, null, false);
-    $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
+    $frm->combinarSelects('cod_uf2', 'cod_municipio2', 'vw_municipios', 'sig_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 
+$frm->closeGroup();
+
+$frm->addGroupField('gpx2', 'Motor de Busca BuscarCep');
+    $frm->addHtmlField('html2', null, 'ajuda/cep_buscar.html','',40)->setCss('border', '1px solid blue');
+    $frm->addCepField('num_cep3'
+                     ,'Cep:'
+                     , true
+                     , '71505030'
+                     , null
+                     , 'des_endereco3'
+                     , null
+                     , null
+                     , 'cod_uf3'
+                     , null
+                     , null
+                     , null
+                     , 'cod_municipio2_temp'
+                     , null
+                     , null, 'myCallback', null,false,null,2);
+    $frm->addTextField('des_endereco3', 'Endereço:', 60);
+    $frm->addSelectField('cod_uf3', 'Estado:', false);
+    $frm->addSelectField('cod_municipio3', 'Município:', null, null, false);
+    $frm->combinarSelects('cod_uf3', 'cod_municipio3', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
+$frm->closeGroup();
+    
 $frm->show();
 ?>
 <script>
@@ -95,5 +165,6 @@ function pesquisarCepBeforeSend(id){
 function myCallback(dataset){
     console.log(jQuery("#cod_municipio2_temp").val());
     jQuery("#cod_uf2").change();
+    jQuery("#cod_uf3").change();
 }
 </script>

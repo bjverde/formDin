@@ -2799,10 +2799,10 @@ class TForm Extends TBox
       * @example exemple/exCampoSelectAgrupado.php
       *
       *
-      * @param string $selectPai
-      * @param string $selectFilho
-      * @param string $TabelaPacoteFuncao
-      * @param string $colunaFiltro
+      * @param string $selectPai             - 1: Id Campo pai
+      * @param string $selectFilho           - 2: Id Campo filho
+      * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
+      * @param string $colunaFiltro          - 4: campo_formulario|campo_banco
       * @param string $colunaCodigo
       * @param string $colunaDescricao
       * @param string $descPrimeiraOpcao
@@ -2812,7 +2812,18 @@ class TForm Extends TBox
       * @param string $funcaoExecutar
       * @param boolean $boolSelectUniqueOption
       */
-     function combinarSelects( $selectPai='cod_uf', $selectFilho='cod_municipio', $TabelaPacoteFuncao=null, $colunaFiltro='COD_UF', $colunaCodigo='COD_MUNICIPIO', $colunaDescricao='NOM_MUNICIPIO', $descPrimeiraOpcao='-- Selecione --', $valorPrimeiraOpcao='', $descNenhumaOpcao='-- vazio --', $campoFormFiltro='', $funcaoExecutar='',$boolSelectUniqueOption=null )
+     function combinarSelects( $selectPai='cod_uf'
+                             , $selectFilho='cod_municipio'
+                             , $TabelaPacoteFuncao=null
+                             , $colunaFiltro='COD_UF'
+                             , $colunaCodigo='COD_MUNICIPIO'
+                             , $colunaDescricao='NOM_MUNICIPIO'
+                             , $descPrimeiraOpcao='-- Selecione --'
+                             , $valorPrimeiraOpcao=''
+                             , $descNenhumaOpcao='-- vazio --'
+                             , $campoFormFiltro=''
+                             , $funcaoExecutar=''
+                             , $boolSelectUniqueOption=null )
      {
          // se o campo estiver dentro de uma aba ou de cum container, chamar o método combinar select destes
          $parentField = $this->getField( $selectPai );
@@ -2858,6 +2869,7 @@ class TForm Extends TBox
          $arrDados[ 'selectUniqueOption' ] = $boolSelectUniqueOption;
          $this->selectsCombinados[ $selectPai ][ $selectFilho ] = $arrDados;
      }
+     
      /**
       * Adiciona botão à frente do campo para fazer pesquisa on-line no banco de dados e retornar valores
       * para os campos do formulario
@@ -3010,6 +3022,7 @@ class TForm Extends TBox
          );
          $this->onlineCruds[ $strFieldName ] = $arrData;
      }
+     
      /**
       * Método para limpar os campos do formulario
       * Pode ser passado um campo ou varios separados por virgula.
@@ -3022,9 +3035,9 @@ class TForm Extends TBox
       * 	$form->clearFields(array('nom_pessoa,des_endereco'));
       * </code>
       *
-      * @param mixed $mixFields        - lista do campos que serão limpos. Apenas esses campos serão limpos
-      * @param mixed $mixIgnoreFields  - lista de campos ignorados
-      * @param bool $boolNewValue
+      * @param mixed $mixFields        - 1: lista do campos que serão limpos. Apenas esses campos serão limpos
+      * @param mixed $mixIgnoreFields  - 2: lista de campos ignorados
+      * @param bool $boolNewValue      - 3: 
       */
      public function clearFields( $mixFields=null, $mixIgnoreFields=null, $boolNewValue=null )
      {
@@ -3057,6 +3070,7 @@ class TForm Extends TBox
              {
                  $mixIgnoreFields = explode( ',', $mixIgnoreFields );
              }
+             
              if( is_array( $mixFields ) )
              {
                  foreach( $mixFields as $k=>$v )
@@ -3811,6 +3825,10 @@ class TForm Extends TBox
                  {
                      $this->addJsFile("FormDin4Geo.js");
                  }
+                 else if( $dc->getField()->getFieldType() == 'cep' )
+                 {
+                     $this->addJsFile("FormDin4Cep.js");
+                 }
              }
          }
          return array( $this->jsFiles, $this->cssFiles );
@@ -4267,13 +4285,17 @@ class TForm Extends TBox
       * 	}
       * </code>
       *
-      * @param mixed $strModule
-      * @param mixed $strMessage
-      * @param boolean $boolSubmit   - ação de submeter. TRUE = post, FALSE = ajax
-      * @param array $arrVars        - Array que será enviado via Post 
-      * @param boolean $boolSaveData - salva os dados formulario atual
+      * @param mixed $strModule      - 1: modulo de destino. Fora da pasta modulo informe o caminho completo
+      * @param mixed $strMessage     - 2: Uma mensagem
+      * @param boolean $boolSubmit   - 3: ação de submeter. TRUE = post, FALSE = ajax
+      * @param array $arrVars        - 4: Array que será enviado via Post 
+      * @param boolean $boolSaveData - 5; salva os dados formulario atual
       */
-      public function redirect( $strModule=null, $strMessage=null, $boolSubmit=false, $arrVars=null, $boolSaveData=null )	{
+      public function redirect( $strModule=null
+                              , $strMessage=null
+                              , $boolSubmit=false
+                              , $arrVars=null
+                              , $boolSaveData=null )	{
           $boolSaveData = is_null( $boolSaveData ) ? false : $boolSaveData;
           
           $filePath = $this->getRealPath( $strModule );
@@ -5089,51 +5111,60 @@ class TForm Extends TBox
           }
           return $newDisplayControl;
       }
-      /**
-       * retorna o array de objetos displaycontrol que contem os campos e os labels do
-       * formulário
-       *
-       * @return array
-       */
-       public function getDisplayControls()
-       {
-           return $this->displayControls;
-       }
+
+    /**
+    * retorna o array de objetos displaycontrol que contem os campos e os labels do
+    * formulário
+    *
+    * @return array
+    */
+    public function getDisplayControls()
+    {
+       return $this->displayControls;
+    }
        
-       /**
-        * Adicionar botão no layout
-        *
-        * O parametro mixValue pode ser um array com os nomes dos botões. ex: array('Gravar', 'Limpar').
-        * Nesta caso os demais parametros não serão considerados exceto o strOnClick que
-        * pode ser informado o nome de uma função javascript para ser executada ao clicar no botão.
-        * Esta função receberá o Valor do botão e a variavel this.
-        *
-        * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
-        * definir o parametro boolLabelAbove do botão para true tambem.
-        *
-        * @param mixed   $mixValue   - Label do Botão
-        * @param string  $strName    - Nome da ação com submit, ignorando strOnClick. Se ficar null será utilizado o valor de mixValue
-        * @param string  $strAction  - Nome da ação
-        * @param string  $strOnClick - Nome da função javascript
-        * @param string  $strConfirmMessage - Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
-        * @param boolean $boolNewLine  - em nova linha
-        * @param boolean $boolFooter   - mostrar no fim do form
-        * @param string  $strImage
-        * @param string  $strImageDisabled
-        * @param string  $strHint
-        * @param string  $strVerticalAlign
-        * @param string  $strLabel
-        * @param bool    $boolLabelAbove
-        * @return TButton
-        */
-       public function addButton( $mixValue=null
-					       		, $strAction=null, $strName=null
-					       		, $strOnClick=null, $strConfirmMessage=null
-					       		, $boolNewLine=null, $boolFooter=null
-					       		, $strImage=null, $strImageDisabled=null
-					       		, $strHint=null, $strVerticalAlign=null
-					       		, $boolLabelAbove=null, $strLabel=null
-					       		, $strHorizontalAlign=null) {
+    /**
+    * Adicionar botão no layout
+    *
+    * O parametro mixValue pode ser um array com os nomes dos botões. ex: array('Gravar', 'Limpar').
+    * Nesta caso os demais parametros não serão considerados exceto o strOnClick que
+    * pode ser informado o nome de uma função javascript para ser executada ao clicar no botão.
+    * Esta função receberá o Valor do botão e a variavel this.
+    *
+    * Para que o botão fique alinhado na frente de um campo com labelAbove=true, basta
+    * definir o parametro boolLabelAbove do botão para true tambem.
+    *
+    * 
+    * @param mixed   $mixValue          - 1 :Label do Botão ou array('Gravar', 'Limpar') com nomes
+    * @param string  $strAction         - 2 :Nome da ação, ignorando $strName $strOnClick. Se ficar null será utilizado o valor de mixValue
+    * @param string  $strName           - 3 :Nome da ação com submit
+    * @param string  $strOnClick        - 4 :Nome da função javascript
+    * @param string  $strConfirmMessage - 5 :Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
+    * @param boolean $boolNewLine       - 6 :Em nova linha. DEFAULT = true
+    * @param boolean $boolFooter        - 7 :Mostrar o botão no rodapé do form. DEFAULT = true
+    * @param string  $strImage          - 8 :Imagem no botão. Evite usar no lugar procure usar a propriedade setClass
+    * @param string  $strImageDisabled  - 9 :
+    * @param string  $strHint           -10 :Texto para explicar
+    * @param string  $strVerticalAlign
+    * @param boolean $boolLabelAbove
+    * @param string  $strLabel
+    * @param string  $strHorizontalAlign
+    * @return TButton|string|array
+    ***/
+    public function addButton( $mixValue=null
+				       		, $strAction=null
+				       		, $strName=null
+				       		, $strOnClick=null
+				       		, $strConfirmMessage=null
+				       		, $boolNewLine=null
+				       		, $boolFooter=null
+				       		, $strImage=null
+				       		, $strImageDisabled=null
+				       		, $strHint=null
+				       		, $strVerticalAlign=null
+				       		, $boolLabelAbove=null
+				       		, $strLabel=null
+				       		, $strHorizontalAlign=null) {
            // botão será criado no rodapé do formulário por padrão
            $boolFooter = ($boolFooter === null) ? true : $boolFooter;
            $strVerticalAlign = is_null( $strVerticalAlign ) ? 'center' : $strVerticalAlign;
@@ -6193,20 +6224,20 @@ class TForm Extends TBox
            public function getLabelsAlign(){
                return $this->labelsAlign;
            }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adiciona um campo oculto ao layout
-            *
-            * @param string $strName
-            * @param string $strValue
-            * @param boolean $boolRequired
-            * @return THidden
-            */
-           public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
-           {
-               $field = new THidden( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
-               return $field;
+   //-----------------------------------------------------------------------------
+    /**
+    * Adiciona um campo oculto ao layout
+    *
+    * @param string $strName       - 1: Id do Campo
+    * @param string $strValue      - 2: Valor inicial
+    * @param boolean $boolRequired - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio  
+    * @return THidden
+    */
+    public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
+    {
+       $field = new THidden( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( null, $field, false, false ) );
+       return $field;
     }
            
     /**
@@ -6214,9 +6245,9 @@ class TForm Extends TBox
      *
      * @param string $strName       - 1: id do campo
      * @param string $strLabel      - 2: Label do campo
-     * @param integer $intMaxLength - 3: tamanho maximo de carateres
-     * @param boolean $boolRequired - 4: obrigatorio ou não
-     * @param integer $intSize      - 5: quantidade de caracteres visiveis.
+     * @param integer $intMaxLength - 3: tamanho máximo de caracteres
+     * @param boolean $boolRequired - 4: obrigatório ou não
+     * @param integer $intSize      - 5: quantidade de caracteres visíveis
      * @param string $strValue      - 6: texto preenchido
      * @param boolean $boolNewLine  - 7: Nova linha
      * @param string $strHint
@@ -6242,7 +6273,7 @@ class TForm Extends TBox
     	$field->setHint( $strHint );
     	$field->setExampleText( $strExampleText );
     	$tDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel,null,null,null,true);
-    	$dc = $this->addDisplayControl( $tDisplayControl );
+    	$this->addDisplayControl( $tDisplayControl );
     	return $field;
     }
            
@@ -6259,19 +6290,20 @@ class TForm Extends TBox
      * @param boolean $boolLabelAbove  - 8: Label sobre o campo
      * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
      * @param string  $strValue
+     * @param string $boolNoWrapLabel
      * @return TMemo
      */
     public function addMemoField( $strName
-           		                       , $strLabel=null
-           		                       , $intMaxLength
-           		                       , $boolRequired=null
-           		                       , $intColumns=null
-           		                       , $intRows=null
-           		                       , $boolNewLine=null
-           		                       , $boolLabelAbove=null
-           		                       , $boolShowCounter=null
-           		                       , $strValue=null
-           		                       , $boolNoWrapLabel=null )
+   		                       , $strLabel=null
+   		                       , $intMaxLength
+   		                       , $boolRequired=null
+   		                       , $intColumns=null
+   		                       , $intRows=null
+   		                       , $boolNewLine=null
+   		                       , $boolLabelAbove=null
+   		                       , $boolShowCounter=null
+   		                       , $strValue=null
+   		                       , $boolNoWrapLabel=null )
     {
     	$field = new TMemo( $strName, $strValue, $intMaxLength, $boolRequired, $intColumns, $intRows, $boolShowCounter );
     	$field->setClass( 'fwMemo' );
@@ -6312,24 +6344,26 @@ class TForm Extends TBox
     	$this->addJavascript('fwSetHtmlEditor("'.$strName.'","callBackEditor",false)');
     	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
     	return $field;
-    }
-
-    /**
+    }    
+    
+    /****
      * Adicona um campo data ou mes/ano ou dia/mes de acordo com o parametro strMaxType
      * Tipo de máscara: DMY, DM, MY
-     *
-     * @param string  $strName
-     * @param string  $strLabel
-     * @param string  $strValue
-     * @param boolean $boolRequired
-     * @param boolean $boolNewLine
+     *  
+     * @param string  $strName         - 1: Id do Campo
+     * @param string  $strLabel        - 2: Label do Campo
+     * @param boolean $boolRequired    - 3: DEFAULT = flase não obrigatório
+     * @param boolean $boolNewLine     - 4: DEFAULT = true nova linha
+     * @param string  $strValue        - 5: Valor inicial
      * @param string  $strMinValue
      * @param string  $strMaxValue
      * @param string  $strMaskType
      * @param boolean $boolButtonVisible
+     * @param string  $strExampleText
      * @param boolean $boolLabelAbove
-     * @return object TDate
-     */ 
+     * @param string  $boolNoWrapLabel
+     * @return TDate
+     */
     public function addDateField( $strName
     		, $strLabel=null
     		, $boolRequired=null
@@ -6368,7 +6402,7 @@ class TForm Extends TBox
     * @param boolean $boolNewLine     - 5: nova linha. Default = true
     * @param boolean $boolNoWrapLabel
     * @param boolean $boolCloseble    - 6: pode fechar ou não
-    * @param string $accordionId      - 7:
+    * @param string  $strAccordionId  - 7:
     * @param boolean $boolOpened      - 8: inicia aberto
     * @param string $imgOpened        - 9:
     * @param string $imgClosed        - 10: 
@@ -6403,156 +6437,195 @@ class TForm Extends TBox
 		return $field;
 	}
            
-           /**
-            * Campo de uso geral para insersão manual de códigos html na página
-            *
-            * Se os parametros width ou height não forem informados, serão
-            * definidos como "auto"
-            *
-            * Se o label for null, não será criado o espaço referente a ele no formulário, para criar
-            * um label invisível defina como "" o seu valor
-            *
-            * criado o espaço
-            * @param string $strName        - Nome do campo            
-            * @param string $strValue       - Texto HTML que irá aparece dentro
-            * @param string $strIncludeFile - 
-            * @param string $strLabel
-            * @param string $strWidth
-            * @param string $strHeight
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return THtml Field
-            */
-           public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
-               $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
-               return $field;
-           }
-           /**
-            * Cria um campo html para exibir um gride via ajax no formulário utilizando a classe TGrid
-            *
-            * @example $mixFormFields - campos do formulário que serão enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
-            * neste caso o valor de des_x será lido do campo do formulário
-            *
-            * @param string $strName
-            * @param string $strGridFile
-            * @param string $strHeight
-            * @param string $strWidth
-            * @param string  $strLoadingMessage
-            * @param boolean $boolNewLine
-            * @param mixed $mixFormFields
-            * @return THtml
-            */
-           public function addHtmlGride( $strName, $strGridFile, $strGridId, $strHeight=null, $strWidth=null, $strLoadingMessage=null, $boolNewLine=null, $mixFormFields=null )
-           {
-               //$strWidth = is_null($strWidth) ? $this->getMaxWidth() : $strWidth;
-               if( $strGridId )
-               {
-                   $field = new THtml( $strName, null, null, $strHeight, $strWidth );
-                   $field->setGridFile( $strGridFile, $strGridId, $mixFormFields );
-                   $strLoadingMessage = is_null( $strLoadingMessage ) ? '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>' : $strLoadingMessage;
-                   $field->setLoadingMessage( $strLoadingMessage );
-                   $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-                   return $field;
-               }
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CPF
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCpf Field
-            */
-           public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCpf( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CNPJ
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCnpj Field
-            */
-           public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCnpj( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo CPF/CNPJ, fazendo a validação do digito verificador
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @return TCpfCnpj Field
-            */
-           public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-           {
-               $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->setInvalidMessage( $strInvalidMessage );
-               $field->setAlwaysValidate( $boolAlwaysValidate );
-               $field->setCallback( $strJsCallback );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
+   /**
+    * Campo de uso geral para insersão manual de códigos html na página
+    *
+    * Se os parametros width ou height não forem informados, serão
+    * definidos como "auto"
+    *
+    * Se o label for null, não será criado o espaço referente a ele no formulário, para criar
+    * um label invisível defina como "" o seu valor
+    *
+    * criado o espaço
+    * @param string $strName        - Nome do campo            
+    * @param string $strValue       - Texto HTML que irá aparece dentro
+    * @param string $strIncludeFile - 
+    * @param string $strLabel
+    * @param string $strWidth
+    * @param string $strHeight
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return THtml Field
+    */
+   public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+   {
+       //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
+       $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
+       return $field;
+   }
+   
+   /**
+    * Cria um campo html para exibir um gride via ajax no formulário utilizando a classe TGrid
+    *
+    * @example $mixFormFields - campos do formulário que serão enviados para o grid na variavel $_POST. 'seq_x,des_x' ou array( 'seq_X'=>10, 'des_x')
+    * neste caso o valor de des_x será lido do campo do formulário
+    *
+    * @param string $strName            - 1: Nome do Campo
+    * @param string $strGridFile        - 2: Caminho do arquivo
+    * @param string $strGridId          - 3: Id do Grid
+    * @param string $strHeight          - 4:
+    * @param string $strWidth           - 5:
+    * @param string  $strLoadingMessage - 6:
+    * @param boolean $boolNewLine       - 7:
+    * @param mixed $mixFormFields       - 8: Exemplo de uso array( 'seq_documento'=>$frm->get('seq_documento') );
+    * @return THtml
+    */
+   public function addHtmlGride( $strName
+                               , $strGridFile
+                               , $strGridId
+                               , $strHeight=null
+                               , $strWidth=null
+                               , $strLoadingMessage=null
+                               , $boolNewLine=null
+                               , $mixFormFields=null )
+   {
+       //$strWidth = is_null($strWidth) ? $this->getMaxWidth() : $strWidth;
+       if( $strGridId )
+       {
+           $field = new THtml( $strName, null, null, $strHeight, $strWidth );
+           $field->setGridFile( $strGridFile, $strGridId, $mixFormFields );
+           $msgDefault = '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>';
+           $strLoadingMessage = is_null( $strLoadingMessage ) ? $msgDefault : $strLoadingMessage;
+           $field->setLoadingMessage( $strLoadingMessage );
+           $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+           return $field;
+       }
+   }
+           
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CPF
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCpf Field
+    */
+   public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCpf( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CNPJ
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCnpj Field
+    */
+   public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCnpj( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
+   /**
+    * Adicionar campo CPF/CNPJ, fazendo a validação do digito verificador
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strValue
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @return TCpfCnpj Field
+    */
+   public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   {
+       $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->setInvalidMessage( $strInvalidMessage );
+       $field->setAlwaysValidate( $boolAlwaysValidate );
+       $field->setCallback( $strJsCallback );
+       return $field;
+   }
+   //-----------------------------------------------------------------------------
            /**
             * Adicionar campo para informar o CEP
             *
             * Para preenchimento automático dos campos do formulário relacionados ao endereço,
             * informar o campo do formulário que deverá ser preenchido na lista de parametros.
             * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
-            * 	$frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+            * 
+            * <code>
+            * $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+            * </code>
             *
-            * Chama FormDin4.js getCepJquery que chama getCep.php que utiliza o serviço buscarcep.com.br
-            * Esse serviço é pago em 13-10-2017 estava disponivel a consulta gratuida via xml
+            * Chama o metodo getCepJquery no arquivo FormDin4Cep.js o parametro cepEngine irá 
+            * definir qual será o motor de consulta. ViaCep usando Json ou BuscarCep via XML.
+            * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
+            * algumas busca por dia de forma gratuita.
             *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strValue
-            * @param boolean $boolNewLine
-            * @param string $strFieldEndereco
-            * @param string $strFieldBairro
-            * @param string $strFieldCidade
-            * @param string $strFieldCodidoUf
-            * @param string $strFieldSiglaUf
-            * @param string $strFieldLogradouro
-            * @param string $strFieldNumero
-            * @param string $strFieldComplemento
-            * @param string $strFieldCodigoMunicipio
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @param string $jsCallback
+            * @param string $strName              -  1: Id do campo
+            * @param string $strLabel             -  2: Label do campo
+            * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+            * @param string $strValue             -  4: Valor inicial do campo
+            * @param boolean $boolNewLine         -  5: Nova linha 
+            * @param string $strFieldEndereco     -  6: id do campo endereço
+            * @param string $strFieldBairro       -  7: id do campo bairro
+            * @param string $strFieldCidade       -  8: id do campo cidade
+            * @param string $strFieldCodidoUf     -  9: id do campo cod uf ibge
+            * @param string $strFieldSiglaUf      - 10: id do campo sig uf
+            * @param string $strFieldLogradouro   - 11: id do campo logradouro
+            * @param string $strFieldNumero       - 12: id do campo numero
+            * @param string $strFieldComplemento  - 13: id do complemento
+            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio
+            * @param boolean $boolLabelAbove      - 15: Label sobre campo 
+            * @param boolean $boolNoWrapLabel     - 16:
+            * @param string $jsCallback           - 17: Js Callback
+            * @param string $jsBeforeSend         - 18: Js Before Send
+            * @param string $boolClearIncompleteValue - 19: 
+            * @param string $strIncompleteMessage - 20: Mensagem se for incompleto
+            * @param integer $cepEngine           - 21: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
             * @return TMask
             */
-           public function addCepField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $strFieldEndereco=null, $strFieldBairro=null, $strFieldCidade=null, $strFieldCodidoUf=null, $strFieldSiglaUf=null, $strFieldNumero=null, $strFieldComplemento=null, $strFieldCodigoMunicipio=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$jsCallback=null,$jsBeforeSend=null,$boolClearIncompleteValue=null,$strIncompleteMessage=null )
+           public function addCepField( $strName
+                                      , $strLabel=null
+                                      , $boolRequired=null
+                                      , $strValue=null
+                                      , $boolNewLine=null
+                                      , $strFieldEndereco=null
+                                      , $strFieldBairro=null
+                                      , $strFieldCidade=null
+                                      , $strFieldCodidoUf=null
+                                      , $strFieldSiglaUf=null
+                                      , $strFieldNumero=null
+                                      , $strFieldComplemento=null
+                                      , $strFieldCodigoMunicipio=null
+                                      , $boolLabelAbove=null
+                                      , $boolNoWrapLabel=null
+                                      , $jsCallback=null
+                                      , $jsBeforeSend=null
+                                      , $boolClearIncompleteValue=null
+                                      , $strIncompleteMessage=null
+                                      , $cepEngine=1)
            {
                $boolClearIncompleteValue = ( $boolClearIncompleteValue === false ? 'false' : 'true' );
                $field = new TMask( $strName, $strValue, '99.999-999', $boolRequired );
@@ -6564,7 +6637,6 @@ class TForm Extends TBox
                {
                    $arrFields[ 'endereco' ] = $strFieldEndereco;
                    $arrClearFields[ ] = $strFieldEndereco;
-                   $arrClearValues[ ] = '';
                }
                if( isset( $strFieldBairro ) )
                {
@@ -6611,14 +6683,20 @@ class TForm Extends TBox
                $qtd = CountHelper::count($arrFields);
                if( $qtd > 0 )
                {
-                   //$field->addEvent('onBlur','getCepJquery("'.$field->getId().'",'.json_encode($arrFields).')');
-                   $button = new TButton( $field->getId() . '_btn_consultar', 'Consultar', null, 'getCepJquery("' . $field->getId() . '",' . json_encode( $arrFields ) . ',' . ($jsCallback ? $jsCallback : 'null'). ',' . ($jsBeforeSend ? $jsBeforeSend : 'null').')', null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
-                   //$button->addEvent('onclick','getCepJqueryy("'.$field->getId().'",'.json_encode($arrFields).')');
+                   $buttonName = $field->getId() . '_btn_consultar';
+                   $getCepJsCallback = ($jsCallback ? $jsCallback : 'null');
+                   $getCepJsBeforeSend = ($jsBeforeSend ? $jsBeforeSend : 'null');
+                   if( $cepEngine == 2){
+                       $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+                   } else {
+                       $buttonOnClick = 'getCepJsonViaCep("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+                   }
+                   $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
                    $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
                    $field->add( $button );
-                   
                }
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+               $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+               $this->addDisplayControl( $displayControl );
                return $field;
            }
            
@@ -6642,15 +6720,15 @@ class TForm Extends TBox
             *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
             * </code>
             *
-            * @param string  $strName      - 1: ID do campo
-            * @param string  $strLabel     - 2: Label do campo
-            * @param boolean $boolRequired - 3: Obrigaorio
-            * @param mixed   $mixOptions   - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine  - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove-6: Label acima
-            * @param mixed   $mixValue      -7:
-            * @param boolean $boolMultiSelect-8:
-            * @param integer $intSize        -9
+            * @param string  $strName        - 1: ID do campo
+            * @param string  $strLabel       - 2: Label do campo
+            * @param boolean $boolRequired   - 3: Obrigatorio
+            * @param mixed   $mixOptions     - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+            * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+            * @param boolean $boolLabelAbove - 6: Label acima
+            * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
+            * @param boolean $boolMultiSelect- 8: True = MultiSelect , False = SingleSelect
+            * @param integer $intSize        - 9:
             * @param integer $intWidth       -10:
             * @param string  $strFirstOptionText - 11: First Key in Display
             * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
@@ -6695,8 +6773,8 @@ class TForm Extends TBox
             * @param array $arrOptions      - 4: Array Options
             * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param string  $strValue
-            * @param integer $intQtdColumns - 8: Quantidade de colunas
+            * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
+            * @param integer $intQtdColumns - 8: Quantidade de colunas, valor DEFAULT = 1;
             * @param integer $intWidth
             * @param integer $intHeight
             * @param integer $intPaddingItems
@@ -6730,13 +6808,13 @@ class TForm Extends TBox
             * @param string $strName         - 1: field ID
             * @param string $strLabel        - 2: Label field
             * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
-            * @param array $arrOptions       - 4: Array Options
+            * @param array $arrOptions       - 4: array no formato "key=>valeu" para identificar a(s) opção(ões) selecionada(s)
             * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
             * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param array $arrValues        - 7: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+            * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>keyOption" para maracar mais de um valor ao mesmo tempo
             * @param integer $intQtdColumns  - 8: Quantidade de colunas
-            * @param integer $intWidth
-            * @param integer $intHeight
+            * @param integer $intWidth       - 9: Largura
+            * @param integer $intHeight      -10: Al
             * @param integer $intPaddingItems
             * @param boolean $boolNoWrapLabel
             * @param boolean $boolNowrapText
@@ -6849,7 +6927,7 @@ class TForm Extends TBox
      * @param integer $intMaxLength      - 3: Quantidade maxima de digitos.
      * @param boolean $boolRequired      - 4: Obrigatorio
      * @param integer $intDecimalPlaces  - 5: Quantidade de casas decimais.
-     * @param boolean $boolNewLine       - 6: Campo em nova linha
+     * @param boolean $boolNewLine       - 6: Campo em nova linha. Default = true = inicia em nova linha, false = continua na linha anterior 
      * @param string $strValue           - 7: valor inicial do campo
      * @param string $strMinValue        - 8: valor minimo permitido. Null = não tem limite.
      * @param string $strMaxValue        - 9: valor maxima permitido. Null = não tem limite.
@@ -6933,58 +7011,70 @@ class TForm Extends TBox
 		return $field;
 	}
            
-           /**
-            * Adicinar campos para entrada de dados de coordenada geográfica no formato GMS ( GRAU, MIN E SEG )
-            *
-            * @param mixed $strName
-            * @param mixed $strLabel
-            * @param mixed $boolRequired
-            * @param mixed $boolNewLine
-            * @param mixed $strLatY
-            * @param mixed $strLonX
-            * @param mixed $strFieldNameLat
-            * @param mixed $strFieldNameLon
-            * @param string $strLabels - rótulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
-            * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vígula:. ex: °,',"
-            * @param mixed $intMapHeight
-            * @param mixed $intMapWidth
-            * @param mixed $boolLabelAbove
-            * @param mixed $boolNoWrapLabel
-            * @param string $strMapHeaderText
-            * @param string $strMapHeaderFontColor
-            * @param string $strMapHeaderFontSize
-            * @return TCoordGMS
-            */
-           public function addCoordGMSField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strLatY=null, $strLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strMapHeaderText=null,$strMapHeaderFontColor=null,$strMapHeaderFontSize=null)
-           {
-               $field = new TCoordGMS( $strName, $boolRequired, $strLatY, $strLonX, $strFieldNameLat, $strFieldNameLon, $strLabels, $strSymbols,$intSymbolsFontSize,$intMapHeight, $intMapWidth,$strMapHeaderText,$strMapHeaderFontColor,$strMapHeaderFontSize);
-               $field->setCustomHintEnabled( $this->getCustomHintEnabled() );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Campo para entrada de senhas
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param integer $intmaxLength
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @param integer $intSize
-            * @param boolean $boolUseVirtualKeyboard
-            * @param boolean $boolShowVirtualKeyboardImage
-            * @param boolean $boolReadOnly
-            * @return TPassword
-            */
-           public function addPasswordField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $intmaxLength=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$intSize=null , $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
-           {
-               $field = new TPassword( $strName, $strValue, $intmaxLength, $boolRequired, $intSize, $boolUseVirtualKeyboard, $boolShowVirtualKeyboardImage, $boolReadOnly);
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    /**
+    * Adicinar campos para entrada de dados de coordenada geográfica no formato GMS ( GRAU, MIN E SEG )
+    *
+    * @param mixed $strName
+    * @param mixed $strLabel
+    * @param mixed $boolRequired
+    * @param mixed $boolNewLine
+    * @param mixed $strLatY
+    * @param mixed $strLonX
+    * @param mixed $strFieldNameLat
+    * @param mixed $strFieldNameLon
+    * @param string $strLabels - rótulos dos campos separados por virgula: ex: 'Grau:,Min:,Seg:'
+    * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vígula:. ex: °,',"
+    * @param mixed $intMapHeight
+    * @param mixed $intMapWidth
+    * @param mixed $boolLabelAbove
+    * @param mixed $boolNoWrapLabel
+    * @param string $strMapHeaderText
+    * @param string $strMapHeaderFontColor
+    * @param string $strMapHeaderFontSize
+    * @return TCoordGMS
+    */
+    public function addCoordGMSField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strLatY=null, $strLonX=null, $strFieldNameLat=null, $strFieldNameLon=null, $strLabels=null, $strSymbols=null, $intSymbolsFontSize=null, $intMapHeight=null, $intMapWidth=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strMapHeaderText=null,$strMapHeaderFontColor=null,$strMapHeaderFontSize=null)
+    {
+        $field = new TCoordGMS( $strName, $boolRequired, $strLatY, $strLonX, $strFieldNameLat, $strFieldNameLon, $strLabels, $strSymbols,$intSymbolsFontSize,$intMapHeight, $intMapWidth,$strMapHeaderText,$strMapHeaderFontColor,$strMapHeaderFontSize);
+        $field->setCustomHintEnabled( $this->getCustomHintEnabled() );
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        return $field;
+    }
+
+    /**
+    * Campo para entrada de senhas
+    *
+    * @param string $strName              -1: Ida do campoa
+    * @param string $strLabel             -2: Label
+    * @param boolean $boolRequired        -3: Campo obrigatorio, DEFALUT is FALSE não obrigatorio.
+    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não obrigatorio.
+    * @param integer $intmaxLength        -5: Tamanho maximo
+    * @param string $strValue
+    * @param boolean $boolLabelAbove      -7: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolNoWrapLabel
+    * @param integer $intSize
+    * @param boolean $boolUseVirtualKeyboard
+    * @param boolean $boolShowVirtualKeyboardImage
+    * @param boolean $boolReadOnly
+    * @return TPassword
+    */
+    public function addPasswordField( $strName
+                                    , $strLabel=null
+                                    , $boolRequired=null
+                                    , $boolNewLine=null
+                                    , $intmaxLength=null
+                                    , $strValue=null
+                                    , $boolLabelAbove=null
+                                    , $boolNoWrapLabel=null
+                                    , $intSize=null
+                                    , $boolUseVirtualKeyboard=null
+                                    , $boolShowVirtualKeyboardImage=null
+                                    , $boolReadOnly=null )
+    {
+        $field = new TPassword( $strName, $strValue, $intmaxLength, $boolRequired, $intSize, $boolUseVirtualKeyboard, $boolShowVirtualKeyboardImage, $boolReadOnly);
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        return $field;
+    }
            /**
             * Campo para entrada de numero de processo do serviço público
             *
@@ -7349,41 +7439,50 @@ class TForm Extends TBox
                $field->setClass( 'ckeditor' );
                $field->setCss('height','0px');
                $this->addJsFile('ckeditor/ckeditor.js');
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, is_null($boolLabelAbove) ? true : $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+               $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
+               $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+               $this->addDisplayControl( $display );
                return $field;
            }
            
-           /**
-            * Criação de campo calendário de eventos tipo agenda
-            *
-            * @param string $strName
-            * @param string $strUrl
-            * @param string $strHeight
-            * @param string $strWidth
-            * @param mixed $defaultView
-            * @param string $jsOnResize
-            * @param string $jsOnDrag
-            * @param string $jsOnDrop
-            * @param string $jsOnEventClick
-            * @param string $jsOnSelectDay
-            * @param string $jsMouseOver
-            * @return TCalendar
-            */
-           public function addCalendarField( $strName, $strUrl=null,  $strHeight=null, $strWidth=null, $defaultView=null, $jsOnResize=null, $jsOnDrag=null, $jsOnDrop=null, $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
-           {
-               if( !DEFINED('INDEX_FILE_NAME') )
-               {
-                   DEFINE('INDEX_FILE_NAME','index.php');
-               }
-               if( ! is_null($strUrl) )
-               {
-                   $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
-               }
-               $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);
-               $field->setClass( 'fwCalendar',false );
-               $this->addDisplayControl( new TDisplayControl( null, $field, false,true,true  ) );
-               return $field;
-           }
-           
+   /**
+    * Criação de campo calendário de eventos tipo agenda
+    *
+    * @param string $strName           1: 
+    * @param string $strUrl
+    * @param string $strHeight
+    * @param string $strWidth
+    * @param mixed $defaultView
+    * @param string $jsOnResize
+    * @param string $jsOnDrag
+    * @param string $jsOnDrop
+    * @param string $jsOnEventClick
+    * @param string $jsOnSelectDay
+    * @param string $jsMouseOver
+    * @return TCalendar
+    */
+    public function addCalendarField( $strName
+                                    , $strUrl=null
+                                    , $strHeight=null
+                                    , $strWidth=null
+                                    , $defaultView=null
+                                    , $jsOnResize=null
+                                    , $jsOnDrag=null
+                                    , $jsOnDrop=null
+                                    , $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
+    {
+       if( !DEFINED('INDEX_FILE_NAME') )
+       {
+           DEFINE('INDEX_FILE_NAME','index.php');
+       }
+       if( ! is_null($strUrl) )
+       {
+           $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
+       }
+       $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);
+       $field->setClass( 'fwCalendar',false );
+       $this->addDisplayControl( new TDisplayControl( null, $field, false,true,true  ) );
+       return $field;
+    }      
 }
 ?>

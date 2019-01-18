@@ -52,14 +52,17 @@ class TGridSelectColumn extends TGridEditColumn
 	*
 	* Ex: addSelectColumn('seq_tipo','TIPO','SEQ_TIPO','1=Um,2=Dois');
 	*
-	* @param string $strEditName
-	* @param string $strTitle
-	* @param string $strFieldName
-	* @param mixed $mixOptions
-	* @param string $strWidth
-	* @param boolean $boolReadOnly
+	* @param string $strEditName        - 1: ID do campos
+	* @param string $strTitle           - 2: Titulo que irá aparecer no grid
+	* @param string $strFieldName       - 3: Nome do campo do gride
+	* @param mixed $mixOptions          - 4: Opções caso o Campo do gride não seja um array
+	* @param string $strWidth           - 5: largura do campos
+	* @param boolean $boolReadOnly      - 6: Somente Leiura
 	* @param string $strFirstOptionText
-	* @param string $initialValueField
+	* @param string $strFirstOptionValue
+	* @param string $strKeyField
+	* @param string $strDisplayField
+	* @param string $strInitialValueField
 	*
 	* @return TGridSelectColumn
 	*/
@@ -75,8 +78,17 @@ class TGridSelectColumn extends TGridEditColumn
 	///---------------------------------------------------------------------------------------------------
 	public function getEdit()
 	{
-	 	$edit = new TSelect(strtolower($this->getEditName()).'['.$this->getKeyValue().']',$this->getOptions(),$this->getValue(),false,false,null,$this->getWidth(),$this->getFirstOptionText(),null,$this->getKeyField(),$this->getDisplayField());
-	 	$edit->setId(strtolower($this->getEditName()).'_'.$this->getRowNum());
+	    $strName = strtolower($this->getEditName()).'['.$this->getKeyValue().']';
+	    $edit = new TSelect($strName
+	                       ,$this->getOptions()
+	                       ,$this->getValue()
+	                       ,false
+	                       ,false
+	                       ,null
+	                       ,$this->getWidth()
+	                       ,$this->getFirstOptionText(),null,$this->getKeyField(),$this->getDisplayField());
+	    $id = strtolower($this->getEditName()).'_'.$this->getRowNum();
+	    $edit->setId( $id );
         $edit->setCss($this->getCss());
         $edit->setEvents($this->getEvents());
 		// adicionar o nome do campo como attibuto do input

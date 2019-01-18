@@ -67,6 +67,25 @@ class ArrayHelper
         return $value;
     }
     
+    /**
+     * Similar to array_keys. But it does not generate an Warning message in PHP7.2.X
+     * 
+     * Semelhante to array_keys. Mas não gera mensagem de Alerta no PHP7.2.X
+     * 
+     * @param array $array
+     * @param mixed $search_value
+     * @param boolean $strict
+     * @return array
+     */
+    static function array_keys2($array, $search_value = null,$strict = false)
+    {
+        $value = array();
+        if (is_array($array)) {
+            $value = array_keys($array, $search_value,$strict);
+        }
+        return $value;
+    }
+    
     /***
      *
      * @param array  $array
@@ -91,6 +110,32 @@ class ArrayHelper
         return $result;
     }
     
+    static function getArray($array,$atributeName)
+    {
+        if(!isset($array[$atributeName])) {
+            $array[$atributeName]=array();
+        }
+        return is_null($array[$atributeName])?array():$array[$atributeName];
+    }
+    
+    /***
+     * Evita erro de notice. Recebe um array FormDin, um atributo e a chave.
+     * Verifica se o atributo e achave existem e devolve o valor
+     * @param array $array
+     * @param string $atributeName
+     * @param int $key
+     * @return NULL|mixed|array
+     */
+    static function getArrayFormKey($array,$atributeName,$key)
+    {
+        $value = null;
+        if( self::has($atributeName, $array) ) {
+            $arrayResult = self::getArray($array, $atributeName);
+            $value = self::get($arrayResult, $key);
+        }
+        return $value;
+    }
+
     /**
      * Convert Array PDO Format to FormDin format
      *

@@ -11,6 +11,7 @@ $pdf->AddPage();
 //a classe TPDF procura pela funcao cabecalho() e se existir sera executada recebendo a instancia da classe TPDF
 function cabecalho($pdf)
 {
+    $pdf->Image('imagem/appv1_logo.png',10,6,30);
     $pdf->SetTextColor(0, 64, 128);
     $pdf->setFont('', 'B', 14);
     $pdf->cell(0, 5, APLICATIVO.' - v:'.SYSTEM_VERSION, 0, 1, 'C');

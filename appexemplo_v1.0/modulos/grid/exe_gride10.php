@@ -53,7 +53,15 @@ $frm->addJsFile('jquery/facebox/facebox.js');
 $frm->addCssFile('jquery/facebox/facebox.css');
 $frm->addSelectField('cod_uf', 'Estado:')->setOptions($frm->getUfs("COD_UF,SIG_UF"));
 
-$gride = new TGrid('gd5', 'Gride Nº 5', 'TESTE.PKG_MOEDA.SEL_MOEDA', 50, null, null, null, null, null, 'gd5OnDrawCell', 'gd5OnDrawRow', null, 'gd5onDrawButton');
+
+$dados = array(
+    'NOM_UF'=>array(0=>'DF',1=>'GO',2=>'SP')
+   ,'COD_UF'=>array(0=>'DF',1=>'GO',2=>'SP')
+   ,'NOME'=>array(0=>'Luiz E',1=>'Kleber',2=>'Rafael')
+   ,'QTD'=>array(0=>10,1=>3,2=>89)
+);
+
+$gride = new TGrid('gd5', 'Gride Nº 5', $dados, 50, null, null, null, null, null, 'gd5OnDrawCell', 'gd5OnDrawRow', null, 'gd5onDrawButton');
 $gride->addExcelHeadField('Estado', 'cod_uf');
 $gride->addExcelHeadField('Nome', 'nom_pessoa');
 $gride->addExcelHeadField('Biomas', 'cod_bioma');

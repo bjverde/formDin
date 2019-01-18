@@ -1391,7 +1391,9 @@ class TDAO
 	{
 		if ( $this->getMetadataDir() && $this->getTableName() )
 		{
-			file_put_contents( $this->getMetadataDir() . $this->getConnDbType() . '-' . $this->getTableName() . '.ser', serialize( $this->getFields() ) );
+		    $filename = $this->getMetadataDir() . $this->getConnDbType() . '-' . $this->getTableName() . '.ser';
+		    $data = serialize( $this->getFields() );
+		    file_put_contents( $filename, $data );
 		}
 	}
     /**
@@ -1829,6 +1831,7 @@ class TDAO
 		
 		if ( is_array( $data ) ){
 			foreach( $data as $k => $row ) {
+				$boolPrimaryKey = ArrayHelper::get($row,'PRIMARYKEY');
 				$this->addField( trim( $row[ 'COLUMN_NAME' ] )
 				               , trim( strtolower($row[ 'DATA_TYPE' ]) )
 				               , ( (int) $row[ 'NUM_LENGTH' ] > 0 ? $row[ 'NUM_LENGTH' ] : $row[ 'CHAR_MAX' ] )
@@ -1836,7 +1839,7 @@ class TDAO
 				               , $row[ 'COLUMN_DEFAULT' ]
 				               , $row[ 'REQUIRED' ]
 				               , $row[ 'AUTOINCREMENT' ]
-				               , $row[ 'PRIMARYKEY']);
+				               , $boolPrimaryKey);
 			}
 			if ( is_array( $this->getfields() ) ) {
 				$this->serializeFields();

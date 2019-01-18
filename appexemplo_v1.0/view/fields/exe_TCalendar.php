@@ -64,11 +64,13 @@ if (RequestHelper::get('ajax')) {
     die();
 }
 
-$frm = new TForm('Exemplo Agenda', 500, 600);
+$frm = new TForm('Exemplo Agenda', 500, 800);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-$f = $frm->addCalendarField('agenda', 'exe_TCalendar.php', 400, null, null, null, null, null, 'onEventClick', 'onSelectDay');
+$frm->addCalendarField('agenda'
+                           ,'view/fields/exe_TCalendar.php'
+                           , 400, null, null, null, null, null, 'onEventClick', 'onSelectDay');
 $frm->setAction('Atualizar');
 $frm->show();
 ?>

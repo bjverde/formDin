@@ -35,7 +35,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-$frm = new TForm('Exemplo de Cadastramento Mestre - Detalhe', 240);
+$frm = new TForm('Exemplo de Cadastramento Mestre - Detalhe', 360);
 $frm->addHtmlField('obs', '<b>Este exemplo utiliza as tabelas tb_pedido e tb_pedido_item do banco de dados bdApoio.s3db ( sqlite )</b>');
 $frm->addGroupField('gpPedido', 'Pedido'); // criar um grupo para os campos da tabela MESTRE
     $frm->addTextField('id_pedido', 'Nº', 5, true, 5)->setReadOnly(true)->setCss('font-size', '14')->setcss('color', 'blue')->setCss('text-align', 'center')->setCss('font-weight', 'bold'); // coluna chave da tabela de pedido
@@ -68,7 +68,7 @@ function inicializar()
     jQuery("#gpItem_area").hide('fast',function(){fwSetFocus('data_pedido')});
     jQuery("#html_gride_itens").html('');
     jQuery("#btnSalvarPedido").show();
-    fwSetFormHeight(240);
+    //fwSetFormHeight(360);
 }
 function validarPedido()
 {

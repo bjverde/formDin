@@ -1,7 +1,7 @@
 <?php
 require_once '../classes/webform/TElement.class.php';
 /**
- * TDiv test case.
+ * TElement test case.
  */
 class TElementTest extends PHPUnit_Framework_TestCase {
 	

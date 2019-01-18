@@ -101,12 +101,5 @@ class TTextEditor extends TMemo
 		return str_replace(chr(147), '"', parent::getValue()); //substitui aspas erradas pelas corretas
 	}
 
-
 }
-/*
-return;
-$memo = new TTextEditor('obs_exemplo','Luis',500,false,50,10);
-$memo->setValue('<b>Luis Eugênio Barbosa,</b><br><br> estou lhe enviando este e-mail para confirmar se o precos da propsota está de acordo com o que combinamos ontem.');
-$memo->show();
-*/
 ?>

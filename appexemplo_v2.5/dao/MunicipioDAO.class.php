@@ -9,33 +9,52 @@ class MunicipioDAO extends TPDOConnection {
 									 ,m.sit_ativo
 									 from municipio m';
 
-
-	public static function selectCount(){
-		$sql = 'select count(cod_municipio) as qtd from municipio';
-		$result = self::executeSql($sql);
-		return $result['QTD'][0];
+	private static function processWhereGridParameters( $whereGrid ) {
+		$result = $whereGrid;
+		if ( is_array($whereGrid) ){
+			$where = ' 1=1 ';
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_MUNICIPIO', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_UF', SqlHelper::SQL_TYPE_NUMERIC);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOM_MUNICIPIO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+			$result = $where;
+		}
+		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function select( $id ) {
+	public static function selectById( $id ) {
+		if( empty($id) || !is_numeric($id) ){
+			throw new InvalidArgumentException();
+		}
 		$values = array($id);
 		$sql = self::$sqlBasicSelect.' where cod_municipio = ?';
 		$result = self::executeSql($sql, $values );
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function selectAllSqlPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null) {
+	public static function selectCount( $where=null ){
+		$where = self::processWhereGridParameters($where);
+		$sql = 'select count(cod_municipio) as qtd from form_exemplo.municipio';
+		$sql = $sql.( ($where)? ' where '.$where:'');
+		$result = self::executeSql($sql);
+		return $result['QTD'][0];
+	}
+	//--------------------------------------------------------------------------------
+	public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {
 		$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);
-		
+		$where = self::processWhereGridParameters($where);
+
 		$sql = self::$sqlBasicSelect
 		.( ($where)? ' where '.$where:'')
 		.( ($orderBy) ? ' order by '.$orderBy:'')
 		.( ' LIMIT '.$rowStart.','.$rowsPerPage);
-		
+
 		$result = self::executeSql($sql);
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
 	public static function selectAll( $orderBy=null, $where=null ) {
+		$where = self::processWhereGridParameters($where);
 		$sql = self::$sqlBasicSelect
 		.( ($where)? ' where '.$where:'')
 		.( ($orderBy) ? ' order by '.$orderBy:'');
@@ -45,27 +64,23 @@ class MunicipioDAO extends TPDOConnection {
 	}
 	//--------------------------------------------------------------------------------
 	public static function insert( MunicipioVO $objVo ) {
-		if( $objVo->getCod_municipio() ) {
-			return self::update($objVo);
-		}
 		$values = array(  $objVo->getCod_uf() 
 						, $objVo->getNom_municipio() 
 						, $objVo->getSit_ativo() 
 						);
-		return self::executeSql('insert into municipio(
+		return self::executeSql('insert into form_exemplo.municipio(
 								 cod_uf
 								,nom_municipio
 								,sit_ativo
 								) values (?,?,?)', $values );
 	}
 	//--------------------------------------------------------------------------------
-	public static function update ( MunicipioVO $objVo )
-	{
+	public static function update ( MunicipioVO $objVo ) {
 		$values = array( $objVo->getCod_uf()
 						,$objVo->getNom_municipio()
 						,$objVo->getSit_ativo()
 						,$objVo->getCod_municipio() );
-		return self::executeSql('update municipio set 
+		return self::executeSql('update form_exemplo.municipio set 
 								 cod_uf = ?
 								,nom_municipio = ?
 								,sit_ativo = ?
@@ -74,7 +89,7 @@ class MunicipioDAO extends TPDOConnection {
 	//--------------------------------------------------------------------------------
 	public static function delete( $id ){
 		$values = array($id);
-		return self::executeSql('delete from municipio where cod_municipio = ?',$values);
+		return self::executeSql('delete from form_exemplo.municipio where cod_municipio = ?',$values);
 	}
 }
 ?>
