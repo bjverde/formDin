@@ -416,7 +416,20 @@ class TForm Extends TBox
             }
             //print '<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFecharFormulario(\''.$this->getId().'\',\''.$sub.'\',\''.$this->getOnClose().'\');">';
         }
-    }    
+    }
+    
+    private function showHeaderHelpOnline(){
+        if( $this->getHelpOnline() )
+        {
+            //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnhelp.gif" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Visualizar arquivo de Ajuda" onClick="fwMostrarAjuda(\''.$this->getHelpFile().'\');"/>');
+            $this->headerCloseButton->add( $this->getHelpOnLine() );
+        }
+    }
+    
+    private function showHeaderBarButtonArea($form){
+        $this->showCloseButtonOnForm($form);
+        $this->showHeaderHelpOnline();
+    }
     
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
@@ -722,12 +735,7 @@ class TForm Extends TBox
         $this->add( $form );
         // o formulario será estruturado em uma Table com cabecalho ,corpo e rodape
         $form->add( $this->table );
-        $this->showCloseButtonOnForm($form);
-        if( $this->getHelpOnline() )
-        {
-            //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnhelp.gif" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Visualizar arquivo de Ajuda" onClick="fwMostrarAjuda(\''.$this->getHelpFile().'\');"/>');
-            $this->headerCloseButton->add( $this->getHelpOnLine() );
-        }
+        $this->showHeaderBarButtonArea($form);
         // adicionar os campos
         if( is_array( $this->displayControls ) )
         {
