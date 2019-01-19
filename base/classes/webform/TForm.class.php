@@ -407,29 +407,35 @@ class TForm Extends TBox
                 $confirm = $this->getConfirmOnClose() ? 'true' : 'false';
                 if( ! $this->get('modalWinId') )
                 {
-                    $this->headerBarButtonArea->add( '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">' );
-                    if( $this->getMaximize() ) {
-                        $this->headerBarButtonArea->add( '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">' ,false);
-                    }
+                    $button = '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">';
+                    $this->headerBarButtonArea->add( $button );
                 } else {
-                    $this->headerBarButtonArea->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">' );
+                    $button = '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">';
+                    $this->headerBarButtonArea->add( $button );
                 }
             }
-            //print '<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFecharFormulario(\''.$this->getId().'\',\''.$sub.'\',\''.$this->getOnClose().'\');">';
         }
     }
     
     private function showHeaderHelpOnline(){
-        if( $this->getHelpOnline() )
-        {
+        if( $this->getHelpOnline() ) {
             //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnhelp.gif" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Visualizar arquivo de Ajuda" onClick="fwMostrarAjuda(\''.$this->getHelpFile().'\');"/>');
             $this->headerBarButtonArea->add( $this->getHelpOnLine() );
         }
     }
     
+    private function showHeaderMaximizeButtonOnForm($form){
+        $notModal = !$this->get('modalWinId'); 
+        if( $notModal && $this->getMaximize() ) {
+            $button = '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">';
+            $this->headerBarButtonArea->add( $button ,false);
+        }
+    }
+    
     private function showHeaderBarButtonArea($form){
-        $this->showCloseButtonOnForm($form);
         $this->showHeaderHelpOnline();
+        $this->showHeaderMaximizeButtonOnForm($form);
+        $this->showCloseButtonOnForm($form);
     }
     
     /**
