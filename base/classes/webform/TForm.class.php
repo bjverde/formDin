@@ -383,6 +383,42 @@ class TForm Extends TBox
     }
     
     /**
+     * Mostra o Botão Fechar no Form
+     */
+    private function showCloseButtonOnForm($form){
+        // adicionar o botao fechar
+        if( $this->getShowCloseButton() )
+        {
+            $sub = 'null';
+            if( isset( $_REQUEST[ 'subform' ] ) && $_REQUEST[ 'subform' ] )
+            {
+                $this->addHiddenField( 'subform', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
+                $sub = '1';
+            }
+            // integração com o modulo onlinesearch que possibilita fazer cadastro on-line quando a pesquisa retorna sem resultado
+            if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
+            {
+                $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">' );
+                $this->addHiddenField( 'onLineSearch', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
+            }
+            else
+            {
+                $confirm = $this->getConfirmOnClose() ? 'true' : 'false';
+                if( ! $this->get('modalWinId') )
+                {
+                    $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">' );
+                    if( $this->getMaximize() ) {
+                        $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">' ,false);
+                    }
+                } else {
+                    $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">' );
+                }
+            }
+            //print '<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFecharFormulario(\''.$this->getId().'\',\''.$sub.'\',\''.$this->getOnClose().'\');">';
+        }
+    }    
+    
+    /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
      * $print = true - exibe o formulário no browser
@@ -686,36 +722,7 @@ class TForm Extends TBox
         $this->add( $form );
         // o formulario será estruturado em uma Table com cabecalho ,corpo e rodape
         $form->add( $this->table );
-        // adicionar o botao fechar
-        if( $this->getShowCloseButton() )
-        {
-            $sub = 'null';
-            if( isset( $_REQUEST[ 'subform' ] ) && $_REQUEST[ 'subform' ] )
-            {
-                $this->addHiddenField( 'subform', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
-                $sub = '1';
-            }
-            // integração com o modulo onlinesearch que possibilita fazer cadastro on-line quando a pesquisa retorna sem resultado
-            if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
-            {
-                $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">' );
-                $this->addHiddenField( 'onLineSearch', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
-            }
-            else
-            {
-                $confirm = $this->getConfirmOnClose() ? 'true' : 'false';
-                if( ! $this->get('modalWinId') )
-                {
-                    $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">' );
-                    if( $this->getMaximize() ) {
-                        $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">' ,false);
-                    }
-                } else {
-                    $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">' );
-                }
-            }
-            //print '<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFecharFormulario(\''.$this->getId().'\',\''.$sub.'\',\''.$this->getOnClose().'\');">';
-        }
+        $this->showCloseButtonOnForm($form);
         if( $this->getHelpOnline() )
         {
             //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnhelp.gif" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Visualizar arquivo de Ajuda" onClick="fwMostrarAjuda(\''.$this->getHelpFile().'\');"/>');
