@@ -95,6 +95,7 @@ class TForm Extends TBox
     private $title;
     public $header;
     public $headerCloseButton;
+    private $headerBarButtonArea;
     private $showCloseButton;
     public $body;
     public $footer;
@@ -314,8 +315,8 @@ class TForm Extends TBox
         $this->header = new TTableCell();
         $this->header->setId( $this->getId() . '_header' );
         
-        $this->headerCloseButton = new TTableCell();
-        $this->headerCloseButton->setClass( 'fwTitleBarButtonArea' );
+        $this->headerBarButtonArea = new TTableCell();
+        $this->headerBarButtonArea->setClass( 'fwTitleBarButtonArea' );
         
         $this->header->setClass( 'fwTitleBar' );
         $this->setTitle( $strTitle );
@@ -398,7 +399,7 @@ class TForm Extends TBox
             // integração com o modulo onlinesearch que possibilita fazer cadastro on-line quando a pesquisa retorna sem resultado
             if( isset( $_REQUEST[ 'onLineSearch' ] ) && $_REQUEST[ 'onLineSearch' ] )
             {
-                $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">' );
+                $this->headerBarButtonArea->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFazerAcao(\'Sair\')");">' );
                 $this->addHiddenField( 'onLineSearch', 1 )->setProperty('noClear','true'); // evitar que a funcao js fwClearFields() limpe este campo;
             }
             else
@@ -406,12 +407,12 @@ class TForm Extends TBox
                 $confirm = $this->getConfirmOnClose() ? 'true' : 'false';
                 if( ! $this->get('modalWinId') )
                 {
-                    $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">' );
+                    $this->headerBarButtonArea->add( '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">' );
                     if( $this->getMaximize() ) {
-                        $this->headerCloseButton->add( '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">' ,false);
+                        $this->headerBarButtonArea->add( '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">' ,false);
                     }
                 } else {
-                    $this->headerCloseButton->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">' );
+                    $this->headerBarButtonArea->add( '<img src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="top.app_close_modal_window();">' );
                 }
             }
             //print '<img src="'.$this->getBase().'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwFecharFormulario(\''.$this->getId().'\',\''.$sub.'\',\''.$this->getOnClose().'\');">';
@@ -422,7 +423,7 @@ class TForm Extends TBox
         if( $this->getHelpOnline() )
         {
             //$this->headerCloseButton->add('<img src="'.$this->getBase().'imagens/fwbtnhelp.gif" style="cursor:pointer;float:right;width:28px; height:15px;vertical-align:top;margin-right:2px;" title="Visualizar arquivo de Ajuda" onClick="fwMostrarAjuda(\''.$this->getHelpFile().'\');"/>');
-            $this->headerCloseButton->add( $this->getHelpOnLine() );
+            $this->headerBarButtonArea->add( $this->getHelpOnLine() );
         }
     }
     
@@ -621,7 +622,7 @@ class TForm Extends TBox
                 //$this->header->clearChildren();
                 $this->header->add( $this->getTitle() );
                 $row->add( $this->header );
-                $row->add( $this->headerCloseButton );
+                $row->add( $this->headerBarButtonArea );
                 $this->header->setCss( 'width', $this->getWidth() - 70 );
                 if( $this->getMaximize() == true )
                 {
@@ -5717,14 +5718,20 @@ class TForm Extends TBox
        {
            return $this->header;
        }
+       
        /**
         * Retorna o objeto TTableCell referente a area do botão fechar da janela
-        *
+        * @deprecated use getHeaderBarButtonArea
         */
        public function getHeaderButtonCell()
        {
-           return $this->headerCloseButton;
+           return $this->getHeaderBarButtonArea();
        }
+       public function getHeaderBarButtonArea()
+       {
+           return $this->headerBarButtonArea;
+       }
+       
        public function getFooterButtons()
        {
            return $this->footerButtons;
