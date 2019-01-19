@@ -7348,118 +7348,121 @@ class TForm Extends TBox
     	return null;
     }
            
-           public function addCaptchaField( $strName, $strLabel=null, $hint=null,$intCaracters=null )
-           {
-               $field = new TCaptcha( $strName, $hint, $intCaracters );
-               
-               $strLabel = isset($strLabel) ? $strLabel : null;
-               $field    = isset($field) ? $field : null;
-               $boolLabelAbove= isset($boolLabelAbove) ? $boolLabelAbove : null;
-               $boolNewLine   = isset($boolNewLine) ? $boolNewLine : null;
-               $boolNoWrapLabel = isset($boolNoWrapLabel) ? $acao : null;
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
-               return $field;
-           }
-           /**
-            * Adiciona no form uma area para mostrar as mensagens ao usuario identica as mensagens do topo do form
-            * diferenciando que nesta pode-se definir a mensagem em qualquer lugar do form e será exibida com a mesma formatação da padrão
-            * <code>
-            *		$frm->addMessageField('msg_local');
-            * 		<script> fwShowMessage({message:"Mensagem em local especifico<br>Linha2<br>linha3","containerId":"msg_local"});</script>
-            *	</code>
-            *
-            * @param string $strName Nome do campos mensagem
-            * @return THtml
-            */
-           public function addMessageField( $strName=null,$intHeight=null )
-           {
-               $field 	= $this->addHtmlField( $this->getId().'_'.$strName. '_msg_area','');
-               $field->setCss( 'visibility', 'visible' );
-               $field->setCss('width','0px');
-               $btn 	= new TButton( 'btn_close_' .$this->getId() .'_'.$strName.'_msg_area', 'Fechar', null, 'fwHideMsgArea("'.$this->getId() .'_'.$strName.'")', null, 'fwbtnclosered.jpg', null, 'Fechar mensagem' );
-               $btn->setCss( 'float', 'right' );
-               $btn->setCss( 'cursor', 'pointer' );
-               $btn->setCss('visibility','visible');
-               $field->add( $btn );
-               $field->add( '<div id="' .$this->getId() .'_'.$strName. '_msg_area_content' . '"></div>' );
-               return $field;
-           }
-           /**
-            * Campo para seleção de Diretório ou Pasta
-            * @param string $strName
-            * @param string $rootDir
-            * @param string $strValue
-            * @param int $intMaxLength
-            * @param bool $boolRequired
-            * @param int $intSize
-            * @param bool $boolLabelAbove
-            * @param bool $boolNewLine
-            * @return TOpenDir
-            */
-           public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null
-                                          , $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
-           {
-               $field = new TOpenDir( $strName, $rootDir, $strValue, $intMaxLength, $boolRequired, $intSize, $strTitle, $strJsCallBack);
-               $boolNoWrapLabel = isset($boolNoWrapLabel) ? $boolNoWrapLabel : null;
-               $TDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
-               $this->addDisplayControl( $TDisplayControl );
-               return $field;
-           }
-           /**
-            * Campo para seleção de fuso horário
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param mixed $mixValue
-            * @param integer $intSize
-            * @param integer $intWidth
-            * @param string $strFirstOptionText
-            * @param string $strFirstOptionValue
-            * @param boolean $boolNoWrapLabel
-            * @return TTimeZone
-            */
-           public function addTimeZoneField( $strName, $strLabel=null, $boolRequired=null,$boolNewLine=null, $boolLabelAbove=null, $mixValue=null, $intSize=null, $intWidth=null, $strFirstOptionText=null, $strFirstOptionValue=null, $boolNoWrapLabel=null )
-           {
-               $field = new TTimeZone( $strName, $mixValue, $boolRequired, $intSize, $intWidth, $strFirstOptionText, $strFirstOptionValue);
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    public function addCaptchaField( $strName, $strLabel=null, $hint=null,$intCaracters=null )
+    {
+       $field = new TCaptcha( $strName, $hint, $intCaracters );
+       
+       $strLabel = isset($strLabel) ? $strLabel : null;
+       $field    = isset($field) ? $field : null;
+       $boolLabelAbove= isset($boolLabelAbove) ? $boolLabelAbove : null;
+       $boolNewLine   = isset($boolNewLine) ? $boolNewLine : null;
+       $boolNoWrapLabel = isset($boolNoWrapLabel) ? $acao : null;
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+       return $field;
+    }
+    
+    /**
+    * Adiciona no form uma area para mostrar as mensagens ao usuario identica as mensagens do topo do form
+    * diferenciando que nesta pode-se definir a mensagem em qualquer lugar do form e será exibida com a mesma formatação da padrão
+    * <code>
+    *		$frm->addMessageField('msg_local');
+    * 		<script> fwShowMessage({message:"Mensagem em local especifico<br>Linha2<br>linha3","containerId":"msg_local"});</script>
+    *	</code>
+    *
+    * @param string $strName Nome do campos mensagem
+    * @return THtml
+    */
+    public function addMessageField( $strName=null,$intHeight=null )
+    {
+       $field 	= $this->addHtmlField( $this->getId().'_'.$strName. '_msg_area','');
+       $field->setCss( 'visibility', 'visible' );
+       $field->setCss('width','0px');
+       $btn 	= new TButton( 'btn_close_' .$this->getId() .'_'.$strName.'_msg_area', 'Fechar', null, 'fwHideMsgArea("'.$this->getId() .'_'.$strName.'")', null, 'fwbtnclosered.jpg', null, 'Fechar mensagem' );
+       $btn->setCss( 'float', 'right' );
+       $btn->setCss( 'cursor', 'pointer' );
+       $btn->setCss('visibility','visible');
+       $field->add( $btn );
+       $field->add( '<div id="' .$this->getId() .'_'.$strName. '_msg_area_content' . '"></div>' );
+       return $field;
+    }
+    
+    /**
+    * Campo para seleção de Diretório ou Pasta
+    * @param string $strName
+    * @param string $rootDir
+    * @param string $strValue
+    * @param int $intMaxLength
+    * @param bool $boolRequired
+    * @param int $intSize
+    * @param bool $boolLabelAbove
+    * @param bool $boolNewLine
+    * @return TOpenDir
+    */
+    public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null
+                                  , $intMaxLength=null, $boolRequired=null, $intSize=null, $strTitle=null, $strJsCallBack=null, $boolLabelAbove=null, $boolNewLine=null)
+    {
+       $field = new TOpenDir( $strName, $rootDir, $strValue, $intMaxLength, $boolRequired, $intSize, $strTitle, $strJsCallBack);
+       $boolNoWrapLabel = isset($boolNoWrapLabel) ? $boolNoWrapLabel : null;
+       $TDisplayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+       $this->addDisplayControl( $TDisplayControl );
+       return $field;
+    }
            
-           /**
-            * Adiciona um editor de texto (CKEDITOR)
-            * @author Daniel Andrade
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param string $strValue
-            * @param boolean $boolNoWrapLabel
-            * @return TTextEditor
-            */
-           public function addTextEditorField( $strName
-           		                             , $strLabel=null
-           		                             , $boolRequired=null
-           		                             , $boolNewLine=null
-           		                             , $strValue=null
-           		                             , $boolLabelAbove=null
-           		                             , $boolNoWrapLabel=true )
-           {
-               $field = new TTextEditor( $strName
-               		                   , $strValue
-               		                   , null
-               		                   , $boolRequired, null, null, false );
-               $field->setClass( 'ckeditor' );
-               $field->setCss('height','0px');
-               $this->addJsFile('ckeditor/ckeditor.js');
-               $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
-               $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
-               $this->addDisplayControl( $display );
-               return $field;
-           }
+    /**
+    * Campo para seleção de fuso horário
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @param mixed $mixValue
+    * @param integer $intSize
+    * @param integer $intWidth
+    * @param string $strFirstOptionText
+    * @param string $strFirstOptionValue
+    * @param boolean $boolNoWrapLabel
+    * @return TTimeZone
+    */
+    public function addTimeZoneField( $strName, $strLabel=null, $boolRequired=null,$boolNewLine=null, $boolLabelAbove=null, $mixValue=null, $intSize=null, $intWidth=null, $strFirstOptionText=null, $strFirstOptionValue=null, $boolNoWrapLabel=null )
+    {
+       $field = new TTimeZone( $strName, $mixValue, $boolRequired, $intSize, $intWidth, $strFirstOptionText, $strFirstOptionValue);
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
+           
+    /**
+    * Adiciona um editor de texto (CKEDITOR)
+    * @author Daniel Andrade
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @param string $strValue
+    * @param boolean $boolNoWrapLabel
+    * @return TTextEditor
+    */
+    public function addTextEditorField( $strName
+    	                             , $strLabel=null
+    	                             , $boolRequired=null
+    	                             , $boolNewLine=null
+    	                             , $strValue=null
+    	                             , $boolLabelAbove=null
+    	                             , $boolNoWrapLabel=true )
+    {
+       $field = new TTextEditor( $strName
+       		                   , $strValue
+       		                   , null
+       		                   , $boolRequired, null, null, false );
+       $field->setClass( 'ckeditor' );
+       $field->setCss('height','0px');
+       $this->addJsFile('ckeditor/ckeditor.js');
+       $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
+       $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+       $this->addDisplayControl( $display );
+       return $field;
+    }
            
    /**
     * Criação de campo calendário de eventos tipo agenda
