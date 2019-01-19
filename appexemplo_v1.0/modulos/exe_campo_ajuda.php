@@ -52,7 +52,7 @@ $frm->addBoxField('bxNome2', 'Informe o nome completo do proprietário do terren
 
 
 $frm->addHtmlField('html3', 'Exemplo de ajuda utilizando boxField com imagem.')->setCss('color', 'blue');
-$frm->addBoxField('bxImagem', null, $this->getBase()."js/jquery/facebox/stairs.jpg", null, 'Visualizar Foto:', 'folder.gif', true, null, null, 'Imagem');
+$frm->addBoxField('bxImagem', null, $frm->getBase()."js/jquery/facebox/stairs.jpg", null, 'Visualizar Foto:', 'folder.gif', true, null, null, 'Imagem');
 
 
 $frm->addHtmlField('html4', 'Exemplo de ajuda utilizando setHelpOnLine.')->setCss('color', 'blue');
