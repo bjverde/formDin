@@ -6206,39 +6206,41 @@ class TForm Extends TBox
                    }
                }
            }
-           //-----------------------------------------------------------------------------
-           /**
-            * Define se o form deve redimensionar a area central da aplicação para a sua altura
-            * evitando a barra de rolagem vertical dentro do iframe central e exibindo
-            * a barra vertical do browser.
-            *
-            * @param boolean $boolNewValue
-            */
-           public function setAppFitFormHeight($boolNewValue=null)
-           {
-               $this->appFitFormHeight = $boolNewValue;
-           }
-           
-           public function getAppFitFormHeight()
-           {
-               return $this->appFitFormHeight;
-           }
-           
-           /**
-            * Define o alinhamento dos rótulos dos campos.
-            * Os valores válidos são:center,left ou right.
-            * O padrão é left
-            *
-            * @param string $strNewValue
-            */
-           public function setLabelsAlign($strNewValue=null) {
-               $this->labelsAlign = $strNewValue;
-               return $this;
-           }
-           //-----------------------------------------------------------------------------
-           public function getLabelsAlign(){
-               return $this->labelsAlign;
-           }
+    //-----------------------------------------------------------------------------
+    /**
+    * Define se o form deve redimensionar a area central da aplicação para a sua altura
+    * evitando a barra de rolagem vertical dentro do iframe central e exibindo
+    * a barra vertical do browser.
+    *
+    * @param boolean $boolNewValue
+    */
+    public function setAppFitFormHeight($boolNewValue=null)
+    {
+       $this->appFitFormHeight = $boolNewValue;
+    }
+    
+    public function getAppFitFormHeight()
+    {
+       return $this->appFitFormHeight;
+    }
+    
+    /**
+    * Define o alinhamento dos rótulos dos campos.
+    * Os valores válidos são:center,left ou right.
+    * O padrão é left
+    *
+    * @param string $strNewValue
+    */
+    public function setLabelsAlign($strNewValue=null) {
+       $this->labelsAlign = $strNewValue;
+       return $this;
+    }
+    
+    //-----------------------------------------------------------------------------
+    public function getLabelsAlign(){
+       return $this->labelsAlign;
+    }
+    
    //-----------------------------------------------------------------------------
     /**
     * Adiciona um campo oculto ao layout
@@ -7090,153 +7092,157 @@ class TForm Extends TBox
         $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
         return $field;
     }
-           /**
-            * Campo para entrada de numero de processo do serviço público
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param string $boolRequired
-            * @param string $boolNewLine
-            * @param string $strValue
-            * @param string $boolLabelAbove
-            * @return TProcesso
-            */
-           public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TProcesso( $strName, $strValue, $boolRequired );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
+    
+    /**
+    * Campo para entrada de numero de processo do serviço público
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param string $boolRequired
+    * @param string $boolNewLine
+    * @param string $strValue
+    * @param string $boolLabelAbove
+    * @return TProcesso
+    */
+    public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    {
+       $field = new TProcesso( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
+    
+    /**
+    * Campos para anexar arquivo. Pode ser um carregamento sincrono ou assincrono via ajax.
+    *
+    * Será incluido no $_POST 4 elementos com os nomes:
+    * <code>
+    *   $_POST['strName_temp'] - caminho temporario;
+    *   $_POST['strName_type'] - mime type;
+    *   $_POST['strName_size'] - tamanho em kb;
+    *   $_POST['strName_name'] - nome arquivo;
+    * </code>
+    *
+    * @param string  $strName         - id do campo
+    * @param string  $strLabel        - Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired    - Obrigatorio 
+    * @param string  $strAllowedFileTypes - Tipos de arquivos
+    * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+    * @param integer $intFieldSize
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @return TFile / TFileAsyn
+    */
+    public function addFileField( $strName
+                               , $strLabel=null
+                               , $boolRequired=null
+                               , $strAllowedFileTypes=null
+                               , $strMaxFileSize=null
+                               , $intFieldSize=null
+                               , $boolAsync=null
+                               , $boolNewLine=null
+                               , $strJsCallBack=null
+                               , $boolLabelAbove=null
+                               , $boolNoWrapLabel=null
+                               , $strMessageInvalidFileType=null ) {
+           $this->setEncType( 'multipart/form-data' );
+           if( $boolAsync === false ) {
+               $field = new TFile( $strName, $intFieldSize, $boolRequired, $strAllowedFileTypes, $strMaxFileSize );
+           } else {
+               $field = new TFileAsync( $strName, $intFieldSize, $boolRequired, $strAllowedFileTypes, $strMaxFileSize, null, $strJsCallBack , $strMessageInvalidFileType);
            }
+           $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+           return $field;
+    }
            
-           /**
-            * Campos para anexar arquivo. Pode ser um carregamento sincrono ou assincrono via ajax.
-            *
-            * Será incluido no $_POST 4 elementos com os nomes:
-            * <code>
-            *   $_POST['strName_temp'] - caminho temporario;
-            *   $_POST['strName_type'] - mime type;
-            *   $_POST['strName_size'] - tamanho em kb;
-            *   $_POST['strName_name'] - nome arquivo;
-            * </code>
-            *
-            * @param string  $strName         - id do campo
-            * @param string  $strLabel        - Rotulo do campo que irá aparece na tela
-            * @param boolean $boolRequired    - Obrigatorio 
-            * @param string  $strAllowedFileTypes - Tipos de arquivos
-            * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-            * @param integer $intFieldSize
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @return TFile / TFileAsyn
-            */
-           public function addFileField( $strName
-               , $strLabel=null
-               , $boolRequired=null
-               , $strAllowedFileTypes=null
-               , $strMaxFileSize=null
-               , $intFieldSize=null
-               , $boolAsync=null
-               , $boolNewLine=null
-               , $strJsCallBack=null
-               , $boolLabelAbove=null
-               , $boolNoWrapLabel=null
-               , $strMessageInvalidFileType=null ) {
-                   $this->setEncType( 'multipart/form-data' );
-                   if( $boolAsync === false ) {
-                       $field = new TFile( $strName, $intFieldSize, $boolRequired, $strAllowedFileTypes, $strMaxFileSize );
-                   } else {
-                       $field = new TFileAsync( $strName, $intFieldSize, $boolRequired, $strAllowedFileTypes, $strMaxFileSize, null, $strJsCallBack , $strMessageInvalidFileType);
-                   }
-                   $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
-                   return $field;
-           }
+    /**
+    * Classe para criação de campos de entrada de dados com máscara de edição
+    *
+    * a - Represents an alpha character (A-Z,a-z)
+    * 9 - Represents a numeric character (0-9)
+    * * - Represents an alphanumeric character (A-Z,a-z,0-9)
+    *
+    * @link http://digitalbush.com/projects/masked-input-plugin/
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strMask
+    * @param boolean $boolNewLine
+    * @param string $strValue
+    * @param boolean $boolLabelAbove
+    * @return TMask
+    */
+    public function addMaskField( $strName, $strLabel=null, $boolRequired=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strExampleText=null )
+    {
+       $field = new TMask( $strName, $strValue, $strMask, $boolRequired );
+       $field->setExampleText( $strExampleText );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       
+       return $field;
+    }
            
-           /**
-            * Classe para criação de campos de entrada de dados com máscara de edição
-            *
-            * a - Represents an alpha character (A-Z,a-z)
-            * 9 - Represents a numeric character (0-9)
-            * * - Represents an alphanumeric character (A-Z,a-z,0-9)
-            *
-            * @link http://digitalbush.com/projects/masked-input-plugin/
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strMask
-            * @param boolean $boolNewLine
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @return TMask
-            */
-           public function addMaskField( $strName, $strLabel=null, $boolRequired=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strExampleText=null )
-           {
-               $field = new TMask( $strName, $strValue, $strMask, $boolRequired );
-               $field->setExampleText( $strExampleText );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               
-               return $field;
-           }
-           /**
-            * Campo para criação de hiperlink no formulário
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param string $strValue
-            * @param string $strOnClick
-            * @param string $strUrl
-            * @param string $strTarget
-            * @param boolean $boolNewLine
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @param string $strHint
-            * @return TLink
-            */
-           public function addLinkField( $strName, $strLabel=null, $strValue=null, $strOnClick=null, $strUrl=null, $strTarget=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
-           {
-               $field = new TLink( $strName, $strValue, $strOnClick, $strUrl, $strTarget, $strHint );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Método para criar campo de edição de horas
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param boolean $boolRequired
-            * @param string $strMinValue
-            * @param string $strMaxValue
-            * @param string $strMask
-            * @param boolean $boolNewLine
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @return TTime
-            */
-           public function addTimeField( $strName, $strLabel=null, $boolRequired=null, $strMinValue=null, $strMaxValue=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TTime( $strName, $boolRequired, $strValue, $strMinValue, $strMaxValue, $strMask );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           /**
-            * Adiciona campo para seleção de cor
-            *
-            * @param string $strName
-            * @param string $strLabel
-            * @param mixed $boolRequired
-            * @param mixed $boolNewLine
-            * @param string $strValue
-            * @param boolean $boolLabelAbove
-            * @param boolean $boolNoWrapLabel
-            * @return TColorPicker
-            */
-           public function addColorPickerField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
-           {
-               $field = new TColorPicker( $strName, $boolRequired, $strValue );
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
+    /**
+    * Campo para criação de hiperlink no formulário
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param string $strValue
+    * @param string $strOnClick
+    * @param string $strUrl
+    * @param string $strTarget
+    * @param boolean $boolNewLine
+    * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @param string $strHint
+    * @return TLink
+    */
+    public function addLinkField( $strName, $strLabel=null, $strValue=null, $strOnClick=null, $strUrl=null, $strTarget=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+    {
+       $field = new TLink( $strName, $strValue, $strOnClick, $strUrl, $strTarget, $strHint );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
+           
+    /**
+    * Método para criar campo de edição de horas
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param boolean $boolRequired
+    * @param string $strMinValue
+    * @param string $strMaxValue
+    * @param string $strMask
+    * @param boolean $boolNewLine
+    * @param string $strValue
+    * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @return TTime
+    */
+    public function addTimeField( $strName, $strLabel=null, $boolRequired=null, $strMinValue=null, $strMaxValue=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    {
+       $field = new TTime( $strName, $boolRequired, $strValue, $strMinValue, $strMaxValue, $strMask );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
+           
+    /**
+    * Adiciona campo para seleção de cor
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param mixed $boolRequired
+    * @param mixed $boolNewLine
+    * @param string $strValue
+    * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @return TColorPicker
+    */
+    public function addColorPickerField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    {
+       $field = new TColorPicker( $strName, $boolRequired, $strValue );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
 	
     /**
     * Adicionar treeview ao formulário.
@@ -7347,16 +7353,24 @@ class TForm Extends TBox
     	$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, 'bottom' ) );
     	return null;
     }
-           
+    
+    /***
+     * 
+     * @param string $strName
+     * @param string $strLabel
+     * @param string $hint
+     * @param integer $intCaracters
+     * @return NULL|TCaptcha
+     */
     public function addCaptchaField( $strName, $strLabel=null, $hint=null,$intCaracters=null )
     {
        $field = new TCaptcha( $strName, $hint, $intCaracters );
        
        $strLabel = isset($strLabel) ? $strLabel : null;
        $field    = isset($field) ? $field : null;
-       $boolLabelAbove= isset($boolLabelAbove) ? $boolLabelAbove : null;
-       $boolNewLine   = isset($boolNewLine) ? $boolNewLine : null;
-       $boolNoWrapLabel = isset($boolNoWrapLabel) ? $acao : null;
+       $boolLabelAbove= null;
+       $boolNewLine   = null;
+       $boolNoWrapLabel = null;
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
        return $field;
     }
