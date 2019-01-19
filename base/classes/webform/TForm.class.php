@@ -426,16 +426,20 @@ class TForm Extends TBox
     
     private function showHeaderMaximizeButtonOnForm($form){
         $notModal = !$this->get('modalWinId'); 
-        if( $notModal && $this->getMaximize() ) {
+        $boolMaximize = $this->getMaximize();
+        if( $notModal && $boolMaximize ) {
             $button = '<img id="btn_'.$form->getId().'_max_min" src="' . $this->getBase() . 'imagens/fwbtnmaximize.png" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Maximizar" onClick="fwFullScreen(\''.$form->getId().'\')">';
-            $this->headerBarButtonArea->add( $button ,false);
+            $this->headerBarButtonArea->add( $button );
         }
     }
     
+    /***
+     * Show 3 Buttons Help, Maximize, Close
+     */
     private function showHeaderBarButtonArea($form){
-        $this->showHeaderHelpOnline();
-        $this->showHeaderMaximizeButtonOnForm($form);
         $this->showCloseButtonOnForm($form);
+        $this->showHeaderMaximizeButtonOnForm($form);
+        $this->showHeaderHelpOnline();
     }
     
     /**
