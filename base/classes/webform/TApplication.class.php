@@ -441,10 +441,13 @@ class TApplication extends TLayout {
 				if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
 					$this->cellLogin->add ( '<br/>' . $btnLogOut );
 				}
-			} else {
+			} 
+			/*
+			else {
 				$this->cellHeader->clearChildren (); // limpar a celula da tabela
 				$this->cellHeader->add ( $this->getHeaderContent () );
 			}
+			*/
 		} else {
 			// montar o cabeçalho da pagina
 			$this->buildPageHeader ();
@@ -1322,69 +1325,131 @@ class TApplication extends TLayout {
 	public function getHorizontalAlign() {
 		return is_null ( $this->horizontalAlign ) ? 'center' : $this->horizontalAlign;
 	}
+	
+	private function getHeaderLogo() {
+	    $app_header_logo = new TDiv( 'app_header_logo' );
+	    $sigla = $this->getSigla();
+	    $app_header_logo->add( $sigla );
+	    return $app_header_logo;
+	}
+	
+	private function getHeaderSubTitle() {
+	    $app_header_subtitle = null;
+	    if ( $this->getSubtitle() ) {
+	        $app_header_subtitle = new TDiv( 'app_header_subtitle' );
+	        $title = $this->getSubtitle();
+	        $app_header_subtitle->add( $title );
+	    }
+	    return $app_header_subtitle;
+	}
+	
+	private function getHeaderTitle() {
+	    $app_header_title = new TDiv( 'app_header_title' );
+	    //$app_header_title->setAttribute('class','elm');
+	    
+	    $app_header_title_main = new TDiv( 'app_header_title_main' );
+	    $title = $this->getTitle();
+	    $app_header_title_main->add( $title );
+	    
+	    $app_header_title->add( $app_header_title_main );
+	    $app_header_title->add( $this->getHeaderSubTitle() );
+	    
+	    return $app_header_title;
+	}
+	
+	private function getHeaderLogin() {
+	    $app_header_login = new TDiv( 'app_header_login' );
+	    //$sigla = $this->getLoginDone();
+	    $app_header_login->add( 'xxxxx' );
+	    return $app_header_login;
+	}
+	
+	
 	private function buildPageHeader() {
-		/**
-		 * tabela do cabeçalho
-		 * ids: app_header_logo ,app_header_title, app_header_login
-		 */
-		$tbCab = new TTable ( 'table_header' );
-		$tbCab->setProperty ( 'width', '100%' );
-		$tbCab->setProperty ( 'border', '0' );
-		$tbCab->setProperty ( 'cellpadding', '0px' );
-		$tbCab->setProperty ( 'cellspacing', '0px' );
-		$this->getNorthArea ()->add ( $tbCab );
-		
-		if ($this->getHeaderContent ()) {
-			// cabeçalho definido pelo usuário
-			$row = $tbCab->addRow ();
-			$cellHeader = $row->addCell ( $this->getHeaderContent () );
-			$cellHeader->setId ( 'app_header' );
-			$cellHeader->clearCss ();
-			$cellHeader->setCss ( 'text-align', 'left' );
-			$cellHeader->setCss ( 'font-size', '14px' );
-			$cellHeader->setCss ( 'border-top', 'none' );
-			$cellHeader->setCss ( 'font-weight', 'normal' );
-			$cellHeader->setCss ( 'line-height', '100%' );
-			// td do cabeçalho
-			$this->cellHeader = $cellHeader;
-		} else {
-			$row = $tbCab->addRow ();
-			// app_header_logo
-			$app_header_logo = $row->addCell ( $this->getSigla () );
-			$app_header_logo->setId ( 'app_header_logo' );
-			$app_header_logo->setCss ( 'width', '200' );
-			// app_header_title
-			$app_header_title = $row->addCell ( $this->getTitle () );
-			$app_header_title->setId ( 'app_header_title' );
-			$app_header_title->setCss ( 'Height', '55' );
-			$app_header_title->setCss ( 'width', '*' );
-			
-			if ($this->getSubtitle ()) {
-				$app_header_title->add ( '<br><span style="font-size:15px;" id="app_header_subtitle">' . $this->getSubtitle () . '</span>' );
-			}
-			
-			$app_header_title->clearCss ();
-			$app_header_title->setCss ( 'background-color', 'transparent' );
-			
-			if (defined ( 'COR_TITULO' )) {
-				$app_header_title->setCss ( 'color', COR_TITULO );
-			}
-			
-			// app_header_login
-			$app_header_login = $row->addCell ( '' );
-			$app_header_login->setId ( 'app_header_login' );
-			$app_header_login->setCss ( 'Height', '55' );
-			$app_header_login->setCss ( 'width', '200' );
-			
-			// propriedades da class
-			$this->cellHeader = $app_header_title;
-			$this->cellLogin = $app_header_login;
-			$this->cellLogo = $app_header_logo;
-			$this->cellLogo->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-			$this->cellHeader->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-			$this->cellLogin->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-		}
-	}	
+	    
+	    $app_hearder = new TDiv( 'header' );
+	    
+	    if ($this->getHeaderContent ()) {
+	        $app_hearderUser = new TDiv( 'app_header' );
+	        $app_hearderUser->add( $this->getHeaderContent() );
+	        $app_hearder->add( $app_hearderUser );
+	    }else{
+	        $app_header_logo  = $this->getHeaderLogo();
+	        $app_header_title = $this->getHeaderTitle();
+	        $app_header_login = $this->getHeaderLogin();
+	        
+	        $app_hearder->add( $app_header_logo );
+	        $app_hearder->add( $app_header_title );
+	        $app_hearder->add( $app_header_login );
+	    }
+	    
+	    $this->getNorthArea ()->add ( $app_hearder );
+	    
+	    /**
+	     * tabela do cabeçalho
+	     * ids: app_header_logo ,app_header_title, app_header_login
+	     */
+	    
+	    /*
+	     $tbCab = new TTable ( 'table_header' );
+	     $tbCab->setProperty ( 'width', '100%' );
+	     $tbCab->setProperty ( 'border', '0' );
+	     $tbCab->setProperty ( 'cellpadding', '0px' );
+	     $tbCab->setProperty ( 'cellspacing', '0px' );
+	     $this->getNorthArea ()->add ( $tbCab );
+	     
+	     if ($this->getHeaderContent ()) {
+	     // cabeçalho definido pelo usuário
+	     $row = $tbCab->addRow ();
+	     $cellHeader = $row->addCell ( $this->getHeaderContent () );
+	     $cellHeader->setId ( 'app_header' );
+	     $cellHeader->clearCss ();
+	     $cellHeader->setCss ( 'text-align', 'left' );
+	     $cellHeader->setCss ( 'font-size', '14px' );
+	     $cellHeader->setCss ( 'border-top', 'none' );
+	     $cellHeader->setCss ( 'font-weight', 'normal' );
+	     $cellHeader->setCss ( 'line-height', '100%' );
+	     // td do cabeçalho
+	     $this->cellHeader = $cellHeader;
+	     } else {
+	     $row = $tbCab->addRow ();
+	     // app_header_logo
+	     $app_header_logo = $row->addCell ( $this->getSigla () );
+	     $app_header_logo->setId ( 'app_header_logo' );
+	     $app_header_logo->setCss ( 'width', '200' );
+	     // app_header_title
+	     $app_header_title = $row->addCell ( $this->getTitle () );
+	     $app_header_title->setId ( 'app_header_title' );
+	     $app_header_title->setCss ( 'Height', '55' );
+	     $app_header_title->setCss ( 'width', '*' );
+	     
+	     if ($this->getSubtitle ()) {
+	     $app_header_title->add ( '<br><span style="font-size:15px;" id="app_header_subtitle">' . $this->getSubtitle () . '</span>' );
+	     }
+	     
+	     $app_header_title->clearCss ();
+	     $app_header_title->setCss ( 'background-color', 'transparent' );
+	     
+	     if (defined ( 'COR_TITULO' )) {
+	     $app_header_title->setCss ( 'color', COR_TITULO );
+	     }
+	     
+	     // app_header_login
+	     $app_header_login = $row->addCell ( '' );
+	     $app_header_login->setId ( 'app_header_login' );
+	     $app_header_login->setCss ( 'Height', '55' );
+	     $app_header_login->setCss ( 'width', '200' );
+	     
+	     // propriedades da class
+	     $this->cellHeader = $app_header_title;
+	     $this->cellLogin = $app_header_login;
+	     $this->cellLogo = $app_header_logo;
+	     $this->cellLogo->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
+	     $this->cellHeader->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
+	     $this->cellLogin->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
+	     }
+	     */
+	}
 	
 	/**
 	 * Build defaulf page Footer  Div: app_footer
