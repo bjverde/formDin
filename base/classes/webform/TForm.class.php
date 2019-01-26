@@ -7383,12 +7383,13 @@ class TForm Extends TBox
     {
        $field = new TCaptcha( $strName, $hint, $intCaracters );
        
-       $strLabel = isset($strLabel) ? $strLabel : null;
-       $field    = isset($field) ? $field : null;
-       $boolLabelAbove= null;
-       $boolNewLine   = null;
-       $boolNoWrapLabel = null;
-       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true ) );
+       $strLabel        = isset($strLabel) ? $strLabel : null;
+       $field           = isset($field) ? $field : null;
+       $boolLabelAbove  = isset($boolLabelAbove) ? $boolLabelAbove : null;
+       $boolNewLine     = isset($boolNewLine) ? $boolNewLine : null;
+       $boolNoWrapLabel = isset($boolNoWrapLabel) ? $acao : null;
+       $tDisplay = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+       $this->addDisplayControl( $tDisplay );
        return $field;
     }
     
