@@ -40,7 +40,6 @@
 
 define("APLICATIVO","TEST");
 define("TITULO_SISTEMA","SistemaS de TesteS");
-define("COR_TITULO","black");
 define("FORMDINCSS","css/FormDin.css");
 define('PASTA_BASE','base/');
 define("DEBUG",1);
