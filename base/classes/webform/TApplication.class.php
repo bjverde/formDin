@@ -419,41 +419,11 @@ class TApplication extends TLayout {
 		$this->setJavaScriptCss();
 		
 		if ($this->getLoginDone ()) {
-			// montar o cabeçalho da pagina
-			$this->buildPageHeader ();
-			
-			$btnLogOut = '';
-			
-			// montar o rodapé da pagina
-			$this->buildPageFooter ();
-			
-			if (isset ( $this->cellLogin )) {
-				// exibir o botão de ecerrar a sessão somente se existir tela de login definida
-				if ($this->getLoginFile ()) {
-					$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sessão" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
-				}
-				if ($this->getLoginInfo ()) {
-					$this->cellLogin->add ( $this->getLoginInfo () );
-				} else if (isset ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) && $_SESSION [APLICATIVO] ["login"] ["num_cpf"]) {
-					$this->cellLogin->add ( 'CPF:' . formatar_cpf_cnpj ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) . '<br/>' . $_SESSION [APLICATIVO] ["login"] ["nom_pessoa"] );
-				}
-				
-				if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
-					$this->cellLogin->add ( '<br/>' . $btnLogOut );
-				}
-			} 
-			/*
-			else {
-				$this->cellHeader->clearChildren (); // limpar a celula da tabela
-				$this->cellHeader->add ( $this->getHeaderContent () );
-			}
-			*/
+		    $this->buildPageHeader(); // montar o cabeçalho da pagina
+			$this->buildPageFooter(); // montar o rodapé da pagina
 		} else {
-			// montar o cabeçalho da pagina
-			$this->buildPageHeader ();
-			
-			// montar o rodapé da pagina
-			$this->buildPageFooter ();
+		    $this->buildPageHeader(); // montar o cabeçalho da pagina
+		    $this->buildPageFooter(); // montar o rodapé da pagina
 			
 			// $this->loCenter->setNorthInitClosed(true); // não mostrar a área de menu
 			if ($this->getLoginInfo () && isset ( $this->cellLogin )) {
@@ -1358,9 +1328,25 @@ class TApplication extends TLayout {
 	}
 	
 	private function getHeaderLogin() {
+	    
+	    $userInfo  = null;
+	    $btnLogOut = null;
+	    // exibir o botão de ecerrar a sessão somente se existir tela de login definida
+	    if ($this->getLoginFile ()) {
+	        $btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sessão" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
+	    }
+	    if ($this->getLoginInfo ()) {
+	        $userInfo = $this->getLoginInfo ();
+	    } else if (isset ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) && $_SESSION [APLICATIVO] ["login"] ["num_cpf"]) {
+	        $userInfo = 'CPF:' . formatar_cpf_cnpj ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) . '<br/>' . $_SESSION [APLICATIVO] ["login"] ["nom_pessoa"] ;
+	    }
+	    
+	    if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
+	        $userInfo =  $userInfo. '<br/>' . $btnLogOut;
+	    }	    
+	    
 	    $app_header_login = new TDiv( 'app_header_login' );
-	    //$sigla = $this->getLoginDone();
-	    $app_header_login->add( 'xxxxx' );
+	    $app_header_login->add( $userInfo );
 	    return $app_header_login;
 	}
 	
