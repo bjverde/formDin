@@ -88,9 +88,6 @@ class TApplication extends TLayout {
 	private $bodyContent;
 	private $horizontalAlign;
 	private $verticalAlign;
-	private $cellLogin;
-	private $cellHeader;
-	private $cellLogo;
 	private $loCenter; // instância do LayoutCenter
 	private $beforeActionFunction;
 	private $width;
@@ -1524,19 +1521,7 @@ class TApplication extends TLayout {
 		}
 		return $this->menuTheme;
 	}
-	public function getCellLogo()
-	{
-		return $this->cellLogo;
-	}
-	public function getCellHeader()
-	{
-		return $this->cellHeader;
-	}
-	public function getCellLogin()
-	{
-		return $this->cellLogin;
-	}
-
+	
 	public function setOnBeforeLogin( $strFunctionName = null )
 	{
 		$this->onBeforeLogin = $strFunctionName;
