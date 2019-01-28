@@ -1354,7 +1354,8 @@ class TApplication extends TLayout {
 	
 	private function buildPageHeader() {
 	    
-	    $app_hearder = new TDiv( 'header' );
+	    $app_hearder = new TElement('header');
+	    //$app_hearder = new TDiv( 'header' );
 	    
 	    if ( $this->getHeaderContent() ) {
 	        $app_hearderUser = new TDiv( 'app_header' );
@@ -1383,7 +1384,8 @@ class TApplication extends TLayout {
 			return;
 		}
 		
-		$app_footer = new TDiv( 'footer' );		
+		$app_footer = new TElement('footer');
+		//$app_footer = new TDiv( 'footer' );		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
