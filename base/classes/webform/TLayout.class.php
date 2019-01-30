@@ -185,7 +185,7 @@ class TLayout extends THtmlPage {
 	    $this->addJsFile( 'jquery-1.9/jquery-1.9.1.js');
 	    $this->addJsFile( 'jquery-1.9/jquery-migrate-1.4.1.js');
 	    $this->addJsFile( 'jquery/jquery.metadata.js' );           //não migrado
-	    $this->addJsFile( 'jquery/jquery.corner.js' );             //não migrado
+	    $this->addJsFile( 'js_new/corner/jquery.corner.1.3.2.js' );
 	    $this->addJsFile( 'jquery/jlayout/jquery.jlayout-1.3.js'); //não migrado
 	    $this->addJsFile( 'js_new/jqueryui/jquery-ui-1.12.1.min.js');
 	}else{
