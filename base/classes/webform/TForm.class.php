@@ -218,6 +218,11 @@ class TForm Extends TBox
             $this->addJsFile( 'FormDin4.js' );
             $this->addJsFile( 'FormDin4Ajax.js' );
             
+            //Font Awesome Icons
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-brands.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-regular.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-solid.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
             
             if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }
             if(MIGRATE_JQUERY){
@@ -225,27 +230,24 @@ class TForm Extends TBox
                 $this->addJsFile( 'jquery-1.9/jquery-migrate-1.4.1.js');
                 $this->addJsFile( 'jquery/jquery.metadata.js' );           //não migrado
                 $this->addJsFile( 'js_new/corner/jquery.corner.1.3.2.js' );
-                $this->addJsFile( 'js_new/jlayout/jquery.jlayout-1.4.3.js'); //não migrado
+                $this->addJsFile( 'js_new/jlayout/jquery.jlayout-1.4.3.js'); 
                 $this->addJsFile( 'js_new/jqueryui/jquery-ui-1.12.1.min.js');
+                $this->addJsFile( 'jquery/jAlert/jquery.alerts.js' );      //não migrado
+                $this->addCssFile('jquery/jAlert/jquery.alerts.css' );
+                $this->addCssFile('jquery/ui/base/base.css' );        
+                $this->addJsFile( 'js_new/shortcuts/jquery.shortcuts.0.8.js' ); 
             }else{
                 $this->addJsFile( 'jquery/jquery.js' );
                 $this->addJsFile( 'jquery/jquery.metadata.js' );
                 $this->addJsFile( 'jquery/jquery.corner.js' );
                 $this->addJsFile( 'jquery/jlayout/jquery.jlayout-1.3.js');
                 $this->addJsFile( 'jquery/jquery-ui-all.js');
+                $this->addJsFile( 'jquery/jAlert/jquery.alerts.js' );
+                $this->addCssFile('jquery/jAlert/jquery.alerts.css' );
+                $this->addCssFile('jquery/ui/base/base.css' );
+                $this->addJsFile( 'jquery/shortcuts/jquery.shortcuts.min.js' );
             }
-            //Font Awesome Icons
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-brands.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-regular.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-solid.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
-            
-            
-            
-            $this->addJsFile( 'jquery/jAlert/jquery.alerts.js' );
-            $this->addCssFile('jquery/jAlert/jquery.alerts.css' );
-            $this->addCssFile('jquery/ui/base/base.css' );
-            $this->addJsFile( 'jquery/shortcuts/jquery.shortcuts.min.js' );
+
             $this->addJsFile( 'jquery/tablesorter/jquery.tablesorter.min.js' );
             $this->addCssFile('jquery/tablesorter/themes/blue/formdin.css' );
             
