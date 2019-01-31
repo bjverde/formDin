@@ -238,10 +238,9 @@ class TForm Extends TBox
                 $this->addJsFile( 'js_new/shortcuts/jquery.shortcuts.0.8.js' );
                 $this->addJsFile( 'jquery/tablesorter/jquery.tablesorter.min.js' ); //não migrado
                 $this->addCssFile('jquery/tablesorter/themes/blue/formdin.css' );
-                //$this->addJsFile( 'jquery/tooltip/jquery.tooltip.js' );  //não migrado
+                $this->addJsFile( 'jquery/tooltip/jquery.tooltip.js' );  //não migrado
                 $this->addCssFile( 'jquery/tooltip/jquery.tooltip.css' );
                 $this->addJsFile( 'js_new/meiomask/jquery.meio.mask.1.1.14.js' );
-                //$this->addJsFile( 'jquery/jquery.meio.mask.min.js' );
             }else{
                 $this->addJsFile( 'jquery/jquery.js' );
                 $this->addJsFile( 'jquery/jquery.metadata.js' );
