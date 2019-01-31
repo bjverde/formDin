@@ -96,38 +96,7 @@ class TMask extends TEdit
 			$js = new TElement('script');
 			$js->setProperty('type',"text/javascript");
 			$js->add('jQuery("#'.$this->getId().'").setMask("'.$this->getMask().'");');
-            /*
-			if( ! $this->getUsePlaceHolder() )
-			{
-				// usar o plugin: jquery/jquery.meio.mask.min.js
-				$js->add('jQuery("#'.$this->getId().'").setMask("'.$this->getMask().'");');
-			}
-			else
-			{
-				$placeHolder = $this->getMaskPlaceHoder();
-				// usar o plugin: jquery/jquery.maskedinput.min.js
-				$js->add('jQuery("#'.$this->getId().'").mask("'.$this->getMask().'",{placeholder:"'.$placeHolder.'"});');
-			}
-			*/
-			//$placeHolder = $this->getMaskPlaceHoder();
-			// usar o plugin: jquery/jquery.maskedinput.min.js
-			//$js->add('jQuery("#'.$this->getId().'").mask("'.$this->getMask().'",{placeholder:"'.$placeHolder.'"});');
 			$this->add($js);
-			//$this->addEvent('onFocus','MaskInput(this,"'.$this->getMask().'")');
-			//$this->addEvent('onFocus','jQuery("#'.$this->getId().'").mask("'.$this->getMask().'",{placeholder:"_"})');
-			/*
-			$js = new TElement('script');
-			$js->setProperty('type',"text/javascript");
-			$js->add('jQuery("#'.$this->getId().'").mask("'.$this->getMask().'",{placeholder:"'.$this->getMaskPlaceHoder().'"});');
-			$this->add($js);
-			*/
-			/*  exemplos;
-			$("#product").mask("99/99/9999",{completed:function(){alert("You typed the following: "+this.val());}});
-			jQuery(function($){
-				$.mask.definitions['~']='[+-]';
-   				$("#eyescript").mask("~9.99 ~9.99 999");
-			});
-			*/
 		}
 		return parent::show($print);
 	}
