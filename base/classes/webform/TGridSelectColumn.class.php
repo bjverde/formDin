@@ -56,7 +56,7 @@ class TGridSelectColumn extends TGridEditColumn
 	* @param string $strTitle           - 2: Titulo que irá aparecer no grid
 	* @param string $strFieldName       - 3: Nome do campo do gride
 	* @param mixed $mixOptions          - 4: Opções caso o Campo do gride não seja um array
-	* @param string $strWidth           - 5: largura do campos
+	* @param string $strWidth           - 5: largura do campos em piexel
 	* @param boolean $boolReadOnly      - 6: Somente Leiura
 	* @param string $strFirstOptionText
 	* @param string $strFirstOptionValue
@@ -66,7 +66,17 @@ class TGridSelectColumn extends TGridEditColumn
 	*
 	* @return TGridSelectColumn
 	*/
-	public function __construct($strEditName,$strTitle,$strFieldName,$mixOptions=null,$strWidth=null,$boolReadOnly=null,$strFirstOptionText=null,$strFirstOptionValue=null, $strKeyField=null,$strDisplayField=null,$strInitialValueField=null)
+	public function __construct($strEditName
+	                           ,$strTitle
+	                           ,$strFieldName
+	                           ,$mixOptions=null
+	                           ,$strWidth=null
+	                           ,$boolReadOnly=null
+	                           ,$strFirstOptionText=null
+	                           ,$strFirstOptionValue=null
+	                           ,$strKeyField=null
+	                           ,$strDisplayField=null
+	                           ,$strInitialValueField=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strFieldName,'select',null,null,null,$strWidth,null,$boolReadOnly);
 		$this->setOptions($mixOptions);

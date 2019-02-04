@@ -6735,222 +6735,225 @@ class TForm Extends TBox
            }
            
            //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo tipo combobox ou menu select
-            *
-            * $mixOptions = array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * $strKeyColumn = nome da coluna que será utilizada para preencher os valores das opções
-            * $strDisplayColumn = nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
-            * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
-            *
-            * <code>
-            * 	// exemplos
-            * 	$frm->addSelectField('tipo','Tipo:',false,'1=Tipo 1,2=Tipo 2');
-            * 	$frm->addSelectField('tipo','Tipo:',false,'tipo');
-            * 	$frm->addSelectField('tipo','Tipo:',false,'select * from tipo order by descricao');
-            * 	$frm->addSelectField('tipo','Tipo:',false,'tipo|descricao like "F%"');
-            *
-            *  //Exemplo espcial - Campo obrigatorio e sem senhum elemento pre selecionado.
-            *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
-            * </code>
-            *
-            * @param string  $strName        - 1: ID do campo
-            * @param string  $strLabel       - 2: Label do campo
-            * @param boolean $boolRequired   - 3: Obrigatorio
-            * @param mixed   $mixOptions     - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-            * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove - 6: Label acima
-            * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
-            * @param boolean $boolMultiSelect- 8: True = MultiSelect , False = SingleSelect
-            * @param integer $intSize        - 9:
-            * @param integer $intWidth       -10:
-            * @param string  $strFirstOptionText - 11: First Key in Display
-            * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
-            * @param string  $strKeyField
-            * @param string  $strDisplayField
-            * @return TSelect
-            */
-           public function addSelectField( $strName
-               , $strLabel=null
-               , $boolRequired=null
-               , $mixOptions=null
-               , $boolNewLine=null
-               , $boolLabelAbove=null
-               , $mixValue=null
-               , $boolMultiSelect=null
-               , $intSize=null
-               , $intWidth=null
-               , $strFirstOptionText=null
-               , $strFirstOptionValue=null
-               , $strKeyColumn=null
-               , $strDisplayColumn=null
-               , $boolNoWrapLabel=null
-               , $strDataColumns=null ) {
-                   
-                   if( ( substr( $strName, 0, 6 ) == 'cod_uf' || $strName === 'uf') && $mixOptions === null ) {
-                       $mixOptions = $this->getUfs();
-                   } else if( substr( $strName, 0, 4 ) == 'sit_' && $mixOptions === null ) {
-                       $mixOptions = 'N=Não,S=Sim';
-                   }
-                   $field = new TSelect( $strName, $mixOptions, $mixValue, $boolRequired, $boolMultiSelect, $intSize, $intWidth, $strFirstOptionText, $strFirstOptionValue, $strKeyColumn, $strDisplayColumn, $strDataColumns);
-                   $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-                   return $field;
+    /**
+    * Adicionar campo tipo combobox ou menu select
+    *
+    * $mixOptions = array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * $strKeyColumn = nome da coluna que será utilizada para preencher os valores das opções
+    * $strDisplayColumn = nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
+    * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
+    *
+    * <code>
+    * 	// exemplos
+    * 	$frm->addSelectField('tipo','Tipo:',false,'1=Tipo 1,2=Tipo 2');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'tipo');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'select * from tipo order by descricao');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'tipo|descricao like "F%"');
+    *
+    *  //Exemplo espcial - Campo obrigatorio e sem senhum elemento pre selecionado.
+    *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
+    * </code>
+    *
+    * @param string  $strName        - 1: ID do campo
+    * @param string  $strLabel       - 2: Label do campo
+    * @param boolean $boolRequired   - 3: Obrigatorio
+    * @param mixed   $mixOptions     - 4: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+    * @param boolean $boolLabelAbove - 6: Default FALSE = Label mesma linha, TRUE = Label acima
+    * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
+    * @param boolean $boolMultiSelect- 8: Default FALSE = SingleSelect, TRUE = MultiSelect
+    * @param integer $intSize        - 9: Default 1. Num itens que irão aparecer. 
+    * @param integer $intWidth           - 10: Largura em Pixels
+    * @param string  $strFirstOptionText - 11: First Key in Display
+    * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' e não pode ser null
+    * @param string  $strKeyColumn       - 13: 
+    * @param string  $strDisplayColumn
+    * @param string  $boolNoWrapLabel
+    * @param string  $strDataColumns
+    * @return TSelect
+    */
+    public function addSelectField( $strName
+                               , $strLabel=null
+                               , $boolRequired=null
+                               , $mixOptions=null
+                               , $boolNewLine=null
+                               , $boolLabelAbove=null
+                               , $mixValue=null
+                               , $boolMultiSelect=null
+                               , $intSize=null
+                               , $intWidth=null
+                               , $strFirstOptionText=null
+                               , $strFirstOptionValue=null
+                               , $strKeyColumn=null
+                               , $strDisplayColumn=null
+                               , $boolNoWrapLabel=null
+                               , $strDataColumns=null ) {
+           
+           if( ( substr( $strName, 0, 6 ) == 'cod_uf' || $strName === 'uf') && $mixOptions === null ) {
+               $mixOptions = $this->getUfs();
+           } else if( substr( $strName, 0, 4 ) == 'sit_' && $mixOptions === null ) {
+               $mixOptions = 'N=Não,S=Sim';
            }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicicionar campo tipo radiobutton
-            * 
-            * 
-            * @param string $strName        - 1: field ID
-            * @param string $strLabel       - 2: Label field
-            * @param boolean $boolRequired  - 3: TRUE = Required, FALSE = not Required
-            * @param array $arrOptions      - 4: Array Options
-            * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
-            * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
-            * @param integer $intQtdColumns - 8: Quantidade de colunas, valor DEFAULT = 1;
-            * @param integer $intWidth
-            * @param integer $intHeight
-            * @param integer $intPaddingItems
-            * @param boolean $boolNoWrapLabel
-            * @param boolean $boolNowrapText
-            * @return TRadio
-            */
-           public function addRadioField( $strName
-						           		, $strLabel=null
-						           		, $boolRequired=null
-						           		, $arrOptions=null
-						           		, $boolNewLine=null
-						           		, $boolLabelAbove=null
-						           		, $strValue=null
-						           		, $intQtdColumns=null
-						           		, $intWidth=null
-						           		, $intHeight=null
-						           		, $intPaddingItems=null
-						           		, $boolNoWrapLabel=null
-						           		, $boolNowrapText=null
-						           		){
-               $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
-               $field->setNoWrapText($boolNowrapText);
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               $field->addEvent('onDblclick','this.checked=false;fwFieldCheckBoxClick(this);');
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /***
-            * Adicicionar campo tipo checkbox
-            * @param string $strName         - 1: field ID
-            * @param string $strLabel        - 2: Label field
-            * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
-            * @param array $arrOptions       - 4: array no formato "key=>valeu" para identificar a(s) opção(ões) selecionada(s)
-            * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
-            * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-            * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>keyOption" para maracar mais de um valor ao mesmo tempo
-            * @param integer $intQtdColumns  - 8: Quantidade de colunas
-            * @param integer $intWidth       - 9: Largura
-            * @param integer $intHeight      -10: Al
-            * @param integer $intPaddingItems
-            * @param boolean $boolNoWrapLabel
-            * @param boolean $boolNowrapText
-            * @return TCheck
-            */
-           public function addCheckField( $strName
-                                       , $strLabel=null
-                                       , $boolRequired=null
-                                       , $arrOptions=null
-                                       , $boolNewLine=null
-                                       , $boolLabelAbove=null
-                                       , $arrValues=null
-                                       , $intQtdColumns=null
-                                       , $intWidth=null
-                                       , $intHeight=null
-                                       , $intPaddingItems=null
-                                       , $boolNoWrapLabel=null 
-                                       , $boolNowrapText=null)
-           {
-               $field = new TCheck( $strName, $arrOptions, $arrValues, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems );
-               $field->setNoWrapText($boolNowrapText);
-               $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-               return $field;
-           }
-           //-----------------------------------------------------------------------------
-           /**
-            * Adicona controle de paginação através de abas
-            * Se o parametro $intHeight for null será assumido o height do form, para ser auto, informar "auto";
-            * se o parametro $intWidth for null utilizado a largura máxima do form
-            * A função informada no parametro $strOnAfterClick e a função onBeforeClick,
-            * recebem 3 parametros: a rotulo da aba, o id do page control e o id da aba clicada em caixa baixa.
-            * Se a função onBeforeClick retornar falso, não ocorrerá a mudança de aba.
-            *
-            * @example $pc = $frm->addPageControl('pc',null,null,'pcClick','pcAfterClick');
-            * @example function pcAfterClick(aba,pageControl,id)
-            *
-            * @param mixed $strName
-            * @param mixed $strHeight
-            * @param mixed $strWidth
-            * @param mixed $strOnBeforeClick
-            * @param mixed $strOnAfterClick
-            * @param mixed $boolShowTabs
-            * @param bool $boolNewLine
-            * @return TPageControl
-            */
-           public function addPageControl( $strName, $strHeight=null, $strWidth=null, $strOnBeforeClick=null, $strOnAfterClick=null, $boolShowTabs=null, $boolNewLine=null )
-           {
-               $boolNewLine = is_null( $strWidth ) ? true : $boolNewLine;
-               $field = new TPageControl( $strName, $strHeight, $strWidth, $boolShowTabs, $strOnBeforeClick, $strOnAfterClick );
-               $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
-               $field->setColumns( $this->getColumns() );
-               
-               /*
-                if( $this->getCurrentContainer() )
-                {
-                $height = $this->getCurrentContainer()->getHeight();
-                $field->setColumns( $this->getCurrentContainer()->getColumns() );
-                if( $this->getCurrentContainer()->getFieldType()=='group')
-                {
-                if( !$field->getWidth())
-                {
-                $diff = ( $this->getCurrentContainer()->getOverflowY()=='hidden' ? 50 : 64 );
-                $field->setWidth( ( $this->getCurrentContainer()->getWidth() - $diff ) );
-                }
-                if( $field->getHeight() )
-                {   if( $field->getHeight() > $height)
-                {
-                $this->getCurrentContainer()->setHeight( ( $field->getHeight() + 20));
-                }
-                }
-                else
-                {
-                if( $this->getCurrentContainer()->getOverflowY()=='hidden')
-                {
-                $field->setHeight( ( $this->getCurrentContainer()->getHeight()-47 ) );
-                }
-                }
-                }
-                else
-                {
-                $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
-                $strWidth = is_null( $strWidth ) ? $this->getCurrentContainer()->getWidth()-20 : $strWidth;
-                }
-                }
-                else
-                {
-                if( is_null( $strWidth ) )
-                {
-                if( $this->getOverFlowY()=='hidden')
-                {
-                $field->setWidth( $this->getWidth()-40 );
-                }
-                else
-                {
-                $field->setWidth( $this->getWidth()-60 );
-                }
-                }
-                }
-                */
-               $this->currentContainer[ ] = $field;
-               return $field;
-           }
+           $field = new TSelect( $strName, $mixOptions, $mixValue, $boolRequired, $boolMultiSelect, $intSize, $intWidth, $strFirstOptionText, $strFirstOptionValue, $strKeyColumn, $strDisplayColumn, $strDataColumns);
+           $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+           $this->addDisplayControl( $displayControl );
+           return $field;
+    }
+    //-----------------------------------------------------------------------------
+    /**
+    * Adicicionar campo tipo radiobutton
+    * 
+    * 
+    * @param string $strName        - 1: field ID
+    * @param string $strLabel       - 2: Label field
+    * @param boolean $boolRequired  - 3: TRUE = Required, FALSE = not Required
+    * @param array $arrOptions      - 4: Array Options
+    * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
+    * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
+    * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
+    * @param integer $intQtdColumns - 8: Quantidade de colunas, valor DEFAULT = 1;
+    * @param integer $intWidth
+    * @param integer $intHeight
+    * @param integer $intPaddingItems
+    * @param boolean $boolNoWrapLabel
+    * @param boolean $boolNowrapText
+    * @return TRadio
+    */
+    public function addRadioField( $strName
+    			           		, $strLabel=null
+    			           		, $boolRequired=null
+    			           		, $arrOptions=null
+    			           		, $boolNewLine=null
+    			           		, $boolLabelAbove=null
+    			           		, $strValue=null
+    			           		, $intQtdColumns=null
+    			           		, $intWidth=null
+    			           		, $intHeight=null
+    			           		, $intPaddingItems=null
+    			           		, $boolNoWrapLabel=null
+    			           		, $boolNowrapText=null
+    			           		){
+       $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
+       $field->setNoWrapText($boolNowrapText);
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $field->addEvent('onDblclick','this.checked=false;fwFieldCheckBoxClick(this);');
+       return $field;
+    }
+    //-----------------------------------------------------------------------------
+    /***
+    * Adicicionar campo tipo checkbox
+    * @param string $strName         - 1: field ID
+    * @param string $strLabel        - 2: Label field
+    * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
+    * @param array $arrOptions       - 4: array no formato "key=>valeu" para identificar a(s) opção(ões) selecionada(s)
+    * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
+    * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
+    * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>keyOption" para maracar mais de um valor ao mesmo tempo
+    * @param integer $intQtdColumns  - 8: Quantidade de colunas
+    * @param integer $intWidth       - 9: Largura
+    * @param integer $intHeight      -10: Al
+    * @param integer $intPaddingItems
+    * @param boolean $boolNoWrapLabel
+    * @param boolean $boolNowrapText
+    * @return TCheck
+    */
+    public function addCheckField( $strName
+                               , $strLabel=null
+                               , $boolRequired=null
+                               , $arrOptions=null
+                               , $boolNewLine=null
+                               , $boolLabelAbove=null
+                               , $arrValues=null
+                               , $intQtdColumns=null
+                               , $intWidth=null
+                               , $intHeight=null
+                               , $intPaddingItems=null
+                               , $boolNoWrapLabel=null 
+                               , $boolNowrapText=null)
+    {
+       $field = new TCheck( $strName, $arrOptions, $arrValues, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems );
+       $field->setNoWrapText($boolNowrapText);
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }
+   //-----------------------------------------------------------------------------
+    /**
+    * Adicona controle de paginação através de abas
+    * Se o parametro $intHeight for null será assumido o height do form, para ser auto, informar "auto";
+    * se o parametro $intWidth for null utilizado a largura máxima do form
+    * A função informada no parametro $strOnAfterClick e a função onBeforeClick,
+    * recebem 3 parametros: a rotulo da aba, o id do page control e o id da aba clicada em caixa baixa.
+    * Se a função onBeforeClick retornar falso, não ocorrerá a mudança de aba.
+    *
+    * @example $pc = $frm->addPageControl('pc',null,null,'pcClick','pcAfterClick');
+    * @example function pcAfterClick(aba,pageControl,id)
+    *
+    * @param mixed $strName
+    * @param mixed $strHeight
+    * @param mixed $strWidth
+    * @param mixed $strOnBeforeClick
+    * @param mixed $strOnAfterClick
+    * @param mixed $boolShowTabs
+    * @param bool $boolNewLine
+    * @return TPageControl
+    */
+    public function addPageControl( $strName, $strHeight=null, $strWidth=null, $strOnBeforeClick=null, $strOnAfterClick=null, $boolShowTabs=null, $boolNewLine=null )
+    {
+       $boolNewLine = is_null( $strWidth ) ? true : $boolNewLine;
+       $field = new TPageControl( $strName, $strHeight, $strWidth, $boolShowTabs, $strOnBeforeClick, $strOnAfterClick );
+       $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+       $field->setColumns( $this->getColumns() );
+       
+       /*
+        if( $this->getCurrentContainer() )
+        {
+        $height = $this->getCurrentContainer()->getHeight();
+        $field->setColumns( $this->getCurrentContainer()->getColumns() );
+        if( $this->getCurrentContainer()->getFieldType()=='group')
+        {
+        if( !$field->getWidth())
+        {
+        $diff = ( $this->getCurrentContainer()->getOverflowY()=='hidden' ? 50 : 64 );
+        $field->setWidth( ( $this->getCurrentContainer()->getWidth() - $diff ) );
+        }
+        if( $field->getHeight() )
+        {   if( $field->getHeight() > $height)
+        {
+        $this->getCurrentContainer()->setHeight( ( $field->getHeight() + 20));
+        }
+        }
+        else
+        {
+        if( $this->getCurrentContainer()->getOverflowY()=='hidden')
+        {
+        $field->setHeight( ( $this->getCurrentContainer()->getHeight()-47 ) );
+        }
+        }
+        }
+        else
+        {
+        $strHeight = is_null( $strHeight ) ? '250' : $strHeight;
+        $strWidth = is_null( $strWidth ) ? $this->getCurrentContainer()->getWidth()-20 : $strWidth;
+        }
+        }
+        else
+        {
+        if( is_null( $strWidth ) )
+        {
+        if( $this->getOverFlowY()=='hidden')
+        {
+        $field->setWidth( $this->getWidth()-40 );
+        }
+        else
+        {
+        $field->setWidth( $this->getWidth()-60 );
+        }
+        }
+        }
+        */
+       $this->currentContainer[ ] = $field;
+       return $field;
+    }
           
     /**
      * 
