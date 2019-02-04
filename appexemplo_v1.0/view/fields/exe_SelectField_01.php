@@ -46,7 +46,7 @@ $frm->setFlat(true);
 $frm->setShowCloseButton(false);
 
 $frm->addGroupField('gp1', 'Selects Normais');
-    $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
+    $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão',4=>'BitCoin');
     $frm->addSelectField('forma_pagamento'     // 1: ID do campo
                        , 'Forma Pagamento:'
                        , TRUE
@@ -55,26 +55,42 @@ $frm->addGroupField('gp1', 'Selects Normais');
                        , null
                        , null
                        , null
-                       , null  //  9
-                       , null  // 10
-                       , ' '   // 11  First Key in Display
-                       , null  // 12 Frist Valeu in Display, use value NULL for required
+                       , null  //  9: Num itens que irão aparecer
+                       , null  // 10: Largura em Pixels
+                       , ' '   // 11: First Key in Display
+                       , null  // 12: Frist Valeu in Display, use value NULL for required
                        );
     
     $fg2 = $frm->addSelectField('forma_pagamento2'     // 1: ID do campo
-        , 'Forma Pagamento (DEFAULT):'
-        , TRUE
-        , $listFormas           // 4: array dos valores
-        , null
-        , null
-        , null
-        , null
-        , null  //  9
-        , null  // 10
-        , ' '   // 11 First Key in Display
-        , 2     // 12 Frist Valeu in Display, use value NULL for required
-        );
+                               , 'Forma Pagamento (DEFAULT):'
+                               , TRUE                  // 3: Obrigatorio
+                               , $listFormas           // 4: array dos valores
+                               , true                  // 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+                               , true                  // 6: Default FALSE = Label mesma linha, TRUE = Label acima
+                               , null                  // 7: Valor DEFAULT, informe o ID do array
+                               , null
+                               , null  //  9: Num itens que irão aparecer
+                               , 150   // 10: Largura em Pixels
+                               , ' '   // 11 First Key in Display
+                               , null     // 12 Frist Valeu in Display, use value NULL for required
+                               );
     $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado');
+    
+    $fg2 = $frm->addSelectField('forma_pagamento3'     // 1: ID do campo
+                            , 'Forma Pagamento (DEFAULT):'
+                            , TRUE                  // 3: Obrigatorio
+                            , $listFormas           // 4: array dos valores
+                            , true                  // 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+                            , true                  // 6: Default FALSE = Label mesma linha, TRUE = Label acima
+                            , null                  // 7: Valor DEFAULT, informe o ID do array
+                            , null
+                            , null  //  9: Num itens que irão aparecer
+                            , 150   // 10: Largura em Pixels
+                            , ' '   // 11 First Key in Display
+                            , 4     // 12 Frist Valeu in Display, use value NULL for required
+                            );
+    $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado, ATRIBUTO 12');
+    
     
     $frm->addSelectField('estado', 'Estado (todos):', false, 'tb_uf', true, false, null, false, null, null, '-- selecione o Estado --', null, 'COD_UF', 'NOM_UF', null, 'cod_regiao')->addEvent('onChange', 'select_change(this)')->setToolTip('SELECT - esta campo select possui o código da região adicionado em sua tag option. Para adicionar dados extras a um campo select, basta definir as colunas no parâmetro $arrDataColumns.');
 $frm->closeGroup();
@@ -107,7 +123,7 @@ $frm->addGroupField('gp5', 'Selects MultiSelect');
                         , null
                         , true
                         , 5          // 9: Num itens que irão aparecer
-                        , 30
+                        , null       // 10: Largura em Pixels
                         , '-- selecione o Estado --'
                         , null
                         , 'COD_UF'
