@@ -1,6 +1,6 @@
 <?php
 d($_REQUEST);
-$frm = new TForm('Gride 09 - CheckColumn', 300, 700);
+$frm = new TForm('Gride Campos 01 - CheckColumn', 300, 700);
 
 // simulação de dados para o gride
 $dados = null;
