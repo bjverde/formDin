@@ -1871,8 +1871,7 @@ class TGrid extends TTable
         return $col;
     }
     /**
-     * coluna tipo radioButton
-     
+     * coluna tipo radioButton     
      *
      * @param string $strName       - Nome do variavel no POST
      * @param string $strTitle      - Titulo que aparece no grid
@@ -1896,10 +1895,10 @@ class TGrid extends TTable
      * Coluna do tipo select
      *
      * @param string $strName         - 1: ID do campos
-     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
-     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param string $strTitle        - 2: Titulo que irá aparecer para o usuário no grid
+     * @param string $strFieldName    - 3: ID do campo na origem dos dados do grid
      * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
-     * @param mixed $strWidth         - 5: largura do campos
+     * @param mixed $strWidth         - 5: largura do campos em pixel
      * @param boolean $boolReadOnly   - 6: Somente Leiura
      * @param string $strFirstOptionText  - 7: Label do Primeiro valor
      * @param string $strFirstOptionValue - 8: Valor do Primeiro valor
