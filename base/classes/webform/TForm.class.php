@@ -6762,7 +6762,7 @@ class TForm Extends TBox
             * @param boolean $boolLabelAbove - 6: Default FALSE = Label mesma linha, TRUE = Label acima
             * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
             * @param boolean $boolMultiSelect- 8: Default FALSE = SingleSelect, TRUE = MultiSelect
-            * @param integer $intSize        - 9:
+            * @param integer $intSize        - 9: Num itens que irão aparecer
             * @param integer $intWidth           - 10:
             * @param string  $strFirstOptionText - 11: First Key in Display
             * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
