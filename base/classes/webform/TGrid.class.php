@@ -1871,8 +1871,7 @@ class TGrid extends TTable
         return $col;
     }
     /**
-     * coluna tipo radioButton
-     
+     * coluna tipo radioButton     
      *
      * @param string $strName       - Nome do variavel no POST
      * @param string $strTitle      - Titulo que aparece no grid
@@ -1896,13 +1895,13 @@ class TGrid extends TTable
      * Coluna do tipo select
      *
      * @param string $strName         - 1: ID do campos
-     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
-     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param string $strTitle        - 2: Titulo que irá aparecer para o usuário no grid
+     * @param string $strFieldName    - 3: ID do campo na origem dos dados do grid
      * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
-     * @param mixed $strWidth         - 5: largura do campos
-     * @param boolean $boolReadOnly   - 6: Somente Leiura
-     * @param string $strFirstOptionText  - 7: Label do Primeiro valor
-     * @param string $strFirstOptionValue - 8: Valor do Primeiro valor
+     * @param mixed $strWidth         - 5: largura do campos em pixel
+     * @param boolean $boolReadOnly   - 6: Somente Leitura
+     * @param string $strFirstOptionText  - 7: Label do Primeiro elemento
+     * @param string $strFirstOptionValue - 8: Valor do Primeiro elemento. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null  
      * @param string $strKeyField         - 9: 
      * @param string $strDisplayField     - 10:
      * @param string $strInitialValueField -11: Default Valeu
@@ -1929,12 +1928,25 @@ class TGrid extends TTable
                 , $strFirstOptionText
                 , $strFirstOptionValue
                 , $strKeyField
-                , $strDisplayField, $strInitialValueField );
+                , $strDisplayField
+                , $strInitialValueField );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * 
+     * @param string $strName         - 1: ID do campos
+     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
+     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param int $intMaxLength       - 4: Tamanho maximo do campo
+     * @param int $intColumns         - 5: Qtd colunas
+     * @param int $intRows            - 6: Qtd de linhas
+     * @param boolean $boolReadOnly   - 7: mostra ou não o contador. Default = TRUE
+     * @param boolean $boolShowCounter  8: mostra ou não o contador. Default = TRUE
+     * @return TGridMemoColumn
+     */
     public function addMemoColumn( $strName, $strTitle = null, $strFieldName = null, $intMaxLength = null, $intColumns = null, $intRows = null, $boolReadOnly = null, $boolShowCounter = null )
     {
         $col = new TGridMemoColumn( $strName, $strTitle, $strFieldName, $intMaxLength, $intColumns, $intRows, $boolReadOnly, $boolShowCounter );
