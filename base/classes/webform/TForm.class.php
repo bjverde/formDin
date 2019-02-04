@@ -6759,15 +6759,17 @@ class TForm Extends TBox
             * @param boolean $boolRequired   - 3: Obrigatorio
             * @param mixed   $mixOptions     - 4: array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
             * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-            * @param boolean $boolLabelAbove - 6: Label acima
+            * @param boolean $boolLabelAbove - 6: Default FALSE = Label mesma linha, TRUE = Label acima
             * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
-            * @param boolean $boolMultiSelect- 8: True = MultiSelect , False = SingleSelect
+            * @param boolean $boolMultiSelect- 8: Default FALSE = SingleSelect, TRUE = MultiSelect
             * @param integer $intSize        - 9:
-            * @param integer $intWidth       -10:
+            * @param integer $intWidth           - 10:
             * @param string  $strFirstOptionText - 11: First Key in Display
             * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required
-            * @param string  $strKeyField
-            * @param string  $strDisplayField
+            * @param unknown $strKeyColumn       - 13: 
+            * @param unknown $strDisplayColumn
+            * @param unknown $boolNoWrapLabel
+            * @param unknown $strDataColumns
             * @return TSelect
             */
            public function addSelectField( $strName
