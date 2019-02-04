@@ -63,7 +63,10 @@ $menu->add('12', '1', 'Campo HTML');
 $menu->add('13', '1', 'Campo Coord GMS');
     $menu->add('13.1', '13', 'Campo Coord GMS', 'view/fields/exe_CoordGmsField.php');
     $menu->add('13.2', '13', 'Campo Coord GMS 02', 'view/fields/exe_CoordGmsField02.php');
-$menu->add('14', '1', 'Campo Select', 'view/fields/exe_SelectField.php');
+$menu->add('14', '1', 'Campo Select');
+    $menu->add('14.1', '14', 'Campo Select - Simples', 'view/fields/exe_SelectField_01.php');
+    $menu->add('14.2', '14', 'Campo Select - Combinados', 'view/fields/exe_SelectField_02.php');
+
 $menu->add('15', '1', 'Campo Radio', 'view/fields/exe_RadioField.php');
 $menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php',null,'../../base/imagens/iconCheckAll.gif');
 $menu->add('17', '1', 'Campo Arquivo ou Blob');
