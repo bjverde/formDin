@@ -39,13 +39,44 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo do Campo Select Simples', 450);
+d($_REQUEST);
 
-$frm->addSelectField('estado', 'Estado (todos):', true, 'tb_uf', true, false, null, false, null, null, '-- selecione o Estado --', null, 'COD_UF', 'NOM_UF', null, 'cod_regiao')->addEvent('onChange', 'select_change(this)')->setToolTip('SELECT - esta campo select possui o código da região adicionado em sua tag option. Para adicionar dados extras a um campo select, basta definir as colunas no parâmetro $arrDataColumns.');
+$frm = new TForm('Exemplo do Campo Select Simples', 450);
+$frm->setFlat(true);
+$frm->setShowCloseButton(false);
 
 $frm->addGroupField('gp1', 'Selects Normais');
-    $f = $frm->addSelectField('sit_cancelado', 'Cancelado:', null, '0=Não,1=Sim', null, null, '1')->addEvent('onChange', 'select_change(this)');
-    $f->setOptionsData(array('0'=>'Zero','1'=>'Um'));
+    $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
+    $frm->addSelectField('forma_pagamento'     // 1: ID do campo
+                       , 'Forma Pagamento:'
+                       , TRUE
+                       , $listFormas           // 4: array dos valores
+                       , null
+                       , null
+                       , null
+                       , null
+                       , null  //  9
+                       , null  // 10
+                       , ' '   // 11  First Key in Display
+                       , null  // 12 Frist Valeu in Display, use value NULL for required
+                       );
+    
+    $fg2 = $frm->addSelectField('forma_pagamento2'     // 1: ID do campo
+        , 'Forma Pagamento (DEFAULT):'
+        , TRUE
+        , $listFormas           // 4: array dos valores
+        , null
+        , null
+        , null
+        , null
+        , null  //  9
+        , null  // 10
+        , ' '   // 11 First Key in Display
+        , 2     // 12 Frist Valeu in Display, use value NULL for required
+        );
+    $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado');
+    
+    $frm->addSelectField('estado', 'Estado (todos):', false, 'tb_uf', true, false, null, false, null, null, '-- selecione o Estado --', null, 'COD_UF', 'NOM_UF', null, 'cod_regiao')->addEvent('onChange', 'select_change(this)')->setToolTip('SELECT - esta campo select possui o código da região adicionado em sua tag option. Para adicionar dados extras a um campo select, basta definir as colunas no parâmetro $arrDataColumns.');
 $frm->closeGroup();
 
 
@@ -60,7 +91,7 @@ $frm->addGroupField('gp5', 'Selects MultiSelect');
     $frm->addSelectField('seq_bioma'
                         , 'Bioma:'
                         , true
-                        , $arrayBiomas
+                        , $arrayBiomas  // 4: array dos valores
                         , null
                         , null
                         , null
@@ -68,32 +99,35 @@ $frm->addGroupField('gp5', 'Selects MultiSelect');
 
 
     $frm->addSelectField('estadomultiselect'
-        , 'Estado (todos):'
-        , true
-        , 'tb_uf'
-        , true
-        , false
-        , null
-        , true
-        , null
-        , null
-        , '-- selecione o Estado --'
-        , null
-        , 'COD_UF'
-        , 'NOM_UF'
-        , null
-        , 'cod_regiao');
+                        , 'Estado (todos):'
+                        , false
+                        , 'tb_uf'      // 4: array dos valores. tb_uf vem do SqLite Configurdo na app de exemplo
+                        , true
+                        , false
+                        , null
+                        , true
+                        , 5          // 9: Num itens que irão aparecer
+                        , 30
+                        , '-- selecione o Estado --'
+                        , null
+                        , 'COD_UF'
+                        , 'NOM_UF'
+                        , null
+                        , 'cod_regiao');
 $frm->closeGroup();
 
-$frm->setAction('Atualizar,Validar');
-$frm->addButton('Limpar', null, 'btnLimpar', 'btnLimparClick()');
-$frm->addButton('Iniciar Estado 2', null, 'btnUF2', 'btnUF2Click()');
+$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
-if ($acao=='Validar') {
-    //d($_POST);
-    $frm->validate();
+switch( $acao ) {
+    case 'Limpar':
+        $frm->clearFields();
+    break;
+    //--------------------------
+    case 'Salvar':
+        $frm->validate();
+    break;
 }
-
 $frm->show();
 ?>
