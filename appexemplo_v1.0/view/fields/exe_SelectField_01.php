@@ -71,8 +71,9 @@ $frm->addGroupField('gp1', 'Selects Normais');
                                , null
                                , null  //  9: Num itens que irão aparecer
                                , 150   // 10: Largura em Pixels
-                               , ' '   // 11 First Key in Display
+                               , null   // 11 First Key in Display
                                , null     // 12 Frist Valeu in Display, use value NULL for required
+                               ,2
                                );
     $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado');
     
@@ -87,7 +88,7 @@ $frm->addGroupField('gp1', 'Selects Normais');
                             , null  //  9: Num itens que irão aparecer
                             , 150   // 10: Largura em Pixels
                             , ' '   // 11 First Key in Display
-                            , 4     // 12 Frist Valeu in Display, use value NULL for required
+                            , 4     // 12 Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null
                             );
     $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado, ATRIBUTO 12');
     
@@ -111,6 +112,15 @@ $frm->addGroupField('gp5', 'Selects MultiSelect');
                         , null
                         , null
                         , null
+                        , true);
+    
+    $frm->addSelectField('seq_bioma2'
+                        , 'Bioma:'
+                        , false
+                        , $arrayBiomas  // 4: array dos valores
+                        , null
+                        , null
+        ,3  // 7: Valor DEFAULT, informe o ID do array array(0=>3,1=>4)
                         , true);
 
 
