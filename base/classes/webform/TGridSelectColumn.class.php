@@ -56,7 +56,7 @@ class TGridSelectColumn extends TGridEditColumn
 	* @param string $strTitle           - 2: Titulo que irá aparecer no grid
 	* @param string $strFieldName       - 3: Nome do campo do gride
 	* @param mixed $mixOptions          - 4: Opções caso o Campo do gride não seja um array
-	* @param string $strWidth           - 5: largura do campos
+	* @param string $strWidth           - 5: largura do campos em piexel
 	* @param boolean $boolReadOnly      - 6: Somente Leiura
 	* @param string $strFirstOptionText
 	* @param string $strFirstOptionValue

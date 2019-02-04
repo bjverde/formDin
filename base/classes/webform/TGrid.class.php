@@ -1899,9 +1899,9 @@ class TGrid extends TTable
      * @param string $strFieldName    - 3: ID do campo na origem dos dados do grid
      * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
      * @param mixed $strWidth         - 5: largura do campos em pixel
-     * @param boolean $boolReadOnly   - 6: Somente Leiura
-     * @param string $strFirstOptionText  - 7: Label do Primeiro valor
-     * @param string $strFirstOptionValue - 8: Valor do Primeiro valor
+     * @param boolean $boolReadOnly   - 6: Somente Leitura
+     * @param string $strFirstOptionText  - 7: Label do Primeiro elemento
+     * @param string $strFirstOptionValue - 8: Valor do Primeiro elemento. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null  
      * @param string $strKeyField         - 9: 
      * @param string $strDisplayField     - 10:
      * @param string $strInitialValueField -11: Default Valeu
