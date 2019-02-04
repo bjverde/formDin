@@ -6765,7 +6765,7 @@ class TForm Extends TBox
     * @param integer $intSize        - 9: Default 1. Num itens que irão aparecer. 
     * @param integer $intWidth           - 10: Largura em Pixels
     * @param string  $strFirstOptionText - 11: First Key in Display
-    * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required. Use this valeu for DEFAULT choicede
+    * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' e não pode ser null
     * @param string  $strKeyColumn       - 13: 
     * @param string  $strDisplayColumn
     * @param string  $boolNoWrapLabel
