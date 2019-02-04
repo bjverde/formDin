@@ -66,7 +66,17 @@ class TGridSelectColumn extends TGridEditColumn
 	*
 	* @return TGridSelectColumn
 	*/
-	public function __construct($strEditName,$strTitle,$strFieldName,$mixOptions=null,$strWidth=null,$boolReadOnly=null,$strFirstOptionText=null,$strFirstOptionValue=null, $strKeyField=null,$strDisplayField=null,$strInitialValueField=null)
+	public function __construct($strEditName
+	                           ,$strTitle
+	                           ,$strFieldName
+	                           ,$mixOptions=null
+	                           ,$strWidth=null
+	                           ,$boolReadOnly=null
+	                           ,$strFirstOptionText=null
+	                           ,$strFirstOptionValue=null
+	                           ,$strKeyField=null
+	                           ,$strDisplayField=null
+	                           ,$strInitialValueField=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strFieldName,'select',null,null,null,$strWidth,null,$boolReadOnly);
 		$this->setOptions($mixOptions);
