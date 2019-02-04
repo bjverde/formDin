@@ -22,9 +22,6 @@ $dados['ATIVO'][] = 'N';
 $dados['GRUPO'][] = 'C';
 $dados['SIT_OPCOES'][] = null;
 
-$html1 = '<b>ATENÇÃO</b>: addSelectColumn para funcionar corretamente precisa que a chave primaria no grid seja definida';
-$frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
-
 $gride = new TGrid('gdTeste' // id do gride
 , 'Título do Gride' // titulo do gride
 , $dados   // array de dados
