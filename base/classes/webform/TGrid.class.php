@@ -1929,12 +1929,25 @@ class TGrid extends TTable
                 , $strFirstOptionText
                 , $strFirstOptionValue
                 , $strKeyField
-                , $strDisplayField, $strInitialValueField );
+                , $strDisplayField
+                , $strInitialValueField );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * 
+     * @param string $strName         - 1: ID do campos
+     * @param string $strTitle        - 2: Titulo que irá aparecer no grid
+     * @param string $strFieldName    - 3: Nome do campo do gride
+     * @param int $intMaxLength       - 4: Tamanho maximo do campo
+     * @param int $intColumns         - 5: Qtd colunas
+     * @param int $intRows            - 6: Qtd de linhas
+     * @param boolean $boolReadOnly   - 7: mostra ou não o contador. Default = TRUE
+     * @param boolean $boolShowCounter  8: mostra ou não o contador. Default = TRUE
+     * @return TGridMemoColumn
+     */
     public function addMemoColumn( $strName, $strTitle = null, $strFieldName = null, $intMaxLength = null, $intColumns = null, $intRows = null, $boolReadOnly = null, $boolShowCounter = null )
     {
         $col = new TGridMemoColumn( $strName, $strTitle, $strFieldName, $intMaxLength, $intColumns, $intRows, $boolReadOnly, $boolShowCounter );
