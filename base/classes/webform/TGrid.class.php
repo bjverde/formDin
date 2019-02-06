@@ -1555,6 +1555,15 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Seta o nome de uma função que será usada para desenhar as linha da tabela.
+     * 
+     * Parametros do envento onDrawRow
+     * 	1) $row 		- objeto TGridRow
+     * 	2) $rowNum 		- número da linha corrente
+     * 	3) $aData		- o array de dados da linha ex: $res[''][n]
+     * @param string $newValue
+     */
     public function setOnDrawRow( $newValue = null )
     {
         $this->onDrawRow = $newValue;
@@ -1568,7 +1577,7 @@ class TGrid extends TTable
     
     //------------------------------------------------------------------------------------
     /**
-     * Seta o nome de uma função que será usada para desenhar as linhas da tabela.
+     * Seta o nome de uma função que será usada para desenhar as celula da tabela.
      * @param string $newValue
      */
     public function setOnDrawCell( $newValue = null )
@@ -1580,20 +1589,27 @@ class TGrid extends TTable
     public function getOnDrawCell()
     {
         return $this->onDrawCell;
-    }
-    
+    }    
     //------------------------------------------------------------------------------------
     /**
      * Seta o nome de uma função que será usada para desenhar o Header do Grid
      * Um exemplo tipo é modificar o texto por uma imagem
+     * 
+     * Parametros do evento onDrawHeaderCell
+     * 	1) $th			- objeto TElement
+     * 	2) $objColumn 	- objeto TGridColum
+     * 	3) $objHeader 	- objeto TElement
      * @param string $newValue
      */
     public function setOnDrawHeaderCell( $newValue = null )
     {
         $this->onDrawHeaderCell = $newValue;
     }
-    
     //------------------------------------------------------------------------------------
+    /***
+     * Verifica se foi informada alguma função 
+     * @return string
+     */
     public function getOnDrawHeaderCell()
     {
         return $this->onDrawHeaderCell;
