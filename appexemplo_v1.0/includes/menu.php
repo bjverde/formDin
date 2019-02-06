@@ -168,6 +168,10 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
         $menu->add('81.6', '81', 'Gride 06 - Campos 1', 'grid/exe_gride06.php');
         $menu->add('81.7', '81', 'Gride 07 - Campos 2', 'grid/exe_gride07.php');
         $menu->add('81.8', '81', 'Gride 08 - Campos 3', 'grid/exe_gride08.php');
+    $menu->add('82', '8', 'Grides Draw - desenhando Dinamicamente', null, null, '../../base/imagens/table16.gif');
+        $menu->add('82.1', '82', 'Gride Draw 01 - Desativando order', 'grid/exe_gride_draw_01.php');
+        $menu->add('82.2', '82', 'Gride Draw 02 - Mudando a cor da linha', 'grid/exe_gride_draw_02.php');
+        $menu->add('82.3', '82', 'Gride Draw 03 - Desativando Botões', 'grid/exe_gride_draw_03.php');
         
     $menu->add('83', '8', 'Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
         $menu->add('83.1', '83', 'Gride 10 - erro', 'grid/exe_gride10.php');
@@ -212,11 +216,15 @@ $menu->add('200', 0, 'Layouts', null, 'Exemplos de Layouts, CSS e apresentaçõe
         $menu->add('20010.1', '20010', 'Layout index', 'layouts.php');
         $menu->add('20010.2', '20010', 'Temas do Menu', 'exe_menu_tema.php');
         $menu->add('20010.3', '20010', 'Esqueleto do Layout', 'exe_layout_1.php');
-    $menu->add('20020', '200', 'Definir Colunas no Formulário', 'view/form/exe_colunas.php');
-    $menu->add('20021', '200', 'Imagem de Fundo', 'view/form/exe_TFormImage.php');
-    $menu->add('20022', '200', 'Customizado com CSS', 'view/form/exe_TForm3.php', null, '../../base/imagens/css.png');
-    $menu->add('20023', '200', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php', null, '../../base/imagens/css.png');
-    $menu->add('20024', '200', 'Customizado grid com CSS', 'view/css/exe_css_form03.php', null, '../../base/imagens/table16.gif');
+   $menu->add('20020', '200', 'Customizado com CSS', null, null, '../../base/imagens/css.png');
+        $menu->add('20020.1', '20020', 'Customizado com CSS', 'view/form/exe_TForm3.php', null, '../../base/imagens/css.png');
+        $menu->add('20020.2', '20020', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php', null, '../../base/imagens/css.png');
+        $menu->add('20020.3', '20020', 'Customizado grid com CSS - 01', 'view/css/exe_css_form03.php', null, '../../base/imagens/table16.gif');
+        $menu->add('20020.4', '20020', 'Customizado grid com Font Awesome', 'view/css/exe_css_form04.php', null, '../../base/imagens/table16.gif');
+        $menu->add('20020.5', '20020', 'Customizado grid forma antiga', 'view/css/exe_css_form05.php', null, '../../base/imagens/table16.gif');
+    $menu->add('20021', '200', 'Definir Colunas no Formulário', 'view/form/exe_colunas.php');
+    $menu->add('20022', '200', 'Imagem de Fundo', 'view/form/exe_TFormImage.php');
+
 
 //-----------------------------------------------------------------------------
 $menu->add('210', null, 'Gerador de Código', null, 'Formularios geradores de codigo', 'settings_tool_preferences-512.png');

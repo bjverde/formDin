@@ -1,0 +1,45 @@
+.failure {
+    color:#ff0000;
+    font-weight:bold;
+}
+.alert {
+    color:#ff8000;
+    font-weight:bold;
+}
+.success {
+    color:#008000;
+    font-weight:bold;
+    font-size: 2em;
+}
+.azul {
+    color:#0000FF;
+    font-size: 2em;
+}
+.gold {
+    color:#FFD700;
+    font-weight:bold;
+    font-size: 2em;
+}
+/********************** 
+  CSS Pseudo-elements
+  https://origin.fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements
+*******************/ 
+.icon::before {
+   display: inline-block;
+   font-style: normal;
+   font-variant: normal;
+   text-rendering: auto;
+   -webkit-font-smoothing: antialiased;
+}
+.login::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f007";
+}
+.btc::before {
+    font-family: "Font Awesome 5 Brands";
+    color:#FFD700;
+    font-weight:bold;
+    font-size: 2em;
+    content: "\f379";
+}
