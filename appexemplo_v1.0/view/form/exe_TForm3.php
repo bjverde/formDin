@@ -39,6 +39,22 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+$dados = null;
+$dados['ID'][]    = 1;
+$dados['NOME'][]  = 'Linha1';
+$dados['ATIVO'][] = 'S';
+$dados['GRUPO'][] = 'A';
+
+$dados['ID'][]    = 2;
+$dados['NOME'][]  = 'Linha2';
+$dados['ATIVO'][] = 'S';
+$dados['GRUPO'][] = 'A';
+
+$dados['ID'][]    = 3;
+$dados['NOME'][]  = 'Linha3';
+$dados['ATIVO'][] = 'N';
+$dados['GRUPO'][] = 'C';
+
 /**
  * @name grides/gride_condominio_offline.php
  * @author  Altamiro Rodrigues <altamiro27 at gmail dot com>
@@ -68,6 +84,14 @@ $frm->getHeaderButtonCell()->add('<table border="0" width="100%" height="100%" c
 $frm->addGroupField('bg1', 'Grupo de teste');
     $frm->addTextField('nome', 'Nome:', 60);
 $frm->closeGroup();
+
+$gride = new TGrid('gdTeste' // id do gride
+    , 'Título do Gride' // titulo do gride
+    , $dados   // array de dados
+    , null     // altura do gride
+    , null     // largura do gride
+    , 'ID');     // chave primaria
+$frm->addHtmlField('gride', $gride);
 
 // exibir o formulário
 $frm->show();
