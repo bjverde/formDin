@@ -1567,6 +1567,10 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Seta o nome de uma função que será usada para desenhar as linhas da tabela.
+     * @param string $newValue
+     */
     public function setOnDrawCell( $newValue = null )
     {
         $this->onDrawCell = $newValue;
@@ -1579,6 +1583,11 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Seta o nome de uma função que será usada para desenhar o Header do Grid
+     * Um exemplo tipo é modificar o texto por uma imagem
+     * @param string $newValue
+     */
     public function setOnDrawHeaderCell( $newValue = null )
     {
         $this->onDrawHeaderCell = $newValue;
@@ -1591,6 +1600,11 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Seta o nome de uma função que será usada para desenhar os botões de uma linha da gride.
+     * Um exemplo tipico é desabilitar determinado botão se o Registro estiver no estado X
+     * @param string $newValue
+     */
     public function setOnDrawActionButton( $newValue = null )
     {
         $this->onDrawActionButton = $newValue;
