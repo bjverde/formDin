@@ -216,7 +216,8 @@ $menu->add('200', 0, 'Layouts', null, 'Exemplos de Layouts, CSS e apresentaçõe
         $menu->add('20020.1', '20020', 'Customizado com CSS', 'view/form/exe_TForm3.php', null, '../../base/imagens/css.png');
         $menu->add('20020.2', '20020', 'Form Buttuns Customizado com CSS', 'view/css/exe_css_form02.php', null, '../../base/imagens/css.png');
         $menu->add('20020.3', '20020', 'Customizado grid com CSS - 01', 'view/css/exe_css_form03.php', null, '../../base/imagens/table16.gif');
-        $menu->add('20020.4', '20020', 'Customizado grid com Font Awesome', 'view/css/exe_css_form04.php', null, '../../base/imagens/table16.gif');        
+        $menu->add('20020.4', '20020', 'Customizado grid com Font Awesome', 'view/css/exe_css_form04.php', null, '../../base/imagens/table16.gif');
+        $menu->add('20020.5', '20020', 'Customizado grid forma antiga', 'view/css/exe_css_form05.php', null, '../../base/imagens/table16.gif');
     $menu->add('20021', '200', 'Definir Colunas no Formulário', 'view/form/exe_colunas.php');
     $menu->add('20022', '200', 'Imagem de Fundo', 'view/form/exe_TFormImage.php');
 

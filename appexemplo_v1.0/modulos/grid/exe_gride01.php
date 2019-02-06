@@ -93,7 +93,7 @@ $gride->setCss('background-clor', 'red');
 $gride->setOnDrawCell('confGride');
 $gride->setOnDrawActionButton('confButton');
 //$gride->setOnDrawHeaderCell('confHeader');
-$gride->setZebrarColors('#ffffff', '#ffffff');
+$gride->setZebrarColors('#ffffff', '#ff00ff');
 
 $gride->addColumn('seq_gride', 'SEQ', 100);
 $gride->addColumn('nom_linha', 'Nome', 100)->setSortable(false);
