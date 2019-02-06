@@ -57,7 +57,8 @@ $frm->setAutoSize(true);
 $frm->addHtmlField('campo_gride');
 
 // criação do array de dados
-for ($i=0; $i<300; $i++) {
+$res = array();
+for ($i=0; $i<30; $i++) {
     $res['SEQ_GRIDE'][] = ($i+1);
     //$res['NOM_LINHA'][] = print_r($_REQUEST,TRUE);//'Linha nº '. ($i+1);
     $res['NOM_LINHA'][] = 'Linha nº '. ($i+1);
@@ -69,6 +70,7 @@ for ($i=0; $i<300; $i++) {
     $res['VAL_ZERO'][] = '0';
     $res['VAL_NULL'][] = null;
 }
+$res['VAL_PAGO'][3]=100;
 
 if (isset($_REQUEST['idGride_serted_column'])) {
     $res = ordenarArrayBanco($res, strtoupper($_REQUEST['idGride_serted_column']), 'SORT_ASC');
@@ -92,8 +94,8 @@ $gride = new TGrid('idGride' // id do gride
 $gride->setCss('background-clor', 'red');
 $gride->setOnDrawCell('confGride');
 $gride->setOnDrawActionButton('confButton');
-//$gride->setOnDrawHeaderCell('confHeader');
-$gride->setZebrarColors('#ffffff', '#ff00ff');
+$gride->setOnDrawHeaderCell('confHeader');
+$gride->setZebrarColors('#ffffff', '#ffffff'); //removendo o zebrado
 
 $gride->addColumn('seq_gride', 'SEQ', 100);
 $gride->addColumn('nom_linha', 'Nome', 100)->setSortable(false);
@@ -211,6 +213,8 @@ function confGride($rowNum, $cell, $objColumn, $aData, $edit)
 {
 
     if ($aData['VAL_PAGO']==100) {
+        $cell->setCss('color', 'red');           // altera a cor de fundo do titulo da coluna para vermelha
+        $cell->setCss('font-size', '14');        // altera o tamanho da fonte do titulo da coluna para 14
         if ($edit) {
             //NOM_LINHA,VAL_PAGO,sit_cancelado,
             //print $objColumn->getFieldName().',';
