@@ -56,18 +56,6 @@ $gride->addSelectColumn('FK_TYPE_SCREEN_REFERENCED'
                        , null                         //10:
                        , null                         //11:
                        );
-$gride->addSelectColumn('FK2'
-    , 'Valor Pre-Selecionado 2'
-    , 'FK2'  //ID no campo na origem dos dados no gride
-    , $listFkType                  //Array de possível valores
-    , 80                           //5: largura do campo em pixel
-    , true                         //6: Somente Leitura
-    , null                           //7: Label do Primeiro elemento
-    , 2                            //8: Valor do Primeiro elemento
-    , null                         //9:
-    , null                         //10:
-    , null                         //11:
-    );
 
 //$selCol = $gride->getColumn('FK_TYPE_SCREEN_REFERENCED');   // recuperar o objeto coluna NOME_COMPRADOR
 //$selCol->setInitialValueField(0);
