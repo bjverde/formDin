@@ -145,7 +145,7 @@ class TGrid extends TTable
      *
      * @param string $strName          - 1: ID do campo
      * @param string $strTitle         - 2: Titulo do campo
-     * @param array $mixData           - 3: Array Data
+     * @param array $mixData           - 3: Array de dados
      * @param mixed $strHeight         - 4: Altura 
      * @param mixed $strWidth          - 5: Largura
      * @param mixed $strKeyField       - 6: Chave primaria
@@ -1578,6 +1578,15 @@ class TGrid extends TTable
     //------------------------------------------------------------------------------------
     /**
      * Seta o nome de uma função que será usada para desenhar as celula da tabela.
+     * 
+     * Parametros do envento onDrawCell
+     * 	1) $rowNum 		- número da linha corrente
+     * 	2) $cell		- objeto TTableCell
+     * 	3) $objColumn	- objeto TGrideColum
+     * 	4) $aData		- o array de dados da linha ex: $res[''][n]
+     * 	5) $edit		- o objeto campo quando a coluna for um campo de edição
+     *   ex: function ondrawCell($rowNum=null,$cell=null,$objColumn=null,$aData=null,$edit=null)
+     * 
      * @param string $newValue
      */
     public function setOnDrawCell( $newValue = null )
@@ -1619,6 +1628,14 @@ class TGrid extends TTable
     /**
      * Seta o nome de uma função que será usada para desenhar os botões de uma linha da gride.
      * Um exemplo tipico é desabilitar determinado botão se o Registro estiver no estado X
+     * 
+     * Parametros do evento onDrawActionButton
+     * 	1) $rowNum 		- número da linha corrente
+     * 	2) $button 		- objeto TButton
+     * 	3) $objColumn	- objeto TGrideColum
+     * 	4) $aData		- o array de dados da linha ex: $res[''][n]
+     *   Ex: function tratarBotoes($rowNum,$button,$objColumn,$aData);
+     * 
      * @param string $newValue
      */
     public function setOnDrawActionButton( $newValue = null )
