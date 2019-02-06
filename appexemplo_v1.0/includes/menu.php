@@ -168,6 +168,9 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
         $menu->add('81.6', '81', 'Gride 06 - Campos 1', 'grid/exe_gride06.php');
         $menu->add('81.7', '81', 'Gride 07 - Campos 2', 'grid/exe_gride07.php');
         $menu->add('81.8', '81', 'Gride 08 - Campos 3', 'grid/exe_gride08.php');
+    $menu->add('82', '8', 'Grides Draw - desenhando Dinamicamente', null, null, '../../base/imagens/table16.gif');
+        $menu->add('82.1', '82', 'Gride Draw 01 - Desativando order', 'grid/exe_gride_draw_01.php');
+        $menu->add('82.2', '82', 'Gride Draw 02 - Mudando a cor da linha', 'grid/exe_gride_draw_02.php');
         
     $menu->add('83', '8', 'Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
         $menu->add('83.1', '83', 'Gride 10 - erro', 'grid/exe_gride10.php');
