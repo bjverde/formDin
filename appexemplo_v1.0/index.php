@@ -38,7 +38,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-define('MIGRATE_JQUERY', false);
+define('MIGRATE_JQUERY', true);
 
 require_once('includes/constantes.php');
 include('includes/config_conexao.php');
