@@ -900,8 +900,7 @@ class TApplication extends TLayout {
 	}
 	public function getDefaultModule() {
 		return $this->defaultModule;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setConnectionFile($strNewValue = null) {
 		$this->connectionFile = $strNewValue;
@@ -911,21 +910,21 @@ class TApplication extends TLayout {
 				die ( 'Arquivo ' . $strNewValue . ' informado não existe!' );
 			}
 		}
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getConnectionFile() {
 		return $this->connectionFile;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setLoginFile($strNewValue = null, $onBeforeLoginFunction = null) {
+	    if ( !file_exists($strNewValue) ) {
+	        throw new LogicException('File not Exists: '.$strNewValue);
+	    }
 		$this->loginFile = $strNewValue;
 		if (! is_null ( $onBeforeLoginFunction )) {
 			$this->setOnBeforeLogin ( $onBeforeLoginFunction );
 		}
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getLoginFile() {
 		// tentar encontrar o arquivo na pasta modulos
@@ -933,49 +932,41 @@ class TApplication extends TLayout {
 			return $this->getRealPath ( $this->loginFile );
 		}
 		return $this->loginFile;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setMainMenuFile($strNewValue = null) {
 		$this->mainMenuFile = $strNewValue;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getMainMenuFile() {
 		return $this->mainMenuFile;
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function setConfigFile($strNewValue = null) {
+	public function setConfigFile($strNewValue = null) {
 		$this->configFile = $strNewValue;
 		if (! is_null ( $this->configFile ) && file_exists ( $this->configFile )) {
 			require_once ($this->configFile);
 		} else {
 			$this->addWarning ( 'config file ' . $strNewValue . ' not found!' );
 		}
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function addIncludeFile($strFileName = null) {
+	public function addIncludeFile($strFileName = null) {
 		if ($strFileName) {
 			$this->includeFiles [$strFileName] = $strFileName;
 		}
-	}
-	
-	// -----------------------------------------------------------------------------
+	}	
+    // --------------------------------------------------------------------------------------------
 	public function getIncludeFiles() {
 		return $this->includeFiles;
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function getConfigFile() {
+	public function getConfigFile() {
 		if (isset ( $this->configFile ) && file_exists ( $this->configFile )) {
 			return $this->configFile;
-		}
-		
+		}		
 		return null;
 	}
-	
 	// --------------------------------------------------------------------------------------------
 	private function includeConnectionFile() {
 		if ($this->getConnectionFile ()) {
@@ -985,15 +976,14 @@ class TApplication extends TLayout {
 				$this->addJavascript ( 'alert("Arquivo de conexão:' . $this->getConnectionFile () . ', defindo para a aplicação, não existe.")' );
 			}
 		}
-	}
-	
+	}	
 	// -----------------------------------------------------------------------------
-	/**
-	 * Método para encontrar e retornar o caminho correto do módulo dentro do diretório modulos/ da aplicação
-	 *
-	 * @param string $strFileName
-	 */
-	function getRealPath($strFileName = null) {
+    /**
+     * Método para encontrar e retornar o caminho correto do módulo dentro do diretório modulos/ da aplicação
+     *
+     * @param string $strFileName
+     */
+	public function getRealPath($strFileName = null) {
 		if ($strFileName == '') {
 			return $strFileName;
 		}
@@ -1554,4 +1544,3 @@ class TApplication extends TLayout {
 		return false;
 	}
 }
-?>
