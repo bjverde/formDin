@@ -318,6 +318,61 @@ class TApplication extends TLayout {
 		}		
 		return $stringHtml;
 	}
+	//---------------------------------------------------------------------------------
+	private function buildCssNorthArea(){
+	    // css
+	    if ( $this->getHeaderBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle( '#app_header_title{background	:transparent;}' );
+	        $this->addStyle( '#app_header_login{background	:transparent;}' );
+	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
+	        
+	        if ( $this->getNorthArea() ) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
+	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
+	            $this->getNorthArea()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getHeaderBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
+	                    if ($width < 30) {
+	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
+	private function buildCssSouthArea(){
+	    if ( $this->getFooterBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
+	        
+	        if ($this->getSouthArea ()) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
+	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
+	            $this->getSouthArea ()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getFooterBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
+	                    if ($width < 30) {
+	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
+	            }
+	        }
+	    }
+	}
 	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
@@ -359,55 +414,9 @@ class TApplication extends TLayout {
 			$this->setContainer ( $e );
 		}
 		
-		// css
-		if ($this->getHeaderBgImage ()) {
-			// sobrescrever as definições do app.css
-			$this->addStyle ( '#app_header_title{background	:transparent;}' );
-			$this->addStyle ( '#app_header_login{background	:transparent;}' );
-			$this->addStyle ( '#app_header_logo{background	:transparent;}' );
-			
-			if ($this->getNorthArea ()) {
-				// definir a imagem de fundo do cabecalho
-				$this->getNorthArea ()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
-				$this->getNorthArea ()->setCss ( 'background-position', "50% 50%" );
-				$this->getNorthArea ()->setCss ( 'border', "0px" );
-				if (is_null ( $this->getHeaderBgRepeat () )) {
-					if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
-						
-						list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
-						if ($width < 30) {
-							$this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-						}
-					}
-				} else {
-					$this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
-				}
-			}
-		}
-		if ($this->getFooterBgImage ()) {
-			// sobrescrever as definições do app.css
-			$this->addStyle ( '#app_footer_message{background	:transparent;}' );
-			$this->addStyle ( '#app_footer_company{background	:transparent;}' );
-			$this->addStyle ( '#app_footer_module{background	:transparent;}' );
-			
-			if ($this->getSouthArea ()) {
-				// definir a imagem de fundo do cabecalho
-				$this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
-				$this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
-				$this->getSouthArea ()->setCss ( 'border', "0px" );
-				if (is_null ( $this->getFooterBgRepeat () )) {
-					if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
-						
-						list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
-						if ($width < 30) {
-							$this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-						}
-					}
-				} else {
-					$this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
-				}
-			}
-		}
+		$this->buildCssNorthArea();
+		$this->buildCssSouthArea();
+
 		if ($this->getTitleTag ()) {
 			parent::setTitle ( $this->getTitleTag () );
 		}
