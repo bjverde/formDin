@@ -917,7 +917,7 @@ class TApplication extends TLayout {
 	}	
 	// -------------------------------------------------------------------------------------------
 	public function setLoginFile($strNewValue = null, $onBeforeLoginFunction = null) {
-	    if ( !file_exists($strNewValue) ) {
+	    if ( !empty($strNewValue) && !file_exists($strNewValue) ) {
 	        throw new LogicException('File not Exists: '.$strNewValue);
 	    }
 		$this->loginFile = $strNewValue;
