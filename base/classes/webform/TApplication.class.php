@@ -415,20 +415,19 @@ class TApplication extends TLayout {
 		
 		$this->setJavaScriptCss();
 		
-		if ($this->getLoginDone ()) {
+		if ( $this->getLoginDone() ) {
 		    $this->buildPageHeader(); // montar o cabeçalho da pagina
 			$this->buildPageFooter(); // montar o rodapé da pagina
 		} else {
 		    $this->buildPageHeader(); // montar o cabeçalho da pagina
 		    $this->buildPageFooter(); // montar o rodapé da pagina
 			
-			if ($this->getLoginFile ()) {
+			if ( $this->getLoginFile() ) {
 				if (file_exists ( $this->getLoginFile () )) {
 					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . addslashes ( $this->getLoginInfo () ) . '")' );
 				} else {
 					$this->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicação, não existe.")' );
 				}
-				
 				$this->show ();
 				exit ();
 			}
@@ -1536,35 +1535,19 @@ class TApplication extends TLayout {
 
 	public function getLoginDone()
 	{
-		/*if( isset( $_REQUEST['fwPublicMode'] ) && !is_null( $_REQUEST['fwPublicMode'] ) && ( $_REQUEST['fwPublicMode'] == 'S' || $_REQUEST['fwPublicMode'] == '1' || strtolower($_REQUEST['fwPublicMode']) == 'true' ) )
-		{
-			return true;
-		}
-		if( isset( $_SESSION[APLICATIVO]['public_mode'] ) && $_SESSION[APLICATIVO]['public_mode']==true )
-		{
-			return true;
-		}
-		*/
 		// se não existe tela de login definida, então sempre retornar verdadeiro
-		if( ! $this->getLoginFile() )
-		{
+		if( !$this->getLoginFile() ){
 			return true;
 		}
-		if( $this->getOnBeforeLogin() )
-		{
+		if( $this->getOnBeforeLogin() ) {
 			if ( function_exists( $this->removeIllegalChars( $this->getOnBeforeLogin()) ) )
 			{
 				return call_user_func( $this->getOnBeforeLogin(), $this );
-			}
-			else
-			{
+			} else {
 				$this->addJavascript('app_alert("Function '.$this->getOnBeforeLogin().' is not defined.");');
 			}
-		}
-		else
-		{
-			if ( isset( $_SESSION[ APLICATIVO ][ "conectado" ] ) && $_SESSION[ APLICATIVO ][ "conectado" ] )
-			{
+		} else {
+			if ( isset( $_SESSION[ APLICATIVO ][ "conectado" ] ) && $_SESSION[ APLICATIVO ][ "conectado" ] ){
 			  return true;
 			}
 		}
