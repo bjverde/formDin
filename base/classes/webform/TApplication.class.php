@@ -1453,59 +1453,7 @@ class TApplication extends TLayout {
 		}
 		return '';
 	}
-	/**
-	 * Define a imagem de fundo do cabeçalho da aplicação
-	 * O parametro $strRepeat define a maneira como a imagem de fundo é repetida:
-	 * repeat -> repete vertical e horizontal
-	 * repeat-y -> repete vertical;
-	 * repeat-x -> repete horizontal;
-	 *
-	 * @param mixed $strNewImage
-	 * @param mixed $strRepeat
-	 */
-	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
-		$this->headerBgImage = $strNewImage;
-		if (is_null ( $this->getWidth () )) {
-			if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
-				list ( $width, $height ) = getimagesize ( $strNewImage );
-				$this->setNorthSize ( $height );
-				if ($width > 600) {
-					$this->setWidth ( $width );
-				}
-			}
-		}
-		if (is_null ( $this->getHeaderBgRepeat () )) {
-			$this->setHeaderBgRepeat ( $strRepeat );
-		}
-	}
-	public function getHeaderBgImage() {
-		return $this->headerBgImage;
-	}
-	public function setHeaderBgRepeat($strNewValue = null) {
-		$this->headerBgRepeat = $strNewValue;
-	}
-	public function getHeaderBgRepeat() {
-		return $this->headerBgRepeat;
-	}
-	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
-		$this->footerBgImage = $strNewImage;
-		if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
-			list ( $width, $height ) = getimagesize ( $strNewImage );
-			$this->setSouthSize ( $height );
-		}
-		if (is_null ( $this->getFooterBgRepeat () )) {
-			$this->setFooterBgRepeat ( $strRepeat );
-		}
-	}
-	public function getFooterBgImage() {
-		return $this->footerBgImage;
-	}
-	public function setFooterBgRepeat($strNewValue = null) {
-		$this->footerBgRepeat = $strNewValue;
-	}
-	public function getFooterBgRepeat() {
-		return $this->footerBgRepeat;
-	}
+	
 	public function setMenuTheme($strNewValue = 'standard | aqua_dark | aqua_sky | aqua_orange | clear_blue | clear_green | dhx_black | dhx_blue | glassy_blue | modern_black | modern_blue | modern_red | clear_silver') {
 		$aThemes = explode ( ',', 'standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver' );
 		if (array_search ( $strNewValue, $aThemes )=== false ) {
@@ -1552,4 +1500,75 @@ class TApplication extends TLayout {
 		}
 		return false;
 	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * Define a imagem de fundo do cabeçalho da aplicação
+	 * O parametro $strRepeat define a maneira como a imagem de fundo é repetida:
+	 * repeat -> repete vertical e horizontal
+	 * repeat-y -> repete vertical;
+	 * repeat-x -> repete horizontal;
+	 *
+	 * @param mixed $strNewImage
+	 * @param mixed $strRepeat
+	 */
+	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
+	    $this->headerBgImage = $strNewImage;
+	    if (is_null ( $this->getWidth () )) {
+	        if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
+	            list ( $width, $height ) = getimagesize ( $strNewImage );
+	            $this->setNorthSize ( $height );
+	            if ($width > 600) {
+	                $this->setWidth ( $width );
+	            }
+	        }
+	    }
+	    if (is_null ( $this->getHeaderBgRepeat () )) {
+	        $this->setHeaderBgRepeat ( $strRepeat );
+	    }
+	}
+	public function getHeaderBgImage() {
+	    return $this->headerBgImage;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setHeaderBgRepeat($strNewValue = null) {
+	    $this->headerBgRepeat = $strNewValue;
+	}
+	public function getHeaderBgRepeat() {
+	    return $this->headerBgRepeat;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
+	    $this->footerBgImage = $strNewImage;
+	    if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
+	        list ( $width, $height ) = getimagesize ( $strNewImage );
+	        $this->setSouthSize ( $height );
+	    }
+	    if (is_null ( $this->getFooterBgRepeat () )) {
+	        $this->setFooterBgRepeat ( $strRepeat );
+	    }
+	}
+	public function getFooterBgImage() {
+	    return $this->footerBgImage;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setFooterBgRepeat($strNewValue = null) {
+	    $this->footerBgRepeat = $strNewValue;
+	}	
+	public function getFooterBgRepeat() {
+	    return $this->footerBgRepeat;
+	}
+	
 }
