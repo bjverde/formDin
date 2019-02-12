@@ -88,9 +88,6 @@ class TApplication extends TLayout {
 	private $bodyContent;
 	private $horizontalAlign;
 	private $verticalAlign;
-	private $cellLogin;
-	private $cellHeader;
-	private $cellLogo;
 	private $loCenter; // instância do LayoutCenter
 	private $beforeActionFunction;
 	private $width;
@@ -321,6 +318,61 @@ class TApplication extends TLayout {
 		}		
 		return $stringHtml;
 	}
+	//---------------------------------------------------------------------------------
+	private function buildCssNorthArea(){
+	    // css
+	    if ( $this->getHeaderBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle( '#app_header_title{background	:transparent;}' );
+	        $this->addStyle( '#app_header_login{background	:transparent;}' );
+	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
+	        
+	        if ( $this->getNorthArea() ) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
+	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
+	            $this->getNorthArea()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getHeaderBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
+	                    if ($width < 30) {
+	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
+	private function buildCssSouthArea(){
+	    if ( $this->getFooterBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
+	        
+	        if ($this->getSouthArea ()) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
+	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
+	            $this->getSouthArea ()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getFooterBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
+	                    if ($width < 30) {
+	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
+	            }
+	        }
+	    }
+	}
 	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
@@ -362,55 +414,9 @@ class TApplication extends TLayout {
 			$this->setContainer ( $e );
 		}
 		
-		// css
-		if ($this->getHeaderBgImage ()) {
-			// sobrescrever as definições do app.css
-			$this->addStyle ( '#app_header_title{background	:transparent;}' );
-			$this->addStyle ( '#app_header_login{background	:transparent;}' );
-			$this->addStyle ( '#app_header_logo{background	:transparent;}' );
-			
-			if ($this->getNorthArea ()) {
-				// definir a imagem de fundo do cabecalho
-				$this->getNorthArea ()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
-				$this->getNorthArea ()->setCss ( 'background-position', "50% 50%" );
-				$this->getNorthArea ()->setCss ( 'border', "0px" );
-				if (is_null ( $this->getHeaderBgRepeat () )) {
-					if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
-						
-						list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
-						if ($width < 30) {
-							$this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-						}
-					}
-				} else {
-					$this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
-				}
-			}
-		}
-		if ($this->getFooterBgImage ()) {
-			// sobrescrever as definições do app.css
-			$this->addStyle ( '#app_footer_message{background	:transparent;}' );
-			$this->addStyle ( '#app_footer_company{background	:transparent;}' );
-			$this->addStyle ( '#app_footer_module{background	:transparent;}' );
-			
-			if ($this->getSouthArea ()) {
-				// definir a imagem de fundo do cabecalho
-				$this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
-				$this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
-				$this->getSouthArea ()->setCss ( 'border', "0px" );
-				if (is_null ( $this->getFooterBgRepeat () )) {
-					if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
-						
-						list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
-						if ($width < 30) {
-							$this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-						}
-					}
-				} else {
-					$this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
-				}
-			}
-		}
+		$this->buildCssNorthArea();
+		$this->buildCssSouthArea();
+
 		if ($this->getTitleTag ()) {
 			parent::setTitle ( $this->getTitleTag () );
 		}
@@ -418,67 +424,25 @@ class TApplication extends TLayout {
 		
 		$this->setJavaScriptCss();
 		
-		if ($this->getLoginDone ()) {
-			// montar o cabeçalho da pagina
-			$this->buildPageHeader ();
-			
-			$btnLogOut = '';
-			
-			// montar o rodapé da pagina
-			$this->buildPageFooter ();
-			
-			if (isset ( $this->cellLogin )) {
-				// exibir o botão de ecerrar a sessão somente se existir tela de login definida
-				if ($this->getLoginFile ()) {
-					$btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sessão" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
-				}
-				if ($this->getLoginInfo ()) {
-					$this->cellLogin->add ( $this->getLoginInfo () );
-				} else if (isset ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) && $_SESSION [APLICATIVO] ["login"] ["num_cpf"]) {
-					$this->cellLogin->add ( 'CPF:' . formatar_cpf_cnpj ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) . '<br/>' . $_SESSION [APLICATIVO] ["login"] ["nom_pessoa"] );
-				}
-				
-				if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
-					$this->cellLogin->add ( '<br/>' . $btnLogOut );
-				}
-			} else {
-				$this->cellHeader->clearChildren (); // limpar a celula da tabela
-				$this->cellHeader->add ( $this->getHeaderContent () );
-			}
+		if ( $this->getLoginDone() ) {
+		    $this->buildPageHeader(); // montar o cabeçalho da pagina
+			$this->buildPageFooter(); // montar o rodapé da pagina
 		} else {
-			// montar o cabeçalho da pagina
-			$this->buildPageHeader ();
+		    $this->buildPageHeader(); // montar o cabeçalho da pagina
+		    $this->buildPageFooter(); // montar o rodapé da pagina
 			
-			// montar o rodapé da pagina
-			$this->buildPageFooter ();
-			
-			// $this->loCenter->setNorthInitClosed(true); // não mostrar a área de menu
-			if ($this->getLoginInfo () && isset ( $this->cellLogin )) {
-				$this->cellLogin->add ( $this->getLoginInfo () );
-			}
-			
-			if ($this->getLoginFile ()) {
+			if ( $this->getLoginFile() ) {
 				if (file_exists ( $this->getLoginFile () )) {
 					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . addslashes ( $this->getLoginInfo () ) . '")' );
 				} else {
 					$this->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicação, não existe.")' );
 				}
-				
 				$this->show ();
 				exit ();
 			}
 		}
 		
-		if ($this->getShowMenu ()) {
-			if ($this->getMainMenuFile ()) {
-				if (file_exists ( $this->getMainMenuFile () )) {
-					$this->addJavascript ( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. Não foi possível instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
-					$this->addJavascript ( 'app_build_menu(false,null,"' . $this->getMainMenuFile () . '")' );
-				} else {
-					$this->addJavascript ( 'alert("Módulo de menu:' . $this->getMainMenuFile () . ', defindo para a aplicação, não existe.")' );
-				}
-			}
-		}
+		$this->buildMainMenu();
 		
 		// se pressionar F5, recarregar o ultimo módulo solicitado
 		$loadModule = null;
@@ -945,8 +909,7 @@ class TApplication extends TLayout {
 	}
 	public function getDefaultModule() {
 		return $this->defaultModule;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setConnectionFile($strNewValue = null) {
 		$this->connectionFile = $strNewValue;
@@ -956,21 +919,21 @@ class TApplication extends TLayout {
 				die ( 'Arquivo ' . $strNewValue . ' informado não existe!' );
 			}
 		}
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getConnectionFile() {
 		return $this->connectionFile;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setLoginFile($strNewValue = null, $onBeforeLoginFunction = null) {
+	    if ( !empty($strNewValue) && !file_exists($strNewValue) ) {
+	        throw new LogicException('File not Exists: '.$strNewValue);
+	    }
 		$this->loginFile = $strNewValue;
 		if (! is_null ( $onBeforeLoginFunction )) {
 			$this->setOnBeforeLogin ( $onBeforeLoginFunction );
 		}
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getLoginFile() {
 		// tentar encontrar o arquivo na pasta modulos
@@ -978,49 +941,41 @@ class TApplication extends TLayout {
 			return $this->getRealPath ( $this->loginFile );
 		}
 		return $this->loginFile;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function setMainMenuFile($strNewValue = null) {
 		$this->mainMenuFile = $strNewValue;
-	}
-	
+	}	
 	// -------------------------------------------------------------------------------------------
 	public function getMainMenuFile() {
 		return $this->mainMenuFile;
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function setConfigFile($strNewValue = null) {
+	public function setConfigFile($strNewValue = null) {
 		$this->configFile = $strNewValue;
 		if (! is_null ( $this->configFile ) && file_exists ( $this->configFile )) {
 			require_once ($this->configFile);
 		} else {
 			$this->addWarning ( 'config file ' . $strNewValue . ' not found!' );
 		}
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function addIncludeFile($strFileName = null) {
+	public function addIncludeFile($strFileName = null) {
 		if ($strFileName) {
 			$this->includeFiles [$strFileName] = $strFileName;
 		}
-	}
-	
-	// -----------------------------------------------------------------------------
+	}	
+    // --------------------------------------------------------------------------------------------
 	public function getIncludeFiles() {
 		return $this->includeFiles;
-	}
-	
+	}	
 	// --------------------------------------------------------------------------------------------
-	function getConfigFile() {
+	public function getConfigFile() {
 		if (isset ( $this->configFile ) && file_exists ( $this->configFile )) {
 			return $this->configFile;
-		}
-		
+		}		
 		return null;
 	}
-	
 	// --------------------------------------------------------------------------------------------
 	private function includeConnectionFile() {
 		if ($this->getConnectionFile ()) {
@@ -1030,15 +985,14 @@ class TApplication extends TLayout {
 				$this->addJavascript ( 'alert("Arquivo de conexão:' . $this->getConnectionFile () . ', defindo para a aplicação, não existe.")' );
 			}
 		}
-	}
-	
+	}	
 	// -----------------------------------------------------------------------------
-	/**
-	 * Método para encontrar e retornar o caminho correto do módulo dentro do diretório modulos/ da aplicação
-	 *
-	 * @param string $strFileName
-	 */
-	function getRealPath($strFileName = null) {
+    /**
+     * Método para encontrar e retornar o caminho correto do módulo dentro do diretório modulos/ da aplicação
+     *
+     * @param string $strFileName
+     */
+	public function getRealPath($strFileName = null) {
 		if ($strFileName == '') {
 			return $strFileName;
 		}
@@ -1322,69 +1276,101 @@ class TApplication extends TLayout {
 	public function getHorizontalAlign() {
 		return is_null ( $this->horizontalAlign ) ? 'center' : $this->horizontalAlign;
 	}
+	
+	private function getHeaderLogo() {
+	    $app_header_logo = new TDiv( 'app_header_logo' );
+	    $sigla = $this->getSigla();
+	    $app_header_logo->add( $sigla );
+	    return $app_header_logo;
+	}
+	
+	private function getHeaderSubTitle() {
+	    $app_header_subtitle = null;
+	    if ( $this->getSubtitle() ) {
+	        $app_header_subtitle = new TDiv( 'app_header_subtitle' );
+	        $title = $this->getSubtitle();
+	        $app_header_subtitle->add( $title );
+	    }
+	    return $app_header_subtitle;
+	}
+	
+	private function getHeaderTitle() {
+	    $app_header_title = new TDiv( 'app_header_title' );
+	    //$app_header_title->setAttribute('class','elm');
+	    
+	    $app_header_title_main = new TDiv( 'app_header_title_main' );
+	    $title = $this->getTitle();
+	    $app_header_title_main->add( $title );
+	    
+	    $app_header_title->add( $app_header_title_main );
+	    $app_header_title->add( $this->getHeaderSubTitle() );
+	    
+	    return $app_header_title;
+	}
+	
+	private function getHeaderLogin() {
+	    
+	    $userInfo  = null;
+	    $btnLogOut = null;
+	    if ($this->getLoginDone ()) {
+	        // exibir o botão de ecerrar a sessão somente se existir tela de login definida
+	        if ($this->getLoginFile ()) {
+	            $btnLogOut = '<input id="button_end_session" type="button" value="Encerrar Sessão" onclick="app_login(1,\'' . $this->getLoginFile () . '\')">';
+	        }
+	        if ($this->getLoginInfo ()) {
+	            $userInfo = $this->getLoginInfo ();
+	        } else if (isset ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) && $_SESSION [APLICATIVO] ["login"] ["num_cpf"]) {
+	            $userInfo = 'CPF:' . formatar_cpf_cnpj ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) . '<br/>' . $_SESSION [APLICATIVO] ["login"] ["nom_pessoa"] ;
+	        }
+	        
+	        if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
+	            $userInfo =  $userInfo. '<br/>' . $btnLogOut;
+	        }
+	    } else {
+	        if ( $this->getLoginInfo() ) {
+	            $userInfo = $this->getLoginInfo();
+	        }
+	    }
+	    
+	    $app_header_login = new TDiv( 'app_header_login' );
+	    $app_header_login->add( $userInfo );
+	    return $app_header_login;
+	}
+	
+	private function buildMainMenu() {
+	    if ($this->getShowMenu ()) {
+	        if ($this->getMainMenuFile ()) {
+	            if (file_exists ( $this->getMainMenuFile () )) {
+	                $this->addJavascript ( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. Não foi possível instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
+	                $this->addJavascript ( 'app_build_menu(false,null,"' . $this->getMainMenuFile () . '")' );
+	            } else {
+	                $this->addJavascript ( 'alert("Módulo de menu:' . $this->getMainMenuFile () . ', defindo para a aplicação, não existe.")' );
+	            }
+	        }
+	    }
+	}
+	
 	private function buildPageHeader() {
-		/**
-		 * tabela do cabeçalho
-		 * ids: app_header_logo ,app_header_title, app_header_login
-		 */
-		$tbCab = new TTable ( 'table_header' );
-		$tbCab->setProperty ( 'width', '100%' );
-		$tbCab->setProperty ( 'border', '0' );
-		$tbCab->setProperty ( 'cellpadding', '0px' );
-		$tbCab->setProperty ( 'cellspacing', '0px' );
-		$this->getNorthArea ()->add ( $tbCab );
-		
-		if ($this->getHeaderContent ()) {
-			// cabeçalho definido pelo usuário
-			$row = $tbCab->addRow ();
-			$cellHeader = $row->addCell ( $this->getHeaderContent () );
-			$cellHeader->setId ( 'app_header' );
-			$cellHeader->clearCss ();
-			$cellHeader->setCss ( 'text-align', 'left' );
-			$cellHeader->setCss ( 'font-size', '14px' );
-			$cellHeader->setCss ( 'border-top', 'none' );
-			$cellHeader->setCss ( 'font-weight', 'normal' );
-			$cellHeader->setCss ( 'line-height', '100%' );
-			// td do cabeçalho
-			$this->cellHeader = $cellHeader;
-		} else {
-			$row = $tbCab->addRow ();
-			// app_header_logo
-			$app_header_logo = $row->addCell ( $this->getSigla () );
-			$app_header_logo->setId ( 'app_header_logo' );
-			$app_header_logo->setCss ( 'width', '200' );
-			// app_header_title
-			$app_header_title = $row->addCell ( $this->getTitle () );
-			$app_header_title->setId ( 'app_header_title' );
-			$app_header_title->setCss ( 'Height', '55' );
-			$app_header_title->setCss ( 'width', '*' );
-			
-			if ($this->getSubtitle ()) {
-				$app_header_title->add ( '<br><span style="font-size:15px;" id="app_header_subtitle">' . $this->getSubtitle () . '</span>' );
-			}
-			
-			$app_header_title->clearCss ();
-			$app_header_title->setCss ( 'background-color', 'transparent' );
-			
-			if (defined ( 'COR_TITULO' )) {
-				$app_header_title->setCss ( 'color', COR_TITULO );
-			}
-			
-			// app_header_login
-			$app_header_login = $row->addCell ( '' );
-			$app_header_login->setId ( 'app_header_login' );
-			$app_header_login->setCss ( 'Height', '55' );
-			$app_header_login->setCss ( 'width', '200' );
-			
-			// propriedades da class
-			$this->cellHeader = $app_header_title;
-			$this->cellLogin = $app_header_login;
-			$this->cellLogo = $app_header_logo;
-			$this->cellLogo->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-			$this->cellHeader->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-			$this->cellLogin->setCss ( 'border', $this->getNorthArea ()->getCss ( 'border' ) );
-		}
-	}	
+	    
+	    $app_hearder = new TElement('header');
+	    //$app_hearder = new TDiv( 'header' );
+	    
+	    if ( $this->getHeaderContent() ) {
+	        $app_hearderUser = new TDiv( 'app_header' );
+	        $app_hearderUser->add( $this->getHeaderContent() );
+	        $app_hearder->add( $app_hearderUser );
+	    }else{
+	        $app_header_logo  = $this->getHeaderLogo();
+	        $app_header_title = $this->getHeaderTitle();
+	        $app_header_login = $this->getHeaderLogin();
+	        
+	        $app_hearder->add( $app_header_logo );
+	        $app_hearder->add( $app_header_title );
+	        $app_hearder->add( $app_header_login );
+	    }
+	    
+	    $this->getNorthArea ()->add ( $app_hearder );
+	}
 	
 	/**
 	 * Build defaulf page Footer  Div: app_footer
@@ -1396,7 +1382,8 @@ class TApplication extends TLayout {
 			return;
 		}
 		
-		$app_footer = new TDiv( 'footer' );		
+		$app_footer = new TElement('footer');
+		//$app_footer = new TDiv( 'footer' );		
 		
 		if ( $this->getFooterContent() ) {
 			$app_footer->add( $this->getFooterContent() );
@@ -1466,59 +1453,7 @@ class TApplication extends TLayout {
 		}
 		return '';
 	}
-	/**
-	 * Define a imagem de fundo do cabeçalho da aplicação
-	 * O parametro $strRepeat define a maneira como a imagem de fundo é repetida:
-	 * repeat -> repete vertical e horizontal
-	 * repeat-y -> repete vertical;
-	 * repeat-x -> repete horizontal;
-	 *
-	 * @param mixed $strNewImage
-	 * @param mixed $strRepeat
-	 */
-	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
-		$this->headerBgImage = $strNewImage;
-		if (is_null ( $this->getWidth () )) {
-			if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
-				list ( $width, $height ) = getimagesize ( $strNewImage );
-				$this->setNorthSize ( $height );
-				if ($width > 600) {
-					$this->setWidth ( $width );
-				}
-			}
-		}
-		if (is_null ( $this->getHeaderBgRepeat () )) {
-			$this->setHeaderBgRepeat ( $strRepeat );
-		}
-	}
-	public function getHeaderBgImage() {
-		return $this->headerBgImage;
-	}
-	public function setHeaderBgRepeat($strNewValue = null) {
-		$this->headerBgRepeat = $strNewValue;
-	}
-	public function getHeaderBgRepeat() {
-		return $this->headerBgRepeat;
-	}
-	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
-		$this->footerBgImage = $strNewImage;
-		if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
-			list ( $width, $height ) = getimagesize ( $strNewImage );
-			$this->setSouthSize ( $height );
-		}
-		if (is_null ( $this->getFooterBgRepeat () )) {
-			$this->setFooterBgRepeat ( $strRepeat );
-		}
-	}
-	public function getFooterBgImage() {
-		return $this->footerBgImage;
-	}
-	public function setFooterBgRepeat($strNewValue = null) {
-		$this->footerBgRepeat = $strNewValue;
-	}
-	public function getFooterBgRepeat() {
-		return $this->footerBgRepeat;
-	}
+	
 	public function setMenuTheme($strNewValue = 'standard | aqua_dark | aqua_sky | aqua_orange | clear_blue | clear_green | dhx_black | dhx_blue | glassy_blue | modern_black | modern_blue | modern_red | clear_silver') {
 		$aThemes = explode ( ',', 'standard,aqua_dark,aqua_sky,aqua_orange,clear_blue,clear_green,dhx_black,dhx_blue,glassy_blue,modern_black,modern_blue,modern_red,clear_silver' );
 		if (array_search ( $strNewValue, $aThemes )=== false ) {
@@ -1534,19 +1469,7 @@ class TApplication extends TLayout {
 		}
 		return $this->menuTheme;
 	}
-	public function getCellLogo()
-	{
-		return $this->cellLogo;
-	}
-	public function getCellHeader()
-	{
-		return $this->cellHeader;
-	}
-	public function getCellLogin()
-	{
-		return $this->cellLogin;
-	}
-
+	
 	public function setOnBeforeLogin( $strFunctionName = null )
 	{
 		$this->onBeforeLogin = $strFunctionName;
@@ -1559,39 +1482,93 @@ class TApplication extends TLayout {
 
 	public function getLoginDone()
 	{
-		/*if( isset( $_REQUEST['fwPublicMode'] ) && !is_null( $_REQUEST['fwPublicMode'] ) && ( $_REQUEST['fwPublicMode'] == 'S' || $_REQUEST['fwPublicMode'] == '1' || strtolower($_REQUEST['fwPublicMode']) == 'true' ) )
-		{
-			return true;
-		}
-		if( isset( $_SESSION[APLICATIVO]['public_mode'] ) && $_SESSION[APLICATIVO]['public_mode']==true )
-		{
-			return true;
-		}
-		*/
 		// se não existe tela de login definida, então sempre retornar verdadeiro
-		if( ! $this->getLoginFile() )
-		{
+		if( !$this->getLoginFile() ){
 			return true;
 		}
-		if( $this->getOnBeforeLogin() )
-		{
+		if( $this->getOnBeforeLogin() ) {
 			if ( function_exists( $this->removeIllegalChars( $this->getOnBeforeLogin()) ) )
 			{
 				return call_user_func( $this->getOnBeforeLogin(), $this );
-			}
-			else
-			{
+			} else {
 				$this->addJavascript('app_alert("Function '.$this->getOnBeforeLogin().' is not defined.");');
 			}
-		}
-		else
-		{
-			if ( isset( $_SESSION[ APLICATIVO ][ "conectado" ] ) && $_SESSION[ APLICATIVO ][ "conectado" ] )
-			{
+		} else {
+			if ( isset( $_SESSION[ APLICATIVO ][ "conectado" ] ) && $_SESSION[ APLICATIVO ][ "conectado" ] ){
 			  return true;
 			}
 		}
 		return false;
 	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * Define a imagem de fundo do cabeçalho da aplicação
+	 * O parametro $strRepeat define a maneira como a imagem de fundo é repetida:
+	 * repeat -> repete vertical e horizontal
+	 * repeat-y -> repete vertical;
+	 * repeat-x -> repete horizontal;
+	 *
+	 * @param mixed $strNewImage
+	 * @param mixed $strRepeat
+	 */
+	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
+	    $this->headerBgImage = $strNewImage;
+	    if (is_null ( $this->getWidth () )) {
+	        if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
+	            list ( $width, $height ) = getimagesize ( $strNewImage );
+	            $this->setNorthSize ( $height );
+	            if ($width > 600) {
+	                $this->setWidth ( $width );
+	            }
+	        }
+	    }
+	    if (is_null ( $this->getHeaderBgRepeat () )) {
+	        $this->setHeaderBgRepeat ( $strRepeat );
+	    }
+	}
+	public function getHeaderBgImage() {
+	    return $this->headerBgImage;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setHeaderBgRepeat($strNewValue = null) {
+	    $this->headerBgRepeat = $strNewValue;
+	}
+	public function getHeaderBgRepeat() {
+	    return $this->headerBgRepeat;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
+	    $this->footerBgImage = $strNewImage;
+	    if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
+	        list ( $width, $height ) = getimagesize ( $strNewImage );
+	        $this->setSouthSize ( $height );
+	    }
+	    if (is_null ( $this->getFooterBgRepeat () )) {
+	        $this->setFooterBgRepeat ( $strRepeat );
+	    }
+	}
+	public function getFooterBgImage() {
+	    return $this->footerBgImage;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Image Back Ground
+	 * @param string $strNewValue
+	 */
+	public function setFooterBgRepeat($strNewValue = null) {
+	    $this->footerBgRepeat = $strNewValue;
+	}	
+	public function getFooterBgRepeat() {
+	    return $this->footerBgRepeat;
+	}
+	
 }
-?>

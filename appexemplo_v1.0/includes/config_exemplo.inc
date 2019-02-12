@@ -1,38 +1,36 @@
 <?php
+
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
- * Criado por Luís Eugênio Barbosa
- * Essa versão é um Fork https://github.com/bjverde/formDin
- *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
- *
+ * 
  * Formdin Framework is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License version 3
  * as published by the Free Software Foundation.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public License version 3
  * along with this program; if not,  see <http://www.gnu.org/licenses/>
  * or write to the Free Software Foundation, Inc., 51 Franklin Street,
  * Fifth Floor, Boston, MA  02110-1301, USA.
  * ----------------------------------------------------------------------------
  * Este arquivo é parte do Framework Formdin.
- *
+ * 
  * O Framework Formdin é um software livre; você pode redistribuí-lo e/ou
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
- *
- * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
+ * 
+ * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
+ * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
  * para maiores detalhes.
- *
+ * 
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
  * "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses/>
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
@@ -40,13 +38,21 @@
  */
 
 
-$frm = new TForm('Exemplos links');
+define("APLICATIVO","TEST");
+define("TITULO_SISTEMA","SistemaS de TesteS");
+define("FORMDINCSS","css/FormDin.css");
+define('PASTA_BASE','base/');
+define("DEBUG",1);
+define("BANCO_TNS","desenv");
+define('TIPO_ACESSO','E'); // 'I'= banco_interno ; 'E' = banco_externo
 
-$homeUrl = UrlHelper::homeUrl();
+// as seguintes linhas apenas para conxÃ£o com usuÃ¡rio fixo. (TIPO_ACESSO='E')
+define('AUTENTICAR_EXTERNO','MCP.PK_AUTENTICAR.AUTENTICAR'); // funÃ§Ã£o usada para autenticar usuÃ¡rio externo
+define('SESSAO_TEMPO_MAX',0); // Tempo mÃ¡ximo que usuÃ¡rio pode ficar logado em segundos. 0=sem limite
+define("BANCO_USUARIO","12345678909");
+define("BANCO_SENHA","teste");
 
-$frm->addLinkField('idLink0', 'labelLink0', 'Layout 00 - Default', null, $homeUrl.'index.php', 'new');
-$frm->addLinkField('idLink1', 'labelLink1', 'Layout 01 - Menu Lateral', null, $homeUrl.'index_layout01.php', 'new');
-$frm->addLinkField('idLink2', 'labelLink2', 'Layout 02 - Header customizado. Metodo setHeaderBgImage deprecated no formDIn v4.2.10, altere o CSS para customizar', null, $homeUrl.'index_layout02.php', 'new');
-$frm->addLinkField('idLink3', 'labelLink3', 'Layout 03 - Header customizado. Metodo setHeaderBgImage deprecated no formDIn v4.2.10, altere o CSS para customizar', null, $homeUrl.'index_layout03.php', 'new');
+define("CACHE_REFRESH",86400);	// Tempo que a descricao dos cabeÃ§alhos do pacotes ficam em cache
+								//segundos !! 1 hora=3600 1 dia=86400
+?>
 
-$frm->show();
