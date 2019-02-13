@@ -424,7 +424,8 @@ class TForm Extends TBox
         }
     }
     
-    private function showHeaderMaximizeButtonOnForm($form){
+    private function showHeaderMaximizeButtonOnForm($form)
+    {
         $notModal = !$this->get('modalWinId'); 
         $boolMaximize = $this->getMaximize();
         if( $notModal && $boolMaximize ) {
@@ -436,10 +437,38 @@ class TForm Extends TBox
     /***
      * Show 3 Buttons Help, Maximize, Close
      */
-    private function showHeaderBarButtonArea($form){
+    private function showHeaderBarButtonArea($form)
+    {
         $this->showCloseButtonOnForm($form);
         $this->showHeaderMaximizeButtonOnForm($form);
         $this->showHeaderHelpOnline();
+    }    
+    
+    private function setFormIds()
+    {
+        // colocar os ids nos objeto do formulario
+        $this->table->setId( $this->getId() . '_table' );
+        $this->header->setId( $this->getId() . '_header' );
+        $this->body->setId( $this->getId() . '_body' );
+        $this->footer->setId( $this->getId() . '_footer' );
+    }
+    
+    private function ajustaModulo()
+    {
+        // ajustar a variavel $_POST['modulo']. Quando o $_POST é passado para a classe banco
+        // no lugar do bvars, os valores das chaves retornam em caixa alta
+        if ( isset( $_POST[ 'MODULO' ] ) ) {
+            $_POST[ 'modulo' ] = $_POST[ 'MODULO' ];
+            $_GET[ 'modulo' ] = $_POST[ 'MODULO' ];
+        }
+    }
+    
+    private function tboxNoOverFlow()
+    {
+        // não deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
+        if ( $this->getFieldType() != 'group' ){
+            $this->divBody->setCss( 'overflow', 'hidden' );
+        }
     }
     
     /**
@@ -454,23 +483,10 @@ class TForm Extends TBox
     public function show( $print=true, $flat=false )
     {
         $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
-        // colocar os ids nos objeto do formulario
-        $this->table->setId( $this->getId() . '_table' );
-        $this->header->setId( $this->getId() . '_header' );
-        $this->body->setId( $this->getId() . '_body' );
-        $this->footer->setId( $this->getId() . '_footer' );
-        // ajustar a variavel $_POST['modulo']. Quando o $_POST é passado para a classe banco
-        // no lugar do bvars, os valores das chaves retornam em caixa alta
-        if( isset( $_POST[ 'MODULO' ] ) )
-        {
-            $_POST[ 'modulo' ] = $_POST[ 'MODULO' ];
-            $_GET[ 'modulo' ] = $_POST[ 'MODULO' ];
-        }
-        // não deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
-        if( $this->getFieldType() != 'group' )
-        {
-            $this->divBody->setCss( 'overflow', 'hidden' );
-        }
+        $this->setFormIds();
+        $this->ajustaModulo();
+        $this->tboxNoOverFlow();
+
         //print $this->getFieldType();
         
         if( $this->getFieldType() == 'form' )
