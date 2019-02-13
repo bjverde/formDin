@@ -2966,7 +2966,7 @@ class TForm Extends TBox
       * @param bool $boolAutoStart         - 5: incia a pesquisa quando abre a tela
       * @param bool $boolAutoSelect        - 6: 
       * @param string $strGridColumns      - 7: colunas que irão aparecer no grid
-      * @param string $strUpdateFormFields - 8: coluna busca | campo form destino, coluna busca | campo form destino
+      * @param string $strUpdateFormFields - 8: Campos que serão atulizados no form Original. Entrad no formato. coluna busca | campo form destino, coluna busca | campo form destino
       * @param string $strWindowHeader     - 9: Titulo da janela de pesquisa
       * @param string $strGridHeader       - 10: Titulo do Gride
       * @param string $strFocusFieldName   - 11: Seta o Foco no campo definido
