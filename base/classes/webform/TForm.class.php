@@ -471,6 +471,22 @@ class TForm Extends TBox
         }
     }
     
+    private function verifySessionEnd()
+    {
+        // verificar se a classe TApplication (controller detectou que a sessão está expirdada
+        if( !$this->getPublicMode() && isset( $_POST['fwSession_expired'] ) && $_POST['fwSession_expired']== true )
+        {
+            // configurar o formulário para exibir somente a mensagem
+            $this->setTitle('Sessão Encerrada');
+            $this->setWidth(300);
+            $this->setHeight(120);
+            $this->hideCloseButton();
+            $this->removeField();
+            $this->addHtmlField('msg','<center><br><h3>Reiniciando. Aguarde...</center>')->setCss('color','#ff0000');
+            $this->addJavascript('window.setTimeout("fwApplicationRestart()",1500)');
+        }
+    }
+    
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
@@ -516,18 +532,8 @@ class TForm Extends TBox
                 prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
                 die;
             }
-            // verificar se a classe TApplication (controller detectou que a sessão está expirdada
-            if( !$this->getPublicMode() && isset( $_POST['fwSession_expired'] ) && $_POST['fwSession_expired']== true )
-            {
-                // configurar o formulário para exibir somente a mensagem
-                $this->setTitle('Sessão Encerrada');
-                $this->setWidth(300);
-                $this->setHeight(120);
-                $this->hideCloseButton();
-                $this->removeField();
-                $this->addHtmlField('msg','<center><br><h3>Reiniciando. Aguarde...</center>')->setCss('color','#ff0000');
-                $this->addJavascript('window.setTimeout("fwApplicationRestart()",1500)');
-            }
+            $this->verifySessionEnd();
+            
             if( $this->getPublicMode() )
             {
                 $this->addHiddenField('fwPublicMode','S');
