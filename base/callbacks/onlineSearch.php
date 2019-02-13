@@ -121,7 +121,7 @@ if ( isset( $_POST[ 'formDinAcao' ] ) && $_POST[ 'formDinAcao' ] == 'cadastrar_o
 //--------------------------------------------------------------------------
 $form = new TForm( $aParams[ 'windowHeader' ], $aParams[ 'windowHeight' ] - 32, $aParams[ 'windowWidth' ] - 32, 'formsearch' );
 $form->addJsFile('onlineSearch.js');
-$form->headerCloseButton->setCss( 'display', 'none' );
+$form->setShowCloseButton(false);
 $form->setCss( 'border', '0px' );
 $form->setFlat( true );
 
