@@ -54,8 +54,10 @@ class Tb_pedido_item {
 	public static function deleteByIdPedido( $idPedido ){
 	    $listItens = self::selectByIdPedido( $idPedido );
 	    $result = array();
-	    foreach ($listItens['ID_ITEM'] as $key => $id) {
-	        $result[$key]=self::delete($id);
+	    If ( is_array($listItens) ) {
+    	    foreach ($listItens['ID_ITEM'] as $key => $id) {
+    	        $result[$key]=self::delete($id);
+    	    }
 	    }
 	    return $result;
 	}
