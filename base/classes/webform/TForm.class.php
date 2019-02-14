@@ -3843,38 +3843,25 @@ class TForm Extends TBox
                  {
                      $this->addJsFile('virtualKeyboard/keyboard.js');
                      $this->addCssFile('virtualKeyboard/keyboard.css');
-                 }
-                 else if( $dc->getField()->getFieldType() == 'fullcalendar' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'fullcalendar' ) {
                      $this->addCssFile('fullcalendar/cupertino/theme.css');
                      $this->addCssFile('fullcalendar/fullcalendar.css');
                      $this->addJsFile('fullcalendar/fullcalendar.min.js');
-                 }
-                 else if( $dc->getField()->getFieldType() == 'helpbox' )
-                 {
-                     if( array_search( 'jquery/facebox/facebox.js', $this->jsFiles, true ) === false )
-                     {
+                 } else if( $dc->getField()->getFieldType() == 'helpbox' ) {                     
+                     if( is_array($this->jsFiles) && (array_search( 'jquery/facebox/facebox.js', $this->jsFiles, true ) === false) ) {
                          $this->addJsFile( 'jquery/facebox/facebox.js' );
                          $this->addCssFile( 'jquery/facebox/facebox.css' );
                      }
-                 }
-                 else if( $dc->getField()->getFieldType() == 'pagecontrol' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'pagecontrol' ) {
                      // css abas
                      $this->addCssFile( 'pagecontrol/pagecontrol.css' );
-                 }
-                 else if( $dc->getField()->getFieldType() == 'opendir' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'opendir' ) {
                      $this->addJsFile("jquery/jqueryFileTree/jquery.easing.js");
                      $this->addJsFile("jquery/jqueryFileTree/jqueryFileTree.js");
                      $this->addCssFile("jquery/jqueryFileTree/jqueryFileTree.css");
-                 }
-                 else if( $dc->getField()->getFieldType() == 'coordgms' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'coordgms' ) {
                      $this->addJsFile("FormDin4Geo.js");
-                 }
-                 else if( $dc->getField()->getFieldType() == 'cep' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'cep' ) {
                      $this->addJsFile("FormDin4Cep.js");
                  }
              }
