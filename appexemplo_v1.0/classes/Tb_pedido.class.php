@@ -80,6 +80,8 @@ class Tb_pedido {
 	public static function saveGridOff( Tb_pedidoVO $objVo )
 	{
 	    self::validarPedidoGridOff($objVo);
+	    //Obs a situação ideial é tudo seja feito com controle de transação do banco de dados.
+	    
 	    $result = null;
 	    $idPedido = $objVo->getId_pedido();
 	    if( $idPedido ) {
