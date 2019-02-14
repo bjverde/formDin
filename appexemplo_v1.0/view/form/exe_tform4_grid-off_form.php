@@ -43,26 +43,36 @@ $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
 
 $acao = isset($acao) ? $acao : null;
 switch ($acao) {
-    case 'Salvar':
-        if ($frm->validate()) {
-            $vo = new Tb_pedidoVO();
-            $frm->setVo($vo);
-            $list_pedido_item = $frm->createBvars('grid_off');
-            $vo->setList_pedido_item($list_pedido_item['GRID_OFF']);
-            $resultado = Tb_pedido::saveGridOff($vo);
-            if ($resultado==1) {
-                $frm->setMessage('Registro gravado com sucesso!!!');
-                $frm->clearFields();
-            } else {
-                $frm->setMessage($resultado);
-            }
-        }
-        break;
-    //--------------------------------------------------------------------------------
     case 'Limpar':
         //unset( $_SESSION[APLICATIVO]['offline'] );
         $frm->clearFields(null,'gdItem');
-        break;
+        //$frm->redirect('view/form/exe_tform4_grid-off_form.php');
+    break;
+    //--------------------------------------------------------------------------------
+    case 'Salvar':
+        try{
+            if ( $frm->validate() ) {
+                $vo = new Tb_pedidoVO();
+                $frm->setVo($vo);
+                $list_pedido_item = $frm->createBvars('grid_off');
+                $vo->setList_pedido_item($list_pedido_item['GRID_OFF']);
+                $resultado = Tb_pedido::saveGridOff($vo);
+                if ($resultado==1) {
+                    $frm->setMessage('Registro gravado com sucesso!!!');
+                    $frm->clearFields();
+                } else {
+                    $frm->setMessage($resultado);
+                }
+            }
+        }
+        catch (DomainException $e) {
+            $frm->setMessage( $e->getMessage() );
+        }
+        catch (Exception $e) {
+            MessageHelper::logRecord($e);
+            $frm->setMessage( $e->getMessage() );
+        }
+    break;
     //--------------------------------------------------------------------------------
     case 'gd_excluir':
         $id = $frm->get($primaryKey);

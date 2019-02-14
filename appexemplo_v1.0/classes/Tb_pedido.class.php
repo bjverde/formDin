@@ -42,7 +42,8 @@ class Tb_pedido {
 		return $result;
 	}
 	//--------------------------------------------------------------------------------
-	private static function saveGridOffItem( $idPedido , $listPedidoItens ){
+	private static function saveGridOffItem( $idPedido , $listPedidoItens )
+	{
 	    $hasArray = ArrayHelper::has('GDITEM_AEI', $listPedidoItens);
 	    if($hasArray) {
     	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
@@ -63,7 +64,16 @@ class Tb_pedido {
 	    }
 	}
 	//--------------------------------------------------------------------------------
-	public static function saveGridOff( Tb_pedidoVO $objVo ){
+	public static function validarPedidoGridOff( Tb_pedidoVO $objVo )
+	{
+	    $listItens = $objVo->getList_pedido_item();
+	    if( !is_array($listItens) ){
+	        throw new DomainException('Só existe pedido se tiver ao menos 1 item');
+	    }
+	}	
+	public static function saveGridOff( Tb_pedidoVO $objVo )
+	{
+	    self::validarPedidoGridOff($objVo);
 	    $result = null;
 	    $idPedido = $objVo->getId_pedido();
 	    if( $idPedido ) {
@@ -84,7 +94,8 @@ class Tb_pedido {
 	    return $result;
 	}
 	//--------------------------------------------------------------------------------
-	public static function delete( $id ){
+	public static function delete( $id )
+	{
 	    $result = Tb_pedido_item::deleteByIdPedido($id);
 		$result = Tb_pedidoDAO::delete( $id );
 		return $result;
