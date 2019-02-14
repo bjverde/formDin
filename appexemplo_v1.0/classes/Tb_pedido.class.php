@@ -44,12 +44,18 @@ class Tb_pedido {
 	//--------------------------------------------------------------------------------
 	private static function saveGridOffItem( $idPedido , $listPedidoItens )
 	{
+	    if( empty($idPedido) ){
+	        throw new InvalidArgumentException('ERRO !! idPedido não pode ser null');
+	    }
+	    
 	    $hasArray = ArrayHelper::has('GDITEM_AEI', $listPedidoItens);
 	    if($hasArray) {
     	    foreach ($listPedidoItens['GDITEM_AEI'] as $key => $value) {
     	        $idPedidoItem = $listPedidoItens['ID_ITEM'][$key];
     	        $objVo = new Tb_pedido_itemVO();
-    	        $objVo->setId_item( $idPedidoItem );
+    	        if ( ($value == 'A') ) {
+    	           $objVo->setId_item( $idPedidoItem );
+    	        }
     	        $objVo->setId_pedido( $idPedido );
     	        $objVo->setProduto( $listPedidoItens['PRODUTO'][$key] );
     	        $objVo->setPreco( $listPedidoItens['PRECO'][$key] );
@@ -84,11 +90,10 @@ class Tb_pedido {
 	    } else {
 	        $objVo->setId_pedido( 'Novo' ); //Para manter compatibilidade com exemplo mestre detalhe
 	        $listLastPedido = Tb_pedidoDAO::insert( $objVo );
-	        $listPedidoItens = $objVo->getList_pedido_item();
-	        
+	        $listPedidoItens = $objVo->getList_pedido_item();	        
 	        $lastID = ArrayHelper::getArray($listLastPedido, 'ID_PEDIDO');
 	        $idPedido = ArrayHelper::get($lastID, 0);
-	        self::saveGridOffItem($idPedido[0], $listPedidoItens);
+	        self::saveGridOffItem($idPedido, $listPedidoItens);
 	        $result = 1;
 	    }
 	    return $result;

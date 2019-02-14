@@ -38,7 +38,7 @@ class Tb_pedido_item {
 	//--------------------------------------------------------------------------------
 	public static function save( Tb_pedido_itemVO $objVo ){
 		$result = null;
-		if( $objVo->getId_pedido() ) {
+		if( $objVo->getId_item() ) {
 		    $result = Tb_pedido_itemDAO::update( $objVo );
 		} else {
 		    $result = Tb_pedido_itemDAO::insert( $objVo );
