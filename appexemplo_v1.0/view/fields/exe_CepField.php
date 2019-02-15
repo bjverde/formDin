@@ -149,7 +149,16 @@ $frm->addGroupField('gpx2', 'Motor de Busca BuscarCep');
     $frm->addSelectField('cod_municipio3', 'Município:', null, null, false);
     $frm->combinarSelects('cod_uf3', 'cod_municipio3', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 $frm->closeGroup();
-    
+
+$frm->addButton('Limpar', null, 'Limpar');
+
+$acao = isset($acao) ? $acao : null;
+switch ($acao) {
+    case 'Limpar':
+        $frm->clearFields();
+    break;
+}
+
 $frm->show();
 ?>
 <script>
