@@ -6639,7 +6639,7 @@ class TForm Extends TBox
             * @param string $strFieldLogradouro   - 11: id do campo logradouro
             * @param string $strFieldNumero       - 12: id do campo numero
             * @param string $strFieldComplemento  - 13: id do complemento
-            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio DEVE TERMINAL COM "_temp"
+            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
             * @param boolean $boolLabelAbove      - 15: Label sobre campo 
             * @param boolean $boolNoWrapLabel     - 16:
             * @param string $jsCallback           - 17: Js Callback
