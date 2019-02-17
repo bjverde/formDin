@@ -318,63 +318,6 @@ class TApplication extends TLayout {
 		}		
 		return $stringHtml;
 	}
-	//---------------------------------------------------------------------------------
-	private function buildCssNorthArea(){
-	    // css
-	    if ( $this->getHeaderBgImage() ) {
-	        // sobrescrever as definições do app.css
-	        $this->addStyle( '#app_header_title{background	:transparent;}' );
-	        $this->addStyle( '#app_header_login{background	:transparent;}' );
-	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
-	        
-	        if ( $this->getNorthArea() ) {
-	            // definir a imagem de fundo do cabecalho
-	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
-	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
-	            $this->getNorthArea()->setCss ( 'border', "0px" );
-	            if (is_null ( $this->getHeaderBgRepeat () )) {
-	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
-	                    
-	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
-	                    $height = $height; //POG para retirar mensagens de variavel não usada;
-	                    if ($width < 30) {
-	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-	                    }
-	                }
-	            } else {
-	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
-	            }
-	        }
-	    }
-	}
-	//---------------------------------------------------------------------------------
-	private function buildCssSouthArea(){
-	    if ( $this->getFooterBgImage() ) {
-	        // sobrescrever as definições do app.css
-	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
-	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
-	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
-	        
-	        if ($this->getSouthArea ()) {
-	            // definir a imagem de fundo do cabecalho
-	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
-	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
-	            $this->getSouthArea ()->setCss ( 'border', "0px" );
-	            if (is_null ( $this->getFooterBgRepeat () )) {
-	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
-	                    
-	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
-	                    $height = $height; //POG para retirar mensagens de variavel não usada;
-	                    if ($width < 30) {
-	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-	                    }
-	                }
-	            } else {
-	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
-	            }
-	        }
-	    }
-	}
 	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
@@ -1514,6 +1457,73 @@ class TApplication extends TLayout {
 		return false;
 	}
 	
+	//---------------------------------------------------------------------------------
+	/**
+	 * @deprecated Please use CSS to change Style of North Area
+	 * maintained for backward compatibility
+	 */
+	private function buildCssNorthArea(){
+	    // css
+	    if ( $this->getHeaderBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle( '#app_header_title{background	:transparent;}' );
+	        $this->addStyle( '#app_header_login{background	:transparent;}' );
+	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
+	        
+	        if ( $this->getNorthArea() ) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
+	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
+	            $this->getNorthArea()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getHeaderBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
+	                    if ($width < 30) {
+	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
+	/**
+	 * @deprecated Please use CSS to change Style of South Area
+	 * maintained for backward compatibility
+	 */
+	private function buildCssSouthArea()
+	{
+	    if ( $this->getFooterBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
+	        
+	        if ($this->getSouthArea ()) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
+	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
+	            $this->getSouthArea ()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getFooterBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
+	                    if ($width < 30) {
+	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * Define a imagem de fundo do cabeçalho da aplicação
@@ -1525,7 +1535,8 @@ class TApplication extends TLayout {
 	 * @param mixed $strNewImage
 	 * @param mixed $strRepeat
 	 */
-	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
+	public function setHeaderBgImage($strNewImage = null, $strRepeat = null)
+	{
 	    $this->headerBgImage = $strNewImage;
 	    if (is_null ( $this->getWidth () )) {
 	        if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
@@ -1540,26 +1551,32 @@ class TApplication extends TLayout {
 	        $this->setHeaderBgRepeat ( $strRepeat );
 	    }
 	}
-	public function getHeaderBgImage() {
+	
+	public function getHeaderBgImage()
+	{
 	    return $this->headerBgImage;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
 	 */
-	public function setHeaderBgRepeat($strNewValue = null) {
+	public function setHeaderBgRepeat($strNewValue = null)
+	{
 	    $this->headerBgRepeat = $strNewValue;
 	}
-	public function getHeaderBgRepeat() {
+	
+	public function getHeaderBgRepeat()
+	{
 	    return $this->headerBgRepeat;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
 	 */
-	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
+	public function setFooterBgImage($strNewImage = null, $strRepeat = null)
+	{
 	    $this->footerBgImage = $strNewImage;
 	    if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
 	        list ( $width, $height ) = getimagesize ( $strNewImage );
@@ -1570,10 +1587,12 @@ class TApplication extends TLayout {
 	        $this->setFooterBgRepeat ( $strRepeat );
 	    }
 	}
-	public function getFooterBgImage() {
+	
+	public function getFooterBgImage()
+	{
 	    return $this->footerBgImage;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
