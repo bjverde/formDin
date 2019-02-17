@@ -53,6 +53,7 @@ require_once ($helps_dir . 'ArrayHelper.class.php');
 require_once ($helps_dir . 'CountHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');
 require_once ($helps_dir . 'GetHelper.class.php');
+require_once ($helps_dir . 'HtmlHelper.class.php');
 require_once ($helps_dir . 'MessageHelper.class.php');
 require_once ($helps_dir . 'PaginationSQLHelper.class.php');
 require_once ($helps_dir . 'PostHelper.class.php');
@@ -644,7 +645,20 @@ class TApplication extends TLayout {
 	        exit ();
 	    }
 	}
-
+	
+	private function getHeaderHtmlForm()
+	{
+	    $htmlViewPort = HtmlHelper::getViewPort();
+	    $htmlScript = "<!DOCTYPE html>"
+	                 ."\n<html>"
+	                 ."\n<head>"
+	                 ."\n<meta charset=\"".$this->getCharset()."\">"
+	                 ."\n".$htmlViewPort
+	                 ."\n</head>"
+	                 ."\n<body>"
+	                 ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+        return $htmlScript;
+	}
 	
 	// -----------------------------------------------------------------
 	/**
@@ -712,11 +726,7 @@ class TApplication extends TLayout {
 			
 			$this->criaXmlSegurancaLerMenu($modulo);
 			
-			$htmlScript = "<!DOCTYPE html>"
-					      ."\n<html>"
-					      ."\n<meta charset=\"".$this->getCharset()."\">"
-					      ."\n<body>"
-					      ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+			$htmlScript = $this->getHeaderHtmlForm();
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
