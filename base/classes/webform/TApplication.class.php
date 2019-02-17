@@ -336,6 +336,7 @@ class TApplication extends TLayout {
 	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
 	                    
 	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
 	                    if ($width < 30) {
 	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
 	                    }
@@ -363,6 +364,7 @@ class TApplication extends TLayout {
 	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
 	                    
 	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
 	                    if ($width < 30) {
 	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
 	                    }
@@ -656,6 +658,48 @@ class TApplication extends TLayout {
 			exit ();
 		}
 	}
+	
+	
+	/**
+	 * utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado 
+	 * @param string $modulo
+	 */
+	private function criaXmlSegurancaLerMenu($modulo)
+	{
+	    // utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado
+	    if (isset ( $_REQUEST ['content-type'] ) && strtolower ( $_REQUEST ['content-type'] ) == 'xml') {
+	        $_SESSION [APLICATIVO] ['modulo'] = null;
+	        if (! file_exists ( $modulo )) {
+	            header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+	            header ( "Cache-Control: no-cache" );
+	            header ( "Pragma: no-cache" );
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
+	            
+	            echo '<menu>
+							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' não existe."/>
+							<item id="verifique" text="Verifique as configurações no index.php"/>
+						</menu>';
+	            exit ();
+	        }
+	        
+	        $aFileInfo = pathinfo ( $modulo );
+	        
+	        if ($aFileInfo ['extension'] == 'php' || $aFileInfo ['extension'] == 'inc') {
+	            header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+	            header ( "Cache-Control: no-cache" );
+	            header ( "Pragma: no-cache" );
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
+	            $this->includeConnectionFile ();
+	            require_once ($modulo);
+	        } else {
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . "'" );
+	            
+	            echo file_get_contents ( $modulo );
+	        }
+	        
+	        exit ();
+	    }
+	}
 
 	
 	// -----------------------------------------------------------------
@@ -722,39 +766,8 @@ class TApplication extends TLayout {
 			// ajustar caminho do modulo recebido
 			$modulo = $this->getRealPath ( $modulo );
 			
-			// utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado
-			if (isset ( $_REQUEST ['content-type'] ) && strtolower ( $_REQUEST ['content-type'] ) == 'xml') {
-				$_SESSION [APLICATIVO] ['modulo'] = null;
-				if (! file_exists ( $modulo )) {
-					header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-					header ( "Cache-Control: no-cache" );
-					header ( "Pragma: no-cache" );
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
-					
-					echo '<menu>
-							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' não existe."/>
-							<item id="verifique" text="Verifique as configurações no index.php"/>
-						</menu>';
-					exit ();
-				}
-				
-				$aFileInfo = pathinfo ( $modulo );
-				
-				if ($aFileInfo ['extension'] == 'php' || $aFileInfo ['extension'] == 'inc') {
-					header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-					header ( "Cache-Control: no-cache" );
-					header ( "Pragma: no-cache" );
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
-					$this->includeConnectionFile ();
-					require_once ($modulo);
-				} else {
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . "'" );
-					
-					echo file_get_contents ( $modulo );
-				}
-				
-				exit ();
-			}
+			$this->criaXmlSegurancaLerMenu($modulo);
+			
 			$htmlScript = "<!DOCTYPE html>"
 					      ."\n<html>"
 					      ."\n<meta charset=\"".$this->getCharset()."\">"
@@ -1550,6 +1563,7 @@ class TApplication extends TLayout {
 	    $this->footerBgImage = $strNewImage;
 	    if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
 	        list ( $width, $height ) = getimagesize ( $strNewImage );
+	        $width = $width; //POG para retirar mensagens de variavel não usada;
 	        $this->setSouthSize ( $height );
 	    }
 	    if (is_null ( $this->getFooterBgRepeat () )) {
@@ -1566,7 +1580,7 @@ class TApplication extends TLayout {
 	 */
 	public function setFooterBgRepeat($strNewValue = null) {
 	    $this->footerBgRepeat = $strNewValue;
-	}	
+	}
 	public function getFooterBgRepeat() {
 	    return $this->footerBgRepeat;
 	}
