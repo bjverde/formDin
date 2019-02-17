@@ -334,7 +334,7 @@ class TApplication extends TLayout {
 		$this->setOnPostModuloAndAction();
 		
 		// ******************************************************************************************
-		$this->processRequest (); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
+		$this->processRequest(); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
 		// ******************************************************************************************
 		
         $this->clearTempFiles();
@@ -555,6 +555,7 @@ class TApplication extends TLayout {
 	private function checkIfExistConfigFile() {
 		if ($this->getIncludeFiles ()) {
 			foreach ( $this->getIncludeFiles () as $k => $v ) {
+			    $k = $k; //POG para avitar mensagem de variavel não usada
 				if (file_exists ( $v )) {
 					require_once ($v);
 				}
@@ -844,6 +845,7 @@ class TApplication extends TLayout {
 				$lines = file ( $moduloXajax, FILE_SKIP_EMPTY_LINES );
 				
 				foreach ( $lines as $line_num => $line ) {
+				    $line_num = $line_num;  //POG para evisar aviso de variavel não usada
 					$line = trim ( $line );
 					
 					if (strpos ( $line, 'function ' ) === 0) {
@@ -1552,6 +1554,9 @@ class TApplication extends TLayout {
 	    }
 	}
 	
+	/**
+	 * @deprecated Please use CSS to change Background Header
+	 */
 	public function getHeaderBgImage()
 	{
 	    return $this->headerBgImage;
@@ -1566,6 +1571,9 @@ class TApplication extends TLayout {
 	    $this->headerBgRepeat = $strNewValue;
 	}
 	
+	/**
+	 * @deprecated Please use CSS to change Background Header
+	 */
 	public function getHeaderBgRepeat()
 	{
 	    return $this->headerBgRepeat;
@@ -1588,6 +1596,9 @@ class TApplication extends TLayout {
 	    }
 	}
 	
+	/**
+	 * @deprecated Please use CSS to change Background footer
+	 */
 	public function getFooterBgImage()
 	{
 	    return $this->footerBgImage;
@@ -1600,6 +1611,10 @@ class TApplication extends TLayout {
 	public function setFooterBgRepeat($strNewValue = null) {
 	    $this->footerBgRepeat = $strNewValue;
 	}
+	
+	/**
+	 * @deprecated Please use CSS to change Background footer
+	 */
 	public function getFooterBgRepeat() {
 	    return $this->footerBgRepeat;
 	}
