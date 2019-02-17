@@ -76,6 +76,7 @@ class THtmlPage extends TElement
 		$this->objHtml->add($this->objBody);
 		$this->objHead->add('<meta http-equiv="Expires" content="Tue, 20 Aug 1996 14:25:27 GMT">');
 		$this->objHead->add('<meta charset="'.$this->getCharset().'">');
+		$this->objHead->add('<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">');
 		
 		$this->objTitle = new TElement('title');
 		$this->objTitle->clearCss();
