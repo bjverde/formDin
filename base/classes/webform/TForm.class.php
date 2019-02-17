@@ -437,7 +437,8 @@ class TForm Extends TBox
         }
     }
     
-    private function showHeaderMaximizeButtonOnForm($form){
+    private function showHeaderMaximizeButtonOnForm($form)
+    {
         $notModal = !$this->get('modalWinId'); 
         $boolMaximize = $this->getMaximize();
         if( $notModal && $boolMaximize ) {
@@ -449,10 +450,54 @@ class TForm Extends TBox
     /***
      * Show 3 Buttons Help, Maximize, Close
      */
-    private function showHeaderBarButtonArea($form){
+    private function showHeaderBarButtonArea($form)
+    {
         $this->showCloseButtonOnForm($form);
         $this->showHeaderMaximizeButtonOnForm($form);
         $this->showHeaderHelpOnline();
+    }    
+    
+    private function setFormIds()
+    {
+        // colocar os ids nos objeto do formulario
+        $this->table->setId( $this->getId() . '_table' );
+        $this->header->setId( $this->getId() . '_header' );
+        $this->body->setId( $this->getId() . '_body' );
+        $this->footer->setId( $this->getId() . '_footer' );
+    }
+    
+    private function ajustaModulo()
+    {
+        // ajustar a variavel $_POST['modulo']. Quando o $_POST é passado para a classe banco
+        // no lugar do bvars, os valores das chaves retornam em caixa alta
+        if ( isset( $_POST[ 'MODULO' ] ) ) {
+            $_POST[ 'modulo' ] = $_POST[ 'MODULO' ];
+            $_GET[ 'modulo' ] = $_POST[ 'MODULO' ];
+        }
+    }
+    
+    private function tboxNoOverFlow()
+    {
+        // não deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
+        if ( $this->getFieldType() != 'group' ){
+            $this->divBody->setCss( 'overflow', 'hidden' );
+        }
+    }
+    
+    private function verifySessionEnd()
+    {
+        // verificar se a classe TApplication (controller detectou que a sessão está expirdada
+        if( !$this->getPublicMode() && isset( $_POST['fwSession_expired'] ) && $_POST['fwSession_expired']== true )
+        {
+            // configurar o formulário para exibir somente a mensagem
+            $this->setTitle('Sessão Encerrada');
+            $this->setWidth(300);
+            $this->setHeight(120);
+            $this->hideCloseButton();
+            $this->removeField();
+            $this->addHtmlField('msg','<center><br><h3>Reiniciando. Aguarde...</center>')->setCss('color','#ff0000');
+            $this->addJavascript('window.setTimeout("fwApplicationRestart()",1500)');
+        }
     }
     
     /**
@@ -467,23 +512,10 @@ class TForm Extends TBox
     public function show( $print=true, $flat=false )
     {
         $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
-        // colocar os ids nos objeto do formulario
-        $this->table->setId( $this->getId() . '_table' );
-        $this->header->setId( $this->getId() . '_header' );
-        $this->body->setId( $this->getId() . '_body' );
-        $this->footer->setId( $this->getId() . '_footer' );
-        // ajustar a variavel $_POST['modulo']. Quando o $_POST é passado para a classe banco
-        // no lugar do bvars, os valores das chaves retornam em caixa alta
-        if( isset( $_POST[ 'MODULO' ] ) )
-        {
-            $_POST[ 'modulo' ] = $_POST[ 'MODULO' ];
-            $_GET[ 'modulo' ] = $_POST[ 'MODULO' ];
-        }
-        // não deixar a classe TBox mostrar  as barras de rolagem lateral e inferior
-        if( $this->getFieldType() != 'group' )
-        {
-            $this->divBody->setCss( 'overflow', 'hidden' );
-        }
+        $this->setFormIds();
+        $this->ajustaModulo();
+        $this->tboxNoOverFlow();
+
         //print $this->getFieldType();
         
         if( $this->getFieldType() == 'form' )
@@ -513,18 +545,8 @@ class TForm Extends TBox
                 prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
                 die;
             }
-            // verificar se a classe TApplication (controller detectou que a sessão está expirdada
-            if( !$this->getPublicMode() && isset( $_POST['fwSession_expired'] ) && $_POST['fwSession_expired']== true )
-            {
-                // configurar o formulário para exibir somente a mensagem
-                $this->setTitle('Sessão Encerrada');
-                $this->setWidth(300);
-                $this->setHeight(120);
-                $this->hideCloseButton();
-                $this->removeField();
-                $this->addHtmlField('msg','<center><br><h3>Reiniciando. Aguarde...</center>')->setCss('color','#ff0000');
-                $this->addJavascript('window.setTimeout("fwApplicationRestart()",1500)');
-            }
+            $this->verifySessionEnd();
+            
             if( $this->getPublicMode() )
             {
                 $this->addHiddenField('fwPublicMode','S');
@@ -2957,7 +2979,7 @@ class TForm Extends TBox
       * @param bool $boolAutoStart         - 5: incia a pesquisa quando abre a tela
       * @param bool $boolAutoSelect        - 6: 
       * @param string $strGridColumns      - 7: colunas que irão aparecer no grid
-      * @param string $strUpdateFormFields - 8: coluna busca | campo form destino, coluna busca | campo form destino
+      * @param string $strUpdateFormFields - 8: Campos que serão atulizados no form Original. Entrad no formato. coluna busca | campo form destino, coluna busca | campo form destino
       * @param string $strWindowHeader     - 9: Titulo da janela de pesquisa
       * @param string $strGridHeader       - 10: Titulo do Gride
       * @param string $strFocusFieldName   - 11: Seta o Foco no campo definido
@@ -3834,38 +3856,25 @@ class TForm Extends TBox
                  {
                      $this->addJsFile('virtualKeyboard/keyboard.js');
                      $this->addCssFile('virtualKeyboard/keyboard.css');
-                 }
-                 else if( $dc->getField()->getFieldType() == 'fullcalendar' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'fullcalendar' ) {
                      $this->addCssFile('fullcalendar/cupertino/theme.css');
                      $this->addCssFile('fullcalendar/fullcalendar.css');
                      $this->addJsFile('fullcalendar/fullcalendar.min.js');
-                 }
-                 else if( $dc->getField()->getFieldType() == 'helpbox' )
-                 {
-                     if( array_search( 'jquery/facebox/facebox.js', $this->jsFiles, true ) === false )
-                     {
+                 } else if( $dc->getField()->getFieldType() == 'helpbox' ) {                     
+                     if( is_array($this->jsFiles) && (array_search( 'jquery/facebox/facebox.js', $this->jsFiles, true ) === false) ) {
                          $this->addJsFile( 'jquery/facebox/facebox.js' );
                          $this->addCssFile( 'jquery/facebox/facebox.css' );
                      }
-                 }
-                 else if( $dc->getField()->getFieldType() == 'pagecontrol' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'pagecontrol' ) {
                      // css abas
                      $this->addCssFile( 'pagecontrol/pagecontrol.css' );
-                 }
-                 else if( $dc->getField()->getFieldType() == 'opendir' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'opendir' ) {
                      $this->addJsFile("jquery/jqueryFileTree/jquery.easing.js");
                      $this->addJsFile("jquery/jqueryFileTree/jqueryFileTree.js");
                      $this->addCssFile("jquery/jqueryFileTree/jqueryFileTree.css");
-                 }
-                 else if( $dc->getField()->getFieldType() == 'coordgms' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'coordgms' ) {
                      $this->addJsFile("FormDin4Geo.js");
-                 }
-                 else if( $dc->getField()->getFieldType() == 'cep' )
-                 {
+                 } else if( $dc->getField()->getFieldType() == 'cep' ) {
                      $this->addJsFile("FormDin4Cep.js");
                  }
              }
@@ -6643,7 +6652,7 @@ class TForm Extends TBox
             * @param string $strFieldLogradouro   - 11: id do campo logradouro
             * @param string $strFieldNumero       - 12: id do campo numero
             * @param string $strFieldComplemento  - 13: id do complemento
-            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio
+            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
             * @param boolean $boolLabelAbove      - 15: Label sobre campo 
             * @param boolean $boolNoWrapLabel     - 16:
             * @param string $jsCallback           - 17: Js Callback

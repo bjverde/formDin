@@ -9,7 +9,7 @@ $frm->setcss('background-color', '#B4CDCD');
 
 //$frm->addHiddenField($primaryKey); // coluna chave da tabela
 //$frm->addTextField('ID_ITEM','item',30); // coluna chave da tabela
-$frm->addTextField('PRODUTO', 'Produto:', 30, false, null);
+$frm->addTextField('PRODUTO', 'Produto:', 30, true, null);
 $frm->addNumberField('QUANTIDADE', 'Quantidade:', 5, true, 1, true);
 $frm->addNumberField('PRECO', 'Preço:', 10, true, 2, true);
 

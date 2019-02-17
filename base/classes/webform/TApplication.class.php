@@ -544,8 +544,8 @@ class TApplication extends TLayout {
 		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
 		$this->addJsCssFile ( 'app.js' );
 		
-		$this->addJsCssFile ( $this->getCssFile () );
 		$this->addJsCssFile ( 'FormDin4.css' );
+		$this->addJsCssFile ( $this->getCssFile () );
 		
 		// arquivo js que será carregado por último se existir
 		$this->addJsCssFile ( 'js/main.js' );

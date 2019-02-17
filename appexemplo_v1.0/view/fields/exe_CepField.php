@@ -39,7 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo Campo CEP');
+$frm = new TForm('Exemplo Campo CEP',600);
 $frm->setFlat(true);
 
 $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
@@ -59,7 +59,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
         , 'cod_uf'      // id do Campo sig uf
         , null          // id do Campo logradouro
         , null          // id do Campo complemento
-        , null          // id do Cod municipio
+        , 'cod_municipio' // id do Cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
         , null          // Label sobre o campo
         , null
         , 'pesquisarCepCallback'    //JavaScript Callback
@@ -80,7 +80,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
         , 'cod_uf'      // id do Campo sig uf
         , null          // id do Campo logradouro
         , null          // id do Campo complemento
-        , null          // id do Cod municipio
+        , 'cod_municipio'  // id do Cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
         , null          // Label sobre o campo
         , null
         , 'pesquisarCepCallback'    //JavaScript Callback
@@ -105,7 +105,6 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
     $frm->addHtmlField('linha', '<hr><b>Consulta com select combinado, motor ViaCep</b>');
     
     // utilizando select combinados
-    $frm->addHiddenField('cod_municipio_temp', '');
     $frm->addCepField('num_cep2'
                      , 'Cep:'
                      , true
@@ -118,7 +117,7 @@ $frm->addGroupField('gpx1', 'Motor de Busca ViaCep');
                      , 'cod_uf2' // campo sig uf
                      , null // campo logradouro
                      , null
-                     , 'cod_municipio2_temp'
+                     , 'cod_municipio2_temp' // id do Cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
                      , null, null, 'myCallback');
     $frm->addTextField('des_endereco2', 'Endereço:', 60);
     // $frm->addSelectField('cod_uf2', 'Estado:', false);
@@ -150,7 +149,16 @@ $frm->addGroupField('gpx2', 'Motor de Busca BuscarCep');
     $frm->addSelectField('cod_municipio3', 'Município:', null, null, false);
     $frm->combinarSelects('cod_uf3', 'cod_municipio3', 'vw_municipios', 'cod_uf', 'cod_municipio', 'nom_municipio', '-- Municípios --', '0', 'Nenhum Município Encontrado');
 $frm->closeGroup();
-    
+
+$frm->addButton('Limpar', null, 'Limpar');
+
+$acao = isset($acao) ? $acao : null;
+switch ($acao) {
+    case 'Limpar':
+        $frm->clearFields();
+    break;
+}
+
 $frm->show();
 ?>
 <script>
@@ -164,6 +172,7 @@ function pesquisarCepBeforeSend(id){
 
 function myCallback(dataset){
     console.log(jQuery("#cod_municipio2_temp").val());
+    console.log(jQuery("#cod_municipio3_temp").val());
     jQuery("#cod_uf2").change();
     jQuery("#cod_uf3").change();
 }
