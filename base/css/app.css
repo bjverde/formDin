@@ -250,3 +250,80 @@ footer
     -moz-opacity:0.80;
     filter: alpha(opacity=80);
 }
+
+
+@media (max-width: 575.98px) { 
+
+	#app_header_logo
+	{
+		display     :table-cell;
+		width       :20%;
+		height	    :55px;
+		font-size	:9px;
+		font-weight	:bold;
+		text-align	:center;
+		vertical-align: middle;
+	}
+
+	#app_header_title_main
+	{
+		background	:transparent;
+		font-size	:12px;
+		font-weight	:bold;
+		text-align	:center;
+	}
+	#app_header_subtitle
+	{
+		background	:transparent;
+		font-size	:9px;
+		font-weight	:bold;
+		text-align	:center;
+	}
+	#app_header_login
+	{
+		display     : table-cell;
+		  vertical-align: middle;
+		width       :20%;
+		font-size	:9px;
+		text-align	:center;
+	}
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+
+	#app_header_logo
+	{
+		display     :table-cell;
+		width       :20%;
+		height	    :55px;
+		font-size	:10px;
+		font-weight	:bold;
+		text-align	:center;
+		vertical-align: middle;
+	}
+
+	#app_header_title_main
+	{
+		background	:transparent;
+		font-size	:14px;
+		font-weight	:bold;
+		text-align	:center;
+	}
+	#app_header_subtitle
+	{
+		background	:transparent;
+		font-size	:10px;
+		font-weight	:bold;
+		text-align	:center;
+	}
+	#app_header_login
+	{
+		display     : table-cell;
+		  vertical-align: middle;
+		width       :20%;
+		font-size	:10px;
+		text-align	:center;
+	}
+
+}
