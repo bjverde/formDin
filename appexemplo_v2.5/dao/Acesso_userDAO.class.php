@@ -29,7 +29,7 @@ class Acesso_userDAO extends TPDOConnection {
 	//--------------------------------------------------------------------------------
 	public static function selectById( $id ) {
 		if( empty($id) || !is_numeric($id) ){
-			throw new InvalidArgumentException();
+			throw new InvalidArgumentException('$id não informado');
 		}
 		$values = array($id);
 		$sql = self::$sqlBasicSelect.' where iduser = ?';
@@ -39,7 +39,7 @@ class Acesso_userDAO extends TPDOConnection {
 	//--------------------------------------------------------------------------------
 	public static function selectByLogin( $login ) {
 		if( empty($login) || !is_string($login) ){
-			throw new InvalidArgumentException();
+			throw new InvalidArgumentException('$login não informado');
 		}
 		$values = array($login);
 		$sql = self::$sqlBasicSelect.' where login_user = ?';
