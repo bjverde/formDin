@@ -444,22 +444,24 @@ class TMenuDhtmlx {
 		}
 		$xml.= ($level > 0 ) ? '</item>' :"\n</menu>";
 		return $xml;
-	}
+    }
+	//--------------------------------------------------------------------------------------
+	public function addOrphanItems()
+	{
+        // adicionar os itens orfãos
+        if ($this->getOrphans()){
+            foreach( $this->getOrphans() as $k=>$objMenu){
+                $objMenuPai =  $this->getMenuById( $objMenu->getIdParent() );
+                if ( $objMenuPai ){
+                    $objMenuPai->addMenu($objMenu);
+                }
+            }
+        }
+    }
 	//--------------------------------------------------------------------------------------
 	public function getXml($print=true)
 	{
-		// adicionar os itens orfãos
-		if($this->getOrphans())
-		{
-			foreach( $this->getOrphans() as $k=>$objMenu)
-			{
-				 $objMenuPai =  $this->getMenuById( $objMenu->getIdParent() );
-				 if( $objMenuPai )
-				 {
-					$objMenuPai->addMenu($objMenu);
-				 }
-			}
-		}
+		$this->addOrphanItems();
 		$print = $print === null ? true : $print;
 		if( $print) {
 			header ("content-type: text/xml; charset=".ENCODINGS);
