@@ -5060,9 +5060,17 @@ function fwHideMsgArea( id )
 	}
 	catch(e){}
 }
+
 /*
 Função para exibir um arquivo pdf ou um pdf gerado dinamicamente com php.
-Parametros: url, modulo, acao, titulo
+Parametros: url
+           ,modulo  - 3: caminho do modulo que deseja abrir
+           ,acao
+           ,titulo  - 4: titulo da Janela 
+           ,data    - 5: Dados que serão enviados para o $_REQUEST
+
+Para usar o data ser for em uma grid deverá usar o 
+
 Ex: fwShowPdf({"modulo" : pastaBase + "exemplos/exe_pdf_1.php" });
 Ex: fwShowPdf({"url" :"tmp/teste.pdf" });
 */
@@ -5092,11 +5100,10 @@ function fwShowPdf( jsonParams )
 	{
 		jsonParams.containerId='formdin';
 	}
-	/*if( !jsonParams.data )
+	if( !jsonParams.data )
 	{
-		jsonParams.data = jQuery("#formdin").serialize();
+		jsonParams.data = null;
 	}
-	*/
 	if( jsonParams.url.indexOf('.pdf') == -1 )
 	{
 		for( key in jsonParams )
@@ -5111,7 +5118,7 @@ function fwShowPdf( jsonParams )
 			}
 		}
 	}
-	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,null);
+	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,jsonParams.data);
 }
 
 

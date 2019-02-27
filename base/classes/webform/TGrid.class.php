@@ -1506,7 +1506,7 @@ class TGrid extends TTable
      * @param string $strRotulo         - 1: Nome do Label do Botão ou Hint que irá aparecer na imagem se o Hint estiver em branco
      * @param string $strAction         - 2: Nome da ação capitura no formDinAcao
      * @param string $strName           - 3: Nome
-     * @param string $strOnClick        - 4:
+     * @param string $strOnClick        - 4: JavaScript que será chamado no evento OnClick
      * @param string $strConfirmMessage - 5: Mensagem com caixa de confirmação
      * @param string $strImage          - 6: Imagem que irá aparecer
      * @param string $strImageDisabled  - 7: Imagem quado desabilitado
