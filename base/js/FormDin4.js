@@ -5067,9 +5067,9 @@ Parametros: url
            ,modulo  - 3: caminho do modulo que deseja abrir
            ,acao
            ,titulo  - 4: titulo da Janela 
-           ,data    - 5: Dados que serão enviados para o $_REQUEST
+           ,dados   - 5: Dados que serão enviados para o $_REQUEST
 
-Para usar o data ser for em uma grid deverá usar o 
+Para usar o dados ser for em uma grid deverá usar o fwFV2O juntamento com setUpdateFields da Tgrid
 
 Ex: fwShowPdf({"modulo" : pastaBase + "exemplos/exe_pdf_1.php" });
 Ex: fwShowPdf({"url" :"tmp/teste.pdf" });
@@ -5096,29 +5096,25 @@ function fwShowPdf( jsonParams )
 	{
 		jsonParams.titulo = 'Relatório Pdf';
 	}
-	if( !jsonParams.conatinerId )
-	{
+	if( !jsonParams.conatinerId ) {
 		jsonParams.containerId='formdin';
 	}
-	if( !jsonParams.data )
-	{
-		jsonParams.data = null;
+	if( !jsonParams.dados ) {
+		jsonParams.dados = null;
 	}
-	if( jsonParams.url.indexOf('.pdf') == -1 )
-	{
-		for( key in jsonParams )
-		{
-			if (key != 'url')
-			{
-				if( jsonParams[key] == '' )
-				{
+	if( jsonParams.url.indexOf('.pdf') == -1 ) {
+		for( key in jsonParams ) {
+			if ( key == 'dados') {
+				jsonParams[key] = jsonParams[key];
+			}else if ( key != 'url') {
+				if( jsonParams[key] == '' ) {
 					jsonParams[key] = jQuery('#'+key).val();
 				}
 				jsonParams.url += ( ( jsonParams.url.indexOf('?') > 0) ? '&' : '?') + ( ( jsonParams[key]) ? key+"="+jsonParams[key] : "" );
 			}
 		}
 	}
-	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,jsonParams.data);
+	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,jsonParams.dados);
 }
 
 
