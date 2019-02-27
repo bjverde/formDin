@@ -47,7 +47,7 @@ $pdf->AddPage();
 function cabecalho($pdf)
 {
     $pdf->Image('imagem/appv1_logo.png',10,6,30);
-    $pdf->SetTextColor(0, 64, 128);
+    $pdf->SetTextColor(160, 60, 60);
     $pdf->setFont('', 'B', 14);
     $pdf->cell(0, 5, APLICATIVO.' - v:'.SYSTEM_VERSION, 0, 1, 'C');
     $pdf->setFont('', 'B', 12);
@@ -67,7 +67,6 @@ function rodape($pdf)
 }
 
 $pdf->SetFont('Arial', '', 10);
-$pdf->cell(0, 5, utf8_decode('Exemplo do relatório utilizando FPDF'), 1, 1, 'C');
 $pdf->ln(3);
 $pdf->multiCell(0, 4, utf8_decode( print_r($_REQUEST, true)) , 1);
 $pdf->show();

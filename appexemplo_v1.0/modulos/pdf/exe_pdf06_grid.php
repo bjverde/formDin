@@ -18,7 +18,7 @@ $dados['VALOR'][] = '4';
 $dados['ID'][]    = 3;
 $dados['NOME'][]  = 'Linha3';
 $dados['ATIVO'][] = 'N';
-$dados['GRUPO'][] = 'C';
+$dados['GRUPO'][] = 'função';
 $dados['VALOR'][] = '5';
 
 $dados['ID'][]    = 4;
