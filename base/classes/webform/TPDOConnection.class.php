@@ -632,6 +632,7 @@ class TPDOConnection {
     public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null ) {
         if ( !self::getInstance() ) {
             self::getError();
+            throw new PDOException(self::$error);
             return;
         }
         self::$error = null;
