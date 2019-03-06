@@ -103,14 +103,15 @@ class TApplication extends TLayout {
 	private $appRootDir;
 	private $imgLogoPath;
 	
-	/**
-	 * classe para criação da aplicação
-	 *
-	 * @param string $strTitle
-	 * @param string $strSubtitle
-	 * @param string $strSigla
-	 * @param string $strUnit
-	 * @return TApplication
+	/***
+	 * Classe para criação da aplicação
+	 * 
+	 * @param string $strTitle     1: Titulo do sistema
+	 * @param string $strSubtitle  2: SubTitulo
+	 * @param string $strSigla     3: Sigla
+	 * @param string $strUnit      4: Nome da unidade
+	 * @param string $intWidth     5: @deprecated - não tem uso, será removido
+	 * @param string $charSet      6: @deprecated - não tem uso, será removido
 	 */
 	public function __construct($strTitle = null, $strSubtitle = null, $strSigla = null, $strUnit = null, $intWidth = null, $charSet = null) {
 		ini_set ( 'xdebug.max_nesting_level', 150 );
@@ -1399,12 +1400,6 @@ class TApplication extends TLayout {
 	public function getOnBeforeActionFunction() {
 		return $this->getBeforeActionFunction ();
 	}
-	public function setWidth($intNewValue = null) {
-		$this->width = $intNewValue;
-	}
-	public function getWidth() {
-		return $this->width;
-	}
 	public function setOnGetLoginInfo($strNewValue = null) {
 		$this->onGetLoginInfo = $strNewValue;
 	}
@@ -1470,6 +1465,18 @@ class TApplication extends TLayout {
 	}
 	
 	//---------------------------------------------------------------------------------
+	
+	/**
+	 * @deprecated Please use CSS to change Style of Width App
+	 * @param integer $intNewValue
+	 */
+	public function setWidth($intNewValue = null) {
+	    $this->width = $intNewValue;
+	}
+	public function getWidth() {
+	    return $this->width;
+	}
+	
 	/**
 	 * @deprecated Please use CSS to change Style of North Area
 	 * maintained for backward compatibility
