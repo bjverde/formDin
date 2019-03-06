@@ -2,14 +2,14 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDPESSOA';
-$frm = new TForm('Cadastro de Pessoa',500);
+$frm = new TForm('Cadastro de Pessoa',700);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addMemoField('NOME', 'Nome',200,TRUE,80,3);
+$frm->addTextField('NOME', 'Nome',200,true,80);
 $frm->addSelectField('TIPO'	, 'Tipo Pessoa:',true,'PF=Pessoa física,PJ=Pessoa jurídica');
 $frm->getLabel('TIPO')->setToolTip('Valor permitidos PF ou PJ');
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
@@ -121,7 +121,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 $frm->addHtmlField('gride');
 $frm->addJavascript('init()');
 if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
-    $frm->show();
+$frm->show();
 }
 ?>
 <script>
