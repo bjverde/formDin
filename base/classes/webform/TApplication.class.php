@@ -102,8 +102,9 @@ class TApplication extends TLayout {
 	private $onBeforeLogin;
 	private $appRootDir;
 	private $imgLogoPath;
-	
-	/***
+	private $responsiveMode;
+
+    /***
 	 * Classe para criação da aplicação
 	 * 
 	 * @param string $strTitle     1: Titulo do sistema
@@ -140,6 +141,7 @@ class TApplication extends TLayout {
 		$this->setUnit ( $strUnit );
 		$this->setSigla ( $strSigla );
 		$this->setShowMenu ( true );
+		$this->setResponsiveMode( true );
 		
 		// arquivo css padrão localizado na base base/css
 		$this->addCssFile ( 'app.css' );
@@ -286,7 +288,7 @@ class TApplication extends TLayout {
 	public function getImgLogoPath() {
 		return $this->imgLogoPath;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * Enter the relative path of the application logo image.
 	 * This setting will show the application logo in place of the acronym text.
@@ -298,8 +300,7 @@ class TApplication extends TLayout {
 	 */
 	public function setImgLogoPath($imgLogoPath) {
 		$this->imgLogoPath = $imgLogoPath;
-	}
-	//---------------------------------------------------------------------------------
+	}	
 	public function getImgLogoHtml(){
 		$stringHtml = null;
 		$appRootDir = $this->getAppRootDir();
@@ -320,7 +321,22 @@ class TApplication extends TLayout {
 		}		
 		return $stringHtml;
 	}
-	
+	//---------------------------------------------------------------------------------
+	/**
+	 * @param boolean $responsiveMode
+	 */
+	public function setResponsiveMode($responsiveMode)
+	{
+	    $this->responsiveMode = $responsiveMode;
+	}
+	/**
+	 * @return boolean
+	 */
+	public function getResponsiveMode()
+	{
+	    return $this->responsiveMode;
+	}
+	//---------------------------------------------------------------------------------	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
 	 * Se for passado o modulo ele apenas inclui módulo e sai funcionando como o modulo ler_modulo.php antigo
@@ -345,7 +361,7 @@ class TApplication extends TLayout {
 			$_SESSION [APLICATIVO] = null;
 		}
 		
-		if ($this->getWidth ()) {
+		if ( $this->getResponsiveMode() == false &&  $this->getWidth()  ) {
 			$e = new TElement ( 'div' );
 			$e->setCss ( $this->getCss () );
 			$e->SetCss ( array (
@@ -1467,7 +1483,8 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	
 	/**
-	 * @deprecated Please use CSS to change Style of Width App
+	 * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+	 * to work, setResponsiveMode = false
 	 * @param integer $intNewValue
 	 */
 	public function setWidth($intNewValue = null) {
