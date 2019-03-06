@@ -92,7 +92,8 @@ class SqlHelper
         if ( BANCO == DBMS_MYSQL ) {
             //$string = addslashes($string);
             //$patterns = '/(%)/';
-            $patterns = '/(%|\'|\")/';
+            $doubleQuotes = chr(34);
+            $patterns = '/(%|\'|"|'.$doubleQuotes.')/';
             $replacements = '\\\$1';
             $string = preg_replace($patterns, $replacements, $string);
         } else {
