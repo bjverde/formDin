@@ -145,6 +145,7 @@ class TPDOConnection {
         try {
             self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
             self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            self::getExtraConfigPDO();
         } catch( PDOException $e ){
             $msg = 'Erro de conexão.<br><b>DNS:</b><br>'
                   .self::$dsn
@@ -155,6 +156,27 @@ class TPDOConnection {
         }
         
         return true;
+    }
+    
+    /**
+     * Verifica se o SGBD é MySQL, rodando no Windows
+     * Encoding do banco é UTF 8
+     * @return boolean
+     */
+    public static function isMySqlWinDbUtf8(){
+        $result = false;
+        $DBMS = self::getDBMS();
+        $boolUtf8_Decode = self::getUtfDecode();
+        if( ($DBMS == DBMS_MYSQL) && (PHP_OS != "Linux" ) && $boolUtf8_Decode==false ){
+            $result = true;
+        }
+        return $result;
+    }
+    
+    public static function getExtraConfigPDO(){
+        if( self::isMySqlWinDbUtf8() ){
+            self::$instance[ self::getDatabaseName()]->exec('SET CHARACTER SET utf8'); // acerta a acentuação vinda do banco de dados
+        }
     }
     
     private static function validateConnect($configFile ,$boolRequired ,$configArray) {
@@ -747,9 +769,11 @@ class TPDOConnection {
             if ( is_string( key( $arrDados ) ) ) {
                 foreach( $arrDados as $k => $v ) {
                     if ( ! is_null( $v )  ) {
-                        
-                        $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                        $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                                                
+                        if( !self::isMySqlWinDbUtf8() ){
+                            $boolUtf8_DecodeDataBase = self::getUtfDecode();
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        }
                         
                         // inverter campo data
                         if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {
@@ -788,8 +812,10 @@ class TPDOConnection {
                 foreach( $arrDados as $k => $v ) {
                     if ( !is_null($v) && !empty($v) ){
                         $v  = self::verifyformtDateYMD( $v );
-                        $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                        $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        if( !self::isMySqlWinDbUtf8() ){
+                            $boolUtf8_DecodeDataBase = self::getUtfDecode();
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        }
                     }else if( is_int($v) ){
                         $arrDados[ $k ] = $v;
                     }else if( $v === '0' ){
@@ -1131,7 +1157,9 @@ class TPDOConnection {
             $retorno = $string;
         }elseif (self::$banco == DBMS_SQLITE) {
             $retorno = $string;
-        }else{
+        } if( self::isMySqlWinDbUtf8() ){
+            $retorno = $string;
+        } else{
             if ( $boolUtf8_Decode ) {
                 $retorno = utf8_decode( $string );
             } else {
