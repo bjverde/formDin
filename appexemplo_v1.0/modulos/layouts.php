@@ -42,21 +42,23 @@
 
 $html2 = 'Forma Antiga de customizar o Layout <i>"Header customizado"</i>
           <br>
-          <br>Usando metodo setHeaderBgImage que foi deprecated no formDIn v4.2.10. Procurei sempre alterar o CSS';
+          <br>Usando metodo setHeaderBgImage que foi deprecated no formDIn v4.2.9. Procurei sempre alterar o CSS';
 
 $homeUrl = UrlHelper::homeUrl();
 
 $frm = new TForm('Exemplos Layout via links');
 
 $frm->addGroupField('gpx1', 'Alterando o CSS');
-    $frm->addLinkField('idLink0', 'labelLink0', 'Layout 00 - Default', null, $homeUrl.'index.php', 'new');
+    $frm->addLinkField('idLink0', 'labelLink0', 'Layout 00 - Default, setResponsiveMode = true (DEFAULT)', null, $homeUrl.'index.php', 'new');
     $frm->addLinkField('idLink1', 'labelLink1', 'Layout 01 - Menu Lateral', null, $homeUrl.'index_layout01.php', 'new');
+    $frm->addLinkField('idLink2', 'labelLink2', 'Layout 02 - Default, setResponsiveMode = FALSE', null, $homeUrl.'index_layout02.php', 'new');
+    $frm->addLinkField('idLink3', 'labelLink3', 'Layout 03 - Alterando APENAS CSS', null, $homeUrl.'index_layout03.php', 'new');
 $frm->closeGroup();
 
-$frm->addGroupField('gpx2', 'Forma Antiga');
+$frm->addGroupField('gpx2', 'Forma Antiga, até FormDin 4.2.9');
     $frm->addHtmlField('html2', $html2, null, null, null, null);
-    $frm->addLinkField('idLink2', 'labelLink2', 'Layout Old 02', null, $homeUrl.'index_layout_old_02.php', 'new');
-    $frm->addLinkField('idLink3', 'labelLink3', 'Layout Old 03', null, $homeUrl.'index_layout_old_03.php', 'new');
+    $frm->addLinkField('idLink12', 'labelLink12', 'Layout Old 02', null, $homeUrl.'index_layout_old_02.php', 'new');
+    $frm->addLinkField('idLink13', 'labelLink13', 'Layout Old 03', null, $homeUrl.'index_layout_old_03.php', 'new');
 $frm->closeGroup();
 
 $frm->setAction('POST PAGINA');
