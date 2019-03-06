@@ -72,58 +72,6 @@ $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
 //$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 
 
-//TPDOConnection::Test(true);
-
-/*
-//$_SESSION[APLICATIVO]["login"]["username"]='postgres';
-//$_SESSION[APLICATIVO]["login"]["password"]='123456';
-//$_SESSION[APLICATIVO]["database"]='teste';
-$pdo1=TPDOConnection::connect();
-print_r($pdo1);
-$conn1 = TPDOConnection::getInstance();
-$pdo2=TPDOConnection::setDataBaseName('teste');
-$conn2 = TPDOConnection::getInstance();
-
-$stmt=$conn1->query('select * from tbteste');
-$res = $stmt->fetchAll();
-print_r($res);
-print '<hr>';
-$stmt=$conn2->query('select * from tbteste');
-$res = $stmt->fetchAll();
-print_r($res);
-print '<hr>';
-print_r( $pdo1->executeSql('select * from tbteste') );
-print '<hr>';
-print_r( $pdo2->executeSq1('select * from tbteste') );
-print '<hr>';
-
-
-
-return;
-TPDOConnection::Test(false);
-/*
-$sql = "SELECT schemaname AS esquema, tablename AS tabela, tableowner AS dono
-                        FROM pg_catalog.pg_tables
-                        WHERE schemaname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')
-                        ORDER BY schemaname, tablename";
-
-print_r( TPDOConnection::executeSql($sql));
-
-print 'Banco:postgres esquema:public<br>';
-TPDOConnection::setDataBaseName('postgres');
-print_r( TPDOConnection::executeSql('select * from tbteste ') );
-print '<hr>';
-print 'Banco:teste esquema:public<br>';
-TPDOConnection::setDataBaseName('teste');
-TPDOConnection::setDieOnError(false);
-print_r( TPDOConnection::executeSql('select * from tbteste ') );
-print '<hr>';
-print 'Banco:teste esquiema:producao<br>';
-//TPDOConnection::setDataBaseName('producao');
-print_r( TPDOConnection::executeSql('select * from producao.usuario ') );
-die('fim');
-*/
-
 // testar prototyï¿½
 set_error_handler("exception_error_handler");
 $app->run();
