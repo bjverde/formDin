@@ -16,6 +16,9 @@ INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`) VA
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (15,'Ana Caroline Medeiros','PF',NOW(),'N');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (16,'Carlos Dias Medeiros','PF',NOW(),'S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (17,'Mario Medeiros Andrade','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (18,'Pesso com Percente % no meio do nome','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (19,'Pesso com aspas simples '' no meio do nome','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (20,'Pesso com aspas duplas " no meio do nome','PF',NOW(),'S');
 
 INSERT INTO `form_exemplo`.`pessoa_fisica`
 (`idpessoa_fisica`,`idpessoa`,`cpf`,`dat_nascimento`,`cod_municipio_nascimento`,`dat_inclusao`,`dat_alteracao`)
