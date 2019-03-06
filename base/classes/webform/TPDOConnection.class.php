@@ -253,6 +253,7 @@ class TPDOConnection {
                 }
             }
         }
+        $return = array();
         $return['root'] = $root;
         $return['configfile'] = $configFile;
         return $return;
