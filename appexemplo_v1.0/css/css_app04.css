@@ -1,0 +1,20 @@
+header{
+  display     :table;
+  background-image: url("../imagem/h2.jpg");
+  background-size: 100% 100%;
+}
+#app_header_logo
+{
+    display     :none;
+}
+#app_header_title_main
+{
+    background  :transparent;
+    font-size   :24px;
+    font-weight :bold;
+    text-align  :left;
+}
+
+footer{	
+  display: none;
+}
