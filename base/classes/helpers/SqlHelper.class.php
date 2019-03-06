@@ -98,9 +98,8 @@ class SqlHelper
         } else {
             if ( preg_match('/(\'|")/', $string ) > 0 ) {
                 throw new InvalidArgumentException('Não use aspas simples ou duplas na pesquisa !');
-            }            
+            }
         }
-        var_dump($string);
         return $string;
     }
     //----------------------------------------
