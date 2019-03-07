@@ -1149,7 +1149,8 @@ class TPDOConnection {
      * @param string $string
      * @return NULL|string
      */
-    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {
+    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) 
+    {
         $retorno = null;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
@@ -1157,7 +1158,8 @@ class TPDOConnection {
             $retorno = $string;
         }elseif (self::$banco == DBMS_SQLITE) {
             $retorno = $string;
-        } if( self::isMySqlWinDbUtf8() ){
+        }
+        elseif( self::isMySqlWinDbUtf8() ){
             $retorno = $string;
         } else{
             if ( $boolUtf8_Decode ) {
