@@ -159,22 +159,22 @@ class TPDOConnection {
     }
     
     /**
-     * Verifica se o SGBD é MySQL, rodando no Windows
+     * Verifica se o SGBD é MySQL
      * Encoding do banco é UTF 8
      * @return boolean
      */
-    public static function isMySqlWinDbUtf8(){
+    public static function isMySqlDbUtf8(){
         $result = false;
         $DBMS = self::getDBMS();
         $boolUtf8_Decode = self::getUtfDecode();
-        if( ($DBMS == DBMS_MYSQL) && (PHP_OS != "Linux" ) && $boolUtf8_Decode==false ){
+        if( ($DBMS == DBMS_MYSQL) && $boolUtf8_Decode==false ){
             $result = true;
         }
         return $result;
     }
     
     public static function getExtraConfigPDO(){
-        if( self::isMySqlWinDbUtf8() ){
+        if( self::isMySqlDbUtf8() ){
             self::$instance[ self::getDatabaseName()]->exec('SET CHARACTER SET utf8'); // acerta a acentuação vinda do banco de dados
         }
     }
@@ -770,7 +770,7 @@ class TPDOConnection {
                 foreach( $arrDados as $k => $v ) {
                     if ( ! is_null( $v )  ) {
                                                 
-                        if( !self::isMySqlWinDbUtf8() ){
+                        if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
                             $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
                         }
@@ -812,7 +812,7 @@ class TPDOConnection {
                 foreach( $arrDados as $k => $v ) {
                     if ( !is_null($v) && !empty($v) ){
                         $v  = self::verifyformtDateYMD( $v );
-                        if( !self::isMySqlWinDbUtf8() ){
+                        if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
                             $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
                         }
@@ -1159,7 +1159,7 @@ class TPDOConnection {
         }elseif (self::$banco == DBMS_SQLITE) {
             $retorno = $string;
         }
-        elseif( self::isMySqlWinDbUtf8() ){
+        elseif( self::isMySqlDbUtf8() ){
             $retorno = $string;
         } else{
             if ( $boolUtf8_Decode ) {
