@@ -2426,65 +2426,56 @@ function fwAtualizarCampos(campos,valores)
 						campo.selectedIndex=-1;
 						jQuery(campo).val(aValor[i]);
 						// verificar se é um select combinado atraves da propriedade parentselect
-						if( jQuery(campo).attr('parentselect') )
-						{
+						if( jQuery(campo).attr('parentselect') ) {
 							parentSelects.push(jQuery(campo).attr('parentselect') );
 							// criar  campo temp se não existir
-							if( ! campo_temp )
-							{
+							if( ! campo_temp ) {
 								jQuery(campo).append('<input type="hidden" id="'+campo.id+'_temp" name="'+campo.id+'_temp" value="'+aValor[i]+'">');
 								alert( 'Campo tmp criado');
-							}
-							else
-							{
+							} else {
 								campo_temp.value = aValor[i];
 							}
 						}
 					}
-					else if( campo.type =='radio')
-					{
+					else if( campo.type =='radio') {
 						jQuery('input:radio[name='+aCampo[i]+'][value='+aValor[i]+']').attr('checked',true);
 					}
-					else if( campo.type == 'checkbox')
-					{
-						if ( campo.value == aValor[i])
-						{
+					else if( campo.type == 'checkbox') {
+						if ( campo.value == aValor[i]) {
 							campo.checked=true;
-						}
-						else
-						{
+						} else {
 							campo.checked=false;
 						}
-					}
-					else
-					{
-						campo.value=decodeURI(aValor[i]);
+					} else {
+						//campo.value=decodeURI(aValor[i]); //Desativo em https://github.com/bjverde/formDin/issues/134
+						campo.value=aValor[i];
 						fwSetBordaCampo(campo,false,true);
-						if( campo_disabled1 )
-						{
+						if( campo_disabled1 ) {
 							try{
 								campo_disabled1.value=campo.value;
 								fwSetBordaCampo(campo_disabled1,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
-						if( campo_disabled2 )
-						{
+						if( campo_disabled2 ) {
 							try{
 								campo_disabled2.value=campo.value;
 								fwSetBordaCampo(campo_disabled2,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
-						if( campo_temp )
-						{
+						if( campo_temp ) {
 							try{
 								campo_temp.value=campo.valor;
 								fwSetBordaCampo(campo_temp,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 					}
-				}
-				else
-				{
+				} else {
 					if( campo.type == 'undefined' )
 					{
 						campo.innerHTML=''; // para campos label que não possuem value;
@@ -2496,24 +2487,32 @@ function fwAtualizarCampos(campos,valores)
 						{
 							try{
 								campo_disabled1.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 						if( campo_disabled2)
 						{
 							try{
 								campo_disabled2.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 						if( campo_temp)
 						{
 							try{
 								campo_temp.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 					}
 				}
 			}
-		} catch(e){}
+		} catch(e){
+			console.log(e);
+		}
 	}
 	// disparar os eventos onchange dos selects pai
 	if( parentSelects.length > 0 )
