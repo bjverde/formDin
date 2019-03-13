@@ -3226,14 +3226,10 @@ class TForm Extends TBox
      public function getValue( $strField=null )
      {
          // excecao para abas
-         if( $this->getFieldType() == 'tabsheet' || is_null( $strField ) )
-         {
+         if( $this->getFieldType() == 'tabsheet' || is_null( $strField ) ) {
              return parent::getValue();
-         }
-         else
-         {
-             if( $this->getField( $strField ) )
-             {
+         } else {
+             if( $this->getField( $strField ) ) {
                  return $this->getField( $strField )->getValue();
              }
          }
@@ -3905,39 +3901,30 @@ class TForm Extends TBox
              }
          }
      }
-     //-----------------------------------------------------------------------------
-     /**
-      * Adiciona um ou vários arquivos CSS ao formulário.
-      *
-      * @param mixed $mixCssFile
-      */
-     public function addCssFile( $mixCssFile=null )
-     {
-         
-         if( is_null( $mixCssFile) || ( is_string($mixCssFile) && trim( $mixCssFile) == '' ) )
-         {
-             return;
-         }
-         if( is_array( $mixCssFile ) )
-         {
-             
-             foreach( $mixCssFile as $k=>$file )
-             {
-                 if( $file )
-                 {
-                     $this->addCssFile( $file );
-                 }
-             }
-         }
-         else if( !is_array( $this->cssFiles ) || array_search( $mixCssFile, $this->cssFiles, true ) === false )
-         {
-             
-             if( trim($mixCssFile)!='')
-             {
-                 $this->cssFiles[ ] = $mixCssFile;
-             }
-         }
-     }
+     
+    //-----------------------------------------------------------------------------
+    /**
+    * Adiciona um ou vários arquivos CSS ao formulário.
+    *
+    * @param mixed $mixCssFile
+    */
+    public function addCssFile( $mixCssFile=null )
+    {         
+        if( is_null( $mixCssFile) || ( is_string($mixCssFile) && trim( $mixCssFile) == '' ) ) {
+            return;
+        }
+        if( is_array( $mixCssFile ) ) {             
+            foreach( $mixCssFile as $k=>$file ) {
+                if( $file ) {
+                    $this->addCssFile( $file );
+                }
+            }
+        } else if( !is_array( $this->cssFiles ) || array_search( $mixCssFile, $this->cssFiles, true ) === false ) {             
+            if( trim($mixCssFile)!='') {
+                $this->cssFiles[ ] = $mixCssFile;
+            }
+        }
+    }
      /**
       * Define se o html gerado deverá ser somente da tag form ou o codigo html da pagina completo.
       *
