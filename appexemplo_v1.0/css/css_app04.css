@@ -1,7 +1,18 @@
-header{
+/**
+List Fonts
+https://fonts.google.com/?subset=latin&sort=popularity
+**/
+
+@import url('https://fonts.googleapis.com/css?family=Srisakdi');
+
+header{  
   display     :table;
   background-image: url("../imagem/h2.jpg");
   background-size: 100% 100%;
+
+  font-family: 'Srisakdi', serif;
+  color: darkred;
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
 }
 #app_header_logo
 {
@@ -10,7 +21,7 @@ header{
 #app_header_title_main
 {
     background  :transparent;
-    font-size   :24px;
+    font-size   :32px;
     font-weight :bold;
     text-align  :left;
 }
