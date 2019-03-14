@@ -83,6 +83,7 @@ class TApplication extends TLayout {
 	private $backgroundRepeat;
 	private $backgroundPosition;
 	private $cssFile;
+	private $cssFileFormDefault;
 	private $loginInfo;
 	private $headerContent;
 	private $footerContent;
@@ -1150,12 +1151,38 @@ class TApplication extends TLayout {
 		
 		return null;
 	}
+	
+	/**
+	 * Configura um arquivo de CSS para parte externa da Aplicação: Hearder, Footer. 
+	 * Não funciona com o form. Para configura o CSS padrão de todos os 
+	 * forms utilize setCssFileFormDefault
+	 * @param string $strNewValue
+	 */
 	public function setCssFile($strNewValue = null) {
 		$this->cssFile = $strNewValue;
 	}
 	public function getCssFile() {
 		return $this->cssFile;
 	}
+	
+	/**
+	 * Configura um arquivo de CSS Default para todos os formularios.
+	 * Para configura o CSS da parte externa utilize setCssFile
+	 * @param string $strNewValue
+	 */
+	public function setCssFileFormDefault($strNewValue = null) {
+	    if (file_exists ( $strNewValue )) {
+	       $this->cssFileFormDefault = $strNewValue;
+	       define('CSS_FILE_FORM_DEFAULT', $strNewValue);
+	    }else{
+	        throw new DomainException(TMessage::CSS_FILE_FORM_DEFAULT_FAIL);
+	    }
+	}
+	public function getCssFileFormDefault() {
+	    return $this->cssFileFormDefault;
+	}
+	
+	
 	public function setLoginInfo($strInfo = null) {
 		$this->loginInfo = preg_replace ( '/' . chr ( 10 ) . '/', '<br/>', $strInfo );
 	}

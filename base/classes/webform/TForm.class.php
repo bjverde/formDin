@@ -3938,6 +3938,17 @@ class TForm Extends TBox
     {
         return $this->showHtmlTag;
     }
+    
+    /**
+     * inclue o arquivo CSS default para todos os form que foi definido em 
+     * TApplication->setCssFileFormDefault
+     */
+    protected function getCssFileFormDefault()
+    {
+        if(defined('CSS_FILE_FORM_DEFAULT')) { 
+            $this->addCssFile(CSS_FILE_FORM_DEFAULT);
+        }
+    }
 
      /**
       * Método interno para gerar o codigo html de inserção dos arquivos js/css adicionados ao formulário
@@ -3947,6 +3958,7 @@ class TForm Extends TBox
      {
          // verificar quais css e js serão necessários de acordo com os campos adicionados
          $this->getJsCss();
+         $this->getCssFileFormDefault();
          $arrTemp = array_merge( $this->jsFiles, $this->cssFiles );
          if( is_array( $arrTemp ) ) {
              foreach( $arrTemp as $k=>$file ) {
