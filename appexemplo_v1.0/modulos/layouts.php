@@ -54,6 +54,7 @@ $frm->addGroupField('gpx1', 'Alterando o CSS');
     $frm->addLinkField('idLink2', 'labelLink2', 'Layout 02 - Default, setResponsiveMode = FALSE', null, $homeUrl.'index_layout02.php', 'new');
     $frm->addLinkField('idLink3', 'labelLink3', 'Layout 03 - Alterando APENAS CSS', null, $homeUrl.'index_layout03.php', 'new');
     $frm->addLinkField('idLink4', 'labelLink4', 'Layout 04 - Alterando APENAS CSS', null, $homeUrl.'index_layout04.php', 'new');
+    $frm->addLinkField('idLink4', 'labelLink4', 'Layout 05 - TODOS os form Verdes. Utilizando TApplication->setCssFileFormDefault', null, $homeUrl.'index_layout05.php', 'new');
 $frm->closeGroup();
 
 $frm->addGroupField('gpx2', 'Forma Antiga, até FormDin 4.2.9');
