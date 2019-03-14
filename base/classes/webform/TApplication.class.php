@@ -1155,7 +1155,7 @@ class TApplication extends TLayout {
 	/**
 	 * Configura um arquivo de CSS para parte externa da Aplicação: Hearder, Footer. 
 	 * Não funciona com o form. Para configura o CSS padrão de todos os 
-	 * forms utilize setCssFileFormDefault
+	 * forms utilize setCssDefaultFormFile
 	 * @param string $strNewValue
 	 */
 	public function setCssFile($strNewValue = null) {
@@ -1170,7 +1170,7 @@ class TApplication extends TLayout {
 	 * Para configura o CSS da parte externa utilize setCssFile
 	 * @param string $strNewValue
 	 */
-	public function setCssFileFormDefault($strNewValue = null) {
+	public function setCssDefaultFormFile($strNewValue = null) {
 	    if (file_exists ( $strNewValue )) {
 	       $this->cssFileFormDefault = $strNewValue;
 	       define('CSS_FILE_FORM_DEFAULT', $strNewValue);

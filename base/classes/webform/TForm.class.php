@@ -3941,7 +3941,7 @@ class TForm Extends TBox
     
     /**
      * inclue o arquivo CSS default para todos os form que foi definido em 
-     * TApplication->setCssFileFormDefault
+     * TApplication->setCssDefaultFormFile
      */
     protected function getCssFileFormDefault()
     {

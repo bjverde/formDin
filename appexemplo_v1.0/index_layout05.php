@@ -62,6 +62,6 @@ $app->setOnGetLoginInfo('minhaFuncaoLogin');
 
 $app->setMenuTheme("clear_green");
 $app->setCssFile('css/css_app04.css');
-$app->setCssFileFormDefault('css/css_form.css');
+$app->setCssDefaultFormFile('css/css_form.css');
 
 $app->run();
