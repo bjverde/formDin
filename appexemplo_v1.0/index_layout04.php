@@ -56,39 +56,11 @@ $app->setUnit('Centro Nacional de Telemática - CNT');
 $app->setVersionSystem(SYSTEM_VERSION);
 $app->setMenuIconsPath('imagem/');
 
-$app->setWidth(990);
-$app->setNorthSize(55);
 $app->setMainMenuFile('includes/menu.php');
 $app->setConfigFile(null);
-//$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
-//$app->setConnectionFile(null);
-
-//$app->addIncludeFile('config.php');
-//$app->getLoCenter()->setCss('background-color','blue');
-
-//$app->setBackgroundImage(null);
 $app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
-//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
 
+$app->setCssFile('css/css_app04.css');
 
-// testar prototyï¿½
-set_error_handler("exception_error_handler");
 $app->run();
-
-function minhaFuncaoLogin()
-{
-    return 'Olá, FormDin '.FORMDIN_VERSION;
-}
-
-function exception_error_handler($errno, $errstr, $errfile, $errline)
-{
-    echo '<pre>';
-    //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-
-    echo '<div style="text-align:left;border:1px solid red;width:100%;font-size:18px;">Erro N.'.$errno.'<br>'.
-    'Mensagem:'.$errstr.'<br>'.
-    'Arquivo:'.$errfile.'<br>'.
-    'Linha:'.$errline.'</div></pre>'.
-    '<script>try{top.app_unblockUI();}catch(e){};</script>';
-}

@@ -150,6 +150,7 @@ $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-f
     $menu->add('63', '6', 'Exemplo 3, com passagem de parametros via Json', 'pdf/exe_pdf03.php');
     $menu->add('64', '6', 'Exemplo 4', 'pdf/exe_pdf04.php');
     $menu->add('65', '6', 'Exemplo 5 - PDF diversos grids', 'pdf/exe_pdf05.php');
+    $menu->add('66', '6', 'Exemplo 6 - Grid chamando PDF', 'pdf/exe_pdf06_grid.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
@@ -171,7 +172,8 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
     $menu->add('82', '8', 'Grides Draw - desenhando Dinamicamente', null, null, '../../base/imagens/table16.gif');
         $menu->add('82.1', '82', 'Gride Draw 01 - Desativando order', 'grid/exe_gride_draw_01.php');
         $menu->add('82.2', '82', 'Gride Draw 02 - Mudando a cor da linha', 'grid/exe_gride_draw_02.php');
-        $menu->add('82.3', '82', 'Gride Draw 03 - Desativando Botões', 'grid/exe_gride_draw_03.php');
+        $menu->add('82.3', '82', 'Gride Draw 03 - Desativando Botões v1', 'grid/exe_gride_draw_03.php');
+        $menu->add('82.4', '82', 'Gride Draw 04 - Desativando Botões v2', 'grid/exe_gride_draw_04.php');
         
     $menu->add('83', '8', 'Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
         $menu->add('83.1', '83', 'Gride 10 - erro', 'grid/exe_gride10.php');

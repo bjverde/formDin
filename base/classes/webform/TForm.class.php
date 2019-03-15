@@ -3239,14 +3239,10 @@ class TForm Extends TBox
      public function getValue( $strField=null )
      {
          // excecao para abas
-         if( $this->getFieldType() == 'tabsheet' || is_null( $strField ) )
-         {
+         if( $this->getFieldType() == 'tabsheet' || is_null( $strField ) ) {
              return parent::getValue();
-         }
-         else
-         {
-             if( $this->getField( $strField ) )
-             {
+         } else {
+             if( $this->getField( $strField ) ) {
                  return $this->getField( $strField )->getValue();
              }
          }
@@ -3918,52 +3914,55 @@ class TForm Extends TBox
              }
          }
      }
-     //-----------------------------------------------------------------------------
-     /**
-      * Adiciona um ou vários arquivos CSS ao formulário.
-      *
-      * @param mixed $mixCssFile
-      */
-     public function addCssFile( $mixCssFile=null )
-     {
-         
-         if( is_null( $mixCssFile) || ( is_string($mixCssFile) && trim( $mixCssFile) == '' ) )
-         {
-             return;
-         }
-         if( is_array( $mixCssFile ) )
-         {
-             
-             foreach( $mixCssFile as $k=>$file )
-             {
-                 if( $file )
-                 {
-                     $this->addCssFile( $file );
-                 }
-             }
-         }
-         else if( !is_array( $this->cssFiles ) || array_search( $mixCssFile, $this->cssFiles, true ) === false )
-         {
-             
-             if( trim($mixCssFile)!='')
-             {
-                 $this->cssFiles[ ] = $mixCssFile;
-             }
-         }
-     }
-     /**
-      * Define se o html gerado deverá ser somente da tag form ou o codigo html da pagina completo.
-      *
-      * @param boolean $boolShow
-      */
-     public function setShowHtmlTag( $boolShow=null )
-     {
-         $this->showHtmlTag = $boolShow;
-     }
-     public function getShowHtmlTag()
-     {
-         return $this->showHtmlTag;
-     }
+
+    //-----------------------------------------------------------------------------
+    /**
+    * Adiciona um ou vários arquivos CSS ao formulário.
+    *
+    * @param mixed $mixCssFile
+    */
+    public function addCssFile( $mixCssFile=null )
+    {         
+        if( is_null( $mixCssFile) || ( is_string($mixCssFile) && trim( $mixCssFile) == '' ) ) {
+            return;
+        }
+        if( is_array( $mixCssFile ) ) {             
+            foreach( $mixCssFile as $k=>$file ) {
+                if( $file ) {
+                    $this->addCssFile( $file );
+                }
+            }
+        } else if( !is_array( $this->cssFiles ) || array_search( $mixCssFile, $this->cssFiles, true ) === false ) {             
+            if( trim($mixCssFile)!='') {
+                $this->cssFiles[ ] = $mixCssFile;
+            }
+        }
+    }
+    /**
+     * Define se o html gerado deverá ser somente da tag form ou o codigo html da pagina completo.
+    *
+    * @param boolean $boolShow
+    */
+    public function setShowHtmlTag( $boolShow=null )
+    {
+        $this->showHtmlTag = $boolShow;
+    }
+    public function getShowHtmlTag()
+    {
+        return $this->showHtmlTag;
+    }
+    
+    /**
+     * inclue o arquivo CSS default para todos os form que foi definido em 
+     * TApplication->setCssDefaultFormFile
+     */
+    protected function getCssFileFormDefault()
+    {
+        if(defined('CSS_FILE_FORM_DEFAULT')) { 
+            $this->addCssFile(CSS_FILE_FORM_DEFAULT);
+        }
+    }
+
      /**
       * Método interno para gerar o codigo html de inserção dos arquivos js/css adicionados ao formulário
       *
@@ -3972,63 +3971,54 @@ class TForm Extends TBox
      {
          // verificar quais css e js serão necessários de acordo com os campos adicionados
          $this->getJsCss();
+         $this->getCssFileFormDefault();
          $arrTemp = array_merge( $this->jsFiles, $this->cssFiles );
-         if( is_array( $arrTemp ) )
-         {
-             foreach( $arrTemp as $k=>$file )
-             {
-                 $fileName = $file;
-                 if( strpos( $file, '.css' ) )
-                 {
-                     $tipo = 'css';
-                 }
-                 else if( strpos( $file, '.js' ) )
-                 {
-                     $tipo = 'js';
-                 }
-                 if( strpos( $file, 'http:' ) === false )
-                 {
-                     $isUrl = false;
-                     // primeiro procurar na pasta js/ do projeto
-                     if( !file_exists( $fileName ) )
-                     {
-                         $fileName = $this->getRoot() . $tipo . '/' . $file;
-                     }
-                     // depois procurar na pasta base/js
-                     if( !file_exists( $fileName ) )
-                     {
-                         $fileName = $this->getBase() . $tipo . '/' . $file;
-                     }
-                     if( !file_exists( $fileName ) )
-                     {
-                         // o css pode estar junto com o js
-                         if( $tipo == 'css' )
-                         {
-                             // procurar na pasta base/js
-                             $fileName = $this->getBase() . 'js/' . $file;
-                         }
-                     }
-                 }
-                 else
-                 {
-                     $isUrl = true;
-                 }
-                 if( $isUrl || file_exists( $fileName ) )
-                 {
-                     if( $tipo == 'js' )
-                     {
-                         $this->add( '<script type="text/javascript" src="' . $fileName . '"></script>' );
-                     }
-                     else if( $tipo == 'css' )
-                     {
-                         $this->add( '<link rel="stylesheet" type="text/css" href="' . $fileName . '" />' );
-                     }
-                 }
+         if( is_array( $arrTemp ) ) {
+             foreach( $arrTemp as $k=>$file ) {
+                 
+                $fileName = $file;
+                if( strpos( $file, '.css' ) ) {
+                    $tipo = 'css';
+                } else if( strpos( $file, '.js' ) ) {
+                    $tipo = 'js';
+                }
+
+                if( strpos( $file, 'http:' ) === false ) {
+                    $isUrl = false;
+                    // primeiro procurar na pasta js/ do projeto
+                    if( !file_exists( $fileName ) ) {
+                        $fileName = $this->getRoot() . $tipo . '/' . $file;
+                    }
+
+                    // depois procurar na pasta base/js
+                    if( !file_exists( $fileName ) ) {
+                        $fileName = $this->getBase() . $tipo . '/' . $file;
+                    }
+
+                    if( !file_exists( $fileName ) ) {
+                        // o css pode estar junto com o js
+                        if( $tipo == 'css' ) {
+                            // procurar na pasta base/js
+                            $fileName = $this->getBase() . 'js/' . $file;
+                        }
+                    }
+                } else {
+                    $isUrl = true;
+                }
+
+                if( $isUrl || file_exists( $fileName ) ) {
+                    if( $tipo == 'js' ) {
+                        $this->add( '<script type="text/javascript" src="' . $fileName . '"></script>' );
+                    } else if( $tipo == 'css' ) {
+                        $this->add( '<link rel="stylesheet" type="text/css" href="' . $fileName . '" />' );
+                    }
+                }
              }
              // evitar que a classe JQuery entre em confilto com outras classes
              $this->add( '<script>jQuery.noConflict();</script>' );
          }
      }
+
      /**
       * Retorna a largura máxima da área interna do formulário.
       *

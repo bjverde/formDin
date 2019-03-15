@@ -2426,65 +2426,56 @@ function fwAtualizarCampos(campos,valores)
 						campo.selectedIndex=-1;
 						jQuery(campo).val(aValor[i]);
 						// verificar se é um select combinado atraves da propriedade parentselect
-						if( jQuery(campo).attr('parentselect') )
-						{
+						if( jQuery(campo).attr('parentselect') ) {
 							parentSelects.push(jQuery(campo).attr('parentselect') );
 							// criar  campo temp se não existir
-							if( ! campo_temp )
-							{
+							if( ! campo_temp ) {
 								jQuery(campo).append('<input type="hidden" id="'+campo.id+'_temp" name="'+campo.id+'_temp" value="'+aValor[i]+'">');
 								alert( 'Campo tmp criado');
-							}
-							else
-							{
+							} else {
 								campo_temp.value = aValor[i];
 							}
 						}
 					}
-					else if( campo.type =='radio')
-					{
+					else if( campo.type =='radio') {
 						jQuery('input:radio[name='+aCampo[i]+'][value='+aValor[i]+']').attr('checked',true);
 					}
-					else if( campo.type == 'checkbox')
-					{
-						if ( campo.value == aValor[i])
-						{
+					else if( campo.type == 'checkbox') {
+						if ( campo.value == aValor[i]) {
 							campo.checked=true;
-						}
-						else
-						{
+						} else {
 							campo.checked=false;
 						}
-					}
-					else
-					{
-						campo.value=decodeURI(aValor[i]);
+					} else {
+						//campo.value=decodeURI(aValor[i]); //Desativo em https://github.com/bjverde/formDin/issues/134
+						campo.value=aValor[i];
 						fwSetBordaCampo(campo,false,true);
-						if( campo_disabled1 )
-						{
+						if( campo_disabled1 ) {
 							try{
 								campo_disabled1.value=campo.value;
 								fwSetBordaCampo(campo_disabled1,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
-						if( campo_disabled2 )
-						{
+						if( campo_disabled2 ) {
 							try{
 								campo_disabled2.value=campo.value;
 								fwSetBordaCampo(campo_disabled2,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
-						if( campo_temp )
-						{
+						if( campo_temp ) {
 							try{
 								campo_temp.value=campo.valor;
 								fwSetBordaCampo(campo_temp,false,true);
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 					}
-				}
-				else
-				{
+				} else {
 					if( campo.type == 'undefined' )
 					{
 						campo.innerHTML=''; // para campos label que não possuem value;
@@ -2496,24 +2487,32 @@ function fwAtualizarCampos(campos,valores)
 						{
 							try{
 								campo_disabled1.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 						if( campo_disabled2)
 						{
 							try{
 								campo_disabled2.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 						if( campo_temp)
 						{
 							try{
 								campo_temp.value = '';
-							}catch(e){}
+							}catch(e){
+								console.log(e);
+							}
 						}
 					}
 				}
 			}
-		} catch(e){}
+		} catch(e){
+			console.log(e);
+		}
 	}
 	// disparar os eventos onchange dos selects pai
 	if( parentSelects.length > 0 )
@@ -3089,7 +3088,7 @@ function fwDisableCtrlKey(evt,teclas,field)
 }
 //-------------------------------------------------------------------------------------
 /*
-Cancela a tecla F5 para evitar o carregamento da p?gina.
+Cancela a tecla F5 para evitar o carregamento da página.
 */
 function fwCancelRefresh(event,reload)
 {
@@ -3188,7 +3187,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 	objSelect.options[0] = opt;
 	// desabilitar o campo
 	objSelect.disabled=true;
-	// ler os valores dos campos do formulario para compor a express?o where
+	// ler os valores dos campos do formulario para compor a expressão where
 	if ( formWhereField )
 	{
 		var aTemp1 = formWhereField.split(',');
@@ -3252,7 +3251,7 @@ function fwFillSelectAjax(selectId, packageFunctionTable, keyColumn, descColumn,
 		}
 		if( data )
 		{
-			data=String(data).trim(); // remover espa?os do inicio e fim da string para evitar erro no eval()
+			data=String(data).trim(); // remover espaços do inicio e fim da string para evitar erro no eval()
 		}
 		fwFillSelectJson( selectId,data,keyColumn,descColumn,initialValue,firstOptionText, firstOptionValue);
 		if( callBackFunction )
@@ -3708,7 +3707,7 @@ function fwFaceBoxClose()
 	}catch(e){}
 }
 /*
-Função para fazer arredondamento de n?meros decimais
+Função para fazer arredondamento de números decimais
 */
 function fwRoundNumber(num, dec) {
 	var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
@@ -3740,7 +3739,7 @@ function fwFieldCoordShowMap(id,height,width,jsonParams)
     if( jQuery("#"+id+"_lat_grau").attr('readonly') == 'readonly' )
     {
     	jsonParams['readonly'] = 'true';
-    	jsonParams['mapHeaderText'] = 'Consulta Coordendada Geogr?fica';
+    	jsonParams['mapHeaderText'] = 'Consulta Coordendada Geográfica';
     }
 
 	for( key in jsonParams )
@@ -3758,8 +3757,8 @@ function fwFieldCoordShowMap(id,height,width,jsonParams)
 }
 
 /*
-Função para definir o bounding box e o centro do mapa utilizada pelo campo coordenada gerogr?fica ao exibir o mapa
-Formato do par?metro bounds: {"latMin":"-13,0141881286166","latMax":"-12,7248145057069","lonMin":"-38,6998295398796","lonMax":"-38,2952318041981"}
+Função para definir o bounding box e o centro do mapa utilizada pelo campo coordenada gerográfica ao exibir o mapa
+Formato do parêmetro bounds: {"latMin":"-13,0141881286166","latMax":"-12,7248145057069","lonMin":"-38,6998295398796","lonMax":"-38,2952318041981"}
 */
 function fwSetZoomLevelCenter(id, bounds, height, width) {
 	if (typeof bounds == "undefined" || bounds.latMin  == "undefined" )
@@ -3799,7 +3798,7 @@ function fwSetZoomLevelCenter(id, bounds, height, width) {
 }
 //--------------------------------------------------------------------------------------------
 /*
-	Esta Função aumenta a altura do formulário at? sumir a barra vertical de scroll
+	Esta Função aumenta a altura do formulário até sumir a barra vertical de scroll
 	fwFormDinAutoSize({formId:"formdin",initialHeight:150});
 */
 function fwFormDinAutoSize(jsonParams)
@@ -3834,7 +3833,7 @@ function fwFormDinAutoSize(jsonParams)
 	*/
 	do
 	{
-		// posiciona a barra de rolagem no valor m?ximo
+		// posiciona a barra de rolagem no valor máximo
 		o3[0].scrollTop = o3[0].scrollTop + o3[0].scrollHeight;
 		dif = o3[0].scrollTop;
 		if( dif > 0 )
@@ -4081,7 +4080,7 @@ function fwExportGrid2Excel(dadosJson)
 	}
 }
 //--------------------------------------------------------------------------------------
-// fun??es Genéricas para utilização com dhtmlx Tree
+// funções Genéricas para utilização com dhtmlx Tree
 function fwTreeAddLoading(tree,id)
 {
 	if( id )
@@ -4125,7 +4124,7 @@ function fwUrlAddParams(url,formFields)
 }
 /**
 	Função para desabilitar abas da classe TPageControl via javascript
-	O parametro pc ? opcional e se for omitido será considerado o nome do
+	O parametro pc é opcional e se for omitido será considerado o nome do
 	primeiro grupo de abas da pagina
 */
 function fwDesabilitarAba(aba,pc)
@@ -4148,7 +4147,7 @@ function fwDesabilitarAba(aba,pc)
 }
 /**
 	Função para habilitar abas da classe TPageControl via javascript
-	O parametro pc ? opcional e se for omitido será considerado o nome do
+	O parametro pc é opcional e se for omitido será considerado o nome do
 	primeiro grupo de abas da pagina
 */
 function fwHabilitarAba(aba,pc)
@@ -4237,7 +4236,7 @@ function fwGetAge( birthDate, updateField )
 	if (array_birthDate.length != 3 )
 		return '';
 
-	//comprovo que o ano, mes, dia s?o corretos
+	//comprovo que o ano, mes, dia são corretos
 	var year = parseInt(array_birthDate[2]);
 	if (isNaN(year))
 		return ''
@@ -4269,7 +4268,7 @@ function fwGetAge( birthDate, updateField )
 		else  if (today.getUTCDate() - day >= 0)
 		{
 			//entao eh porque sao iguais. Vejo os dias
-			//se subtraio os dias e der menor que 0 entao nao cumpriu anos. Se der maior ou igual sim que j? cumpriu
+			//se subtraio os dias e der menor que 0 entao nao cumpriu anos. Se der maior ou igual sim que já cumpriu
 			age++
 		}
 	}
@@ -4381,8 +4380,8 @@ function fwClearChildFields( parentId,except )
 }
 //-------------------------------------------------------------------------------------
 /*
-Função para formatar n?meros adicionando pontos a cada 3 digitos e
-retornando a virgula como separador decimal se o num?ro não for inteiro
+Função para formatar números adicionando pontos a cada 3 digitos e
+retornando a virgula como separador decimal se o numero não for inteiro
 Ex:
 	fwAddPoints('123456') 		-> 123.456
 	fwAddPoints('1,234.56') 	-> 1,234.56
@@ -4510,7 +4509,7 @@ function fwValidateForm(config)
 	var numErros = 0;
 	var campoRadio = new Array();
 	var formName=null;
-	// considerar sempre o ?ltimo form da pagina
+	// considerar sempre o último form da pagina
 	var objForm = jQuery("form");
 	if( objForm.length > 0 )
 	{
@@ -5060,9 +5059,17 @@ function fwHideMsgArea( id )
 	}
 	catch(e){}
 }
+
 /*
 Função para exibir um arquivo pdf ou um pdf gerado dinamicamente com php.
-Parametros: url, modulo, acao, titulo
+Parametros: url
+           ,modulo  - 3: caminho do modulo que deseja abrir
+           ,acao
+           ,titulo  - 4: titulo da Janela 
+           ,dados   - 5: Dados que serão enviados para o $_REQUEST
+
+Para usar o dados ser for em uma grid deverá usar o fwFV2O juntamento com setUpdateFields da Tgrid
+
 Ex: fwShowPdf({"modulo" : pastaBase + "exemplos/exe_pdf_1.php" });
 Ex: fwShowPdf({"url" :"tmp/teste.pdf" });
 */
@@ -5086,32 +5093,27 @@ function fwShowPdf( jsonParams )
 	}
 	if( !jsonParams.titulo )
 	{
-		jsonParams.titulo = 'Relat?rio Pdf';
+		jsonParams.titulo = 'Relatório Pdf';
 	}
-	if( !jsonParams.conatinerId )
-	{
+	if( !jsonParams.conatinerId ) {
 		jsonParams.containerId='formdin';
 	}
-	/*if( !jsonParams.data )
-	{
-		jsonParams.data = jQuery("#formdin").serialize();
+	if( !jsonParams.dados ) {
+		jsonParams.dados = null;
 	}
-	*/
-	if( jsonParams.url.indexOf('.pdf') == -1 )
-	{
-		for( key in jsonParams )
-		{
-			if (key != 'url')
-			{
-				if( jsonParams[key] == '' )
-				{
+	if( jsonParams.url.indexOf('.pdf') == -1 ) {
+		for( key in jsonParams ) {
+			if ( key == 'dados') {
+				jsonParams[key] = jsonParams[key];
+			}else if ( key != 'url') {
+				if( jsonParams[key] == '' ) {
 					jsonParams[key] = jQuery('#'+key).val();
 				}
 				jsonParams.url += ( ( jsonParams.url.indexOf('?') > 0) ? '&' : '?') + ( ( jsonParams[key]) ? key+"="+jsonParams[key] : "" );
 			}
 		}
 	}
-	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,null);
+	fwModalBox(jsonParams.titulo,jsonParams.url,null,null,null,jsonParams.dados);
 }
 
 
@@ -5285,7 +5287,7 @@ function fwGridConfirmDelete( campos, valores, idGrid, rownum )
 }
 /**
  * Função utilizada pelo campo TCoordGms para formatar os segundos
- * permitindo digitar a virgula quando necess?rio, diferentemente do campo
+ * permitindo digitar a virgula quando necessário, diferentemente do campo
  * decimal
  */
 function fwFormatSecondsGms(e,evt)
@@ -5549,13 +5551,13 @@ function fwConfirmShowTempFile(tempName,fileName,type,size)
 
 function fwOpenDir(updateField,rootDir,callback,title)
 {
-		title = title || 'Selecionar Diret?rio';
+		title = title || 'Selecionar Diretório';
 		var container = jQuery('#divFileTree')
 		if( ! container.get(0) )
 		{
 			idContainer='divFileTree';
 			title +='<span style="float:right;cursor:pointer;margin-right:5px;" onClick="jQuery(\'#divFileTree\').hide()">x</span>';
-			//jQuery('body').append('<div id="divFileTree" style="width:500px;height:300px;border:1px solid silver;overflow:auto;background-color:#ffffff;display:none;position:absolute;top:20px;left:20px;"><div id="divTreeFileHeader" style="border:none;border-bottom:1px;height:26px;font-size:12px;color:#000000;background-color:#efefef;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;"><table width="100%" height="100%"><tr><td>Selecione o Diret?rio</td></tr></table></div><div id="divFileTreeContainer" style="border:none;border-top:1px solid silver;height:auto;"></div></div>');
+			//jQuery('body').append('<div id="divFileTree" style="width:500px;height:300px;border:1px solid silver;overflow:auto;background-color:#ffffff;display:none;position:absolute;top:20px;left:20px;"><div id="divTreeFileHeader" style="border:none;border-bottom:1px;height:26px;font-size:12px;color:#000000;background-color:#efefef;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;"><table width="100%" height="100%"><tr><td>Selecione o Diretório</td></tr></table></div><div id="divFileTreeContainer" style="border:none;border-top:1px solid silver;height:auto;"></div></div>');
 			jQuery('body').append('<div id="divFileTree" style="display:none;font-size:12px;font-family:Verdana, Geneva, Arial, sans-serif;;margin:0px;padding:0px;width:500px;height:300px;border:1px solid silver;overflow:hidden;background-color:#ffffff;display:block;position:absolute;top:20px;left:20px;"><div style="position:absolute;top:-1px;left:0px;width:100%;height:26px;margin:0px;padding:0px;border:none;border-bottom:1px solid silver;display:block;background-image:url(headerbg.gif);background-repeat: repeat-x;text-align:left;"><div style="padding-left:2px;margin-top:6px;border:none;">'+title+'</div></div><div id="divFileTreeContainer" style="position:absolute;width:100%;height:246px;top:27px;border:0px;overflow:auto;padding-left:2px;"></div><div style="position:absolute;bottom:-1px;width:100%;height:26px;border:none;display:block;background-image:url('+pastaBase+'/js/jquery/jqueryFileTree/headerbg.gif);background-repeat: repeat-x;text-align:center;"> <div style="margin-top:4px;border:none;"><input id="fileTreeCurDir" type="hidden" value=""> <input class="fwButton" type="button" name="btnAbrir" id="btnAbrirFileTree" value="Selecionar" onClick="jQuery(\'#'+updateField+'\').val(jQuery(\'#fileTreeCurDir\').val());jQuery(\'#divFileTree\').hide();"></div></div></div>');
 			container = jQuery('#divFileTree');
 			container.hide();
@@ -5645,7 +5647,7 @@ function fwM2H( min,returnType )
 	return null;
 }
 /**
-* Função para calcular a diferen?a entre 2 horas
+* Função para calcular a diferença entre 2 horas
 */
 function fwTimeDiference(earlierDate, laterDate)
 {
@@ -5959,11 +5961,11 @@ function fwChkRequestAjax()
 		var msg;
 		if( ajaxRequestCount > 1 )
 		{
-		   msg = 'Existem '+ajaxRequestCount+' requisi??es ajax pendentes!';
+		   msg = 'Existem '+ajaxRequestCount+' requisições ajax pendentes!';
 		}
 		else
 		{
-		   msg = 'Existe '+ajaxRequestCount+' requisi??o ajax pendente!';
+		   msg = 'Existe '+ajaxRequestCount+' requisição ajax pendente!';
 		}
 		fwAlert(msg);
 		return false;
@@ -6079,7 +6081,7 @@ function fwRefreshCalendar(idCalendar) {
 * Acrescentar dias a uma data. Pode ser passada a data no formato dd/mm/yyyy ou o id do campo data
 * neste caso o campo data sera atualizado
 * no formato dd/mm/yyyy
-* Obs: o dia informado conta como o primeiro dia v?lido ent?o por exemplo
+* Obs: o dia informado conta como o primeiro dia válido então por exemplo
 * dia 20/01/2012 + 1 dia será o pr?prio dia 20/01/2012
 */
 function fwDateAddDay(dateDmy,days,fieldId)
@@ -6142,8 +6144,8 @@ function fwDateAddDay(dateDmy,days,fieldId)
 }
 
 /**
-* Função para calcular a diferen?a em dias entre duas datas
-* Obs: o dia informado conta como o primeiro dia v?lido ent?o por exemplo
+* Função para calcular a diferença em dias entre duas datas
+* Obs: o dia informado conta como o primeiro dia válido então por exemplo
 * dia 20/01/2012 - 20/01/2012 será 1 dia
 */
 function fwDateDiffDays(date1,date2)
@@ -6196,7 +6198,7 @@ function fwDateDiffDays(date1,date2)
 
 /**
 * Habilitar a navegação entre os campos com a tecla Enter como se fosse TAB
-* Se o parametro always for true, ir? pular at? mesmo selects e textareas
+* Se o parametro always for true, irá pular até mesmo selects e textareas
 *
 * @param idForm
 * @param always
@@ -6258,7 +6260,7 @@ function fwSetColorPicker(id,color)
 * @example:
 * fwGridShowHideColumn('col_a',null,true); exibir a coluna
 * fwGridShowHideColumn('col_a,col_b',null, false); // esconder as colunas
-* fwGridShowHideColumn('action','gridA', false); // ocultar a coluna A??o do gridA
+* fwGridShowHideColumn('action','gridA', false); // ocultar a coluna Ação do gridA
 */
 function fwGridShowHideColumn( colName, idGrid, show )
 {
@@ -6309,9 +6311,9 @@ function fwGridShowHideColumn( colName, idGrid, show )
 * @example
 * fwGridHideColumn('col_a');
 * fwGridHideColumn('col_a,col_b');
-* fwGridHideColumn('grideX_action'); // ocultar a coluna A??o
-* fwGridHideColumn('action'); // ocultar a coluna A??o
-* fwGridHideColumn('action','gridA'); // ocultar a coluna A??o do gridA
+* fwGridHideColumn('grideX_action'); // ocultar a coluna Ação
+* fwGridHideColumn('action'); // ocultar a coluna Ação
+* fwGridHideColumn('action','gridA'); // ocultar a coluna Ação do gridA
 */
 
 function fwGridHideColumn( colName, idGrid )
@@ -6327,9 +6329,9 @@ function fwGridHideColumn( colName, idGrid )
 * @example
 * fwGridShowColumn('col_a');
 * fwGridShowColumn('col_a,col_b');
-* fwGridShowColumn('grideX_action'); // exibir a coluna A??o
-* fwGridShowColumn('action'); // exibir a coluna A??o
-* fwGridShowColumn('action','gridA'); // exibir a coluna A??o do gridA
+* fwGridShowColumn('grideX_action'); // exibir a coluna Ação
+* fwGridShowColumn('action'); // exibir a coluna Ação
+* fwGridShowColumn('action','gridA'); // exibir a coluna Ação do gridA
 */
 function fwGridShowColumn( colName, idGrid )
 {
@@ -6439,7 +6441,7 @@ function fwReadOnly(trueFalse, parentId, except )
 
 				else if (type == 'hidden')
 				{
-					// pode ser campos radio, check ou select que est?o desabilitados
+					// pode ser campos radio, check ou select que estão desabilitados
 					if( jQuery("#"+id).attr('readonly')=='readonly' && trueFalse == false)
 					{
 						jQuery("#"+id).remove();
@@ -6703,7 +6705,7 @@ function fwSetShortcut(hotkey,id,changeLabel,js )
 	var e = jQuery("#"+id);
 	if( !e.get(0))
 	{
-		// varificar se ? uma aba
+		// varificar se é uma aba
 		e = jQuery('span[tabid="'+id+'"]');
 		// se não existir nenhum elemento executa uma ação
 		if( ! e.get(0) )
@@ -6804,7 +6806,7 @@ function fwSetShortcut(hotkey,id,changeLabel,js )
 }
 
 /**
-* Bloqueia a execu??o do programa pelo tempo solicitado em milissegundos e
+* Bloqueia a execução do programa pelo tempo solicitado em milissegundos e
 * depois executa a Função de callback se tiver sido informada.
 *
 * Exemplo: 	fwSleep(1000,function(){alert("voltei")}); // aguarda 1 segundo
@@ -6823,7 +6825,7 @@ function fwSleep(milliSeconds,callback)
 /**
 
 
-* Retorna o c?digo da tecla pressionada
+* Retorna o código da tecla pressionada
 *
 * @param event
 */
@@ -6839,7 +6841,7 @@ function fwGetKey(event)
 }
 /**
 * Função utilizada pela classe TGrid quando o gride possuir paginação e for clicado nos botoes
-* de proxima, anterior, ultima e primeira p?gina.
+* de proxima, anterior, ultima e primeira página.
 *
 * @param params
 */
@@ -7126,7 +7128,7 @@ function fwConfirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)
 //------------------------------------------------------------------------------
 /**
 * Função utilizada pelo plugin do jquery tablesorter para ordenar datas e
-* valores monet?rios formatados com ponto e virgula ex: 123.456,78
+* valores monetários formatados com ponto e virgula ex: 123.456,78
 */
 function fwTableSorter(node)
 {
@@ -7134,7 +7136,7 @@ function fwTableSorter(node)
 	var number = text.replace(/[^0-9]/g,'');
 	if( String(number) != '' )
 	{
-		// verificar se ? um data
+		// verificar se é um data
 		var dateFormat = /(^\d{1,4}[\.|\\/|-]\d{1,2}[\.|\\/|-]\d{1,4})(\s*(?:0?[1-9]:[0-5]|1(?=[012])\d:[0-5])\d\s*[ap]m)?$/;
   		if ( dateFormat.test( text ) )
   		{
@@ -7147,7 +7149,7 @@ function fwTableSorter(node)
 		}
 		else
 		{
-			// valores monet?rios ou inteiros
+			// valores monetários ou inteiros
 			var posPonto 	= text.indexOf('.');
 			var posVirgula	= text.indexOf(',');
 			if( posVirgula > posPonto  )

@@ -145,6 +145,7 @@ class TPDOConnection {
         try {
             self::$instance[ self::getDatabaseName()] = new PDO( self::$dsn, self::$username, self::$password );
             self::$instance[ self::getDatabaseName()]->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            self::getExtraConfigPDO();
         } catch( PDOException $e ){
             $msg = 'Erro de conexão.<br><b>DNS:</b><br>'
                   .self::$dsn
@@ -155,6 +156,27 @@ class TPDOConnection {
         }
         
         return true;
+    }
+    
+    /**
+     * Verifica se o SGBD é MySQL
+     * Encoding do banco é UTF 8
+     * @return boolean
+     */
+    public static function isMySqlDbUtf8(){
+        $result = false;
+        $DBMS = self::getDBMS();
+        $boolUtf8_Decode = self::getUtfDecode();
+        if( ($DBMS == DBMS_MYSQL) && $boolUtf8_Decode==false ){
+            $result = true;
+        }
+        return $result;
+    }
+    
+    public static function getExtraConfigPDO(){
+        if( self::isMySqlDbUtf8() ){
+            self::$instance[ self::getDatabaseName()]->exec('SET CHARACTER SET utf8'); // acerta a acentuação vinda do banco de dados
+        }
     }
     
     private static function validateConnect($configFile ,$boolRequired ,$configArray) {
@@ -253,6 +275,7 @@ class TPDOConnection {
                 }
             }
         }
+        $return = array();
         $return['root'] = $root;
         $return['configfile'] = $configFile;
         return $return;
@@ -632,6 +655,7 @@ class TPDOConnection {
     public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null ) {
         if ( !self::getInstance() ) {
             self::getError();
+            throw new PDOException(self::$error);
             return;
         }
         self::$error = null;
@@ -745,9 +769,11 @@ class TPDOConnection {
             if ( is_string( key( $arrDados ) ) ) {
                 foreach( $arrDados as $k => $v ) {
                     if ( ! is_null( $v )  ) {
-                        
-                        $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                        $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                                                
+                        if( !self::isMySqlDbUtf8() ){
+                            $boolUtf8_DecodeDataBase = self::getUtfDecode();
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        }
                         
                         // inverter campo data
                         if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {
@@ -786,8 +812,10 @@ class TPDOConnection {
                 foreach( $arrDados as $k => $v ) {
                     if ( !is_null($v) && !empty($v) ){
                         $v  = self::verifyformtDateYMD( $v );
-                        $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                        $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        if( !self::isMySqlDbUtf8() ){
+                            $boolUtf8_DecodeDataBase = self::getUtfDecode();
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                        }
                     }else if( is_int($v) ){
                         $arrDados[ $k ] = $v;
                     }else if( $v === '0' ){
@@ -1121,7 +1149,8 @@ class TPDOConnection {
      * @param string $string
      * @return NULL|string
      */
-    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) {
+    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) 
+    {
         $retorno = null;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
@@ -1129,7 +1158,10 @@ class TPDOConnection {
             $retorno = $string;
         }elseif (self::$banco == DBMS_SQLITE) {
             $retorno = $string;
-        }else{
+        }
+        elseif( self::isMySqlDbUtf8() ){
+            $retorno = $string;
+        } else{
             if ( $boolUtf8_Decode ) {
                 $retorno = utf8_decode( $string );
             } else {

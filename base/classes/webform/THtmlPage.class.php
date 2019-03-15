@@ -76,6 +76,7 @@ class THtmlPage extends TElement
 		$this->objHtml->add($this->objBody);
 		$this->objHead->add('<meta http-equiv="Expires" content="Tue, 20 Aug 1996 14:25:27 GMT">');
 		$this->objHead->add('<meta charset="'.$this->getCharset().'">');
+		$this->objHead->add(HtmlHelper::getViewPort());
 		
 		$this->objTitle = new TElement('title');
 		$this->objTitle->clearCss();
@@ -105,21 +106,16 @@ class THtmlPage extends TElement
 		 	//$this->addJsFile($this->objForm->getJs());
 			$this->addInBody($this->objForm);
 		}
-		if ( $this->objBody->getChildren())
-		{
-			foreach($this->objBody->getChildren() as $k=>$child )
-			{
-				if(is_object($child) && method_exists($child,'getFieldType') && $child->getFieldType() == 'form')
-				{
+		if ( $this->objBody->getChildren()) {
+			foreach($this->objBody->getChildren() as $k=>$child ) {
+				if(is_object($child) && method_exists($child,'getFieldType') && $child->getFieldType() == 'form') {
 					//print 'tem um formulario';
 					$this->addJsCssFile($child->getJsCss());
 					// o form já esta dentro de uma tag html, então nao precisa imprimir a tag html nes os js e css dele
-					if ( method_exists( $child, 'autoIncludeJsCss' ) )
-					{
+					if ( method_exists( $child, 'autoIncludeJsCss' ) ) {
 						$child->autoIncludeJsCss(false);
 					}
-					if ( method_exists( $child, 'showHtmlTag' ) )
-					{
+					if ( method_exists( $child, 'showHtmlTag' ) ) {
 						$child->showHtmlTag(false);
 					}
 				}

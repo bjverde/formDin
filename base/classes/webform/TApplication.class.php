@@ -53,6 +53,7 @@ require_once ($helps_dir . 'ArrayHelper.class.php');
 require_once ($helps_dir . 'CountHelper.class.php');
 require_once ($helps_dir . 'DateTimeHelper.class.php');
 require_once ($helps_dir . 'GetHelper.class.php');
+require_once ($helps_dir . 'HtmlHelper.class.php');
 require_once ($helps_dir . 'MessageHelper.class.php');
 require_once ($helps_dir . 'PaginationSQLHelper.class.php');
 require_once ($helps_dir . 'PostHelper.class.php');
@@ -82,6 +83,7 @@ class TApplication extends TLayout {
 	private $backgroundRepeat;
 	private $backgroundPosition;
 	private $cssFile;
+	private $cssFileFormDefault;
 	private $loginInfo;
 	private $headerContent;
 	private $footerContent;
@@ -101,15 +103,17 @@ class TApplication extends TLayout {
 	private $onBeforeLogin;
 	private $appRootDir;
 	private $imgLogoPath;
-	
-	/**
-	 * classe para criação da aplicação
-	 *
-	 * @param string $strTitle
-	 * @param string $strSubtitle
-	 * @param string $strSigla
-	 * @param string $strUnit
-	 * @return TApplication
+	private $responsiveMode;
+
+    /***
+	 * Classe para criação da aplicação
+	 * 
+	 * @param string $strTitle     1: Titulo do sistema
+	 * @param string $strSubtitle  2: SubTitulo
+	 * @param string $strSigla     3: Sigla
+	 * @param string $strUnit      4: Nome da unidade
+	 * @param string $intWidth     5: @deprecated - não tem uso, será removido
+	 * @param string $charSet      6: @deprecated - não tem uso, será removido
 	 */
 	public function __construct($strTitle = null, $strSubtitle = null, $strSigla = null, $strUnit = null, $intWidth = null, $charSet = null) {
 		ini_set ( 'xdebug.max_nesting_level', 150 );
@@ -138,6 +142,7 @@ class TApplication extends TLayout {
 		$this->setUnit ( $strUnit );
 		$this->setSigla ( $strSigla );
 		$this->setShowMenu ( true );
+		$this->setResponsiveMode( true );
 		
 		// arquivo css padrão localizado na base base/css
 		$this->addCssFile ( 'app.css' );
@@ -284,7 +289,7 @@ class TApplication extends TLayout {
 	public function getImgLogoPath() {
 		return $this->imgLogoPath;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * Enter the relative path of the application logo image.
 	 * This setting will show the application logo in place of the acronym text.
@@ -296,8 +301,7 @@ class TApplication extends TLayout {
 	 */
 	public function setImgLogoPath($imgLogoPath) {
 		$this->imgLogoPath = $imgLogoPath;
-	}
-	//---------------------------------------------------------------------------------
+	}	
 	public function getImgLogoHtml(){
 		$stringHtml = null;
 		$appRootDir = $this->getAppRootDir();
@@ -319,61 +323,21 @@ class TApplication extends TLayout {
 		return $stringHtml;
 	}
 	//---------------------------------------------------------------------------------
-	private function buildCssNorthArea(){
-	    // css
-	    if ( $this->getHeaderBgImage() ) {
-	        // sobrescrever as definições do app.css
-	        $this->addStyle( '#app_header_title{background	:transparent;}' );
-	        $this->addStyle( '#app_header_login{background	:transparent;}' );
-	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
-	        
-	        if ( $this->getNorthArea() ) {
-	            // definir a imagem de fundo do cabecalho
-	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
-	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
-	            $this->getNorthArea()->setCss ( 'border', "0px" );
-	            if (is_null ( $this->getHeaderBgRepeat () )) {
-	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
-	                    
-	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
-	                    if ($width < 30) {
-	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-	                    }
-	                }
-	            } else {
-	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
-	            }
-	        }
-	    }
+	/**
+	 * @param boolean $responsiveMode
+	 */
+	public function setResponsiveMode($responsiveMode)
+	{
+	    $this->responsiveMode = $responsiveMode;
 	}
-	//---------------------------------------------------------------------------------
-	private function buildCssSouthArea(){
-	    if ( $this->getFooterBgImage() ) {
-	        // sobrescrever as definições do app.css
-	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
-	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
-	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
-	        
-	        if ($this->getSouthArea ()) {
-	            // definir a imagem de fundo do cabecalho
-	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
-	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
-	            $this->getSouthArea ()->setCss ( 'border', "0px" );
-	            if (is_null ( $this->getFooterBgRepeat () )) {
-	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
-	                    
-	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
-	                    if ($width < 30) {
-	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
-	                    }
-	                }
-	            } else {
-	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
-	            }
-	        }
-	    }
+	/**
+	 * @return boolean
+	 */
+	public function getResponsiveMode()
+	{
+	    return $this->responsiveMode;
 	}
-	
+	//---------------------------------------------------------------------------------	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
 	 * Se for passado o modulo ele apenas inclui módulo e sai funcionando como o modulo ler_modulo.php antigo
@@ -389,7 +353,7 @@ class TApplication extends TLayout {
 		$this->setOnPostModuloAndAction();
 		
 		// ******************************************************************************************
-		$this->processRequest (); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
+		$this->processRequest(); // se existir modulo postado, a aplicação termina nesta linha senão cria a tela básica do aplicativo
 		// ******************************************************************************************
 		
         $this->clearTempFiles();
@@ -398,7 +362,7 @@ class TApplication extends TLayout {
 			$_SESSION [APLICATIVO] = null;
 		}
 		
-		if ($this->getWidth ()) {
+		if ( $this->getResponsiveMode() == false &&  $this->getWidth()  ) {
 			$e = new TElement ( 'div' );
 			$e->setCss ( $this->getCss () );
 			$e->SetCss ( array (
@@ -610,6 +574,7 @@ class TApplication extends TLayout {
 	private function checkIfExistConfigFile() {
 		if ($this->getIncludeFiles ()) {
 			foreach ( $this->getIncludeFiles () as $k => $v ) {
+			    $k = $k; //POG para avitar mensagem de variavel não usada
 				if (file_exists ( $v )) {
 					require_once ($v);
 				}
@@ -656,7 +621,62 @@ class TApplication extends TLayout {
 			exit ();
 		}
 	}
-
+	
+	
+	/**
+	 * utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado 
+	 * @param string $modulo
+	 */
+	private function criaXmlSegurancaLerMenu($modulo)
+	{
+	    // utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado
+	    if (isset ( $_REQUEST ['content-type'] ) && strtolower ( $_REQUEST ['content-type'] ) == 'xml') {
+	        $_SESSION [APLICATIVO] ['modulo'] = null;
+	        if (! file_exists ( $modulo )) {
+	            header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+	            header ( "Cache-Control: no-cache" );
+	            header ( "Pragma: no-cache" );
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
+	            
+	            echo '<menu>
+							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' não existe."/>
+							<item id="verifique" text="Verifique as configurações no index.php"/>
+						</menu>';
+	            exit ();
+	        }
+	        
+	        $aFileInfo = pathinfo ( $modulo );
+	        
+	        if ($aFileInfo ['extension'] == 'php' || $aFileInfo ['extension'] == 'inc') {
+	            header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
+	            header ( "Cache-Control: no-cache" );
+	            header ( "Pragma: no-cache" );
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
+	            $this->includeConnectionFile ();
+	            require_once ($modulo);
+	        } else {
+	            header ( "content-type: text/xml; charset=" . $this->getCharset () . "'" );
+	            
+	            echo file_get_contents ( $modulo );
+	        }
+	        
+	        exit ();
+	    }
+	}
+	
+	private function getHeaderHtmlForm()
+	{
+	    $htmlViewPort = HtmlHelper::getViewPort();
+	    $htmlScript = "<!DOCTYPE html>"
+	                 ."\n<html>"
+	                 ."\n<head>"
+	                 ."\n<meta charset=\"".$this->getCharset()."\">"
+	                 ."\n".$htmlViewPort
+	                 ."\n</head>"
+	                 ."\n<body>"
+	                 ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+        return $htmlScript;
+	}
 	
 	// -----------------------------------------------------------------
 	/**
@@ -722,44 +742,9 @@ class TApplication extends TLayout {
 			// ajustar caminho do modulo recebido
 			$modulo = $this->getRealPath ( $modulo );
 			
-			// utilizado para criar o xml do menu quando o modulo base/seguranca/ler_menu_xml.php for chamado
-			if (isset ( $_REQUEST ['content-type'] ) && strtolower ( $_REQUEST ['content-type'] ) == 'xml') {
-				$_SESSION [APLICATIVO] ['modulo'] = null;
-				if (! file_exists ( $modulo )) {
-					header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-					header ( "Cache-Control: no-cache" );
-					header ( "Pragma: no-cache" );
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
-					
-					echo '<menu>
-							<item id="cadastro" img="error16.gif" text="Arquivo: ' . $modulo . ' não existe."/>
-							<item id="verifique" text="Verifique as configurações no index.php"/>
-						</menu>';
-					exit ();
-				}
-				
-				$aFileInfo = pathinfo ( $modulo );
-				
-				if ($aFileInfo ['extension'] == 'php' || $aFileInfo ['extension'] == 'inc') {
-					header ( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
-					header ( "Cache-Control: no-cache" );
-					header ( "Pragma: no-cache" );
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . '"' );
-					$this->includeConnectionFile ();
-					require_once ($modulo);
-				} else {
-					header ( "content-type: text/xml; charset=" . $this->getCharset () . "'" );
-					
-					echo file_get_contents ( $modulo );
-				}
-				
-				exit ();
-			}
-			$htmlScript = "<!DOCTYPE html>"
-					      ."\n<html>"
-					      ."\n<meta charset=\"".$this->getCharset()."\">"
-					      ."\n<body>"
-					      ."\n<table border=\"0\" width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n<tr>\n<td name=\"data_content\" id=\"data_content\" align=\"" . $this->getHorizontalAlign () . "\" valign=\"" . $this->getVerticalAlign () . "\">";
+			$this->criaXmlSegurancaLerMenu($modulo);
+			
+			$htmlScript = $this->getHeaderHtmlForm();
 			
 			if (! file_exists ( $modulo )) {
 				echo $htmlScript;
@@ -888,6 +873,7 @@ class TApplication extends TLayout {
 				$lines = file ( $moduloXajax, FILE_SKIP_EMPTY_LINES );
 				
 				foreach ( $lines as $line_num => $line ) {
+				    $line_num = $line_num;  //POG para evisar aviso de variavel não usada
 					$line = trim ( $line );
 					
 					if (strpos ( $line, 'function ' ) === 0) {
@@ -1165,12 +1151,38 @@ class TApplication extends TLayout {
 		
 		return null;
 	}
+	
+	/**
+	 * Configura um arquivo de CSS para parte externa da Aplicação: Hearder, Footer. 
+	 * Não funciona com o form. Para configura o CSS padrão de todos os 
+	 * forms utilize setCssDefaultFormFile
+	 * @param string $strNewValue
+	 */
 	public function setCssFile($strNewValue = null) {
 		$this->cssFile = $strNewValue;
 	}
 	public function getCssFile() {
 		return $this->cssFile;
 	}
+	
+	/**
+	 * Configura um arquivo de CSS Default para todos os formularios.
+	 * Para configura o CSS da parte externa utilize setCssFile
+	 * @param string $strNewValue
+	 */
+	public function setCssDefaultFormFile($strNewValue = null) {
+	    if (file_exists ( $strNewValue )) {
+	       $this->cssFileFormDefault = $strNewValue;
+	       define('CSS_FILE_FORM_DEFAULT', $strNewValue);
+	    }else{
+	        throw new DomainException(TMessage::CSS_FILE_FORM_DEFAULT_FAIL);
+	    }
+	}
+	public function getCssFileFormDefault() {
+	    return $this->cssFileFormDefault;
+	}
+	
+	
 	public function setLoginInfo($strInfo = null) {
 		$this->loginInfo = preg_replace ( '/' . chr ( 10 ) . '/', '<br/>', $strInfo );
 	}
@@ -1431,12 +1443,6 @@ class TApplication extends TLayout {
 	public function getOnBeforeActionFunction() {
 		return $this->getBeforeActionFunction ();
 	}
-	public function setWidth($intNewValue = null) {
-		$this->width = $intNewValue;
-	}
-	public function getWidth() {
-		return $this->width;
-	}
 	public function setOnGetLoginInfo($strNewValue = null) {
 		$this->onGetLoginInfo = $strNewValue;
 	}
@@ -1501,6 +1507,86 @@ class TApplication extends TLayout {
 		return false;
 	}
 	
+	//---------------------------------------------------------------------------------
+	
+	/**
+	 * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+	 * to work, setResponsiveMode = false
+	 * @param integer $intNewValue
+	 */
+	public function setWidth($intNewValue = null) {
+	    $this->width = $intNewValue;
+	}
+	public function getWidth() {
+	    return $this->width;
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Style of North Area
+	 * maintained for backward compatibility
+	 */
+	private function buildCssNorthArea(){
+	    // css
+	    if ( $this->getHeaderBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle( '#app_header_title{background	:transparent;}' );
+	        $this->addStyle( '#app_header_login{background	:transparent;}' );
+	        $this->addStyle( '#app_header_logo{background	:transparent;}' );
+	        
+	        if ( $this->getNorthArea() ) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getNorthArea()->setCss ( 'background-image', "url('" . $this->getHeaderBgImage () . "')" );
+	            $this->getNorthArea()->setCss ( 'background-position', "50% 50%" );
+	            $this->getNorthArea()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getHeaderBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getHeaderBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getHeaderBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
+	                    if ($width < 30) {
+	                        $this->getNorthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getNorthArea ()->setCss ( 'background-repeat', $this->getHeaderBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
+	/**
+	 * @deprecated Please use CSS to change Style of South Area
+	 * maintained for backward compatibility
+	 */
+	private function buildCssSouthArea()
+	{
+	    if ( $this->getFooterBgImage() ) {
+	        // sobrescrever as definições do app.css
+	        $this->addStyle ( '#app_footer_message{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_company{background	:transparent;}' );
+	        $this->addStyle ( '#app_footer_module{background	:transparent;}' );
+	        
+	        if ($this->getSouthArea ()) {
+	            // definir a imagem de fundo do cabecalho
+	            $this->getSouthArea ()->setCss ( 'background-image', "url('" . $this->getFooterBgImage () . "')" );
+	            $this->getSouthArea ()->setCss ( 'background-position', "50% 50%" );
+	            $this->getSouthArea ()->setCss ( 'border', "0px" );
+	            if (is_null ( $this->getFooterBgRepeat () )) {
+	                if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage () )) {
+	                    
+	                    list ( $width, $height ) = getimagesize ( $this->getFooterBgImage () );
+	                    $height = $height; //POG para retirar mensagens de variavel não usada;
+	                    if ($width < 30) {
+	                        $this->getSouthArea ()->setCss ( 'background-repeat', 'repeat-x' );
+	                    }
+	                }
+	            } else {
+	                $this->getSouthArea ()->setCss ( 'background-repeat', $this->getFooterBgRepeat () );
+	            }
+	        }
+	    }
+	}
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * Define a imagem de fundo do cabeçalho da aplicação
@@ -1512,7 +1598,8 @@ class TApplication extends TLayout {
 	 * @param mixed $strNewImage
 	 * @param mixed $strRepeat
 	 */
-	public function setHeaderBgImage($strNewImage = null, $strRepeat = null) {
+	public function setHeaderBgImage($strNewImage = null, $strRepeat = null)
+	{
 	    $this->headerBgImage = $strNewImage;
 	    if (is_null ( $this->getWidth () )) {
 	        if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
@@ -1527,46 +1614,68 @@ class TApplication extends TLayout {
 	        $this->setHeaderBgRepeat ( $strRepeat );
 	    }
 	}
-	public function getHeaderBgImage() {
+	
+	/**
+	 * @deprecated Please use CSS to change Background Header
+	 */
+	public function getHeaderBgImage()
+	{
 	    return $this->headerBgImage;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
 	 */
-	public function setHeaderBgRepeat($strNewValue = null) {
+	public function setHeaderBgRepeat($strNewValue = null)
+	{
 	    $this->headerBgRepeat = $strNewValue;
 	}
-	public function getHeaderBgRepeat() {
+	
+	/**
+	 * @deprecated Please use CSS to change Background Header
+	 */
+	public function getHeaderBgRepeat()
+	{
 	    return $this->headerBgRepeat;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
 	 */
-	public function setFooterBgImage($strNewImage = null, $strRepeat = null) {
+	public function setFooterBgImage($strNewImage = null, $strRepeat = null)
+	{
 	    $this->footerBgImage = $strNewImage;
 	    if (function_exists ( 'getimagesize' ) && file_exists ( $strNewImage )) {
 	        list ( $width, $height ) = getimagesize ( $strNewImage );
+	        $width = $width; //POG para retirar mensagens de variavel não usada;
 	        $this->setSouthSize ( $height );
 	    }
 	    if (is_null ( $this->getFooterBgRepeat () )) {
 	        $this->setFooterBgRepeat ( $strRepeat );
 	    }
 	}
-	public function getFooterBgImage() {
+	
+	/**
+	 * @deprecated Please use CSS to change Background footer
+	 */
+	public function getFooterBgImage()
+	{
 	    return $this->footerBgImage;
 	}
-	
+	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
 	 * @param string $strNewValue
 	 */
 	public function setFooterBgRepeat($strNewValue = null) {
 	    $this->footerBgRepeat = $strNewValue;
-	}	
+	}
+	
+	/**
+	 * @deprecated Please use CSS to change Background footer
+	 */
 	public function getFooterBgRepeat() {
 	    return $this->footerBgRepeat;
 	}

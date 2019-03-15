@@ -28,9 +28,9 @@
  * modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
  * do Software Livre (FSF).
  *
- * Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ * Este programa é distribuí1do na esperança que possa ser útil, mas SEM NENHUMA
  * GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
- * APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ * APLICAÇÃO EM PARTICULAR. Veja a Licen?a Pública Geral GNU/LGPL em portugu?s
  * para maiores detalhes.
  *
  * Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
@@ -38,40 +38,35 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once 'exe_pdf_msg.php';
 
-// ============= PROJECT CONSTANTS =================//
+$pdf = new TPDF('P');
+$pdf->AddPage();
 
-if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
+//a classe TPDF procura pela funcao cabecalho() e se existir sera executada recebendo a instancia da classe TPDF
+function cabecalho($pdf)
+{
+    $pdf->Image('imagem/appv1_logo.png',10,6,30);
+    $pdf->SetTextColor(160, 60, 60);
+    $pdf->setFont('', 'B', 14);
+    $pdf->cell(0, 5, APLICATIVO.' - v:'.SYSTEM_VERSION, 0, 1, 'C');
+    $pdf->setFont('', 'B', 12);
+    $pdf->cell(0, 5, 'Exemplo 6 - Grid Chamando PDF', 0, 1, 'C');
+    $pdf->ln(1);
+    $pdf->setFont('', '', 10);
+    
 }
-if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
+
+//a classe TPDF procurao pela funcao rodape() e se existir sera executada recebendo a instancia da classe TPDF
+function rodape($pdf)
+{
+    $pdf->setY(- 10);
+    $pdf->cell(50, 5, 'Emissao: '.date('d/m/Y h:i:s'), 'T', 0, 'L');
+    $pdf->cell(0, 5, 'Pagina: '.$pdf->
+        PageNo().' de {nb}', 'T', 0, 'R');
 }
 
-
-
-
-// ============= FORMDIN FRAMEWORK CONSTANTS =================//
-
-if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
-}
-define('EOL', "\n");
-define('TAB', chr(9));
-
-
-define('FORMDIN_VERSION', '4.3.2-alpha');
-
-// --Data Base Management System
-define('DBMS_ACCESS', 'ACCESS');
-define('DBMS_FIREBIRD', 'FIREBIRD');
-define('DBMS_MYSQL', 'MYSQL');
-define('DBMS_ORACLE', 'ORACLE');
-define('DBMS_POSTGRES', 'POSTGRES');
-define('DBMS_SQLITE', 'SQLITE');
-define('DBMS_SQLSERVER', 'SQLSERVER');
-
-// --Type Grid
-define('GRID_SIMPLE', '1');
-define('GRID_SCREEN_PAGINATION', '2');
-define('GRID_SQL_PAGINATION', '3');
-
-
-?>
+$pdf->SetFont('Arial', '', 10);
+$pdf->ln(3);
+$pdf->multiCell(0, 4, utf8_decode( print_r($_REQUEST, true)) , 1);
+$pdf->show();

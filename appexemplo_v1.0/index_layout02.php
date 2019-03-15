@@ -38,27 +38,58 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-error_reporting(E_ALL);
+define('MIGRATE_JQUERY', false);
 
-
-define('APLICATIVO', 'APPEV1.0_layout02');
-define('DECIMAL_SEPARATOR', ',');
-
+require_once('includes/constantes.php');
+include('includes/config_conexao.php');
 include('../base/classes/webform/TApplication.class.php');
-$app = new TApplication();
+
+
+//$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
+$app = new TApplication(); // criar uma instancia do objeto aplicacao
+$app->setAppRootDir(__DIR__);
+$app->setTitle(SYSTEM_NAME);
+$app->setSubtitle(APLICATIVO);
 $app->setSigla(APLICATIVO);
-$app->setUnit('FormDin Version'.FORMDIN_VERSION);
-$app->setVersionSystem('v 1.0.0.0');
+$app->setImgLogoPath('imagem/appv1_logo.png');
+$app->setUnit('Centro Nacional de Telemática - CNT');
+$app->setVersionSystem(SYSTEM_VERSION);
 $app->setMenuIconsPath('imagem/');
 
-$app->setWidth(779);
-$app->setNorthSize(55);
-$app->getNorthArea()->setCss('border', '1px solid red');
-$app->getNorthArea()->add('<img style="border:none;float:right;" src="imagem/acessibilidade-brasil.gif"/>');
-$app->setHeaderBgImage('imagem/spoa-cabec.gif');
-$app->setBackgroundImage('../base/css/imagens/app/bg_listrado.jpg');
-$app->setCssFile('css/css_form.css');
-$app->setMenuTheme('clear_green');
-
+$app->setWidth(990);
+$app->setResponsiveMode(false);
+//$app->setNorthSize(10);
 $app->setMainMenuFile('includes/menu.php');
+$app->setConfigFile(null);
+//$app->setLoginFile('includes/tela_login.php');
+$app->setOnGetLoginInfo('minhaFuncaoLogin');
+//$app->setConnectionFile(null);
+
+//$app->addIncludeFile('config.php');
+//$app->getLoCenter()->setCss('background-color','blue');
+
+//$app->setBackgroundImage(null);
+$app->setBackgroundImage('../css/imagens/app/bg_listrado.jpg');
+//$app->setBackgroundImage('../imagens/bg_blackmosaic.png');
+
+
+// testar prototyï¿½
+set_error_handler("exception_error_handler");
 $app->run();
+
+function minhaFuncaoLogin()
+{
+    return 'Olá, FormDin '.FORMDIN_VERSION;
+}
+
+function exception_error_handler($errno, $errstr, $errfile, $errline)
+{
+    echo '<pre>';
+    //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+
+    echo '<div style="text-align:left;border:1px solid red;width:100%;font-size:18px;">Erro N.'.$errno.'<br>'.
+    'Mensagem:'.$errstr.'<br>'.
+    'Arquivo:'.$errfile.'<br>'.
+    'Linha:'.$errline.'</div></pre>'.
+    '<script>try{top.app_unblockUI();}catch(e){};</script>';
+}

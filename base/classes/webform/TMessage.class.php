@@ -1,9 +1,9 @@
 <?php
 /*
- * Formdin Framework
- * Copyright (C) 2012 Ministério do Planejamento
- * Criado por Luís Eugênio Barbosa
- * Essa versão é um Fork https://github.com/bjverde/formDin
+ * FormDin 5 Framework
+ * Created by Reinaldo A. Barrêto Jr in 2019
+ * Based on the FormDin 4 of Luís Eugênio Barbosa
+ * https://github.com/bjverde/formDin5
  *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
@@ -39,39 +39,12 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// ============= PROJECT CONSTANTS =================//
+class TMessage {
 
-if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
+    const CSS_FILE_FORM_DEFAULT_FAIL = 'Arquivo de CSS para o Padrão dos Forms não existe ou não está no formato CSS';
+
+    public function __construct() {
+    }    
+	
 }
-if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
-}
-
-
-
-
-// ============= FORMDIN FRAMEWORK CONSTANTS =================//
-
-if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
-}
-define('EOL', "\n");
-define('TAB', chr(9));
-
-
-define('FORMDIN_VERSION', '4.3.2-alpha');
-
-// --Data Base Management System
-define('DBMS_ACCESS', 'ACCESS');
-define('DBMS_FIREBIRD', 'FIREBIRD');
-define('DBMS_MYSQL', 'MYSQL');
-define('DBMS_ORACLE', 'ORACLE');
-define('DBMS_POSTGRES', 'POSTGRES');
-define('DBMS_SQLITE', 'SQLITE');
-define('DBMS_SQLSERVER', 'SQLSERVER');
-
-// --Type Grid
-define('GRID_SIMPLE', '1');
-define('GRID_SCREEN_PAGINATION', '2');
-define('GRID_SQL_PAGINATION', '3');
-
-
 ?>
