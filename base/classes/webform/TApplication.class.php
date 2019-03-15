@@ -65,7 +65,7 @@ require_once ($helps_dir . 'UrlHelper.class.php');
 
 
 //Composer
-require_once '../../vendor/autoload.php';
+require_once $currentl_dir.DS.'..'.DS.'..'.DS.'vendor/autoload.php';
 
 include_once ('autoload_formdin.php');
 class TApplication extends TLayout {
