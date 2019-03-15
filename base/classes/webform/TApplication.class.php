@@ -63,6 +63,10 @@ require_once ($helps_dir . 'SqlHelper.class.php');
 require_once ($helps_dir . 'StringHelper.class.php');
 require_once ($helps_dir . 'UrlHelper.class.php');
 
+
+//Composer
+require_once '../../vendor/autoload.php';
+
 include_once ('autoload_formdin.php');
 class TApplication extends TLayout {
 	private $strTitle;
