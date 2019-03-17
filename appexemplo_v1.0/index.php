@@ -41,8 +41,9 @@
 define('MIGRATE_JQUERY', false);
 
 require_once('includes/constantes.php');
-include('includes/config_conexao.php');
-include('../base/classes/webform/TApplication.class.php');
+require_once('includes/config_conexao.php');
+require_once('../base/classes/webform/TApplication.class.php');
+require_once('classes/autoload_ap1v.php');
 
 
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');

@@ -12,13 +12,19 @@ use App\Controllers\{
 };
 */
 
-use Tuupola\Middleware\JwtAuthentication;
+//use Tuupola\Middleware\JwtAuthentication;
 //use App\Middlewares\JwtDateTimeMiddleware;
 
 $app = new \Slim\App(slimConfiguration());
 
 // =========================================
 
+$app->group('', function() use ($app) {
+    $app->get('/sysinfo', Sysinfo::class . ':getInfo');
+});
+
+
+/*
 $app->post('/login', AuthController::class . ':login');
 $app->post('/refresh-token', AuthController::class . ':refreshToken');
 
@@ -37,7 +43,7 @@ $app->group('', function() use ($app) {
     $app->put('/produto', ProdutoController::class . ':updateProduto');
     $app->delete('/produto', ProdutoController::class . ':deleteProduto');
 })->add(basicAuth());
-
+*/
 // =========================================
 
 $app->run();
