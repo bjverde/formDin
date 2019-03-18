@@ -14,13 +14,14 @@ use App\Controllers\{
 
 //use Tuupola\Middleware\JwtAuthentication;
 //use App\Middlewares\JwtDateTimeMiddleware;
+use App\Controllers\SysinfoAPI;
 
 $app = new \Slim\App(slimConfiguration());
 
 // =========================================
 
 $app->group('', function() use ($app) {
-    $app->get('/sysinfo', Sysinfo::class . ':getInfo');
+    $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
 });
 
 
