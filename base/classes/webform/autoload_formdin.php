@@ -50,6 +50,8 @@ if ( !function_exists( 'formdin_autoload') )
 			return false;
 		}elseif (strpos($class_name, 'Composer\\') === 0) {
 			return false;
+		}elseif (strpos($class_name, 'App\\') === 0) {
+		    return false;
 		}elseif (strpos($class_name, 'Blacklist.class.php') === 0) {
 			return false;
 		}else{
