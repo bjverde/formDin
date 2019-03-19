@@ -79,6 +79,16 @@ Veja na Wiki
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
+* [4.3.1 - 2019/03/11 tag v4.3.1](https://github.com/bjverde/formDin/releases/tag/v4.3.1)
+   * :bug: #132 - Fixed Encoding on SQL Server 
+   * :bug: #133 - Fixed Encoding on MySQL with Linux
+   * :bug: #134 - Fixed js fwAtualizarCampos
+
+* [4.3.0 - 2019/03/06 tag v4.3.0](https://github.com/bjverde/formDin/releases/tag/v4.3.0)
+   * :hammer: #122 - create setResponsiveMode 
+   * :hammer: #126 - PDF Títulos e Receber Parâmetros
+   * :bug: #124 - MySQL Correção UTF8
+   * :bug: #128 - MySQL Correção busca caracteres  
 
 * [4.2.6 - 2018/11/30 tag v4.2.6](https://github.com/bjverde/formDin/releases/tag/v4.2.6)
    * :bug: FixBugs to Work with PHP 7.2.X
@@ -86,22 +96,6 @@ Veja na Wiki
    * :bug: Notice PHP 7.2.X, TGrid
    * :hammer: Busca cep com Via cep
    * :memo: update app exemplos 2.5
-
-* [4.2.5 - 2018/07/31 tag v4.2.5](https://github.com/bjverde/formDin/releases/tag/v4.2.5)
-   * :bug: radio butun
-   * :art: Font Awesome Icons
-   * :abc: Migration header HTML4 to HTML5 - Tableless footer
-   * :white_check_mark: 150 PHPUnit tests
-   * :bug: Greater compatibility with php 7.2.4
-
-* [4.2.4 - 2018/06/17 tag v4.2.4](https://github.com/bjverde/formDin/releases/tag/4.2.4)
-   * :hammer: Work with Postgres SQL 10.4
-   * :white_check_mark: 145 PHPUnit tests
-   * :bug: Greater compatibility with php 7.2.4
-
-* [4.2.3 - 2018/06/14 tag v4.2.3](https://github.com/bjverde/formDin/releases/tag/v4.2.3)
-   * :hammer: Connect on more than database
-   * :bug: Bug strtolower
 
 * [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
    * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 
