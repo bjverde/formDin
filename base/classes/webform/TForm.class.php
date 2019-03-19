@@ -184,7 +184,7 @@ class TForm Extends TBox
         $strFormName = (( string ) $strFormName == "") ? "form" . mt_rand( 1, 100 ) : $strFormName;
         parent::__construct( $strFormName, $strWidth, $strHeight );
         $this->setFieldType( 'form' );
-        $this->setFlat( false );
+        $this->setFlat( true );
         $this->setMaximize(false); // não permitir maximizar com duplo clique
         $this->setShowHtmlTag( true );
         $this->setShowCloseButton( true );
