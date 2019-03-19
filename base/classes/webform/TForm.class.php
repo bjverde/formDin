@@ -6386,7 +6386,7 @@ class TForm Extends TBox
      * @param string  $strName         - 1: Id do Campo
      * @param string  $strLabel        - 2: Label do Campo
      * @param boolean $boolRequired    - 3: DEFAULT = flase não obrigatório
-     * @param boolean $boolNewLine     - 4: DEFAULT = true nova linha
+     * @param boolean $boolNewLine     - 4: Default TRUE = campo em nova linha, FALSE continua na linha anterior
      * @param string  $strValue        - 5: Valor inicial
      * @param string  $strMinValue
      * @param string  $strMaxValue
@@ -6432,7 +6432,7 @@ class TForm Extends TBox
     * @param string $strLegend        - 2: label que irá aparecer para o usuario 
     * @param integer $intHeight       - 3: altura do grupo. NULL = auto height
     * @param integer $intWidth        - 4: largura do grupo. NULL = largura do form
-    * @param boolean $boolNewLine     - 5: nova linha. Default = true
+    * @param boolean $boolNewLine     - 5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolNoWrapLabel
     * @param boolean $boolCloseble    - 6: pode fechar ou não
     * @param string  $strAccordionId  - 7:
@@ -6480,14 +6480,14 @@ class TForm Extends TBox
     * um label invisível defina como "" o seu valor
     *
     * criado o espaço
-    * @param string $strName        - Nome do campo            
-    * @param string $strValue       - Texto HTML que irá aparece dentro
-    * @param string $strIncludeFile - 
-    * @param string $strLabel
-    * @param string $strWidth
-    * @param string $strHeight
-    * @param boolean $boolNewLine
-    * @param boolean $boolLabelAbove
+    * @param string $strName        - 1: Nome do campo            
+    * @param string $strValue       - 2: Texto HTML que irá aparece dentro
+    * @param string $strIncludeFile - 3:
+    * @param string $strLabel       - 4:
+    * @param string $strWidth       - 5:
+    * @param string $strHeight      - 6: 
+    * @param boolean $boolNewLine   - 7: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+    * @param boolean $boolLabelAbove  8:
     * @return THtml Field
     */
    public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
@@ -6510,7 +6510,7 @@ class TForm Extends TBox
     * @param string $strHeight          - 4:
     * @param string $strWidth           - 5:
     * @param string  $strLoadingMessage - 6:
-    * @param boolean $boolNewLine       - 7:
+    * @param boolean $boolNewLine       - 7: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param mixed $mixFormFields       - 8: Exemplo de uso array( 'seq_documento'=>$frm->get('seq_documento') );
     * @return THtml
     */
@@ -6540,11 +6540,11 @@ class TForm Extends TBox
    /**
     * Adicionar campo CPF
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
-    * @param string $strValue
-    * @param boolean $boolNewLine
+    * @param string $strName             -  1: Id do campo
+    * @param string $strLabel            -  2: Label do campo
+    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param string $strValue            -  4: Valor inicial do campo
+    * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
     * @return TCpf Field
     */
@@ -6561,11 +6561,11 @@ class TForm Extends TBox
    /**
     * Adicionar campo CNPJ
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
-    * @param string $strValue
-    * @param boolean $boolNewLine
+    * @param string $strName             -  1: Id do campo
+    * @param string $strLabel            -  2: Label do campo
+    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param string $strValue            -  4: Valor inicial do campo
+    * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
     * @return TCnpj Field
     */
@@ -6582,23 +6582,23 @@ class TForm Extends TBox
    /**
     * Adicionar campo CPF/CNPJ, fazendo a validação do digito verificador
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
-    * @param string $strValue
-    * @param boolean $boolNewLine
+    * @param string $strName        -  1: Id do campo
+    * @param string $strLabel       -  2: Label do campo
+    * @param boolean $boolRequired  -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param string $strValue       -  4: Valor inicial do campo
+    * @param boolean $boolNewLine   -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
     * @return TCpfCnpj Field
     */
-   public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
-   {
-       $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
-       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
-       $field->setInvalidMessage( $strInvalidMessage );
-       $field->setAlwaysValidate( $boolAlwaysValidate );
-       $field->setCallback( $strJsCallback );
-       return $field;
-   }
+    public function addCpfCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+    {
+        $field = new TCpfCnpj( $strName, $strValue, $boolRequired );
+        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        $field->setInvalidMessage( $strInvalidMessage );
+        $field->setAlwaysValidate( $boolAlwaysValidate );
+        $field->setCallback( $strJsCallback );
+        return $field;
+    }
    //-----------------------------------------------------------------------------
            /**
             * Adicionar campo para informar o CEP
@@ -6620,7 +6620,7 @@ class TForm Extends TBox
             * @param string $strLabel             -  2: Label do campo
             * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
             * @param string $strValue             -  4: Valor inicial do campo
-            * @param boolean $boolNewLine         -  5: Nova linha 
+            * @param boolean $boolNewLine         -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
             * @param string $strFieldEndereco     -  6: id do campo endereço
             * @param string $strFieldBairro       -  7: id do campo bairro
             * @param string $strFieldCidade       -  8: id do campo cidade
