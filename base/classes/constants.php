@@ -57,7 +57,7 @@ define('EOL', "\n");
 define('TAB', chr(9));
 
 
-define('FORMDIN_VERSION', '4.3.2');
+define('FORMDIN_VERSION', '4.4.0');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');
