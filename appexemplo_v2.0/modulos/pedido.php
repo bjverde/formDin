@@ -14,13 +14,14 @@ $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 //$frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
 
 $frm->addGroupField('gpx1','Solicitante do Pedido');
-    $frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
+	$frm->addNumberField('IDPESSOA', 'Cod',4,true,0);
+	$frm->addCpfCnpjField('CPFCNPJ','CPF/CNPJ',true);
     $frm->addTextField('NOM_PESSOA', 'Nome',150,true,70,null,false);
     //Deve sempre ficar depois da definição dos campos
-    $frm->setAutoComplete('NOM_PESSOA'
-        ,'pessoa'// tabela
-        ,'NOME'	 		// campo de pesquisa
-        ,'IDPESSOA|IDPESSOA,NOME|NOM_PESSOA' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
+    $frm->setAutoComplete('CPFCNPJ'
+        ,'vw_pessoa'// tabela
+        ,'CPFCNPJ'	 		// campo de pesquisa
+        ,'IDPESSOA|IDPESSOA,NOME|NOM_PESSOA,CPFCNPJ|CPFCNPJ' // campo que será atualizado ao selecionar o nome do município <campo_tabela> | <campo_formulario>
         ,true
         ,null 		        // campo do formulário que será adicionado como filtro
         ,null				// função javascript

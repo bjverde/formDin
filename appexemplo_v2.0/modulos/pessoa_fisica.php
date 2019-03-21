@@ -11,8 +11,8 @@ $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $listPessoa = Pessoa::selectAll();
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',TRUE,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addTextField('CPF', 'CPF',11,TRUE,11);
-$frm->addDateField('DAT_NASCIMENTO', 'DAT_NASCIMENTO',FALSE);
+$frm->addCpfField('CPF', 'CPF',true);
+$frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',FALSE);
 $listMunicipio = Municipio::selectAll();
 $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'COD_MUNICIPIO_NASCIMENTO',FALSE,$listMunicipio,null,null,null,null,null,null,' ',null);
 $frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);

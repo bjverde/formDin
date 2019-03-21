@@ -116,14 +116,14 @@ if( is_array( $res ) ) {
 		$strSearchField = strtoupper($strSearchField);
 	}
 	if ( !array_key_exists($strSearchField ,$res) ) {
-		echo utf8_encode('Coluna '.$strSearchField.' não existe na tabela');
+		echo 'Coluna '.$strSearchField.' não existe na tabela';
 		return;
 	}
 	foreach($res[key($res)] as $k=>$v) {
 		$upd=array();
 		if( is_array($arrUpdateFields) ) {
 			foreach($arrUpdateFields as $fieldOracle=>$fieldForm) {
-				$upd[$fieldForm] = utf8_encode($res[$fieldOracle][$k]);
+				$upd[$fieldForm] = $res[$fieldOracle][$k];
 			}
 			
 			if(isset($strFunctionJs)) {

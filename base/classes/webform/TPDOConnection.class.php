@@ -140,6 +140,11 @@ class TPDOConnection {
      */
     public static function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null ) {
         
+        //POG for run with PHP-CLI
+        if ( empty($configFile) && defined( 'CONFIG_FILE' ) ) {
+            $configFile = CONFIG_FILE;
+        }
+        
         self::setUtfDecode( $boolUtfDecode );
         self::validateConnect( $configFile ,$boolRequired ,$configArray);
         try {
@@ -915,21 +920,20 @@ class TPDOConnection {
     {
         $base = '';
         
-        for( $i = 0; $i < 10; $i++ )
-        {
-            $base = str_repeat( '../', $i ) . 'base/';
-            
-            if ( file_exists( $base ) )
-            {
+        for( $i = 0; $i < 10; $i++ ) {
+            $base = str_repeat( '../', $i ) . 'base/';            
+            if ( file_exists( $base ) ){
                 $i = 20;
                 break;
             }
         }
         
-        if ( !file_exists( $base ) )
-        {
-            die ( 'pasta base/ não encontrada' );
+        if ( !file_exists( $base ) ) {
+            $msg = 'pasta base/ não encontrada! '
+                  .__FILE__.','.__LINE__.','.__METHOD__;
+            throw new Exception($msg);
         }
+        
         $base = str_replace( 'base', '', $base );
         $base = str_replace( '//', '/', $base );
         $root = ( $base == '/' ) ? './' : $base;

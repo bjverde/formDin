@@ -185,7 +185,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 				if(!strpos($funcaoExecutar,'()'))
 					$funcaoExecutar.='()';
 			}
-			$valeu = preg_replace("/'/","\\'",utf8_encode($v));
+			$valeu = preg_replace("/'/","\\'",$v);
 			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".$valeu."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
 		}
 		if(strlen($sRet) > 0)  {
