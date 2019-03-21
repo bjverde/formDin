@@ -13,11 +13,7 @@ class Tb_pedidoAPI {
     //--------------------------------------------------------------------------------
     public static function selectAll(Request $request, Response $response, array $args): Response
     {
-        $result = array(
-            'SYSTEM_NAME'=>SYSTEM_NAME
-            ,'SYSTEM_ACRONYM'=>SYSTEM_ACRONYM
-            ,'SYSTEM_VERSION'=>SYSTEM_VERSION
-        );
+        $result = \Tb_pedido::selectAll();
         
         $response = $response->withJson($result);
         return $response;
