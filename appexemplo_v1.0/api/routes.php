@@ -22,6 +22,8 @@ $app = new \Slim\App(slimConfiguration());
 
 $app->group('', function() use ($app) {
     $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
+
+    $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
 });
 
 

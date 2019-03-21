@@ -13,8 +13,7 @@ class Tb_pedidoAPI {
     //--------------------------------------------------------------------------------
     public static function selectAll(Request $request, Response $response, array $args): Response
     {
-        $result = Tb_pedido::selectAll();
-        
+        $result = Tb_pedido::selectAll();        
         $response = $response->withJson($result);
         return $response;
     }
