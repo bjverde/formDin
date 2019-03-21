@@ -13,12 +13,11 @@
 if ( !function_exists( 'ap1v_api_autoload') ) {
 	function ap1v_api_autoload( $class_name ){
 		$path = __DIR__.DS.'Controllers'.DS.$class_name.'.class.php';
-		var_dump($path);
 		if (file_exists($path)){
-			require_once $class_name.'.class.php';
+			require_once $path;
 		} else {
 			return false;
 		}
 	}
-spl_autoload_register('ap1v_api_autoload');
+	spl_autoload_register('ap1v_api_autoload');
 }

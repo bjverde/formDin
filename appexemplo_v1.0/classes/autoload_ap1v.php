@@ -12,11 +12,12 @@
 
 if ( !function_exists( 'ap1v_autoload') ) {
 	function ap1v_autoload( $class_name ){
-		if (file_exists(__DIR__.DS.$class_name.'.class.php')){
-			require_once $class_name.'.class.php';
+		$path = __DIR__.DS.$class_name.'.class.php';
+		if (file_exists($path)){
+			require_once $path;
 		} else {
 			return false;
 		}
 	}
-spl_autoload_register('ap1v_autoload');
+	spl_autoload_register('ap1v_autoload');
 }
