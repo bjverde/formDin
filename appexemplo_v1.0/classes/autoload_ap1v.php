@@ -11,8 +11,12 @@
  */
 
 if ( !function_exists( 'ap1v_autoload') ) {
-	function ap1v_autoload( $class_name )	{
-		require_once $class_name . '.class.php';
+	function ap1v_autoload( $class_name ){
+		if (file_exists(__DIR__.DS.$class_name.'.class.php')){
+			require_once $class_name.'.class.php';
+		} else {
+			return false;
+		}
 	}
 spl_autoload_register('ap1v_autoload');
 }
