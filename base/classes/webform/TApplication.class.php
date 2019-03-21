@@ -167,7 +167,7 @@ class TApplication extends TLayout {
 			if(empty($minimumVersion)){
 				throw new DomainException(TMessage::FORM_MIN_VERSION_BLANK);
 			}
-			if( FormDinHelper::versionMinimum($minimumVersion) ){
+			if( !FormDinHelper::versionMinimum($minimumVersion) ){
 				throw new DomainException(TMessage::FORM_MIN_VERSION_NOT.$minimumVersion);
 			}
 		}
