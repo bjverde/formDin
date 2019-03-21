@@ -14,8 +14,8 @@ use App\Controllers\{
 
 //use Tuupola\Middleware\JwtAuthentication;
 //use App\Middlewares\JwtDateTimeMiddleware;
-use App\Controllers\SysinfoAPI;
-use App\Controllers\Tb_pedidoAPI;
+use Controllers\SysinfoAPI;
+use Controllers\Tb_pedidoAPI;
 
 $app = new \Slim\App(slimConfiguration());
 
