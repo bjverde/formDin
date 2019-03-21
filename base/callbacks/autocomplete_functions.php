@@ -78,7 +78,7 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
 		$bvars['NUM_PESSOA'] = $_SESSION['num_pessoa'];
 	}
 	if( $erro = recuperarPacote($strTablePackageFuncion,$bvars,$res,(int)$intCacheTime)) {
-		echo utf8_encode("Erro na função autocomplete(). Erro:".$erro[0])."\n";
+		echo "Erro na função autocomplete(). Erro:".$erro[0]."\n";
 		return;
 	}
 	
@@ -105,14 +105,12 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
     if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
 		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
 			if( preg_match('/falha/i',$erro ) > 0 ) {
-				echo utf8_encode("Erro na função autocomplete(). Erro:".$erro)."\n".$sql;
+				echo "Erro na função autocomplete(). Erro:".$erro."\n".$sql;
 				return;
 			}
 		}
 	} else {
 		$res = TPDOConnection::executeSql($sql);
-		//echo utf8_encode($sql."\n");
-		//return;
 	}
 	return $res;
 }
@@ -138,7 +136,7 @@ function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields,
 		}
 	}
 	//$where = "upper({$strSearchField}) like '".strtoupper($_REQUEST['q'])."%'";
-	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ). utf8_encode($_REQUEST['q'])."%')";
+	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$_REQUEST['q']."%')";
 	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v) {
 			$where .=" and {$k} = '{$v}'";

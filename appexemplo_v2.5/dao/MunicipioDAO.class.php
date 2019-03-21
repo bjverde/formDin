@@ -3,9 +3,9 @@ class MunicipioDAO extends TPDOConnection {
 
 	private static $sqlBasicSelect = 'select
 									  m.cod_municipio
+									 ,m.nom_municipio
 									 ,m.cod_uf
 									 ,(select sig_uf from uf where cod_uf = m.cod_uf) as sig_uf
-									 ,m.nom_municipio
 									 ,m.sit_ativo
 									 from municipio m';
 

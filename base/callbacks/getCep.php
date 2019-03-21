@@ -142,31 +142,6 @@ if(isset($_REQUEST['cep']))
 		$res = file_get_contents('http://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
 		echo utf8_decode($res);
 	}
-
-
-
-
-	/*
-	// exemplo do retorno fixo para testar a chamada
-	echo utf8_encode('<?xml version="1.0" encoding="utf-8" ?>
-		<webservicecep>
-			<quantidade>1</quantidade>
-			<retorno>]
-				<cep>71505030</cep>
-				<uf>DF</uf>
-				<cidade>Lago Norte</cidade>
-				<bairro>Setor de Habitações Individuais Norte</bairro>
-				<tipo_logradouro>Conjunto</tipo_logradouro>
-				<logradouro>SHIN QI 1  3</logradouro>
-				<data>2010-06-12 00:18:12</data>
-				<resultado>1</resultado>
-				<resultado_txt>sucesso. cep encontrado local</resultado_txt>
-				<limite_buscas>10</limite_buscas>
-			</retorno>
-		</webservicecep>');
-	*/
-	//$_SERVER['SERVER_ADDR']
-	//echo file_get_contents('http://www.buscarcep.com.br/?chave=1N4geWh.fwv1HeoCFNpBMsG1Cn1Gxf0&cep='.$cep.'&formato=xml');
 	return;
 }
 ?>
