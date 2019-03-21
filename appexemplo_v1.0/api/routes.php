@@ -15,15 +15,15 @@ use App\Controllers\{
 //use Tuupola\Middleware\JwtAuthentication;
 //use App\Middlewares\JwtDateTimeMiddleware;
 use App\Controllers\SysinfoAPI;
+use App\Controllers\Tb_pedidoAPI;
 
 $app = new \Slim\App(slimConfiguration());
 
 // =========================================
 
 $app->group('', function() use ($app) {
-    $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
-
     $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
+    $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
 });
 
 
