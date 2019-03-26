@@ -18,4 +18,12 @@ class Tb_pedidoAPI {
         $response = $response->withJson($result);
         return $response;
     }
+    //--------------------------------------------------------------------------------
+    public static function selectById(Request $request, Response $response, array $args): Response
+    {
+        $id = $args['id'];
+        $result = \Tb_pedido::selectById($id);        
+        $response = $response->withJson($result);
+        return $response;
+    }
 }

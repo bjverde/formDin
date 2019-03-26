@@ -10,9 +10,15 @@ $app = new \Slim\App(slimConfiguration());
 // =========================================
 
 $app->group('', function() use ($app) {
-    $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
-    $app->get('/tb_pedido_item', Tb_pedido_itemAPI::class . ':selectAll');
     $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
+
+    $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
+    $app->get('/tb_pedido/{id:[0-9]+}', Tb_pedidoAPI::class . ':selectById');
+    
+    $app->get('/tb_pedido_item', Tb_pedido_itemAPI::class . ':selectAll');
+    $app->get('/tb_pedido_item/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':selectById');
+    
+    
 });
 
 
