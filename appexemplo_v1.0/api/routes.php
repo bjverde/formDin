@@ -16,6 +16,7 @@ use App\Controllers\{
 //use App\Middlewares\JwtDateTimeMiddleware;
 use Controllers\SysinfoAPI;
 use Controllers\Tb_pedidoAPI;
+use Controllers\Tb_pedido_itemAPI;
 
 $app = new \Slim\App(slimConfiguration());
 
@@ -23,6 +24,7 @@ $app = new \Slim\App(slimConfiguration());
 
 $app->group('', function() use ($app) {
     $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
+    $app->get('/tb_pedido_item', Tb_pedido_itemAPI::class . ':selectAll');
     $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
 });
 
