@@ -25,5 +25,20 @@ class Tb_pedido_itemAPI {
         $result = \Tb_pedido_item::selectById($id);        
         $response = $response->withJson($result);
         return $response;
-    }    
+    }
+    //--------------------------------------------------------------------------------
+    public static function save(Request $request, Response $response, array $args): Response
+    {
+        $result = array('resp'=>'salvou');
+        $response = $response->withJson($result);
+        return $response;
+    } 
+    //--------------------------------------------------------------------------------
+    public static function delete(Request $request, Response $response, array $args): Response
+    {
+        $id = $args['id'];
+        $result = \Tb_pedido_item::delete($id);        
+        $response = $response->withJson($result);
+        return $response;
+    } 
 }

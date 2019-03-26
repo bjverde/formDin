@@ -14,34 +14,19 @@ $app->group('', function() use ($app) {
 
     $app->get('/tb_pedido', Tb_pedidoAPI::class . ':selectAll');
     $app->get('/tb_pedido/{id:[0-9]+}', Tb_pedidoAPI::class . ':selectById');
-    
-    $app->get('/tb_pedido_item', Tb_pedido_itemAPI::class . ':selectAll');
-    $app->get('/tb_pedido_item/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':selectById');
-    
-    
+
 });
 
+//https://discourse.slimframework.com/t/slim-3-routing-best-practices-and-organization/93
+//http://www.slimframework.com/docs/v2/routing/groups.html
+$app->group('/tb_pedido_item', function() use ($app) {
+    $app->get('', Tb_pedidoAPI::class . ':selectAll');
 
-/*
-$app->post('/login', AuthController::class . ':login');
-$app->post('/refresh-token', AuthController::class . ':refreshToken');
+    $app->post('', Tb_pedido_itemAPI::class . ':save');
 
-$app->get('/teste', function() { echo "oi"; })
-    ->add(new JwtDateTimeMiddleware())
-    ->add(jwtAuth());
-
-$app->group('', function() use ($app) {
-    $app->get('/loja', LojaController::class . ':getLojas');
-    $app->post('/loja', LojaController::class . ':insertLoja');
-    $app->put('/loja', LojaController::class . ':updateLoja');
-    $app->delete('/loja', LojaController::class . ':deleteLoja');
-
-    $app->get('/produto', ProdutoController::class . ':getProdutos');
-    $app->post('/produto', ProdutoController::class . ':insertProduto');
-    $app->put('/produto', ProdutoController::class . ':updateProduto');
-    $app->delete('/produto', ProdutoController::class . ':deleteProduto');
-})->add(basicAuth());
-*/
-// =========================================
+    $app->get('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':selectById');
+    $app->put('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':save');
+    $app->delete('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':delete');
+});
 
 $app->run();
