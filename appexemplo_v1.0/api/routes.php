@@ -1,19 +1,4 @@
 <?php
-/*
-use function src\{
-    slimConfiguration,
-    basicAuth,
-    jwtAuth
-};
-use App\Controllers\{
-    ProdutoController,
-    LojaController,
-    AuthController
-};
-*/
-
-//use Tuupola\Middleware\JwtAuthentication;
-//use App\Middlewares\JwtDateTimeMiddleware;
 use Controllers\{
      SysinfoAPI
     ,Tb_pedidoAPI
