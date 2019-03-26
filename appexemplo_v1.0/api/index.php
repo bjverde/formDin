@@ -10,14 +10,9 @@ require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'constantes.php';
 require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'config_conexao.php';
 require_once $current_dirApi.DS.'..'.DS.'..'.DS.'base/classes/webform/TApplication.class.php';
 require_once $current_dirApi.DS.'..'.DS.'classes'.DS.'autoload_ap1v.php';
-//-------------------------------------------
-require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'Vw_pedido_qtd_itensDAO.class.php';
-require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'Tb_pedidoDAO.class.php';
-require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'Tb_pedido_itemDAO.class.php';
-
+require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'autoload_ap1v_dao.php';
 require_once $current_dirApi.DS.'autoload_ap1v_api.php';
-//require_once $current_dirApi.DS.'Controllers'.DS.'Tb_pedidoAPI.class.php';
-//require_once $current_dirApi.DS.'Controllers'.DS.'SysinfoAPI.class.php';
+
 //-------------------------------------------
 require_once $current_dirApi.DS.'env.php';
 require_once $current_dirApi.DS.'slimConfiguration.php';
