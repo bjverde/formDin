@@ -48,9 +48,12 @@
  return;
  */
 
+if (! defined ( 'DS' )) {
+	define ( 'DS', DIRECTORY_SEPARATOR );
+}
 // sqlite
 define('BANCO', 'SQLITE');
-define('DATABASE', 'bancos_locais/bdApoio.s3db');
+define('DATABASE', __DIR__.DS.'..'.DS.'bancos_locais'.DS.'bdApoio.s3db');
 define('UTF8_DECODE', 0);
 
 
