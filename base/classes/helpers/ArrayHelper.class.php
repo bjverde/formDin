@@ -158,5 +158,30 @@ class ArrayHelper
         }
         return $result;
     }
+
+    /**
+     * Convert Array FormDin Format to PDO format
+     *
+     * @param  array $array
+     * @return array
+     */
+    static function convertArrayFormDin2Pdo($dataArray,$upperCase = true) 
+    {
+        $result = false;
+        if(is_array($dataArray) ) {
+            $listKeys = array_keys($dataArray);
+            $firstKey = $listKeys[0];
+            foreach( $dataArray[$firstKey] as $keyNumber => $value ) {
+                foreach( $listKeys as $keyName ) {
+                    if($upperCase) {
+                        $result[ $keyNumber ][ strtoupper($keyName) ] = $dataArray[$keyName][$keyNumber];
+                    }else{
+                        $result[ $keyNumber ][ strtoupper($keyName) ] = $dataArray[$keyName][$keyNumber];
+                    }
+                }
+            }
+        }
+        return $result;
+    }
 }
 ?>
