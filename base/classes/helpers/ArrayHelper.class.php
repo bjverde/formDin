@@ -165,7 +165,7 @@ class ArrayHelper
      * @param  array $array
      * @return array
      */
-    static function convertArrayFormDin2Pdo($dataArray,$upperCase = true) 
+    static function convertArrayFormDin2Pdo($dataArray,$upperCase = false) 
     {
         $result = false;
         if(is_array($dataArray) ) {
@@ -176,7 +176,7 @@ class ArrayHelper
                     if($upperCase) {
                         $result[ $keyNumber ][ strtoupper($keyName) ] = $dataArray[$keyName][$keyNumber];
                     }else{
-                        $result[ $keyNumber ][ strtoupper($keyName) ] = $dataArray[$keyName][$keyNumber];
+                        $result[ $keyNumber ][ strtolower($keyName) ] = $dataArray[$keyName][$keyNumber];
                     }
                 }
             }
