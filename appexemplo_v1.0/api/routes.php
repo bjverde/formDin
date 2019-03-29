@@ -20,7 +20,7 @@ $app->group('', function() use ($app) {
 //https://discourse.slimframework.com/t/slim-3-routing-best-practices-and-organization/93
 //http://www.slimframework.com/docs/v2/routing/groups.html
 $app->group('/tb_pedido_item', function() use ($app) {
-    $app->get('', Tb_pedidoAPI::class . ':selectAll');
+    $app->get('', Tb_pedido_itemAPI::class . ':selectAll');
 
     $app->post('', Tb_pedido_itemAPI::class . ':save');
 

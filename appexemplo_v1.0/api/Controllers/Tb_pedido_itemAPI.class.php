@@ -14,8 +14,11 @@ class Tb_pedido_itemAPI {
     public static function selectAll(Request $request, Response $response, array $args): Response
     {
         $result = \Tb_pedido_item::selectAll();
-        
-        $response = $response->withJson($result);
+        $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+        $msg = array( 'qtd'=> \CountHelper::count($result)
+            , 'result'=>$result
+        );
+        $response = $response->withJson($msg);
         return $response;
     }
     //--------------------------------------------------------------------------------
@@ -23,7 +26,11 @@ class Tb_pedido_itemAPI {
     {
         $id = $args['id'];
         $result = \Tb_pedido_item::selectById($id);        
-        $response = $response->withJson($result);
+        $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+        $msg = array( 'qtd'=> \CountHelper::count($result)
+            , 'result'=>$result
+        );
+        $response = $response->withJson($msg);
         return $response;
     }
     //--------------------------------------------------------------------------------
