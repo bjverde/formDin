@@ -2065,10 +2065,8 @@ class TForm Extends TBox
         $aTemp[ 'cacheTime' ] = $intCacheTime;
         $aTemp[ 'searchAnyPosition' ] = $boolSearchAnyPosition;
         //$aTemp['messageNotFound']	= $strMessageNotFound;
-        if( ( string ) $strCallBackFunctionJs )
-        {
-            if( !strpos( $strCallBackFunctionJs, '(' ) )
-            {
+        if( ( string ) $strCallBackFunctionJs ){
+            if( !strpos( $strCallBackFunctionJs, '(' ) ){
                 $strCallBackFunctionJs.="()";
             }
             $aTemp[ 'functionJs' ] = $strCallBackFunctionJs;
@@ -2077,21 +2075,17 @@ class TForm Extends TBox
             if( !is_array( $mixUpdateFields ) ) {
                 $mixUpdateFields = explode( ',', $mixUpdateFields );
             }
-            forEach( $mixUpdateFields as $k=>$v )
-            {
-                if( is_int( $k ) )
-                {
+            forEach( $mixUpdateFields as $k=>$v ){
+                if( is_int( $k ) ){
                     $aField = explode( '|', $v );
-                    if( !isset( $aField[ 1 ] ) )
-                    {
+                    if( !isset( $aField[ 1 ] ) ){
                         $aField[ 1 ] = strtolower( $aField[ 0 ] );
                     }
                     $k = strtoupper( $aField[ 0 ] );
                     $v = $aField[ 1 ];
                 }
                 // o campo que recebe o autocomplete não pode estar na lista dos campos que serão atualizados no formulário.
-                if( $v != $strFieldName )
-                {
+                if( $v != $strFieldName ) {
                     $strExtraParams = (isset( $strExtraParams ) && strlen( $strExtraParams ) > 0 ? $strExtraParams . "," : "");
                     $strFillFields = (isset( $strFillFields ) && strlen( $strFillFields ) > 0 ? $strFillFields . "," : "");
                     $strExtraParams.='"' . $k . '":"' . $v . '"'; //"COD_UF":"cod_uf"
@@ -2100,27 +2094,22 @@ class TForm Extends TBox
                 }
             }
         }
-        if( $mixExtraSearchFields )
-        {
+        if( $mixExtraSearchFields ) {
             /* o parametro $mixExtraParams deve ser utilizado para passagem de parametros extras para a url alem do conteúdo digitado no campo
              O formato pode ser uma string ou um array de string com ou sem valores fixos
              Ex: "cod_uf:53" ou  array("cod_uf",'sig_uf'=>'GO')
              Se o parametro passado não tiver um valor fixado, este valor será lido dinamicamente de um campo do formulario que
              possua o mesmo nome.
              */
-            if( is_array( $mixExtraSearchFields ) )
-            {
-                forEach( $mixExtraSearchFields as $k=>$v )
-                {
-                    if( is_int( $k ) )
-                    {
+            if( is_array( $mixExtraSearchFields ) ) {
+                forEach( $mixExtraSearchFields as $k=>$v ) {
+                    if( is_int( $k ) ) {
                         $k = $v;
                         $v = null;
                     }
                     $strExtraParams .= $strExtraParams == '' ? '' : ',';
                     if( ( string ) $v == "" ) {
-                        if( $this->getField( $k ) )
-                        {
+                        if( $this->getField( $k ) ) {
                             $v = 'jQuery("#' . $k . '").get(0).value';
                         }
                     }
