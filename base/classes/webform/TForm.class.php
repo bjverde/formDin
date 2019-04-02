@@ -2073,10 +2073,8 @@ class TForm Extends TBox
             }
             $aTemp[ 'functionJs' ] = $strCallBackFunctionJs;
         }
-        if( $mixUpdateFields )
-        {
-            if( !is_array( $mixUpdateFields ) )
-            {
+        if( $mixUpdateFields ){
+            if( !is_array( $mixUpdateFields ) ) {
                 $mixUpdateFields = explode( ',', $mixUpdateFields );
             }
             forEach( $mixUpdateFields as $k=>$v )
@@ -2120,8 +2118,7 @@ class TForm Extends TBox
                         $v = null;
                     }
                     $strExtraParams .= $strExtraParams == '' ? '' : ',';
-                    if( ( string ) $v == "" )
-                    {
+                    if( ( string ) $v == "" ) {
                         if( $this->getField( $k ) )
                         {
                             $v = 'jQuery("#' . $k . '").get(0).value';
@@ -2131,19 +2128,15 @@ class TForm Extends TBox
                     //$aSearchFields[$k]=$v;
                     $aTemp[ '_w_' . $k ] = $v;
                 }
-            }
-            else
-            {
-                if( !strpos( $mixExtraSearchFields, ":" ) )
-                {
+            } else {
+                if( !strpos( $mixExtraSearchFields, ":" ) ){
                     //$aSearchFields[$mixExtraSearchFields] ='jQuery("#'.$mixExtraSearchFields.'").get(0).value';
                     //$aTemp['_w_'.$mixExtraSearchFields] ='jQuery("#'.$mixExtraSearchFields.'").get(0).value';
                     $field = explode('|',$mixExtraSearchFields);
                     
                     
                     $aTemp[ '_w_' . $mixExtraSearchFields ] = '';
-                    if( !$this->getField( $field[0] ) )
-                    {
+                    if( !$this->getField( $field[0] ) ){
                         print 'SetAutoComplete: O campo ' . $field[0] . ' não exite no formulário.';
                     }
                     
@@ -2162,27 +2155,24 @@ class TForm Extends TBox
                             .' ,messageNotFound:"' . $strMessageNotFound . '",clearOnNotFound:' . ($boolClearOnNotFound ? 'true' : 'false')
                             .' ,extraParams:{' . $strExtraParams . '} });' );
         $this->getField( $strFieldName )->addEvent( 'ondblclick', 'fwAutoCompleteValidade(this)' );
-        if( $boolClearUpdateFields )
-        {
+        if( $boolClearUpdateFields ) {
             $this->getField( $strFieldName )->addEvent( 'onkeydown', 'fwSetFields("' . $strFillFields . '","",event)' );
         }
         $this->getField( $strFieldName )->setAttribute('keepFieldValues',$boolKeepFieldValuesOnPost);
         $this->autocompleteFields[ $strFieldName ][ 'disableFields' ] = $boolDisableUpdateFields;
         $this->autocompleteFields[ $strFieldName ][ 'fillFields' ] = isset( $strFillFields ) ? $strFillFields : null;
         
-        if( !$this->getField( $strFieldName )->getProperty( 'title' ) )
-        {
+        if( !$this->getField( $strFieldName )->getProperty( 'title' ) ) {
             // colocar hint no input para auxiliar o usuário
-            if( ( int ) $intMinChars < 5 )
-            {
-                if( !$this->getField( $strFieldName )->getTooltip() )
-                {
+            if( ( int ) $intMinChars < 5 ) {
+                if( !$this->getField( $strFieldName )->getTooltip() ) {
                     $this->getField( $strFieldName )->setTooltip( 'Campo autocompletar', 'Inicie a digitação e aguarde a lista de opções!' );
                 }
             }
         }
         //$this->getField($strFieldName)->addEvent('onkeyup','jQuery("'.$strFillFields.'").get(0).value="?"');
     }
+    
     //-----------------------------------------------------------------------------
     /**
      * Método para adicionar funções javascript ao formulario que serão executadas
