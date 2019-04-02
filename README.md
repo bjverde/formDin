@@ -79,6 +79,14 @@ Veja na Wiki
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
+* [4.4.1 - 2019/03/20 tag v4.4.1](https://github.com/bjverde/formDin/releases/tag/v4.4.1)
+   * :hammer: #141 - With CONST CONFIG_FILE
+   
+* [4.4.0 - 2019/03/20 tag v4.4.1](https://github.com/bjverde/formDin/releases/tag/v4.4.0)
+    * :hammer: #37 - new method TApplication->setCssFileFormDefault.
+    * :bug: #139 - correcting encoding UTF-8 autocomplete.
+    * :hammer: #137 - changing the border pattern of the form.
+   
 * [4.3.1 - 2019/03/11 tag v4.3.1](https://github.com/bjverde/formDin/releases/tag/v4.3.1)
    * :bug: #132 - Fixed Encoding on SQL Server 
    * :bug: #133 - Fixed Encoding on MySQL with Linux
