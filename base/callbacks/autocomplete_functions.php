@@ -135,8 +135,8 @@ function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields,
 			}
 		}
 	}
-	//$where = "upper({$strSearchField}) like '".strtoupper($_REQUEST['q'])."%'";
-	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$_REQUEST['q']."%')";
+	$text  = StringHelper::str2utf8($_REQUEST['q']);
+	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$text."%')";
 	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v) {
 			$where .=" and {$k} = '{$v}'";

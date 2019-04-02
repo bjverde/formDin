@@ -1995,11 +1995,11 @@ class TForm Extends TBox
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
-     * @param mixed $mixExtraSearchFields           - 6: campo do formulário que será adicionado como filtro
+     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like. Procure usar campos do tipo INT
      * @param string $strCallBackFunctionJs         - 7: função javascript de callback
      * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                     - 9: Default 1000, tempo após a digitação para disparar a consulta
-     * @param integer $intMaxItensToShow            - 10: máximo de registros que deverá ser retornado
+     * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
+     * @param integer $intMaxItensToShow            - 10: Default 50, máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
      * @param string $strUrl                        - 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
@@ -2039,7 +2039,7 @@ class TForm Extends TBox
         $urlCallBack = 'app_index_file+"?modulo=' . $this->getBase() . 'callbacks/autocomplete.php';
         
         $strUrl   = $strUrl === null ? $urlCallBack : $strUrl;
-        $intDelay = $intDelay === null ? 1000 : ( int ) $intDelay; // 1000 = 1 segund
+        $intDelay = $intDelay === null ? 500 : ( int ) $intDelay; // 1000 = 1 segund
         $intMaxItensToShow = $intMaxItensToShow === null ? 50 : ( int ) $intMaxItensToShow;
         $intMinChars = $intMinChars === null ? 3 : ( int ) $intMinChars;
         $intCacheTime = $intCacheTime === null ? 0 : ( int ) $intCacheTime; // 0 = sessão
