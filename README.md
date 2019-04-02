@@ -82,7 +82,7 @@ Veja na Wiki
 * [4.4.1 - 2019/03/20 tag v4.4.1](https://github.com/bjverde/formDin/releases/tag/v4.4.1)
    * :hammer: #141 - With CONST CONFIG_FILE
    
-* [4.4.0 - 2019/03/20 tag v4.4.1](https://github.com/bjverde/formDin/releases/tag/v4.4.0)
+* [4.4.0 - 2019/03/19 tag v4.4.0](https://github.com/bjverde/formDin/releases/tag/v4.4.0)
     * :hammer: #37 - new method TApplication->setCssFileFormDefault.
     * :bug: #139 - correcting encoding UTF-8 autocomplete.
     * :hammer: #137 - changing the border pattern of the form.
