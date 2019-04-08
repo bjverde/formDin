@@ -21,11 +21,10 @@ $app->group('', function() use ($app) {
 //http://www.slimframework.com/docs/v2/routing/groups.html
 $app->group('/tb_pedido_item', function() use ($app) {
     $app->get('', Tb_pedido_itemAPI::class . ':selectAll');
-
-    $app->post('', Tb_pedido_itemAPI::class . ':save');
-
     $app->get('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':selectById');
-    $app->put('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':save');
+
+    $app->post('', Tb_pedido_itemAPI::class . ':save');    
+    $app->put('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':save');    
     $app->delete('/{id:[0-9]+}', Tb_pedido_itemAPI::class . ':delete');
 });
 

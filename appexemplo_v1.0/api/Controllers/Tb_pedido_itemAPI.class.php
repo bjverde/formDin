@@ -34,10 +34,35 @@ class Tb_pedido_itemAPI {
         return $response;
     }
     //--------------------------------------------------------------------------------
-    public static function save(Request $request, Response $response, array $args): Response
+    public static function validate($id,$body)
     {
-        $result = array('resp'=>'salvou');
-        $response = $response->withJson($result);
+
+    }
+    //--------------------------------------------------------------------------------
+    public static function setVo($id,$body)
+    {
+        $vo = new \Tb_pedido_itemVO();
+        
+        return $vo;
+    }    
+    //--------------------------------------------------------------------------------
+    public static function save(Request $request, Response $response, array $args): Response
+    {   
+        $id = $args['id'];
+        $body = $request->getBody();
+        self::validate($id,$body);
+        
+        $vo = new \Tb_pedido_itemVO();
+        $vo = self::setVo($id,$body);
+
+        $class = new \Tb_pedido_item();
+        $result = $class->save($vo);
+        
+        $msg = \Message::GENERIC_UPDATE;
+        if( empty($id) ){
+            $msg = \Message::GENERIC_INSERT;
+        }
+        $response = $response->withJson($msg);
         return $response;
     } 
     //--------------------------------------------------------------------------------
