@@ -34,26 +34,57 @@ class Tb_pedido_itemAPI {
         return $response;
     }
     //--------------------------------------------------------------------------------
-    public static function validate($id,$body)
+    public static function setPropertyVo($bodyRequest,$vo)
+    {
+        $class = new \ReflectionClass($vo);
+        $properties   = $class->getProperties();        
+        foreach ($properties as $attribut) {
+            $name =  $attribut->getName();
+            if (array_key_exists($name, $bodyRequest)) {
+                $reflection = new \ReflectionProperty(get_class($vo), $name);
+                $reflection->setAccessible(true);
+                $reflection->setValue($vo, $bodyRequest[$name]);
+                //echo $bodyRequest[$name];
+            }
+        }
+        return $vo;
+    }    
+    //--------------------------------------------------------------------------------
+    public static function setVo($args,$request)
     {
 
+        $charset = $request->getContentCharset();
+        echo('<hr>$charset: ');
+        var_dump($charset);
+
+        //echo('$args: ');
+        //var_dump($args);
+        
+        echo('<hr>$bodyRequest: ');
+        $bodyRequest = json_decode($request->getBody(),true);
+        var_dump($bodyRequest);
+
+        $vo = new \Tb_pedido_itemVO();
+        $vo = self::setPropertyVo($bodyRequest,$vo);
+
+        echo('<hr>$vO: ');
+        var_dump($vo);
+
+        die();
+        return $vo;
     }
     //--------------------------------------------------------------------------------
-    public static function setVo($id,$body)
+    public static function validate( \Tb_pedido_itemVO $objVo)
     {
-        $vo = new \Tb_pedido_itemVO();
-        
-        return $vo;
+
     }    
     //--------------------------------------------------------------------------------
     public static function save(Request $request, Response $response, array $args): Response
     {   
-        $id = $args['id'];
-        $body = $request->getBody();
-        self::validate($id,$body);
-        
         $vo = new \Tb_pedido_itemVO();
-        $vo = self::setVo($id,$body);
+        $vo = self::setVo($args,$request);
+
+        self::validate($vo);
 
         $class = new \Tb_pedido_item();
         $result = $class->save($vo);
