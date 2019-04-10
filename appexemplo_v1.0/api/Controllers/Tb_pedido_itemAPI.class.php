@@ -40,6 +40,9 @@ class Tb_pedido_itemAPI {
         $bodyRequest = json_decode($request->getBody(),true);
         $vo = new \Tb_pedido_itemVO();
         $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
+        if($request->isPut()){
+            $vo->setId_item($args['id']);
+        }
         return $vo;
     }
     //--------------------------------------------------------------------------------
@@ -52,15 +55,12 @@ class Tb_pedido_itemAPI {
     {   
         $vo = new \Tb_pedido_itemVO();
         $vo = self::setVo($args,$request);
-
         //self::validate($vo);
-
         $class = new \Tb_pedido_item();
         $result = $class->save($vo);
-        
-        $msg = \Message::GENERIC_UPDATE;
-        if( empty($id) ){
-            $msg = \Message::GENERIC_INSERT;
+        $msg = \Message::GENERIC_INSERT;
+        if( $request->isPut() ){            
+            $msg = \Message::GENERIC_UPDATE;
         }
         $response = $response->withJson($msg);
         return $response;
