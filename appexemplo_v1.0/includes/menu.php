@@ -198,6 +198,9 @@ $menu->add('9', null, 'Banco e PDO', null, 'Exemplo de Recursos para conectar no
 
 //-----------------------------------------------------------------------------
 $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-512.png');
+    $menu->add('1010', '10', 'Agenda');
+        $menu->add('1010.1', '1010', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
+        $menu->add('1010.2', '1010', 'Cadastro de Pessoas', 'view/form/pessoa.php');
     $menu->add('10.1', '10', 'Form 01 - Normal', 'view/form/exe_TForm.php');
     $menu->add('10.2', '10', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
     $menu->add('10.3', '10', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
