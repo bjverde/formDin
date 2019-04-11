@@ -27,10 +27,10 @@ $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
-$frm->addNumberField('IDPESSOA_DENTISTA', 'IDPESSOA_DENTISTA',4,true,0);
-$frm->addTextField('HORARIO', 'Horários',50,true,50);
+$listPessoa = Pessoa::selectAll();
+$frm->addSelectField('IDPESSOA_DENTISTA', 'Dentista', true, $listPessoa);
 
-$listHorarios = array('08:00'=>'08:00','09:00'=>'09:00');
+$listHorarios = array('08:00'=>'08:00','09:00'=>'09:00','10:00'=>'10:00','16:00'=>'16:00','17:00'=>'17:00','18:00'=>'18:00');
 $frm->addCheckField('HORARIO','Horários:',TRUE,$listHorarios,null,null,null,4);
 
 
