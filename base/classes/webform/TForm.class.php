@@ -5681,13 +5681,35 @@ class TForm Extends TBox
                            } else {
                                $value = $field->getValue();
                                //print $name.' = '.print_r($field->getValue(),true).'<br>';
-                               if(isset($value[0])) {
-                                   $value = $value[0];
-                               } else {
-                                   $value=null;
+                               if( $field->getFieldType()=='check') {
+                                   if(!isset($value[0])) {
+                                       $value=null;
+                                   }elseif ( CountHelper::count($value)==1 ){
+                                       $value = $value[0];
+                                   }
+                               }else{
+                                   if(isset($value[0])) {
+                                       $value = $value[0];
+                                   } else {
+                                       $value=null;
+                                   } 
                                }                               
                            }
-                           $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           if( !is_array($value) ){
+                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           }else{
+                               $method = '$vo->' . $method . '( array(';
+                               $stringArray = null;
+                               foreach( $value as $key=>$valeuItem ) {
+                                   $stringItem = '\''.addslashes($key).'\'=>\''.addslashes($valeuItem).'\'';
+                                   if($key > 0){
+                                       $stringArray = $stringArray.','.$stringItem;
+                                   }else{
+                                       $stringArray = $stringItem;
+                                   }                                   
+                               }
+                               $method = $method.$stringArray.') );';
+                           }
                            eval( $method );
                        }
                    }
