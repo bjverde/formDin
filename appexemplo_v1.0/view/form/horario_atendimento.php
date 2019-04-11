@@ -13,15 +13,26 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDHORARIO_ATENDIMENTO';
-$frm = new TForm('horario_atendimento',800,950);
+$frm = new TForm('Cadastro de Horários de atendimentos',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
+
+$html1 = 'Esse form foi criado com o <a href="https://github.com/bjverde/sysgen">Sysgen 1.3.0</a></i>, depois alterado para atender o requisito.
+          <br>Esse tela simula o cadastro de atendimento de horarios de um Dentista.
+          <br>
+          <br>Utiliza a tabela HORARIO_ATENDIMENTO do banco de dados bdApoio.s3db ( sqlite )  ';
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+$frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
+
 $frm->addNumberField('IDPESSOA_DENTISTA', 'IDPESSOA_DENTISTA',4,true,0);
-$frm->addTextField('HORARIO', 'HORARIO',50,true,50);
+$frm->addTextField('HORARIO', 'Horários',50,true,50);
+
+$listHorarios = array('08:00'=>'08:00','09:00'=>'09:00');
+$frm->addCheckField('HORARIO','Horários:',TRUE,$listHorarios,null,null,null,4);
+
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -113,8 +124,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'view/form/horario_atendimento.php' );
 
     $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('IDPESSOA_DENTISTA','IDPESSOA_DENTISTA');
-    $gride->addColumn('HORARIO','HORARIO');
+    $gride->addColumn('IDPESSOA_DENTISTA','idPessoa');
+    $gride->addColumn('NOM_PESSOA','Nome');
+    $gride->addColumn('HORARIO','Horário');
 
 
     $gride->show();
