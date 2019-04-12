@@ -2700,6 +2700,13 @@ function fwGetFieldValue(contentId) {
 				if(value){
 					result = value;
 				}
+			}else if(type == 'checkbox') {
+				var checkeds = new Array();
+				jQuery("input[name='" + contentId + "[]']:checked").each(function ()
+				{
+				   checkeds.push( jQuery(this).val());
+				});
+				result = checkeds;
 			}else{
 				result = jQuery("#"+contentId).val();
 			}

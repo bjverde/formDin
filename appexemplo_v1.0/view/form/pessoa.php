@@ -27,7 +27,8 @@ $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 $frm->addTextField('NOM_PESSOA', 'Nome',50,true,50);
 $frm->addCpfCnpjField('CPF_CNPJ', 'CPF/CNPJ',true);
-$frm->addTextField('TP_PESSOA', 'Tipo',50,true,50);
+$listTP = array('PF'=>'Pessoa Física','PJ'=>'Pessoa Juridica');
+$frm->addSelectField('TP_PESSOA', 'Tipo de Pessoa', true, $listTP);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

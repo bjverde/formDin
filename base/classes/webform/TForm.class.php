@@ -5651,10 +5651,13 @@ class TForm Extends TBox
            }
        }
        //-----------------------------------------------------------------------------
+       /**
+        * Recebe um objeto do tipo VO e seta os valores automaticamente
+        * @param object $vo
+        */
        public function setVO( $vo )
        {
-           foreach( $this->displayControls as $name=>$dc )
-           {
+           foreach( $this->displayControls as $name=>$dc ) {
                if( $dc->getField()->getFieldType() == 'pagecontrol' )
                {
                    $dc->getField()->setVo( $vo );
@@ -5662,48 +5665,58 @@ class TForm Extends TBox
                else if( $dc->getField()->getFieldType() == 'group' )
                {
                    $dc->getField()->setVo( $vo );
-               }
-               else
-               {
+               } else {
                    $dc = new TDAOCreate();
                    if( method_exists( $vo, $method = 'set' . ucfirst( $name ) )
                        || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
                    {
                        $field = $this->getField( $name );
-                       if( $field )
-                       {
-                           if( ! is_array($field->getValue() ) )
-                           {
-                               if( $field->getFieldType()=='fileasync')
-                               {
+                       if( $field ) {
+                           if( ! is_array($field->getValue() ) ) {
+                               if( $field->getFieldType()=='fileasync') {
                                    $value = $field->getContent();
-                               }
-                               else
-                               {
+                               } else {
                                    $value = $field->getValue();
                                }
-                           }
-                           else
-                           {
+                           } else {
                                $value = $field->getValue();
                                //print $name.' = '.print_r($field->getValue(),true).'<br>';
-                               if(isset($value[0]))
-                               {
-                                   $value = $value[0];
-                               }
-                               else
-                               {
-                                   $value=null;
-                               }
-                               
+                               if( $field->getFieldType()=='check') {
+                                   if(!isset($value[0])) {
+                                       $value=null;
+                                   }elseif ( CountHelper::count($value)==1 ){
+                                       $value = $value[0];
+                                   }
+                               }else{
+                                   if(isset($value[0])) {
+                                       $value = $value[0];
+                                   } else {
+                                       $value=null;
+                                   } 
+                               }                               
                            }
-                           $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           if( !is_array($value) ){
+                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           }else{
+                               $method = '$vo->' . $method . '( array(';
+                               $stringArray = null;
+                               foreach( $value as $key=>$valeuItem ) {
+                                   $stringItem = '\''.addslashes($key).'\'=>\''.addslashes($valeuItem).'\'';
+                                   if($key > 0){
+                                       $stringArray = $stringArray.','.$stringItem;
+                                   }else{
+                                       $stringArray = $stringItem;
+                                   }                                   
+                               }
+                               $method = $method.$stringArray.') );';
+                           }
                            eval( $method );
                        }
                    }
                }
            }
        }
+       
        /**
         * Retorna o objeto header (TTableCell) referente a área do titulo do formulário.
         *

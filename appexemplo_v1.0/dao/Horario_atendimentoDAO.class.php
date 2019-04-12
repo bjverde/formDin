@@ -15,6 +15,7 @@ class Horario_atendimentoDAO extends TPDOConnection
     private static $sqlBasicSelect = 'select
                                       idhorario_atendimento
                                      ,idpessoa_dentista
+                                     ,(select nom_pessoa from pessoa as p where p.idpessoa = idpessoa_dentista) as nom_pessoa
                                      ,horario
                                      from horario_atendimento ';
 
