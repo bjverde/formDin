@@ -57,7 +57,9 @@ class FormDinHelper
      */
     public static function versionMinimum(string $version)
     {
-        return version_compare($version,self::version(),'>=');
+        $formVersion = explode("-", self::version());
+        $formVersion = $formVersion[0];
+        return version_compare($formVersion,$version,'>=');
     }
     //--------------------------------------------------------------------------------
     /**

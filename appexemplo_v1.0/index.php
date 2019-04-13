@@ -50,6 +50,8 @@ require_once('dao/autoload_ap1v_dao.php');
 //$app = new TApplication('Exemplos das Funcionalidades',null,'FORMDIN 4','Centro Nacional de Telemática - CNT');
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setAppRootDir(__DIR__);
+$app->setFormDinMinimumVersion('4.5.1');
+
 $app->setTitle(SYSTEM_NAME);
 $app->setSubtitle(APLICATIVO);
 $app->setSigla(APLICATIVO);

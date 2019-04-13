@@ -163,16 +163,18 @@ class TApplication extends TLayout {
 	 * Define a versão minima do formDin para o sistema funcionar
      * @param string $minimumVersion
      */
-	public function setFormDinMinimumVersion($minimumVersion) {
-		$t = explode(".", $minimumVersion);
-		if ( CountHelper::count($t) != 3 ) {
-			throw new DomainException(TMessage::FORM_MIN_VERSION_INVALID_FORMAT);
+	public function setFormDinMinimumVersion($minimumVersion) {		
+		if ( empty($minimumVersion) ) {
+		    throw new DomainException(TMessage::FORM_MIN_VERSION_BLANK);			
 		} else {
-			if(empty($minimumVersion)){
-				throw new DomainException(TMessage::FORM_MIN_VERSION_BLANK);
+		    $t = explode(".", $minimumVersion);
+		    if( CountHelper::count($t) != 3 ){
+		        throw new DomainException(TMessage::FORM_MIN_VERSION_INVALID_FORMAT);
 			}
+			$t = explode("-", $minimumVersion);
+			$minimumVersion = $t[0];
 			if( !FormDinHelper::versionMinimum($minimumVersion) ){
-				throw new DomainException(TMessage::FORM_MIN_VERSION_NOT.$minimumVersion);
+			    throw new DomainException(TMessage::FORM_MIN_YOU_VERSION.FORMDIN_VERSION.TMessage::FORM_MIN_VERSION_NOT.$minimumVersion);
 			}
 		}
 	}
