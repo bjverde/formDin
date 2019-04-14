@@ -22,28 +22,22 @@ class Tb_pedido_itemAPI {
         return $response;
     }
     //--------------------------------------------------------------------------------
-    public static function selectById(Request $request, Response $response, array $args): Response
+    private static function selectByIdInside(array $args)
     {
         $id = $args['id'];
-        $result = \Tb_pedido_item::selectById($id);        
+        $result = \Tb_pedido_item::selectById($id);
         $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public static function selectById(Request $request, Response $response, array $args): Response
+    {
+        $result = self::selectByIdInside($args);
         $msg = array( 'qtd'=> \CountHelper::count($result)
             , 'result'=>$result
         );
         $response = $response->withJson($msg);
         return $response;
-    }  
-    //--------------------------------------------------------------------------------
-    public static function setVo($args,$request)
-    {
-        //$charset = $request->getContentCharset();
-        $bodyRequest = json_decode($request->getBody(),true);
-        $vo = new \Tb_pedido_itemVO();
-        $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
-        if($request->isPut()){
-            $vo->setId_item($args['id']);
-        }
-        return $vo;
     }
     //--------------------------------------------------------------------------------
     public static function validate( \Tb_pedido_itemVO $objVo)
@@ -54,14 +48,20 @@ class Tb_pedido_itemAPI {
     public static function save(Request $request, Response $response, array $args): Response
     {   
         $vo = new \Tb_pedido_itemVO();
-        $vo = self::setVo($args,$request);
+        $msg = \Message::GENERIC_INSERT;
+        if( $request->isPut() ){
+            $msg = \Message::GENERIC_UPDATE;
+            $result = self::selectByIdInside($args);
+            $bodyRequest = $result[0];
+            $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
+        }
+        $bodyRequest = json_decode($request->getBody(),true);
+        $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
+        
         //self::validate($vo);
         $class = new \Tb_pedido_item();
-        $result = $class->save($vo);
-        $msg = \Message::GENERIC_INSERT;
-        if( $request->isPut() ){            
-            $msg = \Message::GENERIC_UPDATE;
-        }
+        $class->save($vo);
+
         $response = $response->withJson($msg);
         return $response;
     } 
