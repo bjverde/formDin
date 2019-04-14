@@ -19,9 +19,9 @@ $current_dirApi = dirname ( __FILE__ );
 require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'constantes.php';
 require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'config_conexao.php';
 require_once $current_dirApi.DS.'..'.DS.'..'.DS.'base/classes/webform/TApplication.class.php';
-require_once $current_dirApi.DS.'..'.DS.'classes'.DS.'autoload_xx.php';
-require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'autoload_xx_dao.php';
-require_once $current_dirApi.DS.'autoload_xx_api.php';
+require_once $current_dirApi.DS.'..'.DS.'classes'.DS.'autoload_ap2v.php';
+require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'autoload_ap2v_dao.php';
+require_once $current_dirApi.DS.'autoload_ap2v_api.php';
 
     //--------------------------------------------------------------------------------
 require_once $current_dirApi.DS.'env.php';
