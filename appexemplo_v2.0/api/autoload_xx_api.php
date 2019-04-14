@@ -10,7 +10,7 @@
  * System xx created in: 2019-04-14 20:35:20
  */
 
-if ( !function_exists( 'xx_api_autoload') ) {
+if ( !function_exists( 'ap2v_api_autoload') ) {
     function xx_api_autoload( $class_name )
     {
         $path = __DIR__.DS.$class_name.'.class.php';
@@ -20,5 +20,5 @@ if ( !function_exists( 'xx_api_autoload') ) {
             return false;
         }
     }
-spl_autoload_register('xx_api_autoload');
+spl_autoload_register('ap2v_api_autoload');
 }
