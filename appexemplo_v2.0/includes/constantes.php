@@ -15,4 +15,10 @@ define('SYSTEM_ACRONYM' , 'APPEV2.0');
 define('SYSTEM_VERSION' , '2.0.1');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 define('DS'   , DIRECTORY_SEPARATOR);
+
+define('FORMDIN_VERSION_MIN_VERSION', '4.5.1-alpha');
+
+if (! defined ( 'DS' )) {
+    define('DS'   , DIRECTORY_SEPARATOR);
+}
 ?>
