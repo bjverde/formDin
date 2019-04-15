@@ -12,6 +12,9 @@
 class Meta_tipoDAO extends TPDOConnection
 {
 
+    const PRODUTO = 3;
+    const PAGAMENTO = 4;
+    
     private static $sqlBasicSelect = 'select
                                       idmetatipo
                                      ,descricao
