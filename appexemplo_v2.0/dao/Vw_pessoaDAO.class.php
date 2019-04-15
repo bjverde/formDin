@@ -7,29 +7,39 @@
  * SysGen  Version: 1.3.1-alpha
  * FormDin Version: 4.5.1-alpha
  * 
- * System xx created in: 2019-04-14 20:35:32
+ * System xx created in: 2019-04-14 20:35:33
  */
-class Pessoa_juridicaDAO extends TPDOConnection
+class Vw_pessoaDAO extends TPDOConnection
 {
 
     private static $sqlBasicSelect = 'select
-                                      idpessoa_juridica
-                                     ,cnpj
-                                     ,idpessoa
+                                      idpessoa
+                                     ,nome
+                                     ,tipo
+                                     ,cpfcnpj
+                                     ,dat_nascimento
+                                     ,cod_municipio_nascimento
                                      ,cnae
                                      ,idnatureza_juridica
-                                     from form_exemplo.pessoa_juridica ';
+                                     ,dat_inclusao
+                                     ,sit_ativo
+                                     from form_exemplo.vw_pessoa ';
 
     private static function processWhereGridParameters( $whereGrid )
     {
         $result = $whereGrid;
         if ( is_array($whereGrid) ){
             $where = ' 1=1 ';
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOME', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TIPO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CPFCNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_NASCIMENTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_MUNICIPIO_NASCIMENTO', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNAE', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDNATUREZA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $result = $where;
         }
         return $result;
@@ -41,7 +51,7 @@ class Pessoa_juridicaDAO extends TPDOConnection
             throw new InvalidArgumentException();
         }
         $values = array($id);
-        $sql = self::$sqlBasicSelect.' where idpessoa_juridica = ?';
+        $sql = self::$sqlBasicSelect.' where idpessoa = ?';
         $result = self::executeSql($sql, $values );
         return $result;
     }
@@ -49,7 +59,7 @@ class Pessoa_juridicaDAO extends TPDOConnection
     public static function selectCount( $where=null )
     {
         $where = self::processWhereGridParameters($where);
-        $sql = 'select count(idpessoa_juridica) as qtd from form_exemplo.pessoa_juridica';
+        $sql = 'select count(idpessoa) as qtd from form_exemplo.vw_pessoa';
         $sql = $sql.( ($where)? ' where '.$where:'');
         $result = self::executeSql($sql);
         return $result['QTD'][0];
@@ -78,42 +88,6 @@ class Pessoa_juridicaDAO extends TPDOConnection
 
         $result = self::executeSql($sql);
         return $result;
-    }
-    //--------------------------------------------------------------------------------
-    public static function insert( Pessoa_juridicaVO $objVo )
-    {
-        $values = array(  $objVo->getCnpj() 
-                        , $objVo->getIdpessoa() 
-                        , $objVo->getCnae() 
-                        , $objVo->getIdnatureza_juridica() 
-                        );
-        return self::executeSql('insert into form_exemplo.pessoa_juridica(
-                                 cnpj
-                                ,idpessoa
-                                ,cnae
-                                ,idnatureza_juridica
-                                ) values (?,?,?,?)', $values );
-    }
-    //--------------------------------------------------------------------------------
-    public static function update ( Pessoa_juridicaVO $objVo )
-    {
-        $values = array( $objVo->getCnpj()
-                        ,$objVo->getIdpessoa()
-                        ,$objVo->getCnae()
-                        ,$objVo->getIdnatureza_juridica()
-                        ,$objVo->getIdpessoa_juridica() );
-        return self::executeSql('update form_exemplo.pessoa_juridica set 
-                                 cnpj = ?
-                                ,idpessoa = ?
-                                ,cnae = ?
-                                ,idnatureza_juridica = ?
-                                where idpessoa_juridica = ?',$values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function delete( $id )
-    {
-        $values = array($id);
-        return self::executeSql('delete from form_exemplo.pessoa_juridica where idpessoa_juridica = ?',$values);
     }
 }
 ?>

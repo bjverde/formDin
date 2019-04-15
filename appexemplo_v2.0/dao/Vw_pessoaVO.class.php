@@ -7,34 +7,31 @@
  * SysGen  Version: 1.3.1-alpha
  * FormDin Version: 4.5.1-alpha
  * 
- * System xx created in: 2019-04-14 20:35:32
+ * System xx created in: 2019-04-14 20:35:33
  */
-class Pessoa_fisicaVO
+class Vw_pessoaVO
 {
-    private $idpessoa_fisica = null;
     private $idpessoa = null;
-    private $cpf = null;
+    private $nome = null;
+    private $tipo = null;
+    private $cpfcnpj = null;
     private $dat_nascimento = null;
     private $cod_municipio_nascimento = null;
+    private $cnae = null;
+    private $idnatureza_juridica = null;
     private $dat_inclusao = null;
-    private $dat_alteracao = null;
-    public function __construct( $idpessoa_fisica=null, $idpessoa=null, $cpf=null, $dat_nascimento=null, $cod_municipio_nascimento=null, $dat_inclusao=null, $dat_alteracao=null ) {
-        $this->setIdpessoa_fisica( $idpessoa_fisica );
+    private $sit_ativo = null;
+    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $cpfcnpj=null, $dat_nascimento=null, $cod_municipio_nascimento=null, $cnae=null, $idnatureza_juridica=null, $dat_inclusao=null, $sit_ativo=null ) {
         $this->setIdpessoa( $idpessoa );
-        $this->setCpf( $cpf );
+        $this->setNome( $nome );
+        $this->setTipo( $tipo );
+        $this->setCpfcnpj( $cpfcnpj );
         $this->setDat_nascimento( $dat_nascimento );
         $this->setCod_municipio_nascimento( $cod_municipio_nascimento );
+        $this->setCnae( $cnae );
+        $this->setIdnatureza_juridica( $idnatureza_juridica );
         $this->setDat_inclusao( $dat_inclusao );
-        $this->setDat_alteracao( $dat_alteracao );
-    }
-    //--------------------------------------------------------------------------------
-    public function setIdpessoa_fisica( $strNewValue = null )
-    {
-        $this->idpessoa_fisica = $strNewValue;
-    }
-    public function getIdpessoa_fisica()
-    {
-        return $this->idpessoa_fisica;
+        $this->setSit_ativo( $sit_ativo );
     }
     //--------------------------------------------------------------------------------
     public function setIdpessoa( $strNewValue = null )
@@ -46,13 +43,31 @@ class Pessoa_fisicaVO
         return $this->idpessoa;
     }
     //--------------------------------------------------------------------------------
-    public function setCpf( $strNewValue = null )
+    public function setNome( $strNewValue = null )
     {
-        $this->cpf = preg_replace('/[^0-9]/','',$strNewValue);
+        $this->nome = $strNewValue;
     }
-    public function getCpf()
+    public function getNome()
     {
-        return $this->cpf;
+        return $this->nome;
+    }
+    //--------------------------------------------------------------------------------
+    public function setTipo( $strNewValue = null )
+    {
+        $this->tipo = $strNewValue;
+    }
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+    //--------------------------------------------------------------------------------
+    public function setCpfcnpj( $strNewValue = null )
+    {
+        $this->cpfcnpj = preg_replace('/[^0-9]/','',$strNewValue);
+    }
+    public function getCpfcnpj()
+    {
+        return $this->cpfcnpj;
     }
     //--------------------------------------------------------------------------------
     public function setDat_nascimento( $strNewValue = null )
@@ -73,6 +88,24 @@ class Pessoa_fisicaVO
         return $this->cod_municipio_nascimento;
     }
     //--------------------------------------------------------------------------------
+    public function setCnae( $strNewValue = null )
+    {
+        $this->cnae = $strNewValue;
+    }
+    public function getCnae()
+    {
+        return $this->cnae;
+    }
+    //--------------------------------------------------------------------------------
+    public function setIdnatureza_juridica( $strNewValue = null )
+    {
+        $this->idnatureza_juridica = $strNewValue;
+    }
+    public function getIdnatureza_juridica()
+    {
+        return $this->idnatureza_juridica;
+    }
+    //--------------------------------------------------------------------------------
     public function setDat_inclusao( $strNewValue = null )
     {
         $this->dat_inclusao = $strNewValue;
@@ -82,13 +115,13 @@ class Pessoa_fisicaVO
         return is_null( $this->dat_inclusao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao;
     }
     //--------------------------------------------------------------------------------
-    public function setDat_alteracao( $strNewValue = null )
+    public function setSit_ativo( $strNewValue = null )
     {
-        $this->dat_alteracao = $strNewValue;
+        $this->sit_ativo = $strNewValue;
     }
-    public function getDat_alteracao()
+    public function getSit_ativo()
     {
-        return is_null( $this->dat_alteracao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_alteracao;
+        return $this->sit_ativo;
     }
     //--------------------------------------------------------------------------------
 }

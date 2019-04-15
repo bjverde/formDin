@@ -7,18 +7,19 @@
  * SysGen  Version: 1.3.1-alpha
  * FormDin Version: 4.5.1-alpha
  * 
- * System xx created in: 2019-04-14 20:35:32
+ * System xx created in: 2019-04-14 20:35:33
  */
-class PessoaDAO extends TPDOConnection
+class Vw_pessoa_marca_produtoDAO extends TPDOConnection
 {
 
     private static $sqlBasicSelect = 'select
                                       idpessoa
                                      ,nome
-                                     ,tipo
-                                     ,sit_ativo
-                                     ,dat_inclusao
-                                     from form_exemplo.pessoa ';
+                                     ,idmarca
+                                     ,nom_marca
+                                     ,idproduto
+                                     ,nom_produto
+                                     from form_exemplo.vw_pessoa_marca_produto ';
 
     private static function processWhereGridParameters( $whereGrid )
     {
@@ -27,9 +28,10 @@ class PessoaDAO extends TPDOConnection
             $where = ' 1=1 ';
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOME', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TIPO', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDMARCA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOM_MARCA', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPRODUTO', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOM_PRODUTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $result = $where;
         }
         return $result;
@@ -49,7 +51,7 @@ class PessoaDAO extends TPDOConnection
     public static function selectCount( $where=null )
     {
         $where = self::processWhereGridParameters($where);
-        $sql = 'select count(idpessoa) as qtd from form_exemplo.pessoa';
+        $sql = 'select count(idpessoa) as qtd from form_exemplo.vw_pessoa_marca_produto';
         $sql = $sql.( ($where)? ' where '.$where:'');
         $result = self::executeSql($sql);
         return $result['QTD'][0];
@@ -78,42 +80,6 @@ class PessoaDAO extends TPDOConnection
 
         $result = self::executeSql($sql);
         return $result;
-    }
-    //--------------------------------------------------------------------------------
-    public static function insert( PessoaVO $objVo )
-    {
-        $values = array(  $objVo->getNome() 
-                        , $objVo->getTipo() 
-                        , $objVo->getSit_ativo() 
-                        , $objVo->getDat_inclusao() 
-                        );
-        return self::executeSql('insert into form_exemplo.pessoa(
-                                 nome
-                                ,tipo
-                                ,sit_ativo
-                                ,dat_inclusao
-                                ) values (?,?,?,?)', $values );
-    }
-    //--------------------------------------------------------------------------------
-    public static function update ( PessoaVO $objVo )
-    {
-        $values = array( $objVo->getNome()
-                        ,$objVo->getTipo()
-                        ,$objVo->getSit_ativo()
-                        ,$objVo->getDat_inclusao()
-                        ,$objVo->getIdpessoa() );
-        return self::executeSql('update form_exemplo.pessoa set 
-                                 nome = ?
-                                ,tipo = ?
-                                ,sit_ativo = ?
-                                ,dat_inclusao = ?
-                                where idpessoa = ?',$values);
-    }
-    //--------------------------------------------------------------------------------
-    public static function delete( $id )
-    {
-        $values = array($id);
-        return self::executeSql('delete from form_exemplo.pessoa where idpessoa = ?',$values);
     }
 }
 ?>
