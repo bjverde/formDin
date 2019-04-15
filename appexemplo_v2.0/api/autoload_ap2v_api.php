@@ -11,7 +11,7 @@
  */
 
 if ( !function_exists( 'ap2v_api_autoload') ) {
-    function xx_api_autoload( $class_name )
+    function ap2v_api_autoload( $class_name )
     {
         $path = __DIR__.DS.$class_name.'.class.php';
         if (file_exists($path)){
