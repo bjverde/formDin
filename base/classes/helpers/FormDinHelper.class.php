@@ -55,7 +55,7 @@ class FormDinHelper
      * @param string $version
      * @return boolean
      */
-    public static function versionMinimum(string $version)
+    public static function versionMinimum($version)
     {
         $formVersion = explode("-", self::version());
         $formVersion = $formVersion[0];
