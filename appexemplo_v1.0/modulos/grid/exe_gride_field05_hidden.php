@@ -20,6 +20,7 @@ $frm->setMaximize(true);
 d($_REQUEST);
 
 $html1 = 'Esse form foi criado para servirde exemplo do uso do <i>addHiddenField</i>  no gride.
+          <br> Use esse campo quando vc precisa pegar alguma informação sobre o regristro porém não pode mostrar a coluna
           <br>
           <br>Utiliza a tabela PESSOA do banco de dados bdApoio.s3db ( sqlite )  ';
 
@@ -34,6 +35,7 @@ $frm->addSelectField('TP_PESSOA', 'Tipo de Pessoa', true, $listTP);
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+$frm->addButton('POST PAGINA', null, 'post', null, null, false, false);
 
 
 $acao = isset($acao) ? $acao : null;
@@ -123,7 +125,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'grid/exe_gride_field05_hidden.php' );
 
     //$gride->addColumn($primaryKey,'id');
-    $gride->addHiddenField($primaryKey);
+    $gride->addHiddenField($primaryKey,'idTabela');
     $gride->addColumn('NOM_PESSOA','Nome');
     $gride->addColumn('CPF_CNPJ','CPF/CNPJ');
     $gride->addColumn('TP_PESSOA','Tipo');
