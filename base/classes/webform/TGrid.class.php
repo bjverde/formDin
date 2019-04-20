@@ -1003,31 +1003,7 @@ class TGrid extends TTable
                         }
                     }
                     
-                    // adicionar os campos ocultos na linha ( tr )
-                    if ( $this->getHiddenField() )
-                    {
-                        foreach( $this->getHiddenField() as $fieldName => $id )
-                        {
-                            $value = '';
-                            
-                            if ( isset( $_POST[ strtolower( $id )][ $keyValue ] ) )
-                            {
-                                $value = $_POST[ strtolower( $id )][ $keyValue ];
-                            }
-                            else if( isset( $res[ $fieldName ][ $k ] ) )
-                            {
-                                $value = $res[ $fieldName ][ $k ];
-                            }
-                            else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
-                            {
-                                $value = $res[ strtoupper( $fieldName )][ $k ];
-                            }
-                            $hidden = new THidden( strtolower( $id ) . '[' . $keyValue . ']' );
-                            $hidden->setId( strtolower( $id ) . '_' . $rowNum );
-                            $hidden->setValue( $value );
-                            $row->add( $hidden );
-                        }
-                    }
+                    $this->includeHiddenField($row, $res, $rowNum, $k);
                 }
                 
                 // adicionar a imagem do excel no rodapé
@@ -1054,6 +1030,42 @@ class TGrid extends TTable
         }
         return parent::show( $boolPrint );
     }
+    
+    /**
+     * @param row
+     * @param res
+     * @param fieldName
+     * @param k
+     */
+     private function includeHiddenField($row, $res, $rowNum, $k)
+    {
+        // adicionar os campos ocultos na linha ( tr )
+        if ( $this->getHiddenField() )
+        {
+            foreach( $this->getHiddenField() as $fieldName => $id )
+            {
+                $value = '';
+                
+                if ( isset( $_POST[ strtolower( $id )][ $keyValue ] ) )
+                {
+                    $value = $_POST[ strtolower( $id )][ $keyValue ];
+                }
+                else if( isset( $res[ $fieldName ][ $k ] ) )
+                {
+                    $value = $res[ $fieldName ][ $k ];
+                }
+                else if( isset( $res[ strtoupper( $fieldName )][ $k ] ) )
+                {
+                    $value = $res[ strtoupper( $fieldName )][ $k ];
+                }
+                $hidden = new THidden( strtolower( $id ) . '[' . $keyValue . ']' );
+                $hidden->setId( strtolower( $id ) . '_' . $rowNum );
+                $hidden->setValue( $value );
+                $row->add( $hidden );
+            }
+        }
+     }
+
     /**
      * @param row
      * @param rowNum
