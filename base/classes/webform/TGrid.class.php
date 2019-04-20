@@ -1032,6 +1032,7 @@ class TGrid extends TTable
     }
     
     /**
+     * Include Hidden Fields on Grid
      * @param row
      * @param res
      * @param fieldName
@@ -1046,9 +1047,9 @@ class TGrid extends TTable
             {
                 $value = '';
                 
-                if ( isset( $_POST[ strtolower( $id )][ $keyValue ] ) )
+                if ( isset( $_POST[ strtolower( $id )][ $k ] ) )
                 {
-                    $value = $_POST[ strtolower( $id )][ $keyValue ];
+                    $value = $_POST[ strtolower( $id )][ $k ];
                 }
                 else if( isset( $res[ $fieldName ][ $k ] ) )
                 {
@@ -1058,7 +1059,7 @@ class TGrid extends TTable
                 {
                     $value = $res[ strtoupper( $fieldName )][ $k ];
                 }
-                $hidden = new THidden( strtolower( $id ) . '[' . $keyValue . ']' );
+                $hidden = new THidden( strtolower( $id ) . '[' . $k . ']' );
                 $hidden->setId( strtolower( $id ) . '_' . $rowNum );
                 $hidden->setValue( $value );
                 $row->add( $hidden );
@@ -1366,6 +1367,11 @@ class TGrid extends TTable
         return $col;
     }
     //------------------------------------------------------------------------------------
+    /**
+     * Use esse campo quando vc precisa pegar alguma informação sobre o regristro porém não pode mostrar a coluna
+     * @param string $strFieldName Nome do campo na tabela
+     * @param string $strId Nome do campo que será usado
+     */
     public function addHiddenField( $strFieldName, $strId = null )
     {
         $strId = is_null( $strId ) ? strtolower( $strFieldName ) : $strId;
