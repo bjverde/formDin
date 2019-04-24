@@ -12,7 +12,12 @@
 
 if ( !function_exists( 'ap2v_autoload') ) {
 	function ap2v_autoload( $class_name )	{
-		require_once $class_name . '.class.php';
+	    $path = __DIR__.DS.$class_name.'.class.php';
+	    if (file_exists($path)){
+	        require_once $path;
+	    } else {
+	        return false;
+	    }
 	}
-spl_autoload_register('ap2v_autoload');
+    spl_autoload_register('ap2v_autoload');
 }

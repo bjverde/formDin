@@ -2003,16 +2003,16 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - 1: nome do campo irá funcionar com autocomplete
+     * @param string $strFieldName                  - 1: nome do campo na tela irá funcionar com autocomplete
      * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-     * @param boolean $boolDisableUpdateFields
-     * @param mixed $mixExtraSearchFields           - 6: campo do formulário que será adicionado como filtro
+     * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
+     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like. Procure usar campos do tipo INT
      * @param string $strCallBackFunctionJs         - 7: função javascript de callback
      * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                     - 9: Default 1000, tempo após a digitação para disparar a consulta
-     * @param integer $intMaxItensToShow            - 10: máximo de registros que deverá ser retornado
+     * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
+     * @param integer $intMaxItensToShow            - 10: Default 50, máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
      * @param string $strUrl                        - 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
@@ -2052,7 +2052,7 @@ class TForm Extends TBox
         $urlCallBack = 'app_index_file+"?modulo=' . $this->getBase() . 'callbacks/autocomplete.php';
         
         $strUrl   = $strUrl === null ? $urlCallBack : $strUrl;
-        $intDelay = $intDelay === null ? 1000 : ( int ) $intDelay; // 1000 = 1 segund
+        $intDelay = $intDelay === null ? 500 : ( int ) $intDelay; // 1000 = 1 segund
         $intMaxItensToShow = $intMaxItensToShow === null ? 50 : ( int ) $intMaxItensToShow;
         $intMinChars = $intMinChars === null ? 3 : ( int ) $intMinChars;
         $intCacheTime = $intCacheTime === null ? 0 : ( int ) $intCacheTime; // 0 = sessão
@@ -2078,35 +2078,27 @@ class TForm Extends TBox
         $aTemp[ 'cacheTime' ] = $intCacheTime;
         $aTemp[ 'searchAnyPosition' ] = $boolSearchAnyPosition;
         //$aTemp['messageNotFound']	= $strMessageNotFound;
-        if( ( string ) $strCallBackFunctionJs )
-        {
-            if( !strpos( $strCallBackFunctionJs, '(' ) )
-            {
+        if( ( string ) $strCallBackFunctionJs ){
+            if( !strpos( $strCallBackFunctionJs, '(' ) ){
                 $strCallBackFunctionJs.="()";
             }
             $aTemp[ 'functionJs' ] = $strCallBackFunctionJs;
         }
-        if( $mixUpdateFields )
-        {
-            if( !is_array( $mixUpdateFields ) )
-            {
+        if( $mixUpdateFields ){
+            if( !is_array( $mixUpdateFields ) ) {
                 $mixUpdateFields = explode( ',', $mixUpdateFields );
             }
-            forEach( $mixUpdateFields as $k=>$v )
-            {
-                if( is_int( $k ) )
-                {
+            forEach( $mixUpdateFields as $k=>$v ){
+                if( is_int( $k ) ){
                     $aField = explode( '|', $v );
-                    if( !isset( $aField[ 1 ] ) )
-                    {
+                    if( !isset( $aField[ 1 ] ) ){
                         $aField[ 1 ] = strtolower( $aField[ 0 ] );
                     }
                     $k = strtoupper( $aField[ 0 ] );
                     $v = $aField[ 1 ];
                 }
                 // o campo que recebe o autocomplete não pode estar na lista dos campos que serão atualizados no formulário.
-                if( $v != $strFieldName )
-                {
+                if( $v != $strFieldName ) {
                     $strExtraParams = (isset( $strExtraParams ) && strlen( $strExtraParams ) > 0 ? $strExtraParams . "," : "");
                     $strFillFields = (isset( $strFillFields ) && strlen( $strFillFields ) > 0 ? $strFillFields . "," : "");
                     $strExtraParams.='"' . $k . '":"' . $v . '"'; //"COD_UF":"cod_uf"
@@ -2115,28 +2107,22 @@ class TForm Extends TBox
                 }
             }
         }
-        if( $mixExtraSearchFields )
-        {
+        if( $mixExtraSearchFields ) {
             /* o parametro $mixExtraParams deve ser utilizado para passagem de parametros extras para a url alem do conteúdo digitado no campo
              O formato pode ser uma string ou um array de string com ou sem valores fixos
              Ex: "cod_uf:53" ou  array("cod_uf",'sig_uf'=>'GO')
              Se o parametro passado não tiver um valor fixado, este valor será lido dinamicamente de um campo do formulario que
              possua o mesmo nome.
              */
-            if( is_array( $mixExtraSearchFields ) )
-            {
-                forEach( $mixExtraSearchFields as $k=>$v )
-                {
-                    if( is_int( $k ) )
-                    {
+            if( is_array( $mixExtraSearchFields ) ) {
+                forEach( $mixExtraSearchFields as $k=>$v ) {
+                    if( is_int( $k ) ) {
                         $k = $v;
                         $v = null;
                     }
                     $strExtraParams .= $strExtraParams == '' ? '' : ',';
-                    if( ( string ) $v == "" )
-                    {
-                        if( $this->getField( $k ) )
-                        {
+                    if( ( string ) $v == "" ) {
+                        if( $this->getField( $k ) ) {
                             $v = 'jQuery("#' . $k . '").get(0).value';
                         }
                     }
@@ -2144,19 +2130,15 @@ class TForm Extends TBox
                     //$aSearchFields[$k]=$v;
                     $aTemp[ '_w_' . $k ] = $v;
                 }
-            }
-            else
-            {
-                if( !strpos( $mixExtraSearchFields, ":" ) )
-                {
+            } else {
+                if( !strpos( $mixExtraSearchFields, ":" ) ){
                     //$aSearchFields[$mixExtraSearchFields] ='jQuery("#'.$mixExtraSearchFields.'").get(0).value';
                     //$aTemp['_w_'.$mixExtraSearchFields] ='jQuery("#'.$mixExtraSearchFields.'").get(0).value';
                     $field = explode('|',$mixExtraSearchFields);
                     
                     
                     $aTemp[ '_w_' . $mixExtraSearchFields ] = '';
-                    if( !$this->getField( $field[0] ) )
-                    {
+                    if( !$this->getField( $field[0] ) ){
                         print 'SetAutoComplete: O campo ' . $field[0] . ' não exite no formulário.';
                     }
                     
@@ -2167,29 +2149,32 @@ class TForm Extends TBox
             }
         }
         $strExtraParams = str_replace( array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' ), array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' ), stripcslashes( json_encode( $aTemp ) ) );
-        $this->addJavascript( 'jQuery("#' . $strFieldName . '").autocomplete(' . $strUrl . '&ajax=1", { ajax:1, delay:' . $intDelay . ', minChars:' . $intMinChars . ', matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:fwAutoCompleteSelectItem, onFindValue:fwAutoCompleteFindValue, matchCase:false, maxItemsToShow:' . $intMaxItensToShow . ', autoFill:true, selectFirst:true, mustMatch:false, selectOnly:true,removeMask:' . ($boolRemoveMask ? 'true' : 'false') . ',messageNotFound:"' . $strMessageNotFound . '",clearOnNotFound:' . ($boolClearOnNotFound ? 'true' : 'false') .',extraParams:{' . $strExtraParams . '} });' );
+        $this->addJavascript( 'jQuery("#' . $strFieldName . '").autocomplete(' . $strUrl 
+                            . '&ajax=1", { ajax:1, delay:' . $intDelay . ', minChars:' . $intMinChars 
+                            .' ,matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:fwAutoCompleteSelectItem'
+                            .' ,onFindValue:fwAutoCompleteFindValue, matchCase:false, maxItemsToShow:' . $intMaxItensToShow 
+                            .' ,autoFill:true, selectFirst:true, mustMatch:false, selectOnly:true,removeMask:' . ($boolRemoveMask ? 'true' : 'false') 
+                            .' ,messageNotFound:"' . $strMessageNotFound . '",clearOnNotFound:' . ($boolClearOnNotFound ? 'true' : 'false')
+                            .' ,extraParams:{' . $strExtraParams . '} });' );
         $this->getField( $strFieldName )->addEvent( 'ondblclick', 'fwAutoCompleteValidade(this)' );
-        if( $boolClearUpdateFields )
-        {
+        if( $boolClearUpdateFields ) {
             $this->getField( $strFieldName )->addEvent( 'onkeydown', 'fwSetFields("' . $strFillFields . '","",event)' );
         }
         $this->getField( $strFieldName )->setAttribute('keepFieldValues',$boolKeepFieldValuesOnPost);
         $this->autocompleteFields[ $strFieldName ][ 'disableFields' ] = $boolDisableUpdateFields;
         $this->autocompleteFields[ $strFieldName ][ 'fillFields' ] = isset( $strFillFields ) ? $strFillFields : null;
         
-        if( !$this->getField( $strFieldName )->getProperty( 'title' ) )
-        {
+        if( !$this->getField( $strFieldName )->getProperty( 'title' ) ) {
             // colocar hint no input para auxiliar o usuário
-            if( ( int ) $intMinChars < 5 )
-            {
-                if( !$this->getField( $strFieldName )->getTooltip() )
-                {
+            if( ( int ) $intMinChars < 5 ) {
+                if( !$this->getField( $strFieldName )->getTooltip() ) {
                     $this->getField( $strFieldName )->setTooltip( 'Campo autocompletar', 'Inicie a digitação e aguarde a lista de opções!' );
                 }
             }
         }
         //$this->getField($strFieldName)->addEvent('onkeyup','jQuery("'.$strFillFields.'").get(0).value="?"');
     }
+    
     //-----------------------------------------------------------------------------
     /**
      * Método para adicionar funções javascript ao formulario que serão executadas
@@ -5679,10 +5664,13 @@ class TForm Extends TBox
            }
        }
        //-----------------------------------------------------------------------------
+       /**
+        * Recebe um objeto do tipo VO e seta os valores automaticamente
+        * @param object $vo
+        */
        public function setVO( $vo )
        {
-           foreach( $this->displayControls as $name=>$dc )
-           {
+           foreach( $this->displayControls as $name=>$dc ) {
                if( $dc->getField()->getFieldType() == 'pagecontrol' )
                {
                    $dc->getField()->setVo( $vo );
@@ -5690,48 +5678,58 @@ class TForm Extends TBox
                else if( $dc->getField()->getFieldType() == 'group' )
                {
                    $dc->getField()->setVo( $vo );
-               }
-               else
-               {
+               } else {
                    $dc = new TDAOCreate();
                    if( method_exists( $vo, $method = 'set' . ucfirst( $name ) )
                        || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
                    {
                        $field = $this->getField( $name );
-                       if( $field )
-                       {
-                           if( ! is_array($field->getValue() ) )
-                           {
-                               if( $field->getFieldType()=='fileasync')
-                               {
+                       if( $field ) {
+                           if( ! is_array($field->getValue() ) ) {
+                               if( $field->getFieldType()=='fileasync') {
                                    $value = $field->getContent();
-                               }
-                               else
-                               {
+                               } else {
                                    $value = $field->getValue();
                                }
-                           }
-                           else
-                           {
+                           } else {
                                $value = $field->getValue();
                                //print $name.' = '.print_r($field->getValue(),true).'<br>';
-                               if(isset($value[0]))
-                               {
-                                   $value = $value[0];
-                               }
-                               else
-                               {
-                                   $value=null;
-                               }
-                               
+                               if( $field->getFieldType()=='check') {
+                                   if(!isset($value[0])) {
+                                       $value=null;
+                                   }elseif ( CountHelper::count($value)==1 ){
+                                       $value = $value[0];
+                                   }
+                               }else{
+                                   if(isset($value[0])) {
+                                       $value = $value[0];
+                                   } else {
+                                       $value=null;
+                                   } 
+                               }                               
                            }
-                           $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           if( !is_array($value) ){
+                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                           }else{
+                               $method = '$vo->' . $method . '( array(';
+                               $stringArray = null;
+                               foreach( $value as $key=>$valeuItem ) {
+                                   $stringItem = '\''.addslashes($key).'\'=>\''.addslashes($valeuItem).'\'';
+                                   if($key > 0){
+                                       $stringArray = $stringArray.','.$stringItem;
+                                   }else{
+                                       $stringArray = $stringItem;
+                                   }                                   
+                               }
+                               $method = $method.$stringArray.') );';
+                           }
                            eval( $method );
                        }
                    }
                }
            }
        }
+       
        /**
         * Retorna o objeto header (TTableCell) referente a área do titulo do formulário.
         *
@@ -6401,13 +6399,13 @@ class TForm Extends TBox
      * @param boolean $boolRequired    - 3: DEFAULT = flase não obrigatório
      * @param boolean $boolNewLine     - 4: Default TRUE = campo em nova linha, FALSE continua na linha anterior
      * @param string  $strValue        - 5: Valor inicial
-     * @param string  $strMinValue
-     * @param string  $strMaxValue
-     * @param string  $strMaskType
-     * @param boolean $boolButtonVisible
-     * @param string  $strExampleText
-     * @param boolean $boolLabelAbove
-     * @param string  $boolNoWrapLabel
+     * @param string  $strMinValue     - 6: Menor data que o campo aceita
+     * @param string  $strMaxValue     - 7: Maior data que o campo aceita
+     * @param string  $strMaskType     - 8: DEFAULT = DMY. Tipo de Mascara DMY (dia/mês/ano), DM (dia/mês), MY (mês/ano) 
+     * @param boolean $boolButtonVisible - 9: Exibe ou não o botão do calendario.
+     * @param string  $strExampleText  - 10: Texto de exmplo
+     * @param boolean $boolLabelAbove  - 11: DEFAULT = flase. Label acima do campo = true
+     * @param string  $boolNoWrapLabel - 12: 
      * @return TDate
      */
     public function addDateField( $strName

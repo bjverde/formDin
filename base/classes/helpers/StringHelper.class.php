@@ -63,4 +63,18 @@ class StringHelper
         return $string;
     }
     
+    /***
+     * Checks if text is different from UTF8 and converts to UTF-8
+     * @param string $string
+     * @return string
+     */
+    public static function str2utf8($string)
+    {
+        if ( mb_detect_encoding($string, 'UTF-8', true)!='UTF-8' ){
+            //$string= iconv('ISO-8859-1', 'UTF-8', $string);
+            $string = utf8_encode($string);
+        }
+        return $string;
+    }
+    
 }

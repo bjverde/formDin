@@ -53,11 +53,18 @@ if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8');
 
 if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
 }
-define('EOL', "\n");
-define('TAB', chr(9));
+if (!defined('EOL')) {
+    define('EOL', "\n");
+}
+if (!defined('ESP')) {
+    define('ESP', '    ');
+}
+if (!defined('TAB')) {
+    define('TAB', chr(9));
+}
 
 
-define('FORMDIN_VERSION', '4.4.2-alpha');
+define('FORMDIN_VERSION', '4.5.3-alpha');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');

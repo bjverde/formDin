@@ -43,10 +43,13 @@ require_once('includes/constantes.php');
 require_once('includes/config_conexao.php');
 
 //FormDin version: 4.2.6-alpha
-require '../base/classes/webform/TApplication.class.php';
-require_once('classes/autoload_ap2v.php');
+require_once '../base/classes/webform/TApplication.class.php';
+require_once 'classes/autoload_ap2v.php';
+require_once 'dao/autoload_ap2v_dao.php';
+
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
+$app->setFormDinMinimumVersion(FORMDIN_VERSION_MIN_VERSION);
 $app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 $app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);

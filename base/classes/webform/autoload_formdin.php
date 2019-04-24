@@ -50,10 +50,16 @@ if ( !function_exists( 'formdin_autoload') )
 			return false;
 		}elseif (strpos($class_name, 'Composer\\') === 0) {
 			return false;
+		}elseif (strpos($class_name, 'App\\') === 0) {
+		    return false;
 		}elseif (strpos($class_name, 'Blacklist.class.php') === 0) {
 			return false;
 		}else{
-			require_once $class_name . '.class.php';
+			if (file_exists(__DIR__.'/'.$class_name.'.class.php')){
+				require_once $class_name.'.class.php';
+			} else {
+				return false;
+			}
 		}
 	}
 	spl_autoload_register('formdin_autoload');

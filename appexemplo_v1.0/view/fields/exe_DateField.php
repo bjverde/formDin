@@ -41,4 +41,13 @@
 
 $frm = new TForm('Exemplo Campo Data');
 $frm->addDateField('dat_nascimento', 'Data:', true);
+
+$dt2 = $frm->addDateField('dat_nascimento2', 'Data no ano 1990:', null,null,null,'01/01/1990','31/12/1990');
+$dt2->setToolTip(null, 'Aceita somente Datas entre 01/01/1990 e 31/12/1990');
+
+$dt3 = $frm->addDateField('dat_nascimento3', 'Data mais novos que 2000:', null,null,null,'01/01/2000');
+$dt3->setToolTip(null, 'Aceita somente mais novas que 01/01/2000');
+
+$frm->addDateField('dat_nascimento4', 'Data até 1800:', null,null,null, null, '31/12/1800')->setToolTip(null, 'Aceita somente mais novas que 31/12/1800');
+
 $frm->show();

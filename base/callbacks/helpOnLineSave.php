@@ -66,4 +66,3 @@ if(!file_put_contents($file,utf8_decode($_REQUEST['value'])))
 }
 print utf8_decode($_REQUEST['value']);
 print '<script>alert("Gravação Ok");</script>';
-?>

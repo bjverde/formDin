@@ -412,6 +412,13 @@ abstract class TControl extends TElement
         }
 	}
 	//------------------------------------------------------------------------------
+	/**
+	 * Set um Toolpit em um determinado campo pode ser usado com
+	 * @param string $strTitle - Titulo
+	 * @param string $strText - Texto que irá aparecer
+	 * @param string $strImagem
+	 * @return TControl
+	 */
 	public function setTooltip($strTitle=null,$strText=null,$strImagem=null)
 	{
 		$strText = str_replace(chr(10),'<br/>',$strText);

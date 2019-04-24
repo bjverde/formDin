@@ -40,16 +40,14 @@
  */
 class FormDinHelper
 {
-
     /**
      * Return FormDin version
      * @return string
      */
-    public static function version() 
+    public static function version()
     {
         return FORMDIN_VERSION;
-    }    
-    
+    }
     /***
      * Returns if the current formDin version meets the minimum requirements
      * 
@@ -57,9 +55,35 @@ class FormDinHelper
      * @param string $version
      * @return boolean
      */
-    public static function versionMinimum(string $version)
+    public static function versionMinimum($version)
     {
-        return version_compare($version,self::version(),'>=');
+        $formVersion = explode("-", self::version());
+        $formVersion = $formVersion[0];
+        return version_compare($formVersion,$version,'>=');
+    }
+    //--------------------------------------------------------------------------------
+    /**
+     * Recebe o corpo de um request e um objeto VO. Quando o id do array bodyRequest for
+     * igual ao nome de um atributo no objeto Vo esse deverá ser setado.
+     *
+     * @param array $bodyRequest - Array com corpo do request
+     * @param object $vo - objeto VO para setar os valores
+     * @return object
+     */
+    public static function setPropertyVo($bodyRequest,$vo)
+    {
+        $class = new \ReflectionClass($vo);
+        $properties   = $class->getProperties();        
+        foreach ($properties as $attribut) {
+            $name =  $attribut->getName();
+            if (array_key_exists($name, $bodyRequest)) {
+                $reflection = new \ReflectionProperty(get_class($vo), $name);
+                $reflection->setAccessible(true);
+                $reflection->setValue($vo, $bodyRequest[$name]);
+                //echo $bodyRequest[$name];
+            }
+        }
+        return $vo;
     }
 }
 ?>
