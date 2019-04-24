@@ -6386,13 +6386,13 @@ class TForm Extends TBox
      * @param boolean $boolRequired    - 3: DEFAULT = flase não obrigatório
      * @param boolean $boolNewLine     - 4: Default TRUE = campo em nova linha, FALSE continua na linha anterior
      * @param string  $strValue        - 5: Valor inicial
-     * @param string  $strMinValue
-     * @param string  $strMaxValue
-     * @param string  $strMaskType
-     * @param boolean $boolButtonVisible
-     * @param string  $strExampleText
-     * @param boolean $boolLabelAbove
-     * @param string  $boolNoWrapLabel
+     * @param string  $strMinValue     - 6: Menor data que o campo aceita
+     * @param string  $strMaxValue     - 7: Maior data que o campo aceita
+     * @param string  $strMaskType     - 8: DEFAULT = DMY. Tipo de Mascara DMY (dia/mês/ano), DM (dia/mês), MY (mês/ano) 
+     * @param boolean $boolButtonVisible - 9: Exibe ou não o botão do calendario.
+     * @param string  $strExampleText  - 10: Texto de exmplo
+     * @param boolean $boolLabelAbove  - 11: DEFAULT = flase. Label acima do campo = true
+     * @param string  $boolNoWrapLabel - 12: 
      * @return TDate
      */
     public function addDateField( $strName
