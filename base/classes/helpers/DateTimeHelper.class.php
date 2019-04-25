@@ -152,5 +152,61 @@ class DateTimeHelper
         }
         return $retorno;
     }
-    
+
+    /**
+     * Converter uma data do tipo string para uma data do tipo DateTime. Formato: dd/mm/yyyy.
+     *
+     * @param string $date
+     * @return DateTime 
+    */
+    public static function convertToDateTime($date)
+    {
+        $result = self::date2Mysql($date);
+        return new DateTime($result);
+    }
+
+    /**
+     * Verifica se uma data é um dia de sábado ou domingo. Se sim, retorna TRUE. Formato: dd/mm/yyyy.
+     * @param string $date 
+     * @return boolean
+    */
+    public static function isWeekend($date)
+    {
+        $result = self::convertToDateTime($date);
+        return ($result->format('w') % 6) == 0;
+    }
+
+    /**
+     * Verifica se a data é um dia útil. Se sim, retorna TRUE. Formato: dd/mm/yyyy.
+     * @param string $date
+     * @return boolean
+    */
+    public static function isWorkingDay($date)
+    {
+        $result = self::isWeekend($date);
+        if( !$result ) {
+            // TODO verificar se a data é feriado. Provisoriamente retorna FALSE.
+            $result = FALSE;
+        }
+        return !$result;
+    }
+
+    /**
+     * Obtém a quantidade de dias úteis entre duas datas.
+     * @param DateTime $startDate
+     * @param DateTime $endDate
+     * @return int
+    */
+    public static function getWorkingDaysBetweenDates($startDate,$endDate)
+    {
+        $count = 0;
+        while($startDate <= $endDate) {
+            $result = self::isWorkingDay($startDate->format('d/m/Y'));
+            if($result) {
+                $count++; 
+            }
+            $startDate->add(new DateInterval('P1D'));
+        }
+        return $count;
+    }  
 }
