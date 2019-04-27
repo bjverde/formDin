@@ -713,6 +713,10 @@ class TPDOConnection {
             $result = $stmt->execute( $arrParams );
             
             if ( $result ) {
+                if( !is_int($fetchMode) ){
+                    $fetchMode = PDO::FETCH_ASSOC;
+                }
+                
                 // em caso select ou insert com returning, processa o resultado
                 if ( preg_match( '/^select/i', $sql ) > 0 || preg_match( '/returning/i', $sql ) > 0 || preg_match( '/^with/i', $sql ) > 0 ) {
                     $res = $stmt->fetchAll( $fetchMode );
