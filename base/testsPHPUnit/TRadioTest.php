@@ -1,14 +1,17 @@
 <?php
-require_once '../classes/webform/TElement.class.php';
-require_once '../classes/webform/TControl.class.php';
-require_once '../classes/webform/TOption.class.php';
-require_once '../classes/webform/TRadio.class.php';
-require_once '../classes/webform/TPDOConnection.class.php';
+require_once __DIR__.'/../classes/webform/TElement.class.php';
+require_once __DIR__.'/../classes/webform/TControl.class.php';
+require_once __DIR__.'/../classes/webform/TOption.class.php';
+require_once __DIR__.'/../classes/webform/TRadio.class.php';
+require_once __DIR__.'/../classes/webform/TPDOConnection.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TRadio test case.
  */
-class TRadioTest extends PHPUnit_Framework_TestCase {
-	
+class TRadioTest extends TestCase
+{	
 	/**
 	 *
 	 * @var TRadio

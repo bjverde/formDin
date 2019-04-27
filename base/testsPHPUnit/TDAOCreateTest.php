@@ -39,15 +39,18 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once '../classes/constants.php';
-require_once '../classes/webform/TDAOCreate.class.php';
+require_once __DIR__.'/../classes/constants.php';
+require_once __DIR__.'/../classes/webform/TDAOCreate.class.php';
+
+use PHPUnit\Framework\TestCase;
 
 define('TEOL',"\n");
 define('TTAB',chr(9));
 /**
  * TDAOCreate test case.
  */
-class TDAOCreateTest extends PHPUnit_Framework_TestCase {
+class TDAOCreateTest extends TestCase
+{
 
     /**
      *

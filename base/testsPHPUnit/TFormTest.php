@@ -1,13 +1,17 @@
 <?php
-require_once '../classes/webform/TElement.class.php';
-require_once '../classes/webform/TControl.class.php';
-require_once '../classes/webform/TBox.class.php';
-require_once '../classes/webform/TForm.class.php';
-require_once '../classes/webform/TRichTextEditor.class.php';
+require_once __DIR__.'/../classes/webform/TElement.class.php';
+require_once __DIR__.'/../classes/webform/TControl.class.php';
+require_once __DIR__.'/../classes/webform/TBox.class.php';
+require_once __DIR__.'/../classes/webform/TForm.class.php';
+require_once __DIR__.'/../classes/webform/TRichTextEditor.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TForm case.
  */
-class TFormTest extends PHPUnit_Framework_TestCase {
+class TFormTest extends TestCase
+{
 	
 	/**
 	 *

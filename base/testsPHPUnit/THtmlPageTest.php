@@ -1,10 +1,14 @@
 <?php
 if(!defined('ENCODINGS')){ define('ENCODINGS','ISO-8859-1'); }
-require_once '../classes/webform/THtmlPage.class.php';
+require_once __DIR__.'/../classes/webform/THtmlPage.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * THtmlPage test case.
  */
-class THtmlPageTest extends PHPUnit_Framework_TestCase {
+class THtmlPageTest extends TestCase
+{
 	
 	/**
 	 *

@@ -38,14 +38,16 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/constants.php';
-require_once '../classes/webform/TFormCreate.class.php';
+require_once __DIR__.'/../classes/constants.php';
+require_once __DIR__.'/../classes/webform/TFormCreate.class.php';
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * TFormCreate test case.
  */
-class TFormCreateTest extends PHPUnit_Framework_TestCase {
+class TFormCreateTest  extends TestCase
+{
 
     /**
      *

@@ -1,9 +1,12 @@
 <?php
-require_once '../classes/webform/TApplication.class.php';
+require_once __DIR__.'/../classes/webform/TApplication.class.php';
+
+use PHPUnit\Framework\TestCase;
 /**
  * TApplication test case.
  */
-class TApplicationTest extends PHPUnit_Framework_TestCase {
+class TApplicationTest extends TestCase
+{
 	
 	/**
 	 *

@@ -1,10 +1,13 @@
 <?php
-require_once '../classes/webform/TElement.class.php';
+require_once __DIR__.'/../classes/webform/TElement.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TElement test case.
  */
-class TElementTest extends PHPUnit_Framework_TestCase {
-	
+class TElementTest extends TestCase
+{
 	/**
 	 * Prepares the environment before running a test.
 	 */

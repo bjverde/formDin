@@ -1,13 +1,16 @@
 <?php
 
-require_once '../classes/constants.php';
-require_once '../classes/helpers/ArrayHelper.class.php';
-require_once '../classes/webform/TPDOConnection.class.php';
+require_once __DIR__.'/../classes/constants.php';
+require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
+require_once __DIR__.'/../classes/webform/TPDOConnection.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TPDOConnection test case.
  */
-class TPDOConnectionTest extends PHPUnit_Framework_TestCase {
-	
+class TPDOConnectionTest extends TestCase
+{
 	/**
 	 *
 	 * @var TPDOConnection
