@@ -38,12 +38,15 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/GetHelper.class.php';
+require_once __DIR__.'/../classes/helpers/GetHelper.class.php';
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * GetHelper test case.
  */
-class GetHelperTest extends PHPUnit_Framework_TestCase {
+class GetHelperTest extends TestCase
+{
 
     public function testGet_tem() {
         $esperado = 10;

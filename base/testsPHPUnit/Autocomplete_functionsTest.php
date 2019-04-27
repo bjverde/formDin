@@ -38,13 +38,14 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../callbacks/autocomplete_functions.php';
+require_once __DIR__.'/../callbacks/autocomplete_functions.php';
 
+use PHPUnit\Framework\TestCase;
 /**
  * GetHelper test case.
  */
-class autocomplete_functionsTest extends PHPUnit_Framework_TestCase {
-
+class autocomplete_functionsTest extends TestCase
+{
 	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
 		$_REQUEST['q'] = 'x';
         $bvars = null;
