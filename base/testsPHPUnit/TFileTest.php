@@ -1,16 +1,19 @@
 <?php
-require_once '../classes/exceptions/UploadException.class.php';
-require_once '../classes/webform/TButton.class.php';
-require_once '../classes/webform/THidden.class.php';
-require_once '../classes/webform/TElement.class.php';
-require_once '../classes/webform/TControl.class.php';
-require_once '../classes/webform/TEdit.class.php';
-require_once '../classes/webform/TFile.class.php';
+require_once __DIR__.'/../classes/exceptions/UploadException.class.php';
+require_once __DIR__.'/../classes/webform/TButton.class.php';
+require_once __DIR__.'/../classes/webform/THidden.class.php';
+require_once __DIR__.'/../classes/webform/TElement.class.php';
+require_once __DIR__.'/../classes/webform/TControl.class.php';
+require_once __DIR__.'/../classes/webform/TEdit.class.php';
+require_once __DIR__.'/../classes/webform/TFile.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TApplication test case.
  */
-class TFileTest extends PHPUnit_Framework_TestCase {
-	
+class TFileTest  extends TestCase
+{
 	/**
 	 * @var TFile
 	 */
