@@ -41,8 +41,10 @@
 
 require_once '../classes/Ajuda.class.php';
 
-class AjudaTest extends PHPUnit_Framework_TestCase {
-	
+use PHPUnit\Framework\TestCase;
+
+class AjudaTest extends TestCase
+{
 	/**
 	 *
 	 * @var Ajuda

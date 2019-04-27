@@ -40,10 +40,13 @@
  */
 require_once '../classes/helpers/ArrayHelper.class.php';
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * ArrayHelper test case.
  */
-class ArrayHelperTest extends PHPUnit_Framework_TestCase {
+class ArrayHelperTest extends TestCase
+{
 
     public function testValidateUndefined_temValor() {
         $index = 'key';
