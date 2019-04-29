@@ -65,7 +65,7 @@ class TGridTest extends TestCase
 	}
 	
 	protected function generateTable(){
-		$dadosPessoa = isset($dadosPessoa) ? $dadosPessoa : null;
+		$dadosPessoa = array();
 		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 1, 'Joao Silva', 'F', '123456789', null);
 		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 2, 'Maria Laranja', 'F', '52798074002', null);
 		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 3, 'Dell', 'J', null, '72381189000110');
@@ -133,7 +133,8 @@ class TGridTest extends TestCase
 		$this->assertEquals( $expected['IDPESSOA'][2] , $result['IDPESSOA'][2]);
 	}
 	
-	public function testSortDataByColum_RequestNmpessoaOrderASC() {		
+	public function testSortDataByColum_RequestNmpessoaOrderASC() {
+	    $expected = array();
 		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
 		$expected['NMPESSOA'][1] = $this->dataGrid['NMPESSOA'][0];
 		$expected['NMPESSOA'][2] = $this->dataGrid['NMPESSOA'][1];
@@ -171,10 +172,10 @@ class TGridTest extends TestCase
 	}
 	
 	public function testSortArray_OneRow() {
-		$expected = isset($expected) ? $expected : null;
+		$expected = array();
 		$expected = $this->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
 		
-		$res = isset($res) ? $res : null;
+		$res = array();
 		$res = $this->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
 		$tGrid = $this->tGrid;
 		$result = $tGrid->sortArray($res,'NMPESSOA','SORT_ASC');
@@ -183,6 +184,7 @@ class TGridTest extends TestCase
 	}
 	
 	public function testSortArray_RequestNmpessoaOrderASC() {
+	    $expected = array();
 		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
 		$expected['NMPESSOA'][1] = $this->dataGrid['NMPESSOA'][0];
 		$expected['NMPESSOA'][2] = $this->dataGrid['NMPESSOA'][1];
