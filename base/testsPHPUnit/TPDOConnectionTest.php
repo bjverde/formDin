@@ -109,7 +109,7 @@ class TPDOConnectionTest extends TestCase
 	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsNull(){
 		$DBMS = null;
-		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
 	/**
@@ -117,7 +117,7 @@ class TPDOConnectionTest extends TestCase
 	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsWhite(){
 		$DBMS = '';
-		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ class TPDOConnectionTest extends TestCase
 	 */
 	public function testgetDefaultPortDBMS_WrongDbms(){
 		$DBMS = 'test';
-		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
 	public function testgetDefaultPortDBMS_MySQLDefault(){
@@ -183,9 +183,11 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_string() {
+	    $arrayExpected = array();
 		$arrayExpected[0] = 'abc';
 		$arrayExpected[1] = '123.679,00';
 
+		$arrayData = array();
 		$arrayData[0] = 'abc';
 		$arrayData[1] = '123.679,00';
 		
@@ -194,10 +196,12 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_stringVazia() {
-		$arrayExpected[0] = null;
+	    $arrayExpected = array();
+	    $arrayExpected[0] = null;
 		$arrayExpected[1] = '123.679,00';
 		$arrayExpected[2] = null;
 		
+		$arrayData = array();
 		$arrayData[0] = '';
 		$arrayData[1] = '123.679,00';
 		$arrayData[2] = "";
@@ -207,10 +211,12 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_stringEspace() {
-		$arrayExpected[0] = ' ';
+	    $arrayExpected = array();
+	    $arrayExpected[0] = ' ';
 		$arrayExpected[1] = '123.679,00';
 		$arrayExpected[2] = '   ';
 		
+		$arrayData = array();
 		$arrayData[0] = ' ';
 		$arrayData[1] = '123.679,00';
 		$arrayData[2] = '   ';
@@ -220,9 +226,11 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_soNumerosComZero() {
-		$arrayExpected[0] = 1;
+	    $arrayExpected = array();
+	    $arrayExpected[0] = 1;
 		$arrayExpected[1] = 0;
 
+		$arrayData = array();
 		$arrayData[0] = 1;
 		$arrayData[1] = 0;
 		
@@ -231,9 +239,11 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_soNumerosStringComZero() {
+	    $arrayExpected = array();
 		$arrayExpected[0] = '1';
 		$arrayExpected[1] = '0';
 		
+		$arrayData = array();
 		$arrayData[0] = '1';
 		$arrayData[1] = '0';
 		
@@ -242,8 +252,9 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_dateDDMMYYYY() {
+	    $arrayExpected = array();
 		$arrayExpected[0] = '1980-01-01';
-		
+		$arrayData = array();
 		$arrayData[0] = '01/01/1980';
 		
 		$arrayActual = $this->TPDOConnection->prepareArray($arrayData);
@@ -251,8 +262,9 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testPrepareArray_dateDDMM() {
+	    $arrayExpected = array();
 		$arrayExpected[0] = '28/12';
-		
+		$arrayData = array();
 		$arrayData[0] = '28/12';
 		
 		$arrayActual = $this->TPDOConnection->prepareArray($arrayData);
