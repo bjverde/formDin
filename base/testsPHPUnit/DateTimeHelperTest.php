@@ -39,6 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 require_once __DIR__.'/../classes/helpers/DateTimeHelper.class.php';
+require_once __DIR__.'/../classes/helpers/StringHelper.class.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -76,4 +77,45 @@ class DateTimeHelperTest extends TestCase
         $this->assertEquals($esperado, $retorno);
     }
     
+    public function testGetDateTimeLong() {
+        $esperado = '29 DE ABRIL DE 2019';
+        $entrada = '2019-04-29';
+        $retorno = DateTimeHelper::getDateTimeLong($entrada);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testConvertToDateTime() {
+        $esperado = DateTime::class;
+        $entrada = '28/04/2019';
+        $retorno = DateTimeHelper::convertToDateTime($entrada);
+        $this->assertInstanceOf($esperado, $retorno);
+    }
+    
+    public function testIsWeekendTrue() {
+        $esperado = true;
+        $entrada = '28/04/2019';
+        $retorno = DateTimeHelper::isWeekend($entrada);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testIsWeekendFalse() {
+        $esperado = false;
+        $entrada = '29/04/2019';
+        $retorno = DateTimeHelper::isWeekend($entrada);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testIsWorkingDayTrue() {
+        $esperado = true;
+        $entrada = '29/04/2019';
+        $retorno = DateTimeHelper::isWorkingDay($entrada);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testIsWorkingDayFalse() {
+        $esperado = false;
+        $entrada = '28/04/2019';
+        $retorno = DateTimeHelper::isWorkingDay($entrada);
+        $this->assertEquals($esperado, $retorno);
+    }
 }
