@@ -51,7 +51,8 @@ class ArrayHelperTest extends TestCase
     public function testValidateUndefined_temValor() {
         $index = 'key';
         $valor = 1500;
-        $esperado = $valor;        
+        $esperado = $valor;
+        $arrayTest = array();
         $arrayTest[$index] = $valor;
         $retorno = ArrayHelper::validateUndefined($arrayTest,$index);        
         $this->assertEquals($esperado, $retorno);
@@ -87,6 +88,7 @@ class ArrayHelperTest extends TestCase
     
     public function testGetDefaultValeu_NotInArray() {
     	$esperado  = 'x';
+    	$array = array();
     	$array ['y'] = 123;
     	$atributeName = 'k';
     	$DefaultValue = 'x';    	
@@ -105,6 +107,7 @@ class ArrayHelperTest extends TestCase
     
     public function testGetDefaultValeu_InArray() {
     	$esperado  = 123;
+    	$array = array();
     	$array ['y'] = 123;
     	$atributeName = 'y';
     	$DefaultValue = 'x';
