@@ -38,6 +38,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once __DIR__.'/../classes/webform/TElement.class.php';
+require_once __DIR__.'/../classes/webform/TTable.class.php';
 require_once __DIR__.'/../classes/webform/TGrid.class.php';
 
 use PHPUnit\Framework\TestCase;
@@ -55,7 +57,7 @@ class TGridTest extends TestCase
 	private $tGrid;
 	private $dataGrid;
 	
-	
+
 	protected function incluirPessoa($dadosPessoa, $id, $nome, $tipo, $cpf, $cnpj){
 		$dadosPessoa['IDPESSOA'][]=$id;   $dadosPessoa['NMPESSOA'][]=$nome;
 		$dadosPessoa['TPPESSOA'][]=$tipo; $dadosPessoa['NMCPF'][]=$cpf;
@@ -107,21 +109,22 @@ class TGridTest extends TestCase
 	 */
 	protected function tearDown() {
 		// TODO Auto-generated TGridTest::tearDown()
-		$this->tGrid = null;
-		
+		$this->tGrid = null;		
 		parent::tearDown ();
 	}
 	
-	/**
-	 * Constructs the test case.
-	 */
-	public function __construct() {
-		// TODO Auto-generated constructor
+	public function testGetId() {
+	    $expected = 'gd';
+	    $result = $this->tGrid->getId();
+	    $this->assertEquals( $expected , $result);
 	}
 	
-	/**
-	 * Tests TGrid->sortDataByColum()
-	 */
+	public function testGetTitle() {
+	    $expected = 'Gride';
+	    $result = $this->tGrid->getTitle();
+	    $this->assertEquals( $expected , $result);
+	}	
+	
 	public function testSortDataByColum_RequestNull() {
 		$expected = $this->dataGrid;
 		
@@ -133,6 +136,7 @@ class TGridTest extends TestCase
 		$this->assertEquals( $expected['IDPESSOA'][2] , $result['IDPESSOA'][2]);
 	}
 	
+
 	public function testSortDataByColum_RequestNmpessoaOrderASC() {
 	    $expected = array();
 		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
