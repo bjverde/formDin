@@ -44,7 +44,6 @@ class TFormTest extends TestCase
 	}
 	
 	public function testAddRichTextEditor() {
-		$esperado = 'Test';
 		$form = $this->TForm;
 		$text = $form->addRichTextEditor('TEXTO', 'Texto', 10000, false, 100, 15, true, true, false);
 		$this->assertInstanceOf(TRichTextEditor::class,$text);
