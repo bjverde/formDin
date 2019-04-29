@@ -114,7 +114,7 @@ class TElement
      * Recebe como parametro o tipo de tag html que sera gerada
      * Ex: div, span, input ...
      *
-     * @var string tagType
+     * @var string tagType - name tag html
      */
     public function __construct( $strTagType = null )
     {
