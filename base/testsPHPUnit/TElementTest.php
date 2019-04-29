@@ -44,37 +44,68 @@ class TElementTest extends TestCase
 	}
 	
 	public function testId_FalseString() {
-		$esperado = "false";
+		$esperado = null;
 		$test = new TElement("false");
 		$retorno = $test->getId();
 		$this->assertSame($esperado, $retorno);
 	}
 	
+	public function testId_TrueBoolean() {
+	    $esperado = null;
+	    $test = new TElement(true);
+	    $retorno = $test->getId();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
 	public function testId_TrueString() {
-		$esperado = "true";
+		$esperado = null;
 		$test = new TElement("true");
 		$retorno = $test->getId();
 		$this->assertSame($esperado, $retorno);
 	}
 	
 	public function testId_ZeroInteger() {
-		$esperado = '0';
+	    $esperado = null;
 		$test = new TElement(0);
 		$retorno = $test->getId();
 		$this->assertSame($esperado, $retorno);
 	}
 	
-	public function testId_ZeroString() {
-		$esperado = '0';
-		$test = new TElement('0');
-		$retorno = $test->getId();
-		$this->assertSame($esperado, $retorno);
+	public function testId_DivWithId1024_setAttribute() {
+	    $esperado = '1024';
+	    $test = new TElement('div');
+	    $test->setAttribute('id','1024');
+	    $retorno = $test->getId();
+	    $this->assertSame($esperado, $retorno);
 	}
 	
-	public function testId_Integer() {
-		$esperado = '1024';
-		$test = new TElement(1024);
-		$retorno = $test->getId();
-		$this->assertSame($esperado, $retorno);
+	public function testId_DivWithId1024_setId() {
+	    $esperado = '1024';
+	    $test = new TElement('div');
+	    $test->setId('1024');
+	    $retorno = $test->getId();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testTagType_Div() {
+	    $esperado = 'div';
+	    $test = new TElement('div');
+	    $retorno = $test->getTagType();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testTagType_Nav() {
+	    $esperado = 'nav';
+	    $test = new TElement('nav');
+	    $retorno = $test->getTagType();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testSetClass() {
+	    $esperado = 'navbar-brand';
+	    $test = new TElement('nav');
+	    $test->setClass('navbar-brand');
+	    $retorno = $test->getClass();
+	    $this->assertSame($esperado, $retorno);
 	}
 }
