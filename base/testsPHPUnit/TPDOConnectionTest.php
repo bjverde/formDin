@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../classes/constants.php';
 require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
+require_once __DIR__.'/../classes/helpers/CountHelper.class.php';
 require_once __DIR__.'/../classes/webform/TPDOConnection.class.php';
 
 use PHPUnit\Framework\TestCase;
@@ -75,7 +76,7 @@ class TPDOConnectionTest extends TestCase
 		$configErrors = array();
 		$root = null;
 		$configErrors = $this->TPDOConnection->setConfigDBMS($useConfigFile, $configArray, $configErrors, $root);
-		$size = count($configErrors);
+		$size = CountHelper::count($configErrors);
 		$this->assertEquals( 0 , $size);
 		$this->assertEquals( $expected , $this->TPDOConnection->getDBMS());
 	}
@@ -87,9 +88,10 @@ class TPDOConnectionTest extends TestCase
 		$configArray  = array( 'BANCO'=>DBMS_MYSQL);
 		$configErrors = array();
 		$configErrors = $this->TPDOConnection->setConfigDbmsPort($useConfigFile, $configArray);
-		$size = count($configErrors);
+		$size = CountHelper::count($configErrors);
 		$this->assertEquals( 0 , $size);
-		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
+		$result = $this->TPDOConnection->getPort();
+		$this->assertEquals( $expected , $result);
 	}
 	
 	public function testSetConfigDbmsPort_ArrayDiferentPort(){
@@ -99,7 +101,7 @@ class TPDOConnectionTest extends TestCase
 		$configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001');
 		$configErrors = array();
 		$configErrors = $this->TPDOConnection->setConfigDbmsPort($useConfigFile, $configArray);
-		$size = count($configErrors);
+		$size = CountHelper::count($configErrors);
 		$this->assertEquals( 0 , $size);
 		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
 	}
@@ -132,24 +134,28 @@ class TPDOConnectionTest extends TestCase
 		$expected= '3306';
 		$DBMS = DBMS_MYSQL;
 		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->assertSame( $expected , $port );
 	}
 	
 	public function testgetDefaultPortDBMS_PostgresDefault(){
 		$expected= '5432';
 		$DBMS = DBMS_POSTGRES;
 		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->assertSame( $expected , $port );
 	}
 
 	public function testgetDefaultPortDBMS_OracleDefault(){
 		$expected= '1521';
 		$DBMS = DBMS_ORACLE;
 		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->assertSame( $expected , $port );
 	}
 	
 	public function testgetDefaultPortDBMS_SqlServerDefault(){
 		$expected= '1433';
 		$DBMS = DBMS_SQLSERVER;
 		$port = $this->TPDOConnection->getDefaultPortDBMS($DBMS);
+		$this->assertSame( $expected , $port );
 	}
 	
 	public function testSetConfigUtf8Decode_ArrayEmpty(){
