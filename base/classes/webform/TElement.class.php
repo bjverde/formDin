@@ -320,9 +320,8 @@ class TElement
     {
         if ( is_array( $child ) )
         {
-            foreach( $child as $k => $v )
+            foreach( $child as $v )
             {
-                //$this->children[] = $v;
                 $this->add( $v, $boolLF );
             }
         }
@@ -579,7 +578,7 @@ class TElement
 
         if ( is_array( $this->children ) )
         {
-            foreach( $this->children as $k => $child )
+            foreach( $this->children as $child )
             {
                 if ( is_object( $child ) )
                 {
@@ -987,12 +986,11 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
     //-----------------------------------------------------------------------------
     public function getTopMostParent()
     {
-        if ( $this->parentControl )
-        {
-            $id = $this->parentControl->getId();
+        if ( $this->parentControl ){
+            //$id = $this->parentControl->getId();
             return $this->parentControl->getTopMostParent();
         }
-        $id = $this->getId();
+        //$id = $this->getId();
         return $this;
     }
 
