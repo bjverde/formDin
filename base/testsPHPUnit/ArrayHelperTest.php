@@ -40,6 +40,8 @@
  */
 require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
 
+require_once __DIR__.'/mockFormDinArray.php';
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -84,6 +86,20 @@ class ArrayHelperTest extends TestCase
     	$arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
     	$retorno = ArrayHelper::has('x',$arrayTest);
     	$this->assertEquals($esperado, $retorno);
+    }    
+    
+    public function testArray_keys2_true() {
+        $esperado  = array(0=>'x');
+        $arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
+        $retorno = ArrayHelper::array_keys2($arrayTest,'foo');
+        $this->assertEquals($esperado, $retorno);        
+    }
+    
+    public function testArray_keys2_false() {
+        $esperado  = array();
+        $arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
+        $retorno = ArrayHelper::array_keys2($arrayTest,'xxx');
+        $this->assertEquals($esperado, $retorno);
     }
     
     public function testGetDefaultValeu_NotInArray() {
@@ -113,5 +129,60 @@ class ArrayHelperTest extends TestCase
     	$DefaultValue = 'x';
     	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
     	$this->assertEquals($esperado, $retorno);
+    }    
+    
+    public function testGetArray_true() {
+        $mock = new mockFormDinArray();        
+        $esperado  = array(0=>'Joao Silva', 1=>'Maria Laranja', 2=>'Dell', 3=>'Microsoft');
+        $array = $mock->generateTable();
+        $atributeName = 'NMPESSOA';
+        $retorno = ArrayHelper::getArray($array,$atributeName);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGetArray_false() {
+        $mock = new mockFormDinArray();
+        $esperado  = array();
+        $array = $mock->generateTable();
+        $atributeName = 'TIA';
+        $retorno = ArrayHelper::getArray($array,$atributeName);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testArrayFormKey_true() {
+        $mock = new mockFormDinArray();
+        $esperado  = 'Maria Laranja';
+        $array = $mock->generateTable();
+        $atributeName = 'NMPESSOA';
+        $key = 1;
+        $retorno = ArrayHelper::getArrayFormKey($array,$atributeName,$key);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testArrayFormKey_AtributeNameNotFound() {
+        $mock = new mockFormDinArray();
+        $esperado  = null;
+        $array = $mock->generateTable();
+        $atributeName = 'TIA';
+        $key = 1;
+        $retorno = ArrayHelper::getArrayFormKey($array,$atributeName,$key);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testConvertArrayPdo2FormDin_Upcase() {
+        $mock = new mockFormDinArray();
+        $esperado  = $mock->generateTable();
+        $array = $mock->generateTablePessoaPDO();
+        $retorno = ArrayHelper::convertArrayPdo2FormDin($array,true);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    
+    public function testConvertArrayFormDin2Pdo_Upcase() {
+        $mock = new mockFormDinArray();
+        $esperado  = $mock->generateTablePessoaPDO();
+        $array = $mock->generateTable();
+        $retorno = ArrayHelper::convertArrayFormDin2Pdo($array,true);
+        $this->assertEquals($esperado, $retorno);
     }
 }

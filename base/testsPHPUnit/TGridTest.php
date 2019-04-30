@@ -42,6 +42,8 @@ require_once __DIR__.'/../classes/webform/TElement.class.php';
 require_once __DIR__.'/../classes/webform/TTable.class.php';
 require_once __DIR__.'/../classes/webform/TGrid.class.php';
 
+require_once __DIR__.'/mockFormDinArray.php';
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -56,24 +58,7 @@ class TGridTest extends TestCase
 	 */
 	private $tGrid;
 	private $dataGrid;
-	
-
-	protected function incluirPessoa($dadosPessoa, $id, $nome, $tipo, $cpf, $cnpj){
-		$dadosPessoa['IDPESSOA'][]=$id;   $dadosPessoa['NMPESSOA'][]=$nome;
-		$dadosPessoa['TPPESSOA'][]=$tipo; $dadosPessoa['NMCPF'][]=$cpf;
-		$dadosPessoa['NMCNPJ'][]=$cnpj;
-		
-		return $dadosPessoa;
-	}
-	
-	protected function generateTable(){
-		$dadosPessoa = array();
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 1, 'Joao Silva', 'F', '123456789', null);
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 2, 'Maria Laranja', 'F', '52798074002', null);
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 3, 'Dell', 'J', null, '72381189000110');
-		
-		return $dadosPessoa;
-	}
+	private $mockFormDinArray;
 	
 	/**
 	 * Prepares the environment before running a test.
@@ -82,7 +67,8 @@ class TGridTest extends TestCase
 		parent::setUp ();				
 		
 		$primaryKey = 'IDPESSOA';
-		$dadosPessoa = $this->generateTable();
+		$this->mockFormDinArray = new mockFormDinArray();
+		$dadosPessoa = $this->mockFormDinArray->generateTable();
 		
 		$mixUpdateFields = $primaryKey.'|'.$primaryKey.',NMPESSOA|NMPESSOA,TPPESSOA|TPPESSOA,NMCPF|NMCPF,NMCNPJ|NMCNPJ';
 		$gride = new TGrid( 'gd'        // id do gride
@@ -183,10 +169,10 @@ class TGridTest extends TestCase
 	
 	public function testSortArray_OneRow() {
 		$expected = array();
-		$expected = $this->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
+		$expected = $this->mockFormDinArray->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
 		
 		$res = array();
-		$res = $this->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
+		$res = $this->mockFormDinArray->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
 		$tGrid = $this->tGrid;
 		$result = $tGrid->sortArray($res,'NMPESSOA','SORT_ASC');
 		
@@ -235,10 +221,10 @@ class TGridTest extends TestCase
 		$this->assertEquals( 0 , $result);
 	}
 	
-	public function testGetRowCount_3Rows() {		
+	public function testGetRowCount_4Rows() {		
 		$tGrid = $this->tGrid;
 		$result = $tGrid->getRowCount();		
-		$this->assertEquals( 3 , $result);
+		$this->assertEquals( 4 , $result);
 	}
 	
 	public function testGetRowCount_with_RealTotalRowsWithoutPaginator() {
