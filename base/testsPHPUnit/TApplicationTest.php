@@ -19,6 +19,9 @@ class TApplicationTest extends TestCase
 	 */
 	protected function setUp() {
 		parent::setUp ();
+		if (! defined ( 'APLICATIVO' )) {
+		    define ( 'APLICATIVO', 'phpunit' );
+		}
 		$this->tApplication = new TApplication(/* parameters */);
 	}
 	
@@ -26,6 +29,7 @@ class TApplicationTest extends TestCase
 	 * Cleans up the environment after running a test.
 	 */
 	protected function tearDown() {
+	    session_destroy();
 		$this->tApplication = null;		
 		parent::tearDown ();
 	}
@@ -50,20 +54,10 @@ class TApplicationTest extends TestCase
 	}
 	
 	public function testGetAppImgLogoHtml_SetImg() {
-		$expected= '<img src="images/logo.png">';
+	    $expected= '<img src="'.__DIR__.'/../imagens/tree.gif">';
 		
-		$this->tApplication->setImgLogoPath('images/logo.png');
+		$this->tApplication->setImgLogoPath(__DIR__.'/../imagens/tree.gif');
 		$result = $this->tApplication->getImgLogoHtml();
 		$this->assertEquals( $expected , $result);
 	}
-	
-	public function testGetAppImgLogoHtml_SetImgRootDir() {
-		$expected= '<img src="/var/www/appv1/images/logo.png">';
-		
-		$this->tApplication->setAppRootDir('/var/www/appv1/');
-		$this->tApplication->setImgLogoPath('images/logo.png');
-		$result = $this->tApplication->getImgLogoHtml();
-		$this->assertEquals( $expected , $result);
-	}
-	
 }
