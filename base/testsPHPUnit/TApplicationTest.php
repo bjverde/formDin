@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../classes/constants.php';
 require_once __DIR__.'/../classes/webform/TApplication.class.php';
 
 use PHPUnit\Framework\TestCase;
@@ -35,17 +36,35 @@ class TApplicationTest extends TestCase
 	}
 
 	public function testSetTitle_Defined() {
-		$expected= 'xxxTest95784';
-		
-		$this->tApplication->setTitle($expected);
-		$result = $this->tApplication->getTitle();
-		$this->assertEquals( $expected , $result);
+	    $expected= 'xxxTest95784';
+	    
+	    $this->tApplication->setTitle($expected);
+	    $result = $this->tApplication->getTitle();
+	    $this->assertEquals( $expected , $result);
 	}
 	
 	public function testSetTitle_NotDefined() {
-		$this->tApplication->setTitle(null);
-		$result = $this->tApplication->getTitle();
-		$this->assertNull($result);
+	    $this->tApplication->setTitle(null);
+	    $result = $this->tApplication->getTitle();
+	    $this->assertNull($result);
+	}
+	
+	public function testSetFormDinMinimumVersion_OK() {
+	    $this->tApplication->setFormDinMinimumVersion('1.0.0');
+	}
+	
+	/**
+	 * @expectedException DomainException
+	 */
+	public function testSetFormDinMinimumVersion_fail() {
+	    $this->tApplication->setFormDinMinimumVersion('999.999.999');
+	}
+	
+	/**
+	 * @expectedException DomainException
+	 */
+	public function testSetFormDinMinimumVersion_formatInvalid() {
+	    $this->tApplication->setFormDinMinimumVersion('4.0');
 	}
 	
 	public function testGetImgLogoHtml_null() {

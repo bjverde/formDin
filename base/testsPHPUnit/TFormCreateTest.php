@@ -250,6 +250,7 @@ class TFormCreateTest  extends TestCase
     }
     //----------------------------------------------------------
     public function testAddGetWhereGridParameters() {
+        $expectedArray = array();
     	$expectedArray[] = ''.EOL;
     	$expectedArray[] = 'function getWhereGridParameters(&$frm){'.EOL;
     	$expectedArray[] = TAB.'$retorno = null;'.EOL;
