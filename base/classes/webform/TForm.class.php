@@ -2714,8 +2714,9 @@ class TForm Extends TBox
       * Método para retornar um array com dados das UFs
       *
       * <code>
+      *     $frm->getUfs("COD_UF,NOM_UF"); // DEFAULT retorna array com codigo e sigla
       * 	$frm->getUfs("COD_UF,SIG_UF"); // retorna array com codigo e sigla
-      * 	$frm->getUf("SIG_UF,NOM_UF"); // retorna array com sigla e nome
+      * 	$frm->getUf("SIG_UF,NOM_UF");  // retorna array com sigla e nome
       * </code>
       *
       * @param string $strReturnColumns

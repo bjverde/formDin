@@ -1,9 +1,15 @@
 <?php
+
+require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
+require_once __DIR__.'/../classes/helpers/CountHelper.class.php';
+
 require_once __DIR__.'/../classes/webform/TElement.class.php';
 require_once __DIR__.'/../classes/webform/TControl.class.php';
 require_once __DIR__.'/../classes/webform/TBox.class.php';
+require_once __DIR__.'/../classes/webform/TEdit.class.php';
 require_once __DIR__.'/../classes/webform/TForm.class.php';
 require_once __DIR__.'/../classes/webform/TRichTextEditor.class.php';
+require_once __DIR__.'/../classes/webform/TSelect.class.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -41,6 +47,71 @@ class TFormTest extends TestCase
 		$form->setTitle($esperado);
 		$retorno = $form->getTitle();
 		$this->assertSame($esperado, $retorno);
+	}
+	
+	public function testSetWidth_Menor200() {
+	    $esperado = 200;
+	    $form = $this->TForm;
+	    $form->setWidth(199);
+	    $retorno = $form->getWidth();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testSetWidth_Maior200() {
+	    $esperado = 201;
+	    $form = $this->TForm;
+	    $form->setWidth(201);
+	    $retorno = $form->getWidth();
+	    $this->assertSame($esperado, $retorno);
+	}	
+	
+	public function testSetHeight_Menor100() {
+	    $esperado = 100;
+	    $form = $this->TForm;
+	    $form->setHeight(99);
+	    $retorno = $form->getHeight();
+	    $this->assertSame($esperado, $retorno);
+	}	
+	
+	public function testSetHeight_Maior100() {
+	    $esperado = 101;
+	    $form = $this->TForm;
+	    $form->setHeight(101);
+	    $retorno = $form->getHeight();
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testGetUf_countROW() {
+	    $esperado = 27;
+	    $form = $this->TForm;
+	    $array = $form->getUfs();
+	    $retorno = CountHelper::count($array);
+	    $this->assertSame('ACRE',  $array[12]);
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testGetUf_TreeColumuns() {
+	    $esperado = 27;
+	    $form = $this->TForm;
+	    $array = $form->getUfs("SIG_UF,NOM_UF");
+	    $retorno = CountHelper::count($array);
+	    $this->assertSame('ACRE',  $array['AC']);
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testAddTextField() {
+	    $frm = $this->TForm;
+	    $field = $frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,TRUE,1);
+	    //$fieldType = $frm->getFieldType('SIT_ATIVO');
+	    //$this->assertEquals('Text',$fieldType);
+	    $this->assertInstanceOf(TEdit::class,$field);
+	}
+	
+	public function testAddSelectField() {
+	    $frm = $this->TForm;
+	    $listAcesso_menu = $frm->getUfs();
+	    $field = $frm->addSelectField('IDMENU', 'Menu',TRUE,$listAcesso_menu,null,null,null,null,null,null,' ',null);
+	    $this->assertInstanceOf(TSelect::class,$field);
 	}
 	
 	public function testAddRichTextEditor() {
