@@ -121,6 +121,14 @@ class SqlHelper
         return $string;
     }
     //----------------------------------------
+    /**
+     * Replace spaces with % to make it easier to search with like.
+     * 
+     * Substitua os espaços por % para facilitar a busca com like.
+     * 
+     * @param string $string
+     * @return string`
+     */
     public static function explodeTextString( $string ) {
         $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
         if ( $dataBaseWithLike ) {

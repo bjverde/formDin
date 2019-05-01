@@ -197,7 +197,57 @@ class SqlHelperTest extends TestCase
 		$isFalse = 'ISFALSE';
 		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
-	}	
+	}
+	//--------------------------------------------------------------------------------
+	public function testTransformValidateString_ok_MySQL() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::transformValidateString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testTransformValidateString_SingleQuotes_MySQL() {
+	    $expected = "blabl\'abla";
+	    $string = "blabl'abla";
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::transformValidateString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testTransformValidateString_DubleQuotes_MySQL() {
+	    $expected = 'blabl\"abla';
+	    $string = 'blabl"abla';
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::transformValidateString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testTransformValidateString_ok_SqlServer() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    $result = SqlHelper::transformValidateString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testTransformValidateString_SingleQuotes_SqlServer() {
+	    $string = "blabl'abla";
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    SqlHelper::transformValidateString( $string );
+	}
+	//--------------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testTransformValidateString_DubleQuotes_SqlServer() {
+	    $string = 'blabl"abla';
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    SqlHelper::transformValidateString( $string );
+	}
 	//--------------------------------------------------------------------------------
 	public function testExplodeTextString_1Word_MySQL() {
 	    $expected = 'blablabla';
