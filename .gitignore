@@ -6,7 +6,8 @@
 /.settings/
 /.project
 /.buildpath
-/base/tmp/
+base/tmp/*
+!base/tmp/index.php
 base/testsPHPUnit/.phpunit.result.cache
 /sysgen/
 /xx/
