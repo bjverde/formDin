@@ -184,6 +184,7 @@ class TFormCreateTest  extends TestCase
     }
     //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtdNull_string() {
+        $expectedArray = array();
     	$expectedArray[] = '$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = '$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
     	$expectedArray[] = '$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
@@ -199,6 +200,7 @@ class TFormCreateTest  extends TestCase
     }
     //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtd2_string() {
+        $expectedArray = array();
     	$expectedArray[] = TAB.TAB.'$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
     	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
@@ -235,6 +237,7 @@ class TFormCreateTest  extends TestCase
      * Tests TFormCreate->addGetWhereGridParametersFields()
      */
     public function testAddGetWhereGridParametersFields() {
+        $expectedArray = array();
     	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
     	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
     	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
@@ -311,6 +314,7 @@ class TFormCreateTest  extends TestCase
     }
     //----------------------------------------------------------
     public function testAddGridPagination_jsScript_init_string() {
+        $expectedArray = array();
     	$expectedArray[] ='function init() {'.EOL;
     	$expectedArray[] =TAB.'var Parameters = {"BUSCAR":"","ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
     	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',Parameters,true);'.EOL;
