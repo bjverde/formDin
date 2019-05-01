@@ -48,6 +48,23 @@ class SqlHelper
 	const SQL_TYPE_TEXT_LIKE  = 'like';
 	const SQL_TYPE_TEXT_EQUAL = 'text';
 	
+	private static $dbms;	
+	
+	public static function setDbms($dbms)
+	{
+	    self::$dbms = $dbms;	    
+	}
+	public static function getDbms()	
+    {
+        $dbms =  null;
+        if ( !empty(self::$dbms) ){
+            $dbms = self::$dbms;
+        } else {
+            $dbms = BANCO;
+        }
+        return $dbms;
+    }
+    //--------------------------------------------------------------------------------
     public static function getRowStart($page,$rowsPerPage) 
     {
         $rowStart = 0;
@@ -89,7 +106,7 @@ class SqlHelper
     }
     //----------------------------------------
     public static function transformValidateString( $string ) {        
-        if ( BANCO == DBMS_MYSQL ) {
+        if ( self::getDbms() == DBMS_MYSQL ) {
             //$string = addslashes($string);
             //$patterns = '/(%)/';
             $doubleQuotes = chr(34);
@@ -100,6 +117,15 @@ class SqlHelper
             if ( preg_match('/(\'|")/', $string ) > 0 ) {
                 throw new InvalidArgumentException('Não use aspas simples ou duplas na pesquisa !');
             }
+        }
+        return $string;
+    }
+    //----------------------------------------
+    public static function explodeTextString( $string ) {
+        $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
+        if ( $dataBaseWithLike ) {
+            $string = trim($string);
+            $string = preg_replace('/\s/', '%', $string);
         }
         return $string;
     }
@@ -116,6 +142,7 @@ class SqlHelper
     			$stringWhere = $stringWhere.$attribute;
     		} else {
     			if($type == self::SQL_TYPE_TEXT_LIKE){
+    			    $valeu = self::explodeTextString($valeu);
     				$isTrue = ' AND '.$atribute.' like \'%'.$valeu.'%\' ';
     				$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
     				$stringWhere = $stringWhere.$attribute;

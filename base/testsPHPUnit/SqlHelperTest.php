@@ -38,6 +38,7 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once __DIR__.'/../classes/constants.php';
 require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
 require_once __DIR__.'/../classes/helpers/SqlHelper.class.php';
 
@@ -140,6 +141,7 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeWhite_FALSE() {
 		$expected = 'ISFALSE';
+		$whereGrid = array();
 		$whereGrid['NUMERO']='';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
@@ -149,6 +151,7 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroOmitted() {
 		$expected = 'ISFALSE';
+		$whereGrid = array();
 		$whereGrid['NUMERO']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
@@ -158,6 +161,7 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroTRUE() {
 	    $expected = 'ISFALSE';
+	    $whereGrid = array();
 	    $whereGrid['NUMERO']=0;
 	    $isTrue = 'ISTRUE';
 	    $isFalse = 'ISFALSE';
@@ -167,6 +171,7 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeZero_FALSE_testZeroFALSE() {
 	    $expected = 'ISTRUE';
+	    $whereGrid = array();
 	    $whereGrid['NUMERO']=0;
 	    $isTrue = 'ISTRUE';
 	    $isFalse = 'ISFALSE';
@@ -176,6 +181,7 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_AttributeSearchDoNotExist_FALSE() {
 		$expected = 'ISFALSE';
+		$whereGrid = array();
 		$whereGrid['NUMBER']=0;
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
@@ -185,10 +191,107 @@ class SqlHelperTest extends TestCase
 	//--------------------------------------------------------------------------------
 	public function testAttributeIssetOrNotZero_Attribute_TRUE() {
 		$expected = 'ISTRUE';
+		$whereGrid = array();
 		$whereGrid['NUMERO']='xxx';
 		$isTrue = 'ISTRUE';
 		$isFalse = 'ISFALSE';
 		$result = SqlHelper::attributeIssetOrNotZero($whereGrid,'NUMERO',$isTrue,$isFalse);
 		$this->assertEquals( $expected , $result);
+	}	
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_1Word_MySQL() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_2Words_MySQL() {
+	    $expected = 'blablabla%etcetc';
+	    $string = 'blablabla etcetc';
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_5Words_MySQL() {
+	    $expected = 'aaa%bbb%ccc%ddd%eee';
+	    $string = 'aaa bbb ccc ddd eee';
+	    SqlHelper::setDbms(DBMS_MYSQL);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_1Word_Postgresql() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_POSTGRES);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_2Words_Postgresql() {
+	    $expected = 'blablabla etcetc';
+	    $string = 'blablabla etcetc';
+	    SqlHelper::setDbms(DBMS_POSTGRES);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_5Words_Postgresql() {
+	    $expected = 'aaa bbb ccc ddd eee';
+	    $string = 'aaa bbb ccc ddd eee';
+	    SqlHelper::setDbms(DBMS_POSTGRES);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_1Word_Sqlite() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_SQLITE);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_2Words_Sqlite() {
+	    $expected = 'blablabla%etcetc';
+	    $string = 'blablabla etcetc';
+	    SqlHelper::setDbms(DBMS_SQLITE);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_5Words_Sqlite() {
+	    $expected = 'aaa%bbb%ccc%ddd%eee';
+	    $string = 'aaa bbb ccc ddd eee';
+	    SqlHelper::setDbms(DBMS_SQLITE);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_1Word_SqlServer() {
+	    $expected = 'blablabla';
+	    $string = 'blablabla';
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_2Words_SqlServer() {
+	    $expected = 'blablabla%etcetc';
+	    $string = 'blablabla etcetc';
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testExplodeTextString_5Words_SqlServer() {
+	    $expected = 'aaa%bbb%ccc%ddd%eee';
+	    $string = 'aaa bbb ccc ddd eee';
+	    SqlHelper::setDbms(DBMS_SQLSERVER);
+	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
 	}
 }
