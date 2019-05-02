@@ -130,7 +130,7 @@ class SqlHelper
      * @return string`
      */
     public static function explodeTextString( $string ) {
-        $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
+        $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_POSTGRES) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
         if ( $dataBaseWithLike ) {
             $string = trim($string);
             $string = preg_replace('/\s/', '%', $string);
