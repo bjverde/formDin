@@ -282,7 +282,7 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	public function testExplodeTextString_2Words_Postgresql() {
-	    $expected = 'blablabla etcetc';
+	    $expected = 'blablabla%etcetc';
 	    $string = 'blablabla etcetc';
 	    SqlHelper::setDbms(DBMS_POSTGRES);
 	    $result = SqlHelper::explodeTextString( $string );
@@ -290,7 +290,7 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	public function testExplodeTextString_5Words_Postgresql() {
-	    $expected = 'aaa bbb ccc ddd eee';
+	    $expected = 'aaa%bbb%ccc%ddd%eee';
 	    $string = 'aaa bbb ccc ddd eee';
 	    SqlHelper::setDbms(DBMS_POSTGRES);
 	    $result = SqlHelper::explodeTextString( $string );
@@ -342,6 +342,63 @@ class SqlHelperTest extends TestCase
 	    $string = 'aaa bbb ccc ddd eee';
 	    SqlHelper::setDbms(DBMS_SQLSERVER);
 	    $result = SqlHelper::explodeTextString( $string );
+	    $this->assertEquals( $expected , $result);
+	}	
+	//--------------------------------------------------------------------------------
+	public function getWhereGrid() {
+	    $whereGrid = array('1WORD'=> 'blablabla'
+	                      ,'2WORD'=> 'blablabla etcetc'
+	                      ,'5WORD'=> 'aaa bbb ccc ddd eee'
+	                      ,'NUM_ORD'=> '1200'
+	                      );	    
+	    return $whereGrid;
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_Numeric_only() {
+	    $expected = ' AND NUM_ORD = 1200  ';
+	    $where = null;
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NUM_ORD', SqlHelper::SQL_TYPE_NUMERIC);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_Numeric_others() {
+	    $expected = ' AND 1WORD = \'blablabla\'   AND NUM_ORD = 1200  ';
+	    $where = ' AND 1WORD = \'blablabla\'  ';
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NUM_ORD', SqlHelper::SQL_TYPE_NUMERIC);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_TextEqual_1word() {
+	    $expected = ' AND 1WORD = \'blablabla\'  ';
+	    $where = null;
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '1WORD', SqlHelper::SQL_TYPE_TEXT_EQUAL);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_TextEqual_5word() {
+	    $expected = ' AND 5WORD = \'aaa bbb ccc ddd eee\'  ';
+	    $where = null;
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '5WORD', SqlHelper::SQL_TYPE_TEXT_EQUAL);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_TextLike_1word() {
+	    $expected = ' AND 1WORD like \'%blablabla%\' ';
+	    $where = null;
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '1WORD', SqlHelper::SQL_TYPE_TEXT_LIKE);
+	    $this->assertEquals( $expected , $result);
+	}
+	//--------------------------------------------------------------------------------
+	public function testGetAtributeWhereGridParameters_TextLike_5word() {
+	    $expected = ' AND 5WORD like \'%aaa%bbb%ccc%ddd%eee%\' ';
+	    $where = null;
+	    $whereGrid = self::getWhereGrid();
+	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '5WORD', SqlHelper::SQL_TYPE_TEXT_LIKE);
 	    $this->assertEquals( $expected , $result);
 	}
 }
