@@ -42,33 +42,14 @@ if (! defined ( 'DS' )) {
 	define ( 'DS', DIRECTORY_SEPARATOR );
 }
 $currentl_dir = dirname ( __FILE__ );
+$dirClasses = $currentl_dir.DS.'..'.DS;
 
-require_once ($currentl_dir . DS . '..' . DS . 'constants.php');
+require_once $dirClasses.'constants.php';
+require_once $dirClasses.'exceptions' . DS. 'UploadException.class.php';
+require_once $dirClasses.'helpers'.DS.'autoload_formdin_helper.php';
+require_once $dirClasses.'..'.DS.'vendor/autoload.php';   //Composer
+require_once 'autoload_formdin.php';
 
-$exeptions_dir = $currentl_dir . DS . '..' . DS . 'exceptions' . DS;
-require_once ($exeptions_dir . 'UploadException.class.php');
-
-$helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
-require_once ($helps_dir . 'ArrayHelper.class.php');
-require_once ($helps_dir . 'CountHelper.class.php');
-require_once ($helps_dir . 'DateTimeHelper.class.php');
-require_once ($helps_dir . 'FormDinHelper.class.php');
-require_once ($helps_dir . 'GetHelper.class.php');
-require_once ($helps_dir . 'HtmlHelper.class.php');
-require_once ($helps_dir . 'MessageHelper.class.php');
-require_once ($helps_dir . 'PaginationSQLHelper.class.php');
-require_once ($helps_dir . 'PostHelper.class.php');
-require_once ($helps_dir . 'RequestHelper.class.php');
-require_once ($helps_dir . 'ServerHelper.class.php');
-require_once ($helps_dir . 'SqlHelper.class.php');
-require_once ($helps_dir . 'StringHelper.class.php');
-require_once ($helps_dir . 'UrlHelper.class.php');
-
-
-//Composer
-require_once $currentl_dir.DS.'..'.DS.'..'.DS.'vendor/autoload.php';
-
-include_once ('autoload_formdin.php');
 class TApplication extends TLayout {
 	private $strTitle;
 	private $strTitleTag;
