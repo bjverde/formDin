@@ -40,7 +40,12 @@ class Horario_atendimento
     {
         $result = null;
         if( $objVo->getIdhorario_atendimento() ) {
-            $result = Horario_atendimentoDAO::update( $objVo );
+            $listHorarios = $objVo->getHorario();
+            if( is_array($listHorarios) ){
+                throw new DomainException('Para alterar só por ter uma horario');
+            } else {
+                $result = Horario_atendimentoDAO::update( $objVo );
+            }            
         } else {
             $listHorarios = $objVo->getHorario();
             foreach ($listHorarios as $horario ){

@@ -12,6 +12,8 @@
 
 defined('APLICATIVO') or die();
 
+//d($_REQUEST);
+
 $primaryKey = 'IDHORARIO_ATENDIMENTO';
 $frm = new TForm('Cadastro de Horários de atendimentos',800,950);
 $frm->setFlat(true);
@@ -20,11 +22,15 @@ $frm->setMaximize(true);
 $html1 = 'Esse form foi criado com o <a href="https://github.com/bjverde/sysgen">Sysgen 1.3.0</a></i>, depois alterado para atender o requisito.
           <br>Esse tela simula o cadastro de atendimento de horarios de um Dentista.
           <br>
+          <br><b>REPARE no Campo oculto HORARIOHIDDEN</b>.
+          <br>
           <br>Utiliza a tabela HORARIO_ATENDIMENTO do banco de dados bdApoio.s3db ( sqlite )  ';
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+$frm->addHiddenField( 'HORARIOHIDDEN' );   // coluna chave da tabela
+
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
 $listPessoa = Pessoa::selectAll();
@@ -90,6 +96,11 @@ switch( $acao ) {
             $frm->setMessage( $e->getMessage() );
         }
     break;
+    //--------------------------------------------------------------------------------
+    case 'gd_alterar':
+        $listSel = array(0=> RequestHelper::get('HORARIOHIDDEN') );
+        $frm->setFieldValue('HORARIO',$listSel);
+    break;
 }
 
 
@@ -112,7 +123,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $dados = Horario_atendimento::selectAll( $primaryKey, $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
                     .',IDPESSOA_DENTISTA|IDPESSOA_DENTISTA'
-                    .',HORARIO|HORARIO'
+                    .',HORARIO|HORARIOHIDDEN'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
     				   ,'Gride with SQL Pagination' // titulo do gride
