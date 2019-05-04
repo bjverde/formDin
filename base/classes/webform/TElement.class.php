@@ -704,10 +704,15 @@ $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
 
     //--------------------------------------------------------------------------
    /**
-    * DEPRECADED - PREFIRA USAR setClass. 
+    * DEPRECADED - change to setClass. 
+    * 
+    * Defines a css IN LINE property to create the style of the tag.
+    * To set the CSS of a form use addCssFile.
+    * The $mixProperty parameter can be an array of properties and css values.
+    * 
+    * 
     * Define uma propriedade do css IN LINE para criar o style da tag. 
     * Para setar o CSS de um formulario utilize addCssFile.
-    *
     * O parametro $mixProperty pode ser um array de propriedades e valores de css.
     *
     * <code>
