@@ -38,8 +38,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once __DIR__.'/../classes/helpers/DateTimeHelper.class.php';
-require_once __DIR__.'/../classes/helpers/StringHelper.class.php';
+require_once __DIR__.'/../../../classes/helpers/DateTimeHelper.class.php';
+require_once __DIR__.'/../../../classes/helpers/StringHelper.class.php';
 
 use PHPUnit\Framework\TestCase;
 
