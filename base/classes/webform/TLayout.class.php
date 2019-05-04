@@ -274,7 +274,7 @@ class TLayout extends THtmlPage {
 			$this->addStyle ( $this->getStyle () );
 			$this->addJavascript ( $this->getJs () );
 			if (is_array ( self::$arrLayout )) {
-				foreach ( self::$arrLayout as $k => $objLayout ) {
+				foreach ( self::$arrLayout as $objLayout ) {
 					$this->addJavascript ( $objLayout->getJs () );
 					$this->addStyle ( $objLayout->getStyle () );
 				}
@@ -555,21 +555,39 @@ class TLayout extends THtmlPage {
     }
 
     //-------------------------------------------------------------------------------------------
+    /**
+     * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+     * to work, TApplication->setResponsiveMode = false
+     * @param integer $intNewValue
+     */
     public function setNorthSize($intNewValue=null) {
-	$this->northSize = $intNewValue;
+	   $this->northSize = $intNewValue;
     }
-
+    /**
+     * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+     * to work, TApplication->setResponsiveMode = false
+     * @param integer $intNewValue
+     */
     public function getNorthSize() {
-	return $this->northSize;
+	   return $this->northSize;
     }
 
     //-------------------------------------------------------------------------------------------
+    /**
+     * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+     * to work, TApplication->setResponsiveMode = false
+     * @param integer $intNewValue
+     */
     public function setSouthSize($intNewValue=null) {
-	$this->southSize = $intNewValue;
+	   $this->southSize = $intNewValue;
     }
-
+    /**
+     * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
+     * to work, TApplication->setResponsiveMode = false
+     * @param integer $intNewValue
+     */
     public function getSouthSize() {
-	return $this->southSize;
+	   return $this->southSize;
     }
 
     //-------------------------------------------------------------------------------------------
@@ -629,26 +647,26 @@ class TLayout extends THtmlPage {
 
     //-------------------------------------------------------------------------------------------
     public function setShowBorders($boolNewValue=null) {
-	$this->showBorders = $boolNewValue;
+	   $this->showBorders = $boolNewValue;
     }
 
     public function getShowBorders() {
-	return ($this->showBorders === true) ? true : false;
+	   return ($this->showBorders === true) ? true : false;
     }
 
     //-------------------------------------------------------------------------------------------
     public function setClosable($boolNewValue=null, $intSpacingOpened=null, $intSpacingClosed=null) {
-	$this->closable = $boolNewValue;
-	if ($intSpacingClosed) {
-	    $this->setSpacingClosed($intSpingClosed);
-	}
-	if ($intSpacingOpened) {
-	    $this->setSpacingOpen($intSpacingOpened);
-	}
+    	$this->closable = $boolNewValue;
+    	if ($intSpacingClosed) {
+    	    $this->setSpacingClosed($intSpingClosed);
+    	}
+    	if ($intSpacingOpened) {
+    	    $this->setSpacingOpen($intSpacingOpened);
+    	}
     }
 
     public function getClosable() {
-	return ($this->closable === true) ? true : false;
+	   return ($this->closable === true) ? true : false;
     }
 
     //-------------------------------------------------------------------------------------------
