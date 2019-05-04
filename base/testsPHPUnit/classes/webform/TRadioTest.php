@@ -1,9 +1,11 @@
 <?php
-require_once __DIR__.'/../classes/webform/TElement.class.php';
-require_once __DIR__.'/../classes/webform/TControl.class.php';
-require_once __DIR__.'/../classes/webform/TOption.class.php';
-require_once __DIR__.'/../classes/webform/TRadio.class.php';
-require_once __DIR__.'/../classes/webform/TPDOConnection.class.php';
+
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/webform/TElement.class.php';
+require_once $path.'classes/webform/TControl.class.php';
+require_once $path.'classes/webform/TOption.class.php';
+require_once $path.'classes/webform/TRadio.class.php';
+require_once $path.'classes/webform/TPDOConnection.class.php';
 
 use PHPUnit\Framework\TestCase;
 

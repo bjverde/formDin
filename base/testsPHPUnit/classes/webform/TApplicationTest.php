@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__.'/../classes/constants.php';
-require_once __DIR__.'/../classes/webform/TApplication.class.php';
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/constants.php';
+require_once $path.'classes/webform/TApplication.class.php';
 
 use PHPUnit\Framework\TestCase;
 /**
@@ -73,9 +74,10 @@ class TApplicationTest extends TestCase
 	}
 	
 	public function testGetAppImgLogoHtml_SetImg() {
-	    $expected= '<img src="'.__DIR__.'/../imagens/tree.gif">';
+	    $path =  __DIR__.'/../../../';
+	    $expected= '<img src="'.$path.'imagens/tree.gif">';
 		
-		$this->tApplication->setImgLogoPath(__DIR__.'/../imagens/tree.gif');
+	    $this->tApplication->setImgLogoPath($path.'imagens/tree.gif');
 		$result = $this->tApplication->getImgLogoHtml();
 		$this->assertEquals( $expected , $result);
 	}

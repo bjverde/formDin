@@ -39,8 +39,8 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once __DIR__.'/../classes/constants.php';
-require_once __DIR__.'/../classes/webform/TDAOCreate.class.php';
+require_once __DIR__.'/../../../classes/constants.php';
+require_once __DIR__.'/../../../classes/webform/TDAOCreate.class.php';
 
 use PHPUnit\Framework\TestCase;
 

@@ -38,8 +38,9 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once __DIR__.'/../classes/constants.php';
-require_once __DIR__.'/../classes/webform/TFormCreate.class.php';
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/constants.php';
+require_once $path.'classes/webform/TFormCreate.class.php';
 
 use PHPUnit\Framework\TestCase;
 

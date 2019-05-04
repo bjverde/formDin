@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../classes/webform/TElement.class.php';
+require_once __DIR__.'/../../../classes/webform/TElement.class.php';
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,15 +1,15 @@
 <?php
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/helpers/ArrayHelper.class.php';
+require_once $path.'classes/helpers/CountHelper.class.php';
 
-require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
-require_once __DIR__.'/../classes/helpers/CountHelper.class.php';
-
-require_once __DIR__.'/../classes/webform/TElement.class.php';
-require_once __DIR__.'/../classes/webform/TControl.class.php';
-require_once __DIR__.'/../classes/webform/TBox.class.php';
-require_once __DIR__.'/../classes/webform/TEdit.class.php';
-require_once __DIR__.'/../classes/webform/TForm.class.php';
-require_once __DIR__.'/../classes/webform/TRichTextEditor.class.php';
-require_once __DIR__.'/../classes/webform/TSelect.class.php';
+require_once $path.'classes/webform/TElement.class.php';
+require_once $path.'classes/webform/TControl.class.php';
+require_once $path.'classes/webform/TBox.class.php';
+require_once $path.'classes/webform/TEdit.class.php';
+require_once $path.'classes/webform/TForm.class.php';
+require_once $path.'classes/webform/TRichTextEditor.class.php';
+require_once $path.'classes/webform/TSelect.class.php';
 
 use PHPUnit\Framework\TestCase;
 

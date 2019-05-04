@@ -1,9 +1,9 @@
 <?php
-
-require_once __DIR__.'/../classes/constants.php';
-require_once __DIR__.'/../classes/helpers/ArrayHelper.class.php';
-require_once __DIR__.'/../classes/helpers/CountHelper.class.php';
-require_once __DIR__.'/../classes/webform/TPDOConnection.class.php';
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/constants.php';
+require_once $path.'classes/helpers/ArrayHelper.class.php';
+require_once $path.'classes/helpers/CountHelper.class.php';
+require_once $path.'classes/webform/TPDOConnection.class.php';
 
 use PHPUnit\Framework\TestCase;
 

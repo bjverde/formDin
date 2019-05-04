@@ -1,6 +1,8 @@
 <?php
 if(!defined('ENCODINGS')){ define('ENCODINGS','ISO-8859-1'); }
-require_once __DIR__.'/../classes/webform/THtmlPage.class.php';
+
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/webform/THtmlPage.class.php';
 
 use PHPUnit\Framework\TestCase;
 
