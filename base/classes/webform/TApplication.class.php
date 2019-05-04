@@ -131,7 +131,7 @@ class TApplication extends TLayout {
 		$this->setResponsiveMode( true );
 		
 		// arquivo css padrão localizado na base base/css
-		$this->addCssFile ( 'app.css' );
+		$this->addCssFile ( 'css/app.css' );
 		$this->setBackgroundImage ( $this->getBase () . '/css/imagens/app/bg_listrado.jpg' );
 		
 		// biblioteca de funções geral
@@ -513,11 +513,11 @@ class TApplication extends TLayout {
 		$this->addJavascript ( "background_image='" . $this->getBackgroundImage () . "';" );
 		$this->addJavascript ( "background_repeat='" . $this->getBackgroundRepeat () . "';" );
 		$this->addJavascript ( "background_position='" . $this->getBackgroundPosition () . "';" );
-		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
-		$this->addJsCssFile ( 'app.js' );
 		
-		$this->addJsCssFile ( 'FormDin4.css' );
-		$this->addJsCssFile ( $this->getCssFile () );
+		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
+		$this->addJsCssFile ( 'js/app.js' );		
+		$this->addJsCssFile ( 'css/FormDin4.css' );
+		$this->addJsCssFile ( $this->getCssFile() );
 		
 		// arquivo js que será carregado por último se existir
 		$this->addJsCssFile ( 'js/main.js' );

@@ -210,6 +210,9 @@ class THtmlPage extends TElement
 	    
 	    if ( $file == null && file_exists($this->getBase().$aFile[0]) ){
 	        $file = $this->getBase().$aFile[0];
+	    } else {
+	        //$log = 'formDin: '.FORMDIN_VERSION.' failed to load file:'.$aFile[0];
+	        //error_log($log);
 	    }
 	    
 	    return $file;
