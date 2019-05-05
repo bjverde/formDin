@@ -345,6 +345,32 @@ class TApplication extends TLayout {
 	{
 	    return $this->responsiveMode;
 	}
+	public function loadModule() {
+	    // se pressionar F5, recarregar o ultimo módulo solicitado
+	    $loadModule = null;
+	    if (isset ( $_SESSION [APLICATIVO] ['modulo'] ) && $_SESSION [APLICATIVO] ['modulo']) {
+	        
+	        if ($_SESSION [APLICATIVO] ['modulo'] != $this->getLoginFile ()) {
+	            // $this->addJavascript( '//se pressionar F5, recarregar o ultimo módulo solicitado' );
+	            $loadModule = $_SESSION [APLICATIVO] ['modulo'];
+	            // $this->addJavascript( 'app_load_module("' . $_SESSION[ APLICATIVO ][ 'modulo' ] . '")' );
+	        }
+	    }
+	    if (!$loadModule) {
+	        if ($this->getDefaultModule()) {
+	            $loadModule = $this->getDefaultModule();
+	            $this->addJavascript( 'var app_default_module="'.$loadModule.'";' );
+	            // $this->addJavascript( 'app_load_module("' . $this->getDefaultModule() . '")' );
+	        } else {
+	            // desenhar o background e marca dagua
+	            // $this->addJavascript( 'app_load_module("about:blank")' );
+	            $loadModule = 'about:blank';
+	        }
+	    }
+	    if ($loadModule) {
+	        $this->addJavascript ( 'app_load_module("'.$loadModule.'")' );
+	    }
+	}
 	//---------------------------------------------------------------------------------	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
@@ -366,9 +392,9 @@ class TApplication extends TLayout {
 		
         $this->clearTempFiles();
 		
-		if (! $this->getLoginFile () && ! $this->getMainMenuFile () && ! $this->getDefaultModule ()) {
-			$_SESSION [APLICATIVO] = null;
-		}
+        if( !$this->getLoginFile() && !$this->getMainMenuFile() && !$this->getDefaultModule() ) {
+            $_SESSION [APLICATIVO] = null;
+        }
 		
 		if ( $this->getResponsiveMode() == false &&  $this->getWidth()  ) {
 			$e = new TElement ( 'div' );
@@ -413,34 +439,9 @@ class TApplication extends TLayout {
 				exit ();
 			}
 		}
-		
 		$this->buildMainMenu();
-		
-		// se pressionar F5, recarregar o ultimo módulo solicitado
-		$loadModule = null;
-		if (isset ( $_SESSION [APLICATIVO] ['modulo'] ) && $_SESSION [APLICATIVO] ['modulo']) {
-			
-			if ($_SESSION [APLICATIVO] ['modulo'] != $this->getLoginFile ()) {
-				// $this->addJavascript( '//se pressionar F5, recarregar o ultimo módulo solicitado' );
-				$loadModule = $_SESSION [APLICATIVO] ['modulo'];
-				// $this->addJavascript( 'app_load_module("' . $_SESSION[ APLICATIVO ][ 'modulo' ] . '")' );
-			}
-		}
-		if (! $loadModule) {
-			if ($this->getDefaultModule ()) {
-				$loadModule = $this->getDefaultModule ();
-				$this->addJavascript ( 'var app_default_module="' . $this->getDefaultModule () . '";' );
-				// $this->addJavascript( 'app_load_module("' . $this->getDefaultModule() . '")' );
-			} else {
-				// desenhar o background e marca dagua
-				// $this->addJavascript( 'app_load_module("about:blank")' );
-				$loadModule = 'about:blank';
-			}
-		}
-		if ($loadModule) {
-			$this->addJavascript ( 'app_load_module("' . $loadModule . '")' );
-		}
-		$this->show ();
+		$this->loadModule();
+		$this->show();
 	}
 	
 	/**
@@ -515,7 +516,7 @@ class TApplication extends TLayout {
 		$this->addJavascript ( "background_position='" . $this->getBackgroundPosition () . "';" );
 		
 		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
-		$this->addJsCssFile ( 'js/app.js' );		
+		$this->addJsCssFile ( 'js/app.js' );
 		$this->addJsCssFile ( 'css/FormDin4.css' );
 		$this->addJsCssFile ( $this->getCssFile() );
 		
