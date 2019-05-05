@@ -112,22 +112,22 @@ class TApplication extends TLayout {
 		
 		// desenv: error_reporting( E_ALL | E_STRICT );
 		// error_reporting( E_ALL | E_STRICT );
-		parent::__construct ( 'app', 50, 20 ); // criar layout com norte=50px e sul=20px
-		$this->setPadding ( 0 );
+		parent::__construct( 'app', 50, 20 ); // criar layout com norte=50px e sul=20px
+		$this->setPadding( 0 );
 		// criar o layout central com area de menu 30px e o iframe central
-		$this->loCenter = new TLayout ( 'loCenter', 30 );
-		$this->loCenter->setPadding ( '0px' );
-		$this->loCenter->getCenterArea ()->setTagType ( 'iframe' );
-		$this->loCenter->getCenterArea ()->setId ( 'app_iframe' );
-		$this->loCenter->getNorthArea ()->setId ( 'div_main_menu' );
-		$this->loCenter->setNorthInitClosed ( false );
-		$this->addLayout ( $this->loCenter, 'C' );
+		$this->loCenter = new TLayout( 'loCenter', 30 );
+		$this->loCenter->setPadding( '0px' );
+		$this->loCenter->getCenterArea()->setTagType( 'iframe' );
+		$this->loCenter->getCenterArea()->setId( 'app_iframe' );
+		$this->loCenter->getNorthArea()->setId( 'div_main_menu' );
+		$this->loCenter->setNorthInitClosed( false );
+		$this->addLayout( $this->loCenter, 'C' );
 		
-		$this->setTitle ( $strTitle );
-		$this->setSubtitle ( $strSubtitle );
-		$this->setUnit ( $strUnit );
-		$this->setSigla ( $strSigla );
-		$this->setShowMenu ( true );
+		$this->setTitle( $strTitle );
+		$this->setSubtitle( $strSubtitle );
+		$this->setUnit( $strUnit );
+		$this->setSigla( $strSigla );
+		$this->setShowMenu( true );
 		$this->setResponsiveMode( true );
 		
 		// arquivo css padrão localizado na base base/css
