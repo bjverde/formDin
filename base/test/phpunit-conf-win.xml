@@ -1,0 +1,49 @@
+<phpunit 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.2/phpunit.xsd"
+    colors="true"
+    verbose="true"
+    >
+    <testsuites>
+        <testsuite name="FormDin 5">
+            <directory>D:\wamp\www\formDin\base\test</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">D:\wamp\www\formDin\base</directory>
+            <exclude>
+                <directory suffix=".php">D:\wamp\www\formDin\base\callbacks</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\css</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\imagens</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\js</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\lib_fpdf181</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\lib</directory>
+                <directory suffix=".php">D:\wamp\www\formDin\base\vendor</directory>
+                <file>D:\wamp\www\formDin\base\tmp\index.php</file>
+                <file>D:\wamp\www\formDin\base\callbacks\index.php</file>
+                <file>D:\wamp\www\formDin\base\index.php</file>
+                <file>D:\wamp\www\formDin\base\test\index.php</file>
+                <file>D:\wamp\www\formDin\base\xajax\index.php</file>
+                <file>D:\wamp\www\formDin\base\classes\helpers\index.php</file>                
+                <file>D:\wamp\www\formDin\base\classes\index.php</file>
+
+                <file>D:\wamp\www\formDin\base\classes\webform\index.php</file>
+                
+                <file>D:\wamp\www\formDin\base\css\index.php</file>
+                <file>D:\wamp\www\formDin\base\imagens\index.php</file>
+                <file>D:\wamp\www\formDin\base\js\index.php</file>
+                <file>D:\wamp\www\formDin\base\logs\index.php</file>                
+                
+                
+                <file>D:\wamp\www\formDin\base\vendor\index.php</file>
+                
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="D:\wamp\www\formDin\phpunit-code-coverage\" lowUpperBound="35" highLowerBound="70"/>        
+        <log type="testdox-text" target="D:\wamp\www\formDin\phpunit-code-coverage\testResult.txt"/>
+        <log type="testdox-html" target="D:\wamp\www\formDin\phpunit-code-coverage\testResult.html"/>
+    </logging>     
+</phpunit>

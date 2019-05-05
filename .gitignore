@@ -8,7 +8,10 @@
 /.buildpath
 base/tmp/*
 !base/tmp/index.php
-base/testsPHPUnit/.phpunit.result.cache
+phpunit-code-coverage/*
+!phpunit-code-coverage/phpunit-code-coverage.zip
 /sysgen/
+
+
 /xx/
 /appteste/

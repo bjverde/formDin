@@ -38,12 +38,12 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-$path =  __DIR__.'/../../../';
-require_once $path.'classes/webform/TElement.class.php';
-require_once $path.'classes/webform/TTable.class.php';
-require_once $path.'classes/webform/TGrid.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'webform/TElement.class.php';
+require_once $path.'webform/TTable.class.php';
+require_once $path.'webform/TGrid.class.php';
 
-require_once $path.'testsPHPUnit/mockFormDinArray.php';
+require_once $path.'../test/mockFormDinArray.php';
 
 use PHPUnit\Framework\TestCase;
 
