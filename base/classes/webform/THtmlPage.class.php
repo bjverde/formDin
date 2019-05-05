@@ -97,17 +97,15 @@ class THtmlPage extends TElement
 			}
 			$this->getJavascript();
 		}
-		if($this->getFavIcon())
-		{
+		if($this->getFavIcon()) {
 			$this->addInHead('<link rel="shortcut icon" href="'.$this->getFavIcon().'" />');
 		}
-		if( $this->getForm())
-		{
+		if( $this->getForm()) {
 		 	//$this->addJsFile($this->objForm->getJs());
 			$this->addInBody($this->objForm);
 		}
 		if ( $this->objBody->getChildren()) {
-			foreach($this->objBody->getChildren() as $k=>$child ) {
+			foreach($this->objBody->getChildren() as $child ) {
 				if(is_object($child) && method_exists($child,'getFieldType') && $child->getFieldType() == 'form') {
 					//print 'tem um formulario';
 					$this->addJsCssFile($child->getJsCss());
@@ -136,15 +134,11 @@ class THtmlPage extends TElement
 			*/
 			//$this->addInHead($js);
 		//}
-		if($this->getParentControl())
-		{
+		if($this->getParentControl()){
 			$this->getBody()->setTagType('');
 			return $this->getBody()->show($print);
-		}
-		else
-		{
+		} else {
 			return parent::show($print);
-
 		}
 	}
 	/**
@@ -157,7 +151,7 @@ class THtmlPage extends TElement
 	*/
 	public function addJsCssFile($mixJsCssFile) {
 		if( is_array($mixJsCssFile) ) {
-			foreach($mixJsCssFile as $k=>$file) {
+			foreach($mixJsCssFile as $file) {
 				$this->addJsCssFile($file);
 			}
 		} else if( is_string($mixJsCssFile) ) {
@@ -252,25 +246,17 @@ class THtmlPage extends TElement
 	*/
 	public function addInBody($child)
 	{
-		if( is_array($child) )
-		{
-			foreach ($child as $k=>$v)
-			{
+		if( is_array($child) ) {
+			foreach ($child as $v) {
 				$this->objBody->add($v);
 			}
-		}
-		else
-		{
-			if($child != null )
-			{
+		} else {
+			if($child != null ) {
 				$this->objBody->add($child);
 			}
-//			if( is_object($child))
-//			{
-//				$child->setParentControl($this);
-//			}
 		}
 	}
+	
 	/**
 	* Adiciona conteudo dentro da tag title. Pode ser um texto ou outro objeto da classe Element
 	*
@@ -278,21 +264,17 @@ class THtmlPage extends TElement
 	*/
 	public function addInTitle($child)
 	{
-		if( is_array($child) )
-		{
-			foreach ($child as $k=>$v)
-			{
+		if( is_array($child) ) {
+			foreach ($child as $v) {
 				$this->objTitle->add($v);
 			}
-		}
-		else
-		{
-			if($child != null )
-			{
+		} else {
+			if($child != null ) {
 				$this->objTitle->add($child);
 			}
 		}
 	}
+	
 	/**
 	* Adiciona conteudo dentro da tag head. Pode ser um texto ou outro objeto da classe Element
 	*
@@ -300,17 +282,12 @@ class THtmlPage extends TElement
 	*/
 	public function addInHead($child)
 	{
-		if( is_array($child) )
-		{
-			foreach ($child as $k=>$v)
-			{
+		if( is_array($child) ) {
+			foreach ($child as $v) {
 				$this->objHead->add($v);
 			}
-		}
-		else
-		{
-			if($child != null )
-			{
+		} else {
+			if($child != null ) {
 				$this->objHead->add($child);
 			}
 		}
@@ -360,39 +337,29 @@ class THtmlPage extends TElement
 		$boolReturnText = $boolReturnText === null ? false : $boolReturnText;
 		$boolOnLoad 	= $boolOnLoad === null ? true : $boolOnLoad;
 		$arrTemp=null;
-		if(is_array(self::$arrJsOnLoad))
-		{
+		if(is_array(self::$arrJsOnLoad)) {
 			$arrTemp = (array)self::$arrJsOnLoad;
 			// colocar em ordem crescente de execução
 			ksort($arrTemp);
 			self::$js->setProperty('language','javascript');
 			self::$js->clearCss();
-			if( $boolOnLoad )
-			{
+			if( $boolOnLoad ) {
 				self::$js->add('if( typeof jQuery=="function" ){try{ jQuery(document).ready(function() {');
 			}
 			self::$js->add(chr(9).'// javasripts que serão executados depois que o documento estiver 100% carregado.');
-   			foreach($arrTemp as $k=>$mixJs)
-			{
-				if( is_object( $mixJs ) )
-				{
+   			foreach($arrTemp as $k=>$mixJs) {
+				if( is_object( $mixJs ) ) {
 					self::$js->add( $mixJs );
-				}
-				else
-				{
+				} else {
 					self::$js->add(chr(9).str_replace(";;",";",$mixJs.";"));
 				}
 			}
-			if( $boolOnLoad)
-			{
+			if( $boolOnLoad) {
 				self::$js->add('})} catch(e){ alert( e.message ); } }');
 			}
-			if( $boolReturnText===true )
-			{
+			if( $boolReturnText===true ) {
 				return self::$js->show(false);
-			}
-			else
-			{
+			} else {
 				$this->addInHead(self::$js);
 			}
 		}
@@ -453,9 +420,4 @@ class THtmlPage extends TElement
 		return $this->favIcon;
 	}
 }
-// teste
-/*
-$p = new THtmlPage();
-$p->show();
-*/
 ?>
