@@ -347,7 +347,7 @@ class THtmlPage extends TElement
 				self::$js->add('if( typeof jQuery=="function" ){try{ jQuery(document).ready(function() {');
 			}
 			self::$js->add(chr(9).'// javasripts que serão executados depois que o documento estiver 100% carregado.');
-   			foreach($arrTemp as $k=>$mixJs) {
+   			foreach($arrTemp as $mixJs) {
 				if( is_object( $mixJs ) ) {
 					self::$js->add( $mixJs );
 				} else {
