@@ -63,6 +63,7 @@ $app->setMenuIconsPath('imagem/');
 $app->setWidth(990);
 $app->setNorthSize(55);
 $app->setMainMenuFile('includes/menu.php');
+$app->setFavIcon('favicon-32x32.png');
 $app->setConfigFile(null);
 //$app->setLoginFile('includes/tela_login.php');
 $app->setOnGetLoginInfo('minhaFuncaoLogin');
