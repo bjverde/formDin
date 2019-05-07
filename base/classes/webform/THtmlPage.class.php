@@ -415,9 +415,13 @@ class THtmlPage extends TElement
 	{
 		$this->favIcon=$urlImage;
 	}
-	public function getFavIcon($urlImage=null)
+	public function getFavIcon()
 	{
-		return $this->favIcon;
+	    $result = $this->favIcon;
+	    if( empty($this->favIcon) ){
+	        $result = $this->getBase().'/imagens/favicon-32x32.png';
+	    }
+	    return $result;
 	}
 }
 ?>
