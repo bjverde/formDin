@@ -42,5 +42,19 @@ class THtmlPageTest extends TestCase
 		$result =  $this->tHtmlPage->getCharset();
 		$this->assertEquals( $expected , $result);
 	}
+	
+	
+	public function testGetFavIcon_Null() {
+	    $expected = '../../base//imagens/favicon-32x32.png';
+	    $result =  $this->tHtmlPage->getFavIcon();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetFavIcon_informed() {
+	    $expected = '../base/imagens/favicon-blue.png';
+	    $this->tHtmlPage->setFavIcon('../base/imagens/favicon-blue.png');
+	    $result =  $this->tHtmlPage->getFavIcon();
+	    $this->assertEquals( $expected , $result);
+	}
 }
 
