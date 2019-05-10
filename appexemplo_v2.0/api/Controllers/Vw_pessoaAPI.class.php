@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.5.1-alpha
+ * FormDin Version: 4.5.3-alpha
  * 
- * System xx created in: 2019-04-14 20:35:33
+ * System appev2 created in: 2019-05-10 01:19:09
  */
 
 
@@ -25,7 +25,7 @@ class Vw_pessoaAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function selectAll(Request $request, Response $response, array $args): Response
+    public static function selectAll(Request $request, Response $response, array $args)
     {
         $result = \Vw_pessoa::selectAll();
         $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
@@ -46,7 +46,7 @@ class Vw_pessoaAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function selectById(Request $request, Response $response, array $args): Response
+    public static function selectById(Request $request, Response $response, array $args)
     {
         $result = self::selectByIdInside($args);
         $msg = array( 'qtd'=> \CountHelper::count($result)

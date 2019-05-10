@@ -44,8 +44,8 @@ require_once('includes/config_conexao.php');
 
 //FormDin version: 4.2.6-alpha
 require_once '../base/classes/webform/TApplication.class.php';
-require_once 'classes/autoload_ap2v.php';
-require_once 'dao/autoload_ap2v_dao.php';
+require_once 'classes/autoload_appev2.php';
+require_once 'dao/autoload_appev2_dao.php';
 
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
