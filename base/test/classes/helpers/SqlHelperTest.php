@@ -232,7 +232,7 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	/**
-	 * @expectedException InvalidArgumentException
+	 * @expectedException DomainException
 	 */
 	public function testTransformValidateString_SingleQuotes_SqlServer() {
 	    $string = "blabl'abla";
@@ -241,12 +241,65 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	/**
-	 * @expectedException InvalidArgumentException
+	 * @expectedException DomainException
 	 */
 	public function testTransformValidateString_DubleQuotes_SqlServer() {
 	    $string = 'blabl"abla';
 	    SqlHelper::setDbms(DBMS_SQLSERVER);
 	    SqlHelper::transformValidateString( $string );
+	}
+	//--------------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGetSqlTypeInText_Exception() {
+	    $expected = null;
+	    //SqlHelper::setDbms(DBMS_MYSQL);
+	    $stringWhere = null;
+	    $arrayWhereGrid = array();
+	    $arrayWhereGrid['LETRAS'] = 'xxx';
+	    $attribute = 'LETRAS';
+	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,null);
+	    $this->assertEquals( $expected , $result);
+	}	
+	public function testGetSqlTypeInText() {
+	    $expected = ' AND LETRAS in (\'a\',\'b\',\'c\') ';
+	    //SqlHelper::setDbms(DBMS_MYSQL);
+	    $stringWhere = null;
+	    $value = array('a','b','c');
+	    $arrayWhereGrid = array(); 
+	    $arrayWhereGrid['X'] = 123;
+	    $arrayWhereGrid['D'] = 123;
+	    $arrayWhereGrid['LETRAS'] = $value;
+	    $attribute = 'LETRAS';
+	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $this->assertEquals( $expected , $result);
+	}
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testGetSqlTypeInNumeric_Exception() {
+	    $expected = null;
+	    //SqlHelper::setDbms(DBMS_MYSQL);
+	    $stringWhere = null;
+	    $arrayWhereGrid = array();
+	    $arrayWhereGrid['LETRAS'] = 'xxx';
+	    $attribute = 'LETRAS';
+	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,null);
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testGetSqlTypeInNumeric() {
+	    $expected = ' AND NUMEROS in (1,2,3) ';
+	    //SqlHelper::setDbms(DBMS_MYSQL);
+	    $stringWhere = null;
+	    $value = array('1','2','3');
+	    $arrayWhereGrid = array();
+	    $arrayWhereGrid['X'] = 123;
+	    $arrayWhereGrid['D'] = 123;
+	    $arrayWhereGrid['NUMEROS'] = $value;
+	    $attribute = 'NUMEROS';
+	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
 	public function testExplodeTextString_1Word_MySQL() {
