@@ -64,7 +64,7 @@ if (!defined('TAB')) {
 }
 
 
-define('FORMDIN_VERSION', '4.5.3-alpha');
+define('FORMDIN_VERSION', '4.6.0');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');
