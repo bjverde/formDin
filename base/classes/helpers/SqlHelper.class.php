@@ -198,19 +198,29 @@ class SqlHelper
                                            , $value
                                            , $connector=self::SQL_CONNECTOR_AND
                                            ) {
-       If(!is_array($value)){
-           throw new InvalidArgumentException(TMessage::ARRAY_EXPECTED);
+       If(is_array($value)){
+           $qtdElement = CountHelper::count($value);
+           if( $qtdElement == 1 ){
+               $value = $value[0];
+               $stringWhere = self::getSqlTypeText($stringWhere
+                                                 , $arrayWhereGrid
+                                                 , $attribute
+                                                 , $testZero
+                                                 , $value
+                                                 , $connector);
+           } else if( $qtdElement > 1 ) {
+               $value = implode("','",$value);
+               $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
+               $stringWhere = $stringWhere.$isTrue;
+           }
+       } else {
+           $stringWhere = self::getSqlTypeText($stringWhere
+                                             , $arrayWhereGrid
+                                             , $attribute
+                                             , $testZero 
+                                             , $value
+                                             , $connector);
        }
-       /*
-       $stringIn = null;
-       foreach ($value as $valueInArray) {
-           $valueInArray = self::transformValidateString( $valueInArray );
-           $stringIn = $stringIn.'\''.$valueInArray
-       }
-       */
-       $value = implode("','",$value);
-       $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
-       $stringWhere = $stringWhere.$isTrue;
        return $stringWhere;
     }
     public static function getSqlTypeInNumeric( $stringWhere
@@ -221,19 +231,29 @@ class SqlHelper
                                               , $connector=self::SQL_CONNECTOR_AND
                                               ) {
         
-        If(!is_array($value)){
-          throw new InvalidArgumentException(TMessage::ARRAY_EXPECTED);
+        If(is_array($value)){
+            $qtdElement = CountHelper::count($value);
+            if( $qtdElement == 1 ){
+                $value = $value[0];
+                $stringWhere = self::getSqlTypeNumeric($stringWhere
+                                                     , $arrayWhereGrid
+                                                     , $attribute
+                                                     , $testZero
+                                                     , $value
+                                                     , $connector);
+            } else if( $qtdElement > 1 ) {
+                $value = implode(",",$value);
+                $isTrue = ' AND '.$attribute.' in ('.$value.') ';
+                $stringWhere = $stringWhere.$isTrue;
+            }
+        }else{
+            $stringWhere = self::getSqlTypeNumeric($stringWhere
+                                                 , $arrayWhereGrid
+                                                 , $attribute
+                                                 , $testZero 
+                                                 , $value
+                                                 , $connector);
         }
-        /*
-        $stringIn = null;
-        foreach ($value as $valueInArray) {
-        $valueInArray = self::transformValidateString( $valueInArray );
-        $stringIn = $stringIn.'\''.$valueInArray
-        }
-        */
-        $value = implode(",",$value);
-        $isTrue = ' AND '.$attribute.' in ('.$value.') ';
-        $stringWhere = $stringWhere.$isTrue;
         return $stringWhere;
     }
     //----------------------------------------    

@@ -249,22 +249,30 @@ class SqlHelperTest extends TestCase
 	    SqlHelper::transformValidateString( $string );
 	}
 	//--------------------------------------------------------------------------------
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testGetSqlTypeInText_Exception() {
-	    $expected = null;
-	    //SqlHelper::setDbms(DBMS_MYSQL);
+	public function testGetSqlTypeInText_NoArray() {
+	    $expected = ' AND LETRAS = \'xxx\'  ';
 	    $stringWhere = null;
+	    $value = 'xxx';
 	    $arrayWhereGrid = array();
-	    $arrayWhereGrid['LETRAS'] = 'xxx';
+	    $arrayWhereGrid['LETRAS'] = $value;
 	    $attribute = 'LETRAS';
-	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,null);
+	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
 	    $this->assertEquals( $expected , $result);
-	}	
+	}
+	public function testGetSqlTypeInText_Array1Element() {
+	    $expected = ' AND LETRAS = \'a\'  ';
+	    $stringWhere = null;
+	    $value = array('a');
+	    $arrayWhereGrid = array();
+	    $arrayWhereGrid['X'] = 123;
+	    $arrayWhereGrid['D'] = 123;
+	    $arrayWhereGrid['LETRAS'] = $value;
+	    $attribute = 'LETRAS';
+	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $this->assertEquals( $expected , $result);
+	}
 	public function testGetSqlTypeInText() {
 	    $expected = ' AND LETRAS in (\'a\',\'b\',\'c\') ';
-	    //SqlHelper::setDbms(DBMS_MYSQL);
 	    $stringWhere = null;
 	    $value = array('a','b','c');
 	    $arrayWhereGrid = array(); 
@@ -275,22 +283,31 @@ class SqlHelperTest extends TestCase
 	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
 	    $this->assertEquals( $expected , $result);
 	}
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testGetSqlTypeInNumeric_Exception() {
-	    $expected = null;
-	    //SqlHelper::setDbms(DBMS_MYSQL);
+	//--------------------------------------------------------------------------------
+	public function testGetSqlTypeInNumeric_NoArray() {
+	    $expected = ' AND NUMEROS = 1  ';
 	    $stringWhere = null;
+	    $value = '1';
 	    $arrayWhereGrid = array();
-	    $arrayWhereGrid['LETRAS'] = 'xxx';
-	    $attribute = 'LETRAS';
-	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,null);
+	    $arrayWhereGrid['NUMEROS'] = $value;
+	    $attribute = 'NUMEROS';
+	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testGetSqlTypeInNumeric_Array1Element() {
+	    $expected = ' AND NUMEROS = 1  ';
+	    $stringWhere = null;
+	    $value = array('1');
+	    $arrayWhereGrid = array();
+	    $arrayWhereGrid['X'] = 123;
+	    $arrayWhereGrid['D'] = 123;
+	    $arrayWhereGrid['NUMEROS'] = $value;
+	    $attribute = 'NUMEROS';
+	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
 	    $this->assertEquals( $expected , $result);
 	}
 	public function testGetSqlTypeInNumeric() {
 	    $expected = ' AND NUMEROS in (1,2,3) ';
-	    //SqlHelper::setDbms(DBMS_MYSQL);
 	    $stringWhere = null;
 	    $value = array('1','2','3');
 	    $arrayWhereGrid = array();
