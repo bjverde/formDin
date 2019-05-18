@@ -159,18 +159,18 @@ class TElementTest extends TestCase
 	    $this->assertSame($expected, $result);
 	}
 	
-	public function testgetIdent_3() {
-	    $expected = chr( 9 );
+	public function testgetIdent_3_depthNull() {
+	    $expected = null;
 	    $test = new TElement('nav');
 	    $result = $test->getIdent(3);
-	    $this->assertSame($expected, $result);
+	    $this->assertEquals($expected, $result);
 	}
 	
-	public function testgetIdent_1() {
-	    $expected = ' ';
+	public function testgetIdent_1_depthNull() {
+	    $expected = null;
 	    $test = new TElement('nav');
 	    $result = $test->getIdent(1);
-	    $this->assertSame($expected, $result);
+	    $this->assertEquals($expected, $result);
 	}
 	
 	public function testChilren() {

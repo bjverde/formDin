@@ -57,7 +57,9 @@ if (!defined('EOL')) {
     define('EOL', "\n");
 }
 if (!defined('ESP')) {
-    define('ESP', '    ');
+    $esp = chr(32).chr(32).chr(32).chr(32);
+    //define('ESP', '    ');
+    define('ESP', $esp);
 }
 if (!defined('TAB')) {
     define('TAB', chr(9));

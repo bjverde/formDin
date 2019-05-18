@@ -791,7 +791,7 @@ class TElement
     {
         if ( $GLOBALS[ 'teste' ] && self::$depth > 0 )
         {
-            return str_repeat( chr( 9 ), ( self::$depth + $intDepth ) );
+            return str_repeat( ESP, ( self::$depth + $intDepth ) );
         }
         return null;
     }

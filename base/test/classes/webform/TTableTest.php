@@ -88,7 +88,7 @@ class TTableTest extends TestCase
 	    $expected = '<table id="tb01" >'.EOL
 	               .'<tr>'.EOL
 	               .ESP.'<td>'.EOL
-	               .'        aaa'.EOL
+	               .ESP.ESP.'aaa'.EOL
 	               .ESP.'</td>'.EOL
 	               .'</tr>'.EOL
 	               .'</table>'.EOL;
