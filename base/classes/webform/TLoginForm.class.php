@@ -93,7 +93,7 @@ Class TLoginForm extends TForm
 			$this->htmlField->setCss('font-weight','bold');
 		$this->closeGroup();
     }
-	public function show($print=true)
+    public function show($print=true, $flat=false )
 	{
 		$this->setAction($this->btnLoginLabel.','.$this->btnExitLabel);
 

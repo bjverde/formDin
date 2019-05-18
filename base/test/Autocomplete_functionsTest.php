@@ -38,67 +38,41 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/PostHelper.class.php';
+require_once __DIR__.'/../callbacks/autocomplete_functions.php';
 
+use PHPUnit\Framework\TestCase;
 /**
  * GetHelper test case.
  */
-class PostHelperTest extends PHPUnit_Framework_TestCase {
-
-    public function testGet_tem() {
-        $esperado = 10;
-        $_POST['x']= $esperado;
-        $retorno = PostHelper::get('x');        
+class autocomplete_functionsTest extends TestCase
+{
+	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
+		$_REQUEST['q'] = 'x';
+        $bvars = null;
+        $boolSearchAnyPosition = false;
+        $arrUpdateFields = null;
+        $strSearchField = 'nome_camplo_coluna';
+        $strTablePackageFuncion = 'table_sys';
+      
+        $esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'x%\') order by nome_camplo_coluna';
+        
+        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testGet_Naotem() {
-        $esperado = '';
-        $_POST['x']= 123;
-        $retorno = PostHelper::get('z');
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGet_Branco() {
-    	$esperado = '';
-    	$_POST['x']= '';
-    	$retorno = PostHelper::get('x');
+    public function testTableRecoverCreateSql_boolSearchAnyPositionTRUE() {
+    	$_REQUEST['q'] = 'x';
+    	$bvars = null;
+    	$boolSearchAnyPosition = true;
+    	$arrUpdateFields = null;
+    	$strSearchField = 'nome_camplo_coluna';
+    	$strTablePackageFuncion = 'table_sys';
+    	
+    	$esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
+    	
+    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
+    	
     	$this->assertEquals($esperado, $retorno);
     }
     
-    public function testGet_null() {
-    	$esperado = '';
-    	$_POST['x']= null;
-    	$retorno = PostHelper::get('x');
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_temValor(){
-        $esperado = 10;
-        $_POST['x']= $esperado;
-        $retorno = PostHelper::getDefaultValeu('x','padrao');        
-        $this->assertEquals($esperado, $retorno);
-    }
-
-    public function testGetDefaultValeu_NaoValor(){
-        $esperado = 'padrao';
-        $_POST['x']= 10;
-        $retorno = PostHelper::getDefaultValeu('y','padrao');
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_Branco(){
-    	$esperado = 'padrao';
-    	$_POST['x']= '';
-    	$retorno = PostHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_GetNull(){
-    	$esperado = 'padrao';
-    	$_POST['x']= null;
-    	$retorno = PostHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
-    }
 }
-

@@ -42,12 +42,6 @@
 /*
 Classe para entrada de número de processo
 */
-if( !function_exists('__autoload') )
-{
-	function __autoload($class_name) {
-		require_once $class_name . '.class.php';
-	}
-}
 class TProcesso extends TEdit
 {
 	/**

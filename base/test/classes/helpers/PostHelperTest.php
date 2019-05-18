@@ -38,74 +38,70 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/ArrayHelper.class.php';
+require_once __DIR__.'/../../../classes/helpers/PostHelper.class.php';
+
+use PHPUnit\Framework\TestCase;
 
 /**
- * ArrayHelper test case.
+ * GetHelper test case.
  */
-class ArrayHelperTest extends PHPUnit_Framework_TestCase {
+class PostHelperTest extends TestCase
+{
 
-    public function testValidateUndefined_temValor() {
-        $index = 'key';
-        $valor = 1500;
-        $esperado = $valor;        
-        $arrayTest[$index] = $valor;
-        $retorno = ArrayHelper::validateUndefined($arrayTest,$index);        
+    public function testGet_tem() {
+        $esperado = 10;
+        $_POST['x']= $esperado;
+        $retorno = PostHelper::get('x');        
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testValidateUndefined() {
+    public function testGet_Naotem() {
         $esperado = '';
-        $arrayTest = array();
-        $retorno = ArrayHelper::validateUndefined($arrayTest,'indexNotExist');
+        $_POST['x']= 123;
+        $retorno = PostHelper::get('z');
         $this->assertEquals($esperado, $retorno);
-    }    
+    }
     
-    public function testHas_notArray() {
-    	$esperado = FALSE;
-    	$arrayTest = null;
-    	$retorno = ArrayHelper::has('x',$arrayTest);
-    	$this->assertEquals($esperado, $retorno);
-    }    
-   
-    public function testHas_notInArray() {
-    	$esperado  = FALSE;
-    	$arrayTest = array("foo" => "bar","bar" => "foo",100=> -100,-100=> 100);
-    	$retorno = ArrayHelper::has('x',$arrayTest);
+    public function testGet_Branco() {
+    	$esperado = '';
+    	$_POST['x']= '';
+    	$retorno = PostHelper::get('x');
     	$this->assertEquals($esperado, $retorno);
     }
     
-    public function testHas_InArray() {
-    	$esperado  = TRUE;
-    	$arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
-    	$retorno = ArrayHelper::has('x',$arrayTest);
+    public function testGet_null() {
+    	$esperado = '';
+    	$_POST['x']= null;
+    	$retorno = PostHelper::get('x');
     	$this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_NotInArray() {
-    	$esperado  = 'x';
-    	$array ['y'] = 123;
-    	$atributeName = 'k';
-    	$DefaultValue = 'x';    	
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
+    public function testGetDefaultValeu_temValor(){
+        $esperado = 10;
+        $_POST['x']= $esperado;
+        $retorno = PostHelper::getDefaultValeu('x','padrao');        
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testGetDefaultValeu_NaoValor(){
+        $esperado = 'padrao';
+        $_POST['x']= 10;
+        $retorno = PostHelper::getDefaultValeu('y','padrao');
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testGetDefaultValeu_Branco(){
+    	$esperado = 'padrao';
+    	$_POST['x']= '';
+    	$retorno = PostHelper::getDefaultValeu('x','padrao');
     	$this->assertEquals($esperado, $retorno);
     }
     
-    public function testGetDefaultValeu_NotArray() {
-    	$esperado  = 'x';
-    	$array = 123;
-    	$atributeName = 'k';
-    	$DefaultValue = 'x';
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_InArray() {
-    	$esperado  = 123;
-    	$array ['y'] = 123;
-    	$atributeName = 'y';
-    	$DefaultValue = 'x';
-    	$retorno = ArrayHelper::getDefaultValeu($array,$atributeName,$DefaultValue);
+    public function testGetDefaultValeu_GetNull(){
+    	$esperado = 'padrao';
+    	$_POST['x']= null;
+    	$retorno = PostHelper::getDefaultValeu('x','padrao');
     	$this->assertEquals($esperado, $retorno);
     }
 }
+

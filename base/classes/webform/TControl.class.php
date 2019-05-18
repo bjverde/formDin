@@ -38,6 +38,8 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
+
 /**
 * classe raiz de todos os controles que podem ser inseridos em um TForm
 * Possui as propriedades:

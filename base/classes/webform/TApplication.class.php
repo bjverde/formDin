@@ -42,33 +42,14 @@ if (! defined ( 'DS' )) {
 	define ( 'DS', DIRECTORY_SEPARATOR );
 }
 $currentl_dir = dirname ( __FILE__ );
+$dirClasses = $currentl_dir.DS.'..'.DS;
 
-require_once ($currentl_dir . DS . '..' . DS . 'constants.php');
+require_once $dirClasses.'constants.php';
+require_once $dirClasses.'exceptions' . DS. 'UploadException.class.php';
+require_once $dirClasses.'helpers'.DS.'autoload_formdin_helper.php';
+require_once $dirClasses.'..'.DS.'vendor/autoload.php';   //Composer
+require_once 'autoload_formdin.php';
 
-$exeptions_dir = $currentl_dir . DS . '..' . DS . 'exceptions' . DS;
-require_once ($exeptions_dir . 'UploadException.class.php');
-
-$helps_dir = $currentl_dir . DS . '..' . DS . 'helpers' . DS;
-require_once ($helps_dir . 'ArrayHelper.class.php');
-require_once ($helps_dir . 'CountHelper.class.php');
-require_once ($helps_dir . 'DateTimeHelper.class.php');
-require_once ($helps_dir . 'FormDinHelper.class.php');
-require_once ($helps_dir . 'GetHelper.class.php');
-require_once ($helps_dir . 'HtmlHelper.class.php');
-require_once ($helps_dir . 'MessageHelper.class.php');
-require_once ($helps_dir . 'PaginationSQLHelper.class.php');
-require_once ($helps_dir . 'PostHelper.class.php');
-require_once ($helps_dir . 'RequestHelper.class.php');
-require_once ($helps_dir . 'ServerHelper.class.php');
-require_once ($helps_dir . 'SqlHelper.class.php');
-require_once ($helps_dir . 'StringHelper.class.php');
-require_once ($helps_dir . 'UrlHelper.class.php');
-
-
-//Composer
-require_once $currentl_dir.DS.'..'.DS.'..'.DS.'vendor/autoload.php';
-
-include_once ('autoload_formdin.php');
 class TApplication extends TLayout {
 	private $strTitle;
 	private $strTitleTag;
@@ -131,26 +112,26 @@ class TApplication extends TLayout {
 		
 		// desenv: error_reporting( E_ALL | E_STRICT );
 		// error_reporting( E_ALL | E_STRICT );
-		parent::__construct ( 'app', 50, 20 ); // criar layout com norte=50px e sul=20px
-		$this->setPadding ( 0 );
+		parent::__construct( 'app', 50, 20 ); // criar layout com norte=50px e sul=20px
+		$this->setPadding( 0 );
 		// criar o layout central com area de menu 30px e o iframe central
-		$this->loCenter = new TLayout ( 'loCenter', 30 );
-		$this->loCenter->setPadding ( '0px' );
-		$this->loCenter->getCenterArea ()->setTagType ( 'iframe' );
-		$this->loCenter->getCenterArea ()->setId ( 'app_iframe' );
-		$this->loCenter->getNorthArea ()->setId ( 'div_main_menu' );
-		$this->loCenter->setNorthInitClosed ( false );
-		$this->addLayout ( $this->loCenter, 'C' );
+		$this->loCenter = new TLayout( 'loCenter', 30 );
+		$this->loCenter->setPadding( '0px' );
+		$this->loCenter->getCenterArea()->setTagType( 'iframe' );
+		$this->loCenter->getCenterArea()->setId( 'app_iframe' );
+		$this->loCenter->getNorthArea()->setId( 'div_main_menu' );
+		$this->loCenter->setNorthInitClosed( false );
+		$this->addLayout( $this->loCenter, 'C' );
 		
-		$this->setTitle ( $strTitle );
-		$this->setSubtitle ( $strSubtitle );
-		$this->setUnit ( $strUnit );
-		$this->setSigla ( $strSigla );
-		$this->setShowMenu ( true );
+		$this->setTitle( $strTitle );
+		$this->setSubtitle( $strSubtitle );
+		$this->setUnit( $strUnit );
+		$this->setSigla( $strSigla );
+		$this->setShowMenu( true );
 		$this->setResponsiveMode( true );
 		
 		// arquivo css padrão localizado na base base/css
-		$this->addCssFile ( 'app.css' );
+		$this->addCssFile ( 'css/app.css' );
 		$this->setBackgroundImage ( $this->getBase () . '/css/imagens/app/bg_listrado.jpg' );
 		
 		// biblioteca de funções geral
@@ -364,6 +345,32 @@ class TApplication extends TLayout {
 	{
 	    return $this->responsiveMode;
 	}
+	public function loadModule() {
+	    // se pressionar F5, recarregar o ultimo módulo solicitado
+	    $loadModule = null;
+	    if (isset ( $_SESSION [APLICATIVO] ['modulo'] ) && $_SESSION [APLICATIVO] ['modulo']) {
+	        
+	        if ($_SESSION [APLICATIVO] ['modulo'] != $this->getLoginFile ()) {
+	            // $this->addJavascript( '//se pressionar F5, recarregar o ultimo módulo solicitado' );
+	            $loadModule = $_SESSION [APLICATIVO] ['modulo'];
+	            // $this->addJavascript( 'app_load_module("' . $_SESSION[ APLICATIVO ][ 'modulo' ] . '")' );
+	        }
+	    }
+	    if (!$loadModule) {
+	        if ($this->getDefaultModule()) {
+	            $loadModule = $this->getDefaultModule();
+	            $this->addJavascript( 'var app_default_module="'.$loadModule.'";' );
+	            // $this->addJavascript( 'app_load_module("' . $this->getDefaultModule() . '")' );
+	        } else {
+	            // desenhar o background e marca dagua
+	            // $this->addJavascript( 'app_load_module("about:blank")' );
+	            $loadModule = 'about:blank';
+	        }
+	    }
+	    if ($loadModule) {
+	        $this->addJavascript ( 'app_load_module("'.$loadModule.'")' );
+	    }
+	}
 	//---------------------------------------------------------------------------------	
 	/**
 	 * Este método inicializa a aplicação e cria a interface da aplicação.
@@ -385,9 +392,9 @@ class TApplication extends TLayout {
 		
         $this->clearTempFiles();
 		
-		if (! $this->getLoginFile () && ! $this->getMainMenuFile () && ! $this->getDefaultModule ()) {
-			$_SESSION [APLICATIVO] = null;
-		}
+        if( !$this->getLoginFile() && !$this->getMainMenuFile() && !$this->getDefaultModule() ) {
+            $_SESSION [APLICATIVO] = null;
+        }
 		
 		if ( $this->getResponsiveMode() == false &&  $this->getWidth()  ) {
 			$e = new TElement ( 'div' );
@@ -432,34 +439,9 @@ class TApplication extends TLayout {
 				exit ();
 			}
 		}
-		
 		$this->buildMainMenu();
-		
-		// se pressionar F5, recarregar o ultimo módulo solicitado
-		$loadModule = null;
-		if (isset ( $_SESSION [APLICATIVO] ['modulo'] ) && $_SESSION [APLICATIVO] ['modulo']) {
-			
-			if ($_SESSION [APLICATIVO] ['modulo'] != $this->getLoginFile ()) {
-				// $this->addJavascript( '//se pressionar F5, recarregar o ultimo módulo solicitado' );
-				$loadModule = $_SESSION [APLICATIVO] ['modulo'];
-				// $this->addJavascript( 'app_load_module("' . $_SESSION[ APLICATIVO ][ 'modulo' ] . '")' );
-			}
-		}
-		if (! $loadModule) {
-			if ($this->getDefaultModule ()) {
-				$loadModule = $this->getDefaultModule ();
-				$this->addJavascript ( 'var app_default_module="' . $this->getDefaultModule () . '";' );
-				// $this->addJavascript( 'app_load_module("' . $this->getDefaultModule() . '")' );
-			} else {
-				// desenhar o background e marca dagua
-				// $this->addJavascript( 'app_load_module("about:blank")' );
-				$loadModule = 'about:blank';
-			}
-		}
-		if ($loadModule) {
-			$this->addJavascript ( 'app_load_module("' . $loadModule . '")' );
-		}
-		$this->show ();
+		$this->loadModule();
+		$this->show();
 	}
 	
 	/**
@@ -532,11 +514,11 @@ class TApplication extends TLayout {
 		$this->addJavascript ( "background_image='" . $this->getBackgroundImage () . "';" );
 		$this->addJavascript ( "background_repeat='" . $this->getBackgroundRepeat () . "';" );
 		$this->addJavascript ( "background_position='" . $this->getBackgroundPosition () . "';" );
-		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
-		$this->addJsCssFile ( 'app.js' );
 		
-		$this->addJsCssFile ( 'FormDin4.css' );
-		$this->addJsCssFile ( $this->getCssFile () );
+		$this->addJsCssFile ( $this->getBase () . 'js/dhtmlx/menu/skins/' . $this->getMenuTheme() . '/' . $this->getMenuTheme() . '.css' );
+		$this->addJsCssFile ( 'js/app.js' );
+		$this->addJsCssFile ( 'css/FormDin4.css' );
+		$this->addJsCssFile ( $this->getCssFile() );
 		
 		// arquivo js que será carregado por último se existir
 		$this->addJsCssFile ( 'js/main.js' );
@@ -1377,13 +1359,13 @@ class TApplication extends TLayout {
 	}
 	
 	private function buildMainMenu() {
-	    if ($this->getShowMenu ()) {
-	        if ($this->getMainMenuFile ()) {
-	            if (file_exists ( $this->getMainMenuFile () )) {
+	    if( $this->getShowMenu() ) {
+	        if( $this->getMainMenuFile() ){
+	            if( file_exists( $this->getMainMenuFile() ) ){
 	                $this->addJavascript ( 'try{app_main_menu = new dhtmlXMenuObject("div_main_menu",menuTheme);}catch(e){alert( "Erro no menu. Não foi possível instanciar a classe dhtmlXMenuObject.\t"+e.message)}' );
-	                $this->addJavascript ( 'app_build_menu(false,null,"' . $this->getMainMenuFile () . '")' );
+	                $this->addJavascript ( 'app_build_menu(false,null,"'.$this->getMainMenuFile().'")' );
 	            } else {
-	                $this->addJavascript ( 'alert("Módulo de menu:' . $this->getMainMenuFile () . ', defindo para a aplicação, não existe.")' );
+	                $this->addJavascript ( 'alert("Módulo de menu:'.$this->getMainMenuFile().', defindo para a aplicação, não existe.")' );
 	            }
 	        }
 	    }
@@ -1540,6 +1522,7 @@ class TApplication extends TLayout {
 	 * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
 	 * to work, setResponsiveMode = false
 	 * @param integer $intNewValue
+	 * @codeCoverageIgnore
 	 */
 	public function setWidth($intNewValue = null) {
 	    $this->width = $intNewValue;
@@ -1551,6 +1534,7 @@ class TApplication extends TLayout {
 	/**
 	 * @deprecated Please use CSS to change Style of North Area
 	 * maintained for backward compatibility
+	 * @codeCoverageIgnore
 	 */
 	private function buildCssNorthArea(){
 	    // css
@@ -1584,6 +1568,7 @@ class TApplication extends TLayout {
 	/**
 	 * @deprecated Please use CSS to change Style of South Area
 	 * maintained for backward compatibility
+	 * @codeCoverageIgnore
 	 */
 	private function buildCssSouthArea()
 	{
@@ -1624,6 +1609,7 @@ class TApplication extends TLayout {
 	 *
 	 * @param mixed $strNewImage
 	 * @param mixed $strRepeat
+	 * @codeCoverageIgnore
 	 */
 	public function setHeaderBgImage($strNewImage = null, $strRepeat = null)
 	{
@@ -1644,6 +1630,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background Header
+	 * @codeCoverageIgnore
 	 */
 	public function getHeaderBgImage()
 	{
@@ -1652,6 +1639,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setHeaderBgRepeat($strNewValue = null)
@@ -1661,6 +1649,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background Header
+	 * @codeCoverageIgnore
 	 */
 	public function getHeaderBgRepeat()
 	{
@@ -1669,6 +1658,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setFooterBgImage($strNewImage = null, $strRepeat = null)
@@ -1686,6 +1676,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background footer
+	 * @codeCoverageIgnore
 	 */
 	public function getFooterBgImage()
 	{
@@ -1694,6 +1685,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setFooterBgRepeat($strNewValue = null) {
@@ -1702,6 +1694,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background footer
+	 * @codeCoverageIgnore
 	 */
 	public function getFooterBgRepeat() {
 	    return $this->footerBgRepeat;

@@ -38,40 +38,56 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../callbacks/autocomplete_functions.php';
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/constants.php';
+require_once $path.'classes/webform/autoload_formdin.php';
+require_once $path.'classes/helpers/autoload_formdin_helper.php';
 
-/**
- * GetHelper test case.
- */
-class autocomplete_functionsTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
 
-	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
-		$_REQUEST['q'] = 'x';
-        $bvars = null;
-        $boolSearchAnyPosition = false;
-        $arrUpdateFields = null;
-        $strSearchField = 'nome_camplo_coluna';
-        $strTablePackageFuncion = 'table_sys';
-      
-        $esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'x%\') order by nome_camplo_coluna';
-        
-        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testTableRecoverCreateSql_boolSearchAnyPositionTRUE() {
-    	$_REQUEST['q'] = 'x';
-    	$bvars = null;
-    	$boolSearchAnyPosition = true;
-    	$arrUpdateFields = null;
-    	$strSearchField = 'nome_camplo_coluna';
-    	$strTablePackageFuncion = 'table_sys';
-    	
-    	$esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
-    	
-    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
-    	
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
+class TPDOConnectionObjTest extends TestCase
+{
+
+    private $test;
+	
+	/**
+	 * Prepares the environment before running a test.
+	 */
+	protected function setUp() {
+		parent::setUp ();
+		$this->test = new TPDOConnectionObj();
+	}
+	
+	/**
+	 * Cleans up the environment after running a test.
+	 */
+	protected function tearDown() {
+	    $this->test = null;		
+		parent::tearDown ();
+	}	
+	//--------------------------------------------------------------------------------
+	public function testGetDBMS_null() {
+	    $expected = null;
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetPort_null() {
+	    $expected = null;
+	    $result = $this->test->getPort();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetHost_null() {
+	    $expected = null;
+	    $result = $this->test->getHost();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testDataBaseName_null() {
+	    $expected = null;
+	    $result = $this->test->getHost();
+	    $this->assertEquals( $expected , $result);
+	}
+	
 }

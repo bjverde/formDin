@@ -38,14 +38,18 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/constants.php';
-require_once '../classes/webform/TFormCreate.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
+use PHPUnit\Framework\TestCase;
 
 /**
  * TFormCreate test case.
  */
-class TFormCreateTest extends PHPUnit_Framework_TestCase {
+class TFormCreateTest  extends TestCase
+{
 
     /**
      *
@@ -182,6 +186,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     }
     //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtdNull_string() {
+        $expectedArray = array();
     	$expectedArray[] = '$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = '$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
     	$expectedArray[] = '$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
@@ -197,6 +202,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     }
     //----------------------------------------------------------
     public function testAddColumnsGrid_4Column_qtd2_string() {
+        $expectedArray = array();
     	$expectedArray[] = TAB.TAB.'$gride->addColumn($primaryKey,\'id\',50,\'center\');'.EOL;
     	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'NOM\',\'NOM\',50,\'center\');'.EOL;
     	$expectedArray[] = TAB.TAB.'$gride->addColumn(\'DATE\',\'DATE\',50,\'center\');'.EOL;
@@ -233,6 +239,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
      * Tests TFormCreate->addGetWhereGridParametersFields()
      */
     public function testAddGetWhereGridParametersFields() {
+        $expectedArray = array();
     	$expectedArray[] = TAB.TAB.',\'NOM\'=>$frm->get(\'NOM\')'.EOL;
     	$expectedArray[] = TAB.TAB.',\'DATE\'=>$frm->get(\'DATE\')'.EOL;
     	$expectedArray[] = TAB.TAB.',\'FLAG\'=>$frm->get(\'FLAG\')'.EOL;
@@ -248,6 +255,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     }
     //----------------------------------------------------------
     public function testAddGetWhereGridParameters() {
+        $expectedArray = array();
     	$expectedArray[] = ''.EOL;
     	$expectedArray[] = 'function getWhereGridParameters(&$frm){'.EOL;
     	$expectedArray[] = TAB.'$retorno = null;'.EOL;
@@ -308,6 +316,7 @@ class TFormCreateTest extends PHPUnit_Framework_TestCase {
     }
     //----------------------------------------------------------
     public function testAddGridPagination_jsScript_init_string() {
+        $expectedArray = array();
     	$expectedArray[] ='function init() {'.EOL;
     	$expectedArray[] =TAB.'var Parameters = {"BUSCAR":"","ID":"","NOM":"","DATE":"","FLAG":""};'.EOL;
     	$expectedArray[] =TAB.'fwGetGrid(\'xxx.php\',\'gride\',Parameters,true);'.EOL;

@@ -38,67 +38,65 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/RequestHelper.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
-/**
- * GetHelper test case.
- */
-class RequestHelperTest extends PHPUnit_Framework_TestCase {
+use PHPUnit\Framework\TestCase;
 
-    public function testGet_tem() {
-        $esperado = 10;
-        $_REQUEST['x']= $esperado;
-        $retorno = RequestHelper::get('x');        
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGet_Naotem() {
-        $esperado = '';
-        $_REQUEST['x']= 123;
-        $retorno = RequestHelper::get('z');
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGet_Branco() {
-    	$esperado = '';
-    	$_REQUEST['x']= '';
-    	$retorno = RequestHelper::get('x');
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGet_null() {
-    	$esperado = '';
-    	$_REQUEST['x']= null;
-    	$retorno = RequestHelper::get('x');
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_temValor(){
-        $esperado = 10;
-        $_REQUEST['x']= $esperado;
-        $retorno = RequestHelper::getDefaultValeu('x','padrao');        
-        $this->assertEquals($esperado, $retorno);
-    }
 
-    public function testGetDefaultValeu_NaoValor(){
-        $esperado = 'padrao';
-        $_REQUEST['x']= 10;
-        $retorno = RequestHelper::getDefaultValeu('y','padrao');
-        $this->assertEquals($esperado, $retorno);
-    }
+class TTableTest extends TestCase
+{
     
-    public function testGetDefaultValeu_Branco(){
-    	$esperado = 'padrao';
-    	$_REQUEST['x']= '';
-    	$retorno = RequestHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testGetDefaultValeu_GetNull(){
-    	$esperado = 'padrao';
-    	$_REQUEST['x']= null;
-    	$retorno = RequestHelper::getDefaultValeu('x','padrao');
-    	$this->assertEquals($esperado, $retorno);
-    }
+   
+	/**
+	 * Prepares the environment before running a test.
+	 */
+	protected function setUp() {
+		parent::setUp ();
+	}
+	
+	/**
+	 * Cleans up the environment after running a test.
+	 */
+	protected function tearDown() {		
+		parent::tearDown ();
+	}
+	
+	public function testNewTable() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testAddRow() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'<tr>'.EOL
+	               .'</tr>'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $test->addRow();
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	
+	public function testAddCell() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'<tr>'.EOL
+	               .ESP.'<td>'.EOL
+	               .ESP.ESP.'aaa'.EOL
+	               .ESP.'</td>'.EOL
+	               .'</tr>'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $row = $test->addRow();
+	    $row->addCell('aaa');
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+
 }
-

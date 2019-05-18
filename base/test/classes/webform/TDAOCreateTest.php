@@ -39,15 +39,20 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once '../classes/constants.php';
-require_once '../classes/webform/TDAOCreate.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
+
+use PHPUnit\Framework\TestCase;
 
 define('TEOL',"\n");
 define('TTAB',chr(9));
 /**
  * TDAOCreate test case.
  */
-class TDAOCreateTest extends PHPUnit_Framework_TestCase {
+class TDAOCreateTest extends TestCase
+{
 
     /**
      *
@@ -166,7 +171,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     public function testAddProcessWhereGridParameters_sizeArray(){
     	$tDAOCreate = $this->tDAOCreate;
     	$listColumnsName = array("ID","NOM", "DATE", "FLAG");
-    	foreach ( $listColumnsName as $k => $v ){
+    	foreach ( $listColumnsName as $v ){
     		$tDAOCreate->addColumn($v);
     	}
     	
@@ -177,12 +182,13 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     }
     //--------------------------------------------------------------------------------------
     public function testAddProcessWhereGridParameters_stringArray(){
+        $expectedArray = array();
     	$expectedArray[] = TTAB.'private static function processWhereGridParameters( $whereGrid ) {'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'$result = $whereGrid;'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'if ( is_array($whereGrid) ){'.TEOL;
     	$expectedArray[] = TTAB.TTAB.TTAB.'$where = \' 1=1 \';'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'NUMERO\'],\' AND NUMERO like \\\'%\'.$whereGrid[\'NUMERO\'].\'%\\\' \',null) );'.TEOL;
-    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid[\'ESTADO\'],\' AND ESTADO like \\\'%\'.$whereGrid[\'ESTADO\'].\'%\\\' \',null) );'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,\'NUMERO\',\' AND NUMERO like \\\'%\'.$whereGrid[\'NUMERO\'].\'%\\\' \',null) );'.TEOL;
+    	$expectedArray[] = TTAB.TTAB.TTAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,\'ESTADO\',\' AND ESTADO like \\\'%\'.$whereGrid[\'ESTADO\'].\'%\\\' \',null) );'.TEOL;
     	$expectedArray[] = TTAB.TTAB.TTAB.'$result = $where;'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'}'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'return $result;'.TEOL;
@@ -192,7 +198,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     	
     	$tDAOCreate = $this->tDAOCreate;
     	$listColumnsName = array("NUMERO", "ESTADO");
-    	foreach ( $listColumnsName as $k => $v ){
+    	foreach ( $listColumnsName as $v ){
     		$tDAOCreate->addColumn($v);
     	}
     	
@@ -203,7 +209,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     //--------------------------------------------------------------------------------------
     public function testAddSqlSelectById_stringMySQL(){
         $tDAOCreate = $this->tDAOCreate;
-        
+        $expectedArray = array();
         $expectedArray[] = TTAB.'public static function selectById( $id ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$sql = self::$sqlBasicSelect.\' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\';'.TEOL;
@@ -240,6 +246,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAddSqlSelectAllPagination_stringMySQL(){
+        $expectedArray = array();
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
@@ -266,6 +273,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAddSqlSelectAllPagination_stringMSSQL(){
+        $expectedArray = array();
         $expectedArray[] = TTAB.'public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null ) {'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);'.TEOL;
         $expectedArray[] = TTAB.TTAB.'$where = self::processWhereGridParameters($where);'.TEOL;
@@ -302,7 +310,7 @@ class TDAOCreateTest extends PHPUnit_Framework_TestCase {
     
     public function testAddSqlDelete_string(){
     	$tDAOCreate = $this->tDAOCreate;
-    	
+    	$expectedArray = array();
     	$expectedArray[] = TTAB.'public static function delete( $id ){'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'$values = array($id);'.TEOL;
     	$expectedArray[] = TTAB.TTAB.'return self::executeSql(\'delete from '.$tDAOCreate->hasSchema().$tDAOCreate->getTableName().' where '.$tDAOCreate->getKeyColumnName().' = '.$tDAOCreate->getCharParam().'\',$values);'.TEOL;

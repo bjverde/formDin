@@ -38,39 +38,69 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/helpers/DateTimeHelper.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
+
+use PHPUnit\Framework\TestCase;
 
 /**
- * DateTimeHelper test case.
+ * TApplication test case.
  */
-class DateTimeHelperTest extends PHPUnit_Framework_TestCase {
-
-    public function testDate_null() {
-        $esperado = null;
-        $estrada = null;
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-
-    public function testDate_white() {
-        $esperado = null;
-        $estrada = '';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }    
-    
-    public function testDate_01() {
-        $esperado = '2019-10-02';
-        $estrada = '02/10/2019';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-
-    public function testDate_02() {
-        $esperado = '1900-01-02';
-        $estrada = '02/01/1900';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-    
+class TFileTest  extends TestCase
+{
+	/**
+	 * @var TFile
+	 */
+	private $file;
+	private $fieldName;
+	
+	/**
+	 * Prepares the environment before running a test.
+	 */
+	protected function setUp() {
+		parent::setUp ();
+		$fileFormat = 'pdf,gif,txt,jpg,rar,zip,doc';
+		$this->fieldName = 'anexo';
+		$this->file = new TFile('anexo','Anexo Async:',true,$fileFormat,'2M',40,FALSE);
+	}
+	
+	/**
+	 * Cleans up the environment after running a test.
+	 */
+	protected function tearDown() {
+		$this->file = null;		
+		parent::tearDown ();
+	}
+	
+	public function testGetMaxSize() {
+		$esperado = '2Mb';
+		$retorno = $this->file->getMaxSize();
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	public function testGetMaxSizeKb_2k() {
+		$size = '2K';
+		$esperado = '2048';
+		$this->file->setMaxSizeKb($size);
+		$retorno = $this->file->getMaxSizeKb();
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	public function testGetMaxSizeKb_3M() {
+		$size = '3M';
+		$esperado = '3145728';
+		$this->file->setMaxSizeKb($size);
+		$retorno = $this->file->getMaxSizeKb();
+		$this->assertEquals($esperado, $retorno);
+	}
+	
+	public function testGetMaxSizeKb_4G() {
+		$size = '4G';
+		$esperado = '4294967296';
+		$this->file->setMaxSizeKb($size);
+		$retorno = $this->file->getMaxSizeKb();
+		$this->assertEquals($esperado, $retorno);
+	}	
 }

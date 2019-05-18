@@ -47,7 +47,29 @@ class SqlHelper
 	const SQL_TYPE_NUMERIC    = 'numeric';
 	const SQL_TYPE_TEXT_LIKE  = 'like';
 	const SQL_TYPE_TEXT_EQUAL = 'text';
+	const SQL_TYPE_IN_TEXT    = 'text with IN';
+	const SQL_TYPE_IN_NUMERIC = 'numeric with IN';
 	
+	const SQL_CONNECTOR_AND = ' AND ';
+	const SQL_CONNECTOR_OR  = ' OR ';
+	
+	private static $dbms;	
+	
+	public static function setDbms($dbms)
+	{
+	    self::$dbms = $dbms;	    
+	}
+	public static function getDbms()	
+    {
+        $dbms =  null;
+        if ( !empty(self::$dbms) ){
+            $dbms = self::$dbms;
+        } else {
+            $dbms = BANCO;
+        }
+        return $dbms;
+    }
+    //--------------------------------------------------------------------------------
     public static function getRowStart($page,$rowsPerPage) 
     {
         $rowStart = 0;
@@ -70,6 +92,20 @@ class SqlHelper
         return $retorno;
     }
     //--------------------------------------------------------------------------------
+    /***
+     * Verify that a given attribute has an attribute value. Returns the string 
+     * that corresponds to the $isTrue or $isFalse situation.
+     * 
+     * Verificar se um determinado atributo tem um valor atributo. Retorna a 
+     * string corresponde a situação $isTrue ou $isFalse.
+     * 
+     * @param array   $whereGrid  1: array with all the attributes that should be checked 
+     * @param string  $attribute  2: attribute that will be verified
+     * @param string  $isTrue     3: return string if positive
+     * @param string  $isFalse    4: 
+     * @param boolean $testZero   5: the zero must be forehead or not. True = attribute must be diverge from zero
+     * @return string
+     */
     public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
     {
         $retorno = $isFalse;
@@ -88,8 +124,9 @@ class SqlHelper
         return $retorno;
     }
     //----------------------------------------
-    public static function transformValidateString( $string ) {        
-        if ( BANCO == DBMS_MYSQL ) {
+    public static function transformValidateString( $string )
+    {        
+        if ( self::getDbms() == DBMS_MYSQL ) {
             //$string = addslashes($string);
             //$patterns = '/(%)/';
             $doubleQuotes = chr(34);
@@ -98,32 +135,172 @@ class SqlHelper
             $string = preg_replace($patterns, $replacements, $string);
         } else {
             if ( preg_match('/(\'|")/', $string ) > 0 ) {
-                throw new InvalidArgumentException('Não use aspas simples ou duplas na pesquisa !');
+                throw new DomainException(TMessage::DONOT_QUOTATION);
             }
         }
         return $string;
     }
     //----------------------------------------
-    public static function getAtributeWhereGridParameters( $stringWhere, $arrayWhereGrid, $atribute, $type ,$testZero=true ) {
-    	if( ArrayHelper::has($atribute, $arrayWhereGrid) ){
-    		$valeu = $arrayWhereGrid[$atribute];
-    		if ( !empty($valeu) ){
-    		  $valeu = self::transformValidateString($valeu);
+    /**
+     * Replace spaces with % to make it easier to search with like.
+     * 
+     * Substitua os espaços por % para facilitar a busca com like.
+     * 
+     * @param string $string
+     * @return string`
+     */
+    public static function explodeTextString( $string )
+    {
+        $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_POSTGRES) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
+        if ( $dataBaseWithLike ) {
+            $string = trim($string);
+            $string = preg_replace('/\s/', '%', $string);
+        }
+        return $string;
+    }
+    
+    /***
+     * Return string sql for query with numeric
+     * @param string $stringWhere
+     * @param array $arrayWhereGrid
+     * @param string $atribute
+     * @param string $type
+     * @param boolean $testZero
+     * @param string $value
+     * @param string $connector
+     * @return string
+     */
+    public static function getSqlTypeNumeric( $stringWhere
+                                            , $arrayWhereGrid
+                                            , $attribute
+                                            , $testZero=true
+                                            , $value
+                                            , $connector=self::SQL_CONNECTOR_AND
+                                            ) {
+        $isTrue = ' AND '.$attribute.' = '.$value.'  ';
+        $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
+        $stringWhere = $stringWhere.$attribute;
+        return $stringWhere;
+    }
+    //--------------------------------------------------------------------------
+    public static function getSqlTypeTextLike( $stringWhere
+                                             , $arrayWhereGrid
+                                             , $attribute
+                                             , $testZero=true
+                                             , $value
+                                             , $connector=self::SQL_CONNECTOR_AND
+                                             ) {
+        $value = self::explodeTextString($value);
+        $isTrue = ' AND '.$attribute.' like \'%'.$value.'%\' ';
+        $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
+        $stringWhere = $stringWhere.$attribute;
+        return $stringWhere;
+    }
+    //--------------------------------------------------------------------------
+    public static function getSqlTypeText( $stringWhere
+                                         , $arrayWhereGrid
+                                         , $attribute
+                                         , $testZero=true
+                                         , $value
+                                         , $connector=self::SQL_CONNECTOR_AND
+                                         ) {
+        $isTrue = ' AND '.$attribute.' = \''.$value.'\'  ';
+        $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
+        $stringWhere = $stringWhere.$attribute;
+        return $stringWhere;
+    }
+    //--------------------------------------------------------------------------
+    public static function getSqlTypeNotIn( $stringWhere
+                                          , $arrayWhereGrid
+                                          , $attribute
+                                          , $testZero=true
+                                          , $value
+                                          , $connector=self::SQL_CONNECTOR_AND
+                                          , $type
+                                          )
+    {
+        if($type == self::SQL_TYPE_IN_NUMERIC){
+            $stringWhere = self::getSqlTypeNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+        }else{
+            $stringWhere = self::getSqlTypeText($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+        }
+        return $stringWhere;
+    }
+    public static function getSqlTypeIn( $stringWhere
+                                       , $arrayWhereGrid
+                                       , $attribute
+                                       , $testZero=true
+                                       , $value
+                                       , $connector=self::SQL_CONNECTOR_AND
+                                       , $type
+                                       )
+    {
+       If(is_array($value)){
+           $qtdElement = CountHelper::count($value);
+           if( $qtdElement == 1 ){
+               $value = $value[0];
+               if( FormDinHelper::issetOrNotZero($value) ){
+                   $stringWhere = self::getSqlTypeNotIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
+               }
+           } else if( $qtdElement > 1 ) {
+               if($type == self::SQL_TYPE_IN_NUMERIC){
+                   $value = implode(",",$value);
+                   $isTrue = ' AND '.$attribute.' in ('.$value.') ';
+                   $stringWhere = $stringWhere.$isTrue;
+               }else{
+                   $value = implode("','",$value);
+                   $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
+                   $stringWhere = $stringWhere.$isTrue;
+               }
+           }
+       } else {
+           $stringWhere = self::getSqlTypeNotIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
+       }
+       return $stringWhere;
+    }
+    //----------------------------------------    
+    /***
+     * Generates the SQL string for the where clauses, according to the parameters
+     * 
+     * Gera a string SQL para as cláusulas where, conforme os parametros informados
+     * 
+     * @param string  $stringWhere     1: Existing SQL String that will be concatenated
+     * @param array   $arrayWhereGrid  2: array with all attributes and values
+     * @param string  $attribute       3: name of the attribute to be verified
+     * @param string  $type            4:
+     * @param boolean $testZero        5: 
+     * @param string  $connector       6:
+     * @return string
+     */
+    public static function getAtributeWhereGridParameters( $stringWhere
+                                                         , $arrayWhereGrid
+                                                         , $attribute
+                                                         , $type 
+                                                         , $testZero=true
+                                                         , $connector=self::SQL_CONNECTOR_AND 
+                                                         ) {
+        if( ArrayHelper::has($attribute, $arrayWhereGrid) ){
+    	    $value = $arrayWhereGrid[$attribute];
+    	    if ( !empty($value) && !is_array($value)){
+    		    $value = self::transformValidateString($value);
     		}
-    		if($type == self::SQL_TYPE_NUMERIC){
-    			$isTrue = ' AND '.$atribute.' = '.$valeu.'  ';
-    			$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
-    			$stringWhere = $stringWhere.$attribute;
-    		} else {
-    			if($type == self::SQL_TYPE_TEXT_LIKE){
-    				$isTrue = ' AND '.$atribute.' like \'%'.$valeu.'%\' ';
-    				$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
-    				$stringWhere = $stringWhere.$attribute;
-    			}else{
-    				$isTrue = ' AND '.$atribute.' = \''.$valeu.'\'  ';
-    				$attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$atribute,$isTrue,null,$testZero);
-    				$stringWhere = $stringWhere.$attribute;
-    			}
+    		
+    		switch ($type) {
+    		    case self::SQL_TYPE_NUMERIC:
+    		        $stringWhere = self::getSqlTypeNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+    		    break;
+    		    case self::SQL_TYPE_TEXT_LIKE:
+    		        $stringWhere = self::getSqlTypeTextLike($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+    		    break;
+    		    case self::SQL_TYPE_TEXT_EQUAL:
+    		        $stringWhere = self::getSqlTypeText($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+    		    break;
+    		    case self::SQL_TYPE_IN_TEXT:
+    		        $stringWhere = self::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
+    		    break;
+    		    case self::SQL_TYPE_IN_NUMERIC:
+    		        $stringWhere = self::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
+    		    break;
     		}
     	}
     	return $stringWhere;

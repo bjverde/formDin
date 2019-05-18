@@ -4,40 +4,38 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.5.1-alpha
+ * FormDin Version: 4.5.3-alpha
  * 
- * System xx created in: 2019-04-14 20:35:31
+ * System appev2 created in: 2019-05-10 01:19:08
  */
 
-use Controllers\{
-    SysinfoAPI
-    ,Acesso_menuAPI
-    ,Acesso_perfilAPI
-    ,Acesso_perfil_menuAPI
-    ,Acesso_perfil_userAPI
-    ,Acesso_userAPI
-    ,Acesso_user_menuAPI
-    ,AutoridadeAPI
-    ,EnderecoAPI
-    ,MarcaAPI
-    ,Meta_tipoAPI
-    ,MunicipioAPI
-    ,Natureza_juridicaAPI
-    ,PedidoAPI
-    ,Pedido_itemAPI
-    ,PessoaAPI
-    ,Pessoa_fisicaAPI
-    ,Pessoa_juridicaAPI
-    ,ProdutoAPI
-    ,RegiaoAPI
-    ,TelefoneAPI
-    ,TipoAPI
-    ,UfAPI
-    ,Vw_acesso_user_menuAPI
-    ,Vw_pessoaAPI
-    ,Vw_pessoa_marca_produtoAPI
-};
+use Controllers\SysinfoAPI;
+use Controllers\Acesso_menuAPI;
+use Controllers\Acesso_perfilAPI;
+use Controllers\Acesso_perfil_menuAPI;
+use Controllers\Acesso_perfil_userAPI;
+use Controllers\Acesso_userAPI;
+use Controllers\Acesso_user_menuAPI;
+use Controllers\AutoridadeAPI;
+use Controllers\EnderecoAPI;
+use Controllers\MarcaAPI;
+use Controllers\Meta_tipoAPI;
+use Controllers\MunicipioAPI;
+use Controllers\Natureza_juridicaAPI;
+use Controllers\PedidoAPI;
+use Controllers\Pedido_itemAPI;
+use Controllers\PessoaAPI;
+use Controllers\Pessoa_fisicaAPI;
+use Controllers\Pessoa_juridicaAPI;
+use Controllers\ProdutoAPI;
+use Controllers\RegiaoAPI;
+use Controllers\TelefoneAPI;
+use Controllers\TipoAPI;
+use Controllers\UfAPI;
+use Controllers\Vw_acesso_user_menuAPI;
+use Controllers\Vw_pessoaAPI;
+use Controllers\Vw_pessoa_marca_produtoAPI;
 
 $app = new \Slim\App(slimConfiguration());
 

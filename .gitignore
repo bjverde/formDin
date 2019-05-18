@@ -6,7 +6,12 @@
 /.settings/
 /.project
 /.buildpath
-/base/tmp/
+base/tmp/*
+!base/tmp/index.php
+phpunit-code-coverage/*
+!phpunit-code-coverage/phpunit-code-coverage.zip
 /sysgen/
+
+
 /xx/
 /appteste/

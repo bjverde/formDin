@@ -57,14 +57,16 @@ if (!defined('EOL')) {
     define('EOL', "\n");
 }
 if (!defined('ESP')) {
-    define('ESP', '    ');
+    $esp = chr(32).chr(32).chr(32).chr(32);
+    //define('ESP', '    ');
+    define('ESP', $esp);
 }
 if (!defined('TAB')) {
     define('TAB', chr(9));
 }
 
 
-define('FORMDIN_VERSION', '4.5.3-alpha');
+define('FORMDIN_VERSION', '4.6.2-alpha');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');

@@ -118,7 +118,7 @@ class TGroupBox Extends TForm
 	{
 		return $this->closeble;
 	}
-	public function show($print=true)
+	public function show($print=true, $flat=false )
 	{
 		if( !$this->getLegend())
 		{

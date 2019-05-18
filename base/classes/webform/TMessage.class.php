@@ -47,6 +47,10 @@ class TMessage {
     const FORM_MIN_VERSION_BLANK = 'Informe a versão minima do formDin';
     const FORM_MIN_VERSION_NOT = ' Para esse sistema funcionar a versão mínima necessária do formDin é: ';
     const FORM_MIN_YOU_VERSION = 'Sua versão do FormDin é : ';
+    
+    const ARRAY_EXPECTED = 'O atribruto deveria ser um array';
+    
+    const DONOT_QUOTATION = 'Não use aspas simples ou duplas na pesquisa !';
 
     public function __construct() {
     }

@@ -26,7 +26,7 @@ class Horario_atendimentoDAO extends TPDOConnection
             $where = ' 1=1 ';
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDHORARIO_ATENDIMENTO', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA_DENTISTA', SqlHelper::SQL_TYPE_NUMERIC);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'HORARIO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'HORARIO', SqlHelper::SQL_TYPE_IN_TEXT);
             $result = $where;
         }
         return $result;

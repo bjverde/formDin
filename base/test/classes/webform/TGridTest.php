@@ -38,11 +38,20 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once '../classes/webform/TGrid.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
+
+require_once $path.'../test/mockFormDinArray.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * TGrid test case.
  */
-class TGridTest extends PHPUnit_Framework_TestCase {
+class TGridTest extends TestCase
+{
 	
 	/**
 	 *
@@ -50,24 +59,7 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	 */
 	private $tGrid;
 	private $dataGrid;
-	
-	
-	protected function incluirPessoa($dadosPessoa, $id, $nome, $tipo, $cpf, $cnpj){
-		$dadosPessoa['IDPESSOA'][]=$id;   $dadosPessoa['NMPESSOA'][]=$nome;
-		$dadosPessoa['TPPESSOA'][]=$tipo; $dadosPessoa['NMCPF'][]=$cpf;
-		$dadosPessoa['NMCNPJ'][]=$cnpj;
-		
-		return $dadosPessoa;
-	}
-	
-	protected function generateTable(){
-		$dadosPessoa = isset($dadosPessoa) ? $dadosPessoa : null;
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 1, 'Joao Silva', 'F', '123456789', null);
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 2, 'Maria Laranja', 'F', '52798074002', null);
-		$dadosPessoa = $this->incluirPessoa($dadosPessoa, 3, 'Dell', 'J', null, '72381189000110');
-		
-		return $dadosPessoa;
-	}
+	private $mockFormDinArray;
 	
 	/**
 	 * Prepares the environment before running a test.
@@ -76,7 +68,8 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		parent::setUp ();				
 		
 		$primaryKey = 'IDPESSOA';
-		$dadosPessoa = $this->generateTable();
+		$this->mockFormDinArray = new mockFormDinArray();
+		$dadosPessoa = $this->mockFormDinArray->generateTable();
 		
 		$mixUpdateFields = $primaryKey.'|'.$primaryKey.',NMPESSOA|NMPESSOA,TPPESSOA|TPPESSOA,NMCPF|NMCPF,NMCNPJ|NMCNPJ';
 		$gride = new TGrid( 'gd'        // id do gride
@@ -103,21 +96,28 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected function tearDown() {
 		// TODO Auto-generated TGridTest::tearDown()
-		$this->tGrid = null;
-		
+		$this->tGrid = null;		
 		parent::tearDown ();
 	}
 	
-	/**
-	 * Constructs the test case.
-	 */
-	public function __construct() {
-		// TODO Auto-generated constructor
+	public function testGetId() {
+	    $expected = 'gd';
+	    $result = $this->tGrid->getId();
+	    $this->assertEquals( $expected , $result);
 	}
 	
-	/**
-	 * Tests TGrid->sortDataByColum()
-	 */
+	public function testGetTitle() {
+	    $expected = 'Gride';
+	    $result = $this->tGrid->getTitle();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetName() {
+	    $expected = 'gd';
+	    $result = $this->tGrid->getName();
+	    $this->assertEquals( $expected , $result);
+	}	
+	
 	public function testSortDataByColum_RequestNull() {
 		$expected = $this->dataGrid;
 		
@@ -129,7 +129,9 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( $expected['IDPESSOA'][2] , $result['IDPESSOA'][2]);
 	}
 	
-	public function testSortDataByColum_RequestNmpessoaOrderASC() {		
+
+	public function testSortDataByColum_RequestNmpessoaOrderASC() {
+	    $expected = array();
 		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
 		$expected['NMPESSOA'][1] = $this->dataGrid['NMPESSOA'][0];
 		$expected['NMPESSOA'][2] = $this->dataGrid['NMPESSOA'][1];
@@ -167,11 +169,11 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testSortArray_OneRow() {
-		$expected = isset($expected) ? $expected : null;
-		$expected = $this->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
+		$expected = array();
+		$expected = $this->mockFormDinArray->incluirPessoa($expected, 1, 'Joao Silva', 'F', '123456789', null);
 		
-		$res = isset($res) ? $res : null;
-		$res = $this->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
+		$res = array();
+		$res = $this->mockFormDinArray->incluirPessoa($res, 1, 'Joao Silva', 'F', '123456789', null);
 		$tGrid = $this->tGrid;
 		$result = $tGrid->sortArray($res,'NMPESSOA','SORT_ASC');
 		
@@ -179,6 +181,7 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testSortArray_RequestNmpessoaOrderASC() {
+	    $expected = array();
 		$expected['NMPESSOA'][0] = $this->dataGrid['NMPESSOA'][2];
 		$expected['NMPESSOA'][1] = $this->dataGrid['NMPESSOA'][0];
 		$expected['NMPESSOA'][2] = $this->dataGrid['NMPESSOA'][1];
@@ -219,10 +222,10 @@ class TGridTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 0 , $result);
 	}
 	
-	public function testGetRowCount_3Rows() {		
+	public function testGetRowCount_4Rows() {		
 		$tGrid = $this->tGrid;
 		$result = $tGrid->getRowCount();		
-		$this->assertEquals( 3 , $result);
+		$this->assertEquals( 4 , $result);
 	}
 	
 	public function testGetRowCount_with_RealTotalRowsWithoutPaginator() {

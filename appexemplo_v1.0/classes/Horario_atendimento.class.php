@@ -40,9 +40,21 @@ class Horario_atendimento
     {
         $result = null;
         if( $objVo->getIdhorario_atendimento() ) {
-            $result = Horario_atendimentoDAO::update( $objVo );
+            $listHorarios = $objVo->getHorario();
+            if( is_array($listHorarios) ){
+                throw new DomainException('Para alterar só por ter uma horario');
+            } else {
+                $result = Horario_atendimentoDAO::update( $objVo );
+            }            
         } else {
-            $result = Horario_atendimentoDAO::insert( $objVo );
+            $listHorarios = $objVo->getHorario();
+            foreach ($listHorarios as $horario ){
+                $vo = new Horario_atendimentoVO();
+                $vo->setIdhorario_atendimento( $objVo->getIdhorario_atendimento() );
+                $vo->setIdpessoa_dentista( $objVo->getIdpessoa_dentista() );
+                $vo->setHorario( $horario );
+                $result = Horario_atendimentoDAO::insert( $vo );
+            }
         }
         return $result;
     }

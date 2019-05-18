@@ -38,65 +38,56 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+require_once __DIR__.'/../../../classes/constants.php';
+require_once __DIR__.'/../../../classes/helpers/autoload_formdin_helper.php';
 
-require_once '../classes/Ajuda.class.php';
+use PHPUnit\Framework\TestCase;
 
-class AjudaTest extends PHPUnit_Framework_TestCase {
-	
-	/**
-	 *
-	 * @var Ajuda
-	 */
-	private $ajuda;
-	
-	/**
-	 * Prepares the environment before running a test.
-	 */
-	protected function setUp() {
-		parent::setUp ();
-		$this->ajuda = new Ajuda('Nome','Texto');
-		$this->ajuda->setValorChave('valeuKey');
-	}
-	
-	/**
-	 * Cleans up the environment after running a test.
-	 */
-	protected function tearDown() {
-		$this->ajuda = null;
-		parent::tearDown ();
-	}
-	
-	public function testSetCorFundo_valor() {
-		$esperado = '#EEFFE4';
-		$this->ajuda->setCorFundo('#EEFFE4');
-		$retorno = $this->ajuda->getCorFundo();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testSetCorFundo_null() {
-		$esperado = '#FFFFE4';
-		$retorno = $this->ajuda->getCorFundo();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	/**
-	 * Tests Ajuda->setCorFonte()
-	 */
-	public function testSetCorFonte() {
-		$esperado = '#EEFFE4';
-		$this->ajuda->setCorFonte('#EEFFE4');
-		$retorno = $this->ajuda->getCorFonte();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testSetCorFonte_null() {
-		$esperado = '#0000FF';
-		$retorno = $this->ajuda->getCorFonte();
-		
-		$this->assertEquals($esperado, $retorno);
-	}
+/**
+ * GetHelper test case.
+ */
+class FormDinHelperTest extends TestCase
+{
+    public function testIssetOrNotZero_arrayNull() {
+        $expected = false;
+        $variable = array();
+        $result = FormDinHelper::issetOrNotZero($variable);
+        $this->assertEquals( $expected , $result);
+    }
+    
+    public function testIssetOrNotZero_arrayNotNull() {
+        $expected = true;
+        $variable = array(0,1);
+        $result = FormDinHelper::issetOrNotZero($variable);
+        $this->assertEquals( $expected , $result);
+    }
+    
+    public function testIssetOrNotZero_stringBlank() {
+        $expected = false;
+        $variable = '';
+        $result = FormDinHelper::issetOrNotZero($variable);
+        $this->assertEquals( $expected , $result);
+    }
+    
+    public function testIssetOrNotZero_stringNull() {
+        $expected = false;
+        $variable = null;
+        $result = FormDinHelper::issetOrNotZero($variable);
+        $this->assertEquals( $expected , $result);
+    }
+    
+    public function testIssetOrNotZero_stringZero() {
+        $expected = false;
+        $variable = '0';
+        $result = FormDinHelper::issetOrNotZero($variable);
+        $this->assertEquals( $expected , $result);
+    }
+    
+    public function testIssetOrNotZero_stringZeroNoTest() {
+        $expected = true;
+        $variable = '0';
+        $result = FormDinHelper::issetOrNotZero($variable,false);
+        $this->assertEquals( $expected , $result);
+    }
+    
 }
-

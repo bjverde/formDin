@@ -1,10 +1,16 @@
 <?php
 if(!defined('ENCODINGS')){ define('ENCODINGS','ISO-8859-1'); }
-require_once '../classes/webform/THtmlPage.class.php';
+
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/webform/THtmlPage.class.php';
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * THtmlPage test case.
  */
-class THtmlPageTest extends PHPUnit_Framework_TestCase {
+class THtmlPageTest extends TestCase
+{
 	
 	/**
 	 *
@@ -35,6 +41,20 @@ class THtmlPageTest extends PHPUnit_Framework_TestCase {
 		$expected = 'UTF-8';		
 		$result =  $this->tHtmlPage->getCharset();
 		$this->assertEquals( $expected , $result);
+	}
+	
+	
+	public function testGetFavIcon_Null() {
+	    $expected = '../../base//imagens/favicon-32x32.png';
+	    $result =  $this->tHtmlPage->getFavIcon();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetFavIcon_informed() {
+	    $expected = '../base/imagens/favicon-blue.png';
+	    $this->tHtmlPage->setFavIcon('../base/imagens/favicon-blue.png');
+	    $result =  $this->tHtmlPage->getFavIcon();
+	    $this->assertEquals( $expected , $result);
 	}
 }
 

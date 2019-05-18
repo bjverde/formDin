@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.5.1-alpha
+ * FormDin Version: 4.5.3-alpha
  * 
- * System xx created in: 2019-04-14 20:35:31
+ * System appev2 created in: 2019-05-10 01:19:08
  */
 
 
@@ -25,7 +25,7 @@ class Acesso_perfilAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function selectAll(Request $request, Response $response, array $args): Response
+    public static function selectAll(Request $request, Response $response, array $args)
     {
         $result = \Acesso_perfil::selectAll();
         $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
@@ -46,7 +46,7 @@ class Acesso_perfilAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function selectById(Request $request, Response $response, array $args): Response
+    public static function selectById(Request $request, Response $response, array $args)
     {
         $result = self::selectByIdInside($args);
         $msg = array( 'qtd'=> \CountHelper::count($result)
@@ -57,7 +57,7 @@ class Acesso_perfilAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function save(Request $request, Response $response, array $args): Response
+    public static function save(Request $request, Response $response, array $args)
     {
         $vo = new \Acesso_perfilVO;
         $msg = \Message::GENERIC_INSERT;
@@ -78,7 +78,7 @@ class Acesso_perfilAPI
     }
 
     //--------------------------------------------------------------------------------
-    public static function delete(Request $request, Response $response, array $args): Response
+    public static function delete(Request $request, Response $response, array $args)
     {
         $id = $args['id'];
         $class = new \Acesso_perfil;
