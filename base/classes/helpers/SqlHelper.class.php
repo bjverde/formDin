@@ -92,6 +92,20 @@ class SqlHelper
         return $retorno;
     }
     //--------------------------------------------------------------------------------
+    /***
+     * Verify that a given attribute has an attribute value. Returns the string 
+     * that corresponds to the $isTrue or $isFalse situation.
+     * 
+     * Verificar se um determinado atributo tem um valor atributo. Retorna a 
+     * string corresponde a situação $isTrue ou $isFalse.
+     * 
+     * @param array   $whereGrid  1: array with all the attributes that should be checked 
+     * @param string  $attribute  2: attribute that will be verified
+     * @param string  $isTrue     3: return string if positive
+     * @param string  $isFalse    4: 
+     * @param boolean $testZero   5: the zero must be forehead or not. True = attribute must be diverge from zero
+     * @return string
+     */
     public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
     {
         $retorno = $isFalse;
