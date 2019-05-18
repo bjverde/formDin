@@ -39,11 +39,13 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once __DIR__.'/../../classes/Ajuda.class.php';
+$path =  __DIR__.'/../../../';
+require_once $path.'classes/constants.php';
+require_once $path.'classes/webform/TAjuda.class.php';
 
 use PHPUnit\Framework\TestCase;
 
-class AjudaTest extends TestCase
+class TAjudaTest extends TestCase
 {
 	/**
 	 *
@@ -56,7 +58,7 @@ class AjudaTest extends TestCase
 	 */
 	protected function setUp() {
 		parent::setUp ();
-		$this->ajuda = new Ajuda('Nome','Texto');
+		$this->ajuda = new TAjuda('Nome','Texto');
 		$this->ajuda->setValorChave('valeuKey');
 	}
 	
