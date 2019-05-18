@@ -34,7 +34,7 @@ $frm->addHiddenField( 'HORARIOHIDDEN' );   // coluna chave da tabela
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
 $listPessoa = Pessoa::selectAll();
-$frm->addSelectField('IDPESSOA_DENTISTA', 'Dentista', true, $listPessoa);
+$frm->addSelectField('IDPESSOA_DENTISTA', 'Dentista', true, $listPessoa, null, null, null, null, null, null, ' ', null);
 
 $listHorarios = array('08:00'=>'08:00','09:00'=>'09:00','10:00'=>'10:00','16:00'=>'16:00','17:00'=>'17:00','18:00'=>'18:00');
 $frm->addCheckField('HORARIO','Horários:',TRUE,$listHorarios,null,null,null,4);
