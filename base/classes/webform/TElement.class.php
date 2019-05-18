@@ -787,7 +787,7 @@ class TElement
     }
     
     //-------------------------------------------------------------------------------------------------
-    protected function getIdent( $intDepth = 0 )
+    public function getIdent( $intDepth = 0 )
     {
         if ( $GLOBALS[ 'teste' ] && self::$depth > 0 )
         {

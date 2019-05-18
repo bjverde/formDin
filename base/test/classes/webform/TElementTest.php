@@ -152,6 +152,27 @@ class TElementTest extends TestCase
 	    $this->assertSame($esperado, $retorno);
 	}
 	
+	public function testgetIdent_null() {
+	    $expected = null;
+	    $test = new TElement('nav');	    
+	    $result = $test->getIdent();
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testgetIdent_3() {
+	    $expected = chr( 9 );
+	    $test = new TElement('nav');
+	    $result = $test->getIdent(3);
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testgetIdent_1() {
+	    $expected = ' ';
+	    $test = new TElement('nav');
+	    $result = $test->getIdent(1);
+	    $this->assertSame($expected, $result);
+	}
+	
 	public function testChilren() {
 	    $expected = 'If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".';
 	    $test = new TElement('p');
