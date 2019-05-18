@@ -54,9 +54,10 @@
 class TPDOConnectionObj
 {
 
-    private $TPDOConnection = null;
+    private $tpdo = null;
     
-    public function __construct() {
+    public function __construct()
+    {
         $tpdo = New TPDOConnection();
         $tpdo::connect(null,true,null,null);
         $this->setTPDOConnection($tpdo);
@@ -64,25 +65,37 @@ class TPDOConnectionObj
     //--------------------------------------------------------------------------------------    
     public function getTPDOConnection()
     {
-        return $this->TPDOConnection;
+        return $this->tpdo;
     }
     public function setTPDOConnection($TPDOConnection)
     {
-        $this->TPDOConnection = $TPDOConnection;
+        $this->tpdo = $TPDOConnection;
     }
     //--------------------------------------------------------------------------------------
-    public static function getDBMS() {
-        return  $this->TPDOConnection::getDBMS();
+    public function getDBMS()
+    {
+        return $this->tpdo::getDBMS();
     }
     public function setDBMS( $banco = null ) {
-        $this->TPDOConnection::setBanco($banco);
+        $this->tpdo::setBanco($banco);
     }
     //--------------------------------------------------------------------------------------
-    public function getHost() {
-        return $this->TPDOConnection::getHost();
+    public function getHost()
+    {
+        return $this->tpdo::getHost();
     }
-    public function setHost($host) {
-        $this->TPDOConnection::setHost($host);
+    public function setHost($host)
+    {
+        $this->tpdo::setHost($host);
+    }
+    //--------------------------------------------------------------------------------------
+    public function getDataBaseName()
+    {
+        return $this->tpdo::getDataBaseName();
+    }
+    public function setDataBaseName($host)
+    {
+        $this->tpdo::setDataBaseName($host);
     }
     //--------------------------------------------------------------------------------------
     public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
@@ -96,6 +109,21 @@ class TPDOConnectionObj
         $tpdo = $this->getTPDOConnection();
         $result = $tpdo::executeSql($sql,$arrParams);
         return $result;
+    }
+    //--------------------------------------------------------------------------------------
+    public function beginTransaction()
+    {
+        $this->tpdo::beginTransaction();
+    }
+    //--------------------------------------------------------------------------------------
+    public function commit()
+    {
+        $this->tpdo::commit();
+    }
+    //--------------------------------------------------------------------------------------
+    public function rollBack()
+    {
+        $this->tpdo::rollBack();
     }
 }
 ?>
