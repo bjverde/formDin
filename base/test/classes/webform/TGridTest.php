@@ -39,9 +39,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 $path =  __DIR__.'/../../../classes/';
-require_once $path.'webform/TElement.class.php';
-require_once $path.'webform/TTable.class.php';
-require_once $path.'webform/TGrid.class.php';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
 require_once $path.'../test/mockFormDinArray.php';
 

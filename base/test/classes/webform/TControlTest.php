@@ -46,61 +46,23 @@ require_once $path.'helpers/autoload_formdin_helper.php';
 use PHPUnit\Framework\TestCase;
 
 /**
- * TApplication test case.
+ * TElement test case.
  */
-class TFileTest  extends TestCase
+class TControlTest extends TestCase
 {
-	/**
-	 * @var TFile
-	 */
-	private $file;
-	private $fieldName;
-	
 	/**
 	 * Prepares the environment before running a test.
 	 */
 	protected function setUp() {
 		parent::setUp ();
-		$fileFormat = 'pdf,gif,txt,jpg,rar,zip,doc';
-		$this->fieldName = 'anexo';
-		$this->file = new TFile('anexo','Anexo Async:',true,$fileFormat,'2M',40,FALSE);
 	}
 	
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
-		$this->file = null;		
+	protected function tearDown() {		
 		parent::tearDown ();
 	}
 	
-	public function testGetMaxSize() {
-		$esperado = '2Mb';
-		$retorno = $this->file->getMaxSize();
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testGetMaxSizeKb_2k() {
-		$size = '2K';
-		$esperado = '2048';
-		$this->file->setMaxSizeKb($size);
-		$retorno = $this->file->getMaxSizeKb();
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testGetMaxSizeKb_3M() {
-		$size = '3M';
-		$esperado = '3145728';
-		$this->file->setMaxSizeKb($size);
-		$retorno = $this->file->getMaxSizeKb();
-		$this->assertEquals($esperado, $retorno);
-	}
-	
-	public function testGetMaxSizeKb_4G() {
-		$size = '4G';
-		$esperado = '4294967296';
-		$this->file->setMaxSizeKb($size);
-		$retorno = $this->file->getMaxSizeKb();
-		$this->assertEquals($esperado, $retorno);
-	}	
+
 }

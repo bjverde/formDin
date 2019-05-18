@@ -38,10 +38,10 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-
-$path =  __DIR__.'/../../../';
-require_once $path.'classes/constants.php';
-require_once $path.'classes/webform/TAjuda.class.php';
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'webform/autoload_formdin.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
 use PHPUnit\Framework\TestCase;
 
