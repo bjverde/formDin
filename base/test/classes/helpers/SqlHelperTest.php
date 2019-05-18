@@ -249,17 +249,17 @@ class SqlHelperTest extends TestCase
 	    SqlHelper::transformValidateString( $string );
 	}
 	//--------------------------------------------------------------------------------
-	public function testGetSqlTypeInText_NoArray() {
+	public function testGetSqlTypeIn_TextNoArray() {
 	    $expected = ' AND LETRAS = \'xxx\'  ';
 	    $stringWhere = null;
 	    $value = 'xxx';
 	    $arrayWhereGrid = array();
 	    $arrayWhereGrid['LETRAS'] = $value;
 	    $attribute = 'LETRAS';
-	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_TEXT);
 	    $this->assertEquals( $expected , $result);
 	}
-	public function testGetSqlTypeInText_Array1Element() {
+	public function testGetSqlTypeIn_TextArray1Element() {
 	    $expected = ' AND LETRAS = \'a\'  ';
 	    $stringWhere = null;
 	    $value = array('a');
@@ -268,10 +268,10 @@ class SqlHelperTest extends TestCase
 	    $arrayWhereGrid['D'] = 123;
 	    $arrayWhereGrid['LETRAS'] = $value;
 	    $attribute = 'LETRAS';
-	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_TEXT);
 	    $this->assertEquals( $expected , $result);
 	}
-	public function testGetSqlTypeInText() {
+	public function testGetSqlTypeIn_Text() {
 	    $expected = ' AND LETRAS in (\'a\',\'b\',\'c\') ';
 	    $stringWhere = null;
 	    $value = array('a','b','c');
@@ -280,21 +280,21 @@ class SqlHelperTest extends TestCase
 	    $arrayWhereGrid['D'] = 123;
 	    $arrayWhereGrid['LETRAS'] = $value;
 	    $attribute = 'LETRAS';
-	    $result = SqlHelper::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_TEXT);
 	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	public function testGetSqlTypeInNumeric_NoArray() {
+	public function testGetSqlTypeIn_NumericNoArray() {
 	    $expected = ' AND NUMEROS = 1  ';
 	    $stringWhere = null;
 	    $value = '1';
 	    $arrayWhereGrid = array();
 	    $arrayWhereGrid['NUMEROS'] = $value;
 	    $attribute = 'NUMEROS';
-	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_NUMERIC);
 	    $this->assertEquals( $expected , $result);
 	}
-	public function testGetSqlTypeInNumeric_Array1Element() {
+	public function testGetSqlTypeIn_NumericArray1Element() {
 	    $expected = ' AND NUMEROS = 1  ';
 	    $stringWhere = null;
 	    $value = array('1');
@@ -303,10 +303,10 @@ class SqlHelperTest extends TestCase
 	    $arrayWhereGrid['D'] = 123;
 	    $arrayWhereGrid['NUMEROS'] = $value;
 	    $attribute = 'NUMEROS';
-	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_NUMERIC);
 	    $this->assertEquals( $expected , $result);
 	}
-	public function testGetSqlTypeInNumeric() {
+	public function testGetSqlTypeIn_Numeric() {
 	    $expected = ' AND NUMEROS in (1,2,3) ';
 	    $stringWhere = null;
 	    $value = array('1','2','3');
@@ -315,7 +315,7 @@ class SqlHelperTest extends TestCase
 	    $arrayWhereGrid['D'] = 123;
 	    $arrayWhereGrid['NUMEROS'] = $value;
 	    $attribute = 'NUMEROS';
-	    $result = SqlHelper::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, true ,$value);
+	    $result = SqlHelper::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, true ,$value,null,SqlHelper::SQL_TYPE_IN_NUMERIC);
 	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------

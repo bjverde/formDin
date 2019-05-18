@@ -48,7 +48,7 @@ class SqlHelper
 	const SQL_TYPE_TEXT_LIKE  = 'like';
 	const SQL_TYPE_TEXT_EQUAL = 'text';
 	const SQL_TYPE_IN_TEXT    = 'text with IN';
-	const SQL_TYPE_IN_NUMERIC    = 'text with IN';
+	const SQL_TYPE_IN_NUMERIC = 'numeric with IN';
 	
 	const SQL_CONNECTOR_AND = ' AND ';
 	const SQL_CONNECTOR_OR  = ' OR ';
@@ -124,7 +124,8 @@ class SqlHelper
         return $retorno;
     }
     //----------------------------------------
-    public static function transformValidateString( $string ) {        
+    public static function transformValidateString( $string )
+    {        
         if ( self::getDbms() == DBMS_MYSQL ) {
             //$string = addslashes($string);
             //$patterns = '/(%)/';
@@ -148,7 +149,8 @@ class SqlHelper
      * @param string $string
      * @return string`
      */
-    public static function explodeTextString( $string ) {
+    public static function explodeTextString( $string )
+    {
         $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_POSTGRES) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
         if ( $dataBaseWithLike ) {
             $string = trim($string);
@@ -180,6 +182,7 @@ class SqlHelper
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
     }
+    //--------------------------------------------------------------------------
     public static function getSqlTypeTextLike( $stringWhere
                                              , $arrayWhereGrid
                                              , $attribute
@@ -193,6 +196,7 @@ class SqlHelper
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
     }
+    //--------------------------------------------------------------------------
     public static function getSqlTypeText( $stringWhere
                                          , $arrayWhereGrid
                                          , $attribute
@@ -205,70 +209,54 @@ class SqlHelper
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
     }
-    public static function getSqlTypeInText( $stringWhere
-                                           , $arrayWhereGrid
-                                           , $attribute
-                                           , $testZero=true
-                                           , $value
-                                           , $connector=self::SQL_CONNECTOR_AND
-                                           ) {
+    //--------------------------------------------------------------------------
+    public static function getSqlTypeNotIn( $stringWhere
+                                          , $arrayWhereGrid
+                                          , $attribute
+                                          , $testZero=true
+                                          , $value
+                                          , $connector=self::SQL_CONNECTOR_AND
+                                          , $type
+                                          )
+    {
+        if($type == self::SQL_TYPE_IN_NUMERIC){
+            $stringWhere = self::getSqlTypeNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+        }else{
+            $stringWhere = self::getSqlTypeText($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+        }
+        return $stringWhere;
+    }
+    public static function getSqlTypeIn( $stringWhere
+                                       , $arrayWhereGrid
+                                       , $attribute
+                                       , $testZero=true
+                                       , $value
+                                       , $connector=self::SQL_CONNECTOR_AND
+                                       , $type
+                                       )
+    {
        If(is_array($value)){
            $qtdElement = CountHelper::count($value);
            if( $qtdElement == 1 ){
                $value = $value[0];
-               $stringWhere = self::getSqlTypeText($stringWhere
-                                                 , $arrayWhereGrid
-                                                 , $attribute
-                                                 , $testZero
-                                                 , $value
-                                                 , $connector);
+               if( FormDinHelper::issetOrNotZero($value) ){
+                   $stringWhere = self::getSqlTypeNotIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
+               }
            } else if( $qtdElement > 1 ) {
-               $value = implode("','",$value);
-               $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
-               $stringWhere = $stringWhere.$isTrue;
+               if($type == self::SQL_TYPE_IN_NUMERIC){
+                   $value = implode(",",$value);
+                   $isTrue = ' AND '.$attribute.' in ('.$value.') ';
+                   $stringWhere = $stringWhere.$isTrue;
+               }else{
+                   $value = implode("','",$value);
+                   $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
+                   $stringWhere = $stringWhere.$isTrue;
+               }
            }
        } else {
-           $stringWhere = self::getSqlTypeText($stringWhere
-                                             , $arrayWhereGrid
-                                             , $attribute
-                                             , $testZero 
-                                             , $value
-                                             , $connector);
+           $stringWhere = self::getSqlTypeNotIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
        }
        return $stringWhere;
-    }
-    public static function getSqlTypeInNumeric( $stringWhere
-                                              , $arrayWhereGrid
-                                              , $attribute
-                                              , $testZero=true
-                                              , $value
-                                              , $connector=self::SQL_CONNECTOR_AND
-                                              ) {
-        
-        If(is_array($value)){
-            $qtdElement = CountHelper::count($value);
-            if( $qtdElement == 1 ){
-                $value = $value[0];
-                $stringWhere = self::getSqlTypeNumeric($stringWhere
-                                                     , $arrayWhereGrid
-                                                     , $attribute
-                                                     , $testZero
-                                                     , $value
-                                                     , $connector);
-            } else if( $qtdElement > 1 ) {
-                $value = implode(",",$value);
-                $isTrue = ' AND '.$attribute.' in ('.$value.') ';
-                $stringWhere = $stringWhere.$isTrue;
-            }
-        }else{
-            $stringWhere = self::getSqlTypeNumeric($stringWhere
-                                                 , $arrayWhereGrid
-                                                 , $attribute
-                                                 , $testZero 
-                                                 , $value
-                                                 , $connector);
-        }
-        return $stringWhere;
     }
     //----------------------------------------    
     /***
@@ -308,10 +296,10 @@ class SqlHelper
     		        $stringWhere = self::getSqlTypeText($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
     		    break;
     		    case self::SQL_TYPE_IN_TEXT:
-    		        $stringWhere = self::getSqlTypeInText($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+    		        $stringWhere = self::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
     		    break;
     		    case self::SQL_TYPE_IN_NUMERIC:
-    		        $stringWhere = self::getSqlTypeInNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
+    		        $stringWhere = self::getSqlTypeIn($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector, $type);
     		    break;
     		}
     	}
