@@ -45,11 +45,11 @@ require_once $path.'helpers/autoload_formdin_helper.php';
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * TElement test case.
- */
-class TControlTest extends TestCase
+
+class TTableTest extends TestCase
 {
+    
+   
 	/**
 	 * Prepares the environment before running a test.
 	 */
@@ -64,5 +64,39 @@ class TControlTest extends TestCase
 		parent::tearDown ();
 	}
 	
+	public function testNewTable() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testAddRow() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'<tr>'.EOL
+	               .'</tr>'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $test->addRow();
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	
+	public function testAddCell() {
+	    $expected = '<table id="tb01" >'.EOL
+	               .'<tr>'.EOL
+	               .ESP.'<td>'.EOL
+	               .'        aaa'.EOL
+	               .ESP.'</td>'.EOL
+	               .'</tr>'.EOL
+	               .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $row = $test->addRow();
+	    $row->addCell('aaa');
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
 
 }
