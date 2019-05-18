@@ -85,5 +85,32 @@ class FormDinHelper
         }
         return $vo;
     }
+    
+    /***
+     * 
+     * @param mixed $variable
+     * @param boolean $testZero
+     * @return boolean
+     */
+    public static function issetOrNotZero($variable,$testZero=true)
+    {
+        $result = false;
+        if( is_array($variable) ){
+            if( !empty($variable) ) {
+                $result = true;
+            }
+        }else{
+            if(isset($variable) && !($variable==='') ) {
+                if($testZero) {
+                    if($variable<>'0' ) {
+                        $result = true;
+                    }
+                }else{
+                    $result = true;
+                }
+            }
+        }
+        return $result;
+    }
 }
 ?>
