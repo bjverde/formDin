@@ -1522,6 +1522,7 @@ class TApplication extends TLayout {
 	 * @deprecated in formDin 4.3.0. Please use CSS to change Style of Width App
 	 * to work, setResponsiveMode = false
 	 * @param integer $intNewValue
+	 * @codeCoverageIgnore
 	 */
 	public function setWidth($intNewValue = null) {
 	    $this->width = $intNewValue;
@@ -1533,6 +1534,7 @@ class TApplication extends TLayout {
 	/**
 	 * @deprecated Please use CSS to change Style of North Area
 	 * maintained for backward compatibility
+	 * @codeCoverageIgnore
 	 */
 	private function buildCssNorthArea(){
 	    // css
@@ -1566,6 +1568,7 @@ class TApplication extends TLayout {
 	/**
 	 * @deprecated Please use CSS to change Style of South Area
 	 * maintained for backward compatibility
+	 * @codeCoverageIgnore
 	 */
 	private function buildCssSouthArea()
 	{
@@ -1606,6 +1609,7 @@ class TApplication extends TLayout {
 	 *
 	 * @param mixed $strNewImage
 	 * @param mixed $strRepeat
+	 * @codeCoverageIgnore
 	 */
 	public function setHeaderBgImage($strNewImage = null, $strRepeat = null)
 	{
@@ -1626,6 +1630,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background Header
+	 * @codeCoverageIgnore
 	 */
 	public function getHeaderBgImage()
 	{
@@ -1634,6 +1639,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setHeaderBgRepeat($strNewValue = null)
@@ -1643,6 +1649,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background Header
+	 * @codeCoverageIgnore
 	 */
 	public function getHeaderBgRepeat()
 	{
@@ -1651,6 +1658,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setFooterBgImage($strNewImage = null, $strRepeat = null)
@@ -1668,6 +1676,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background footer
+	 * @codeCoverageIgnore
 	 */
 	public function getFooterBgImage()
 	{
@@ -1676,6 +1685,7 @@ class TApplication extends TLayout {
 	//---------------------------------------------------------------------------------
 	/**
 	 * @deprecated Please use CSS to change Image Back Ground
+	 * @codeCoverageIgnore
 	 * @param string $strNewValue
 	 */
 	public function setFooterBgRepeat($strNewValue = null) {
@@ -1684,6 +1694,7 @@ class TApplication extends TLayout {
 	
 	/**
 	 * @deprecated Please use CSS to change Background footer
+	 * @codeCoverageIgnore
 	 */
 	public function getFooterBgRepeat() {
 	    return $this->footerBgRepeat;
