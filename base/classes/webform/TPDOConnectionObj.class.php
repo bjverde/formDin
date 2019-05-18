@@ -120,6 +120,33 @@ class TPDOConnectionObj
         $this->tpdo::setDataBaseName($host);
     }
     //--------------------------------------------------------------------------------------
+    public function getUsername()
+    {
+        return $this->tpdo::getUsername();
+    }
+    public function setUsername($username)
+    {
+        $this->tpdo::setUsername($username);
+    }
+    //--------------------------------------------------------------------------------------
+    public function getPassword()
+    {
+        return $this->tpdo::getPassword();
+    }
+    public function setPassword($password)
+    {
+        $this->tpdo::setPassword($password);
+    }
+    //--------------------------------------------------------------------------------------
+    public function getUtfDecode()
+    {
+        return $this->tpdo::getUtfDecode();
+    }
+    public function setUtfDecode( $boolNewValue = null )
+    {
+        $this->tpdo::setUtfDecode($boolNewValue);
+    }
+    //--------------------------------------------------------------------------------------
     public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
     {
         $tpdo = $this->getTPDOConnection();
