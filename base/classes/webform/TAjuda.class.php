@@ -75,7 +75,7 @@ class TAjuda {
 	* @param mixed $strValorChave
 	* @param mixed $strColunaAjuda
 	* @param mixed $strTitulo
-	* @return Ajuda
+	* @return TAjuda
 	*/
 	public function __construct($strNome=null
 										,$strRotulo=null
@@ -101,7 +101,7 @@ class TAjuda {
 			$this->setArquivoAjuda($strArquivoAjuda);
 			$this->setPacoteOracle($strPacoteOracle);
 			$this->setColunaChave($strColunaChave);
-			$this->setValorChave($strValorchave);
+			$this->setValorChave($strValorChave);
 			$this->setColunaAjuda($strColunaAjuda);
 			$this->setTitulo($strTitulo);
 		}

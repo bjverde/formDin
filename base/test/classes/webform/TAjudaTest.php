@@ -49,7 +49,7 @@ class TAjudaTest extends TestCase
 {
 	/**
 	 *
-	 * @var Ajuda
+	 * @var TAjuda
 	 */
 	private $ajuda;
 	
