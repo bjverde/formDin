@@ -11,15 +11,24 @@
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">D:\wamp\www\formDin\base</directory>
-            <exclude>
+            <directory suffix=".php">D:\wamp\www\formDin\base\webform</directory>
+            <exclude>				
                 <directory suffix=".php">D:\wamp\www\formDin\base\callbacks</directory>
+				<directory suffix=".php">D:\wamp\www\formDin\base\classes\captcha</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\css</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\imagens</directory>
+				<directory suffix=".php">D:\wamp\www\formDin\base\includes</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\js</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\lib_fpdf181</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\lib</directory>
                 <directory suffix=".php">D:\wamp\www\formDin\base\vendor</directory>
+				<directory suffix=".php">D:\wamp\www\formDin\base\tmp</directory>
+				<directory suffix=".php">D:\wamp\www\formDin\base\xajax</directory>
+
+                <file>D:\wamp\www\formDin\base\classes\excelwriter.inc.php</file>
+				<file>D:\wamp\www\formDin\base\classes\FormDin4.xls.php</file>
+				<file>D:\wamp\www\formDin\base\classes\nusoap.inc</file>
+				<file>D:\wamp\www\formDin\base\classes\webform\TGridTest.class.php</file>
                 <file>D:\wamp\www\formDin\base\tmp\index.php</file>
                 <file>D:\wamp\www\formDin\base\callbacks\index.php</file>
                 <file>D:\wamp\www\formDin\base\index.php</file>
