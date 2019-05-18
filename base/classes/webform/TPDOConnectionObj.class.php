@@ -59,8 +59,20 @@ class TPDOConnectionObj
     public function __construct()
     {
         $tpdo = New TPDOConnection();
-        $tpdo::connect(null,true,null,null);
+        //$configArray = $this->getFakeConnectionArray();
+        //$tpdo::connect(null,true,null,$configArray);
         $this->setTPDOConnection($tpdo);
+    }    
+    private function getFakeConnectionArray(){
+        $configArray= array(
+             'DBMS' => DBMS_MYSQL
+            ,'PORT' => null
+            ,'HOST' => 'locahost'
+            ,'DATABASE' => 'fake'
+            ,'USERNAME' => 'fake'
+            ,'PASSWORD' => 'fake'
+        );        
+        return $configArray;
     }
     //--------------------------------------------------------------------------------------    
     public function getTPDOConnection()
@@ -76,8 +88,18 @@ class TPDOConnectionObj
     {
         return $this->tpdo::getDBMS();
     }
-    public function setDBMS( $banco = null ) {
+    public function setDBMS( $banco = null )
+    {
         $this->tpdo::setBanco($banco);
+    }
+    //--------------------------------------------------------------------------------------
+    public function getPort()
+    {
+        return $this->tpdo::getPort();
+    }
+    public function setPort($port = null )
+    {
+        $this->tpdo::setPort($port);
     }
     //--------------------------------------------------------------------------------------
     public function getHost()
