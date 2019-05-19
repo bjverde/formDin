@@ -86,7 +86,7 @@ class TPDOConnectionObjTest extends TestCase
 	
 	public function testGetDataBaseName_null() {
 	    $expected = null;
-	    $result = $this->test->getHost();
+	    $result = $this->test->getDataBaseName();
 	    $this->assertEquals( $expected , $result);
 	}
 	
@@ -103,9 +103,49 @@ class TPDOConnectionObjTest extends TestCase
 	}
 	
 	public function testGetUtfDecode_null() {
-	    $expected = null;
+	    $expected = true;
 	    $result = $this->test->getUtfDecode();
 	    $this->assertEquals( $expected , $result);
 	}
+	
+	public function testConnect_ObjMySQL() {
+	    $expected = DBMS_MYSQL;
+	    $this->test->setDBMS(DBMS_MYSQL);
+	    $this->test->setHost('localhost');
+	    $this->test->setDataBaseName('test');
+	    $this->test->setUsername('test');
+	    $this->test->setPassword('test');
+	    $this->test->connect();
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testConnect_ObjSqLite() {
+	    $expected = DBMS_SQLITE;
+	    $this->test->setDBMS(DBMS_SQLITE);
+	    $this->test->setDataBaseName('includes/exemplo.s3db');
+	    $this->test->connect();
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	
+	/**
+	 * Work but very very slow. This test 
+	public function testConnect_ArrayMySQL() {
+	    $expected = DBMS_MYSQL;
+	    $configArray= array(
+	        'DBMS' => DBMS_MYSQL
+	        ,'PORT' => null
+	        ,'HOST' => 'locahost'
+	        ,'DATABASE' => 'fake'
+	        ,'USERNAME' => 'fake'
+	        ,'PASSWORD' => 'fake'
+	    );
+	    $this->test->connect(null,null,null,$configArray);
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	**/
 	
 }
