@@ -90,14 +90,35 @@ class TPDOConnectionObjTest extends TestCase
 	    $this->assertEquals( $expected , $result);
 	}
 	
+	public function testGetDataBaseName_NotNull() {
+	    $expected = 'form_exemplo';
+	    $this->test->setDataBaseName('form_exemplo');
+	    $result = $this->test->getDataBaseName();
+	    $this->assertEquals( $expected , $result);
+	}
+	
 	public function testGetUsername_null() {
 	    $expected = null;
 	    $result = $this->test->getUsername();
 	    $this->assertEquals( $expected , $result);
 	}
 	
+	public function testGetUsername_NotNull() {
+	    $expected = 'form_exemplo';
+	    $this->test->setUsername('form_exemplo');
+	    $result = $this->test->getUsername();
+	    $this->assertEquals( $expected , $result);
+	}
+	
 	public function testGetPassword_null() {
 	    $expected = null;
+	    $result = $this->test->getPassword();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetPassword_NotNull() {
+	    $expected = '123456';
+	    $this->test->setPassword('123456');
 	    $result = $this->test->getPassword();
 	    $this->assertEquals( $expected , $result);
 	}

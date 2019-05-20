@@ -125,7 +125,7 @@ class TPDOConnection {
     //--------------------------------------------------------------------------------------
     public static function getPassword()
     {
-        self::$password;
+        return self::$password;
     }
     public static function setPassword($password)
     {
