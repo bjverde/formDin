@@ -631,7 +631,7 @@ class TElement
         if ( !$GLOBALS[ 'teste' ] )
         {
             $result = str_replace( "\n", '', $result );
-            $result = str_replace( chr( 9 ), '', $result );
+            $result = str_replace( ESP, '', $result );
         }
         
         if ( $print )
