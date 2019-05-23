@@ -83,6 +83,14 @@ class TTableTest extends TestCase
 	    $this->assertSame($expected, $result);
 	}
 	
+	public function testAddRow_GetVisible() {
+	    $expected = false;
+	    $test = new TTable('tb01');
+	    $row = $test->addRow();
+	    $row->setVisible(false);
+	    $result = $row->getVisible();
+	    $this->assertSame($expected, $result);
+	}
 	
 	public function testAddCell() {
 	    $expected = '<table id="tb01" >'.EOL
@@ -98,5 +106,59 @@ class TTableTest extends TestCase
 	    $result = $test->show(false);
 	    $this->assertSame($expected, $result);
 	}
-
+	
+	public function testAddCell_setClass() {
+	    $expected = '<table id="tb01"  class="grid-green" >'.EOL
+            	    .'<tr>'.EOL
+            	    .ESP.'<td>'.EOL
+            	    .ESP.ESP.'aaa'.EOL
+            	    .ESP.'</td>'.EOL
+            	    .'</tr>'.EOL
+            	    .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    $test->setClass('grid-green');
+	    $row = $test->addRow();
+	    $row->addCell('aaa');
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testAddCell_NotVisible() {
+	    $expected = '<table id="tb01" >'.EOL
+            	    .'<tr>'.EOL
+            	    .ESP.'<td>'.EOL
+            	    .ESP.ESP.'aaa'.EOL
+            	    .ESP.'</td>'.EOL
+            	    .'</tr>'.EOL
+            	    .'<tr>'.EOL
+            	    .ESP.'<td>'.EOL
+            	    .ESP.ESP.'aaa3'.EOL
+            	    .ESP.'</td>'.EOL
+            	    .'</tr>'.EOL
+            	    .'</table>'.EOL;
+	    $test = new TTable('tb01');
+	    
+	    $row = $test->addRow();
+	    $row->addCell('aaa');
+	    //$row->setVisible(false);
+	    
+	    $row2 = $test->addRow();
+	    $row2->addCell('aaa2');
+	    $row2->setVisible(false);
+	    
+	    $row3 = $test->addRow();
+	    $row3->addCell('aaa3');
+	    
+	    $result = $test->show(false);
+	    $this->assertSame($expected, $result);
+	}
+	
+	public function testAddCell_GetValue() {
+	    $expected = 'aaa';
+	    $test = new TTable('tb01');
+	    $row = $test->addRow();
+	    $cell = $row->addCell('aaa');
+	    $result = $cell->getValue();
+	    $this->assertSame($expected, $result);
+	}
 }
