@@ -404,7 +404,7 @@ class TForm Extends TBox
             }
             else
             {
-                $confirm = $this->getConfirmOnClose() ? 'true' : 'false';
+                //$confirm = $this->getConfirmOnClose() ? 'true' : 'false';
                 if( ! $this->get('modalWinId') )
                 {
                     $button = '<img id="btn_'.$form->getId().'_close" src="' . $this->getBase() . 'imagens/fwbtnclosered.jpg" style="cursor:pointer;float:right;width:20px; height:15px;vertical-align:top;margin-right:2px;" title="Fechar" onClick="fwConfirmCloseForm(\'' . $this->getId() . '\',' . $sub . ',' . $this->getOnClose() . ',' . $this->getOnBeforeClose().');">';
@@ -2833,17 +2833,17 @@ class TForm Extends TBox
       * @example exemple/exCampoSelectAgrupado.php
       *
       *
-      * @param string $selectPai             - 1: Id Campo pai
-      * @param string $selectFilho           - 2: Id Campo filho
+      * @param string $selectPai             - 1: Id Campo pai no Form
+      * @param string $selectFilho           - 2: Id Campo filho no Form
       * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
-      * @param string $colunaFiltro          - 4: campo_formulario|campo_banco
-      * @param string $colunaCodigo
-      * @param string $colunaDescricao
-      * @param string $descPrimeiraOpcao
-      * @param string $valorPrimeiraOpcao
-      * @param string $descNenhumaOpcao
+      * @param string $colunaFiltro          - 4: coluna filtro na tabela/view o equivalente a id Campo pai 
+      * @param string $colunaCodigo          - 5: coluna na tabela/view codigo do campo filho
+      * @param string $colunaDescricao       - 6: coluna na na tabela/view com as descrições
+      * @param string $descPrimeiraOpcao     - 7: descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
+      * @param string $valorPrimeiraOpcao    - 8: valor da primeira opção geralmente um valor da lista
+      * @param string $descNenhumaOpcao      - 9: mensagem caso não tenho nenhuma opção correspondente.
       * @param string $campoFormFiltro
-      * @param string $funcaoExecutar
+      * @param string $funcaoExecutar        - 11: Função JavaScript que será chamado no caso de onChange
       * @param boolean $boolSelectUniqueOption
       */
      function combinarSelects( $selectPai='cod_uf'
@@ -4667,25 +4667,9 @@ class TForm Extends TBox
               return $html;
           }
       }
-      /**
-       * Método para fazer a inclusão do modulo de acordo com a ação solicitada
-       *
-       * @param mixed $arrVar
-       * @param string $strAction
-       */
-      public function processAction( $arrVar=null, $strAction=null )
+      
+      public function processActionGetModulo()
       {
-          
-          $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
-          // para funcionar com chamadas ajax sem fwAjaxRequest.
-          if( $boolAjax )
-          {
-              $_REQUEST['dataType'] = ( isset( $_REQUEST['dataType'] ) ) ? $_REQUEST['dataType'] : $_REQUEST['dataType']='text';
-              require_once($this->getBase() . 'includes/formDin4Ajax.php');
-          }
-          $this->setVar( $arrVar );
-          
-          
           $strModule = null;
           // encontrar a modulo postado em uma das variáveis: modulo, module
           if( isset($_POST[ 'modulo' ]) && $_POST[ 'modulo' ]  )
@@ -4711,7 +4695,12 @@ class TForm Extends TBox
           else if( isset($_REQUEST[ 'module' ]) && $_REQUEST[ 'module' ]  )
           {
               $strModule = $_REQUEST[ 'module' ];
-          }
+          }          
+          return  $strModule;          
+      }
+      
+      public function processActionGetAction($strAction=null)
+      {
           // encontrar a ação postada em uma das variáveis: formDinAcao, acao ou action
           if( is_null( $strAction ) )
           {
@@ -4754,6 +4743,32 @@ class TForm Extends TBox
               
               $strAction = $this->removeIllegalChars( $strAction );
           }
+          
+          return $strAction;
+
+      }
+      
+      
+      /**
+       * Método para fazer a inclusão do modulo de acordo com a ação solicitada
+       *
+       * @param mixed $arrVar
+       * @param string $strAction
+       */
+      public function processAction( $arrVar=null, $strAction=null )
+      {
+          
+          $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
+          // para funcionar com chamadas ajax sem fwAjaxRequest.
+          if( $boolAjax )
+          {
+              $_REQUEST['dataType'] = ( isset( $_REQUEST['dataType'] ) ) ? $_REQUEST['dataType'] : $_REQUEST['dataType']='text';
+              require_once($this->getBase() . 'includes/formDin4Ajax.php');
+          }
+          $this->setVar( $arrVar );          
+          
+          $strModule = $this->processActionGetModulo();
+          $strAction = $this->processActionGetAction($strAction);
           
           if( $strAction && $strModule )
           {
