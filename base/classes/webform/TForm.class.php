@@ -7155,9 +7155,9 @@ class TForm Extends TBox
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
     *
-    * @param string  $strName         - id do campo
-    * @param string  $strLabel        - Rotulo do campo que irá aparece na tela
-    * @param boolean $boolRequired    - Obrigatorio 
+    * @param string  $strName         - 1: id do campo
+    * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired    - 3: Obrigatorio 
     * @param string  $strAllowedFileTypes - Tipos de arquivos
     * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
     * @param integer $intFieldSize
@@ -7217,8 +7217,8 @@ class TForm Extends TBox
     /**
     * Campo para criação de hiperlink no formulário
     *
-    * @param string $strName
-    * @param string $strLabel
+    * @param string $strName           - 1: id do campo
+    * @param string $strLabel          - 2: Rotulo do campo que irá aparece na tela
     * @param string $strValue
     * @param string $strOnClick
     * @param string $strUrl
@@ -7239,13 +7239,13 @@ class TForm Extends TBox
     /**
     * Método para criar campo de edição de horas
     *
-    * @param string $strName
-    * @param string $strLabel
+    * @param string $strName             - 1: id do campo
+    * @param string $strLabel            - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired
     * @param string $strMinValue
     * @param string $strMaxValue
-    * @param string $strMask
-    * @param boolean $boolNewLine
+    * @param string $stMask        6: HM, HMS
+    * @param boolean $boolNewLine  7: 
     * @param string $strValue
     * @param boolean $boolLabelAbove
     * @param boolean $boolNoWrapLabel
