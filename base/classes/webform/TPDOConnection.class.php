@@ -752,10 +752,19 @@ class TPDOConnection {
                     // Para stored procedure do MS SQL Server
                 }else if( preg_match( '/^exec/i', $sql ) > 0  ){
                     $res = array();
+                    /*
                     do {
                         $results = $stmt->fetchAll( $fetchMode );
                         $res[] = self::processResult( $results, $fetchMode, $boolUtfDecode );
                     } while ($stmt->nextRowset());
+                    */
+                    
+                    //https://github.com/bjverde/formDin/issues/164
+                    while($stmt->columnCount()) {
+                        $results = $stmt->fetchAll( $fetchMode );
+                        $res[] = self::processResult( $results, $fetchMode, $boolUtfDecode );
+                        $stmt->nextRowset();
+                    }
                     
                     if ( is_array( $res ) || is_object( $res ) ){
                         return $res;
