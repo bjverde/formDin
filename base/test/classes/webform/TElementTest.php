@@ -152,6 +152,27 @@ class TElementTest extends TestCase
 	    $this->assertSame($esperado, $retorno);
 	}
 	
+	public function testTagImg_NotClose() {
+	    $esperado = '<img>'.EOL;
+	    $test = new TElement('img');
+	    $retorno = $test->show(false);
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testTagInput_NotClose() {
+	    $esperado = '<input>'.EOL;
+	    $test = new TElement('input');
+	    $retorno = $test->show(false);
+	    $this->assertSame($esperado, $retorno);
+	}
+	
+	public function testTagDoctype_NotClose() {
+	    $esperado = '<!DOCTYPE html>'.EOL;
+	    $test = new TElement('doctype');
+	    $retorno = $test->show(false);
+	    $this->assertSame($esperado, $retorno);
+	}
+	
 	public function testgetIdent_null() {
 	    $expected = null;
 	    $test = new TElement('nav');	    
