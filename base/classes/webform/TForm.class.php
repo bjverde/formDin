@@ -7239,14 +7239,14 @@ class TForm Extends TBox
     /**
     * Método para criar campo de edição de horas
     *
-    * @param string $strName             - 1: id do campo
-    * @param string $strLabel            - 2: Rotulo do campo que irá aparece na tela
+    * @param string  $strName             - 1: id do campo
+    * @param string  $strLabel            - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired
-    * @param string $strMinValue
-    * @param string $strMaxValue
-    * @param string $stMask        6: HM, HMS
+    * @param string  $strMinValue
+    * @param string  $strMaxValue
+    * @param string  $strMask        6: HM, HMS
     * @param boolean $boolNewLine  7: 
-    * @param string $strValue
+    * @param string  $strValue
     * @param boolean $boolLabelAbove
     * @param boolean $boolNoWrapLabel
     * @return TTime
