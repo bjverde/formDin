@@ -42,6 +42,7 @@
 class TMessage {
 
     const CSS_FILE_FORM_DEFAULT_FAIL = 'Arquivo de CSS para o Padrão dos Forms não existe ou não está no formato CSS';
+    const MENU_FILE_FAIL = 'Arquivo do Menu não existe';
 
     const FORM_MIN_VERSION_INVALID_FORMAT = 'O formato da versão não é válido, informe no formato X.Y.Z';
     const FORM_MIN_VERSION_BLANK = 'Informe a versão minima do formDin';
