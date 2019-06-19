@@ -1465,28 +1465,51 @@ class TDAO
 			;
 			//--------------------------------------------------------------------------------
 			case DBMS_SQLSERVER:
-			    $sql = "SELECT qtd.TABLE_SCHEMA
-                              ,qtd.TABLE_NAME
-                        	  ,qtd.COLUMN_QTD
-                        	  ,ty.TABLE_TYPE
-							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+			    $sql = "select 
+                        TABLE_SCHEMA
+                        ,TABLE_NAME
+                        ,COLUMN_QTD
+                        ,TABLE_TYPE
+                        from (
+                        SELECT qtd.TABLE_SCHEMA
+                        		,qtd.TABLE_NAME
+                        		,qtd.COLUMN_QTD
+                        		,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
                         FROM
                         	(SELECT TABLE_SCHEMA
-                        		  ,TABLE_NAME
-                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
+                        			,TABLE_NAME
+                        			,COUNT(TABLE_NAME) COLUMN_QTD
                         	FROM INFORMATION_SCHEMA.COLUMNS c
                         	where c.TABLE_SCHEMA <> 'METADADOS'
                         	group by TABLE_SCHEMA, TABLE_NAME
                         	) as qtd
                         	,(SELECT TABLE_SCHEMA
-                        	       , TABLE_NAME
-                        		   , TABLE_TYPE
+                        			, TABLE_NAME
+                        			, TABLE_TYPE
                         	FROM INFORMATION_SCHEMA.TABLES i
                         	where I.TABLE_SCHEMA <> 'METADADOS'
                         	) as ty
                         where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
                         and qtd.TABLE_NAME = ty.TABLE_NAME
-                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+                        
+                        UNION
+                        
+                         SELECT Schema_name(schema_id)   AS TABLE_SCHEMA,
+                               SO.NAME                   AS TABLE_NAME,       
+                        	   count(*)                  AS COLUMN_QTD,
+                        	   CASE SO.type_desc 
+                        	   WHEN  'SQL_STORED_PROCEDURE' THEN 'PROCEDURE'
+                        	   ELSE 'FUNCTION' 
+                        	   END AS TABLE_TYPE	   
+                        FROM   sys.objects AS SO
+                               INNER JOIN sys.parameters AS P
+                                       ON SO.object_id = P.object_id
+                        WHERE  SO.object_id IN (SELECT object_id
+                                                FROM   sys.objects
+                                                WHERE  type IN ( 'P', 'FN' ))
+                        group by schema_id, SO.NAME, SO.type_desc
+                        ) as res
+                        order by res.TABLE_SCHEMA, res.TABLE_NAME";
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_POSTGRES:
