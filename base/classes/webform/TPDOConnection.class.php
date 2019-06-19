@@ -70,7 +70,8 @@ class TPDOConnection {
     private static $databaseName;
     private static $schema;
     private static $utfDecode;
-    
+   
+
     // construtor
     public function __construct(){
     }
@@ -104,12 +105,32 @@ class TPDOConnection {
         self::$port = $port;
     }   
     //--------------------------------------------------------------------------------------
-    public static function getDataBaseName() {
+    public static function getDataBaseName()
+    {
         return  self::$databaseName;
     }
-    public static function setDataBaseName( $strNewValue = null ) {
+    public static function setDataBaseName( $strNewValue = null )
+    {
         self::$databaseName = $strNewValue;
-    }    
+    }
+    //--------------------------------------------------------------------------------------
+    public static function getUsername()
+    {
+        return self::$username;
+    }
+    public static function setUsername($username)
+    {
+        self::$username = $username;
+    }
+    //--------------------------------------------------------------------------------------
+    public static function getPassword()
+    {
+        return self::$password;
+    }
+    public static function setPassword($password)
+    {
+        self::$password = $password;
+    }
     //--------------------------------------------------------------------------------------
     public static function setUtfDecode( $boolNewValue = null ) {
         self::$utfDecode = $boolNewValue;
@@ -731,10 +752,19 @@ class TPDOConnection {
                     // Para stored procedure do MS SQL Server
                 }else if( preg_match( '/^exec/i', $sql ) > 0  ){
                     $res = array();
+                    /*
                     do {
                         $results = $stmt->fetchAll( $fetchMode );
                         $res[] = self::processResult( $results, $fetchMode, $boolUtfDecode );
                     } while ($stmt->nextRowset());
+                    */
+                    
+                    //https://github.com/bjverde/formDin/issues/164
+                    while($stmt->columnCount()) {
+                        $results = $stmt->fetchAll( $fetchMode );
+                        $res[] = self::processResult( $results, $fetchMode, $boolUtfDecode );
+                        $stmt->nextRowset();
+                    }
                     
                     if ( is_array( $res ) || is_object( $res ) ){
                         return $res;

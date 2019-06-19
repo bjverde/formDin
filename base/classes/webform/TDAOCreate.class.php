@@ -39,8 +39,6 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-if(!defined('EOL')){ define('EOL',"\n"); }
-if(!defined('TAB')){ define('TAB',chr(9)); }
 
 class TDAOCreate {
 	private $tableName;

@@ -84,10 +84,89 @@ class TPDOConnectionObjTest extends TestCase
 	    $this->assertEquals( $expected , $result);
 	}
 	
-	public function testDataBaseName_null() {
+	public function testGetDataBaseName_null() {
 	    $expected = null;
-	    $result = $this->test->getHost();
+	    $result = $this->test->getDataBaseName();
 	    $this->assertEquals( $expected , $result);
 	}
+	
+	public function testGetDataBaseName_NotNull() {
+	    $expected = 'form_exemplo';
+	    $this->test->setDataBaseName('form_exemplo');
+	    $result = $this->test->getDataBaseName();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetUsername_null() {
+	    $expected = null;
+	    $result = $this->test->getUsername();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetUsername_NotNull() {
+	    $expected = 'form_exemplo';
+	    $this->test->setUsername('form_exemplo');
+	    $result = $this->test->getUsername();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetPassword_null() {
+	    $expected = null;
+	    $result = $this->test->getPassword();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetPassword_NotNull() {
+	    $expected = '123456';
+	    $this->test->setPassword('123456');
+	    $result = $this->test->getPassword();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testGetUtfDecode_null() {
+	    $expected = true;
+	    $result = $this->test->getUtfDecode();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testConnect_ObjMySQL() {
+	    $expected = DBMS_MYSQL;
+	    $this->test->setDBMS(DBMS_MYSQL);
+	    $this->test->setHost('localhost');
+	    $this->test->setDataBaseName('test');
+	    $this->test->setUsername('test');
+	    $this->test->setPassword('test');
+	    $this->test->connect();
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testConnect_ObjSqLite() {
+	    $expected = DBMS_SQLITE;
+	    $this->test->setDBMS(DBMS_SQLITE);
+	    $this->test->setDataBaseName('includes/exemplo.s3db');
+	    $this->test->connect();
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	
+	/**
+	 * Work but very very slow. This test 
+	public function testConnect_ArrayMySQL() {
+	    $expected = DBMS_MYSQL;
+	    $configArray= array(
+	        'DBMS' => DBMS_MYSQL
+	        ,'PORT' => null
+	        ,'HOST' => 'locahost'
+	        ,'DATABASE' => 'fake'
+	        ,'USERNAME' => 'fake'
+	        ,'PASSWORD' => 'fake'
+	    );
+	    $this->test->connect(null,null,null,$configArray);
+	    $result = $this->test->getDBMS();
+	    $this->assertEquals( $expected , $result);
+	}
+	**/
 	
 }

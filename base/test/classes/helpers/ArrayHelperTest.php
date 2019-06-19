@@ -38,7 +38,10 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once __DIR__.'/../../../classes/helpers/ArrayHelper.class.php';
+
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
 require_once __DIR__.'/../../mockFormDinArray.php';
 
@@ -92,7 +95,28 @@ class ArrayHelperTest extends TestCase
         $esperado  = array(0=>'x');
         $arrayTest = array("foo" => "bar","x" => "foo",100=> -100,-100=> 100);
         $retorno = ArrayHelper::array_keys2($arrayTest,'foo');
-        $this->assertEquals($esperado, $retorno);        
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testArray_keys2_position2() {
+        $esperado  = array(0=>2);
+        $arrayTest = array(0 => 'idTest',1=>'nm_test',2=>'tp_test');
+        $retorno = ArrayHelper::array_keys2($arrayTest,'tp_test');
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testArray_keys2_position1() {
+        $esperado  = array(0=>1);
+        $arrayTest = array(0 => 'idTest',1=>'nm_test',2=>'tp_test');
+        $retorno = ArrayHelper::array_keys2($arrayTest,'nm_test');
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testArray_keys2_position0() {
+        $esperado  = array(0=>0);
+        $arrayTest = array(0 => 'idTest',1=>'nm_test',2=>'tp_test');
+        $retorno = ArrayHelper::array_keys2($arrayTest,'idTest');
+        $this->assertEquals($esperado, $retorno);
     }
     
     public function testArray_keys2_false() {

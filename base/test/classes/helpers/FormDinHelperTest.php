@@ -38,16 +38,40 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-require_once __DIR__.'/../../../classes/constants.php';
-require_once __DIR__.'/../../../classes/helpers/autoload_formdin_helper.php';
+
+$path =  __DIR__.'/../../../classes/';
+require_once $path.'constants.php';
+require_once $path.'helpers/autoload_formdin_helper.php';
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * GetHelper test case.
- */
 class FormDinHelperTest extends TestCase
 {
+
+    public function testVersion() {
+		$expected = '4.6.3-alpha';
+		$result =  FormDinHelper::version();
+		$this->assertEquals( $expected , $result);
+	}
+	
+	public function testVersionMinimum_false() {
+	    $expected = false;
+	    $result = FormDinHelper::versionMinimum('99.99.99');
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testVersionMinimum_true() {
+	    $expected = true;
+	    $result = FormDinHelper::versionMinimum('1.0.0');
+	    $this->assertEquals( $expected , $result);
+	}
+	
+	public function testVersionMinimum_equal() {
+	    $expected = true;
+	    $result = FormDinHelper::versionMinimum('4.6.3-alpha');
+	    $this->assertEquals( $expected , $result);
+	}
+
     public function testIssetOrNotZero_arrayNull() {
         $expected = false;
         $variable = array();
