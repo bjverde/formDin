@@ -459,7 +459,12 @@ class TMenuDhtmlx {
         }
     }
 	//--------------------------------------------------------------------------------------
-	public function getXml($print=true)
+    /**
+     * Gerar um XML do Menu no formato do FormDin 4
+     * @param boolean $print
+     * @return string
+     */
+    public function getXml($print=true)
 	{
 		$this->addOrphanItems();
 		$print = $print === null ? true : $print;
@@ -470,6 +475,7 @@ class TMenuDhtmlx {
 			return str_replace("'",'"',$this->getStructure());
 		}
         /*
+		// ------  Exemplo de XML Gerado ------
 		echo '<menu>
 		<item id="file" text="Administração">
 			<item id="new" text="New" img="new.gif"/>
