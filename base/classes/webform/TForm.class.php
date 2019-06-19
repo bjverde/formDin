@@ -487,6 +487,52 @@ class TForm Extends TBox
         }
     }
     
+    public function showAjaxErrosMessages(){
+        $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
+        if( $boolAjax ){
+            // para funcionar com chamadas ajax sem fwAjaxRequest.
+            $_REQUEST['dataType'] = ( isset( $_REQUEST['dataType'] ) ) ? $_REQUEST['dataType'] : 'text';
+            
+            if( ! function_exists( 'prepareReturnAjax' ) ){
+                require_once($this->getBase() . 'includes/formDin4Ajax.php');
+            }
+            
+            // se tiver alguma coisa no buffer, poder ser algum echo, print ou mensagem de erro do php
+            $flagSucess=1;
+            if( $this->getErrors() ){
+                $flagSucess=0;
+                echo implode("\n", $this->getErrors() );// joga no buffer de saida
+                //die();
+            }
+            
+            if( $this->getMessages() ){
+                echo implode("\n", $this->getMessages() ); // joga no buffer de saida
+            }
+            prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
+            die;
+        }
+    }
+    
+    public function showFormBorder(){
+        // remover/exibir as barras de rolagem
+        $this->body->setCss( "overflow",'hidden');
+        $this->body->setCss( "overflow-x", $this->getOverFlowX() );
+        $this->body->setCss( "overflow-y", $this->getOverFlowY() );
+        //$this->body->setCss('border','1px dashed blue');        
+        //$this->body->setCss('background-color','red');
+        
+        if( $this->getFlat()) {
+            $this->body->setCss( 'width', $this->getWidth()-5);
+        } else {
+            $this->body->setCss( 'width', $this->getWidth()-17);
+        }
+        
+        //$this->body->setCss( 'width', $this->getMaxWidth());
+        if( $this->getAutoSize() ) {
+            $this->setOverflowY( 'auto' );
+        }
+    }
+    
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
      *
@@ -498,40 +544,13 @@ class TForm Extends TBox
      */
     public function show( $print=true, $flat=false )
     {
-        $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
         $this->setFormIds();
         $this->ajustaModulo();
         $this->tboxNoOverFlow();
-
-        //print $this->getFieldType();
         
-        if( $this->getFieldType() == 'form' )
-        {
-            //$this->returnAjax();
-            if( $boolAjax )
-            {
-                // para funcionar com chamadas ajax sem fwAjaxRequest.
-                $_REQUEST['dataType'] = ( isset( $_REQUEST['dataType'] ) ) ? $_REQUEST['dataType'] : 'text';
-                
-                if( ! function_exists( 'prepareReturnAjax' ) )
-                {
-                    require_once($this->getBase() . 'includes/formDin4Ajax.php');
-                }
-                // se tiver alguma coisa no buffer, poder ser algum echo, print ou mensagem de erro do php
-                $flagSucess=1;
-                if( $this->getErrors() )
-                {
-                    $flagSucess=0;
-                    echo implode("\n", $this->getErrors() );// joga no buffer de saida
-                    //die();
-                }
-                if( $this->getMessages() )
-                {
-                    echo implode("\n", $this->getMessages() ); // joga no buffer de saida
-                }
-                prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
-                die;
-            }
+        if( $this->getFieldType() == 'form' ){
+            
+            $this->showAjaxErrosMessages();
             $this->verifySessionEnd();
             
             if( $this->getPublicMode() )
@@ -586,26 +605,7 @@ class TForm Extends TBox
             // implementação para permitir aplicativos com a estrutura de visão e controle separados
             // se existir arquivo js/css externo com o mesmo nome do modulo, no mesmo diretorio ou no diretorio js/ fazer a inclusão automática
             $this->addJsCssModule();
-            
-            // remover/exibir as barras de rolagem
-            $this->body->setCss( "overflow",'hidden');
-            $this->body->setCss( "overflow-x", $this->getOverFlowX() );
-            $this->body->setCss( "overflow-y", $this->getOverFlowY() );
-            //$this->body->setCss('border','1px dashed blue');
-            //$this->body->setCss('background-color','red');
-            if( $this->getFlat())
-            {
-                $this->body->setCss( 'width', $this->getWidth()-5);
-            }
-            else
-            {
-                $this->body->setCss( 'width', $this->getWidth()-17);
-            }
-            //$this->body->setCss( 'width', $this->getMaxWidth());
-            if( $this->getAutoSize() )
-            {
-                $this->setOverflowY( 'auto' );
-            }
+            $this->showFormBorder();
             
             // alterar a aparência do formulario se ele estiver sendo executado como subform - modal
             if( isset( $_REQUEST[ 'facebox' ] ) && $_REQUEST[ 'facebox' ] )
@@ -4743,11 +4743,8 @@ class TForm Extends TBox
               
               $strAction = $this->removeIllegalChars( $strAction );
           }
-          
           return $strAction;
-
       }
-      
       
       /**
        * Método para fazer a inclusão do modulo de acordo com a ação solicitada
@@ -4757,46 +4754,19 @@ class TForm Extends TBox
        */
       public function processAction( $arrVar=null, $strAction=null )
       {
-          
-          $boolAjax = ( isset( $_REQUEST[ 'ajax' ] ) && $_REQUEST[ 'ajax' ] == 1);
-          // para funcionar com chamadas ajax sem fwAjaxRequest.
-          if( $boolAjax )
-          {
-              $_REQUEST['dataType'] = ( isset( $_REQUEST['dataType'] ) ) ? $_REQUEST['dataType'] : $_REQUEST['dataType']='text';
-              require_once($this->getBase() . 'includes/formDin4Ajax.php');
-          }
-          $this->setVar( $arrVar );          
-          
+          $this->setVar( $arrVar );
           $strModule = $this->processActionGetModulo();
           $strAction = $this->processActionGetAction($strAction);
           
-          if( $strAction && $strModule )
-          {
+          if( $strAction && $strModule ) {
               $strModule = $this->getRealPath( $strModule, $strAction );
-              $frm = $this;
-              if( !is_null( $strModule ) )
-              {
+              if( !is_null( $strModule ) ){
                   include($strModule); // adiciona o arquivo da ação
               }
           }
-          if( $boolAjax )
-          {
-              // se tiver alguma coisa no buffer, poder ser algum echo, print ou mensagem de erro do php
-              $flagSucess=1;
-              if( $this->getErrors() )
-              {
-                  $flagSucess=0;
-                  echo implode("\n", $this->getErrors() );// joga no buffer de saida
-                  //die();
-              }
-              if( $this->getMessages() )
-              {
-                  echo implode("\n", $this->getMessages() ); // joga no buffer de saida
-              }
-              prepareReturnAjax( $flagSucess,$this->getReturnAjaxData());
-              die;
-          }
+          $this->showAjaxErrosMessages();
       }
+      
       /**
        * Este médodo faz uma atualização da página principal
        *
@@ -6143,27 +6113,28 @@ class TForm Extends TBox
                return ( $this->maximize === false ? false: true );
            }
            
-           //-----------------------------------------------------------------------------
-           /**
-            * Define se o formulário será exibido ou não ao receber o post fwSession_expired da
-            * aplicação
-            *
-            * @param boolean $boolNewValue
-            */
-           public function setPublicMode($boolNewValue = null)
-           {
-               self::$publicMode = $boolNewValue;
-           }
-           /**
-            * Retorna se o formulário será exibido ou não ao receber o post fwSession_expired da
-            * aplicação
-            *
-            */
-           public function getPublicMode()
-           {
-               //return ( $this->publicMode == 'S' || strtolower($this->publicMode) == '1' || strtolower( $this->publicMode == 'true') ) ? true : false;
-               return ( self::$publicMode == 'S' || strtolower(self::$publicMode) == '1' || strtolower( self::$publicMode == 'true') ) ? true : false;
-           }
+    //-----------------------------------------------------------------------------
+    /**
+    * Define se o formulário será exibido ou não ao receber o post fwSession_expired da
+    * aplicação
+    *
+    * @param boolean $boolNewValue
+    */
+    public function setPublicMode($boolNewValue = null)
+    {
+       self::$publicMode = $boolNewValue;
+    }
+    
+   /**
+    * Retorna se o formulário será exibido ou não ao receber o post fwSession_expired da
+    * aplicação
+    *
+    */
+   public function getPublicMode()
+   {
+       //return ( $this->publicMode == 'S' || strtolower($this->publicMode) == '1' || strtolower( $this->publicMode == 'true') ) ? true : false;
+       return ( self::$publicMode == 'S' || strtolower(self::$publicMode) == '1' || strtolower( self::$publicMode == 'true') ) ? true : false;
+   }
            //-----------------------------------------------------------------------------
            public function setRequiredFieldText($strNewValue=null)
            {
