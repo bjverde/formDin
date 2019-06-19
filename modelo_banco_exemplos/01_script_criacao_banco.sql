@@ -524,6 +524,58 @@ FROM form_exemplo.pessoa as p
     left join form_exemplo.pessoa_fisica as pf on p.idpessoa = pf.idpessoa
     left join form_exemplo.pessoa_juridica as pj on p.idpessoa = pj.idpessoa_juridica;
 
+DELIMITER $$
+CREATE PROCEDURE `selFilhosMenu`(IN idmenu_pai INT)
+BEGIN
+  SELECT am.`idmenu`,
+      am.`nom_menu`,
+      am.`idmenu_pai`,
+      am.`url`,
+      am.`tooltip`,
+      am.`img_menu`,
+      am.`imgdisabled`,
+      am.`disabled`,
+      am.`hotkey`,
+      am.`boolSeparator`,
+      am.`jsonParams`,
+      am.`sit_ativo`,
+      am.`dat_inclusao`,
+      am.`dat_update`
+  FROM `form_exemplo`.`acesso_menu` as am
+  where am.idmenu_pai = @idmenu_pai;
+END $$
+DELIMITER ;
+/****
+SET @idmenu_pai = 1;
+CALL selFilhosMenu(@idmenu_pai);
+****/
+
+
+DELIMITER $$
+CREATE PROCEDURE `selMenuQtd`(OUT qtd INT)
+BEGIN
+  SELECT count(*) into qtd FROM `form_exemplo`.`acesso_menu` as am;
+END $$
+DELIMITER ;
+/***
+CALL selMenuQtd(@qtd);
+SELECT @qtd;
+****/
+DELIMITER $$
+CREATE PROCEDURE `selFilhosMenuQtd`(OUT qtd INT, IN idmenu_pai INT)
+BEGIN
+  SELECT count(*) into qtd
+  FROM `form_exemplo`.`acesso_menu` as am
+  where am.idmenu_pai = @idmenu_pai;
+END $$
+DELIMITER ;
+
+/***
+SET @idmenu_pai = 1;
+CALL selFilhosMenuQtd(@qtd, @idmenu_pai);
+SELECT @qtd;
+****/
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
