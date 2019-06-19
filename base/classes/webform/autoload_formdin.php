@@ -42,25 +42,11 @@ if ( !function_exists( 'formdin_autoload') )
 {
 	function formdin_autoload( $class_name )
 	{
-		if (strpos($class_name, 'setasign\\') === 0) {
-			return false;
-		} elseif (strpos($class_name, 'PHPUnit\\') === 0) {
-			return false; 
-		} elseif (strpos($class_name, 'Symfony\\') === 0) {
-			return false;
-		}elseif (strpos($class_name, 'Composer\\') === 0) {
-			return false;
-		}elseif (strpos($class_name, 'App\\') === 0) {
-		    return false;
-		}elseif (strpos($class_name, 'Blacklist.class.php') === 0) {
-			return false;
-		}else{
-			if (file_exists(__DIR__.'/'.$class_name.'.class.php')){
-				require_once $class_name.'.class.php';
-			} else {
-				return false;
-			}
-		}
+	    if (file_exists(__DIR__.'/'.$class_name.'.class.php')){
+	        require_once $class_name . '.class.php';
+	    } else {
+	        return false;
+	    }
 	}
 	spl_autoload_register('formdin_autoload');
 }
