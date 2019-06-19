@@ -132,10 +132,10 @@ class TApplication extends TLayout {
 		
 		// arquivo css padrão localizado na base base/css
 		$this->addCssFile ( 'css/app.css' );
-		$this->setBackgroundImage ( $this->getBase () . '/css/imagens/app/bg_listrado.jpg' );
+		$this->setBackgroundImage ( $this->getBase().'/css/imagens/app/bg_listrado.jpg' );
 		
 		// biblioteca de funções geral
-		$this->addIncludeFile ( $this->getBase () . 'includes/funcoes.inc' );
+		$this->addIncludeFile ( $this->getBase().'includes/funcoes.inc' );
 	}
 
 	/***
@@ -345,6 +345,7 @@ class TApplication extends TLayout {
 	{
 	    return $this->responsiveMode;
 	}
+	
 	public function loadModule() {
 	    // se pressionar F5, recarregar o ultimo módulo solicitado
 	    $loadModule = null;

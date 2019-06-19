@@ -167,7 +167,7 @@ class TElement
         {
             // todas as propriedades terao nomes em caixa baixa
             $property = strtolower( $property );
-            
+
             // id e name nao podem ter caracteres da lingua portuguesa
             if ( $property == 'id' || $property == 'name' )
             {
