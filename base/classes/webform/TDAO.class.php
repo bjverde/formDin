@@ -1439,30 +1439,59 @@ class TDAO
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
-				$sql = 'SELECT qtd.TABLE_SCHEMA
-                              ,qtd.TABLE_NAME
-                              ,qtd.COLUMN_QTD
-                              ,case when upper(t.TABLE_TYPE) = \'BASE TABLE \' then \'TABLE\' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
-                        FROM
-                        	(SELECT  c.TABLE_SCHEMA
-                        		   ,c.TABLE_NAME
-                        		   ,count(c.table_name) as COLUMN_QTD       
-                        	FROM INFORMATION_SCHEMA.COLUMNS as c
-                        	WHERE TABLE_NAME in (
-                        		SELECT TABLE_NAME
-                        		FROM INFORMATION_SCHEMA.TABLES
-                        		WHERE TABLE_TYPE = \'BASE TABLE\'
-                        		OR TABLE_TYPE = \'VIEW\'
-                        	)
-                        	group by c.TABLE_SCHEMA, c.TABLE_NAME
-                        	) as qtd
-                            ,INFORMATION_SCHEMA.TABLES as t
-                        where t.TABLE_NAME = qtd.TABLE_NAME 
-                        and   t.TABLE_SCHEMA = qtd.TABLE_SCHEMA
-                        and   t.TABLE_SCHEMA not in (\'sys\',\'performance_schema\',\'mysql\',\'information_schema\')
-                        order by qtd.TABLE_SCHEMA,qtd.TABLE_NAME';
-				break;
-			;
+				$sql = "select vg.TABLE_SCHEMA
+                        	  ,vg.TABLE_NAME
+                              ,vg.COLUMN_QTD
+                              ,vg.TABLE_TYPE
+                        from
+                        (                        
+                        	select vt.TABLE_SCHEMA
+                        		  ,vt.TABLE_NAME
+                        		  ,count(*) as COLUMN_QTD
+                        		  ,vt.TABLE_TYPE
+                        	from
+                        	(
+                        		SELECT t.TABLE_SCHEMA
+                        			  ,t.TABLE_NAME
+                        			  ,case when upper(t.TABLE_TYPE) = 'BASE TABLE' then 'TABLE' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
+                        		FROM INFORMATION_SCHEMA.TABLES as t
+                        			,INFORMATION_SCHEMA.COLUMNS as c
+                        		WHERE t.TABLE_NAME = c.TABLE_NAME 
+                        		 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
+                        		 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
+                        		 and t.TABLE_SCHEMA not in ('sys','performance_schema','mysql','information_schema')
+                        	 ) as vt
+                        	 group by vt.TABLE_SCHEMA
+                        			 ,vt.TABLE_NAME
+                        			 ,vt.TABLE_TYPE
+                        			 
+                        	union
+                        
+                        	select vp.TABLE_SCHEMA
+                                  ,vp.TABLE_NAME
+                                  ,count(*) as COLUMN_QTD
+                                  ,'PROCEDURE' as TABLE_TYPE
+                        	from
+                        	(
+                        		select p.SPECIFIC_SCHEMA as TABLE_SCHEMA
+                        			  ,p.SPECIFIC_NAME as TABLE_NAME
+                        			  ,p.routine_type as TABLE_TYPE
+                        		from information_schema.routines as r
+                        		left join information_schema.parameters as p
+                        				  on p.specific_schema = r.routine_schema
+                        				  and p.specific_name = r.specific_name
+                        		where r.routine_schema not in ('sys', 'information_schema','mysql', 'performance_schema')
+                        		and p.routine_type = 'PROCEDURE'
+                        	) as vp
+                        	group by vp.TABLE_SCHEMA
+                        			,vp.TABLE_NAME
+                        			,vp.TABLE_TYPE
+                        ) as vg
+                        order by 
+                                 vg.TABLE_SCHEMA
+                        		,vg.TABLE_TYPE
+                        		,vg.TABLE_NAME";
+			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_SQLSERVER:
 			    $sql = "select 
@@ -1509,7 +1538,9 @@ class TDAO
                                                 WHERE  type IN ( 'P', 'FN' ))
                         group by schema_id, SO.NAME, SO.type_desc
                         ) as res
-                        order by res.TABLE_SCHEMA, res.TABLE_NAME";
+                        order by res.TABLE_SCHEMA
+                               , res.TABLE_TYPE
+                               , res.TABLE_NAME";
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_POSTGRES:
