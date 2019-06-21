@@ -1586,7 +1586,7 @@ class TDAO
 	public function getSqlToFieldsFromOneStoredProcedureMySQL() {
 	    $sql="select 
                 	 p.parameter_name as COLUMN_NAME
-                	,null as REQUIRED
+                	,'FALSE' as REQUIRED
                 	,r.routine_type AS DATA_TYPE
                 	,p.character_maximum_length as CHAR_MAX
                 	,p.numeric_precision as NUM_LENGTH
@@ -1613,7 +1613,7 @@ class TDAO
 	
 	public function getSqlToFieldsFromOneStoredProcedureSqlServer() {
 	    $sql="SELECT P.NAME                    AS COLUMN_NAME
-                   ,null                      AS REQUIRED
+                   ,'FALSE'                   AS REQUIRED
             	   ,Type_name(P.user_type_id) AS DATA_TYPE
                    ,P.max_length              AS CHAR_MAX
                    ,null                      AS NUM_LENGTH
