@@ -1612,6 +1612,8 @@ class TDAO
 	}
 	
 	public function getSqlToFieldsFromOneStoredProcedureSqlServer() {
+	    $name = $this->getTableName();
+	    $shema = $this->getSchema();
 	    $sql="SELECT P.NAME                    AS COLUMN_NAME
                    ,'FALSE'                   AS REQUIRED
             	   ,Type_name(P.user_type_id) AS DATA_TYPE
@@ -1631,8 +1633,8 @@ class TDAO
             WHERE  SO.object_id IN (SELECT object_id
                                     FROM   sys.objects
                                     WHERE  type IN ( 'P'))
-                  AND upper(P.NAME) = upper('".$this->getTableName()."')
-                  AND upper(Schema_name(schema_id)) = upper('".$this->getSchema()."')
+                  AND upper(SO.NAME) = upper('".$name."')
+                  AND upper(Schema_name(schema_id)) = upper('".$shema."')
                   ";
 	    return $sql;
 	}
@@ -1650,6 +1652,7 @@ class TDAO
 	    }
 	    else if( $DbType == DBMS_SQLSERVER ) {
 	        $sql   = $this->getSqlToFieldsFromOneStoredProcedureSqlServer();
+	        $params=array($this->getTableName());
 	    }
 	    $result = array();
 	    $result['sql']    = $sql;
