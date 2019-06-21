@@ -1583,6 +1583,104 @@ class TDAO
 	    return $result;
 	}
 	
+	public function getSqlToFieldsFromOneStoredProcedureMySQL() {
+	    $sql="select 
+                	 p.parameter_name as COLUMN_NAME
+                	,null as REQUIRED
+                	,r.routine_type AS DATA_TYPE
+                	,p.character_maximum_length as CHAR_MAX
+                	,p.numeric_precision as NUM_LENGTH
+                	,p.numeric_scale as NUM_SCALE
+                	,r.ROUTINE_COMMENT as COLUMN_COMMENT
+                	,r.specific_name as TABLE_NAME
+                	,r.routine_schema as TABLE_SCHEMA
+                	,p.ordinal_position
+                	,case when p.parameter_mode is null and p.data_type is not null
+                				then 'RETURN'
+                				else parameter_mode end as parameter_mode
+                from information_schema.routines r
+                left join information_schema.parameters p
+                          on p.specific_schema = r.routine_schema
+                          and p.specific_name = r.specific_name
+                where r.routine_schema not in ('sys', 'information_schema','mysql', 'performance_schema')
+                and upper(r.specific_name)  = upper('".$this->getTableName()."')
+                and upper(r.routine_schema) = upper('".$this->getSchema()."')
+                order by r.routine_schema,
+                         r.specific_name,
+                         p.ordinal_position";
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsFromOneStoredProcedureSqlServer() {
+	    $sql="SELECT P.NAME                    AS COLUMN_NAME
+                   ,null                      AS REQUIRED
+            	   ,Type_name(P.user_type_id) AS DATA_TYPE
+                   ,P.max_length              AS CHAR_MAX
+                   ,null                      AS NUM_LENGTH
+                   ,null                      AS NUM_SCALE
+                   ,null                      AS COLUMN_COMMENT
+            	   ,null                      AS COLUMN_COMMENT
+            	   ,null                      AS KEY_TYPE
+            	   ,null                      AS REFERENCED_TABLE_NAME
+            	   ,null                      AS REFERENCED_COLUMN_NAME
+                   ,Schema_name(schema_id)    AS TABLE_SCHEMA
+                   ,SO.NAME                   AS table_name
+            FROM   sys.objects AS SO
+                   INNER JOIN sys.parameters AS P
+                           ON SO.object_id = P.object_id
+            WHERE  SO.object_id IN (SELECT object_id
+                                    FROM   sys.objects
+                                    WHERE  type IN ( 'P'))
+                  AND upper(P.NAME) = upper('".$this->getTableName()."')
+                  AND upper(Schema_name(schema_id)) = upper('".$this->getSchema()."')
+                  ";
+	    return $sql;
+	}
+	
+	public function getSqlToFieldsOneStoredProcedureFromDatabase() {
+	    //$DbType = $this->getConnDbType();
+	    $DbType = $this->getDbType();
+	    $sql    = null;
+	    $params = null;
+	    $data   = null;
+	    
+	    // ler os campos do banco de dados
+	    if ( $DbType == DBMS_MYSQL ){
+	        $sql   = $this->getSqlToFieldsFromOneStoredProcedureMySQL();
+	    }
+	    else if( $DbType == DBMS_SQLSERVER ) {
+	        $sql   = $this->getSqlToFieldsFromOneStoredProcedureSqlServer();
+	    }
+	    $result = array();
+	    $result['sql']    = $sql;
+	    $result['params'] = $params;
+	    $result['data']   = $data;	    
+	    return $result;
+	}
+	
+	/**
+	 * Recupera as informações dos parametros de uma Storage Procedeure diretamente do banco de dados
+	 * @return null
+	 */
+	public function loadFieldsOneStoredProcedureFromDatabase() {
+	    $DbType = $this->getDbType();
+	    if ( !$this->getTableName() ) {
+	        throw new InvalidArgumentException('Table Name is empty');
+	    }
+	    $result = $this->getSqlToFieldsOneStoredProcedureFromDatabase();
+	    $sql    = $result['sql'];
+	    switch( $DbType ) {
+	        case DBMS_MYSQL:
+	        case DBMS_SQLSERVER:
+	            $result = $this->executeSql($sql);
+	        break;
+	        //--------------------------------------------------------------------------------
+	        default:
+	            throw new DomainException('Database '.$DbType.' not implemented ! Contribute to the project https://github.com/bjverde/sysgen !');
+	    }
+	    return $result;
+	}
+	
 	public function getSqlToFieldsFromDatabaseMySQL() {
 	    // http://dev.mysql.com/doc/refman/5.0/en/tables-table.html
 	    $sql="SELECT c.column_name COLUMN_NAME
@@ -1828,7 +1926,7 @@ class TDAO
 				}
 			}
 		}
-		
+		$result = array();
 		$result['sql']    = $sql;
 		$result['params'] = $params;
 		$result['data']   = $data;
@@ -1847,7 +1945,6 @@ class TDAO
 		}
 		$result = $this->getSqlToFieldsFromDatabase();
 		$sql    = $result['sql'];
-		$params = $result['params'];
 		$data   = $result['data'];
 		switch( $DbType ) {
 			case DBMS_SQLITE:
