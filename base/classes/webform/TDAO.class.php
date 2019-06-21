@@ -1614,7 +1614,7 @@ class TDAO
 	public function getSqlToFieldsFromOneStoredProcedureSqlServer() {
 	    $name = $this->getTableName();
 	    $shema = $this->getSchema();
-	    $sql="SELECT P.NAME                    AS COLUMN_NAME
+	    $sql="SELECT REPLACE(P.NAME,'@','')   AS COLUMN_NAME
                    ,'FALSE'                   AS REQUIRED
             	   ,Type_name(P.user_type_id) AS DATA_TYPE
                    ,P.max_length              AS CHAR_MAX
