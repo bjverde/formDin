@@ -129,20 +129,15 @@ class TElement
         
         //$this->setCss('font-family','Arial,Helvetica, Geneva, Sans-Serif');
         //$this->setCss('font-size','12px');
-        if ( is_null( self::$depth ) )
-        {
-            if ( $this->tagType == 'doctype' )
-            {
+        if ( is_null( self::$depth ) ) {
+            if ( $this->tagType == 'doctype' ) {
                 self::$depth = -1;
-            }
-            else
-            {
+            }else {
                 self::$depth = 0;
             }
         }
         
-        if ( is_null( self::$base ) )
-        {
+        if ( is_null( self::$base ) ) {
             $this->getBase();
         }
     }
@@ -741,9 +736,10 @@ class TElement
     //-------------------------------------------------------------------------------------------------
     public function getIdent( $intDepth = 0 )
     {
-        if ( $GLOBALS[ 'teste' ] && self::$depth > 0 )
-        {
-            return str_repeat( ESP, ( self::$depth + $intDepth ) );
+        if ( $GLOBALS[ 'teste' ] && self::$depth > 0 ) {
+            $qtd    = self::$depth + $intDepth;
+            $result = str_repeat( ESP, $qtd );
+            return $result;
         }
         return null;
     }
