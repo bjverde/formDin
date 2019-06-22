@@ -311,6 +311,7 @@ class TElement
         
         
     }
+    
     /**
      * Adiciona conteudo dentro da tag. Pode ser um texto ou outro objeto da classe Element
      *
@@ -318,36 +319,28 @@ class TElement
      */
     public function add( $child, $boolLF = true )
     {
-        if ( is_array( $child ) )
-        {
-            foreach( $child as $v )
-            {
+        if ( is_array( $child ) ) {
+            foreach( $child as $v ) {
                 $this->add( $v, $boolLF );
             }
-        }
-        else
-        {
-            if ( $child != null )
-            {
-                if ( $boolLF === false && !is_object( $child ) )
-                {
+        } else {
+            if ( $child != null ) {
+                if ( $boolLF === false && !is_object( $child ) ) {
                     $index = ( is_array( $this->children ) ? count( $this->children ) - 1 : 0 );
                     $this->children[ $index ] .= $child;
-                }
-                else
-                {
+                } else {
                     $this->children[ ] = $child;
                 }
                 
                 // gravar o objeto pai no objeto filho
-                if ( is_object( $child ) )
-                {
+                if ( is_object( $child ) ) {
                     $child->setParentControl( $this );
                 }
                 return $child;
             }
         }
     }
+    
     /**
      * Adiciona conteudo dentro da tag antes de todos os objeto já inseridos.
      * Pode ser um texto ou outro objeto da classe Element
@@ -520,24 +513,14 @@ class TElement
     }
     
     //---------------------------------------------------------------------
-    /**
-     * Imprime/retorna o codigo completo de abertura e fechamento da tag
-     * Se print for false, retorna o html gerado
-     * Se print for true, joga o html para o browser ( padrao )
-     *
-     * @param mixed $print
-     */
-    public function show( $print = true )
+    public function subShowCss()
     {
         // criar o estilo se tiver sido definida alguma propriedade
-        if ( is_array( $this->css ) )
-        {
+        if ( is_array( $this->css ) ) {
             $css = '';
             
-            foreach( $this->css as $name => $value )
-            {
-                if ( $value )
-                {
+            foreach( $this->css as $name => $value ) {
+                if ( $value ) {
                     // tags que devem possuir unidade de medida para funcionarem em strict mode no browser
                     if ( preg_match( '/(padding|margin|width|height|top|left|font-size)/', $name )
                         && preg_match( '/[0-9]$/', $value ) )
@@ -548,12 +531,14 @@ class TElement
                 $css .= $name . ':' . $value . ';';
             }
             
-            if ( ( string ) $css != '' )
-            {
+            if ( ( string ) $css != '' ){
                 $this->style = $css;
             }
         }
-        
+    }
+    
+    public function subShowEvents()
+    {
         // adicionar os eventos definidos por setEvent()
         if ( is_array( $this->events ) )
         {
@@ -563,79 +548,59 @@ class TElement
                 $this->$event = $actualValue . ( ( string ) $actualValue != '' ? ';' : '' ) . $function;
             }
         }
-        $result = $this->open( $print );
-        
+    }
+    
+    public function subShowChildren($result)
+    {
         if ( is_array( $this->children ) )
         {
             foreach( $this->children as $child )
             {
-                if ( is_object( $child ) )
-                {
+                if ( is_object( $child ) ) {
                     self::$depth++;
                     $result .= $child->show( false );
                     self::$depth--;
-                }
-                else
-                {
+                } else {
                     // o texto do campo textarea e option não ser identado senão aparece na tela
                     if ( $this->tagType != 'textarea' && $this->tagType != 'option' )
                     {
                         // linha de comentario
-                        if ( preg_match('/^\/\//',ltrim( $child ) ) && !$GLOBALS[ 'teste' ] )
-                        {
+                        if ( preg_match('/^\/\//',ltrim( $child ) ) && !$GLOBALS[ 'teste' ] ) {
                             $child = "";
-                        }
-                        else
-                        {
+                        } else {
                             $result .= $this->getIdent( 1 ) . $child . "\n";
                         }
-                    }
-                    else
-                    {
-                        if ( ! preg_match('/^\/\//',ltrim( $child ) ) )
-                        {
+                    } else {
+                        if ( ! preg_match('/^\/\//',ltrim( $child ) ) ) {
                             $result .= $child;
                         }
                     }
                 }
             }
         }
-        
-        // encontrar depois uma expressão regular para retirar estra quebra
-        // para evitar epaco em branco no internet explorer
-        /* exeplo de codigo com problema:
-         <fieldset name="lay_x"  id="lay_x"  type="panel"  style="width:auto;height:auto;overflow:auto;display:inline;verticalalign:top;margin:0px;padding:2px;border:1px dashed red;position:relative;" >
-         <fieldset name="pnl_x"  id="pnl_x"  type="panel"  style="width:auto;height:auto;overflow:auto;display:inline;verticalalign:top;margin:0px;padding:2px;border:1px dashed red;position:relative;" >
-         <div name="lblDataInclusao"  value="Data Inclusão:"  id="lblDataInclusao"  type="label"  style="float:left;position:relative;" >
-         Data Inclusão:
-         </div>
-         <input name="dat_inclusao"  maxlength="10"  size="10"  required="false"  id="dat_inclusao"  type="edit"  style="position:relative;"  onblur="fwValidarData(this,event,'dmy','','')"  onfocus="MaskInput(this,'99/99/9999')"  onkeyup="fwSetBordaCampo(this,false)" >
-         </input>
-         </fieldset>
-         <br/>
-         <fieldset name="pnl_x"  id="pnl_x"  type="panel"  style="width:auto;height:auto;overflow:auto;display:inline;verticalalign:top;margin:0px;padding:2px;border:1px dashed red;position:relative;" >
-         <input name="dat_inclusao2"  maxlength="10"  size="10"  required="false"  id="dat_inclusao2"  type="edit"  style="position:relative;"  onblur="fwValidarData(this,event,'dmy','','')"  onfocus="MaskInput(this,'99/99/9999')"  onkeyup="fwSetBordaCampo(this,false)" >
-         </input>
-         </fieldset>
-         </fieldset>
-         
-         */
-        /*$result = str_replace(chr(9).'<br/>','<br/>',$result);
-         $result = str_replace(chr(9).'<br/>','<br/>',$result);
-         $result = str_replace(chr(9).'<br/>','<br/>',$result);
-         $result = str_replace(chr(9).'<br/>','<br/>',$result);
-         $result = str_replace("\n".'<br/>','<br/>'."\n",$result);
-         */
-        
+        return $result;
+    }
+    
+    /**
+     * Imprime/retorna o codigo completo de abertura e fechamento da tag
+     * Se print for false, retorna o html gerado
+     * Se print for true, joga o html para o browser ( padrao )
+     *
+     * @param mixed $print
+     */
+    public function show( $print = true )
+    {
+        $this->subShowCss();
+        $this->subShowEvents();
+        $result = $this->open( $print );
+        $result = $this->subShowChildren($result);
         // tive que remover quebras e tabs para nao interferir no layout dos elementos na pagina
-        if ( !$GLOBALS[ 'teste' ] )
-        {
+        if ( !$GLOBALS[ 'teste' ] ) {
             $result = str_replace( "\n", '', $result );
             $result = str_replace( ESP, '', $result );
         }
         
-        if ( $print )
-        {
+        if ( $print ) {
             echo $result;
         }
         $result .= $this->close( $print );
