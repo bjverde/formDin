@@ -425,52 +425,39 @@ class TElement
                                         $v .= 'px';
                                     }
                                     // atributos que não possuem medidas
-                                    if( preg_match('/(cellspacing|cellpadding)/i', $k ) )
-                                    {
+                                    if( preg_match('/(cellspacing|cellpadding)/i', $k ) ) {
                                         $v = preg_replace('/[^0-9]/','',$v);
                                     }
-                                    if ( !is_null( $k ) && $k != '' )
-                                    {
-                                        if( is_string($v) || is_numeric($v) )
-                                        {
+                                    
+                                    if ( !is_null( $k ) && $k != '' ) {
+                                        if( is_string($v) || is_numeric($v) ) {
                                             $result .= " $k=\"$v\" ";
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             $result .= "$k=\"".gettype($v)."\" ";
                                         }
                                     }
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             $result .= " $k=\"{$v->show(false)}\"";
                         }
                     }
                 }
                 
-                if ( $this->tagType == 'option' )
-                {
+                if ( $this->tagType == 'option' ) {
                     $result .= ">";
-                }
-                else
-                {
+                } else {
                     $result .= ">\n";
                 }
             }
         }
         
-        if ( $result != '' )
-        {
-            $result = $this->getIdent() . $result;
-            
-            if ( $print )
-            {
+        if ( $result != '' ) {
+            $ident  = $this->getIdent();
+            $result = $ident.$result;
+            if ( $print ) {
                 echo $result;
-            }
-            else
-            {
+            } else {
                 return $result;
             }
         }
