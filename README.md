@@ -66,7 +66,7 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 Veja na Wiki 
 
 [Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
-* Branchs
+* [Branchs](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#sobre-as-branchs)
 * [Banco de Dados](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#banco-de-dados)
 * [Bibliotes utilizadas](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#bibliotecas-utilizadas)
 * [Arquitetura do formDin](https://github.com/bjverde/formDin/wiki/Arquitetura-do-formDin)
