@@ -130,7 +130,9 @@ class FormDinHelper
         $arrayFormDin = array();
         foreach ($properties as $attribut) {
             $name =  $attribut->getName();
-            $arrayFormDin[$name][0] = $class->getProperty($name)->getValue();
+            $property = $class->getProperty($name);
+            $property->setAccessible(true);
+            $arrayFormDin[$name][0] = $property->getValue($vo);
         }
         return $arrayFormDin;
     }
