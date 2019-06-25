@@ -61,6 +61,7 @@ class FormDinHelper
         $formVersion = $formVersion[0];
         return version_compare($formVersion,$version,'>=');
     }
+    
     //--------------------------------------------------------------------------------
     /**
      * Recebe o corpo de um request e um objeto VO. Quando o id do array bodyRequest for
@@ -84,6 +85,31 @@ class FormDinHelper
             }
         }
         return $vo;
+    }
+    
+    //--------------------------------------------------------------------------------
+    /***
+     * Convert Object Vo to Array FormDin 
+     * @param object $vo
+     * @throws InvalidArgumentException
+     * @return array
+     */
+    public static function convertVo2ArrayFormDin($vo)
+    {
+        $isObject = is_object( $vo );
+        if( !$isObject ){
+            throw new InvalidArgumentException('Not Object .class:'.__METHOD__);
+        }
+        $class = new \ReflectionClass($vo);
+        $properties   = $class->getProperties();
+        $arrayFormDin = array();
+        foreach ($properties as $attribut) {
+            $name =  $attribut->getName();
+            $property = $class->getProperty($name);
+            $property->setAccessible(true);
+            $arrayFormDin[$name][0] = $property->getValue($vo);
+        }
+        return $arrayFormDin;
     }
     
     /***
@@ -113,28 +139,6 @@ class FormDinHelper
         return $result;
     }
     
-    /***
-     * 
-     * @param object $vo
-     * @throws InvalidArgumentException
-     * @return array
-     */
-    public static function convertVo2ArrayFormDin($vo)
-    {
-        $isObject = is_object( $vo );
-        if( !$isObject ){
-            throw new InvalidArgumentException('Not Object .class:'.__METHOD__);
-        }
-        $class = new \ReflectionClass($vo);
-        $properties   = $class->getProperties();
-        $arrayFormDin = array();
-        foreach ($properties as $attribut) {
-            $name =  $attribut->getName();
-            $property = $class->getProperty($name);
-            $property->setAccessible(true);
-            $arrayFormDin[$name][0] = $property->getValue($vo);
-        }
-        return $arrayFormDin;
-    }
+
 }
 ?>
