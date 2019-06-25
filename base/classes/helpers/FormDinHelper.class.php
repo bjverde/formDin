@@ -112,5 +112,27 @@ class FormDinHelper
         }
         return $result;
     }
+    
+    /***
+     * 
+     * @param object $vo
+     * @throws InvalidArgumentException
+     * @return array
+     */
+    public static function convertVo2ArrayFormDin($vo)
+    {
+        $isObject = is_object( $vo );
+        if( !$isObject ){
+            throw new InvalidArgumentException('Not Object .class:'.__METHOD__);
+        }
+        $class = new \ReflectionClass($vo);
+        $properties   = $class->getProperties();
+        $arrayFormDin = array();
+        foreach ($properties as $attribut) {
+            $name =  $attribut->getName();
+            $arrayFormDin[$name][0] = $class->getProperty($name)->getValue();
+        }
+        return $arrayFormDin;
+    }
 }
 ?>
