@@ -531,7 +531,35 @@ class TForm Extends TBox
         if( $this->getAutoSize() ) {
             $this->setOverflowY( 'auto' );
         }
+    }  
+    
+    /**
+     * verificar se tem alguma mensagem de topo para ser exibida
+     */
+    public function showPopUpMessage()
+    {
+        if( $this->getPopUpMessage() )
+        {
+            $aMsg = $this->getPopUpMessage();
+            $aMsg[ 1 ] = isset( $aMsg[ 1 ] ) ? $aMsg[ 1 ] : 'SUCESS';
+            if( $aMsg[ 1 ] == 'ERROR' && !$aMsg[ 3 ] )
+            {
+                $aMsg[ 3 ] = 'ruim.gif';
+            }
+            $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // duração
+            $aMsg[ 3 ] = isset( $aMsg[ 3 ] ) ? $aMsg[ 3 ] : 'sucess.gif';
+            // se não foi informado o endereço manualmente, encontrar na pasta base
+            if( strpos( $aMsg[ 3 ], '/' ) === false )
+            {
+                if( !file_exists( $aMsg[ 3 ] ) )
+                {
+                    $aMsg[ 3 ] = $this->getBase() . 'imagens/' . $aMsg[ 3 ];
+                }
+            }
+            $this->addJavascript( 'try{ parent.app_show_message("' . $aMsg[ 0 ] . '","' . $aMsg[ 1 ] . '","' . $aMsg[ 2 ] . '","' . $aMsg[ 3 ] . '");}catch(e){alert("' . $aMsg[ 0 ] . '")}' );
+        }
     }
+    
     
     /**
      * Exibe no browser ou devolve o html do formulário dependendo do parametro $print
@@ -1604,27 +1632,8 @@ class TForm Extends TBox
                     }
                 }
             }
-            // verificar se tem alguma mensagem de topo para ser exibida
-            if( $this->getPopUpMessage() )
-            {
-                $aMsg = $this->getPopUpMessage();
-                $aMsg[ 1 ] = isset( $aMsg[ 1 ] ) ? $aMsg[ 1 ] : 'SUCESS';
-                if( $aMsg[ 1 ] == 'ERROR' && !$aMsg[ 3 ] )
-                {
-                    $aMsg[ 3 ] = 'ruim.gif';
-                }
-                $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // duração
-                $aMsg[ 3 ] = isset( $aMsg[ 3 ] ) ? $aMsg[ 3 ] : 'sucess.gif';
-                // se não foi informado o endereço manualmente, encontrar na pasta base
-                if( strpos( $aMsg[ 3 ], '/' ) === false )
-                {
-                    if( !file_exists( $aMsg[ 3 ] ) )
-                    {
-                        $aMsg[ 3 ] = $this->getBase() . 'imagens/' . $aMsg[ 3 ];
-                    }
-                }
-                $this->addJavascript( 'try{ parent.app_show_message("' . $aMsg[ 0 ] . '","' . $aMsg[ 1 ] . '","' . $aMsg[ 2 ] . '","' . $aMsg[ 3 ] . '");}catch(e){alert("' . $aMsg[ 0 ] . '")}' );
-            }
+            
+            $this->showPopUpMessage();
             // definir o campo que receberá o foco unicial
             $jsFocusField = '';
             if( !$this->getFormGridOffLine() )
