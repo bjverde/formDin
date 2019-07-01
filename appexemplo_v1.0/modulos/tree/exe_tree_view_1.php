@@ -37,7 +37,25 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+d($_REQUEST);
+
+
 $frm = new TForm('Estrutura Oragnizacional', 400);
+
+
+$listThemes = array();
+$listThemes['bluebooks']='bluebooks';
+$listThemes['bluefolders']='bluefolders';
+$listThemes['books']='books';
+$listThemes['default']='default';
+$listThemes['scbrblue']='scbrblue';
+$listThemes['skyblue']='skyblue';
+$listThemes['vista']='vista';
+$listThemes['winstyle']='winstyle';
+$listThemes['yellowbooks']='yellowbooks';
+$frm->addRadioField('theme', 'Tema da TreeView', false, $listThemes, null, true, 'default', 5, null, null, null, false, false);
+$frm->addButton('Atualizar', null, 'Atualizar', null, null, true, false);
+
 
 $frm->addGroupField('gpTree', 'Exemplo Treeview', 200)->setcloseble(true);
 //$pc = $frm->addPageControl('xxx',200);
@@ -45,15 +63,9 @@ $frm->addGroupField('gpTree', 'Exemplo Treeview', 200)->setcloseble(true);
 
     $tree = $frm->addTreeField('tree', null, null, null, null, null, null, null, null);
     $tree->setStartExpanded(true);
-    $tree->setTheme('bluebooks');
-    $tree->setTheme('bluefolders');
-    $tree->setTheme('books');
-    $tree->setTheme('default');
-    $tree->setTheme('scbrblue');
-    $tree->setTheme('skyblue');
-    $tree->setTheme('vista');
-    $tree->setTheme('winstyle');
-    $tree->setTheme('yellowbooks');
+    
+    $theme = $frm->get('theme');
+    $tree->setTheme($theme);
 
     $tree->addItem(null, 1, 'Relatório', true);
     $tree->addItem(1, 11, 'Financeiro', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
@@ -65,5 +77,4 @@ for ($i=23; $i<50; $i++) {
     $tree->addItem(2, $i, 'Nivel teste '.$i);
 }
 $frm->closeGroup();
-$frm->setAction('Atualizar');
 $frm->show();
