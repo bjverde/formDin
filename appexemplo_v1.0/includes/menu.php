@@ -127,8 +127,9 @@ $menu->add('4', null, 'Mensagens e Ajuda', null, null, '../../base/imagens/feedb
     $menu->add('40', '4', 'Hints / Tooltips', 'exe_hint.php');
     $menu->add('41', '4', 'Mensagens');
         $menu->add('411', '41', 'Exemplo 1', 'view/messages/exe_mensagem.php');
-        $menu->add('412', '41', 'Caixa de Confirmação', 'view/messages/exe_confirmDialog.php');
-        $menu->add('413', '41', 'Caixa de Confirmação 2', 'view/messages/exe_confirm_dialog.php');
+        $menu->add('412', '41', 'Exemplo 2', 'view/messages/exe_mensagemv2.php');
+        $menu->add('413', '41', 'Caixa de Confirmação', 'view/messages/exe_confirmDialog.php');
+        $menu->add('414', '41', 'Caixa de Confirmação 2', 'view/messages/exe_confirm_dialog.php');
     $menu->add('42', '4', 'Ajuda');
         $menu->add('421', '42', 'Ajuda com arquivo HTML', 'exe_campo_ajuda.php', 'Com um arquivo HTML separado', '../../base/imagens/icon_help.png');
         $menu->add('422', '42', 'Ajuda On-line (sqlite)', 'exe_documentacao_online.php', 'Confe??o do texto de ajuda gravando no banco de dados sqlite');
