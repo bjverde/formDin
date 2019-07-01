@@ -7252,19 +7252,19 @@ class TForm Extends TBox
     * Adicionar treeview ao formulário.
     *
     * @param mixed $strName            - 1: id do campo
-    * @param string $strRootLabel      - 2: Nome da raiz do campo
+    * @param string $strRootLabel      - 2: Lavel do campo
     * @param mixed $arrData            - 3: array de dados
-    * @param mixed $strParentFieldName - 4: 
-    * @param mixed $strChildFieldName  - 5:
-    * @param mixed $strDescFieldName   - 6:
+    * @param mixed $strParentFieldName - 4: id do campo chave do pai
+    * @param mixed $strChildFieldName  - 5: id do campo chave dos filhos
+    * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
     * @param mixed $strInitialParentKey- 7:
-    * @param mixed $mixUserDataFields  - 8:
+    * @param mixed $mixUserDataFields  - 8: campos que serão passados quando cliamos no nó da arvore
     * @param bool $strHeight           - 9: altura
     * @param bool $strWidth            -10: largura
-    * @param mixed $jsOnClick
-    * @param mixed $jsOnCheck
-    * @param mixed $jsOnDrag
-    * @param mixed $boolEnableCheckBoxes
+    * @param mixed $jsOnClick          -11:
+    * @param mixed $jsOnCheck          -12:
+    * @param mixed $jsOnDrag           -13:
+    * @param mixed $boolEnableCheckBoxes - 14 : Habilita campo Checks
     * @param mixed $boolEnableRadioButtons
     * @param mixed $boolEnableTreeLines
     * @param mixed $strLabel
@@ -7301,9 +7301,20 @@ class TForm Extends TBox
         $this->addJsFile( 'dhtmlx/treeview/dhtmlxtree.js' );
         $this->addCssFile( 'dhtmlx/treeview/dhtmlxtree.css' );
 
-        $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $strInitialParentKey, $mixUserDataFields, $strHeight, $strWidth, $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag, $boolEnableCheckBoxes, $boolEnableRadioButtons, $boolEnableTreeLines, $mixFormSearchFields );
+        $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName
+                             , $strDescFieldName
+                             , $strInitialParentKey
+                             , $mixUserDataFields
+                             , $strHeight
+                             , $strWidth
+                             , $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag
+                             , $boolEnableCheckBoxes
+                             , $boolEnableRadioButtons
+                             , $boolEnableTreeLines
+                             , $mixFormSearchFields );
         //$tree->addItem(0,1,'Animal',true,'Animais');
-        $this->addDisplayControl( new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        $display = new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+        $this->addDisplayControl( $display );
         return $tree;
     }
 	
