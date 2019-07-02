@@ -45,6 +45,7 @@ $frm->addTextField('nome', 'Nome:', 30);
 $frm->addButton('Msg Alert', 'msgalert', null, null, null, true, false);
 $frm->addButton('Msg POP Sucesso', 'msgpopsu', null, null, null, false, false);
 $frm->addButton('Msg POP Error', 'msgpoperror', null, null, null, false, false);
+$frm->addButton('Msg POP Attention', 'msgpopattention', null, null, null, false, false);
 
 
 $acao = isset($acao) ? $acao : null;
@@ -59,6 +60,10 @@ switch ($acao) {
     //--------------------------------------------------------------------------------
     case 'msgpoperror':
         $frm->setPopUpMessage('Mensagem Pop-up Error',null,'ERROR');
+    break;
+    //--------------------------------------------------------------------------------
+    case 'msgpopattention':
+        $frm->setPopUpMessage('Mensagem Pop-up Attention',null,'ATTENTION');
     break;
 }
 
