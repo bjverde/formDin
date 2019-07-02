@@ -544,14 +544,14 @@ class TForm Extends TBox
             $aMsg[ 1 ] = isset( $aMsg[ 1 ] ) ? $aMsg[ 1 ] : 'SUCESS';
             if( $aMsg[ 1 ] == 'ERROR' && !$aMsg[ 3 ] ) {
                 $aMsg[ 3 ] = 'ruim.gif';
+            }else if($aMsg[ 1 ] == 'ATTENTION' && !$aMsg[ 3 ]){
+                $aMsg[ 3 ] = 'icon_alert.png';
             }
             $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // duração
             $aMsg[ 3 ] = isset( $aMsg[ 3 ] ) ? $aMsg[ 3 ] : 'sucess.gif';
             // se não foi informado o endereço manualmente, encontrar na pasta base
-            if( strpos( $aMsg[ 3 ], '/' ) === false )
-            {
-                if( !file_exists( $aMsg[ 3 ] ) )
-                {
+            if( strpos( $aMsg[ 3 ], '/' ) === false ) {
+                if( !file_exists( $aMsg[ 3 ] ) ) {
                     $aMsg[ 3 ] = $this->getBase() . 'imagens/' . $aMsg[ 3 ];
                 }
             }
