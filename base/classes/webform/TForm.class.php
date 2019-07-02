@@ -6593,140 +6593,140 @@ class TForm Extends TBox
         return $field;
     }
    //-----------------------------------------------------------------------------
-           /**
-            * Adicionar campo para informar o CEP
-            *
-            * Para preenchimento automático dos campos do formulário relacionados ao endereço,
-            * informar o campo do formulário que deverá ser preenchido na lista de parametros.
-            * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
-            * 
-            * <code>
-            * $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
-            * </code>
-            *
-            * Chama o metodo getCepJquery no arquivo FormDin4Cep.js o parametro cepEngine irá 
-            * definir qual será o motor de consulta. ViaCep usando Json ou BuscarCep via XML.
-            * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
-            * algumas busca por dia de forma gratuita.
-            *
-            * @param string $strName              -  1: Id do campo
-            * @param string $strLabel             -  2: Label do campo
-            * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
-            * @param string $strValue             -  4: Valor inicial do campo
-            * @param boolean $boolNewLine         -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-            * @param string $strFieldEndereco     -  6: id do campo endereço
-            * @param string $strFieldBairro       -  7: id do campo bairro
-            * @param string $strFieldCidade       -  8: id do campo cidade
-            * @param string $strFieldCodidoUf     -  9: id do campo cod uf ibge
-            * @param string $strFieldSiglaUf      - 10: id do campo sig uf
-            * @param string $strFieldLogradouro   - 11: id do campo logradouro
-            * @param string $strFieldNumero       - 12: id do campo numero
-            * @param string $strFieldComplemento  - 13: id do complemento
-            * @param string $strFieldCodigoMunicipio - 14: id do cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
-            * @param boolean $boolLabelAbove      - 15: Label sobre campo 
-            * @param boolean $boolNoWrapLabel     - 16:
-            * @param string $jsCallback           - 17: Js Callback
-            * @param string $jsBeforeSend         - 18: Js Before Send
-            * @param string $boolClearIncompleteValue - 19: 
-            * @param string $strIncompleteMessage - 20: Mensagem se for incompleto
-            * @param integer $cepEngine           - 21: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
-            * @return TMask
-            */
-           public function addCepField( $strName
-                                      , $strLabel=null
-                                      , $boolRequired=null
-                                      , $strValue=null
-                                      , $boolNewLine=null
-                                      , $strFieldEndereco=null
-                                      , $strFieldBairro=null
-                                      , $strFieldCidade=null
-                                      , $strFieldCodidoUf=null
-                                      , $strFieldSiglaUf=null
-                                      , $strFieldNumero=null
-                                      , $strFieldComplemento=null
-                                      , $strFieldCodigoMunicipio=null
-                                      , $boolLabelAbove=null
-                                      , $boolNoWrapLabel=null
-                                      , $jsCallback=null
-                                      , $jsBeforeSend=null
-                                      , $boolClearIncompleteValue=null
-                                      , $strIncompleteMessage=null
-                                      , $cepEngine=1)
-           {
-               $boolClearIncompleteValue = ( $boolClearIncompleteValue === false ? 'false' : 'true' );
-               $field = new TMask( $strName, $strValue, '99.999-999', $boolRequired );
-               $field->setFieldType( 'cep' );
-               $field->addEvent( 'onBlur', 'fwValidarTamanhoCep(this,'.$boolClearIncompleteValue.',"'.$strIncompleteMessage.'")' );
-               $arrFields = array( );
-               $arrClearFields = array( );
-               if( isset( $strFieldEndereco ) )
-               {
-                   $arrFields[ 'endereco' ] = $strFieldEndereco;
-                   $arrClearFields[ ] = $strFieldEndereco;
-               }
-               if( isset( $strFieldBairro ) )
-               {
-                   $arrFields[ 'bairro' ] = $strFieldBairro;
-                   $arrClearFields[ ] = $strFieldBairro;
-               }
-               /*
-                if( isset($strFieldLogradouro) )
-                {
-                $arrFields['logradouro'] = $strFieldLogradouro;
-                $arrClearFields[]=$strFieldLogradouro;
-                }
-                */
-               if( isset( $strFieldCidade ) )
-               {
-                   $arrFields[ 'cidade' ] = $strFieldCidade;
-                   $arrClearFields[ ] = $strFieldCidade;
-               }
-               if( isset( $strFieldCodidoUf ) )
-               {
-                   $arrFields[ 'ibge_uf' ] = $strFieldCodidoUf;
-                   $arrClearFields[ ] = $strFieldCodidoUf;
-               }
-               if( isset( $strFieldNumero ) )
-               {
-                   $arrFields[ 'numero' ] = $strFieldNumero;
-                   $arrClearFields[ ] = $strFieldNumero;
-               }
-               if( isset( $strFieldSiglaUf ) )
-               {
-                   $arrFields[ 'uf' ] = $strFieldSiglaUf;
-                   $arrClearFields[ ] = $strFieldSiglaUf;
-               }
-               if( isset( $strFieldComplemento ) )
-               {
-                   $arrFields[ 'complemento' ] = $strFieldComplemento;
-                   $arrClearFields[ ] = $strFieldComplemento;
-               }
-               if( isset( $strFieldCodigoMunicipio ) )
-               {
-                   $arrFields[ 'ibge_municipio_verificador' ] = $strFieldCodigoMunicipio;
-                   $arrClearFields[ ] = $strFieldCodigoMunicipio;
-               }
-               $qtd = CountHelper::count($arrFields);
-               if( $qtd > 0 )
-               {
-                   $buttonName = $field->getId() . '_btn_consultar';
-                   $getCepJsCallback = ($jsCallback ? $jsCallback : 'null');
-                   $getCepJsBeforeSend = ($jsBeforeSend ? $jsBeforeSend : 'null');
-                   if( $cepEngine == 2){
-                       $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
-                   } else {
-                       $buttonOnClick = 'getCepJsonViaCep("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
-                   }
-                   $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
-                   $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
-                   $field->add( $button );
-               }
-               $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
-               $this->addDisplayControl( $displayControl );
-               return $field;
+   /**
+    * Adicionar campo para informar o CEP
+    *
+    * Para preenchimento automático dos campos do formulário relacionados ao endereço,
+    * informar o campo do formulário que deverá ser preenchido na lista de parametros.
+    * Exemplo: para informar o cep e preencher o campo des_endereco do formulário automaticamente, fazer assim:
+    * 
+    * <code>
+    * $frm->addCepField('num_cep','Cep:',true,null,null,'des_endereco');
+    * </code>
+    *
+    * Chama o metodo getCepJquery no arquivo FormDin4Cep.js o parametro cepEngine irá 
+    * definir qual será o motor de consulta. ViaCep usando Json ou BuscarCep via XML.
+    * O ViaCep parece que não tem limite de uso, o BuscarCep é um serviço pago que oferece
+    * algumas busca por dia de forma gratuita.
+    *
+    * @param string $strName              -  1: Id do campo
+    * @param string $strLabel             -  2: Label do campo
+    * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param string $strValue             -  4: Valor inicial do campo
+    * @param boolean $boolNewLine         -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+    * @param string $strFieldEndereco     -  6: id do campo endereço
+    * @param string $strFieldBairro       -  7: id do campo bairro
+    * @param string $strFieldCidade       -  8: id do campo cidade
+    * @param string $strFieldCodidoUf     -  9: id do campo cod uf ibge
+    * @param string $strFieldSiglaUf      - 10: id do campo sig uf
+    * @param string $strFieldLogradouro   - 11: id do campo logradouro
+    * @param string $strFieldNumero       - 12: id do campo numero
+    * @param string $strFieldComplemento  - 13: id do complemento
+    * @param string $strFieldCodigoMunicipio - 14: id do cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
+    * @param boolean $boolLabelAbove      - 15: Label sobre campo 
+    * @param boolean $boolNoWrapLabel     - 16:
+    * @param string $jsCallback           - 17: Js Callback
+    * @param string $jsBeforeSend         - 18: Js Before Send
+    * @param string $boolClearIncompleteValue - 19: 
+    * @param string $strIncompleteMessage - 20: Mensagem se for incompleto
+    * @param integer $cepEngine           - 21: Define o serviço de busca que cep que será usado. Default 1 = ViaCep (https://viacep.com.br/ usando json), 2 = Buscarcep (http://buscarcep.com.br usando xml)
+    * @return TMask
+    */
+   public function addCepField( $strName
+                              , $strLabel=null
+                              , $boolRequired=null
+                              , $strValue=null
+                              , $boolNewLine=null
+                              , $strFieldEndereco=null
+                              , $strFieldBairro=null
+                              , $strFieldCidade=null
+                              , $strFieldCodidoUf=null
+                              , $strFieldSiglaUf=null
+                              , $strFieldNumero=null
+                              , $strFieldComplemento=null
+                              , $strFieldCodigoMunicipio=null
+                              , $boolLabelAbove=null
+                              , $boolNoWrapLabel=null
+                              , $jsCallback=null
+                              , $jsBeforeSend=null
+                              , $boolClearIncompleteValue=null
+                              , $strIncompleteMessage=null
+                              , $cepEngine=1)
+   {
+       $boolClearIncompleteValue = ( $boolClearIncompleteValue === false ? 'false' : 'true' );
+       $field = new TMask( $strName, $strValue, '99.999-999', $boolRequired );
+       $field->setFieldType( 'cep' );
+       $field->addEvent( 'onBlur', 'fwValidarTamanhoCep(this,'.$boolClearIncompleteValue.',"'.$strIncompleteMessage.'")' );
+       $arrFields = array( );
+       $arrClearFields = array( );
+       if( isset( $strFieldEndereco ) )
+       {
+           $arrFields[ 'endereco' ] = $strFieldEndereco;
+           $arrClearFields[ ] = $strFieldEndereco;
+       }
+       if( isset( $strFieldBairro ) )
+       {
+           $arrFields[ 'bairro' ] = $strFieldBairro;
+           $arrClearFields[ ] = $strFieldBairro;
+       }
+       /*
+        if( isset($strFieldLogradouro) )
+        {
+        $arrFields['logradouro'] = $strFieldLogradouro;
+        $arrClearFields[]=$strFieldLogradouro;
+        }
+        */
+       if( isset( $strFieldCidade ) )
+       {
+           $arrFields[ 'cidade' ] = $strFieldCidade;
+           $arrClearFields[ ] = $strFieldCidade;
+       }
+       if( isset( $strFieldCodidoUf ) )
+       {
+           $arrFields[ 'ibge_uf' ] = $strFieldCodidoUf;
+           $arrClearFields[ ] = $strFieldCodidoUf;
+       }
+       if( isset( $strFieldNumero ) )
+       {
+           $arrFields[ 'numero' ] = $strFieldNumero;
+           $arrClearFields[ ] = $strFieldNumero;
+       }
+       if( isset( $strFieldSiglaUf ) )
+       {
+           $arrFields[ 'uf' ] = $strFieldSiglaUf;
+           $arrClearFields[ ] = $strFieldSiglaUf;
+       }
+       if( isset( $strFieldComplemento ) )
+       {
+           $arrFields[ 'complemento' ] = $strFieldComplemento;
+           $arrClearFields[ ] = $strFieldComplemento;
+       }
+       if( isset( $strFieldCodigoMunicipio ) )
+       {
+           $arrFields[ 'ibge_municipio_verificador' ] = $strFieldCodigoMunicipio;
+           $arrClearFields[ ] = $strFieldCodigoMunicipio;
+       }
+       $qtd = CountHelper::count($arrFields);
+       if( $qtd > 0 )
+       {
+           $buttonName = $field->getId() . '_btn_consultar';
+           $getCepJsCallback = ($jsCallback ? $jsCallback : 'null');
+           $getCepJsBeforeSend = ($jsBeforeSend ? $jsBeforeSend : 'null');
+           if( $cepEngine == 2){
+               $buttonOnClick = 'getCepJquery("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
+           } else {
+               $buttonOnClick = 'getCepJsonViaCep("' . $field->getId() . '",'.json_encode( $arrFields ).','.$getCepJsCallback.','.$getCepJsBeforeSend.')';
            }
+           $button = new TButton( $buttonName , 'Consultar', null, $buttonOnClick, null, null, null, 'Infome o CEP e clique aqui para autocompletar os campos de endereço.' );
+           $field->addEvent( 'onKeyUp', 'fwFieldCepKeyUp(this,event,"' . implode( ',', $arrClearFields ) . '")' );
+           $field->add( $button );
+       }
+       $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, true );
+       $this->addDisplayControl( $displayControl );
+       return $field;
+   }           
+   //-----------------------------------------------------------------------------
            
-           //-----------------------------------------------------------------------------
     /**
     * Adicionar campo tipo combobox ou menu select
     *
