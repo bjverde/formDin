@@ -542,8 +542,7 @@ class TForm Extends TBox
         {
             $aMsg = $this->getPopUpMessage();
             $aMsg[ 1 ] = isset( $aMsg[ 1 ] ) ? $aMsg[ 1 ] : 'SUCESS';
-            if( $aMsg[ 1 ] == 'ERROR' && !$aMsg[ 3 ] )
-            {
+            if( $aMsg[ 1 ] == 'ERROR' && !$aMsg[ 3 ] ) {
                 $aMsg[ 3 ] = 'ruim.gif';
             }
             $aMsg[ 2 ] = isset( $aMsg[ 2 ] ) ? $aMsg[ 2 ] : 5; // duração
@@ -2582,10 +2581,10 @@ class TForm Extends TBox
       * <code>
       * 	$frm->setPopupMessge('Dados gravados corretamente');
       * </code>
-      * @param string $strMessage
-      * @param integer $intSeconds
-      * @param string $strType
-      * @param string $strImage
+      * @param string $strMessage    1: Text Mensages
+      * @param integer $intSeconds   2: tempo em segundos que a mensagem ficará visível na tela. Default: 5
+      * @param string $strType       3: SUCESS (Default), ERROR, ATTENTION
+      * @param string $strImage      4: path icon
       */
      public function setPopUpMessage( $strMessage=null, $intSeconds=null, $strType=null, $strImage=null )
      {
