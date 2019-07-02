@@ -197,6 +197,13 @@ footer
 	margin:0px;
 	padding: 0px;
 }
+.app_div_message{
+	display:none;
+	position:absolute;
+	top:30px;
+	text-align:center;	
+	width:600px;
+}
 .app_div_error{
     width:50%;
     overflow:hidden;
