@@ -519,12 +519,12 @@ class TTreeView extends TControl
 	/**
 	* Adicionar ítem na árvore
 	*
-	* @param bool $idParent
-	* @param mixed $id
-	* @param mixed $text
-	* @param mixed $open
-	* @param mixed $hint
-	* @param mixed $arrUserData
+	* @param bool $idParent        1: id do registro pai
+	* @param mixed $id             2: id do registro
+	* @param mixed $text           3: Texto do Registro
+	* @param mixed $open           4: Nó aberto ou fechado
+	* @param mixed $hint           5: 
+	* @param mixed $arrUserData    6: campos que serão passados quando clicamos no nó da arvore, usado no TreeClik
 	* @param mixed $boolSelect
 	* @param mixed $boolChecked
 	*/

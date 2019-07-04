@@ -7266,7 +7266,7 @@ class TForm Extends TBox
     * @param mixed $strChildFieldName  - 5: id do campo chave dos filhos
     * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
     * @param mixed $strInitialParentKey- 7:
-    * @param mixed $mixUserDataFields  - 8: campos que serão passados quando cliamos no nó da arvore
+    * @param mixed $mixUserDataFields  - 8: campos que serão passados quando clicamos no nó da arvore
     * @param bool $strHeight           - 9: altura
     * @param bool $strWidth            -10: largura
     * @param mixed $jsOnClick          -11:
