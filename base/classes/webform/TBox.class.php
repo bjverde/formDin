@@ -135,7 +135,6 @@
 		$this->divBody->SetCss('border','none');
 		$this->divBody->SetCss('top','5px');
 		$this->divBody->SetCss('left','5px');
-		//$this->divBody->setCss('background-color', $this->getCss('background-color'));
 
 		$this->divContent->add($this->divBody);
 
@@ -144,7 +143,6 @@
 		$divlb->clearCss();
 		$divlb->setCss('background-color','transparent');
 		$divlb->setClass('lb');
-		//$divlb->setCss('background-color','transparent');
 
 		$divrb = new TElement('div');
 		$divrb->clearCss();

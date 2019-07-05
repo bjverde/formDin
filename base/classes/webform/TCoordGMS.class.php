@@ -156,8 +156,6 @@ class TCoordGMS extends TGroup
 		$this->lonHem = $this->addSelectField($this->getId() . '_lon_hem', 'Hem:', $boolRequired, "W=Oeste,E=Leste", false, null, null, null, null, null, "");
 
 		//$this->lonHem->setEnabled(false);
-		//$this->lonHem->setCss('text-align', 'center');
-		//$this->lonHem->setCss('width', '20px');
 		// botão para abrir o mapa
 		$this->buttonGMap = $this->addButton('G', null, 'btnGoogle_' . $this->getId(), null, null, false, false, 'fwgoogle-maps-icon_19x19px.gif', 'fwgoogle-maps-icon_19x19px.gif', 'Mapa - Visualizar / selecionar a coordenada');
 		$this->fieldZoom = $this->addHiddenField($this->getId().'_map_zoom');
