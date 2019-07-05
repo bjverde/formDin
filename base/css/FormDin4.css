@@ -57,13 +57,14 @@ body
 	*/
 }
 
-input:focus {
-    border-color: rgba(82,168,236,.8);
+input:focus ,textarea:focus, select:focus {
+	//border-color: #DAE8F3;
+	border-color: rgba(82,168,236,.8);
+	border-color: rgba(82,168,236,.8);
     outline: 0;
     outline: thin dotted \9;
     -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
     box-shadow: 0 0 8px rgba(82,168,236,.6) !important;
-//    background-color: #DAE8F3;
 }
 
 .fwHelpText
