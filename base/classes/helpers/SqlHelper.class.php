@@ -177,7 +177,7 @@ class SqlHelper
                                             , $value
                                             , $connector=self::SQL_CONNECTOR_AND
                                             ) {
-        $isTrue = ' AND '.$attribute.' = '.$value.'  ';
+        $isTrue = EOL.' AND '.$attribute.' = '.$value.'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
@@ -191,7 +191,7 @@ class SqlHelper
                                              , $connector=self::SQL_CONNECTOR_AND
                                              ) {
         $value = self::explodeTextString($value);
-        $isTrue = ' AND '.$attribute.' like \'%'.$value.'%\' ';
+        $isTrue = EOL.' AND '.$attribute.' like \'%'.$value.'%\' ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
@@ -204,7 +204,7 @@ class SqlHelper
                                          , $value
                                          , $connector=self::SQL_CONNECTOR_AND
                                          ) {
-        $isTrue = ' AND '.$attribute.' = \''.$value.'\'  ';
+        $isTrue = EOL.' AND '.$attribute.' = \''.$value.'\'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
@@ -245,11 +245,11 @@ class SqlHelper
            } else if( $qtdElement > 1 ) {
                if($type == self::SQL_TYPE_IN_NUMERIC){
                    $value = implode(",",$value);
-                   $isTrue = ' AND '.$attribute.' in ('.$value.') ';
+                   $isTrue = EOL.' AND '.$attribute.' in ('.$value.') ';
                    $stringWhere = $stringWhere.$isTrue;
                }else{
                    $value = implode("','",$value);
-                   $isTrue = ' AND '.$attribute.' in (\''.$value.'\') ';
+                   $isTrue = EOL.' AND '.$attribute.' in (\''.$value.'\') ';
                    $stringWhere = $stringWhere.$isTrue;
                }
            }
