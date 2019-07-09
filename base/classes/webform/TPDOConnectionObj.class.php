@@ -248,5 +248,13 @@ class TPDOConnectionObj
         $tpdo::rollBack();
         $this->setTPDOConnection($tpdo);         
     }
+    //--------------------------------------------------------------------------------------
+    public function getLastInsertId()
+    {
+        $tpdo = $this->tpdo;
+        $pdo = $tpdo::getInstance();
+        $id = $pdo->lastInsertId();
+        return $id;
+    }
 }
 ?>
