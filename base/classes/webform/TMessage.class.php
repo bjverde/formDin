@@ -52,6 +52,8 @@ class TMessage {
     const ARRAY_EXPECTED = 'O atribruto deveria ser um array';
     
     const DONOT_QUOTATION = 'Não use aspas simples ou duplas na pesquisa !';
+    
+    const ERROR_FIELD_ID_CANNOT_EMPTY = 'O id do campo não pode ficar em branco';
 
     public function __construct() {
     }
