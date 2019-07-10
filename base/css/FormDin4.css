@@ -214,10 +214,15 @@ input:focus ,textarea:focus, select:focus {
 	background-color:#efefef;
 }
 
-.fwField
-{
+.fwField {
 	font-family:Arial,Helvetica, Geneva, Sans-Serif;
 	font-size:11px;
+}
+
+.fwFieldBoarder {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c0c0c0;
 }
 
 .fwFieldRequired {
