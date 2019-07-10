@@ -37,26 +37,24 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+d($_REQUEST);
+
 $fileFormat = 'pdf,gif,txt,jpg,rar,zip,doc';
 $frm = new TForm('Exemplo Campo Arquivo', 300, 700);
 
 $frm->addHtmlField('html1', 'Arquivo de tamanho maximo de 2MB e no formatos: '.$fileFormat, null, 'Dica:', null, 200)->setCss('border', '1px dashed blue');
 // define a largura das colunas verticais do formulario para alinhamento dos campos
-$frm->setColumns(array(100,100));
-$frm->addFileField('anexo', 'Anexo Async:', true, $fileFormat, '2M', 40, false);
-//d($_SESSION);
-//d($_POST);
-//print_r(file_put_contents($frm->getBase().'tmp/upload_'.md5(session_id().$res_alt['DES_ARQUIVO'][0]),'teste') );
+//$frm->setColumns(array(100,100));
+$frm->addFileField('anexo', 'Anexo Async:', true, $fileFormat, '100K', 40, false);
 
 $frm->setAction('Gravar,Novo');
 
 $acao = isset($acao) ? $acao : null;
 switch ($acao) {
     case 'Gravar': {
-        d($_FILES);
-        $frm->validate();
-        $bvars = $frm->createBvars('anexo');
-        d($bvars);
+        if ( $frm->validate() ) {
+            echo 'Foiiiiiiiii !';
+        }
     }
 }
 $frm->show();
