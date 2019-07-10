@@ -339,7 +339,7 @@ class TNumber extends TEdit
 		}
 		if( !$result = ( (string)$this->getError()==="" ))
 		{
-			$this->setCss('border','1px solid #ff0000');
+		    $this->setClass('fwFieldRequiredBoarder');
 		}
 		return $result;
 	}

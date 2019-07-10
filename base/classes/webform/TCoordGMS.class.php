@@ -514,40 +514,40 @@ class TCoordGMS extends TGroup
 				is_null($this->lonSeg->getValue()))
 			{
 				$this->addError("Campo obrigatório");
-				$this->setCss('border', '1px solid #ff0000');
+				$this->setClass('fwFieldRequiredBoarder');
 				return ( (string) $this->getError() === "" );
 			}
 		}
 		if (!is_null($this->latGrau->getValue()) && $this->latGrau->getValue() > 35)
 		{
 			$this->addError("Grau Latitude inválido");
-			$this->latGrau->setCss('border', '1px solid #ff0000');
+			$this->latGrau->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->latMin->getValue()) && $this->latMin->getValue() > 59)
 		{
 			$this->addError("Minuto Latitude inválido");
-			$this->latMin->setCss('border', '1px solid #ff0000');
+			$this->latMin->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->latSeg->getValue()) && $this->latSeg->getValue() > 59)
 		{
 			$this->addError("Segundo Latitude inválido");
-			$this->latSeg->setCss('border', '1px solid #ff0000');
+			$this->latSeg->setClass('fwFieldRequiredBoarder');
 		}
 		// longitude
 		if (!is_null($this->lonGrau->getValue()) && $this->lonGrau->getValue() != '' && $this->lonGrau->getValue() < 30 || $this->lonGrau->getValue() > 70)
 		{
 			$this->addError("Grau Longitude inválido");
-			$this->lonGrau->setCss('border', '1px solid #ff0000');
+			$this->lonGrau->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->lonMin->getValue()) && $this->lonMin->getValue() > 59)
 		{
 			$this->addError("Minuto Longitude inválido");
-			$this->lonMin->setCss('border', '1px solid #ff0000');
+			$this->lonMin->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->lonSeg->getValue()) && $this->lonSeg->getValue() > 59)
 		{
 			$this->addError("Segundo Longitude inválido");
-			$this->lonSeg->setCss('border', '1px solid #ff0000');
+			$this->lonSeg->setClass('fwFieldRequiredBoarder');
 		}
 		return ( (string) $this->getError() === "" );
 	}

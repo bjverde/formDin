@@ -170,7 +170,7 @@ class TEdit extends TControl
 		//$this->setError(null);
 		if($this->getRequired() && (string)$this->getValue()=="")
 		{
-			$this->setCss('border','1px solid #ff0000');
+			$this->setClass('fwFieldRequiredBoarder');
 			$this->setError('Campo obrigatório.');
 		}
 		// validar o tamanho
@@ -185,7 +185,7 @@ class TEdit extends TControl
 				}
 				if( (int)$this->getMaxLenght() < strlen( $value ) )
 				{
-					$this->setCss('border','1px solid #ff0000');
+				    $this->setClass('fwFieldRequiredBoarder');
 					$this->setError('máximo '.$this->getMaxLenght().' caracteres.');
 				}
 			}

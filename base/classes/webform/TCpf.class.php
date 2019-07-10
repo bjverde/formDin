@@ -137,7 +137,7 @@ class TCpf extends TMask
 		}
 		if ( $controle != $cpf_dv )
 		{
-			$this->setCss('border','1px solid #ff0000');
+		    $this->setClass('fwFieldRequiredBoarder');
 			$this->setError('Cpf '.$this->getFormated().' está digitado incorretamente!');
 		}
 		return ( (string)$this->getError()==="" );
