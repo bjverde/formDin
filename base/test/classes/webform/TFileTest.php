@@ -74,6 +74,15 @@ class TFileTest  extends TestCase
 		parent::tearDown ();
 	}
 	
+	/**
+	 * @expectedException UploadException
+	 */
+	public function testSetPostFileInfo_ERRO() {
+	    $_FILES = array();
+	    $_FILES['anexo']['error']=UPLOAD_ERR_INI_SIZE;
+	    $this->file->setPostFileInfo();
+	}
+	
 	public function testGetMaxSize() {
 		$esperado = '2Mb';
 		$retorno = $this->file->getMaxSize();
