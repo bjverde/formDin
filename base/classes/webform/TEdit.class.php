@@ -54,7 +54,7 @@ class TEdit extends TControl
 		$this->setMaxLenght($intMaxLength);
 		$this->setSize($intSize);
 		$this->setRequired($boolRequired);
-		$this->fwFieldBoarder('fwFieldBoarder');
+		$this->setClass('fwFieldBoarder');
 		$this->setCss('cursor','pointer');
 		$this->setCss('font-family',"Arial");
 		//$this->setCss('font-size',"13px");
