@@ -367,20 +367,6 @@ class TForm Extends TBox
             die();
         }
         
-        /*
-         $this->message_area = $this->addHtmlField( $this->getId() . '_msg_area' ,null,null,null,null,1);
-         $btn = new TButton( 'btn_close_' . $this->getId() . '_msg_area', 'Fechar', null, 'fwHideMsgArea("'.$this->getName().'")', null, 'fwbtnclosered.jpg', null, 'Fechar mensagem' );
-         $btn->setCss( 'float', 'right' );
-         $btn->setCss( 'cursor', 'pointer' );
-         $btn->setCss('visibility','visible');
-         $this->message_area->add( $btn );
-         $this->message_area->add( '<div id="' . $this->getId() . '_msg_area_content' . '"></div>' );
-         //$this->message_area->setCss( 'visibility', 'visible' );
-         $this->message_area->setCss( 'visibility', 'visible' );
-         //$this->message_area->setCss( 'height', '1' );
-         // campo oculto para guardar quem chamou o formulário
-         $this->addHiddenField( 'fw_back_to' );
-         */
     }
     
     /**
