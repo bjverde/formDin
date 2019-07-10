@@ -54,7 +54,7 @@ class TEdit extends TControl
 		$this->setMaxLenght($intMaxLength);
 		$this->setSize($intSize);
 		$this->setRequired($boolRequired);
-		$this->setCss('border','1px solid #c0c0c0');
+		$this->fwFieldBoarder('fwFieldBoarder');
 		$this->setCss('cursor','pointer');
 		$this->setCss('font-family',"Arial");
 		//$this->setCss('font-size',"13px");
@@ -166,7 +166,7 @@ class TEdit extends TControl
 	*/
 	public function validate()
 	{
-		$this->setCss('border','1px solid #c0c0c0');
+		$this->setClass('fwFieldBoarder');
 		//$this->setError(null);
 		if($this->getRequired() && (string)$this->getValue()=="")
 		{

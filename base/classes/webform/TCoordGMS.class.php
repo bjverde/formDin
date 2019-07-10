@@ -495,15 +495,15 @@ class TCoordGMS extends TGroup
 	 */
 	public function validate($strPage=null, $strFields=null, $strIgnoreFields=null)
 	{
-		$this->setCss('border', '1px solid #c0c0c0');
-		$this->latGrau->setCss('border', '1px solid #c0c0c0');
-		$this->latMin->setCss('border', '1px solid #c0c0c0');
-		$this->latSeg->setCss('border', '1px solid #c0c0c0');
-		$this->latHem->setCss('border', '1px solid #c0c0c0');
-		$this->lonGrau->setCss('border', '1px solid #c0c0c0');
-		$this->lonMin->setCss('border', '1px solid #c0c0c0');
-		$this->lonSeg->setCss('border', '1px solid #c0c0c0');
-		$this->lonHem->setCss('border', '1px solid #c0c0c0');
+		$this->setClass('fwFieldBoarder');
+		$this->latGrau->setClass('fwFieldBoarder');
+		$this->latMin->setClass('fwFieldBoarder');
+		$this->latSeg->setClass('fwFieldBoarder');
+		$this->latHem->setClass('fwFieldBoarder');
+		$this->lonGrau->setClass('fwFieldBoarder');
+		$this->lonMin->setClass('fwFieldBoarder');
+		$this->lonSeg->setClass('fwFieldBoarder');
+		$this->lonHem->setClass('fwFieldBoarder');
 		if ($this->getRequired() == true)
 		{
 			if (is_null($this->latGrau->getValue()) ||
