@@ -225,6 +225,12 @@ input:focus ,textarea:focus, select:focus {
 	vertical-align: middle;
 }
 
+.fwFieldRequiredBoarder {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ff0000;
+}
+
 .fwFieldRequiredOldStyle {
 	margin:0px;
 	padding:0px;

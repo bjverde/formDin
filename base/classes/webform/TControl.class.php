@@ -202,9 +202,8 @@ abstract class TControl extends TElement
         }
 
        	// se o campo tiver erro, ajustar a cor da borda para vermelha
-		if($this->getError())
-		{
-			$this->setCss('border','1px solid #ff0000');
+		if($this->getError()){
+			$this->setClass('fwFieldRequiredBoard');
 		}
         return parent::show( $print ).$disableHtml.$this->getHelpOnLine();
     }

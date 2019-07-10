@@ -7109,7 +7109,7 @@ class TForm Extends TBox
        return $field;
     }
     
-    /**
+    /***
     * Campos para anexar arquivo. Pode ser um carregamento sincrono ou assincrono via ajax.
     *
     * Será incluido no $_POST 4 elementos com os nomes:
@@ -7119,18 +7119,21 @@ class TForm Extends TBox
     *   $_POST['strName_size'] - tamanho em kb;
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
-    *
-    * @param string  $strName         - 1: id do campo
-    * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
-    * @param boolean $boolRequired    - 3: Obrigatorio 
-    * @param string  $strAllowedFileTypes - Tipos de arquivos
-    * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-    * @param integer $intFieldSize
-    * @param boolean $boolNewLine
-    * @param boolean $boolLabelAbove
-    * @param boolean $boolNoWrapLabel
-    * @return TFile / TFileAsyn
-    */
+    * 
+     * @param string  $strName         - 1: id do campo
+     * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
+     * @param boolean $boolRequired    - 3: Obrigatorio
+     * @param string  $strAllowedFileTypes - Tipos de arquivos
+     * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+     * @param integer $intFieldSize
+     * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
+     * @param boolean $boolNewLine
+     * @param string  $strJsCallBack
+     * @param boolean $boolLabelAbove
+     * @param boolean $boolNoWrapLabel
+     * @param string  $strMessageInvalidFileType
+     * @return TFile|TFileAsync
+     */
     public function addFileField( $strName
                                , $strLabel=null
                                , $boolRequired=null
