@@ -43,6 +43,7 @@ if(!defined('ROWS_PER_PAGE')) { define('ROWS_PER_PAGE', 20);
 }
 
 /**
+ * @codeCoverageIgnore
  * @deprecated Please change to SqlHelper
  */
 class paginationSQLHelper
