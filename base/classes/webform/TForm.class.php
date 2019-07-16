@@ -3905,6 +3905,7 @@ class TForm Extends TBox
             }
         }
     }
+    
     /**
      * Define se o html gerado deverá ser somente da tag form ou o codigo html da pagina completo.
     *
@@ -3914,6 +3915,7 @@ class TForm Extends TBox
     {
         $this->showHtmlTag = $boolShow;
     }
+    
     public function getShowHtmlTag()
     {
         return $this->showHtmlTag;
@@ -3929,6 +3931,66 @@ class TForm Extends TBox
             $this->addCssFile(CSS_FILE_FORM_DEFAULT);
         }
     }
+    
+    /**
+     * Verifica se o arquivo existe e devolve o caminho. Se não existir
+     * retona null
+     * @param array $aFile
+     * @return NULL|string
+     */
+    protected function getPathJsCssFiles($file)
+    {       
+        $fileType = false;
+        $result = array();
+        $result['type'] = null;
+        $result['path'] = null;        
+        
+        if( strpos( $file, 'http:' ) !== false ) {
+            $fileType = false;
+        } else {
+            $fileType = true;
+            
+            $fileName = $file;
+            if( strpos( $file, '.css' ) ) {
+                $tipo = 'css';
+            } else if( strpos( $file, '.js' ) ) {
+                $tipo = 'js';
+            }
+            
+            // primeiro procurar na pasta js/ do projeto
+            if( !file_exists( $fileName ) ) {
+                $fileName = $this->getRoot() . $tipo . '/' . $file;
+            }
+            
+            // depois procurar na pasta base/js
+            if( !file_exists( $fileName ) ) {
+                $fileName = $this->getBase() . $tipo . '/' . $file;
+            }
+            
+            if( !file_exists( $fileName ) ) {
+                // o css pode estar junto com o js
+                if( $tipo == 'css' ) {
+                    // procurar na pasta base/js
+                    $fileName = $this->getBase() . 'js/' . $file;
+                }
+            }            
+            $file = $fileName;
+        }
+        
+        if ( $fileType == false ){
+            $result['type'] = $tipo;
+            $result['path'] = $file;
+        } else {
+            if ( $fileType == true && file_exists($file) ){
+                $result['type'] = $tipo;
+                $result['path'] = $file;
+            } else {
+                $log = 'formDin: '.FORMDIN_VERSION.' failed to load file:'.$file;
+                error_log($log);
+            }
+        }
+        return $result;
+    }
 
      /**
       * Método interno para gerar o codigo html de inserção dos arquivos js/css adicionados ao formulário
@@ -3941,45 +4003,13 @@ class TForm Extends TBox
          $this->getCssFileFormDefault();
          $arrTemp = array_merge( $this->jsFiles, $this->cssFiles );
          if( is_array( $arrTemp ) ) {
-             foreach( $arrTemp as $k=>$file ) {
-                 
-                $fileName = $file;
-                if( strpos( $file, '.css' ) ) {
-                    $tipo = 'css';
-                } else if( strpos( $file, '.js' ) ) {
-                    $tipo = 'js';
-                }
-
-                if( strpos( $file, 'http:' ) === false ) {
-                    $isUrl = false;
-                    // primeiro procurar na pasta js/ do projeto
-                    if( !file_exists( $fileName ) ) {
-                        $fileName = $this->getRoot() . $tipo . '/' . $file;
-                    }
-
-                    // depois procurar na pasta base/js
-                    if( !file_exists( $fileName ) ) {
-                        $fileName = $this->getBase() . $tipo . '/' . $file;
-                    }
-
-                    if( !file_exists( $fileName ) ) {
-                        // o css pode estar junto com o js
-                        if( $tipo == 'css' ) {
-                            // procurar na pasta base/js
-                            $fileName = $this->getBase() . 'js/' . $file;
-                        }
-                    }
-                } else {
-                    $isUrl = true;
-                }
-
-                if( $isUrl || file_exists( $fileName ) ) {
-                    if( $tipo == 'js' ) {
-                        $this->add( '<script type="text/javascript" src="' . $fileName . '"></script>' );
-                    } else if( $tipo == 'css' ) {
-                        $this->add( '<link rel="stylesheet" type="text/css" href="' . $fileName . '" />' );
-                    }
-                }
+             foreach( $arrTemp as $file ) {
+                 $fileinfo = $this->getPathJsCssFiles($file);
+                 if( $fileinfo['type'] == 'js' ) {
+                     $this->add( '<script type="text/javascript" src="' . $fileinfo['path'] . '"></script>' );
+                 } else if( $fileinfo['type'] == 'css' ) {
+                     $this->add( '<link rel="stylesheet" type="text/css" href="' . $fileinfo['path'] . '" />' );
+                 }
              }
              // evitar que a classe JQuery entre em confilto com outras classes
              $this->add( '<script>jQuery.noConflict();</script>' );
