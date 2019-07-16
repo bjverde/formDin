@@ -532,33 +532,37 @@ class TElement
         }
     }
     
+    /***
+     * TODO DESCOBRIR o motivo de não conseguir  extrair para outro metodo
+     * https://github.com/bjverde/formDin/issues/177
+     * @param string $result
+     * @return string|array|NULL
+     */
     public function subShowChildren($result)
     {
-        if ( is_array( $this->children ) )
-        {
-            foreach( $this->children as $child )
-            {
+        if ( is_array( $this->children ) ) {
+            foreach( $this->children as $child ) {
                 if ( is_object( $child ) ) {
                     self::$depth++;
                     $result .= $child->show( false );
                     self::$depth--;
                 } else {
                     // o texto do campo textarea e option não ser identado senão aparece na tela
-                    if ( $this->tagType != 'textarea' && $this->tagType != 'option' )
-                    {
+                    if ( $this->tagType != 'textarea' && $this->tagType != 'option' ) {
                         // linha de comentario
-                        if ( preg_match('/^\/\//',ltrim( $child ) ) && !$GLOBALS[ 'teste' ] ) {
+                        $preg = preg_match('/^\/\//',ltrim( $child ) );
+                        if ( $preg && !$GLOBALS[ 'teste' ] ) {
                             $child = "";
                         } else {
                             $result .= $this->getIdent( 1 ) . $child . "\n";
                         }
                     } else {
-                        if ( ! preg_match('/^\/\//',ltrim( $child ) ) ) {
+                        if ( !$preg ) {
                             $result .= $child;
                         }
                     }
                 }
-            }
+            }//END foreach
         }
         return $result;
     }
@@ -575,7 +579,36 @@ class TElement
         $this->subShowCss();
         $this->subShowEvents();
         $result = $this->open( $print );
-        $result = $this->subShowChildren($result);
+        
+        //--------- TODO DESCOBRIR o motivo de não conseguir  extrair para outro metodo
+        //--------- https://github.com/bjverde/formDin/issues/177
+        //$result = $this->subShowChildren($result);
+        if ( is_array( $this->children ) ) {
+            foreach( $this->children as $child ) {
+                if ( is_object( $child ) ) {
+                    self::$depth++;
+                    $result .= $child->show( false );
+                    self::$depth--;
+                } else {
+                    // o texto do campo textarea e option não ser identado senão aparece na tela
+                    if ( $this->tagType != 'textarea' && $this->tagType != 'option' ) {
+                        // linha de comentario
+                        $preg = preg_match('/^\/\//',ltrim( $child ) );
+                        if ( $preg && !$GLOBALS[ 'teste' ] ) {
+                            $child = "";
+                        } else {
+                            $result .= $this->getIdent( 1 ) . $child . "\n";
+                        }
+                    } else {
+                        if ( !$preg ) {
+                            $result .= $child;
+                        }
+                    }
+                }
+            }//END foreach
+        }
+        //----------------------------------------------------------------------
+        
         // tive que remover quebras e tabs para nao interferir no layout dos elementos na pagina
         if ( !$GLOBALS[ 'teste' ] ) {
             $result = str_replace( "\n", '', $result );
