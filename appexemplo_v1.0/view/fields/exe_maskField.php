@@ -52,7 +52,7 @@
   $frm->addMaskField('c3', 'Código de Barras:', false, '9 999999 999999')->setExampleText('9 999999 999999');
   ;
 
-  $frm->addHtmlField(null, 'Coração - Neste formulário, os rótulos dos campos foram alinhados à direita utilizando o método <b>$frm->setLabelsAlign("right")</b>.');
+  $frm->addHtmlField('idhtml', 'Coração - Neste formulário, os rótulos dos campos foram alinhados à direita utilizando o método <b>$frm->setLabelsAlign("right")</b>.');
   $frm->setAction('Atualizar');
   $frm->setLabelsAlign('right');
   $frm->Show();
