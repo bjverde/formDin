@@ -172,7 +172,8 @@ class TEdit extends TControl
 		//$this->setError(null);
 		if($this->getRequired() && (string)$this->getValue()=="")
 		{
-			$this->setClass('fwFieldRequiredBoarder');
+		    $this->setCss('border','1px solid #ff0000'); //#176 relacionado com FormDin4.js
+			//$this->setClass('fwFieldRequiredBoarder');
 			$this->setError('Campo obrigatório.');
 		}
 		// validar o tamanho
@@ -187,7 +188,8 @@ class TEdit extends TControl
 				}
 				if( (int)$this->getMaxLenght() < strlen( $value ) )
 				{
-				    $this->setClass('fwFieldRequiredBoarder');
+				    $this->setCss('border','1px solid #ff0000'); //#176 relacionado com FormDin4.js
+				    //$this->setClass('fwFieldRequiredBoarder');
 					$this->setError('máximo '.$this->getMaxLenght().' caracteres.');
 				}
 			}

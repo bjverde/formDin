@@ -161,6 +161,7 @@ class TFile extends TEdit {
                         $msg = 'Tamanho máximo permitido '.$this->getMaxSize().' O arquivo selecionado possui '.ceil($_POST[$this->getId().'_size'] / 1024).'Kb';
                         $this->addError($msg);
                         $this->clear();
+                        $this->setCss('border','1px solid #ff0000');
                     } else {
                         // validar extensão
                         if( $this->getAllowedFileTypes() ) {

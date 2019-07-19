@@ -95,7 +95,8 @@ abstract class TOption extends TControl
 		$this->setPaddingItems( $intPaddingItems );
 		$this->setFieldType( ($strInputType == null) ? 'select' : $strInputType );
 		$this->setMultiSelect( $boolMultiSelect );
-		$this->setClass('fwFieldBoarder');
+		$this->setCss( 'border',  '1px solid #c0c0c0' ); //#176 relacionado com FormDin4.js
+		//$this->setClass('fwFieldBoarder');
 		$this->setCss( 'display', 'inline' );
 		$this->setWidth( $intWidth );
 		$this->setHeight( $intHeight );
