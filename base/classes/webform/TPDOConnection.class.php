@@ -536,8 +536,7 @@ class TPDOConnection {
                 if (PHP_OS == "Linux") {
                     if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
                         $driver = 'sqlsrv';
-                        //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                        self::$dsn = $driver.':Server='.$host.';Database='.$database;
+                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
                     } else {
                         $driver = 'dblib';
                         //self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
