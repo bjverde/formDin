@@ -108,7 +108,8 @@
 			$this->divBody->setCss('background-color',$this->getCss('background-color'));
 		}
 		if($this->getCss('border')=='none') {
-			$this->setClass('fwFieldBoarder');
+		    $this->setCss('border','1px solid #c0c0c0');
+			//$this->setClass('fwFieldBoarder');
 		}
 		if( $this->getPosition() ) {
 			$this->divBody->add('<script>window.setTimeout(\'fwSet_position("'.$this->getId().'","'.$this->getPosition().'")\',100);</script>');
