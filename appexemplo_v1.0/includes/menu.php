@@ -202,9 +202,12 @@ $menu->add('9', null, 'Banco e PDO', null, 'Exemplo de Recursos para conectar no
 
 //-----------------------------------------------------------------------------
 $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-512.png');
-    $menu->add('1010', '10', 'Agenda');
-        $menu->add('1010.1', '1010', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
-        $menu->add('1010.2', '1010', 'Cadastro de Pessoas', 'view/form/pessoa.php');
+
+    $menu->add('10.01', '10', 'Recursos do Formulário');
+        $menu->add('10.0.1', '10.01', 'Recurso de Autosize', 'view/form/exe_TForm_autosize.php');
+        $menu->add('10.0.2', '10.01', 'Boxes', 'view/form/exe_TBox.php');
+        $menu->add('10.0.3', '10.01', 'Maximizar', 'view/form/exe_max.php');
+        $menu->add('10.0.4', '10.01', 'Inicia Maximizar', 'view/form/exe_max_start.php');
     $menu->add('10.1', '10', 'Form 01 - Normal', 'view/form/exe_TForm.php');
     $menu->add('10.2', '10', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
     $menu->add('10.3', '10', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
@@ -213,8 +216,9 @@ $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-
     $menu->add('10.6', '10', 'Form 05 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
     $menu->add('10.7', '10', 'Form 06 - Texto Rico TinyMCE', 'view/form/exe_TForm5.php');
     $menu->add('10.8', '10', 'Form 07 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
-    $menu->add('10.9', '10', 'Boxes', 'view/form/exe_TBox.php');
-    $menu->add('10.10', '10', 'Recurso de Autosize', 'view/form/exe_TForm_autosize.php');
+    $menu->add('10.9', '10', 'Agenda');
+        $menu->add('10.9.1', '10.9', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
+        $menu->add('10.9.2', '10.9', 'Cadastro de Pessoas', 'view/form/pessoa.php');
     $menu->add('10.11', '10', 'Tela Login', 'view/form/exe_tela_login.php');
     $menu->add('10.12', '10', 'Cadastro on-line (CRUD)', 'view/form/exe_crud_online.php');
     $menu->add('10.13', '10', 'ERRO - Local Destino', 'view/form/exe_form_local_destino.php');
