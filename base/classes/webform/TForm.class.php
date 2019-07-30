@@ -7211,6 +7211,29 @@ class TForm Extends TBox
        
        return $field;
     }
+    
+    /**
+     * Campo para criação de hiperlink no formulário
+     *
+     * @param string $strName           - 1: id do campo
+     * @param string $strLabel          - 2: Rotulo do campo que irá aparece na tela
+     * @param string $strValue          - 3: Valor
+     * @param string $strOnClick        - 4: Nome metodo JavScript
+     * @param string $strUrl            - 5: Url destinos
+     * @param string $strTarget
+     * @param boolean $boolNewLine
+     * @param boolean $boolLabelAbove
+     * @param boolean $boolNoWrapLabel
+     * @param string $strHint
+     * @return TLink
+     */
+    public function addLinkField( $strName, $strLabel=null, $strValue=null, $strOnClick=null, $strUrl=null, $strTarget=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strHint=null )
+    {
+        $field = new TLink( $strName, $strValue, $strOnClick, $strUrl, $strTarget, $strHint );
+        $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+        $this->addDisplayControl( $displayControl );
+        return $field;
+    }
            
     /**
      * Método para criar campo de edição de horas
