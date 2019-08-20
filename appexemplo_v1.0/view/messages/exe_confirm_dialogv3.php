@@ -38,15 +38,22 @@
  */
 
 d($_REQUEST);
-$frm = new TForm('Exemplo de Caixa de Confirmação 3', 200, 500);
+$frm = new TForm('Exemplo de Caixa de Confirmação 3');
+$frm->addCssFile('css/css_form02.css');
 
-$frm->addTextField('IDFIELD', 'Informe um Valor', 40,true);
+$html ='O exemplo faz uso do addButton com a função JS';
+$frm->addHtmlField('html1', $html, null, null, null, 300)->setClass('notice2');
 
-$frm->addButton('Confirmar', null, 'btnConfirmar', 'fwConfirm("Tem certeza ?","confirmSim","confirmNao")');
-$frm->addButton('Confirmar 2', null, 'btnConfirmar2', 'fwConfirm("Tem certeza ?",confirmSim)');
-$frm->addButton('Confirmar 3', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-$frm->addButton('Confirmar 4', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-$frm->addButton('Confirmar 5 - submit', 'btn05', null, null, 'Quer submeter essa pagina e evitar JavaScript explicito? ');
+$frm->addGroupField('gpx1', 'Pegar Valor');
+    $frm->addTextField('IDFIELD1', 'Informe um Valor', 40,true);
+    $frm->addButton('Confirmar1', null, 'btnConfirmar1', 'fnBtnConfirmar1()',null,null,false);
+$frm->closeGroup();
+
+$frm->addGroupField('gpx2', 'Pegar Valor com submit form via JS');
+    $frm->addTextField('IDFIELD2', 'Informe um Valor', 40,true);
+    $frm->addButton('Confirmar2', null, 'btnConfirmar2', 'fnBtnConfirmar2()',null,null,false);
+$frm->closeGroup();
+
 $frm->addButton('Limpar', null, 'Limpar');
 
 $acao = isset($acao) ? $acao : null;
@@ -64,6 +71,16 @@ switch ($acao) {
 $frm->show();
 ?>
 <script>
+function fnBtnConfirmar1()
+{
+	id = fwGetFieldValue('IDFIELD1');
+	fwConfirm("O que deseja fazer com "+id+" ?"
+			,confirmSim
+			,confirmNao
+			,"Repetir o Cadasro"
+			,"Repetir a Consulta"
+			,"Tome uma decisão");
+}
 function confirmSim() {
     alert('sim');
 }
