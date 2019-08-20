@@ -41,7 +41,7 @@ d($_REQUEST);
 $frm = new TForm('Exemplo de Caixa de Confirmação 3');
 $frm->addCssFile('css/css_form02.css');
 
-$html ='O exemplo faz uso do addButton com a função JS';
+$html ='O exemplo faz uso do addButton com a função JS, pegando informações do Form e enviado para o JS';
 $frm->addHtmlField('html1', $html, null, null, null, 300)->setClass('notice2');
 
 $frm->addGroupField('gpx1', 'Pegar Valor');
@@ -58,8 +58,9 @@ $frm->addButton('Limpar', null, 'Limpar');
 
 $acao = isset($acao) ? $acao : null;
 switch ($acao) {
-    case 'btn05':
-        $frm->setFieldValue('field5', 'Você falou SIM !! :-) ');
+    case 'atualizar':
+        //$frm->setFieldValue('field5', 'Você falou SIM !! :-) ');
+        echo "Executou ação de atulizar";
         break;
     //--------------------------------------------------------------------------------
     case 'Limpar':
@@ -86,5 +87,21 @@ function confirmSim() {
 }
 function confirmNao() {
     alert('nao');
+}
+//-----------------------------------
+function fnBtnConfirmar2()
+{
+	id = fwGetFieldValue('IDFIELD2');
+	fwConfirm("O que deseja fazer com "+id+" ?"
+			,confirmSim2
+			,confirmNao2
+			,"Submit Pagina"
+			,"Faz Nada"
+			,"Tome uma decisão");
+}
+function confirmSim2(){
+	fwFazerAcao("atualizar");
+}
+function confirmNao2() {
 }
 </script>
