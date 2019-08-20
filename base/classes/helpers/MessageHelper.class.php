@@ -58,5 +58,12 @@ class MessageHelper
         
         error_log($log);
     }
+    
+    public static function logRecordSimple($message)
+    {
+        $log = 'formDin: '.FORMDIN_VERSION.' ,sistem: '.SYSTEM_ACRONYM.' v:'.SYSTEM_VERSION
+        .PHP_EOL.TAB.'mensagem: '.$message;
+        error_log($log);
+    }
 }
 ?>
