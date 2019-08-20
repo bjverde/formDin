@@ -38,32 +38,14 @@
  */
 
 d($_REQUEST);
-$frm = new TForm('Exemplo de Caixa de Confirmação 2');
-$frm->addCssFile('css/css_form02.css');
+$frm = new TForm('Exemplo de Caixa de Confirmação 3', 200, 500);
 
-$html ='O exemplo faz uso do addButton com a função JS fwConfirm (FormDin4.js), comparando com o uso parâmetro 5 ($strConfirmMessage) no botão "Confirmar 5 - submit"';
-$html = $html.'<br>';
-$html = $html
-.'<pre>
-/**
-* fwConfirm - Dialogo de confirmação
-*
-* @param message     1: Mensagem 
-* @param callbackYes 2: function call to Yes 
-* @param callbackNo  3: function call to No
-* @param yesLabel    4: label button to Yes
-* @param noLabel     5: label button to No
-* @param title       6: Title of dialog
-*/
-</pre>';
-$frm->addHtmlField('html1', $html, null, null, null, 300)->setClass('notice2');
+$frm->addTextField('IDFIELD', 'Informe um Valor', 40,true);
 
-$frm->addTextField('field5', 'Resultado do Confirma5', 40);
-
-$frm->addButton('Confirmar 1 - JS', null, 'btnConfirmar', 'fwConfirm("Tem certeza ?",confirmSim,confirmNao)');
-
-$frm->addButton('Confirmar 3 - JS', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-
+$frm->addButton('Confirmar', null, 'btnConfirmar', 'fwConfirm("Tem certeza ?","confirmSim","confirmNao")');
+$frm->addButton('Confirmar 2', null, 'btnConfirmar2', 'fwConfirm("Tem certeza ?",confirmSim)');
+$frm->addButton('Confirmar 3', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
+$frm->addButton('Confirmar 4', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
 $frm->addButton('Confirmar 5 - submit', 'btn05', null, null, 'Quer submeter essa pagina e evitar JavaScript explicito? ');
 $frm->addButton('Limpar', null, 'Limpar');
 
