@@ -337,9 +337,9 @@ class TNumber extends TEdit
 				}
 			}
 		}
-		if( !$result = ( (string)$this->getError()==="" ))
-		{
-			$this->setCss('border','1px solid #ff0000');
+		if( !$result = ( (string)$this->getError()==="" )) {
+		    $this->setCss('border','1px solid #ff0000'); //#176 relacionado com FormDin4.js
+		    //$this->setClass('fwFieldRequiredBoarder');
 		}
 		return $result;
 	}

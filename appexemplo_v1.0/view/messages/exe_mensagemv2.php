@@ -1,10 +1,8 @@
 <?php
+
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
- * Criado por Luís Eugênio Barbosa
- * Essa versão é um Fork https://github.com/bjverde/formDin
- *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -39,48 +37,35 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// ============= PROJECT CONSTANTS =================//
+d($_REQUEST);
 
-if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
+$frm = new TForm('Exemplo Mensagem apenas PHP', 200, 900);
+$frm->addTextField('nome', 'Nome:', 30);
+
+$frm->addButton('Msg Alert', 'msgalert', null, null, null, true, false);
+$frm->addButton('Msg POP Sucesso', 'msgpopsu', null, null, null, false, false);
+$frm->addButton('Msg POP Error', 'msgpoperror', null, null, null, false, false);
+$frm->addButton('Msg POP Attention', 'msgpopattention', null, null, null, false, false);
+
+
+$acao = isset($acao) ? $acao : null;
+switch ($acao) {
+    case 'msgalert':
+        $frm->setMessage('Mensagem Alert Normal');
+    break;
+    //--------------------------------------------------------------------------------
+    case 'msgpopsu':
+        $frm->setPopUpMessage('Mensagem Pop-up sucesso');
+    break;
+    //--------------------------------------------------------------------------------
+    case 'msgpoperror':
+        $frm->setPopUpMessage('Mensagem Pop-up Error',null,'ERROR');
+    break;
+    //--------------------------------------------------------------------------------
+    case 'msgpopattention':
+        $frm->setPopUpMessage('Mensagem Pop-up Attention',null,'ATTENTION');
+    break;
 }
-if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
-}
 
-
-
-
-// ============= FORMDIN FRAMEWORK CONSTANTS =================//
-
-if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
-}
-if (!defined('EOL')) {
-    define('EOL', "\n");
-}
-if (!defined('ESP')) {
-    $esp = chr(32).chr(32).chr(32).chr(32);
-    //define('ESP', '    ');
-    define('ESP', $esp);
-}
-if (!defined('TAB')) {
-    define('TAB', chr(9));
-}
-
-
-define('FORMDIN_VERSION', '4.7.5-alpha');
-
-// --Data Base Management System
-define('DBMS_ACCESS', 'ACCESS');
-define('DBMS_FIREBIRD', 'FIREBIRD');
-define('DBMS_MYSQL', 'MYSQL');
-define('DBMS_ORACLE', 'ORACLE');
-define('DBMS_POSTGRES', 'POSTGRES');
-define('DBMS_SQLITE', 'SQLITE');
-define('DBMS_SQLSERVER', 'SQLSERVER');
-
-// --Type Grid
-define('GRID_SIMPLE', '1');
-define('GRID_SCREEN_PAGINATION', '2');
-define('GRID_SQL_PAGINATION', '3');
-
-
+$frm->show();
 ?>

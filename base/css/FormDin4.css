@@ -56,6 +56,17 @@ body
 	background-position:center center;
 	*/
 }
+
+input:focus ,textarea:focus, select:focus {
+	//border-color: #DAE8F3;
+	border-color: rgba(82,168,236,.8);
+	border-color: rgba(82,168,236,.8);
+    outline: 0;
+    outline: thin dotted \9;
+    -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
+    box-shadow: 0 0 8px rgba(82,168,236,.6) !important;
+}
+
 .fwHelpText
 {
 	width:auto;
@@ -203,15 +214,26 @@ body
 	background-color:#efefef;
 }
 
-.fwField
-{
+.fwField {
 	font-family:Arial,Helvetica, Geneva, Sans-Serif;
 	font-size:11px;
+}
+
+.fwFieldBoarder {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c0c0c0;
 }
 
 .fwFieldRequired {
 	color:#ff0000;
 	vertical-align: middle;
+}
+
+.fwFieldRequiredBoarder {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ff0000;
 }
 
 .fwFieldRequiredOldStyle {

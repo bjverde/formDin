@@ -1,10 +1,8 @@
 <?php
+
 /*
  * Formdin Framework
  * Copyright (C) 2012 Ministério do Planejamento
- * Criado por Luís Eugênio Barbosa
- * Essa versão é um Fork https://github.com/bjverde/formDin
- *
  * ----------------------------------------------------------------------------
  * This file is part of Formdin Framework.
  *
@@ -39,48 +37,43 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-// ============= PROJECT CONSTANTS =================//
-
-if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
-}
-if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
-}
+d($_REQUEST);
 
 
+$html = 'Essa Funcionalidade não está completa, falta algumas coisas !';
 
+$frm = new TForm('7 - TreeView with Drag and Drop', 400);
+$frm->setFlat(true);
+$frm->setMaximize(true);
+$frm->setAutoSize(true);
+$frm->addCssFile('css/css_form04.css');
 
-// ============= FORMDIN FRAMEWORK CONSTANTS =================//
+$frm->addHtmlField('html1', $html, null,null)->setClass('alert');
 
-if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
-}
-if (!defined('EOL')) {
-    define('EOL', "\n");
-}
-if (!defined('ESP')) {
-    $esp = chr(32).chr(32).chr(32).chr(32);
-    //define('ESP', '    ');
-    define('ESP', $esp);
-}
-if (!defined('TAB')) {
-    define('TAB', chr(9));
-}
+$frm->addButton('Atualizar', null, 'Atualizar', null, null, true, false);
 
+$frm->addGroupField('gpTree', 'Exemplo Treeview', 200)->setcloseble(true);
 
-define('FORMDIN_VERSION', '4.7.5-alpha');
+    $tree = $frm->addTreeField('tree', null, null, null, null, null, null, null, null);
+    $tree->setStartExpanded(true);
+    $tree->enableDrag(true);
 
-// --Data Base Management System
-define('DBMS_ACCESS', 'ACCESS');
-define('DBMS_FIREBIRD', 'FIREBIRD');
-define('DBMS_MYSQL', 'MYSQL');
-define('DBMS_ORACLE', 'ORACLE');
-define('DBMS_POSTGRES', 'POSTGRES');
-define('DBMS_SQLITE', 'SQLITE');
-define('DBMS_SQLSERVER', 'SQLSERVER');
-
-// --Type Grid
-define('GRID_SIMPLE', '1');
-define('GRID_SCREEN_PAGINATION', '2');
-define('GRID_SQL_PAGINATION', '3');
-
-
+    $tree->addItem(null, 1, 'Relatório', true);
+    $tree->addItem(1, 11, 'Financeiro', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
+    $tree->addItem(1, 12, 'Recursos Humanos', null, null, array('URL'=>'www.google.com.br'));
+    $tree->addItem(null, 2, 'Arquivos', true);
+    $tree->addItem(2, 21, 'Documentos', null, 'Documentos do órgão', array('MODULO'=>'modulos/cad_documento'));
+    $tree->addItem(2, 22, 'Planilhas');
+    for ($i=23; $i<30; $i++) {
+        $tree->addItem(2, $i, 'Nivel teste '.$i);
+    }
+$frm->closeGroup();
+$frm->show();
 ?>
+<script>
+function treeDrag(id, id2)
+{
+	return confirm("Deseja mover o ítem " + tree.getItemText(id) + " para o item " + tree.getItemText(id2) + "?");
+    
+}
+</script>

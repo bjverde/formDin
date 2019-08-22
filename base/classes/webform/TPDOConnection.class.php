@@ -544,7 +544,8 @@ class TPDOConnection {
                     }
                 } else {
                     $driver = 'sqlsrv';
-                    self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                    //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+					self::$dsn = $driver.':Server='.$host.';Database='.$database;
                 }
                 break;
                 //----------------------------------------------------------

@@ -81,6 +81,12 @@
     padding: 15px 32px;
 }
 
+.notice2 {
+    font-size: 16px;
+    border: 1px dashed blue;
+    display: inline-block;
+}
+
 .text {
     margin-bottom: 20px;
     background-color: #ffffcc;

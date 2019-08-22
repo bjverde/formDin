@@ -7089,12 +7089,12 @@ function fwAppFitFormHeight(delay)
 /**
 * Dialogo de confirmação
 *
-* @param message
-* @param callbackYes
-* @param callbackNo
-* @param yesLabel
-* @param noLabel
-* @param title
+* @param message     1: Mensagem 
+* @param callbackYes 2: function call to Yes 
+* @param callbackNo  3: function call to No
+* @param yesLabel    4: label button to Yes
+* @param noLabel     5: label button to No
+* @param title       6: Title of dialog
 */
 
 function fwConfirm(message, callbackYes, callbackNo, yesLabel, noLabel, title)

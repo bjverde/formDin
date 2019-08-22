@@ -37,7 +37,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 error_reporting(E_ALL);
-$frm = new TForm('Exemplo Mensagem', 200, 900);
+$frm = new TForm('Exemplo Mensagem via JS', 200, 900);
 //$frm->setOverflowY(false);
 //$frm->setFlat(true);
 

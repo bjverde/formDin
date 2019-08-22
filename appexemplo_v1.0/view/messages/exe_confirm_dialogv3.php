@@ -38,39 +38,29 @@
  */
 
 d($_REQUEST);
-$frm = new TForm('Exemplo de Caixa de Confirmação 2');
+$frm = new TForm('Exemplo de Caixa de Confirmação 3');
 $frm->addCssFile('css/css_form02.css');
 
-$html ='O exemplo faz uso do addButton com a função JS fwConfirm (FormDin4.js), comparando com o uso parâmetro 5 ($strConfirmMessage) no botão "Confirmar 5 - submit"';
-$html = $html.'<br>';
-$html = $html
-.'<pre>
-/**
-* fwConfirm - Dialogo de confirmação
-*
-* @param message     1: Mensagem 
-* @param callbackYes 2: function call to Yes 
-* @param callbackNo  3: function call to No
-* @param yesLabel    4: label button to Yes
-* @param noLabel     5: label button to No
-* @param title       6: Title of dialog
-*/
-</pre>';
+$html ='O exemplo faz uso do addButton com a função JS, pegando informações do Form e enviado para o JS';
 $frm->addHtmlField('html1', $html, null, null, null, 300)->setClass('notice2');
 
-$frm->addTextField('field5', 'Resultado do Confirma5', 40);
+$frm->addGroupField('gpx1', 'Pegar Valor');
+    $frm->addTextField('IDFIELD1', 'Informe um Valor', 40,true);
+    $frm->addButton('Confirmar1', null, 'btnConfirmar1', 'fnBtnConfirmar1()',null,null,false);
+$frm->closeGroup();
 
-$frm->addButton('Confirmar 1 - JS', null, 'btnConfirmar', 'fwConfirm("Tem certeza ?",confirmSim,confirmNao)');
+$frm->addGroupField('gpx2', 'Pegar Valor com submit form via JS');
+    $frm->addTextField('IDFIELD2', 'Informe um Valor', 40,true);
+    $frm->addButton('Confirmar2', null, 'btnConfirmar2', 'fnBtnConfirmar2()',null,null,false);
+$frm->closeGroup();
 
-$frm->addButton('Confirmar 3 - JS', null, 'btnConfirmar3', 'fwConfirm("O que deseja fazer?",confirmSim,confirmNao,"Repetir o Cadasro","Repetir a Consulta","Tome uma decisão")');
-
-$frm->addButton('Confirmar 5 - submit', 'btn05', null, null, 'Quer submeter essa pagina e evitar JavaScript explicito? ');
 $frm->addButton('Limpar', null, 'Limpar');
 
 $acao = isset($acao) ? $acao : null;
 switch ($acao) {
-    case 'btn05':
-        $frm->setFieldValue('field5', 'Você falou SIM !! :-) ');
+    case 'atualizar':
+        //$frm->setFieldValue('field5', 'Você falou SIM !! :-) ');
+        echo "Executou ação de atulizar";
         break;
     //--------------------------------------------------------------------------------
     case 'Limpar':
@@ -82,10 +72,36 @@ switch ($acao) {
 $frm->show();
 ?>
 <script>
+function fnBtnConfirmar1()
+{
+	id = fwGetFieldValue('IDFIELD1');
+	fwConfirm("O que deseja fazer com "+id+" ?"
+			,confirmSim
+			,confirmNao
+			,"Repetir o Cadasro"
+			,"Repetir a Consulta"
+			,"Tome uma decisão");
+}
 function confirmSim() {
     alert('sim');
 }
 function confirmNao() {
     alert('nao');
+}
+//-----------------------------------
+function fnBtnConfirmar2()
+{
+	id = fwGetFieldValue('IDFIELD2');
+	fwConfirm("O que deseja fazer com "+id+" ?"
+			,confirmSim2
+			,confirmNao2
+			,"Submit Pagina"
+			,"Faz Nada"
+			,"Tome uma decisão");
+}
+function confirmSim2(){
+	fwFazerAcao("atualizar");
+}
+function confirmNao2() {
 }
 </script>

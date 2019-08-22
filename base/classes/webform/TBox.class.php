@@ -108,7 +108,8 @@
 			$this->divBody->setCss('background-color',$this->getCss('background-color'));
 		}
 		if($this->getCss('border')=='none') {
-			$this->setCss('border','1px solid #c0c0c0');
+		    $this->setCss('border','1px solid #c0c0c0');
+			//$this->setClass('fwFieldBoarder');
 		}
 		if( $this->getPosition() ) {
 			$this->divBody->add('<script>window.setTimeout(\'fwSet_position("'.$this->getId().'","'.$this->getPosition().'")\',100);</script>');
@@ -135,7 +136,6 @@
 		$this->divBody->SetCss('border','none');
 		$this->divBody->SetCss('top','5px');
 		$this->divBody->SetCss('left','5px');
-		//$this->divBody->setCss('background-color', $this->getCss('background-color'));
 
 		$this->divContent->add($this->divBody);
 
@@ -144,7 +144,6 @@
 		$divlb->clearCss();
 		$divlb->setCss('background-color','transparent');
 		$divlb->setClass('lb');
-		//$divlb->setCss('background-color','transparent');
 
 		$divrb = new TElement('div');
 		$divrb->clearCss();

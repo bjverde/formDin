@@ -51,7 +51,9 @@ class THtml extends TControl
 	private $loadingMessage;
 	public function __construct($strName,$strValue=null,$strIncludeFile=null,$strHeight=null,$strWidth=null,$strGridId=null,$strGridFile=null,$strLoadingMessage=null)
 	{
-		//parent::__construct('fieldset',$strName);
+	    if( empty($strName) ){
+	        throw new DomainException(TMessage::ERROR_FIELD_ID_CANNOT_EMPTY.' '.__CLASS__);
+	    }
 		parent::__construct('div',$strName,$strValue);
 		parent::setFieldType('html');
 		$this->setClass('fwHtml');

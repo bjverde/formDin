@@ -156,8 +156,6 @@ class TCoordGMS extends TGroup
 		$this->lonHem = $this->addSelectField($this->getId() . '_lon_hem', 'Hem:', $boolRequired, "W=Oeste,E=Leste", false, null, null, null, null, null, "");
 
 		//$this->lonHem->setEnabled(false);
-		//$this->lonHem->setCss('text-align', 'center');
-		//$this->lonHem->setCss('width', '20px');
 		// botão para abrir o mapa
 		$this->buttonGMap = $this->addButton('G', null, 'btnGoogle_' . $this->getId(), null, null, false, false, 'fwgoogle-maps-icon_19x19px.gif', 'fwgoogle-maps-icon_19x19px.gif', 'Mapa - Visualizar / selecionar a coordenada');
 		$this->fieldZoom = $this->addHiddenField($this->getId().'_map_zoom');
@@ -497,15 +495,15 @@ class TCoordGMS extends TGroup
 	 */
 	public function validate($strPage=null, $strFields=null, $strIgnoreFields=null)
 	{
-		$this->setCss('border', '1px solid #c0c0c0');
-		$this->latGrau->setCss('border', '1px solid #c0c0c0');
-		$this->latMin->setCss('border', '1px solid #c0c0c0');
-		$this->latSeg->setCss('border', '1px solid #c0c0c0');
-		$this->latHem->setCss('border', '1px solid #c0c0c0');
-		$this->lonGrau->setCss('border', '1px solid #c0c0c0');
-		$this->lonMin->setCss('border', '1px solid #c0c0c0');
-		$this->lonSeg->setCss('border', '1px solid #c0c0c0');
-		$this->lonHem->setCss('border', '1px solid #c0c0c0');
+		$this->setClass('fwFieldBoarder');
+		$this->latGrau->setClass('fwFieldBoarder');
+		$this->latMin->setClass('fwFieldBoarder');
+		$this->latSeg->setClass('fwFieldBoarder');
+		$this->latHem->setClass('fwFieldBoarder');
+		$this->lonGrau->setClass('fwFieldBoarder');
+		$this->lonMin->setClass('fwFieldBoarder');
+		$this->lonSeg->setClass('fwFieldBoarder');
+		$this->lonHem->setClass('fwFieldBoarder');
 		if ($this->getRequired() == true)
 		{
 			if (is_null($this->latGrau->getValue()) ||
@@ -516,40 +514,40 @@ class TCoordGMS extends TGroup
 				is_null($this->lonSeg->getValue()))
 			{
 				$this->addError("Campo obrigatório");
-				$this->setCss('border', '1px solid #ff0000');
+				$this->setClass('fwFieldRequiredBoarder');
 				return ( (string) $this->getError() === "" );
 			}
 		}
 		if (!is_null($this->latGrau->getValue()) && $this->latGrau->getValue() > 35)
 		{
 			$this->addError("Grau Latitude inválido");
-			$this->latGrau->setCss('border', '1px solid #ff0000');
+			$this->latGrau->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->latMin->getValue()) && $this->latMin->getValue() > 59)
 		{
 			$this->addError("Minuto Latitude inválido");
-			$this->latMin->setCss('border', '1px solid #ff0000');
+			$this->latMin->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->latSeg->getValue()) && $this->latSeg->getValue() > 59)
 		{
 			$this->addError("Segundo Latitude inválido");
-			$this->latSeg->setCss('border', '1px solid #ff0000');
+			$this->latSeg->setClass('fwFieldRequiredBoarder');
 		}
 		// longitude
 		if (!is_null($this->lonGrau->getValue()) && $this->lonGrau->getValue() != '' && $this->lonGrau->getValue() < 30 || $this->lonGrau->getValue() > 70)
 		{
 			$this->addError("Grau Longitude inválido");
-			$this->lonGrau->setCss('border', '1px solid #ff0000');
+			$this->lonGrau->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->lonMin->getValue()) && $this->lonMin->getValue() > 59)
 		{
 			$this->addError("Minuto Longitude inválido");
-			$this->lonMin->setCss('border', '1px solid #ff0000');
+			$this->lonMin->setClass('fwFieldRequiredBoarder');
 		}
 		if (!is_null($this->lonSeg->getValue()) && $this->lonSeg->getValue() > 59)
 		{
 			$this->addError("Segundo Longitude inválido");
-			$this->lonSeg->setCss('border', '1px solid #ff0000');
+			$this->lonSeg->setClass('fwFieldRequiredBoarder');
 		}
 		return ( (string) $this->getError() === "" );
 	}

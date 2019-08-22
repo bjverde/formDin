@@ -71,20 +71,12 @@ class TButton extends TControl
 		$strName = is_null( $strName ) ? $this->removeIllegalChars( $strValue ) : $strName;
 		parent::__construct('button',$strName,$strValue);
 		$this->setHint($strHint);
-		//print $strHint.',';
 		$this->setFieldType('button');
 		$this->setProperty('type','button');
 		$this->setAction($strAction);
 		$this->setOnClick($strOnClick);
 		$this->setConfirmMessage($strConfirmMessage);
 		$this->setSubmitAction($boolSubmitAction);
-		// definir o estilo do botão
-		/*$this->setCss('border','1px outset silver');
-		$this->setCss('background-color','#E1E1E1');
-		$this->setCss('background','#ddd url('.$this->getBase().'imagens/fwbuttonbg.gif) left center repeat-x');
-		$this->setCss('color','blue');
-		$this->setCss('cursor','pointer');
-		*/
 		$this->setImage($strImageEnabled);
 		$this->setImageDisabled($strImageDisabled);
 		$this->setClass('fwButton');

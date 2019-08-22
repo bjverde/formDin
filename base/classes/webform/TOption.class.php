@@ -95,7 +95,8 @@ abstract class TOption extends TControl
 		$this->setPaddingItems( $intPaddingItems );
 		$this->setFieldType( ($strInputType == null) ? 'select' : $strInputType );
 		$this->setMultiSelect( $boolMultiSelect );
-		$this->setCss( 'border',  '1px solid #c0c0c0' );
+		$this->setCss( 'border',  '1px solid #c0c0c0' ); //#176 relacionado com FormDin4.js
+		//$this->setClass('fwFieldBoarder');
 		$this->setCss( 'display', 'inline' );
 		$this->setWidth( $intWidth );
 		$this->setHeight( $intHeight );
@@ -365,7 +366,6 @@ abstract class TOption extends TControl
 				$this->setHeight( null );
 			}
 			$this->setProperty( 'size', $this->getSelectSize() );
-			//$this->setCss('border','1px solid #c0c0c0');
 			$this->setCss( 'background-color', '#ffffff' );
 			// colocar hint se não tiver
 			if( $this->getMultiSelect() && $this->title == '' )

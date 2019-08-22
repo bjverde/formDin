@@ -116,19 +116,23 @@ $menu->add('2', null, 'Containers');
         $menu->add('234', '23', 'Aba4', 'view/containers/exe_aba_4.php');
         $menu->add('235', '23', 'Aba5', 'view/containers/exe_aba05_pagacontrol.php');
     $menu->add('24', '2', 'TreeView', null, null, '../../base/imagens/folder-39-128.png');
-        $menu->add('241', '24', 'Dentro do Formulário', 'tree/exe_tree_view_1.php');
+        $menu->add('241', '24', 'Dentro do Formulário', 'tree/exe_tree_view_1.php', null, '../../base/imagens/folder-bw.png');
         $menu->add('242', '24', 'Fora do Formulário', 'tree/exe_tree_view_2.php', null, '../../base/imagens/folder-bw.png');
-        $menu->add('243', '24', 'User Data - Array', 'tree/exe_tree_view_3.php');
+        $menu->add('243', '24', 'User Data - Array', 'tree/exe_tree_view_3.php', null, '../../base/imagens/folder-bw.png');
         $menu->add('244', '24', 'Uf x Municípios', 'tree/exe_tree_view_4.php');
         $menu->add('245', '24', 'Uf x Municípios com SetXmlFile()', 'tree/exe_tree_view_5.php');
+        $menu->add('246', '24', 'TreeView with CheckBox (ERRO)', 'tree/exe_tree_view_6_check.php');
+        $menu->add('247', '24', 'TreeView with Drag and Drop (ERRO)', 'tree/exe_tree_view_7_drag.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('4', null, 'Mensagens e Ajuda', null, null, '../../base/imagens/feedback-512.png');
     $menu->add('40', '4', 'Hints / Tooltips', 'exe_hint.php');
     $menu->add('41', '4', 'Mensagens');
-        $menu->add('411', '41', 'Exemplo 1', 'view/messages/exe_mensagem.php');
-        $menu->add('412', '41', 'Caixa de Confirmação', 'view/messages/exe_confirmDialog.php');
-        $menu->add('413', '41', 'Caixa de Confirmação 2', 'view/messages/exe_confirm_dialog.php');
+        $menu->add('411', '41', 'Mensagens JS', 'view/messages/exe_mensagem.php');
+        $menu->add('412', '41', 'Mensagens PHP', 'view/messages/exe_mensagemv2.php');
+        $menu->add('413', '41', 'Caixa de Confirmação', 'view/messages/exe_confirmDialog.php');
+        $menu->add('414', '41', 'Caixa de Confirmação 2', 'view/messages/exe_confirm_dialog.php');
+        $menu->add('415', '41', 'Caixa de Confirmação 3', 'view/messages/exe_confirm_dialogv3.php');
     $menu->add('42', '4', 'Ajuda');
         $menu->add('421', '42', 'Ajuda com arquivo HTML', 'exe_campo_ajuda.php', 'Com um arquivo HTML separado', '../../base/imagens/icon_help.png');
         $menu->add('422', '42', 'Ajuda On-line (sqlite)', 'exe_documentacao_online.php', 'Confe??o do texto de ajuda gravando no banco de dados sqlite');
@@ -199,9 +203,12 @@ $menu->add('9', null, 'Banco e PDO', null, 'Exemplo de Recursos para conectar no
 
 //-----------------------------------------------------------------------------
 $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-512.png');
-    $menu->add('1010', '10', 'Agenda');
-        $menu->add('1010.1', '1010', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
-        $menu->add('1010.2', '1010', 'Cadastro de Pessoas', 'view/form/pessoa.php');
+
+    $menu->add('10.01', '10', 'Recursos do Formulário');
+        $menu->add('10.0.1', '10.01', 'Recurso de Autosize', 'view/form/exe_TForm_autosize.php');
+        $menu->add('10.0.2', '10.01', 'Boxes', 'view/form/exe_TBox.php');
+        $menu->add('10.0.3', '10.01', 'Maximizar', 'view/form/exe_max.php');
+        $menu->add('10.0.4', '10.01', 'Inicia Maximizar', 'view/form/exe_max_start.php');
     $menu->add('10.1', '10', 'Form 01 - Normal', 'view/form/exe_TForm.php');
     $menu->add('10.2', '10', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
     $menu->add('10.3', '10', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
@@ -210,8 +217,9 @@ $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-
     $menu->add('10.6', '10', 'Form 05 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
     $menu->add('10.7', '10', 'Form 06 - Texto Rico TinyMCE', 'view/form/exe_TForm5.php');
     $menu->add('10.8', '10', 'Form 07 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
-    $menu->add('10.9', '10', 'Boxes', 'view/form/exe_TBox.php');
-    $menu->add('10.10', '10', 'Recurso de Autosize', 'view/form/exe_TForm_autosize.php');
+    $menu->add('10.9', '10', 'Agenda');
+        $menu->add('10.9.1', '10.9', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
+        $menu->add('10.9.2', '10.9', 'Cadastro de Pessoas', 'view/form/pessoa.php');
     $menu->add('10.11', '10', 'Tela Login', 'view/form/exe_tela_login.php');
     $menu->add('10.12', '10', 'Cadastro on-line (CRUD)', 'view/form/exe_crud_online.php');
     $menu->add('10.13', '10', 'ERRO - Local Destino', 'view/form/exe_form_local_destino.php');

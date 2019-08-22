@@ -110,16 +110,16 @@ class TTreeView extends TControl
 	*	};
 	* </code>
 	*
-	* @param mixed $strName
-	* @param string $strRootLabel
-	* @param mixed $mixData
-	* @param mixed $strParentFieldName
-	* @param mixed $strChildFieldName
-	* @param mixed $strDescFieldName
+	* @param mixed $strName               - 1: id do campo
+	* @param string $strRootLabel         - 2: Lavel do campo
+	* @param mixed $mixData               - 3: array de dados
+	* @param mixed $strParentFieldName    - 4: id do campo chave do pai
+	* @param mixed $strChildFieldName     - 5: id do campo chave dos filhos
+	* @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
 	* @param mixed $strInitialParentKey
 	* @param mixed $mixUserDataFieldNames - campos separados por virgula ou array normal ex: array('nome','telefone');
-	* @param mixed $strHeight
-	* @param mixed $strWidth
+	* @param mixed $strHeight             - 9: altura
+	* @param mixed $strWidth              -10: largura
 	* @param mixed $jsOnClick
 	* @param mixed $jsOnDblClick
 	* @param mixed $jsOnCheck
@@ -130,7 +130,16 @@ class TTreeView extends TControl
 	* @param mixed $mixFormSearchFields
 	* @return TTreeView
 	*/
-	public function __construct( $strName=null, $strRootLabel = null, $mixData = null, $strParentFieldName = null, $strChildFieldName = null, $strDescFieldName = null, $strInitialParentKey = null, $mixUserDataFieldNames = null, $strHeight = null, $strWidth = null, $jsOnClick = null, $jsOnDblClick = null, $jsOnCheck = null, $jsOnDrag = null, $boolEnableCheckBoxes = null, $boolEnableRadioButtons = null, $boolEnableTreeLines = null, $mixFormSearchFields = null, $boolShowToolBar = null )
+	public function __construct( $strName=null, $strRootLabel = null, $mixData = null
+	                           , $strParentFieldName = null, $strChildFieldName = null
+	                           , $strDescFieldName = null, $strInitialParentKey = null
+	                           , $mixUserDataFieldNames = null, $strHeight = null, $strWidth = null
+	                           , $jsOnClick = null, $jsOnDblClick = null, $jsOnCheck = null, $jsOnDrag = null
+	                           , $boolEnableCheckBoxes = null
+	                           , $boolEnableRadioButtons = null
+	                           , $boolEnableTreeLines = null
+	                           , $mixFormSearchFields = null
+	                           , $boolShowToolBar = null )
 	{
 		$strName = is_null($strName) ? 'tree_'.$this->getRandomChars(3):$strName;
 		parent::__construct( 'div', $strName );
@@ -510,12 +519,12 @@ class TTreeView extends TControl
 	/**
 	* Adicionar ítem na árvore
 	*
-	* @param bool $idParent
-	* @param mixed $id
-	* @param mixed $text
-	* @param mixed $open
-	* @param mixed $hint
-	* @param mixed $arrUserData
+	* @param bool $idParent        1: id do registro pai
+	* @param mixed $id             2: id do registro
+	* @param mixed $text           3: Texto do Registro
+	* @param mixed $open           4: Nó aberto ou fechado
+	* @param mixed $hint           5: 
+	* @param mixed $arrUserData    6: campos que serão passados quando clicamos no nó da arvore, usado no TreeClik
 	* @param mixed $boolSelect
 	* @param mixed $boolChecked
 	*/

@@ -93,11 +93,13 @@ class TLayout extends THtmlPage {
     private $url;
 
     /**
-     * put your comment there...
+     * Constroi o Layout Basico do Sistema. Criando 5 grandes areas, a mais importe é a area central
+     * em volta tem 4 areas North (acima da central), South (abaixo da central), East (esquerda da central)
+     * West (direito da central). 
      *
-     * @param mixed $strId
-     * @param mixed $intNorthSize
-     * @param mixed $intSouthSize
+     * @param mixed $strId               1: Id do Layout
+     * @param mixed $intNorthSize        2: Tamanho da Area Norte
+     * @param mixed $intSouthSize        3: Tamanho da Area Sul
      * @param mixed $intEastSize
      * @param mixed $intWestSize
      * @param mixed $boolShowBorders
