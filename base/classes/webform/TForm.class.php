@@ -5163,12 +5163,12 @@ class TForm Extends TBox
     * @param boolean $boolNewLine       - 6 :Em nova linha. DEFAULT = true
     * @param boolean $boolFooter        - 7 :Mostrar o botão no rodapé do form. DEFAULT = true
     * @param string  $strImage          - 8 :Imagem no botão. Evite usar no lugar procure usar a propriedade setClass
-    * @param string  $strImageDisabled  - 9 :
-    * @param string  $strHint           -10 :Texto para explicar
-    * @param string  $strVerticalAlign
-    * @param boolean $boolLabelAbove
-    * @param string  $strLabel
-    * @param string  $strHorizontalAlign
+    * @param string  $strImageDisabled   - 9 :
+    * @param string  $strHint            -10 : Texto hint para explicar
+    * @param string  $strVerticalAlign   -11 :
+    * @param boolean $boolLabelAbove     -12 : Position text label 
+    * @param string  $strLabel           -13 : Text label 
+    * @param string  $strHorizontalAlign -14 : Text align DEFAULT = center, left, right
     * @return TButton|string|array
     ***/
     public function addButton( $mixValue=null
@@ -6491,15 +6491,23 @@ class TForm Extends TBox
     * criado o espaço
     * @param string $strName        - 1: Nome do campo            
     * @param string $strValue       - 2: Texto HTML que irá aparece dentro
-    * @param string $strIncludeFile - 3:
-    * @param string $strLabel       - 4:
+    * @param string $strIncludeFile - 3: Arquivo que será incluido
+    * @param string $strLabel       - 4: label do campo
     * @param string $strWidth       - 5:
     * @param string $strHeight      - 6: 
     * @param boolean $boolNewLine   - 7: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove  8:
     * @return THtml Field
     */
-   public function addHtmlField( $strName, $strValue=null, $strIncludeFile=null, $strLabel=null, $strHeight=null, $strWidth=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+   public function addHtmlField( $strName
+                               , $strValue=null
+                               , $strIncludeFile=null
+                               , $strLabel=null
+                               , $strHeight=null
+                               , $strWidth=null
+                               , $boolNewLine=null
+                               , $boolLabelAbove=null
+                               , $boolNoWrapLabel=null )
    {
        //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
        $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
