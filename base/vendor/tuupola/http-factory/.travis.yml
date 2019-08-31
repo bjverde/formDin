@@ -12,7 +12,8 @@ env:
     - PSR7_LIBRARY="zendframework/zend-diactoros:^1.0"
     - PSR7_LIBRARY="zendframework/zend-diactoros:^2.0"
     - PSR7_LIBRARY="nyholm/psr7"
-    - PSR7_LIBRARY="slim/slim"
+    - PSR7_LIBRARY="slim/psr7"
+    - PSR7_LIBRARY="slim/slim:^3.0"
     - PSR7_LIBRARY="guzzlehttp/psr7"
 
 matrix:

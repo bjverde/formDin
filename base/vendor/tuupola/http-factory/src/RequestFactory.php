@@ -38,6 +38,7 @@ use Nyholm\Psr7\Request as NyholmRequest;
 use Slim\Http\Request as SlimRequest;
 use Slim\Http\Uri as SlimUri;
 use Slim\Http\Headers as SlimHeaders;
+use Slim\Psr7\Factory\RequestFactory as SlimPsr7RequestFactory;
 use Zend\Diactoros\Request as DiactorosRequest;
 
 use Psr\Http\Message\RequestInterface;
@@ -56,6 +57,10 @@ final class RequestFactory implements RequestFactoryInterface
 
         if (class_exists(NyholmRequest::class)) {
             return new NyholmRequest($method, $uri);
+        }
+
+        if (class_exists(SlimPsr7RequestFactory::class)) {
+            return (new SlimPsr7RequestFactory)->createRequest($method, $uri);
         }
 
         if (class_exists(SlimRequest::class)) {
