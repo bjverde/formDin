@@ -12,10 +12,10 @@
 
 $menu = new TMenuDhtmlx();
 $menu->add(1, null, 'Menu', null, null, 'menu-alt-512.png');
-$menu->add(11,1,'marca','modulos/marca.php');
-$menu->add(12,1,'pedido','modulos/pedido.php');
-$menu->add(13,1,'pedido_item','modulos/pedido_item.php');
-$menu->add(14,1,'produto','modulos/produto.php');
+$menu->add(1.1,1,'marca','modulos/marca.php');
+$menu->add(1.2,1,'pedido','modulos/pedido.php');
+$menu->add(1.3,1,'pedido_item','modulos/pedido_item.php');
+$menu->add(1.4,1,'produto','modulos/produto.php');
 
 $menu->add(2, null, 'Pessoas', null, null);
 $menu->add(21,2,'pessoa','modulos/pessoa.php');
@@ -47,6 +47,11 @@ $menu->add(101,10,'Ambiente Resumido','modulos/sys_environment_summary.php',null
 $menu->add(102,10,'PHPInfo','modulos/sys_environment.php',null,'php_logo.png');
 $menu->add(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 $menu->add(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png');
+
+
+$menu->add(11, null, 'Banco Transação', null, null, 'data_base.png');
+$menu->add(11.1, 11, 'Commit', 'modulos/database_commit.php', null, '../../'.DIR_ROOT.'/images/database_commit.png');
+$menu->add(11.2, 11, 'Rollback', 'modulos/database_rollback.php', null, '../../'.DIR_ROOT.'/images/database_rollback.png');
 
 $menu->getXml();
 ?>
