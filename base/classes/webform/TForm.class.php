@@ -231,9 +231,9 @@ class TForm Extends TBox
                 $this->addJsFile( 'jquery/jquery.corner.js' );
             }
             //Font Awesome Icons
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-brands.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-regular.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-solid.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/brands.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/regular.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/solid.min.css' );
             $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
             
             $this->addJsFile( 'jquery/jlayout/jquery.jlayout-1.3.js');
