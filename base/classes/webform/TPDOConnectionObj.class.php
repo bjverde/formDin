@@ -229,7 +229,9 @@ class TPDOConnectionObj
     {
         //$this->tpdo::beginTransaction();
         $tpdo = $this->tpdo;
-        $tpdo::beginTransaction();
+        //$tpdo::beginTransaction();
+        $instance = $tpdo::getInstance();
+        $instance->beginTransaction();
         $this->setTPDOConnection($tpdo);          
     }
     //--------------------------------------------------------------------------------------
@@ -237,7 +239,9 @@ class TPDOConnectionObj
     {
         //$this->tpdo::commit();
         $tpdo = $this->tpdo;
-        $tpdo::commit();
+        //$tpdo::commit();
+        $instance = $tpdo::getInstance();
+        $instance->commit();
         $this->setTPDOConnection($tpdo);          
     }
     //--------------------------------------------------------------------------------------
@@ -245,7 +249,9 @@ class TPDOConnectionObj
     {
         //$this->tpdo::rollBack();
         $tpdo = $this->tpdo;
-        $tpdo::rollBack();
+        //$tpdo::rollBack();
+        $instance = $tpdo::getInstance();
+        $instance->rollBack();
         $this->setTPDOConnection($tpdo);         
     }
     //--------------------------------------------------------------------------------------
