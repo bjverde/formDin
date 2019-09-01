@@ -10,8 +10,8 @@
  * System appev2 created in: 2019-09-01 16:03:02
  */
 
-if ( !function_exists( 'appev2_api_autoload') ) {
-    function appev2_api_autoload( $class_name )
+if ( !function_exists( 'appev2_autoload') ) {
+    function appev2_autoload( $class_name )
     {
         $path = __DIR__.DS.$class_name.'.class.php';
         if (file_exists($path)){
@@ -20,5 +20,5 @@ if ( !function_exists( 'appev2_api_autoload') ) {
             return false;
         }
     }
-spl_autoload_register('appev2_api_autoload');
+spl_autoload_register('appev2_autoload');
 }
