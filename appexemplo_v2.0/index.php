@@ -63,6 +63,7 @@ $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
 
-$app->setCssFile('css/css_form_default.css');
+$app->setCssDefaultFormFile('css/css_form_default.css');
+
 $app->run();
 ?>

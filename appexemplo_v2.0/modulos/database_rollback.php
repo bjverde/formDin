@@ -12,4 +12,32 @@ $frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert'
 
 $frm->addButton('Executar', null, 'Executar', null, null, true, false)->setClass('btnOragen', false);
 
+
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+    case 'Executar':
+        try{
+            if ( $frm->validate() ) {
+                $vo = new PedidoVO();
+                $frm->setVo( $vo );
+                $resultado = Pedido::save( $vo );
+                if($resultado==1) {
+                    $frm->setMessage('Registro gravado com sucesso!!!');
+                    $frm->clearFields();
+                }else{
+                    $frm->setMessage($resultado);
+                }
+            }
+        }
+        catch (DomainException $e) {
+            $frm->setMessage( $e->getMessage() );
+        }
+        catch (Exception $e) {
+            MessageHelper::logRecord($e);
+            $frm->setMessage( $e->getMessage() );
+        }
+    break;
+    //--------------------------------------------------------------------------------
+}
+
 $frm->show();
