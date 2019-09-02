@@ -52,9 +52,25 @@ class Autoridade
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function validar( AutoridadeVO $objVo) {
+        //Invertendo a string de data pois vem da tela dd-mm-yyyy
+        // e o mysql só entende yyyy-mm-dd
+        $dat_evento = implode("-", array_reverse(explode("/", $objVo->getDat_evento())));
+        
+        $ordem = $objVo->getOrdem();
+        $where = 'ordem ='.$ordem.' and dat_evento = \''.$dat_evento.'\'';
+        $resultado = $this->dao->selectAll(null, $where);
+        
+        if (is_array($resultado) && count($resultado)>0) {
+            $msg = "No evento do mesmo dia só pode ter uma autoridade da mesma ordem";
+            throw new DomainException($msg);
+        }
+    }
+    //--------------------------------------------------------------------------------
     public function save( AutoridadeVO $objVo )
     {
         $result = null;
+        $this->validar($objVo);
         if( $objVo->getIdautoridade() ) {
             $result = $this->dao->update( $objVo );
         } else {

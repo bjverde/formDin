@@ -34,6 +34,13 @@ class Acesso_perfil_user
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function selectByIdUser( $idUser )
+    {
+        $where  = array ('IDUSER'=>$idUser);
+        $result = $this->dao->selectAll( null, $where );
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
     public function selectCount( $where=null )
     {
         $result = $this->dao->selectCount( $where );
