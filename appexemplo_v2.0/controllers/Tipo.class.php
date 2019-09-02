@@ -52,6 +52,16 @@ class Tipo
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function selectAllAtivoByMeta( $idMetaTipo )
+	{
+		if( empty($idMetaTipo) ){
+			throw new InvalidArgumentException('Meta tipo não informado');
+		}
+		$where =  array ('SIT_ATIVO'=>'S','IDMETA_TIPO'=>$idMetaTipo);
+		$result = $this->dao->selectAll( 'descricao', $where );
+		return $result;
+    }
+    //--------------------------------------------------------------------------------
     public function save( TipoVO $objVo )
     {
         $result = null;
