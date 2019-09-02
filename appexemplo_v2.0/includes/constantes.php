@@ -4,18 +4,18 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 0.9.0
- * FormDin Version: 4.2.6-alpha
+ * SysGen  Version: 1.9.0-alpha
+ * FormDin Version: 4.7.5-alpha
  * 
- * System ap2v created in: 2018-11-21 23:29:28
+ * System appev2 created in: 2019-09-01 16:03:02
  */
 
 define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
-define('SYSTEM_ACRONYM' , 'APPEV2.0');
-define('SYSTEM_VERSION' , '2.0.1');
+define('SYSTEM_ACRONYM' , 'appev2.0');
+define('SYSTEM_VERSION' , '2.0.2');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 
-define('FORMDIN_VERSION_MIN_VERSION', '4.5.1-alpha');
+define('FORMDIN_VERSION_MIN_VERSION', '4.7.5-alpha');
 
 if (! defined ( 'DS' )) {
     define('DS'   , DIRECTORY_SEPARATOR);
