@@ -108,7 +108,7 @@ switch( $acao ) {
     break;
 }
 
-$dados = Acesso_menu::selectAll($primaryKey);
+$dados = $controllerAcesso_menu->selectAll($primaryKey);
 
 $frm->addGroupField('gpTree','Menus em Treeview')->setcloseble(true);
 $userData = array('IDMENU_PAI','NOM_MENU','URL','TOOLTIP','IMG_MENU','IMGDISABLED','DISSABLED','HOTKEY','BOOLSEPARATOR','JSONPARAMS','SIT_ATIVO','DAT_INCLUSAO','DAT_UPDATE');
