@@ -6,7 +6,7 @@ require_once 'includes/config_conexao.php';
 $login = (ArrayHelper::has('USER', $_SESSION[APLICATIVO]) ? $_SESSION[APLICATIVO]['USER']['LOGIN']:null);
 $grupo = null;
 if (ArrayHelper::has('USER', $_SESSION[APLICATIVO])) {
-    $grupo = (ArrayHelper::has('NOM_PERFIL', $_SESSION[APLICATIVO]['USER']) ? $_SESSION[APLICATIVO]['USER']['NOM_PERFIL']:null);
+    $grupo = (ArrayHelper::has('GRUPO_NOME', $_SESSION[APLICATIVO]['USER']) ? $_SESSION[APLICATIVO]['USER']['GRUPO_NOME']:null);
 }
 
 $frm = new TForm('Sobre', 400, 500);
