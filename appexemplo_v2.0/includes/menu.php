@@ -49,9 +49,10 @@ $menu->add(104,10,'Gerador VO/DAO','../base/includes/gerador_vo_dao.php');
 $menu->add(105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png');
 
 
-$menu->add(11, null, 'Banco Transação', null, null, 'data_base.png');
+$menu->add(11, null, 'Banco', null, null, 'data_base.png');
 $menu->add(11.1, 11, 'Commit', 'modulos/database_commit.php', null, '../../'.DIR_ROOT.'/images/database_commit.png');
 $menu->add(11.2, 11, 'Rollback', 'modulos/database_rollback.php', null, '../../'.DIR_ROOT.'/images/database_rollback.png');
+$menu->add(11.3, 11, 'Multiplos Bancos', 'modulos/database_multiplos.php', null, '../../'.DIR_ROOT.'/images/database_balance.png');
 
 $menu->getXml();
 ?>
