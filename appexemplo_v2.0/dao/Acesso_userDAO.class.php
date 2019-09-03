@@ -24,8 +24,10 @@ class Acesso_userDAO
 
     private $tpdo = null;
 
-    public function __construct() {
-        $tpdo = New TPDOConnectionObj();
+    public function __construct(TPDOConnectionObj $tpdo) {
+        if( empty($tpdo) ){
+            $tpdo = New TPDOConnectionObj();
+        }
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()
@@ -34,6 +36,10 @@ class Acesso_userDAO
     }
     public function setTPDOConnection($TPDOConnection)
     {
+        $typeObjWrong = !($TPDOConnection instanceof TPDOConnectionObj);
+        if( empty($TPDOConnection) || $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
         $this->tpdo = $TPDOConnection;
     }
     private function processWhereGridParameters( $whereGrid )
