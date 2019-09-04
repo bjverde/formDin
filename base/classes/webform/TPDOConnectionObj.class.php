@@ -60,7 +60,7 @@ class TPDOConnectionObj
     {
         $tpdo = New TPDOConnection();
         //$configArray = $this->getFakeConnectionArray();
-        //$tpdo::connect(null,true,null,$configArray);
+        $tpdo::connect(null,true,null,null);
         $this->setTPDOConnection($tpdo);
     }    
     private function getFakeConnectionArray(){
