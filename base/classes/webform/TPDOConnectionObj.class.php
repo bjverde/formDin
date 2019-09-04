@@ -84,6 +84,39 @@ class TPDOConnectionObj
         $this->tpdo = $TPDOConnection;
     }
     //--------------------------------------------------------------------------------------
+    public function makeConfigArray(){
+        $configArray = null;
+        $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
+        $hasDBas = FormDinHelper::issetOrNotZero($this->getDataBaseName());
+        if($hasDBMS && $hasDBas){
+            $configArray= array(
+                'DBMS' => $this->getDBMS()
+                ,'PORT' => $this->getPort()
+                ,'HOST' => $this->getHost()
+                ,'DATABASE' => $this->getDataBaseName()
+                ,'USERNAME' => $this->getUsername()
+                ,'PASSWORD' => $this->getPassword()
+            );
+        }
+        return $configArray;
+    }
+    //--------------------------------------------------------------------------------------
+    public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
+    {
+        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        if(!$hasConfigArray){
+            $configArray = $this->makeConfigArray();
+        }        
+        $tpdo = $this->tpdo;
+        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        if($hasConfigArray){
+            $tpdo::connect(null,$boolRequired,$boolUtfDecode,$configArray);
+        }else{
+            $tpdo::connect($configFile,$boolRequired,$boolUtfDecode,null);
+        }
+        $this->setTPDOConnection($tpdo);
+    }
+    //--------------------------------------------------------------------------------------
     public function getDBMS()
     {
         //return $this->tpdo::getDBMS();
@@ -187,35 +220,6 @@ class TPDOConnectionObj
         $tpdo = $this->tpdo;
         $tpdo::setUtfDecode($boolNewValue);
         $this->setTPDOConnection($tpdo);   
-    }
-    //--------------------------------------------------------------------------------------
-    public function makeConfigArray(){
-        $configArray = null;
-        $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
-        $hasDBas = FormDinHelper::issetOrNotZero($this->getDataBaseName());
-        if($hasDBMS && $hasDBas){           
-            $configArray= array(
-                 'DBMS' => $this->getDBMS()
-                ,'PORT' => $this->getPort()
-                ,'HOST' => $this->getHost()
-                ,'DATABASE' => $this->getDataBaseName()
-                ,'USERNAME' => $this->getUsername()
-                ,'PASSWORD' => $this->getPassword()
-            );
-        }
-        return $configArray;
-    }
-    //--------------------------------------------------------------------------------------
-    public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
-    {
-        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
-        if(!$hasConfigArray){
-            $configArray = $this->makeConfigArray();
-        }
-        //$this->tpdo::connect($configFile,$boolRequired,$boolUtfDecode,$configArray);
-        $tpdo = $this->tpdo;
-        $tpdo::connect($configFile,$boolRequired,$boolUtfDecode,$configArray);
-        $this->setTPDOConnection($tpdo); 
     }
     //--------------------------------------------------------------------------------------
     public function executeSql($sql, $arrParams = null)
