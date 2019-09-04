@@ -15,6 +15,33 @@ use PHPMailer\PHPMailer\Exception;
  */
 class Database
 {
+    private $dao = null;
+
+    public function __construct()
+    {
+        $this->dao = new DatabaseDAO();
+    }
+    public function getDao()
+    {
+        return $this->dao;
+    }
+    public function setDao($dao)
+    {
+        $this->dao = $dao;
+    }
+    //--------------------------------------------------------------------------------
+    public function showMultiplos()
+    {
+        $dados = $this->dao->selectAll( null, null );
+        var_dump($dados);
+
+        $controllersMarca = new Marca();
+        $dados = $controllersMarca->selectAll();
+        var_dump($dados);
+
+        $dados = $this->dao->selectAll( null, null );
+        var_dump($dados);
+    }
     //--------------------------------------------------------------------------------
     public function commit()
     {
