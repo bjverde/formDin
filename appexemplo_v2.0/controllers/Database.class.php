@@ -33,14 +33,28 @@ class Database
     public function showMultiplos()
     {
         $dados = $this->dao->selectAll( null, null );
+        echo('<h1>SqLite</h1>');
         var_dump($dados);
+        echo('<hr>');
 
         $controllersMarca = new Marca();
         $dados = $controllersMarca->selectAll();
+        echo('<h1>MySql</h1>');
         var_dump($dados);
+        echo('<hr>');
 
+        $dao = new DatabaseDAO();
+        $this->setDao($dao);
         $dados = $this->dao->selectAll( null, null );
+        echo('<h1>SqLite</h1>');
         var_dump($dados);
+        echo('<hr>');
+        
+        $controllersMarca = new Marca();
+        $dados = $controllersMarca->selectAll();
+        echo('<h1>MySql</h1>');
+        var_dump($dados);
+        echo('<hr>');
     }
     //--------------------------------------------------------------------------------
     public function commit()

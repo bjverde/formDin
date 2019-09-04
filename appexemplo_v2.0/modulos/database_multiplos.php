@@ -10,7 +10,7 @@ $html1 = $html1.'<br> 3 - Select em tabela MySql';
 $html1 = $html1.'<br>';
 $html1 = $html1.'<br> Reparece que o banco MySql é conexão principal, portante não precisa ser informada';
 
-$frm = new TForm('Exemplo RollBack');
+$frm = new TForm('Exemplo Multiplos');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert',true);
