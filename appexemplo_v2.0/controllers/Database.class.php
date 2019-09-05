@@ -109,6 +109,8 @@ class Database
             echo '<br>Acesso_user_menu: '.$qtd;
             
             
+            var_dump($tpdo);
+            
             $tpdo->commit();
         }
         catch (Exception $e) {
