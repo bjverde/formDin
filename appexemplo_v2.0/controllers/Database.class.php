@@ -62,17 +62,47 @@ class Database
         $tpdo = New TPDOConnectionObj();
         try{            
             $tpdo->beginTransaction();
-            $objUserVO = new Acesso_userVO();
+            echo '<h1>Antes</h1>';
+            
             $objUser = new acesso_user();
+            $objUserPerfil = new Acesso_user_menu();
+            
+            $qtd = $objUser->selectCount();
+            echo 'acesso_user: '.$qtd;
+            $qtd = $objUserPerfil->selectCount();
+            echo 'Acesso_user_menu: '.$qtd;
+            
+            echo '<hr>'; 
+            echo '<h1>Inicio include</h1>';
+            
+            $objUserVO = new Acesso_userVO();
+            $objUserVO->setLogin_user('userTransaction');
+            $objUserVO->setSit_ativo('S');
+            
+            //$objUser = new acesso_user();
             $daoUser = $objUser->getDao();
             $daoUser->setTPDOConnection($tpdo);
             $objUser->save($objUserVO);
 
-            $objUserPerfil = new Acesso_user_menu();
+            $objPerfilUser = new Acesso_perfil_userVO();
+            $objPerfilUser->setIdperfil(3);
+            $objPerfilUser->setIduser(5);
+            $objPerfilUser->setSit_ativo('S');
+            
+            //$objUserPerfil = new Acesso_user_menu();
             $objUserPerfil->getDao()->setTPDOConnection($tpdo);
+            $objUserPerfil->save($objPerfilUser);
             
             $tpdo->commit();
-            return $result;
+            
+           
+            echo '<hr>';
+            echo '<h1>Depois do include</h1>';
+            
+            $qtd = $objUser->selectCount();
+            echo 'acesso_user: '.$qtd;
+            $qtd = $objUserPerfil->selectCount();
+            echo 'Acesso_user_menu: '.$qtd;
         }
         catch (Exception $e) {
             $tpdo->rollBack();

@@ -23,10 +23,8 @@ class Acesso_user_menuDAO
 
     private $tpdo = null;
 
-    public function __construct(TPDOConnectionObj $tpdo) {
-        if( empty($tpdo) ){
-            $tpdo = New TPDOConnectionObj();
-        }
+    public function __construct() {
+        $tpdo = New TPDOConnectionObj();
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()

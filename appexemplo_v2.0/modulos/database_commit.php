@@ -12,4 +12,13 @@ $frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert'
 
 $frm->addButton('Executar', null, 'Executar', null, null, true, false)->setClass('btnOragen', false);
 
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+    case 'Executar':
+        $controllerDatabase = new Database();
+        $controllerDatabase->commit();
+    break;
+    //--------------------------------------------------------------------------------
+}
+
 $frm->show();
