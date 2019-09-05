@@ -229,14 +229,28 @@ class TPDOConnectionObj
         return $result;
     }
     //--------------------------------------------------------------------------------------
+    public function getInstance()
+    {
+        $tpdo = $this->tpdo;
+        $instance = $tpdo::getInstance();
+        return $instance;
+    }
+    //--------------------------------------------------------------------------------------
     public function beginTransaction()
     {
-        //$this->tpdo::beginTransaction();
+        //$this->tpdo::rollBack();
         $tpdo = $this->tpdo;
-        //$tpdo::beginTransaction();
+        //$tpdo::rollBack();
         $instance = $tpdo::getInstance();
         $instance->beginTransaction();
         $this->setTPDOConnection($tpdo);          
+    }
+    //--------------------------------------------------------------------------------------
+    public function inTransaction()
+    {
+        $instance = $this->getInstance();
+        $instance->beginTransaction();
+        return $instance->inTransaction();
     }
     //--------------------------------------------------------------------------------------
     public function commit()
@@ -261,9 +275,8 @@ class TPDOConnectionObj
     //--------------------------------------------------------------------------------------
     public function getLastInsertId()
     {
-        $tpdo = $this->tpdo;
-        $pdo = $tpdo::getInstance();
-        $id = $pdo->lastInsertId();
+        $instance = $this->getInstance();
+        $id = $instance->lastInsertId();
         return $id;
     }
 }
