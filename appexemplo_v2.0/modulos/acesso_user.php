@@ -13,7 +13,7 @@
 defined('APLICATIVO') or die();
 
 $primaryKey = 'IDUSER';
-$frm = new TForm('Cadastro de usuários');
+$frm = new TForm('Cadastro de usuários',500);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);

@@ -5,7 +5,7 @@ $html1 = '<h1>Exemplo controle de transação de banco</h1>';
 $html1 = $html1.'<br>';
 $html1 = $html1.'Ao Clicar executar 3 ações de banco serão executadas';
 
-$frm = new TForm('Exemplo Commit');
+$frm = new TForm('Exemplo Commit',250);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert',true);

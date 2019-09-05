@@ -65,44 +65,51 @@ class Database
             echo '<h1>Antes</h1>';
             
             $objUser = new acesso_user();
-            $objUserPerfil = new Acesso_user_menu();
+            $objUserPerfil = new Acesso_perfil_user();
             
             $qtd = $objUser->selectCount();
-            echo 'acesso_user: '.$qtd;
+            echo '<br>acesso_user: '.$qtd;
             $qtd = $objUserPerfil->selectCount();
-            echo 'Acesso_user_menu: '.$qtd;
+            echo '<br>Acesso_user_menu: '.$qtd;
             
             echo '<hr>'; 
             echo '<h1>Inicio include</h1>';
             
+            $nome = 'userTransaction';
             $objUserVO = new Acesso_userVO();
-            $objUserVO->setLogin_user('userTransaction');
+            $objUserVO->setLogin_user($nome);
             $objUserVO->setSit_ativo('S');
             
             //$objUser = new acesso_user();
             $daoUser = $objUser->getDao();
             $daoUser->setTPDOConnection($tpdo);
             $objUser->save($objUserVO);
+            
+            $where = array('LOGIN_USER'=>$nome);
+            $dados = $objUser->selectAll(null,$where);
+            
+            $idUser = $dados['IDUSER'][0];
+
 
             $objPerfilUser = new Acesso_perfil_userVO();
             $objPerfilUser->setIdperfil(3);
-            $objPerfilUser->setIduser(5);
+            $objPerfilUser->setIduser($idUser);
             $objPerfilUser->setSit_ativo('S');
             
             //$objUserPerfil = new Acesso_user_menu();
             $objUserPerfil->getDao()->setTPDOConnection($tpdo);
             $objUserPerfil->save($objPerfilUser);
-            
-            $tpdo->commit();
-            
-           
+
             echo '<hr>';
             echo '<h1>Depois do include</h1>';
             
             $qtd = $objUser->selectCount();
-            echo 'acesso_user: '.$qtd;
+            echo '<br>acesso_user: '.$qtd;
             $qtd = $objUserPerfil->selectCount();
-            echo 'Acesso_user_menu: '.$qtd;
+            echo '<br>Acesso_user_menu: '.$qtd;
+            
+            
+            $tpdo->commit();
         }
         catch (Exception $e) {
             $tpdo->rollBack();
