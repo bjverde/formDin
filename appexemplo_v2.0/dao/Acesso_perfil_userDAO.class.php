@@ -25,7 +25,11 @@ class Acesso_perfil_userDAO
 
     private $tpdo = null;
 
-    public function __construct(TPDOConnectionObj $tpdo) {
+    public function __construct($tpdo=null) {
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
         if( empty($tpdo) ){
             $tpdo = New TPDOConnectionObj();
         }

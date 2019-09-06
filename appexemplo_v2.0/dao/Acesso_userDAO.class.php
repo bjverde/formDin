@@ -24,7 +24,11 @@ class Acesso_userDAO
 
     private $tpdo = null;
 
-    public function __construct(TPDOConnectionObj $tpdo) {
+    public function __construct($tpdo=null) {
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
         if( empty($tpdo) ){
             $tpdo = New TPDOConnectionObj();
         }
@@ -79,7 +83,7 @@ class Acesso_userDAO
 		$sql = self::$sqlBasicSelect.' where login_user = ?';
 		$result = $this->tpdo->executeSql($sql, $values );
 		return $result;
-	}    
+	}
     //--------------------------------------------------------------------------------
     public function selectCount( $where=null )
     {
