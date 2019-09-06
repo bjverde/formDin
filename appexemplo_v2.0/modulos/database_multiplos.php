@@ -8,7 +8,7 @@ $html1 = $html1.'<br> 1 - Select em tabela MySql';
 $html1 = $html1.'<br> 2 - Select em tabela SqLite';
 $html1 = $html1.'<br> 3 - Select em tabela MySql';
 $html1 = $html1.'<br>';
-$html1 = $html1.'<br> Reparece que o banco MySql é conexão principal, portante não precisa ser informada';
+$html1 = $html1.'<br> Reparece que o banco MySql é conexão principal, portanto não precisa ser informada de forma EXPLICITA';
 
 $frm = new TForm('Exemplo Multiplos');
 $frm->setFlat(true);

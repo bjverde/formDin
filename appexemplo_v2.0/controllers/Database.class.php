@@ -75,7 +75,7 @@ class Database
         try{            
             $tpdo->beginTransaction();
             
-            $objUser = new acesso_user($tpdo);
+            $objUser = new Acesso_user($tpdo);
             $objUserPerfil = new Acesso_perfil_user($tpdo);
             
             $msg = 'Antes de iniciar a transação';
@@ -133,7 +133,7 @@ class Database
         try{
             $tpdo->beginTransaction();
             
-            $objUser = new acesso_user($tpdo);
+            $objUser = new Acesso_user($tpdo);
             $objUserPerfil = new Acesso_perfil_user($tpdo);
             
             $msg = 'Antes de iniciar a transação';
