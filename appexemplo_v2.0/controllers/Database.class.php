@@ -53,25 +53,35 @@ class Database
         echo('<hr>');
     }
     //--------------------------------------------------------------------------------
+    public function showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil)
+    {
+        echo '<hr>';
+        echo '<h1>'.$msg.'</h1>';
+        $inTransaction = $tpdo->inTransaction();
+        if( $inTransaction == 1 ){
+            echo '<br><b>In Transaction</b>';
+        }else{
+            echo '<br>NOT Transaction';
+        }
+        $qtd = $objUser->selectCount();
+        echo '<br>Acesso_user: '.$qtd;
+        $qtd = $objUserPerfil->selectCount();
+        echo '<br>Acesso_user_menu: '.$qtd;
+    }
+    //--------------------------------------------------------------------------------
     public function commit()
     {
         $tpdo = New TPDOConnectionObj();
         try{            
             $tpdo->beginTransaction();
-            d($tpdo->inTransaction(),'inTransaction');
-            echo '<h1>Antes</h1>';
             
             $objUser = new acesso_user($tpdo);
             $objUserPerfil = new Acesso_perfil_user($tpdo);
             
-            $qtd = $objUser->selectCount();
-            echo '<br>acesso_user: '.$qtd;
-            $qtd = $objUserPerfil->selectCount();
-            echo '<br>Acesso_user_menu: '.$qtd;
-            
-            echo '<hr>'; 
-            echo '<h1>Inicio include</h1>';
-            d($tpdo->inTransaction(),'inTransaction');
+            $msg = 'Antes de iniciar a transação';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
+            //---------------------------------------
+
             
             $nome = 'userTransaction'.rand(1, 100);
             $objUserVO = new Acesso_userVO();
@@ -98,54 +108,83 @@ class Database
             $objUserPerfil->getDao()->setTPDOConnection($tpdo);
             $objUserPerfil->save($objPerfilUser);
 
-            echo '<hr>';
-            echo '<h1>Depois do include</h1>';
-            d($tpdo->inTransaction(),'inTransaction');
+            $msg = 'Depois do include';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
             
-            $qtd = $objUser->selectCount();
-            echo '<br>acesso_user: '.$qtd;
-            $qtd = $objUserPerfil->selectCount();
-            echo '<br>Acesso_user_menu: '.$qtd;
-            
-
-            echo '<hr>';
-            echo '<h1>Delete</h1>';
-            d($tpdo->inTransaction(),'inTransaction');
-            
+            //----------------            
             $objUserPerfil->deleteByIdUser($idUser);
             $objUser->delete($idUser);
             
+            $msg = 'Deletando registros incluidos';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
             
-            $qtd = $objUser->selectCount();
-            echo '<br>acesso_user: '.$qtd;
-            $qtd = $objUserPerfil->selectCount();
-            echo '<br>Acesso_user_menu: '.$qtd;
-            
-            
-            d($tpdo->inTransaction(),'inTransaction');
             $tpdo->commit();
         }
         catch (Exception $e) {
             $tpdo->rollBack();
             MessageHelper::logRecord($e);
             throw new Exception($e);
-        }        
+        }
     }
     //--------------------------------------------------------------------------------
     public function rollBack()
     {
         $tpdo = New TPDOConnectionObj();
-        try{            
+        try{
             $tpdo->beginTransaction();
-            $result = $this->dao->delete( $id );
+            
+            $objUser = new acesso_user($tpdo);
+            $objUserPerfil = new Acesso_perfil_user($tpdo);
+            
+            $msg = 'Antes de iniciar a transação';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
+            //---------------------------------------
+            
+            
+            $nome = 'userTransaction'.rand(1, 100);
+            $objUserVO = new Acesso_userVO();
+            $objUserVO->setLogin_user($nome);
+            $objUserVO->setSit_ativo('S');
+            
+            //$objUser = new acesso_user();
+            $daoUser = $objUser->getDao();
+            $daoUser->setTPDOConnection($tpdo);
+            $objUser->save($objUserVO);
+            
+            $where = array('LOGIN_USER'=>$nome);
+            $dados = $objUser->selectAll(null,$where);
+            
+            $idUser = $dados['IDUSER'][0];
+            
+            
+            $objPerfilUser = new Acesso_perfil_userVO();
+            $objPerfilUser->setIdperfil(3);
+            $objPerfilUser->setIduser($idUser);
+            $objPerfilUser->setSit_ativo('S');
+            
+            throw new  Exception('Gerenic Exception!!!!');
+            
+            //$objUserPerfil = new Acesso_user_menu();
+            $objUserPerfil->getDao()->setTPDOConnection($tpdo);
+            $objUserPerfil->save($objPerfilUser);
+            
+            $msg = 'Depois do include';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
+            
+            //----------------
+            $objUserPerfil->deleteByIdUser($idUser);
+            $objUser->delete($idUser);
+            
+            $msg = 'Deletando registros incluidos';
+            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
+            
             $tpdo->commit();
-            return $result;
         }
         catch (Exception $e) {
             $tpdo->rollBack();
             MessageHelper::logRecord($e);
             throw new Exception($e);
-        } 
+        }
     }
 }
 ?>
