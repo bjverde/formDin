@@ -15,9 +15,9 @@ class Acesso_perfil_user
 
     private $dao = null;
 
-    public function __construct()
+    public function __construct(TPDOConnectionObj $tpdo)
     {
-        $this->dao = new Acesso_perfil_userDAO();
+        $this->dao = new Acesso_perfil_userDAO($tpdo);
     }
     public function getDao()
     {
@@ -73,6 +73,12 @@ class Acesso_perfil_user
     public function delete( $id )
     {
         $result = $this->dao->delete( $id );
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function deleteByIdUser( $id )
+    {
+        $result = $this->dao->deleteByIdUser( $id );
         return $result;
     }
     //--------------------------------------------------------------------------------

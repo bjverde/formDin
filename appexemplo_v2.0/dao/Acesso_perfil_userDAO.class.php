@@ -25,8 +25,10 @@ class Acesso_perfil_userDAO
 
     private $tpdo = null;
 
-    public function __construct() {
-        $tpdo = New TPDOConnectionObj();
+    public function __construct(TPDOConnectionObj $tpdo) {
+        if( empty($tpdo) ){
+            $tpdo = New TPDOConnectionObj();
+        }
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()
@@ -147,6 +149,17 @@ class Acesso_perfil_userDAO
         }
         $values = array($id);
         $sql = 'delete from form_exemplo.acesso_perfil_user where idperfiluser = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function deleteByIdUser( $id )
+    {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
+        $values = array($id);
+        $sql = 'delete from form_exemplo.acesso_perfil_user where iduser = ?';
         $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }

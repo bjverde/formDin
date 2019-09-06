@@ -15,9 +15,9 @@ class Acesso_user
 
     private $dao = null;
 
-    public function __construct()
+    public function __construct(TPDOConnectionObj $tpdo)
     {
-        $this->dao = new Acesso_userDAO();
+        $this->dao = new Acesso_userDAO($tpdo);
     }
     public function getDao()
     {

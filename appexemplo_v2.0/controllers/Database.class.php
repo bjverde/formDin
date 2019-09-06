@@ -62,10 +62,11 @@ class Database
         $tpdo = New TPDOConnectionObj();
         try{            
             $tpdo->beginTransaction();
+            d($tpdo->inTransaction(),'inTransaction');
             echo '<h1>Antes</h1>';
             
-            $objUser = new acesso_user();
-            $objUserPerfil = new Acesso_perfil_user();
+            $objUser = new acesso_user($tpdo);
+            $objUserPerfil = new Acesso_perfil_user($tpdo);
             
             $qtd = $objUser->selectCount();
             echo '<br>acesso_user: '.$qtd;
@@ -74,8 +75,9 @@ class Database
             
             echo '<hr>'; 
             echo '<h1>Inicio include</h1>';
+            d($tpdo->inTransaction(),'inTransaction');
             
-            $nome = 'userTransaction';
+            $nome = 'userTransaction'.rand(1, 100);
             $objUserVO = new Acesso_userVO();
             $objUserVO->setLogin_user($nome);
             $objUserVO->setSit_ativo('S');
@@ -102,6 +104,21 @@ class Database
 
             echo '<hr>';
             echo '<h1>Depois do include</h1>';
+            d($tpdo->inTransaction(),'inTransaction');
+            
+            $qtd = $objUser->selectCount();
+            echo '<br>acesso_user: '.$qtd;
+            $qtd = $objUserPerfil->selectCount();
+            echo '<br>Acesso_user_menu: '.$qtd;
+            
+
+            echo '<hr>';
+            echo '<h1>Delete</h1>';
+            d($tpdo->inTransaction(),'inTransaction');
+            
+            $objUserPerfil->deleteByIdUser($idUser);
+            $objUser->delete($idUser);
+            
             
             $qtd = $objUser->selectCount();
             echo '<br>acesso_user: '.$qtd;
@@ -109,8 +126,7 @@ class Database
             echo '<br>Acesso_user_menu: '.$qtd;
             
             
-            var_dump($tpdo);
-            
+            d($tpdo->inTransaction(),'inTransaction');
             $tpdo->commit();
         }
         catch (Exception $e) {

@@ -49,7 +49,7 @@ switch( $acao ) {
             if ( $frm->validate() ) {
                 $vo = new Acesso_userVO();
                 $frm->setVo( $vo );
-                $controller = new Acesso_user();
+                $controller = new Acesso_user(null);
                 $resultado = $controller->save( $vo );
                 if($resultado==1) {
                     $frm->setMessage('Registro gravado com sucesso!!!');
@@ -71,7 +71,7 @@ switch( $acao ) {
     case 'gd_excluir':
         try{
             $id = $frm->get( $primaryKey ) ;
-            $controller = new Acesso_user();
+            $controller = new Acesso_user(null);
             $resultado = $controller->delete( $id );
             if($resultado==1) {
                 $frm->setMessage('Registro excluido com sucesso!!!');
@@ -111,7 +111,7 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Acesso_user();
+    $controller = new Acesso_user(null);
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
