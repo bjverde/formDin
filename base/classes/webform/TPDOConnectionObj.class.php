@@ -249,7 +249,6 @@ class TPDOConnectionObj
     public function inTransaction()
     {
         $instance = $this->getInstance();
-        $instance->beginTransaction();
         return $instance->inTransaction();
     }
     //--------------------------------------------------------------------------------------
