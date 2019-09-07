@@ -218,11 +218,6 @@ class TForm Extends TBox
             $this->addJsFile( 'FormDin4.js' );
             $this->addJsFile( 'FormDin4Ajax.js' );
             
-            //Font Awesome Icons
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-brands.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-regular.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fa-solid.min.css' );
-            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
             
             if(!defined('MIGRATE_JQUERY')){ define('MIGRATE_JQUERY',FALSE); }
             if(MIGRATE_JQUERY){
@@ -257,6 +252,12 @@ class TForm Extends TBox
                 $this->addCssFile( 'jquery/tooltip/jquery.tooltip.css' );
                 $this->addJsFile( 'jquery/jquery.meio.mask.min.js' );
             }
+
+            //Font Awesome Icons
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/brands.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/regular.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/solid.min.css' );
+            $this->addCssFile($this->getBase().'vendor/components/font-awesome/css/fontawesome.min.css' );
             
             //$this->addJsFile( 'jquery/simplemodal/jquery.simplemodal.js' );
             

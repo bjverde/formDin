@@ -4,12 +4,12 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.9.0-alpha
+ * FormDin Version: 4.7.5-alpha
  * 
- * System xx created in: 2019-04-14 20:35:31
+ * System appev2 created in: 2019-09-01 16:03:50
  */
-class Acesso_perfil_menuDAO extends TPDOConnection
+class Acesso_perfil_menuDAO 
 {
 
     private static $sqlBasicSelect = 'select
@@ -23,7 +23,21 @@ class Acesso_perfil_menuDAO extends TPDOConnection
 									 ,pm.dat_update
 									 from form_exemplo.acesso_perfil_menu as pm';
 
-    private static function processWhereGridParameters( $whereGrid )
+    private $tpdo = null;
+
+    public function __construct() {
+        $tpdo = New TPDOConnectionObj();
+        $this->setTPDOConnection($tpdo);
+    }
+    public function getTPDOConnection()
+    {
+        return $this->tpdo;
+    }
+    public function setTPDOConnection($TPDOConnection)
+    {
+        $this->tpdo = $TPDOConnection;
+    }
+    private function processWhereGridParameters( $whereGrid )
     {
         $result = $whereGrid;
         if ( is_array($whereGrid) ){
@@ -39,52 +53,52 @@ class Acesso_perfil_menuDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectById( $id )
+    public function selectById( $id )
     {
         if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
         }
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where idperfilmenu = ?';
-        $result = self::executeSql($sql, $values );
+        $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectCount( $where=null )
+    public function selectCount( $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = 'select count(idperfilmenu) as qtd from form_exemplo.acesso_perfil_menu';
         $sql = $sql.( ($where)? ' where '.$where:'');
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result['QTD'][0];
     }
     //--------------------------------------------------------------------------------
-    public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
+    public function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
     {
-        $rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);
-        $where = self::processWhereGridParameters($where);
+        $rowStart = SqlHelper::getRowStart($page,$rowsPerPage);
+        $where = $this->processWhereGridParameters($where);
 
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'')
         .( ' LIMIT '.$rowStart.','.$rowsPerPage);
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public function selectAll( $orderBy=null, $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'');
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function insert( Acesso_perfil_menuVO $objVo )
+    public function insert( Acesso_perfil_menuVO $objVo )
     {
         $values = array(  $objVo->getIdperfil() 
                         , $objVo->getIdmenu() 
@@ -92,16 +106,18 @@ class Acesso_perfil_menuDAO extends TPDOConnection
                         , $objVo->getDat_inclusao() 
                         , $objVo->getDat_update() 
                         );
-        return self::executeSql('insert into form_exemplo.acesso_perfil_menu(
+        $sql = 'insert into form_exemplo.acesso_perfil_menu(
                                  idperfil
                                 ,idmenu
                                 ,sit_ativo
                                 ,dat_inclusao
                                 ,dat_update
-                                ) values (?,?,?,?,?)', $values );
+                                ) values (?,?,?,?,?)';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function update ( Acesso_perfil_menuVO $objVo )
+    public function update ( Acesso_perfil_menuVO $objVo )
     {
         $values = array( $objVo->getIdperfil()
                         ,$objVo->getIdmenu()
@@ -109,19 +125,39 @@ class Acesso_perfil_menuDAO extends TPDOConnection
                         ,$objVo->getDat_inclusao()
                         ,$objVo->getDat_update()
                         ,$objVo->getIdperfilmenu() );
-        return self::executeSql('update form_exemplo.acesso_perfil_menu set 
+        $sql = 'update form_exemplo.acesso_perfil_menu set 
                                  idperfil = ?
                                 ,idmenu = ?
                                 ,sit_ativo = ?
                                 ,dat_inclusao = ?
                                 ,dat_update = ?
-                                where idperfilmenu = ?',$values);
+                                where idperfilmenu = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public function delete( $id )
     {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
         $values = array($id);
-        return self::executeSql('delete from form_exemplo.acesso_perfil_menu where idperfilmenu = ?',$values);
+        $sql = 'delete from form_exemplo.acesso_perfil_menu where idperfilmenu = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function getVoById( $id )
+    {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
+        $result = $this->selectById( $id );
+        $result = \ArrayHelper::convertArrayFormDin2Pdo($result,false);
+        $result = $result[0];
+        $vo = new Acesso_perfil_menuVO();
+        $vo = \FormDinHelper::setPropertyVo($result,$vo);
+        return $vo;
     }
 }
 ?>

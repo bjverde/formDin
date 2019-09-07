@@ -11,7 +11,5 @@ base/tmp/*
 phpunit-code-coverage/*
 !phpunit-code-coverage/phpunit-code-coverage.zip
 /sysgen/
-
-
 /xx/
 /appteste/

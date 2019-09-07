@@ -4,12 +4,12 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.9.0-alpha
+ * FormDin Version: 4.7.5-alpha
  * 
- * System xx created in: 2019-04-14 20:35:32
+ * System appev2 created in: 2019-09-01 16:03:51
  */
-class MunicipioDAO extends TPDOConnection
+class MunicipioDAO 
 {
 
     private static $sqlBasicSelect = 'select
@@ -20,7 +20,21 @@ class MunicipioDAO extends TPDOConnection
 									 ,m.sit_ativo
 									 from municipio m';
 
-    private static function processWhereGridParameters( $whereGrid )
+    private $tpdo = null;
+
+    public function __construct() {
+        $tpdo = New TPDOConnectionObj();
+        $this->setTPDOConnection($tpdo);
+    }
+    public function getTPDOConnection()
+    {
+        return $this->tpdo;
+    }
+    public function setTPDOConnection($TPDOConnection)
+    {
+        $this->tpdo = $TPDOConnection;
+    }
+    private function processWhereGridParameters( $whereGrid )
     {
         $result = $whereGrid;
         if ( is_array($whereGrid) ){
@@ -34,81 +48,103 @@ class MunicipioDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectById( $id )
+    public function selectById( $id )
     {
         if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
         }
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where cod_municipio = ?';
-        $result = self::executeSql($sql, $values );
+        $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectCount( $where=null )
+    public function selectCount( $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = 'select count(cod_municipio) as qtd from form_exemplo.municipio';
         $sql = $sql.( ($where)? ' where '.$where:'');
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result['QTD'][0];
     }
     //--------------------------------------------------------------------------------
-    public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
+    public function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
     {
-        $rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);
-        $where = self::processWhereGridParameters($where);
+        $rowStart = SqlHelper::getRowStart($page,$rowsPerPage);
+        $where = $this->processWhereGridParameters($where);
 
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'')
         .( ' LIMIT '.$rowStart.','.$rowsPerPage);
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public function selectAll( $orderBy=null, $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'');
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function insert( MunicipioVO $objVo )
+    public function insert( MunicipioVO $objVo )
     {
         $values = array(  $objVo->getCod_uf() 
                         , $objVo->getNom_municipio() 
                         , $objVo->getSit_ativo() 
                         );
-        return self::executeSql('insert into form_exemplo.municipio(
+        $sql = 'insert into form_exemplo.municipio(
                                  cod_uf
                                 ,nom_municipio
                                 ,sit_ativo
-                                ) values (?,?,?)', $values );
+                                ) values (?,?,?)';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function update ( MunicipioVO $objVo )
+    public function update ( MunicipioVO $objVo )
     {
         $values = array( $objVo->getCod_uf()
                         ,$objVo->getNom_municipio()
                         ,$objVo->getSit_ativo()
                         ,$objVo->getCod_municipio() );
-        return self::executeSql('update form_exemplo.municipio set 
+        $sql = 'update form_exemplo.municipio set 
                                  cod_uf = ?
                                 ,nom_municipio = ?
                                 ,sit_ativo = ?
-                                where cod_municipio = ?',$values);
+                                where cod_municipio = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public function delete( $id )
     {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
         $values = array($id);
-        return self::executeSql('delete from form_exemplo.municipio where cod_municipio = ?',$values);
+        $sql = 'delete from form_exemplo.municipio where cod_municipio = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function getVoById( $id )
+    {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
+        $result = $this->selectById( $id );
+        $result = \ArrayHelper::convertArrayFormDin2Pdo($result,false);
+        $result = $result[0];
+        $vo = new MunicipioVO();
+        $vo = \FormDinHelper::setPropertyVo($result,$vo);
+        return $vo;
     }
 }
 ?>

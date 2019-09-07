@@ -60,7 +60,7 @@ class TPDOConnectionObj
     {
         $tpdo = New TPDOConnection();
         //$configArray = $this->getFakeConnectionArray();
-        //$tpdo::connect(null,true,null,$configArray);
+        $tpdo::connect(null,true,null,null);
         $this->setTPDOConnection($tpdo);
     }    
     private function getFakeConnectionArray(){
@@ -82,6 +82,39 @@ class TPDOConnectionObj
     public function setTPDOConnection($TPDOConnection)
     {
         $this->tpdo = $TPDOConnection;
+    }
+    //--------------------------------------------------------------------------------------
+    public function makeConfigArray(){
+        $configArray = null;
+        $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
+        $hasDBas = FormDinHelper::issetOrNotZero($this->getDataBaseName());
+        if($hasDBMS && $hasDBas){
+            $configArray= array(
+                'DBMS' => $this->getDBMS()
+                ,'PORT' => $this->getPort()
+                ,'HOST' => $this->getHost()
+                ,'DATABASE' => $this->getDataBaseName()
+                ,'USERNAME' => $this->getUsername()
+                ,'PASSWORD' => $this->getPassword()
+            );
+        }
+        return $configArray;
+    }
+    //--------------------------------------------------------------------------------------
+    public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
+    {
+        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        if(!$hasConfigArray){
+            $configArray = $this->makeConfigArray();
+        }        
+        $tpdo = $this->tpdo;
+        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        if($hasConfigArray){
+            $tpdo::connect(null,$boolRequired,$boolUtfDecode,$configArray);
+        }else{
+            $tpdo::connect($configFile,$boolRequired,$boolUtfDecode,null);
+        }
+        $this->setTPDOConnection($tpdo);
     }
     //--------------------------------------------------------------------------------------
     public function getDBMS()
@@ -189,35 +222,6 @@ class TPDOConnectionObj
         $this->setTPDOConnection($tpdo);   
     }
     //--------------------------------------------------------------------------------------
-    public function makeConfigArray(){
-        $configArray = null;
-        $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
-        $hasDBas = FormDinHelper::issetOrNotZero($this->getDataBaseName());
-        if($hasDBMS && $hasDBas){           
-            $configArray= array(
-                 'DBMS' => $this->getDBMS()
-                ,'PORT' => $this->getPort()
-                ,'HOST' => $this->getHost()
-                ,'DATABASE' => $this->getDataBaseName()
-                ,'USERNAME' => $this->getUsername()
-                ,'PASSWORD' => $this->getPassword()
-            );
-        }
-        return $configArray;
-    }
-    //--------------------------------------------------------------------------------------
-    public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
-    {
-        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
-        if(!$hasConfigArray){
-            $configArray = $this->makeConfigArray();
-        }
-        //$this->tpdo::connect($configFile,$boolRequired,$boolUtfDecode,$configArray);
-        $tpdo = $this->tpdo;
-        $tpdo::connect($configFile,$boolRequired,$boolUtfDecode,$configArray);
-        $this->setTPDOConnection($tpdo); 
-    }
-    //--------------------------------------------------------------------------------------
     public function executeSql($sql, $arrParams = null)
     {
         $tpdo = $this->getTPDOConnection();
@@ -225,19 +229,36 @@ class TPDOConnectionObj
         return $result;
     }
     //--------------------------------------------------------------------------------------
+    public function getInstance()
+    {
+        $tpdo = $this->tpdo;
+        $instance = $tpdo::getInstance();
+        return $instance;
+    }
+    //--------------------------------------------------------------------------------------
     public function beginTransaction()
     {
-        //$this->tpdo::beginTransaction();
+        //$this->tpdo::rollBack();
         $tpdo = $this->tpdo;
-        $tpdo::beginTransaction();
+        //$tpdo::rollBack();
+        $instance = $tpdo::getInstance();
+        $instance->beginTransaction();
         $this->setTPDOConnection($tpdo);          
+    }
+    //--------------------------------------------------------------------------------------
+    public function inTransaction()
+    {
+        $instance = $this->getInstance();
+        return $instance->inTransaction();
     }
     //--------------------------------------------------------------------------------------
     public function commit()
     {
         //$this->tpdo::commit();
         $tpdo = $this->tpdo;
-        $tpdo::commit();
+        //$tpdo::commit();
+        $instance = $tpdo::getInstance();
+        $instance->commit();
         $this->setTPDOConnection($tpdo);          
     }
     //--------------------------------------------------------------------------------------
@@ -245,15 +266,16 @@ class TPDOConnectionObj
     {
         //$this->tpdo::rollBack();
         $tpdo = $this->tpdo;
-        $tpdo::rollBack();
+        //$tpdo::rollBack();
+        $instance = $tpdo::getInstance();
+        $instance->rollBack();
         $this->setTPDOConnection($tpdo);         
     }
     //--------------------------------------------------------------------------------------
     public function getLastInsertId()
     {
-        $tpdo = $this->tpdo;
-        $pdo = $tpdo::getInstance();
-        $id = $pdo->lastInsertId();
+        $instance = $this->getInstance();
+        $id = $instance->lastInsertId();
         return $id;
     }
 }

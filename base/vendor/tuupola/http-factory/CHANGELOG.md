@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## [1.1.0](https://github.com/tuupola/http-factory/compare/1.0.3...1.1.0) - 2019-08-07
+### Added
+- Support for slim/psr7 ([#10](https://github.com/tuupola/http-factory/pull/10)).
+
 ## [1.0.3](https://github.com/tuupola/http-factory/compare/1.0.2...1.0.3) - 2019-01-11
 ### Fixed
 - `ServerRequestFactory::createServerRequest()` now honours passed in server params.

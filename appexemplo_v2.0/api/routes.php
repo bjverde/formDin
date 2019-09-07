@@ -4,43 +4,99 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.5.1-alpha
- * FormDin Version: 4.5.3-alpha
+ * SysGen  Version: 1.9.0-alpha
+ * FormDin Version: 4.7.5-alpha
  * 
- * System appev2 created in: 2019-05-10 01:19:08
+ * System appev2 created in: 2019-09-01 16:03:50
  */
 
-use Controllers\SysinfoAPI;
-use Controllers\Acesso_menuAPI;
-use Controllers\Acesso_perfilAPI;
-use Controllers\Acesso_perfil_menuAPI;
-use Controllers\Acesso_perfil_userAPI;
-use Controllers\Acesso_userAPI;
-use Controllers\Acesso_user_menuAPI;
-use Controllers\AutoridadeAPI;
-use Controllers\EnderecoAPI;
-use Controllers\MarcaAPI;
-use Controllers\Meta_tipoAPI;
-use Controllers\MunicipioAPI;
-use Controllers\Natureza_juridicaAPI;
-use Controllers\PedidoAPI;
-use Controllers\Pedido_itemAPI;
-use Controllers\PessoaAPI;
-use Controllers\Pessoa_fisicaAPI;
-use Controllers\Pessoa_juridicaAPI;
-use Controllers\ProdutoAPI;
-use Controllers\RegiaoAPI;
-use Controllers\TelefoneAPI;
-use Controllers\TipoAPI;
-use Controllers\UfAPI;
-use Controllers\Vw_acesso_user_menuAPI;
-use Controllers\Vw_pessoaAPI;
-use Controllers\Vw_pessoa_marca_produtoAPI;
+use api_controllers\SysinfoAPI;
+use api_controllers\SelfilhosmenuAPI;
+use api_controllers\SelfilhosmenuqtdAPI;
+use api_controllers\SelmenuqtdAPI;
+use api_controllers\Acesso_menuAPI;
+use api_controllers\Acesso_perfilAPI;
+use api_controllers\Acesso_perfil_menuAPI;
+use api_controllers\Acesso_perfil_userAPI;
+use api_controllers\Acesso_userAPI;
+use api_controllers\Acesso_user_menuAPI;
+use api_controllers\AutoridadeAPI;
+use api_controllers\EnderecoAPI;
+use api_controllers\MarcaAPI;
+use api_controllers\Meta_tipoAPI;
+use api_controllers\MunicipioAPI;
+use api_controllers\Natureza_juridicaAPI;
+use api_controllers\PedidoAPI;
+use api_controllers\Pedido_itemAPI;
+use api_controllers\PessoaAPI;
+use api_controllers\Pessoa_fisicaAPI;
+use api_controllers\Pessoa_juridicaAPI;
+use api_controllers\ProdutoAPI;
+use api_controllers\RegiaoAPI;
+use api_controllers\TelefoneAPI;
+use api_controllers\TipoAPI;
+use api_controllers\UfAPI;
+use api_controllers\Vw_acesso_user_menuAPI;
+use api_controllers\Vw_pessoaAPI;
+use api_controllers\Vw_pessoa_marca_produtoAPI;
 
 $app = new \Slim\App(slimConfiguration());
 
+$app->get("/", function ($request, $response, $args) use ($app) {
+    $url = \ServerHelper::getCurrentUrl();
+    $url = substr($url,0,strlen($url)-1);
+    $routes = $app->getContainer()->router->getRoutes();
+    $routesArray = array();
+    foreach ($routes as $route) {
+        $routeArray = array();
+        $met = $route->getMethods();
+        $routeArray['methods']  = $met[0];
+        $routeArray['url']  = $url.$route->getPattern();
+        $routesArray[] = $routeArray;
+    }
+
+    $msg = array( 'info'=> SysinfoAPI::info()
+                , 'endpoints'=>array( 'qtd'=> \CountHelper::count($routesArray)
+                                    ,'result'=>$routesArray
+                                    )
+                );
+
+    $response = $response->withJson($msg);
+    return $response;
+});
+
 $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
 
+
+
+//--------------------------------------------------------------------
+//  VIEW: selFilhosMenu
+//--------------------------------------------------------------------
+$app->group('/selfilhosmenu', function() use ($app) {
+    $app->get('', SelfilhosmenuAPI::class . ':selectAll');
+    $app->get('/{id:[0-9]+}', SelfilhosmenuAPI::class . ':selectById');
+
+});
+
+
+//--------------------------------------------------------------------
+//  VIEW: selFilhosMenuQtd
+//--------------------------------------------------------------------
+$app->group('/selfilhosmenuqtd', function() use ($app) {
+    $app->get('', SelfilhosmenuqtdAPI::class . ':selectAll');
+    $app->get('/{id:[0-9]+}', SelfilhosmenuqtdAPI::class . ':selectById');
+
+});
+
+
+//--------------------------------------------------------------------
+//  VIEW: selMenuQtd
+//--------------------------------------------------------------------
+$app->group('/selmenuqtd', function() use ($app) {
+    $app->get('', SelmenuqtdAPI::class . ':selectAll');
+    $app->get('/{id:[0-9]+}', SelmenuqtdAPI::class . ':selectById');
+
+});
 
 
 //--------------------------------------------------------------------

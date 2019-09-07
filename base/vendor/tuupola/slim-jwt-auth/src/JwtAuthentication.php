@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2015-2018 Mika Tuupola
+Copyright (c) 2015-2019 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -146,7 +146,10 @@ final class JwtAuthentication implements MiddlewareInterface
             ]);
         }
 
-        $params = ["decoded" => $decoded];
+        $params = [
+            "decoded" => $decoded,
+            "token" => $token,
+        ];
 
         /* Add decoded token to request as attribute when requested. */
         if ($this->options["attribute"]) {
@@ -251,7 +254,6 @@ final class JwtAuthentication implements MiddlewareInterface
 
         if (isset($cookieParams[$this->options["cookie"]])) {
             $this->log(LogLevel::DEBUG, "Using token from cookie");
-            $this->log(LogLevel::DEBUG, $cookieParams[$this->options["cookie"]]);
             return $cookieParams[$this->options["cookie"]];
         };
 

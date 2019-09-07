@@ -139,7 +139,8 @@ $menu->add('4', null, 'Mensagens e Ajuda', null, null, '../../base/imagens/feedb
         $menu->add('423', '42', 'Ajuda On-line (sqlite) - ERRO', 'exe_help_online_1.php');
 
 //-----------------------------------------------------------------------------
-$menu->add('5', null, 'Ajax');
+$menu->add('5', null, 'JavaScript', null, null, '../../base/imagens/logo_js_flat.png');
+	$menu->add('50', '5', 'JavaScript Leia-me', 'jscrip/exe_js_texto.php', null, '../../base/imagens/logo_js_flat.png');
     $menu->add('51', '5', 'Exemplo 1', 'ajax/exe_ajax01.php');
     $menu->add('52', '5', 'Atualizar Campos', 'ajax/exe_ajax02.php');
     $menu->add('53', '5', 'Ajax com Semáforo', 'ajax/exe_ajax03_semaphore.php');

@@ -44,9 +44,11 @@ require_once('includes/config_conexao.php');
 
 //FormDin version: 4.2.6-alpha
 require_once '../base/classes/webform/TApplication.class.php';
-require_once 'classes/autoload_appev2.php';
+require_once 'controllers/autoload_appev2.php';
 require_once 'dao/autoload_appev2_dao.php';
 
+
+define('DIR_ROOT'     , basename(__DIR__));
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setFormDinMinimumVersion(FORMDIN_VERSION_MIN_VERSION);
@@ -60,5 +62,8 @@ $app->setVersionSystem(SYSTEM_VERSION);
 $app->setLoginInfo('Bem-vindo');
 $app->setMainMenuFile('includes/menu.php');
 $app->setWaterMark('brasao_marca_dagua.png');
+
+$app->setCssDefaultFormFile('css/css_form_default.css');
+
 $app->run();
 ?>

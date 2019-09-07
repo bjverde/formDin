@@ -4,12 +4,12 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.3.1-alpha
- * FormDin Version: 4.5.1-alpha
+ * SysGen  Version: 1.9.0-alpha
+ * FormDin Version: 4.7.5-alpha
  * 
- * System xx created in: 2019-04-14 20:35:32
+ * System appev2 created in: 2019-09-01 16:03:51
  */
-class RegiaoDAO extends TPDOConnection
+class RegiaoDAO 
 {
 
     private static $sqlBasicSelect = 'select
@@ -17,7 +17,21 @@ class RegiaoDAO extends TPDOConnection
                                      ,nom_regiao
                                      from form_exemplo.regiao ';
 
-    private static function processWhereGridParameters( $whereGrid )
+    private $tpdo = null;
+
+    public function __construct() {
+        $tpdo = New TPDOConnectionObj();
+        $this->setTPDOConnection($tpdo);
+    }
+    public function getTPDOConnection()
+    {
+        return $this->tpdo;
+    }
+    public function setTPDOConnection($TPDOConnection)
+    {
+        $this->tpdo = $TPDOConnection;
+    }
+    private function processWhereGridParameters( $whereGrid )
     {
         $result = $whereGrid;
         if ( is_array($whereGrid) ){
@@ -29,73 +43,95 @@ class RegiaoDAO extends TPDOConnection
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectById( $id )
+    public function selectById( $id )
     {
         if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
         }
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where cod_regiao = ?';
-        $result = self::executeSql($sql, $values );
+        $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectCount( $where=null )
+    public function selectCount( $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = 'select count(cod_regiao) as qtd from form_exemplo.regiao';
         $sql = $sql.( ($where)? ' where '.$where:'');
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result['QTD'][0];
     }
     //--------------------------------------------------------------------------------
-    public static function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
+    public function selectAllPagination( $orderBy=null, $where=null, $page=null,  $rowsPerPage= null )
     {
-        $rowStart = PaginationSQLHelper::getRowStart($page,$rowsPerPage);
-        $where = self::processWhereGridParameters($where);
+        $rowStart = SqlHelper::getRowStart($page,$rowsPerPage);
+        $where = $this->processWhereGridParameters($where);
 
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'')
         .( ' LIMIT '.$rowStart.','.$rowsPerPage);
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectAll( $orderBy=null, $where=null )
+    public function selectAll( $orderBy=null, $where=null )
     {
-        $where = self::processWhereGridParameters($where);
+        $where = $this->processWhereGridParameters($where);
         $sql = self::$sqlBasicSelect
         .( ($where)? ' where '.$where:'')
         .( ($orderBy) ? ' order by '.$orderBy:'');
 
-        $result = self::executeSql($sql);
+        $result = $this->tpdo->executeSql($sql);
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function insert( RegiaoVO $objVo )
+    public function insert( RegiaoVO $objVo )
     {
         $values = array(  $objVo->getNom_regiao() 
                         );
-        return self::executeSql('insert into form_exemplo.regiao(
+        $sql = 'insert into form_exemplo.regiao(
                                  nom_regiao
-                                ) values (?)', $values );
+                                ) values (?)';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function update ( RegiaoVO $objVo )
+    public function update ( RegiaoVO $objVo )
     {
         $values = array( $objVo->getNom_regiao()
                         ,$objVo->getCod_regiao() );
-        return self::executeSql('update form_exemplo.regiao set 
+        $sql = 'update form_exemplo.regiao set 
                                  nom_regiao = ?
-                                where cod_regiao = ?',$values);
+                                where cod_regiao = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function delete( $id )
+    public function delete( $id )
     {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
         $values = array($id);
-        return self::executeSql('delete from form_exemplo.regiao where cod_regiao = ?',$values);
+        $sql = 'delete from form_exemplo.regiao where cod_regiao = ?';
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function getVoById( $id )
+    {
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
+        }
+        $result = $this->selectById( $id );
+        $result = \ArrayHelper::convertArrayFormDin2Pdo($result,false);
+        $result = $result[0];
+        $vo = new RegiaoVO();
+        $vo = \FormDinHelper::setPropertyVo($result,$vo);
+        return $vo;
     }
 }
 ?>
