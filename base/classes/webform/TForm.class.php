@@ -6517,7 +6517,8 @@ class TForm Extends TBox
    {
        //$strWidth = is_null($strWidth) ? $this->getMaxWidth('html') : $strWidth;
        $field = new THtml( $strName, $strValue, $strIncludeFile, $strHeight, $strWidth );
-       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false ));
+       $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel, null, null, null, false );
+       $this->addDisplayControl( $displayControl );
        return $field;
    }
    
@@ -6554,7 +6555,8 @@ class TForm Extends TBox
            $msgDefault = '<center>Carregando...<br><img width=\"190px\" height=\"20px\" src=\"' . $this->getBase() . 'imagens/processando.gif\"><center>';
            $strLoadingMessage = is_null( $strLoadingMessage ) ? $msgDefault : $strLoadingMessage;
            $field->setLoadingMessage( $strLoadingMessage );
-           $this->addDisplayControl( new TDisplayControl( null, $field, false, $boolNewLine ) );
+           $displayControl = new TDisplayControl( null, $field, false, $boolNewLine );
+           $this->addDisplayControl( $displayControl );
            return $field;
        }
    }
