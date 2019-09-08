@@ -26,7 +26,11 @@ $frm->addGroupField('gpx2', 'Janela Maximizada');
     $html2 = 'Exemplo change que inicia janela já maximizada';
     $frm->addHtmlField('html2', $html2, null, null, null, null,false)->setClass('boxAlert',false);
 $frm->closeGroup();
-
+$frm->addGroupField('gpx3', 'Esconder campos');
+    $frm->addButton('Esconder campos', null, null, null, null, true, false);
+    $html2 = 'Exemplo changeFields que mostra e esconde campos';
+    $frm->addHtmlField('html2', $html2, null, null, null, null,false)->setClass('boxAlert',false);
+$frm->closeGroup();
 
 $acao = isset($acao) ? $acao : null;
 switch ($acao) {
@@ -37,7 +41,10 @@ switch ($acao) {
     case 'Ir Janela':
         $frm->redirect('view/form/exe_max_start.php', null, true);
     break;
-    //--------------------------------------------------------------------
+    //------------------------------------------------------------------
+    case 'Esconder campos':
+        $frm->redirect('view/jscript/exe_js_fileds.php', null, true);
+    break;
 }
 
 $frm->show();
