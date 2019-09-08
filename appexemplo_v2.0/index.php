@@ -49,11 +49,11 @@ require_once 'dao/autoload_appev2_dao.php';
 
 
 define('DIR_ROOT'     , basename(__DIR__));
-define('SYSTEM_NAME'    , 'Sistema exemplo 2.0 com FormDin '.FORMDIN_VERSION);
+
 
 $app = new TApplication(); // criar uma instancia do objeto aplicacao
 $app->setFormDinMinimumVersion(FORMDIN_VERSION_MIN_VERSION);
-$app->setTitle(SYSTEM_NAME);
+$app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
 $app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
 $app->setSigla(APLICATIVO);
 $app->setImgLogoPath('images/appv1_logo.png');
