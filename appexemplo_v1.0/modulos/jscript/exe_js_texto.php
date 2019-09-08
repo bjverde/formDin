@@ -43,7 +43,7 @@ switch ($acao) {
     break;
     //------------------------------------------------------------------
     case 'Esconder campos':
-        $frm->redirect('view/jscript/exe_js_fileds.php', null, true);
+        $frm->redirect('jscript/exe_js_fileds.php', null, true);
     break;
 }
 
