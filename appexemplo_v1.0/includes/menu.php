@@ -140,14 +140,14 @@ $menu->add('4', null, 'Mensagens e Ajuda', null, null, '../../base/imagens/feedb
 
 //-----------------------------------------------------------------------------
 $menu->add('5', null, 'JavaScript', null, null, '../../base/imagens/logo_js_flat.png');
-	$menu->add('50', '5', 'JavaScript Leia-me', 'jscrip/exe_js_texto.php', null, '../../base/imagens/logo_js_flat.png');
+	$menu->add('50', '5', 'JavaScript Leia-me', 'jscript/exe_js_texto.php', null, '../../base/imagens/logo_js_flat.png');
     $menu->add('51', '5', 'Exemplo 1', 'ajax/exe_ajax01.php');
     $menu->add('52', '5', 'Atualizar Campos', 'ajax/exe_ajax02.php');
     $menu->add('53', '5', 'Ajax com Semáforo', 'ajax/exe_ajax03_semaphore.php');
     $menu->add('54', '5', 'Ajax 04', 'ajax/exe_ajax04.php');
     $menu->add('55', '5', 'Ajax 05', 'ajax/exe_ajax05.php');
     $menu->add('56', '5', 'Ajax 06 - JavaScript e CSS', 'ajax/exe_ajax06_javascript_css.php');
-    $menu->add('57', '5', 'Esconder campos', 'jscrip/exe_js_fileds.php', null, '../../base/imagens/logo_js_flat.png');
+    $menu->add('57', '5', 'Esconder campos', 'jscript/exe_js_fileds.php', null, '../../base/imagens/logo_js_flat.png');
 
 //-----------------------------------------------------------------------------
 $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
