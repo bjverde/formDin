@@ -10,8 +10,8 @@
  * System appev2 created in: 2019-09-01 16:03:02
  */
 
-define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
-define('SYSTEM_ACRONYM' , 'appev2.0');
+//define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
+define('SYSTEM_ACRONYM' , 'APPEV2.0');
 define('SYSTEM_VERSION' , '2.0.2');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 
