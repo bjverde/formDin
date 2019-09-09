@@ -1,15 +1,20 @@
 <?php
 defined('APLICATIVO') or die();
 
-$whereGrid = ' 1=1 ';
-$primaryKey = 'IDPROCESSO';
+$html1 = 'Os campos: "Somente restrição patrimoniais" e "Prestação de Contas" tem um evento addEvent que mostra campos.'
+        .'<br>'
+        .'<br>'
+        .'<br>O campo "Prestação de Contas" mostra campos "Obrigatorios" porém esses campos não são realmente obrigatorios, apenas aparecem em vermelho simulando um campo obrigatorio. Porém é apenas uma alteração no front-end (fwSetRequired). Se preicsar de uma validar deverá fazer no Back-end (PHP)'
+        .'<br>';
+
 $frm = new TForm('Sentença');
 $frm->setFlat(true);
 $frm->setMaximize(true);
+$frm->addCssFile('css/css_formDinv5.css');
 
 
-$frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addHiddenField( 'BUSCAR' );
+$frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert',false);
+
 
 $frm->addGroupField('gpEditar','Campos para alterar:');
 $frm->addTextField('Nome', 'Nome do sentenciado',150,true,50);
