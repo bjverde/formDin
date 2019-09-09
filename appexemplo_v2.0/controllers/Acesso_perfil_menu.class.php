@@ -55,6 +55,7 @@ class Acesso_perfil_menu
     public function save( Acesso_perfil_menuVO $objVo )
     {
         $result = null;
+        $objVo->setSit_ativo('S');
         if( $objVo->getIdperfilmenu() ) {
             $result = $this->dao->update( $objVo );
         } else {

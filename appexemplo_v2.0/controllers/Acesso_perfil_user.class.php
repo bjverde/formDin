@@ -62,6 +62,7 @@ class Acesso_perfil_user
     public function save( Acesso_perfil_userVO $objVo )
     {
         $result = null;
+        $objVo->setSit_ativo('S');
         if( $objVo->getIdperfiluser() ) {
             $result = $this->dao->update( $objVo );
         } else {
