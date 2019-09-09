@@ -56,13 +56,14 @@ class TPDOConnectionObj
 
     private $tpdo = null;
     
-    public function __construct()
+    public function __construct($connect = true)
     {
         $tpdo = New TPDOConnection();
         //$configArray = $this->getFakeConnectionArray();
-        $tpdo::connect(null,true,null,null);
+        if( $connect ){
+            $tpdo::connect(null,true,null,null);
+        }
         $this->setTPDOConnection($tpdo);
-        //$this->connect();
     }    
     private function getFakeConnectionArray(){
         $configArray= array(
@@ -72,7 +73,7 @@ class TPDOConnectionObj
             ,'DATABASE' => 'fake'
             ,'USERNAME' => 'fake'
             ,'PASSWORD' => 'fake'
-        );        
+        );
         return $configArray;
     }
     //--------------------------------------------------------------------------------------    
