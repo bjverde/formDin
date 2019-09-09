@@ -62,6 +62,7 @@ class TPDOConnectionObj
         //$configArray = $this->getFakeConnectionArray();
         $tpdo::connect(null,true,null,null);
         $this->setTPDOConnection($tpdo);
+        //$this->connect();
     }    
     private function getFakeConnectionArray(){
         $configArray= array(
@@ -107,7 +108,7 @@ class TPDOConnectionObj
         if(!$hasConfigArray){
             $configArray = $this->makeConfigArray();
         }        
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
         if($hasConfigArray){
             $tpdo::connect(null,$boolRequired,$boolUtfDecode,$configArray);
@@ -120,14 +121,14 @@ class TPDOConnectionObj
     public function getDBMS()
     {
         //return $this->tpdo::getDBMS();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getDBMS();
         return $attribute;
     }
     public function setDBMS( $banco = null )
     {
         //$this->tpdo::setBanco($banco);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setBanco($banco);
         $this->setTPDOConnection($tpdo);
     }
@@ -135,14 +136,14 @@ class TPDOConnectionObj
     public function getPort()
     {
         //return $this->tpdo::getPort();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getPort();
         return $attribute;
     }
     public function setPort($port = null )
     {
         //$this->tpdo::setPort($port);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setPort($port);
         $this->setTPDOConnection($tpdo);
     }
@@ -150,14 +151,14 @@ class TPDOConnectionObj
     public function getHost()
     {
         //return $this->tpdo::getHost();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getHost();
         return $attribute;
     }
     public function setHost($host)
     {
         //$this->tpdo::setHost($host);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setHost($host);
         $this->setTPDOConnection($tpdo);        
     }
@@ -165,14 +166,14 @@ class TPDOConnectionObj
     public function getDataBaseName()
     {
         //return $this->tpdo::getDataBaseName();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getDataBaseName();
         return $attribute;
     }
     public function setDataBaseName($host)
     {
         //$this->tpdo::setDataBaseName($host);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setDataBaseName($host);
         $this->setTPDOConnection($tpdo); 
     }
@@ -180,14 +181,14 @@ class TPDOConnectionObj
     public function getUsername()
     {
         //return $this->tpdo::getUsername();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getUsername();
         return $attribute;
     }
     public function setUsername($username)
     {
         //$this->tpdo::setUsername($username);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setUsername($username);
         $this->setTPDOConnection($tpdo);         
     }
@@ -195,14 +196,14 @@ class TPDOConnectionObj
     public function getPassword()
     {
         //return $this->tpdo::getPassword();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getPassword();
         return $attribute;
     }
     public function setPassword($password)
     {
         //$this->tpdo::setPassword($password);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setPassword($password);
         $this->setTPDOConnection($tpdo);         
     }
@@ -210,14 +211,14 @@ class TPDOConnectionObj
     public function getUtfDecode()
     {
         //return $this->tpdo::getUtfDecode();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $attribute = $tpdo::getUtfDecode();
         return $attribute;
     }
     public function setUtfDecode( $boolNewValue = null )
     {
         //$this->tpdo::setUtfDecode($boolNewValue);
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $tpdo::setUtfDecode($boolNewValue);
         $this->setTPDOConnection($tpdo);   
     }
@@ -231,7 +232,7 @@ class TPDOConnectionObj
     //--------------------------------------------------------------------------------------
     public function getInstance()
     {
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         $instance = $tpdo::getInstance();
         return $instance;
     }
@@ -239,7 +240,7 @@ class TPDOConnectionObj
     public function beginTransaction()
     {
         //$this->tpdo::rollBack();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         //$tpdo::rollBack();
         $instance = $tpdo::getInstance();
         $instance->beginTransaction();
@@ -255,7 +256,7 @@ class TPDOConnectionObj
     public function commit()
     {
         //$this->tpdo::commit();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         //$tpdo::commit();
         $instance = $tpdo::getInstance();
         $instance->commit();
@@ -265,7 +266,7 @@ class TPDOConnectionObj
     public function rollBack()
     {
         //$this->tpdo::rollBack();
-        $tpdo = $this->tpdo;
+        $tpdo = $this->getTPDOConnection();
         //$tpdo::rollBack();
         $instance = $tpdo::getInstance();
         $instance->rollBack();
