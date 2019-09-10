@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:50
+ * System appev2 created in: 2019-09-10 09:04:46
  */
 class Acesso_perfil_user
 {
@@ -39,7 +39,7 @@ class Acesso_perfil_user
         $where  = array ('IDUSER'=>$idUser);
         $result = $this->dao->selectAll( null, $where );
         return $result;
-    }
+    }    
     //--------------------------------------------------------------------------------
     public function selectCount( $where=null )
     {
@@ -81,7 +81,7 @@ class Acesso_perfil_user
     {
         $result = $this->dao->deleteByIdUser( $id );
         return $result;
-    }
+    }    
     //--------------------------------------------------------------------------------
     public function getVoById( $id )
     {

@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:50
+ * System appev2 created in: 2019-09-10 09:04:46
  */
 class Acesso_perfil_menu
 {
@@ -15,9 +15,9 @@ class Acesso_perfil_menu
 
     private $dao = null;
 
-    public function __construct()
+    public function __construct($tpdo = null)
     {
-        $this->dao = new Acesso_perfil_menuDAO();
+        $this->dao = new Acesso_perfil_menuDAO($tpdo);
     }
     public function getDao()
     {
@@ -55,7 +55,6 @@ class Acesso_perfil_menu
     public function save( Acesso_perfil_menuVO $objVo )
     {
         $result = null;
-        $objVo->setSit_ativo('S');
         if( $objVo->getIdperfilmenu() ) {
             $result = $this->dao->update( $objVo );
         } else {

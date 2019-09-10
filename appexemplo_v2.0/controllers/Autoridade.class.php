@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:50
+ * System appev2 created in: 2019-09-10 09:04:46
  */
 class Autoridade
 {
@@ -15,9 +15,9 @@ class Autoridade
 
     private $dao = null;
 
-    public function __construct()
+    public function __construct($tpdo = null)
     {
-        $this->dao = new AutoridadeDAO();
+        $this->dao = new AutoridadeDAO($tpdo);
     }
     public function getDao()
     {
@@ -65,7 +65,7 @@ class Autoridade
             $msg = "No evento do mesmo dia só pode ter uma autoridade da mesma ordem";
             throw new DomainException($msg);
         }
-    }
+    }    
     //--------------------------------------------------------------------------------
     public function save( AutoridadeVO $objVo )
     {

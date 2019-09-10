@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:51
+ * System appev2 created in: 2019-09-10 09:04:46
  */
 class Marca
 {
@@ -15,9 +15,9 @@ class Marca
 
     private $dao = null;
 
-    public function __construct()
+    public function __construct($tpdo = null)
     {
-        $this->dao = new MarcaDAO();
+        $this->dao = new MarcaDAO($tpdo);
     }
     public function getDao()
     {
