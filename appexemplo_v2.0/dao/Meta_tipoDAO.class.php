@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:51
+ * System appev2 created in: 2019-09-10 11:31:30
  */
 class Meta_tipoDAO 
 {
@@ -23,17 +23,29 @@ class Meta_tipoDAO
 
     private $tpdo = null;
 
-    public function __construct() {
-        $tpdo = New TPDOConnectionObj();
+    public function __construct($tpdo=null)
+    {
+        $this->validateObjType($tpdo);
+        if( empty($tpdo) ){
+            $tpdo = New TPDOConnectionObj();
+        }
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()
     {
         return $this->tpdo;
     }
-    public function setTPDOConnection($TPDOConnection)
+    public function setTPDOConnection($tpdo)
     {
-        $this->tpdo = $TPDOConnection;
+        $this->validateObjType($tpdo);
+        $this->tpdo = $tpdo;
+    }
+    public function validateObjType($tpdo)
+    {
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
     }
     private function processWhereGridParameters( $whereGrid )
     {
@@ -54,7 +66,7 @@ class Meta_tipoDAO
             throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
         }
         $values = array($id);
-        $sql = self::$sqlBasicSelect.' where idMetaTipo = ?';
+        $sql = self::$sqlBasicSelect.' where idmetatipo = ?';
         $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }
@@ -62,7 +74,7 @@ class Meta_tipoDAO
     public function selectCount( $where=null )
     {
         $where = $this->processWhereGridParameters($where);
-        $sql = 'select count(idMetaTipo) as qtd from form_exemplo.meta_tipo';
+        $sql = 'select count(idmetatipo) as qtd from form_exemplo.meta_tipo';
         $sql = $sql.( ($where)? ' where '.$where:'');
         $result = $this->tpdo->executeSql($sql);
         return $result['QTD'][0];

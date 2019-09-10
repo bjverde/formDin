@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:51
+ * System appev2 created in: 2019-09-10 11:31:31
  */
 class PedidoDAO 
 {
@@ -32,21 +32,33 @@ class PedidoDAO
 									   		,form_exemplo.tipo as t
 									   where p.idpessoa = pe.idpessoa
 									   and t.idtipo = pe.idtipo_pagamento
-									   ) as r';
-
+                                       ) as r';
+                                       
     private $tpdo = null;
 
-    public function __construct() {
-        $tpdo = New TPDOConnectionObj();
+    public function __construct($tpdo=null)
+    {
+        $this->validateObjType($tpdo);
+        if( empty($tpdo) ){
+            $tpdo = New TPDOConnectionObj();
+        }
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()
     {
         return $this->tpdo;
     }
-    public function setTPDOConnection($TPDOConnection)
+    public function setTPDOConnection($tpdo)
     {
-        $this->tpdo = $TPDOConnection;
+        $this->validateObjType($tpdo);
+        $this->tpdo = $tpdo;
+    }
+    public function validateObjType($tpdo)
+    {
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
     }
     private function processWhereGridParameters( $whereGrid )
     {
@@ -110,14 +122,14 @@ class PedidoDAO
     public function insert( PedidoVO $objVo )
     {
         $values = array(  $objVo->getIdpessoa() 
-						, $objVo->getIdtipo_pagamento() 
                         , $objVo->getDat_pedido() 
+                        , $objVo->getIdtipo_pagamento() 
                         );
         $sql = 'insert into form_exemplo.pedido(
-                                                idpessoa
-                                               ,idtipo_pagamento
-                                               ,dat_pedido
-                                               ) values (?,?,?)';
+                                 idpessoa
+                                ,dat_pedido
+                                ,idtipo_pagamento
+                                ) values (?,?,?)';
         $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }

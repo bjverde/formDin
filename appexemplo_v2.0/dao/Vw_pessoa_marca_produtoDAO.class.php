@@ -5,9 +5,9 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:52
+ * System appev2 created in: 2019-09-10 11:31:31
  */
 class Vw_pessoa_marca_produtoDAO 
 {
@@ -23,17 +23,29 @@ class Vw_pessoa_marca_produtoDAO
 
     private $tpdo = null;
 
-    public function __construct() {
-        $tpdo = New TPDOConnectionObj();
+    public function __construct($tpdo=null)
+    {
+        $this->validateObjType($tpdo);
+        if( empty($tpdo) ){
+            $tpdo = New TPDOConnectionObj();
+        }
         $this->setTPDOConnection($tpdo);
     }
     public function getTPDOConnection()
     {
         return $this->tpdo;
     }
-    public function setTPDOConnection($TPDOConnection)
+    public function setTPDOConnection($tpdo)
     {
-        $this->tpdo = $TPDOConnection;
+        $this->validateObjType($tpdo);
+        $this->tpdo = $tpdo;
+    }
+    public function validateObjType($tpdo)
+    {
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.__METHOD__);
+        }
     }
     private function processWhereGridParameters( $whereGrid )
     {

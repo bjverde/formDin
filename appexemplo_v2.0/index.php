@@ -63,7 +63,7 @@ $app->setVersionSystem(SYSTEM_VERSION);
 $app->setLoginInfo('Bem-vindo'); //Info usuario logado
 //$app->setFavIcon('../base/imagens/favicon-16x16.png');
 $app->setImgLogoPath('images/appv1_logo.png'); //Logo APP
-$app->setWaterMark('images/formdin_logo.png'); //Imagem no centro
+$app->setWaterMark('formdin_logo.png'); //Imagem no centro
 //$app->setBackgroundImage('../imagens/bg_blackmosaic.png'); // Imagem de Fundo
 $app->setCssDefaultFormFile('css/css_form_default.css');
 
