@@ -5,17 +5,17 @@
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
  * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:02
+ * System appev2 created in: 2019-09-10 09:04:14
  */
 
 define('SYSTEM_NAME'    , 'Sistema exemplo 2.0');
 define('SYSTEM_ACRONYM' , 'APPEV2.0');
-define('SYSTEM_VERSION' , '2.0.2');
+define('SYSTEM_VERSION' , '2.0.3');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
 
-define('FORMDIN_VERSION_MIN_VERSION', '4.7.5-alpha');
+define('FORMDIN_VERSION_MIN_VERSION', '4.7.5');
 
 if (! defined ( 'DS' )) {
     define('DS'   , DIRECTORY_SEPARATOR);
