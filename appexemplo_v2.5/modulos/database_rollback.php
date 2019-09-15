@@ -1,8 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
-if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
-    die();
-}
+require_once 'modulos/acesso_view_allowed_include.php';
 
 $html1 = '<h1>Exemplo controle de transação de banco</h1>';
 $html1 = $html1.'<br>'; 
