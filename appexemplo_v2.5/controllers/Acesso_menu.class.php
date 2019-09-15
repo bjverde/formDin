@@ -34,6 +34,12 @@ class Acesso_menu
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function selectMenuByLogin( $login )
+    {
+        $result = $this->dao->selectMenuByLogin( $login );
+        return $result;
+    }    
+    //--------------------------------------------------------------------------------
     public function selectCount( $where=null )
     {
         $result = $this->dao->selectCount( $where );

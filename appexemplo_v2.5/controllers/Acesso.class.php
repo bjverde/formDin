@@ -47,15 +47,17 @@ class Acesso {
 	}
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserPerfil(){
-        $iduser = self::getIdUser();
-		$perfil = Acesso_perfil_user::selectByIdUser($iduser);
+		$iduser = self::getIdUser();
+		$controllerAcesso_perfil_user = new Acesso_perfil_user();
+		$perfil = $controllerAcesso_perfil_user->selectByIdUser($iduser);
 		$_SESSION[APLICATIVO]['USER']['IDPERFIL']=$perfil['IDPERFIL'][0];
 		$_SESSION[APLICATIVO]['USER']['NOM_PERFIL']=$perfil['NOM_PERFIL'][0];
-	}	
+	}
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserModulo(){
-        $login = self::getLogin();
-	    $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
+		$login = self::getLogin();
+		$controllerAcesso_menu = new Acesso_menu();
+		$userMenu = $controllerAcesso_menu->selectMenuByLogin($login);
 	    $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'] = $userMenu;
 	}
 	//--------------------------------------------------------------------------------	
@@ -91,14 +93,14 @@ class Acesso {
         }
         if($pwd_user_new1 != $pwd_user_new2){
             throw new DomainException('As senhas não iguais');
-        }        
-		$user = Acesso_userDAO::selectByLogin($login_user);
+		}
+		$controllerAcesso_user = new Acesso_user();
+		$user = $controllerAcesso_user->selectByLogin($login_user);
 		if (password_verify($pwd_user_old, $user['PWD_USER'][0])) {
 		    $pwd_user_new_hash = password_hash($pwd_user_new1, PASSWORD_DEFAULT);
 		    $vo = new Acesso_userVO();
 		    $vo->setLogin_user($login_user);
 			$vo->setPwd_user($pwd_user_new_hash);
-			$controllerAcesso_user = new Acesso_user();
 			$controllerAcesso_user->updateSenha($login_user);
 		    $msg = 1;
         }else{
