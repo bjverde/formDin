@@ -14,7 +14,7 @@ defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPESSOA';
-$frm = new TForm('pessoa',800,950);
+$frm = new TForm('Cadastro de Pessoa',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);

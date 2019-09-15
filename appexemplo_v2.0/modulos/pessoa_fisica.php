@@ -27,7 +27,7 @@ $controllerPessoa = new Pessoa();
 $listPessoa = $controllerPessoa->selectAll();
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
 $frm->addTextField('CPF', 'CPF',11,true,11);
-$frm->addDateField('DAT_NASCIMENTO', 'DAT_NASCIMENTO',false);
+$frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
 $controllerMunicipio = new Municipio();
 $listMunicipio = $controllerMunicipio->selectAll();
 $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'COD_MUNICIPIO_NASCIMENTO',false,$listMunicipio,null,null,null,null,null,null,' ',null);
@@ -138,10 +138,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn($primaryKey,'id');
     $gride->addColumn('IDPESSOA','id Pessoa');
     $gride->addColumn('CPF','CPF');
-    $gride->addColumn('DAT_NASCIMENTO','DAT_NASCIMENTO');
+    $gride->addColumn('DAT_NASCIMENTO','Data Nascimento');
     $gride->addColumn('COD_MUNICIPIO_NASCIMENTO','COD_MUNICIPIO_NASCIMENTO');
-    $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-    $gride->addColumn('DAT_ALTERACAO','DAT_ALTERACAO');
+    $gride->addColumn('DAT_INCLUSAO','Data Inclusão');
+    $gride->addColumn('DAT_ALTERACAO','Data Alteração');
 
 
     $gride->show();
