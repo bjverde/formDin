@@ -33,6 +33,11 @@ class Acesso_user
         $result = $this->dao->selectById( $id );
         return $result;
     }
+    public function selectByLogin( $login )
+	{
+        $result = $this->dao->selectByLogin($login);
+        return $result;
+    }        
     //--------------------------------------------------------------------------------
     public function selectCount( $where=null )
     {
@@ -74,6 +79,11 @@ class Acesso_user
         $result = $this->dao->getVoById( $id );
         return $result;
     }
-
+    //--------------------------------------------------------------------------------
+    public function updateSenha ( Acesso_userVO $objVo )
+    {
+        $result = $this->dao->updateSenha($objVo);
+        return $result;
+    }
 }
 ?>

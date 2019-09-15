@@ -17,7 +17,8 @@ class Acesso {
     }
 	//--------------------------------------------------------------------------------	
 	public static function login( $login_user, $pwd_user )	{
-		$user = Acesso_userDAO::selectByLogin($login_user);
+		$controllerAcesso_user = new Acesso_user();
+		$user = $controllerAcesso_user->selectByLogin($login_user);
         if (password_verify($pwd_user, $user['PWD_USER'][0])) {
             $_SESSION[APLICATIVO]['USER']['IDUSER'] = $user['IDUSER'][0];
             $_SESSION[APLICATIVO]['USER']['LOGIN']  = $user['LOGIN_USER'][0];
@@ -31,8 +32,11 @@ class Acesso {
 	}
 	//--------------------------------------------------------------------------------	
 	public static function getLogin()	{
-		$user  = ArrayHelper::get( $_SESSION[APLICATIVO],'USER');
-		$login = ArrayHelper::get( $user,'LOGIN');
+	    $login = null;
+	    if( ArrayHelper::has(APLICATIVO, $_SESSION) ){
+		  $user  = ArrayHelper::get( $_SESSION[APLICATIVO],'USER');
+		  $login = ArrayHelper::get( $user,'LOGIN');
+	    }
         return $login;
 	}
 	//--------------------------------------------------------------------------------	
@@ -43,15 +47,17 @@ class Acesso {
 	}
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserPerfil(){
-        $iduser = self::getIdUser();
-		$perfil = Acesso_perfil_user::selectByIdUser($iduser);
+		$iduser = self::getIdUser();
+		$controllerAcesso_perfil_user = new Acesso_perfil_user();
+		$perfil = $controllerAcesso_perfil_user->selectByIdUser($iduser);
 		$_SESSION[APLICATIVO]['USER']['IDPERFIL']=$perfil['IDPERFIL'][0];
 		$_SESSION[APLICATIVO]['USER']['NOM_PERFIL']=$perfil['NOM_PERFIL'][0];
-	}	
+	}
 	//--------------------------------------------------------------------------------
 	public static function setAcessoUserModulo(){
-        $login = self::getLogin();
-	    $userMenu = Acesso_menuDAO::selectMenuByLogin($login);
+		$login = self::getLogin();
+		$controllerAcesso_menu = new Acesso_menu();
+		$userMenu = $controllerAcesso_menu->selectMenuByLogin($login);
 	    $_SESSION[APLICATIVO]['USER']['MODULO_ACESSO'] = $userMenu;
 	}
 	//--------------------------------------------------------------------------------	
@@ -66,19 +72,19 @@ class Acesso {
 	 * @throws InvalidArgumentException
 	 * @return boolean
 	 */
-	public static function moduloAcessoPermitido($dsUrl){
-	    $permitido = false;
+    public static function viewAccessNotAllowed($dsUrl){
+        $notAllowed = true;
 	    if(empty($dsUrl)){
 	        throw new InvalidArgumentException('Erro: Modulo não informado');
 	    }else{
 	       $dadosMenu = self::getAcessoUserMenuByLogin();
 	       $listDsUrl = ArrayHelper::getArray($dadosMenu, 'URL');
-	       $permitido = in_array($dsUrl, $listDsUrl);
-	       if( $permitido==false ){
-	           $permitido = in_array('modulos/'.$dsUrl, $listDsUrl);
+	       $in_array = in_array($dsUrl, $listDsUrl);
+	       if( $in_array == true ){
+	           $notAllowed = false;
 	       }
 	    }
-	    return $permitido;
+	    return $notAllowed;
 	}
     //--------------------------------------------------------------------------------
     public static function changePassword($login_user, $pwd_user_old, $pwd_user_new1, $pwd_user_new2)	{
@@ -87,14 +93,15 @@ class Acesso {
         }
         if($pwd_user_new1 != $pwd_user_new2){
             throw new DomainException('As senhas não iguais');
-        }        
-		$user = Acesso_userDAO::selectByLogin($login_user);
+		}
+		$controllerAcesso_user = new Acesso_user();
+		$user = $controllerAcesso_user->selectByLogin($login_user);
 		if (password_verify($pwd_user_old, $user['PWD_USER'][0])) {
 		    $pwd_user_new_hash = password_hash($pwd_user_new1, PASSWORD_DEFAULT);
 		    $vo = new Acesso_userVO();
 		    $vo->setLogin_user($login_user);
-		    $vo->setPwd_user($pwd_user_new_hash);
-		    Acesso_userDAO::updateSenha($vo);
+			$vo->setPwd_user($pwd_user_new_hash);
+			$controllerAcesso_user->updateSenha($login_user);
 		    $msg = 1;
         }else{
             throw new DomainException('A senha atual não está correta');
