@@ -17,7 +17,8 @@ class Acesso {
     }
 	//--------------------------------------------------------------------------------	
 	public static function login( $login_user, $pwd_user )	{
-		$user = Acesso_userDAO::selectByLogin($login_user);
+		$controllerAcesso_user = new Acesso_user();
+		$user = $controllerAcesso_user->selectByLogin($login_user);
         if (password_verify($pwd_user, $user['PWD_USER'][0])) {
             $_SESSION[APLICATIVO]['USER']['IDUSER'] = $user['IDUSER'][0];
             $_SESSION[APLICATIVO]['USER']['LOGIN']  = $user['LOGIN_USER'][0];
@@ -96,8 +97,9 @@ class Acesso {
 		    $pwd_user_new_hash = password_hash($pwd_user_new1, PASSWORD_DEFAULT);
 		    $vo = new Acesso_userVO();
 		    $vo->setLogin_user($login_user);
-		    $vo->setPwd_user($pwd_user_new_hash);
-		    Acesso_userDAO::updateSenha($vo);
+			$vo->setPwd_user($pwd_user_new_hash);
+			$controllerAcesso_user = new Acesso_user();
+			$controllerAcesso_user->updateSenha($login_user);
 		    $msg = 1;
         }else{
             throw new DomainException('A senha atual não está correta');
