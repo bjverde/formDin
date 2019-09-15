@@ -72,19 +72,19 @@ class Acesso {
 	 * @throws InvalidArgumentException
 	 * @return boolean
 	 */
-	public static function moduloAcessoPermitido($dsUrl){
-	    $permitido = false;
+    public static function viewAccessNotAllowed($dsUrl){
+        $notAllowed = true;
 	    if(empty($dsUrl)){
 	        throw new InvalidArgumentException('Erro: Modulo não informado');
 	    }else{
 	       $dadosMenu = self::getAcessoUserMenuByLogin();
 	       $listDsUrl = ArrayHelper::getArray($dadosMenu, 'URL');
-	       $permitido = in_array($dsUrl, $listDsUrl);
-	       if( $permitido==false ){
-	           $permitido = in_array('modulos/'.$dsUrl, $listDsUrl);
+	       $in_array = in_array($dsUrl, $listDsUrl);
+	       if( $in_array == true ){
+	           $notAllowed = false;
 	       }
 	    }
-	    return $permitido;
+	    return $notAllowed;
 	}
     //--------------------------------------------------------------------------------
     public static function changePassword($login_user, $pwd_user_old, $pwd_user_new1, $pwd_user_new2)	{
