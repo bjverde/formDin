@@ -124,7 +124,7 @@ class Acesso_menuDAO
         return $result;
     }
     //--------------------------------------------------------------------------------
-    public static function selectMenuByLogin( $login_user )
+    public function selectMenuByLogin( $login_user )
     {
         $values = array($login_user);
         $sql = 'select
@@ -146,7 +146,8 @@ class Acesso_menuDAO
 					,vw_acesso_user_menu as um
 				where um.idmenu = m.idmenu
 				AND um.login_user = ?';
-        return self::executeSql($sql, $values);
+        $result = $this->tpdo->executeSql($sql, $values);
+        return $result;
     }    
     //--------------------------------------------------------------------------------
     public function insert( Acesso_menuVO $objVo )
