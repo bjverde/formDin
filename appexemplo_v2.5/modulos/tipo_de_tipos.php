@@ -1,5 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDTIPO_DE_TIPOS';
 $frm = new TForm('tipo_de_tipos',800,950);

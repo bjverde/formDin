@@ -11,9 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
-if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
-    die();
-}
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $frm = new TForm('selfilhosmenu',800,950);
 $frm->setShowCloseButton(false);

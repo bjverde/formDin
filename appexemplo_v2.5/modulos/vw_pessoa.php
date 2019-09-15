@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPESSOA';
 $frm = new TForm('vw_pessoa',800,950);

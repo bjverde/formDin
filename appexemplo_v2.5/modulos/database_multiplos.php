@@ -1,6 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
-require_once 'modulos/acesso_view_allowed_include.php';
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $html1 = '<h1>Exemplo acessando diversos bancos</h1>';
 $html1 = $html1.'<br>'; 
