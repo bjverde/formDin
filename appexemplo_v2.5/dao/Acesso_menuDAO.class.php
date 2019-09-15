@@ -146,7 +146,7 @@ class Acesso_menuDAO
 					,vw_acesso_user_menu as um
 				where um.idmenu = m.idmenu
 				AND um.login_user = ?';
-        $result = $this->tpdo->executeSql($sql);
+        $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }    
     //--------------------------------------------------------------------------------
