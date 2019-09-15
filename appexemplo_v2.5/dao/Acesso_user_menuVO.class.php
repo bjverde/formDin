@@ -7,9 +7,9 @@
  * SysGen  Version: 1.9.0-alpha
  * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-10 09:04:47
+ * System appev2 created in: 2019-09-10 09:04:46
  */
-class Vw_acesso_user_menuVO
+class Acesso_user_menuVO
 {
     private $iduser = null;
     private $login_user = null;

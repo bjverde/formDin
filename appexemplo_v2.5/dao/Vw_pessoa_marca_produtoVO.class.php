@@ -9,19 +9,21 @@
  * 
  * System appev2 created in: 2019-09-10 09:04:47
  */
-class PessoaVO
+class Vw_pessoa_marca_produtoVO
 {
     private $idpessoa = null;
     private $nome = null;
-    private $tipo = null;
-    private $sit_ativo = null;
-    private $dat_inclusao = null;
-    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null ) {
+    private $idmarca = null;
+    private $nom_marca = null;
+    private $idproduto = null;
+    private $nom_produto = null;
+    public function __construct( $idpessoa=null, $nome=null, $idmarca=null, $nom_marca=null, $idproduto=null, $nom_produto=null ) {
         $this->setIdpessoa( $idpessoa );
         $this->setNome( $nome );
-        $this->setTipo( $tipo );
-        $this->setSit_ativo( $sit_ativo );
-        $this->setDat_inclusao( $dat_inclusao );
+        $this->setIdmarca( $idmarca );
+        $this->setNom_marca( $nom_marca );
+        $this->setIdproduto( $idproduto );
+        $this->setNom_produto( $nom_produto );
     }
     //--------------------------------------------------------------------------------
     public function setIdpessoa( $strNewValue = null )
@@ -42,31 +44,40 @@ class PessoaVO
         return $this->nome;
     }
     //--------------------------------------------------------------------------------
-    public function setTipo( $strNewValue = null )
+    public function setIdmarca( $strNewValue = null )
     {
-        $this->tipo = $strNewValue;
+        $this->idmarca = $strNewValue;
     }
-    public function getTipo()
+    public function getIdmarca()
     {
-        return $this->tipo;
-    }
-    //--------------------------------------------------------------------------------
-    public function setSit_ativo( $strNewValue = null )
-    {
-        $this->sit_ativo = $strNewValue;
-    }
-    public function getSit_ativo()
-    {
-        return $this->sit_ativo;
+        return $this->idmarca;
     }
     //--------------------------------------------------------------------------------
-    public function setDat_inclusao( $strNewValue = null )
+    public function setNom_marca( $strNewValue = null )
     {
-        $this->dat_inclusao = $strNewValue;
+        $this->nom_marca = $strNewValue;
     }
-    public function getDat_inclusao()
+    public function getNom_marca()
     {
-        return is_null( $this->dat_inclusao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao;
+        return $this->nom_marca;
+    }
+    //--------------------------------------------------------------------------------
+    public function setIdproduto( $strNewValue = null )
+    {
+        $this->idproduto = $strNewValue;
+    }
+    public function getIdproduto()
+    {
+        return $this->idproduto;
+    }
+    //--------------------------------------------------------------------------------
+    public function setNom_produto( $strNewValue = null )
+    {
+        $this->nom_produto = $strNewValue;
+    }
+    public function getNom_produto()
+    {
+        return $this->nom_produto;
     }
     //--------------------------------------------------------------------------------
 }
