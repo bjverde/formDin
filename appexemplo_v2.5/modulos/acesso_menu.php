@@ -11,7 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
-require_once 'modulos/acesso_view_allowed_include.php';
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDMENU';
 $frm = new TForm('Cadastro de Menu',1000,1000);

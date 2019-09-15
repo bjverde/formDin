@@ -11,7 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
-require_once 'modulos/acesso_view_allowed_include.php';
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDUSER';
 $frm = new TForm('Cadastro de usuários',500);
@@ -20,7 +20,7 @@ $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
-include 'modulos/acesso_aviso.php';
+include 'modulos/includes/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('LOGIN_USER', 'Login',50,true);
