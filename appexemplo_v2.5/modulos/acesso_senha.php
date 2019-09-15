@@ -1,5 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
+require_once 'modulos/acesso_view_allowed_include.php';
 
 $primaryKey = 'IDPERFILUSER';
 $frm = new TForm('Alterar a senha',300,400);
@@ -52,8 +53,6 @@ switch( $acao ) {
 	break;
 }
 
-if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
-    $frm->show();
-}
+$frm->show();
 
 ?>
