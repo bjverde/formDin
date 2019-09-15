@@ -12,7 +12,12 @@
 
 define('SYSTEM_NAME'    , 'Sistema exemplo 2.5');
 define('SYSTEM_ACRONYM' , 'APPEV25');
-define('SYSTEM_VERSION' , '2.5.0');
+define('SYSTEM_VERSION' , '2.5.3');
 define('APLICATIVO'     , SYSTEM_ACRONYM);
-define('DS'   , DIRECTORY_SEPARATOR);
+
+define('FORMDIN_VERSION_MIN_VERSION', '4.7.0');
+
+if (! defined ( 'DS' )) {
+    define('DS'   , DIRECTORY_SEPARATOR);
+}
 ?>
