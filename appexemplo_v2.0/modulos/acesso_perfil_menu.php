@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPERFILMENU';
 $frm = new TForm('Relacionar Perfil com Menu',700);
@@ -19,7 +20,7 @@ $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
-include 'modulos/acesso_aviso.php';
+include 'modulos/includes/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $controllerAcesso_perfil = new Acesso_perfil();

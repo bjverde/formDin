@@ -1,5 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $html1 = '<h1>Exemplo controle de transação de banco</h1>';
 $html1 = $html1.'<br>';

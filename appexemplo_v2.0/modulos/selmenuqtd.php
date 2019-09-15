@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $frm = new TForm('selmenuqtd',800,950);
 $frm->setShowCloseButton(false);

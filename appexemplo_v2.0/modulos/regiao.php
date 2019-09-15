@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'COD_REGIAO';
 $frm = new TForm('Cadastro de Regiões',800,950);

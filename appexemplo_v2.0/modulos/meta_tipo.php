@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDMETATIPO';
 $frm = new TForm('Cadastro de Meta Tipo',800,950);

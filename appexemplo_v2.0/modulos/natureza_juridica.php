@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDNATUREZA_JURIDICA';
 $frm = new TForm('natureza_juridica',800,950);
