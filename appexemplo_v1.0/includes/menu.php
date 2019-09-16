@@ -190,17 +190,21 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
 
 //-----------------------------------------------------------------------------
 $menu->add('9', null, 'Banco e PDO', null, 'Exemplo de Recursos para conectar nos bancos de dados', 'data_base.png');
-    $menu->add('91', '9', 'Exemplo Mysql', 'pdo/exe_pdo_1.php', null, '../../base/imagens/MySQL-Database-512.png');
-    $menu->add('92', '9', 'Exemplo Sqlite e Mysql', 'pdo/exe_pdo_2.php', null, '../../base/imagens/MySQL-Database-512.png');
-    $menu->add('93', '9', 'Exemplo Postgres');
-        $menu->add('931', '93', 'DAO e VO', 'pdo/pg/exe_pgsql01.php');
-        $menu->add('932', '93', 'Cadastro Arquivo Postgres', 'pdo/exe_pdo_4.php');
-        $menu->add('933', '93', 'Postgres SQL 02', 'pdo/pg/exe_pgsql02.php');
-        $menu->add('934', '93', 'Postgres SQL 03', 'pdo/pg/exe_pgsql03.php');
-    $menu->add('94', '9', 'PDO Firebird', 'pdo/exe_pdo_firebird01.php');
-    $menu->add('96', '9', 'Testar Conexão', 'pdo/exe_teste_conexao.php');
-    $menu->add('97', '9', 'Dados de Apoio', 'pdo/exe_pdo_6_apoio.php');
-    $menu->add('98', '9', 'Banco Textual DBM (db4)', 'pdo/exe_db4.php');
+    $menu->add('9.1', '9', 'Exemplo Mysql', 'pdo/exe_pdo_1.php', null, '../../base/imagens/MySQL-Database-512.png');
+    $menu->add('9.2', '9', 'Exemplo Sqlite e Mysql', 'pdo/exe_pdo_2.php', null, '../../base/imagens/MySQL-Database-512.png');
+    $menu->add('9.3', '9', 'Exemplo Postgres');
+        $menu->add('9.3.1', '93', 'DAO e VO', 'pdo/pg/exe_pgsql01.php');
+        $menu->add('9.3.2', '93', 'Cadastro Arquivo Postgres', 'pdo/exe_pdo_4.php');
+        $menu->add('9.3.3', '93', 'Postgres SQL 02', 'pdo/pg/exe_pgsql02.php');
+        $menu->add('9.3.4', '93', 'Postgres SQL 03', 'pdo/pg/exe_pgsql03.php');
+    $menu->add('9.4', '9', 'PDO Firebird', 'pdo/exe_pdo_firebird01.php');
+    $menu->add('9.6', '9', 'Testar Conexão', 'pdo/exe_teste_conexao.php');
+    $menu->add('9.7', '9', 'Dados de Apoio', 'pdo/exe_pdo_6_apoio.php');
+    $menu->add('9.8', '9', 'Banco Textual DBM (db4)', 'pdo/exe_db4.php');
+    $menu->add('9.9', '9', 'Transação');
+        $menu->add('9.9.1', '9.9', 'Commit', 'pdo/exe_pdo_transaction_commit.php', null, '../../base/imagens/database_commit.png');
+        $menu->add('9.9.2', '9.9', 'RollBack', 'pdo/exe_pdo_transaction_commit.php', null, '../../base/imagens/database_rollback.png');
+    $menu->add('9.10', '9', 'Multiplos SBGDs ou Bancos', 'pdo/exe_pdo_multidabase.php', null, '../../base/imagens/database_balance.png');
 
 
 //-----------------------------------------------------------------------------
@@ -211,16 +215,16 @@ $menu->add('10', null, 'Formulário', null, null, '../../base/imagens/fill_form-
         $menu->add('10.0.2', '10.01', 'Boxes', 'view/form/exe_TBox.php');
         $menu->add('10.0.3', '10.01', 'Maximizar', 'view/form/exe_max.php');
         $menu->add('10.0.4', '10.01', 'Inicia Maximizar', 'view/form/exe_max_start.php');
-    $menu->add('10.1', '10', 'Exemplos de Formulários');
+    $menu->add('10.1', '10', 'Exemplos de Formulários', null, null, '../../base/imagens/fill_form-512.png');
         $menu->add('10.1.1', '10.1', 'Form 01 - Normal', 'view/form/exe_TForm.php');
-        $menu->add('10.2.1', '10.1', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
-        $menu->add('10.3.1', '10.1', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
-        $menu->add('10.4.1', '10.1', 'Form 04 - Consulta Pedidos', 'view/form/exe_tform4_consulta_tree_p1.php');
-        $menu->add('10.5.1', '10.1', 'Form 04 - Visualizar Item', 'view/form/exe_tform4_consulta_tree_p2.php');
-        $menu->add('10.6.1', '10.1', 'Form 05 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
-        $menu->add('10.7.1', '10.1', 'Form 06 - Texto Rico TinyMCE', 'view/form/exe_TForm5.php');
-        $menu->add('10.8.1', '10.1', 'Form 07 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
-        $menu->add('10.8.1', '10.1', 'Form 08 - Grid Duplo Paginado', 'view/form/exe_form_gride_paginacao_dupla.php');
+        $menu->add('10.1.2', '10.1', 'Form 02 - Subcadastro', 'view/form/exe_TForm2.php');
+        $menu->add('10.1.3', '10.1', 'Form 03 - Mestre Detalhe com Ajax', 'cad_mestre_detalhe/cad_mestre_detalhe.php');
+        $menu->add('10.1.4', '10.1', 'Form 04 - Consulta Pedidos', 'view/form/exe_tform4_consulta_tree_p1.php');
+        $menu->add('10.1.5', '10.1', 'Form 04 - Visualizar Item', 'view/form/exe_tform4_consulta_tree_p2.php');
+        $menu->add('10.1.6', '10.1', 'Form 05 - Grid Off-line', 'view/form/exe_tform4_grid-off_form.php');
+        $menu->add('10.1.7', '10.1', 'Form 06 - Texto Rico TinyMCE (ERRO)', 'view/form/exe_TForm5.php');
+        $menu->add('10.1.8', '10.1', 'Form 07 - Texto Rico CkEditor (ERRO)', 'view/form/exe_TForm5_ckeditor.php');
+        $menu->add('10.1.9', '10.1', 'Form 08 - Grid Duplo Paginado', 'view/form/exe_form_gride_paginacao_dupla.php');
     $menu->add('10.9', '10', 'Agenda');
         $menu->add('10.9.1', '10.9', 'Cadastro de Horarios disponiveis', 'view/form/horario_atendimento.php');
         $menu->add('10.9.2', '10.9', 'Cadastro de Pessoas', 'view/form/pessoa.php');
