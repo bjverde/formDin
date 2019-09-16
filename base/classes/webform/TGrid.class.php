@@ -2069,6 +2069,12 @@ class TGrid extends TTable
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * Qtd Max de linhas
+     *
+     * @param int $intNewValue
+     * @return void
+     */
     public function setMaxRows( $intNewValue = null ) {
         $this->maxRows = $intNewValue;
     }
