@@ -250,11 +250,23 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Retorna o numero de regristros quando for usar uma pagina de banco e não apenas paginação de tela
+     *
+     * @return int
+     */
     public function getRealTotalRowsSqlPaginator(){
         return $this->realTotalRowsSqlPaginator;
     }
     
     //------------------------------------------------------------------------------------
+    /**
+     * Numero real de registros, deve ser utilizando somento com paginação de banco
+     * está relacionado com setMaxRows
+     *
+     * @param int $realTotalRowsSqlPaginator
+     * @return void
+     */
     public function setRealTotalRowsSqlPaginator($realTotalRowsSqlPaginator){
         $this->realTotalRowsSqlPaginator = $realTotalRowsSqlPaginator;
     }
