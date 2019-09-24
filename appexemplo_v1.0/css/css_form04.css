@@ -20,6 +20,42 @@
     font-weight:bold;
     font-size: 2em;
 }
+
+.buttonBigGreen {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonNoBorder {
+    /** background-color: transparent; **/
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.buttonTransparent {
+    background-color: transparent;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
 /********************** 
   CSS Pseudo-elements
   https://origin.fontawesome.com/how-to-use/on-the-web/advanced/css-pseudo-elements
@@ -40,6 +76,13 @@
     font-family: "Font Awesome 5 Brands";
     color:#FFD700;
     font-weight:bold;
-    font-size: 2em;
+    font-size: 1.5em;
     content: "\f379";
+}
+.php::before {
+    font-family: "Font Awesome 5 Brands";
+    color:#0000FF;
+    font-weight:bold;
+    font-size: 1.5em;
+    content: "\f457";
 }
