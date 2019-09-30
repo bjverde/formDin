@@ -474,9 +474,14 @@ class TPageControl extends TTable
 				if( $strPage=='' || $page->getid()==$this->getId().strtolower($strPage) || $page->getid()==$this->getId().'_'.strtolower($strPage) || $page->getid()==strtolower($strPage) )
 				{
 					$page->validate(null, $strFields, $strIgnoreFields );
-					if($result)
-					{
-						$result = count($page->getErrors()==0);
+					if($result) {
+						$erros = $page->getErrors();
+						$qtdErros = CountHelper::count($erros);
+						if($qtdErros > 0){
+							$result = $qtdErros;
+						}else{
+							$result = 0;
+						}
 					}
 				}
 			}
