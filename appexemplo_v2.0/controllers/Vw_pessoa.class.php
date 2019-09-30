@@ -78,10 +78,11 @@ class Vw_pessoa
     //--------------------------------------------------------------------------------
     public function validateUmCpfCnpj( Vw_pessoaVO $objVo )
     {
+        $idpessoa = $objVo->getIdpessoa();
         $CpfCnpj = $objVo->getCpfcnpj();
         $dados = $this->selectByCpfCnpj($CpfCnpj);
         $CpfCnpjBanco = ArrayHelper::getArrayFormKey($dados,'CPFCNPJ',0);
-        if( !empty($CpfCnpjBanco) ){
+        if( empty($idpessoa) && !empty($CpfCnpjBanco) ){
             throw new DomainException(Message::ERROR_PESSOA_CPFCNPJ);
         }
     }
@@ -90,11 +91,11 @@ class Vw_pessoa
     {
         $tipo = $objVo->getTipo();
         if( $tipo == Pessoa::PF ){
-            if( $objVo->getCpf() ){
+            if( empty($objVo->getCpf()) ){
                 throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CPF');
             }
         }else{
-            if( $objVo->getCnpj() ){
+            if( empty($objVo->getCnpj()) ){
                 throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CNPJ');
             }
         }
@@ -116,7 +117,7 @@ class Vw_pessoa
             
             $objVoPessoa = new PessoaVO();
             $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
-            $objVoPessoa->setNom_pessoa( $objVo->setNome() );
+            $objVoPessoa->setNome( $objVo->setNome() );
             $objVoPessoa->setTipo( $objVo->setTipo() );
             $result = new Pessoa($objVo);
 
