@@ -22,6 +22,8 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
+$frm->addHiddenField( 'IDPESSOA_FISICA' );
+$frm->addHiddenField( 'IDNATUREZA_JURIDICA' );
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('NOME', 'Nome',200,true,80);
 $frm->addSelectField('TIPO' ,'Tipo Pessoa:', null, 'PF=Pessoa física,PJ=Pessoa jurídica', false)->addEvent('onChange', 'select_change(this)');
@@ -136,7 +138,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',NOME|NOME'
                     .',TIPO|TIPO'
                     .',CPF|CPF'
+                    .',IDPESSOA_FISICA|IDPESSOA_FISICA'
                     .',CNPJ|CNPJ'
+                    .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
                     .',SIT_ATIVO|SIT_ATIVO'
                     .',DAT_INCLUSAO|DAT_INCLUSAO'
                     ;

@@ -117,9 +117,25 @@ class Vw_pessoa
             
             $objVoPessoa = new PessoaVO();
             $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
-            $objVoPessoa->setNome( $objVo->setNome() );
-            $objVoPessoa->setTipo( $objVo->setTipo() );
-            $result = new Pessoa($objVo);
+            $objVoPessoa->setNome( $objVo->getNome() );
+            $objVoPessoa->setTipo( $objVo->getTipo() );
+            $objVoPessoa->setSit_ativo( 'S' );
+            $controllerPessoa = new Pessoa($tpdo);
+            $result = $controllerPessoa->save($objVoPessoa);
+
+            $tipo = $objVo->getTipo();
+            if( $tipo == Pessoa::PF ){
+                $objVoPessoaPF = new Pessoa_fisicaVO();
+                $objVoPessoaPF->setIdpessoa_fisica( $objVo->getIdpessoa_fisica() );
+                $objVoPessoaPF->setIdpessoa( $objVo->getIdpessoa() );
+                $objVoPessoaPF->setCod_municipio_nascimento( $objVo->getCod_municipio_nascimento() );
+                $controllerPessoaPF = new Pessoa_fisica($tpdo);
+                $result = $controllerPessoaPF->save($objVoPessoaPF);
+            }else{
+                $objVoPessoaPJ = new Pessoa_juridicaVO();
+                $controllerPessoaPJ = new Pessoa_juridica($tpdo);
+                $result = $controllerPessoaPJ->save($objVoPessoaPJ);
+            }
 
             $tpdo->commit();
         }
