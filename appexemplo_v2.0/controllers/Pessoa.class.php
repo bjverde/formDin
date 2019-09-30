@@ -12,6 +12,8 @@
 class Pessoa
 {
 
+    const PJ = 'PJ';
+    const PF = 'PF';
 
     private $dao = null;
 

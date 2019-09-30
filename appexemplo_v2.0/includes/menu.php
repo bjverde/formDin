@@ -18,9 +18,9 @@ $menu->add(1.3,1,'pedido_item','modulos/pedido_item.php');
 $menu->add(1.4,1,'produto','modulos/produto.php');
 
 $menu->add(2, null, 'Pessoas', null, null);
-$menu->add(21,2,'pessoa','modulos/pessoa.php');
-$menu->add(22,2,'pessoa_fisica','modulos/pessoa_fisica.php');
-$menu->add(23,2,'pessoa_juridica','modulos/pessoa_juridica.php');
+$menu->add(21,2,'Pessoa','modulos/pessoa.php');
+$menu->add(22,2,'Pessoa Física','modulos/pessoa_fisica.php');
+$menu->add(23,2,'Pessoa Jurídica','modulos/pessoa_juridica.php');
 
 $menu->add(3, null, 'Autoridades', null, null);
 $menu->add(31, 3, 'Cadastro Autoridades', 'modulos/autoridade.php', null);

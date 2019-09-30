@@ -74,6 +74,60 @@ class Vw_pessoa
         $where['CPFCNPJ'] = $CpfCnpj;
         $result = $this->dao->selectAll( 'NOME', $where );
         return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function validateUmCpfCnpj( Vw_pessoaVO $objVo )
+    {
+        $CpfCnpj = $objVo->getCpfcnpj();
+        $dados = $this->selectByCpfCnpj($CpfCnpj);
+        $CpfCnpjBanco = ArrayHelper::getArrayFormKey($dados,'CPFCNPJ',0);
+        if( !empty($CpfCnpjBanco) ){
+            throw new DomainException(Message::ERROR_PESSOA_CPFCNPJ);
+        }
+    }
+    //--------------------------------------------------------------------------------
+    public function validateCamposObrigatorios( Vw_pessoaVO $objVo )
+    {
+        $tipo = $objVo->getTipo();
+        if( $tipo == Pessoa::PF ){
+            if( $objVo->getCpf() ){
+                throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CPF');
+            }
+        }else{
+            if( $objVo->getCnpj() ){
+                throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CNPJ');
+            }
+        }
+    }
+    //--------------------------------------------------------------------------------
+    public function validate( Vw_pessoaVO $objVo )
+    {
+        $this->validateCamposObrigatorios( $objVo );
+        $this->validateUmCpfCnpj( $objVo );
+    }   
+    //--------------------------------------------------------------------------------
+    public function save( Vw_pessoaVO $objVo )
+    {
+        $this->validate($objVo);
+        $result = null;
+        $tpdo = New TPDOConnectionObj();
+        try{            
+            $tpdo->beginTransaction();
+            
+            $objVoPessoa = new PessoaVO();
+            $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
+            $objVoPessoa->setNom_pessoa( $objVo->setNome() );
+            $objVoPessoa->setTipo( $objVo->setTipo() );
+            $result = new Pessoa($objVo);
+
+            $tpdo->commit();
+        }
+        catch (Exception $e) {
+            $tpdo->rollBack();
+            MessageHelper::logRecord($e);
+            throw new Exception($e);
+        }
+        return $result;
     }    
     //--------------------------------------------------------------------------------
     public function getVoById( $id )

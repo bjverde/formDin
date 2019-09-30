@@ -7,4 +7,7 @@ class Message {
     const GENERIC_EXEC   = 'Ação executada com sucesso!';
 
     const TYPE_NOT_INT = 'Tipo não númerico! ';
+
+    const ERROR_PESSOA_CPFCNPJ = 'Já existe outra pessoa com o CPF/CNPJ informado';
+    const ERROR_CAMPO_OBRIGATORIO = 'Campo Obrigatório: '
 }

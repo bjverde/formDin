@@ -23,8 +23,8 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
+$controllerVwPessoa = new Vw_pessoa();
+$listPessoa = $controllerVwPessoa->selectAllPJ('NOME');
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
 
 //$frm->addTextField('CNPJ', 'CNPJ',14,true,14);
