@@ -23,10 +23,11 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
+$controllerVwPessoa = new Vw_pessoa();
+$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addTextField('CPF', 'CPF',11,true,11);
+$frm->addCpfField('CPF', 'CPF',true);
+//$frm->addTextField('CPF', 'CPF',11,true,11);
 
 $frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
 
@@ -39,9 +40,6 @@ $listMunicipio = $controllerMunicipio->selectAll();
 $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
 
 $frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
-
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',true);
-$frm->addDateField('DAT_ALTERACAO', 'DAT_ALTERACAO',false);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

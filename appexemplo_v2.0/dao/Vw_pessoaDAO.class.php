@@ -15,14 +15,18 @@ class Vw_pessoaDAO
     private static $sqlBasicSelect = 'select
                                       idpessoa
                                      ,nome
+                                     ,cpfcnpj                                     
                                      ,tipo
-                                     ,cpfcnpj
-                                     ,dat_nascimento
-                                     ,cod_municipio_nascimento
-                                     ,cnae
-                                     ,idnatureza_juridica
-                                     ,dat_inclusao
                                      ,sit_ativo
+                                     ,dat_inclusao
+                                     ,dat_inclusao_format
+                                     ,cpf
+                                     ,idpessoa_fisica
+                                     ,cod_municipio_nascimento
+                                     ,dat_nascimento
+                                     ,dat_nascimento_format
+                                     ,idnatureza_juridica
+                                     ,cnpj
                                      from form_exemplo.vw_pessoa ';
 
     private $tpdo = null;
@@ -57,15 +61,19 @@ class Vw_pessoaDAO
         if ( is_array($whereGrid) ){
             $where = ' 1=1 ';
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CPFCNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'NOME', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'TIPO', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CPFCNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_NASCIMENTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_MUNICIPIO_NASCIMENTO', SqlHelper::SQL_TYPE_NUMERIC);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNAE', SqlHelper::SQL_TYPE_NUMERIC);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDNATUREZA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
-            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'SIT_ATIVO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO_FORMAT', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CPF', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA_FISICA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_MUNICIPIO_NASCIMENTO', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_NASCIMENTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_NASCIMENTO_FORMAT', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDNATUREZA_JURIDICA', SqlHelper::SQL_TYPE_NUMERIC);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CNPJ', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $result = $where;
         }
         return $result;

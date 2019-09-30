@@ -24,10 +24,24 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('NOME', 'Nome',200,true,80);
-$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',true,'PF=Pessoa física,PJ=Pessoa jurídica');
+$frm->addSelectField('TIPO' ,'Tipo Pessoa:', null, 'F=Pessoa física,J=Pessoa jurídica', false)->addEvent('onChange', 'select_change(this)');
 $frm->getLabel('TIPO')->setToolTip('Valor permitidos PF ou PJ');
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 //$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+
+$pc = $frm->addPageControl('pc', 100, null, null, null);
+
+$pc->addPage('Pessoa Física', false, true, 'pessoaFisica', true, true);
+    $frm->addCpfField('NMCPF', 'CPF:', false);
+    $frm->addTextField('IDUF', 'UF', 50, false);
+    $frm->addTextField('IDESTADOCIVIL', 'Estado Civil', 50, false);
+    $frm->addTextField('IDNACIONALIDADE', 'Nacionalidade', 50, false);
+
+
+$pc->addPage('Pessoa Jurídica', false, true, 'pessoaJuridica', true, true);
+    $frm->addCnpjField('NMCNPJ', 'CNPJ:', false);
+
+$frm->closeGroup();
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -117,7 +131,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',DAT_INCLUSAO|DAT_INCLUSAO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Gride with SQL Pagination. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Lista de Pessoas. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -156,5 +170,34 @@ function init() {
 function buscar() {
     jQuery("#BUSCAR").val(1);
     init();
+}
+function select_change(e) {
+    if( e.id == 'TIPO'){
+        var valor = jQuery("#"+e.id).find(":selected").val();
+        //var fwg = fwGetFields("#TPPESSOA",null,null);
+        //console.log ( fwg );
+        
+        jQuery( "#TIPO *").each(  function() {
+            var type    = this.type;
+            var tag     = this.tagName.toLowerCase();
+            var id      = ''
+            var value   = '';
+            console.log ( this );
+        }
+        );
+            
+        
+        if (valor=='F'){
+            fwSetRequired('NMCPF');
+            fwHabilitarAba('pessoaFisica','pc');
+            fwSelecionarAba('pessoaFisica');
+            fwDesabilitarAba('pessoaJuridica');
+        }else{
+            fwSetRequired('NMCNPJ');
+            fwHabilitarAba('pessoaJuridica','pc');
+            fwSelecionarAba('pessoaJuridica');
+            fwDesabilitarAba('pessoaFisica');
+        }
+    }
 }
 </script>

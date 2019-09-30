@@ -52,6 +52,30 @@ class Vw_pessoa
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function selectAllPF( $orderBy=null)
+    {
+        $where = array();
+        $where['TIPO'] = 'PF';
+        $result = $this->dao->selectAll( $orderBy, $where );
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function selectAllPJ( $orderBy=null)
+    {
+        $where = array();
+        $where['TIPO'] = 'PJ';
+        $result = $this->dao->selectAll( $orderBy, $where );
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function selectByCpfCnpj( $CpfCnpj )
+    {
+        $where = array();
+        $where['CPFCNPJ'] = $CpfCnpj;
+        $result = $this->dao->selectAll( 'NOME', $where );
+        return $result;
+    }    
+    //--------------------------------------------------------------------------------
     public function getVoById( $id )
     {
         $result = $this->dao->getVoById( $id );
