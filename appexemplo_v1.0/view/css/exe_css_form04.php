@@ -1,6 +1,6 @@
 <?php
 d($_REQUEST);
-$frm = new TForm('CSS Form 04 - Exemplo de uso do CSS, no grid com Font Awesome', 300, 700);
+$frm = new TForm('CSS Form 04 - Exemplo de uso do CSS, no grid com Font Awesome', 300, 800);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->setAutoSize(true);
@@ -56,6 +56,19 @@ $gride->addColumn('NOME', 'Nome');
 $gride->addColumn('ATIVO', 'Ativo');
 $gride->addColumn('GRUPO', 'grupo');
 $gride->addColumn('FONT', 'Font Awesome',null,'center');
+
+
+$gride->addbutton('Alterar', $gride->getId() .'_alterar', null, null, null, 'alterar.gif', null, 'Alterar' );
+$gride->addButton('Excluir', $gride->getId() .'_excluir', null, 'fwGridConfirmDelete()', null, 'lixeira.gif', null, 'Excluir' );
+$gride->addButton('Normal','gd_btn1','btn1',null,null,null,null,'Ação 01');
+$gride->addButton(null,'gd_btn2','btn2',null,null,null,null,'Ação 02')->setClass('icon login', true);
+$gride->addButton(null,'gd_btn3','btn3',null,null,null,null,'Ação 03')->setClass('icon btc', true);
+$gride->addButton('Verde','gd_btn4','btn4',null,null,null,null,'Ação 04')->setClass('buttonBigGreen', true);
+$gride->addButton('xxx','gd_btn5','btn5',null,null,null,null,'Ação 05')->setClass('buttonNoBorder icon login', true);
+$gride->addButton('xxx','gd_btn6','btn6',null,null,null,null,'Ação 06')->setClass('buttonTransparent icon login', true);
+$gride->addButton(null,'gd_btn7','btn7',null,null,null,null,'Ação 07')->setClass('buttonTransparent icon php', true);
+$gride->addbutton('Alterar', $gride->getId() .'_alterar', null, null, null, 'alterar.gif', null, 'Alterar' );
+$gride->addButton('Excluir', $gride->getId() .'_excluir', null, 'fwGridConfirmDelete()', null, 'lixeira.gif', null, 'Excluir' );
 
 $frm->addHtmlField('gride', $gride);
 
