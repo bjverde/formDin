@@ -66,9 +66,9 @@ switch( $acao ) {
     case 'Salvar':
         try{
             if ( $frm->validate() ) {
-                $vo = new Vw_pessoa();
+                $vo = new Vw_pessoaVO();
                 $frm->setVo( $vo );
-                $controller = new Pessoa();
+                $controller = new Vw_pessoa();
                 $resultado = $controller->save( $vo );
                 if($resultado==1) {
                     $frm->setMessage('Registro gravado com sucesso!!!');
