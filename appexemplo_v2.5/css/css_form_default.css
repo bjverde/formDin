@@ -1,0 +1,35 @@
+.boxAlert{
+    border: 1px solid rgb(255, 235, 59);
+    background-color: rgb(255, 255, 204);
+    margin-bottom:'10px';
+}
+
+.btnOragen:hover{
+    background-color:#FF9933;
+    text-decoration:none;
+    color:#FFFFFF;
+}
+
+.btnOragen{
+    padding:0 8px 0px 8px;
+    cursor:pointer;
+    background-color:#EC5500;
+    display:block;
+    text-align:center;
+    border-radius:5px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#919191;
+    font-style:normal;
+    color:#FFFFFF;
+}
+
+.fwGroupBoxLegend{
+    background-color:rgb(253, 186, 120);
+    border-radius:5px;
+    font-size: 110%;
+}
+
+.fwFieldRequired{
+    color:rgb(155, 9, 9);
+}

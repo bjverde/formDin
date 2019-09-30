@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDMARCA';
 $frm = new TForm('Marca',800,950);

@@ -4,34 +4,42 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5-alpha
+ * SysGen  Version: 1.9.1
+ * FormDin Version: 4.7.5
  * 
- * System appev2 created in: 2019-09-01 16:03:52
+ * System xx created in: 2019-09-29 20:48:35
  */
 class Vw_pessoaVO
 {
     private $idpessoa = null;
+    private $cpfcnpj = null;
     private $nome = null;
     private $tipo = null;
-    private $cpfcnpj = null;
-    private $dat_nascimento = null;
-    private $cod_municipio_nascimento = null;
-    private $cnae = null;
-    private $idnatureza_juridica = null;
-    private $dat_inclusao = null;
     private $sit_ativo = null;
-    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $cpfcnpj=null, $dat_nascimento=null, $cod_municipio_nascimento=null, $cnae=null, $idnatureza_juridica=null, $dat_inclusao=null, $sit_ativo=null ) {
+    private $dat_inclusao = null;
+    private $dat_inclusao_format = null;
+    private $cpf = null;
+    private $idpessoa_fisica = null;
+    private $cod_municipio_nascimento = null;
+    private $dat_nascimento = null;
+    private $dat_nascimento_format = null;
+    private $idnatureza_juridica = null;
+    private $cnpj = null;
+    public function __construct( $idpessoa=null, $cpfcnpj=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null, $dat_inclusao_format=null, $cpf=null, $idpessoa_fisica=null, $cod_municipio_nascimento=null, $dat_nascimento=null, $dat_nascimento_format=null, $idnatureza_juridica=null, $cnpj=null ) {
         $this->setIdpessoa( $idpessoa );
+        $this->setCpfcnpj( $cpfcnpj );
         $this->setNome( $nome );
         $this->setTipo( $tipo );
-        $this->setCpfcnpj( $cpfcnpj );
-        $this->setDat_nascimento( $dat_nascimento );
-        $this->setCod_municipio_nascimento( $cod_municipio_nascimento );
-        $this->setCnae( $cnae );
-        $this->setIdnatureza_juridica( $idnatureza_juridica );
-        $this->setDat_inclusao( $dat_inclusao );
         $this->setSit_ativo( $sit_ativo );
+        $this->setDat_inclusao( $dat_inclusao );
+        $this->setDat_inclusao_format( $dat_inclusao_format );
+        $this->setCpf( $cpf );
+        $this->setIdpessoa_fisica( $idpessoa_fisica );
+        $this->setCod_municipio_nascimento( $cod_municipio_nascimento );
+        $this->setDat_nascimento( $dat_nascimento );
+        $this->setDat_nascimento_format( $dat_nascimento_format );
+        $this->setIdnatureza_juridica( $idnatureza_juridica );
+        $this->setCnpj( $cnpj );
     }
     //--------------------------------------------------------------------------------
     public function setIdpessoa( $strNewValue = null )
@@ -41,6 +49,22 @@ class Vw_pessoaVO
     public function getIdpessoa()
     {
         return $this->idpessoa;
+    }
+    //--------------------------------------------------------------------------------
+    public function setCpfcnpj( $strNewValue = null )
+    {
+        $this->cpfcnpj = preg_replace('/[^0-9]/','',$strNewValue);
+    }
+    public function getCpfcnpj()
+    {
+        $cpfcnpj = $this->cpfcnpj;
+        if( empty($cpfcnpj) ){
+            $cpfcnpj = $this->getCpf();
+            if( empty($cpfcnpj) ){
+                $cpfcnpj = $this->getCpfcnpj();
+            }
+        }
+        return $this->cpfcnpj;
     }
     //--------------------------------------------------------------------------------
     public function setNome( $strNewValue = null )
@@ -61,49 +85,13 @@ class Vw_pessoaVO
         return $this->tipo;
     }
     //--------------------------------------------------------------------------------
-    public function setCpfcnpj( $strNewValue = null )
+    public function setSit_ativo( $strNewValue = null )
     {
-        $this->cpfcnpj = preg_replace('/[^0-9]/','',$strNewValue);
+        $this->sit_ativo = $strNewValue;
     }
-    public function getCpfcnpj()
+    public function getSit_ativo()
     {
-        return $this->cpfcnpj;
-    }
-    //--------------------------------------------------------------------------------
-    public function setDat_nascimento( $strNewValue = null )
-    {
-        $this->dat_nascimento = $strNewValue;
-    }
-    public function getDat_nascimento()
-    {
-        return is_null( $this->dat_nascimento ) ? date( 'Y-m-d h:i:s' ) : $this->dat_nascimento;
-    }
-    //--------------------------------------------------------------------------------
-    public function setCod_municipio_nascimento( $strNewValue = null )
-    {
-        $this->cod_municipio_nascimento = $strNewValue;
-    }
-    public function getCod_municipio_nascimento()
-    {
-        return $this->cod_municipio_nascimento;
-    }
-    //--------------------------------------------------------------------------------
-    public function setCnae( $strNewValue = null )
-    {
-        $this->cnae = $strNewValue;
-    }
-    public function getCnae()
-    {
-        return $this->cnae;
-    }
-    //--------------------------------------------------------------------------------
-    public function setIdnatureza_juridica( $strNewValue = null )
-    {
-        $this->idnatureza_juridica = $strNewValue;
-    }
-    public function getIdnatureza_juridica()
-    {
-        return $this->idnatureza_juridica;
+        return $this->sit_ativo;
     }
     //--------------------------------------------------------------------------------
     public function setDat_inclusao( $strNewValue = null )
@@ -115,13 +103,76 @@ class Vw_pessoaVO
         return is_null( $this->dat_inclusao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao;
     }
     //--------------------------------------------------------------------------------
-    public function setSit_ativo( $strNewValue = null )
+    public function setDat_inclusao_format( $strNewValue = null )
     {
-        $this->sit_ativo = $strNewValue;
+        $this->dat_inclusao_format = $strNewValue;
     }
-    public function getSit_ativo()
+    public function getDat_inclusao_format()
     {
-        return $this->sit_ativo;
+        return is_null( $this->dat_inclusao_format ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao_format;
+    }
+    //--------------------------------------------------------------------------------
+    public function setCpf( $strNewValue = null )
+    {
+        $this->cpf = preg_replace('/[^0-9]/','',$strNewValue);
+    }
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+    //--------------------------------------------------------------------------------
+    public function setIdpessoa_fisica( $strNewValue = null )
+    {
+        $this->idpessoa_fisica = $strNewValue;
+    }
+    public function getIdpessoa_fisica()
+    {
+        return $this->idpessoa_fisica;
+    }
+    //--------------------------------------------------------------------------------
+    public function setCod_municipio_nascimento( $strNewValue = null )
+    {
+        $this->cod_municipio_nascimento = $strNewValue;
+    }
+    public function getCod_municipio_nascimento()
+    {
+        return $this->cod_municipio_nascimento;
+    }
+    //--------------------------------------------------------------------------------
+    public function setDat_nascimento( $strNewValue = null )
+    {
+        $this->dat_nascimento = $strNewValue;
+    }
+    public function getDat_nascimento()
+    {
+        return is_null( $this->dat_nascimento ) ? date( 'Y-m-d h:i:s' ) : $this->dat_nascimento;
+    }
+    //--------------------------------------------------------------------------------
+    public function setDat_nascimento_format( $strNewValue = null )
+    {
+        $this->dat_nascimento_format = $strNewValue;
+    }
+    public function getDat_nascimento_format()
+    {
+        return is_null( $this->dat_nascimento_format ) ? date( 'Y-m-d h:i:s' ) : $this->dat_nascimento_format;
+    }
+    //--------------------------------------------------------------------------------
+    public function setIdnatureza_juridica( $strNewValue = null )
+    {
+        $this->idnatureza_juridica = $strNewValue;
+    }
+    public function getIdnatureza_juridica()
+    {
+        return $this->idnatureza_juridica;
+    }
+    //--------------------------------------------------------------------------------
+    public function setCnpj( $strNewValue = null )
+    {
+        $this->cnpj = preg_replace('/[^0-9]/','',$strNewValue);
+    }
+    public function getCnpj()
+    {
+        return $this->cnpj;
     }
     //--------------------------------------------------------------------------------
 }

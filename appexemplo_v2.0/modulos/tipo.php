@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDTIPO';
 $frm = new TForm('Cadastro de Tipos',800,950);
@@ -22,11 +23,13 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('DESCRICAO', 'DESCRICAO',100,true,100);
 $controllerMeta_tipo = new Meta_tipo();
 $listMeta_tipo = $controllerMeta_tipo->selectAll();
-$frm->addSelectField('IDMETA_TIPO', 'IDMETA_TIPO',true,$listMeta_tipo,null,null,null,null,null,null,' ',null);
-$frm->addTextField('SIT_ATIVO', 'SIT_ATIVO',1,false,1);
+$frm->addSelectField('IDMETA_TIPO', 'Meta Tipo',true,$listMeta_tipo,null,null,null,null,null,null,' ',null);
+
+$frm->addTextField('DESCRICAO', 'Descrição',100,true,100);
+
+$frm->addTextField('SIT_ATIVO', 'Ativo',1,false,1);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

@@ -5914,6 +5914,25 @@ INSERT INTO `form_exemplo`.`acesso_menu`
 VALUES
 (105,10,'Gerador Form VO/DAO','../base/includes/gerador_form_vo_dao.php',null,'smiley-1-512.png',null,'N',null,null);
 
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(111,null,'Banco',null,null,'data_base.png',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(1111,111,'Commit','modulos/database_commit.php',null,'database_commit.png',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(1112,111,'Commit','modulos/database_rollback.php',null,'database_rollback.png',null,'N',null,null);
+
+INSERT INTO `form_exemplo`.`acesso_menu`
+(`idmenu`,`idmenu_pai`,`nom_menu`,`url`,`tooltip`,`img_menu`,`imgdisabled`,`disabled`,`hotkey`,`boolSeparator`)
+VALUES
+(1113,111,'Commit','modulos/database_rollback.php',null,'database_balance.png',null,'N',null,null);
 
 -- Gerador dos inserts
 -- SELECT m.idmenu
@@ -5955,6 +5974,10 @@ INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,102);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,104);
 INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,105);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,111);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,1111);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,1112);
+INSERT INTO `form_exemplo`.`acesso_perfil_menu` (`idperfil`,`idmenu`) VALUES (1,1113);
 
 
 

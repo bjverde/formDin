@@ -160,9 +160,8 @@ class Database
             $objPerfilUser = new Acesso_perfil_userVO();
             $objPerfilUser->setIdperfil(3);
             $objPerfilUser->setIduser($idUser);
-            $objPerfilUser->setSit_ativo('S');
+            $objPerfilUser->setSit_ativo('S');           
             
-            throw new  Exception('Gerenic Exception!!!!');
             
             //$objUserPerfil = new Acesso_user_menu();
             $objUserPerfil->getDao()->setTPDOConnection($tpdo);
@@ -171,13 +170,14 @@ class Database
             $msg = 'Depois do include';
             $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
             
+            throw new  Exception('Gerenic Exception!!!!');            
             //----------------
-            $objUserPerfil->deleteByIdUser($idUser);
-            $objUser->delete($idUser);
+            //$objUserPerfil->deleteByIdUser($idUser);
+            //$objUser->delete($idUser);
             
-            $msg = 'Deletando registros incluidos';
-            $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
-            
+            //$msg = 'Deletando registros incluidos';
+            //$this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);            
+                        
             $tpdo->commit();
         }
         catch (Exception $e) {

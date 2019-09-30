@@ -1,12 +1,13 @@
 <?php
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPERFILUSER';
 $frm = new TForm('Alterar a senha',300,400);
 $frm->setFlat(true);
 $frm->setMaximize(true);
 
-include 'modulos/acesso_aviso.php';
+include 'modulos/includes/acesso_aviso.php';
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $login = ArrayHelper::get( $_SESSION[APLICATIVO],'LOGIN');
@@ -52,8 +53,6 @@ switch( $acao ) {
 	break;
 }
 
-if ( Acesso::moduloAcessoPermitido($_REQUEST['modulo']) ){
-    $frm->show();
-}
+$frm->show();
 
 ?>

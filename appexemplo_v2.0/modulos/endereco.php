@@ -11,6 +11,7 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDENDERECO';
 $frm = new TForm('Endereço',800,950);

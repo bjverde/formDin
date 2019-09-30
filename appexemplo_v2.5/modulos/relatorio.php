@@ -1,5 +1,6 @@
 <?php
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $frm = new TForm('Relatório do pedido',100);
 $frm->setFlat(true);

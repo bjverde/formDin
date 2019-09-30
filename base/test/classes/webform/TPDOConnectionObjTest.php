@@ -55,7 +55,7 @@ class TPDOConnectionObjTest extends TestCase
 	 */
 	protected function setUp() {
 		parent::setUp ();
-		$this->test = new TPDOConnectionObj();
+		$this->test = new TPDOConnectionObj(false);
 	}
 	
 	/**

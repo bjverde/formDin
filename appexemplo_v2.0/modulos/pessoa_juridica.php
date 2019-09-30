@@ -11,9 +11,10 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPESSOA_JURIDICA';
-$frm = new TForm('pessoa_juridica',800,950);
+$frm = new TForm('Cadastro Simples Pessoa Jurídica',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -22,10 +23,12 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('CNPJ', 'CNPJ',14,true,14);
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
+$controllerVwPessoa = new Vw_pessoa();
+$listPessoa = $controllerVwPessoa->selectAllPJ('NOME');
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
+
+//$frm->addTextField('CNPJ', 'CNPJ',14,true,14);
+$frm->addCnpjField('CNPJ', 'CNPJ',true);
 $frm->addNumberField('CNAE', 'CNAE',10,false,0);
 $frm->getLabel('CNAE')->setToolTip('códigos de atividades econômicas em todo o país');
 $controllerNatureza_juridica = new Natureza_juridica();

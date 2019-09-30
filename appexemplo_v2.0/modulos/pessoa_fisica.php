@@ -11,9 +11,10 @@
  */
 
 defined('APLICATIVO') or die();
+require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPESSOA_FISICA';
-$frm = new TForm('pessoa_fisica',800,950);
+$frm = new TForm('Cadastro Simples Pessoa Física',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -22,16 +23,23 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
+$controllerVwPessoa = new Vw_pessoa();
+$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
 $frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addTextField('CPF', 'CPF',11,true,11);
-$frm->addDateField('DAT_NASCIMENTO', 'DAT_NASCIMENTO',false);
+$frm->addCpfField('CPF', 'CPF',true);
+//$frm->addTextField('CPF', 'CPF',11,true,11);
+
+$frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
+
+$controllerUf = new Uf();
+$listUf = $controllerUf->selectAll('NOM_UF');
+$frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
+
 $controllerMunicipio = new Municipio();
 $listMunicipio = $controllerMunicipio->selectAll();
-$frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'COD_MUNICIPIO_NASCIMENTO',false,$listMunicipio,null,null,null,null,null,null,' ',null);
-$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',true);
-$frm->addDateField('DAT_ALTERACAO', 'DAT_ALTERACAO',false);
+$frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+
+$frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -125,7 +133,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',DAT_ALTERACAO|DAT_ALTERACAO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Gride with SQL Pagination. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Pessoa Física. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -137,10 +145,10 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn($primaryKey,'id');
     $gride->addColumn('IDPESSOA','id Pessoa');
     $gride->addColumn('CPF','CPF');
-    $gride->addColumn('DAT_NASCIMENTO','DAT_NASCIMENTO');
+    $gride->addColumn('DAT_NASCIMENTO','Data Nascimento');
     $gride->addColumn('COD_MUNICIPIO_NASCIMENTO','COD_MUNICIPIO_NASCIMENTO');
-    $gride->addColumn('DAT_INCLUSAO','DAT_INCLUSAO');
-    $gride->addColumn('DAT_ALTERACAO','DAT_ALTERACAO');
+    $gride->addColumn('DAT_INCLUSAO','Data Inclusão');
+    $gride->addColumn('DAT_ALTERACAO','Data Alteração');
 
 
     $gride->show();

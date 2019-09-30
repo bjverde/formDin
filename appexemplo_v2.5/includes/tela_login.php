@@ -37,20 +37,15 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$html = '<br><br>Existem 4 usuários, cada um com um perfil diferete!'
-       . '<br>'
-       . '<ul>'
-       . '    <li>login: root e senha: root &rarr; é o super usuário, que pode criar novas telas com o gerador </li>'
-       . '    <li>login: admin e senha: admin &rarr; é o super administrador, pode incluir outros usuarios e conceder acesso </li>'
-       . '    <li>login: user e senha: user &rarr; usario comum pode operar todas as telas</li>'
-       . '    <li>login: trainee e senha: trainee &rarr; tem acesso apenas uma tela</li>'
-       . '<ul>';
+$filePathHtmlLogin = 'ajuda/info_login_pt-br.php';
+$filePathHtmlInfo  = 'ajuda/info_start_pt-br.php';
 
-$frm = new TForm('Acesso ao Sistema',400,400);
+$frm = new TForm('Acesso ao Sistema',500,540);
 $frm->hideCloseButton();
 $frm->addTextField('login'		,'Login:',20,true,20);
 $frm->addPasswordField('senha'	,'Senha:',20,true,20);
-$frm->addHtmlField('msg',$html);
+$frm->addHtmlField('htmlLogin', null, $filePathHtmlLogin, null, null, null);
+$frm->addHtmlField('htmlInfo' , null, $filePathHtmlInfo, null, null, null)->setClass('boxAlert',true);
 //$frm->addButton('Entrar','login',null);
 $frm->addButtonAjax('Entrar',null,'fwValidateFields()','resultado','login','Validando informações','json',false);
 
