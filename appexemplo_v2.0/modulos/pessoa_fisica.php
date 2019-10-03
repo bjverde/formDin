@@ -14,7 +14,7 @@ defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'IDPESSOA';
-$frm = new TForm('Cadastro Simples Pessoa Física',800,950);
+$frm = new TForm('Pessoa Física',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -32,19 +32,25 @@ $frm->addHiddenField( 'TIPO', Pessoa::PF);
 $frm->addHiddenField( 'SIT_ATIVO', 'S');
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 
-$frm->addTextField('NOME', 'Nome',200,true,80);
-$frm->addCpfField('CPF', 'CPF',true);
-$frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
+$frm->addGroupField('gpx1','');
+    $frm->addTextField('NOME', 'Nome',200,true,80);
+    $frm->addCpfField('CPF', 'CPF',true);
+$frm->closeGroup();
 
-$controllerUf = new Uf();
-$listUf = $controllerUf->selectAll('NOM_UF');
-$frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
+$frm->addGroupField('gpx2','');
+    $frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
 
-$controllerMunicipio = new Municipio();
-$listMunicipio = $controllerMunicipio->selectAll();
-$frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+    $controllerUf = new Uf();
+    $listUf = $controllerUf->selectAll('NOM_UF');
+    $frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
 
-$frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
+    $controllerMunicipio = new Municipio();
+    $listMunicipio = $controllerMunicipio->selectAll();
+    $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+
+    $frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
+$frm->closeGroup();
+
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
