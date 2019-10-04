@@ -1841,6 +1841,14 @@ class TGrid extends TTable
     }
     
     //---------------------------------------------------------------------------------------
+    /**
+     * Seta as cores para Zebrar um Grid, informe valores em Hexadecimal
+     * como #efefef ou #ffffff
+     *
+     * @param string $strColor1
+     * @param string $strColor2
+     * @return void
+     */
     function setZebrarColors( $strColor1 = null, $strColor2 = null )
     {
         $this->zebrarColors = array( $strColor1, $strColor2 );
