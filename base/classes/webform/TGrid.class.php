@@ -1851,6 +1851,8 @@ class TGrid extends TTable
      */
     function setZebrarColors( $strColor1 = null, $strColor2 = null )
     {
+        HtmlHelper::validateHtmlColorHexa($strColor1);
+        HtmlHelper::validateHtmlColorHexa($strColor2);
         $this->zebrarColors = array( $strColor1, $strColor2 );
     }
     
