@@ -2588,8 +2588,8 @@ class TForm Extends TBox
       * Adiciona uma mensagem à lista, para ser exibida na tela via alert() em javascript quando o formulário for exibido
       *
       * <code>
-      * 	$frm->addMessae('Mensagem nova');
-      * 	$frm->addMessae(array('Mensagem 1', 'Mensagem 2');
+      * 	$frm->addMessage('Mensagem nova');
+      * 	$frm->addMessage(array('Mensagem 1', 'Mensagem 2');
       * </code>
       *
       * @param string $mixMessage
