@@ -85,8 +85,7 @@ class FormDinHelper
             }
         }
         return $vo;
-    }
-    
+    }    
     //--------------------------------------------------------------------------------
     /***
      * Convert Object Vo to Array FormDin 
@@ -111,7 +110,24 @@ class FormDinHelper
         }
         return $arrayFormDin;
     }
-    
+    //--------------------------------------------------------------------------------
+    /**
+     * Validate Object Type is Instance Of TPDOConnectionObj
+     *
+     * @param object $tpdo instanceof TPDOConnectionObj
+     * @param string $method __METHOD__
+     * @return void
+     */    
+    public static function validateObjType($tpdo,$method)
+    {
+        if( empty($method) ){
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.'class:'.__METHOD__);
+        }        
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('class:'.$method);
+        }
+    }
     /***
      * 
      * @param mixed $variable

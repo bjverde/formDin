@@ -57,6 +57,8 @@ class TMessage {
 
     const ERROR_HTML_COLOR_HEXA = 'Informe uma cor HTML no formato hexadecimal. Exemplo #efefef !';
 
+    const ERROR_EMPTY_INPUT = 'O Parametro não pode ficar em branco';
+
     public function __construct() {
     }
 	
