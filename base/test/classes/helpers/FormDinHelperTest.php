@@ -159,6 +159,23 @@ class FormDinHelperTest extends TestCase
 	}
 
 	
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testValidateObjTypeTPDOConnectionObj_failObjWrong(){
+	    $tpdo = new TDiv();
+	    FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
+	}
+	
+	public function testValidateObjTypeTPDOConnectionObj_ok(){
+        $database = __DIR__.'/../../sqlite_mock.db3';
+	    $tpdo = new TPDOConnectionObj(false);
+	    $tpdo->setDBMS(DBMS_SQLITE);
+	    $tpdo->setDataBaseName($database);
+	    $tpdo->connect();
+	    $this->assertNull( FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__) );
+	}
+	
 	public function testVersionMinimum_false() {
 	    $expected = false;
 	    $result = FormDinHelper::versionMinimum('99.99.99');

@@ -56,6 +56,13 @@ class TRadioTest extends TestCase
 	 */
 	private $tRadio;
 	
+	public static function setUpBeforeClass()
+	{
+	    $tpdo = new TPDOConnectionObj(false);
+	    $tpdo->setDBMS(null);
+	    $tpdo->setDataBaseName(null);
+	}
+	
 	
 	/**
 	 * Prepares the environment before running a test.
@@ -63,6 +70,7 @@ class TRadioTest extends TestCase
 	protected function setUp() {
 		parent::setUp ();
 		$listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
+		//$tRadio = new TRadio('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
 		$tRadio = new TRadio('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
 		$this->tRadio = $tRadio;
 	}
