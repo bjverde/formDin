@@ -44,8 +44,8 @@ class TRadio extends TOption
     * Classe para criação de campos do tipo RadioButtons, onde apenas uma opção poderá ser selecionada
     *
     * @param string $strName
-    * @param array $arrOptions      - 2: Array Options
-    * @param array $arrValues
+    * @param array $arrOptions      - 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
+    * @param array $arrValues       - 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
     * @param boolean $boolRequired  - 4: TRUE = Required, FALSE = not Required
     * @param integer $intQtdColumns - 5: Quantidade de colunas, valor DEFAULT = 1;
     * @param integer $intWidth
@@ -73,7 +73,8 @@ class TRadio extends TOption
                            ,$intHeight
                            ,$intPaddingItems
                            ,false
-                           ,TOption::RADIO);
+                           ,TOption::RADIO
+            );
     }
     public function show($print=true)
     {
