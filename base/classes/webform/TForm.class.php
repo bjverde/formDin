@@ -6853,7 +6853,8 @@ class TForm Extends TBox
     			           		){
        $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
        $field->setNoWrapText($boolNowrapText);
-       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+       $this->addDisplayControl( $displayControl );
        $field->addEvent('onDblclick','this.checked=false;fwFieldCheckBoxClick(this);');
        return $field;
     }

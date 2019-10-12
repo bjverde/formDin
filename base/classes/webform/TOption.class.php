@@ -71,22 +71,37 @@ abstract class TOption extends TControl
 	 * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
 	 *
 	 * @abstract
-	 * @param string $strName
-	 * @param array $arrOptions
-	 * @param array $arrValues
-	 * @param boolean $boolRequired
-	 * @param integer $intQtdColumns
-	 * @param integer $intWidth
-	 * @param integer $intHeight
-	 * @param integer $intPaddingItems
-	 * @param boolean $boolMultiSelect
-	 * @param string $strInputType
-	 * @param string $strKeyField
-	 * @param string $strDisplayField
-	 * @param string $strDataColumns
+	 * @param string $strName          - 1:
+	 * @param array $mixOptions        - 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
+	 * @param array $arrValues         - 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+	 * @param boolean $boolRequired    - 4:
+	 * @param integer $intQtdColumns   - 5:
+	 * @param integer $intWidth        - 6:
+	 * @param integer $intHeight       - 7:
+	 * @param integer $intPaddingItems - 8:
+	 * @param boolean $boolMultiSelect - 9:
+	 * @param string $strInputType     -10: define o tipo de input a ser gerado. Ex: select, radio ou check
+	 * @param string $strKeyField      -11:
+	 * @param string $strDisplayField  -12:
+	 * @param boolean $boolNowrapText  -13:
+	 * @param string $strDataColumns   -14: informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
 	 * @return TOption
 	 */
-	public function __construct( $strName, $mixOptions, $arrValues=null, $boolRequired=null, $intQtdColumns=null, $intWidth=null, $intHeight=null, $intPaddingItems=null, $boolMultiSelect=null, $strInputType=null, $strKeyField=null, $strDisplayField=null,$boolNowrapText=null,$strDataColumns=null )
+	public function __construct( $strName
+	                           , $mixOptions
+	                           , $arrValues=null
+	                           , $boolRequired=null
+                        	   , $intQtdColumns=null
+                        	   , $intWidth=null
+                        	   , $intHeight=null
+                        	   , $intPaddingItems=null
+                        	   , $boolMultiSelect=null
+                        	   , $strInputType=null
+                        	   , $strKeyField=null
+                        	   , $strDisplayField=null
+                        	   ,$boolNowrapText=null
+                        	   ,$strDataColumns=null 
+                        	   )
 	{
 		parent::__construct( 'div', $strName );
 		$this->setValue( $arrValues );

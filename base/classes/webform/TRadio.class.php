@@ -44,21 +44,39 @@ class TRadio extends TOption
     * Classe para criação de campos do tipo RadioButtons, onde apenas uma opção poderá ser selecionada
     *
     * @param string $strName
-    * @param array $arrOptions
+    * @param array $arrOptions      - 2: Array Options
     * @param array $arrValues
-    * @param boolean $boolRequired
-    * @param integer $intQtdColumns
+    * @param boolean $boolRequired  - 4: TRUE = Required, FALSE = not Required
+    * @param integer $intQtdColumns - 5: Quantidade de colunas, valor DEFAULT = 1;
     * @param integer $intWidth
     * @param integer $intHeight
     * @param integer $intPaddingItems
     * @example RadioButtons.php
     * @return TRadio
     */
-    public function __construct($strName,$arrOptions,$arrValues=null,$boolRequired=null,$intQtdColumns=null,$intWidth=null,$intHeight=null,$intPaddingItems=null)
+    public function __construct($strName
+                               ,$arrOptions
+                               ,$arrValues=null
+                               ,$boolRequired=null
+                               ,$intQtdColumns=null
+                               ,$intWidth=null
+                               ,$intHeight=null
+                               ,$intPaddingItems=null
+                               )
     {
-         parent::__construct($strName,$arrOptions,$arrValues,$boolRequired,$intQtdColumns,$intWidth,$intHeight,$intPaddingItems,false,'radio');
+        parent::__construct($strName
+                           ,$arrOptions
+                           ,$arrValues
+                           ,$boolRequired
+                           ,$intQtdColumns
+                           ,$intWidth
+                           ,$intHeight
+                           ,$intPaddingItems
+                           ,false
+                           ,TOption::RADIO);
     }
-    public function show($print=true) {
+    public function show($print=true)
+    {
     	// se o controle etiver desativado, gerar um campo oculto com mesmo nome e id para não perder o post e
     	// renomear o input para "id"_disabled
     	if( ! $this->getEnabled() ) {
