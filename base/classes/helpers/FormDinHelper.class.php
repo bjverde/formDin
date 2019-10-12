@@ -123,10 +123,10 @@ class FormDinHelper
     public static function validateObjTypeTPDOConnectionObj($tpdo,$method,$line)
     {
         if( empty($method) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.'class:'.__METHOD__);
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable method is null. '.__METHOD__);
         }
         if( empty($line) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.'class:'.__METHOD__);
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable line is null. '.__METHOD__);
         }
         $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
         if( !is_null($tpdo) && $typeObjWrong ){

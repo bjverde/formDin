@@ -92,7 +92,7 @@ class TApplicationTest extends TestCase
 	}
 	
 	public function testSetFormDinMinimumVersion_OK() {
-	    $this->tApplication->setFormDinMinimumVersion('1.0.0');
+	    $this->assertNull( $this->tApplication->setFormDinMinimumVersion('1.0.0') );
 	}
 	
 	/**

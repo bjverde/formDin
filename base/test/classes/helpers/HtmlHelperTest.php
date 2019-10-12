@@ -97,10 +97,10 @@ class HtmlHelperTest extends TestCase
     }
     public function testValidateHtmlColorHexa_PassNull() {
 	    $string = null;
-	    HtmlHelper::validateHtmlColorHexa( $string );
+	    $this->assertNull( HtmlHelper::validateHtmlColorHexa( $string ) );
     }
     public function testValidateHtmlColorHexa_Pass() {
 	    $string = '#123456';
-	    HtmlHelper::validateHtmlColorHexa( $string );
+	    $this->assertNull( HtmlHelper::validateHtmlColorHexa( $string ) );
 	}
 }
