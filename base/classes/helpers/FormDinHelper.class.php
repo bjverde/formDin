@@ -116,16 +116,21 @@ class FormDinHelper
      *
      * @param object $tpdo instanceof TPDOConnectionObj
      * @param string $method __METHOD__
+     * @param string $line __LINE__
+     * @throws InvalidArgumentException
      * @return void
-     */    
-    public static function validateObjType($tpdo,$method)
+     */
+    public static function validateObjTypeTPDOConnectionObj($tpdo,$method,$line)
     {
         if( empty($method) ){
             throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.'class:'.__METHOD__);
-        }        
+        }
+        if( empty($line) ){
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.'class:'.__METHOD__);
+        }
         $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
         if( !is_null($tpdo) && $typeObjWrong ){
-            throw new InvalidArgumentException('class:'.$method);
+            throw new InvalidArgumentException('Informed class is not an instance of TPDOConnectionObj. See the method: '.$method.' in the line: '.$line);
         }
     }
     /***
