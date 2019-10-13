@@ -51,7 +51,7 @@ class FormDinHelperTest extends TestCase
 {
 
     public function testVersion() {
-		$expected = '4.7.7';
+		$expected = '4.7.8';
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}
