@@ -55,7 +55,24 @@ class FormDinHelperTest extends TestCase
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}
-	
+	public function testVersionMinimum_false() {
+	    $expected = false;
+	    $result = FormDinHelper::versionMinimum('99.99.99');
+	    $this->assertEquals( $expected , $result);
+	}	
+	public function testVersionMinimum_true() {
+	    $expected = true;
+	    $result = FormDinHelper::versionMinimum('1.0.0');
+	    $this->assertEquals( $expected , $result);
+	}	
+	public function testVersionMinimum_equal() {
+	    $expected = true;
+	    $result = FormDinHelper::versionMinimum('4.6.3-alpha');
+	    $this->assertEquals( $expected , $result);
+	}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
 	public function testSetPropertyVo_noSet(){
 	    $bodyRequest = array();
 	    $bodyRequest['IDPESSOA'] = 10;
@@ -104,7 +121,9 @@ class FormDinHelperTest extends TestCase
 	    $this->assertEquals( $expected , $vo->getSit_ativo());
 	}
 	*/
-	
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
@@ -139,14 +158,15 @@ class FormDinHelperTest extends TestCase
 	    $this->assertEquals( 2 , $arrayFormDin['COD_UF'][0]);
 	    $this->assertEquals( 'S' , $arrayFormDin['SIT_ATIVO'][0]);
 	}	
-	
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testValidateObjTypeTPDOConnectionObj_failMethod(){
 	    FormDinHelper::validateObjTypeTPDOConnectionObj(null,null,null);
-	}
-	
+	}	
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
@@ -156,9 +176,7 @@ class FormDinHelperTest extends TestCase
 	
 	public function testValidateObjTypeTPDOConnectionObj_failNoObj(){
 	    $this->assertNull( FormDinHelper::validateObjTypeTPDOConnectionObj(null,__METHOD__,__LINE__) );
-	}
-
-	
+	}	
 	/**
 	 * @expectedException InvalidArgumentException
 	 */
@@ -175,25 +193,24 @@ class FormDinHelperTest extends TestCase
 	    $tpdo->connect();
 	    $this->assertNull( FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__) );
 	}
-	
-	public function testVersionMinimum_false() {
-	    $expected = false;
-	    $result = FormDinHelper::versionMinimum('99.99.99');
-	    $this->assertEquals( $expected , $result);
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testValidateIdIsNumeric_FailNull(){
+	    FormDinHelper::validateIdIsNumeric(null,__METHOD__,__LINE__);
 	}
-	
-	public function testVersionMinimum_true() {
-	    $expected = true;
-	    $result = FormDinHelper::versionMinimum('1.0.0');
-	    $this->assertEquals( $expected , $result);
+	public function testValidateIdIsNumeric_OkInteger(){
+	    $this->assertNull( FormDinHelper::validateIdIsNumeric(10,__METHOD__,__LINE__) );
 	}
-	
-	public function testVersionMinimum_equal() {
-	    $expected = true;
-	    $result = FormDinHelper::versionMinimum('4.6.3-alpha');
-	    $this->assertEquals( $expected , $result);
+	public function testValidateIdIsNumeric_OkString(){
+	    $this->assertNull( FormDinHelper::validateIdIsNumeric('10',__METHOD__,__LINE__) );
 	}
-
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
     public function testIssetOrNotZero_arrayNull() {
         $expected = false;
         $variable = array();
