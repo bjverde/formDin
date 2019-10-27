@@ -13,8 +13,8 @@
 defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
-$primaryKey = 'IDPESSOA_FISICA';
-$frm = new TForm('Cadastro Simples Pessoa Física',800,950);
+$primaryKey = 'IDPESSOA';
+$frm = new TForm('Pessoa Física',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -22,24 +22,35 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
+//$controllerVwPessoa = new Vw_pessoa();
+//$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
+//$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
+$frm->addHiddenField( 'IDPESSOA');
+$frm->addHiddenField( 'IDPESSOA_FISICA');
+$frm->addHiddenField( 'IDNATUREZA_JURIDICA' );
+$frm->addHiddenField( 'TIPO', Pessoa::PF);
+$frm->addHiddenField( 'SIT_ATIVO', 'S');
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$controllerVwPessoa = new Vw_pessoa();
-$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addCpfField('CPF', 'CPF',true);
-//$frm->addTextField('CPF', 'CPF',11,true,11);
 
-$frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
+$frm->addGroupField('gpx1','');
+    $frm->addTextField('NOME', 'Nome',200,true,80);
+    $frm->addCpfField('CPF', 'CPF',true);
+$frm->closeGroup();
 
-$controllerUf = new Uf();
-$listUf = $controllerUf->selectAll('NOM_UF');
-$frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
+$frm->addGroupField('gpx2','');
+    $frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
 
-$controllerMunicipio = new Municipio();
-$listMunicipio = $controllerMunicipio->selectAll();
-$frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+    $controllerUf = new Uf();
+    $listUf = $controllerUf->selectAll('NOM_UF');
+    $frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
 
-$frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
+    $controllerMunicipio = new Municipio();
+    $listMunicipio = $controllerMunicipio->selectAll();
+    $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+
+    $frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
+$frm->closeGroup();
+
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -61,7 +72,7 @@ switch( $acao ) {
                 $controller = new Pessoa_fisica();
                 $resultado = $controller->save( $vo );
                 if($resultado==1) {
-                    $frm->setMessage('Registro gravado com sucesso!!!');
+                    $frm->setMessage(Message::GENERIC_SAVE);
                     $frm->clearFields();
                 }else{
                     $frm->setMessage($resultado);
@@ -83,7 +94,7 @@ switch( $acao ) {
             $controller = new Pessoa_fisica();
             $resultado = $controller->delete( $id );
             if($resultado==1) {
-                $frm->setMessage('Registro excluido com sucesso!!!');
+                $frm->setMessage(Message::GENERIC_DELETE);
                 $frm->clearFields();
             }else{
                 $frm->setMessage($resultado);
@@ -105,13 +116,18 @@ function getWhereGridParameters(&$frm)
     $retorno = null;
     if($frm->get('BUSCAR') == 1 ){
         $retorno = array(
-                'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
+                 'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
                 ,'CPF'=>$frm->get('CPF')
                 ,'DAT_NASCIMENTO'=>$frm->get('DAT_NASCIMENTO')
                 ,'COD_MUNICIPIO_NASCIMENTO'=>$frm->get('COD_MUNICIPIO_NASCIMENTO')
                 ,'DAT_INCLUSAO'=>$frm->get('DAT_INCLUSAO')
                 ,'DAT_ALTERACAO'=>$frm->get('DAT_ALTERACAO')
+        );
+    }else{
+        $retorno = array(
+             'TIPO'=>$frm->get('TIPO')
+            ,'SIT_ATIVO'=>$frm->get('SIT_ATIVO')
         );
     }
     return $retorno;
@@ -120,20 +136,22 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Pessoa_fisica();
+    $controller = new Vw_pessoa();
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
-                    .',IDPESSOA|IDPESSOA'
+                    .',NOME|NOME'
+                    .',TIPO|TIPO'
                     .',CPF|CPF'
-                    .',DAT_NASCIMENTO|DAT_NASCIMENTO'
-                    .',COD_MUNICIPIO_NASCIMENTO|COD_MUNICIPIO_NASCIMENTO'
+                    .',IDPESSOA_FISICA|IDPESSOA_FISICA'
+                    .',CNPJ|CNPJ'
+                    .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
+                    .',SIT_ATIVO|SIT_ATIVO'
                     .',DAT_INCLUSAO|DAT_INCLUSAO'
-                    .',DAT_ALTERACAO|DAT_ALTERACAO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Pessoa Física. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Lista de Pessoas Físicas. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -143,14 +161,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'pessoa_fisica.php' );
 
     $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('IDPESSOA','id Pessoa');
-    $gride->addColumn('CPF','CPF');
-    $gride->addColumn('DAT_NASCIMENTO','Data Nascimento');
-    $gride->addColumn('COD_MUNICIPIO_NASCIMENTO','COD_MUNICIPIO_NASCIMENTO');
-    $gride->addColumn('DAT_INCLUSAO','Data Inclusão');
-    $gride->addColumn('DAT_ALTERACAO','Data Alteração');
-
-
+	$gride->addColumn('NOME','Nome');
+    //$gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
+    $gride->addColumn('CPF','CPF',null,'center');
+	//$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
+	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
     $gride->show();
     die();
 }

@@ -2602,8 +2602,8 @@ class TForm Extends TBox
       * Adiciona uma mensagem à lista, para ser exibida na tela via alert() em javascript quando o formulário for exibido
       *
       * <code>
-      * 	$frm->addMessae('Mensagem nova');
-      * 	$frm->addMessae(array('Mensagem 1', 'Mensagem 2');
+      * 	$frm->addMessage('Mensagem nova');
+      * 	$frm->addMessage(array('Mensagem 1', 'Mensagem 2');
       * </code>
       *
       * @param string $mixMessage
@@ -6859,7 +6859,8 @@ class TForm Extends TBox
     			           		){
        $field = new TRadio( $strName, $arrOptions, $strValue, $boolRequired, $intQtdColumns, $intWidth, $intHeight, $intPaddingItems,$boolNowrapText);
        $field->setNoWrapText($boolNowrapText);
-       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+       $this->addDisplayControl( $displayControl );
        $field->addEvent('onDblclick','this.checked=false;fwFieldCheckBoxClick(this);');
        return $field;
     }

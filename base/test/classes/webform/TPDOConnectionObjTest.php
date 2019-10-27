@@ -50,6 +50,13 @@ class TPDOConnectionObjTest extends TestCase
 
     private $test;
 	
+    public static function setUpBeforeClass()
+    {
+        $tpdo = new TPDOConnectionObj(false);
+        $tpdo->setDBMS(null);
+        $tpdo->setDataBaseName(null);
+    }
+    
 	/**
 	 * Prepares the environment before running a test.
 	 */

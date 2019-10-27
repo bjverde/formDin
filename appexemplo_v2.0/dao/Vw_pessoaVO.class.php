@@ -61,7 +61,7 @@ class Vw_pessoaVO
         if( empty($cpfcnpj) ){
             $cpfcnpj = $this->getCpf();
             if( empty($cpfcnpj) ){
-                $cpfcnpj = $this->getCpfcnpj();
+                $cpfcnpj = $this->getCnpj();
             }
         }
         return $this->cpfcnpj;

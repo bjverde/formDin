@@ -78,10 +78,11 @@ class Vw_pessoa
     //--------------------------------------------------------------------------------
     public function validateUmCpfCnpj( Vw_pessoaVO $objVo )
     {
+        $idpessoa = $objVo->getIdpessoa();
         $CpfCnpj = $objVo->getCpfcnpj();
         $dados = $this->selectByCpfCnpj($CpfCnpj);
         $CpfCnpjBanco = ArrayHelper::getArrayFormKey($dados,'CPFCNPJ',0);
-        if( !empty($CpfCnpjBanco) ){
+        if( empty($idpessoa) && !empty($CpfCnpjBanco) ){
             throw new DomainException(Message::ERROR_PESSOA_CPFCNPJ);
         }
     }
@@ -90,11 +91,11 @@ class Vw_pessoa
     {
         $tipo = $objVo->getTipo();
         if( $tipo == Pessoa::PF ){
-            if( $objVo->getCpf() ){
+            if( empty($objVo->getCpf()) ){
                 throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CPF');
             }
         }else{
-            if( $objVo->getCnpj() ){
+            if( empty($objVo->getCnpj()) ){
                 throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CNPJ');
             }
         }
@@ -116,9 +117,25 @@ class Vw_pessoa
             
             $objVoPessoa = new PessoaVO();
             $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
-            $objVoPessoa->setNom_pessoa( $objVo->setNome() );
-            $objVoPessoa->setTipo( $objVo->setTipo() );
-            $result = new Pessoa($objVo);
+            $objVoPessoa->setNome( $objVo->getNome() );
+            $objVoPessoa->setTipo( $objVo->getTipo() );
+            $objVoPessoa->setSit_ativo( 'S' );
+            $controllerPessoa = new Pessoa($tpdo);
+            $result = $controllerPessoa->save($objVoPessoa);
+
+            $tipo = $objVo->getTipo();
+            if( $tipo == Pessoa::PF ){
+                $objVoPessoaPF = new Pessoa_fisicaVO();
+                $objVoPessoaPF->setIdpessoa_fisica( $objVo->getIdpessoa_fisica() );
+                $objVoPessoaPF->setIdpessoa( $objVo->getIdpessoa() );
+                $objVoPessoaPF->setCod_municipio_nascimento( $objVo->getCod_municipio_nascimento() );
+                $controllerPessoaPF = new Pessoa_fisica($tpdo);
+                $result = $controllerPessoaPF->save($objVoPessoaPF);
+            }else{
+                $objVoPessoaPJ = new Pessoa_juridicaVO();
+                $controllerPessoaPJ = new Pessoa_juridica($tpdo);
+                $result = $controllerPessoaPJ->save($objVoPessoaPJ);
+            }
 
             $tpdo->commit();
         }

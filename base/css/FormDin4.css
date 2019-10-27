@@ -58,13 +58,13 @@ body
 }
 
 input:focus ,textarea:focus, select:focus {
-	//border-color: #DAE8F3;
+	/* border-color: #DAE8F3; */
 	border-color: rgba(82,168,236,.8);
 	border-color: rgba(82,168,236,.8);
     outline: 0;
     outline: thin dotted \9;
     -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 0 8px rgba(82,168,236,.6) !important;
+    box-shadow: 0 0 8px rgba(82,168,236,.6);
 }
 
 .fwHelpText
@@ -585,12 +585,10 @@ input:focus ,textarea:focus, select:focus {
 
 .fwGridRow:hover {
 	/*background-color: #E6DB74 !important;*/
-	/* background-color: #D0D0D0 !important;*/
-	 background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x !important;
- 	/* background: -moz-linear-gradient(center top , #C0F7FF, #93E9F6 20%, #78CEDB 51%, #63B9C6 51%, #54AAB7 95%, #489EAB) repeat scroll 0 0 rgba(0, 0, 0, 0);*/
-
+	/*background-color: #D0D0D0 !important;*/
+	background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x;
 }
 
 .fwGridCellAction:hover{
-	 background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x !important;
+	background: #D0D0D0 url(../imagens/fwSmallDarkGradient.png) left center repeat-x;
 }

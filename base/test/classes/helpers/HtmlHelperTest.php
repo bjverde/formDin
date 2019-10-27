@@ -38,80 +38,69 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
+
 $path =  __DIR__.'/../../../classes/';
 require_once $path.'constants.php';
-require_once $path.'webform/autoload_formdin.php';
 require_once $path.'helpers/autoload_formdin_helper.php';
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * TRadio test case.
+ * paginationSQLHelper test case.
  */
-class TRadioTest extends TestCase
+class HtmlHelperTest extends TestCase
 {	
-	/**
-	 *
-	 * @var TRadio
-	 */
-	private $tRadio;
-	
 
+	public function testGetViewPort() {
+	    $expected = '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
+        $result = HtmlHelper::getViewPort();
+        $this->assertEquals( $expected , $result);
+	}
 	/**
-	 * Prepares the environment before running a test.
+	 * @expectedException InvalidArgumentException
 	 */
-	protected function setUp() {
-		parent::setUp ();
-		$listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
-		//$tRadio = new TRadio('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
-		$tRadio = new TRadio('forma_pagamento', $listFormas, null, false);
-		$this->tRadio = $tRadio;
+	public function testValidateHtmlColorHexa_FailNumber() {
+	    $string = 1;
+	    HtmlHelper::validateHtmlColorHexa( $string );
 	}
-	
+	//--------------------------------------------------------------------------------
 	/**
-	 * Cleans up the environment after running a test.
+	 * @expectedException InvalidArgumentException
 	 */
-	protected function tearDown() {		
-		parent::tearDown ();
-	}
-	
-	public function testCheckedItemRadioOrCheck_Empty() {
-		$esperado = null;
-		
-		$tRadio = $this->tRadio;
-		$tRadio->setValue(1);
-		
-		$input = new TElement('input');
-		$input->setProperty( 'type', 'radio' );
-		$input->setName( $tRadio->getId() );
-		$input->setProperty( 'id', $tRadio->getId() . '_1');
-		
-		$span = new TElement( 'span' );
-		
-		$tRadio->checkedItemRadioOrCheck( $input,$span, 2 );
-		
-		$retorno = $input->getProperty('checked');
-		
-		$this->assertSame($esperado, $retorno);
-	}
-	
-	public function testCheckedItemRadioOrCheck_True() {
-		$esperado = 'true';
-		
-		$tRadio = $this->tRadio;
-		$tRadio->setValue(1);
-		
-		$input = new TElement('input');
-		$input->setProperty( 'type', 'radio' );
-		$input->setName( $tRadio->getId() );
-		$input->setProperty( 'id', $tRadio->getId() . '_1');
-		
-		$span = new TElement( 'span' );
-		
-		$tRadio->checkedItemRadioOrCheck( $input,$span, 1 );
-		
-		$retorno = $input->getProperty('checked');
-		
-		$this->assertSame($esperado, $retorno);
+	public function testValidateHtmlColorHexa_FailString() {
+	    $string = 'xxx';
+	    HtmlHelper::validateHtmlColorHexa( $string );
+    }
+	//--------------------------------------------------------------------------------
+	/**
+	 * @expectedException PHPUnit\Framework\Error\Error
+	 */
+	public function testValidateHtmlColorHexa_FailArray() {
+	    $string = array(1,2);
+	    HtmlHelper::validateHtmlColorHexa( $string );
+    }    
+	//--------------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 */
+	public function testValidateHtmlColorHexa_FailWrongSizeLess() {
+	    $string = '#1';
+	    HtmlHelper::validateHtmlColorHexa( $string );
+    }
+    //--------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
+	public function testValidateHtmlColorHexa_FailWrongSizeBig() {
+	    $string = '#12345678';
+	    HtmlHelper::validateHtmlColorHexa( $string );
+    }
+    public function testValidateHtmlColorHexa_PassNull() {
+	    $string = null;
+	    $this->assertNull( HtmlHelper::validateHtmlColorHexa( $string ) );
+    }
+    public function testValidateHtmlColorHexa_Pass() {
+	    $string = '#123456';
+	    $this->assertNull( HtmlHelper::validateHtmlColorHexa( $string ) );
 	}
 }

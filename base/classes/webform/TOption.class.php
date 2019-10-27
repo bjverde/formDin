@@ -45,6 +45,8 @@ abstract class TOption extends TControl
 {
 	
 	const RADIO = 'radio';
+	const CHECK = 'check';
+	const SELECT = 'select';
 	
 	private $arrOptions;
 	private $arrValues;
@@ -62,38 +64,47 @@ abstract class TOption extends TControl
 	/**
 	 * Método construtor
 	 *
-	 * $mixOptions = array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
-	 * $arrValues = array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
-	 * $intPaddingItems = numero inteiro para definir o espaço vertical entre as colunas de opções
-	 * $strInptType = define o tipo de input a ser gerado. Ex: select, radio ou check
-	 * $strKeyColumn = nome da coluna que será utilizada para preencher os valores das opções
 	 * $strDisplayColumn = nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
-	 * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
 	 *
 	 * @abstract
-	 * @param string $strName
-	 * @param array $arrOptions
-	 * @param array $arrValues
-	 * @param boolean $boolRequired
-	 * @param integer $intQtdColumns
-	 * @param integer $intWidth
-	 * @param integer $intHeight
-	 * @param integer $intPaddingItems
-	 * @param boolean $boolMultiSelect
-	 * @param string $strInputType
-	 * @param string $strKeyField
-	 * @param string $strDisplayField
-	 * @param string $strDataColumns
+	 * @param string $strName          - 1:
+	 * @param array $mixOptions        - 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
+	 * @param array $arrValues         - 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+	 * @param boolean $boolRequired    - 4:
+	 * @param integer $intQtdColumns   - 5:
+	 * @param integer $intWidth        - 6:
+	 * @param integer $intHeight       - 7:
+	 * @param integer $intPaddingItems - 8: numero inteiro para definir o espaço vertical entre as colunas de opções
+	 * @param boolean $boolMultiSelect - 9:
+	 * @param string $strInputType     -10: define o tipo de input a ser gerado. Ex: select, radio ou check
+	 * @param string $strKeyField      -11: nome da coluna que será utilizada para preencher os valores das opções
+	 * @param string $strDisplayField  -12:
+	 * @param boolean $boolNowrapText  -13:
+	 * @param string $strDataColumns   -14: informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
 	 * @return TOption
 	 */
-	public function __construct( $strName, $mixOptions, $arrValues=null, $boolRequired=null, $intQtdColumns=null, $intWidth=null, $intHeight=null, $intPaddingItems=null, $boolMultiSelect=null, $strInputType=null, $strKeyField=null, $strDisplayField=null,$boolNowrapText=null,$strDataColumns=null )
+	public function __construct( $strName
+	                           , $mixOptions
+	                           , $arrValues=null
+	                           , $boolRequired=null
+                        	   , $intQtdColumns=null
+                        	   , $intWidth=null
+                        	   , $intHeight=null
+                        	   , $intPaddingItems=null
+                        	   , $boolMultiSelect=null
+                        	   , $strInputType=null
+                        	   , $strKeyField=null
+                        	   , $strDisplayField=null
+                        	   , $boolNowrapText=null
+                        	   , $strDataColumns=null 
+                        	   )
 	{
 		parent::__construct( 'div', $strName );
 		$this->setValue( $arrValues );
 		$this->setRequired( $boolRequired );
 		$this->setQtdColumns( $intQtdColumns );
 		$this->setPaddingItems( $intPaddingItems );
-		$this->setFieldType( ($strInputType == null) ? 'select' : $strInputType );
+		$this->setFieldType( ($strInputType == null) ? self::SELECT : $strInputType );
 		$this->setMultiSelect( $boolMultiSelect );
 		$this->setCss( 'border',  '1px solid #c0c0c0' ); //#176 relacionado com FormDin4.js
 		//$this->setClass('fwFieldBoarder');
@@ -105,8 +116,7 @@ abstract class TOption extends TControl
 		$this->setOptions( $mixOptions, $strDisplayField, $strKeyField, null, $strDataColumns );
 		$this->setNowrapText($boolNowrapText);
 		// tratamento para campos selects postados das colunas tipo do TGrid onde os nomes são arrays
-	   if( $this->getFieldType() == 'select' && strpos( $this->getName(), '[' ) !== false )
-	   {
+		if( $this->getFieldType() == self::SELECT && strpos( $this->getName(), '[' ) !== false ) {
 	   	   $name = $this->getName();
 		   $arrTemp = explode('[',$name);
 		   if( isset($_POST[$arrTemp[0] ] ) )
@@ -511,12 +521,9 @@ abstract class TOption extends TControl
 	 */
 	public function setValue( $mixValues=null )
 	{
-		if (is_array($mixValues))
-		{
+		if (is_array($mixValues)) {
 			$this->arrValues = $mixValues;
-		}
-		else
-		{
+		} else {
 			$this->arrValues = array($mixValues);
 		}
 		return $this;
@@ -529,27 +536,19 @@ abstract class TOption extends TControl
 	public function getValue()
 	{
 		$type = $this->getFieldType();
-		if( $type == 'select' && !$this->getMultiSelect() )
-		{
-			if( $this->arrValues )
-			{
-				if( is_array( $this->arrValues ) )
-				{
+		if( $type == self::SELECT && !$this->getMultiSelect() ) {
+			if( $this->arrValues ) {
+				if( is_array( $this->arrValues ) ) {
 					return $this->arrValues[ 0 ];
-				}
-				else
-				{
+				} else {
 					return null;
 				}
 			}
 			return null;
-		}
-		elseif ($type == self::RADIO){
+		} elseif ($type == self::RADIO){
 			$result = $this->arrValues[0];
 			return $result;
-		}
-		else
-		{
+		} else {
 			return ( array ) $this->arrValues;
 		}
 	}
@@ -571,21 +570,17 @@ abstract class TOption extends TControl
 	 */
 	public function setOptions( $mixOptions=null, $strDisplayField=null, $strKeyField=null, $mixSearchFields=null, $strDataColumns=null )
 	{
-		if( isset( $mixOptions ) )
-		{
+		if( isset( $mixOptions ) ) {
 
-			if( !is_null($strDataColumns) && trim( $strDataColumns) != '' )
-			{
+			if( !is_null($strDataColumns) && trim( $strDataColumns) != '' ) {
 				$arrDataColumns	= explode(',',$strDataColumns);
 				$strDataColumns	= ','.$strDataColumns.' ';
 			}
 
-			if( is_string( $mixOptions ) )
-			{
+			if( is_string( $mixOptions ) ) {
 				$where = null;
 				$cacheSeconds = null;
-				if( preg_match('/\|/',$mixOptions))
-				{
+				if( preg_match('/\|/',$mixOptions)){
 					$mixOptions  	= explode( '|', $mixOptions );
 					$mixOptions[1]  = ( isset( $mixOptions[1] ) ? $mixOptions[1] : '' );
 					// segundo parametro pode ser o where ou tempo de cache
@@ -598,12 +593,9 @@ abstract class TOption extends TControl
 				{
 
 				// tratar opção de 1 caractere. Ex: S,N,1,2...
-					if( strlen($mixOptions)==1 )
-					{
+					if( strlen($mixOptions)==1 ){
 						$mixOptions = array( 'N'=>'' );
-					}
-					else
-					{
+					} else {
 						// tratar formato S=>SIM,N=>NÃO
 						$mixOptions = preg_replace('/\=\>/','=',$mixOptions);
 						$mixOptions = explode( ',', $mixOptions );
@@ -841,7 +833,7 @@ abstract class TOption extends TControl
 	}
 	/**
 	 * Define a distância entre as colunas. Padrão=20px
-	 *
+	 * @deprecated
 	 * @param integer $intNewValue
 	 */
 	public function setPaddingItems( $intNewValue=null )
@@ -850,8 +842,10 @@ abstract class TOption extends TControl
 		return $this;
 	}
 	/**
+	 * DEPRECADED - change to setClass
 	 * recupera a distância entre as colunas. Padrão=20px
-	 *
+	 * @deprecated
+	 * @return number
 	 */
 	public function getPaddingRight()
 	{

@@ -661,6 +661,38 @@ FROM
 	left join pessoa_juridica as pj
 	on p.idpessoa = pj.idpessoa;
 
+
+-- -----------------------------------------------------
+-- View `vw_pessoa`
+-- -----------------------------------------------------
+USE `form_exemplo`;
+DROP VIEW IF EXISTS `vw_pessoa_fisica` ;
+CREATE  OR REPLACE VIEW `vw_pessoa_fisica` AS
+
+SELECT p.idpessoa
+      ,p.nome
+	    ,p.tipo
+	    ,p.sit_ativo
+	    ,pf.cpf
+      ,pf.rg	
+      ,m.cod_uf
+      ,m.nom_uf
+      ,m.sig_uf
+      ,pf.cod_municipio_nascimento
+      ,m.nom_municipio
+	    ,pf.dat_nascimento
+	    ,DATE_FORMAT(pf.dat_nascimento, '%d/%m/%Y') as dat_nascimento_format
+      ,pf.idpessoa_fisica
+	    ,p.dat_inclusao   
+      ,p.dat_alteracao
+FROM 
+	pessoa as p
+	left join pessoa_fisica as pf
+	on p.idpessoa = pf.idpessoa
+	left join vw_regiao_municipio as m
+    on pf.cod_municipio_nascimento = m.cod_municipio
+
+
 -- -----------------------------------------------------
 -- View `vw_pessoa_marca_produto`
 -- -----------------------------------------------------

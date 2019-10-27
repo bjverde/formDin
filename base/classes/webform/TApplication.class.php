@@ -1176,7 +1176,7 @@ class TApplication extends TLayout {
 	}
 	
 	/**
-	 * Configura um arquivo de CSS Default para todos os formularios.
+	 * Configura um arquivo de CSS Default para todos os formulários.
 	 * Para configura o CSS da parte externa utilize setCssFile
 	 * @param string $strNewValue
 	 */
@@ -1391,7 +1391,7 @@ class TApplication extends TLayout {
 	        $app_hearder->add( $app_header_login );
 	    }
 	    
-	    $this->getNorthArea ()->add ( $app_hearder );
+	    $this->getNorthArea()->add ( $app_hearder );
 	}
 	
 	/**

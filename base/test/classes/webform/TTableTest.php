@@ -74,8 +74,8 @@ class TTableTest extends TestCase
 	
 	public function testAddRow() {
 	    $expected = '<table id="tb01" >'.EOL
-	               .'<tr>'.EOL
-	               .'</tr>'.EOL
+	               .ESP.'<tr>'.EOL
+	               .ESP.'</tr>'.EOL
 	               .'</table>'.EOL;
 	    $test = new TTable('tb01');
 	    $test->addRow();
@@ -94,11 +94,11 @@ class TTableTest extends TestCase
 	
 	public function testAddCell() {
 	    $expected = '<table id="tb01" >'.EOL
-	               .'<tr>'.EOL
-	               .ESP.'<td>'.EOL
-	               .ESP.ESP.'aaa'.EOL
-	               .ESP.'</td>'.EOL
-	               .'</tr>'.EOL
+	               .ESP.'<tr>'.EOL
+	               .ESP.ESP.'<td>'.EOL
+	               .ESP.ESP.ESP.'aaa'.EOL
+	               .ESP.ESP.'</td>'.EOL
+	               .ESP.'</tr>'.EOL
 	               .'</table>'.EOL;
 	    $test = new TTable('tb01');
 	    $row = $test->addRow();
@@ -109,11 +109,11 @@ class TTableTest extends TestCase
 	
 	public function testAddCell_setClass() {
 	    $expected = '<table id="tb01"  class="grid-green" >'.EOL
-            	    .'<tr>'.EOL
-            	    .ESP.'<td>'.EOL
-            	    .ESP.ESP.'aaa'.EOL
-            	    .ESP.'</td>'.EOL
-            	    .'</tr>'.EOL
+	                .ESP.'<tr>'.EOL
+	                .ESP.ESP.'<td>'.EOL
+	                .ESP.ESP.ESP.'aaa'.EOL
+	                .ESP.ESP.'</td>'.EOL
+	                .ESP.'</tr>'.EOL
             	    .'</table>'.EOL;
 	    $test = new TTable('tb01');
 	    $test->setClass('grid-green');
@@ -125,16 +125,16 @@ class TTableTest extends TestCase
 	
 	public function testAddCell_NotVisible() {
 	    $expected = '<table id="tb01" >'.EOL
-            	    .'<tr>'.EOL
-            	    .ESP.'<td>'.EOL
-            	    .ESP.ESP.'aaa'.EOL
-            	    .ESP.'</td>'.EOL
-            	    .'</tr>'.EOL
-            	    .'<tr>'.EOL
-            	    .ESP.'<td>'.EOL
-            	    .ESP.ESP.'aaa3'.EOL
-            	    .ESP.'</td>'.EOL
-            	    .'</tr>'.EOL
+	                .ESP.'<tr>'.EOL
+	                .ESP.ESP.'<td>'.EOL
+	                .ESP.ESP.ESP.'aaa'.EOL
+	                .ESP.ESP.'</td>'.EOL
+	                .ESP.'</tr>'.EOL
+	                .ESP.'<tr>'.EOL
+	                .ESP.ESP.'<td>'.EOL
+	                .ESP.ESP.ESP.'aaa3'.EOL
+	                .ESP.ESP.'</td>'.EOL
+	                .ESP.'</tr>'.EOL
             	    .'</table>'.EOL;
 	    $test = new TTable('tb01');
 	    

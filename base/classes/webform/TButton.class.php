@@ -66,7 +66,12 @@ class TButton extends TControl
 	public function __construct($strName
 	                           ,$strValue=null
 	                           ,$strAction=null
-	                           ,$strOnClick=null,$strConfirmMessage=null,$strImageEnabled=null,$strImageDisabled=null,$strHint=null,$boolSubmitAction=null)
+	                           ,$strOnClick=null
+	                           ,$strConfirmMessage=null
+	                           ,$strImageEnabled=null
+	                           ,$strImageDisabled=null
+	                           ,$strHint=null
+	                           ,$boolSubmitAction=null)
 	{
 		$strName = is_null( $strName ) ? $this->removeIllegalChars( $strValue ) : $strName;
 		parent::__construct('button',$strName,$strValue);

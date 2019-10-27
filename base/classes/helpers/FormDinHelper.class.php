@@ -85,8 +85,7 @@ class FormDinHelper
             }
         }
         return $vo;
-    }
-    
+    }    
     //--------------------------------------------------------------------------------
     /***
      * Convert Object Vo to Array FormDin 
@@ -112,6 +111,49 @@ class FormDinHelper
         return $arrayFormDin;
     }
     
+    public static function validateMethodLine($method,$line,$nameMethodValidate)
+    {
+        if( empty($method) ){
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable method is null. '.$nameMethodValidate);
+        }
+        if( empty($line) ){
+            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable line is null. '.$nameMethodValidate);
+        }        
+    }
+    //--------------------------------------------------------------------------------
+    /**
+     * Validate Object Type is Instance Of TPDOConnectionObj
+     *
+     * @param object $tpdo instanceof TPDOConnectionObj
+     * @param string $method __METHOD__
+     * @param string $line __LINE__
+     * @throws InvalidArgumentException
+     * @return void
+     */
+    public static function validateObjTypeTPDOConnectionObj($tpdo,$method,$line)
+    {
+        self::validateMethodLine($method, $line, __METHOD__);
+        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
+        if( !is_null($tpdo) && $typeObjWrong ){
+            throw new InvalidArgumentException('Informed class is not an instance of TPDOConnectionObj. See the method: '.$method.' in the line: '.$line);
+        }
+    }
+    //--------------------------------------------------------------------------------
+    /**
+     * Validade ID is numeric and not empty
+     * @param integer $id
+     * @param string $method
+     * @param string $line
+     * @throws InvalidArgumentException
+     * @return void
+     */
+    public static function validateIdIsNumeric($id,$method,$line)
+    {
+        self::validateMethodLine($method, $line, __METHOD__);
+        if( empty($id) || !is_numeric($id) ){
+            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_INT.'See the method: '.$method.' in the line: '.$line);
+        }
+    }
     /***
      * 
      * @param mixed $variable

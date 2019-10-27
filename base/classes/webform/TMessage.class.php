@@ -55,6 +55,11 @@ class TMessage {
     
     const ERROR_FIELD_ID_CANNOT_EMPTY = 'O id do campo não pode ficar em branco';
 
+    const ERROR_HTML_COLOR_HEXA = 'Informe uma cor HTML no formato hexadecimal. Exemplo #efefef !';
+
+    const ERROR_EMPTY_INPUT = 'O Parametro não pode ficar em branco';
+    const ERROR_TYPE_NOT_INT = 'Tipo não númerico! ';
+
     public function __construct() {
     }
 	

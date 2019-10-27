@@ -170,7 +170,7 @@ class Database
             $msg = 'Depois do include';
             $this->showMsgQtds($msg, $tpdo, $objUser, $objUserPerfil);
             
-            throw new  Exception('Gerenic Exception!!!!');            
+            throw new  Exception('Generic Exception!!!!');            
             //----------------
             //$objUserPerfil->deleteByIdUser($idUser);
             //$objUser->delete($idUser);

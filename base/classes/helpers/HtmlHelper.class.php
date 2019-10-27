@@ -41,9 +41,17 @@
 
 class HtmlHelper
 {
-    static function getViewPort() 
+    public static function getViewPort() 
     {
         return '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">';
     }
+
+    public static function validateHtmlColorHexa($color) 
+    {
+        if ( !empty($color) && (preg_match('/^#[\D0-9]{6}\z/', $color) !== 1) ){
+            throw new InvalidArgumentException(TMessage::ERROR_HTML_COLOR_HEXA);
+        }
+    }
+
 }
 ?>

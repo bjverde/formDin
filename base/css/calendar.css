@@ -51,12 +51,14 @@
 .calendar THEAD .title {
 	BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 1px; FONT-WEIGHT: bold; BACKGROUND: #788084; PADDING-BOTTOM: 1px; BORDER-LEFT: #000 1px solid; COLOR: #fff; PADDING-TOP: 1px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center
 }
+/*
 .calendar THEAD .headrow {
 	
 }
 .calendar THEAD .daynames {
 	
 }
+*/
 .calendar THEAD .name {
 	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; BACKGROUND: #e8f0f4; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center
 }
@@ -111,9 +113,11 @@
 .calendar TBODY .emptyrow {
 	DISPLAY: none
 }
+/*
 .calendar TFOOT .footrow {
 	
 }
+*/
 .calendar TFOOT .ttip {
 	BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 1px; BACKGROUND: #788084; PADDING-BOTTOM: 1px; BORDER-LEFT: #000 1px solid; COLOR: #fff; PADDING-TOP: 1px; BORDER-BOTTOM: #000 1px solid; TEXT-ALIGN: center
 }
