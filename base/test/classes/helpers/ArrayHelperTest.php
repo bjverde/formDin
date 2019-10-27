@@ -244,6 +244,28 @@ class ArrayHelperTest extends TestCase
     /**
      * @expectedException InvalidArgumentException
      */
+    public function testFormDinDeleteRowByKeyIndex_FailNull(){
+        ArrayHelper::formDinDeleteRowByKeyIndex(null,10);
+    }
+    
+    public function testFormDinDeleteRowByKeyIndex_FailAttributeNotExist(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByKeyIndex($array,10);
+        
+        $expected = false;
+        $this->assertEquals($expected, $result['result']);
+        $expected = TMessage::ARRAY_KEY_NOT_EXIST;
+        $this->assertEquals($expected, $result['message']);
+    }
+    
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
     public function testFormDinDeleteRowByColumnNameAndKeyIndex_FailNull(){
         ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex(null,'xx',10);
     }
