@@ -214,8 +214,33 @@ class ArrayHelper
         return $value;
     }
     
+    
     /**
-     * -
+     * Remove todos os elementos de uma linha de um array FormDin
+     * Recebe um array formDin e o numero da linha que será removida.
+     * Retonar um novo array com:
+     *         $result['result'] = true se deletou ou false se não foi possivel deletar
+     *         $result['formarray'] = array com o resultado
+     *         $result['message'] = motivo da não deleção
+     * @param array $array
+     * @param string $atributeName
+     * @param int $keyIndex
+     * @throws InvalidArgumentException
+     * @return NULL|array
+     */
+    public static function formDinDeleteRowByKeyIndex($array,$keyIndex){
+        self::validateIsArray($array, __METHOD__, __LINE__);
+        $attributeName = array_key_first($array);
+        return self::formDinDeleteRowByColumnNameAndKeyIndex($array, $attributeName, $keyIndex);
+    }    
+    
+    /**
+     * Remove todos os elementos de uma linha de um array FormDin
+     * Recebe um array formDin o nome de uma coluna e o numero da linha que será removida.
+     * Retonar um novo array com:
+     *         $result['result'] = true se deletou ou false se não foi possivel deletar
+     *         $result['formarray'] = array com o resultado
+     *         $result['message'] = motivo da não deleção
      * @param array $array
      * @param string $atributeName
      * @param int $keyIndex
