@@ -119,6 +119,7 @@ class ArrayHelper
     }
     
     /***
+     * @deprecated chante to formDinGetValue
      * Evita erro de notice. Recebe um array FormDin, um atributo e a chave.
      * Verifica se o atributo e achave existem e devolve o valor
      * @param array $array
@@ -128,14 +129,9 @@ class ArrayHelper
      */
     static function getArrayFormKey($array,$atributeName,$key)
     {
-        $value = null;
-        if( self::has($atributeName, $array) ) {
-            $arrayResult = self::getArray($array, $atributeName);
-            $value = self::get($arrayResult, $key);
-        }
-        return $value;
+        return self::formDinGetValue($array, $atributeName, $key);
     }
-
+    //--------------------------------------------------------------------------------
     /**
      * Convert Array PDO Format to FormDin format
      *
@@ -158,7 +154,7 @@ class ArrayHelper
         }
         return $result;
     }
-
+    //--------------------------------------------------------------------------------
     /**
      * Convert Array FormDin Format to PDO format
      *
@@ -198,6 +194,61 @@ class ArrayHelper
         if( empty($array) || !is_array($array) ){
             throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_ARRAY.'See the method: '.$method.' in the line: '.$line);
         }
+    }
+    //--------------------------------------------------------------------------------
+    /***
+     * Evita erro de notice. Recebe um array FormDin, um atributo e a chave.
+     * Verifica se o atributo e achave existem e devolve o valor
+     * @param array $array
+     * @param string $atributeName
+     * @param int $key
+     * @return NULL|mixed|array
+     */
+    public static function formDinGetValue($array,$atributeName,$key)
+    {        
+        $value = null;
+        if( self::has($atributeName, $array) ) {
+            $arrayResult = self::getArray($array, $atributeName);
+            $value = self::get($arrayResult, $key);
+        }
+        return $value;
+    }
+    
+    /**
+     * -
+     * @param array $array
+     * @param string $atributeName
+     * @param int $keyIndex
+     * @throws InvalidArgumentException
+     * @return NULL|array
+     */
+    public static function formDinDeleteRowByColumnNameAndKeyIndex($array,$attributeName,$keyIndex)
+    {
+        self::validateIsArray($array, __METHOD__, __LINE__);
+        
+        $result = array();
+        $result['result'] = false;
+        $result['formarray'] = $array;
+        
+        if( !self::has($attributeName, $array) ) {
+            $result['message'] = TMessage::ARRAY_ATTRIBUTE_NOT_EXIST;
+        }else{
+            if( !self::formDinGetValue($array, $attributeName, $keyIndex) ){
+                $result['message'] = TMessage::ARRAY_KEY_NOT_EXIST;
+            }else{
+                $arrayResult = array();
+                foreach ($array as $attribute => $arrayAttribute) {
+                    foreach ($arrayAttribute as $key => $value) {
+                        if($keyIndex != $key ){
+                            $arrayResult[$attribute][]=$value;
+                        }
+                    }
+                }
+                $result['result']    = true;
+                $result['formarray'] = $arrayResult;
+            }
+        }
+        return $result;
     }
 }
 ?>
