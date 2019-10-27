@@ -59,6 +59,7 @@ class TMessage {
 
     const ERROR_EMPTY_INPUT = 'O Parametro não pode ficar em branco';
     const ERROR_TYPE_NOT_INT = 'Tipo não númerico! ';
+    const ERROR_TYPE_NOT_ARRAY = 'Tipo não é um array! ';
 
     public function __construct() {
     }

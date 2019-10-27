@@ -209,4 +209,33 @@ class ArrayHelperTest extends TestCase
         $retorno = ArrayHelper::convertArrayFormDin2Pdo($array,true);
         $this->assertEquals($esperado, $retorno);
     }
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailNull(){
+        ArrayHelper::validateIsArray(null,__METHOD__,__LINE__);
+    }
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailArrayEmpty(){
+        $listArray = array();
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailString(){
+        $listArray = 'xxx';
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
+    public function testValidateIdIsNumeric_OKArrayNotEmpty(){
+        $listArray = array();
+        $listArray[]=1;
+        $listArray[]=2;
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
 }
