@@ -22,12 +22,7 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
-//$controllerVwPessoa = new Vw_pessoa();
-//$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
-//$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addHiddenField( 'IDPESSOA');
 $frm->addHiddenField( 'IDPESSOA_FISICA');
-$frm->addHiddenField( 'IDNATUREZA_JURIDICA' );
 $frm->addHiddenField( 'TIPO', Pessoa::PF);
 $frm->addHiddenField( 'SIT_ATIVO', 'S');
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
@@ -118,11 +113,11 @@ function getWhereGridParameters(&$frm)
         $retorno = array(
                  'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
+                ,'TIPO'=>$frm->get('TIPO')
                 ,'CPF'=>$frm->get('CPF')
                 ,'DAT_NASCIMENTO'=>$frm->get('DAT_NASCIMENTO')
+                ,'COD_UF'=>$frm->get('COD_UF')
                 ,'COD_MUNICIPIO_NASCIMENTO'=>$frm->get('COD_MUNICIPIO_NASCIMENTO')
-                ,'DAT_INCLUSAO'=>$frm->get('DAT_INCLUSAO')
-                ,'DAT_ALTERACAO'=>$frm->get('DAT_ALTERACAO')
         );
     }else{
         $retorno = array(
@@ -136,7 +131,7 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Vw_pessoa();
+    $controller = new Vw_pessoa_fisica();
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
@@ -145,10 +140,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',TIPO|TIPO'
                     .',CPF|CPF'
                     .',IDPESSOA_FISICA|IDPESSOA_FISICA'
-                    .',CNPJ|CNPJ'
-                    .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
-                    .',SIT_ATIVO|SIT_ATIVO'
-                    .',DAT_INCLUSAO|DAT_INCLUSAO'
+                    .',DAT_NASCIMENTO|DAT_NASCIMENTO'
+                    .',COD_UF|COD_UF'
+                    .',COD_MUNICIPIO_NASCIMENTO|COD_MUNICIPIO_NASCIMENTO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
     				   ,'Lista de Pessoas Físicas. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
@@ -163,9 +157,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn($primaryKey,'id');
 	$gride->addColumn('NOME','Nome');
     //$gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
-    $gride->addColumn('CPF','CPF',null,'center');
-	//$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
-	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('CPF','CPF',null,'center');    
+    $gride->addColumn('DAT_NASCIMENTO','Data Nascimento',null,'center');
+    $gride->addColumn('SIG_UF','UF',null,'center');
+    $gride->addColumn('NOM_MUNICIPIO','Município',null,'center');
+    //$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    //$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
     $gride->show();
     die();
 }
@@ -182,8 +179,8 @@ function init() {
                     ,"IDPESSOA":""
                     ,"CPF":""
                     ,"DAT_NASCIMENTO":""
-                    ,"COD_MUNICIPIO_NASCIMENTO":""
-                    ,"DAT_INCLUSAO":""
+                    ,"COD_UF":""
+                    ,"COD_MUNICIPIO_NASCIMENTO":""                    
                     ,"DAT_ALTERACAO":""
                     };
     fwGetGrid('pessoa_fisica.php','gride',Parameters,true);
