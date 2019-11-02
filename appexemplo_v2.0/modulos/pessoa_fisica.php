@@ -62,11 +62,11 @@ switch( $acao ) {
     case 'Salvar':
         try{
             if ( $frm->validate() ) {
-                $vo = new Pessoa_fisicaVO();
+                $vo = new Vw_pessoaVO();
                 $frm->setVo( $vo );
-                $controller = new Pessoa_fisica();
+                $controller = new Vw_pessoa();
                 $resultado = $controller->save( $vo );
-                if($resultado==1) {
+                if( is_int($resultado) && $resultado!=0 ) {
                     $frm->setMessage(Message::GENERIC_SAVE);
                     $frm->clearFields();
                 }else{
@@ -75,11 +75,11 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
     //--------------------------------------------------------------------------------
@@ -96,11 +96,11 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
 }

@@ -109,7 +109,7 @@ class PessoaDAO
                                  nome
                                 ,tipo
                                 ,sit_ativo
-                                ) values (?,?,?,?)';
+                                ) values (?,?,?)';
         $result = $this->tpdo->executeSql($sql, $values);
         $result = $this->tpdo->getLastInsertId();
         return intval($result);

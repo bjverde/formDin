@@ -112,9 +112,8 @@ class Vw_pessoa
         $this->validate($objVo);
         $result = null;
         $tpdo = New TPDOConnectionObj();
-        try{            
-            $tpdo->beginTransaction();
-            
+        $tpdo->beginTransaction();
+        try{                        
             $objVoPessoa = new PessoaVO();
             $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
             $objVoPessoa->setNome( $objVo->getNome() );
@@ -123,11 +122,14 @@ class Vw_pessoa
             $controllerPessoa = new Pessoa($tpdo);
             $result = $controllerPessoa->save($objVoPessoa);
 
+            $objVo->setIdpessoa($result);
             $tipo = $objVo->getTipo();
             if( $tipo == Pessoa::PF ){
                 $objVoPessoaPF = new Pessoa_fisicaVO();
                 $objVoPessoaPF->setIdpessoa_fisica( $objVo->getIdpessoa_fisica() );
                 $objVoPessoaPF->setIdpessoa( $objVo->getIdpessoa() );
+                $objVoPessoaPF->setCpf( $objVo->getCpf() );
+                $objVoPessoaPF->setDat_nascimento( $objVo->getDat_nascimento() );
                 $objVoPessoaPF->setCod_municipio_nascimento( $objVo->getCod_municipio_nascimento() );
                 $controllerPessoaPF = new Pessoa_fisica($tpdo);
                 $result = $controllerPessoaPF->save($objVoPessoaPF);
@@ -139,10 +141,14 @@ class Vw_pessoa
 
             $tpdo->commit();
         }
+        catch (DomainException $e) {
+            $tpdo->rollBack();
+            throw new DomainException($e->getMessage());
+        }        
         catch (Exception $e) {
             $tpdo->rollBack();
             MessageHelper::logRecord($e);
-            throw new Exception($e);
+            throw new Exception($e->getMessage());
         }
         return $result;
     }    
