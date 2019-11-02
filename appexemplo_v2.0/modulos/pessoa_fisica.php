@@ -114,6 +114,7 @@ function getWhereGridParameters(&$frm)
                  'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
                 ,'TIPO'=>$frm->get('TIPO')
+                ,'NOME'=>$frm->get('NOME')
                 ,'CPF'=>$frm->get('CPF')
                 ,'DAT_NASCIMENTO'=>$frm->get('DAT_NASCIMENTO')
                 ,'COD_UF'=>$frm->get('COD_UF')
@@ -177,6 +178,7 @@ function init() {
     var Parameters = {"BUSCAR":""
                     ,"IDPESSOA_FISICA":""
                     ,"IDPESSOA":""
+                    ,"NOME":""
                     ,"CPF":""
                     ,"DAT_NASCIMENTO":""
                     ,"COD_UF":""

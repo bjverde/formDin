@@ -107,6 +107,7 @@ function getWhereGridParameters(&$frm)
         $retorno = array(
                 'IDPESSOA_JURIDICA'=>$frm->get('IDPESSOA_JURIDICA')
                 ,'CNPJ'=>$frm->get('CNPJ')
+                ,'NOME'=>$frm->get('NOME')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
                 ,'CNAE'=>$frm->get('CNAE')
                 ,'IDNATUREZA_JURIDICA'=>$frm->get('IDNATUREZA_JURIDICA')
@@ -129,6 +130,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
                     .',CNPJ|CNPJ'
+                    .',NOME|NOME'
                     .',IDPESSOA|IDPESSOA'
                     .',CNAE|CNAE'
                     .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
@@ -162,9 +164,10 @@ $frm->show();
 <script>
 function init() {
     var Parameters = {"BUSCAR":""
+                    ,"IDPESSOA":""
                     ,"IDPESSOA_JURIDICA":""
                     ,"CNPJ":""
-                    ,"IDPESSOA":""
+                    ,"NOME":""
                     ,"CNAE":""
                     ,"IDNATUREZA_JURIDICA":""
                     };
