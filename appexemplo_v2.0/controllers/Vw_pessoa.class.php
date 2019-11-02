@@ -88,8 +88,8 @@ class Vw_pessoa
             throw new InvalidArgumentException(Message::ERROR.' '.Message::ERROR_CAMPO_OBRIGATORIO. ': CPF/CNPJ em branco');
         }
         $dados = $this->selectByCpfCnpj($CpfCnpj);
-        $CpfCnpjBanco = ArrayHelper::getArrayFormKey($dados,'CPFCNPJ',0);
-        if( empty($idpessoa) && !empty($CpfCnpjBanco) ){
+        $CpfCnpjBanco = ArrayHelper::formDinGetValue($dados,'CPFCNPJ',0);
+        if( empty($objVo->getIdpessoa()) && !empty($CpfCnpjBanco) ){
             throw new DomainException(Message::ERROR_PESSOA_CPFCNPJ);
         }
     }
@@ -123,7 +123,9 @@ class Vw_pessoa
         $result = null;
         $tpdo = New TPDOConnectionObj();
         $tpdo->beginTransaction();
-        try{                        
+        try{
+            $idPessoa = $objVo->getIdpessoa(); //Para saber de insert ou update
+            
             $objVoPessoa = new PessoaVO();
             $objVoPessoa->setIdpessoa( $objVo->getIdpessoa() );
             $objVoPessoa->setNome( $objVo->getNome() );
@@ -131,8 +133,10 @@ class Vw_pessoa
             $objVoPessoa->setSit_ativo( 'S' );
             $controllerPessoa = new Pessoa($tpdo);
             $result = $controllerPessoa->save($objVoPessoa);
-
-            $objVo->setIdpessoa($result);
+            if(empty($idPessoa)){
+                $idPessoa = $result;
+            }
+            $objVo->setIdpessoa($idPessoa);
             $tipo = $objVo->getTipo();
             if( $tipo == Pessoa::PF ){
                 $objVoPessoaPF = new Pessoa_fisicaVO();
