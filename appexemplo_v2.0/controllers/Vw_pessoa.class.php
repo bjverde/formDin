@@ -78,8 +78,15 @@ class Vw_pessoa
     //--------------------------------------------------------------------------------
     public function validateUmCpfCnpj( Vw_pessoaVO $objVo )
     {
-        $idpessoa = $objVo->getIdpessoa();
         $CpfCnpj = $objVo->getCpfcnpj();
+        if( empty($CpfCnpj) ){
+            $CpfCnpj = $objVo->getCpf();
+        }else{
+            $CpfCnpj = $objVo->getCnpj();
+        }
+        if( empty($CpfCnpj) ){
+            throw new InvalidArgumentException(Message::ERROR.' '.Message::ERROR_CAMPO_OBRIGATORIO. ': CPF/CNPJ em branco');
+        }
         $dados = $this->selectByCpfCnpj($CpfCnpj);
         $CpfCnpjBanco = ArrayHelper::getArrayFormKey($dados,'CPFCNPJ',0);
         if( empty($idpessoa) && !empty($CpfCnpjBanco) ){
