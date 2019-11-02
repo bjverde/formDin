@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System appev2 created in: 2019-09-10 11:31:31
+ * System appev2 created in: 2019-11-01 22:23:15
  */
 class Pessoa_fisicaDAO 
 {
@@ -16,6 +16,7 @@ class Pessoa_fisicaDAO
                                       idpessoa_fisica
                                      ,idpessoa
                                      ,cpf
+                                     ,rg
                                      ,dat_nascimento
                                      ,cod_municipio_nascimento
                                      ,dat_inclusao
@@ -26,7 +27,7 @@ class Pessoa_fisicaDAO
 
     public function __construct($tpdo=null)
     {
-        $this->validateObjType($tpdo);
+        FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
         if( empty($tpdo) ){
             $tpdo = New TPDOConnectionObj();
         }
@@ -38,15 +39,8 @@ class Pessoa_fisicaDAO
     }
     public function setTPDOConnection($tpdo)
     {
-        $this->validateObjType($tpdo);
+        FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
         $this->tpdo = $tpdo;
-    }
-    public function validateObjType($tpdo)
-    {
-        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
-        if( !is_null($tpdo) && $typeObjWrong ){
-            throw new InvalidArgumentException('class:'.__METHOD__);
-        }
     }
     private function processWhereGridParameters( $whereGrid )
     {
@@ -56,6 +50,7 @@ class Pessoa_fisicaDAO
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA_FISICA', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'IDPESSOA', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'CPF', SqlHelper::SQL_TYPE_TEXT_LIKE);
+            $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'RG', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_NASCIMENTO', SqlHelper::SQL_TYPE_TEXT_LIKE);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'COD_MUNICIPIO_NASCIMENTO', SqlHelper::SQL_TYPE_NUMERIC);
             $where = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, 'DAT_INCLUSAO', SqlHelper::SQL_TYPE_TEXT_LIKE);
@@ -67,9 +62,7 @@ class Pessoa_fisicaDAO
     //--------------------------------------------------------------------------------
     public function selectById( $id )
     {
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
-        }
+        FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where idpessoa_fisica = ?';
         $result = $this->tpdo->executeSql($sql, $values);
@@ -114,6 +107,7 @@ class Pessoa_fisicaDAO
     {
         $values = array(  $objVo->getIdpessoa() 
                         , $objVo->getCpf() 
+                        , $objVo->getRg() 
                         , $objVo->getDat_nascimento() 
                         , $objVo->getCod_municipio_nascimento() 
                         , $objVo->getDat_inclusao() 
@@ -122,19 +116,22 @@ class Pessoa_fisicaDAO
         $sql = 'insert into form_exemplo.pessoa_fisica(
                                  idpessoa
                                 ,cpf
+                                ,rg
                                 ,dat_nascimento
                                 ,cod_municipio_nascimento
                                 ,dat_inclusao
                                 ,dat_alteracao
-                                ) values (?,?,?,?,?,?)';
+                                ) values (?,?,?,?,?,?,?)';
         $result = $this->tpdo->executeSql($sql, $values);
-        return $result;
+        $result = $this->tpdo->getLastInsertId();
+        return intval($result);
     }
     //--------------------------------------------------------------------------------
     public function update ( Pessoa_fisicaVO $objVo )
     {
         $values = array( $objVo->getIdpessoa()
                         ,$objVo->getCpf()
+                        ,$objVo->getRg()
                         ,$objVo->getDat_nascimento()
                         ,$objVo->getCod_municipio_nascimento()
                         ,$objVo->getDat_inclusao()
@@ -143,20 +140,19 @@ class Pessoa_fisicaDAO
         $sql = 'update form_exemplo.pessoa_fisica set 
                                  idpessoa = ?
                                 ,cpf = ?
+                                ,rg = ?
                                 ,dat_nascimento = ?
                                 ,cod_municipio_nascimento = ?
                                 ,dat_inclusao = ?
                                 ,dat_alteracao = ?
                                 where idpessoa_fisica = ?';
         $result = $this->tpdo->executeSql($sql, $values);
-        return $result;
+        return intval($result);
     }
     //--------------------------------------------------------------------------------
     public function delete( $id )
     {
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
-        }
+        FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
         $values = array($id);
         $sql = 'delete from form_exemplo.pessoa_fisica where idpessoa_fisica = ?';
         $result = $this->tpdo->executeSql($sql, $values);
@@ -165,9 +161,7 @@ class Pessoa_fisicaDAO
     //--------------------------------------------------------------------------------
     public function getVoById( $id )
     {
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
-        }
+        FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
         $result = $this->selectById( $id );
         $result = \ArrayHelper::convertArrayFormDin2Pdo($result,false);
         $result = $result[0];

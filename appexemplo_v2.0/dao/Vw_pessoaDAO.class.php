@@ -4,18 +4,18 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System appev2 created in: 2019-09-10 11:31:31
+ * System appev2 created in: 2019-11-01 22:23:15
  */
 class Vw_pessoaDAO 
 {
 
     private static $sqlBasicSelect = 'select
                                       idpessoa
+                                     ,cpfcnpj
                                      ,nome
-                                     ,cpfcnpj                                     
                                      ,tipo
                                      ,sit_ativo
                                      ,dat_inclusao
@@ -33,7 +33,7 @@ class Vw_pessoaDAO
 
     public function __construct($tpdo=null)
     {
-        $this->validateObjType($tpdo);
+        FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
         if( empty($tpdo) ){
             $tpdo = New TPDOConnectionObj();
         }
@@ -45,15 +45,8 @@ class Vw_pessoaDAO
     }
     public function setTPDOConnection($tpdo)
     {
-        $this->validateObjType($tpdo);
+        FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
         $this->tpdo = $tpdo;
-    }
-    public function validateObjType($tpdo)
-    {
-        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
-        if( !is_null($tpdo) && $typeObjWrong ){
-            throw new InvalidArgumentException('class:'.__METHOD__);
-        }
     }
     private function processWhereGridParameters( $whereGrid )
     {
@@ -81,9 +74,7 @@ class Vw_pessoaDAO
     //--------------------------------------------------------------------------------
     public function selectById( $id )
     {
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
-        }
+        FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
         $values = array($id);
         $sql = self::$sqlBasicSelect.' where idpessoa = ?';
         $result = $this->tpdo->executeSql($sql, $values);
@@ -126,9 +117,7 @@ class Vw_pessoaDAO
     //--------------------------------------------------------------------------------
     public function getVoById( $id )
     {
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(Message::TYPE_NOT_INT.'class:'.__METHOD__);
-        }
+        FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
         $result = $this->selectById( $id );
         $result = \ArrayHelper::convertArrayFormDin2Pdo($result,false);
         $result = $result[0];

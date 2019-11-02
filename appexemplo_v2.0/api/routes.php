@@ -170,20 +170,6 @@ $app->group('/acesso_user', function() use ($app) {
 
 
 //--------------------------------------------------------------------
-//  TABLE: acesso_user_menu
-//--------------------------------------------------------------------
-$app->group('/acesso_user_menu', function() use ($app) {
-    $app->get('', Acesso_user_menuAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_user_menuAPI::class . ':selectById');
-
-
-    $app->post('', Acesso_user_menuAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_user_menuAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_user_menuAPI::class . ':delete');
-});
-
-
-//--------------------------------------------------------------------
 //  TABLE: autoridade
 //--------------------------------------------------------------------
 $app->group('/autoridade', function() use ($app) {
