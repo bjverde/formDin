@@ -25,7 +25,14 @@ class Vw_pessoaVO
     private $dat_nascimento_format = null;
     private $idnatureza_juridica = null;
     private $cnpj = null;
-    public function __construct( $idpessoa=null, $cpfcnpj=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null, $dat_inclusao_format=null, $cpf=null, $idpessoa_fisica=null, $cod_municipio_nascimento=null, $dat_nascimento=null, $dat_nascimento_format=null, $idnatureza_juridica=null, $cnpj=null ) {
+    public function __construct( $idpessoa=null
+                               , $cpfcnpj=null, $nome=null, $tipo=null, $sit_ativo=null
+                               , $dat_inclusao=null, $dat_inclusao_format=null, $cpf=null
+                               , $idpessoa_fisica=null, $cod_municipio_nascimento=null
+                               , $dat_nascimento=null
+                               , $dat_nascimento_format=null
+                               , $idnatureza_juridica=null
+                               , $cnpj=null ) {
         $this->setIdpessoa( $idpessoa );
         $this->setCpfcnpj( $cpfcnpj );
         $this->setNome( $nome );

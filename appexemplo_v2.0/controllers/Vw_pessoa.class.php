@@ -79,7 +79,7 @@ class Vw_pessoa
     public function validateUmCpfCnpj( Vw_pessoaVO $objVo )
     {
         $CpfCnpj = $objVo->getCpfcnpj();
-        if( empty($CpfCnpj) ){
+        if( $objVo->getTipo() ==  Pessoa::PF){
             $CpfCnpj = $objVo->getCpf();
         }else{
             $CpfCnpj = $objVo->getCnpj();
@@ -97,6 +97,9 @@ class Vw_pessoa
     public function validateCamposObrigatorios( Vw_pessoaVO $objVo )
     {
         $tipo = $objVo->getTipo();
+        if( empty($tipo) ){
+            throw new InvalidArgumentException(Message::ERROR.' '.Message::ERROR_CAMPO_OBRIGATORIO.' Tipo Pessoa');
+        }        
         if( $tipo == Pessoa::PF ){
             if( empty($objVo->getCpf()) ){
                 throw new DomainException(Message::ERROR_CAMPO_OBRIGATORIO.' CPF');
@@ -143,6 +146,10 @@ class Vw_pessoa
             }else{
                 $objVoPessoaPJ = new Pessoa_juridicaVO();
                 $controllerPessoaPJ = new Pessoa_juridica($tpdo);
+                $objVoPessoaPJ->setIdpessoa( $objVo->getIdpessoa() );
+                $objVoPessoaPJ->setCnpj( $objVo->getCnpj() );
+                $objVoPessoaPJ->setIdnatureza_juridica($objVo->getIdnatureza_juridica() );
+                //$objVoPessoaPJ->setCnae( $objVo->getCnae());
                 $result = $controllerPessoaPJ->save($objVoPessoaPJ);
             }
             $tpdo->commit();
