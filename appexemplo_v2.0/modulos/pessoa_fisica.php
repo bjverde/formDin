@@ -86,7 +86,7 @@ switch( $acao ) {
     case 'gd_excluir':
         try{
             $id = $frm->get( $primaryKey ) ;
-            $controller = new Pessoa_fisica();
+            $controller = new Vw_pessoa();
             $resultado = $controller->delete( $id );
             if($resultado==1) {
                 $frm->setMessage(Message::GENERIC_DELETE);

@@ -145,7 +145,31 @@ class Vw_pessoa
                 $controllerPessoaPJ = new Pessoa_juridica($tpdo);
                 $result = $controllerPessoaPJ->save($objVoPessoaPJ);
             }
-
+            $tpdo->commit();
+        }
+        catch (DomainException $e) {
+            $tpdo->rollBack();
+            throw new DomainException($e->getMessage());
+        }        
+        catch (Exception $e) {
+            $tpdo->rollBack();
+            MessageHelper::logRecord($e);
+            throw new Exception($e->getMessage());
+        }
+        return $result;
+    }
+    //--------------------------------------------------------------------------------
+    public function delete( $id )
+    {
+        $tpdo = New TPDOConnectionObj();
+        $tpdo->beginTransaction();
+        try{
+            $controllerPessoaPF = new Pessoa_fisica($tpdo);
+            $controllerPessoaPF->delete($id);
+            $controllerPessoaPJ = new Pessoa_juridica($tpdo);
+            $controllerPessoaPJ->delete($id);
+            $controllerPessoa = new Pessoa($tpdo);
+            $result = $controllerPessoa->delete($id);
             $tpdo->commit();
         }
         catch (DomainException $e) {
