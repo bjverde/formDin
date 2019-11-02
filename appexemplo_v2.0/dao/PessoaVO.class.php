@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System appev2 created in: 2019-09-10 09:04:47
+ * System appev2 created in: 2019-11-01 22:23:15
  */
 class PessoaVO
 {
@@ -16,12 +16,14 @@ class PessoaVO
     private $tipo = null;
     private $sit_ativo = null;
     private $dat_inclusao = null;
-    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null ) {
+    private $dat_alteracao = null;
+    public function __construct( $idpessoa=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null, $dat_alteracao=null ) {
         $this->setIdpessoa( $idpessoa );
         $this->setNome( $nome );
         $this->setTipo( $tipo );
         $this->setSit_ativo( $sit_ativo );
         $this->setDat_inclusao( $dat_inclusao );
+        $this->setDat_alteracao( $dat_alteracao );
     }
     //--------------------------------------------------------------------------------
     public function setIdpessoa( $strNewValue = null )
@@ -67,6 +69,15 @@ class PessoaVO
     public function getDat_inclusao()
     {
         return is_null( $this->dat_inclusao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_inclusao;
+    }
+    //--------------------------------------------------------------------------------
+    public function setDat_alteracao( $strNewValue = null )
+    {
+        $this->dat_alteracao = $strNewValue;
+    }
+    public function getDat_alteracao()
+    {
+        return is_null( $this->dat_alteracao ) ? date( 'Y-m-d h:i:s' ) : $this->dat_alteracao;
     }
     //--------------------------------------------------------------------------------
 }

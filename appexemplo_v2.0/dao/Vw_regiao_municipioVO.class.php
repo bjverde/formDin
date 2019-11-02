@@ -7,7 +7,7 @@
  * SysGen  Version: 1.10.1-alpha
  * FormDin Version: 4.7.9-alpha
  * 
- * System xx created in: 2019-11-01 22:11:31
+ * System appev2 created in: 2019-11-01 22:23:16
  */
 class Vw_regiao_municipioVO
 {
