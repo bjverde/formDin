@@ -23,22 +23,67 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addMemoField('ENDERECO', 'ENDERECO',300,true,80,3);
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
+
+
+$frm->addGroupField('gpx1', 'Pessoa');
+    $frm->addTextField('IDPESSOA', 'id Pessoa', 6,true,6);
+    $frm->addTextField('NOME', 'Nome',200,true,80,null,false);
+
+    $frm->setAutoComplete('NOME'
+                        , 'vw_pessoa'            // 2: tabela alvo da pesquisa
+                        , 'NOME'           // 3: campo de pesquisa
+                        , 'NOME|NOME,IDPESSOA|IDPESSOA'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+                        , true
+                        , null                      // 6: campo do formulário que será adicionado como filtro
+                        , null
+                        , 3
+                        , 1000                       // Default 1000, tempo após a digitação para disparar a consulta
+                        , 50                         // máximo de registros que deverá ser retornado
+                        , null
+                        , null
+                        , null                       // url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+                        , null                       // Mesagem caso não encontre nenhum registro
+                        , null
+                        , null
+                        , null
+                        , true);                       // $boolSearchAnyPosition busca o texto em qualquer posição igual Like %texto%    
+$frm->closeGroup();
+
+
+
 $controllerTipo = new Tipo();
-$listTipo = $controllerTipo->selectAll();
-$frm->addSelectField('IDTIPO_ENDERECO', 'IDTIPO_ENDERECO',true,$listTipo,null,null,null,null,null,null,' ',null);
-$controllerMunicipio = new Municipio();
-$listMunicipio = $controllerMunicipio->selectAll();
-$frm->addSelectField('COD_MUNICIPIO', 'COD_MUNICIPIO',true,$listMunicipio,null,null,null,null,null,null,' ',null);
-$frm->getLabel('COD_MUNICIPIO')->setToolTip('código do municipio');
-$frm->addTextField('CEP', 'CEP',8,false,8);
+$listTipo = $controllerTipo->selectAllAtivoByMeta(Meta_tipo::ENDERECO);
+$frm->addSelectField('IDTIPO_ENDERECO', 'Tipo Endereço',true,$listTipo,null,null,null,null,null,null,' ',null);
+
+$frm->addCepField('CEP' //id do campo
+        , 'Cep:'        //Label do campo
+        , true          //
+        , null
+        , null          // Nova linha
+        , 'ENDERECO'    // id do Campo endereço
+        , 'BAIRRO'      // id do Campo bairro
+        , 'CIDADE'      // id do Campo cidade
+        , null          // id do Campo cod uf
+        , 'cod_uf'      // id do Campo sig uf
+        , null          // id do Campo logradouro
+        , null          // id do Campo complemento
+        , 'cod_municipio' // id do Cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
+        , null          // Label sobre o campo
+        , null
+        , null           //JavaScript Callback
+        , null
+        ); 
+
+
+$frm->addMemoField('ENDERECO', 'ENDERECO',300,true,80,3);
 $frm->addTextField('NUMERO', 'NUMERO',5,false,5);
 $frm->addMemoField('COMPLEMENTO', 'COMPLEMENTO',300,false,80,3);
 $frm->addMemoField('BAIRRO', 'BAIRRO',300,false,80,3);
 $frm->addMemoField('CIDADE', 'CIDADE',300,false,80,3);
+
+$controllerMunicipio = new Municipio();
+$listMunicipio = $controllerMunicipio->selectAll();
+$frm->addSelectField('COD_MUNICIPIO', 'COD_MUNICIPIO',true,$listMunicipio,null,null,null,null,null,null,' ',null);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);

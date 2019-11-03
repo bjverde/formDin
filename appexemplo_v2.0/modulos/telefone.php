@@ -23,15 +23,40 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+
+
+$frm->addGroupField('gpx1', 'Pessoa');
+    $frm->addTextField('IDPESSOA', 'id Pessoa', 6,true,6);
+    $frm->addTextField('NOME', 'Nome',200,true,80,null,false);
+
+    $frm->setAutoComplete('NOME'
+                        , 'vw_pessoa'            // 2: tabela alvo da pesquisa
+                        , 'NOME'           // 3: campo de pesquisa
+                        , 'NOME|NOME,IDPESSOA|IDPESSOA'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+                        , true
+                        , null                      // 6: campo do formulário que será adicionado como filtro
+                        , null
+                        , 3
+                        , 1000                       // Default 1000, tempo após a digitação para disparar a consulta
+                        , 50                         // máximo de registros que deverá ser retornado
+                        , null
+                        , null
+                        , null                       // url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+                        , null                       // Mesagem caso não encontre nenhum registro
+                        , null
+                        , null
+                        , null
+                        , true);                       // $boolSearchAnyPosition busca o texto em qualquer posição igual Like %texto%    
+$frm->closeGroup();
+
+
 $frm->addTextField('NUMERO', 'NUMERO',45,true,45);
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->getLabel('IDPESSOA')->setToolTip('dono do telefone');
+
 $controllerTipo = new Tipo();
-$listTipo = $controllerTipo->selectAll();
-$frm->addSelectField('IDTIPO_TELEFONE', 'IDTIPO_TELEFONE',true,$listTipo,null,null,null,null,null,null,' ',null);
-$frm->getLabel('IDTIPO_TELEFONE')->setToolTip('tipo de telefon');
+$listTipo = $controllerTipo->selectAllAtivoByMeta(Meta_tipo::TELEFONE);
+$frm->addSelectField('IDTIPO_TELEFONE', 'Tipo Telefone',true,$listTipo,null,null,null,null,null,null,' ',null);
+
+
 $controllerEndereco = new Endereco();
 $listEndereco = $controllerEndereco->selectAll();
 $frm->addSelectField('IDENDERECO', 'IDENDERECO',false,$listEndereco,null,null,null,null,null,null,' ',null);
