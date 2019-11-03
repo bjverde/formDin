@@ -7058,9 +7058,16 @@ class TForm Extends TBox
 	 * @param boolean $boolNewLine  - 4: Campo em nova linha
 	 * @param string $strValue
 	 * @param boolean $boolLabelAbove
+     * @param boolean $boolNoWrapLabel
 	 * @return TFone
 	 */
-	public function addFoneField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    public function addFoneField( $strName
+                                , $strLabel=null
+                                , $boolRequired=null
+                                , $boolNewLine=null
+                                , $strValue=null
+                                , $boolLabelAbove=null
+                                , $boolNoWrapLabel=null )
 	{
 		$field = new TFone( $strName, $strValue, $boolRequired );
 		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
