@@ -50,21 +50,20 @@ $frm->addGroupField('gpx1', 'Pessoa');
 $frm->closeGroup();
 
 
-$frm->addTextField('NUMERO', 'NUMERO',45,true,45);
-
 $controllerTipo = new Tipo();
 $listTipo = $controllerTipo->selectAllAtivoByMeta(Meta_tipo::TELEFONE);
 $frm->addSelectField('IDTIPO_TELEFONE', 'Tipo Telefone',true,$listTipo,null,null,null,null,null,null,' ',null);
 
+$frm->addFoneField('NUMERO', 'Num Telefone',true);
 
 $controllerEndereco = new Endereco();
 $listEndereco = $controllerEndereco->selectAll();
 $frm->addSelectField('IDENDERECO', 'IDENDERECO',false,$listEndereco,null,null,null,null,null,null,' ',null);
-$frm->addTextField('SIT_FIXO', 'SIT_FIXO',1,false,1);
-$frm->addTextField('WHASTAPP', 'WHASTAPP',1,false,1);
-$frm->getLabel('WHASTAPP')->setToolTip('informa se o numero tem whastapp');
-$frm->addTextField('TELEGRAM', 'TELEGRAM',1,false,1);
-$frm->getLabel('TELEGRAM')->setToolTip('informa se o numero tem telegram');
+
+$listSimNao = array('S'=>'Sim','N'=>'Nao');
+$frm->addRadioField('SIT_FIXO', 'É fixo ?', false, $listSimNao,null,null,null,4);
+$frm->addRadioField('WHASTAPP', 'Tem WhastApp?', false, $listSimNao,null,null,null,4);
+$frm->addRadioField('TELEGRAM', 'Tem Telegram?', false, $listSimNao,null,null,null,4);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
