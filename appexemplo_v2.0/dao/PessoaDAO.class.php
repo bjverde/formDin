@@ -133,8 +133,10 @@ class PessoaDAO
     public function delete( $id )
     {
         FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
-        $values = array($id);
-        $sql = 'delete from form_exemplo.pessoa where idpessoa = ?';
+        $values = array('N',$id);
+        $sql = 'update form_exemplo.pessoa set 
+                                 sit_ativo = ?
+                                where idpessoa = ?';
         $result = $this->tpdo->executeSql($sql, $values);
         return $result;
     }

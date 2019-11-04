@@ -175,10 +175,10 @@ class Vw_pessoa
         $tpdo = New TPDOConnectionObj();
         $tpdo->beginTransaction();
         try{
-            $controllerPessoaPF = new Pessoa_fisica($tpdo);
-            $controllerPessoaPF->delete($id);
-            $controllerPessoaPJ = new Pessoa_juridica($tpdo);
-            $controllerPessoaPJ->delete($id);
+            //$controllerPessoaPF = new Pessoa_fisica($tpdo);
+            //$controllerPessoaPF->delete($id);
+            //$controllerPessoaPJ = new Pessoa_juridica($tpdo);
+            //$controllerPessoaPJ->delete($id);
             $controllerPessoa = new Pessoa($tpdo);
             $result = $controllerPessoa->delete($id);
             $tpdo->commit();
