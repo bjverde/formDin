@@ -20,6 +20,8 @@ class Vw_pessoaDAO
                                      ,sit_ativo
                                      ,dat_inclusao
                                      ,dat_inclusao_format
+                                     ,dat_alteracao
+                                     ,dat_alteracao_format                                     
                                      ,cpf
                                      ,idpessoa_fisica
                                      ,cod_municipio_nascimento

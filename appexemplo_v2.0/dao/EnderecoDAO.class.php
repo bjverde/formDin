@@ -23,6 +23,8 @@ class EnderecoDAO
                                      ,complemento
                                      ,bairro
                                      ,cidade
+                                     ,dat_inclusao
+                                     ,dat_alteracao                                     
                                      from form_exemplo.endereco ';
 
     private $tpdo = null;

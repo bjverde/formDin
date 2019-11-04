@@ -173,9 +173,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn('IDTIPO_TELEFONE','id Tipo_telefone');
     $gride->addColumn('NUMERO','Número');        
     $gride->addColumn('IDENDERECO','id Endereco');
-    $gride->addColumn('SIT_FIXO','Fixo');
-    $gride->addColumn('WHASTAPP','WhastApp');
-    $gride->addColumn('TELEGRAM','Telegram');
+    $gride->addColumn('SIT_FIXO','Fixo',null,'center');
+    $gride->addColumn('WHASTAPP','WhastApp',null,'center');
+    $gride->addColumn('TELEGRAM','Telegram',null,'center');
+    $gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('DAT_ALTERACAO','Data da Alteração',null,'center');
 
 
     $gride->show();

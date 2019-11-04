@@ -21,6 +21,8 @@ class TelefoneDAO
                                      ,sit_fixo
                                      ,whastapp
                                      ,telegram
+                                     ,dat_inclusao
+                                     ,dat_alteracao
                                      from form_exemplo.telefone ';
 
     private $tpdo = null;
