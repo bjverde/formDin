@@ -699,7 +699,7 @@ FROM
 	on p.idpessoa = pf.idpessoa
 	left join vw_regiao_municipio as m
     on pf.cod_municipio_nascimento = m.cod_municipio
-where p.tipo = 'PF'
+where p.tipo = 'PF';
 
 -- -----------------------------------------------------
 -- View `vw_pessoa_marca_produto`
