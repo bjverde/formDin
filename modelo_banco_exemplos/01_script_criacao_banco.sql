@@ -318,6 +318,8 @@ CREATE TABLE IF NOT EXISTS `pessoa_juridica` (
   `idpessoa` INT NOT NULL,
   `cnae` INT NULL COMMENT 'códigos de atividades econômicas em todo o país',
   `idnatureza_juridica` INT NULL,
+  `dat_inclusao` DATETIME NOT NULL DEFAULT NOW(),
+  `dat_alteracao` DATETIME NULL DEFAULT now() ON UPDATE now(),  
   PRIMARY KEY (`idpessoa_juridica`),
   INDEX `fk_pessoa_juridica_pessoa1_idx` (`idpessoa` ASC),
   INDEX `fk_pessoa_juridica_natureza_juridica1_idx` (`idnatureza_juridica` ASC),
@@ -450,6 +452,8 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `complemento` VARCHAR(300) NULL,
   `bairro` VARCHAR(300) NULL,
   `cidade` VARCHAR(300) NULL,
+  `dat_inclusao` DATETIME NOT NULL DEFAULT NOW(),
+  `dat_alteracao` DATETIME NULL DEFAULT now() ON UPDATE now(),   
   PRIMARY KEY (`idendereco`),
   INDEX `fk_endereco_pessoa1_idx` (`idpessoa` ASC),
   INDEX `fk_endereco_tipo1_idx` (`idtipo_endereco` ASC),
@@ -486,6 +490,8 @@ CREATE TABLE IF NOT EXISTS `telefone` (
   `sit_fixo` CHAR(1) NULL,
   `whastapp` CHAR(1) NULL COMMENT 'informa se o numero tem whastapp',
   `telegram` CHAR(1) NULL COMMENT 'informa se o numero tem telegram',
+  `dat_inclusao` DATETIME NOT NULL DEFAULT NOW(),
+  `dat_alteracao` DATETIME NULL DEFAULT now() ON UPDATE now(),   
   PRIMARY KEY (`idtelefone`),
   INDEX `fk_telefone_pessoa1_idx` (`idpessoa` ASC),
   INDEX `fk_telefone_tipo1_idx` (`idtipo_telefone` ASC),
@@ -647,6 +653,8 @@ SELECT p.idpessoa
 	,p.sit_ativo
 	,p.dat_inclusao
 	,DATE_FORMAT(p.dat_inclusao, '%d/%m/%Y') as dat_inclusao_format
+	,p.dat_alteracao
+	,DATE_FORMAT(p.dat_alteracao, '%d/%m/%Y') as dat_alteracao_format  
 	,pf.cpf
 	,pf.idpessoa_fisica
 	,pf.cod_municipio_nascimento
@@ -683,7 +691,7 @@ SELECT p.idpessoa
 	    ,pf.dat_nascimento
 	    ,DATE_FORMAT(pf.dat_nascimento, '%d/%m/%Y') as dat_nascimento_format
       ,pf.idpessoa_fisica
-	    ,p.dat_inclusao   
+	    ,p.dat_inclusao
       ,p.dat_alteracao
 FROM 
 	pessoa as p
