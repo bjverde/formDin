@@ -117,14 +117,15 @@ class PessoaDAO
     //--------------------------------------------------------------------------------
     public function update ( PessoaVO $objVo )
     {
+        $dtHoje = DateTimeHelper::getNow();
         $values = array( $objVo->getNome()
                         ,$objVo->getTipo()
-                        ,$objVo->getSit_ativo()
+                        ,$dtHoje
                         ,$objVo->getIdpessoa() );
         $sql = 'update form_exemplo.pessoa set 
                                  nome = ?
                                 ,tipo = ?
-                                ,sit_ativo = ?
+                                ,dat_alteracao = ?
                                 where idpessoa = ?';
         $result = $this->tpdo->executeSql($sql, $values);
         return intval($result);
@@ -133,9 +134,11 @@ class PessoaDAO
     public function delete( $id )
     {
         FormDinHelper::validateIdIsNumeric($id,__METHOD__,__LINE__);
-        $values = array('N',$id);
+        $dtHoje = DateTimeHelper::getNow();
+        $values = array('N',$dtHoje,$id);
         $sql = 'update form_exemplo.pessoa set 
                                  sit_ativo = ?
+                                ,dat_alteracao = ?
                                 where idpessoa = ?';
         $result = $this->tpdo->executeSql($sql, $values);
         return $result;

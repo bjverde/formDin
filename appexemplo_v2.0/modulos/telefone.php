@@ -169,13 +169,13 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'telefone.php' );
 
     $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('NUMERO','NUMERO');
     $gride->addColumn('IDPESSOA','id Pessoa');
     $gride->addColumn('IDTIPO_TELEFONE','id Tipo_telefone');
+    $gride->addColumn('NUMERO','Número');        
     $gride->addColumn('IDENDERECO','id Endereco');
-    $gride->addColumn('SIT_FIXO','SIT_FIXO');
-    $gride->addColumn('WHASTAPP','WHASTAPP');
-    $gride->addColumn('TELEGRAM','TELEGRAM');
+    $gride->addColumn('SIT_FIXO','Fixo');
+    $gride->addColumn('WHASTAPP','WhastApp');
+    $gride->addColumn('TELEGRAM','Telegram');
 
 
     $gride->show();
