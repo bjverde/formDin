@@ -5166,9 +5166,9 @@ class TForm Extends TBox
     * @param string  $strImageDisabled   - 9 :
     * @param string  $strHint            -10 : Texto hint para explicar
     * @param string  $strVerticalAlign   -11 :
-    * @param boolean $boolLabelAbove     -12 : Position text label 
+    * @param boolean $boolLabelAbove     -12 : Position text label. DEFAULT is false. NULL = false. 
     * @param string  $strLabel           -13 : Text label 
-    * @param string  $strHorizontalAlign -14 : Text align DEFAULT = center, left, right
+    * @param string  $strHorizontalAlign -14 : Text Horizontal align. DEFAULT = center. Valeus center, left, right
     * @return TButton|string|array
     ***/
     public function addButton( $mixValue=null
