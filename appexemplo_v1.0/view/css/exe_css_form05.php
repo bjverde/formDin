@@ -17,6 +17,11 @@ $dados['NOME'][]  = 'Linha3';
 $dados['ATIVO'][] = 'N';
 $dados['GRUPO'][] = 'C';
 
+$dados['ID'][]    = 4;
+$dados['NOME'][]  = 'Linha3';
+$dados['ATIVO'][] = 'N';
+$dados['GRUPO'][] = 'C';
+
 $frm = new TForm('Layout Form 05 - Forma Antiga', 200, 700);
 
 $html ='Esse form mostra o exemplo do uso <b>$gride->setZebrarColors(</b>'
