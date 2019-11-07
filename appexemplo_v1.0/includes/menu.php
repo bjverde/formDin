@@ -102,6 +102,7 @@ $menu->add('121', '1', 'Campo Link', 'view/fields/exe_field_link.php');
 $menu->add('122', '1', 'Redirect', 'exe_redirect.inc');
 $menu->add('123', '1', 'TZip', 'exe_TZip.php');
 $menu->add('124', '1', 'E-mail', 'view/fields/exe_TEmail.php', null, '../../base/imagens/email.png');
+$menu->add('125', '1', 'Button', 'view/fields/exe_TButton.php', null);
 
 //-----------------------------------------------------------------------------
 $menu->add('2', null, 'Containers');
