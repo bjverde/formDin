@@ -263,14 +263,19 @@ class TButton extends TControl
 		parent::clearEvents();
 	}
 }
-/*
+
+/***
+ * Exemplo de como usar apenas o botão
+ */
+/***
 $btn = new TButton('btnGravar','Gravar','actGravar',null,'Confirma Gravação ?');
 $btn->setImage('btnCalendario.gif');
 $btn->show();
-*/
-
-//$btn = new TButton('btnGravar','Gravar',null,'fwTeste()','Tem Certeza ?','../../imagens/search.gif','../../imagens/lixeira.gif');
-//$btn->setEnabled(false);
-//$btn->setVisible(false);
-//$btn->show();
+echo '<br>';
+echo '<br>';
+$btn = new TButton('btnGravar','Gravar',null,'fwTeste()','Tem Certeza ?','../../imagens/search.gif','../../imagens/lixeira.gif');
+$btn->setEnabled(false);
+$btn->setVisible(false);
+$btn->show();
+ */
 ?>
