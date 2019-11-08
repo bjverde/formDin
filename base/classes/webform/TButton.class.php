@@ -54,9 +54,9 @@ class TButton extends TControl
 	/***
 	 *  Cria um botão 
 	 * @param string $strName           - 1: Id do botão
-	 * @param string $strValue          - 2: label do botão
-	 * @param string $strAction         - 3: 
-	 * @param string $strOnClick        - 4:
+	 * @param string $strValue          - 2: label do botão que irá aparecer para o usuário
+	 * @param string $strAction         - 3: nome da ação que será executada
+	 * @param string $strOnClick        - 4: 
 	 * @param string $strConfirmMessage - 5: Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
 	 * @param string $strImageEnabled   - 6: Imagem no botão. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
 	 * @param string $strImageDisabled  - 7: Imagem no desativado. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
