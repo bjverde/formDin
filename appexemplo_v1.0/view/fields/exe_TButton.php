@@ -47,6 +47,9 @@ $frm = new TForm('Exemplo do TButton');
 
 $frm->addNumberField('num_peso', 'Peso Unitário:', 5, true, 2, true)->setExampleText('Kg');
 $frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+$frm->addButton('Exemplo 09 - img', null, 'act09', null, null, true, false,'joia.gif');
+$frm->addButton('Exemplo 09 - img desabilitado', null, 'act09d', null, null, true, false,'joia.gif','joia_desabilitado.gif');
+$frm->addButton('Exemplo 10 - img', null, 'act10', null, null, true, false,'favicon-32x32.png');
 $frm->addButton('Exemplo 11 - hint', null, 'act11', null, null, true, false,null,null,'text hint');
 $frm->addButton('Exemplo 12', null, 'act12', null, null, true, false,null,null,null,null,true,'xxx','center');
 $frm->addButton('Exemplo 13', null, 'act13', null, null, true, false,null,null,null,null,true,'xxx','left');
