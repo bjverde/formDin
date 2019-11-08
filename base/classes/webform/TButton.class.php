@@ -56,12 +56,12 @@ class TButton extends TControl
 	 * @param string $strName           - 1: Id do botão
 	 * @param string $strValue          - 2: label do botão
 	 * @param string $strAction         - 3: 
-	 * @param string $strOnClick
-	 * @param string $strConfirmMessage
-	 * @param string $strImageEnabled
-	 * @param string $strImageDisabled
-	 * @param string $strHint
-	 * @param boolean $boolSubmitAction
+	 * @param string $strOnClick        - 4:
+	 * @param string $strConfirmMessage - 5: Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
+	 * @param string $strImageEnabled   - 6: Imagem no botão. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
+	 * @param string $strImageDisabled  - 7: Imagem no desativado. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
+	 * @param string $strHint           - 8: Texto hint para explicar
+	 * @param boolean $boolSubmitAction - 9: 
 	 */
 	public function __construct($strName
 	                           ,$strValue=null
@@ -218,28 +218,20 @@ class TButton extends TControl
 	public function getImage()
 	{
 		$path="";
-		if($this->getEnabled())
-		{
+		if($this->getEnabled()){
 			$image = $this->imageEnabled;
-		}
-		else
-		{
+		}else{
 			$image = $this->getImageDisabled();
 		}
-		if($image)
-		{
+		if($image){
 			// se não foi informado o endereço manualmente, encontrar na pasta base
-			if( strpos($image,'/')===false)
-			{
-				if( ! file_exists($image) )
-				{
+			if( strpos($image,'/')===false){
+				if( ! file_exists($image) ){
 					$path = $this->getBase().'imagens/';
 				}
-
 			}
 		}
-		if( ! file_exists($path.$image) )
-		{
+		if( ! file_exists($path.$image) ){
 			$image = str_replace('_disabled.','.',$image);
 		}
 		return $path.$image;
