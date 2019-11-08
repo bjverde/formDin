@@ -2,14 +2,23 @@
 # Ignore * all files in directories
 # Ignore **/ alll subdirectories 
 
+# VsCode files
 .vscode/
+
+# Eclipse files
 /.settings/
+/.vscode/
 /.project
 /.buildpath
-base/tmp/*
+
+#FormDin Project
 !base/tmp/index.php
+base/tmp/*
 phpunit-code-coverage/*
 !phpunit-code-coverage/phpunit-code-coverage.zip
+
+#FormDin children projects
 /sysgen/
 /xx/
-/appteste/
+/spu/
+/appev2/
