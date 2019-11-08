@@ -119,6 +119,16 @@ input:focus ,textarea:focus, select:focus {
 	text-decoration: underline;
 	/*background: url(../imagens/fwsubmit-btn.gif) no-repeat bottom left;*/
 }
+.fwButtonImg
+{
+	cursor:pointer;
+	vertical-align:middle;
+	font-family:none;
+	font-size:none;
+	border: none;
+	background:none;
+	background-color:none;
+}
 .fwLinkOnlineSearch
 {
 	cursor:pointer;
