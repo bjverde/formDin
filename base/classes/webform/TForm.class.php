@@ -5162,8 +5162,8 @@ class TForm Extends TBox
     * @param string  $strConfirmMessage - 5 :Mensagem de confirmação, para utilizar o confirme sem utilizar javaScript explicito.
     * @param boolean $boolNewLine       - 6 :Em nova linha. DEFAULT = true
     * @param boolean $boolFooter        - 7 :Mostrar o botão no rodapé do form. DEFAULT = true
-    * @param string  $strImage          - 8 :Imagem no botão. Evite usar no lugar procure usar a propriedade setClass
-    * @param string  $strImageDisabled   - 9 :
+    * @param string  $strImage          - 8 : Imagem no botão. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
+    * @param string  $strImageDisabled   - 9 :Imagem no desativado. Evite usar no lugar procure usar a propriedade setClass. Busca pasta imagens do base ou no caminho informado
     * @param string  $strHint            -10 : Texto hint para explicar
     * @param string  $strVerticalAlign   -11 :
     * @param boolean $boolLabelAbove     -12 : Position text label. DEFAULT is false. NULL = false. 
@@ -5223,12 +5223,9 @@ class TForm Extends TBox
                        $strOnClick = $onClick . '("' . $value . '",this)';
                    }
                    $btn = new TButton( $strName, $strValue, $strAction, $strOnClick, $strConfirmMessage, $strImage, $strImageDisabled, $strHint );
-                   if( $boolFooter )
-                   {
+                   if( $boolFooter ) {
                        $this->footerButtons[ $btn->getId() ] = $btn;
-                   }
-                   else
-                   {
+                   } else {
                        $this->addDisplayControl( new TDisplayControl( $strLabel, $btn, $boolLabelAbove, $boolNewLine, false, $strVerticalAlign ) );
                        //$dc->setCss('text-align',$strHorizontalAlign);
                        $btn->setAttribute('align',$strHorizontalAlign);
