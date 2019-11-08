@@ -44,6 +44,10 @@
 */
 class TButton extends TControl
 {
+	const CLASS_CSS = 'fwButton'; //FormDin 4
+	//const CLASS_CSS = 'btn btn-primary btn-sm'; //FormDin 5
+	const CLASS_CSS_IMG = 'fwButtonImg';
+
 	private $action;
 	private $onClick;
 	private $confirMessage;
@@ -84,7 +88,7 @@ class TButton extends TControl
 		$this->setSubmitAction($boolSubmitAction);
 		$this->setImage($strImageEnabled);
 		$this->setImageDisabled($strImageDisabled);
-		$this->setClass('fwButton');
+		$this->setClass(self::CLASS_CSS);
 	}
 
 	public function show($print=true)
@@ -96,23 +100,14 @@ class TButton extends TControl
 			$this->setTagType('img');
 			$this->setFieldType('img');
 			$this->setProperty('src',$this->getImage());
-			if( $this->getClass() == 'fwButton' )
+			if( $this->getClass() == self::CLASS_CSS )
 			{
 				$this->setProperty('class',null);
-				$this->setCss('background',null);
-				$this->setCss('cursor','pointer');
-				$this->setCss('background-color',null);
-				$this->setCss('font-family',null);
-				$this->setCss('font-size',null);
-				$this->setCss('border','none');
-				$this->setCss('color',null);
-				$this->setCss('vertical-align','top');
-                if( is_null( $this->getProperty('alt')))
-                {
+				$this->setClass(self::CLASS_CSS_IMG);
+                if( is_null( $this->getProperty('alt'))){
                     $this->setProperty('alt', $this->getvalue() );
                 }
-                if( !$this->getProperty('title'))
-                {
+                if( !$this->getProperty('title')){
                 	$this->setProperty('title', $this->getValue() );
                 }
                 $this->setAttribute('type',null);
@@ -122,8 +117,7 @@ class TButton extends TControl
 		}
 
         // regra de acessibilidade
-        if( is_null( $this->getHint() ) )
-        {
+        if( is_null( $this->getHint() ) ){
             $this->setHint($this->getValue());
         }
 
