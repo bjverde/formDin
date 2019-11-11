@@ -315,4 +315,14 @@ class TPDOConnectionTest extends TestCase
 		$this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
 	}
 	
+	public function testGetStrUtf8OrAnsi_dateDDMM() {
+	    $arrayExpected = array();
+	    $arrayExpected[0] = '28/12';
+	    $arrayData = array();
+	    $arrayData[0] = '28/12';
+	    
+	    $arrayActual = $this->TPDOConnection->prepareArray($arrayData);
+	    $this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
+	}
+	
 }

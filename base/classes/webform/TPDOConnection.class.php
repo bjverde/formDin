@@ -52,6 +52,10 @@ $currentl_dir = dirname ( __FILE__ );
 require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
 
 class TPDOConnection {
+    
+    const SENSE_APP2BANK = 'SENSE_APP2BANK';
+    const SENSE_BANK2APP = 'SENSE_BANK2APP';
+    
     private static $error = null;
     private static $instance = null;
     private static $lastSql;
@@ -701,7 +705,7 @@ class TPDOConnection {
         // nás chamadas ajax, não precisa aplicar utf8
         if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
             $boolUtf8_Decode = self::getUtfDecode();
-            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $sql );
+            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$sql ,self::SENSE_APP2BANK );
             $arrParams = self::encodeArray( $arrParams );
         }
         $arrParams = self::prepareArray( $arrParams );
@@ -812,7 +816,7 @@ class TPDOConnection {
                                                 
                         if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v ,self::SENSE_APP2BANK);
                         }
                         
                         // inverter campo data
@@ -1188,9 +1192,10 @@ class TPDOConnection {
      * @param string $string
      * @return NULL|string
      */
-    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) 
+    public static function getStrUtf8OrAnsi( $boolUtf8_Decode ,$string ,$sense) 
     {
-        $retorno = null;
+        $retorno = $string;
+        /*
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
         }elseif ( (self::$banco == DBMS_SQLSERVER) && (PHP_OS == "Linux" ) && (version_compare(PHP_VERSION, '7.0.0') >= 0) ) {
@@ -1207,6 +1212,7 @@ class TPDOConnection {
                 $retorno = utf8_encode( $string );
             }
         }
+        */
         return $retorno;
     }
     //--------------------------------------------------------------------------------------
@@ -1225,11 +1231,11 @@ class TPDOConnection {
         if ( is_array( $result ) ) {
             foreach( $result as $key => $val ) {
                 foreach( $val as $k => $v ) {
-                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode , $k ) );
+                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$k ,self::SENSE_BANK2APP) );
                     
                     // transformar tags"< >" em codigo html para não serem interpretadas
                     if ( is_string( $v ) ) {
-                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $v );
+                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$v ,self::SENSE_BANK2APP );
                         
                         //$res[ $k ][ $key ] = utf8_decode($v);
                         // consertar ordem do campo data
