@@ -73,6 +73,7 @@ class StringHelper
         if ( mb_detect_encoding($string, 'UTF-8', true)!='UTF-8' ){
             //$string= iconv('ISO-8859-1', 'UTF-8', $string);
             $string = utf8_encode($string);
+            //$string = mb_convert_encoding($string, 'UTF-8');
         }
         return $string;
     }
