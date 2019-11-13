@@ -315,7 +315,7 @@ class TPDOConnectionTest extends TestCase
 		$this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
 	}
 	
-	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DBStringUtf8() {
+	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DbStringUtf8() {
 	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
 	    
 	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
@@ -323,7 +323,7 @@ class TPDOConnectionTest extends TestCase
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
-	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DBStringISO88591() {
+	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DbStringISO88591() {
 	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
 	    $string = utf8_decode($string);
 	    
@@ -331,5 +331,34 @@ class TPDOConnectionTest extends TestCase
 	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(false, $string, TPDOConnection::WAY_APP2BANK);
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
+	
+	/*
+	
+	public function testGetStrUtf8OrAnsi_DecoldefalseDb2AppStringUtf8() {
+
+	}
+	
+	public function testGetStrUtf8OrAnsi_DecoldefalseDb2AppStringISO88591() {
+
+	}
+	
+	public function testGetStrUtf8OrAnsi_DecoldeTrueApp2DbStringUtf8() {
+
+	}
+	
+	public function testGetStrUtf8OrAnsi_DecoldeTrueApp2DbStringISO88591() {
+
+	}	
+	
+	public function testGetStrUtf8OrAnsi_DecoldeTrueDb2AppStringUtf8() {
+
+	}
+	
+	public function testGetStrUtf8OrAnsi_DecoldeTrueDb2AppStringISO88591() {
+
+	}
+	
+
+	*/
 	
 }
