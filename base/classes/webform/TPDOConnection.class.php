@@ -53,8 +53,8 @@ require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
 
 class TPDOConnection {
     
-    const SENSE_APP2BANK = 'SENSE_APP2BANK';
-    const SENSE_BANK2APP = 'SENSE_BANK2APP';
+    const WAY_APP2BANK = 'WAY_APP2BANK';
+    const WAY_BANK2APP = 'WAY_BANK2APP';
     
     private static $error = null;
     private static $instance = null;
@@ -91,8 +91,16 @@ class TPDOConnection {
         }
         return  $retorno;
     }
-    public static function setBanco( $banco = null ) {
+    public static function setDBMS( $banco = null ) {
         self::$banco = $banco;
+    }
+    
+    /**
+     * @deprecated change to setDBMS
+     * @param string $banco
+     */
+    public static function setBanco( $banco = null ) {
+        self::setDBMS($banco);
     }    
     //--------------------------------------------------------------------------------------
     public static function getHost() {
@@ -1190,12 +1198,12 @@ class TPDOConnection {
      * Returns the string in the appropriate format UTF8 or ANSI
      * @param boolean $boolUtf8_Decode
      * @param string $string
+     * @param string $way use the const self::WAY_APP2DB or self::WAY_DB2APP 
      * @return NULL|string
      */
-    public static function getStrUtf8OrAnsi( $boolUtf8_Decode ,$string ,$sense) 
+    public static function getStrUtf8OrAnsi( $boolUtf8_Decode ,$string ,$way) 
     {
         $retorno = $string;
-        /*
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
         }elseif ( (self::$banco == DBMS_SQLSERVER) && (PHP_OS == "Linux" ) && (version_compare(PHP_VERSION, '7.0.0') >= 0) ) {
@@ -1207,12 +1215,13 @@ class TPDOConnection {
             $retorno = $string;
         } else{
             if ( $boolUtf8_Decode ) {
-                $retorno = utf8_decode( $string );
-            } else {
-                $retorno = utf8_encode( $string );
+                if($way == self::WAY_APP2BANK){
+                    $retorno = utf8_decode($string);
+                }else{
+                    $retorno = StringHelper::str2utf8($string);
+                }
             }
         }
-        */
         return $retorno;
     }
     //--------------------------------------------------------------------------------------

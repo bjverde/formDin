@@ -315,14 +315,21 @@ class TPDOConnectionTest extends TestCase
 		$this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
 	}
 	
-	public function testGetStrUtf8OrAnsi_dateDDMM() {
-	    $arrayExpected = array();
-	    $arrayExpected[0] = '28/12';
-	    $arrayData = array();
-	    $arrayData[0] = '28/12';
+	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DBStringUtf8() {
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
 	    
-	    $arrayActual = $this->TPDOConnection->prepareArray($arrayData);
-	    $this->assertSame( $arrayExpected , $arrayActual,'Os arrays nao sao iguais');
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(false, $string, TPDOConnection::WAY_APP2BANK);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
+	}
+	
+	public function testGetStrUtf8OrAnsi_DecoldeFalseApp2DBStringISO88591() {
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
+	    $string = utf8_decode($string);
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(false, $string, TPDOConnection::WAY_APP2BANK);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
 }
