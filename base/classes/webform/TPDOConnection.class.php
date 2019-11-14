@@ -713,7 +713,7 @@ class TPDOConnection {
         // nás chamadas ajax, não precisa aplicar utf8
         if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
             $boolUtf8_Decode = self::getUtfDecode();
-            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$sql ,self::SENSE_APP2BANK );
+            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$sql ,self::WAY_APP2BANK );
             $arrParams = self::encodeArray( $arrParams );
         }
         $arrParams = self::prepareArray( $arrParams );
@@ -824,7 +824,7 @@ class TPDOConnection {
                                                 
                         if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v ,self::SENSE_APP2BANK);
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi($boolUtf8_DecodeDataBase, $v ,self::WAY_APP2BANK);
                         }
                         
                         // inverter campo data
@@ -866,7 +866,7 @@ class TPDOConnection {
                         $v  = self::verifyformtDateYMD( $v );
                         if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi($boolUtf8_DecodeDataBase, $v,self::WAY_APP2BANK);
                         }
                     }else if( is_int($v) ){
                         $arrDados[ $k ] = $v;
@@ -1240,11 +1240,11 @@ class TPDOConnection {
         if ( is_array( $result ) ) {
             foreach( $result as $key => $val ) {
                 foreach( $val as $k => $v ) {
-                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$k ,self::SENSE_BANK2APP) );
+                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$k ,self::WAY_BANK2APP) );
                     
                     // transformar tags"< >" em codigo html para não serem interpretadas
                     if ( is_string( $v ) ) {
-                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$v ,self::SENSE_BANK2APP );
+                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$v ,self::WAY_BANK2APP );
                         
                         //$res[ $k ][ $key ] = utf8_decode($v);
                         // consertar ordem do campo data
