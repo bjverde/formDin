@@ -332,33 +332,58 @@ class TPDOConnectionTest extends TestCase
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
-	/*
-	
 	public function testGetStrUtf8OrAnsi_DecoldefalseDb2AppStringUtf8() {
-
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(false, $string, TPDOConnection::WAY_BANK2APP);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
 	public function testGetStrUtf8OrAnsi_DecoldefalseDb2AppStringISO88591() {
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
+	    $string = utf8_decode($string);
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(false, $string, TPDOConnection::WAY_BANK2APP);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
+	}	
 
-	}
-	
 	public function testGetStrUtf8OrAnsi_DecoldeTrueApp2DbStringUtf8() {
-
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(true, $string, TPDOConnection::WAY_APP2BANK);
+	    
+	    $string = utf8_decode($string);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
-	
+
+	/**
+	 * Esse cenario nunca irá acontecer. Pois o APP sempre está em UTF-8
 	public function testGetStrUtf8OrAnsi_DecoldeTrueApp2DbStringISO88591() {
 
-	}	
+	}
+	**/
 	
 	public function testGetStrUtf8OrAnsi_DecoldeTrueDb2AppStringUtf8() {
-
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';	    
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(true, $string, TPDOConnection::WAY_BANK2APP);
+	    
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
 	public function testGetStrUtf8OrAnsi_DecoldeTrueDb2AppStringISO88591() {
-
+	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
+	    $string = utf8_decode($string);
+	    
+	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
+	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(true, $string, TPDOConnection::WAY_BANK2APP);	    
+	    
+	    $string = utf8_encode($string);
+	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
-	
-
-	*/
 	
 }
