@@ -831,21 +831,15 @@ class TPDOConnection {
                         if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {
                             $v = self::verifyformtDateYMD( $v );
                             $arrDados[ $k ] = $v;
-                        }
-                        else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 )
-                        {
+                        } else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 ) {
                             // alterar a virgula por ponto nos campos decimais
                             $posPonto = ( int ) strpos( $v, '.' );
                             $posVirgula = ( int ) strpos( $v, ',' );
                             
-                            if ( $posVirgula > $posPonto )
-                            {
-                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula )
-                                {
+                            if ( $posVirgula > $posPonto ) {
+                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
                                     $v = preg_replace( '/\,/', '', $v );
-                                }
-                                else
-                                {
+                                } else {
                                     $v = preg_replace( '/,/', ' ', $v );
                                     $v = preg_replace( '/\./', '', $v );
                                     $v = preg_replace( '/ /', '.', $v );
@@ -853,9 +847,7 @@ class TPDOConnection {
                             }
                             $arrDados[ $k ] = trim( $v );
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $arrDados[ $k ] = null;
                     }
                     $result[] = $arrDados[ $k ];
@@ -885,18 +877,14 @@ class TPDOConnection {
     public static function prepareArrayNamed( $arrDados = null ) {
         $result = array();
         
-        foreach( $arrDados as $k => $v )
-        {
-            if ( !is_null($v) )
-            {
+        foreach( $arrDados as $k => $v ) {
+            if ( !is_null($v) ) {
                 $arrDados[ $k ] = $v;
                 // inverter campo data
                 if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )    {
                     $v  = self::verifyformtDateYMD( $v );
                     $arrDados[ $k ] = $v;
-                }
-                else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
-                {
+                } else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 ) {
                     // alterar a virgula por ponto nos campos decimais
                     $posPonto = ( int ) strpos( $v, '.' );
                     $posVirgula = ( int ) strpos( $v, ',' );
@@ -912,7 +900,7 @@ class TPDOConnection {
                     }
                     $arrDados[ $k ] = trim( $v );
                 }
-            }else{
+            } else {
                 $arrDados[ $k ] = null;
             }
             $result[] = $arrDados[ $k ];
@@ -944,11 +932,11 @@ class TPDOConnection {
                     if ( !is_null($v) && !empty($v) ){
                         $v  = self::verifyformtDateYMD( $v );
                         $arrDados[ $k ] = $v;
-                    }else if( is_int($v) ){
+                    } else if( is_int($v) ) {
                         $arrDados[ $k ] = $v;
-                    }else if( $v === '0' ){
+                    } else if( $v === '0' ) {
                         $arrDados[ $k ] = $v;
-                    }else {
+                    } else {
                         $arrDados[ $k ] = null;
                     }
                 }
