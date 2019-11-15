@@ -1307,6 +1307,9 @@ class TGrid extends TTable
         
         // salvar o array em disco
         $tmpName = $excel->getBase().'tmp/tmp_'.$this->getId().'_'.session_id().'.go';
+        if( !file_exists( $excel->getBase().'tmp' ) ) {
+            mkdir( $excel->getBase().'tmp' );
+        }
         if( file_exists( $tmpName ) ) {
             @unlink($tmpName);
         }
