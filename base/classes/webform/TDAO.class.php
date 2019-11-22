@@ -2446,8 +2446,8 @@ class TDAO
 			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlInsert      ="insert into " . $this->getTableName() . ' ';
-				$valuesClause   =null;
-				$params         =null;
+				$valuesClause   =array();
+				$params         =array();
 				$returningClause='';
 
 				foreach( $arrFieldValues as $fieldName => $fieldValue )
@@ -2477,8 +2477,8 @@ class TDAO
 			{
 				// oracle
 				$sqlInsert   ="insert into " . $this->getTableName() . ' ';
-				$valuesClause=null;
-				$params      =null;
+				$valuesClause=array();
+				$params      =array();
 				$returningFields=array();
 				$returningInto=array();
 				$descriptors=null;
@@ -2781,8 +2781,8 @@ class TDAO
 			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
-				$valuesClause   = null;
-				$params         = null;
+				$valuesClause   = array();
+				$params         = array();
 				foreach( $arrFieldValues as $fieldName => $fieldValue )
 				{
 					$fieldName = trim( $fieldName );
@@ -2800,7 +2800,7 @@ class TDAO
 				$sqlUpdate .= trim( $valuesClause );
                 if( is_array($pks))
                 {
-	                $whereClause = null;
+	                $whereClause = array();
    					foreach($pks as $k=>$v)
 					{
 
@@ -2816,8 +2816,8 @@ class TDAO
 			{
   				// oracle sem PDO
 				$sql ="update " . $this->getTableName() . ' set ';
-				$valuesClause=null;
-				$params      =null;
+				$valuesClause=array();
+				$params      =array();
 				$returningFields=array();
 				$returningInto=array();
 				$descriptors=null;
@@ -2853,7 +2853,7 @@ class TDAO
 				$sql .= ' '.$valuesClause;
 
 				// where
-				$whereClause =null;
+				$whereClause =array();
 				foreach($pks as $v)
 				{
 					$v = strtolower($v);
