@@ -1693,7 +1693,7 @@ class TDAO
 						, c.numeric_precision NUM_LENGTH
 						, c.numeric_scale NUM_SCALE
 						, c.COLUMN_COMMENT
-						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when upper(c.COLUMN_KEY) = 'MUL' then 'FOREIGN KEY' else 0 end  KEY_TYPE
+						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when ( upper(c.COLUMN_KEY) = 'MUL' AND k.REFERENCED_TABLE_NAME is not null ) then 'FOREIGN KEY' else 0 end  KEY_TYPE
 						, case when lower(c.EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
 						, c.COLUMN_DEFAULT
 						, k.REFERENCED_TABLE_NAME
@@ -2348,7 +2348,7 @@ class TDAO
 		if( count($pks) > 0 )
 		{
 			$params=null;
-			$where = '';
+			$where = array();
 			foreach($pks as $v)
 			{
 				$params[$v] = $this->getFieldValue($v);
