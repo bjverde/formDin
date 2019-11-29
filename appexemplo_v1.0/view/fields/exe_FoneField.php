@@ -39,6 +39,7 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
+d($_REQUEST);
 
 $html = '<br><br><b>Apenas telefones de 8 ou 9 digitos + DDD no padrão Brasil</b>';
         
@@ -54,8 +55,31 @@ $frm = new TForm('Exemplo do Campo Telefone', 200, 400);
 
 $frm->addOutside($box3);
 
-$frm->addFoneField('fone1', 'Telefone:', false, null, '6198761234');
+$frm->addFoneField('fone1', 'Telefone:', true, null, '6198761234');
 $frm->addFoneField('fone2', 'Fax:');
+
+$frm->addButton('Salvar', null, 'Salvar', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+
+
+$acao = isset($acao) ? $acao : null;
+switch( $acao ) {
+    //--------------------------------------------------------------------------------
+    case 'Limpar':
+        $frm->clearFields();
+    break;
+    //--------------------------------------------------------------------------------
+    case 'Salvar':
+        if ( $frm->validate() ) {            
+            if($resultado==1) {
+                $frm->setMessage('Registro gravado com sucesso!!!');
+                $frm->clearFields();
+            }else{
+                $frm->setMessage($resultado);
+            }
+        }
+    break;
+}
 
 
 $frm->show();
