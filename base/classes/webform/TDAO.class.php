@@ -1693,7 +1693,7 @@ class TDAO
 						, c.numeric_precision NUM_LENGTH
 						, c.numeric_scale NUM_SCALE
 						, c.COLUMN_COMMENT
-						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when upper(c.COLUMN_KEY) = 'MUL' then 'FOREIGN KEY' else 0 end  KEY_TYPE
+						, case when upper(c.COLUMN_KEY) = 'PRI' then 'PK' when ( upper(c.COLUMN_KEY) = 'MUL' AND k.REFERENCED_TABLE_NAME is not null ) then 'FOREIGN KEY' else 0 end  KEY_TYPE
 						, case when lower(c.EXTRA) = 'auto_increment' then 1 else 0 end  AUTOINCREMENT
 						, c.COLUMN_DEFAULT
 						, k.REFERENCED_TABLE_NAME
@@ -2348,7 +2348,7 @@ class TDAO
 		if( count($pks) > 0 )
 		{
 			$params=null;
-			$where = '';
+			$where = array();
 			foreach($pks as $v)
 			{
 				$params[$v] = $this->getFieldValue($v);
@@ -2446,8 +2446,8 @@ class TDAO
 			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlInsert      ="insert into " . $this->getTableName() . ' ';
-				$valuesClause   =null;
-				$params         =null;
+				$valuesClause   =array();
+				$params         =array();
 				$returningClause='';
 
 				foreach( $arrFieldValues as $fieldName => $fieldValue )
@@ -2477,8 +2477,8 @@ class TDAO
 			{
 				// oracle
 				$sqlInsert   ="insert into " . $this->getTableName() . ' ';
-				$valuesClause=null;
-				$params      =null;
+				$valuesClause=array();
+				$params      =array();
 				$returningFields=array();
 				$returningInto=array();
 				$descriptors=null;
@@ -2781,8 +2781,8 @@ class TDAO
 			if ( $this->getDbType() != DBMS_ORACLE )
 			{
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
-				$valuesClause   = null;
-				$params         = null;
+				$valuesClause   = array();
+				$params         = array();
 				foreach( $arrFieldValues as $fieldName => $fieldValue )
 				{
 					$fieldName = trim( $fieldName );
@@ -2800,7 +2800,7 @@ class TDAO
 				$sqlUpdate .= trim( $valuesClause );
                 if( is_array($pks))
                 {
-	                $whereClause = null;
+	                $whereClause = array();
    					foreach($pks as $k=>$v)
 					{
 
@@ -2816,8 +2816,8 @@ class TDAO
 			{
   				// oracle sem PDO
 				$sql ="update " . $this->getTableName() . ' set ';
-				$valuesClause=null;
-				$params      =null;
+				$valuesClause=array();
+				$params      =array();
 				$returningFields=array();
 				$returningInto=array();
 				$descriptors=null;
@@ -2853,7 +2853,7 @@ class TDAO
 				$sql .= ' '.$valuesClause;
 
 				// where
-				$whereClause =null;
+				$whereClause =array();
 				foreach($pks as $v)
 				{
 					$v = strtolower($v);
