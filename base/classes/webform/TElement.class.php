@@ -746,7 +746,11 @@ class TElement
     public function getEvent( $strEventName )
     {
         $strEventName = strtolower( $this->removeIllegalChars( $strEventName ) );
-        return $this->events[ $strEventName ];
+        $event = null;
+        if(is_array($this->events)){
+            $event = $this->events[ $strEventName ];
+        }
+        return $event;
     }
     /**
      *  Retorna o array de eventos ligados ao elemento
