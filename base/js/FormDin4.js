@@ -803,26 +803,6 @@ function fwValidarEmail(campo,alertar)
 	return r;
 }
 //-------------------------------------------------------------------------------------
-/*
-function fwFormatarTelefone(e) {
-	var s = "";
-	var res = "";
-	s = fwFiltraCampo(e.value);
-	while ( s.substring(0,1) == "0" ) {
-		s1 = s.substring(1,s.length);
-		s = s1;
-	}
-	s = s.substring(0,10);
-	res = s.substring(s.length-4,s.length);
-	if ( s.length > 4  && s.length < 9 )
-		res = s.substring(0,s.length-4)+"-"+res;
-	if ( s.length > 8  )
-		res = "(0xx" + s.substring(0,2) + ") " +
-				   s.substring(2,s.length-4) + "-" + res;
-	e.value = res;
-	return res;
-}
-*/
 
 function fwFormatarTelefone(e) {
 	var s = "";
@@ -859,14 +839,14 @@ function fwFormatarTelefone(e) {
 		{
 			if(s.length == 11 )
 			{
-             	res = "(0xx" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
+             	res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
 			}
 			else if(s.length == 9 )
 			{
                 res = s.substring(0,5)+'-'+res;
 			}
 			else
-             res = "(0xx" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
+             res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
 		}
 
 	}
