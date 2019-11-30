@@ -1893,11 +1893,23 @@ class TGrid extends TTable
      * @return TGridEditColumn
      */
     public function addTextColumn( $strName, $strTitle = null
-        , $strFieldName = null, $strSize = null
-        , $intMaxLength = null, $strMask = null
-        , $strWidth = null, $strAlign = null
+        , $strFieldName = null
+        , $strSize = null
+        , $intMaxLength = null
+        , $strMask = null
+        , $strWidth = null
+        , $strAlign = null
         , $boolReadOnly = null ){
-            $col = new TGridEditColumn( $strName, $strTitle, $strFieldName, 'text', $strSize, $intMaxLength, $strMask, $strWidth, $strAlign, $boolReadOnly );
+            $col = new TGridEditColumn( $strName
+                                      , $strTitle
+                                      , $strFieldName
+                                      , 'text'
+                                      , $strSize
+                                      , $intMaxLength
+                                      , $strMask
+                                      , $strWidth
+                                      , $strAlign
+                                      , $boolReadOnly );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
@@ -1906,7 +1918,16 @@ class TGrid extends TTable
     public function addAutoCompleteColumn( $strName, $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
     {
         $this->autocomplete[ $strName ] = new TAutoComplete( $strFieldName, $strTablePackage, $strSearchField, $mixUpdateFields, null, null, 'callBack', $intMinChars );
-        return $this->addTextColumn( $strName, $strTitle, $strFieldName, $strSize, $intMaxLength, $strMask, $strWidth, $strAlign, $boolReadOnly );
+        $tgridColumn = $this->addTextColumn( $strName
+                                            , $strTitle
+                                            , $strFieldName
+                                            , $strSize
+                                            , $intMaxLength
+                                            , null
+                                            , $strWidth
+                                            , $strAlign
+                                            , $boolReadOnly );
+        return $tgridColumn;
     }
     
     //---------------------------------------------------------------------------------------
