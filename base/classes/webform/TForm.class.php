@@ -7066,8 +7066,9 @@ class TForm Extends TBox
                                 , $boolLabelAbove=null
                                 , $boolNoWrapLabel=null )
 	{
-		$field = new TFone( $strName, $strValue, $boolRequired );
-		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+        $field = new TFone( $strName, $strValue, $boolRequired );
+        $displayControl = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
+		$this->addDisplayControl( $displayControl );
 		return $field;
 	}
            
