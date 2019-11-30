@@ -280,7 +280,7 @@ class TGrid extends TTable
     public function setQtdColumns($qtdColumns){
         $this->qtdColumns = $qtdColumns;
     }
-    
+        
     //------------------------------------------------------------------------------------
     public function show( $boolPrint = true ) {
         // quando for requisição de paginação do gride, limpar o buffer de saida
@@ -749,56 +749,15 @@ class TGrid extends TTable
                                 }
                             }
                             
-                            if ( $edit )
-                            {
-                                if ( is_object( $this->autocomplete[ strtolower( $objColumn->getFieldName() )] ) )
-                                {
-                                    $ac = $this->autocomplete[ strtolower( $objColumn->getFieldName() )];
-                                    // transformar os campos de update para array
-                                    $up = $ac->getUpdateFields();
-                                    $ac->setUpdateFields( null );
-                                    
-                                    if ( $up )
-                                    {
-                                        if ( is_string( $up ) )
-                                        {
-                                            $up = explode( ',', $up );
-                                        }
-                                        $upFields = '';
-                                        
-                                        foreach( $up as $key => $value )
-                                        {
-                                            $value = explode( '%', $value );
-                                            $upFields .= $upFields == '' ? '' : ',';
-                                            $upFields .= $value[ 0 ] . '%' . $objColumn->getRowNum();
-                                        }
-                                        $ac->setUpdateFields( $upFields );
-                                    }
-                                    $ac->setFieldName( $edit->getId() );
-                                    // parametros defaul
-                                    $ac->setCallBackParameters( "'" . $keyValue . "'," . $objColumn->getRowNum() . ',' . $this->getRowCount() );
-                                    
-                                    // verificar se o usuário quer redefinir os parametros
-                                    if ( $this->getOnGetAutocompleteParameters() )
-                                    {
-                                        call_user_func( $this->onGetAutocompleteParameters, $ac, $this->getRowData( $k ), $rowNum, $cell, $objColumn );
-                                    }
-                                    $edit->setHint( $ac->getHint() );
-                                    $this->javaScript[] = $ac->getJs() . "\n";
-                                }
-                                $cell->add( $edit );
-                            }
+                            $this->showEditAutoComplete($edit,$rowNum, $cell, $keyValue, $objColumn);
                             
-                            if ( $this->onDrawCell )
-                            {
+                            if ( $this->onDrawCell ){
                                 call_user_func( $this->onDrawCell, $rowNum, $cell, $objColumn, $this->getRowData( $k ), $edit );
                             }
                             
                             // deaabilitar todos os edits se o grid for readonly
-                            if ( $this->getReadOnly() )
-                            {
-                                if ( method_exists( $edit, 'setEnabled' ) )
-                                {
+                            if ( $this->getReadOnly() ){
+                                if ( method_exists( $edit, 'setEnabled' ) ){
                                     $edit->setEnabled( false );
                                 }
                             }
@@ -1042,6 +1001,56 @@ class TGrid extends TTable
         }
         return parent::show( $boolPrint );
     }
+    
+
+    /**
+     * Show Gried Field AutoComplete
+     * @param string $edit
+     * @param int $rowNum
+     * @param string $cell
+     * @param string $keyValue
+     * @param object $objColumn
+     */
+    private function showEditAutoComplete($edit,$rowNum, $cell, $keyValue, $objColumn)
+    {
+        if ( $edit ){
+            $fieldName = strtolower($objColumn->getFieldName());
+            if( is_array($this->autocomplete) ){ //Test to PHP 7.4
+                $ac = $this->autocomplete[$fieldName];
+                if ( is_object($ac) ) {
+                    // transformar os campos de update para array
+                    $up = $ac->getUpdateFields();
+                    $ac->setUpdateFields( null );
+                    
+                    if ( $up ) {
+                        if ( is_string( $up ) ) {
+                            $up = explode( ',', $up );
+                        }
+                        $upFields = '';
+                        
+                        foreach( $up as $key => $value ) {
+                            $value = explode( '%', $value );
+                            $upFields .= $upFields == '' ? '' : ',';
+                            $upFields .= $value[ 0 ] . '%' . $objColumn->getRowNum();
+                        }
+                        $ac->setUpdateFields( $upFields );
+                    }
+                    $ac->setFieldName( $edit->getId() );
+                    // parametros defaul
+                    $ac->setCallBackParameters( "'" . $keyValue . "'," . $objColumn->getRowNum() . ',' . $this->getRowCount() );
+                    
+                    // verificar se o usuário quer redefinir os parametros
+                    if ( $this->getOnGetAutocompleteParameters() ){
+                        call_user_func( $this->onGetAutocompleteParameters, $ac, $this->getRowData( $k ), $rowNum, $cell, $objColumn );
+                    }
+                    $edit->setHint( $ac->getHint() );
+                    $this->javaScript[] = $ac->getJs() . "\n";
+                }
+            }
+            $cell->add( $edit );
+        }
+    }
+
     
     /**
      * Include Hidden Fields on Grid
