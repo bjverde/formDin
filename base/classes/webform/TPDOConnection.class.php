@@ -800,6 +800,7 @@ class TPDOConnection {
         }
         catch( PDOException $e ) {
             self::$error = $e->getMessage();
+            MessageHelper::logRecordSimple(self::$error);
             self::showError();
         }
         return false;
