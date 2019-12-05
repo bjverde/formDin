@@ -1459,7 +1459,7 @@ class TDAO
                         		WHERE t.TABLE_NAME = c.TABLE_NAME 
                         		 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
                         		 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
-                        		 and t.TABLE_SCHEMA not in ('sys','performance_schema','mysql','information_schema')
+                        		 and t.TABLE_SCHEMA not in ('sys','phpmyadmin','performance_schema','mysql','information_schema')
                         	 ) as vt
                         	 group by vt.TABLE_SCHEMA
                         			 ,vt.TABLE_NAME
@@ -1480,7 +1480,7 @@ class TDAO
                         		left join information_schema.parameters as p
                         				  on p.specific_schema = r.routine_schema
                         				  and p.specific_name = r.specific_name
-                        		where r.routine_schema not in ('sys', 'information_schema','mysql', 'performance_schema')
+                        		where r.routine_schema not in ('sys','phpmyadmin','information_schema','mysql', 'performance_schema')
                         		and p.routine_type = 'PROCEDURE'
                         	) as vp
                         	group by vp.TABLE_SCHEMA
