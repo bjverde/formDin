@@ -21,6 +21,8 @@ $menu->add(2, null, 'Pessoas', null, null);
 $menu->add(21,2,'Pessoa Física','modulos/pessoa_fisica.php');
 $menu->add(22,2,'Pessoa Jurídica','modulos/pessoa_juridica.php');
 $menu->add(23,2,'Pessoa','modulos/pessoa.php');
+$menu->add(24,2,'Endereço','modulos/endereco.php');
+$menu->add(25,2,'Telefone','modulos/telefone.php');
 
 $menu->add(3, null, 'Autoridades', null, null);
 $menu->add(31, 3, 'Cadastro Autoridades', 'modulos/autoridade.php', null);

@@ -67,7 +67,25 @@ class ServerHelper
             $url = explode('?', $pageURL);
             return $url[0];
         }
+    } 
+    /**
+     * https://pt.stackoverflow.com/questions/179389/como-pegar-ip-de-um-usuario-usando-php/179455
+     *
+     * @return string
+     */
+    public static function getIpClient()
+    {
+        $client = ArrayHelper::get($_SERVER,'HTTP_CLIENT_IP');
+        $forward = ArrayHelper::get($_SERVER,'HTTP_X_FORWARDED_FOR');
+        $remote = ArrayHelper::get($_SERVER,'REMOTE_ADDR');
+        if ( filter_var($client, FILTER_VALIDATE_IP) ){
+            $ip = $client;
+        } elseif ( filter_var($forward, FILTER_VALIDATE_IP) ){
+            $ip = $forward;
+        } else {
+            $ip = $remote;
+        }
+        return $ip;
     }
-    
 }
 ?>

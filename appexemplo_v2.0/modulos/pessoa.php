@@ -159,7 +159,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
     $gride->addColumn('CPFCNPJ','CPF/CNPJ');
 	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
-	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('DAT_ALTERACAO','Data da Alteração',null,'center');
 
 
     $gride->show();

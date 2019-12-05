@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.1
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System xx created in: 2019-09-29 20:48:35
+ * System appev2 created in: 2019-11-01 22:23:15
  */
 class Vw_pessoaVO
 {
@@ -25,7 +25,14 @@ class Vw_pessoaVO
     private $dat_nascimento_format = null;
     private $idnatureza_juridica = null;
     private $cnpj = null;
-    public function __construct( $idpessoa=null, $cpfcnpj=null, $nome=null, $tipo=null, $sit_ativo=null, $dat_inclusao=null, $dat_inclusao_format=null, $cpf=null, $idpessoa_fisica=null, $cod_municipio_nascimento=null, $dat_nascimento=null, $dat_nascimento_format=null, $idnatureza_juridica=null, $cnpj=null ) {
+    public function __construct( $idpessoa=null
+                               , $cpfcnpj=null, $nome=null, $tipo=null, $sit_ativo=null
+                               , $dat_inclusao=null, $dat_inclusao_format=null, $cpf=null
+                               , $idpessoa_fisica=null, $cod_municipio_nascimento=null
+                               , $dat_nascimento=null
+                               , $dat_nascimento_format=null
+                               , $idnatureza_juridica=null
+                               , $cnpj=null ) {
         $this->setIdpessoa( $idpessoa );
         $this->setCpfcnpj( $cpfcnpj );
         $this->setNome( $nome );

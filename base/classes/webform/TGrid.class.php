@@ -280,7 +280,7 @@ class TGrid extends TTable
     public function setQtdColumns($qtdColumns){
         $this->qtdColumns = $qtdColumns;
     }
-    
+        
     //------------------------------------------------------------------------------------
     public function show( $boolPrint = true ) {
         // quando for requisição de paginação do gride, limpar o buffer de saida
@@ -749,56 +749,15 @@ class TGrid extends TTable
                                 }
                             }
                             
-                            if ( $edit )
-                            {
-                                if ( is_object( $this->autocomplete[ strtolower( $objColumn->getFieldName() )] ) )
-                                {
-                                    $ac = $this->autocomplete[ strtolower( $objColumn->getFieldName() )];
-                                    // transformar os campos de update para array
-                                    $up = $ac->getUpdateFields();
-                                    $ac->setUpdateFields( null );
-                                    
-                                    if ( $up )
-                                    {
-                                        if ( is_string( $up ) )
-                                        {
-                                            $up = explode( ',', $up );
-                                        }
-                                        $upFields = '';
-                                        
-                                        foreach( $up as $key => $value )
-                                        {
-                                            $value = explode( '%', $value );
-                                            $upFields .= $upFields == '' ? '' : ',';
-                                            $upFields .= $value[ 0 ] . '%' . $objColumn->getRowNum();
-                                        }
-                                        $ac->setUpdateFields( $upFields );
-                                    }
-                                    $ac->setFieldName( $edit->getId() );
-                                    // parametros defaul
-                                    $ac->setCallBackParameters( "'" . $keyValue . "'," . $objColumn->getRowNum() . ',' . $this->getRowCount() );
-                                    
-                                    // verificar se o usuário quer redefinir os parametros
-                                    if ( $this->getOnGetAutocompleteParameters() )
-                                    {
-                                        call_user_func( $this->onGetAutocompleteParameters, $ac, $this->getRowData( $k ), $rowNum, $cell, $objColumn );
-                                    }
-                                    $edit->setHint( $ac->getHint() );
-                                    $this->javaScript[] = $ac->getJs() . "\n";
-                                }
-                                $cell->add( $edit );
-                            }
+                            $this->showEditAutoComplete($edit,$rowNum, $cell, $keyValue, $objColumn);
                             
-                            if ( $this->onDrawCell )
-                            {
+                            if ( $this->onDrawCell ){
                                 call_user_func( $this->onDrawCell, $rowNum, $cell, $objColumn, $this->getRowData( $k ), $edit );
                             }
                             
                             // deaabilitar todos os edits se o grid for readonly
-                            if ( $this->getReadOnly() )
-                            {
-                                if ( method_exists( $edit, 'setEnabled' ) )
-                                {
+                            if ( $this->getReadOnly() ){
+                                if ( method_exists( $edit, 'setEnabled' ) ){
                                     $edit->setEnabled( false );
                                 }
                             }
@@ -1042,6 +1001,56 @@ class TGrid extends TTable
         }
         return parent::show( $boolPrint );
     }
+    
+
+    /**
+     * Show Gried Field AutoComplete
+     * @param string $edit
+     * @param int $rowNum
+     * @param string $cell
+     * @param string $keyValue
+     * @param object $objColumn
+     */
+    private function showEditAutoComplete($edit,$rowNum, $cell, $keyValue, $objColumn)
+    {
+        if ( $edit ){
+            $fieldName = strtolower($objColumn->getFieldName());
+            if( is_array($this->autocomplete) ){ //Test to PHP 7.4
+                $ac = $this->autocomplete[$fieldName];
+                if ( is_object($ac) ) {
+                    // transformar os campos de update para array
+                    $up = $ac->getUpdateFields();
+                    $ac->setUpdateFields( null );
+                    
+                    if ( $up ) {
+                        if ( is_string( $up ) ) {
+                            $up = explode( ',', $up );
+                        }
+                        $upFields = '';
+                        
+                        foreach( $up as $key => $value ) {
+                            $value = explode( '%', $value );
+                            $upFields .= $upFields == '' ? '' : ',';
+                            $upFields .= $value[ 0 ] . '%' . $objColumn->getRowNum();
+                        }
+                        $ac->setUpdateFields( $upFields );
+                    }
+                    $ac->setFieldName( $edit->getId() );
+                    // parametros defaul
+                    $ac->setCallBackParameters( "'" . $keyValue . "'," . $objColumn->getRowNum() . ',' . $this->getRowCount() );
+                    
+                    // verificar se o usuário quer redefinir os parametros
+                    if ( $this->getOnGetAutocompleteParameters() ){
+                        call_user_func( $this->onGetAutocompleteParameters, $ac, $this->getRowData( $k ), $rowNum, $cell, $objColumn );
+                    }
+                    $edit->setHint( $ac->getHint() );
+                    $this->javaScript[] = $ac->getJs() . "\n";
+                }
+            }
+            $cell->add( $edit );
+        }
+    }
+
     
     /**
      * Include Hidden Fields on Grid
@@ -1307,6 +1316,9 @@ class TGrid extends TTable
         
         // salvar o array em disco
         $tmpName = $excel->getBase().'tmp/tmp_'.$this->getId().'_'.session_id().'.go';
+        if( !file_exists( $excel->getBase().'tmp' ) ) {
+            mkdir( $excel->getBase().'tmp' );
+        }
         if( file_exists( $tmpName ) ) {
             @unlink($tmpName);
         }
@@ -1881,11 +1893,23 @@ class TGrid extends TTable
      * @return TGridEditColumn
      */
     public function addTextColumn( $strName, $strTitle = null
-        , $strFieldName = null, $strSize = null
-        , $intMaxLength = null, $strMask = null
-        , $strWidth = null, $strAlign = null
+        , $strFieldName = null
+        , $strSize = null
+        , $intMaxLength = null
+        , $strMask = null
+        , $strWidth = null
+        , $strAlign = null
         , $boolReadOnly = null ){
-            $col = new TGridEditColumn( $strName, $strTitle, $strFieldName, 'text', $strSize, $intMaxLength, $strMask, $strWidth, $strAlign, $boolReadOnly );
+            $col = new TGridEditColumn( $strName
+                                      , $strTitle
+                                      , $strFieldName
+                                      , 'text'
+                                      , $strSize
+                                      , $intMaxLength
+                                      , $strMask
+                                      , $strWidth
+                                      , $strAlign
+                                      , $boolReadOnly );
             $this->columns[ strtolower( $strName )] = $col;
             return $col;
     }
@@ -1894,7 +1918,16 @@ class TGrid extends TTable
     public function addAutoCompleteColumn( $strName, $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
     {
         $this->autocomplete[ $strName ] = new TAutoComplete( $strFieldName, $strTablePackage, $strSearchField, $mixUpdateFields, null, null, 'callBack', $intMinChars );
-        return $this->addTextColumn( $strName, $strTitle, $strFieldName, $strSize, $intMaxLength, $strMask, $strWidth, $strAlign, $boolReadOnly );
+        $tgridColumn = $this->addTextColumn( $strName
+                                            , $strTitle
+                                            , $strFieldName
+                                            , $strSize
+                                            , $intMaxLength
+                                            , null
+                                            , $strWidth
+                                            , $strAlign
+                                            , $boolReadOnly );
+        return $tgridColumn;
     }
     
     //---------------------------------------------------------------------------------------

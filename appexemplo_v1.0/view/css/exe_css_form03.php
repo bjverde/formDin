@@ -42,8 +42,8 @@ $columNomeComprador = $gride->getColumn('NOME_COMPRADOR');   // recuperar o obje
 $columNomeComprador->setClass('columNome',true);             // Set um classe CSS
 
 $h = $columNomeComprador->getHeader();                   // recuperar o objeto header da NOM_UF
-$h->setCss('color', 'red');           // altera a cor de fundo do titulo da coluna para vermelha
 $h->setCss('font-size', '14');        // altera o tamanho da fonte do titulo da coluna para 14
+$h->setCss('color', 'red');           // altera a cor de fundo do titulo da coluna para vermelha
 
 
 $columQtd = $gride->getColumn('QTD');   // recuperar o objeto coluna NOME_COMPRADOR

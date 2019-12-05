@@ -50,6 +50,8 @@ class TMessage {
     const FORM_MIN_YOU_VERSION = 'Sua versão do FormDin é : ';
     
     const ARRAY_EXPECTED = 'O atribruto deveria ser um array';
+    const ARRAY_KEY_NOT_EXIST = 'Não existe a chave procurada no array FormDin';
+    const ARRAY_ATTRIBUTE_NOT_EXIST = 'Não existe a atributo procurada no array FormDin';
     
     const DONOT_QUOTATION = 'Não use aspas simples ou duplas na pesquisa !';
     
@@ -59,6 +61,7 @@ class TMessage {
 
     const ERROR_EMPTY_INPUT = 'O Parametro não pode ficar em branco';
     const ERROR_TYPE_NOT_INT = 'Tipo não númerico! ';
+    const ERROR_TYPE_NOT_ARRAY = 'Tipo não é um array! ';
 
     public function __construct() {
     }

@@ -52,6 +52,10 @@ $currentl_dir = dirname ( __FILE__ );
 require_once( $currentl_dir . DS . '..' . DS . 'constants.php' );
 
 class TPDOConnection {
+    
+    const WAY_APP2BANK = 'WAY_APP2BANK';
+    const WAY_BANK2APP = 'WAY_BANK2APP';
+    
     private static $error = null;
     private static $instance = null;
     private static $lastSql;
@@ -87,8 +91,16 @@ class TPDOConnection {
         }
         return  $retorno;
     }
-    public static function setBanco( $banco = null ) {
+    public static function setDBMS( $banco = null ) {
         self::$banco = $banco;
+    }
+    
+    /**
+     * @deprecated change to setDBMS
+     * @param string $banco
+     */
+    public static function setBanco( $banco = null ) {
+        self::setDBMS($banco);
     }    
     //--------------------------------------------------------------------------------------
     public static function getHost() {
@@ -701,7 +713,7 @@ class TPDOConnection {
         // nás chamadas ajax, não precisa aplicar utf8
         if ( !isset( $_REQUEST[ 'ajax' ] ) || !isset( $_REQUEST[ 'ajax' ] ) ) {
             $boolUtf8_Decode = self::getUtfDecode();
-            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $sql );
+            $sql       = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$sql ,self::WAY_APP2BANK );
             $arrParams = self::encodeArray( $arrParams );
         }
         $arrParams = self::prepareArray( $arrParams );
@@ -788,6 +800,7 @@ class TPDOConnection {
         }
         catch( PDOException $e ) {
             self::$error = $e->getMessage();
+            MessageHelper::logRecordSimple(self::$error);
             self::showError();
         }
         return false;
@@ -812,28 +825,22 @@ class TPDOConnection {
                                                 
                         if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi($boolUtf8_DecodeDataBase, $v ,self::WAY_APP2BANK);
                         }
                         
                         // inverter campo data
                         if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) ) {
                             $v = self::verifyformtDateYMD( $v );
                             $arrDados[ $k ] = $v;
-                        }
-                        else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 )
-                        {
+                        } else if( preg_match( '/VAL_|NUM_/i', $k ) > 0 ) {
                             // alterar a virgula por ponto nos campos decimais
                             $posPonto = ( int ) strpos( $v, '.' );
                             $posVirgula = ( int ) strpos( $v, ',' );
                             
-                            if ( $posVirgula > $posPonto )
-                            {
-                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula )
-                                {
+                            if ( $posVirgula > $posPonto ) {
+                                if ( $posPonto && $posVirgula && $posPonto > $posVirgula ) {
                                     $v = preg_replace( '/\,/', '', $v );
-                                }
-                                else
-                                {
+                                } else {
                                     $v = preg_replace( '/,/', ' ', $v );
                                     $v = preg_replace( '/\./', '', $v );
                                     $v = preg_replace( '/ /', '.', $v );
@@ -841,9 +848,7 @@ class TPDOConnection {
                             }
                             $arrDados[ $k ] = trim( $v );
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $arrDados[ $k ] = null;
                     }
                     $result[] = $arrDados[ $k ];
@@ -854,7 +859,7 @@ class TPDOConnection {
                         $v  = self::verifyformtDateYMD( $v );
                         if( !self::isMySqlDbUtf8() ){
                             $boolUtf8_DecodeDataBase = self::getUtfDecode();
-                            $arrDados[ $k ] = self::getStrUtf8OrAnsi(!$boolUtf8_DecodeDataBase, $v);
+                            $arrDados[ $k ] = self::getStrUtf8OrAnsi($boolUtf8_DecodeDataBase, $v,self::WAY_APP2BANK);
                         }
                     }else if( is_int($v) ){
                         $arrDados[ $k ] = $v;
@@ -873,18 +878,14 @@ class TPDOConnection {
     public static function prepareArrayNamed( $arrDados = null ) {
         $result = array();
         
-        foreach( $arrDados as $k => $v )
-        {
-            if ( !is_null($v) )
-            {
+        foreach( $arrDados as $k => $v ) {
+            if ( !is_null($v) ) {
                 $arrDados[ $k ] = $v;
                 // inverter campo data
                 if ( preg_match( '/^DAT[_,A]/i', $k ) > 0 || ( strpos( $v, '/' ) == 2 && strpos( $v, '/', 4 ) == 5 ) )    {
                     $v  = self::verifyformtDateYMD( $v );
                     $arrDados[ $k ] = $v;
-                }
-                else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 )
-                {
+                } else if( preg_match( '/NR_|VAL_|NUM_/i', $k ) > 0 ) {
                     // alterar a virgula por ponto nos campos decimais
                     $posPonto = ( int ) strpos( $v, '.' );
                     $posVirgula = ( int ) strpos( $v, ',' );
@@ -900,7 +901,7 @@ class TPDOConnection {
                     }
                     $arrDados[ $k ] = trim( $v );
                 }
-            }else{
+            } else {
                 $arrDados[ $k ] = null;
             }
             $result[] = $arrDados[ $k ];
@@ -932,11 +933,11 @@ class TPDOConnection {
                     if ( !is_null($v) && !empty($v) ){
                         $v  = self::verifyformtDateYMD( $v );
                         $arrDados[ $k ] = $v;
-                    }else if( is_int($v) ){
+                    } else if( is_int($v) ) {
                         $arrDados[ $k ] = $v;
-                    }else if( $v === '0' ){
+                    } else if( $v === '0' ) {
                         $arrDados[ $k ] = $v;
-                    }else {
+                    } else {
                         $arrDados[ $k ] = null;
                     }
                 }
@@ -1186,11 +1187,12 @@ class TPDOConnection {
      * Returns the string in the appropriate format UTF8 or ANSI
      * @param boolean $boolUtf8_Decode
      * @param string $string
+     * @param string $way use the const self::WAY_APP2DB or self::WAY_DB2APP 
      * @return NULL|string
      */
-    public static function getStrUtf8OrAnsi( $boolUtf8_Decode , $string ) 
+    public static function getStrUtf8OrAnsi( $boolUtf8_Decode ,$string ,$way) 
     {
-        $retorno = null;
+        $retorno = $string;
         if(  (self::$banco == DBMS_SQLSERVER) && (PHP_OS != "Linux" ) ){
             $retorno = $string;
         }elseif ( (self::$banco == DBMS_SQLSERVER) && (PHP_OS == "Linux" ) && (version_compare(PHP_VERSION, '7.0.0') >= 0) ) {
@@ -1202,9 +1204,11 @@ class TPDOConnection {
             $retorno = $string;
         } else{
             if ( $boolUtf8_Decode ) {
-                $retorno = utf8_decode( $string );
-            } else {
-                $retorno = utf8_encode( $string );
+                if($way == self::WAY_APP2BANK){
+                    $retorno = utf8_decode($string);
+                }else{
+                    $retorno = StringHelper::str2utf8($string);
+                }
             }
         }
         return $retorno;
@@ -1225,11 +1229,11 @@ class TPDOConnection {
         if ( is_array( $result ) ) {
             foreach( $result as $key => $val ) {
                 foreach( $val as $k => $v ) {
-                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode , $k ) );
+                    $k = strtoupper( self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$k ,self::WAY_BANK2APP) );
                     
                     // transformar tags"< >" em codigo html para não serem interpretadas
                     if ( is_string( $v ) ) {
-                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode , $v );
+                        $res[ $k ][ $key ] = self::getStrUtf8OrAnsi( $boolUtf8_Decode ,$v ,self::WAY_BANK2APP );
                         
                         //$res[ $k ][ $key ] = utf8_decode($v);
                         // consertar ordem do campo data

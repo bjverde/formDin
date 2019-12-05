@@ -4,24 +4,26 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System appev2 created in: 2019-09-10 09:04:47
+ * System appev2 created in: 2019-11-01 22:23:15
  */
 class Pessoa_fisicaVO
 {
     private $idpessoa_fisica = null;
     private $idpessoa = null;
     private $cpf = null;
+    private $rg = null;
     private $dat_nascimento = null;
     private $cod_municipio_nascimento = null;
     private $dat_inclusao = null;
     private $dat_alteracao = null;
-    public function __construct( $idpessoa_fisica=null, $idpessoa=null, $cpf=null, $dat_nascimento=null, $cod_municipio_nascimento=null, $dat_inclusao=null, $dat_alteracao=null ) {
+    public function __construct( $idpessoa_fisica=null, $idpessoa=null, $cpf=null, $rg=null, $dat_nascimento=null, $cod_municipio_nascimento=null, $dat_inclusao=null, $dat_alteracao=null ) {
         $this->setIdpessoa_fisica( $idpessoa_fisica );
         $this->setIdpessoa( $idpessoa );
         $this->setCpf( $cpf );
+        $this->setRg( $rg );
         $this->setDat_nascimento( $dat_nascimento );
         $this->setCod_municipio_nascimento( $cod_municipio_nascimento );
         $this->setDat_inclusao( $dat_inclusao );
@@ -53,6 +55,15 @@ class Pessoa_fisicaVO
     public function getCpf()
     {
         return $this->cpf;
+    }
+    //--------------------------------------------------------------------------------
+    public function setRg( $strNewValue = null )
+    {
+        $this->rg = $strNewValue;
+    }
+    public function getRg()
+    {
+        return $this->rg;
     }
     //--------------------------------------------------------------------------------
     public function setDat_nascimento( $strNewValue = null )

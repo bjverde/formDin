@@ -12,6 +12,10 @@
 class Meta_tipo
 {
 
+    const TELEFONE = 1;
+    const ENDERECO = 2;
+    const PRODUTO  = 3;
+    const PAGAMENTO = 4;
 
     private $dao = null;
 

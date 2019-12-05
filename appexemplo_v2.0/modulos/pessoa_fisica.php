@@ -22,12 +22,7 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
-//$controllerVwPessoa = new Vw_pessoa();
-//$listPessoa = $controllerVwPessoa->selectAllPF('NOME');
-//$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addHiddenField( 'IDPESSOA');
 $frm->addHiddenField( 'IDPESSOA_FISICA');
-$frm->addHiddenField( 'IDNATUREZA_JURIDICA' );
 $frm->addHiddenField( 'TIPO', Pessoa::PF);
 $frm->addHiddenField( 'SIT_ATIVO', 'S');
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
@@ -67,11 +62,11 @@ switch( $acao ) {
     case 'Salvar':
         try{
             if ( $frm->validate() ) {
-                $vo = new Pessoa_fisicaVO();
+                $vo = new Vw_pessoaVO();
                 $frm->setVo( $vo );
-                $controller = new Pessoa_fisica();
+                $controller = new Vw_pessoa();
                 $resultado = $controller->save( $vo );
-                if($resultado==1) {
+                if( is_int($resultado) && $resultado!=0 ) {
                     $frm->setMessage(Message::GENERIC_SAVE);
                     $frm->clearFields();
                 }else{
@@ -80,18 +75,18 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
     //--------------------------------------------------------------------------------
     case 'gd_excluir':
         try{
             $id = $frm->get( $primaryKey ) ;
-            $controller = new Pessoa_fisica();
+            $controller = new Vw_pessoa();
             $resultado = $controller->delete( $id );
             if($resultado==1) {
                 $frm->setMessage(Message::GENERIC_DELETE);
@@ -101,11 +96,11 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
 }
@@ -118,11 +113,12 @@ function getWhereGridParameters(&$frm)
         $retorno = array(
                  'IDPESSOA_FISICA'=>$frm->get('IDPESSOA_FISICA')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
+                ,'TIPO'=>$frm->get('TIPO')
+                ,'NOME'=>$frm->get('NOME')
                 ,'CPF'=>$frm->get('CPF')
                 ,'DAT_NASCIMENTO'=>$frm->get('DAT_NASCIMENTO')
+                ,'COD_UF'=>$frm->get('COD_UF')
                 ,'COD_MUNICIPIO_NASCIMENTO'=>$frm->get('COD_MUNICIPIO_NASCIMENTO')
-                ,'DAT_INCLUSAO'=>$frm->get('DAT_INCLUSAO')
-                ,'DAT_ALTERACAO'=>$frm->get('DAT_ALTERACAO')
         );
     }else{
         $retorno = array(
@@ -136,7 +132,7 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Vw_pessoa();
+    $controller = new Vw_pessoa_fisica();
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
@@ -145,10 +141,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',TIPO|TIPO'
                     .',CPF|CPF'
                     .',IDPESSOA_FISICA|IDPESSOA_FISICA'
-                    .',CNPJ|CNPJ'
-                    .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
-                    .',SIT_ATIVO|SIT_ATIVO'
-                    .',DAT_INCLUSAO|DAT_INCLUSAO'
+                    .',DAT_NASCIMENTO|DAT_NASCIMENTO'
+                    .',COD_UF|COD_UF'
+                    .',COD_MUNICIPIO_NASCIMENTO|COD_MUNICIPIO_NASCIMENTO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
     				   ,'Lista de Pessoas Físicas. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
@@ -163,9 +158,12 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->addColumn($primaryKey,'id');
 	$gride->addColumn('NOME','Nome');
     //$gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
-    $gride->addColumn('CPF','CPF',null,'center');
-	//$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
-	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('CPF','CPF',null,'center');    
+    $gride->addColumn('DAT_NASCIMENTO','Data Nascimento',null,'center');
+    $gride->addColumn('SIG_UF','UF',null,'center');
+    $gride->addColumn('NOM_MUNICIPIO','Município',null,'center');
+    //$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    //$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
     $gride->show();
     die();
 }
@@ -180,10 +178,11 @@ function init() {
     var Parameters = {"BUSCAR":""
                     ,"IDPESSOA_FISICA":""
                     ,"IDPESSOA":""
+                    ,"NOME":""
                     ,"CPF":""
                     ,"DAT_NASCIMENTO":""
-                    ,"COD_MUNICIPIO_NASCIMENTO":""
-                    ,"DAT_INCLUSAO":""
+                    ,"COD_UF":""
+                    ,"COD_MUNICIPIO_NASCIMENTO":""                    
                     ,"DAT_ALTERACAO":""
                     };
     fwGetGrid('pessoa_fisica.php','gride',Parameters,true);

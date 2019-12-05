@@ -86,13 +86,13 @@ class TFone extends TEdit
                 $value=substr($value, 0, 4).'-'.substr($value, 4);
             }
             elseif (strlen($value)==9) {
-                $value='(0xx'.substr($value, 0, 2).') '.substr($value, 2, 3).'-'.substr($value, 5);
+                $value='('.substr($value, 0, 2).') '.substr($value, 2, 3).'-'.substr($value, 5);
             }
             elseif (strlen($value)==10) {
-                $value='(0xx'.substr($value, 1, 2).') '.substr($value, 3, 3).'-'.substr($value, 6);
+                $value='('.substr($value, 1, 2).') '.substr($value, 3, 3).'-'.substr($value, 6);
             }
             elseif (strlen($value) > 10 ) {
-                $value='(0xx'.substr($value, 1, 2).') '.substr($value, 3, 4).'-'.substr($value, 7);
+                $value='('.substr($value, 1, 2).') '.substr($value, 3, 4).'-'.substr($value, 7);
             }
             return $value;
         }

@@ -102,6 +102,7 @@ $menu->add('121', '1', 'Campo Link', 'view/fields/exe_field_link.php');
 $menu->add('122', '1', 'Redirect', 'exe_redirect.inc');
 $menu->add('123', '1', 'TZip', 'exe_TZip.php');
 $menu->add('124', '1', 'E-mail', 'view/fields/exe_TEmail.php', null, '../../base/imagens/email.png');
+$menu->add('125', '1', 'Button', 'view/fields/exe_TButton.php', null);
 
 //-----------------------------------------------------------------------------
 $menu->add('2', null, 'Containers');
@@ -181,6 +182,7 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
         $menu->add('82.2', '82', 'Gride Draw 02 - Mudando a cor da linha', 'grid/exe_gride_draw_02.php');
         $menu->add('82.3', '82', 'Gride Draw 03 - Desativando Botões v1', 'grid/exe_gride_draw_03.php');
         $menu->add('82.4', '82', 'Gride Draw 04 - Desativando Botões v2', 'grid/exe_gride_draw_04.php');
+        $menu->add('82.5', '82', 'Gride Draw 05 - addFooter e cor da linha', 'grid/exe_gride_draw_05.php');
         
     $menu->add('83', '8', 'Exempos Grides problemas', null, null, '../../base/imagens/table16.gif');
         $menu->add('83.1', '83', 'Gride 10 - erro', 'grid/exe_gride10.php');

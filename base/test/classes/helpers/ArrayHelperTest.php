@@ -209,4 +209,128 @@ class ArrayHelperTest extends TestCase
         $retorno = ArrayHelper::convertArrayFormDin2Pdo($array,true);
         $this->assertEquals($esperado, $retorno);
     }
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailNull(){
+        ArrayHelper::validateIsArray(null,__METHOD__,__LINE__);
+    }
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailArrayEmpty(){
+        $listArray = array();
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testValidateIsArray_FailString(){
+        $listArray = 'xxx';
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
+    public function testValidateIdIsNumeric_OKArrayNotEmpty(){
+        $listArray = array();
+        $listArray[]=1;
+        $listArray[]=2;
+        $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
+    }
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testFormDinDeleteRowByKeyIndex_FailNull(){
+        ArrayHelper::formDinDeleteRowByKeyIndex(null,10);
+    }
+    
+    public function testFormDinDeleteRowByKeyIndex_FailAttributeNotExist(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByKeyIndex($array,10);
+        
+        $expected = false;
+        $this->assertEquals($expected, $result['result']);
+        $expected = TMessage::ARRAY_KEY_NOT_EXIST;
+        $this->assertEquals($expected, $result['message']);
+    }
+    
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testFormDinDeleteRowByColumnNameAndKeyIndex_FailNull(){
+        ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex(null,'xx',10);
+    }
+    
+    public function testFormDinDeleteRowByColumnNameAndKeyIndex_FailAttributeNotExist(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($array,'idCarro',10);
+        
+        $expected = false;
+        $this->assertEquals($expected, $result['result']);
+        $expected = TMessage::ARRAY_ATTRIBUTE_NOT_EXIST;
+        $this->assertEquals($expected, $result['message']);
+    }
+    
+    public function testFormDinDeleteRowByColumnNameAndKeyIndex_FailKeyNotExist(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($array,'IDPESSOA',10);
+        
+        $expected = false;
+        $this->assertEquals($expected, $result['result']);
+        $expected = TMessage::ARRAY_KEY_NOT_EXIST;
+        $this->assertEquals($expected, $result['message']);
+    }
+    
+    public function testFormDinDeleteRowByColumnNameAndKeyIndex_okQtd(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($array,'IDPESSOA',1);
+        
+        $expected = true;
+        $this->assertEquals($expected, $result['result']);
+        $expected = 3;
+        $resultQtd = CountHelper::count($result['formarray']['IDPESSOA']);
+        $this->assertEquals($expected, $resultQtd);
+        
+        $this->assertEquals(3, $result['formarray']['IDPESSOA'][1]);
+        $this->assertEquals('Dell', $result['formarray']['NMPESSOA'][1]);
+        $this->assertEquals('J', $result['formarray']['TPPESSOA'][1]);
+        $this->assertEquals(null, $result['formarray']['NMCPF'][1]);
+        $this->assertEquals('72381189000110', $result['formarray']['NMCNPJ'][1]);
+    }
+    
+    public function testFormDinDeleteRowByColumnNameAndKeyIndex_ok3Times(){
+        $mock = new mockFormDinArray();
+        $array = $mock->generateTable();
+        
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($array,'IDPESSOA',3);
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($result['formarray'],'IDPESSOA',2);
+        $result = ArrayHelper::formDinDeleteRowByColumnNameAndKeyIndex($result['formarray'],'IDPESSOA',1);
+        
+        $expected = true;
+        $this->assertEquals($expected, $result['result']);
+        $expected = 1;
+        $resultQtd = CountHelper::count($result['formarray']['IDPESSOA']);
+        $this->assertEquals($expected, $resultQtd);
+        
+        $this->assertEquals(1, $result['formarray']['IDPESSOA'][0]);
+        $this->assertEquals('Joao Silva', $result['formarray']['NMPESSOA'][0]);
+        $this->assertEquals('F', $result['formarray']['TPPESSOA'][0]);
+        $this->assertEquals('123456789', $result['formarray']['NMCPF'][0]);
+    }
+    
 }
