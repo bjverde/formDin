@@ -42,9 +42,9 @@
 class ServerHelper
 {
 
-    const DEVICE_TYPE_MOBILE  = 'MOBILE';
-    const DEVICE_TYPE_TABLE   = 'TABLE';
-    const DEVICE_TYPE_DESKTOP = 'DESKTOP';
+    const DEVICE_TYPE_MOBILE  = 'mobile';
+    const DEVICE_TYPE_TABLE   = 'tablet';
+    const DEVICE_TYPE_DESKTOP = 'desktop';
 
     public static function get($atributeName) 
     {
@@ -94,6 +94,11 @@ class ServerHelper
         return $ip;
     }
 
+    public static function getClientAgent(){
+        $agent = ArrayHelper::get($_SERVER,'HTTP_USER_AGENT');
+        return $agent; 
+    }     
+
     /**
      * Return string with Device Type of client
      * https://code-boxx.com/detect-mobile-desktop-in-php/
@@ -102,11 +107,16 @@ class ServerHelper
      */
     public static function getClientDeviceType()
     {
-        if (is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), self::DEVICE_TYPE_MOBILE))) {
-            return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "tablet")) ? self::DEVICE_TYPE_TABLE : self::DEVICE_TYPE_DESKTOP ;
-        } else {
-            return 0;
+        $agent = strtolower(self::getClientAgent());
+        $type = null;
+        if (is_numeric(strpos($agent, self::DEVICE_TYPE_MOBILE))) {
+            $type = self::DEVICE_TYPE_MOBILE;
+        } else if( is_numeric(strpos($agent, self::DEVICE_TYPE_TABLE)) ) {
+            $type = self::DEVICE_TYPE_TABLE;
+        }else{
+            $type = self::DEVICE_TYPE_DESKTOP;
         }
+        return $type;
     }
 
 }
