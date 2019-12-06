@@ -41,6 +41,11 @@
 
 class ServerHelper
 {
+
+    const DEVICE_TYPE_MOBILE  = 'MOBILE';
+    const DEVICE_TYPE_TABLE   = 'TABLE';
+    const DEVICE_TYPE_DESKTOP = 'DESKTOP';
+
     public static function get($atributeName) 
     {
         if(!isset($_SERVER[$atributeName])) {
@@ -67,13 +72,14 @@ class ServerHelper
             $url = explode('?', $pageURL);
             return $url[0];
         }
-    } 
+    }
     /**
+     * Return string with IP client
      * https://pt.stackoverflow.com/questions/179389/como-pegar-ip-de-um-usuario-usando-php/179455
      *
      * @return string
      */
-    public static function getIpClient()
+    public static function getClientIP()
     {
         $client = ArrayHelper::get($_SERVER,'HTTP_CLIENT_IP');
         $forward = ArrayHelper::get($_SERVER,'HTTP_X_FORWARDED_FOR');
@@ -87,5 +93,21 @@ class ServerHelper
         }
         return $ip;
     }
+
+    /**
+     * Return string with Device Type of client
+     * https://code-boxx.com/detect-mobile-desktop-in-php/
+     *
+     * @return string
+     */
+    public static function getClientDeviceType()
+    {
+        if (is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), self::DEVICE_TYPE_MOBILE))) {
+            return is_numeric(strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "tablet")) ? self::DEVICE_TYPE_TABLE : self::DEVICE_TYPE_DESKTOP ;
+        } else {
+            return 0;
+        }
+    }
+
 }
 ?>
