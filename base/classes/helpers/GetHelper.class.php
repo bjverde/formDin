@@ -41,7 +41,7 @@
 
 class GetHelper
 {
-    static function get($atributeName) 
+    public static function get($atributeName) 
     {
         if(!isset($_GET[$atributeName])) {
             $_GET[$atributeName]="";
@@ -49,7 +49,7 @@ class GetHelper
         return is_null($_GET[$atributeName])?"":trim($_GET[$atributeName]);
     }
     
-    static function getDefaultValeu($atributeName,$DefaultValue) 
+    public static function getDefaultValeu($atributeName,$DefaultValue) 
     {
         $value = null;
         if(isset($_GET[$atributeName]) && ($_GET[$atributeName]<>'') ) {
@@ -60,7 +60,7 @@ class GetHelper
         return $value;
     }
     
-    static function has($atributeName) 
+    public static function has($atributeName) 
     {
         $value = null;
         if(isset($_GET[$atributeName])) {

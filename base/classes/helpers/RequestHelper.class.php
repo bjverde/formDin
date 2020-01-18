@@ -41,13 +41,13 @@
 
 class RequestHelper
 {
-    static function get($atributeName) 
+    public static function get($atributeName) 
     {
         $result = ArrayHelper::get($_REQUEST, $atributeName);
         return $result;
     }
     
-    static function getDefaultValeu($atributeName,$DefaultValue) 
+    public static function getDefaultValeu($atributeName,$DefaultValue) 
     {
         $result = ArrayHelper::getDefaultValeu($_REQUEST, $atributeName, $DefaultValue);
         return $result;
