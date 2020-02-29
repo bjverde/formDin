@@ -67,7 +67,7 @@ class FormDinHelperTest extends TestCase
 	}	
 	public function testVersionMinimum_equal() {
 	    $expected = true;
-	    $result = FormDinHelper::versionMinimum('4.6.3-alpha');
+	    $result = FormDinHelper::versionMinimum('4.8.2');
 	    $this->assertEquals( $expected , $result);
 	}
 	//-----------------------------------------------------------------------------------
