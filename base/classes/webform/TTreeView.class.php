@@ -177,8 +177,7 @@ class TTreeView extends TControl
  		$this->SetChildFieldName($strChildFieldName);
  		$this->setDescFieldName($strDescFieldName);
  		$this->setUserDataFieldNames($mixUserDataFieldNames);
- 		$this->setData();
-
+ 	    $this->setData();
 	}
 
 	/**
@@ -199,7 +198,8 @@ class TTreeView extends TControl
 
 	public function getXmlFile()
 	{
-		if( !$this->itens ) {
+	    $itens = $this->itens;
+	    if( !$itens ) {
 	   		$xmlFile = is_null($this->xmlFile) ? $this->getBase().'callbacks/treeView.php' : $this->xmlFile;
    			if( file_exists($xmlFile) ) {
    			    $parentFieldName = $this->getParentFieldName();
@@ -208,36 +208,22 @@ class TTreeView extends TControl
    			    $tableName = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
    			    $url = 'index.php?modulo='.$xmlFile
-   			    .'&ajax=1&fwTreeview=1&parentField='.$parentFieldName
-   			    .'&childField='.$childFieldName
-   			    .'&descField='.$descFieldName
-   			    .'&tableName='.$tableName
-   			    .'&userDataFields='.$userDataFieldNames;
+           			    .'&ajax=1&fwTreeview=1&parentField='.$parentFieldName
+           			    .'&childField='.$childFieldName
+           			    .'&descField='.$descFieldName
+           			    .'&tableName='.$tableName
+           			    .'&userDataFields='.$userDataFieldNames;
    			    return $url;
-				//return $this->xmlFile;
 			} else {
 				$this->addItem(0,1,'Arquivo '.$xmlFile.' não encontrado!', true, '' );
 			}
 		}
 	}
 
-	protected  function showData()
-	{
-	    $mixData = $this->getMixData();
-	    $strParentFieldName = $this->getParentFieldName();
-	    $strChildFieldName = $this->getChildFieldName();
-	    $strDescFieldName = $this->getDescFieldName();
-	    $mixUserDataFieldNames = $this->getUserDataFieldNames();
-	    $this->setData( $mixData
-	                  , $strParentFieldName
-	                  , $strChildFieldName
-	                  , $strDescFieldName
-	                  , $mixUserDataFieldNames );
-	}
 	
 	public function show( $print = true )
 	{
-	    //$this->showData();
+	    //$this->setData();
 		$this->setToolBar();
 		return parent::show( $print );
 	}
@@ -653,23 +639,19 @@ class TTreeView extends TControl
 		$js .= $id . '.setImagePath("' . $this->getImagesPath() . '");' . "\n";
 		$js .= $id . '.enableHighlighting(' . $this->getEnableHighlighting() . ');' . "\n";
 
-		if ( $this->getXmlFile() )
-		{
+		$xmlFile = $this->getXmlFile();
+		if ( $xmlFile ){
 			$js .= $id . '.attachEvent("onXLS", function(tree,id){fwTreeAddLoading(tree,id);});' . "\n";
 			$js .= $id . '.attachEvent("onXLE", function(tree,id){fwTreeRemoveLoading(tree,id);});' . "\n";
 		}
 
-		if ( $this->getOnClick() )
-		{
+		if ( $this->getOnClick() ){
 			$js .= $id . '.setOnClickHandler( ' . $this->getOnClick() . ' );' . "\n";
-		}
-		else if( $this->getOnDblClick() )
-		{
+		} else if( $this->getOnDblClick() ) {
 			$js .= $id . '.setOnDblClickHandler( ' . $this->getOnDblClick() . ' );' . "\n";
 		}
 
-		if ( $this->getEnableCheck() )
-		{
+		if ( $this->getEnableCheck() ){
 			$js .= $id . '.enableCheckBoxes(true);' . "\n";
 		}
 
@@ -698,9 +680,8 @@ class TTreeView extends TControl
 			$js .= $id . '.enableTreeLines(true);' . "\n";
 		}
 
-		if ( $this->getXmlFile() )
-		{
-			$url = $this->getXmlFile();
+		if ( $xmlFile ){
+		    $url = $xmlFile;
 			$url = str_replace( 'index.php', '', $url );
 			if ( !strpos( $url, 'ajax=1' ) )
 			{
@@ -711,13 +692,10 @@ class TTreeView extends TControl
 				$url .= '&initialParentKey=' . $this->initialParentKey;
 			}
 
-			if ( strpos( $this->getXmlFile(), 'index.php' ) == 0 )
-			{
+			if ( strpos( $xmlFile, 'index.php' ) == 0 ) {
 				$js .= $id . '.setXMLAutoLoading(fwUrlAddParams(app_url+app_index_file+"' . $url . '"' . ( $this->getFormSearchFields( true ) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
  				$js .= $id . '.loadXML(fwUrlAddParams(app_url+app_index_file+"' . $url . '"' . ( $this->getFormSearchFields( true ) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
- 		}
-			else
-			{
+ 		     }else{
 				$js .= $id . '.setXMLAutoLoading(fwUrlAddParams("' . $url . '"' . ( ( $this->getFormSearchFields( true )) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 				$js .= $id . '.loadXML(fwUrlAddParams("' . $url . '"' . ( $this->getFormSearchFields( true ) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 			}
