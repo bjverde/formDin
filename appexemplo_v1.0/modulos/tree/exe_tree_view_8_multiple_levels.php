@@ -326,27 +326,26 @@ $tree = $frm->addTreeField('tree'
                            ,null
                            ,$dados
                            ,'IDMENU_PAI'
-                           ,$primaryKey
+                           ,$primaryKey    // 05: id do campo chave dos filhos
                            ,'NOM_MENU'
                            ,null
                            ,$userData
                            ,null
+                           ,null           //10: largura
+                           ,null
+                           ,null
+                           ,null
+                           ,null           //14: Habilita campo Checks
+                           ,null           //15: 
                            ,null
                            ,null
                            ,null
                            ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,null
-                           ,false
+                           ,null //19:
+                           ,null //20:
+                           ,null           //21:
+                           ,null           //22:
+                           ,true           //23: Se o TreeView deve iniciar expandido ou não
                         );
 //$tree->setStartExpanded(false);
 //$tree->setStartExpanded(true);
