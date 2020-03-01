@@ -77,8 +77,7 @@ class TTreeView extends TControl
 	/**
 	* Implementa Tree View
 	*
-	* O parametro $mixData pode ser um array de dados ou o nome de uma tabela. Se for o nome de uma tabela,
-	* o carregamento dos filhos será feito dinamicamente ao clicar no item pai
+	* O parametro $mixData pode ser um array de dados
 	*
 	* A função definida no parametro jsOnClick recebe o id do item clicado e deve ser utilizado para
 	* recuperar attributos do nó.
@@ -168,23 +167,18 @@ class TTreeView extends TControl
 		//$this->enableRadio($boolEnableRadioButtons);
 		$this->addFormSearchFields( $mixFormSearchFields );
 		$this->enableLines( $boolEnableTreeLines );
-		//$this->setMixData($mixData);
-		$this->setData( $mixData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $mixUserDataFieldNames );
+		$this->setMixData($mixData);
+		if ( is_string( $mixData ) )
+		{
+		    $this->setTableName($mixData);
+		}
+		//$this->setData( $mixData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $mixUserDataFieldNames );
         $this->setParentFieldName($strParentFieldName);
  		$this->SetChildFieldName($strChildFieldName);
  		$this->setDescFieldName($strDescFieldName);
  		$this->setUserDataFieldNames($mixUserDataFieldNames);
-		if ( is_string( $mixData ) )
-		{
-			$this->setTableName($mixData);
-			/*if ( is_array( $mixUserDataFieldNames ) )
-			{
-				$mixUserDataFieldNames = implode(',',$mixUserDataFieldNames);
-			}
-			*/
-			//$this->setXmlFile( 'index.php?modulo='.$this->getBase().'callbacks/treeView.php&ajax=1&parentField=' . $strParentFieldName . '&childField=' . $strChildFieldName . '&descField=' . $strDescFieldName . '&tableName=' . $mixData . '&userDataFields=' . $mixUserDataFieldNames );
-			//$this->setXmlFile($this->getBase().'callbacks/treeView.php');
-		}
+ 		$this->setData();
+
 	}
 
 	/**
@@ -370,8 +364,14 @@ class TTreeView extends TControl
 	}
 
 	//---------------------------------------------------------------------------
-	public function setData( $arrData, $strParentField, $strChildField, $strDescField, $mixUserDataFields = null )
+	public function setData()
 	{
+	    $arrData = $this->getMixData();
+	    $strParentField = $this->getParentFieldName();
+	    $strChildField = $this->getChildFieldName();
+	    $strDescField = $this->getDescFieldName();
+	    $mixUserDataFields = $this->getUserDataFieldNames();
+	    
 		if ( !is_array( $arrData ) || is_null( $strParentField ) || is_null( $strChildField ) || is_null( $strDescField ) )
 		{
 			return;
