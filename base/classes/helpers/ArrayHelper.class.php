@@ -181,6 +181,7 @@ class ArrayHelper
     }    
     //--------------------------------------------------------------------------------
     /**
+     * @deprecated chante to ValidateHelper::isArray
      * Validade is array and not empty
      * @param integer $id
      * @param string $method
@@ -190,10 +191,7 @@ class ArrayHelper
      */
     public static function validateIsArray($array,$method,$line)
     {
-        FormDinHelper::validateMethodLine($method, $line, __METHOD__);
-        if( empty($array) || !is_array($array) ){
-            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_ARRAY.'See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::isArray($array, $method, $line);
     }
     //--------------------------------------------------------------------------------
     /***

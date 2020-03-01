@@ -111,17 +111,20 @@ class FormDinHelper
         return $arrayFormDin;
     }
     
+    /**
+     * @deprecated chante to ValidateHelper::methodLine
+     * @param string $method
+     * @param string $line
+     * @param string $nameMethodValidate
+     * @throws InvalidArgumentException
+     */
     public static function validateMethodLine($method,$line,$nameMethodValidate)
     {
-        if( empty($method) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable method is null. '.$nameMethodValidate);
-        }
-        if( empty($line) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable line is null. '.$nameMethodValidate);
-        }        
+        ValidateHelper::methodLine($method, $line, $nameMethodValidate);
     }
     //--------------------------------------------------------------------------------
     /**
+     *  @deprecated chante to ValidateHelper::objTypeTPDOConnectionObj
      * Validate Object Type is Instance Of TPDOConnectionObj
      *
      * @param object $tpdo instanceof TPDOConnectionObj
@@ -132,14 +135,11 @@ class FormDinHelper
      */
     public static function validateObjTypeTPDOConnectionObj($tpdo,$method,$line)
     {
-        self::validateMethodLine($method, $line, __METHOD__);
-        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
-        if( !is_null($tpdo) && $typeObjWrong ){
-            throw new InvalidArgumentException('Informed class is not an instance of TPDOConnectionObj. See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::objTypeTPDOConnectionObj($tpdo, $method, $line);
     }
     //--------------------------------------------------------------------------------
     /**
+     * @deprecated chante to ValidateHelper::isNumeric
      * Validade ID is numeric and not empty
      * @param integer $id
      * @param string $method
@@ -149,10 +149,7 @@ class FormDinHelper
      */
     public static function validateIdIsNumeric($id,$method,$line)
     {
-        self::validateMethodLine($method, $line, __METHOD__);
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_INT.'See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::isNumeric($id, $method, $line);
     }
     /***
      * 
