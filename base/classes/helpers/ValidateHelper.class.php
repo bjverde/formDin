@@ -60,6 +60,14 @@ class ValidateHelper
         }
     }
     
+    public static function isSet($variable,$method,$line)
+    {
+        self::methodLine($method, $line, __METHOD__);
+        if( is_null($variable) ){
+            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_SET.'See the method: '.$method.' in the line: '.$line);
+        }
+    }
+    
     /**
      * Validade is array and not empty
      * @param array $array
