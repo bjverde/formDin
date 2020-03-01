@@ -7324,8 +7324,8 @@ class TForm Extends TBox
     * @param mixed $boolEnableTreeLines -16:
     * @param mixed $strLabel            -17:
     * @param mixed $boolLabelAbove      -18:
-    * @param mixed $boolNewLine         -19:
-    * @param mixed $boolNoWrapLabel     -20:
+    * @param mixed $boolNewLine         -19: boolNewLine
+    * @param mixed $boolNoWrapLabel     -20: boolNoWrapLabel
     * @param mixed $mixFormSearchFields -21:
     * @param mixed $boolShowToolBar     -22:
     * @param mixed $startExpanded       -23: Se o TreeView deve iniciar expandido ou não
@@ -7361,13 +7361,20 @@ class TForm Extends TBox
         $this->addJsFile( 'dhtmlx/treeview/dhtmlxtree.js' );
         $this->addCssFile( 'dhtmlx/treeview/dhtmlxtree.css' );
 
-        $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName
+        $tree = new TTreeView( $strName
+                             , $strRootLabel
+                             , $arrData
+                             , $strParentFieldName
+                             , $strChildFieldName
                              , $strDescFieldName
                              , $strInitialParentKey
                              , $mixUserDataFields
                              , $strHeight
                              , $strWidth
-                             , $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag
+                             , $jsOnClick
+                             , $jsOnDblClick
+                             , $jsOnCheck
+                             , $jsOnDrag
                              , $boolEnableCheckBoxes
                              , $boolEnableRadioButtons
                              , $boolEnableTreeLines
