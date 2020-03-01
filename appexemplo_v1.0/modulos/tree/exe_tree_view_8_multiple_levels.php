@@ -322,8 +322,34 @@ $dados = selectMenu();
 
 $frm->addGroupField('gpTree','Menus em Treeview')->setcloseble(true);
 $userData = array('IDMENU_PAI','NOM_MENU','URL','TOOLTIP','IMG_MENU','IMGDISABLED','DISSABLED','HOTKEY','BOOLSEPARATOR','JSONPARAMS','SIT_ATIVO','DAT_INCLUSAO','DAT_UPDATE');
-$tree = $frm->addTreeField('tree',null,$dados,'IDMENU_PAI',$primaryKey,'NOM_MENU',null, $userData);
-$tree->setStartExpanded(true);
+$tree = $frm->addTreeField('tree'
+                           ,null
+                           ,$dados
+                           ,'IDMENU_PAI'
+                           ,$primaryKey
+                           ,'NOM_MENU'
+                           ,null
+                           ,$userData
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,null
+                           ,false
+                        );
+//$tree->setStartExpanded(false);
+//$tree->setStartExpanded(true);
 $tree->setOnClick('treeClick'); // fefinir o evento que ser? chamado ao clicar no item da treeview
 $frm->closeGroup();
 
