@@ -96,7 +96,7 @@ class ValidateHelper
      */
     public static function objTypeTPDOConnectionObj($tpdo,$method,$line)
     {
-        self::validateMethodLine($method, $line, __METHOD__);
+        self::methodLine($method, $line, __METHOD__);
         $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
         if( !is_null($tpdo) && $typeObjWrong ){
             throw new InvalidArgumentException('Informed class is not an instance of TPDOConnectionObj. See the method: '.$method.' in the line: '.$line);
