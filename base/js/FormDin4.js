@@ -803,16 +803,16 @@ function fwValidarEmail(campo,alertar)
 	return r;
 }
 //-------------------------------------------------------------------------------------
-
-function fwFormatarTelefone(e) {
+function fwFormatarTelefone(e)
+{
 	var s = "";
-	var res = "";
-	s = fwFiltraCampo(e.value);
-	if (s.length > 12 )
+    var res = "";
+    s = fwFiltraCampo(e.value);
+	if ( s.length > 12 )
 	{
 		s = s.substring(0,11);
-	}
-	if ( s.length > 4 && s.substring(0,1) =='0' && s.substring(0,4) !='0800')
+    }
+	if ( s.length > 4 && s.substring(0,1) =='0' && s.substring(0,4) !='0800' )
 	{
 		while ( s.substring(0,1) == "0" )
 		{
@@ -822,34 +822,32 @@ function fwFormatarTelefone(e) {
 	}
 	if ( s.substring(0,4) == '0800' )
 	{
-		res = s.substring(0,4) + " " + s.substring(4,7) + " " +s.substring(7);
+		res = s.substring(0,4) + " " + s.substring(4,7) + " " + s.substring(7,11);
 	}
 	else
 	{
-		if ( s.length == 14 || s.length == 12 )
-			s = s.substring(s.length-10,s.length);
-		if ( s.length == 13 )
-			s = s.substring(s.length-9,s.length);
-
 		res = s.substring(s.length-4,s.length);
-		if ( s.length > 4  && s.length < 9 )
-			res = s.substring(0,s.length-4)+"-"+res;
-
-		if ( s.length > 8  )
+        if ( s.length > 4  && s.length < 9 )
+        {
+			res = s.substring(0,s.length-4) + "-" + res;
+        }
+		if ( s.length > 8 )
 		{
-			if(s.length == 11 )
+			if ( s.length == 11 )
 			{
-             	res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
+                 res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
 			}
-			else if(s.length == 9 )
+			else if ( s.length == 9 )
 			{
-                res = s.substring(0,5)+'-'+res;
+                res = s.substring(0,5) + '-' + res;
 			}
-			else
-             res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
+            else
+            {
+                res = "(" + s.substring(0,2) + ") " + s.substring(2,s.length-4) + "-" + res;
+            }
 		}
 
-	}
+    }
 	e.value = res;
 	return res;
 }

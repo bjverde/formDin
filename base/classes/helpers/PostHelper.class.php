@@ -41,25 +41,25 @@
 
 class PostHelper
 {
-    static function getArray($atributeName) 
+    public static function getArray($atributeName) 
     {
         $result = ArrayHelper::getArray($_POST, $atributeName);
         return $result;
     }
 
-    static function get($atributeName) 
+    public static function get($atributeName) 
     {        
         $result = ArrayHelper::get($_POST, $atributeName);
         return $result;
     }
     
-    static function getDefaultValeu($atributeName,$DefaultValue) 
+    public static function getDefaultValeu($atributeName,$DefaultValue) 
     {        
         $result = ArrayHelper::getDefaultValeu($_POST, $atributeName, $DefaultValue);
         return $result;
     }
 
-    static function getInt($atributeName) 
+    public static function getInt($atributeName) 
     {
         if(!isset($_POST[$atributeName])) {
             $_POST[$atributeName]="";
@@ -67,7 +67,7 @@ class PostHelper
         return is_null($_POST[$atributeName])?"":trim((int)$_POST[$atributeName]);
     }
     
-    static function getBool($atributeName) 
+    public static function getBool($atributeName) 
     {
         if(!isset($_POST[$atributeName]) || is_null($_POST[$atributeName])) {
             $_POST[$atributeName] = false;

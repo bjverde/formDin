@@ -46,9 +46,9 @@ class TFone extends TEdit
      * @param string  $value
      * @param boolean $required
      */
-    public function __construct($strName,$strValue=null,$boolRequired=null)
+    public function __construct( $strName,$strValue=null,$boolRequired=null )
     {
-        parent::__construct($strName, $strValue, 18, $boolRequired);
+        parent::__construct($strName, $strValue, 15, $boolRequired);
         $this->setFieldType('fone');
         $this->addEvent('onkeyup', 'fwFormatarTelefone(this)');
         // aplicar formatação ao exibir.
@@ -59,47 +59,48 @@ class TFone extends TEdit
     }
     public function getFormated()
     {
-
-        if($this->getValue() ) {
+        if ( $this->getValue() )
+        {
             $value = preg_replace("/[^0-9]/", "", $this->getValue());
             // nao pode comecar com zero
-            while ( substr($value, 0, 1)==="0" )
+            while ( substr($value, 0, 1) === "0" )
             {
-                $value=substr($value, 1);
+                $value = substr($value, 1);
             }
-            if (! $value) // nenhum valor informado
+            if ( ! $value ) // nenhum valor informado
             {
                 return null;
             }
-            if (strlen($value) < 5 ) // não precisa formatar
+            if ( strlen($value) < 5 ) // não precisa formatar
             {
                 return $value;
             }
-            if (substr($value, 0, 4) == '0800' ) {
-                print 'luis';
-                $value = substr($value, 0, 4)." " . substr($value, 4, 3) . " " . substr($value, 7);
+            if ( substr($value, 0, 4) == '0800' )
+            {
+                $value = substr($value, 0, 4)." ". substr($value, 4, 3)." ".substr($value, 7);
             }
-            else if (strlen($value) < 8 ) {
+            else if ( strlen($value) < 8 )
+            {
                 $value = substr($value, 0, 3).'-'.substr($value, 3);
             }
-            else if (strlen($value) == 8 ) {
-                $value=substr($value, 0, 4).'-'.substr($value, 4);
+            else if ( strlen($value) == 8 )
+            {
+                $value = substr($value, 0, 4).'-'.substr($value, 4);
             }
-            elseif (strlen($value)==9) {
-                $value='('.substr($value, 0, 2).') '.substr($value, 2, 3).'-'.substr($value, 5);
+            elseif ( strlen($value) == 9 )
+            {
+                $value = '('.substr($value, 0, 2).') '.substr($value, 2, 3).'-'.substr($value, 5);
             }
-            elseif (strlen($value)==10) {
-                $value='('.substr($value, 1, 2).') '.substr($value, 3, 3).'-'.substr($value, 6);
+            elseif ( strlen($value) == 10)
+            {
+                $value = '('.substr($value, 1, 2).') '.substr($value, 3, 3).'-'.substr($value, 6);
             }
-            elseif (strlen($value) > 10 ) {
-                $value='('.substr($value, 1, 2).') '.substr($value, 3, 4).'-'.substr($value, 7);
+            elseif ( strlen($value) > 10 )
+            {
+                $value = '('.substr($value, 1, 2).') '.substr($value, 3, 4).'-'.substr($value, 7);
             }
             return $value;
         }
     }
 }
-//$val = new TFone('des_telefone','6234683581',50);
-//$val->show();
-//print '<br>'.$val->getValue();
-//print '<br>'.$val->getFormated();
 ?>
