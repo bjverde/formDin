@@ -79,7 +79,7 @@ class TMask extends TEdit
 		$this->mask=(string)$strNewMask;
 		$len = strlen($this->mask);
 		parent::setMaxLenght($len);
-		parent::setSize($len);
+		parent::setSize($len+2);
 	}
 	//-------------------------------------------------------------------------------------
 	public function getMask()
