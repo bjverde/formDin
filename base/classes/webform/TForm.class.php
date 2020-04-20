@@ -7210,9 +7210,10 @@ class TForm Extends TBox
     * * - Represents an alphanumeric character (A-Z,a-z,0-9)
     *
     * @link http://digitalbush.com/projects/masked-input-plugin/
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
+    *
+    * @param string $strName         - 1: id do campo
+    * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired   - 3: Obrigatorio
     * @param string $strMask
     * @param boolean $boolNewLine
     * @param string $strValue
