@@ -14,6 +14,8 @@ $frm = new TForm('Quest');
 $frm->setFlat(true);
 $frm->setAutoSize(true);
 
+$frm->addLinkField('Link1','','Layout 2',null,'index2.php','new');
+$frm->addLinkField('Link2','','Resultado',null,'result.php','new');
 
 $frm->addGroupField('gp1', '');
 
