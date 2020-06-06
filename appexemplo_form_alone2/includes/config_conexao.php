@@ -10,10 +10,14 @@
  * System quest created in: 2020-06-05 23:04:07
  */
 
+if (! defined ( 'DS' )) {
+    define('DS'   , DIRECTORY_SEPARATOR);
+}
+
 define('BANCO'   , 'SQLITE');
 define('HOST'    , '');
 define('PORT'    , '');
-define('DATABASE', 'banco_local\banco.sqlite3');
+define('DATABASE', 'banco_local'.DS.'banco.sqlite3');
 define('SCHEMA'  , '');
 define('USUARIO' , '');
 define('SENHA'   , '');
