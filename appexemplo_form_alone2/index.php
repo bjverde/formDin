@@ -10,7 +10,7 @@ require_once 'dao/autoload_audit_dao.php';
 
 var_dump($_REQUEST);
 
-$frm = new TForm('AUDIT - Alcool Use Disorders Identification Test');
+$frm = new TForm('Quest');
 $frm->setFlat(true);
 $frm->setAutoSize(true);
 
