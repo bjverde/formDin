@@ -6423,32 +6423,32 @@ class TForm Extends TBox
     }
            
     /**
-    * Adiciona campo tipo grupo com legenda na parte superior
-    * Se o parametro $intHeight for null será auto height
-    * se o parametro $intWidth for null utilizado a largura do form
-    *
-    * <code>
-    * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
-    *   $frm->addGroupField('gp01','Grupo Teste');
-    * 	// com quebra nos rotulos quando excederem a largura da coluna definida
-    *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
-    * </code>
-    *
-    * @param string $strName          - 1: nome Id
-    * @param string $strLegend        - 2: label que irá aparecer para o usuario 
-    * @param integer $intHeight       - 3: altura do grupo. NULL = auto height
-    * @param integer $intWidth        - 4: largura do grupo. NULL = largura do form
-    * @param boolean $boolNewLine     - 5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-    * @param boolean $boolNoWrapLabel
-    * @param boolean $boolCloseble    - 6: pode fechar ou não
-    * @param string  $strAccordionId  - 7:
-    * @param boolean $boolOpened      - 8: inicia aberto
-    * @param string $imgOpened        - 9:
-    * @param string $imgClosed        - 10: 
-    * @param boolean $boolOverflowX   - 11:
-    * @param boolean $boolOverflowY   - 12: 
-    * @return TGroupBox
-    */
+     * Adiciona campo tipo grupo com legenda na parte superior
+     * Se o parametro $intHeight for null será auto height
+     * se o parametro $intWidth for null utilizado a largura do form
+     *
+     * <code>
+     * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
+     *   $frm->addGroupField('gp01','Grupo Teste');
+     * 	// com quebra nos rotulos quando excederem a largura da coluna definida
+     *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
+     * </code>
+     *
+     * @param string $strName          - 01: Nome Id
+     * @param string $strLegend        - 02: Label que irá aparecer para o usuario 
+     * @param integer $intHeight       - 03: Altura do grupo. NULL = auto height
+     * @param integer $intWidth        - 04: Largura do grupo. NULL = largura do form
+     * @param boolean $boolNewLine     - 05: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+     * @param boolean $boolNoWrapLabel - 06:
+     * @param boolean $boolCloseble    - 07: pode fechar ou não
+     * @param string  $strAccordionId  - 08:
+     * @param boolean $boolOpened      - 09: inicia aberto
+     * @param string $imgOpened        - 10:
+     * @param string $imgClosed        - 11:
+     * @param boolean $boolOverflowX   - 12:
+     * @param boolean $boolOverflowY   - 13:
+     * @return TGroupBox
+     */
 	public function addGroupField( $strName
            		, $strLegend=null
 				, $strHeight=null
