@@ -168,6 +168,7 @@ $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
         $menu->add('80.3', '80', 'Gride 04 - fwGetGrid()', 'grid/exe_gride04.php');
         $menu->add('80.4', '80', 'Gride 05 - Paginação', 'grid/exe_gride05_paginacao.php');
         $menu->add('80.5', '80', 'Gride 13 com imagens', 'grid/exe_gride13.php');
+        $menu->add('80.6', '80', 'Gride 15 - simples completo', 'grid/exe_grid15_simples_completo.php');
     $menu->add('81', '8', 'Grides com campos internos', null, null, '../../base/imagens/table16.gif');
         $menu->add('81.1', '81', 'Gride Campos 01 - CheckColumn', 'grid/exe_gride_field01_check.php');
         $menu->add('81.2', '81', 'Gride Campos 02 - RadioButun', 'grid/exe_gride_field02.php');
