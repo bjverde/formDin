@@ -153,24 +153,40 @@ class DateTimeHelper
     {
         $retorno = null;
         $dateSql = trim($dateSql);
-        if(!$permiteHora){
-            $dateSql = explode(' ', $dateSql);
-            $dateSql = $dateSql[0];
+        if($permiteHora){
             
-            if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
-                $retorno = $dateSql;
+            if( preg_match('/\d{4}-\d{2}-\d{2}/', $dateSql) ){
+                if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
+                    $retorno = $dateSql;
+                }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}$/', $dateSql) ){
+                    $retorno = $dateSql;
+                }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}:\d{2}$/', $dateSql) ){
+                    $retorno = $dateSql;
+                }
             }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
-                if(isset($dateSql) && ($dateSql<>'') ) {
+                if( preg_match('/\d{2}\/\d{2}\/\d{4}$/', $dateSql) ){
                     $ano= substr($dateSql, 6);
                     $mes= substr($dateSql, 3, -5);
                     $dia= substr($dateSql, 0, -8);
                     $retorno = $ano."-".$mes."-".$dia;
+                }else{
+                    $dateSql = explode(' ', $dateSql);
+                    $dateSqlDia  = $dateSql[0];
+                    $dateSqlHora = $dateSql[1];
+                    
+                    $ano= substr($dateSqlDia, 6);
+                    $mes= substr($dateSqlDia, 3, -5);
+                    $dia= substr($dateSqlDia, 0, -8);
+                    $dateSqlDia = $ano."-".$mes."-".$dia;
+
+                    $retorno = $dateSqlDia.' '.$dateSqlHora;                    
                 }
-            }            
+            }
         }else{
+            $dateSql = explode(' ', $dateSql);
+            $dateSql = $dateSql[0];
+            
             if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
-                $retorno = $dateSql;
-            }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}/', $dateSql) ){
                 $retorno = $dateSql;
             }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
                 if(isset($dateSql) && ($dateSql<>'') ) {
