@@ -51,28 +51,28 @@ use PHPUnit\Framework\TestCase;
 class DateTimeHelperTest extends TestCase
 {
 
-    public function testDate_null() {
+    public function testDate2MySql_null() {
         $esperado = null;
         $estrada = null;
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testDate_white() {
+    public function testDate2MySql_white() {
         $esperado = null;
         $estrada = '';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }    
     
-    public function testDate_01() {
+    public function testDate2MySql_01() {
         $esperado = '2019-10-02';
         $estrada = '02/10/2019';
         $retorno = DateTimeHelper::date2Mysql($estrada);
         $this->assertEquals($esperado, $retorno);
     }
 
-    public function testDate_02() {
+    public function testDate2MySql_02() {
         $esperado = '1900-01-02';
         $estrada = '02/01/1900';
         $retorno = DateTimeHelper::date2Mysql($estrada);

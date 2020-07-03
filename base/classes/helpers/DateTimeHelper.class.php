@@ -141,14 +141,43 @@ class DateTimeHelper
      * @param  string $dateSql
      * @return string
      */
-    public static function date2Mysql($dateSql)
+    public static function date2Mysql($dateSql,$permiteHora=false)
     {
         $retorno = null;
-        if(isset($dateSql) && ($dateSql<>'') ) {
-            $ano= substr($dateSql, 6);
-            $mes= substr($dateSql, 3, -5);
-            $dia= substr($dateSql, 0, -8);
-            $retorno = $ano."-".$mes."-".$dia;
+        if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
+            $retorno = $dateSql;
+        }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}/', $dateSql) ){
+            $retorno = $dateSql;
+        }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
+            if(isset($dateSql) && ($dateSql<>'') ) {
+                $ano= substr($dateSql, 6);
+                $mes= substr($dateSql, 3, -5);
+                $dia= substr($dateSql, 0, -8);
+                $retorno = $ano."-".$mes."-".$dia;
+            }
+        }
+        return $retorno;
+    }
+    
+    /**
+     * Converter data no formato yyyy-mm-dd para dd/mm/yyyy
+     * Verifica se a data está no formato 'dd/mm/yyyy'
+     *
+     * @param  string $dateSql
+     * @param boolean $permiteHora
+     * @return string
+     */
+    public static function DateIso2DateBr($dateSql)
+    {
+        $retorno = null;
+        if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
+            $dateTime = new DateTime($dateSql);
+            $retorno = $dateTime->format('d/m/Y');
+        }elseif( preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}/', $dateSql) ){
+            $dateTime = new DateTime($dateSql);
+            $retorno = $dateTime->format('d/m/Y');
+        }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
+            $retorno = $dateSql;
         }
         return $retorno;
     }
