@@ -136,24 +136,49 @@ class DateTimeHelper
     }
     
     /**
-     * Converter data no formato dd/mm/yyyy para yyyy-mm-dd
+     * Converter data no formato dd/mm/yyyy para yyyy-mm-dd.
+     * Converter data no formato dd/mm/yyyy hh:mm para yyyy-mm-dd hh:mm:00
+     * Converter data no formato dd/mm/yyyy hh:mm:ss para yyyy-mm-dd hh:mm:ss
+     * 
+     * Verifica se a data está no formato 'yyyy-mm-dd' ou 'yyyy-mm-dd hh:mm'
+     * ou 'yyyy-mm-dd hh:mm:ss' ignora e retorna igual entrada.
+     * 
+     * Qualquer outro formato ou entrada devolve null
      *
-     * @param  string $dateSql
+     * @param  string $dateSql - String da data
+     * @param boolean $permiteHora - saída com ou sem hora. Só coloca hora se entrada tiver hora
      * @return string
      */
     public static function date2Mysql($dateSql,$permiteHora=false)
     {
         $retorno = null;
-        if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
-            $retorno = $dateSql;
-        }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}/', $dateSql) ){
-            $retorno = $dateSql;
-        }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
-            if(isset($dateSql) && ($dateSql<>'') ) {
-                $ano= substr($dateSql, 6);
-                $mes= substr($dateSql, 3, -5);
-                $dia= substr($dateSql, 0, -8);
-                $retorno = $ano."-".$mes."-".$dia;
+        $dateSql = trim($dateSql);
+        if(!$permiteHora){
+            $dateSql = explode(' ', $dateSql);
+            $dateSql = $dateSql[0];
+            
+            if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
+                $retorno = $dateSql;
+            }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
+                if(isset($dateSql) && ($dateSql<>'') ) {
+                    $ano= substr($dateSql, 6);
+                    $mes= substr($dateSql, 3, -5);
+                    $dia= substr($dateSql, 0, -8);
+                    $retorno = $ano."-".$mes."-".$dia;
+                }
+            }            
+        }else{
+            if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
+                $retorno = $dateSql;
+            }elseif( $permiteHora && preg_match('/\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2}/', $dateSql) ){
+                $retorno = $dateSql;
+            }elseif( preg_match('/\d{2}\/\d{2}\/\d{4}/', $dateSql) ){
+                if(isset($dateSql) && ($dateSql<>'') ) {
+                    $ano= substr($dateSql, 6);
+                    $mes= substr($dateSql, 3, -5);
+                    $dia= substr($dateSql, 0, -8);
+                    $retorno = $ano."-".$mes."-".$dia;
+                }
             }
         }
         return $retorno;
