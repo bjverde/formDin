@@ -162,6 +162,34 @@ class DateTimeHelperTest extends TestCase
         $retorno = DateTimeHelper::date2Mysql($estrada,true);
         $this->assertEquals($esperado, $retorno);
     }
+    
+    public function testDate2MySql_dtBr01ComHora_HoraNaoPermitida() {
+        $esperado = '2019-10-02';
+        $estrada = '02/10/2019 15:42';
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_dtBr01ComHora_HoraPermitida() {
+        $esperado = '2019-10-02 15:42';
+        $estrada = '02/10/2019 15:42';
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_dtBr01ComSegundo_HoraNaoPermitida() {
+        $esperado = '2019-10-02';
+        $estrada = '02/10/2019 15:42:30';
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_dtBr01ComSegundo_HoraPermitida() {
+        $esperado = '2019-10-02 15:42:30';
+        $estrada = '02/10/2019 15:42:30';
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
+        $this->assertEquals($esperado, $retorno);
+    }
 
     public function testDate2MySql_dtBr02_HoraNaoPermitida() {
         $esperado = '1900-01-02';
