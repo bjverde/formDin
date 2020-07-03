@@ -121,48 +121,65 @@ class DateTimeHelperTest extends TestCase
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testDate2MySql_naoAlteraDataComHoraHoraNaoPermitida() {
+    public function testDate2MySql_naoAlteraDataComHora_HoraNaoPermitida() {
+        $esperado = '2019-10-02';
+        $estrada = '2019-10-02 13:45';
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_naoAlteraDataComHora_HoraPermitida() {
         $esperado = '2019-10-02 13:45';
         $estrada = '2019-10-02 13:45';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testDate2MySql_naoAlteraDataComSegundosHoraNaoPermitida() {
+    public function testDate2MySql_naoAlteraDataComSegundos_HoraNaoPermitida() {
+        $esperado = '2019-10-02';
+        $estrada = '2019-10-02 13:45:12';
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_naoAlteraDataComSegundos_HoraPermitida() {
         $esperado = '2019-10-02 13:45:12';
         $estrada = '2019-10-02 13:45:12';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-
-    public function testDate2MySql_naoAlteraDataComHora() {
-        $esperado = '2019-10-02 13:45';
-        $estrada = '2019-10-02 13:45';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
         $this->assertEquals($esperado, $retorno);
     }
     
-    public function testDate2MySql_naoAlteraDataComSegundos() {
-        $esperado = '2019-10-02 13:45:12';
-        $estrada = '2019-10-02 13:45:12';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-    
-    public function testDate2MySql_01() {
+    public function testDate2MySql_dtBr01_HoraNaoPermitida() {
         $esperado = '2019-10-02';
         $estrada = '02/10/2019';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
-        $this->assertEquals($esperado, $retorno);
-    }
-
-    public function testDate2MySql_02() {
-        $esperado = '1900-01-02';
-        $estrada = '02/01/1900';
-        $retorno = DateTimeHelper::date2Mysql($estrada);
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
         $this->assertEquals($esperado, $retorno);
     }
     
+    public function testDate2MySql_dtBr01_HoraPermitida() {
+        $esperado = '2019-10-02';
+        $estrada = '02/10/2019';
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDate2MySql_dtBr02_HoraNaoPermitida() {
+        $esperado = '1900-01-02';
+        $estrada = '02/01/1900';
+        $retorno = DateTimeHelper::date2Mysql($estrada,false);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    public function testDate2MySql_dtBr02_HoraPermitida() {
+        $esperado = '1900-01-02';
+        $estrada = '02/01/1900';
+        $retorno = DateTimeHelper::date2Mysql($estrada,true);
+        $this->assertEquals($esperado, $retorno);
+    }
+    
+    //------------------------------------------------------------
+    //------------------------------------------------------------
+    //------------------------------------------------------------
     public function testGetDateTimeLong() {
         $esperado = '29 DE ABRIL DE 2019';
         $entrada = '2019-04-29';
