@@ -244,19 +244,27 @@ class TPDF extends FPDF
      * @param string $intWidth       - 2: Size column
      * @param string $strAlign       - 3: Align column, Values L = Left ,C= Center,R= ,J=justified
      * @param string $strFieldName   - 4: Label column head
-     * @param string $hexFillColor
-     * @param string $strFontStyle
-     * @param string $intFontSize
+     * @param string $hexFillColor   - 5: Cor do fundo, hexadecimal
+     * @param string $strFontStyle   - 6: Style da font: I, B
+     * @param string $intFontSize    - 7: Tamanho da fonte
      * @param string $hexFontColor
      * @param string $strFontFamily
      * @return TPDFColumn
      */
-    public function addColumn( $strHeader = null, $intWidth = null, $strAlign = null, $strFieldName = null,
-        $hexFillColor = null, $strFontStyle = null, $intFontSize = null, $hexFontColor = null, $strFontFamily = null )
+    public function addColumn( $strHeader = null
+                             , $intWidth = null
+                             , $strAlign = null
+                             , $strFieldName = null
+                             , $hexFillColor = null
+                             , $strFontStyle = null
+                             , $intFontSize = null
+                             , $hexFontColor = null
+                             , $strFontFamily = null 
+                             )
     {
-        $column =
-            new TPDFColumn( $strHeader, $intWidth, $strAlign, $strFieldName, $hexFillColor, $strFontStyle, $intFontSize,
-                $hexFontColor, $strFontFamily );
+        $column = new TPDFColumn( $strHeader, $intWidth, $strAlign, $strFieldName
+                                , $hexFillColor, $strFontStyle, $intFontSize
+                                , $hexFontColor, $strFontFamily );
         $this->colums[] = $column;
         return $column;
     }
