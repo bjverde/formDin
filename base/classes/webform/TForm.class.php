@@ -2002,6 +2002,7 @@ class TForm Extends TBox
      * @param boolean $boolClearOnNotFound
      * @param boolean $boolClearUpdateFields
      * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
+     * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco para executar o autocomplete
      */
     public function setAutoComplete( $strFieldName
     		                       , $strTablePackageFuncion
@@ -2020,7 +2021,9 @@ class TForm Extends TBox
     		                       , $boolKeepFieldValuesOnPost=null
     		                       , $boolClearOnNotFound=null
     		                       , $boolClearUpdateFields=null
-    		                       , $boolSearchAnyPosition=null )
+                                   , $boolSearchAnyPosition=null 
+                                   , $strConfigFileName=null 
+                                   )
     {
         
         // não criar o autocomplente se o campo não existir
@@ -2058,6 +2061,7 @@ class TForm Extends TBox
         $aTemp[ 'searchField' ] = $strSearchField;
         $aTemp[ 'cacheTime' ] = $intCacheTime;
         $aTemp[ 'searchAnyPosition' ] = $boolSearchAnyPosition;
+        $aTemp[ 'configFileName' ] = $strConfigFileName;
         //$aTemp['messageNotFound']	= $strMessageNotFound;
         if( ( string ) $strCallBackFunctionJs ){
             if( !strpos( $strCallBackFunctionJs, '(' ) ){

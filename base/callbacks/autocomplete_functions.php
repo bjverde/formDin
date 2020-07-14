@@ -95,22 +95,20 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
  * @param strTablePackageFuncion
  * @param erro
  */
-function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion) {
+function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,$configFileName=null) {
 	$sql = tableRecoverCreateSql ( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
 	//impAutocomplete( $sql,true);return;
 
 	$bvars	=null;
 	$res	=null;
 	$nrows	=null;
-    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
-		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
-			if( preg_match('/falha/i',$erro ) > 0 ) {
-				echo "Erro na função autocomplete(). Erro:".$erro."\n".$sql;
-				return;
-			}
-		}
+    if( !class_exists('TPDOConnectionObj') ) {
+		echo "Erro na função autocomplete(). Erro: não encontra classe de config de banco";
+		return;
 	} else {
-		$res = TPDOConnection::executeSql($sql);
+		$tpdo = New TPDOConnectionObj(false);
+		$tpdo->connect($configFileName,true,null,null);
+		$res = $tpdo->executeSql($sql);
 	}
 	return $res;
 }
