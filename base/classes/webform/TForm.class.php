@@ -6437,32 +6437,32 @@ class TForm Extends TBox
     }
            
     /**
-    * Adiciona campo tipo grupo com legenda na parte superior
-    * Se o parametro $intHeight for null será auto height
-    * se o parametro $intWidth for null utilizado a largura do form
-    *
-    * <code>
-    * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
-    *   $frm->addGroupField('gp01','Grupo Teste');
-    * 	// com quebra nos rotulos quando excederem a largura da coluna definida
-    *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
-    * </code>
-    *
-    * @param string $strName          - 1: nome Id
-    * @param string $strLegend        - 2: label que irá aparecer para o usuario 
-    * @param integer $intHeight       - 3: altura do grupo. NULL = auto height
-    * @param integer $intWidth        - 4: largura do grupo. NULL = largura do form
-    * @param boolean $boolNewLine     - 5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-    * @param boolean $boolNoWrapLabel
-    * @param boolean $boolCloseble    - 6: pode fechar ou não
-    * @param string  $strAccordionId  - 7:
-    * @param boolean $boolOpened      - 8: inicia aberto
-    * @param string $imgOpened        - 9:
-    * @param string $imgClosed        - 10: 
-    * @param boolean $boolOverflowX   - 11:
-    * @param boolean $boolOverflowY   - 12: 
-    * @return TGroupBox
-    */
+     * Adiciona campo tipo grupo com legenda na parte superior
+     * Se o parametro $intHeight for null será auto height
+     * se o parametro $intWidth for null utilizado a largura do form
+     *
+     * <code>
+     * 	// sem quebra nos rotulos quando excederem a largura da coluna definida
+     *   $frm->addGroupField('gp01','Grupo Teste');
+     * 	// com quebra nos rotulos quando excederem a largura da coluna definida
+     *   $frm->addGroupField('gp01','Grupo Teste',null,null,null,true);
+     * </code>
+     *
+     * @param string $strName          - 01: Nome Id
+     * @param string $strLegend        - 02: Label que irá aparecer para o usuario 
+     * @param integer $intHeight       - 03: Altura do grupo. NULL = auto height
+     * @param integer $intWidth        - 04: Largura do grupo. NULL = largura do form
+     * @param boolean $boolNewLine     - 05: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+     * @param boolean $boolNoWrapLabel - 06:
+     * @param boolean $boolCloseble    - 07: pode fechar ou não
+     * @param string  $strAccordionId  - 08:
+     * @param boolean $boolOpened      - 09: inicia aberto
+     * @param string $imgOpened        - 10:
+     * @param string $imgClosed        - 11:
+     * @param boolean $boolOverflowX   - 12:
+     * @param boolean $boolOverflowY   - 13:
+     * @return TGroupBox
+     */
 	public function addGroupField( $strName
            		, $strLegend=null
 				, $strHeight=null
@@ -7216,9 +7216,10 @@ class TForm Extends TBox
     * * - Represents an alphanumeric character (A-Z,a-z,0-9)
     *
     * @link http://digitalbush.com/projects/masked-input-plugin/
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
+    *
+    * @param string $strName         - 1: id do campo
+    * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired   - 3: Obrigatorio
     * @param string $strMask
     * @param boolean $boolNewLine
     * @param string $strValue
@@ -7325,14 +7326,16 @@ class TForm Extends TBox
     * @param mixed $jsOnClick          -11:
     * @param mixed $jsOnCheck          -12:
     * @param mixed $jsOnDrag           -13:
-    * @param mixed $boolEnableCheckBoxes - 14 : Habilita campo Checks
-    * @param mixed $boolEnableRadioButtons
-    * @param mixed $boolEnableTreeLines
-    * @param mixed $strLabel
-    * @param mixed $boolLabelAbove
-    * @param mixed $boolNewLine
-    * @param mixed $boolNoWrapLabel
-    * @param mixed $mixFormSearchFields
+    * @param mixed $boolEnableCheckBoxes - 14: Habilita campo Checks
+    * @param mixed $boolEnableRadioButtons - 15:
+    * @param mixed $boolEnableTreeLines -16:
+    * @param mixed $strLabel            -17:
+    * @param mixed $boolLabelAbove      -18:
+    * @param mixed $boolNewLine         -19: boolNewLine
+    * @param mixed $boolNoWrapLabel     -20: boolNoWrapLabel
+    * @param mixed $mixFormSearchFields -21:
+    * @param mixed $boolShowToolBar     -22:
+    * @param mixed $startExpanded       -23: Se o TreeView deve iniciar expandido ou não
     * @return TTreeView
     */
     public function addTreeField( $strName
@@ -7356,23 +7359,36 @@ class TForm Extends TBox
                                , $boolLabelAbove = null
                                , $boolNewLine = null
                                , $boolNoWrapLabel = null
-                               , $mixFormSearchFields=null )
+                               , $mixFormSearchFields=null
+                               , $boolShowToolBar=null
+                               , $startExpanded=null
+        )
     {
         $this->addJsFile( 'dhtmlx/dhtmlxcommon.js' );
         $this->addJsFile( 'dhtmlx/treeview/dhtmlxtree.js' );
         $this->addCssFile( 'dhtmlx/treeview/dhtmlxtree.css' );
 
-        $tree = new TTreeView( $strName, $strRootLabel, $arrData, $strParentFieldName, $strChildFieldName
+        $tree = new TTreeView( $strName
+                             , $strRootLabel
+                             , $arrData
+                             , $strParentFieldName
+                             , $strChildFieldName
                              , $strDescFieldName
                              , $strInitialParentKey
                              , $mixUserDataFields
                              , $strHeight
                              , $strWidth
-                             , $jsOnClick, $jsOnDblClick, $jsOnCheck, $jsOnDrag
+                             , $jsOnClick
+                             , $jsOnDblClick
+                             , $jsOnCheck
+                             , $jsOnDrag
                              , $boolEnableCheckBoxes
                              , $boolEnableRadioButtons
                              , $boolEnableTreeLines
-                             , $mixFormSearchFields );
+                             , $mixFormSearchFields
+                             , $boolShowToolBar
+                             , $startExpanded
+                            );
         //$tree->addItem(0,1,'Animal',true,'Animais');
         $display = new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
         $this->addDisplayControl( $display );

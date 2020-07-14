@@ -41,7 +41,7 @@
 class ArrayHelper
 {
     
-    static function validateUndefined($array,$atributeName) 
+    public static function validateUndefined($array,$atributeName) 
     {
         if(!isset($array[$atributeName])) {
             $array[$atributeName]=null;
@@ -58,7 +58,7 @@ class ArrayHelper
      * @param  array  $array
      * @return boolean
      */
-    static function has($atributeName,$array) 
+    public static function has($atributeName,$array) 
     {
         $value = false;
         if (is_array($array) && array_key_exists($atributeName, $array)) {
@@ -77,7 +77,7 @@ class ArrayHelper
      * @param boolean $strict
      * @return array
      */
-    static function array_keys2($array, $search_value = null,$strict = false)
+    public static function array_keys2($array, $search_value = null,$strict = false)
     {
         $value = array();
         if (is_array($array)) {
@@ -93,7 +93,7 @@ class ArrayHelper
      * @param mixed  $DefaultValue
      * @return mixed
      */
-    static function getDefaultValeu($array,$atributeName,$DefaultValue) 
+    public static function getDefaultValeu($array,$atributeName,$DefaultValue) 
     {
         $value = $DefaultValue;
         if(self::has($atributeName, $array) ) {
@@ -104,13 +104,13 @@ class ArrayHelper
         return $value;
     }
     
-    static function get($array,$atributeName) 
+    public static function get($array,$atributeName) 
     {
         $result = self::getDefaultValeu($array, $atributeName, null);
         return $result;
     }
     
-    static function getArray($array,$atributeName)
+    public static function getArray($array,$atributeName)
     {
         if(!isset($array[$atributeName])) {
             $array[$atributeName]=array();
@@ -127,7 +127,7 @@ class ArrayHelper
      * @param int $key
      * @return NULL|mixed|array
      */
-    static function getArrayFormKey($array,$atributeName,$key)
+    public static function getArrayFormKey($array,$atributeName,$key)
     {
         return self::formDinGetValue($array, $atributeName, $key);
     }
@@ -138,7 +138,7 @@ class ArrayHelper
      * @param  array $array
      * @return array
      */
-    static function convertArrayPdo2FormDin($dataArray,$upperCase = true) 
+    public static function convertArrayPdo2FormDin($dataArray,$upperCase = true) 
     {
         $result = false;
         if(is_array($dataArray) ) {
@@ -161,7 +161,7 @@ class ArrayHelper
      * @param  array $array
      * @return array
      */
-    static function convertArrayFormDin2Pdo($dataArray,$upperCase = false) 
+    public static function convertArrayFormDin2Pdo($dataArray,$upperCase = false) 
     {
         $result = false;
         if(is_array($dataArray) ) {
@@ -181,6 +181,7 @@ class ArrayHelper
     }    
     //--------------------------------------------------------------------------------
     /**
+     * @deprecated chante to ValidateHelper::isArray
      * Validade is array and not empty
      * @param integer $id
      * @param string $method
@@ -190,10 +191,7 @@ class ArrayHelper
      */
     public static function validateIsArray($array,$method,$line)
     {
-        FormDinHelper::validateMethodLine($method, $line, __METHOD__);
-        if( empty($array) || !is_array($array) ){
-            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_ARRAY.'See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::isArray($array, $method, $line);
     }
     //--------------------------------------------------------------------------------
     /***

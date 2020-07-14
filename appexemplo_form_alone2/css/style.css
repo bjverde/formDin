@@ -1,0 +1,31 @@
+body {
+    background-color: #808080;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.centro {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo {
+    border-radius: 25px;
+    border: 3px solid #B71010;
+    background-color: white;;
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+    padding-left: 3vh;
+    padding-right: 3vh;
+    width: 60vw;
+}
+
+.link{
+    margin: 2px;
+}

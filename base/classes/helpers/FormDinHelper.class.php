@@ -111,17 +111,20 @@ class FormDinHelper
         return $arrayFormDin;
     }
     
+    /**
+     * @deprecated chante to ValidateHelper::methodLine
+     * @param string $method
+     * @param string $line
+     * @param string $nameMethodValidate
+     * @throws InvalidArgumentException
+     */
     public static function validateMethodLine($method,$line,$nameMethodValidate)
     {
-        if( empty($method) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable method is null. '.$nameMethodValidate);
-        }
-        if( empty($line) ){
-            throw new InvalidArgumentException(TMessage::ERROR_EMPTY_INPUT.' variable line is null. '.$nameMethodValidate);
-        }        
+        ValidateHelper::methodLine($method, $line, $nameMethodValidate);
     }
     //--------------------------------------------------------------------------------
     /**
+     *  @deprecated chante to ValidateHelper::objTypeTPDOConnectionObj
      * Validate Object Type is Instance Of TPDOConnectionObj
      *
      * @param object $tpdo instanceof TPDOConnectionObj
@@ -132,14 +135,11 @@ class FormDinHelper
      */
     public static function validateObjTypeTPDOConnectionObj($tpdo,$method,$line)
     {
-        self::validateMethodLine($method, $line, __METHOD__);
-        $typeObjWrong = !($tpdo instanceof TPDOConnectionObj);
-        if( !is_null($tpdo) && $typeObjWrong ){
-            throw new InvalidArgumentException('Informed class is not an instance of TPDOConnectionObj. See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::objTypeTPDOConnectionObj($tpdo, $method, $line);
     }
     //--------------------------------------------------------------------------------
     /**
+     * @deprecated chante to ValidateHelper::isNumeric
      * Validade ID is numeric and not empty
      * @param integer $id
      * @param string $method
@@ -149,10 +149,7 @@ class FormDinHelper
      */
     public static function validateIdIsNumeric($id,$method,$line)
     {
-        self::validateMethodLine($method, $line, __METHOD__);
-        if( empty($id) || !is_numeric($id) ){
-            throw new InvalidArgumentException(TMessage::ERROR_TYPE_NOT_INT.'See the method: '.$method.' in the line: '.$line);
-        }
+        ValidateHelper::isNumeric($id, $method, $line);
     }
     /***
      * 
@@ -182,5 +179,67 @@ class FormDinHelper
     }
     
 
+    /***
+     * função para depuração. Exibe o modulo a linha e a variável/objeto solicitado
+     * Retirado do FormDin 4.9.0
+     * https://github.com/bjverde/formDin/blob/master/base/includes/funcoes.inc
+     */
+    public static function debug( $mixExpression,$strComentario='Debug', $boolExit=FALSE, $showBackTrace=false ) {
+        ini_set ( 'xdebug.max_nesting_level', 150 );
+        if (defined('DEBUGAR') && !DEBUGAR){
+            return;
+        }
+        $arrBacktrace = debug_backtrace();
+        if( isset($_REQUEST['ajax']) && $_REQUEST['ajax'] ){
+            echo '<div class="formDinDebug">';
+            echo '<pre>';
+            foreach ( $arrBacktrace[0] as $strAttribute => $mixValue ){
+                if ( !is_array($mixValue) ){
+                    echo $strAttribute .'='. $mixValue ."\n";
+                }
+            }
+            echo "---------------\n";
+            print_r( $mixExpression );
+            echo '</pre>';
+            echo '</div>';
+        } else {
+            echo '<div class="formDinDebug">';
+            echo "<script>try{fwUnblockUI();}catch(e){try{top.app_unblockUI();}catch(e){}}</script>";
+            echo "<fieldset style='text-align:left;'><legend><font color=\"#007000\">".$strComentario."</font></legend><pre>" ;
+            foreach ( $arrBacktrace[0] as $strAttribute => $mixValue ) {
+                if( !is_array($mixValue) ) {
+                    echo "<b>" . $strAttribute . "</b> ". $mixValue ."\n";
+                }
+            }
+            echo "</pre><hr />";
+            echo '<span style="color:red;"><blink>'.$strComentario.'</blink></span>'."\n";;
+            echo '<pre>';
+            if( is_object($mixExpression) ) {
+                var_dump( $mixExpression );
+            } else {
+                print_r($mixExpression);
+            }
+            echo '</pre>';
+            
+            if($showBackTrace==true){
+                echo '<hr>';
+                echo '<font style="color:red;">BackTrack</font>';
+                echo '<pre>';
+                foreach ( $arrBacktrace as $key => $value ){
+                    echo $value['file'] .' <b>line:</b> '.$value['line'].' <b>function:</b> '.$value['function']."\n";
+                }
+                echo '</pre>';
+            }
+            
+            echo '</fieldset>';
+            echo '</div>';
+            if ( $boolExit ) {
+                echo "<br /><font color=\"#700000\" size=\"4\"><b>D I E</b></font>";
+                exit();
+            }
+        }
+    }
+    
+    
 }
 ?>

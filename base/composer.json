@@ -4,7 +4,7 @@
 	"description" : "formDin FrameWork",
 	"require" : {
 		"php" : ">=5.6.0",
-		"phpmailer/phpmailer" : "^6.0.0",
+		"phpmailer/phpmailer" : "^6.1.0",
 		"components/font-awesome" : "^5.4.2",
 		"slim/slim" : "^3.12",
 		"tuupola/slim-basic-auth" : "^3.2",
