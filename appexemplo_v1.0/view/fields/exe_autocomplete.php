@@ -53,7 +53,7 @@ $html2 = 'Exemplo busque pela palavra SERRA, nos dois grupos.'
         .'<br>No grupo 2 irá buscar por municipios com SERRA em qualquer posição'
         ;
 
- $frm = new TForm('Exemplo Campo Texto com Autocompletar', 400);
+ $frm = new TForm('Exemplo Campo Texto com Autocompletar', 700);
  $frm->addHtmlField('msg', $html);
  
 $frm->addGroupField('gpx1', 'Exemplo AutoComple, busca apenas iniciando com');
@@ -100,11 +100,14 @@ $frm->setAutoComplete('nom_municipio3'
                      , 'tb_municipio'            // 2: tabela alvo da pesquisa
                      , 'nom_municipio'           // 3: campo de pesquisa
                      , 'cod_municipio|cod_municipio3,cod_uf|cod_uf3'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-                     , true, null                      // 6: campo do formulário que será adicionado como filtro
-                     , 'callback_autocomplete_municipio()', 3, 1000                       // Default 1000, tempo após a digitação para disparar a consulta
-                     , 50                         // máximo de registros que deverá ser retornado
-                     , null, null, null                       // url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
-                     , null                       // Mesagem caso não encontre nenhum registro
+                     , true
+                     , null                      // 6: campo do formulário que será adicionado como filtro
+                     , 'callback_autocomplete_municipio()'
+                     , 3
+                     , 1000                       // 09: Default 1000, tempo após a digitação para disparar a consulta
+                     , 50                         // 10: máximo de registros que deverá ser retornado
+                     , null, null, null           // url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+                     , null                       // 15: Mesagem caso não encontre nenhum registro
                      , null
                      , null
                      , null
@@ -113,7 +116,19 @@ $frm->setAutoComplete('nom_municipio3'
 
 
 
-$frm->setAction('Refresh');
+$frm->addButton('Refresh', null, 'Refresh', null, null, true, false);
+$frm->addButton('Limpar', null, 'Limpar', null, null, false, false);
+
+
+$acao = isset($acao) ? $acao : null;
+switch ($acao) {
+    case 'Limpar':
+        $mixIgnoreFields = array('nom_municipio3','cod_uf3');
+        $frm->clearFields(null,$mixIgnoreFields);
+    break;
+}
+
+
 $frm->show();
 ?>
 
