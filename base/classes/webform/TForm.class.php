@@ -6772,7 +6772,7 @@ class TForm Extends TBox
     * @param string  $strName        - 1: ID do campo
     * @param string  $strLabel       - 2: Label do campo
     * @param boolean $boolRequired   - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
-    * @param mixed   $mixOptions         - 04: Array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * @param mixed   $mixOptions         - 04: Array dos valores. no formato "id=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param boolean $boolNewLine        - 05: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
     * @param boolean $boolLabelAbove     - 06: Default FALSE = Label mesma linha, TRUE = Label acima
     * @param mixed   $mixValue           - 07: Valor DEFAULT, informe o ID do array
@@ -6861,10 +6861,10 @@ class TForm Extends TBox
     * @param string $strName         - 1: field ID
     * @param string $strLabel        - 2: Label field
     * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
-    * @param array $arrOptions       - 4: array no formato "key=>valeu" para identificar a(s) opção(ões) selecionada(s)
+    * @param array $arrOptions       - 4: array no formato "id=>valeu" para identificar a(s) opção(ões) selecionada(s)
     * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
     * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
-    * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>keyOption" para maracar mais de um valor ao mesmo tempo
+    * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>id" para maracar mais de um valor ao mesmo tempo
     * @param integer $intQtdColumns  - 8: Quantidade de colunas
     * @param integer $intWidth       - 9: Largura
     * @param integer $intHeight      -10: Al

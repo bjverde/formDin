@@ -64,7 +64,7 @@ class TSelect extends TOption
     * </code>
     *
     * @param string $strName       - 01: ID do campo
-    * @param mixed  $mixOptions    - 02: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * @param mixed  $mixOptions    - 02: array dos valores. no formato "id=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param mixed $strValue       - 03: Valor DEFAULT, informe o ID do array
     * @param mixed $boolRequired   - 04: Default FALSE = não obrigatori, TRUE = obrigatorio
     * @param mixed $boolMultiSelect- 05: Default FALSE = SingleSelect, TRUE = MultiSelect
@@ -98,8 +98,8 @@ class TSelect extends TOption
 							 ,$intWidth
 							 ,null
 							 ,null
-							 ,$boolMultiSelect
-							 ,'select'
+							 ,$boolMultiSelect //09: Default FALSE = SingleSelect, TRUE = MultiSelect
+							 ,TOption::SELECT  //10: 10: define o tipo de input a ser gerado. Ex: select, radio ou check
 							 ,$strKeyColumn
 							 ,$strDisplayColumn
 							 ,null
