@@ -70,8 +70,8 @@ abstract class TOption extends TControl
 	 * @param string $strName          - 1:
 	 * @param array $mixOptions        - 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
 	 * @param array $arrValues         - 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
-	 * @param boolean $boolRequired    - 4:
-	 * @param integer $intQtdColumns   - 5:
+	 * @param boolean $boolRequired    - 4: Default FALSE = não obrigatori, TRUE = obrigatorio
+	 * @param integer $intQtdColumns   - 5: Quantidade de colunas, valor DEFAULT = 1;
 	 * @param integer $intWidth        - 6:
 	 * @param integer $intHeight       - 7:
 	 * @param integer $intPaddingItems - 8: numero inteiro para definir o espaço vertical entre as colunas de opções
