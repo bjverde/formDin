@@ -63,18 +63,18 @@ class TSelect extends TOption
     *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
     * </code>
     *
-    * @param string $strName      - 1: ID do campo
-    * @param mixed  $mixOptions   - 2: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-    * @param mixed $strValue
-    * @param mixed $boolRequired
-    * @param mixed $boolMultiSelect
-    * @param mixed $intSize
-    * @param mixed $intWidth
-    * @param mixed $strFirstOptionText
-    * @param mixed $strFirstOptionValue
-    * @param mixed $strKeyColumn
-    * @param mixed $strDisplayColumn
-    * @param mixed $strDataColumns
+    * @param string $strName       - 01: ID do campo
+    * @param mixed  $mixOptions    - 02: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * @param mixed $strValue       - 03: Valor DEFAULT, informe o ID do array
+    * @param mixed $boolRequired   - 04: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param mixed $boolMultiSelect- 05: Default FALSE = SingleSelect, TRUE = MultiSelect
+    * @param mixed $intSize        - 06: Default 1. Num itens que irão aparecer no MultiSelect
+    * @param mixed $intWidth       - 07: Largura em Pixels
+    * @param mixed $strFirstOptionText  - 08:
+    * @param mixed $strFirstOptionValue - 09:
+    * @param mixed $strKeyColumn        - 10: Nome da coluna que será utilizada para preencher os valores das opções
+    * @param mixed $strDisplayColumn    - 11: Nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
+    * @param mixed $strDataColumns      - 12: Informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
     * @return TSelect
     */
     public function __construct($strName

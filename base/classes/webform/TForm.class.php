@@ -6771,7 +6771,7 @@ class TForm Extends TBox
     *
     * @param string  $strName        - 1: ID do campo
     * @param string  $strLabel       - 2: Label do campo
-    * @param boolean $boolRequired   - 3: Obrigatorio
+    * @param boolean $boolRequired   - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
     * @param mixed   $mixOptions         - 04: Array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param boolean $boolNewLine        - 05: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
     * @param boolean $boolLabelAbove     - 06: Default FALSE = Label mesma linha, TRUE = Label acima
