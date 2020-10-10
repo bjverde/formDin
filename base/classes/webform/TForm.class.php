@@ -6779,7 +6779,7 @@ class TForm Extends TBox
     * @param boolean $boolMultiSelect    - 08: Default FALSE = SingleSelect, TRUE = MultiSelect
     * @param integer $intSize            - 09: Default 1. Num itens que irão aparecer no MultiSelect
     * @param integer $intWidth           - 10: Largura em Pixels
-    * @param string  $strFirstOptionText - 11: First Key in Display
+    * @param string  $strFirstOptionText - 11: First Key in Display. Informe um valor diferente de '' ou null para mostrar um Label.
     * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' e não pode ser null
     * @param string  $strKeyColumn       - 13: Nome da coluna que será utilizada para preencher os valores das opções
     * @param string  $strDisplayColumn   - 14: Nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário

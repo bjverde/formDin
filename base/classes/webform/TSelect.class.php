@@ -70,8 +70,8 @@ class TSelect extends TOption
     * @param mixed $boolMultiSelect- 05: Default FALSE = SingleSelect, TRUE = MultiSelect
     * @param mixed $intSize        - 06: Default 1. Num itens que irão aparecer no MultiSelect
     * @param mixed $intWidth       - 07: Largura em Pixels
-    * @param mixed $strFirstOptionText - 08:
-    * @param mixed $strFirstOptionValue- 09:
+    * @param mixed $strFirstOptionText - 08: First Key in Display. Informe um valor diferente de '' ou null para mostrar um Label.
+    * @param mixed $strFirstOptionValue- 09: Frist Valeu in Display, use value NULL for required. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' e não pode ser null
     * @param mixed $strKeyColumn       - 10: Nome da coluna que será utilizada para preencher os valores das opções
     * @param mixed $strDisplayColumn   - 11: Nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
     * @param mixed $strDataColumns     - 12: Informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
