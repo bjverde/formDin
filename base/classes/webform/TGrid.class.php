@@ -1883,7 +1883,7 @@ class TGrid extends TTable
      * Adciona um campo do tipo texto livre, equivalente ao addTextField
      * @param string $strName      - id do campo
      * @param string $strTitle     - Titulo da coluna
-     * @param string $strFieldName - id do array que vei do banco
+     * @param string $strFieldName - id do array que veio do banco
      * @param string $strSize      - tamanho do campos
      * @param int    $intMaxLength - tamanho maximo
      * @param string $strMask
@@ -1954,6 +1954,21 @@ class TGrid extends TTable
     }
     
     //---------------------------------------------------------------------------------------
+
+    /**
+     *  Adciona uma coluna do tipo numerico
+     *
+     * @param string $strName           -1: id do campo
+     * @param [type] $strTitle          -2: Titulo da coluna que vai aparcer para o usuário
+     * @param [type] $strFieldName      -3: id do array que veio do banco
+     * @param [type] $intSize           -4: tamanho do número
+     * @param [type] $intDecimalPlaces  -5: quantidade de casas decimais
+     * @param [type] $boolFormatInteger -6:
+     * @param [type] $strWidth
+     * @param [type] $strAlign
+     * @param [type] $boolReadOnly
+     * @return void
+     */
     public function addNumberColumn( $strName, $strTitle = null, $strFieldName = null, $intSize = null, $intDecimalPlaces = null, $boolFormatInteger = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
     {
         $col = new TGridNumberColumn( $strName, $strTitle, $strFieldName, $intSize, $intDecimalPlaces, $boolFormatInteger, $strWidth, $strAlign, $boolReadOnly );
