@@ -178,6 +178,25 @@ class ArrayHelper
             }
         }
         return $result;
+    }
+    //--------------------------------------------------------------------------------
+    /**
+     * Convert array FormDin para Array com Obetos VO
+     *
+     * @param array $arrayFormDin - array FormDin
+     * @param string $classNameVoEntity - nome da classe VO
+     * @return array
+     */
+    public static function convertArrayFormDin2ArrayVoEntity($arrayFormDin,$classNameVoEntity)
+    {    
+        $arrayVoEntity = array();
+        $arrayPdo = self::convertArrayFormDin2Pdo($arrayFormDin,false);
+        foreach ($arrayPdo as $elemento){
+            $vo = new $classNameVoEntity();
+            $vo = \FormDinHelper::setPropertyVo($elemento,$vo);
+            $arrayVoEntity[] = $vo;
+        }
+        return $arrayVoEntity;
     }    
     //--------------------------------------------------------------------------------
     /**
