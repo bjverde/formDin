@@ -90,7 +90,21 @@ class TSelect extends TOption
                                ,$strDisplayColumn=null
                                ,$strDataColumns=null)
     {
-         parent::__construct($strName,$mixOptions,$strValue,$boolRequired,null,$intWidth,null,null,$boolMultiSelect,'select',$strKeyColumn,$strDisplayColumn,null,$strDataColumns);
+		 parent::__construct($strName
+							 ,$mixOptions     // 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
+							 ,$strValue       // 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
+							 ,$boolRequired   // 4: Default FALSE = não obrigatori, TRUE = obrigatorio
+							 ,null
+							 ,$intWidth
+							 ,null
+							 ,null
+							 ,$boolMultiSelect
+							 ,'select'
+							 ,$strKeyColumn
+							 ,$strDisplayColumn
+							 ,null
+							 ,$strDataColumns
+							);
          parent::setSelectSize($intSize);
          $this->setFirstOptionText($strFirstOptionText);
          $this->setFirstOptionValue($strFirstOptionValue);
