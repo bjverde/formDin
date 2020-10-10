@@ -6772,19 +6772,19 @@ class TForm Extends TBox
     * @param string  $strName        - 1: ID do campo
     * @param string  $strLabel       - 2: Label do campo
     * @param boolean $boolRequired   - 3: Obrigatorio
-    * @param mixed   $mixOptions     - 4: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
-    * @param boolean $boolNewLine    - 5: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-    * @param boolean $boolLabelAbove - 6: Default FALSE = Label mesma linha, TRUE = Label acima
-    * @param mixed   $mixValue       - 7: Valor DEFAULT, informe o ID do array
-    * @param boolean $boolMultiSelect- 8: Default FALSE = SingleSelect, TRUE = MultiSelect
-    * @param integer $intSize        - 9: Default 1. Num itens que irão aparecer. 
+    * @param mixed   $mixOptions         - 04: Array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * @param boolean $boolNewLine        - 05: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
+    * @param boolean $boolLabelAbove     - 06: Default FALSE = Label mesma linha, TRUE = Label acima
+    * @param mixed   $mixValue           - 07: Valor DEFAULT, informe o ID do array
+    * @param boolean $boolMultiSelect    - 08: Default FALSE = SingleSelect, TRUE = MultiSelect
+    * @param integer $intSize            - 09: Default 1. Num itens que irão aparecer no MultiSelect
     * @param integer $intWidth           - 10: Largura em Pixels
     * @param string  $strFirstOptionText - 11: First Key in Display
     * @param string  $strFirstOptionValue- 12: Frist Valeu in Display, use value NULL for required. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' e não pode ser null
-    * @param string  $strKeyColumn       - 13: 
-    * @param string  $strDisplayColumn
-    * @param string  $boolNoWrapLabel
-    * @param string  $strDataColumns
+    * @param string  $strKeyColumn       - 13: Nome da coluna que será utilizada para preencher os valores das opções
+    * @param string  $strDisplayColumn   - 14: Nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
+    * @param string  $boolNoWrapLabel    - 15:
+    * @param string  $strDataColumns     - 16: Informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
     * @return TSelect
     */
     public function addSelectField( $strName

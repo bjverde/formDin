@@ -45,10 +45,26 @@ class TSelect extends TOption
 	private $firstOptionValue;
 
     /**
-    * Classe para criação de campos do tipo combobox / menu select
+    * Adicionar campo tipo combobox ou menu select
     *
-    * @param mixed $strName
-    * @param mixed $mixOptions
+    * $mixOptions = array no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
+    * $strKeyColumn = nome da coluna que será utilizada para preencher os valores das opções
+    * $strDisplayColumn = nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
+    * $strDataColumns = informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
+    *
+    * <code>
+    * 	// exemplos
+    * 	$frm->addSelectField('tipo','Tipo:',false,'1=Tipo 1,2=Tipo 2');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'tipo');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'select * from tipo order by descricao');
+    * 	$frm->addSelectField('tipo','Tipo:',false,'tipo|descricao like "F%"');
+    *
+    *  //Exemplo espcial - Campo obrigatorio e sem senhum elemento pre selecionado.
+    *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
+    * </code>
+    *
+    * @param string $strName      - 1: ID do campo
+    * @param mixed  $mixOptions   - 2: array dos valores. no formato "key=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param mixed $strValue
     * @param mixed $boolRequired
     * @param mixed $boolMultiSelect
