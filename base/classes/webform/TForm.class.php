@@ -6904,10 +6904,10 @@ class TForm Extends TBox
     * @example $pc = $frm->addPageControl('pc',null,null,'pcClick','pcAfterClick');
     * @example function pcAfterClick(aba,pageControl,id)
     *
-    * @param mixed $strName
-    * @param mixed $strHeight
-    * @param mixed $strWidth
-    * @param mixed $strOnBeforeClick
+    * @param mixed $strName           - 01 : id do PageControl
+    * @param mixed $strHeight         - 02 : Se o parametro $intHeight for null será assumido o height do form, para ser auto, informar "auto";
+    * @param mixed $strWidth          - 03 : se o parametro $intWidth for null utilizado a largura máxima do form
+    * @param mixed $strOnBeforeClick  - 04 : 
     * @param mixed $strOnAfterClick
     * @param mixed $boolShowTabs
     * @param bool $boolNewLine
