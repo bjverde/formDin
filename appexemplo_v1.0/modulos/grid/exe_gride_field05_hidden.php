@@ -16,6 +16,9 @@ $primaryKey = 'IDPESSOA';
 $frm = new TForm('Cadastro de Pessoas',800,950);
 $frm->setFlat(true);
 $frm->setMaximize(true);
+$html = '<br><b>Importante</b>'
+        .'<br><br>SEMPRE declare a chave primaria do grid. Sem a PK o campo não vai funcionar';		
+$frm->addHtmlField('aviso', $html, null,null, null,null);
 
 d($_REQUEST);
 
