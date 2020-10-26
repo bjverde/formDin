@@ -63,6 +63,7 @@ class TMessage {
     const ERROR_TYPE_NOT_INT = 'Tipo não númerico! ';
     const ERROR_TYPE_NOT_ARRAY = 'Tipo não é um array! ';
     const ERROR_TYPE_NOT_SET = 'A variable has not been defined! ';
+    const ERROR_WHITOUT_TPDO_OBJ = 'Erro na função autocomplete(). Erro: não encontra classe de config de banco';
 
     public function __construct() {
     }

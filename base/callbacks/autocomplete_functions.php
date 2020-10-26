@@ -99,15 +99,17 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 	$sql = tableRecoverCreateSql ( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
 	//impAutocomplete( $sql,true);return;
 
-	$bvars	=null;
 	$res	=null;
-	$nrows	=null;
     if( !class_exists('TPDOConnectionObj') ) {
-		echo "Erro na função autocomplete(). Erro: não encontra classe de config de banco";
+		throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_TPDO_OBJ);
 		return;
 	} else {
 		$tpdo = New TPDOConnectionObj(false);
-		$tpdo->connect($configFileName,true,null,null);
+		if( empty($configFileName) ){
+			$tpdo->connect(null,true,null,null);
+		}else{
+			$tpdo->connect($configFileName,true,null,null);
+		}
 		$res = $tpdo->executeSql($sql);
 	}
 	return $res;
