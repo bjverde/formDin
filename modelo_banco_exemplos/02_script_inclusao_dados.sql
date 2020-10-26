@@ -28,6 +28,32 @@ INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`si
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (27,'Cisco','PJ','1984-02-01 00:00:00','S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (28,'Twitter','PJ','2004-01-01 00:00:00','S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (29,'Instagram','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (30,'Vivo','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (31,'Oracle','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (32,'Logicalis','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (33,'Intelbras','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (34,'Mercado Livre','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (35,'Getnet','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (36,'Algar Telecom','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (37,'IBM Brasil','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (38,'Clear Sale','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (39,'Cielo','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (40,'Cognizant Brasil','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (41,'Atento Brasil','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (42,'VMware','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (43,'Locaweb','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (44,'Itaúsa','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (45,'Eletrobrás','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (46,'Vale','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (47,'JBS','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (48,'Banco do Brasil','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (49,'Banco Bradesco','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (50,'Petrobras','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (51,'BRASKEM','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (52,'BUNGE ALIMENTOS','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (53,'SHELL BRASIL','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (54,'CORREIOS','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (55,'Nextel','PJ','2004-01-01 00:00:00','S');
 
 INSERT INTO `form_exemplo`.`pessoa_fisica`
 (`idpessoa_fisica`,`idpessoa`,`cpf`,`dat_nascimento`,`cod_municipio_nascimento`,`dat_inclusao`,`dat_alteracao`)
