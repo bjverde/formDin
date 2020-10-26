@@ -2002,7 +2002,7 @@ class TForm Extends TBox
      * @param boolean $boolClearOnNotFound
      * @param boolean $boolClearUpdateFields
      * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
-     * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco para executar o autocomplete
+     * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
      */
     public function setAutoComplete( $strFieldName
     		                       , $strTablePackageFuncion

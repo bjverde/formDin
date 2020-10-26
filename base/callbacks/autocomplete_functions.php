@@ -88,12 +88,13 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
 
 /**
  * Recupera o resultado da tabela 
- * @param bvars
- * @param boolSearchAnyPosition
- * @param arrUpdateFields
- * @param strSearchField
- * @param strTablePackageFuncion
- * @param erro
+ * @param array $bvars
+ * @param [type] $boolSearchAnyPosition
+ * @param [type] $arrUpdateFields
+ * @param [type] $strSearchField
+ * @param [type] $strTablePackageFuncion
+ * @param string $configFileName Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+ * @return void
  */
 function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,$configFileName=null) {
 	$sql = tableRecoverCreateSql ( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
