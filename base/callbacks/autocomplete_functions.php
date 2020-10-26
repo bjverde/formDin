@@ -106,7 +106,7 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 		return;
 	} else {
 		$tpdo = New TPDOConnectionObj(false);
-		if( empty($configFileName) ){
+		if( $configFileName == "null" ){
 			$tpdo->connect(null,true,null,null);
 		}else{
 			if ( !defined('ROOT_PATH') ) {
