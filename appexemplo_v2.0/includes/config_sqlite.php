@@ -18,7 +18,7 @@ function getConnectionArray(){
 		 'DBMS' => DBMS_SQLITE
 		,'PORT' => null
 		,'HOST' => null
-		,'DATABASE' => __DIR__.DS.'..'.DS.'local_database'.DS.'bdApoio.s3db'
+		,'DATABASE' => __DIR__.DS.'..'.DS.'local_database'.DS.'local_database.s3db'
 		,'USERNAME' => null
 		,'PASSWORD' => null
 		,'UTF8_DECODE' => 0
