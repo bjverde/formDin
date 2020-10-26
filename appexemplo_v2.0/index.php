@@ -47,7 +47,7 @@ require_once '../base/classes/webform/TApplication.class.php';
 require_once 'controllers/autoload_appev2.php';
 require_once 'dao/autoload_appev2_dao.php';
 
-
+define('ROOT_PATH'     , __DIR__); //Folder root name
 define('ROOT_FOLDER'     , basename(__DIR__)); //Folder root name
 define('DIR_ROOT'     , basename(__DIR__));
 

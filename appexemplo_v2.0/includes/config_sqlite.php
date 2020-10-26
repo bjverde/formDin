@@ -13,8 +13,16 @@ if (! defined ( 'DS' )) {
 	define ( 'DS', DIRECTORY_SEPARATOR );
 }
 
-// sqlite
-define('BANCO', 'SQLITE');
-define('DATABASE', __DIR__.DS.'..'.DS.'local_database'.DS.'bdApoio.s3db');
-define('UTF8_DECODE', 0);
+function getConnectionArray(){
+	$configArray= array(
+		 'DBMS' => DBMS_SQLITE
+		,'PORT' => null
+		,'HOST' => null
+		,'DATABASE' => __DIR__.DS.'..'.DS.'local_database'.DS.'bdApoio.s3db'
+		,'USERNAME' => null
+		,'PASSWORD' => null
+		,'UTF8_DECODE' => 0
+	);
+	return $configArray;
+}
 ?>
