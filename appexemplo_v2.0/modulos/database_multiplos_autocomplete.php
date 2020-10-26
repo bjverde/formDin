@@ -8,7 +8,7 @@ $html1 = $html1.'<br> No grupo "MySql: Empresa" - está conectado o banco MySql,
 $html1 = $html1.'<br> No grupo "SqLite: Municípios" - está conectado o banco SqLite, na tebela tb_municipio. Pesquisando nomes de Municípios recondo usar SERRA';
 $html1 = $html1.'<br>';
 
-$frm = new TForm('Exemplo Multiplos');
+$frm = new TForm('Exemplo setAutoComplete Multiplos bancos');
 $frm->setFlat(true);
 $frm->setMaximize(true);
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert',true);

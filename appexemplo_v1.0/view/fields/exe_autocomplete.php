@@ -46,6 +46,11 @@ $html = '<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlit
  A tabela de consulta é a tb_municipio.<br>
  A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>
  O campo Cod Uf será preenchido automaticamente quando a cidade for encontrada ou selecionada</h3>';
+ $html = $html.'<br>';
+ $html = $html.'<br>';
+ $html = $html.'<h3>Multiplos bancos</h3>';
+ $html = $html.'<br> O Parametro 19, permite informação um arquivo de conexão para multiplos bancos.';
+ $html = $html.'<br> No appexemplo_v2.0 no modulo/database_multiplos_autocomplete.php tem um exemplo';
 
 
 $html2 = 'Exemplo busque pela palavra SERRA, nos dois grupos.'
