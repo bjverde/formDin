@@ -19,6 +19,15 @@ INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`si
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (18,'Pesso com Percente % no meio do nome','PF',NOW(),'S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (19,'Pesso com aspas simples '' no meio do nome','PF',NOW(),'S');
 INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (20,'Pesso com aspas duplas " no meio do nome','PF',NOW(),'S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (21,'Apple','PJ','1976-04-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (22,'Amazon','PJ','1994-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (23,'Facebook','PJ','2004-02-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (24,'Tencent','PJ','2004-02-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (25,'Samsung','PJ','1969-02-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (26,'Intel','PJ','1969-02-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (27,'Cisco','PJ','1984-02-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (28,'Twitter','PJ','2004-01-01 00:00:00','S');
+INSERT INTO `form_exemplo`.`pessoa` (`idpessoa`,`nome`,`tipo`,`dat_inclusao`,`sit_ativo`) VALUES (29,'Instagram','PJ','2004-01-01 00:00:00','S');
 
 INSERT INTO `form_exemplo`.`pessoa_fisica`
 (`idpessoa_fisica`,`idpessoa`,`cpf`,`dat_nascimento`,`cod_municipio_nascimento`,`dat_inclusao`,`dat_alteracao`)
