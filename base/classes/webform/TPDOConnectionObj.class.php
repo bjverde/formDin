@@ -126,9 +126,11 @@ class TPDOConnectionObj
         $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
         if(!$hasConfigArray){
             $configArray = $this->makeConfigArray();
-        }        
+        }
+        if( empty($configFile) ){
+            $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        }
         $tpdo = $this->getTPDOConnection();
-        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
         if($hasConfigArray){
             $tpdo::connect(null,$boolRequired,$boolUtfDecode,$configArray);
         }else{
