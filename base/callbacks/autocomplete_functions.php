@@ -102,14 +102,21 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 
 	$res	=null;
     if( !class_exists('TPDOConnectionObj') ) {
-		throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_TPDO_OBJ);
+		throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_TPDO_OBJ);
 		return;
 	} else {
 		$tpdo = New TPDOConnectionObj(false);
 		if( empty($configFileName) ){
 			$tpdo->connect(null,true,null,null);
 		}else{
-			$tpdo->connect($configFileName,true,null,null);
+			if ( !defined('ROOT_PATH') ) {
+				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
+				return;
+			}
+			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
+			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
+			$configArray = getConnectionArray();
+			$tpdo->connect(null,true,null,$configArray);
 		}
 		$res = $tpdo->executeSql($sql);
 	}
