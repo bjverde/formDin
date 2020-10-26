@@ -56,6 +56,9 @@ class TPDOConnectionObj
 
     private $tpdo = null;
     
+    /**
+     * @param boolean $connect : use MAIN connect 
+     */
     public function __construct($connect = true)
     {
         $tpdo = New TPDOConnection();
@@ -108,10 +111,12 @@ class TPDOConnectionObj
     }
     //--------------------------------------------------------------------------------------
     /**
-     * Forma de conexão com o banco de dados, usando arquivos $configFile ou $array
+     * Establishes the connection to the database. the main connection is informed in $configfile
+     * the secondary connections are informed in $configArray. The $configArray prevails over $configfile.
+     * In this case $configfile will be ignored.
      *
      * @param string $configFile     - 1: nome do arquivo na pasta <APP>/includes/<nome_arquivo>.php
-     * @param boolean $boolRequired  - 2: Default TRUE
+     * @param boolean $boolRequired  - 2: Default TRUE = connection is mandatory
      * @param boolean $boolUtfDecode - 3: Default TRUE = faz o Decode / Encode UTF8
      * @param array $configArray     - 4: Usa array de configuração, prevalecendo sobre o $configFile
      * @return void
