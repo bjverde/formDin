@@ -1,6 +1,9 @@
 <?php
 d($_REQUEST);
 $frm = new TForm('Gride Campos 04 - Campo Memo', 300, 700);
+$html = '<br><b>Importante</b>'
+        .'<br><br>SEMPRE declare a chave primaria do grid. Sem a PK o campo não vai funcionar';		
+$frm->addHtmlField('aviso', $html, null,null, null,null);
 
 // simulação de dados para o gride
 $dados = null;

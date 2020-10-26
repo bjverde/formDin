@@ -88,10 +88,10 @@ class TPageControl extends TTable
 	/**
 	* Adicionar aba ao pageControl
 	* boolDefaut - indica se a aba será a seleciona na criação do formulãrio
-	* @param mixed $strLabel      - Nome da Aba
-	* @param boolean $boolDefault - indica se a aba será a seleciona na criação do formulário
-	* @param boolean $boolVisible - Visivel
-	* @param string $strName
+	* @param mixed $strLabel      - 1: Nome da Aba
+	* @param boolean $boolDefault - 2: indica se a aba será a seleciona na criação do formulário
+	* @param boolean $boolVisible - 3: Visivel
+	* @param string $strName      - 4: 
 	* @param boolean $boolDisableTab - Desabilita 
 	* @return TForm
 	*/

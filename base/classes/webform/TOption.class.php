@@ -68,17 +68,17 @@ abstract class TOption extends TControl
 	 *
 	 * @abstract
 	 * @param string $strName          - 1:
-	 * @param array $mixOptions        - 2: array no formato "key=>value" ou nome do pacote oracle e da função a ser executada
-	 * @param array $arrValues         - 3: array no formato "key=>key" para identificar a(s) opção(ões) selecionada(s)
-	 * @param boolean $boolRequired    - 4:
-	 * @param integer $intQtdColumns   - 5:
+	 * @param array $mixOptions        - 2: Array no formato "id=>value" ou nome do pacote oracle e da função a ser executada
+	 * @param array $arrValues         - 3: Array no formato "key=>id" para identificar a(s) opção(ões) selecionada(s)
+	 * @param boolean $boolRequired    - 4: Default FALSE = não obrigatori, TRUE = obrigatorio
+	 * @param integer $intQtdColumns   - 5: Quantidade de colunas, valor DEFAULT = 1;
 	 * @param integer $intWidth        - 6:
 	 * @param integer $intHeight       - 7:
 	 * @param integer $intPaddingItems - 8: numero inteiro para definir o espaço vertical entre as colunas de opções
-	 * @param boolean $boolMultiSelect - 9:
-	 * @param string $strInputType     -10: define o tipo de input a ser gerado. Ex: select, radio ou check
-	 * @param string $strKeyField      -11: nome da coluna que será utilizada para preencher os valores das opções
-	 * @param string $strDisplayField  -12:
+	 * @param boolean $boolMultiSelect -09: Default FALSE = SingleSelect, TRUE = MultiSelect
+	 * @param string $strInputType     -10: Define o tipo de input a ser gerado. Ex: select, radio ou check
+	 * @param string $strKeyField      -11: Nome da coluna que será utilizada para preencher os valores das opções
+	 * @param string $strDisplayField  -12: Nome da coluna que será utilizada para preencher as opções que serão exibidas para o usuário
 	 * @param boolean $boolNowrapText  -13:
 	 * @param string $strDataColumns   -14: informações extras do banco de dados que deverão ser adicionadas na tag option do campo select
 	 * @return TOption

@@ -41,14 +41,37 @@
 
 d($_REQUEST);
 
+//Array FormDin
+$listFormas = array();
+
+$listFormas['ID'][] = 1;
+$listFormas['SIGLA'][] = 'Din';
+$listFormas['NOME'][] = 'Dinheiro';
+
+$listFormas['ID'][] = 2;
+$listFormas['SIGLA'][] = 'Che';
+$listFormas['NOME'][] = 'Cheque';
+
+$listFormas['ID'][] = 3;
+$listFormas['SIGLA'][] = 'Car';
+$listFormas['NOME'][] = 'Cartão';
+
+$listFormas['ID'][] = 4;
+$listFormas['SIGLA'][] = 'Bit';
+$listFormas['NOME'][] = 'Bitcoin';
+
+$listFormas['ID'][] = 5;
+$listFormas['SIGLA'][] = 'Da';
+$listFormas['NOME'][] = 'Dash';
+//-------
+
 $frm = new TForm('Exemplo do Campo Select Simples', 450);
 $frm->setFlat(true);
 $frm->setShowCloseButton(false);
 
 $frm->addGroupField('gp1', 'Selects Normais');
-    $listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão',4=>'BitCoin');
-    $frm->addSelectField('forma_pagamento'     // 1: ID do campo
-                       , 'Forma Pagamento:'
+    $frm->addSelectField('forma_pagamento_sigla'     // 1: ID do campo
+                       , 'Forma Pagamento (sigla):'
                        , TRUE
                        , $listFormas           // 4: array dos valores
                        , null
@@ -60,6 +83,23 @@ $frm->addGroupField('gp1', 'Selects Normais');
                        , ' '   // 11: First Key in Display
                        , null  // 12: Frist Valeu in Display, use value NULL for required
                        );
+
+    $frm->addSelectField('forma_pagamento_nome'     // 1: ID do campo
+                       , 'Forma Pagamento (Nome):'
+                       , TRUE
+                       , $listFormas           // 4: array dos valores
+                       , null
+                       , null
+                       , null
+                       , null
+                       , null  //  9: Num itens que irão aparecer
+                       , null  // 10: Largura em Pixels
+                       , ' '   // 11: First Key in Display
+                       , null  // 12: Frist Valeu in Display, use value NULL for required
+                       ,'ID'
+                       ,'NOME'
+                       );                       
+
     
     $fg2 = $frm->addSelectField('forma_pagamento2'     // 1: ID do campo
                                , 'Forma Pagamento (DEFAULT):'
@@ -71,9 +111,9 @@ $frm->addGroupField('gp1', 'Selects Normais');
                                , null
                                , null  //  9: Num itens que irão aparecer
                                , 150   // 10: Largura em Pixels
-                               , null   // 11 First Key in Display
-                               , null     // 12 Frist Valeu in Display, use value NULL for required
-                               ,2
+                               , null  // 11 First Key in Display
+                               , null  // 12 Frist Valeu in Display, use value NULL for required
+                               , null
                                );
     $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado');
     
@@ -87,8 +127,8 @@ $frm->addGroupField('gp1', 'Selects Normais');
                             , null
                             , null  //  9: Num itens que irão aparecer
                             , 150   // 10: Largura em Pixels
-                            , ' '   // 11 First Key in Display
-                            , 4     // 12 Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null
+                            , 6   // 11 First Key in Display
+                            , 'xx'     // 12 Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null
                             );
     $fg2->setToolTip('Campo com valor DEFAULT pré-selecionado, ATRIBUTO 12');
     
