@@ -86,6 +86,10 @@ class TPDOConnectionObj
         $this->tpdo = $TPDOConnection;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Gera o Array de configuração com base nos atributos dos metodos
+     * @return array
+     */
     public function makeConfigArray(){
         $configArray = null;
         $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
@@ -103,6 +107,15 @@ class TPDOConnectionObj
         return $configArray;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Forma de conexão com o banco de dados, usando arquivos $configFile ou $array
+     *
+     * @param string $configFile     - 1: nome do arquivo na pasta <APP>/includes/<nome_arquivo>.php
+     * @param boolean $boolRequired  - 2: Default TRUE
+     * @param boolean $boolUtfDecode - 3: Default TRUE = faz o Decode / Encode UTF8
+     * @param array $configArray     - 4: Usa array de configuração, prevalecendo sobre o $configFile
+     * @return void
+     */
     public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
     {
         $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
