@@ -526,10 +526,13 @@ DROP procedure IF EXISTS `selFilhosMenu`;
 DELIMITER $$
 USE `form_exemplo`$$
 /****
+//Funciona com 
+//Para executar
 SET @idmenu_pai = 1;
-CALL selFilhosMenu(@idmenu_pai);
+CALL form_exemplo.selFilhosMenu(1);
 ****/
 CREATE PROCEDURE `selFilhosMenu`(IN idmenu_pai INT)
+NOT DETERMINISTIC READS SQL DATA SQL SECURITY DEFINER 
 BEGIN
   SELECT am.`idmenu`,
       am.`nom_menu`,
@@ -546,7 +549,7 @@ BEGIN
       am.`dat_inclusao`,
       am.`dat_update`
   FROM `acesso_menu` as am
-  where am.idmenu_pai = @idmenu_pai;
+  where am.idmenu_pai = idmenu_pai;
 END$$
 
 DELIMITER ;
@@ -564,9 +567,10 @@ USE `form_exemplo`$$
 CALL selMenuQtd(@qtd);
 SELECT @qtd;
 ****/
-CREATE PROCEDURE `selMenuQtd`(OUT qtd INT)
+CREATE PROCEDURE `selMenuQtd`()
+NOT DETERMINISTIC READS SQL DATA SQL SECURITY DEFINER 
 BEGIN
-  SELECT count(*) into qtd FROM `acesso_menu` as am;
+  SELECT count(*) as qtd FROM `acesso_menu` as am;
 END$$
 
 DELIMITER ;
@@ -577,6 +581,7 @@ DELIMITER ;
 
 USE `form_exemplo`;
 DROP procedure IF EXISTS `selFilhosMenuQtd`;
+NOT DETERMINISTIC READS SQL DATA SQL SECURITY DEFINER 
 
 DELIMITER $$
 USE `form_exemplo`$$
@@ -585,11 +590,12 @@ SET @idmenu_pai = 1;
 CALL selFilhosMenuQtd(@qtd, @idmenu_pai);
 SELECT @qtd;
 ****/
-CREATE PROCEDURE `selFilhosMenuQtd`(OUT qtd INT, IN idmenu_pai INT)
+CREATE PROCEDURE `selFilhosMenuQtd`(IN idmenu_pai INT)
 BEGIN
-  SELECT count(*) into qtd
+  SELECT idmenu_pai
+        ,count(*) as qtd
   FROM `acesso_menu` as am
-  where am.idmenu_pai = @idmenu_pai;
+  where am.idmenu_pai = idmenu_pai;
 END$$
 
 DELIMITER ;
