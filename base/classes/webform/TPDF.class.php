@@ -44,9 +44,9 @@
  *
  */
 // artificio para encontrar a pasta base
-$e = new TElement();
-define( 'FPDF_FONTPATH', $e->getBase() . 'lib_fpdf181/font/' );
-require_once( $e->getBase() . 'lib_fpdf181/fpdf.php' );
+//$e = new TElement();
+//define( 'FPDF_FONTPATH', $e->getBase() . 'lib_fpdf181/font/' );
+//require_once( $e->getBase() . 'lib_fpdf181/fpdf.php' );
 
 class TPDF extends FPDF
 {
