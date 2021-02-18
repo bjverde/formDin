@@ -159,6 +159,7 @@ $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-f
     $menu->add('64', '6', 'Exemplo 4', 'pdf/exe_pdf04.php');
     $menu->add('65', '6', 'Exemplo 5 - PDF diversos grids', 'pdf/exe_pdf05.php');
     $menu->add('66', '6', 'Exemplo 6 - Grid chamando PDF', 'pdf/exe_pdf06_grid.php');
+    $menu->add('67', '6', 'Exemplo 7 - FPDF Puro', 'pdf/exe_pdf07.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');
