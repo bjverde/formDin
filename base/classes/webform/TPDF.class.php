@@ -70,6 +70,10 @@ class TPDF extends FPDF
     private $onDrawCell;
     private $flagPrintHeader;
 
+    private $headerFillColors;
+    private $headerFontColors;
+    private $headerFontStyles;
+
     /**
      * Classe para criação de relatórios no formato PDF
      *
@@ -450,14 +454,7 @@ class TPDF extends FPDF
     {
         $this->colums = null;
     }
-
     //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //xxx
     //----------------------------------------------------------------------------------------------------
     /**
      * Imprimir array de dados em colunas
@@ -467,6 +464,9 @@ class TPDF extends FPDF
      *
      * @param mixed $data
      * @param mixed $margemInferior
+     * @param [type] $mixFillColor
+     * @param [type] $mixFontColor
+     * @return void
      */
     function row( $data, $intBottomMarginSize = null, $mixFillColor = null, $mixFontColor = null )
     {
