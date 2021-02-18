@@ -77,13 +77,17 @@ class TPDF extends FPDF
     /**
      * Classe para criação de relatórios no formato PDF
      *
-     * @param string $strOrientation
-     * @param string $strUnit
+     * @param string $strOrientation 01 : P or L
+     * @param string $strUnit        02 :sunidade 
      * @param string $strFormat
-     * @return TPDF
+     * @param string $strFontFamily
+     * @param integer $intFontSize
      */
-    public function __construct( $strOrientation = 'P', $strUnit = 'mm', $strFormat = 'A4', $strFontFamily = 'arial',
-        $intFontSize = 8 )
+    public function __construct( $strOrientation = 'P'
+                               , $strUnit = 'mm'
+                               , $strFormat = 'A4'
+                               , $strFontFamily = 'arial'
+                               , $intFontSize = 8 )
     {
         parent::__construct( $strOrientation, $strUnit, $strFormat );
         $this->SetFont( ( is_null( $strFontFamily ) ? 'Arial' : $strFontFamily ), '', ( is_null( $intFontSize ) ? 8 : $intFontSize ) );
