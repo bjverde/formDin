@@ -1018,6 +1018,15 @@ class TPDF extends FPDF
    	   return $this->tMargin;
     }
     //-----------------------------------------------------
+    /**
+     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     *   - red, green, blue, yellow, fuchsia, gray, black, white
+     *   - orange, lightYellow, lightBlue, lightGreen, pink
+     *   - brown, silver
+     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *
+     * @param string $headerFontColors
+     */    
     public function setHeaderFillColors($headerFillColors)
     {
     	$this->headerFillColors = $headerFillColors;
@@ -1029,6 +1038,15 @@ class TPDF extends FPDF
         }
         return $this->headerFillColors;
     }
+    /**
+     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     *   - red, green, blue, yellow, fuchsia, gray, black, white
+     *   - orange, lightYellow, lightBlue, lightGreen, pink
+     *   - brown, silver
+     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *
+     * @param string $headerFontColors
+     */
     public function setHeaderFontColors($headerFontColors)
     {
     	$this->headerFontColors = $headerFontColors;
