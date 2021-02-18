@@ -132,8 +132,8 @@ $dados02['TEXTO'][] = 'Desde ontem a noite o gerenciador de dependências do fro
 $pdf->clearColumns();
 $pdf->setData($dados02);
 //$pdf->printGridHeader();
-$pdf->setHeaderFillColors('blue');
-$pdf->setHeaderFontColors('red');
+$pdf->setHeaderFillColors('orange');
+$pdf->setHeaderFontColors('white');
 $pdf->addColumn('id', 10, 'C', 'ID', 'white', 'B', 14, 'black', 'times');
 $pdf->addColumn('Texto', 100, 'J', 'TEXTO', 'yellow', 'B', 8, 'black', 'Arial');
 $pdf->printRows();  //criar a grid do pdf
