@@ -966,7 +966,9 @@ class TPDF extends FPDF
 
 	            if ( count( $headers ) > 0 )
 	            {
-	                $this->row( $headers, null, 'silver', 'black' );
+                    $headerFillColors = $this->getHeaderFillColors();
+                    $headerFontColors = $this->getHeaderFontColors();
+	                $this->row( $headers, null, $headerFillColors, $headerFontColors );
 	            }
 	            $this->setRowAligns($oldAligns);
 				$this->flagPrintHeader=false;
@@ -988,7 +990,6 @@ class TPDF extends FPDF
         }
         return $r;
     }
-
     public function setVar( $varName = null, $varValue = null )
     {
         if ( $varName )
@@ -996,7 +997,6 @@ class TPDF extends FPDF
             $this->vars[ strtolower( $varName )] = $varValue;
         }
     }
-
     public function getVar( $varName = null )
     {
         if ( $varName )
@@ -1009,15 +1009,36 @@ class TPDF extends FPDF
     	if( (integer) $intNewValue > -1 )
     	{
     		$this->tMargin = $intNewValue;
-		}
-		else
-		{
+		}else{
 			$this->tMargin = 10.00125; // valor padrão.
 		}
     }
     public function getTopMargin($intNewValue=null)
     {
    	   return $this->tMargin;
+    }
+    //-----------------------------------------------------
+    public function setHeaderFillColors($headerFillColors)
+    {
+    	$this->headerFillColors = $headerFillColors;
+    }
+    public function getHeaderFillColors()
+    {
+        if(empty($this->headerFillColors) ) {
+            $this->setHeaderFillColors('silver');
+        }
+        return $this->headerFillColors;
+    }
+    public function setHeaderFontColors($headerFontColors)
+    {
+    	$this->headerFontColors = $headerFontColors;
+    }
+    public function getHeaderFontColors()
+    {
+        if(empty($this->headerFontColors) ) {
+            $this->setHeaderFontColors('black');
+        }
+        return $this->headerFontColors;
     }
 }
 ?>
