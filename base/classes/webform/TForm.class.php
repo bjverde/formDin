@@ -7035,13 +7035,13 @@ class TForm Extends TBox
 	 *
 	 * @param string $strName       - 1: ID do campo
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
-	 * @param boolean $boolNewLine  - 3: Campo em nova linha
-	 * @param integer $intMaxLength 
-	 * @param boolean $boolRequired - 5: Obrigatorio
-	 * @param integer $intSize      
+	 * @param integer $intMaxLength - 3: Tamanho maximo de caracteres
+	 * @param boolean $boolRequired - 4: Obrigatorio
+	 * @param integer $intSize      - 5: Tamanho do campo na tela
+	 * @param boolean $boolNewLine  - 6: Campo em nova linha
 	 * @param string  $strValue     - 7: valor inicial do campo
-	 * @param boolean $boolLabelAbove
-	 * @return TNumber
+	 * @param boolean $boolLabelAbove-8: Label acima, DEFAULT is FALSE na mesma linha
+	 * @return TEmail
 	 */
 	public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
