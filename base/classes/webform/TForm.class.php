@@ -6560,15 +6560,29 @@ class TForm Extends TBox
    /**
     * Adicionar campo CPF
     *
-    * @param string $strName             -  1: Id do campo
-    * @param string $strLabel            -  2: Label do campo
+    * @param string  $strName            -  1: Id do campo
+    * @param string  $strLabel           -  2: Label do campo
     * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
-    * @param string $strValue            -  4: Valor inicial do campo
+    * @param string  $strValue           -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @param string  $strInvalidMessage
+    * @param boolean $boolAlwaysValidate
+    *
     * @return TCpf Field
     */
-   public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   public function addCpfField( $strName
+                              , $strLabel=null
+                              , $boolRequired=null
+                              , $strValue=null
+                              , $boolNewLine=null
+                              , $boolLabelAbove=null
+                              , $boolNoWrapLabel=null
+                              , $strInvalidMessage=null
+                              , $boolAlwaysValidate=null
+                              , $strJsCallback=null 
+                              )
    {
        $field = new TCpf( $strName, $strValue, $boolRequired );
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
