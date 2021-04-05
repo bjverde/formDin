@@ -1984,7 +1984,7 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - 1: nome do campo na tela irá funcionar com autocomplete
+     * @param string $strFieldName                  - 1: nome do campo no form(tela) irá funcionar com autocomplete
      * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
