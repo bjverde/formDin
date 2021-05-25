@@ -60,7 +60,7 @@ class TFormTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		$this->TForm = new TForm(/* parameters */);
 	}
@@ -68,7 +68,7 @@ class TFormTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		$this->TForm = null;
 		parent::tearDown ();
 	}

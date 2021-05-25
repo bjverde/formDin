@@ -39,40 +39,19 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-require_once 'includes/constantes.php';
-require_once 'includes/config_conexao.php';
+$e = new TElement();
+$tmp = $e->getBase().'tmp';
+$arquivo = $tmp.DS.'test.pdf';
 
-//FormDin version: 4.7.5
-require_once '../base/classes/webform/TApplication.class.php';
-require_once 'controllers/autoload_appev2.php';
-require_once 'dao/autoload_appev2_dao.php';
+//POG OutPut Buffer no 
+//https://stackoverflow.com/questions/9475686/fpdf-error-some-data-has-already-been-output-cant-send-pdf
 
-
-define('ROOT_FOLDER'     , basename(__DIR__)); //Folder root name
-define('DIR_ROOT'     , basename(__DIR__));
-
-
-
-$app = new TApplication(); //criar uma instancia do objeto aplicacao
-$app->setAppRootDir(__DIR__); //Caminho completo no sistema operacional
-$app->setFormDinMinimumVersion(FORMDIN_VERSION_MIN_VERSION);
-$app->setTitle(SYSTEM_NAME.' com FormDin '.FORMDIN_VERSION);
-$app->setSUbTitle('Framework para Desenvolvimento de Aplicativos WEB');
-$app->setSigla(SYSTEM_ACRONYM);
-$app->setVersionSystem(SYSTEM_VERSION);
-//Customização simples https://github.com/bjverde/formDin/wiki/Layout-e-CSS#customiza%C3%A7%C3%A3o-simples
-$app->setLoginFile('includes/tela_login.php');
-$login = Acesso::getLogin();
-$app->setLoginInfo($login);
-
-//$app->setFavIcon('../base/imagens/favicon-16x16.png');
-$app->setImgLogoPath('images/appv1_logo.png'); //Logo APP
-$app->setWaterMark('formdin_logo.png'); //Imagem no centro
-//$app->setBackgroundImage('../imagens/bg_blackmosaic.png'); // Imagem de Fundo
-$app->setCssDefaultFormFile('css/css_form_default.css');
-
-$app->setMainMenuFile('includes/menu.php');
-//$app->setDefaultModule('info_start.php'); //Tela padrão que será carregada
-
-$app->run();
-?>
+// Para o FPDF Funcionar precisa usar o ob_start e ob_end_flush 
+ob_start();
+$pdf = new FPDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(40,10,'Exemplo com FPDF Puro');
+//$pdf->Output($arquivo,'I'); //É melhor gravando no tmp
+$pdf->Output();
+ob_end_flush(); 
