@@ -212,16 +212,12 @@ class ArrayHelperTest extends TestCase
     //-----------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------
     //-----------------------------------------------------------------------------------
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testValidateIsArray_FailNull(){
+        $this->expectException(InvalidArgumentException::class);
         ArrayHelper::validateIsArray(null,__METHOD__,__LINE__);
     }
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testValidateIsArray_FailArrayEmpty(){
+        $this->expectException(InvalidArgumentException::class);
         $listArray = array();
         $this->assertNull( ArrayHelper::validateIsArray($listArray,__METHOD__,__LINE__) );
     }
