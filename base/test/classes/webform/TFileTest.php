@@ -74,10 +74,8 @@ class TFileTest  extends TestCase
 		parent::tearDown ();
 	}
 	
-	/**
-	 * @expectedException UploadException
-	 */
 	public function testSetPostFileInfo_ERRO() {
+		$this->expectException(InvalidArgumentException::class);
 	    $_FILES = array();
 	    $_FILES['anexo']['error']=UPLOAD_ERR_INI_SIZE;
 	    $this->file->setPostFileInfo();

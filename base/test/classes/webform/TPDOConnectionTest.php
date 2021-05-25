@@ -144,26 +144,20 @@ class TPDOConnectionTest extends TestCase
 		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsNull(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = null;
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsWhite(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = '';
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_WrongDbms(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = 'test';
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
