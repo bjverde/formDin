@@ -56,18 +56,14 @@ class HtmlHelperTest extends TestCase
         $result = HtmlHelper::getViewPort();
         $this->assertEquals( $expected , $result);
 	}
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testValidateHtmlColorHexa_FailNumber() {
+		$this->expectException(InvalidArgumentException::class);
 	    $string = 1;
 	    HtmlHelper::validateHtmlColorHexa( $string );
 	}
 	//--------------------------------------------------------------------------------
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testValidateHtmlColorHexa_FailString() {
+		$this->expectException(InvalidArgumentException::class);
 	    $string = 'xxx';
 	    HtmlHelper::validateHtmlColorHexa( $string );
     }
@@ -76,22 +72,19 @@ class HtmlHelperTest extends TestCase
 	 * @expectedException PHPUnit\Framework\Error\Error
 	 */
 	public function testValidateHtmlColorHexa_FailArray() {
+		$this->expectError();
 	    $string = array(1,2);
 	    HtmlHelper::validateHtmlColorHexa( $string );
     }    
 	//--------------------------------------------------------------------------------
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testValidateHtmlColorHexa_FailWrongSizeLess() {
+		$this->expectException(InvalidArgumentException::class);
 	    $string = '#1';
 	    HtmlHelper::validateHtmlColorHexa( $string );
     }
     //--------------------------------------------------------------------------------
-    /**
-     * @expectedException InvalidArgumentException
-     */
 	public function testValidateHtmlColorHexa_FailWrongSizeBig() {
+		$this->expectException(InvalidArgumentException::class);
 	    $string = '#12345678';
 	    HtmlHelper::validateHtmlColorHexa( $string );
     }
