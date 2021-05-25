@@ -235,6 +235,7 @@ class SqlHelper
                                        , $type
                                        )
     {
+       $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
        If(is_array($value)){
            $qtdElement = CountHelper::count($value);
            if( $qtdElement == 1 ){
