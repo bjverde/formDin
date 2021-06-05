@@ -6336,8 +6336,8 @@ class TForm Extends TBox
      * @param string $boolNoWrapLabel
      * @return TMemo
      */
-    public function addMemoField( $strName
-   		                       , $strLabel=null
+    public function addMemoField(string $strName
+   		                       , string $strLabel=null
    		                       , $intMaxLength
    		                       , $boolRequired=null
    		                       , $intColumns=null
@@ -6370,8 +6370,8 @@ class TForm Extends TBox
      * @param boolean $boolNoWrapLabel - 10:
      * @return TRichTextEditor
      */
-    public function addRichTextEditor( $strName
-    		, $strLabel=null
+    public function addRichTextEditor( string $strName
+    		, string $strLabel=null
     		, $intMaxLength
     		, $boolRequired=null
     		, $intColumns=null
@@ -7011,8 +7011,8 @@ class TForm Extends TBox
      * @param string $strHint
      * @return TNumber
      */       
-	public function addNumberField( $strName
-				           		, $strLabel=null
+	public function addNumberField(string $strName
+				           		, string $strLabel=null
 				           		, $intMaxLength
 				           		, $boolRequired=null
 				           		, $intDecimalPlaces=null
@@ -7057,7 +7057,7 @@ class TForm Extends TBox
 	 * @param boolean $boolLabelAbove-8: Label acima, DEFAULT is FALSE na mesma linha
 	 * @return TEmail
 	 */
-	public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	public function addEmailField( string $strName, string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
 		$field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
 		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
