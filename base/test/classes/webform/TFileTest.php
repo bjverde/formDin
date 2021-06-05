@@ -59,7 +59,7 @@ class TFileTest  extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		$fileFormat = 'pdf,gif,txt,jpg,rar,zip,doc';
 		$this->fieldName = 'anexo';
@@ -69,15 +69,13 @@ class TFileTest  extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		$this->file = null;		
 		parent::tearDown ();
 	}
 	
-	/**
-	 * @expectedException UploadException
-	 */
 	public function testSetPostFileInfo_ERRO() {
+		$this->expectException(UploadException::class);
 	    $_FILES = array();
 	    $_FILES['anexo']['error']=UPLOAD_ERR_INI_SIZE;
 	    $this->file->setPostFileInfo();

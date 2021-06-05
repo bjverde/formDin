@@ -16,5 +16,5 @@ REM D:\wamp\bin\php\php7.2.18\php.exe D:\wamp\bin\phpunit\phpunit-7.2.4.phar --w
 REM ECHO PHP 7.2.18 and PHPUnit 7.2.4 with Config XML and Coverage
 REM D:\wamp\bin\php\php7.2.18\php.exe D:\wamp\bin\phpunit\phpunit-7.2.4.phar --configuration D:\wamp\www\formDin\base\test\phpunit-conf-win.xml --coverage-html D:\wamp\www\formDin\phpunit-code-coverage D:\wamp\www\formDin\base\test\
 
-ECHO PHP 7.2.18 and PHPUnit 7.2.4 with Config XML file
-D:\wamp\bin\php\php7.2.18\php.exe D:\wamp\bin\phpunit\phpunit-7.2.4.phar --configuration D:\wamp\www\formDin\base\test\phpunit-conf-win.xml D:\wamp\www\formDin\base\test\
+ECHO php 7.3.5 and PHPUnit 9.1.4 with Config XML file
+D:\wamp\bin\php\php7.3.5\php.exe D:\wamp\bin\phpunit\phpunit-9.1.4.phar --configuration D:\wamp\www\formDin\base\test\phpunit-conf-win.xml D:\wamp\www\formDin\base\test\

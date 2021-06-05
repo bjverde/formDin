@@ -50,8 +50,7 @@ class TPDOConnectionObjTest extends TestCase
 
     private $test;
 	
-    public static function setUpBeforeClass()
-    {
+    public static function setUpBeforeClass(): void {
         $tpdo = new TPDOConnectionObj(false);
         $tpdo->setDBMS(null);
         $tpdo->setDataBaseName(null);
@@ -60,7 +59,7 @@ class TPDOConnectionObjTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		$this->test = new TPDOConnectionObj(false);
 	}
@@ -68,7 +67,7 @@ class TPDOConnectionObjTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 	    $this->test = null;		
 		parent::tearDown ();
 	}	

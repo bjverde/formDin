@@ -86,7 +86,7 @@ class TCnpj extends TMask
 			$cnpj = @preg_replace("/[^0-9]/","",$this->getValue());
 			return substr($cnpj,0,2).".".substr($cnpj,2,3).".".substr($cnpj,5,3)."/".substr($cnpj,8,4)."-".substr($cnpj,12,2);
 		}
-		return $ghis->getValue();
+		return $this->getValue();
 	}
 
 	/**

@@ -46,6 +46,11 @@ $html = '<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlit
  A tabela de consulta é a tb_municipio.<br>
  A consulta esta configurada para disparar quando for digitado o terceiro caractere do nome.<br>
  O campo Cod Uf será preenchido automaticamente quando a cidade for encontrada ou selecionada</h3>';
+ $html = $html.'<br>';
+ $html = $html.'<br>';
+ $html = $html.'<h3>Multiplos bancos</h3>';
+ $html = $html.'<br> O Parametro 19, permite informação um arquivo de conexão para multiplos bancos.';
+ $html = $html.'<br> No appexemplo_v2.0 no modulo/database_multiplos_autocomplete.php tem um exemplo';
 
 
 $html2 = 'Exemplo busque pela palavra SERRA, nos dois grupos.'
@@ -96,22 +101,25 @@ $frm->setAutoComplete('nom_municipio2', 'tb_municipio'            // 2: tabela a
 , null, null, null, true);                       // $boolSearchAnyPosition busca o texto em qualquer posição igual Like %texto%
 
 
-$frm->setAutoComplete('nom_municipio3'
-                     , 'tb_municipio'            // 2: tabela alvo da pesquisa
-                     , 'nom_municipio'           // 3: campo de pesquisa
+$frm->setAutoComplete('nom_municipio3'           // 01: nome do campo na tela irá funcionar com autocomplete
+                     , 'tb_municipio'            // 02: tabela alvo da pesquisa
+                     , 'nom_municipio'           // 03: campo de pesquisa
                      , 'cod_municipio|cod_municipio3,cod_uf|cod_uf3'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-                     , true
-                     , null                      // 6: campo do formulário que será adicionado como filtro
-                     , 'callback_autocomplete_municipio()'
-                     , 3
-                     , 1000                       // 09: Default 1000, tempo após a digitação para disparar a consulta
-                     , 50                         // 10: máximo de registros que deverá ser retornado
-                     , null, null, null           // url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
-                     , null                       // 15: Mesagem caso não encontre nenhum registro
+                     , true                      // 05: Desativa os campos que serão atuliazados depois da pesquisa
+                     , null                      // 06: campo do formulário que será adicionado como filtro
+                     , 'callback_autocomplete_municipio()' // 07: função javascript de callback
+                     , 3                         // 08: Default 3, numero de caracteres minimos para disparar a pesquisa
+                     , 1000                      // 09: Default 1000, tempo após a digitação para disparar a consulta
+                     , 50                        // 10: Máximo de registros que deverá ser retornado
                      , null
                      , null
+                     , null                      // 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+                     , null                      // 14: Mesagem caso não encontre nenhum registro
+                     , null                      // 15:
                      , null
-                     , true                     // $boolSearchAnyPosition busca o texto em qualquer posição igual Like %texto%
+                     , null
+                     , true                      // 18: busca o texto em qualquer posição igual Like %texto%
+                     , null                      // 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
                     );  
 
 

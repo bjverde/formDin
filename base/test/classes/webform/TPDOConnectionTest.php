@@ -59,7 +59,7 @@ class TPDOConnectionTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		//if(!defined('ENCODINGS')){ define('ENCODINGS','UTF-8'); }
 		$this->TPDOConnection = new TPDOConnection(/* parameters */);
@@ -68,7 +68,7 @@ class TPDOConnectionTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 	    $this->TPDOConnection = null;		
 		parent::tearDown ();
 	}
@@ -144,26 +144,20 @@ class TPDOConnectionTest extends TestCase
 		$this->assertEquals( $expected , $this->TPDOConnection->getPort());
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsNull(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = null;
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_EmptyDbmsWhite(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = '';
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testgetDefaultPortDBMS_WrongDbms(){
+		$this->expectException(InvalidArgumentException::class);
 		$DBMS = 'test';
 		$this->TPDOConnection->getDefaultPortDBMS($DBMS);
 	}
