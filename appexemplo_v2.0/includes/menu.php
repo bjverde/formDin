@@ -55,6 +55,7 @@ $menu->add(11, null, 'Banco', null, null, 'data_base.png');
 $menu->add(11.1, 11, 'Commit', 'modulos/database_commit.php', null, '../../'.DIR_ROOT.'/images/database_commit.png');
 $menu->add(11.2, 11, 'Rollback', 'modulos/database_rollback.php', null, '../../'.DIR_ROOT.'/images/database_rollback.png');
 $menu->add(11.3, 11, 'Multiplos Bancos', 'modulos/database_multiplos.php', null, '../../'.DIR_ROOT.'/images/database_balance.png');
+$menu->add(11.4, 11, 'AutoComplete Multiplos Bancos', 'modulos/database_multiplos_autocomplete.php', null, '../../'.DIR_ROOT.'/images/database_balance.png');
 
 $menu->getXml();
 ?>

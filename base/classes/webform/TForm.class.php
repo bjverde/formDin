@@ -1998,7 +1998,7 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - 1: nome do campo na tela irá funcionar com autocomplete
+     * @param string $strFieldName                  - 1: nome do campo no form(tela) irá funcionar com autocomplete
      * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
@@ -2016,6 +2016,7 @@ class TForm Extends TBox
      * @param boolean $boolClearOnNotFound
      * @param boolean $boolClearUpdateFields
      * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
+     * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
      */
     public function setAutoComplete( $strFieldName
     		                       , $strTablePackageFuncion
@@ -2034,7 +2035,9 @@ class TForm Extends TBox
     		                       , $boolKeepFieldValuesOnPost=null
     		                       , $boolClearOnNotFound=null
     		                       , $boolClearUpdateFields=null
-    		                       , $boolSearchAnyPosition=null )
+                                   , $boolSearchAnyPosition=null 
+                                   , $strConfigFileName=null 
+                                   )
     {
         
         // não criar o autocomplente se o campo não existir
@@ -2072,6 +2075,7 @@ class TForm Extends TBox
         $aTemp[ 'searchField' ] = $strSearchField;
         $aTemp[ 'cacheTime' ] = $intCacheTime;
         $aTemp[ 'searchAnyPosition' ] = $boolSearchAnyPosition;
+        $aTemp[ 'configFileName' ] = $strConfigFileName;
         //$aTemp['messageNotFound']	= $strMessageNotFound;
         if( ( string ) $strCallBackFunctionJs ){
             if( !strpos( $strCallBackFunctionJs, '(' ) ){
@@ -6562,15 +6566,29 @@ class TForm Extends TBox
    /**
     * Adicionar campo CPF
     *
-    * @param string $strName             -  1: Id do campo
-    * @param string $strLabel            -  2: Label do campo
+    * @param string  $strName            -  1: Id do campo
+    * @param string  $strLabel           -  2: Label do campo
     * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
-    * @param string $strValue            -  4: Valor inicial do campo
+    * @param string  $strValue           -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
+    * @param boolean $boolNoWrapLabel
+    * @param string  $strInvalidMessage
+    * @param boolean $boolAlwaysValidate
+    *
     * @return TCpf Field
     */
-   public function addCpfField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
+   public function addCpfField( $strName
+                              , $strLabel=null
+                              , $boolRequired=null
+                              , $strValue=null
+                              , $boolNewLine=null
+                              , $boolLabelAbove=null
+                              , $boolNoWrapLabel=null
+                              , $strInvalidMessage=null
+                              , $boolAlwaysValidate=null
+                              , $strJsCallback=null 
+                              )
    {
        $field = new TCpf( $strName, $strValue, $boolRequired );
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
@@ -7037,13 +7055,13 @@ class TForm Extends TBox
 	 *
 	 * @param string $strName       - 1: ID do campo
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
-	 * @param boolean $boolNewLine  - 3: Campo em nova linha
-	 * @param integer $intMaxLength 
-	 * @param boolean $boolRequired - 5: Obrigatorio
-	 * @param integer $intSize      
+	 * @param integer $intMaxLength - 3: Tamanho maximo de caracteres
+	 * @param boolean $boolRequired - 4: Obrigatorio
+	 * @param integer $intSize      - 5: Tamanho do campo na tela
+	 * @param boolean $boolNewLine  - 6: Campo em nova linha
 	 * @param string  $strValue     - 7: valor inicial do campo
-	 * @param boolean $boolLabelAbove
-	 * @return TNumber
+	 * @param boolean $boolLabelAbove-8: Label acima, DEFAULT is FALSE na mesma linha
+	 * @return TEmail
 	 */
 	public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{

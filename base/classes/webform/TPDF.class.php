@@ -44,9 +44,9 @@
  *
  */
 // artificio para encontrar a pasta base
-$e = new TElement();
-define( 'FPDF_FONTPATH', $e->getBase() . 'lib_fpdf181/font/' );
-require_once( $e->getBase() . 'lib_fpdf181/fpdf.php' );
+//$e = new TElement();
+//define( 'FPDF_FONTPATH', $e->getBase() . 'lib_fpdf181/font/' );
+//require_once( $e->getBase() . 'lib_fpdf181/fpdf.php' );
 
 class TPDF extends FPDF
 {
@@ -70,16 +70,24 @@ class TPDF extends FPDF
     private $onDrawCell;
     private $flagPrintHeader;
 
+    private $headerFillColors;
+    private $headerFontColors;
+    private $headerFontStyles;
+
     /**
      * Classe para criação de relatórios no formato PDF
      *
-     * @param string $strOrientation
-     * @param string $strUnit
+     * @param string $strOrientation 01 : P or L
+     * @param string $strUnit        02 :sunidade 
      * @param string $strFormat
-     * @return TPDF
+     * @param string $strFontFamily
+     * @param integer $intFontSize
      */
-    public function __construct( $strOrientation = 'P', $strUnit = 'mm', $strFormat = 'A4', $strFontFamily = 'arial',
-        $intFontSize = 8 )
+    public function __construct( $strOrientation = 'P'
+                               , $strUnit = 'mm'
+                               , $strFormat = 'A4'
+                               , $strFontFamily = 'arial'
+                               , $intFontSize = 8 )
     {
         parent::__construct( $strOrientation, $strUnit, $strFormat );
         $this->SetFont( ( is_null( $strFontFamily ) ? 'Arial' : $strFontFamily ), '', ( is_null( $intFontSize ) ? 8 : $intFontSize ) );
@@ -450,14 +458,7 @@ class TPDF extends FPDF
     {
         $this->colums = null;
     }
-
     //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------
-    //xxx
     //----------------------------------------------------------------------------------------------------
     /**
      * Imprimir array de dados em colunas
@@ -467,6 +468,9 @@ class TPDF extends FPDF
      *
      * @param mixed $data
      * @param mixed $margemInferior
+     * @param [type] $mixFillColor
+     * @param [type] $mixFontColor
+     * @return void
      */
     function row( $data, $intBottomMarginSize = null, $mixFillColor = null, $mixFontColor = null )
     {
@@ -962,7 +966,9 @@ class TPDF extends FPDF
 
 	            if ( count( $headers ) > 0 )
 	            {
-	                $this->row( $headers, null, 'silver', 'black' );
+                    $headerFillColors = $this->getHeaderFillColors();
+                    $headerFontColors = $this->getHeaderFontColors();
+	                $this->row( $headers, null, $headerFillColors, $headerFontColors );
 	            }
 	            $this->setRowAligns($oldAligns);
 				$this->flagPrintHeader=false;
@@ -984,7 +990,6 @@ class TPDF extends FPDF
         }
         return $r;
     }
-
     public function setVar( $varName = null, $varValue = null )
     {
         if ( $varName )
@@ -992,7 +997,6 @@ class TPDF extends FPDF
             $this->vars[ strtolower( $varName )] = $varValue;
         }
     }
-
     public function getVar( $varName = null )
     {
         if ( $varName )
@@ -1005,15 +1009,54 @@ class TPDF extends FPDF
     	if( (integer) $intNewValue > -1 )
     	{
     		$this->tMargin = $intNewValue;
-		}
-		else
-		{
+		}else{
 			$this->tMargin = 10.00125; // valor padrão.
 		}
     }
     public function getTopMargin($intNewValue=null)
     {
    	   return $this->tMargin;
+    }
+    //-----------------------------------------------------
+    /**
+     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     *   - red, green, blue, yellow, fuchsia, gray, black, white
+     *   - orange, lightYellow, lightBlue, lightGreen, pink
+     *   - brown, silver
+     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *
+     * @param string $headerFontColors
+     */    
+    public function setHeaderFillColors($headerFillColors)
+    {
+    	$this->headerFillColors = $headerFillColors;
+    }
+    public function getHeaderFillColors()
+    {
+        if(empty($this->headerFillColors) ) {
+            $this->setHeaderFillColors('silver');
+        }
+        return $this->headerFillColors;
+    }
+    /**
+     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     *   - red, green, blue, yellow, fuchsia, gray, black, white
+     *   - orange, lightYellow, lightBlue, lightGreen, pink
+     *   - brown, silver
+     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *
+     * @param string $headerFontColors
+     */
+    public function setHeaderFontColors($headerFontColors)
+    {
+    	$this->headerFontColors = $headerFontColors;
+    }
+    public function getHeaderFontColors()
+    {
+        if(empty($this->headerFontColors) ) {
+            $this->setHeaderFontColors('black');
+        }
+        return $this->headerFontColors;
     }
 }
 ?>

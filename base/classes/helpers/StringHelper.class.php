@@ -94,7 +94,7 @@ class StringHelper
      */
     public static function formatCnpjCpf($value) 
     {
-        $cnpj_cpf = preg_replace("/\D/", '', $value);
+        $cnpj_cpf = self::limpaCnpjCpf($value);
         if (strlen($cnpj_cpf) === 11) {
             $value = preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cnpj_cpf);
         } else if(strlen($cnpj_cpf) === 14){
@@ -109,5 +109,129 @@ class StringHelper
         return $limpo;
     }
 
+    /**
+     * Recebe uma string e formata o numero telefone em dos 4 formatos
+     * (61) 91234-5678
+     * (61) 1234-5678
+     * 91234-5678
+     * 1234-5678
+     * @param string $value
+     * @return string
+     */
+    public static function formatPhoneNumber($value) 
+    {
+        $cnpj_cpf = self::limpaCnpjCpf($value);
+        if (strlen($cnpj_cpf) === 11) {
+            $value = preg_replace("/(\d{2})(\d{5})(\d{4})/", "(\$1) \$2-\$3", $cnpj_cpf);
+        } else if(strlen($cnpj_cpf) === 10){
+            $value = preg_replace("/(\d{2})(\d{4})(\d{4})/", "(\$1) \$2-\$3", $cnpj_cpf);
+        } else if(strlen($cnpj_cpf) === 9){
+            $value = preg_replace("/(\d{5})(\d{4})/", "\$1-\$2", $cnpj_cpf);
+        } else if(strlen($cnpj_cpf) === 8){
+            $value = preg_replace("/(\d{4})(\d{4})/", "\$1-\$2", $cnpj_cpf);
+        }
+        return $value;
+    }
+    
+    /**
+     * Recebe uma string do tipo "olá à mim! ñ" e retona "ola a mim! n"
+     * https://pt.stackoverflow.com/questions/49645/remover-acentos-de-uma-string-em-phps
+     * https://pt.stackoverflow.com/questions/858/refatora%c3%a7%c3%a3o-de-fun%c3%a7%c3%a3o-para-remover-pontua%c3%a7%c3%a3o-espa%c3%a7os-e-caracteres-especiais
+     * https://stackoverflow.com/questions/13614622/transliterate-any-convertible-utf8-char-into-ascii-equivalent
+     * @param string $string
+     * @return string
+     */
+    public static function tirarAcentos($string) 
+    {
+        $string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+        $string = self::removeCaracteresEspeciais($string);
+        return $string;
+    }
+
+    /**
+     * Recebe uma string remove tudo que não faz partes das palavras Brasileira
+     * e espaços em branco
+     * @param string $string
+     * @return string
+     */
+    public static function removeCaracteresEspeciais($string) 
+    {
+        $string = preg_replace('/[^a-zA-Z0-9\sÀÁÃÂÉÊÍÓÕÔÚÜÇÑàáãâéêíóõôúüçñ]/', '', $string);        
+        return $string;
+    }
+
+    /**
+     * Recebe uma string remove espaços em branco
+     * @param string $string
+     * @return string
+     */
+    public static function removeEspacoBranco($string) 
+    {
+        $string = preg_replace('/[\s]/', '', $string);
+        return $string;
+    }
+
+    /**
+     * Recebe uma string "minha string"e converte para o formato PascalCase
+     * "MinhaString"
+     * https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function string2PascalCase($string) 
+    {
+        $string = self::tirarAcentos($string);
+        $string = mb_convert_case ( $string, MB_CASE_TITLE );
+        $string = self::removeEspacoBranco($string);
+        return $string;
+    }
+
+    /**
+     * Recebe uma string "minha string"e converte para o formato CamelCase
+     * "minhaString"
+     * https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function string2CamelCase($string) 
+    {
+        $string = self::string2PascalCase($string);
+        $string = lcfirst($string);
+        return $string;
+    }
+
+    /**
+     * Recebe uma string "minha string"e converte para o formato KebabCase
+     * "minha-string"
+     * https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function string2KebabCase($string) 
+    {
+        $string = self::removeCaracteresEspeciais($string);
+        $string = self::tirarAcentos($string);
+        $string = mb_convert_case ( $string,  MB_CASE_LOWER );
+        $string = preg_replace('/[\s]/', '-', $string);
+        return $string;
+    }
+
+    /**
+     * Recebe uma string "minha string"e converte para o formato SnakeCase
+     * "minha_string"
+     * https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function string2SnakeCase($string) 
+    {
+        $string = self::string2KebabCase($string);
+        $string = preg_replace('/[-]/', '_', $string);
+        return $string;
+    }
 
 }

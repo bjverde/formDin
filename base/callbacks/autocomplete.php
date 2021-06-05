@@ -52,6 +52,7 @@ $boolDebug=false;
 $bvars=null;
 $intCacheTime = isset( $_REQUEST['cacheTime'] ) ? $_REQUEST['cacheTime'] : -1; // sem cache
 $boolSearchAnyPosition = isset( $_REQUEST['searchAnyPosition'] ) ? ( $_REQUEST['searchAnyPosition'] == 'true' ) : false; // usar %like%
+$configFileName = isset( $_REQUEST['configFileName'] ) ? $_REQUEST['configFileName'] : null; // nome arquivo de config de banco
 
 
  //print_r($_REQUEST,TRUE);
@@ -103,7 +104,7 @@ if($boolDebug) {
 if(preg_match('/\.PK\a?/i',$strTablePackageFuncion)>0) {
 	$res = recuperaPacoteOracleAutoComplete ( $strSearchField, $intCacheTime, $strTablePackageFuncion );
 } else {
-	$res = tableRecoverResult( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
+	$res = tableRecoverResult( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion, $configFileName);
 }
 
 //----------------------------------------------------------------------------------

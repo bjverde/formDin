@@ -51,7 +51,7 @@ class FormDinHelperTest extends TestCase
 {
 
     public function testVersion() {
-		$expected = '4.10.0';
+		$expected = '4.11.1';
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}
@@ -124,24 +124,18 @@ class FormDinHelperTest extends TestCase
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testConvertVo2ArrayFormDin_failNull(){	    
+	public function testConvertVo2ArrayFormDin_failNull(){
+		$this->expectException(InvalidArgumentException::class);	    
 	    FormDinHelper::convertVo2ArrayFormDin(null);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testConvertVo2ArrayFormDin_failString(){
+		$this->expectException(InvalidArgumentException::class);
 	    FormDinHelper::convertVo2ArrayFormDin('xx');
 	}
 	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testConvertVo2ArrayFormDin_failInt(){
+		$this->expectException(InvalidArgumentException::class);
 	    FormDinHelper::convertVo2ArrayFormDin(120);
 	}	
 	
@@ -161,26 +155,20 @@ class FormDinHelperTest extends TestCase
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testValidateObjTypeTPDOConnectionObj_failMethod(){
+		$this->expectException(InvalidArgumentException::class);
 	    FormDinHelper::validateObjTypeTPDOConnectionObj(null,null,null);
-	}	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
+	}
 	public function testValidateObjTypeTPDOConnectionObj_failLine(){
+		$this->expectException(InvalidArgumentException::class);
 	    FormDinHelper::validateObjTypeTPDOConnectionObj(null,__METHOD__,null);
 	}
 	
 	public function testValidateObjTypeTPDOConnectionObj_failNoObj(){
 	    $this->assertNull( FormDinHelper::validateObjTypeTPDOConnectionObj(null,__METHOD__,__LINE__) );
-	}	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
+	}
 	public function testValidateObjTypeTPDOConnectionObj_failObjWrong(){
+		$this->expectException(InvalidArgumentException::class);
 	    $tpdo = new TDiv();
 	    FormDinHelper::validateObjTypeTPDOConnectionObj($tpdo,__METHOD__,__LINE__);
 	}
@@ -196,10 +184,8 @@ class FormDinHelperTest extends TestCase
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------	
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testValidateIdIsNumeric_FailNull(){
+		$this->expectException(InvalidArgumentException::class);
 	    FormDinHelper::validateIdIsNumeric(null,__METHOD__,__LINE__);
 	}
 	public function testValidateIdIsNumeric_OkInteger(){

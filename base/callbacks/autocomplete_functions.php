@@ -88,29 +88,37 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
 
 /**
  * Recupera o resultado da tabela 
- * @param bvars
- * @param boolSearchAnyPosition
- * @param arrUpdateFields
- * @param strSearchField
- * @param strTablePackageFuncion
- * @param erro
+ * @param array $bvars
+ * @param [type] $boolSearchAnyPosition
+ * @param [type] $arrUpdateFields
+ * @param [type] $strSearchField
+ * @param [type] $strTablePackageFuncion
+ * @param string $configFileName Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+ * @return void
  */
-function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion) {
+function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,$configFileName=null) {
 	$sql = tableRecoverCreateSql ( $bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
 	//impAutocomplete( $sql,true);return;
 
-	$bvars	=null;
 	$res	=null;
-	$nrows	=null;
-    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ) {
-		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$intCacheTime) ) {
-			if( preg_match('/falha/i',$erro ) > 0 ) {
-				echo "Erro na função autocomplete(). Erro:".$erro."\n".$sql;
+    if( !class_exists('TPDOConnectionObj') ) {
+		throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_TPDO_OBJ);
+		return;
+	} else {
+		$tpdo = New TPDOConnectionObj(false);
+		if( $configFileName == "null" ){
+			$tpdo->connect(null,true,null,null);
+		}else{
+			if ( !defined('ROOT_PATH') ) {
+				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
 				return;
 			}
+			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
+			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
+			$configArray = getConnectionArray();
+			$tpdo->connect(null,true,null,$configArray);
 		}
-	} else {
-		$res = TPDOConnection::executeSql($sql);
+		$res = $tpdo->executeSql($sql);
 	}
 	return $res;
 }

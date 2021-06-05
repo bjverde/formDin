@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * GetHelper test case.
  */
-class autocomplete_functionsTest extends TestCase
+class Autocomplete_functionsTest extends TestCase
 {
 	public function testTableRecoverCreateSql_boolSearchAnyPositionFALSE() {
 		$_REQUEST['q'] = 'x';

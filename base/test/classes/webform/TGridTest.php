@@ -64,7 +64,7 @@ class TGridTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();				
 		
 		$primaryKey = 'IDPESSOA';
@@ -94,7 +94,7 @@ class TGridTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 		// TODO Auto-generated TGridTest::tearDown()
 		$this->tGrid = null;		
 		parent::tearDown ();
