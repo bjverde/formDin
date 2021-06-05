@@ -1915,7 +1915,7 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
-    public function addAutoCompleteColumn( $strName, $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
+    public function addAutoCompleteColumn( string $strName, string $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
     {
         $this->autocomplete[ $strName ] = new TAutoComplete( $strFieldName, $strTablePackage, $strSearchField, $mixUpdateFields, null, null, 'callBack', $intMinChars );
         $tgridColumn = $this->addTextColumn( $strName
@@ -1990,8 +1990,8 @@ class TGrid extends TTable
      * @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
      * @return TGridCheckColumn
      */
-    public function addCheckColumn( $strName
-        , $strTitle = null
+    public function addCheckColumn( string $strName
+        , string $strTitle = null
         , $strKeyField
         , $strDescField = null
         , $boolReadOnly = null
@@ -2015,7 +2015,7 @@ class TGrid extends TTable
      * @param boolean $boolReadOnly
      * @return TGridRadioColumn
      */
-    public function addRadioColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
+    public function addRadioColumn( string $strName, string $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
     {
         if ( !$strKeyField )
         {
