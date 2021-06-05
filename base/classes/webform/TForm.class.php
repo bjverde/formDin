@@ -6299,8 +6299,8 @@ class TForm Extends TBox
      * @param boolean $boolNoWrapLabel
      * @return TEdit
      */
-    public function addTextField( $strName
-    		                    , $strLabel=null
+    public function addTextField( string $strName
+    		                    , string $strLabel=null
     		                    , $intMaxLength
     		                    , $boolRequired=null
     		                    , $intSize=null
