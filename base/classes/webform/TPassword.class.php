@@ -57,7 +57,10 @@
 	* @param boolean $boolReadOnly
 	* @return TPassword
 	*/
-	public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intSize=null, $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
+	public function __construct(string $strName
+	                           ,string $strValue=null
+							   ,$intMaxLength
+							   ,$boolRequired=null,$intSize=null, $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
 	{
 		$intMaxLength = is_null($intMaxLength) ? 20 : $intMaxLength;
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired);
