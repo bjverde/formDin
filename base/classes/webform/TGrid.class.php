@@ -1915,7 +1915,18 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
-    public function addAutoCompleteColumn( string $strName, string $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
+    public function addAutoCompleteColumn( string $strName
+                                         , string $strTitle = null
+                                         , string $strFieldName = null
+                                         , string $strSize = null
+                                         , int $intMaxLength = null
+                                         , string $strTablePackage
+                                         , string $strSearchField
+                                         , int $intMinChars = null
+                                         , $mixUpdateFields = null
+                                         , $strWidth = null
+                                         , $strAlign = null
+                                         , $boolReadOnly = null )
     {
         $this->autocomplete[ $strName ] = new TAutoComplete( $strFieldName, $strTablePackage, $strSearchField, $mixUpdateFields, null, null, 'callBack', $intMinChars );
         $tgridColumn = $this->addTextColumn( $strName
