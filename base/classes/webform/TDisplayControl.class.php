@@ -232,7 +232,7 @@ class TDisplayControl extends TTable
 				$this->label->setValue( $btnDocumentation . $this->label->getValue() );
 			}
 			$btnTooltipLabel=null;
-			if ( method_exists( $this->label, 'getTooltip' ) )
+			if ( !empty($this->label) && method_exists( $this->label, 'getTooltip' ) )
 			{
 				if ( $tt = $this->label->getTooltip() )
 				{
