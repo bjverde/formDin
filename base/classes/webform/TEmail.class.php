@@ -46,7 +46,7 @@ class TEmail extends TEdit
      * @param string  $value
      * @param boolean $required
      */
-    public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intSize=null)
+    public function __construct(string $strName,string $strValue=null,int $intMaxLength,$boolRequired=null,$intSize=null)
     {
         $intSize = is_null($intSize) ? 50 : $intSize;
         parent::__construct($strName, $strValue, $intMaxLength, $boolRequired, $intSize);
