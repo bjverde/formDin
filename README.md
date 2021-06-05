@@ -80,11 +80,9 @@ Veja na Wiki
 ## Versões
 [See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
 
-* [4.12.0 - 2019/03/20 tag v4.7.0](https://github.com/bjverde/formDin/releases/tag/v4.7.0)
-   * :white_check_mark: #153 new test 
-   * :bug: #164 
-   * :abc: FormDin5 
-   * :hammer: #165 list Stored e Procedure on MySQL and Sql Server
+* [4.11.1 - 2021/05/21 tag v4.11.1](https://github.com/bjverde/formDin/releases/tag/v4.11.1)
+   * :bug: #237 - SqlHelper::getSqlTypeIn with CONNECTOR_OR
+   * :hammer: #235 - PDF , cores do titulo
 
 * [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
    * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 
