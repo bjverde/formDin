@@ -60,7 +60,7 @@ class TApplicationTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		if (! defined ( 'APLICATIVO' )) {
 		    define ( 'APLICATIVO', 'phpunit' );
@@ -71,7 +71,7 @@ class TApplicationTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {
+	protected function tearDown(): void {
 	    session_destroy();
 		$this->tApplication = null;		
 		parent::tearDown ();

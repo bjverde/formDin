@@ -235,6 +235,7 @@ class SqlHelper
                                        , $type
                                        )
     {
+       $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
        If(is_array($value)){
            $qtdElement = CountHelper::count($value);
            if( $qtdElement == 1 ){
@@ -245,11 +246,11 @@ class SqlHelper
            } else if( $qtdElement > 1 ) {
                if($type == self::SQL_TYPE_IN_NUMERIC){
                    $value = implode(",",$value);
-                   $isTrue = EOL.' AND '.$attribute.' in ('.$value.') ';
+                   $isTrue = EOL.$connector.$attribute.' in ('.$value.') ';
                    $stringWhere = $stringWhere.$isTrue;
                }else{
                    $value = implode("','",$value);
-                   $isTrue = EOL.' AND '.$attribute.' in (\''.$value.'\') ';
+                   $isTrue = EOL.$connector.$attribute.' in (\''.$value.'\') ';
                    $stringWhere = $stringWhere.$isTrue;
                }
            }

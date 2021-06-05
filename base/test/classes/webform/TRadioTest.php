@@ -60,7 +60,7 @@ class TRadioTest extends TestCase
 	/**
 	 * Prepares the environment before running a test.
 	 */
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp ();
 		$listFormas = array(1=>'Dinheiro',2=>'Cheque',3=>'Cartão');
 		//$tRadio = new TRadio('forma_pagamento', 'Forma Pagamento:', false, $listFormas);
@@ -71,7 +71,7 @@ class TRadioTest extends TestCase
 	/**
 	 * Cleans up the environment after running a test.
 	 */
-	protected function tearDown() {		
+	protected function tearDown(): void {
 		parent::tearDown ();
 	}
 	

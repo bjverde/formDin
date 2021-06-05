@@ -150,6 +150,7 @@ $menu->add('5', null, 'JavaScript', null, null, '../../base/imagens/logo_js_flat
     $menu->add('55', '5', 'Ajax 05', 'ajax/exe_ajax05.php');
     $menu->add('56', '5', 'Ajax 06 - JavaScript e CSS', 'ajax/exe_ajax06_javascript_css.php');
     $menu->add('57', '5', 'Esconder campos', 'jscript/exe_js_fileds.php', null, '../../base/imagens/logo_js_flat.png');
+    $menu->add('58', '5', 'Abrir nova Janela', 'jscript/exe_js_new_window.php', null, '../../base/imagens/logo_js_flat.png');
 
 //-----------------------------------------------------------------------------
 $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-file-512.png');
@@ -159,6 +160,7 @@ $menu->add('6', null, 'PDF', null, null, '../../base/imagens/adobe-acrobat-pdf-f
     $menu->add('64', '6', 'Exemplo 4', 'pdf/exe_pdf04.php');
     $menu->add('65', '6', 'Exemplo 5 - PDF diversos grids', 'pdf/exe_pdf05.php');
     $menu->add('66', '6', 'Exemplo 6 - Grid chamando PDF', 'pdf/exe_pdf06_grid.php');
+    $menu->add('67', '6', 'Exemplo 7 - FPDF Puro', 'pdf/exe_pdf07.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('8', null, 'Gride', null, null, '../../base/imagens/table16.gif');

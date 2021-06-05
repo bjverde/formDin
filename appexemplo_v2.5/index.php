@@ -51,6 +51,8 @@ require_once 'dao/autoload_appev2_dao.php';
 define('ROOT_FOLDER'     , basename(__DIR__)); //Folder root name
 define('DIR_ROOT'     , basename(__DIR__));
 
+
+
 $app = new TApplication(); //criar uma instancia do objeto aplicacao
 $app->setAppRootDir(__DIR__); //Caminho completo no sistema operacional
 $app->setFormDinMinimumVersion(FORMDIN_VERSION_MIN_VERSION);

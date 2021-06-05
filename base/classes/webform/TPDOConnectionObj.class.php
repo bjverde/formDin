@@ -56,6 +56,9 @@ class TPDOConnectionObj
 
     private $tpdo = null;
     
+    /**
+     * @param boolean $connect : use MAIN connect 
+     */
     public function __construct($connect = true)
     {
         $tpdo = New TPDOConnection();
@@ -86,6 +89,10 @@ class TPDOConnectionObj
         $this->tpdo = $TPDOConnection;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Gera o Array de configuração com base nos atributos dos metodos
+     * @return array
+     */
     public function makeConfigArray(){
         $configArray = null;
         $hasDBMS = FormDinHelper::issetOrNotZero($this->getDBMS());
@@ -103,14 +110,27 @@ class TPDOConnectionObj
         return $configArray;
     }
     //--------------------------------------------------------------------------------------
+    /**
+     * Establishes the connection to the database. the main connection is informed in $configfile
+     * the secondary connections are informed in $configArray. The $configArray prevails over $configfile.
+     * In this case $configfile will be ignored.
+     *
+     * @param string $configFile     - 1: nome do arquivo na pasta <APP>/includes/<nome_arquivo>.php
+     * @param boolean $boolRequired  - 2: Default TRUE = connection is mandatory
+     * @param boolean $boolUtfDecode - 3: Default TRUE = faz o Decode / Encode UTF8
+     * @param array $configArray     - 4: Usa array de configuração, prevalecendo sobre o $configFile
+     * @return void
+     */
     public function connect( $configFile = null, $boolRequired = true, $boolUtfDecode = null, $configArray = null )
     {
         $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
         if(!$hasConfigArray){
             $configArray = $this->makeConfigArray();
-        }        
+        }
+        if( empty($configFile) ){
+            $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
+        }
         $tpdo = $this->getTPDOConnection();
-        $hasConfigArray = FormDinHelper::issetOrNotZero($configArray);
         if($hasConfigArray){
             $tpdo::connect(null,$boolRequired,$boolUtfDecode,$configArray);
         }else{

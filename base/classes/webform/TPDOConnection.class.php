@@ -217,6 +217,14 @@ class TPDOConnection {
         }
     }
     
+    /**
+     * Valida as configurações
+     *
+     * @param string $configFile
+     * @param bool $boolRequired
+     * @param array $configArray
+     * @return void
+     */
     private static function validateConnect($configFile ,$boolRequired ,$configArray) {
         $configErrors = array();
         
@@ -265,6 +273,12 @@ class TPDOConnection {
         }
     }
     
+    /**
+     * Recupera o caminho correto do arquivo de configuração
+     *
+     * @param string $configFile
+     * @return void
+     */
     private static function getConfigFileAndRoot($configFile){
         $root = null;
         

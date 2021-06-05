@@ -63,7 +63,7 @@ class TDAOCreateTest extends TestCase
     /**
      * Prepares the environment before running a test.
      */
-    protected function setUp(){
+    protected function setUp(): void {
         parent::setUp();        
         // TODO Auto-generated TDAOCreateTest::setUp()
         $tableName = 'myTableTest';
@@ -75,7 +75,7 @@ class TDAOCreateTest extends TestCase
     /**
      * Cleans up the environment after running a test.
      */
-    protected function tearDown(){
+    protected function tearDown(): void {
         // TODO Auto-generated TDAOCreateTest::tearDown()
         $this->tDAOCreate = null;        
         parent::tearDown();

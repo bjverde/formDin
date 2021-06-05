@@ -232,19 +232,15 @@ class SqlHelperTest extends TestCase
 	    $this->assertEquals( $expected , $result);
 	}
 	//--------------------------------------------------------------------------------
-	/**
-	 * @expectedException DomainException
-	 */
 	public function testTransformValidateString_SingleQuotes_SqlServer() {
+		$this->expectException(DomainException::class);
 	    $string = "blabl'abla";
 	    SqlHelper::setDbms(DBMS_SQLSERVER);
 	    SqlHelper::transformValidateString( $string );
 	}
 	//--------------------------------------------------------------------------------
-	/**
-	 * @expectedException DomainException
-	 */
 	public function testTransformValidateString_DubleQuotes_SqlServer() {
+		$this->expectException(DomainException::class);
 	    $string = 'blabl"abla';
 	    SqlHelper::setDbms(DBMS_SQLSERVER);
 	    SqlHelper::transformValidateString( $string );
