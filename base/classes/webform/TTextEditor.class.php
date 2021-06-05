@@ -48,7 +48,7 @@ class TTextEditor extends TMemo
 	private $onlineSearch;
 	private $resizeEnabled;
 
-	public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intColumns=null,$intRows=null,$boolShowCounter=null)
+	public function __construct(string $strName,string $strValue=null,$intMaxLength,$boolRequired=null,$intColumns=null,$intRows=null,$boolShowCounter=null)
 	{
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intColumns,$intRows,$boolShowCounter);
 		parent::setFieldType('textEditor');
