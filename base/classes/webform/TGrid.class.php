@@ -3271,7 +3271,7 @@ class TGrid extends TTable
             else if( preg_match('/edit|memo|hidden|select|number|date|cpf|cpfcnpj|cnpj/i',$field->getFieldType() ) )
             {
                 $label=null;
-                if( method_exists($dc->getLabel(),'getValue'))
+                if( !empty($dc->getLabel()) && method_exists($dc->getLabel(),'getValue'))
                 {
                     $label =$dc->getLabel()->getValue();
                 }

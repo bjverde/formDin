@@ -57,7 +57,11 @@ class TGridNumberColumn extends TGridEditColumn
 	* @param boolean $boolReadOnly
 	* @return TGridNumberColumn
 	*/
-	public function __construct($strEditName,$strTitle=null,$strFieldName=null,$intSize,$intDecimalPlaces=null,$boolFormatInteger=null,$strWidth=null,$strAlign=null,$boolReadOnly=null)
+	public function __construct(string $strEditName
+	                           ,string $strTitle=null
+							   ,string $strFieldName=null
+							   ,string $intSize
+							   ,$intDecimalPlaces=null,$boolFormatInteger=null,$strWidth=null,$strAlign=null,$boolReadOnly=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strFieldName,'number',$intSize,$intSize,null,$strWidth,$strAlign,$boolReadOnly);
 		$this->setDecimalPlaces($intDecimalPlaces);
