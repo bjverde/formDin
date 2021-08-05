@@ -106,7 +106,11 @@ class SqlHelper
      * @param boolean $testZero   5: the zero must be forehead or not. True = attribute must be diverge from zero
      * @return string
      */
-    public static function attributeIssetOrNotZero($whereGrid,$attribute,$isTrue,$isFalse,$testZero=true)
+    public static function attributeIssetOrNotZero(mixed $whereGrid
+                                                  ,string $attribute
+                                                  ,mixed $isTrue
+                                                  ,mixed $isFalse
+                                                  ,mixed $testZero=true)
     {
         $retorno = $isFalse;
         $has = ArrayHelper::has($attribute, $whereGrid);
@@ -170,12 +174,12 @@ class SqlHelper
      * @param string $connector
      * @return string
      */
-    public static function getSqlTypeNumeric( $stringWhere
-                                            , $arrayWhereGrid
-                                            , $attribute
-                                            , $testZero=true
-                                            , $value
-                                            , $connector=self::SQL_CONNECTOR_AND
+    public static function getSqlTypeNumeric( string $stringWhere
+                                            , mixed $arrayWhereGrid
+                                            , string $attribute
+                                            , mixed $testZero=true
+                                            , string $value
+                                            , string $connector=self::SQL_CONNECTOR_AND
                                             ) {
         $isTrue = EOL.' AND '.$attribute.' = '.$value.'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
@@ -210,13 +214,13 @@ class SqlHelper
         return $stringWhere;
     }
     //--------------------------------------------------------------------------
-    public static function getSqlTypeNotIn( $stringWhere
-                                          , $arrayWhereGrid
-                                          , $attribute
-                                          , $testZero=true
-                                          , $value
-                                          , $connector=self::SQL_CONNECTOR_AND
-                                          , $type
+    public static function getSqlTypeNotIn( string $stringWhere
+                                          , mixed $arrayWhereGrid
+                                          , string $attribute
+                                          , mixed $testZero=true
+                                          , string $value
+                                          , string $connector=self::SQL_CONNECTOR_AND
+                                          , string $type
                                           )
     {
         if($type == self::SQL_TYPE_IN_NUMERIC){
@@ -226,17 +230,30 @@ class SqlHelper
         }
         return $stringWhere;
     }
-    public static function getSqlTypeIn( $stringWhere
-                                       , $arrayWhereGrid
-                                       , $attribute
-                                       , $testZero=true
-                                       , $value
-                                       , $connector=self::SQL_CONNECTOR_AND
-                                       , $type
+
+    /**
+     * Retorna o SQL da clausula IN do SQL
+     *
+     * @param string $stringWhere string WHERE do Sql até o momento
+     * @param mixed  $arrayWhereGrid array ou string
+     * @param string $attribute name of the attribute to be verified
+     * @param mixed  $testZero
+     * @param string $value
+     * @param string $connector
+     * @param string $type
+     * @return void
+     */
+    public static function getSqlTypeIn( string $stringWhere
+                                       , mixed  $arrayWhereGrid
+                                       , string $attribute
+                                       , mixed  $testZero=true
+                                       , string $value
+                                       , string $connector=self::SQL_CONNECTOR_AND
+                                       , string $type
                                        )
     {
        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
-       If(is_array($value)){
+       if(is_array($value)){
            $qtdElement = CountHelper::count($value);
            if( $qtdElement == 1 ){
                $value = $value[0];
