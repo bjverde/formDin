@@ -163,37 +163,51 @@ class SqlHelper
         return $string;
     }
     
-    /***
-     * Return string sql for query with numeric
-     * @param string $stringWhere
-     * @param array $arrayWhereGrid
-     * @param string $atribute
-     * @param string $type
-     * @param boolean $testZero
+    /**
+     * Return string SQL for query with numeric
+     *
+     * @param string $stringWhere     1: Existing SQL String that will be concatenated
+     * @param mixed  $arrayWhereGrid  2: array with all attributes and values
+     * @param string $attribute       3: name of the attribute to be verified
+     * @param mixed  $testZero
      * @param string $value
      * @param string $connector
      * @return string
      */
     public static function getSqlTypeNumeric( string $stringWhere
-                                            , mixed $arrayWhereGrid
+                                            , mixed  $arrayWhereGrid
                                             , string $attribute
-                                            , mixed $testZero=true
+                                            , mixed  $testZero
                                             , string $value
                                             , string $connector=self::SQL_CONNECTOR_AND
                                             ) {
+        $testZero = empty($testZero)?true:$testZero;
         $isTrue = EOL.' AND '.$attribute.' = '.$value.'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
         return $stringWhere;
     }
     //--------------------------------------------------------------------------
+    /**
+     * Return string SQL for query with text like
+     *
+     * @param string $stringWhere     1: Existing SQL String that will be concatenated
+     * @param mixed  $arrayWhereGrid  2: array with all attributes and values
+     * @param string $attribute       3: name of the attribute to be verified
+     * @param mixed  $testZero        4: test string with ZERO, Default is TRUE
+     * @param string $value
+     * @param string $connector
+     * @return string
+     */    
     public static function getSqlTypeTextLike( $stringWhere
                                              , $arrayWhereGrid
                                              , $attribute
-                                             , $testZero=true
+                                             , $testZero
                                              , $value
                                              , $connector=self::SQL_CONNECTOR_AND
-                                             ) {
+                                             )
+    {
+        $testZero = empty($testZero)?true:$testZero;
         $value = self::explodeTextString($value);
         $isTrue = EOL.' AND '.$attribute.' like \'%'.$value.'%\' ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
@@ -201,13 +215,26 @@ class SqlHelper
         return $stringWhere;
     }
     //--------------------------------------------------------------------------
+    /**
+     * Return string SQL for query with text
+     *
+     * @param string $stringWhere     1: Existing SQL String that will be concatenated
+     * @param mixed  $arrayWhereGrid  2: array with all attributes and values
+     * @param string $attribute       3: name of the attribute to be verified
+     * @param mixed  $testZero        4: test string with ZERO, Default is TRUE
+     * @param string $value
+     * @param string $connector
+     * @return string
+     */ 
     public static function getSqlTypeText( $stringWhere
                                          , $arrayWhereGrid
                                          , $attribute
-                                         , $testZero=true
+                                         , $testZero
                                          , $value
                                          , $connector=self::SQL_CONNECTOR_AND
-                                         ) {
+                                         )
+    {
+        $testZero = empty($testZero)?true:$testZero;
         $isTrue = EOL.' AND '.$attribute.' = \''.$value.'\'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
@@ -217,12 +244,13 @@ class SqlHelper
     public static function getSqlTypeNotIn( string $stringWhere
                                           , mixed $arrayWhereGrid
                                           , string $attribute
-                                          , mixed $testZero=true
+                                          , mixed $testZero
                                           , string $value
                                           , string $connector=self::SQL_CONNECTOR_AND
                                           , string $type
                                           )
     {
+        $testZero = empty($testZero)?true:$testZero;
         if($type == self::SQL_TYPE_IN_NUMERIC){
             $stringWhere = self::getSqlTypeNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
         }else{
@@ -234,14 +262,14 @@ class SqlHelper
     /**
      * Retorna o SQL da clausula IN do SQL
      *
-     * @param string $stringWhere string WHERE do Sql até o momento
-     * @param mixed  $arrayWhereGrid array ou string
-     * @param string $attribute name of the attribute to be verified
+     * @param string $stringWhere     1: Existing SQL String that will be concatenated
+     * @param mixed  $arrayWhereGrid  2: array with all attributes and values
+     * @param string $attribute       3: name of the attribute to be verified
      * @param mixed  $testZero
      * @param string $value
      * @param string $connector
      * @param string $type
-     * @return void
+     * @return string
      */
     public static function getSqlTypeIn( string $stringWhere
                                        , mixed  $arrayWhereGrid
@@ -251,7 +279,7 @@ class SqlHelper
                                        , string $connector=self::SQL_CONNECTOR_AND
                                        , string $type
                                        )
-    {
+    {        
        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
        if(is_array($value)){
            $qtdElement = CountHelper::count($value);
@@ -290,13 +318,14 @@ class SqlHelper
      * @param string  $connector       6:
      * @return string
      */
-    public static function getAtributeWhereGridParameters( $stringWhere
-                                                         , $arrayWhereGrid
-                                                         , $attribute
-                                                         , $type 
-                                                         , $testZero=true
-                                                         , $connector=self::SQL_CONNECTOR_AND 
-                                                         ) {
+    public static function getAtributeWhereGridParameters( string $stringWhere
+                                                         , mixed  $arrayWhereGrid
+                                                         , string $attribute
+                                                         , string $type 
+                                                         , mixed  $testZero=true
+                                                         , string $connector=self::SQL_CONNECTOR_AND 
+                                                         )
+    {
         if( ArrayHelper::has($attribute, $arrayWhereGrid) ){
     	    $value = $arrayWhereGrid[$attribute];
     	    if ( !empty($value) && !is_array($value)){
