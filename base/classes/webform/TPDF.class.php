@@ -1058,5 +1058,8 @@ class TPDF extends FPDF
         }
         return $this->headerFontColors;
     }
+    public function getFontSize(){
+        return $this->FontSizePt;
+    }    
 }
 ?>
