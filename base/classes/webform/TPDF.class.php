@@ -529,12 +529,13 @@ class TPDF extends FPDF
         $this->CheckPageBreak( $lineHeight );
 
         //Draw the cells of the row
-        for( $i = 0; $i < count( $data ); $i++ )
-        {
+        for( $i = 0; $i < count( $data ); $i++ ) {
             $oCol = $this->getColumn( $i );
             //definir o estilo, tamanho e cor da fonte da celula
-            $this->SetFont( $oCol->getFontFamily( $currentFontFamily ), $oCol->getFontStyle( $currentFontStyle ),
-                $oCol->getFontSize( $currentFontSize ) );
+            $this->SetFont( $oCol->getFontFamily( $currentFontFamily )
+                          , $oCol->getFontStyle( $currentFontStyle )
+                          , $oCol->getFontSize( $currentFontSize )
+                          );
             $this->SetFillColor( $currentFillColor );
             $colWidth = $this->getRowWidths($i);
             $textAlign = strtoupper($this->getRowAligns(null,$i));
@@ -543,10 +544,8 @@ class TPDF extends FPDF
             //alterar a cor da fonte
             $aCor = null;
 
-            if ( $mixFontColor )
-            {
-                if ( is_array( $mixFontColor ) )
-                {
+            if ( $mixFontColor ) {
+                if ( is_array( $mixFontColor ) ){
                     if ( isset( $mixFontColor[ 'g' ] ) ) {
                         $aCor = $mixFontColor;
                     } else {
@@ -568,37 +567,25 @@ class TPDF extends FPDF
             }
 
             //cor de preenchimento da celula
-            if ( $mixFillColor )
-            {
-                if ( is_array( $mixFillColor ) )
-                {
-                    if ( isset( $mixFillColor[ 'g' ] ) )
-                    {
+            if ( $mixFillColor ){
+                if ( is_array( $mixFillColor ) ){
+                    if ( isset( $mixFillColor[ 'g' ] ) ){
                         $aCor = $mixFillColor;
-                    }
-                    else
-                    {
+                    } else {
                         $aCor[ 'r' ] = $mixFillColor[ 0 ];
                         $aCor[ 'g' ] = $mixFillColor[ 1 ];
                         $aCor[ 'b' ] = $mixFillColor[ 2 ];
                     }
-                }
-                else
-                {
+                }else{
                     $aCor = $this->HexToRGB( $mixFillColor );
                 }
-            }
-            else
-            {
+            }else{
                 $aCor = $this->HexToRGB( $oCol->getFillColor( $currentFillColor ) );
             }
 
-            if ( is_array( $aCor ) )
-            {
+            if ( is_array( $aCor ) ){
                 $this->SetFillColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
-            }
-            else
-            {
+            }else{
                 $this->SetFillColor( $aCor ); // escala de cinza: 0 - 255
             }
             //Save the current position
