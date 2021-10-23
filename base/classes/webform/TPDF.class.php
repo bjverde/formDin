@@ -835,41 +835,25 @@ class TPDF extends FPDF
         }
         return $strColor;
     }
-
-    /* public function setOnDrawRow($newValue=null)
-      {
-      $this->onDrawRow = $newValue;
-      }
-      //------------------------------------------------------------------------------------
-      public function getOnDrawRow()
-      {
-      return $this->onDrawRow;
-      }
-     */
-
     //------------------------------------------------------------------------------------
     public function setOnDrawCell( $newValue = null )
     {
         $this->onDrawCell = $newValue;
         return $this;
     }
-
-    //------------------------------------------------------------------------------------
     public function getOnDrawCell()
     {
         return $this->onDrawCell;
     }
-
-    function RotatedText( $x, $y, $txt, $angle )
+    //------------------------------------------------------------------------------------
+    public function RotatedText( $x, $y, $txt, $angle )
     {
         //Text rotated around its origin
         $this->Rotate( $angle, $x, $y );
         $this->Text( $x, $y, $txt );
         $this->Rotate( 0 );
     }
-
-    // xxx
-    function Rotate( $angle, $x = -1, $y = -1 )
+    public function Rotate( $angle, $x = -1, $y = -1 )
     {
         if ( $x == -1 )$x = $this->x;
 
