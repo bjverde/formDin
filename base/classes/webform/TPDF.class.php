@@ -478,10 +478,10 @@ class TPDF extends FPDF
      * O parametro $margemInferior indica o limite inferior maximo que a função
      * poderá utilizar para impressão da linha,  jogando o texto para a outra página se não couber.
      *
-     * @param mixed $data
-     * @param mixed $margemInferior
-     * @param [type] $mixFillColor
-     * @param [type] $mixFontColor
+     * @param array $data
+     * @param int   $intBottomMarginSize
+     * @param mixed $mixFillColor
+     * @param mixed $mixFontColor
      * @return void
      */
     function row( $data, $intBottomMarginSize = null, $mixFillColor = null, $mixFontColor = null )
