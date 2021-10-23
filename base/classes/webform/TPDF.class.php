@@ -944,9 +944,8 @@ class TPDF extends FPDF
         return $color;
     }
     /**
-     * Undocumented function
-     *
-     * @param [type] $strColor
+     * Converte o nome de uma cor no valor em HexaDecimal
+     * @param string $strColor
      * @return void
      */
     public function translateColor( $strColor = null )
