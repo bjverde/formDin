@@ -413,7 +413,6 @@ class TPDF extends FPDF
     }
     */
     }
-
     public function Footer()
     {
         if ( function_exists( 'rodape' ) )
@@ -421,24 +420,20 @@ class TPDF extends FPDF
             call_user_func( 'rodape', $this );
         }
     }
-
     //----------------------------------------------------------------------------------------------------
     public function setRowLineHeight( $intNewValue = null )
     {
         $this->rowLineHeight = $intNewValue;
     }
-
     public function getRowLineHeight()
     {
         return is_null( $this->rowLineHeight ) ? 4 : $this->rowLineHeight;
     }
-
     //----------------------------------------------------------------------------------------------------
     public function setWaterMark( $strNewValue = null )
     {
         $this->waterMark = $strNewValue;
     }
-
     //----------------------------------------------------------------------------------------------------
     public function getWaterMark()
     {
@@ -459,7 +454,6 @@ class TPDF extends FPDF
         }
         return $str;
     }
-
     //----------------------------------------------------------------------------------------------------
     /**
      * Clean coluns to new grid
@@ -494,7 +488,8 @@ class TPDF extends FPDF
         $currentFontStyle = $this->FontStyle;
         $currentFontSize  = $this->FontSizePt;
         $currentTextColor = $this->getCurrentTextColor();
-        $currentFillColor = $this->FillColor;
+        $currentFillColor = $this->getCurrentFillColor();
+        //MessageHelper::logRecordSimple('FillColor linha 492: '.$currentFillColor);
         $currentDrawColor = $this->DrawColor;
 
         // calcular o espaço que a linha vai ocupar na página
@@ -572,8 +567,7 @@ class TPDF extends FPDF
 			}
 
             // centralizar verticalmente o texto na célula
-            if ( ( $c = $nb - $aNb[ $i ] ) > 0 )
-            {
+            if ( ( $c = $nb - $aNb[ $i ] ) > 0 ){
                 $c *= ( $this->getRowLineHeight() / 2 );
                 $this->SetXY( $x, ( $y + $c ) );
             }
@@ -584,8 +578,7 @@ class TPDF extends FPDF
             $this->SetXY( $x + $colWidth, $y );
 
             //eugenio - desenhar a borda
-            if ( $borda )
-            {
+            if ( $borda ){
                 $this->Rect( $x, $y, $colWidth, $lineHeight, 'D' );
             }
             // voltar as configurações padrão
@@ -604,7 +597,6 @@ class TPDF extends FPDF
         //If the height h would cause an overflow, add a new page immediately
         if ( $this->GetY() + $h > $this->PageBreakTrigger )$this->AddPage( $this->CurOrientation );
     }
-
     //-------------------------------------------------------------------------------
     function NbLines( $w, $txt )
     {
@@ -991,6 +983,15 @@ class TPDF extends FPDF
     public function getFontSize(){
         return $this->FontSizePt;
     }
+    public function getCurrentFillColor(){
+        $currentColor=null;
+        if( $this->TextColor == '0.000 g'){
+            $currentColor=0;
+        }else{
+            $currentColor=$this->FillColor;
+        }
+        return $currentColor;
+    }
     public function getCurrentTextColor(){
         $currentTextColor=null;
         if( $this->TextColor == '0 g'){
@@ -1027,7 +1028,5 @@ class TPDF extends FPDF
         }
         return $aCor;
     }
-
-
 }
 ?>
