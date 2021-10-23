@@ -194,7 +194,6 @@ class TPDF extends FPDF
      * @param string $strOrientation P/L
      * @param boolean $boolBorder
      */
-    //function AddPage( $strOrientation = null, $boolBorder = false )
     function AddPage( $strOrientation='', $size='', $rotation=0 ) 
     {
     	$strOrientation = ( is_null($strOrientation) ? '' : $strOrientation );
@@ -209,8 +208,8 @@ class TPDF extends FPDF
 
    		if ($str = $this->getWaterMark())
     	{
-    		$currentFontSize = $this->FontSizePt;
-    		$currentTextColor = $this->TextColor;
+    		$currentFontSize  = $this->FontSizePt;
+    		$currentTextColor = $this->getCurrentTextColor();  ;
 	        $this->SetFont('Arial', 'B', 50);
 	        $this->SetTextColor(255, 192, 203);
 	        if ($this->w > $this->h) {
@@ -339,6 +338,13 @@ class TPDF extends FPDF
         $this->setRowFieldNames( $aFieldNames );
     }
 
+    /**
+     * criar a grid do pdf
+     *
+     * @param [type] $newPage
+     * @param [type] $strPageOrientation
+     * @return void
+     */
     public function printRows( $newPage = null, $strPageOrientation = null )
     {
     	//$this->clearColumns();
@@ -487,7 +493,7 @@ class TPDF extends FPDF
         $currentFontFamily = $this->FontFamily;
         $currentFontStyle = $this->FontStyle;
         $currentFontSize = $this->FontSizePt;
-        $currentTextColor = $this->TextColor;
+        $currentTextColor = $this->getCurrentTextColor();
         $currentFillColor = $this->FillColor;
         $currentDrawColor = $this->DrawColor;
         /*
@@ -549,33 +555,23 @@ class TPDF extends FPDF
             {
                 if ( is_array( $mixFontColor ) )
                 {
-                    if ( isset( $mixFontColor[ 'g' ] ) )
-                    {
+                    if ( isset( $mixFontColor[ 'g' ] ) ) {
                         $aCor = $mixFontColor;
-                    }
-                    else
-                    {
+                    } else {
                         $aCor[ 'r' ] = $mixFontColor[ 0 ];
                         $aCor[ 'g' ] = $mixFontColor[ 1 ];
                         $aCor[ 'b' ] = $mixFontColor[ 2 ];
                     }
-                }
-                else
-                {
+                } else {
                     $aCor = $this->HexToRGB( $mixFontColor );
                 }
-            }
-            else
-            {
+            } else {
                 $aCor = $this->HexToRGB( $oCol->getFontColor( $currentTextColor ) );
             }
 
-            if ( is_array( $aCor ) )
-            {
+            if ( is_array( $aCor ) ) {
                 $this->SetTextColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
-            }
-            else
-            {
+            } else {
                 $this->SetTextColor( $aCor ); // Escala de cinza: 0 - 255
             }
 
@@ -1066,6 +1062,15 @@ class TPDF extends FPDF
     }
     public function getFontSize(){
         return $this->FontSizePt;
-    }    
+    }
+    public function getCurrentTextColor(){
+        $currentTextColor=null;
+        if( $this->TextColor == '0 g'){
+            $currentTextColor=0;
+        }else{
+            $currentTextColor=$this->TextColor;
+        }
+        return $currentTextColor;
+    }
 }
 ?>
