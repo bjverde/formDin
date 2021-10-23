@@ -775,67 +775,6 @@ class TPDF extends FPDF
     {
         return $this->rowFieldNames;
     }
-
-    function HexToRGB( $hex ){
-        $hex = $this->translateColor( $hex );
-
-        if ( is_null( $hex ) || $hex === 0 ){
-            return $hex;
-        }
-
-        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' ){
-            return $hex;
-        }
-
-        if ( !preg_match( '/^#/', $hex ) ) {
-            return $hex;
-        }
-        $hex = preg_replace( "/#/", "", $hex );
-        $color = array();
-
-        if ( strlen( $hex ) == 3 ){
-            $color[ 'r' ] = hexdec( substr( $hex, 0, 1 ) . $r );
-            $color[ 'g' ] = hexdec( substr( $hex, 1, 1 ) . $g );
-            $color[ 'b' ] = hexdec( substr( $hex, 2, 1 ) . $b );
-        }else if( strlen( $hex ) == 6 ){
-            $color[ 'r' ] = hexdec( substr( $hex, 0, 2 ) );
-            $color[ 'g' ] = hexdec( substr( $hex, 2, 2 ) );
-            $color[ 'b' ] = hexdec( substr( $hex, 4, 2 ) );
-        }
-        return $color;
-    }
-
-    public function translateColor( $strColor = null )
-    {
-        if ( is_null( $strColor ) || !is_string( $strColor ) || preg_match( '/#/', $strColor ) == 1 )
-        {
-            return $strColor;
-        }
-        $strColor = strtolower( $strColor );
-        $aColors[ 'red' ] = '#ff0000';
-        $aColors[ 'green' ] = '#00ff00';
-        $aColors[ 'blue' ] = '#0000ff';
-        $aColors[ 'yellow' ] = '#FFFF00';
-        $aColors[ 'fuchsia' ] = '#FF00FF';
-        $aColors[ 'gray' ] = '#989898';
-        $aColors[ 'grey' ] = '#989898';
-        $aColors[ 'black' ] = '#000000';
-        $aColors[ 'white' ] = '#ffffff';
-        $aColors[ 'orange' ] = '#FF9900';
-        $aColors[ 'lightYellow' ] = '#FF9900';
-        $aColors[ 'lightBlue' ] = '#0066FF';
-        $aColors[ 'lightGreen' ] = '#66FF99';
-        $aColors[ 'pink' ] = '#FF99FF';
-        $aColors[ 'brown' ] = '#663300';
-        $aColors[ 'silver' ] = '#E8E8E8';
-
-        if ( isset( $aColors[ $strColor ] ) )
-        {
-            return $aColors[ $strColor ];
-        }
-        return $strColor;
-    }
-    //------------------------------------------------------------------------------------
     public function setOnDrawCell( $newValue = null )
     {
         $this->onDrawCell = $newValue;
@@ -975,7 +914,66 @@ class TPDF extends FPDF
     {
    	   return $this->tMargin;
     }
-    //-----------------------------------------------------
+    //------------------------------------------------------------------------------------    
+    public function HexToRGB( $hex ){
+        $hex = $this->translateColor( $hex );
+
+        if ( is_null( $hex ) || $hex === 0 ){
+            return $hex;
+        }
+
+        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' ){
+            return $hex;
+        }
+
+        if ( !preg_match( '/^#/', $hex ) ) {
+            return $hex;
+        }
+        $hex = preg_replace( "/#/", "", $hex );
+        $color = array();
+
+        if ( strlen( $hex ) == 3 ){
+            $color[ 'r' ] = hexdec( substr( $hex, 0, 1 ) . $r );
+            $color[ 'g' ] = hexdec( substr( $hex, 1, 1 ) . $g );
+            $color[ 'b' ] = hexdec( substr( $hex, 2, 1 ) . $b );
+        }else if( strlen( $hex ) == 6 ){
+            $color[ 'r' ] = hexdec( substr( $hex, 0, 2 ) );
+            $color[ 'g' ] = hexdec( substr( $hex, 2, 2 ) );
+            $color[ 'b' ] = hexdec( substr( $hex, 4, 2 ) );
+        }
+        return $color;
+    }
+    public function translateColor( $strColor = null )
+    {
+        if ( is_null( $strColor ) || !is_string( $strColor ) || preg_match( '/#/', $strColor ) == 1 )
+        {
+            return $strColor;
+        }
+        $strColor = strtolower( $strColor );
+        $aColors[ 'red' ] = '#ff0000';
+        $aColors[ 'green' ] = '#00ff00';
+        $aColors[ 'blue' ] = '#0000ff';
+        $aColors[ 'yellow' ] = '#FFFF00';
+        $aColors[ 'fuchsia' ] = '#FF00FF';
+        $aColors[ 'gray' ] = '#989898';
+        $aColors[ 'grey' ] = '#989898';
+        $aColors[ 'black' ] = '#000000';
+        $aColors[ 'white' ] = '#ffffff';
+        $aColors[ 'orange' ] = '#FF9900';
+        $aColors[ 'lightYellow' ] = '#FF9900';
+        $aColors[ 'lightBlue' ] = '#0066FF';
+        $aColors[ 'lightGreen' ] = '#66FF99';
+        $aColors[ 'pink' ] = '#FF99FF';
+        $aColors[ 'brown' ] = '#663300';
+        $aColors[ 'silver' ] = '#E8E8E8';
+
+        if ( isset( $aColors[ $strColor ] ) )
+        {
+            return $aColors[ $strColor ];
+        }
+        return $strColor;
+    }    
+    //------------------------------------------------------------------------------------    
     /**
      * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
      *   - red, green, blue, yellow, fuchsia, gray, black, white
