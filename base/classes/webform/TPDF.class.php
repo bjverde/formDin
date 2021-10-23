@@ -994,6 +994,8 @@ class TPDF extends FPDF
         $currentColor=$this->FillColor;
         if( $currentColor == '0.000 g'){
             $currentColor=0;
+        }elseif( $currentColor == '0.412 0.412 0.412 rg'){
+            $currentColor=0;
         }
         return $currentColor;
     }
@@ -1007,6 +1009,8 @@ class TPDF extends FPDF
         if( $currentColor == '0 g'){
             $currentColor=0;
         }elseif( $currentColor == '0.000 g'){
+            $currentColor=0;
+        }elseif( $currentColor == '0.412 0.412 0.412 rg'){
             $currentColor=0;
         }
         return $currentColor;
