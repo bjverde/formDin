@@ -943,6 +943,12 @@ class TPDF extends FPDF
         }
         return $color;
     }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $strColor
+     * @return void
+     */
     public function translateColor( $strColor = null )
     {
         if ( is_null( $strColor ) || !is_string( $strColor ) || preg_match( '/#/', $strColor ) == 1 )
@@ -975,11 +981,12 @@ class TPDF extends FPDF
     }    
     //------------------------------------------------------------------------------------    
     /**
-     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     * Seta a cor de fundo do cabeçalho do Grid, é possíveis em HEX decimal um nome fixo.
+     * alguns exemplos
      *   - red, green, blue, yellow, fuchsia, gray, black, white
      *   - orange, lightYellow, lightBlue, lightGreen, pink
      *   - brown, silver
-     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *  A lista completa em veja $this->translateColor
      *
      * @param string $headerFontColors
      */    
@@ -995,11 +1002,12 @@ class TPDF extends FPDF
         return $this->headerFillColors;
     }
     /**
-     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     * Seta a cor da letro deo cabeçao do grid, é possíveis em HEX decimal um nome fixo.
+     * alguns exemplos
      *   - red, green, blue, yellow, fuchsia, gray, black, white
      *   - orange, lightYellow, lightBlue, lightGreen, pink
      *   - brown, silver
-     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *  A lista completa em veja $this->translateColor
      *
      * @param string $headerFontColors
      */
