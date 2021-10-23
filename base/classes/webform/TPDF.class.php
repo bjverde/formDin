@@ -255,8 +255,8 @@ class TPDF extends FPDF
      * @param string $hexFillColor   - 5: Cor do fundo, hexadecimal
      * @param string $strFontStyle   - 6: Style da font: I, B
      * @param string $intFontSize    - 7: Tamanho da fonte
-     * @param string $hexFontColor
-     * @param string $strFontFamily
+     * @param string $hexFontColor   - 8: Cor em HexaDecimal
+     * @param string $strFontFamily  - 9: 
      * @return TPDFColumn
      */
     public function addColumn( $strHeader = null
@@ -270,9 +270,15 @@ class TPDF extends FPDF
                              , $strFontFamily = null 
                              )
     {
-        $column = new TPDFColumn( $strHeader, $intWidth, $strAlign, $strFieldName
-                                , $hexFillColor, $strFontStyle, $intFontSize
-                                , $hexFontColor, $strFontFamily );
+        $column = new TPDFColumn( $strHeader
+                                , $intWidth
+                                , $strAlign
+                                , $strFieldName
+                                , $hexFillColor
+                                , $strFontStyle
+                                , $intFontSize
+                                , $hexFontColor
+                                , $strFontFamily );
         $this->colums[] = $column;
         return $column;
     }
