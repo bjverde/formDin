@@ -490,34 +490,28 @@ class TPDF extends FPDF
         //Calculate the height of the row
         $nb = 0;
         $aNb = null;
-        $currentFontFamily = $this->FontFamily;
+        $currentFontFamily= $this->FontFamily;
         $currentFontStyle = $this->FontStyle;
-        $currentFontSize = $this->FontSizePt;
+        $currentFontSize  = $this->FontSizePt;
         $currentTextColor = $this->getCurrentTextColor();
         $currentFillColor = $this->FillColor;
         $currentDrawColor = $this->DrawColor;
-        /*
-          $oCol = $this->getColumn(0);
-          print '<br>Familia:'.$oCol->getFontFamily($currentFontFamily);
-          print '<br>Estilo:'.$oCol->getFontStyle($currentFontStyle);
-          print '<br>Tamanho:'.$oCol->getFontSize($currentFontSize);
-          print '<br>Cor:'.print_r($this->HexToRGB($oCol->getFontColor($currentFontColor)),true);
-          die();
-         */
+
         // calcular o espaço que a linha vai ocupar na página
-        for( $i = 0; $i < count( $data ); $i++ )
-        {
+        for( $i = 0; $i < count( $data ); $i++ ){
             $oCol = $this->getColumn( $i );
 
-            if ( $this->getOnDrawCell() && function_exists( $this->getOnDrawCell() ) )
-            {
+            if ( $this->getOnDrawCell() && function_exists( $this->getOnDrawCell() ) ){
             	//$params = (object) array('value'=>$data[$i],'colIndex'=>$i, 'data'=>$data );
                 //call_user_func( $this->getOnDrawCell(), $oCol, $params );
                 call_user_func( $this->getOnDrawCell(), $oCol, $data[ $i ], $i, $data );
             }
+
             //definir de volta o estilo, tamanho e cor da fonte da celula
-            $this->SetFont( $oCol->getFontFamily( $currentFontFamily ), $oCol->getFontStyle( $currentFontStyle ),
-                $oCol->getFontSize( $currentFontSize ) );
+            $this->SetFont( $oCol->getFontFamily( $currentFontFamily )
+                          , $oCol->getFontStyle( $currentFontStyle )
+                          , $oCol->getFontSize( $currentFontSize ) 
+                          );
 
             $aNb[ $i ] = $this->NbLines( $oCol->getWidth(), $data[ $i ] );
             $nb = max( $nb, $aNb[ $i ] );
@@ -526,10 +520,8 @@ class TPDF extends FPDF
         $lineHeight = $this->getRowLineHeight() * $nb;
 
         //saltar página se a linha for ocupar mais que o limite informado.
-        if ( $intBottomMarginSize )
-        {
-            if ( ( $this->GetY() + $lineHeight ) > $intBottomMarginSize )
-            {
+        if ( $intBottomMarginSize ){
+            if ( ( $this->GetY() + $lineHeight ) > $intBottomMarginSize ) {
                 $this->AddPage( $this->CurOrientation, $this->getPageBorder() );
             }
         }
