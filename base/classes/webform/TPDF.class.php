@@ -490,7 +490,7 @@ class TPDF extends FPDF
         $currentTextColor = $this->getCurrentTextColor();
         $currentFillColor = $this->getCurrentFillColor();
         //MessageHelper::logRecordSimple('FillColor linha 492: '.$currentFillColor);
-        $currentDrawColor = $this->DrawColor;
+        $currentDrawColor = $this->getCurrentDrawColor();
 
         // calcular o espaço que a linha vai ocupar na página
         for( $i = 0; $i < count( $data ); $i++ ){
@@ -648,13 +648,11 @@ class TPDF extends FPDF
         }
         return $nl;
     }
-
     public function setRowWidths( $mixNewValue = null )
     {
         $this->rowWidths = $mixNewValue;
         return $this;
     }
-
     public function getRowWidths($intCol=null)
     {
     	if( ! is_null( $intCol ) )
@@ -663,46 +661,38 @@ class TPDF extends FPDF
     	}
         return $this->rowWidths;
     }
-
     public function setRowFillColors( $mixNewValue = null )
     {
         $this->rowFillColors = $mixNewValue;
         return $this;
     }
-
     public function getRowFillColors()
     {
         return $this->rowFillColors;
     }
-
     public function setRowFontColors( $mixNewValue = null )
     {
         $this->rowFontColors = $mixNewValue;
         return $this;
     }
-
     public function getRowFontColors()
     {
         return $this->rowFontColors;
     }
-
     public function setRowFontStyles( $mixNewValue = null )
     {
         $this->rowFontStyles = $mixNewValue;
         return $this;
     }
-
     public function getRowFontStyles()
     {
         return $this->rowFontStyles;
     }
-
     public function setRowAligns( $mixNewValue = null )
     {
         $this->rowAligns = $mixNewValue;
         return $this;
     }
-
     /**
     * Retorna o array com os alinhamentos de cada coluna.
     * Se for informado o parametro $allAs, o array retornado
@@ -724,13 +714,11 @@ class TPDF extends FPDF
         }
         return $this->rowAligns;
     }
-
     public function setRowFieldNames( $mixNewValue = null )
     {
         $this->rowFieldNames = $mixNewValue;
         return $this;
     }
-
     public function getRowFieldNames()
     {
         return $this->rowFieldNames;
@@ -832,7 +820,6 @@ class TPDF extends FPDF
 			}
         }
     }
-
     public function getRowMaxWidth()
     {
         $this->prepare();
@@ -983,6 +970,16 @@ class TPDF extends FPDF
     public function getFontSize(){
         return $this->FontSizePt;
     }
+    //-------------------------------------------------------------------------
+    public function getCurrentDrawColor(){
+        $currentColor=null;
+        if( $this->TextColor == '0.000 G'){
+            $currentColor=0;
+        }else{
+            $currentColor=$this->DrawColor;
+        }
+        return $currentColor;
+    }    
     public function getCurrentFillColor(){
         $currentColor=null;
         if( $this->TextColor == '0.000 g'){
@@ -993,13 +990,13 @@ class TPDF extends FPDF
         return $currentColor;
     }
     public function getCurrentTextColor(){
-        $currentTextColor=null;
+        $currentColor=null;
         if( $this->TextColor == '0 g'){
-            $currentTextColor=0;
+            $currentColor=0;
         }else{
-            $currentTextColor=$this->TextColor;
+            $currentColor=$this->FillColor;
         }
-        return $currentTextColor;
+        return $currentColor;
     }
 
     /**
