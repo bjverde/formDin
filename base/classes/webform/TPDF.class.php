@@ -971,30 +971,43 @@ class TPDF extends FPDF
         return $this->FontSizePt;
     }
     //-------------------------------------------------------------------------
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */
     public function getCurrentDrawColor(){
-        $currentColor=null;
-        if( $this->TextColor == '0.000 G'){
+        $currentColor=$this->DrawColor;
+        if( $currentColor == '0.000 G'){
             $currentColor=0;
-        }else{
-            $currentColor=$this->DrawColor;
-        }
-        return $currentColor;
-    }    
-    public function getCurrentFillColor(){
-        $currentColor=null;
-        if( $this->TextColor == '0.000 g'){
+        }elseif( $currentColor == '0 G'){
             $currentColor=0;
-        }else{
-            $currentColor=$this->FillColor;
         }
         return $currentColor;
     }
-    public function getCurrentTextColor(){
-        $currentColor=null;
-        if( $this->TextColor == '0 g'){
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */    
+    public function getCurrentFillColor(){
+        $currentColor=$this->FillColor;
+        if( $currentColor == '0.000 g'){
             $currentColor=0;
-        }else{
-            $currentColor=$this->FillColor;
+        }
+        return $currentColor;
+    }
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */    
+    public function getCurrentTextColor(){
+        $currentColor=$this->TextColor;
+        if( $currentColor == '0 g'){
+            $currentColor=0;
+        }elseif( $currentColor == '0.000 g'){
+            $currentColor=0;
         }
         return $currentColor;
     }
