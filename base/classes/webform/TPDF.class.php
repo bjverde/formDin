@@ -797,35 +797,28 @@ class TPDF extends FPDF
         return $this->rowFieldNames;
     }
 
-    function HexToRGB( $hex )
-    {
+    function HexToRGB( $hex ){
         $hex = $this->translateColor( $hex );
 
-        if ( is_null( $hex ) || $hex === 0 )
-        {
+        if ( is_null( $hex ) || $hex === 0 ){
             return $hex;
         }
 
-        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' )
-        {
+        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' ){
             return $hex;
         }
 
-        if ( !preg_match( '/^#/', $hex ) )
-        {
+        if ( !preg_match( '/^#/', $hex ) ) {
             return $hex;
         }
         $hex = preg_replace( "/#/", "", $hex );
         $color = array();
 
-        if ( strlen( $hex ) == 3 )
-        {
+        if ( strlen( $hex ) == 3 ){
             $color[ 'r' ] = hexdec( substr( $hex, 0, 1 ) . $r );
             $color[ 'g' ] = hexdec( substr( $hex, 1, 1 ) . $g );
             $color[ 'b' ] = hexdec( substr( $hex, 2, 1 ) . $b );
-        }
-        else if( strlen( $hex ) == 6 )
-        {
+        }else if( strlen( $hex ) == 6 ){
             $color[ 'r' ] = hexdec( substr( $hex, 0, 2 ) );
             $color[ 'g' ] = hexdec( substr( $hex, 2, 2 ) );
             $color[ 'b' ] = hexdec( substr( $hex, 4, 2 ) );
@@ -1053,8 +1046,7 @@ class TPDF extends FPDF
     {
     	$this->headerFontColors = $headerFontColors;
     }
-    public function getHeaderFontColors()
-    {
+    public function getHeaderFontColors(){
         if(empty($this->headerFontColors) ) {
             $this->setHeaderFontColors('black');
         }
