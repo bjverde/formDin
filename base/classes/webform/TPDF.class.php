@@ -543,23 +543,8 @@ class TPDF extends FPDF
 
             //alterar a cor da fonte
             $aCor = null;
-
-            if ( $mixFontColor ) {
-                if ( is_array( $mixFontColor ) ){
-                    if ( isset( $mixFontColor[ 'g' ] ) ) {
-                        $aCor = $mixFontColor;
-                    } else {
-                        $aCor[ 'r' ] = $mixFontColor[ 0 ];
-                        $aCor[ 'g' ] = $mixFontColor[ 1 ];
-                        $aCor[ 'b' ] = $mixFontColor[ 2 ];
-                    }
-                } else {
-                    $aCor = $this->HexToRGB( $mixFontColor );
-                }
-            } else {
-                $aCor = $this->HexToRGB( $oCol->getFontColor( $currentTextColor ) );
-            }
-
+            $color= $oCol->getFontColor( $currentTextColor );
+            $aCor = $this->getMixColor($mixFontColor, $color);
             if ( is_array( $aCor ) ) {
                 $this->SetTextColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
             } else {
@@ -567,22 +552,8 @@ class TPDF extends FPDF
             }
 
             //cor de preenchimento da celula
-            if ( $mixFillColor ){
-                if ( is_array( $mixFillColor ) ){
-                    if ( isset( $mixFillColor[ 'g' ] ) ){
-                        $aCor = $mixFillColor;
-                    } else {
-                        $aCor[ 'r' ] = $mixFillColor[ 0 ];
-                        $aCor[ 'g' ] = $mixFillColor[ 1 ];
-                        $aCor[ 'b' ] = $mixFillColor[ 2 ];
-                    }
-                }else{
-                    $aCor = $this->HexToRGB( $mixFillColor );
-                }
-            }else{
-                $aCor = $this->HexToRGB( $oCol->getFillColor( $currentFillColor ) );
-            }
-
+            $color= $oCol->getFillColor( $currentFillColor );
+            $aCor = $this->getMixColor($mixFillColor, $color);
             if ( is_array( $aCor ) ){
                 $this->SetFillColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
             }else{
@@ -593,12 +564,9 @@ class TPDF extends FPDF
             $y = $this->GetY();
 
             $fill=1;
-			if( $oCol->getFillColor() == '255'  && is_null( $mixFillColor ) )
-			{
+			if( $oCol->getFillColor() == '255'  && is_null( $mixFillColor ) ) {
             	$fill = 0;
-			}
-			else
-			{
+			} else {
 	            //Pintar o fundo da celula
 	            $this->Rect( $x, $y, $colWidth, $lineHeight, 'FD' );
 			}
@@ -1032,5 +1000,34 @@ class TPDF extends FPDF
         }
         return $currentTextColor;
     }
+
+    /**
+     * recupera a cor
+     *
+     * @param mixed $mixColor
+     * @param string $color
+     * @return void
+     */
+    public function getMixColor($mixColor, $color){
+        $aCor = null;
+        if ( $mixColor ) {
+            if ( is_array( $mixColor ) ){
+                if ( isset( $mixColor[ 'g' ] ) ) {
+                    $aCor = $mixColor;
+                } else {
+                    $aCor[ 'r' ] = $mixColor[ 0 ];
+                    $aCor[ 'g' ] = $mixColor[ 1 ];
+                    $aCor[ 'b' ] = $mixColor[ 2 ];
+                }
+            } else {
+                $aCor = $this->HexToRGB( $mixColor );
+            }
+        } else {
+            $aCor = $this->HexToRGB( $color );
+        }
+        return $aCor;
+    }
+
+
 }
 ?>
