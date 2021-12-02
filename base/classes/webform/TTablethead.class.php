@@ -44,7 +44,7 @@ class TTablethead extends TElement
     private $visible;
     public function __construct()
     {
-        parent::__construct('tr');
+        parent::__construct('thead');
         $this->setVisible(true);
     }
     //------------------------------------------------------------------

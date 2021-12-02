@@ -43,6 +43,7 @@ class TTableArray Extends TElement
 {
     private $keyMap = array();
     private $data = null;
+    private $thead = null;
     private $tbody = null;
 
     /**
@@ -94,7 +95,41 @@ class TTableArray Extends TElement
         return $this->data;
     }
     //---------------------------------------------------------------------------------------
+    private function addRowThead() {
+        $listKeysMap = array_keys($this->keyMap);
+        if( !is_array($listKeysMap) ){
+            $listKeys = array_keys($this->data);
+            foreach( $listKeys as $keyName ) {                
+                $this->thead->addCell($keyName);
+            }
+        } else {
+            $listKeys = array_keys($this->data);
+            $this->thead = new TTablethead();
+            foreach( $listKeys as $keyName ) {                
+                if(in_array($keyName,$listKeysMap)) {
+                    $this->thead->addCell($this->keyMap[$keyName]);
+                }
+            }
+        }//Fim IF
+    }
+    //---------------------------------------------------------------------------------------
+    private function addRowTBody() {
+        $listKeys = array_keys($this->data);
+        $firstKey = $listKeys[0];
+        foreach( $this->data[$firstKey] as $keyNumber => $value ) {
+            foreach( $listKeys as $keyName ) {
+                $listKeysMap = array_keys($this->keyMap);
+                $row = $this->addRow();
+                if(in_array($keyName,$listKeysMap)) {
+                    $row->addCell($this->data[$keyName][$keyNumber]);
+                }
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------
     public function show( $boolPrint = true ) {
+        $this->addRowThead();
+        //$this->addRowTBody();
         return parent::show( $boolPrint );
     }
 }
