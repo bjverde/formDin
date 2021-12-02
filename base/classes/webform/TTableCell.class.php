@@ -38,43 +38,28 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-
-class TTable Extends TElement
+class TTableCell extends TElement
 {
-    public function __construct($strName=null)
+    public function __construct($value=null)
     {
-        parent::__construct('table');
-        $this->setId($strName);
+        parent::__construct('td');
+        parent::add($value);
     }
-
-    //------------------------------------------------------------------
-    public function addRow($strId=null)
+    public function getValue()
     {
-        $row = new TTableRow();
-        $row->setId($strId);
-        parent::add($row);
-        return $row;
+        if($this->getChildren()) {
+            $children = $this->getChildren();
+            if(is_object($children[0]) ) {
+                return '';
+            }
+            return implode('', $this->getChildren());
+        }
+        return '';
+    }
+    public function setValue($newValue=null)
+    {
+        $this->clearChildren();
+        $this->add($newValue);
     }
 }
-/*
-//------------------------------------------------------------------------------------
-$tb = new TTable;
-$tb->border=1;
-$tb->width=300;
-
-$row = $tb->addRow();
-$row->bgColor="#efefef";
-    $cell = $row->addCell('celula 1');
-    $cell->colspan=5;
-    $cell->align="center";
-$row = $tb->addRow();
-
-$row->bgColor="green";
-    $cell = $row->addCell('celula 1');
-    $cell = $row->addCell('celula 1');
-    $cell = $row->addCell('celula 1');
-    $cell = $row->addCell('celula 1');
-    $cell = $row->addCell('celula 1');
-$tb->show();
-*/
 ?>
