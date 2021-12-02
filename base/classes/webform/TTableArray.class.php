@@ -43,8 +43,8 @@ class TTableArray Extends TElement
 {
     private $keyMap = array();
     private $data = null;
-    private $thead = null;
-    private $tbody = null;
+    public $thead = null;
+    public $tbody = null;
 
     /**
      * Cria uma tabela HTML
@@ -99,14 +99,15 @@ class TTableArray Extends TElement
     private function addRowThead() {
         $listKeysMap = array_keys($this->keyMap);
         $listKeys = array_keys($this->data);
+        $row = $this->thead->addRow();
         if( empty($listKeysMap) ){
             foreach( $listKeys as $keyName ) {                
-                $this->thead->addCell($keyName);
+                $row->addCell($keyName);
             }
         } else {
             foreach( $listKeys as $keyName ) {                
                 if(in_array($keyName,$listKeysMap)) {
-                    $this->thead->addCell($this->keyMap[$keyName]);
+                    $row->addCell($this->keyMap[$keyName]);
                 }
             }
         }//Fim IF

@@ -39,20 +39,37 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class TTablethead extends TElement
+class TTabletheadrow extends TElement
 {
     private $visible;
     public function __construct()
     {
-        parent::__construct('thead');
+        parent::__construct('tr');
+        $this->setVisible(true);
     }
     //------------------------------------------------------------------
-    public function addRow($strId=null)
+    public function addCell($value=null,$strId=null)
     {
-        $row = new TTabletheadrow();
-        $row->setId($strId);
-        parent::add($row);
-        return $row;
+        $cell = new TTableth($value);
+        $cell->setId($strId);
+        parent::add($cell);
+        return $cell;
+    }
+    public function setVisible($boolNewValue=null)
+    {
+        $boolNewValue = is_null($boolNewValue) ? true :$boolNewValue;
+        $this->visible = $boolNewValue;
+    }
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+    public function show($print=true)    
+    {
+        if($this->getVisible()) {
+            return parent::show($print);
+        }
+        return null;
     }
 }
 ?>
