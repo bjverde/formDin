@@ -44,6 +44,9 @@ d($_REQUEST);
 
 $frm = new TForm('Exemplo Campo Memo', 300);
 $frm->addMemoField('campo_memo_simples', 'Descrição:', 1000, true, 80, 5);
+
+$memo1 = $frm->addMemoField('memo1', 'Descrição:', 300, true, 80, 5);
+$memo1->setProperty('placeholder','Describe yourself here...');
 $frm->addButton('Post');
 
 $frm->show();
