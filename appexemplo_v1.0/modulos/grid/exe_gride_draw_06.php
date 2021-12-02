@@ -40,7 +40,7 @@ $frm = new TForm('Gride Draw 06 - Table HTML');
 $html1 = '<b>ATENÇÃO</b>: Aqui não usa o GRID apenas cria uma tabela HTML comum, passando um array FormDin';
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
-$tableHtml = new TTableArray();
+$tableHtml = new TTableArray('table1');
 $tableHtml->setData($dados);
 $table1 = $tableHtml->show();
 //FormDinHelper::debug($tableHtml->thead,'obj Tabela');
@@ -49,7 +49,7 @@ $table1 = $tableHtml->show();
 $frm->addHtmlField('avisotabela1','Resultado simples, todas as colunas', null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 $frm->addHtmlField('table1', $table1);
 
-$tableHtml2 = new TTableArray();
+$tableHtml2 = new TTableArray('table2');
 $tableHtml2->setData($dados);
 $tableHtml2->addColumn('NOME','Nome');
 $tableHtml2->addColumn('VALOR','Valor');
