@@ -39,9 +39,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-class TTablev2 Extends TElement
+class TTableArray Extends TElement
 {
-    private $data;
+    private $keyMap = array();
+    private $data = null;
+    private $tbody = null;
 
     /**
      * Cria uma tabela HTML
@@ -53,7 +55,6 @@ class TTablev2 Extends TElement
         parent::__construct('table');
         $this->setId($idTableHtml);
     }
-
     //------------------------------------------------------------------
     public function addRow($strId=null)
     {
@@ -62,26 +63,17 @@ class TTablev2 Extends TElement
         parent::add($row);
         return $row;
     }
-
-
     //------------------------------------------------------------------------------------
     /**
      * Coluna normal para o grid
      * @param string $strFieldName 1: ID da coluna = Nome da coluna da tabela
      * @param string $strValue     2: Nome do Label que irá aparecer 
-     * @param integer $strWidth    3: tamanho da coluna
-     * @param string $strTextAlign 4: Alinhamento do texto left|right|center|justify
-     * @return TGridColumn
      */
     public function addColumn( $strFieldName, $strValue = null)
     {
-        $col = new TGridColumn( $strFieldName, $strValue, $strWidth, $strTextAlign );
-        $col->clearCss();
-        $col->setGridId($this->getId());
-        $this->columns[ $col->getId()] = $col;
-        return $col;
+        $strValue =  empty($strValue)?$strFieldName:$strValue;
+        $this->keyMap[$strFieldName]=$strValue;
     }
-
     //------------------------------------------------------------------------------------
     public function setData( $mixValue = null ){
         if ( !is_array( $mixValue ) ) {
@@ -93,74 +85,16 @@ class TTablev2 Extends TElement
             }
         }
         $this->data = $mixValue;
-    }
-    
+    }    
     //---------------------------------------------------------------------------------------
     /**
      * Retorna o array de dados do gride
      */
     public function getData() {
-        $res = null;
-        
-        if ( is_array( $this->data ) ) {
-            $keys = array_keys( $this->data );
-            if( ! is_array($this->data[$keys[0]] ) || isset($this->data[$keys[0]][0] ) ) {
-                return $this->data;
-            }
-            return $this->data;
-        }
-        else if( strpos( strtolower( $this->data ), 'select ' ) !== false ) {
-            
-            $bvars = null;
-            $bvars = $this->getBvars();
-            
-            if ( function_exists( 'recuperarPacote' ) )
-            {
-                $cache = $this->getCache();
-                print_r( $GLOBALS[ 'conexao' ]->executar_recuperar( $this->data, $bvars, $res, $cache ) );
-            }
-            else if( !class_exists( 'TPDOConnection' ) || !TPDOConnection::getInstance() )
-            {
-                $res = TPDOConnection::executeSql( $this->data );
-            }
-        }
-        //else if( strpos(strtolower($this->data),'pk_') !== false || strpos(strtolower($this->data),'pkg_') !== false )
-        else if( preg_match( '/\.PK\a?/i', $this->data ) > 0 )
-        {
-            $bvars = $this->getBvars();
-            $cache = $this->getCache();
-            print_r( recuperarPacote( $this->data, $bvars, $res, $cache ) );
-        }
-        else if( !is_null( $this->data ) )
-        {
-            $where = '';
-            
-            if ( is_array( $this->getBvars() ) )
-            {
-                foreach( $this->getBvars() as $k => $v )
-                {
-                    $where .= $where == '' ? '' : ' and ';
-                    $where .= "($k='$v')";
-                }
-                $where = $where == '' ? '' : ' where ' . $where;
-            }
-            $sql = "SELECT * FROM {$this->data} {$where}";
-            $cache = $this->getCache();
-            $bvars = null;
-            
-            if ( function_exists( 'recuperarPacote' ) )
-            {
-                print_r( $GLOBALS[ 'conexao' ]->executar_recuperar( $sql, $bvars, $res, $cache ) );
-            }
-            else if( !class_exists( 'TPDOConnection' ) || !TPDOConnection::getInstance() )
-            {
-                $res = TPDOConnection::executeSql( $sql );
-            }
-        }
-        
-        if ( $res ) {
-            $this->setData( $res );
-        }
-        return $res;
+        return $this->data;
+    }
+    //---------------------------------------------------------------------------------------
+    public function show( $boolPrint = true ) {
+        return parent::show( $boolPrint );
     }
 }
