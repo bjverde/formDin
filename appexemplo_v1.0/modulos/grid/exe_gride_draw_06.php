@@ -35,18 +35,27 @@ $dados['GRUPO'][] = 'C';
 $dados['VALOR'][] = '3';
 
 
-$frm = new TForm('Gride Draw 06 - Table HTML', 700, 700);
+$frm = new TForm('Gride Draw 06 - Table HTML');
 
 $html1 = '<b>ATENÇÃO</b>: Aqui não usa o GRID apenas cria uma tabela HTML comum, passando um array FormDin';
 $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
 
-FormDinHelper::debug($dados,'Array FormDin');
-
-
 $tableHtml = new TTableArray();
 $tableHtml->setData($dados);
-$html2 = $tableHtml->show();
+$table1 = $tableHtml->show();
+//FormDinHelper::debug($tableHtml->thead,'obj Tabela');
+//FormDinHelper::debug($tableHtml,'obj Tabela');
 
-$frm->addHtmlField('tablehtml', $html2);
+$frm->addHtmlField('avisotabela1','Resultado simples, todas as colunas', null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
+$frm->addHtmlField('table1', $table1);
+
+$tableHtml2 = new TTableArray();
+$tableHtml2->setData($dados);
+$tableHtml2->addColumn('NOME','Nome');
+$tableHtml2->addColumn('VALOR','Valor');
+$table2 = $tableHtml2->show();
+
+$frm->addHtmlField('avisotabela2','Resultado simples, algumas colunas', null, null, null, null)->setCss('border', '1px solid #ffeb3b')->setCss('background-color', '#ffffcc')->setCss('margin-bottom', '10px');
+$frm->addHtmlField('table2', $table2);
 
 $frm->show();
