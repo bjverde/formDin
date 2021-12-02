@@ -56,6 +56,7 @@ class TTableArray Extends TElement
         parent::__construct('table');
         $this->setId($idTableHtml);
         $this->thead = new TTablethead();
+        parent::add($this->thead);
     }
     //------------------------------------------------------------------
     public function addRow($strId=null)
