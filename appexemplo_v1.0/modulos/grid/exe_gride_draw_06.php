@@ -43,8 +43,10 @@ $frm->addHtmlField('html1', $html1, null, null, null, null)->setCss('border', '1
 FormDinHelper::debug($dados,'Array FormDin');
 
 
-$html2 = new TTablev2();
+$tableHtml = new TTableArray();
+$tableHtml->setData($dados);
+$html2 = $tableHtml->show();
 
-$frm->addHtmlField('html2',$html2, null, null, null, null);
+$frm->addHtmlField('tablehtml', $html2);
 
 $frm->show();
