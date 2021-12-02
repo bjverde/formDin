@@ -118,9 +118,13 @@ class TTableArray Extends TElement
         foreach( $this->data[$firstKey] as $keyNumber => $value ) {
             $row = $this->addRow();
             foreach( $listKeys as $keyName ) {
-                $listKeysMap = array_keys($this->keyMap);                
-                if(in_array($keyName,$listKeysMap)) {
+                $listKeysMap = array_keys($this->keyMap);
+                if( empty($listKeysMap) ){
                     $row->addCell($this->data[$keyName][$keyNumber]);
+                } else {
+                    if(in_array($keyName,$listKeysMap)) {
+                        $row->addCell($this->data[$keyName][$keyNumber]);
+                    }
                 }
             }
         }
