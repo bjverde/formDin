@@ -71,8 +71,8 @@ class ValidateHelper
     /**
      * Validade is array and not empty
      * @param array $array
-     * @param string $method
-     * @param string $line
+     * @param string $method __METHOD__
+     * @param string $line __LINE__
      * @throws InvalidArgumentException
      * @return void
      */
