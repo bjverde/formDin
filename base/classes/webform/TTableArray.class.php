@@ -55,6 +55,7 @@ class TTableArray Extends TElement
     {
         parent::__construct('table');
         $this->setId($idTableHtml);
+        $this->thead = new TTablethead();
     }
     //------------------------------------------------------------------
     public function addRow($strId=null)
@@ -97,14 +98,12 @@ class TTableArray Extends TElement
     //---------------------------------------------------------------------------------------
     private function addRowThead() {
         $listKeysMap = array_keys($this->keyMap);
-        if( !is_array($listKeysMap) ){
-            $listKeys = array_keys($this->data);
+        $listKeys = array_keys($this->data);
+        if( empty($listKeysMap) ){
             foreach( $listKeys as $keyName ) {                
                 $this->thead->addCell($keyName);
             }
         } else {
-            $listKeys = array_keys($this->data);
-            $this->thead = new TTablethead();
             foreach( $listKeys as $keyName ) {                
                 if(in_array($keyName,$listKeysMap)) {
                     $this->thead->addCell($this->keyMap[$keyName]);
@@ -117,9 +116,9 @@ class TTableArray Extends TElement
         $listKeys = array_keys($this->data);
         $firstKey = $listKeys[0];
         foreach( $this->data[$firstKey] as $keyNumber => $value ) {
+            $row = $this->addRow();
             foreach( $listKeys as $keyName ) {
-                $listKeysMap = array_keys($this->keyMap);
-                $row = $this->addRow();
+                $listKeysMap = array_keys($this->keyMap);                
                 if(in_array($keyName,$listKeysMap)) {
                     $row->addCell($this->data[$keyName][$keyNumber]);
                 }
@@ -129,7 +128,7 @@ class TTableArray Extends TElement
     //---------------------------------------------------------------------------------------
     public function show( $boolPrint = true ) {
         $this->addRowThead();
-        //$this->addRowTBody();
+        $this->addRowTBody();
         return parent::show( $boolPrint );
     }
 }
