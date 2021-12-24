@@ -110,8 +110,9 @@ class SqlHelper
                                                   ,string $attribute
                                                   ,mixed $isTrue
                                                   ,mixed $isFalse
-                                                  ,mixed $testZero=true)
+                                                  ,mixed $testZero)
     {
+        $testZero  = empty($testZero)?true:$testZero;
         $retorno = $isFalse;
         $has = ArrayHelper::has($attribute, $whereGrid);
         if($has ) {
@@ -179,9 +180,10 @@ class SqlHelper
                                             , string $attribute
                                             , mixed  $testZero
                                             , string $value
-                                            , string $connector=self::SQL_CONNECTOR_AND
+                                            , string $connector
                                             ) {
         $testZero = empty($testZero)?true:$testZero;
+        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
         $isTrue = EOL.' AND '.$attribute.' = '.$value.'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
@@ -204,10 +206,11 @@ class SqlHelper
                                              , $attribute
                                              , $testZero
                                              , $value
-                                             , $connector=self::SQL_CONNECTOR_AND
+                                             , $connector
                                              )
     {
         $testZero = empty($testZero)?true:$testZero;
+        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
         $value = self::explodeTextString($value);
         $isTrue = EOL.' AND '.$attribute.' like \'%'.$value.'%\' ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
@@ -231,10 +234,11 @@ class SqlHelper
                                          , $attribute
                                          , $testZero
                                          , $value
-                                         , $connector=self::SQL_CONNECTOR_AND
+                                         , $connector
                                          )
     {
         $testZero = empty($testZero)?true:$testZero;
+        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
         $isTrue = EOL.' AND '.$attribute.' = \''.$value.'\'  ';
         $attribute = self::attributeIssetOrNotZero($arrayWhereGrid,$attribute,$isTrue,null,$testZero);
         $stringWhere = $stringWhere.$attribute;
@@ -246,11 +250,12 @@ class SqlHelper
                                           , string $attribute
                                           , mixed $testZero
                                           , string $value
-                                          , string $connector=self::SQL_CONNECTOR_AND
+                                          , string $connector
                                           , string $type
                                           )
     {
         $testZero = empty($testZero)?true:$testZero;
+        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
         if($type == self::SQL_TYPE_IN_NUMERIC){
             $stringWhere = self::getSqlTypeNumeric($stringWhere, $arrayWhereGrid, $attribute, $testZero ,$value, $connector);
         }else{
@@ -274,12 +279,13 @@ class SqlHelper
     public static function getSqlTypeIn( string $stringWhere
                                        , mixed  $arrayWhereGrid
                                        , string $attribute
-                                       , mixed  $testZero=true
+                                       , mixed $testZero
                                        , string $value
-                                       , string $connector=self::SQL_CONNECTOR_AND
+                                       , string $connector
                                        , string $type
                                        )
-    {        
+    {
+       $testZero  = empty($testZero)?true:$testZero;
        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
        if(is_array($value)){
            $qtdElement = CountHelper::count($value);
@@ -322,10 +328,12 @@ class SqlHelper
                                                          , mixed  $arrayWhereGrid
                                                          , string $attribute
                                                          , string $type 
-                                                         , mixed  $testZero=true
-                                                         , string $connector=self::SQL_CONNECTOR_AND 
+                                                         , mixed $testZero
+                                                         , string $connector
                                                          )
     {
+        $testZero  = empty($testZero)?true:$testZero;
+        $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
         if( ArrayHelper::has($attribute, $arrayWhereGrid) ){
     	    $value = $arrayWhereGrid[$attribute];
     	    if ( !empty($value) && !is_array($value)){
