@@ -106,11 +106,11 @@ class SqlHelper
      * @param boolean $testZero   5: the zero must be forehead or not. True = attribute must be diverge from zero
      * @return string
      */
-    public static function attributeIssetOrNotZero(mixed $whereGrid
-                                                  ,string $attribute
-                                                  ,mixed $isTrue
-                                                  ,mixed $isFalse
-                                                  ,mixed $testZero)
+    public static function attributeIssetOrNotZero($whereGrid
+                                                  ,$attribute
+                                                  ,$isTrue
+                                                  ,$isFalse
+                                                  ,$testZero=true)
     {
         $testZero  = empty($testZero)?true:$testZero;
         $retorno = $isFalse;
@@ -175,12 +175,12 @@ class SqlHelper
      * @param string $connector
      * @return string
      */
-    public static function getSqlTypeNumeric( string $stringWhere
-                                            , mixed  $arrayWhereGrid
-                                            , string $attribute
-                                            , mixed  $testZero
-                                            , string $value
-                                            , string $connector
+    public static function getSqlTypeNumeric( $stringWhere
+                                            , $arrayWhereGrid
+                                            , $attribute
+                                            , $testZero
+                                            , $value
+                                            , $connector
                                             ) {
         $testZero = empty($testZero)?true:$testZero;
         $connector = empty($connector)?self::SQL_CONNECTOR_AND:$connector;
@@ -245,13 +245,13 @@ class SqlHelper
         return $stringWhere;
     }
     //--------------------------------------------------------------------------
-    public static function getSqlTypeNotIn( string $stringWhere
-                                          , mixed $arrayWhereGrid
-                                          , string $attribute
-                                          , mixed $testZero
-                                          , string $value
-                                          , string $connector
-                                          , string $type
+    public static function getSqlTypeNotIn( $stringWhere
+                                          , $arrayWhereGrid
+                                          , $attribute
+                                          , $testZero
+                                          , $value
+                                          , $connector
+                                          , $type
                                           )
     {
         $testZero = empty($testZero)?true:$testZero;
@@ -276,13 +276,13 @@ class SqlHelper
      * @param string $type
      * @return string
      */
-    public static function getSqlTypeIn( string $stringWhere
-                                       , mixed  $arrayWhereGrid
-                                       , string $attribute
-                                       , mixed $testZero
-                                       , string $value
-                                       , string $connector
-                                       , string $type
+    public static function getSqlTypeIn( $stringWhere
+                                       , $arrayWhereGrid
+                                       , $attribute
+                                       , $testZero
+                                       , $value
+                                       , $connector
+                                       , $type
                                        )
     {
        $testZero  = empty($testZero)?true:$testZero;
@@ -324,12 +324,12 @@ class SqlHelper
      * @param string  $connector       6:
      * @return string
      */
-    public static function getAtributeWhereGridParameters( string $stringWhere
-                                                         , mixed  $arrayWhereGrid
-                                                         , string $attribute
-                                                         , string $type 
-                                                         , mixed $testZero
-                                                         , string $connector
+    public static function getAtributeWhereGridParameters( $stringWhere
+                                                         , $arrayWhereGrid
+                                                         , $attribute
+                                                         , $type 
+                                                         , $testZero=null
+                                                         , $connector=null
                                                          )
     {
         $testZero  = empty($testZero)?true:$testZero;
