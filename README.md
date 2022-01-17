@@ -61,10 +61,9 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* Compatível PHP 8.0.x, **7.4.x,** 7.3.x, 7.2.x, 7.1.x, 7.0.x
-* Ultima versão compatível com PHP 5.6 é 4.7.8
-
-Veja na Wiki 
+* PHP 7.2.5 a 8.0.x é compativel com as versões do FormDin 4.12.0 ou superior. A recomendação é usar no mínimo o PHP **7.4.x,**
+* PHP 7.0.0 a 7.2.4 é compativel com as versões do FormDin 4.8.0 até 4.11.0
+* PHP 5.6 a iltima versão compatível do Formdin é 4.7.8
 
 [Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
 * [Branchs](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#sobre-as-branchs)
@@ -72,17 +71,7 @@ Veja na Wiki
 * [Bibliotes utilizadas](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#bibliotecas-utilizadas)
 * [Arquitetura do formDin](https://github.com/bjverde/formDin/wiki/Arquitetura-do-formDin)
 
-
 ## Instalação.
-
 [Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
-
 ## Versões
-[See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
-
-* [4.11.1 - 2021/05/21 tag v4.11.1](https://github.com/bjverde/formDin/releases/tag/v4.11.1)
-   * :bug: #237 - SqlHelper::getSqlTypeIn with CONNECTOR_OR
-   * :hammer: #235 - PDF , cores do titulo
-
-* [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
-   * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 
+[Lista de todas as versões](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)

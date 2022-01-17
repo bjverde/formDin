@@ -21,3 +21,6 @@ REM D:\wamp\bin\php\php7.3.5\php.exe D:\wamp\bin\phpunit\phpunit-9.1.4.phar --co
 
 ECHO php 7.4.11 and PHPUnit 9.1.4 with Config XML file
 D:\wamp64\bin\php\php7.4.11\php.exe D:\wamp64\bin\phpunit\phpunit-9.1.4.phar --configuration D:\wamp64\www\formDin\base\test\phpunit-conf-win.xml D:\wamp64\www\formDin\base\test\
+
+REM ECHO php 8.0.7 and PHPUnit 9.1.4 with Config XML file
+REM D:\wamp64\bin\php\php8.0.7\php.exe D:\wamp64\bin\phpunit\phpunit-9.1.4.phar --configuration D:\wamp64\www\formDin\base\test\phpunit-conf-win.xml D:\wamp64\www\formDin\base\test\
