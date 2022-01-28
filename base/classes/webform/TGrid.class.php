@@ -1967,7 +1967,7 @@ class TGrid extends TTable
     //---------------------------------------------------------------------------------------
 
     /**
-     *  Adciona uma coluna do tipo numerico
+     *  Adciona uma coluna do tipo numerico para form no grid
      *
      * @param string $strName           -1: id do campo
      * @param [type] $strTitle          -2: Titulo da coluna que vai aparcer para o usuário
