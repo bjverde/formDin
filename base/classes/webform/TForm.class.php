@@ -1989,7 +1989,7 @@ class TForm Extends TBox
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
-     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like. Procure usar campos do tipo INT
+     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like, procure usar campos do tipo INT. ATENÇÃO Segue o Padrão <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
      * @param string $strCallBackFunctionJs         - 7: função javascript de callback
      * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
      * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
