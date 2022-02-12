@@ -1943,49 +1943,30 @@ function fwPreencherSelectAjax(obj)
 	*/
 	var dadosJson = {
 		modulo:obj['pastaBase']+"callbacks/combinarSelects.php"
-		,
-		selectPai		:obj['selectPai']
-		,
-		campoSelect		:obj['selectFilho']
-		,
-		pacoteOracle		:obj['pacoteOracle']
-		,
-		colunaFiltro		:obj['colunaFiltro']
-		,
-		valorFiltro		:valorFiltro
-		,
-		selectFilhoStatus	:obj['selectFilhoStatus']
-		,
-		colunaCodigo		:obj['colunaCodigo']
-		,
-		colunaDescricao	:obj['colunaDescricao']
-		,
-		valorInicial		:obj['valorInicial']
-		,
-		descPrimeiraOpcao	:obj['descPrimeiraOpcao']
-		,
-		valorPrimeiraOpcao	:obj['valorPrimeiraOpcao']
-		,
-		descNenhumaOpcao	:obj['descNenhumaOpcao']
-		,
-		campoFormFiltro	:campoBvars
-		,
-		campoFormFiltroValor:campoFormFiltroValor
-		,
-		funcaoExecutar		:obj['funcaoExecutar']
-		,
-		ajax			:"1"
-		,
-		selectUniqueOption	:obj['selectUniqueOption']
-		,
-		acao			:acao
-		,
-		dataType		:'textJson'
-		,
-		fwPublicMode : obj['fwPublicMode']
+		,selectPai		   :obj['selectPai']
+		,campoSelect	   :obj['selectFilho']
+		,pacoteOracle	   :obj['pacoteOracle']
+		,colunaFiltro	   :obj['colunaFiltro']
+		,valorFiltro	   :valorFiltro
+		,selectFilhoStatus :obj['selectFilhoStatus']
+		,colunaCodigo	   :obj['colunaCodigo']
+		,colunaDescricao   :obj['colunaDescricao']
+		,valorInicial	   :obj['valorInicial']
+		,descPrimeiraOpcao :obj['descPrimeiraOpcao']
+		,valorPrimeiraOpcao:obj['valorPrimeiraOpcao']
+		,descNenhumaOpcao  :obj['descNenhumaOpcao']
+		,campoFormFiltro   :campoBvars
+		,campoFormFiltroValor:campoFormFiltroValor
+		,funcaoExecutar	   :obj['funcaoExecutar']
+		,ajax			   :"1"
+		,selectUniqueOption:obj['selectUniqueOption']
+		,acao			   :acao
+		,dataType		   :'textJson'
+		,fwPublicMode      :obj['fwPublicMode']
+		,configFileName    :obj['configFileName']
 	};
-	if( app_index_file != '' )
-	{
+
+	if( app_index_file != '' ){
 		urlDestino = app_index_file;
 	}
 	jQuery.post(urlDestino+'?',dadosJson ,function(aDados)

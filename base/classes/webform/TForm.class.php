@@ -1421,12 +1421,9 @@ class TForm Extends TBox
                             }
                             //$dcField->addEvent( 'onchange', 'fwSetFocus("' . $proximoSelect . '");fwSetOpcoesSelect("' . $parametros . '")' );
                             $dcField->addEvent( 'onchange','fwSetOpcoesSelect("' . $parametros . '")' );
-                            if( $dcField->getEnabled() )
-                            {
+                            if( $dcField->getEnabled() ) {
                                 $this->addJavascript( 'jQuery("#' . $dcField->getId() . '").change()' );
-                            }
-                            else
-                            {
+                            } else {
                                 $this->addJavascript( 'jQuery("#' . $dcField->getId() . '_disabled").change()' );
                             }
                         }
@@ -2842,6 +2839,7 @@ class TForm Extends TBox
       * @param string $descNenhumaOpcao      - 9: Mensagem caso não tenho nenhuma opção correspondente.
       * @param string $campoFormFiltro       -10: Campos extras que serão usados como critérios de filtro
       * @param string $funcaoExecutar        -11: Função JavaScript que será chamado no caso de onChange
+      * @param boolean $strConfigFileName   - 12: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
       * @param boolean $boolSelectUniqueOption
       */
      function combinarSelects( $selectPai='cod_uf'
@@ -2855,20 +2853,18 @@ class TForm Extends TBox
                              , $descNenhumaOpcao='-- vazio --'
                              , $campoFormFiltro=''
                              , $funcaoExecutar=''
-                             , $boolSelectUniqueOption=null )
+                             , $boolSelectUniqueOption=null 
+                             , $strConfigFileName=null
+                             )
      {
          // se o campo estiver dentro de uma aba ou de cum container, chamar o método combinar select destes
          $parentField = $this->getField( $selectPai );
-         if( $parentField )
-         {
-             if( $parentField->getParentControl() != $this )
-             {
+         if( $parentField ) {
+             if( $parentField->getParentControl() != $this ) {
                  $parentField->getParentControl()->combinarSelects( $selectPai, $selectFilho, $TabelaPacoteFuncao, $colunaFiltro, $colunaCodigo, $colunaDescricao, $descPrimeiraOpcao, $valorPrimeiraOpcao, $descNenhumaOpcao, $campoFormFiltro, $funcaoExecutar , $boolSelectUniqueOption );
                  return;
              }
-         }
-         else
-         {
+         } else {
              return;
          }
          //die($selectPai);
@@ -2899,6 +2895,7 @@ class TForm Extends TBox
          $arrDados[ 'pastaBase' ] = $this->getBase();
          $arrDados[ 'funcaoExecutar' ] = $funcaoExecutar;
          $arrDados[ 'selectUniqueOption' ] = $boolSelectUniqueOption;
+         $arrDados[ 'configFileName' ] = $strConfigFileName;
          $this->selectsCombinados[ $selectPai ][ $selectFilho ] = $arrDados;
      }
      

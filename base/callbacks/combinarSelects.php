@@ -43,6 +43,8 @@ ini_set('default_charset','utf-8');
 
 //$_REQUEST['fwDebug'] = 1;
 $_REQUEST['fwDebug'] = ( isset( $_REQUEST['fwDebug'] ) ? $_REQUEST['fwDebug'] : 0 );
+$configFileName = isset( $_REQUEST['configFileName'] ) ? $_REQUEST['configFileName'] : null; // nome arquivo de config de banco
+
 if( $_REQUEST['fwDebug']==1) {
 	print_r( $_REQUEST );
 	die();
@@ -126,8 +128,7 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
 		$sql = 'select COD_MUNICIPIO, NOM_MUNICIPIO from municipio where cod_uf = 53 order by nom_municipio';
 	}
 
-    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() )
-    {
+    if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() ){
 		$bvars=null;
 		$res=null;
 		$res[$campoCodigo][] = 0;
@@ -139,10 +140,23 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
 			}
 		}
 	} else {
-		$res = TPDOConnection::executeSql($sql);
-		if( TPDOConnection::getError() ) {
+		$tpdo = New TPDOConnectionObj(false);
+		if( empty($configFileName) ){
+			$tpdo->connect(null,true,null,null);
+		}else{
+			if ( !defined('ROOT_PATH') ) {
+				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
+				return;
+			}
+			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
+			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
+			$configArray = getConnectionArray();
+			$tpdo->connect(null,true,null,$configArray);
+		}
+		$res = $tpdo->executeSql($sql);
+		if( $tpdo->getError() ) {
 			$res[$campoCodigo][] = 0;
-			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".TPDOConnection::getError();
+			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".$tpdo->getError();
 		}
 	}
 }
