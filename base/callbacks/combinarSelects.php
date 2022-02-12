@@ -39,19 +39,11 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-//ini_set('default_charset','iso-8859-1');
 ini_set('default_charset','utf-8');
 
-/*session_start();
-error_reporting(0);
-include("../../includes/config.inc");
-include("../includes/conexao.inc");
-*/
 //$_REQUEST['fwDebug'] = 1;
 $_REQUEST['fwDebug'] = ( isset( $_REQUEST['fwDebug'] ) ? $_REQUEST['fwDebug'] : 0 );
-
-if( $_REQUEST['fwDebug']==1)
-{
+if( $_REQUEST['fwDebug']==1) {
 	print_r( $_REQUEST );
 	die();
 }
@@ -82,8 +74,8 @@ if((string)$_REQUEST['campoFormFiltro']<>'')
 		}
 	}
 }
-if( isset($_REQUEST['fwSession_expired'] ) &&  $_REQUEST['fwSession_expired'] && $_REQUEST['fwSession_expired'] == true )
-{
+
+if( isset($_REQUEST['fwSession_expired'] ) &&  $_REQUEST['fwSession_expired'] && $_REQUEST['fwSession_expired'] == true ) {
 	 echo '{"fwSession_expired":"1"}';
 	 die();
 }
@@ -101,15 +93,13 @@ $retorno='{"campo":"'.$_REQUEST['campoSelect'].
 			'","descNenhumaOpcao":"'.utf8_decode($_REQUEST['descNenhumaOpcao']).'"';
 // executar pacote
 $pacoteCache = explode('|',$_REQUEST['pacoteOracle']);
-if (!isset($pacoteCache[1]))
-{
+
+if (!isset($pacoteCache[1])) {
 	$pacoteCache[1] = NULL;
 }
 //if(strpos($pacoteCache[0],'.PKG')>0)
-if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 )
-{
-	if( $erro = recuperarPacote($pacoteCache[0],$bvars,$res,$pacoteCache[1]))
-	{
+if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
+	if( $erro = recuperarPacote($pacoteCache[0],$bvars,$res,$pacoteCache[1])) {
 		/*$banco = new banco();
 		$bvars = array('COD_UF'=>53);
 		$erro = $banco->executar_pacote_func_proc($pacoteCache[0],$bvars,0);
@@ -123,19 +113,14 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 )
 		print "alert('Erro na função combinarSelect().\\n".$erro[0]."')";
 		return;
 	}
-}
-else
-{
+} else {
 	$sql = 'select '.$campoCodigo.','.$campoDescricao.' from '.$pacoteCache[0];
-	if($where != "")
-	{
+	if($where != "") {
 		$sql .= " where ".$where;
 	}
 	$sql .= " order by ".$campoDescricao;
 
-	if( $_REQUEST['fwDebug'] == '1' || $_REQUEST['fwDebug'] == '2' )
-	{
-
+	if( $_REQUEST['fwDebug'] == '1' || $_REQUEST['fwDebug'] == '2' ){
 		//echo 'Comando SQL:<br>';
 		echo $sql;
 		$sql = 'select COD_MUNICIPIO, NOM_MUNICIPIO from municipio where cod_uf = 53 order by nom_municipio';
@@ -147,35 +132,28 @@ else
 		$res=null;
 		$res[$campoCodigo][] = 0;
 		$res[$campoDescricao][] = $sql;
-		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$pacoteCache[1]))
-		{
-			if( preg_match('/falha/i',$erro ) > 0 )
-			{
+		if( $erro = $GLOBALS['conexao']->executar_recuperar($sql,$bvars,$res,$nrows,(int)$pacoteCache[1])) {
+			if( preg_match('/falha/i',$erro ) > 0 ){
 				$res[$campoCodigo][] = 0;
 				$res[$campoDescricao][] = "Erro na funcao combinarSelect(). Erro:".$erro;
 			}
 		}
-	}
-	else
-	{
+	} else {
 		$res = TPDOConnection::executeSql($sql);
-		if( TPDOConnection::getError() )
-		{
+		if( TPDOConnection::getError() ) {
 			$res[$campoCodigo][] = 0;
 			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".TPDOConnection::getError();
 		}
 	}
 }
 
-if( $_REQUEST['fwDebug'] == 3)
-{
+if( $_REQUEST['fwDebug'] == 3) {
 	echo 'Resultado consulta:<br>';
 	print_r($res);
 	die('<hr>fim debug');
 }
 
-if($res)
-{
+if($res) {
 	/**
 	* remover retorno de linha
 	*/
