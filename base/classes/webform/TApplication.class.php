@@ -1210,7 +1210,6 @@ class TApplication extends TLayout {
 		if (isset ( $this->onGetLoginInfo ) && function_exists ( $this->removeIllegalChars ( $this->onGetLoginInfo ) )) {
 			return call_user_func ( $this->getOnGetLoginInfo () );
 		}
-		
 		return $this->loginInfo;
 	}
 	
@@ -1223,16 +1222,15 @@ class TApplication extends TLayout {
 		$this->headerContent = $strNewValue;
 	}
 	public function getHeaderContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->headerContent ) > 0) {
-			if (file_exists ( $this->headerContent )) {
+		if ( FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->headerContent ) > 0) {
+			if ( FileHelper::exists( $this->headerContent) ) {
 				// $code= file_get_contents($this->headerContent);
 				// $code= file_get_contents($this->headerContent);
 				return $this->parsePhpFile ( $this->headerContent );
 			} else {
 				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabeçalho não encontrado.';
 			}
-		}
-		
+		}		
 		return $this->headerContent;
 	}
 	
@@ -1245,14 +1243,13 @@ class TApplication extends TLayout {
 		$this->bodyContent = $strNewValue;
 	}
 	public function getBodyContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->bodyContent ) > 0) {
-			if (file_exists ( $this->bodyContent )) {
+		if ( FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->bodyContent ) > 0) {
+			if ( FileHelper::exists( $this->bodyContent )) {
 				return file_get_contents ( $this->bodyContent );
 			} else {
 				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo não encontrado.';
 			}
-		}
-		
+		}		
 		return $this->bodyContent;
 	}
 	
@@ -1339,8 +1336,8 @@ class TApplication extends TLayout {
 	    return $app_header_title;
 	}
 	
-	private function getHeaderLogin() {
-	    
+	private function getHeaderLogin()
+	{	    
 	    $userInfo  = null;
 	    $btnLogOut = null;
 	    if ($this->getLoginDone ()) {
