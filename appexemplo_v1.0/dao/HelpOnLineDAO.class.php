@@ -90,12 +90,12 @@ class HelpOnLineDAO extends TPDOConnection
     //--------------------------------------------------------------------------------
     public static function createFile()
     {
-        if (!file_exists(DATABASE)) {
+        if (!FileHelper::exists(DATABASE)) {
             $aFileParts = pathinfo(DATABASE);
             $baseName = $aFileParts[ 'basename' ];
             $fileName = $aFileParts[ 'filename' ];
             $dirName = $aFileParts[ 'dirname' ];
-            if ($dirName && ! file_exists($dirName)) {
+            if ($dirName && ! FileHelper::exists($dirName)) {
                 if (! mkdir($dirName, 0775, true)) {
                     die('Não foi possivel criar o diretório '.$dirName);
                 }
