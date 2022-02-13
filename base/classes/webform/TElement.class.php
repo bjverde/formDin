@@ -306,6 +306,22 @@ class TElement
         
         
     }
+
+    public function removeIllegalCharsv2( $word=null, $strExcept = null )
+    {
+        if( is_null($word) || trim($word) == '' ){
+            return null;
+        }
+        if ( isset( $strExcept ) ){
+            $search  = array( '[', ']', '^' );
+            $replace = array( '\\[', '\\]', '\\^' );
+            $strExcept = str_replace( $search, $replace, $strExcept );
+        }
+        $pattern="/[^a-zA-Z0-9_" . $strExcept . "]/";
+        $subject=strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" );
+        $word   =preg_replace( $pattern, "",$subject );
+        return $word;
+    }
     
     /**
      * Adiciona conteudo dentro da tag. Pode ser um texto ou outro objeto da classe Element
@@ -795,8 +811,7 @@ class TElement
         // e a função removeillegaChars remove eles se não for informado
         $this->id = $this->removeIllegalChars( $newId );
         if( !is_null($newId) ){
-            // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id
-            
+            // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id            
             if ( !empty($this->name) && !strpos( $this->name, '[' ) ) {
                 $this->name = $this->removeIllegalChars( $newId, '[]' );
             }
