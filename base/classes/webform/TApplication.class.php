@@ -106,13 +106,19 @@ class TApplication extends TLayout {
 	 * @param string $charSet      6: @deprecated - não tem uso, será removido
 	 */
 	public function __construct($strTitle = null, $strSubtitle = null, $strSigla = null, $strUnit = null, $intWidth = null, $charSet = null) {
+		if( !empty($intWidth) ){
+			throw new InvalidArgumentException('ERRO !! remova o parametro $intWidth');
+		}
+		if( !empty($charSet) ){
+			throw new InvalidArgumentException('ERRO !! remova o parametro $charSet');
+		}		
 		ini_set ( 'xdebug.max_nesting_level', 150 );
 		date_default_timezone_set ( 'America/Sao_Paulo' );
 		
 		$this->includePathDao();
 		$this->includePathClasses();
 		
-		session_start ();
+		session_start();
 		
 		// desenv: error_reporting( E_ALL | E_STRICT );
 		// error_reporting( E_ALL | E_STRICT );

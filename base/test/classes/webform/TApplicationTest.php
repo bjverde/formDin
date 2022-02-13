@@ -78,7 +78,21 @@ class TApplicationTest extends TestCase
 		$this->tApplication = null;		
 		parent::tearDown ();
 	}
-
+	//----------------------------------------------
+	/*
+	public function testSetIntWidth_Exception() {
+		$this->tearDown();
+		$this->expectException(InvalidArgumentException::class);
+		$app = new TApplication('PHP Unit','Test','test','unit test',800);
+	}
+	//----------------------------------------------
+	public function testSetCharSet_Exception() {
+		$this->tearDown();
+		$this->expectException(InvalidArgumentException::class);
+		$app = new TApplication('PHP Unit','Test','test','unit test',800,'UTF8');
+	}
+	*/	
+	//----------------------------------------------
 	public function testSetTitle_Defined() {
 	    $expected= 'xxxTest95784';
 	    
