@@ -793,11 +793,10 @@ class TElement
         // considerar os caracteres [] porque os campo check e select multi tem [] no final
         // e a função removeillegaChars remove eles se não for informado
         $this->id = $this->removeIllegalChars( $newId );
-        if( ! is_null($newId) )
-        {
+        if( !is_null($newId) ){
             // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id
-            if ( !strpos( $this->name, '[' ) )
-            {
+            
+            if ( !empty($this->name) && !strpos( $this->name, '[' ) ) {
                 $this->name = $this->removeIllegalChars( $newId, '[]' );
             }
         }
