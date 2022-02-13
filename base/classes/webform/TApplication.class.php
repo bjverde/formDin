@@ -233,7 +233,7 @@ class TApplication extends TLayout {
 		if (preg_match ( '/</', strtolower ( $this->strSigla ) )) {
 			return $this->strSigla;
 		} else if (preg_match ( '/jp?|gif|png|bmp/', $this->strSigla )) {
-			if (file_exists ( $this->strSigla )) {
+			if( FileHelper::exists($this->strSigla) ){
 				return '<img src="' . $this->strSigla . '">';
 			}
 			
@@ -320,13 +320,13 @@ class TApplication extends TLayout {
 		$appImgLogo = $this->getImgLogoPath();
 		
 		if( !is_null($appImgLogo) ){
-			$appImgLogoExists = file_exists ( $appImgLogo );
+			$appImgLogoExists = FileHelper::exists( $appImgLogo );
 			if ($appImgLogoExists) {
 				$stringHtml = '<img src="'.$appImgLogo.'">';
 			}
 			
 			if ( !is_null($appRootDir) ) {
-				$appImgLogoExists = file_exists ( $appRootDir.$appImgLogo );				
+				$appImgLogoExists = FileHelper::exists( $appRootDir.$appImgLogo );
 				if ($appImgLogoExists) {
 					$stringHtml = '<img src="'.$appRootDir.$appImgLogo.'">';
 				}
@@ -435,7 +435,7 @@ class TApplication extends TLayout {
 		    $this->buildPageFooter(); // montar o rodapé da pagina
 			
 			if ( $this->getLoginFile() ) {
-				if (file_exists ( $this->getLoginFile () )) {
+				if ( FileHelper::exists( $this->getLoginFile() )  ) {
 					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . addslashes ( $this->getLoginInfo () ) . '")' );
 				} else {
 					$this->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicação, não existe.")' );
@@ -562,7 +562,7 @@ class TApplication extends TLayout {
 				while ( $filetmp = readdir ( $h ) ) {
 					if ($filetmp != '.' && $filetmp != '..') {
 						$filepath = $tmpDir . $filetmp;
-						if (! is_dir ( $filepath ) && file_exists ( $filepath )) {
+						if (! is_dir ( $filepath ) && FileHelper::exists($filepath) ){
 							$lastModified = @filemtime ( $filepath );
 							if ($lastModified == NULL)
 								$lastModified = @filemtime ( utf8_decode ( $filepath ) );
@@ -589,7 +589,7 @@ class TApplication extends TLayout {
 		if ($this->getIncludeFiles ()) {
 			foreach ( $this->getIncludeFiles () as $k => $v ) {
 			    $k = $k; //POG para avitar mensagem de variavel não usada
-				if (file_exists ( $v )) {
+				if ( FileHelper::exists($v) ) {
 					require_once ($v);
 				}
 			}
@@ -926,7 +926,7 @@ class TApplication extends TLayout {
 	}	
 	// -------------------------------------------------------------------------------------------
 	public function setLoginFile($strNewValue = null, $onBeforeLoginFunction = null) {
-	    if ( !empty($strNewValue) && !file_exists($strNewValue) ) {
+	    if ( !empty($strNewValue) && !FileHelper::exists($strNewValue) ) {
 	        throw new LogicException('File not Exists: '.$strNewValue);
 	    }
 		$this->loginFile = $strNewValue;
@@ -937,7 +937,7 @@ class TApplication extends TLayout {
 	// -------------------------------------------------------------------------------------------
 	public function getLoginFile() {
 		// tentar encontrar o arquivo na pasta modulos
-		if (! file_exists ( $this->loginFile )) {
+		if ( !FileHelper::exists( $this->loginFile ) ) {
 			return $this->getRealPath ( $this->loginFile );
 		}
 		return $this->loginFile;
@@ -1089,7 +1089,7 @@ class TApplication extends TLayout {
 	public function setBackgroundImage($strNewValue = null, $strRepeat = null, $strPosition = null) {
 		$this->backgroundImage = $strNewValue;
 		if ($strNewValue && file_exists ( $strNewValue )) {
-			if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage ( $strNewValue ) )) {
+			if ( function_exists ( 'getimagesize' ) && FileHelper::exists($this->getFooterBgImage($strNewValue)) ) {
 				list ( $width, $height ) = getimagesize ( $strNewValue );
 				if (($width + $height) > 800) {
 					$this->setBackgroundRepeat ( 'repeat-y' );
@@ -1260,13 +1260,12 @@ class TApplication extends TLayout {
 	}
 	public function getFooterContent() {
 		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->footerContent ) > 0) {
-			if (file_exists ( $this->footerContent )) {
+			if ( FileHelper::exists($this->footerContent) ){
 				return file_get_contents ( $this->footerContent );
 			} else {
 				return 'Arquivo <b>' . $this->footerContent . '<b> definido para o rodapé não encontrado.';
 			}
 		}
-		
 		return $this->footerContent;
 	}
 	
