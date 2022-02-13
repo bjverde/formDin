@@ -234,6 +234,7 @@ class TButton extends TControl
 			}
 		}
 		if( ! file_exists($path.$image) ){
+			$image = empty($image)?'':$image;
 			$image = str_replace('_disabled.','.',$image);
 		}
 		return $path.$image;
