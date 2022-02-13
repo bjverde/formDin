@@ -682,7 +682,8 @@ class TElement
      */
     public function setEvent( $eventName, $functionJs = null, $boolRestrictive = null )
     {
-        $eventName = strtolower( $this->removeIllegalChars( $eventName ) );
+        $eventName = $this->removeIllegalChars( $eventName );
+        $eventName = !empty($eventName)?strtolower($eventName):$eventName;
         //$functionJs	= $this->removeIllegalChars($functionJs);
         $this->events[ $eventName ] = '';
         
