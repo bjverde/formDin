@@ -232,8 +232,7 @@ class TAjuda {
 				for($i=0;$i<10;$i++)
 				{
 					$base = str_repeat('../',$i).'base/';
-					if( file_exists($base) )
-					{
+					if( FileHelper::exists($base) ){
 						$i=1000;
 						//$this->base = $base;
 						self::$base=$base;
