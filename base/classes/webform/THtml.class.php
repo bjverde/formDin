@@ -167,6 +167,7 @@ class THtml extends TControl
 	//-------------------------------------------------------------------------------------
 	public function setLoadingMessage($strNewValue=null)
 	{
+		$strNewValue = empty($strNewValue)?'':$strNewValue;
 		$this->loadingMessage = str_replace("'",'"',$strNewValue);
 	}
 	public function getLoadingMessage()
