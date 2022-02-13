@@ -165,18 +165,32 @@ class StringHelperTest extends TestCase
 		$result = StringHelper::formatPhoneNumber('12345678') ;		
 		$this->assertEquals( $expected , $result );
 	}
-
-    public function testTirarAcentos() {
+	//-------------------------------------------------------------------------
+    public function testTirarAcentos_test1() {
         $expected = 'Voce deve ter recebido uma copia da GNU LGPL versao 3';
-		$result = StringHelper::tirarAcentos(self::STRING_ORIGIN) ;		
+		$result = StringHelper::tirarAcentos(self::STRING_ORIGIN);		
 		$this->assertEquals( $expected , $result );
 	}
-
-	public function testTirarAcentos2() {
+	public function testTirarAcentos_test2() {
         $expected = 'acao ACAO Nao nAo';
-		$result = StringHelper::tirarAcentos('ação AÇÃO Não nÃo') ;		
+		$result = StringHelper::tirarAcentos('ação AÇÃO Não nÃo');
 		$this->assertEquals( $expected , $result );
 	}
+	public function testTirarAcentos_test3() {
+        $expected = 'acao ACAO Nao nAo';
+		$result = StringHelper::tirarAcentos('ação AÇÃO Não nÃo');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testTirarAcentos_frase() {
+        $expected = 'ola acao a mim!';
+		$result = StringHelper::tirarAcentos('olá ação à mim!');		
+		$this->assertEquals( $expected , $result );
+	}
+	public function testTirarAcentos_caracteres() {
+        $expected = 'aaaaeeiooouucAAAAEEIOOOUU';
+		$result = StringHelper::tirarAcentos('áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜ');		
+		$this->assertEquals( $expected , $result );
+	}	
 	//-------------------------------------------------------------------------
 	public function removeCaracteresEspeciais_a() {
         $expected = 'Ã[]áàãâÁÀÃÂ';
@@ -188,6 +202,11 @@ class StringHelperTest extends TestCase
 		$result = StringHelper::removeCaracteresEspeciais('ÉÊéê[] @amor');		
 		$this->assertEquals( $expected , $result );
 	}
+	public function removeCaracteresEspeciais_4espacos() {
+        $expected = 'ÉÊéê    amor';
+		$result = StringHelper::removeCaracteresEspeciais('ÉÊéê[]    @amor');		
+		$this->assertEquals( $expected , $result );
+	}		
 	//-------------------------------------------------------------------------
 	public function testRemoveEspacoBranco() {
         $expected = 'acaoACAONaonAo';
