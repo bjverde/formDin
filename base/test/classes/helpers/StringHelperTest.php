@@ -177,7 +177,24 @@ class StringHelperTest extends TestCase
 		$result = StringHelper::tirarAcentos('ação AÇÃO Não nÃo') ;		
 		$this->assertEquals( $expected , $result );
 	}
-
+	//-------------------------------------------------------------------------
+	public function removeCaracteresEspeciais_a() {
+        $expected = 'Ã[]áàãâÁÀÃÂ';
+		$result = StringHelper::removeCaracteresEspeciais('ÃáàãâÁÀÃÂ');		
+		$this->assertEquals( $expected , $result );
+	}
+	public function removeCaracteresEspeciais_e() {
+        $expected = 'ÉÊéê amor';
+		$result = StringHelper::removeCaracteresEspeciais('ÉÊéê[] @amor');		
+		$this->assertEquals( $expected , $result );
+	}
+	//-------------------------------------------------------------------------
+	public function testRemoveEspacoBranco() {
+        $expected = 'acaoACAONaonAo';
+		$result = StringHelper::removeEspacoBranco('acao ACAO Nao nAo') ;		
+		$this->assertEquals( $expected , $result );
+	}
+	//-------------------------------------------------------------------------
 	public function testString2PascalCase() {
         $expected = 'AcaoDeletarMao';
 		$result = StringHelper::string2PascalCase('ação deLEtar MÃO') ;		
