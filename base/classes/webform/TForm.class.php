@@ -6152,8 +6152,8 @@ class TForm Extends TBox
     */
    public function getPublicMode()
    {
-       //return ( $this->publicMode == 'S' || strtolower($this->publicMode) == '1' || strtolower( $this->publicMode == 'true') ) ? true : false;
-       return ( self::$publicMode == 'S' || strtolower(self::$publicMode) == '1' || strtolower( self::$publicMode == 'true') ) ? true : false;
+       self::$publicMode = !empty(self::$publicMode)?strtolower(self::$publicMode):self::$publicMode;
+       return ( self::$publicMode == 'S' || self::$publicMode == '1' || self::$publicMode == 'true' ) ? true : false;
    }
            //-----------------------------------------------------------------------------
            public function setRequiredFieldText($strNewValue=null)
