@@ -769,6 +769,7 @@ abstract class TOption extends TControl
 											$value = $mixOptions[strtolower($colName)][$k];
 										}
 										$value = $this->specialChars2htmlEntities( $value );
+										$value = empty($value)?array():$value;
 										$value = preg_replace("/\n/",' ',$value);
 										$this->arrOptionsData[$v]['data-'.strtolower($colName)] = $value;
 									}

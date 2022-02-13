@@ -4280,8 +4280,7 @@ class TForm Extends TBox
       */
      public function getOnClose()
      {
-         if(preg_match('/\(/',$this->onClose) == 1 )
-         {
+         if( FormDinHelper::pregMatch('/\(/',$this->onClose) == 1 ){
              return "'".$this->onClose."'";
          }
          return is_null($this->onClose) ? 'null' : $this->onClose;
@@ -4302,8 +4301,7 @@ class TForm Extends TBox
       */
      public function getOnBeforeClose()
      {
-         if(preg_match('/\(/',$this->onBeforeClose) == 1 )
-         {
+         if(FormDinHelper::pregMatch('/\(/',$this->onBeforeClose) == 1 ){
              return "'".$this->onBeforeClose."'";
          }
          return is_null($this->onBeforeClose) ? 'null' : $this->onBeforeClose;

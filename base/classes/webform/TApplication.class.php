@@ -1259,7 +1259,7 @@ class TApplication extends TLayout {
 		$this->footerContent = $strNewValue;
 	}
 	public function getFooterContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->footerContent ) > 0) {
+		if (FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->footerContent ) > 0) {
 			if ( FileHelper::exists($this->footerContent) ){
 				return file_get_contents ( $this->footerContent );
 			} else {
