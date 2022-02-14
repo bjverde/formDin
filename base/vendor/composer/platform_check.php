@@ -4,8 +4,8 @@
 
 $issues = array();
 
-if (!(PHP_VERSION_ID >= 70205)) {
-    $issues[] = 'Your Composer dependencies require a PHP version ">= 7.2.5". You are running ' . PHP_VERSION  .  '.';
+if (!(PHP_VERSION_ID >= 80000)) {
+    $issues[] = 'Your Composer dependencies require a PHP version ">= 8.0.0". You are running ' . PHP_VERSION  .  '.';
 }
 
 $missingExtensions = array();
@@ -13,8 +13,6 @@ extension_loaded('ctype') || $missingExtensions[] = 'ctype';
 extension_loaded('filter') || $missingExtensions[] = 'filter';
 extension_loaded('hash') || $missingExtensions[] = 'hash';
 extension_loaded('json') || $missingExtensions[] = 'json';
-extension_loaded('libxml') || $missingExtensions[] = 'libxml';
-extension_loaded('simplexml') || $missingExtensions[] = 'simplexml';
 
 if ($missingExtensions) {
     $issues[] = 'Your Composer dependencies require the following PHP extensions to be installed: ' . implode(', ', $missingExtensions);
