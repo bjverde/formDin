@@ -386,7 +386,10 @@ abstract class TOption extends TControl
 					$opt->setProperty( 'value', $k );
 					$opt->clearCss();
 					if( !is_array( $this->getValue() ) ) {
-					    if( html_entity_decode( ( string ) $k ) == html_entity_decode( ( string ) $this->getValue(),null, ENCODINGS ) ) {
+						$decodeOption   = isset($k)?html_entity_decode( ( string ) $k ):'';
+						$value = $this->getValue();
+						$decodeGetValue = isset($value)?html_entity_decode( (string)$value,ENT_NOQUOTES, ENCODINGS ):'';
+					    if( $decodeOption == $decodeGetValue ) {
 							$opt->setProperty( 'selected', "true" );
 						}
 					} else {
