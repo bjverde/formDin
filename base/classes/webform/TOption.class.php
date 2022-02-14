@@ -119,11 +119,9 @@ abstract class TOption extends TControl
 		if( $this->getFieldType() == self::SELECT && strpos( $this->getName(), '[' ) !== false ) {
 	   	   $name = $this->getName();
 		   $arrTemp = explode('[',$name);
-		   if( isset($_POST[$arrTemp[0] ] ) )
-		   {
+		   if( isset($_POST[$arrTemp[0] ] ) ){
 		      $expr = '$v=$_POST["'.str_replace( '[', '"][', $name ).';';
-		      if( ! preg_match('/\[\]/',$expr ))
-		      {
+		      if( !FormDinHelper::pregMatch('/\[\]/',$expr )){
 		   		@eval( $expr );
 		   		$this->setValue( $v );
 		      }
@@ -569,7 +567,7 @@ abstract class TOption extends TControl
 			if( is_string( $mixOptions ) ) {
 				$where = null;
 				$cacheSeconds = null;
-				if( preg_match('/\|/',$mixOptions)){
+				if( FormDinHelper::pregMatch('/\|/',$mixOptions)){
 					$mixOptions  	= explode( '|', $mixOptions );
 					$mixOptions[1]  = ( isset( $mixOptions[1] ) ? $mixOptions[1] : '' );
 					// segundo parametro pode ser o where ou tempo de cache
@@ -625,20 +623,13 @@ abstract class TOption extends TControl
 							}
 						}
 						// se passou somente o nome da tabela , criar comando select
-						if( preg_match( '/\.PK\a?/i', $packageName ) )
-						{
+						if( FormDinHelper::pregMatch( '/\.PK\a?/i', $packageName ) ){
 							print_r( recuperarPacote( $packageName, $bvars, $mixOptions, $cacheSeconds ) );
-						}
-						else
-						{
-							if( $strKeyField && $strDisplayField )
-							{
+						} else {
+							if( $strKeyField && $strDisplayField ) {
 								$sql = "select {$strKeyField},{$strDisplayField}{$strDataColumns} from  {$packageName} order by {$strDisplayField}";
-							}
-							else
-							{
-								if( !preg_match( '/' . ESQUEMA . '\./', $packageName ) )
-								{
+							} else {
+								if( !FormDinHelper::pregMatch( '/' . ESQUEMA . '\./', $packageName ) ){
 									$packageName = ESQUEMA . '.' . $packageName;
 								}
 								$sql = "select * from {$packageName}";
@@ -646,39 +637,26 @@ abstract class TOption extends TControl
 							$bvars = null;
 							$nrows = 0;
 							$mixOptions = null;
-							if( $GLOBALS[ 'conexao' ] )
-							{
+							if( $GLOBALS[ 'conexao' ] ) {
 								if( $GLOBALS[ 'conexao' ]->executar_recuperar( $sql, $bvars, $mixOptions, $nrows ) )
 								{
 									echo 'Erro na execução do sql:' . $sql;
 								}
 							}
 						}
-					}
-					else
-					{
-						if( TPDOConnection::getInstance() )
-						{
-							if( preg_match( '/^select/i', $mixOptions ) > 0 )
-							{
+					} else {
+						if( TPDOConnection::getInstance() ) {
+							if( FormDinHelper::pregMatch( '/^select/i', $mixOptions ) > 0 ){
 								$mixOptions = TPDOConnection::executeSql( $mixOptions );
-							}
-							else
-							{
-								if( !is_null( $where ) )
-								{
+							} else {
+								if( !is_null( $where ) ){
 									$where = ' where ' . preg_replace( '/"/', "'", $where );
-								}
-								else
-								{
+								} else {
 									$where = '';
 								}
-								if( $this->getKeyField() && $this->getDisplayField() )
-								{
+								if( $this->getKeyField() && $this->getDisplayField() ) {
 									$sql = "select {$this->getKeyField()},{$this->getDisplayField()}{$strDataColumns} from {$mixOptions} {$where} order by {$this->getDisplayField()}";
-								}
-								else
-								{
+								} else {
 									$sql = "select * from {$mixOptions} {$where}";
 								}
 								$mixOptions = TPDOConnection::executeSql( $sql );

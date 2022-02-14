@@ -399,7 +399,7 @@ class TElement
                                 // regras de acessibilidade para div
                                 if( $k == 'name' )
                                 {
-                                    if( preg_match('/(div|table|tr|td)/i',$this->getTagType()))
+                                    if( FormDinHelper::pregMatch('/(div|table|tr|td)/i',$this->getTagType()))
                                         continue;
                                 }
                                 if(substr($k,0,3) != '_fl')
@@ -591,7 +591,7 @@ class TElement
                     $result .= $child->show( false );
                     self::$depth--;
                 } else {
-                    $preg = preg_match('/^\/\//',ltrim( $child ) );
+                    $preg = FormDinHelper::pregMatch('/^\/\//',ltrim( $child ) );
                     // o texto do campo textarea e option não ser identado senão aparece na tela
                     if ( $this->tagType != 'textarea' && $this->tagType != 'option' ) {
                         // linha de comentario                        
@@ -938,12 +938,10 @@ class TElement
         $url = ( $url == '' ? $_SERVER[ 'SCRIPT_FILENAME' ] : $url );
         $url = ( $url == '' ? $_SERVER[ 'SCRIPT_NAME' ] : $url );
         $url = ( $url == '' ? $_SERVER[ 'PHP_SELF' ] : $url );
-        if ( !$url )
-        {
+        if ( !$url ){
             return 'index.php';
         }
-        if( preg_match('/\./',$url))
-        {
+        if( FormDinHelper::pregMatch('/\./',$url)) {
             $aFileParts = pathinfo( $url );
             return $aFileParts[ 'basename' ];
         }
@@ -1065,7 +1063,7 @@ class TElement
         {
             return $strValue;
         }
-        if( preg_match( '/\?/', utf8_decode($strValue) ) )
+        if( FormDinHelper::pregMatch( '/\?/', utf8_decode($strValue) ) )
         {
             return $strValue;
         }

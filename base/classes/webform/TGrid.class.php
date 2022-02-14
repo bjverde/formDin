@@ -727,7 +727,7 @@ class TGrid extends TTable
                             {
                                 foreach( $edit->getEvents() as $eventName => $eventFunction )
                                 {
-                                    if ( preg_match( '/\(\)/', $eventFunction ) == 1 )
+                                    if ( FormDinHelper::pregMatch( '/\(\)/', $eventFunction ) == 1 )
                                     {
                                         $eventFunction = preg_replace( '/\(\)/', '(this,' . $rowNum . ')', $eventFunction );
                                         $edit->setEvent( $eventName, $eventFunction );
@@ -771,7 +771,7 @@ class TGrid extends TTable
                             {
                                 foreach( $this->getButtons() as $buttonName => $objButton )
                                 {
-                                    if( $this->getDisabledButtonImage() && preg_match('/fwblank/',$objButton->getImageDisabled() ) )
+                                    if( $this->getDisabledButtonImage() && FormDinHelper::pregMatch('/fwblank/',$objButton->getImageDisabled() ) )
                                     {
                                         $objButton->setImageDisabled( $this->getDisabledButtonImage() ) ;
                                     }
@@ -1466,7 +1466,7 @@ class TGrid extends TTable
             }
         }
         //else if( strpos(strtolower($this->data),'pk_') !== false || strpos(strtolower($this->data),'pkg_') !== false )
-        else if( preg_match( '/\.PK\a?/i', $this->data ) > 0 )
+        else if( FormDinHelper::pregMatch( '/\.PK\a?/i', $this->data ) > 0 )
         {
             $bvars = $this->getBvars();
             $cache = $this->getCache();
