@@ -1100,8 +1100,10 @@ class TElement
             $this->css = $mixProperty;
         } else {
             // os nomes das propriedades serao em caixa baixa
+            $mixProperty = isset($mixProperty)?$mixProperty:'';
             $mixProperty = preg_replace( '[-]', '_', $mixProperty );
             $mixProperty = $this->removeIllegalChars( strtolower( $mixProperty ) );
+            $mixProperty = isset($mixProperty)?$mixProperty:'';
             $mixProperty = preg_replace( '[_]', '-', $mixProperty );
             if ( $newValue === null ) {
                 $this->css[ $mixProperty ] = null;
