@@ -668,7 +668,7 @@ class TForm Extends TBox
                 $row->add( $this->headerBarButtonArea );
                 $this->header->setCss( 'width', $this->getWidth() - 70 );
                 if( $this->getMaximize() == true ){
-                    if( preg_match('/\(/',$this->getOnMaximize() )==1) {
+                    if( FormDinHelper::pregMatch('/\(/',$this->getOnMaximize() )==1) {
                         $this->header->addEvent('ondblclick','fwFullScreen("'.$this->name.'","'.$this->getOnMaximize().'")');
                     } else {
                         $this->header->addEvent('ondblclick','fwFullScreen("'.$this->name.'","'.$this->getOnMaximize().'")');
@@ -806,9 +806,9 @@ class TForm Extends TBox
                 // se o formulário tiver documentação on-line, ativar no displaycontrol
                 if( $this->getOnlineDoc() )
                 {
-                    if( !self::$onlineDocIgnoreFields || preg_match('/,'.$dc->getField()->getId().',/',','.self::$onlineDocIgnoreFields.',' ) == 0 )
+                    if( !self::$onlineDocIgnoreFields || FormDinHelper::pregMatch('/,'.$dc->getField()->getId().',/',','.self::$onlineDocIgnoreFields.',' ) == 0 )
                     {
-                        if( !self::$onlineDocFields || preg_match('/,'.$dc->getField()->getId().',/',','.self::$onlineDocFields.',' ) > 0 )
+                        if( !self::$onlineDocFields || FormDinHelper::pregMatch('/,'.$dc->getField()->getId().',/',','.self::$onlineDocFields.',' ) > 0 )
                         {
                             $dc->setOnlineDoc($this->getOnlineDoc());
                         }
@@ -1775,12 +1775,9 @@ class TForm Extends TBox
             foreach( $this->getJavascript() as $k=>$strJs )
             {
                 //print $strJs.'<br>';
-                if( preg_match( '/alert\(/', $strJs ) > 0 )
-                {
+                if( FormDinHelper::pregMatch( '/alert\(/', $strJs ) > 0 ) {
                     $alerts[] = preg_replace( '/;;/', '', $strJs );
-                }
-                else
-                {
+                }else{
                     //$js->add(chr(9).str_replace(";;",";",$strJs.";"));
                     $js->add( chr( 9 ) . preg_replace( '/;;/', '', $strJs ) );
                 }
@@ -2178,31 +2175,22 @@ class TForm Extends TBox
         if( $strJs )
         {
             // adicionar parentes se tiver passado o nome da função
-            if( !preg_match('/[ =\(]/',$strJs))
-            {
-                //$strJs.='('.json_encode($_REQUEST).')';
+            if( !preg_match('/[ =\(]/',$strJs)) {
                 $strJs.='()';
             }
             // quando for passado assim: minhaFuncao(POST), retornar os valores do $_POST
-            if( preg_match('/\(POST\)/',$strJs) )
-            {
+            if( preg_match('/\(POST\)/',$strJs) ){
                 $strJs = preg_replace('/\(POST\)/','('.json_encode($_POST).')',$strJs );
-            }
-            else if( preg_match('/\(GET\)/',$strJs) )
-            {
+            }else if( preg_match('/\(GET\)/',$strJs) ){
                 $strJs = preg_replace('/\(GET\)/','('.json_encode($_GET).')',$strJs );
-            }
-            else if( preg_match('/\(REQUEST\)/',$strJs) )
-            {
+            }else if( preg_match('/\(REQUEST\)/',$strJs) ){
                 $strJs = preg_replace('/\(REQUEST\)/','('.json_encode($_REQUEST).')',$strJs );
             }
             // adicionar ; se não tiver
-            if( preg_match( '/;\z/', $strJs ) == 0 )
-            {
+            if( preg_match( '/;\z/', $strJs ) == 0 ){
                 $strJs .= ';';
             }
-            if( preg_match( '/GB_HIDE/i', $strJs ) > 0 )
-            {
+            if( preg_match( '/GB_HIDE/i', $strJs ) > 0 ){
                 //$strJs .= ';return;';
             }
         }
@@ -3300,18 +3288,12 @@ class TForm Extends TBox
                                          $value = $_SESSION[ APLICATIVO ][ 'offline' ][ $gridFile[ 'id' ] ];
                                          unset( $value[ 'FW_BACK_TO' ] );
                                      }
-                                 }
-                                 else if( $field->getFieldType() == 'number' )
-                                 {
-                                     if( $strDecimalSeparator == '.')
-                                     {
-                                         if( preg_match('/,/',$value) == 1 )
-                                         {
+                                 } else if( $field->getFieldType() == 'number' ) {
+                                     if( $strDecimalSeparator == '.') {
+                                         if( FormDinHelper::pregMatch('/,/',$value) == 1 ){
                                              $value = str_replace( ',', '.', str_replace( '.', '', $value ) );
                                          }
-                                     }
-                                     else
-                                     {
+                                     } else {
                                          $value = str_replace( '.', ',', str_replace( ',', '', $value ) );
                                      }
                                  }
@@ -6166,53 +6148,39 @@ class TForm Extends TBox
            public function parseShortcut($obj,$target)
            {
                
-               if( !is_object($obj) || ! method_exists($obj,'getValue') )
-               {
+               if( !is_object($obj) || ! method_exists($obj,'getValue') ) {
                    return;
                }
                $label = $obj->getValue();
-               if( preg_match('/\|/',$label) == 1)
-               {
+               if( FormDinHelper::pregMatch('/\|/',$label) == 1) {
                    $char = explode('|',$label);
-                   if( isset($char[0] ) )
-                   {
+                   if( isset($char[0] ) ) {
                        $obj->setProperty('shortcut',$char[0].'|'.$target);
                        //$obj->setValue(preg_replace('/&/','',$label) );
                        $label = preg_replace('/'.$char[0].'\|/','',$label);
-                       if( $obj->getFieldType() == 'tabsheet')
-                       {
+                       if( $obj->getFieldType() == 'tabsheet'){
                            $obj->setValue(null,$label);
-                       }
-                       else
-                       {
+                       } else {
                            $obj->setValue( $label );
                        }
                    }
-               }
-               else if( preg_match('/\&/',$label) == 1)
-               {
-                   
+               } else if( FormDinHelper::pregMatch('/\&/',$label) == 1) {                   
                    $arrSpecialCharFrom = array('&nbsp;','&aacute','&Aacute','&atilde','&Atilde','&acirc','&Acirc','&agrave','&Agrave','&eacute','&Eacute','&ecirc','&Ecirc','&iacute','&Iacute','&oacute','&Oacute','&otilde','&Otilde','&ocirc','&Ocirc','&uacute','&Uacute','&ccedil','&Ccedil;','&amp;','','&circ;','&tilde;','&uml;','&cute;','&cedil;','&quot;','&ldquo;','&rdquo;','&lsquo;','&rsquo;','&sbquo;','&bdquo;','&ordm;','&ordf;','&ndash;','&mdash;','&shy;','&macr;','&lsaquo;','&rsaquo;','&ldquo;','&raquo;','&hellip;','&brvbar;','&bull;','&#8227;','&para;','&sect;','&copy;','&reg;','&trade;','&pound;','&cent;','&#8357;','&euro;','&yen;','&#8354;','&#8355;','&#8356;','&#8367;','&#8358;','&#8359;','&#8360;','&#8361;','&#8362;','&#8363;','&#8365;','&#8366;','&curren;','&sup1;','&#8321;','&sup2;','&#8322;','&sup3;','&#8323;','&#8308;','&#8324;','&#8309;','&#8325;','&#8310;','&#8326;','&#8311;','&#8327;','&#8312;','&#8328;','&#8313;','&#8329;','&#8304;','&#8320;','&#8316;','&#8332;','&#8314;','&#8330;','&#8315;','&#8331;','&#8317;','&#8318;','&#8333;','&#8334;','&#8319;','&#8305;','&frac12;','&#8531;','&frac14;','&#8533;','&#8537;','&#8539;','&#8532;','&#8534;','&frac34;','&#8535;','&#8540;','&#8536;','&#8538;','&#8541;','&#8542;','&ne;','&asymp;','&cong;','&prop;','&equiv;','&gt;','&lt;','&le;','&ge;','&plusmn;','&minus;','&times;','&divide;','&lowast;','&frasl;','&permil;','&int;','&sum;','&prod;','&radic;','&infin;','&ang;','&perp;','&prime;','&Prime;','&deg;','&there4;','&sdot;','&middot;','&part;','&image;','&alefsym;','&real;','&nabla;','&oplus;','&otimes;','&slash;','&Oslash;','&isin;','&notin;','&cap;','&cup;','&sub;','&sup;','&sube;','&supe;','&exist;','&forall;','&empty;','&not;','&and;','&or;','&loz;','&crarr;','&lceil;','&rceil;','&lfloor;','&rfloor;','&#10102;','&#10103;','&#10104;','&#10105;','&#10106;','&#10107;','&#10108;','&#10109;','&#10110;','&#10111;','&#10112;','&#10113;','&#10114;','&#10115;','&#10116;','&#10117;','&#10118;','&#10119;','&#10120;','&#10121;','&#9312;','&#9313;','&#9314;','&#9315;','&#9316;','&#9317;','&#9318;','&#9319;','&#9320;','&#9321;','&#9322;','&#9323;','&#9324;','&#9325;','&#9326;','&#9327;','&#9328;','&#9329;','&#9330;','&#9331;','&#12881;','&#12882;','&#12883;','&#12884;','&#12885;','&#12886;','&#12887;','&#12888;','&#12889;','&#12890;','&#12891;','&#12892;','&#12893;','&#12894;','&#12895;','&#12977;','&#12978;','&#12979;','&#12980;','&#12981;','&#12982;','&#12983;','&#12984;','&#12985;','&#12986;','&#9450;','&#10122;','&#10123;','&#10124;','&#10125;','&#10126;','&#10127;','&#10128;','&#10129;','&#10130;','&#10131;','&#9451;','&#9452;','&#9453;','&#9454;','&#9455;','&#9456;','&#9457;','&#9458;','&#9459;','&#9460;','&#9461;','&#9462;','&#9463;','&#9464;','&#9465;','&#9466;','&#9467;','&#9468;','&#9469;','&#9470;','&#9398;','&#9399;','&#9400;','&#9401;','&#9402;','&#9403;','&#9404;','&#9405;','&#9406;','&#9407;','&#9408;','&#9409;','&#9410;','&#9411;','&#9412;','&#9413;','&#9414;','&#9415;','&#9416;','&#9417;','&#9418;','&#9419;','&#9420;','&#9421;','&#9422;','&#9423;','&#9424;','&#9425;','&#9426;','&#9427;','&#9428;','&#9429;','&#9430;','&#9431;','&#9432;','&#9433;','&#9433;','&#9434;','&#9435;','&#9436;','&#9437;','&#9438;','&#9439;','&#9440;','&#9441;','&#9442;','&#9443;','&#9444;','&#9445;','&#9446;','&#9447;','&#9448;','&#9449;','&ntilde;','&Ntilde;','&iexcl;','&iquest;','&fnof;','&szlig;','&micro;','&auml;','&Auml;','&aring;','&Aring;','&euml;','&Euml;','&grave;','&Egrave;','&iuml;','&Iuml;','&igrave;','&Igrave;','&icirc;','&Icirc;','&ouml;','&Ouml;','&ograve;','&Ograve;','&ugrave;','&Ugrave;','&ucirc;','&Ucirc;','&uuml;','&Uuml;','&yacute;','&Yacute;','&yuml;','&Yuml;','&aelig;','&AElig;','&oelig;','&OElig;','&dagger;','&Dagger;','&scaron;','&Scaron;','&thorn;','&THORN;','&eth;','&ETH;','&alpha;','&Alpha;','&beta;','&Beta;','&gamma;','&Gamma;','&delta;','&Delta;','&epsilon;','&Epsilon;','&zeta;','&Zeta;','&eta;','&Eta;','&theta;','&Theta;','&iota;','&Iota;','&kappa;','&Kappa;','&lambda;','&Lambda;','&mu;','&Mu;','&nu;','&Nu;','&xi;','&Xi;','&omicron;','&Omicron;','&pi;','&Pi;','&rho;','&Rho;','&sigma;','&Sigma;','&sigmaf;','&tau;','&Tau;','&upsilon;','&Upsilon;','&phi;','&Phi;','&chi;','&Chi;','&psi;','&Psi;','&omega;','&Omega;','&thetasym;','&upsih;','&piv;');
                    $arrSpecialCharTo   = array('xnbsp;','xaacute','xAacute','xatilde','xAtilde','xacirc','xAcirc','xagrave','xAgrave','xeacute','xEacute','xecirc','xEcirc','xiacute','xIacute','xoacute','xOacute','xotilde','xOtilde','xocirc','xOcirc','xuacute','xUacute','xccedil','xCcedil;','xamp;','','xcirc;','xtilde;','xuml;','xcute;','xcedil;','xquot;','xldquo;','xrdquo;','xlsquo;','xrsquo;','xsbquo;','xbdquo;','xordm;','xordf;','xndash;','xmdash;','xshy;','xmacr;','xlsaquo;','xrsaquo;','xldquo;','xraquo;','xhellip;','xbrvbar;','xbull;','x#8227;','xpara;','xsect;','xcopy;','xreg;','xtrade;','xpound;','xcent;','x#8357;','xeuro;','xyen;','x#8354;','x#8355;','x#8356;','x#8367;','x#8358;','x#8359;','x#8360;','x#8361;','x#8362;','x#8363;','x#8365;','x#8366;','xcurren;','xsup1;','x#8321;','xsup2;','x#8322;','xsup3;','x#8323;','x#8308;','x#8324;','x#8309;','x#8325;','x#8310;','x#8326;','x#8311;','x#8327;','x#8312;','x#8328;','x#8313;','x#8329;','x#8304;','x#8320;','x#8316;','x#8332;','x#8314;','x#8330;','x#8315;','x#8331;','x#8317;','x#8318;','x#8333;','x#8334;','x#8319;','x#8305;','xfrac12;','x#8531;','xfrac14;','x#8533;','x#8537;','x#8539;','x#8532;','x#8534;','xfrac34;','x#8535;','x#8540;','x#8536;','x#8538;','x#8541;','x#8542;','xne;','xasymp;','xcong;','xprop;','xequiv;','xgt;','xlt;','xle;','xge;','xplusmn;','xminus;','xtimes;','xdivide;','xlowast;','xfrasl;','xpermil;','xint;','xsum;','xprod;','xradic;','xinfin;','xang;','xperp;','xprime;','xPrime;','xdeg;','xthere4;','xsdot;','xmiddot;','xpart;','ximage;','xalefsym;','xreal;','xnabla;','xoplus;','xotimes;','xslash;','xOslash;','xisin;','xnotin;','xcap;','xcup;','xsub;','xsup;','xsube;','xsupe;','xexist;','xforall;','xempty;','xnot;','xand;','xor;','xloz;','xcrarr;','xlceil;','xrceil;','xlfloor;','xrfloor;','x#10102;','x#10103;','x#10104;','x#10105;','x#10106;','x#10107;','x#10108;','x#10109;','x#10110;','x#10111;','x#10112;','x#10113;','x#10114;','x#10115;','x#10116;','x#10117;','x#10118;','x#10119;','x#10120;','x#10121;','x#9312;','x#9313;','x#9314;','x#9315;','x#9316;','x#9317;','x#9318;','x#9319;','x#9320;','x#9321;','x#9322;','x#9323;','x#9324;','x#9325;','x#9326;','x#9327;','x#9328;','x#9329;','x#9330;','x#9331;','x#12881;','x#12882;','x#12883;','x#12884;','x#12885;','x#12886;','x#12887;','x#12888;','x#12889;','x#12890;','x#12891;','x#12892;','x#12893;','x#12894;','x#12895;','x#12977;','x#12978;','x#12979;','x#12980;','x#12981;','x#12982;','x#12983;','x#12984;','x#12985;','x#12986;','x#9450;','x#10122;','x#10123;','x#10124;','x#10125;','x#10126;','x#10127;','x#10128;','x#10129;','x#10130;','x#10131;','x#9451;','x#9452;','x#9453;','x#9454;','x#9455;','x#9456;','x#9457;','x#9458;','x#9459;','x#9460;','x#9461;','x#9462;','x#9463;','x#9464;','x#9465;','x#9466;','x#9467;','x#9468;','x#9469;','x#9470;','x#9398;','x#9399;','x#9400;','x#9401;','x#9402;','x#9403;','x#9404;','x#9405;','x#9406;','x#9407;','x#9408;','x#9409;','x#9410;','x#9411;','x#9412;','x#9413;','x#9414;','x#9415;','x#9416;','x#9417;','x#9418;','x#9419;','x#9420;','x#9421;','x#9422;','x#9423;','x#9424;','x#9425;','x#9426;','x#9427;','x#9428;','x#9429;','x#9430;','x#9431;','x#9432;','x#9433;','x#9433;','x#9434;','x#9435;','x#9436;','x#9437;','x#9438;','x#9439;','x#9440;','x#9441;','x#9442;','x#9443;','x#9444;','x#9445;','x#9446;','x#9447;','x#9448;','x#9449;','xntilde;','xNtilde;','xiexcl;','xiquest;','xfnof;','xszlig;','xmicro;','xauml;','xAuml;','xaring;','xAring;','xeuml;','xEuml;','xgrave;','xEgrave;','xiuml;','xIuml;','xigrave;','xIgrave;','xicirc;','xIcirc;','xouml;','xOuml;','xograve;','xOgrave;','xugrave;','xUgrave;','xucirc;','xUcirc;','xuuml;','xUuml;','xyacute;','xYacute;','xyuml;','xYuml;','xaelig;','xAElig;','xoelig;','xOElig;','xdagger;','xDagger;','xscaron;','xScaron;','xthorn;','xTHORN;','xeth;','xETH;','xalpha;','xAlpha;','xbeta;','xBeta;','xgamma;','xGamma;','xdelta;','xDelta;','xepsilon;','xEpsilon;','xzeta;','xZeta;','xeta;','xEta;','xtheta;','xTheta;','xiota;','xIota;','xkappa;','xKappa;','xlambda;','xLambda;','xmu;','xMu;','xnu;','xNu;','xxi;','xXi;','xomicron;','xOmicron;','xpi;','xPi;','xrho;','xRho;','xsigma;','xSigma;','xsigmaf;','xtau;','xTau;','xupsilon;','xUpsilon;','xphi;','xPhi;','xchi;','xChi;','xpsi;','xPsi;','xomega;','xOmega;','xthetasym;','xupsih;','xpiv;');
                    //$label = html_entity_decode($label,null,'ISO-8859-1');
                    $label = str_replace( $arrSpecialCharFrom,$arrSpecialCharTo,$label);
-                   if( preg_match('/\&/',$label) == 1)
-                   {
+                   if( FormDinHelper::pregMatch('/\&/',$label) == 1) {
                        $char = trim( substr($label,strpos($label,'&')+1,1));
                        
-                       if( $char )
-                       {
+                       if( $char ) {
                            $obj->setProperty('shortcut','ALT+'.$char.'|'.$target);
                            //$obj->setValue(preg_replace('/&/','',$label) );
                            $label = preg_replace('/&/','',$label);
                            $label = htmlentities( $label,null,ENCODINGS );
                            $label = str_replace( $arrSpecialCharTo,$arrSpecialCharFrom,$label);
-                           if( $obj->getFieldType() == 'tabsheet')
-                           {
+                           if( $obj->getFieldType() == 'tabsheet') {
                                $obj->setValue(null,$label);
-                           }
-                           else
-                           {
+                           } else {
                                $obj->setValue( $label );
                            }
                        }

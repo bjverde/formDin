@@ -257,19 +257,14 @@ class TFileAsync extends TEdit
 		{
 			$tempFileName = $_REQUEST[$this->getId().'_temp_name'];
 		}
-        if( preg_match('/base\//',$tempFileName))
-        {
+        if( FormDinHelper::pregMatch('/base\//',$tempFileName)) {
 			$x = strpos($tempFileName,'base/');
 			$tempFileName = $this->getBase.substr($tempFileName,($x+5));
         }
-        if( $tempFileName)
-        {
-			if(file_exists($tempFileName))
-			{
+        if( $tempFileName) {
+			if(file_exists($tempFileName)) {
 				return $tempFileName;
-			}
-			else
-			{
+			} else {
 				// procurar no diretorio base/tmp
 				if(file_exists($this->getBase().$tempFileName))
 				{
