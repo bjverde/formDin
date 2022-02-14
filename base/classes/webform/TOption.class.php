@@ -360,34 +360,26 @@ abstract class TOption extends TControl
 		if( $this->getFieldType() == 'radio' || $this->getFieldType() == 'check' )
 		{
 			$this->showRadioOrCheck($boolPrint);
-		}
-		else
-		{
+		} else {
 			// criar o input do tipo select ( comboBox )
-			if( $this->getMultiSelect() )
-			{
+			if( $this->getMultiSelect() ) {
 				$this->setTagType( 'select multiple' );
 				$this->setName( $this->getId() . '[]' );
 				$this->setProperty( 'id', $this->getId() );
-			}
-			else
-			{
+			} else {
 				$this->setTagType( 'select' );
 				$this->setHeight( null );
 			}
 			$this->setProperty( 'size', $this->getSelectSize() );
 			$this->setCss( 'background-color', '#ffffff' );
 			// colocar hint se não tiver
-			if( $this->getMultiSelect() && $this->title == '' )
-			{
+			if( $this->getMultiSelect() && $this->title == '' ) {
 				$this->setProperty( 'title', 'Pressione a tecla CTRL ou SHIFT para marcar/desmarcar as opções!' );
 			}
-			if( is_array( $this->getOptions() ) )
-			{
+			if( is_array( $this->getOptions() ) ) {
 				$this->setCss( 'cursor', 'pointer' );
 				$arrOptionsData = $this->getOptionsData();
-				foreach( $this->getOptions() as $k=>$v )
-				{
+				foreach( $this->getOptions() as $k=>$v ) {
 					$k=trim($k);
 					$v=trim($v);
 					$this->add( $opt = new TElement( 'option' ) );
@@ -397,33 +389,27 @@ abstract class TOption extends TControl
 					    if( html_entity_decode( ( string ) $k ) == html_entity_decode( ( string ) $this->getValue(),null, ENCODINGS ) ) {
 							$opt->setProperty( 'selected', "true" );
 						}
-					}
-					else {
+					} else {
 						if( ( string ) array_search( $k, $this->getValue() ) != "" ) {
 							$opt->setProperty( 'selected', "true" );
 						}
 					}
 					$opt->add( $v );
 
-					if( isset( $arrOptionsData[$k] ) )
-					{
-						if( is_array( $arrOptionsData[$k]  ))
-						{
-							foreach($arrOptionsData[$k] as $e=>$f)
-							{
+					if( isset( $arrOptionsData[$k] ) ) {
+						if( is_array( $arrOptionsData[$k]  )) {
+							foreach($arrOptionsData[$k] as $e=>$f) {
 								$opt->setAttribute($e,$f);
 							}
-						}
-						else
-						{
+						} else {
 							$opt->setAttribute('data-value',$arrOptionsData[$k] );
 						}
 					}
-				}
+				}//Fim foreach
 			}
 		}
-		if( $this->getRequired() )
-		{
+
+		if( $this->getRequired() ) {
 			$this->setProperty( 'needed', 'true' );
 		}
 
