@@ -649,8 +649,7 @@ class TForm Extends TBox
             // este javascript tem que ser o ultimo a ser adicionado, por isso coloquei aqui
             $this->addJsFile( 'funcoes.js' );
             // se o formulario estiver fora de um objeto THtmlPage, inserir os javascripts e css necessários
-            if( $this->getAutoIncludeJsCss() )
-            {
+            if( $this->getAutoIncludeJsCss() ) {
                 $this->includeJsCss();
             }
             $this->setId( $this->getId() . '_area' );
@@ -662,27 +661,20 @@ class TForm Extends TBox
             $this->table->setCss( 'background-color', $this->getCss( 'background-color' ) );
             
             $row = $this->table->addRow();
-            if( $this->getShowHeader() )
-            {
+            if( $this->getShowHeader() ) {
                 //$this->header->clearChildren();
                 $this->header->add( $this->getTitle() );
                 $row->add( $this->header );
                 $row->add( $this->headerBarButtonArea );
                 $this->header->setCss( 'width', $this->getWidth() - 70 );
-                if( $this->getMaximize() == true )
-                {
-                    if( preg_match('/\(/',$this->getOnMaximize() )==1)
-                    {
+                if( $this->getMaximize() == true ){
+                    if( preg_match('/\(/',$this->getOnMaximize() )==1) {
                         $this->header->addEvent('ondblclick','fwFullScreen("'.$this->name.'","'.$this->getOnMaximize().'")');
-                    }
-                    else
-                    {
+                    } else {
                         $this->header->addEvent('ondblclick','fwFullScreen("'.$this->name.'","'.$this->getOnMaximize().'")');
                     }
                 }
-            }
-            else
-            {
+            } else {
                 $this->header->setCss( 'height', 0 );
                 $this->body->setCss( "border-top", 'none' );
             }
