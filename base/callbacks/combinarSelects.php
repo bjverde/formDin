@@ -157,6 +157,7 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
 		if( $tpdo->getError() ) {
 			$res[$campoCodigo][] = 0;
 			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".$tpdo->getError();
+			MessageHelper::logRecordSimple($tpdo->getError());
 		}
 	}
 }
