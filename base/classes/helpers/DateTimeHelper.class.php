@@ -278,5 +278,27 @@ class DateTimeHelper
             $startDate->add(new DateInterval('P1D'));
         }
         return $count;
-    }  
+    }
+
+    /**
+     * Verfica se a data 1 é mais recente que a data 2
+     *
+     * @param string $datahora1 data no formato iso yyyy-mm-dd hh:mm:ss
+     * @param string $datahora2 data no formato iso yyyy-mm-dd hh:mm:ss
+     * @return boolean
+     */
+    public static function verificaData1MaisRecenteQueData2( $datahora1, $datahora2  ){ 
+        $dtInicioObj = new DateTime($datahora1);
+        $dtFimObj    = new DateTime($datahora2);
+
+        $result = false;
+        $interval = $dtInicioObj->diff($dtFimObj); //If Date is in past then invert will 1
+        //var_dump($interval->invert);
+        //echo $interval->format('%R%a days');
+	    if( $interval->invert == 1 ){
+	        $result = true;
+	    }
+        return $result;
+    }
+
 }
