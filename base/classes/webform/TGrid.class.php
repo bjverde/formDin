@@ -1830,9 +1830,8 @@ class TGrid extends TTable
     //------------------------------------------------------------------------------------
     public function getActionColumnTitle( $strNewValue = null )
     {
-        if ( is_null( $this->actionColumnTitle ) )
-        {
-            return htmlentities( 'Ação',null, ENCODINGS );
+        if ( is_null( $this->actionColumnTitle ) ){
+            return htmlentities( 'Ação',ENT_COMPAT, ENCODINGS );
         }
         return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
     }
