@@ -175,7 +175,7 @@ class TFileAsync extends TEdit
 		//verficar se o arquivo está no servidor
 		$filename = $this->getTempFile();
 
-		if ( !file_exists($filename) && $this->getRequired() )
+		if ( !FileHelper::exists($filename) && $this->getRequired() )
 		{
 			$this->addError('Campo obrigatório');
 		}
@@ -185,8 +185,7 @@ class TFileAsync extends TEdit
 	public function clear()
 	{
 		// excluir o arquivo temporário
-		if( file_exists($this->getTempFile()))
-		{
+		if( FileHelper::exists($this->getTempFile()) ){
 			@unlink($this->getTempFile());
 		}
 		if( isset( $_REQUEST[$this->getId().'_temp_name'] ) )
@@ -263,12 +262,11 @@ class TFileAsync extends TEdit
 			$tempFileName = $this->getBase.substr($tempFileName,($x+5));
         }
         if( $tempFileName) {
-			if(file_exists($tempFileName)) {
+			if(FileHelper::exists($tempFileName)) {
 				return $tempFileName;
 			} else {
 				// procurar no diretorio base/tmp
-				if(file_exists($this->getBase().$tempFileName))
-				{
+				if(FileHelper::exists($this->getBase().$tempFileName)){
 					return $this->getBase().$tempFileName;
 				}
 			}
