@@ -3087,7 +3087,8 @@ class TGrid extends TTable
         {
             foreach( $this->getColumns() as $name => $objColumn )
             {
-                $colName = strtoupper( $objColumn->getFieldName() );
+                $getName = $objColumn->getFieldName();
+                $colName = isset($getName)?strtoupper($getName):null;
                 if ( isset( $res[ $colName ] ) ) {
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
