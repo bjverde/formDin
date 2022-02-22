@@ -223,8 +223,9 @@ class TFileAsync extends TEdit
 	* Ex. teste.gif -> retorna: gif
 	*/
 	public function getFileExtension() {
-		$filename = strtolower($this->getValue()) ;
-		$aFileInfo = pathinfo( $filename );
+		$value = $this->getValue();
+		$filename  = isset($value)?strtolower($value):null;
+		$aFileInfo = isset($filename)?pathinfo( $filename ):null;
         return  isset( $aFileInfo[ 'extension' ] ) ? $aFileInfo[ 'extension' ]  : '';
 	}
 	/**
