@@ -2527,14 +2527,13 @@ class TGrid extends TTable
                         }
                         else
                         {
-                            $this->addKeyField( strtoupper( $fieldName ) );
+                            $this->addKeyField( StringHelper::strtoupper( $fieldName ) );
                             $aFieldNames[] = $fieldName;
                         }
                         
                         // considerar o primeiro campo oculto como a chave do gride
-                        if ( is_null( $strFirstKeyField ) )
-                        {
-                            $strFirstKeyField = strtoupper( $fieldName );
+                        if ( is_null( $strFirstKeyField ) ){
+                            $strFirstKeyField = StringHelper::strtoupper( $fieldName );
                         }
                     }
                     else
@@ -2545,14 +2544,14 @@ class TGrid extends TTable
                 else if ( $field->getFieldType() == 'edit' || $field->getFieldType() == 'number' || $field->getFieldType() == 'date' || $field->getFieldType() == 'cpf' || $field->getFieldType() == 'cpfcnpj' || $field->getFieldType() == 'cnpj' || $field->getFieldType() == 'fone' || $field->getFieldType() == 'memo' || $field->getFieldType() == 'cep' )
                 {
                     $field->setAttribute( 'gridOfflineField', 'true' );
-                    $label = str_replace( ':', '', $label );
+                    $label = isset($label)?str_replace( ':', '', $label ):null;
                     
-                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 )
-                    {
+                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 ){
                         $align = 'right';
                     }
                     $align = $field->getAttribute( 'grid_algin' );
-                    $col = $this->addColumn( strtoUpper( $fieldName ), $label, null, $align );
+                    $fieldName = StringHelper::strtoupper( $fieldName );
+                    $col = $this->addColumn( $fieldName, $label, null, $align );
                     $strJquery .= $strJquery == '' ? ' ' : ',';
                     $strJquery .= '"' . $fieldName . '":jQuery("#' . $fieldName . '").val()';
                     $aFieldNames[] = $fieldName;
