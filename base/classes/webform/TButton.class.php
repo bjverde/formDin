@@ -137,7 +137,8 @@ class TButton extends TControl
 			//Alterado para padronizar as mensagens utilizando o fwConfirm
 			//Por Diego Barreto e Felipe Colares
 // 			$jsConfirm = 'if( !confirm("'.$this->getConfirmMessage().'")){return false;} ';
-		    $jsConfirmBegin = 'fwConfirm("'.htmlentities($this->getConfirmMessage(),null,ENCODINGS).'", function() { ';
+			$msg = htmlentities($this->getConfirmMessage(),ENT_COMPAT,ENCODINGS);
+		    $jsConfirmBegin = 'fwConfirm("'.$msg.'", function() { ';
 			$jsConfirmEnd	= '}, function() {})';
 		}
 
