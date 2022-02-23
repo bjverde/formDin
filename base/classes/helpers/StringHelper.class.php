@@ -46,7 +46,21 @@
  */
 class StringHelper
 {
-    
+
+    /**
+     * Evita problemas com PHP 8.1
+     *
+     * @param string $inputString
+     * @return string|null
+     */
+    public static function strtolower($inputString) 
+    {
+        $outputString    = null;
+        if( isset($inputStrin) ){
+            $outputString = strtolower($inputString);
+        }
+        return $outputString;
+    }    
     public static function strtolower_utf8($inputString) 
     {
         $outputString    = utf8_decode($inputString);
@@ -55,6 +69,20 @@ class StringHelper
         return $outputString;
     }
     
+    /**
+     * Evita problemas com PHP 8.1
+     *
+     * @param string $inputString
+     * @return string|null
+     */
+    public static function strtoupper($inputString) 
+    {
+        $outputString    = null;
+        if( isset($inputStrin) ){
+            $outputString = strtoupper($inputString);
+        }
+        return $outputString;
+    }
     public static function strtoupper_utf8($string)
     {
         $string = utf8_decode($string);
