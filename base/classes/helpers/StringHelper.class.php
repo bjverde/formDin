@@ -56,7 +56,7 @@ class StringHelper
     public static function strtolower($inputString) 
     {
         $outputString    = null;
-        if( isset($inputStrin) ){
+        if( isset($inputString) ){
             $outputString = strtolower($inputString);
         }
         return $outputString;
@@ -78,7 +78,7 @@ class StringHelper
     public static function strtoupper($inputString) 
     {
         $outputString    = null;
-        if( isset($inputStrin) ){
+        if( isset($inputString) ){
             $outputString = strtoupper($inputString);
         }
         return $outputString;
