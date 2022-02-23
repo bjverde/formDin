@@ -1450,7 +1450,7 @@ class TGrid extends TTable
             }
             return $this->data;
         }
-        else if( strpos( StringHelper::strtolower( $this->data ), 'select ' ) !== false ) {
+        else if( isset($this->data) && (strpos( StringHelper::strtolower( $this->data ), 'select ' ) !== false) ) {
             
             $bvars = null;
             $bvars = $this->getBvars();
