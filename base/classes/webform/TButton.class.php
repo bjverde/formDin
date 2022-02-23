@@ -163,16 +163,14 @@ class TButton extends TControl
 		{
 			$this->setEvent('onclick',$jsConfirmBegin.$this->getOnClick().$jsConfirmEnd,false);
 		}
-		if( ! $this->getEnabled() )
-		{
+		if( ! $this->getEnabled() ){
 			$this->setCss('cursor','default');
-			if( ! $this->getProperty('title') )
-			{
-			    $this->setProperty('title',htmlentities('Ação desabilitada',null,ENCODINGS) );
+			if( ! $this->getProperty('title') ){
+				$property = htmlentities('Ação desabilitada',ENT_COMPAT,ENCODINGS);
+			    $this->setProperty('title', $property);
 			}
 			$this->setAttribute('disabled','true');
-			if( $this->getOnClick() && $this->getImage() != '' )
-			{
+			if( $this->getOnClick() && $this->getImage() != '' ){
 				$this->setOnClick('if( jQuery(this).attr("disabled")){return false;};'.$this->getOnClick() ,false);
 				$this->setEvent('onClick',$this->getOnClick());
 			}
