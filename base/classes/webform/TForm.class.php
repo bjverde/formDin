@@ -2258,9 +2258,9 @@ class TForm Extends TBox
             {
                 return $this->displayControls[ StringHelper::strtolower($strFieldName) ]->getField();
             }
-            else if( array_key_exists( strtoupper($strFieldName), $this->displayControls ) )
+            else if( array_key_exists( StringHelper::strtoupper($strFieldName), $this->displayControls ) )
             {
-                return $this->displayControls[ strtoupper($strFieldName) ]->getField();
+                return $this->displayControls[ StringHelper::strtoupper($strFieldName) ]->getField();
             }
             // varrer todo o array para pesquisar dentro de abas e grupos
             foreach( $this->displayControls as $id=>$dc )
