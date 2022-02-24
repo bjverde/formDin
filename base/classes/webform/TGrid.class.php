@@ -1450,7 +1450,7 @@ class TGrid extends TTable
             }
             return $this->data;
         }
-        else if( strpos( strtolower( $this->data ), 'select ' ) !== false ) {
+        else if( isset($this->data) && (strpos( StringHelper::strtolower( $this->data ), 'select ' ) !== false) ) {
             
             $bvars = null;
             $bvars = $this->getBvars();
@@ -1830,9 +1830,8 @@ class TGrid extends TTable
     //------------------------------------------------------------------------------------
     public function getActionColumnTitle( $strNewValue = null )
     {
-        if ( is_null( $this->actionColumnTitle ) )
-        {
-            return htmlentities( 'Ação',null, ENCODINGS );
+        if ( is_null( $this->actionColumnTitle ) ){
+            return htmlentities( 'Ação',ENT_COMPAT, ENCODINGS );
         }
         return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
     }
@@ -2528,14 +2527,13 @@ class TGrid extends TTable
                         }
                         else
                         {
-                            $this->addKeyField( strtoupper( $fieldName ) );
+                            $this->addKeyField( StringHelper::strtoupper( $fieldName ) );
                             $aFieldNames[] = $fieldName;
                         }
                         
                         // considerar o primeiro campo oculto como a chave do gride
-                        if ( is_null( $strFirstKeyField ) )
-                        {
-                            $strFirstKeyField = strtoupper( $fieldName );
+                        if ( is_null( $strFirstKeyField ) ){
+                            $strFirstKeyField = StringHelper::strtoupper( $fieldName );
                         }
                     }
                     else
@@ -2546,14 +2544,14 @@ class TGrid extends TTable
                 else if ( $field->getFieldType() == 'edit' || $field->getFieldType() == 'number' || $field->getFieldType() == 'date' || $field->getFieldType() == 'cpf' || $field->getFieldType() == 'cpfcnpj' || $field->getFieldType() == 'cnpj' || $field->getFieldType() == 'fone' || $field->getFieldType() == 'memo' || $field->getFieldType() == 'cep' )
                 {
                     $field->setAttribute( 'gridOfflineField', 'true' );
-                    $label = str_replace( ':', '', $label );
+                    $label = isset($label)?str_replace( ':', '', $label ):null;
                     
-                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 )
-                    {
+                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 ){
                         $align = 'right';
                     }
                     $align = $field->getAttribute( 'grid_algin' );
-                    $col = $this->addColumn( strtoUpper( $fieldName ), $label, null, $align );
+                    $fieldName = StringHelper::strtoupper( $fieldName );
+                    $col = $this->addColumn( $fieldName, $label, null, $align );
                     $strJquery .= $strJquery == '' ? ' ' : ',';
                     $strJquery .= '"' . $fieldName . '":jQuery("#' . $fieldName . '").val()';
                     $aFieldNames[] = $fieldName;
@@ -3088,7 +3086,8 @@ class TGrid extends TTable
         {
             foreach( $this->getColumns() as $name => $objColumn )
             {
-                $colName = strtoupper( $objColumn->getFieldName() );
+                $getName = $objColumn->getFieldName();
+                $colName = isset($getName)?strtoupper($getName):null;
                 if ( isset( $res[ $colName ] ) ) {
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
