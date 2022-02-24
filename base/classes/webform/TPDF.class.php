@@ -194,7 +194,6 @@ class TPDF extends FPDF
      * @param string $strOrientation P/L
      * @param boolean $boolBorder
      */
-    //function AddPage( $strOrientation = null, $boolBorder = false )
     function AddPage( $strOrientation='', $size='', $rotation=0 ) 
     {
     	$strOrientation = ( is_null($strOrientation) ? '' : $strOrientation );
@@ -209,8 +208,8 @@ class TPDF extends FPDF
 
    		if ($str = $this->getWaterMark())
     	{
-    		$currentFontSize = $this->FontSizePt;
-    		$currentTextColor = $this->TextColor;
+    		$currentFontSize  = $this->FontSizePt;
+    		$currentTextColor = $this->getCurrentTextColor();  ;
 	        $this->SetFont('Arial', 'B', 50);
 	        $this->SetTextColor(255, 192, 203);
 	        if ($this->w > $this->h) {
@@ -255,8 +254,8 @@ class TPDF extends FPDF
      * @param string $hexFillColor   - 5: Cor do fundo, hexadecimal
      * @param string $strFontStyle   - 6: Style da font: I, B
      * @param string $intFontSize    - 7: Tamanho da fonte
-     * @param string $hexFontColor
-     * @param string $strFontFamily
+     * @param string $hexFontColor   - 8: Cor em HexaDecimal
+     * @param string $strFontFamily  - 9: 
      * @return TPDFColumn
      */
     public function addColumn( $strHeader = null
@@ -270,9 +269,15 @@ class TPDF extends FPDF
                              , $strFontFamily = null 
                              )
     {
-        $column = new TPDFColumn( $strHeader, $intWidth, $strAlign, $strFieldName
-                                , $hexFillColor, $strFontStyle, $intFontSize
-                                , $hexFontColor, $strFontFamily );
+        $column = new TPDFColumn( $strHeader
+                                , $intWidth
+                                , $strAlign
+                                , $strFieldName
+                                , $hexFillColor
+                                , $strFontStyle
+                                , $intFontSize
+                                , $hexFontColor
+                                , $strFontFamily );
         $this->colums[] = $column;
         return $column;
     }
@@ -333,6 +338,13 @@ class TPDF extends FPDF
         $this->setRowFieldNames( $aFieldNames );
     }
 
+    /**
+     * criar a grid do pdf
+     *
+     * @param [type] $newPage
+     * @param [type] $strPageOrientation
+     * @return void
+     */
     public function printRows( $newPage = null, $strPageOrientation = null )
     {
     	//$this->clearColumns();
@@ -401,7 +413,6 @@ class TPDF extends FPDF
     }
     */
     }
-
     public function Footer()
     {
         if ( function_exists( 'rodape' ) )
@@ -409,24 +420,20 @@ class TPDF extends FPDF
             call_user_func( 'rodape', $this );
         }
     }
-
     //----------------------------------------------------------------------------------------------------
     public function setRowLineHeight( $intNewValue = null )
     {
         $this->rowLineHeight = $intNewValue;
     }
-
     public function getRowLineHeight()
     {
         return is_null( $this->rowLineHeight ) ? 4 : $this->rowLineHeight;
     }
-
     //----------------------------------------------------------------------------------------------------
     public function setWaterMark( $strNewValue = null )
     {
         $this->waterMark = $strNewValue;
     }
-
     //----------------------------------------------------------------------------------------------------
     public function getWaterMark()
     {
@@ -447,7 +454,6 @@ class TPDF extends FPDF
         }
         return $str;
     }
-
     //----------------------------------------------------------------------------------------------------
     /**
      * Clean coluns to new grid
@@ -466,10 +472,10 @@ class TPDF extends FPDF
      * O parametro $margemInferior indica o limite inferior maximo que a função
      * poderá utilizar para impressão da linha,  jogando o texto para a outra página se não couber.
      *
-     * @param mixed $data
-     * @param mixed $margemInferior
-     * @param [type] $mixFillColor
-     * @param [type] $mixFontColor
+     * @param array $data
+     * @param int   $intBottomMarginSize
+     * @param mixed $mixFillColor
+     * @param mixed $mixFontColor
      * @return void
      */
     function row( $data, $intBottomMarginSize = null, $mixFillColor = null, $mixFontColor = null )
@@ -478,34 +484,29 @@ class TPDF extends FPDF
         //Calculate the height of the row
         $nb = 0;
         $aNb = null;
-        $currentFontFamily = $this->FontFamily;
+        $currentFontFamily= $this->FontFamily;
         $currentFontStyle = $this->FontStyle;
-        $currentFontSize = $this->FontSizePt;
-        $currentTextColor = $this->TextColor;
-        $currentFillColor = $this->FillColor;
-        $currentDrawColor = $this->DrawColor;
-        /*
-          $oCol = $this->getColumn(0);
-          print '<br>Familia:'.$oCol->getFontFamily($currentFontFamily);
-          print '<br>Estilo:'.$oCol->getFontStyle($currentFontStyle);
-          print '<br>Tamanho:'.$oCol->getFontSize($currentFontSize);
-          print '<br>Cor:'.print_r($this->HexToRGB($oCol->getFontColor($currentFontColor)),true);
-          die();
-         */
+        $currentFontSize  = $this->FontSizePt;
+        $currentTextColor = $this->getCurrentTextColor();
+        $currentFillColor = $this->getCurrentFillColor();
+        //MessageHelper::logRecordSimple('FillColor linha 492: '.$currentFillColor);
+        $currentDrawColor = $this->getCurrentDrawColor();
+
         // calcular o espaço que a linha vai ocupar na página
-        for( $i = 0; $i < count( $data ); $i++ )
-        {
+        for( $i = 0; $i < count( $data ); $i++ ){
             $oCol = $this->getColumn( $i );
 
-            if ( $this->getOnDrawCell() && function_exists( $this->getOnDrawCell() ) )
-            {
+            if ( $this->getOnDrawCell() && function_exists( $this->getOnDrawCell() ) ){
             	//$params = (object) array('value'=>$data[$i],'colIndex'=>$i, 'data'=>$data );
                 //call_user_func( $this->getOnDrawCell(), $oCol, $params );
                 call_user_func( $this->getOnDrawCell(), $oCol, $data[ $i ], $i, $data );
             }
+
             //definir de volta o estilo, tamanho e cor da fonte da celula
-            $this->SetFont( $oCol->getFontFamily( $currentFontFamily ), $oCol->getFontStyle( $currentFontStyle ),
-                $oCol->getFontSize( $currentFontSize ) );
+            $this->SetFont( $oCol->getFontFamily( $currentFontFamily )
+                          , $oCol->getFontStyle( $currentFontStyle )
+                          , $oCol->getFontSize( $currentFontSize ) 
+                          );
 
             $aNb[ $i ] = $this->NbLines( $oCol->getWidth(), $data[ $i ] );
             $nb = max( $nb, $aNb[ $i ] );
@@ -514,10 +515,8 @@ class TPDF extends FPDF
         $lineHeight = $this->getRowLineHeight() * $nb;
 
         //saltar página se a linha for ocupar mais que o limite informado.
-        if ( $intBottomMarginSize )
-        {
-            if ( ( $this->GetY() + $lineHeight ) > $intBottomMarginSize )
-            {
+        if ( $intBottomMarginSize ){
+            if ( ( $this->GetY() + $lineHeight ) > $intBottomMarginSize ) {
                 $this->AddPage( $this->CurOrientation, $this->getPageBorder() );
             }
         }
@@ -525,12 +524,13 @@ class TPDF extends FPDF
         $this->CheckPageBreak( $lineHeight );
 
         //Draw the cells of the row
-        for( $i = 0; $i < count( $data ); $i++ )
-        {
+        for( $i = 0; $i < count( $data ); $i++ ) {
             $oCol = $this->getColumn( $i );
             //definir o estilo, tamanho e cor da fonte da celula
-            $this->SetFont( $oCol->getFontFamily( $currentFontFamily ), $oCol->getFontStyle( $currentFontStyle ),
-                $oCol->getFontSize( $currentFontSize ) );
+            $this->SetFont( $oCol->getFontFamily( $currentFontFamily )
+                          , $oCol->getFontStyle( $currentFontStyle )
+                          , $oCol->getFontSize( $currentFontSize )
+                          );
             $this->SetFillColor( $currentFillColor );
             $colWidth = $this->getRowWidths($i);
             $textAlign = strtoupper($this->getRowAligns(null,$i));
@@ -538,73 +538,20 @@ class TPDF extends FPDF
 
             //alterar a cor da fonte
             $aCor = null;
-
-            if ( $mixFontColor )
-            {
-                if ( is_array( $mixFontColor ) )
-                {
-                    if ( isset( $mixFontColor[ 'g' ] ) )
-                    {
-                        $aCor = $mixFontColor;
-                    }
-                    else
-                    {
-                        $aCor[ 'r' ] = $mixFontColor[ 0 ];
-                        $aCor[ 'g' ] = $mixFontColor[ 1 ];
-                        $aCor[ 'b' ] = $mixFontColor[ 2 ];
-                    }
-                }
-                else
-                {
-                    $aCor = $this->HexToRGB( $mixFontColor );
-                }
-            }
-            else
-            {
-                $aCor = $this->HexToRGB( $oCol->getFontColor( $currentTextColor ) );
-            }
-
-            if ( is_array( $aCor ) )
-            {
+            $color= $oCol->getFontColor( $currentTextColor );
+            $aCor = $this->getMixColor($mixFontColor, $color);
+            if ( is_array( $aCor ) ) {
                 $this->SetTextColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
-            }
-            else
-            {
+            } else {
                 $this->SetTextColor( $aCor ); // Escala de cinza: 0 - 255
             }
 
             //cor de preenchimento da celula
-            if ( $mixFillColor )
-            {
-                if ( is_array( $mixFillColor ) )
-                {
-                    if ( isset( $mixFillColor[ 'g' ] ) )
-                    {
-                        $aCor = $mixFillColor;
-                    }
-                    else
-                    {
-                        $aCor[ 'r' ] = $mixFillColor[ 0 ];
-                        $aCor[ 'g' ] = $mixFillColor[ 1 ];
-                        $aCor[ 'b' ] = $mixFillColor[ 2 ];
-                    }
-                }
-                else
-                {
-                    $aCor = $this->HexToRGB( $mixFillColor );
-                }
-            }
-            else
-            {
-                $aCor = $this->HexToRGB( $oCol->getFillColor( $currentFillColor ) );
-            }
-
-            if ( is_array( $aCor ) )
-            {
+            $color= $oCol->getFillColor( $currentFillColor );
+            $aCor = $this->getMixColor($mixFillColor, $color);
+            if ( is_array( $aCor ) ){
                 $this->SetFillColor( $aCor[ 'r' ], $aCor[ 'g' ], $aCor[ 'b' ] );
-            }
-            else
-            {
+            }else{
                 $this->SetFillColor( $aCor ); // escala de cinza: 0 - 255
             }
             //Save the current position
@@ -612,19 +559,15 @@ class TPDF extends FPDF
             $y = $this->GetY();
 
             $fill=1;
-			if( $oCol->getFillColor() == '255'  && is_null( $mixFillColor ) )
-			{
+			if( $oCol->getFillColor() == '255'  && is_null( $mixFillColor ) ) {
             	$fill = 0;
-			}
-			else
-			{
+			} else {
 	            //Pintar o fundo da celula
 	            $this->Rect( $x, $y, $colWidth, $lineHeight, 'FD' );
 			}
 
             // centralizar verticalmente o texto na célula
-            if ( ( $c = $nb - $aNb[ $i ] ) > 0 )
-            {
+            if ( ( $c = $nb - $aNb[ $i ] ) > 0 ){
                 $c *= ( $this->getRowLineHeight() / 2 );
                 $this->SetXY( $x, ( $y + $c ) );
             }
@@ -635,8 +578,7 @@ class TPDF extends FPDF
             $this->SetXY( $x + $colWidth, $y );
 
             //eugenio - desenhar a borda
-            if ( $borda )
-            {
+            if ( $borda ){
                 $this->Rect( $x, $y, $colWidth, $lineHeight, 'D' );
             }
             // voltar as configurações padrão
@@ -655,7 +597,6 @@ class TPDF extends FPDF
         //If the height h would cause an overflow, add a new page immediately
         if ( $this->GetY() + $h > $this->PageBreakTrigger )$this->AddPage( $this->CurOrientation );
     }
-
     //-------------------------------------------------------------------------------
     function NbLines( $w, $txt )
     {
@@ -707,13 +648,11 @@ class TPDF extends FPDF
         }
         return $nl;
     }
-
     public function setRowWidths( $mixNewValue = null )
     {
         $this->rowWidths = $mixNewValue;
         return $this;
     }
-
     public function getRowWidths($intCol=null)
     {
     	if( ! is_null( $intCol ) )
@@ -722,46 +661,38 @@ class TPDF extends FPDF
     	}
         return $this->rowWidths;
     }
-
     public function setRowFillColors( $mixNewValue = null )
     {
         $this->rowFillColors = $mixNewValue;
         return $this;
     }
-
     public function getRowFillColors()
     {
         return $this->rowFillColors;
     }
-
     public function setRowFontColors( $mixNewValue = null )
     {
         $this->rowFontColors = $mixNewValue;
         return $this;
     }
-
     public function getRowFontColors()
     {
         return $this->rowFontColors;
     }
-
     public function setRowFontStyles( $mixNewValue = null )
     {
         $this->rowFontStyles = $mixNewValue;
         return $this;
     }
-
     public function getRowFontStyles()
     {
         return $this->rowFontStyles;
     }
-
     public function setRowAligns( $mixNewValue = null )
     {
         $this->rowAligns = $mixNewValue;
         return $this;
     }
-
     /**
     * Retorna o array com os alinhamentos de cada coluna.
     * Se for informado o parametro $allAs, o array retornado
@@ -783,119 +714,33 @@ class TPDF extends FPDF
         }
         return $this->rowAligns;
     }
-
     public function setRowFieldNames( $mixNewValue = null )
     {
         $this->rowFieldNames = $mixNewValue;
         return $this;
     }
-
     public function getRowFieldNames()
     {
         return $this->rowFieldNames;
     }
-
-    function HexToRGB( $hex )
-    {
-        $hex = $this->translateColor( $hex );
-
-        if ( is_null( $hex ) || $hex === 0 )
-        {
-            return $hex;
-        }
-
-        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' )
-        {
-            return $hex;
-        }
-
-        if ( !preg_match( '/^#/', $hex ) )
-        {
-            return $hex;
-        }
-        $hex = preg_replace( "/#/", "", $hex );
-        $color = array();
-
-        if ( strlen( $hex ) == 3 )
-        {
-            $color[ 'r' ] = hexdec( substr( $hex, 0, 1 ) . $r );
-            $color[ 'g' ] = hexdec( substr( $hex, 1, 1 ) . $g );
-            $color[ 'b' ] = hexdec( substr( $hex, 2, 1 ) . $b );
-        }
-        else if( strlen( $hex ) == 6 )
-        {
-            $color[ 'r' ] = hexdec( substr( $hex, 0, 2 ) );
-            $color[ 'g' ] = hexdec( substr( $hex, 2, 2 ) );
-            $color[ 'b' ] = hexdec( substr( $hex, 4, 2 ) );
-        }
-        return $color;
-    }
-
-    public function translateColor( $strColor = null )
-    {
-        if ( is_null( $strColor ) || !is_string( $strColor ) || preg_match( '/#/', $strColor ) == 1 )
-        {
-            return $strColor;
-        }
-        $strColor = strtolower( $strColor );
-        $aColors[ 'red' ] = '#ff0000';
-        $aColors[ 'green' ] = '#00ff00';
-        $aColors[ 'blue' ] = '#0000ff';
-        $aColors[ 'yellow' ] = '#FFFF00';
-        $aColors[ 'fuchsia' ] = '#FF00FF';
-        $aColors[ 'gray' ] = '#989898';
-        $aColors[ 'grey' ] = '#989898';
-        $aColors[ 'black' ] = '#000000';
-        $aColors[ 'white' ] = '#ffffff';
-        $aColors[ 'orange' ] = '#FF9900';
-        $aColors[ 'lightYellow' ] = '#FF9900';
-        $aColors[ 'lightBlue' ] = '#0066FF';
-        $aColors[ 'lightGreen' ] = '#66FF99';
-        $aColors[ 'pink' ] = '#FF99FF';
-        $aColors[ 'brown' ] = '#663300';
-        $aColors[ 'silver' ] = '#E8E8E8';
-
-        if ( isset( $aColors[ $strColor ] ) )
-        {
-            return $aColors[ $strColor ];
-        }
-        return $strColor;
-    }
-
-    /* public function setOnDrawRow($newValue=null)
-      {
-      $this->onDrawRow = $newValue;
-      }
-      //------------------------------------------------------------------------------------
-      public function getOnDrawRow()
-      {
-      return $this->onDrawRow;
-      }
-     */
-
-    //------------------------------------------------------------------------------------
     public function setOnDrawCell( $newValue = null )
     {
         $this->onDrawCell = $newValue;
         return $this;
     }
-
-    //------------------------------------------------------------------------------------
     public function getOnDrawCell()
     {
         return $this->onDrawCell;
     }
-
-    function RotatedText( $x, $y, $txt, $angle )
+    //------------------------------------------------------------------------------------
+    public function RotatedText( $x, $y, $txt, $angle )
     {
         //Text rotated around its origin
         $this->Rotate( $angle, $x, $y );
         $this->Text( $x, $y, $txt );
         $this->Rotate( 0 );
     }
-
-    // xxx
-    function Rotate( $angle, $x = -1, $y = -1 )
+    public function Rotate( $angle, $x = -1, $y = -1 )
     {
         if ( $x == -1 )$x = $this->x;
 
@@ -975,7 +820,6 @@ class TPDF extends FPDF
 			}
         }
     }
-
     public function getRowMaxWidth()
     {
         $this->prepare();
@@ -1017,13 +861,78 @@ class TPDF extends FPDF
     {
    	   return $this->tMargin;
     }
-    //-----------------------------------------------------
+    //------------------------------------------------------------------------------------    
+    public function HexToRGB( $hex ){
+        $hex = $this->translateColor( $hex );
+
+        if ( is_null( $hex ) || $hex === 0 ){
+            return $hex;
+        }
+
+        if ( $hex == 255 || $hex == '0 G' || $hex == '0 g' ){
+            return $hex;
+        }
+
+        if ( !preg_match( '/^#/', $hex ) ) {
+            return $hex;
+        }
+        $hex = preg_replace( "/#/", "", $hex );
+        $color = array();
+
+        if ( strlen( $hex ) == 3 ){
+            $color[ 'r' ] = hexdec( substr( $hex, 0, 1 ) . $r );
+            $color[ 'g' ] = hexdec( substr( $hex, 1, 1 ) . $g );
+            $color[ 'b' ] = hexdec( substr( $hex, 2, 1 ) . $b );
+        }else if( strlen( $hex ) == 6 ){
+            $color[ 'r' ] = hexdec( substr( $hex, 0, 2 ) );
+            $color[ 'g' ] = hexdec( substr( $hex, 2, 2 ) );
+            $color[ 'b' ] = hexdec( substr( $hex, 4, 2 ) );
+        }
+        return $color;
+    }
     /**
-     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     * Converte o nome de uma cor no valor em HexaDecimal
+     * @param string $strColor
+     * @return void
+     */
+    public function translateColor( $strColor = null )
+    {
+        if ( is_null( $strColor ) || !is_string( $strColor ) || preg_match( '/#/', $strColor ) == 1 )
+        {
+            return $strColor;
+        }
+        $strColor = strtolower( $strColor );
+        $aColors[ 'red' ] = '#ff0000';
+        $aColors[ 'green' ] = '#00ff00';
+        $aColors[ 'blue' ] = '#0000ff';
+        $aColors[ 'yellow' ] = '#FFFF00';
+        $aColors[ 'fuchsia' ] = '#FF00FF';
+        $aColors[ 'gray' ] = '#989898';
+        $aColors[ 'grey' ] = '#989898';
+        $aColors[ 'black' ] = '#000000';
+        $aColors[ 'white' ] = '#ffffff';
+        $aColors[ 'orange' ] = '#FF9900';
+        $aColors[ 'lightYellow' ] = '#FF9900';
+        $aColors[ 'lightBlue' ] = '#0066FF';
+        $aColors[ 'lightGreen' ] = '#66FF99';
+        $aColors[ 'pink' ] = '#FF99FF';
+        $aColors[ 'brown' ] = '#663300';
+        $aColors[ 'silver' ] = '#E8E8E8';
+
+        if ( isset( $aColors[ $strColor ] ) )
+        {
+            return $aColors[ $strColor ];
+        }
+        return $strColor;
+    }    
+    //------------------------------------------------------------------------------------    
+    /**
+     * Seta a cor de fundo do cabeçalho do Grid, é possíveis em HEX decimal um nome fixo.
+     * alguns exemplos
      *   - red, green, blue, yellow, fuchsia, gray, black, white
      *   - orange, lightYellow, lightBlue, lightGreen, pink
      *   - brown, silver
-     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *  A lista completa em veja $this->translateColor
      *
      * @param string $headerFontColors
      */    
@@ -1039,11 +948,12 @@ class TPDF extends FPDF
         return $this->headerFillColors;
     }
     /**
-     * Seta as cores possíveis em HEX decimal ou uma das cores fixas abaixo
+     * Seta a cor da letro deo cabeçao do grid, é possíveis em HEX decimal um nome fixo.
+     * alguns exemplos
      *   - red, green, blue, yellow, fuchsia, gray, black, white
      *   - orange, lightYellow, lightBlue, lightGreen, pink
      *   - brown, silver
-     *  Para saber a cor em hexa decimal veja $this->translateColor
+     *  A lista completa em veja $this->translateColor
      *
      * @param string $headerFontColors
      */
@@ -1051,12 +961,86 @@ class TPDF extends FPDF
     {
     	$this->headerFontColors = $headerFontColors;
     }
-    public function getHeaderFontColors()
-    {
+    public function getHeaderFontColors(){
         if(empty($this->headerFontColors) ) {
             $this->setHeaderFontColors('black');
         }
         return $this->headerFontColors;
+    }
+    public function getFontSize(){
+        return $this->FontSizePt;
+    }
+    //-------------------------------------------------------------------------
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */
+    public function getCurrentDrawColor(){
+        $currentColor=$this->DrawColor;
+        if( $currentColor == '0.000 G'){
+            $currentColor=0;
+        }elseif( $currentColor == '0 G'){
+            $currentColor=0;
+        }
+        return $currentColor;
+    }
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */    
+    public function getCurrentFillColor(){
+        $currentColor=$this->FillColor;
+        if( $currentColor == '0.000 g'){
+            $currentColor=0;
+        }elseif( $currentColor == '0.412 0.412 0.412 rg'){
+            $currentColor=0;
+        }
+        return $currentColor;
+    }
+    /**
+     * POG para evitar o problema PHP Warning:  A non-numeric value encountered
+     *
+     * @return mixed
+     */    
+    public function getCurrentTextColor(){
+        $currentColor=$this->TextColor;
+        if( $currentColor == '0 g'){
+            $currentColor=0;
+        }elseif( $currentColor == '0.000 g'){
+            $currentColor=0;
+        }elseif( $currentColor == '0.412 0.412 0.412 rg'){
+            $currentColor=0;
+        }
+        return $currentColor;
+    }
+
+    /**
+     * recupera a cor
+     *
+     * @param mixed $mixColor
+     * @param string $color
+     * @return void
+     */
+    public function getMixColor($mixColor, $color){
+        $aCor = null;
+        if ( $mixColor ) {
+            if ( is_array( $mixColor ) ){
+                if ( isset( $mixColor[ 'g' ] ) ) {
+                    $aCor = $mixColor;
+                } else {
+                    $aCor[ 'r' ] = $mixColor[ 0 ];
+                    $aCor[ 'g' ] = $mixColor[ 1 ];
+                    $aCor[ 'b' ] = $mixColor[ 2 ];
+                }
+            } else {
+                $aCor = $this->HexToRGB( $mixColor );
+            }
+        } else {
+            $aCor = $this->HexToRGB( $color );
+        }
+        return $aCor;
     }
 }
 ?>

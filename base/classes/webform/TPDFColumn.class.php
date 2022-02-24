@@ -50,7 +50,32 @@ class TPDFColumn
 	private $fontSize;
 	private $fontFamily;
 	private $fillColor;
-	public function __construct( $strHeader=null,$intWidth=null,$strAlign=null, $strFieldName=null, $hexFillColor=null, $strFontStyle=null, $intFontSize=null,$hexFontColor=null, $strFontFamily=null)
+
+	/**
+     * Add New Column in Grid. Need to use method printRows for show column in pdf.
+     * 
+     * Adicionar nova coluna na grade. Precisa usar o método printRows para mostrar coluna em pdf
+     * 
+     * @param string $strHeader      - 1: ID column
+     * @param string $intWidth       - 2: Size column
+     * @param string $strAlign       - 3: Align column, Values L = Left ,C= Center,R= ,J=justified
+     * @param string $strFieldName   - 4: Label column head
+     * @param string $hexFillColor   - 5: Cor do fundo, hexadecimal
+     * @param string $strFontStyle   - 6: Style da font: I, B
+     * @param string $intFontSize    - 7: Tamanho da fonte
+     * @param string $hexFontColor   - 8: Cor em HexaDecimal
+     * @param string $strFontFamily  - 9: 
+     * @return TPDFColumn
+	 **/
+	public function __construct( $strHeader=null
+	                           , $intWidth=null
+							   , $strAlign=null
+							   , $strFieldName=null
+							   , $hexFillColor=null
+							   , $strFontStyle=null
+							   , $intFontSize=null
+							   , $hexFontColor=null
+							   , $strFontFamily=null)
 	{
 		$this->setHeader($strHeader);
 		$this->setWidth($intWidth);
@@ -58,9 +83,9 @@ class TPDFColumn
 		$this->setFieldName($strFieldName);
 		$this->setFillColor($hexFillColor);
 		$this->setFontStyle($strFontStyle);
+		$this->setFontSize($intFontSize);
 		$this->setFontColor($hexFontColor);
 		$this->setFontFamily($strFontFamily);
-		$this->setFontSize($intFontSize);
 	}
 	public function setHeader($strNewValue=null)
 	{

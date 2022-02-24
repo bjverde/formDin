@@ -2003,7 +2003,7 @@ class TForm Extends TBox
      * @param string $strSearchField                - 3: campo de pesquisa
      * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
      * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
-     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like. Procure usar campos do tipo INT
+     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like, procure usar campos do tipo INT. ATENÇÃO Segue o Padrão <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
      * @param string $strCallBackFunctionJs         - 7: função javascript de callback
      * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
      * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
@@ -2848,14 +2848,14 @@ class TForm Extends TBox
       * @param string $selectPai             - 1: Id Campo pai no Form
       * @param string $selectFilho           - 2: Id Campo filho no Form
       * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
-      * @param string $colunaFiltro          - 4: coluna filtro na tabela/view o equivalente a id Campo pai 
-      * @param string $colunaCodigo          - 5: coluna na tabela/view codigo do campo filho
-      * @param string $colunaDescricao       - 6: coluna na na tabela/view com as descrições
-      * @param string $descPrimeiraOpcao     - 7: descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
-      * @param string $valorPrimeiraOpcao    - 8: valor da primeira opção geralmente um valor da lista
-      * @param string $descNenhumaOpcao      - 9: mensagem caso não tenho nenhuma opção correspondente.
-      * @param string $campoFormFiltro
-      * @param string $funcaoExecutar        - 11: Função JavaScript que será chamado no caso de onChange
+      * @param string $colunaFiltro          - 4: Coluna filtro na tabela/view o equivalente a id Campo pai 
+      * @param string $colunaCodigo          - 5: Coluna na tabela/view codigo do campo filho
+      * @param string $colunaDescricao       - 6: Coluna na na tabela/view com as descrições
+      * @param string $descPrimeiraOpcao     - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
+      * @param string $valorPrimeiraOpcao    - 8: Valor da primeira opção geralmente um valor da lista
+      * @param string $descNenhumaOpcao      - 9: Mensagem caso não tenho nenhuma opção correspondente.
+      * @param string $campoFormFiltro       -10: Campos extras que serão usados como critérios de filtro
+      * @param string $funcaoExecutar        -11: Função JavaScript que será chamado no caso de onChange
       * @param boolean $boolSelectUniqueOption
       */
      function combinarSelects( $selectPai='cod_uf'
@@ -6313,8 +6313,8 @@ class TForm Extends TBox
      * @param boolean $boolNoWrapLabel
      * @return TEdit
      */
-    public function addTextField( $strName
-    		                    , $strLabel=null
+    public function addTextField( string $strName
+    		                    , string $strLabel=null
     		                    , $intMaxLength
     		                    , $boolRequired=null
     		                    , $intSize=null
@@ -6350,8 +6350,8 @@ class TForm Extends TBox
      * @param string $boolNoWrapLabel
      * @return TMemo
      */
-    public function addMemoField( $strName
-   		                       , $strLabel=null
+    public function addMemoField(string $strName
+   		                       , string $strLabel=null
    		                       , $intMaxLength
    		                       , $boolRequired=null
    		                       , $intColumns=null
@@ -6384,8 +6384,8 @@ class TForm Extends TBox
      * @param boolean $boolNoWrapLabel - 10:
      * @return TRichTextEditor
      */
-    public function addRichTextEditor( $strName
-    		, $strLabel=null
+    public function addRichTextEditor( string $strName
+    		, string $strLabel=null
     		, $intMaxLength
     		, $boolRequired=null
     		, $intColumns=null
@@ -7017,8 +7017,8 @@ class TForm Extends TBox
      * @param string $strHint
      * @return TNumber
      */       
-	public function addNumberField( $strName
-				           		, $strLabel=null
+	public function addNumberField(string $strName
+				           		, string $strLabel=null
 				           		, $intMaxLength
 				           		, $boolRequired=null
 				           		, $intDecimalPlaces=null
@@ -7063,7 +7063,7 @@ class TForm Extends TBox
 	 * @param boolean $boolLabelAbove-8: Label acima, DEFAULT is FALSE na mesma linha
 	 * @return TEmail
 	 */
-	public function addEmailField( $strName, $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	public function addEmailField( string $strName, string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
 		$field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
 		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );

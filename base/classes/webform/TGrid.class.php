@@ -1915,7 +1915,18 @@ class TGrid extends TTable
     }
     
     //------------------------------------------------------------------------------------
-    public function addAutoCompleteColumn( $strName, $strTitle = null, $strFieldName = null, $strSize = null, $intMaxLength = null, $strTablePackage, $strSearchField, $intMinChars = null, $mixUpdateFields = null, $strWidth = null, $strAlign = null, $boolReadOnly = null )
+    public function addAutoCompleteColumn( string $strName
+                                         , string $strTitle = null
+                                         , string $strFieldName = null
+                                         , string $strSize = null
+                                         , int $intMaxLength = null
+                                         , string $strTablePackage
+                                         , string $strSearchField
+                                         , int $intMinChars = null
+                                         , $mixUpdateFields = null
+                                         , $strWidth = null
+                                         , $strAlign = null
+                                         , $boolReadOnly = null )
     {
         $this->autocomplete[ $strName ] = new TAutoComplete( $strFieldName, $strTablePackage, $strSearchField, $mixUpdateFields, null, null, 'callBack', $intMinChars );
         $tgridColumn = $this->addTextColumn( $strName
@@ -1956,7 +1967,7 @@ class TGrid extends TTable
     //---------------------------------------------------------------------------------------
 
     /**
-     *  Adciona uma coluna do tipo numerico
+     *  Adciona uma coluna do tipo numerico para form no grid
      *
      * @param string $strName           -1: id do campo
      * @param [type] $strTitle          -2: Titulo da coluna que vai aparcer para o usuário
@@ -1990,8 +2001,8 @@ class TGrid extends TTable
      * @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
      * @return TGridCheckColumn
      */
-    public function addCheckColumn( $strName
-        , $strTitle = null
+    public function addCheckColumn( string $strName
+        , string $strTitle = null
         , $strKeyField
         , $strDescField = null
         , $boolReadOnly = null
@@ -2015,7 +2026,7 @@ class TGrid extends TTable
      * @param boolean $boolReadOnly
      * @return TGridRadioColumn
      */
-    public function addRadioColumn( $strName, $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
+    public function addRadioColumn( string $strName, string $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
     {
         if ( !$strKeyField )
         {
@@ -3260,7 +3271,7 @@ class TGrid extends TTable
             else if( preg_match('/edit|memo|hidden|select|number|date|cpf|cpfcnpj|cnpj/i',$field->getFieldType() ) )
             {
                 $label=null;
-                if( method_exists($dc->getLabel(),'getValue'))
+                if( !empty($dc->getLabel()) && method_exists($dc->getLabel(),'getValue'))
                 {
                     $label =$dc->getLabel()->getValue();
                 }

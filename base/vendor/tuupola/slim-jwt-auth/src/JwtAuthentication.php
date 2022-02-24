@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2015-2019 Mika Tuupola
+Copyright (c) 2015-2020 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,10 +46,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use RuntimeException;
+use SplStack;
 use Tuupola\Middleware\DoublePassTrait;
 use Tuupola\Http\Factory\ResponseFactory;
 use Tuupola\Middleware\JwtAuthentication\RequestMethodRule;
 use Tuupola\Middleware\JwtAuthentication\RequestPathRule;
+use Tuupola\Middleware\JwtAuthentication\RuleInterface;
 
 final class JwtAuthentication implements MiddlewareInterface
 {
@@ -57,21 +59,25 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * PSR-3 compliant logger.
+     * @var LoggerInterface|null
      */
     private $logger;
 
     /**
      * Last error message.
+     * @var string
      */
     private $message;
 
     /**
      * The rules stack.
+     * @var SplStack<RuleInterface>
      */
     private $rules;
 
     /**
      * Stores all the options passed to the middleware.
+     * @var mixed[]
      */
     private $options = [
         "secure" => true,
@@ -88,6 +94,9 @@ final class JwtAuthentication implements MiddlewareInterface
         "error" => null
     ];
 
+    /**
+     * @param mixed[] $options
+     */
     public function __construct(array $options = [])
     {
         /* Setup stack for rules */
@@ -181,6 +190,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set all rules in the stack.
+     *
+     * @param RuleInterface[] $rules
      */
     public function withRules(array $rules): self
     {
@@ -222,6 +233,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Call the error handler if it exists.
+     *
+     * @param mixed[] $arguments
      */
     private function processError(ResponseInterface $response, array $arguments): ResponseInterface
     {
@@ -254,6 +267,9 @@ final class JwtAuthentication implements MiddlewareInterface
 
         if (isset($cookieParams[$this->options["cookie"]])) {
             $this->log(LogLevel::DEBUG, "Using token from cookie");
+            if (preg_match($this->options["regexp"], $cookieParams[$this->options["cookie"]], $matches)) {
+                return $matches[1];
+            }
             return $cookieParams[$this->options["cookie"]];
         };
 
@@ -264,6 +280,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Decode the token.
+     *
+     * @return mixed[]
      */
     private function decodeToken(string $token): array
     {
@@ -282,8 +300,10 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Hydrate options from given array.
+     *
+     * @param mixed[] $data
      */
-    private function hydrate($data = []): void
+    private function hydrate(array $data = []): void
     {
         foreach ($data as $key => $value) {
             /* https://github.com/facebook/hhvm/issues/6368 */
@@ -292,6 +312,7 @@ final class JwtAuthentication implements MiddlewareInterface
             $method = str_replace(" ", "", $method);
             if (method_exists($this, $method)) {
                 /* Try to use setter */
+                /** @phpstan-ignore-next-line */
                 call_user_func([$this, $method], $value);
             } else {
                 /* Or fallback to setting option directly */
@@ -302,6 +323,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set path where middleware should bind to.
+     *
+     * @param string|string[] $path
      */
     private function path($path): void
     {
@@ -310,6 +333,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set path which middleware ignores.
+     *
+     * @param string|string[] $ignore
      */
     private function ignore($ignore): void
     {
@@ -319,7 +344,7 @@ final class JwtAuthentication implements MiddlewareInterface
     /**
      * Set the cookie name where to search the token from.
      */
-    private function cookie($cookie): void
+    private function cookie(string $cookie): void
     {
         $this->options["cookie"] = $cookie;
     }
@@ -334,6 +359,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set hosts where secure rule is relaxed.
+     *
+     * @param string[] $relaxed
      */
     private function relaxed(array $relaxed): void
     {
@@ -342,10 +369,12 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set the secret key.
+     *
+     * @param string|string[] $secret
      */
     private function secret($secret): void
     {
-        if (false === is_array($secret) && false === is_string($secret)) {
+        if (false === is_array($secret) && false === is_string($secret) && ! $secret instanceof \ArrayAccess) {
             throw new InvalidArgumentException(
                 'Secret must be either a string or an array of "kid" => "secret" pairs'
             );
@@ -368,15 +397,17 @@ final class JwtAuthentication implements MiddlewareInterface
     /**
      * Set the logger.
      */
-    private function logger(LoggerInterface $logger = null)
+    private function logger(LoggerInterface $logger = null): void
     {
         $this->logger = $logger;
     }
 
     /**
      * Logs with an arbitrary level.
+     *
+     * @param mixed[] $context
      */
-    private function log($level, string $message, array $context = []): void
+    private function log(string $level, string $message, array $context = []): void
     {
         if ($this->logger) {
             $this->logger->log($level, $message, $context);
@@ -409,6 +440,8 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set the allowed algorithms
+     *
+     * @param string|string[] $algorithm
      */
     private function algorithm($algorithm): void
     {
@@ -442,6 +475,7 @@ final class JwtAuthentication implements MiddlewareInterface
 
     /**
      * Set the rules.
+     * @param RuleInterface[] $rules
      */
     private function rules(array $rules): void
     {

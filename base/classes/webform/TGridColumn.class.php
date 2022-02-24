@@ -59,10 +59,10 @@ class TGridColumn extends TElement
 	/**
 	* Classe para construir as colunas no gride
 	*
-	* @param string $strFieldName
-	* @param string $strTitle
-	* @param string $strWidth
-	* @param string $strTextAlign
+	* @param string $strFieldName   1: ID da coluna = Nome da coluna da tabela
+	* @param string $strTitle       2: Nome do Label que irá aparecer 
+	* @param string $strWidth       3: tamanho da coluna
+	* @param string $strTextAlign   4: Alinhamento do texto left|right|center|justify
 	* @param boolean $boolReadOnly
 	* @param boolean $boolSortable
 	* @param boolean $boolVisivle

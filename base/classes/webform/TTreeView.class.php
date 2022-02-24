@@ -528,7 +528,7 @@ class TTreeView extends TControl
 	}
 
 	
-	protected function getItemIsOpen( $open = null, $idParent, $id, $text )
+	protected function getItemIsOpen( $open = null, $idParent = null, $id = null, $text = null )
 	{
 	    $expand = false;
 	    if ( !is_null($open) ){
@@ -546,7 +546,7 @@ class TTreeView extends TControl
 	/**
 	* Adicionar ítem na árvore
 	*
-	* @param bool $idParent        1: id do registro pai
+	* @param mixed $idParent       1: id do registro pai
 	* @param mixed $id             2: id do registro
 	* @param mixed $text           3: Texto do Registro
 	* @param mixed $open           4: Nó aberto ou fechado
@@ -555,7 +555,7 @@ class TTreeView extends TControl
 	* @param mixed $boolSelect
 	* @param mixed $boolChecked
 	*/
-	public function addItem( $idParent = null, $id, $text, $open = null, $hint = null, $arrUserData = null, $boolSelect = null, $boolChecked = null )
+	public function addItem( $idParent, string $id, string $text, $open = null, $hint = null, $arrUserData = null, $boolSelect = null, $boolChecked = null )
 	{
 		$idParent = is_null($idParent) ? '' : $idParent.'';
  		if ( !$this->itens ) {

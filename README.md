@@ -56,14 +56,14 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 
 ## Informações
 
-![Logo PHP 7.3&](https://raw.githubusercontent.com/bjverde/formDin/master/base/imagens/php73_jeqlk3.png)
+![Logo PHP 8.0&](documents/img/php8_logo.png)
 
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* Compatível PHP **7.3.x,** 7.2.x, 7.1.x, 7.0.x e 5.6.x
-
-Veja na Wiki 
+* PHP 7.2.5 a 8.0.x é compativel com as versões do FormDin 4.12.0 ou superior. A recomendação é usar no mínimo o PHP **7.4.x,**
+* PHP 7.0.0 a 7.2.4 é compativel com as versões do FormDin 4.8.0 até 4.11.0
+* PHP 5.6 a iltima versão compatível do Formdin é 4.7.8
 
 [Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
 * [Branchs](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#sobre-as-branchs)
@@ -71,28 +71,7 @@ Veja na Wiki
 * [Bibliotes utilizadas](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#bibliotecas-utilizadas)
 * [Arquitetura do formDin](https://github.com/bjverde/formDin/wiki/Arquitetura-do-formDin)
 
-
 ## Instalação.
-
 [Wiki com informações completas e detalhadas](https://github.com/bjverde/formDin/wiki)
-
 ## Versões
-[See the full list of abstracts on the wiki](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)
-
-* [4.7.0 - 2019/03/20 tag v4.7.0](https://github.com/bjverde/formDin/releases/tag/v4.7.0)
-   * :white_check_mark: #153 new test 
-   * :bug: #164 
-   * :abc: FormDin5 
-   * :hammer: #165 list Stored e Procedure on MySQL and Sql Server
-
-* [4.5.0 - 2019/04/14 tag v4.5.0](https://github.com/bjverde/formDin/releases/tag/v4.5.0)
-   * With Slim FrameWork to support API REST
-   
-* [4.4.0 - 2019/03/19 tag v4.4.0](https://github.com/bjverde/formDin/releases/tag/v4.4.0)
-    * :hammer: #37 - new method TApplication->setCssFileFormDefault.
-    * :bug: #139 - correcting encoding UTF-8 autocomplete.
-    * :hammer: #137 - changing the border pattern of the form.
-   
-
-* [4.0.0 - 2017/09/22 tag v4.0.0](https://github.com/bjverde/formDin/releases/tag/v4.0.0) 
-   * Versão orignal, conforme enviado pelo Luís Eugênio Barbosa exite uma copia na Brach copyLEB 
+[Lista de todas as versões](https://github.com/bjverde/formDin/wiki/Vers%C3%B5es-e-versionamento)

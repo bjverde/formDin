@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2017-2019 Mika Tuupola
+Copyright (c) 2017-2020 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,8 @@ use GuzzleHttp\Psr7\UploadedFile as GuzzleUploadedFile;
 use Nyholm\Psr7\UploadedFile as NyholmUploadedFile;
 use Slim\Http\UploadedFile as SlimUploadedFile;
 use Slim\Psr7\Factory\UploadedFileFactory as SlimPsr7UploadedFileFactory;
-use Zend\Diactoros\UploadedFile as DiactorosUploadedFile;
+use Zend\Diactoros\UploadedFile as ZendDiactorosUploadedFile;
+use Laminas\Diactoros\UploadedFile as LaminasDiactorosUploadedFile;
 
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
@@ -59,8 +60,8 @@ final class UploadedFileFactory implements UploadedFileFactoryInterface
             $size = $stream->getSize();
         }
 
-        if (class_exists(DiactorosUploadedFile::class)) {
-            return new DiactorosUploadedFile(
+        if (class_exists(LaminasDiactorosUploadedFile::class)) {
+            return new LaminasDiactorosUploadedFile(
                 $stream,
                 $size,
                 $error,
@@ -109,6 +110,16 @@ final class UploadedFileFactory implements UploadedFileFactoryInterface
 
         if (class_exists(GuzzleUploadedFile::class)) {
             return new GuzzleUploadedFile(
+                $stream,
+                $size,
+                $error,
+                $clientFilename,
+                $clientMediaType
+            );
+        }
+
+        if (class_exists(ZendDiactorosUploadedFile::class)) {
+            return new ZendDiactorosUploadedFile(
                 $stream,
                 $size,
                 $error,

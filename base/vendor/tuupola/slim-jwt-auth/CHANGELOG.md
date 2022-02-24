@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
 
+## [3.5.1](https://github.com/tuupola/slim-jwt-auth/compare/3.5.0...3.5.1) - 2020-10-28
+### Changed
+- Force atleast tuupola/http-factory:1.0.2 ([#193](https://github.com/tuupola/slim-jwt-auth/issues/193)) ([#194](https://github.com/tuupola/slim-jwt-auth/pull/194)).
+
+## [3.5.0](https://github.com/tuupola/slim-jwt-auth/compare/3.4.0...3.5.0) - 2020-09-24
+### Added
+- Possibility to use `ArrayAccess` objects as the `secret` ([#174](https://github.com/tuupola/slim-jwt-auth/pull/174)).
+- Given `regexp` is also used when extracting token from cookie ([#171](https://github.com/tuupola/slim-jwt-auth/pull/171)).
+- Allow installing with PHP 8 ([#191](https://github.com/tuupola/slim-jwt-auth/pull/191)).
+
 ## [3.4.0](https://github.com/tuupola/slim-jwt-auth/compare/3.3.0...3.4.0) - 2019-07-01
 ### Added
 - Raw token to `before` and `after` arguments ([#168](https://github.com/tuupola/slim-jwt-auth/pull/168)).

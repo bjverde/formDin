@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## [1.1.0](https://github.com/tuupola/callable-handler/compare/1.0.0...1.1.0) - 2020-09-09
+### Added
+- Library can now be installed with PHP 8 ([#2](https://github.com/tuupola/callable-handler/pull/2)).
+
 ## [1.0.0](https://github.com/tuupola/callable-handler/compare/0.4.0...1.0.0) - 2018-10-12
 - This is only to create a stable release.
 

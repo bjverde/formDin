@@ -92,8 +92,7 @@ class StringHelper
      * @param string $value
      * @return string
      */
-    public static function formatCnpjCpf($value) 
-    {
+    public static function formatCnpjCpf($value){
         $cnpj_cpf = self::limpaCnpjCpf($value);
         if (strlen($cnpj_cpf) === 11) {
             $value = preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cnpj_cpf);
@@ -103,11 +102,44 @@ class StringHelper
         return $value;
     }
 
-    public static function limpaCnpjCpf($value) 
-    {
+    public static function limpaCnpjCpf($value){
         $limpo = preg_replace("/\D/", '', $value);
         return $limpo;
     }
+
+	public static function validarCpf($value){
+		$dv 		= false;
+		$cpf 		= self::limpaCnpjCpf($value);
+		if($cpf=='') {
+			return false;
+		}
+
+		$cpf_dv 	= substr($cpf,-2);
+		$controle 	= '';
+		// evitar sequencias de número. Ex:11111111111
+		for ( $i = 0; $i < 10; $i++ ) {
+			if( $cpf == str_repeat($i,11)){
+				$cpf_dv = '99'; // causar erro de validação
+				break;
+			}
+		}
+
+        $digito = null;
+		for ( $i = 0; $i < 2; $i++ ) {
+			$soma = 0;
+			for ( $j = 0; $j < 9; $j++ )
+			$soma += substr($cpf,$j,1)*(10+$i-$j);
+			if ( $i == 1 ) $soma += $digito * 2;
+			$digito = ($soma * 10) % 11;
+			if ( $digito == 10 ) $digito = 0;
+			$controle .= $digito;
+		}
+
+		if ( $controle != $cpf_dv ){
+		    return false;
+		}
+		return true;
+	}    
 
     /**
      * Recebe uma string e formata o numero telefone em dos 4 formatos

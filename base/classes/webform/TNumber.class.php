@@ -59,7 +59,10 @@ class TNumber extends TEdit
 	 * @param boolean $allowZero
 	 * @param boolean $allowNull
 	 */
-	public function __construct($strName,$strValue=null,$intMaxLength,$boolRequired=null,$intDecimalPlaces=null,$strMinValue=null,$strMaxValue=null,$boolFormatInteger=null,$strDirection=null,$boolAllowZero=null,$boolAllowNull=null)
+	public function __construct(string $strName
+	                          ,string $strValue=null
+	                          ,$intMaxLength
+							  ,$boolRequired=null,$intDecimalPlaces=null,$strMinValue=null,$strMaxValue=null,$boolFormatInteger=null,$strDirection=null,$boolAllowZero=null,$boolAllowNull=null)
 	{
 		parent::__construct($strName,null,$intMaxLength,$boolRequired);
 		$this->setFieldType('number');

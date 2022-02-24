@@ -43,6 +43,7 @@ $path =  __DIR__.'/../../../classes/';
 require_once $path.'constants.php';
 require_once $path.'webform/autoload_formdin.php';
 require_once $path.'helpers/autoload_formdin_helper.php';
+require_once $path.'exceptions/UploadException.class.php';
 
 use PHPUnit\Framework\TestCase;
 /**
@@ -61,6 +62,7 @@ class TApplicationTest extends TestCase
 	 * Prepares the environment before running a test.
 	 */
 	protected function setUp(): void {
+		if(session_status() === PHP_SESSION_ACTIVE) session_destroy();
 		parent::setUp ();
 		if (! defined ( 'APLICATIVO' )) {
 		    define ( 'APLICATIVO', 'phpunit' );
