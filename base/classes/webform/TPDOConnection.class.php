@@ -347,7 +347,7 @@ class TPDOConnection {
             $dbms  = ArrayHelper::get($configArray, 'DBMS');
             $banco = ArrayHelper::get($configArray, 'BANCO');
             $dbms  = empty($dbms)?$banco:$dbms;
-            $dbms  = strtoupper($dbms);
+            $dbms  = is_null($dbms)?null:strtoupper($dbms);
             if( empty($dbms) ){
                 $configErrors[] = 'Array Config is not configured! Define DBMS';
             }else{
