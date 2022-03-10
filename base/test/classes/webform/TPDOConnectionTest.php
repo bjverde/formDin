@@ -211,7 +211,7 @@ class TPDOConnectionTest extends TestCase
 	}
 	
 	public function testSetConfigUtf8Decode_ArrayUtf8False(){
-		$expected = true;
+		$expected = 0;
 		
 		$useConfigFile= false;
 		$configArray  = array( 'BANCO'=>DBMS_MYSQL , 'PORT'=>'7001' , 'UTF8_DECODE' => 0);

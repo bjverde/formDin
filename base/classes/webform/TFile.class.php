@@ -180,7 +180,7 @@ class TFile extends TEdit {
     public function clear()
     {
         // excluir o arquivo temporário
-        if( file_exists($this->getValue(true)))
+        if( FileHelper::exists($this->getValue(true)))
         {
             unlink($_POST[$this->getId().'_temp']);
         }
@@ -233,8 +233,7 @@ class TFile extends TEdit {
         if( isset( $_POST[$this->getId().'_temp'] ) )
         {
             $tempFile = $_POST[$this->getId().'_temp'];
-            if(file_exists($tempFile))
-            {
+            if( FileHelper::exists($tempFile) ){
                 return file_get_contents($tempFile);
             }
         }

@@ -78,7 +78,20 @@ class TApplicationTest extends TestCase
 		$this->tApplication = null;		
 		parent::tearDown ();
 	}
-
+	//----------------------------------------------
+	/*
+	public function testSetIntWidth_Exception() {
+		$this->tearDown();
+		$this->expectException(InvalidArgumentException::class);
+		$app = new TApplication('PHP Unit','Test','test','unit test',800);
+	}
+	//----------------------------------------------
+	public function testSetCharSet_Exception() {
+		$this->tearDown();
+		$this->expectException(InvalidArgumentException::class);
+		$app = new TApplication('PHP Unit','Test','test','unit test',800,'UTF8');
+	}
+	//----------------------------------------------
 	public function testSetTitle_Defined() {
 	    $expected= 'xxxTest95784';
 	    
@@ -92,22 +105,18 @@ class TApplicationTest extends TestCase
 	    $result = $this->tApplication->getTitle();
 	    $this->assertNull($result);
 	}
-	
+
 	public function testSetFormDinMinimumVersion_OK() {
 	    $this->assertNull( $this->tApplication->setFormDinMinimumVersion('1.0.0') );
 	}
 	
-	/**
-	 * @expectedException DomainException
-	 */
 	public function testSetFormDinMinimumVersion_fail() {
+		$this->expectException(DomainException::class);
 	    $this->tApplication->setFormDinMinimumVersion('999.999.999');
 	}
 	
-	/**
-	 * @expectedException DomainException
-	 */
 	public function testSetFormDinMinimumVersion_formatInvalid() {
+		$this->expectException(DomainException::class);
 	    $this->tApplication->setFormDinMinimumVersion('4.0');
 	}
 	
@@ -124,4 +133,6 @@ class TApplicationTest extends TestCase
 		$result = $this->tApplication->getImgLogoHtml();
 		$this->assertEquals( $expected , $result);
 	}
+	
+	*/
 }

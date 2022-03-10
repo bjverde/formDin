@@ -373,47 +373,34 @@ class TNumber extends TEdit
 	{
 		parent::setValue($newValue);
 		$newValue = $this->value;
-		if( preg_match('/[1-9]/',$newValue)==0 && ! $this->getAllowZero() )
-		{
-			if( $this->getAllowNull() )
-			{
+		if( FormDinHelper::pregMatch('/[1-9]/',$newValue)==0 && ! $this->getAllowZero() ) {
+			if( $this->getAllowNull() ){
 				$this->value = '';
 				return;
 			}
   		}
-		if( $this->getDecimalPlaces() > 0 )
-		{
+		if( $this->getDecimalPlaces() > 0 ){
 			$posComma = strpos($newValue,',');
 			$posPoint = strpos($newValue,'.');
 			$posComma = !$posComma ? 0 : $posComma;
 			$posPoint = !$posPoint ? 0 : $posPoint;
-			if( $posComma && $posPoint )
-			{
-				if( $posComma>$posPoint)
-				{
+			if( $posComma && $posPoint ){
+				if( $posComma>$posPoint){
 					$newValue = preg_replace('/\./','',$newValue);
-				}
-				else
-				{
+				} else {
 					$newValue = preg_replace('/,/','',$newValue);
 					$newValue = preg_replace('/\./',',',$newValue);
 				}
-
-			}
-			else if( $posPoint )
-			{
+			}else if( $posPoint ){
 				$newValue = preg_replace('/\./',',',$newValue);
 			}
 			//completar casas decimais
-			if ( preg_match('/,/',$newValue)==0)
-			{
+			if ( FormDinHelper::pregMatch('/,/',$newValue)==0){
 				$newValue.=',0'; // deve ter pelo menos uma casa decimal
 			}
 			$aParts = explode(',',$newValue);
-			if( isset( $aParts[1] ) )
-			{
-				if( strlen($aParts[1]) < $this->getDecimalPlaces())
-				{
+			if( isset( $aParts[1] ) ){
+				if( strlen($aParts[1]) < $this->getDecimalPlaces()){
 					$aParts[1] = str_pad($aParts[1], $this->getDecimalPlaces(),'0',STR_PAD_RIGHT );
 				}
 				else if( strlen($aParts[1]) > $this->getDecimalPlaces())

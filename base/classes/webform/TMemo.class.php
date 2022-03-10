@@ -60,8 +60,9 @@ class TMemo extends TEdit
 	public function show($print=true)
 	{
 		$this->setProperty('size',null);
-		if((string)trim($this->getValue())!="")
-		{
+		$valor = $this->getValue();
+		$valor = isset($valor)?(string)trim($valor):'';
+		if($valor!=""){
 			$this->add($this->getValue());
 		}
 		$this->value=null;

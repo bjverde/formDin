@@ -3,11 +3,11 @@
 	"homepage" : "https://github.com/bjverde/formDin",
 	"description" : "FormDin FrameWork v4",
 	"require" : {
-		"php" : ">=7.0.0",
+		"php" : ">=7.2.0",
 		"phpmailer/phpmailer" : "^6.5",
-		"components/font-awesome" : "^5.15",
-		"slim/slim" : "^3.12",
-		"tuupola/slim-basic-auth" : "^3.2",
-		"tuupola/slim-jwt-auth" : "^3.2"
+		"components/font-awesome" : "^6.0",
+		"slim/slim" : "^4.7",
+		"tuupola/slim-basic-auth" : "^3.3",
+		"tuupola/slim-jwt-auth" : "^3.6"
 	}
 }

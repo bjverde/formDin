@@ -163,11 +163,10 @@ class TGridEditColumn extends TGridColumn
 
 		// o valor postado tem preferencia sobre o valor do $res
 		//if( $_POST &&  $this->getRowNum() > 0 && isset($_POST[$this->getEditName()]) && isset($_POST[$this->getEditName()][$this->getRowNum()]))
-		if( preg_match('/text|memo|number/', $this->getDataType()) == 1 )
+		if( FormDinHelper::pregMatch('/text|memo|number/', $this->getDataType()) == 1 )
 		{
 			if( $_POST &&  $this->getRowNum() > 0 && isset($_POST[$this->getEditName()][$this->getKeyValue()]))
 			{
-
 				$strNewValue = $_POST[$this->getEditName()][$this->getKeyValue()];
 			}
 		}

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2017-2020 Mika Tuupola
+Copyright (c) 2017-2021 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,16 +110,16 @@ class StreamFactory implements StreamFactoryInterface
             return (new SlimPsr7StreamFactory)->createStreamFromResource($resource);
         }
 
+        if (class_exists(ZendDiactorosStream::class)) {
+            return new ZendDiactorosStream($resource);
+        }
+
         if (class_exists(SlimStream::class)) {
             return new SlimStream($resource);
         }
 
         if (class_exists(GuzzleStream::class)) {
             return new GuzzleStream($resource);
-        }
-
-        if (class_exists(ZendDiactorosStream::class)) {
-            return new ZendDiactorosStream($resource);
         }
 
         throw new RuntimeException("No PSR-7 implementation available");

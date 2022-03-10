@@ -52,7 +52,7 @@ class ComposerStaticInit1960b5e1094b59438bae05e560dca0df
         ),
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'Psr\\Http\\Server\\' => 
         array (
@@ -82,16 +82,6 @@ class ComposerStaticInit1960b5e1094b59438bae05e560dca0df
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Pimple' => 
-            array (
-                0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-        ),
-    );
-
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -101,7 +91,6 @@ class ComposerStaticInit1960b5e1094b59438bae05e560dca0df
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit1960b5e1094b59438bae05e560dca0df::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1960b5e1094b59438bae05e560dca0df::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1960b5e1094b59438bae05e560dca0df::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit1960b5e1094b59438bae05e560dca0df::$classMap;
 
         }, null, ClassLoader::class);

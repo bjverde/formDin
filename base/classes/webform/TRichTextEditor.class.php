@@ -49,7 +49,7 @@ class TRichTextEditor extends TMemo
 	private $onlineSearch;
 	public function __construct($strName
 			,$strValue=null
-			,$intMaxLength
+			,$intMaxLength=null
 			,$boolRequired=null
 			,$intColumns=null
 			,$intRows=null)

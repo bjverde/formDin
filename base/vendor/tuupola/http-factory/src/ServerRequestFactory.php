@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2017-2020 Mika Tuupola
+Copyright (c) 2017-2021 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -64,6 +64,10 @@ final class ServerRequestFactory implements ServerRequestFactoryInterface
             return (new SlimPsr7ServerRequestFactory)->createServerRequest($method, $uri, $serverParams);
         }
 
+        if (class_exists(ZendDiactorosServerRequest::class)) {
+            return new ZendDiactorosServerRequest($serverParams, [], $uri, $method);
+        }
+
         if (class_exists(SlimServerRequest::class)) {
             $uri = SlimUri::createFromString($uri);
             $headers = new SlimHeaders;
@@ -73,10 +77,6 @@ final class ServerRequestFactory implements ServerRequestFactoryInterface
 
         if (class_exists(GuzzleServerRequest::class)) {
             return new GuzzleServerRequest($method, $uri, [], null, "1.1", $serverParams);
-        }
-
-        if (class_exists(ZendDiactorosServerRequest::class)) {
-            return new ZendDiactorosServerRequest($serverParams, [], $uri, $method);
         }
 
         throw new \RuntimeException("No PSR-7 implementation available");

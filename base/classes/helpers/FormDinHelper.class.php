@@ -244,7 +244,7 @@ class FormDinHelper
      * Avoid the problem Deprecated preg_match in PHP 8.1.X
      * @param string $pattern
      * @param string $subject
-     * @return void
+     * @return string
      */
     public static function pregMatch($pattern,$subject) 
     {

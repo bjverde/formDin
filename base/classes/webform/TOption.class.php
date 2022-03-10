@@ -119,11 +119,9 @@ abstract class TOption extends TControl
 		if( $this->getFieldType() == self::SELECT && strpos( $this->getName(), '[' ) !== false ) {
 	   	   $name = $this->getName();
 		   $arrTemp = explode('[',$name);
-		   if( isset($_POST[$arrTemp[0] ] ) )
-		   {
+		   if( isset($_POST[$arrTemp[0] ] ) ){
 		      $expr = '$v=$_POST["'.str_replace( '[', '"][', $name ).';';
-		      if( ! preg_match('/\[\]/',$expr ))
-		      {
+		      if( !FormDinHelper::pregMatch('/\[\]/',$expr )){
 		   		@eval( $expr );
 		   		$this->setValue( $v );
 		      }
@@ -360,70 +358,59 @@ abstract class TOption extends TControl
 		if( $this->getFieldType() == 'radio' || $this->getFieldType() == 'check' )
 		{
 			$this->showRadioOrCheck($boolPrint);
-		}
-		else
-		{
+		} else {
 			// criar o input do tipo select ( comboBox )
-			if( $this->getMultiSelect() )
-			{
+			if( $this->getMultiSelect() ) {
 				$this->setTagType( 'select multiple' );
 				$this->setName( $this->getId() . '[]' );
 				$this->setProperty( 'id', $this->getId() );
-			}
-			else
-			{
+			} else {
 				$this->setTagType( 'select' );
 				$this->setHeight( null );
 			}
 			$this->setProperty( 'size', $this->getSelectSize() );
 			$this->setCss( 'background-color', '#ffffff' );
 			// colocar hint se não tiver
-			if( $this->getMultiSelect() && $this->title == '' )
-			{
+			if( $this->getMultiSelect() && $this->title == '' ) {
 				$this->setProperty( 'title', 'Pressione a tecla CTRL ou SHIFT para marcar/desmarcar as opções!' );
 			}
-			if( is_array( $this->getOptions() ) )
-			{
+			if( is_array( $this->getOptions() ) ) {
 				$this->setCss( 'cursor', 'pointer' );
 				$arrOptionsData = $this->getOptionsData();
-				foreach( $this->getOptions() as $k=>$v )
-				{
+				foreach( $this->getOptions() as $k=>$v ) {
 					$k=trim($k);
 					$v=trim($v);
 					$this->add( $opt = new TElement( 'option' ) );
 					$opt->setProperty( 'value', $k );
 					$opt->clearCss();
 					if( !is_array( $this->getValue() ) ) {
-					    if( html_entity_decode( ( string ) $k ) == html_entity_decode( ( string ) $this->getValue(),null, ENCODINGS ) ) {
+						$decodeOption   = isset($k)?html_entity_decode( ( string ) $k ):'';
+						$value = $this->getValue();
+						$decodeGetValue = isset($value)?html_entity_decode( (string)$value,ENT_NOQUOTES, ENCODINGS ):'';
+					    if( $decodeOption == $decodeGetValue ) {
 							$opt->setProperty( 'selected', "true" );
 						}
-					}
-					else {
+					} else {
 						if( ( string ) array_search( $k, $this->getValue() ) != "" ) {
 							$opt->setProperty( 'selected', "true" );
 						}
 					}
 					$opt->add( $v );
 
-					if( isset( $arrOptionsData[$k] ) )
-					{
-						if( is_array( $arrOptionsData[$k]  ))
-						{
-							foreach($arrOptionsData[$k] as $e=>$f)
-							{
+					if( isset( $arrOptionsData[$k] ) ) {
+						if( is_array( $arrOptionsData[$k]  )) {
+							foreach($arrOptionsData[$k] as $e=>$f) {
 								$opt->setAttribute($e,$f);
 							}
-						}
-						else
-						{
+						} else {
 							$opt->setAttribute('data-value',$arrOptionsData[$k] );
 						}
 					}
-				}
+				}//Fim foreach
 			}
 		}
-		if( $this->getRequired() )
-		{
+
+		if( $this->getRequired() ) {
 			$this->setProperty( 'needed', 'true' );
 		}
 
@@ -580,7 +567,7 @@ abstract class TOption extends TControl
 			if( is_string( $mixOptions ) ) {
 				$where = null;
 				$cacheSeconds = null;
-				if( preg_match('/\|/',$mixOptions)){
+				if( FormDinHelper::pregMatch('/\|/',$mixOptions)){
 					$mixOptions  	= explode( '|', $mixOptions );
 					$mixOptions[1]  = ( isset( $mixOptions[1] ) ? $mixOptions[1] : '' );
 					// segundo parametro pode ser o where ou tempo de cache
@@ -636,20 +623,13 @@ abstract class TOption extends TControl
 							}
 						}
 						// se passou somente o nome da tabela , criar comando select
-						if( preg_match( '/\.PK\a?/i', $packageName ) )
-						{
+						if( FormDinHelper::pregMatch( '/\.PK\a?/i', $packageName ) ){
 							print_r( recuperarPacote( $packageName, $bvars, $mixOptions, $cacheSeconds ) );
-						}
-						else
-						{
-							if( $strKeyField && $strDisplayField )
-							{
+						} else {
+							if( $strKeyField && $strDisplayField ) {
 								$sql = "select {$strKeyField},{$strDisplayField}{$strDataColumns} from  {$packageName} order by {$strDisplayField}";
-							}
-							else
-							{
-								if( !preg_match( '/' . ESQUEMA . '\./', $packageName ) )
-								{
+							} else {
+								if( !FormDinHelper::pregMatch( '/' . ESQUEMA . '\./', $packageName ) ){
 									$packageName = ESQUEMA . '.' . $packageName;
 								}
 								$sql = "select * from {$packageName}";
@@ -657,39 +637,26 @@ abstract class TOption extends TControl
 							$bvars = null;
 							$nrows = 0;
 							$mixOptions = null;
-							if( $GLOBALS[ 'conexao' ] )
-							{
+							if( $GLOBALS[ 'conexao' ] ) {
 								if( $GLOBALS[ 'conexao' ]->executar_recuperar( $sql, $bvars, $mixOptions, $nrows ) )
 								{
 									echo 'Erro na execução do sql:' . $sql;
 								}
 							}
 						}
-					}
-					else
-					{
-						if( TPDOConnection::getInstance() )
-						{
-							if( preg_match( '/^select/i', $mixOptions ) > 0 )
-							{
+					} else {
+						if( TPDOConnection::getInstance() ) {
+							if( FormDinHelper::pregMatch( '/^select/i', $mixOptions ) > 0 ){
 								$mixOptions = TPDOConnection::executeSql( $mixOptions );
-							}
-							else
-							{
-								if( !is_null( $where ) )
-								{
+							} else {
+								if( !is_null( $where ) ){
 									$where = ' where ' . preg_replace( '/"/', "'", $where );
-								}
-								else
-								{
+								} else {
 									$where = '';
 								}
-								if( $this->getKeyField() && $this->getDisplayField() )
-								{
+								if( $this->getKeyField() && $this->getDisplayField() ) {
 									$sql = "select {$this->getKeyField()},{$this->getDisplayField()}{$strDataColumns} from {$mixOptions} {$where} order by {$this->getDisplayField()}";
-								}
-								else
-								{
+								} else {
 									$sql = "select * from {$mixOptions} {$where}";
 								}
 								$mixOptions = TPDOConnection::executeSql( $sql );
