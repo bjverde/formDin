@@ -6,53 +6,53 @@
     >
     <testsuites>
         <testsuite name="FormDin 5">
-            <directory>D:\wamp\www\formDin\base\test</directory>
+            <directory>c:\wamp64\www\formDin\base\test</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">D:\wamp\www\formDin\base\webform</directory>
+            <directory suffix=".php">c:\wamp64\www\formDin\base\webform</directory>
             <exclude>				
-                <directory suffix=".php">D:\wamp\www\formDin\base\callbacks</directory>
-				<directory suffix=".php">D:\wamp\www\formDin\base\classes\captcha</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\css</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\imagens</directory>
-				<directory suffix=".php">D:\wamp\www\formDin\base\includes</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\js</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\lib_fpdf181</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\lib</directory>
-                <directory suffix=".php">D:\wamp\www\formDin\base\vendor</directory>
-				<directory suffix=".php">D:\wamp\www\formDin\base\tmp</directory>
-				<directory suffix=".php">D:\wamp\www\formDin\base\xajax</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\callbacks</directory>
+				<directory suffix=".php">c:\wamp64\www\formDin\base\classes\captcha</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\css</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\imagens</directory>
+				<directory suffix=".php">c:\wamp64\www\formDin\base\includes</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\js</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\lib_fpdf181</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\lib</directory>
+                <directory suffix=".php">c:\wamp64\www\formDin\base\vendor</directory>
+				<directory suffix=".php">c:\wamp64\www\formDin\base\tmp</directory>
+				<directory suffix=".php">c:\wamp64\www\formDin\base\xajax</directory>
 
-                <file>D:\wamp\www\formDin\base\classes\excelwriter.inc.php</file>
-				<file>D:\wamp\www\formDin\base\classes\FormDin4.xls.php</file>
-				<file>D:\wamp\www\formDin\base\classes\nusoap.inc</file>
-				<file>D:\wamp\www\formDin\base\classes\webform\TGridTest.class.php</file>
-                <file>D:\wamp\www\formDin\base\tmp\index.php</file>
-                <file>D:\wamp\www\formDin\base\callbacks\index.php</file>
-                <file>D:\wamp\www\formDin\base\index.php</file>
-                <file>D:\wamp\www\formDin\base\test\index.php</file>
-                <file>D:\wamp\www\formDin\base\xajax\index.php</file>
-                <file>D:\wamp\www\formDin\base\classes\helpers\index.php</file>                
-                <file>D:\wamp\www\formDin\base\classes\index.php</file>
+                <file>c:\wamp64\www\formDin\base\classes\excelwriter.inc.php</file>
+				<file>c:\wamp64\www\formDin\base\classes\FormDin4.xls.php</file>
+				<file>c:\wamp64\www\formDin\base\classes\nusoap.inc</file>
+				<file>c:\wamp64\www\formDin\base\classes\webform\TGridTest.class.php</file>
+                <file>c:\wamp64\www\formDin\base\tmp\index.php</file>
+                <file>c:\wamp64\www\formDin\base\callbacks\index.php</file>
+                <file>c:\wamp64\www\formDin\base\index.php</file>
+                <file>c:\wamp64\www\formDin\base\test\index.php</file>
+                <file>c:\wamp64\www\formDin\base\xajax\index.php</file>
+                <file>c:\wamp64\www\formDin\base\classes\helpers\index.php</file>                
+                <file>c:\wamp64\www\formDin\base\classes\index.php</file>
 
-                <file>D:\wamp\www\formDin\base\classes\webform\index.php</file>
+                <file>c:\wamp64\www\formDin\base\classes\webform\index.php</file>
                 
-                <file>D:\wamp\www\formDin\base\css\index.php</file>
-                <file>D:\wamp\www\formDin\base\imagens\index.php</file>
-                <file>D:\wamp\www\formDin\base\js\index.php</file>
-                <file>D:\wamp\www\formDin\base\logs\index.php</file>                
+                <file>c:\wamp64\www\formDin\base\css\index.php</file>
+                <file>c:\wamp64\www\formDin\base\imagens\index.php</file>
+                <file>c:\wamp64\www\formDin\base\js\index.php</file>
+                <file>c:\wamp64\www\formDin\base\logs\index.php</file>                
                 
                 
-                <file>D:\wamp\www\formDin\base\vendor\index.php</file>
+                <file>c:\wamp64\www\formDin\base\vendor\index.php</file>
                 
             </exclude>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="D:\wamp\www\formDin\phpunit-code-coverage\" lowUpperBound="35" highLowerBound="70"/>        
-        <log type="testdox-text" target="D:\wamp\www\formDin\phpunit-code-coverage\testResult.txt"/>
-        <log type="testdox-html" target="D:\wamp\www\formDin\phpunit-code-coverage\testResult.html"/>
+        <log type="coverage-html" target="c:\wamp64\www\formDin\phpunit-code-coverage\" lowUpperBound="35" highLowerBound="70"/>        
+        <log type="testdox-text" target="c:\wamp64\www\formDin\phpunit-code-coverage\testResult.txt"/>
+        <log type="testdox-html" target="c:\wamp64\www\formDin\phpunit-code-coverage\testResult.html"/>
     </logging>     
 </phpunit>
