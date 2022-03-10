@@ -2892,7 +2892,7 @@ class TForm Extends TBox
       * O parametro $boolAutoSelect - informa que se a consulta retornar apenas um resultado este deverá ser
       * automaticamente selecionado e retornado para a tela
       *
-      * Ex: strFilterFields (campoBanco|Rotulo|caracteres|tamanho|obrigatorio|tipo|casas decimais|parte do campo|pesquisar formatado )
+      * Ex: strFilterFields (campoBanco|Rotulo|caracteres|tamanho|Obrigatório|tipo|casas decimais|parte do campo|pesquisar formatado )
       *                     (name|label|length|size|required|$type|decimalPlaces|partialKey|searchFormated)
       * 	NOM_INTERRESSADO|Nome Interessado:|45||||true,NUM_ORIGINAL|Nº Original:,DES_ASSUNTO|Assunto,COD_UF|Estado:||||uf'
       * 	o tipo pode ser: char, uf, cpf, cnpj, cpfcnpj, data, int, dec, select ou hidden
@@ -6228,7 +6228,7 @@ class TForm Extends TBox
     *
     * @param string $strName       - 1: Id do Campo
     * @param string $strValue      - 2: Valor inicial
-    * @param boolean $boolRequired - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio  
+    * @param boolean $boolRequired - 3: True = Obrigatório; False (Defalt) = Não Obrigatório  
     * @return THidden
     */
     public function addHiddenField( $strName, $strValue=null, $boolRequired=null )
@@ -6279,9 +6279,9 @@ class TForm Extends TBox
      * Adicionar campo de entrada de texto com multiplas linhas ( memo ) equivalente ao html textarea
      *
      * @param string  $strName         - 1: ID do campo
-     * @param string  $strLabel        - 2: Labal
+     * @param string  $strLabel        - 2: Label do campo
      * @param integer $intMaxLength    - 3: tamanho maximo
-     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param boolean $boolRequired    - 4: Obrigatório
      * @param integer $intColumns      - 5: qtd colunas
      * @param integer $intRows         - 6: qtd linhas
      * @param boolean $boolNewLine     - 7: nova linha
@@ -6314,9 +6314,9 @@ class TForm Extends TBox
      * com editor TinyMCE for free, the most advanced WYSWIYG 
      *
      * @param string  $strName         - 1: ID do campo
-     * @param string  $strLabel        - 2: Labal
+     * @param string  $strLabel        - 2: Label do campo
      * @param integer $intMaxLength    - 3: tamanho maximo
-     * @param boolean $boolRequired    - 4: Obrigatorio
+     * @param boolean $boolRequired    - 4: Obrigatório
      * @param integer $intColumns      - 5: qtd colunas
      * @param integer $intRows         - 6: qtd linhas
      * @param boolean $boolNewLine     - 7: nova linha
@@ -6517,7 +6517,7 @@ class TForm Extends TBox
     *
     * @param string  $strName            -  1: Id do campo
     * @param string  $strLabel           -  2: Label do campo
-    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string  $strValue           -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
@@ -6552,7 +6552,7 @@ class TForm Extends TBox
     *
     * @param string $strName             -  1: Id do campo
     * @param string $strLabel            -  2: Label do campo
-    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string $strValue            -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
@@ -6573,7 +6573,7 @@ class TForm Extends TBox
     *
     * @param string $strName        -  1: Id do campo
     * @param string $strLabel       -  2: Label do campo
-    * @param boolean $boolRequired  -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param boolean $boolRequired  -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string $strValue       -  4: Valor inicial do campo
     * @param boolean $boolNewLine   -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param boolean $boolLabelAbove
@@ -6607,7 +6607,7 @@ class TForm Extends TBox
     *
     * @param string $strName              -  1: Id do campo
     * @param string $strLabel             -  2: Label do campo
-    * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param boolean $boolRequired        -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string $strValue             -  4: Valor inicial do campo
     * @param boolean $boolNewLine         -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
     * @param string $strFieldEndereco     -  6: id do campo endereço
@@ -6738,13 +6738,13 @@ class TForm Extends TBox
     * 	$frm->addSelectField('tipo','Tipo:',false,'select * from tipo order by descricao');
     * 	$frm->addSelectField('tipo','Tipo:',false,'tipo|descricao like "F%"');
     *
-    *  //Exemplo espcial - Campo obrigatorio e sem senhum elemento pre selecionado.
+    *  //Exemplo espcial - Campo Obrigatório e sem senhum elemento pre selecionado.
     *  $frm->addSelectField('tipo','Tipo',true,$tiposDocumentos,null,null,null,null,null,null,' ','');
     * </code>
     *
     * @param string  $strName        - 1: ID do campo
     * @param string  $strLabel       - 2: Label do campo
-    * @param boolean $boolRequired   - 3: Default FALSE = não obrigatori, TRUE = obrigatorio
+    * @param boolean $boolRequired   - 3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param mixed   $mixOptions         - 04: Array dos valores. no formato "id=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param boolean $boolNewLine        - 05: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
     * @param boolean $boolLabelAbove     - 06: Default FALSE = Label mesma linha, TRUE = Label acima
@@ -6951,7 +6951,7 @@ class TForm Extends TBox
      * @param string $strName            - 1: ID do campo
      * @param string $strLabel           - 2: Label do campo, que irá aparecer na tela do usuario
      * @param integer $intMaxLength      - 3: Quantidade maxima de digitos.
-     * @param boolean $boolRequired      - 4: Obrigatorio
+     * @param boolean $boolRequired      - 4: Obrigatório
      * @param integer $intDecimalPlaces  - 5: Quantidade de casas decimais.
      * @param boolean $boolNewLine       - 6: Campo em nova linha. Default = true = inicia em nova linha, false = continua na linha anterior 
      * @param string $strValue           - 7: valor inicial do campo
@@ -7005,7 +7005,7 @@ class TForm Extends TBox
 	 * @param string $strName       - 1: ID do campo
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
 	 * @param integer $intMaxLength - 3: Tamanho maximo de caracteres
-	 * @param boolean $boolRequired - 4: Obrigatorio
+	 * @param boolean $boolRequired - 4: Obrigatório
 	 * @param integer $intSize      - 5: Tamanho do campo na tela
 	 * @param boolean $boolNewLine  - 6: Campo em nova linha
 	 * @param string  $strValue     - 7: valor inicial do campo
@@ -7024,7 +7024,7 @@ class TForm Extends TBox
 	 *
 	 * @param string $strName       - 1: ID do campo
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
-	 * @param boolean $boolRequired - 3: Obrigatorio
+	 * @param boolean $boolRequired - 3: Obrigatório
 	 * @param boolean $boolNewLine  - 4: Campo em nova linha
 	 * @param string $strValue
 	 * @param boolean $boolLabelAbove
@@ -7080,8 +7080,8 @@ class TForm Extends TBox
     *
     * @param string $strName              -1: Ida do campoa
     * @param string $strLabel             -2: Label
-    * @param boolean $boolRequired        -3: Campo obrigatorio, DEFALUT is FALSE não obrigatorio.
-    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não obrigatorio.
+    * @param boolean $boolRequired        -3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param integer $intmaxLength        -5: Tamanho maximo
     * @param string $strValue
     * @param boolean $boolLabelAbove      -7: Label acima, DEFAULT is FALSE na mesma linha
@@ -7141,7 +7141,7 @@ class TForm Extends TBox
     * 
      * @param string  $strName         - 1: id do campo
      * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
-     * @param boolean $boolRequired    - 3: Obrigatorio
+     * @param boolean $boolRequired    - 3: Obrigatório
      * @param string  $strAllowedFileTypes - Tipos de arquivos
      * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
      * @param integer $intFieldSize
@@ -7186,7 +7186,7 @@ class TForm Extends TBox
     *
     * @param string $strName         - 1: id do campo
     * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
-    * @param boolean $boolRequired   - 3: Obrigatorio
+    * @param boolean $boolRequired   - 3: Obrigatório
     * @param string $strMask
     * @param boolean $boolNewLine
     * @param string $strValue
@@ -7230,7 +7230,7 @@ class TForm Extends TBox
      *
      * @param string  $strName             - 1: id do campo
      * @param string  $strLabel            - 2: Rotulo do campo que irá aparece na tela
-     * @param boolean $boolRequired        - 3: True = Obrigatorio; False (Defalt) = Não Obrigatorio
+     * @param boolean $boolRequired        - 3: True = Obrigatório; False (Defalt) = Não Obrigatório
      * @param string  $strMinValue         - 4: Menor Valor
      * @param string  $strMaxValue         - 5: Maior valor
      * @param string  $strMask             - 6: HM, HMS
