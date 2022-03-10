@@ -57,16 +57,14 @@ class StringHelper
     {
         $outputString    = null;
         if( isset($inputString) ){
-            $outputString = strtolower($inputString);
+            $outputString = mb_strtolower($inputString);
         }
         return $outputString;
     }    
     public static function strtolower_utf8($inputString) 
     {
-        $outputString    = utf8_decode($inputString);
-        $outputString    = strtolower($outputString);
-        $outputString    = utf8_encode($outputString);
-        return $outputString;
+        $string = self::strtolower($inputString);
+        return  $string;
     }
     
     /**
@@ -79,15 +77,13 @@ class StringHelper
     {
         $outputString    = null;
         if( isset($inputString) ){
-            $outputString = strtoupper($inputString);
+            $outputString = mb_strtoupper($inputString);
         }
         return $outputString;
     }
     public static function strtoupper_utf8($string)
     {
-        $string = utf8_decode($string);
-        $string = strtoupper($string);
-        $string = utf8_encode($string);
+        $string = self::strtoupper($string);
         return $string;
     }
     
