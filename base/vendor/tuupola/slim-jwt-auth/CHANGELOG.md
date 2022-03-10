@@ -2,10 +2,19 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## [3.6.0](https://github.com/tuupola/slim-jwt-auth/compare/3.5.2...3.6.0) - 2022-01-12
+### Added
+- Allow installing with latest versions of `psr/log` ([#215](https://github.com/tuupola/slim-jwt-auth/pull/215)).
+
+## [3.5.2](https://github.com/tuupola/slim-jwt-auth/compare/3.5.1...3.5.2) - 2021-09-17
+
+### Changed
+- Replace Zend Diactoros with Laminas Diactoros in unit tests ([#209](https://github.com/tuupola/slim-jwt-auth/pull/209)).
+
 
 ## [3.5.1](https://github.com/tuupola/slim-jwt-auth/compare/3.5.0...3.5.1) - 2020-10-28
-### Changed
-- Force atleast tuupola/http-factory:1.0.2 ([#193](https://github.com/tuupola/slim-jwt-auth/issues/193)) ([#194](https://github.com/tuupola/slim-jwt-auth/pull/194)).
+### Fixed
+- Bump minimum requirement of `tuupola/http-factory` to `1.0.2` . This is to avoid Composer 2 installing the broken `1.0.1` version which will also cause `psr/http-factory` to be removed. ([#193](https://github.com/tuupola/slim-jwt-auth/issues/193)) ([#194](https://github.com/tuupola/slim-jwt-auth/pull/194)).
 
 ## [3.5.0](https://github.com/tuupola/slim-jwt-auth/compare/3.4.0...3.5.0) - 2020-09-24
 ### Added
@@ -100,4 +109,3 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 - Most setters and getters for settings. Pass settings in an array only during initialization.
-

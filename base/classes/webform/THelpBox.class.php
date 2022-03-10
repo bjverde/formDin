@@ -80,7 +80,7 @@ class THelpBox extends TControl
 		$value = $this->value;
 		$isImage=false;
 		// verificar so texto ou o nome do arquivo é uma imagem
-		if( preg_match('/\.(jpe?g|gif|bmp|png)$/i',$value.$this->getFileName()))
+		if( FormDinHelper::pregMatch('/\.(jpe?g|gif|bmp|png)$/i',$value.$this->getFileName()))
 		{
 			$isImage=true;
 			$this->setDataType('image');

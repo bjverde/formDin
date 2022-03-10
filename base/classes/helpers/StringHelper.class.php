@@ -46,7 +46,21 @@
  */
 class StringHelper
 {
-    
+
+    /**
+     * Evita problemas com PHP 8.1
+     *
+     * @param string $inputString
+     * @return string|null
+     */
+    public static function strtolower($inputString) 
+    {
+        $outputString    = null;
+        if( isset($inputString) ){
+            $outputString = strtolower($inputString);
+        }
+        return $outputString;
+    }    
     public static function strtolower_utf8($inputString) 
     {
         $outputString    = utf8_decode($inputString);
@@ -55,6 +69,20 @@ class StringHelper
         return $outputString;
     }
     
+    /**
+     * Evita problemas com PHP 8.1
+     *
+     * @param string $inputString
+     * @return string|null
+     */
+    public static function strtoupper($inputString) 
+    {
+        $outputString    = null;
+        if( isset($inputString) ){
+            $outputString = strtoupper($inputString);
+        }
+        return $outputString;
+    }
     public static function strtoupper_utf8($string)
     {
         $string = utf8_decode($string);
@@ -78,6 +106,13 @@ class StringHelper
         return $string;
     }
     
+    /**
+     * Converte uma string com enconding destino e enconding de origem
+     * @param string $string        1: string que devera ser convertida
+     * @param string $to_encoding   2: encoding de destino
+     * @param string $from_encoding 3: encoding de origem
+     * @return string
+     */
     public static function convert_encoding($string,$to_encoding='UTF-8',$from_encoding='ASCII')
     {
         if ( mb_detect_encoding($string, $to_encoding, true)!=$to_encoding ){
@@ -166,17 +201,34 @@ class StringHelper
     }
     
     /**
-     * Recebe uma string do tipo "olá à mim! ñ" e retona "ola a mim! n"
+     * Troca caracteres acentuados por não acentudos.
+     * Recebe uma string do tipo "olá ação à mim!" e retona "ola acao a mim!"
      * https://pt.stackoverflow.com/questions/49645/remover-acentos-de-uma-string-em-phps
      * https://pt.stackoverflow.com/questions/858/refatora%c3%a7%c3%a3o-de-fun%c3%a7%c3%a3o-para-remover-pontua%c3%a7%c3%a3o-espa%c3%a7os-e-caracteres-especiais
      * https://stackoverflow.com/questions/13614622/transliterate-any-convertible-utf8-char-into-ascii-equivalent
      * @param string $string
      * @return string
      */
-    public static function tirarAcentos($string) 
+    public static function tirarAcentos_old($string) 
     {
         $string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
         $string = self::removeCaracteresEspeciais($string);
+        return $string;
+    }
+
+    /**
+     * Troca caracteres acentuados por não acentudos
+     * Recebe uma string do tipo "olá ação à mim!" e retona "ola acao a mim!"
+     * http://blog.dbins.com.br/removendo-acentos-e-caracteres-especiais-com-php
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function tirarAcentos($string) 
+    {
+        $comAcentos = array('à', 'á', 'â', 'ã', 'ä', 'å', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ü', 'ú', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'O', 'Ù', 'Ü', 'Ú');
+        $semAcentos = array('a', 'a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'y', 'A', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U');
+        $string= str_replace($comAcentos, $semAcentos, $string);
         return $string;
     }
 

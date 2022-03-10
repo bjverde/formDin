@@ -423,8 +423,8 @@ abstract class TControl extends TElement
 	 */
 	public function setTooltip($strTitle=null,$strText=null,$strImagem=null)
 	{
-		$strText = str_replace(chr(10),'<br/>',$strText);
-		$strTittle = str_replace(chr(10),'',$strText);
+		$strText = isset($strText)?str_replace(chr(10),'<br/>',$strText):null;
+		//$strTittle = str_replace(chr(10),'',$strText);
 		$this->tooltip = new TTooltip($strTitle,$strText,$strImagem);
 		return $this;
 	}
