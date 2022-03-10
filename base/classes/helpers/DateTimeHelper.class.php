@@ -152,7 +152,7 @@ class DateTimeHelper
     public static function date2Mysql($dateSql,$permiteHora=false)
     {
         $retorno = null;
-        $dateSql = trim($dateSql);
+        $dateSql = is_null($dateSql)?'':trim($dateSql);
         if($permiteHora){
             
             if( preg_match('/\d{4}-\d{2}-\d{2}/', $dateSql) ){
@@ -183,7 +183,8 @@ class DateTimeHelper
                 }
             }
         }else{
-            $dateSql = explode(' ', $dateSql);
+            $arrayVazio = array(0=>'');//POG para evitar problema problema com PHP 8.1
+            $dateSql = is_null($dateSql)?$arrayVazio:explode(' ', $dateSql);
             $dateSql = $dateSql[0];
             
             if( preg_match('/\d{4}-\d{2}-\d{2}$/', $dateSql) ){
