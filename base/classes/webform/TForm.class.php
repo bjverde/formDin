@@ -6327,7 +6327,7 @@ class TForm Extends TBox
      */
     public function addRichTextEditor( string $strName
     		, string $strLabel=null
-    		, $intMaxLength
+    		, $intMaxLength=null
     		, $boolRequired=null
     		, $intColumns=null
     		, $intRows=null
