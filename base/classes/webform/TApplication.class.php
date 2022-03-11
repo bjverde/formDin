@@ -442,7 +442,8 @@ class TApplication extends TLayout {
 			
 			if ( $this->getLoginFile() ) {
 				if ( FileHelper::exists( $this->getLoginFile() )  ) {
-					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . addslashes ( $this->getLoginInfo () ) . '")' );
+					$loginInfo = is_null($this->getLoginInfo())?null:addslashes ( $this->getLoginInfo () );
+					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' .$loginInfo. '")' );
 				} else {
 					$this->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicação, não existe.")' );
 				}
