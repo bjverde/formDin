@@ -72,7 +72,7 @@ class TGridColumn extends TElement
 	{
 		parent::__construct('span');
 		$this->clearCss();
-		$strFieldName = !empty($strFieldName)?strtolower($strFieldName):$strFieldName;
+		//$strFieldName = is_null($strFieldName)?'':strtolower($strFieldName);
 		$this->setId($strFieldName);
 		$this->setFieldName($strFieldName);
 		$this->setWidth($strWidth);
