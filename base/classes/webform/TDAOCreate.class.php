@@ -463,7 +463,7 @@ class TDAOCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public  function removeUnderline($txt) {
-		$len = strlen($txt);
+		$len = StringHelper::strlen($txt);
 		for ($i = $len-1; $i >= 0; $i--) {
 			if ($txt[$i] === '_') {
 				$len--;

@@ -859,8 +859,8 @@ class TDAO
 		$result='';
 		$this->utf8Decode( $str );
 
-		for( $i = 0; $i < strlen( $str ); $i++ )
-		{
+		$len  = StringHelper::strlen( $str );
+		for( $i = 0; $i < $len; $i++ ){
 			$result .= utf8_encode( substr( $str, $i, 1 ) );
 		}
 
