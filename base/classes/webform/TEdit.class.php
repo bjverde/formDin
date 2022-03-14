@@ -186,7 +186,7 @@ class TEdit extends TControl
 				{
 					$value = preg_replace('/[^0-9]/','',$value);
 				}
-				if( (int)$this->getMaxLenght() < strlen( $value ) )
+				if( (int)$this->getMaxLenght() < StringHelper::strlen( $value ) )
 				{
 				    $this->setCss('border','1px solid #ff0000'); //#176 relacionado com FormDin4.js
 				    //$this->setClass('fwFieldRequiredBoarder');
