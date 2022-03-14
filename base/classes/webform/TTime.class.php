@@ -113,8 +113,8 @@ class TTime extends TMask
 	{
 		if( parent::validate() )
 		{
-			$hora =$this->getValue();
-			$tam = strlen($hora);
+			$hora= $this->getValue();
+			$tam = StringHelper::strlen($hora);
 			if( $tam == 0 )
 			{
 				return true; // campo está vazio

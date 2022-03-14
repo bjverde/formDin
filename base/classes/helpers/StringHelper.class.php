@@ -53,6 +53,21 @@ class StringHelper
      * @param string $inputString
      * @return string|null
      */
+    public static function strlen($inputString) 
+    {
+        $outputString    = 0;
+        if( isset($inputString) ){
+            $outputString = strlen($inputString);
+        }
+        return $outputString;
+    }
+
+    /**
+     * Evita problemas com PHP 8.1
+     *
+     * @param string $inputString
+     * @return string|null
+     */
     public static function strtolower($inputString) 
     {
         $outputString    = null;
@@ -125,9 +140,10 @@ class StringHelper
      */
     public static function formatCnpjCpf($value){
         $cnpj_cpf = self::limpaCnpjCpf($value);
-        if (strlen($cnpj_cpf) === 11) {
+        $tamanho  = StringHelper::strlen($cnpj_cpf);
+        if ($tamanho === 11) {
             $value = preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cnpj_cpf);
-        } else if(strlen($cnpj_cpf) === 14){
+        } else if($tamanho === 14){
             $value = preg_replace("/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/", "\$1.\$2.\$3/\$4-\$5", $cnpj_cpf);
         }
         return $value;
