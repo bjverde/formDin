@@ -14,7 +14,8 @@ class CaptchaSecurityImages {
 		$code = '';
 		$i = 0;
 		while ($i < $characters) {
-			$code .= substr($possible, mt_rand(0, strlen($possible)-1), 1);
+			$len  = StringHelper::strlen($possible);
+			$code .= substr($possible, mt_rand(0, $len-1), 1);
 			$i++;
 		}
 		return $code;
