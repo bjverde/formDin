@@ -200,13 +200,14 @@ class StringHelper
     public static function formatPhoneNumber($value) 
     {
         $cnpj_cpf = self::limpaCnpjCpf($value);
-        if (strlen($cnpj_cpf) === 11) {
+        $tamanho  = StringHelper::strlen($cnpj_cpf);
+        if ($tamanho === 11) {
             $value = preg_replace("/(\d{2})(\d{5})(\d{4})/", "(\$1) \$2-\$3", $cnpj_cpf);
-        } else if(strlen($cnpj_cpf) === 10){
+        } else if($tamanho === 10){
             $value = preg_replace("/(\d{2})(\d{4})(\d{4})/", "(\$1) \$2-\$3", $cnpj_cpf);
-        } else if(strlen($cnpj_cpf) === 9){
+        } else if($tamanho === 9){
             $value = preg_replace("/(\d{5})(\d{4})/", "\$1-\$2", $cnpj_cpf);
-        } else if(strlen($cnpj_cpf) === 8){
+        } else if($tamanho === 8){
             $value = preg_replace("/(\d{4})(\d{4})/", "\$1-\$2", $cnpj_cpf);
         }
         return $value;
