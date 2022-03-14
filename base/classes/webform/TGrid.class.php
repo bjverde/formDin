@@ -586,10 +586,9 @@ class TGrid extends TTable
                             // verificar o nome da coluna informado em caixa alta, baixa e normal
                             $tdValue = $this->getTdValue($res, $fieldName, $k);                            
 
-                            if ($objColumn->getColumnType() == 'columncompact')
-                            {
-                                if (strlen($tdValue)> $objColumn->getMaxTextLength())
-                                {
+                            if ($objColumn->getColumnType() == 'columncompact') {
+                                $len = StringHelper::strlen($tdValue);
+                                if ( $len>$objColumn->getMaxTextLength() ){
                                     $cell->setProperty('title', $tdValue);
                                     $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()-3).' (...)';
                                 }
