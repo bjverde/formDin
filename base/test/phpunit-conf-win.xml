@@ -43,11 +43,11 @@
   </coverage>
   <testsuites>
     <testsuite name="FormDin 5">
-      <directory>c:\wamp64\www\formDin\base\test</directory>
+      <directory>..\base\test</directory>
     </testsuite>
   </testsuites>
   <logging>
-    <testdoxText outputFile="c:\wamp64\www\formDin\phpunit-code-coverage\testResult.txt"/>
-    <testdoxHtml outputFile="c:\wamp64\www\formDin\phpunit-code-coverage\testResult.html"/>
+    <testdoxText outputFile="..\..\phpunit-code-coverage\testResult.txt"/>
+    <testdoxHtml outputFile="..\..\phpunit-code-coverage\testResult.html"/>
   </logging>
 </phpunit>
