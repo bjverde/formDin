@@ -39,12 +39,12 @@
       <file>..\base\vendor\index.php</file>
     </exclude>
     <report>
-      <html outputDirectory="..\phpunit-code-coverage\" lowUpperBound="35" highLowerBound="70"/>
+      <html outputDirectory="../../phpunit-code-coverage/" lowUpperBound="35" highLowerBound="70"/>
     </report>
   </coverage>
   <testsuites>
     <testsuite name="FormDin 5">
-      <directory>..\base\test</directory>
+      <directory>../base/test</directory>
     </testsuite>
   </testsuites>
   <logging>
