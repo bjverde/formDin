@@ -22,3 +22,4 @@ phpunit-code-coverage/*
 /xx/
 /spu/
 /appev2/
+base/test/.phpunit.result.cache
