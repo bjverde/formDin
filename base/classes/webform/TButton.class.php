@@ -242,16 +242,11 @@ class TButton extends TControl
 	{
 		$this->imageDisabled=$strNewImage;
 	}
-	public function getImageDisabled()
-	{
-		if( !$this->imageDisabled )
-		{
-			if( file_exists($this->getBase().'imagens/'.str_replace('.','_disabled.',$this->imageEnabled)))
-			{
+	public function getImageDisabled() {
+		if( !$this->imageDisabled ) {
+			if( file_exists($this->getBase().'imagens/'.str_replace('.','_disabled.',$this->imageEnabled))) {
 				return str_replace('.','_disabled.',$this->imageEnabled );
-			}
-			else
-			{
+			} else {
 				return 'fwblank16x16.png';
 			}
 		}
