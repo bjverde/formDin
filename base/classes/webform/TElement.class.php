@@ -293,6 +293,22 @@ class TElement
      */
     public function removeIllegalChars( $word=null, $strExcept = null )
     {
+        if( is_null($word) || trim($word) == '' )
+        {
+            return null;
+        }
+        if ( isset( $strExcept ) )
+        {
+            $strExcept = str_replace( array( '[', ']', '^' ), array( '\\[', '\\]', '\\^' ), $strExcept );
+        }
+        return $word = @preg_replace( "/[^a-zA-Z0-9_" . $strExcept . "]/", "",
+            strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" ) );
+        
+        
+    }
+
+    public function removeIllegalCharsv2( $word=null, $strExcept = null )
+    {
         if( is_null($word) || trim($word) == '' ){
             return null;
         }
@@ -301,9 +317,8 @@ class TElement
             $replace = array( '\\[', '\\]', '\\^' );
             $strExcept = str_replace( $search, $replace, $strExcept );
         }
-        $subject=strtr( $word, " ", "_" );//Troca espaco por under line
-        $subject=StringHelper::tirarAcentos($subject);
         $pattern="/[^a-zA-Z0-9_" . $strExcept . "]/";
+        $subject=strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" );
         $word   =preg_replace( $pattern, "",$subject );
         return $word;
     }
@@ -797,7 +812,9 @@ class TElement
         $this->id = $this->removeIllegalChars( $newId );
         if( !is_null($newId) ){
             // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id            
-            $this->name = $this->removeIllegalChars( $newId, '[]' );
+            if ( !empty($this->name) && !strpos( $this->name, '[' ) ) {
+                $this->name = $this->removeIllegalChars( $newId, '[]' );
+            }
         }
         return $this;
     }
