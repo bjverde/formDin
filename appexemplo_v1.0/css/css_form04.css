@@ -68,19 +68,19 @@
    -webkit-font-smoothing: antialiased;
 }
 .login::before {
-    font-family: "Font Awesome 5 Free";
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     content: "\f007";
 }
 .btc::before {
-    font-family: "Font Awesome 5 Brands";
+    font-family: "Font Awesome 6 Brands";
     color:#FFD700;
     font-weight:bold;
     font-size: 1.5em;
     content: "\f379";
 }
 .php::before {
-    font-family: "Font Awesome 5 Brands";
+    font-family: "Font Awesome 6 Brands";
     color:#0000FF;
     font-weight:bold;
     font-size: 1.5em;
