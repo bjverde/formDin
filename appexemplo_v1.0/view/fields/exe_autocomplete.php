@@ -54,19 +54,24 @@ $html = '<h3>Este exemplo está utilizando o banco de dados bdApoio.s3db ( sqlit
 
 
 $html2 = 'Exemplo busque pela palavra SERRA, nos dois grupos.'
-        .'<br>No grupo 1 irá buscar por municipios iniciados com SERRA'
-        .'<br>No grupo 2 irá buscar por municipios com SERRA em qualquer posição'
+        .'<br>No grupo 1 irá buscar por municípios iniciados com SERRA'
+        .'<br>No grupo 2 irá buscar por municípios com SERRA em qualquer posição'
+        ;
+
+$html4 = 'Exemplo: copie a palavra entre aspas com o espeço no final "SERRA TALHADA " e busque no grupo 2 e 4'
+        .'<br>No grupo 2 irá buscar o município SERRA TALHADA'
+        .'<br>No grupo 4 irá NÃO buscar o município'
         ;
 
  $frm = new TForm('Exemplo Campo Texto com Autocompletar', 700);
  $frm->addHtmlField('msg', $html);
  
-$frm->addGroupField('gpx1', 'Exemplo AutoComple, busca apenas iniciando com');
+$frm->addGroupField('gpx1', 'Grupo 1 - Exemplo AutoComple, busca apenas iniciando com');
 $frm->addTextField('nom_municipio', 'Cidade:', 60)->setExampleText('Digite os 3 primeiros caracteres.')->addEvent('onblur', 'validarMunicipio(this)');
     $frm->addTextField('cod_uf', 'Cód Uf:', false);
 $frm->closeGroup();
 
-$frm->addGroupField('gpx2', 'Exemplo AutoComple, busca qualquer posição');
+$frm->addGroupField('gpx2', 'Grupo 2 - Exemplo AutoComple, busca qualquer posição');
     $frm->addHtmlField('msg2', $html2);
     $frm->addTextField('nom_municipio2', 'Cidade 2:', 60)->setExampleText('Digite os 3 primeiros caracteres.')->addEvent('onblur', 'validarMunicipio(this)');
     $frm->addTextField('cod_uf2', 'Cód Uf 2:', false);
@@ -78,6 +83,13 @@ $frm->addHtmlField('msg3', 'Quando o usuário carrega a tela tem um valor inicia
     $frm->addTextField('cod_uf3', 'Cód Uf:', false);
 $frm->closeGroup();
 
+/**
+$frm->addGroupField('gpx4', 'Grupo 4 - Exemplo AutoComple, busca qualquer posição SEM o trim');
+    $frm->addHtmlField('msg4', $html4);
+    $frm->addTextField('nom_municipio4', 'Cidade 2:', 60)->setExampleText('Digite os 3 primeiros caracteres.')->addEvent('onblur', 'validarMunicipio(this)');
+    $frm->addTextField('cod_uf4', 'Cód Uf 4:', false);
+$frm->closeGroup();
+**/
 /**************
  *  o setAutoComplete deve sempre ficar depois da definição dos campos
  */
@@ -122,6 +134,27 @@ $frm->setAutoComplete('nom_municipio3'           // 01: nome do campo na tela ir
                      , null                      // 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
                     );  
 
+$frm->setAutoComplete('nom_municipio4'           // 01: nome do campo na tela irá funcionar com autocomplete
+                    , 'tb_municipio'            // 02: tabela alvo da pesquisa
+                    , 'nom_municipio'           // 03: campo de pesquisa
+                    , 'cod_municipio|cod_municipio4,cod_uf|cod_uf4'  // 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+                    , true                      // 05: Desativa os campos que serão atuliazados depois da pesquisa
+                    , null                      // 06: campo do formulário que será adicionado como filtro
+                    , 'callback_autocomplete_municipio()' // 07: função javascript de callback
+                    , 3                         // 08: Default 3, numero de caracteres minimos para disparar a pesquisa
+                    , 1000                      // 09: Default 1000, tempo após a digitação para disparar a consulta
+                    , 50                        // 10: Máximo de registros que deverá ser retornado
+                    , null
+                    , null
+                    , null                      // 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
+                    , null                      // 14: Mesagem caso não encontre nenhum registro
+                    , null                      // 15:
+                    , null
+                    , null
+                    , true                      // 18: busca o texto em qualquer posição igual Like %texto%
+                    , null                      // 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+                    , false                     // 20: Default é usar o trim para limpar o texto.
+                   );  
 
 
 $frm->addButton('Refresh', null, 'Refresh', null, null, true, false);
