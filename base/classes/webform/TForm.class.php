@@ -1989,6 +1989,7 @@ class TForm Extends TBox
      * @param boolean $boolClearUpdateFields
      * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
      * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+     * @param boolean $trimText                     - 20: limpa o texto com trim. DEFAULT = true
      */
     public function setAutoComplete( $strFieldName
     		                       , $strTablePackageFuncion
@@ -2008,7 +2009,8 @@ class TForm Extends TBox
     		                       , $boolClearOnNotFound=null
     		                       , $boolClearUpdateFields=null
                                    , $boolSearchAnyPosition=null 
-                                   , $strConfigFileName=null 
+                                   , $strConfigFileName=null
+                                   , $trimText = true
                                    )
     {
         
@@ -2032,6 +2034,7 @@ class TForm Extends TBox
         $boolClearUpdateFields = $boolClearUpdateFields === null ? true : ( bool ) $boolClearUpdateFields;
         $strMessageNotFound = $strMessageNotFound === null ? 'Nenhum registro encontrado' : ( string ) $strMessageNotFound;
         $boolSearchAnyPosition = ( $boolSearchAnyPosition === true ? true : false );
+        $trimText = ( $trimText === true ? true : false );
         if(is_null( $boolKeepFieldValuesOnPost))
         {
             //if( $_REQUEST['gridOffline'] == 1 )
@@ -2048,6 +2051,7 @@ class TForm Extends TBox
         $aTemp[ 'cacheTime' ] = $intCacheTime;
         $aTemp[ 'searchAnyPosition' ] = $boolSearchAnyPosition;
         $aTemp[ 'configFileName' ] = $strConfigFileName;
+        $aTemp[ 'trimText' ]       = $trimText;
         //$aTemp['messageNotFound']	= $strMessageNotFound;
         if( ( string ) $strCallBackFunctionJs ){
             if( !strpos( $strCallBackFunctionJs, '(' ) ){
