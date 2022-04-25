@@ -123,7 +123,6 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 			$tpdo->connect(null,true,null,$configArray);
 		}
 		$res = $tpdo->executeSql($sql);
-		var_dump($res);
 	}
 	return $res;
 }
@@ -154,9 +153,6 @@ function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields,
 		$text  = trim($text);
 	}	
 	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$text."%')";
-	var_dump($trimText);
-	var_dump($text);
-	var_dump($where);
 	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v) {
 			$where .=" and {$k} = '{$v}'";
