@@ -42,7 +42,7 @@
 /*
 Classe para entrada de número de processo
 */
-class TProcesso extends TEdit
+class TNumeroDistribuicaoTJDFT extends TEdit
 {
 	/**
 	* Classe para entrada de número de processo
