@@ -915,45 +915,27 @@ function fwFormatarNumeroDistribuicaoTJDFT(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwValidarNumeroDistribuicaoTJDFT(e, clear) {
-	var dv = false;
-	clear = clear || true;
-	s = fwFiltraCampo(e.value);
-	tam = s.length
-	if (tam == 15 || tam == 17) {
-		if (tam == 15 && s.substring(11, 13) < 60) {
-			s = s.substring(0, tam - 4) + "20" + s.substring(tam - 4);
-			tam = 17;
-		}
-		num = s.substring(0, tam - 2);
-		for (i = 0; i < 2; i++) {
-			soma = 0;
-			mult = num.length + 1;
-			for (k = 0; k < num.length; k++)
-				soma += num.substring(k, k + 1) * (mult - k);
-			mod11 = 11 - (soma % 11);
-			if (mod11 < 10) dv_proc = "0" + mod11;
-			else dv_proc = mod11 + "";
-			dv_proc = dv_proc.substring(1, 2);
-			num += dv_proc;
-		}
-		if (num == s)
-			dv = true;
-	}
-	if (!dv && tam > 0) {
-		if (!fwValidarProcessoSISPROT(e)) {
-			mensagem = "           Erro de digitação:\n";
-			mensagem += "          ===============\n\n";
-			mensagem += " DV para o processo " + e.value + " não confere!!\n";
+function fwValidarNumeroDistribuicaoTJDFT(numeroSujo) {
+	var num = numeroSujo.replace(/[-\.]/g, '');
 
-			alert(mensagem);
-			if (clear) {
-				e.value = '';
-			}
-			e.focus();
-		}
+	tam = num.length;
+
+	if (tam == 20) {
+		var numeroSequencia = num.substr(0, 7);
+		var numeroDV = num.substr(7, 2);
+		var numeroAno = num.substr(9, 4);
+		var numeroRamo = num.substr(13, 1);
+		var numeroTribunal = num.substr(14, 2);
+		var numeroOrigem = num.substr(16, 4);
+
+		var R1 = parseInt(numeroSequencia) % 97;
+		var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
+		var R3 = parseInt(R2 + "" + numeroOrigem + "00") % 97
+		var digito = 98 - R3;
 	}
-	return dv;
+
+
+	return digito == numeroDV;
 }
 //-----------------------------------------------------------------------------------------
 function fwValidarProcesso(e,clear)
