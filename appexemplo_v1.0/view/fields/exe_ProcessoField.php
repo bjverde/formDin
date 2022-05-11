@@ -45,25 +45,11 @@ $frm = new TForm('Campos de processos');
 $frm->addProcessoField('processo','Campo de processo federal: ',false,true)->setExampleText('Ex: 02000.000343/2020-51');
 $frm->addnumeroDistribuicaoTJDFTField('numeroDistTJDFT','Campo do número único do TJDFT: ',false,true)->setExampleText('Ex: 0700444-79.2021.8.07.0003');
 
-$frm->addNumberField('num_peso', 'Peso Unitário:', 5, true, 2, true)->setExampleText('Kg');
-$frm->addNumberField('num_preco', 'Preço Unitário:', 9, true, 2, false)->setExampleText('R$');
-$frm->set('num_peso', '2.9');
-$frm->setAction('Gravar,Testar');
-
 $frm->set('processo', '02000.000343/2020-51');
 
 #####.######/##-##
 // numero existe $frm->set('processoMPDFT', '08191.085650/2021-61');
 // numero unico 0700444-79.2021.8.07.0003
 
-$acao = isset($acao) ? $acao : null;
-if ($acao=='Gravar') {
-    if ($frm->validate()) {
-        //d($_POST);
-        $bvars = $frm->createBvars('num_pessoa,val_salario,val_taxa');
-        //d($bvars);
-        $frm->setPopUpMessage('Validação OK');
-    }
-}
 // exibir o formulário
 $frm->show();
