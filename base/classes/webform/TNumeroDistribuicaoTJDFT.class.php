@@ -55,7 +55,7 @@ class TProcesso extends TEdit
 	{
 		parent::__construct($strName,$strValue,21,$boolRequired);
 		$this->setFieldType('processo');
-		$this->addEvent('onkeyup','fwFormatarProcesso(this)');
+		$this->addEvent('onkeyup','fwFormatarNumeroDistribuicaoTJDFT(this)');
 		$this->addEvent('onblur','fwValidarProcesso(this)');
 	}
 	public function getFormated()
