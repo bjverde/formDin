@@ -902,8 +902,14 @@ function fwFormatarNumeroDistribuicaoTJDFT(e) {
 	r = s.substring(0, 5) + "." + s.substring(5, 11) + "/";
 	r += s.substring(11, 11 + ano_dig) + "-" + s.substring(11 + ano_dig, 13 + ano_dig);
 */
+	
+//#######-##.####.#.##.#### - 20 dígitos
+//0123456-78.9012.3.45.6789
+//7-2.4.1.2.4
+//
+/*	
 	//window.status = r + 'tam:'+tam;
-	if (tam < 6)
+	if (tam < 7)
 		s = r.substring(0, tam);
 	else if (tam < 12)
 		s = r.substring(0, tam + 1);
@@ -911,13 +917,15 @@ function fwFormatarNumeroDistribuicaoTJDFT(e) {
 		s = r.substring(0, tam + 2);
 	else
 		s = r.substring(0, tam + 3);
+*/		
 	e.value = s;
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwValidarNumeroDistribuicaoTJDFT(numeroSujo) {
-	var num = numeroSujo.replace(/[-\.]/g, '');
+function fwValidarNumeroDistribuicaoTJDFT(e) {
+	//var num = numeroSujo.replace(/[-\.]/g, '');
 
+	num = fwFiltraCampo(e.value);
 	tam = num.length;
 
 	if (tam == 20) {
