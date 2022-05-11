@@ -907,17 +907,10 @@ function fwFormatarNumeroDistribuicaoTJDFT(e) {
 //0123456-78.9012.3.45.6789
 //7-2.4.1.2.4
 //
-/*	
-	//window.status = r + 'tam:'+tam;
-	if (tam < 7)
-		s = r.substring(0, tam);
-	else if (tam < 12)
-		s = r.substring(0, tam + 1);
-	else if (tam < 12 + ano_dig)
-		s = r.substring(0, tam + 2);
-	else
-		s = r.substring(0, tam + 3);
-*/		
+	$value = substr($value, 0, 7).'-'.substr($value, 7, 2).'.'.substr($value, 9, 4).'.'.substr($value, 13, 1).'.'.substr($value, 14, 2).'.'.substr($value, 16, 4);
+	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "/";
+	if (s.tam < 7)
+		s=
 	e.value = s;
 	return s;
 }
