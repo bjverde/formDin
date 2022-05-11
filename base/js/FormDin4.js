@@ -890,6 +890,32 @@ function fwFormatarProcesso(e)
 	return s;
 }
 //-----------------------------------------------------------------------------------------
+function fwFormatarNumeroDistribuicaoTJDFT(e) {
+	var s = "";
+	s = fwFiltraCampo(e.value);
+/*	tam = s.length;
+	if (tam > 15) // && s.substring(0,5) == "02000" && s.substring(11,13) == "20" )
+		ano_dig = 4;
+	else
+		ano_dig = 2;
+
+	r = s.substring(0, 5) + "." + s.substring(5, 11) + "/";
+	r += s.substring(11, 11 + ano_dig) + "-" + s.substring(11 + ano_dig, 13 + ano_dig);
+*/
+	//window.status = r + 'tam:'+tam;
+	if (tam < 6)
+		s = r.substring(0, tam);
+	else if (tam < 12)
+		s = r.substring(0, tam + 1);
+	else if (tam < 12 + ano_dig)
+		s = r.substring(0, tam + 2);
+	else
+		s = r.substring(0, tam + 3);
+	e.value = s;
+	return s;
+}
+
+//-----------------------------------------------------------------------------------------
 function fwValidarProcesso(e,clear)
 {
 	var dv = false;
