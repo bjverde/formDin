@@ -53,7 +53,7 @@ class TNumeroDistribuicaoTJDFT extends TEdit
 	*/
 	public function __construct($strName,$strValue=null,$boolRequired=null)
 	{
-		parent::__construct($strName,$strValue,21,$boolRequired);
+		parent::__construct($strName,$strValue,26,$boolRequired);
 		$this->setFieldType('numeroDistribuicaoTJDFT');
 		$this->addEvent('onkeyup','fwFormatarNumeroDistribuicaoTJDFT(this)');
 		$this->addEvent('onblur','fwValidarNumeroDistribuicaoTJDFT(this)');
