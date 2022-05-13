@@ -893,24 +893,22 @@ function fwFormatarProcesso(e)
 function fwFormatarNumeroDistribuicaoTJDFT(e) {
 	var s = "";
 	s = fwFiltraCampo(e.value);
-/*	tam = s.length;
-	if (tam > 15) // && s.substring(0,5) == "02000" && s.substring(11,13) == "20" )
-		ano_dig = 4;
-	else
-		ano_dig = 2;
+	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "." + s.substring(9, 13) + "." + s.substring(13, 14) + ".";
+	r+= s.substring(14, 16) + "." + s.substring(16, 20);
+	tam = s.length;
 
-	r = s.substring(0, 5) + "." + s.substring(5, 11) + "/";
-	r += s.substring(11, 11 + ano_dig) + "-" + s.substring(11 + ano_dig, 13 + ano_dig);
-*/
-	
-//#######-##.####.#.##.#### - 20 dígitos
-//0123456-78.9012.3.45.6789
-//7-2.4.1.2.4
-//
-	$value = substr($value, 0, 7).'-'.substr($value, 7, 2).'.'.substr($value, 9, 4).'.'.substr($value, 13, 1).'.'.substr($value, 14, 2).'.'.substr($value, 16, 4);
-	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "/";
-	if (s.tam < 7)
-		s=
+	if (tam < 7)
+		s = r.substring(0, tam); 
+	else if (tam < 9)
+		s = r.substring(0, tam + 1);
+	else if (tam < 13)
+		s = r.substring(0, tam + 2);
+	else if (tam < 14)
+		s = r.substring(0, tam + 3);
+	else if (tam < 16)
+		s = r.substring(0, tam + 4);
+	else
+		s = r.substring(0, tam + 5);
 	e.value = s;
 	return s;
 }
