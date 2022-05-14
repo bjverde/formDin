@@ -47,6 +47,10 @@ $frm->addnumeroDistribuicaoTJDFTField('numeroDistTJDFT','Campo do número único
 
 $frm->set('processo', '02000.000343/2020-51');
 
+$frm->set('numeroDistTJDFT', '0700444-79.2021.8.07.000');
+
+
+
 #####.######/##-##
 // numero existe $frm->set('processoMPDFT', '08191.085650/2021-61');
 // numero unico 0700444-79.2021.8.07.0003
