@@ -43,7 +43,7 @@ $frm = new TForm('Campos de processos');
 
 
 $frm->addProcessoField('processo','Campo de processo federal: ',false,true)->setExampleText('Ex: 02000.000343/2020-51');
-$frm->addnumeroDistribuicaoTJDFTField('numeroDistTJDFT','Campo do número único do TJDFT: ',false,true)->setExampleText('Ex: 0700444-79.2021.8.07.0003');
+$frm->addNumeroTJDFTField('numeroDistTJDFT','Campo do número único do TJDFT: ',false,true)->setExampleText('Ex: 0700444-79.2021.8.07.0003');
 
 $frm->set('processo', '02000.000343/2020-51');
 
