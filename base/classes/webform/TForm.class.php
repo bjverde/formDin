@@ -7131,6 +7131,24 @@ class TForm Extends TBox
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
        return $field;
     }
+
+    /**
+    * Campo para entrada de numero de processo do serviço público
+    *
+    * @param string $strName
+    * @param string $strLabel
+    * @param string $boolRequired
+    * @param string $boolNewLine
+    * @param string $strValue
+    * @param string $boolLabelAbove
+    * @return TProcesso
+    */
+    public function addNumeroDistribuicaoTJDFTField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    {
+       $field = new TNumeroDistribuicaoTJDFT( $strName, $strValue, $boolRequired );
+       $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
+       return $field;
+    }    
     
     /***
     * Campos para anexar arquivo. Pode ser um carregamento sincrono ou assincrono via ajax.
