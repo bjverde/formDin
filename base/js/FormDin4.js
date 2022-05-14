@@ -943,17 +943,17 @@ function fwValidarNumeroDistribuicaoTJDFT(e,clear) {
 	}
 
 	if (!dv && tam > 0) {
-		if (!fwFormatarNumeroDistribuicaoTJDFT(e)) {
-			mensagem = "           Erro de digitação:\n";
-			mensagem += "          ===============\n\n";
-			mensagem += " DV para o número " + e.value + " não confere!!\n";
 
-			alert(mensagem);
-			if (clear) {
-				e.value = '';
-			}
-			e.focus();
+		val = fwFormatarNumeroDistribuicaoTJDFT(e);
+		mensagem = "           Erro de digitação:\n";
+		mensagem += "          ===============\n\n";
+		mensagem += " DV para o número " + val + " não confere!!\n";
+
+		alert(mensagem);
+		if (clear) {
+			e.value = '';
 		}
+		e.focus();
 	}
 	return dv;
 }
