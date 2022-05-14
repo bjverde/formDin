@@ -42,7 +42,7 @@
 /*
 Classe para entrada de número de processo
 */
-class TNumeroDistribuicaoTJDFT extends TEdit
+class TNumeroTJDFT extends TEdit
 {
 	/**
 	* Classe para entrada de número de processo
@@ -54,9 +54,9 @@ class TNumeroDistribuicaoTJDFT extends TEdit
 	public function __construct($strName,$strValue=null,$boolRequired=null)
 	{
 		parent::__construct($strName,$strValue,26,$boolRequired);
-		$this->setFieldType('numeroDistribuicaoTJDFT');
-		$this->addEvent('onkeyup','fwFormatarNumeroDistribuicaoTJDFT(this)');
-		$this->addEvent('onblur','fwValidarNumeroDistribuicaoTJDFT(this)');
+		$this->setFieldType('numeroTJDFT');
+		$this->addEvent('onkeyup','fwFormatarTJDFT(this)');
+		$this->addEvent('onblur','fwValidarTJDFT(this)');
 	}
 	public function getFormated()
 	{
@@ -79,6 +79,9 @@ class TNumeroDistribuicaoTJDFT extends TEdit
 			else
 			{
 				//formatação para o número de 14 digitos
+				//1999.01.1.001573-8
+				//4.2.1.6-1
+				$value = substr($value,0,4).'3'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,14,1);
 				null;
 			}
 			return $value;
