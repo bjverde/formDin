@@ -7145,7 +7145,7 @@ class TForm Extends TBox
     */
     public function addNumeroDistribuicaoTJDFTField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
     {
-       $field = new TNumeroDistribuicaoTJDFT( $strName, $strValue, $boolRequired );
+       $field = new TNumeroTJDFT( $strName, $strValue, $boolRequired );
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
        return $field;
     }    
