@@ -247,7 +247,7 @@ function fwChkMinMax(vMin, vMax, pCampo, casasDecimais,allowZero, allowNull)
 }
 //--------------------------------------------------------------------------------
 function fwFiltraCampo(codigo,campo,evento) {
-	var c = codigo.replace(/[^0-9]/g,'')
+	var c = codigo.replace(/[^0-9]/g, '');
 	if( campo )
 	{
 		if( evento )
@@ -261,7 +261,7 @@ function fwFiltraCampo(codigo,campo,evento) {
 				return;
 			}
 		}
-		campo.value=c
+		campo.value = c;
 	}
 	return c;
 }
@@ -913,28 +913,49 @@ function fwFormatarNumeroDistribuicaoTJDFT(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwValidarNumeroDistribuicaoTJDFT(e) {
-	//var num = numeroSujo.replace(/[-\.]/g, '');
-
+function fwValidarNumeroDistribuicaoTJDFT(e,clear) {
+	
+	var dv = false;
 	num = fwFiltraCampo(e.value);
 	tam = num.length;
 
-	if (tam == 20) {
-		var numeroSequencia = num.substr(0, 7);
-		var numeroDV = num.substr(7, 2);
-		var numeroAno = num.substr(9, 4);
-		var numeroRamo = num.substr(13, 1);
-		var numeroTribunal = num.substr(14, 2);
-		var numeroOrigem = num.substr(16, 4);
+	if (tam == 14 || tam == 20) {
+		if (tam == 20) {
+			var numeroSequencia = num.substr(0, 7);
+			var numeroDV = num.substr(7, 2);
+			var numeroAno = num.substr(9, 4);
+			var numeroRamo = num.substr(13, 1);
+			var numeroTribunal = num.substr(14, 2);
+			var numeroOrigem = num.substr(16, 4);
 
-		var R1 = parseInt(numeroSequencia) % 97;
-		var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
-		var R3 = parseInt(R2 + "" + numeroOrigem + "00") % 97
-		var digito = 98 - R3;
+			var R1 = parseInt(numeroSequencia) % 97;
+			var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
+			var R3 = parseInt(R2 + "" + numeroOrigem + "00") % 97
+			var digito = 98 - R3;
+			
+			if (digito == numeroDV)
+				dv = true;
+		} else {
+			// calculo do 14 digitos, quando achar
+			dv = true;
+		}
+
 	}
 
+	if (!dv && tam > 0) {
+		if (!fwFormatarNumeroDistribuicaoTJDFT(e)) {
+			mensagem = "           Erro de digitação:\n";
+			mensagem += "          ===============\n\n";
+			mensagem += " DV para o número " + e.value + " não confere!!\n";
 
-	return digito == numeroDV;
+			alert(mensagem);
+			if (clear) {
+				e.value = '';
+			}
+			e.focus();
+		}
+	}
+	return dv;
 }
 //-----------------------------------------------------------------------------------------
 function fwValidarProcesso(e,clear)
