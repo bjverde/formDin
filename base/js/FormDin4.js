@@ -953,7 +953,6 @@ function fwFormatarNumeroDistribuicao(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-
 function fwValidarNumeroTJDFT(e, clear) {
 	tam = num.length;
 	
@@ -963,8 +962,36 @@ function fwValidarNumeroTJDFT(e, clear) {
 		fwNumeroDistribuicao(e);
 	}
 }
+//-----------------------------------------------------------------------------------------
+function fwNumeroDistribuicao(e, clear) {
+	
+	var dv = false;
+	num = fwFiltraCampo(e.value);
+	tam = num.length;
 
+	if (tam == 14) {
 
+		// aguardando o cálculo de validação do número de distribuição do TJDFT
+		
+		dv = true;
+	}
+
+	if (!dv && tam > 0) {
+
+		val = fwFormatarNumeroDistribuicao(e);
+		mensagem = "           Erro de digitação:\n";
+		mensagem += "          ===============\n\n";
+		mensagem += " DV para o número " + val + " não confere!!\n";
+
+		alert(mensagem);
+		if (clear) {
+			e.value = '';
+		}
+		e.focus();
+	}
+	return dv;
+}
+//-----------------------------------------------------------------------------------------
 function fwValidarNumeroUnico(e,clear) {
 	
 	var dv = false;
