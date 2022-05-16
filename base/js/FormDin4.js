@@ -958,7 +958,7 @@ function fwValidarNumeroTJDFT(e, clear) {
 	
 	if (tam == 20) {
 		fwValidarNumeroUnico(e);
-	} else if (tam == 20) {
+	} else if (tam == 14) {
 		fwNumeroDistribuicao(e);
 	}
 }
@@ -972,7 +972,7 @@ function fwNumeroDistribuicao(e, clear) {
 	if (tam == 14) {
 
 		// aguardando o cálculo de validação do número de distribuição do TJDFT
-		
+
 		dv = true;
 	}
 
