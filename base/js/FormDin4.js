@@ -896,7 +896,7 @@ function fwFormatarNumeroTJDFT(e) {
 	tam = valor.length;
 	console.log('valor: ' + tam);
 	console.log('tamanho: ' + tam);
-	if (tam > 14) {
+	if (tam == 14) {
 		valor = fwFormatarNumeroUnico(valor);
 	} else {
 		valor = fwFormatarNumeroDistribuicao(valor);
@@ -930,22 +930,25 @@ function fwFormatarNumeroUnico(e) {
 function fwFormatarNumeroDistribuicao(e) {
 	var s = "";
 	s = fwFiltraCampo(e.value);
-	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "." + s.substring(9, 13) + "." + s.substring(13, 14) + ".";
-	r += s.substring(14, 16) + "." + s.substring(16, 20);
+	r = s.substring(0, 4) + "." + s.substring(4, 6) + "." + s.substring(6, 7) + "." + s.substring(7, 13) + "-";
+	r += s.substring(13, 14);
 	tam = s.length;
 
-	if (tam < 7)
+
+	//1999.01.1.001573 - 8
+	//4.2.1.6-1
+	
+	if (tam < 4)
 		s = r.substring(0, tam);
-	else if (tam < 9)
+	else if (tam < 6)
 		s = r.substring(0, tam + 1);
-	else if (tam < 13)
+	else if (tam < 7)
 		s = r.substring(0, tam + 2);
-	else if (tam < 14)
+	else if (tam < 13)
 		s = r.substring(0, tam + 3);
-	else if (tam < 16)
-		s = r.substring(0, tam + 4);
 	else
-		s = r.substring(0, tam + 5);
+		s = r.substring(0, tam + 4);
+	
 	e.value = s;
 	return s;
 }
