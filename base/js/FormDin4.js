@@ -895,13 +895,10 @@ function fwFormatarNumeroTJDFT(e) {
 	var valor = fwFiltraCampo(e.value);
 	var retorno = '';
 	tam = valor.length;
-	console.log('valor: ' + valor);
-	console.log('tamanho: ' + tam);
+
 	if (tam == 14) {
 		retorno = fwFormatarNumeroDistribuicao(valor);
 	} else {
-		console.log(e.value);
-		console.log(valor);
 		retorno = fwFormatarNumeroUnico(valor);
 	}
 	e.value = retorno;
@@ -910,13 +907,7 @@ function fwFormatarNumeroTJDFT(e) {
 //-----------------------------------------------------------------------------------------
 function fwFormatarNumeroUnico(e) {
 	var s = "";
-
-	console.log(e);
-
 	s = fwFiltraCampo(e);
-	
-	console.log(s);
-
 	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "." + s.substring(9, 13) + "." + s.substring(13, 14) + ".";
 	r+= s.substring(14, 16) + "." + s.substring(16, 20);
 	tam = s.length;
