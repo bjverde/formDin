@@ -944,10 +944,6 @@ function fwFormatarNumeroDistribuicao(e) {
 	r += s.substring(13, 14);
 	tam = s.length;
 
-
-	//1999.01.1.001573 - 8
-	//4.2.1.6-1
-	
 	if (tam < 4)
 		s = r.substring(0, tam);
 	else if (tam < 6)
