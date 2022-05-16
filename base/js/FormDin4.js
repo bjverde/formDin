@@ -893,20 +893,29 @@ function fwFormatarProcesso(e)
 function fwFormatarNumeroTJDFT(e) {
 
 	var valor = fwFiltraCampo(e.value);
+	var retorno = '';
 	tam = valor.length;
-	console.log('valor: ' + tam);
+	console.log('valor: ' + valor);
 	console.log('tamanho: ' + tam);
 	if (tam == 14) {
-		valor = fwFormatarNumeroDistribuicao(valor);
+		retorno = fwFormatarNumeroDistribuicao(valor);
 	} else {
-		valor = fwFormatarNumeroUnico(valor);
+		console.log(e.value);
+		console.log(valor);
+		retorno = fwFormatarNumeroUnico(valor);
 	}
-	return valor;
+	return retorno;
 }
 //-----------------------------------------------------------------------------------------
 function fwFormatarNumeroUnico(e) {
 	var s = "";
+
+	console.log(e.value);
+
 	s = fwFiltraCampo(e.value);
+	
+	console.log(s);
+
 	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "." + s.substring(9, 13) + "." + s.substring(13, 14) + ".";
 	r+= s.substring(14, 16) + "." + s.substring(16, 20);
 	tam = s.length;
@@ -954,13 +963,16 @@ function fwFormatarNumeroDistribuicao(e) {
 }
 //-----------------------------------------------------------------------------------------
 function fwValidarNumeroTJDFT(e, clear) {
-	tam = num.length;
+	var valor = fwFiltraCampo(e.value);
+	var retorno = '';
+	tam = valor.length;
 	
 	if (tam == 20) {
-		fwValidarNumeroUnico(e);
+		retorno = fwValidarNumeroUnico(e);
 	} else if (tam == 14) {
-		fwNumeroDistribuicao(e);
+		retorno= fwNumeroDistribuicao(e);
 	}
+	return retorno;
 }
 //-----------------------------------------------------------------------------------------
 function fwNumeroDistribuicao(e, clear) {
