@@ -898,7 +898,6 @@ function fwFormatarNumeroTJDFT(e) {
 	console.log('tamanho: ' + tam);
 	if (tam == 14) {
 		valor = fwFormatarNumeroDistribuicao(valor);
-		
 	} else {
 		valor = fwFormatarNumeroUnico(valor);
 	}
@@ -954,6 +953,18 @@ function fwFormatarNumeroDistribuicao(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
+
+function fwValidarNumeroTJDFT(e, clear) {
+	tam = num.length;
+	
+	if (tam == 20) {
+		fwValidarNumeroUnico(e);
+	} else if (tam == 20) {
+		fwNumeroDistribuicao(e);
+	}
+}
+
+
 function fwValidarNumeroUnico(e,clear) {
 	
 	var dv = false;
