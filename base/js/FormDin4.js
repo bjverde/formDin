@@ -964,10 +964,9 @@ function fwFormatarNumeroDistribuicao(e) {
 //-----------------------------------------------------------------------------------------
 function fwValidarNumeroTJDFT(e, clear) {
 	var valor = fwFiltraCampo(e.value);
-	var retorno = '';
 	tam = valor.length;
 	clear = clear || true;
-	
+
 	if (tam == 20) {
 		 fwValidarNumeroUnico(e,clear);
 	} else if (tam == 14) {
