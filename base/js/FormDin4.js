@@ -886,7 +886,7 @@ function fwFormatarProcesso(e)
 		s = r.substring(0,tam+2);
 	else
 		s = r.substring(0,tam+3);
-	e.value = s;
+
 	return s;
 }
 //-----------------------------------------------------------------------------------------
@@ -904,15 +904,16 @@ function fwFormatarNumeroTJDFT(e) {
 		console.log(valor);
 		retorno = fwFormatarNumeroUnico(valor);
 	}
-	return retorno;
+	e.value = retorno;
+	return e;
 }
 //-----------------------------------------------------------------------------------------
 function fwFormatarNumeroUnico(e) {
 	var s = "";
 
-	console.log(e.value);
+	console.log(e);
 
-	s = fwFiltraCampo(e.value);
+	s = fwFiltraCampo(e);
 	
 	console.log(s);
 
@@ -932,13 +933,13 @@ function fwFormatarNumeroUnico(e) {
 		s = r.substring(0, tam + 4);
 	else
 		s = r.substring(0, tam + 5);
-	e.value = s;
+
 	return s;
 }
 //-----------------------------------------------------------------------------------------
 function fwFormatarNumeroDistribuicao(e) {
 	var s = "";
-	s = fwFiltraCampo(e.value);
+	s = fwFiltraCampo(e);
 	r = s.substring(0, 4) + "." + s.substring(4, 6) + "." + s.substring(6, 7) + "." + s.substring(7, 13) + "-";
 	r += s.substring(13, 14);
 	tam = s.length;
@@ -958,7 +959,6 @@ function fwFormatarNumeroDistribuicao(e) {
 	else
 		s = r.substring(0, tam + 4);
 	
-	e.value = s;
 	return s;
 }
 //-----------------------------------------------------------------------------------------
@@ -966,16 +966,17 @@ function fwValidarNumeroTJDFT(e, clear) {
 	var valor = fwFiltraCampo(e.value);
 	var retorno = '';
 	tam = valor.length;
+	clear = clear || true;
 	
 	if (tam == 20) {
-		retorno = fwValidarNumeroUnico(e);
+		 fwValidarNumeroUnico(e,clear);
 	} else if (tam == 14) {
-		retorno= fwNumeroDistribuicao(e);
+		 fwValidarNumeroDistribuicao(e,clear);
 	}
-	return retorno;
+
 }
 //-----------------------------------------------------------------------------------------
-function fwNumeroDistribuicao(e, clear) {
+function fwValidarNumeroDistribuicao(e, clear) {
 	
 	var dv = false;
 	num = fwFiltraCampo(e.value);
@@ -990,7 +991,7 @@ function fwNumeroDistribuicao(e, clear) {
 
 	if (!dv && tam > 0) {
 
-		val = fwFormatarNumeroDistribuicao(e);
+		val = fwFormatarNumeroDistribuicao(e.value);
 		mensagem = "           Erro de digitação:\n";
 		mensagem += "          ===============\n\n";
 		mensagem += " DV para o número " + val + " não confere!!\n";
@@ -1029,7 +1030,7 @@ function fwValidarNumeroUnico(e,clear) {
 
 	if (!dv && tam > 0) {
 
-		val = fwFormatarNumeroUnico(e);
+		val = fwFormatarNumeroUnico(e.value);
 		mensagem = "           Erro de digitação:\n";
 		mensagem += "          ===============\n\n";
 		mensagem += " DV para o número " + val + " não confere!!\n";
