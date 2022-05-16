@@ -897,9 +897,10 @@ function fwFormatarNumeroTJDFT(e) {
 	console.log('valor: ' + tam);
 	console.log('tamanho: ' + tam);
 	if (tam == 14) {
-		valor = fwFormatarNumeroUnico(valor);
-	} else {
 		valor = fwFormatarNumeroDistribuicao(valor);
+		
+	} else {
+		valor = fwFormatarNumeroUnico(valor);
 	}
 	return valor;
 }
