@@ -890,6 +890,20 @@ function fwFormatarProcesso(e)
 	return s;
 }
 //-----------------------------------------------------------------------------------------
+function fwFormatarNumeroTJDFT(e) {
+
+	var valor = fwFiltraCampo(e.value);
+	tam = valor.length;
+	console.log('valor: ' + tam);
+	console.log('tamanho: ' + tam);
+	if (tam > 14) {
+		valor = fwFormatarNumeroUnico(valor);
+	} else {
+		valor = fwFormatarNumeroDistribuicao(valor);
+	}
+	return valor;
+}
+//-----------------------------------------------------------------------------------------
 function fwFormatarNumeroUnico(e) {
 	var s = "";
 	s = fwFiltraCampo(e.value);
