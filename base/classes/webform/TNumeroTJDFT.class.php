@@ -55,7 +55,7 @@ class TNumeroTJDFT extends TEdit
 	{
 		parent::__construct($strName,$strValue,26,$boolRequired);
 		$this->setFieldType('numeroTJDFT');
-		$this->addEvent('onkeyup','fwFormatarTJDFT(this)');
+		$this->addEvent('onkeyup','fwFormatarNumeroTJDFT(this)');
 		$this->addEvent('onblur','fwValidarTJDFT(this)');
 	}
 	public function getFormated()
