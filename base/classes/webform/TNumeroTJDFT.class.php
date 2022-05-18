@@ -51,13 +51,30 @@ class TNumeroTJDFT extends TEdit
 	* @param string $value
 	* @param boolean $required
 	*/
-	public function __construct($strName,$strValue=null,$boolRequired=null)
+	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true)
 	{
-		parent::__construct($strName,$strValue,26,$boolRequired);
+
+			$numeroDistribuicao = 'false';
+			$numeroUnico = 'false';
+
+		if ($boolAcceptNumeroDistribuicao == true){
+			$intMaxLength = 20;
+			$intSize = 14;
+			$numeroDistribuicao = 'true';
+		}
+
+		if ($boolAcceptNumeroUnico == true){
+			$intMaxLength = 26;
+			$intSize = 20;
+			$numeroUnico = 'true';
+		}
+		
+		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('numeroTJDFT');
-		$this->addEvent('onkeyup','fwFormatarNumeroTJDFT(this)');
+		$this->addEvent('onkeyup',"fwFormatarNumeroTJDFT(this,'".$numeroDistribuicao."','".$numeroUnico."')");
 		$this->addEvent('onblur','fwValidarNumeroTJDFT(this)');
 	}
+
 	public function getFormated()
 	{
 
