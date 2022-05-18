@@ -890,17 +890,41 @@ function fwFormatarProcesso(e)
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwFormatarNumeroTJDFT(e) {
-
+function fwFormatarNumeroTJDFT(e, boolAcceptNumeroDistribuicao, boolAcceptNumeroUnico)
+{
+	var numeroDistribuicao;
+	var numeroUnico;
 	var valor = fwFiltraCampo(e.value);
 	var retorno = '';
-	tam = valor.length;
+	var tam = valor.length;
 
-	if (tam == 14) {
+	if (boolAcceptNumeroDistribuicao.toLowerCase() == 'true') {
+		numeroDistribuicao = true;
+	}
+
+	if (boolAcceptNumeroUnico.toLowerCase() == 'true') {
+		numeroUnico = true;
+	}	
+
+	// aceita número distribuição e número único
+	if (numeroDistribuicao ==  numeroUnico ) {
+		if (tam == 14) {
+			retorno = fwFormatarNumeroDistribuicao(valor);
+		} else {
+			retorno = fwFormatarNumeroUnico(valor);
+		}
+	}
+
+	// aceita APENAS número distribuição
+	if (numeroDistribuicao == true && numeroUnico != true) { 
 		retorno = fwFormatarNumeroDistribuicao(valor);
-	} else {
+	}
+
+	// aceita APENAS número único
+	if (numeroDistribuicao != true && numeroUnico == true) {
 		retorno = fwFormatarNumeroUnico(valor);
 	}
+
 	e.value = retorno;
 	return e;
 }
