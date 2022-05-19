@@ -90,14 +90,12 @@ if ( isset( $_POST[ 'formDinAcao' ] ) && $_POST[ 'formDinAcao' ] == 'cadastrar_o
 			$_POST[ 'fw_back_to' ] = $_POST[ 'modulo' ];
 			$_POST[ 'modulo' ] = $moduleName;
 
-			if ( !file_exists( $moduloName ) )
-			{
+			if ( !FileHelper::exists( $moduloName ) ){
 				$moduleName = $currentPath . $moduleName;
 			}
 			$e = new TElement();
 			$base = $e->getBase();
-			if ( file_exists( $moduleName ) )
-			{
+			if ( FileHelper::exists( $moduleName ) ){
 				if( !class_exists('TPDOConnection') || !TPDOConnection::getInstance() )
 				{
 					include($base . 'includes/conexao.inc' );

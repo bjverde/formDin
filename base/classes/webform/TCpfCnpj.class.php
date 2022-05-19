@@ -78,12 +78,10 @@ class TCpfCnpj extends TMask
 		if($this->getValue())
 		{
 			$value = @preg_replace("/[^0-9]/","",$this->getValue() );
-			if( strlen($value) == 11 )
-			{
+			$tamanho = StringHelper::strlen($value);
+			if( $tamanho == 11 ){
 				return substr($value,0,3).".".substr($value,3,3).".".substr($value,6,3)."-".substr($value,9,2);
-			}
-			else if ( strlen($value) == 14 )
-			{
+			} else if ( $tamanho == 14 ) {
 				return substr($value,0,2).".".substr($value,2,3).".".substr($value,5,3)."/".substr($value,8,4)."-".substr($value,12,2);
 			}
 		}

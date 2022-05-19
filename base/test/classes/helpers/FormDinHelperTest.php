@@ -49,9 +49,8 @@ use PHPUnit\Framework\TestCase;
 
 class FormDinHelperTest extends TestCase
 {
-
     public function testVersion() {
-		$expected = '4.14.1';
+		$expected = '4.16.1' ;
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}

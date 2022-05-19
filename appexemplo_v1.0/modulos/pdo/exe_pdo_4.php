@@ -49,7 +49,7 @@ $frm->addHtmlField('html_imagem', $img, null, null, 250, $frm->getWidth()-80, tr
 //$acao = is_null($_POST['formDinAcao']) ? '' : $_POST['formDinAcao'];
 $acao = isset($acao) ? $acao : null;
 if ($acao == 'salvar_anexo') {
-    if (!file_exists($_REQUEST['anexo_temp_name'])) {
+    if (!FileHelper::exists($_REQUEST['anexo_temp_name'])) {
         die('Arquivo inexistente');
     }
 

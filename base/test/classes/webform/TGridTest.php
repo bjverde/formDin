@@ -116,6 +116,13 @@ class TGridTest extends TestCase
 	    $expected = 'gd';
 	    $result = $this->tGrid->getName();
 	    $this->assertEquals( $expected , $result);
+	}
+
+	public function testSetName() {
+	    $expected = 'gdAA';
+		$result = $this->tGrid->setName($expected);
+	    $result = $this->tGrid->getName();
+	    $this->assertEquals( $expected , $result);
 	}	
 	
 	public function testSortDataByColum_RequestNull() {

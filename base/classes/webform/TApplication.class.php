@@ -106,13 +106,19 @@ class TApplication extends TLayout {
 	 * @param string $charSet      6: @deprecated - não tem uso, será removido
 	 */
 	public function __construct($strTitle = null, $strSubtitle = null, $strSigla = null, $strUnit = null, $intWidth = null, $charSet = null) {
+		if( !empty($intWidth) ){
+			throw new InvalidArgumentException('ERRO !! remova o parametro $intWidth');
+		}
+		if( !empty($charSet) ){
+			throw new InvalidArgumentException('ERRO !! remova o parametro $charSet');
+		}		
 		ini_set ( 'xdebug.max_nesting_level', 150 );
 		date_default_timezone_set ( 'America/Sao_Paulo' );
 		
 		$this->includePathDao();
 		$this->includePathClasses();
 		
-		session_start ();
+		session_start();
 		
 		// desenv: error_reporting( E_ALL | E_STRICT );
 		// error_reporting( E_ALL | E_STRICT );
@@ -233,7 +239,7 @@ class TApplication extends TLayout {
 		if (preg_match ( '/</', strtolower ( $this->strSigla ) )) {
 			return $this->strSigla;
 		} else if (preg_match ( '/jp?|gif|png|bmp/', $this->strSigla )) {
-			if (file_exists ( $this->strSigla )) {
+			if( FileHelper::exists($this->strSigla) ){
 				return '<img src="' . $this->strSigla . '">';
 			}
 			
@@ -320,13 +326,13 @@ class TApplication extends TLayout {
 		$appImgLogo = $this->getImgLogoPath();
 		
 		if( !is_null($appImgLogo) ){
-			$appImgLogoExists = file_exists ( $appImgLogo );
+			$appImgLogoExists = FileHelper::exists( $appImgLogo );
 			if ($appImgLogoExists) {
 				$stringHtml = '<img src="'.$appImgLogo.'">';
 			}
 			
 			if ( !is_null($appRootDir) ) {
-				$appImgLogoExists = file_exists ( $appRootDir.$appImgLogo );				
+				$appImgLogoExists = FileHelper::exists( $appRootDir.$appImgLogo );
 				if ($appImgLogoExists) {
 					$stringHtml = '<img src="'.$appRootDir.$appImgLogo.'">';
 				}
@@ -435,8 +441,9 @@ class TApplication extends TLayout {
 		    $this->buildPageFooter(); // montar o rodapé da pagina
 			
 			if ( $this->getLoginFile() ) {
-				if (file_exists ( $this->getLoginFile () )) {
-					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' . addslashes ( $this->getLoginInfo () ) . '")' );
+				if ( FileHelper::exists( $this->getLoginFile() )  ) {
+					$loginInfo = is_null($this->getLoginInfo())?null:addslashes ( $this->getLoginInfo () );
+					$this->addJavascript ( 'app_login(false,"' . $this->getLoginFile () . '","' .$loginInfo. '")' );
 				} else {
 					$this->addJavascript ( 'alert("Tela de login:' . $this->getLoginFile () . ', defindo para a aplicação, não existe.")' );
 				}
@@ -562,7 +569,7 @@ class TApplication extends TLayout {
 				while ( $filetmp = readdir ( $h ) ) {
 					if ($filetmp != '.' && $filetmp != '..') {
 						$filepath = $tmpDir . $filetmp;
-						if (! is_dir ( $filepath ) && file_exists ( $filepath )) {
+						if (! is_dir ( $filepath ) && FileHelper::exists($filepath) ){
 							$lastModified = @filemtime ( $filepath );
 							if ($lastModified == NULL)
 								$lastModified = @filemtime ( utf8_decode ( $filepath ) );
@@ -589,7 +596,7 @@ class TApplication extends TLayout {
 		if ($this->getIncludeFiles ()) {
 			foreach ( $this->getIncludeFiles () as $k => $v ) {
 			    $k = $k; //POG para avitar mensagem de variavel não usada
-				if (file_exists ( $v )) {
+				if ( FileHelper::exists($v) ) {
 					require_once ($v);
 				}
 			}
@@ -926,7 +933,7 @@ class TApplication extends TLayout {
 	}	
 	// -------------------------------------------------------------------------------------------
 	public function setLoginFile($strNewValue = null, $onBeforeLoginFunction = null) {
-	    if ( !empty($strNewValue) && !file_exists($strNewValue) ) {
+	    if ( !empty($strNewValue) && !FileHelper::exists($strNewValue) ) {
 	        throw new LogicException('File not Exists: '.$strNewValue);
 	    }
 		$this->loginFile = $strNewValue;
@@ -937,7 +944,7 @@ class TApplication extends TLayout {
 	// -------------------------------------------------------------------------------------------
 	public function getLoginFile() {
 		// tentar encontrar o arquivo na pasta modulos
-		if (! file_exists ( $this->loginFile )) {
+		if ( !FileHelper::exists( $this->loginFile ) ) {
 			return $this->getRealPath ( $this->loginFile );
 		}
 		return $this->loginFile;
@@ -1089,7 +1096,7 @@ class TApplication extends TLayout {
 	public function setBackgroundImage($strNewValue = null, $strRepeat = null, $strPosition = null) {
 		$this->backgroundImage = $strNewValue;
 		if ($strNewValue && file_exists ( $strNewValue )) {
-			if (function_exists ( 'getimagesize' ) && file_exists ( $this->getFooterBgImage ( $strNewValue ) )) {
+			if ( function_exists ( 'getimagesize' ) && FileHelper::exists($this->getFooterBgImage($strNewValue)) ) {
 				list ( $width, $height ) = getimagesize ( $strNewValue );
 				if (($width + $height) > 800) {
 					$this->setBackgroundRepeat ( 'repeat-y' );
@@ -1204,7 +1211,6 @@ class TApplication extends TLayout {
 		if (isset ( $this->onGetLoginInfo ) && function_exists ( $this->removeIllegalChars ( $this->onGetLoginInfo ) )) {
 			return call_user_func ( $this->getOnGetLoginInfo () );
 		}
-		
 		return $this->loginInfo;
 	}
 	
@@ -1217,16 +1223,15 @@ class TApplication extends TLayout {
 		$this->headerContent = $strNewValue;
 	}
 	public function getHeaderContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->headerContent ) > 0) {
-			if (file_exists ( $this->headerContent )) {
+		if ( FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->headerContent ) > 0) {
+			if ( FileHelper::exists( $this->headerContent) ) {
 				// $code= file_get_contents($this->headerContent);
 				// $code= file_get_contents($this->headerContent);
 				return $this->parsePhpFile ( $this->headerContent );
 			} else {
 				return 'Arquivo <b>' . $this->headerContent . '<b> definido para o cabeçalho não encontrado.';
 			}
-		}
-		
+		}		
 		return $this->headerContent;
 	}
 	
@@ -1239,14 +1244,13 @@ class TApplication extends TLayout {
 		$this->bodyContent = $strNewValue;
 	}
 	public function getBodyContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->bodyContent ) > 0) {
-			if (file_exists ( $this->bodyContent )) {
+		if ( FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->bodyContent ) > 0) {
+			if ( FileHelper::exists( $this->bodyContent )) {
 				return file_get_contents ( $this->bodyContent );
 			} else {
 				return 'Arquivo <b>' . $this->bodyContent . '<b> definido para o corpo não encontrado.';
 			}
-		}
-		
+		}		
 		return $this->bodyContent;
 	}
 	
@@ -1259,14 +1263,13 @@ class TApplication extends TLayout {
 		$this->footerContent = $strNewValue;
 	}
 	public function getFooterContent() {
-		if (preg_match ( '/\.php?|\.inc|\.htm?/', $this->footerContent ) > 0) {
-			if (file_exists ( $this->footerContent )) {
+		if (FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->footerContent ) > 0) {
+			if ( FileHelper::exists($this->footerContent) ){
 				return file_get_contents ( $this->footerContent );
 			} else {
 				return 'Arquivo <b>' . $this->footerContent . '<b> definido para o rodapé não encontrado.';
 			}
 		}
-		
 		return $this->footerContent;
 	}
 	
@@ -1334,8 +1337,8 @@ class TApplication extends TLayout {
 	    return $app_header_title;
 	}
 	
-	private function getHeaderLogin() {
-	    
+	private function getHeaderLogin()
+	{	    
 	    $userInfo  = null;
 	    $btnLogOut = null;
 	    if ($this->getLoginDone ()) {

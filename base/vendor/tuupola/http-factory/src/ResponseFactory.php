@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 
-Copyright (c) 2017-2020 Mika Tuupola
+Copyright (c) 2017-2021 Mika Tuupola
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,16 +62,16 @@ final class ResponseFactory implements ResponseFactoryInterface
             return (new SlimPsr7ResponseFactory)->createResponse($code, $reason);
         }
 
+        if (class_exists(ZendDiactorosResponse::class)) {
+            return (new ZendDiactorosResponse)->withStatus($code, $reason);
+        }
+
         if (class_exists(SlimResponse::class)) {
             return (new SlimResponse)->withStatus($code, $reason);
         }
 
         if (class_exists(GuzzleResponse::class)) {
             return new GuzzleResponse($code, [], null, "1.1", $reason);
-        }
-
-        if (class_exists(ZendDiactorosResponse::class)) {
-            return (new ZendDiactorosResponse)->withStatus($code, $reason);
         }
 
         throw new \RuntimeException("No PSR-7 implementation available");

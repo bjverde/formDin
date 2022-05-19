@@ -251,6 +251,13 @@ class TPDOConnectionObj
         return $result;
     }
     //--------------------------------------------------------------------------------------
+    public function getError()
+    {
+        $tpdo = $this->getTPDOConnection();
+        $result = $tpdo::getError();
+        return $result;
+    }
+    //--------------------------------------------------------------------------------------
     public function getInstance()
     {
         $tpdo = $this->getTPDOConnection();

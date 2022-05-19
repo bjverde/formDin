@@ -247,7 +247,7 @@ function fwChkMinMax(vMin, vMax, pCampo, casasDecimais,allowZero, allowNull)
 }
 //--------------------------------------------------------------------------------
 function fwFiltraCampo(codigo,campo,evento) {
-	var c = codigo.replace(/[^0-9]/g,'')
+	var c = codigo.replace(/[^0-9]/g, '');
 	if( campo )
 	{
 		if( evento )
@@ -261,7 +261,7 @@ function fwFiltraCampo(codigo,campo,evento) {
 				return;
 			}
 		}
-		campo.value=c
+		campo.value = c;
 	}
 	return c;
 }
@@ -886,8 +886,172 @@ function fwFormatarProcesso(e)
 		s = r.substring(0,tam+2);
 	else
 		s = r.substring(0,tam+3);
-	e.value = s;
+
 	return s;
+}
+//-----------------------------------------------------------------------------------------
+function fwFormatarNumeroTJDFT(e, boolAcceptNumeroDistribuicao, boolAcceptNumeroUnico)
+{
+	var numeroDistribuicao;
+	var numeroUnico;
+	var valor = fwFiltraCampo(e.value);
+	var retorno = '';
+	var tam = valor.length;
+
+	if (boolAcceptNumeroDistribuicao.toLowerCase() == 'true') {
+		numeroDistribuicao = true;
+	}
+
+	if (boolAcceptNumeroUnico.toLowerCase() == 'true') {
+		numeroUnico = true;
+	}	
+
+	// aceita número distribuição e número único
+	if (numeroDistribuicao ==  numeroUnico ) {
+		if (tam == 14) {
+			retorno = fwFormatarNumeroDistribuicao(valor);
+		} else {
+			retorno = fwFormatarNumeroUnico(valor);
+		}
+	}
+
+	// aceita APENAS número distribuição
+	if (numeroDistribuicao == true && numeroUnico != true) { 
+		retorno = fwFormatarNumeroDistribuicao(valor);
+	}
+
+	// aceita APENAS número único
+	if (numeroDistribuicao != true && numeroUnico == true) {
+		retorno = fwFormatarNumeroUnico(valor);
+	}
+
+	e.value = retorno;
+	return e;
+}
+//-----------------------------------------------------------------------------------------
+function fwFormatarNumeroUnico(e) {
+	var s = "";
+	s = fwFiltraCampo(e);
+	r = s.substring(0, 7) + "-" + s.substring(7, 9) + "." + s.substring(9, 13) + "." + s.substring(13, 14) + ".";
+	r+= s.substring(14, 16) + "." + s.substring(16, 20);
+	tam = s.length;
+
+	if (tam < 7)
+		s = r.substring(0, tam); 
+	else if (tam < 9)
+		s = r.substring(0, tam + 1);
+	else if (tam < 13)
+		s = r.substring(0, tam + 2);
+	else if (tam < 14)
+		s = r.substring(0, tam + 3);
+	else if (tam < 16)
+		s = r.substring(0, tam + 4);
+	else
+		s = r.substring(0, tam + 5);
+
+	return s;
+}
+//-----------------------------------------------------------------------------------------
+function fwFormatarNumeroDistribuicao(e) {
+	var s = "";
+	s = fwFiltraCampo(e);
+	r = s.substring(0, 4) + "." + s.substring(4, 6) + "." + s.substring(6, 7) + "." + s.substring(7, 13) + "-";
+	r += s.substring(13, 14);
+	tam = s.length;
+
+	if (tam < 4)
+		s = r.substring(0, tam);
+	else if (tam < 6)
+		s = r.substring(0, tam + 1);
+	else if (tam < 7)
+		s = r.substring(0, tam + 2);
+	else if (tam < 13)
+		s = r.substring(0, tam + 3);
+	else
+		s = r.substring(0, tam + 4);
+	
+	return s;
+}
+//-----------------------------------------------------------------------------------------
+function fwValidarNumeroTJDFT(e, clear) {
+	var valor = fwFiltraCampo(e.value);
+	tam = valor.length;
+	clear = clear || true;
+
+	if (tam == 20) {
+		 fwValidarNumeroUnico(e,clear);
+	} else if (tam == 14) {
+		 fwValidarNumeroDistribuicao(e,clear);
+	}
+
+}
+//-----------------------------------------------------------------------------------------
+function fwValidarNumeroDistribuicao(e, clear) {
+	
+	var dv = false;
+	num = fwFiltraCampo(e.value);
+	tam = num.length;
+
+	if (tam == 14) {
+
+		// aguardando o cálculo de validação do número de distribuição do TJDFT
+
+		dv = true;
+	}
+
+	if (!dv && tam > 0) {
+
+		val = fwFormatarNumeroDistribuicao(e.value);
+		mensagem = "           Erro de digitação:\n";
+		mensagem += "          ===============\n\n";
+		mensagem += " DV para o número " + val + " não confere!!\n";
+
+		alert(mensagem);
+		if (clear) {
+			e.value = '';
+		}
+		e.focus();
+	}
+	return dv;
+}
+//-----------------------------------------------------------------------------------------
+function fwValidarNumeroUnico(e,clear) {
+	
+	var dv = false;
+	num = fwFiltraCampo(e.value);
+	tam = num.length;
+
+	if (tam == 20) {
+		var numeroSequencia = num.substr(0, 7);
+		var numeroDV = num.substr(7, 2);
+		var numeroAno = num.substr(9, 4);
+		var numeroRamo = num.substr(13, 1);
+		var numeroTribunal = num.substr(14, 2);
+		var numeroOrigem = num.substr(16, 4);
+
+		var R1 = parseInt(numeroSequencia) % 97;
+		var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
+		var R3 = parseInt(R2 + "" + numeroOrigem + "00") % 97
+		var digito = 98 - R3;
+		
+		if (digito == numeroDV)
+			dv = true;
+	}
+
+	if (!dv && tam > 0) {
+
+		val = fwFormatarNumeroUnico(e.value);
+		mensagem = "           Erro de digitação:\n";
+		mensagem += "          ===============\n\n";
+		mensagem += " DV para o número " + val + " não confere!!\n";
+
+		alert(mensagem);
+		if (clear) {
+			e.value = '';
+		}
+		e.focus();
+	}
+	return dv;
 }
 //-----------------------------------------------------------------------------------------
 function fwValidarProcesso(e,clear)
@@ -1943,49 +2107,30 @@ function fwPreencherSelectAjax(obj)
 	*/
 	var dadosJson = {
 		modulo:obj['pastaBase']+"callbacks/combinarSelects.php"
-		,
-		selectPai		:obj['selectPai']
-		,
-		campoSelect		:obj['selectFilho']
-		,
-		pacoteOracle		:obj['pacoteOracle']
-		,
-		colunaFiltro		:obj['colunaFiltro']
-		,
-		valorFiltro		:valorFiltro
-		,
-		selectFilhoStatus	:obj['selectFilhoStatus']
-		,
-		colunaCodigo		:obj['colunaCodigo']
-		,
-		colunaDescricao	:obj['colunaDescricao']
-		,
-		valorInicial		:obj['valorInicial']
-		,
-		descPrimeiraOpcao	:obj['descPrimeiraOpcao']
-		,
-		valorPrimeiraOpcao	:obj['valorPrimeiraOpcao']
-		,
-		descNenhumaOpcao	:obj['descNenhumaOpcao']
-		,
-		campoFormFiltro	:campoBvars
-		,
-		campoFormFiltroValor:campoFormFiltroValor
-		,
-		funcaoExecutar		:obj['funcaoExecutar']
-		,
-		ajax			:"1"
-		,
-		selectUniqueOption	:obj['selectUniqueOption']
-		,
-		acao			:acao
-		,
-		dataType		:'textJson'
-		,
-		fwPublicMode : obj['fwPublicMode']
+		,selectPai		   :obj['selectPai']
+		,campoSelect	   :obj['selectFilho']
+		,pacoteOracle	   :obj['pacoteOracle']
+		,colunaFiltro	   :obj['colunaFiltro']
+		,valorFiltro	   :valorFiltro
+		,selectFilhoStatus :obj['selectFilhoStatus']
+		,colunaCodigo	   :obj['colunaCodigo']
+		,colunaDescricao   :obj['colunaDescricao']
+		,valorInicial	   :obj['valorInicial']
+		,descPrimeiraOpcao :obj['descPrimeiraOpcao']
+		,valorPrimeiraOpcao:obj['valorPrimeiraOpcao']
+		,descNenhumaOpcao  :obj['descNenhumaOpcao']
+		,campoFormFiltro   :campoBvars
+		,campoFormFiltroValor:campoFormFiltroValor
+		,funcaoExecutar	   :obj['funcaoExecutar']
+		,ajax			   :"1"
+		,selectUniqueOption:obj['selectUniqueOption']
+		,acao			   :acao
+		,dataType		   :'textJson'
+		,fwPublicMode      :obj['fwPublicMode']
+		,configFileName    :obj['configFileName']
 	};
-	if( app_index_file != '' )
-	{
+
+	if( app_index_file != '' ){
 		urlDestino = app_index_file;
 	}
 	jQuery.post(urlDestino+'?',dadosJson ,function(aDados)

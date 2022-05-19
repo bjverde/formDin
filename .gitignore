@@ -16,9 +16,12 @@
 base/tmp/*
 phpunit-code-coverage/*
 !phpunit-code-coverage/phpunit-code-coverage.zip
+!phpunit-code-coverage/cache/index.php
+!phpunit-code-coverage/html/index.php
 
 #FormDin children projects
 /sysgen/
 /xx/
 /spu/
 /appev2/
+base/test/.phpunit.result.cache

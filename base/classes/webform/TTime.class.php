@@ -79,7 +79,7 @@ class TTime extends TMask
 	//--------------------------------------------------------------------------
 	public function setMask($strNewMaskType=null)
 	{
-		$strNewMaskType = strtolower($strNewMaskType);
+		$strNewMaskType = StringHelper::strtolower($strNewMaskType);
 		$arrMasksTypes = array(
 		 'hms'	=> '99:99:99'
 		,'hm'	=> '99:99');
@@ -113,8 +113,8 @@ class TTime extends TMask
 	{
 		if( parent::validate() )
 		{
-			$hora =$this->getValue();
-			$tam = strlen($hora);
+			$hora= $this->getValue();
+			$tam = StringHelper::strlen($hora);
 			if( $tam == 0 )
 			{
 				return true; // campo está vazio

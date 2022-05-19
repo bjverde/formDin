@@ -111,13 +111,11 @@ if( strpos( $file, '../' ) === false)
 	//$dir = '../..'.( ($app) ? '/'.$app :'').'/ajuda/';
 	$dir = ( ($app) ? $app.'/' :'').'ajuda/';
 }
-if( ! file_exists( $dir ) )
-{
+if( !FileHelper::exists( $dir ) ){
 	print 'criar dir:'.$dir.'<br>';
 	mkdir($dir,'0777',true);
 }
-if( !file_exists($dir))
-{
+if( !FileHelper::exists($dir)){
 	die( 'Diretório não encontrado: '.$dir);
 }
 $file = $dir . $file;
@@ -128,12 +126,10 @@ if( !$readOnly )
 }
 
 // criar o arquivo
-if( ! file_exists($file) )
-{
+if( !FileHelper::exists($file) ){
 	file_put_contents($file,'');
 }
-if( file_exists($file) )
-{
+if( FileHelper::exists($file) ){
 	//print 'Arquivo:'.$file.'<hr>';
 	$html = file_get_contents($file);
 	if(!$readOnly && trim( $html)=='')

@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '44a6d267ae2c047bb72c67f39ecf96f9b2055c05',
+    'reference' => 'abbbe787ea2db4fdb3fe84fd00211c407c0466fc',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,25 +31,25 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '44a6d267ae2c047bb72c67f39ecf96f9b2055c05',
+      'reference' => 'abbbe787ea2db4fdb3fe84fd00211c407c0466fc',
     ),
     'components/font-awesome' => 
     array (
-      'pretty_version' => '5.15.3',
-      'version' => '5.15.3.0',
+      'pretty_version' => '6.0.0',
+      'version' => '6.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '09f1f2e02ea0cd319569b32f8639b37dfcd7a62d',
+      'reference' => '7ece3fe765a89cb09eff1ad04fce6a92710b5a79',
     ),
     'firebase/php-jwt' => 
     array (
-      'pretty_version' => 'v5.4.0',
-      'version' => '5.4.0.0',
+      'pretty_version' => 'v5.5.1',
+      'version' => '5.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd2113d9b2e0e349796e72d2a63cf9319100382d2',
+      'reference' => '83b609028194aa042ea33b5af2d41a7427de80e6',
     ),
     'nikic/fast-route' => 
     array (
@@ -62,30 +62,21 @@ private static $installed = array (
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.5.0',
-      'version' => '6.5.0.0',
+      'pretty_version' => 'v6.5.3',
+      'version' => '6.5.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
-    ),
-    'pimple/pimple' => 
-    array (
-      'pretty_version' => 'v3.4.0',
-      'version' => '3.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '86406047271859ffc13424a048541f4531f53601',
+      'reference' => 'baeb7cde6b60b1286912690ab0693c7789a31e71',
     ),
     'psr/container' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '2.0.2',
+      'version' => '2.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8622567409010282b7aeebe4bb841fe98b58dcaf',
+      'reference' => 'c71ecc56dfe541dbd90c5360474fbc405f8d5963',
     ),
     'psr/http-factory' => 
     array (
@@ -112,13 +103,6 @@ private static $installed = array (
       ),
       'reference' => 'f6561bf28d520154e4b0ec72be95418abe6d9363',
     ),
-    'psr/http-message-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '1.0',
-      ),
-    ),
     'psr/http-server-handler' => 
     array (
       'pretty_version' => '1.0.1',
@@ -139,21 +123,21 @@ private static $installed = array (
     ),
     'psr/log' => 
     array (
-      'pretty_version' => '1.1.4',
-      'version' => '1.1.4.0',
+      'pretty_version' => '3.0.0',
+      'version' => '3.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
+      'reference' => 'fe5ea303b0887d5caefd3d431c3e61ad47037001',
     ),
     'slim/slim' => 
     array (
-      'pretty_version' => '3.12.3',
-      'version' => '3.12.3.0',
+      'pretty_version' => '4.9.0',
+      'version' => '4.9.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1c9318a84ffb890900901136d620b4f03a59da38',
+      'reference' => '44d3c9c0bfcc47e52e42b097b6062689d21b904b',
     ),
     'tuupola/callable-handler' => 
     array (
@@ -166,12 +150,12 @@ private static $installed = array (
     ),
     'tuupola/http-factory' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'aa48841a9f572b9cebe9d3ac5d5d3362a83f57ac',
+      'reference' => 'ae3f8fbdd31cf2f1bbe920b38963c5e4d1e9c454',
     ),
     'tuupola/slim-basic-auth' => 
     array (
@@ -184,12 +168,12 @@ private static $installed = array (
     ),
     'tuupola/slim-jwt-auth' => 
     array (
-      'pretty_version' => '3.5.1',
-      'version' => '3.5.1.0',
+      'pretty_version' => '3.6.0',
+      'version' => '3.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1c3668deebbcbdc49c9abe6cce4f6e0c8c5e09b5',
+      'reference' => 'd9ed8bca77a0ef2a95ab48e65ddc26073b99c5ff',
     ),
   ),
 );

@@ -306,6 +306,22 @@ class TElement
         
         
     }
+
+    public function removeIllegalCharsv2( $word=null, $strExcept = null )
+    {
+        if( is_null($word) || trim($word) == '' ){
+            return null;
+        }
+        if ( isset( $strExcept ) ){
+            $search  = array( '[', ']', '^' );
+            $replace = array( '\\[', '\\]', '\\^' );
+            $strExcept = str_replace( $search, $replace, $strExcept );
+        }
+        $pattern="/[^a-zA-Z0-9_" . $strExcept . "]/";
+        $subject=strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" );
+        $word   =preg_replace( $pattern, "",$subject );
+        return $word;
+    }
     
     /**
      * Adiciona conteudo dentro da tag. Pode ser um texto ou outro objeto da classe Element
@@ -398,7 +414,7 @@ class TElement
                                 // regras de acessibilidade para div
                                 if( $k == 'name' )
                                 {
-                                    if( preg_match('/(div|table|tr|td)/i',$this->getTagType()))
+                                    if( FormDinHelper::pregMatch('/(div|table|tr|td)/i',$this->getTagType()))
                                         continue;
                                 }
                                 if(substr($k,0,3) != '_fl')
@@ -590,7 +606,7 @@ class TElement
                     $result .= $child->show( false );
                     self::$depth--;
                 } else {
-                    $preg = preg_match('/^\/\//',ltrim( $child ) );
+                    $preg = FormDinHelper::pregMatch('/^\/\//',ltrim( $child ) );
                     // o texto do campo textarea e option não ser identado senão aparece na tela
                     if ( $this->tagType != 'textarea' && $this->tagType != 'option' ) {
                         // linha de comentario                        
@@ -682,7 +698,8 @@ class TElement
      */
     public function setEvent( $eventName, $functionJs = null, $boolRestrictive = null )
     {
-        $eventName = strtolower( $this->removeIllegalChars( $eventName ) );
+        $eventName = $this->removeIllegalChars( $eventName );
+        $eventName = !empty($eventName)?strtolower($eventName):$eventName;
         //$functionJs	= $this->removeIllegalChars($functionJs);
         $this->events[ $eventName ] = '';
         
@@ -793,11 +810,9 @@ class TElement
         // considerar os caracteres [] porque os campo check e select multi tem [] no final
         // e a função removeillegaChars remove eles se não for informado
         $this->id = $this->removeIllegalChars( $newId );
-        if( ! is_null($newId) )
-        {
-            // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id
-            if ( !strpos( $this->name, '[' ) )
-            {
+        if( !is_null($newId) ){
+            // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id            
+            if ( !empty($this->name) && !strpos( $this->name, '[' ) ) {
                 $this->name = $this->removeIllegalChars( $newId, '[]' );
             }
         }
@@ -940,12 +955,10 @@ class TElement
         $url = ( $url == '' ? $_SERVER[ 'SCRIPT_FILENAME' ] : $url );
         $url = ( $url == '' ? $_SERVER[ 'SCRIPT_NAME' ] : $url );
         $url = ( $url == '' ? $_SERVER[ 'PHP_SELF' ] : $url );
-        if ( !$url )
-        {
+        if ( !$url ){
             return 'index.php';
         }
-        if( preg_match('/\./',$url))
-        {
+        if( FormDinHelper::pregMatch('/\./',$url)) {
             $aFileParts = pathinfo( $url );
             return $aFileParts[ 'basename' ];
         }
@@ -1067,7 +1080,7 @@ class TElement
         {
             return $strValue;
         }
-        if( preg_match( '/\?/', utf8_decode($strValue) ) )
+        if( FormDinHelper::pregMatch( '/\?/', utf8_decode($strValue) ) )
         {
             return $strValue;
         }
@@ -1104,8 +1117,10 @@ class TElement
             $this->css = $mixProperty;
         } else {
             // os nomes das propriedades serao em caixa baixa
+            $mixProperty = isset($mixProperty)?$mixProperty:'';
             $mixProperty = preg_replace( '[-]', '_', $mixProperty );
             $mixProperty = $this->removeIllegalChars( strtolower( $mixProperty ) );
+            $mixProperty = isset($mixProperty)?$mixProperty:'';
             $mixProperty = preg_replace( '[_]', '-', $mixProperty );
             if ( $newValue === null ) {
                 $this->css[ $mixProperty ] = null;

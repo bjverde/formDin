@@ -62,7 +62,7 @@ $tempFile = $dirBase . 'tmp/tmp_' .$grd .'_'.session_id().'.go';
 
 $dadosGride = null;
 $tituloGride = '';
-if (file_exists($tempFile) ) {
+if (FileHelper::exists($tempFile) ) {
     $fileContents = file_get_contents($tempFile);
     $dadosGride = unserialize($fileContents);
     $tituloGride = $_REQUEST[ 'title' ];

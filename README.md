@@ -61,9 +61,9 @@ Além do FormDin existem mais dois projetos intimamente ligados.
 * arquivos do projeto
     * UTF-8 
     * retorno do carro formato Windows
-* PHP 7.2.5 a 8.0.x é compativel com as versões do FormDin 4.12.0 ou superior. A recomendação é usar no mínimo o PHP **7.4.x,**
+* PHP 7.2.5 a 8.1.x é compativel com as versões do FormDin 4.12.0 ou superior. A recomendação é usar no mínimo o PHP **7.4.x,**
 * PHP 7.0.0 a 7.2.4 é compativel com as versões do FormDin 4.8.0 até 4.11.0
-* PHP 5.6 a iltima versão compatível do Formdin é 4.7.8
+* PHP 5.6 a última versão compatível do Formdin é 4.7.8
 
 [Informações completas e detalhas sobre](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas):
 * [Branchs](https://github.com/bjverde/formDin/wiki/Informa%C3%A7%C3%B5es-t%C3%A9cnicas#sobre-as-branchs)

@@ -240,6 +240,21 @@ class FormDinHelper
         }
     }
     
+    /**
+     * Avoid the problem Deprecated preg_match in PHP 8.1.X
+     * @param string $pattern
+     * @param string $subject
+     * @return string
+     */
+    public static function pregMatch($pattern,$subject) 
+    {
+    	if( empty($subject) ){
+    		$result = FALSE;
+    	}else{
+            $result = preg_match ( $pattern, $subject );
+        }
+    	return $result;
+    }
     
 }
 ?>

@@ -586,10 +586,9 @@ class TGrid extends TTable
                             // verificar o nome da coluna informado em caixa alta, baixa e normal
                             $tdValue = $this->getTdValue($res, $fieldName, $k);                            
 
-                            if ($objColumn->getColumnType() == 'columncompact')
-                            {
-                                if (strlen($tdValue)> $objColumn->getMaxTextLength())
-                                {
+                            if ($objColumn->getColumnType() == 'columncompact') {
+                                $len = StringHelper::strlen($tdValue);
+                                if ( $len>$objColumn->getMaxTextLength() ){
                                     $cell->setProperty('title', $tdValue);
                                     $tdValue = substr($tdValue, 0, $objColumn->getMaxTextLength()-3).' (...)';
                                 }
@@ -727,7 +726,7 @@ class TGrid extends TTable
                             {
                                 foreach( $edit->getEvents() as $eventName => $eventFunction )
                                 {
-                                    if ( preg_match( '/\(\)/', $eventFunction ) == 1 )
+                                    if ( FormDinHelper::pregMatch( '/\(\)/', $eventFunction ) == 1 )
                                     {
                                         $eventFunction = preg_replace( '/\(\)/', '(this,' . $rowNum . ')', $eventFunction );
                                         $edit->setEvent( $eventName, $eventFunction );
@@ -771,7 +770,7 @@ class TGrid extends TTable
                             {
                                 foreach( $this->getButtons() as $buttonName => $objButton )
                                 {
-                                    if( $this->getDisabledButtonImage() && preg_match('/fwblank/',$objButton->getImageDisabled() ) )
+                                    if( $this->getDisabledButtonImage() && FormDinHelper::pregMatch('/fwblank/',$objButton->getImageDisabled() ) )
                                     {
                                         $objButton->setImageDisabled( $this->getDisabledButtonImage() ) ;
                                     }
@@ -1450,7 +1449,7 @@ class TGrid extends TTable
             }
             return $this->data;
         }
-        else if( strpos( strtolower( $this->data ), 'select ' ) !== false ) {
+        else if( isset($this->data) && (strpos( StringHelper::strtolower( $this->data ), 'select ' ) !== false) ) {
             
             $bvars = null;
             $bvars = $this->getBvars();
@@ -1466,7 +1465,7 @@ class TGrid extends TTable
             }
         }
         //else if( strpos(strtolower($this->data),'pk_') !== false || strpos(strtolower($this->data),'pkg_') !== false )
-        else if( preg_match( '/\.PK\a?/i', $this->data ) > 0 )
+        else if( FormDinHelper::pregMatch( '/\.PK\a?/i', $this->data ) > 0 )
         {
             $bvars = $this->getBvars();
             $cache = $this->getCache();
@@ -1830,9 +1829,8 @@ class TGrid extends TTable
     //------------------------------------------------------------------------------------
     public function getActionColumnTitle( $strNewValue = null )
     {
-        if ( is_null( $this->actionColumnTitle ) )
-        {
-            return htmlentities( 'Ação',null, ENCODINGS );
+        if ( is_null( $this->actionColumnTitle ) ){
+            return htmlentities( 'Ação',ENT_COMPAT, ENCODINGS );
         }
         return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
     }
@@ -2528,14 +2526,13 @@ class TGrid extends TTable
                         }
                         else
                         {
-                            $this->addKeyField( strtoupper( $fieldName ) );
+                            $this->addKeyField( StringHelper::strtoupper( $fieldName ) );
                             $aFieldNames[] = $fieldName;
                         }
                         
                         // considerar o primeiro campo oculto como a chave do gride
-                        if ( is_null( $strFirstKeyField ) )
-                        {
-                            $strFirstKeyField = strtoupper( $fieldName );
+                        if ( is_null( $strFirstKeyField ) ){
+                            $strFirstKeyField = StringHelper::strtoupper( $fieldName );
                         }
                     }
                     else
@@ -2546,14 +2543,14 @@ class TGrid extends TTable
                 else if ( $field->getFieldType() == 'edit' || $field->getFieldType() == 'number' || $field->getFieldType() == 'date' || $field->getFieldType() == 'cpf' || $field->getFieldType() == 'cpfcnpj' || $field->getFieldType() == 'cnpj' || $field->getFieldType() == 'fone' || $field->getFieldType() == 'memo' || $field->getFieldType() == 'cep' )
                 {
                     $field->setAttribute( 'gridOfflineField', 'true' );
-                    $label = str_replace( ':', '', $label );
+                    $label = isset($label)?str_replace( ':', '', $label ):null;
                     
-                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 )
-                    {
+                    if ( $field->getFieldType() == 'number' && $field->getDecimalPlaces() > 0 ){
                         $align = 'right';
                     }
                     $align = $field->getAttribute( 'grid_algin' );
-                    $col = $this->addColumn( strtoUpper( $fieldName ), $label, null, $align );
+                    $fieldName = StringHelper::strtoupper( $fieldName );
+                    $col = $this->addColumn( $fieldName, $label, null, $align );
                     $strJquery .= $strJquery == '' ? ' ' : ',';
                     $strJquery .= '"' . $fieldName . '":jQuery("#' . $fieldName . '").val()';
                     $aFieldNames[] = $fieldName;
@@ -3088,7 +3085,8 @@ class TGrid extends TTable
         {
             foreach( $this->getColumns() as $name => $objColumn )
             {
-                $colName = strtoupper( $objColumn->getFieldName() );
+                $getName = $objColumn->getFieldName();
+                $colName = isset($getName)?strtoupper($getName):null;
                 if ( isset( $res[ $colName ] ) ) {
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;

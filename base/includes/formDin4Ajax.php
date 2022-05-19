@@ -60,23 +60,17 @@ function prepareReturnAjax($pStatus, $pData=null, $pMessage=null,$boolBancoUtf8=
 	$buffer = trim( $buffer );
 
 	// retornos padrão para facilitar
-	if( strtoupper( $pMessage ) == 'POST')
-	{
+	$pMessage = StringHelper::strtoupper($pMessage);
+	if( $pMessage == 'POST'){
 		$pMessage = print_r($_POST,true);
-	}
-	else if( strtoupper( $pMessage ) == 'SESSION')
-	{
+	} else if( $pMessage == 'SESSION'){
 		$pMessage = print_r($_SESSION,true);
-	}
-	else if( strtoupper( $pMessage ) == 'SERVER')
-	{
+	} else if( $pMessage == 'SERVER') {
 		$pMessage = print_r($_SERVER,true);
-	}
-	else if( is_array( $pMessage ) )
-	{
+	} else if( is_array( $pMessage ) ) {
 		$pMessage = print_r($pMessage,true);
 	}
-
+	
 	ob_clean();
    	$boolAplicarUtf8  = false;
 	$boolBancoUtf8 = is_null($boolBancoUtf8) ? BANCO_UTF8 : $boolBancoUtf8;

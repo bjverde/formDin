@@ -56,7 +56,7 @@ class TDAOCreate {
 		$this->setTableName($strTableName);
 		$this->keyColumnName = $strkeyColumnName;
 		$this->path = $strPath;
-		$this->databaseManagementSystem = strtoupper($databaseManagementSystem);
+		$this->databaseManagementSystem = StringHelper::strtoupper($databaseManagementSystem);
 		if( $databaseManagementSystem == DBMS_POSTGRES ) {
 			$this->charParam = '$1';
 		}
@@ -75,7 +75,7 @@ class TDAOCreate {
 	}
 	//------------------------------------------------------------------------------------
 	public function setDatabaseManagementSystem($databaseManagementSystem) {
-	    return $this->databaseManagementSystem = strtoupper($databaseManagementSystem);
+	    return $this->databaseManagementSystem = StringHelper::strtoupper($databaseManagementSystem);
 	}
 	//------------------------------------------------------------------------------------
 	public function getDatabaseManagementSystem() {
@@ -233,7 +233,8 @@ class TDAOCreate {
 		$this->addLine( TAB.TAB.'if ( is_array($whereGrid) ){');
 		$this->addLine( TAB.TAB.TAB.'$where = \' 1=1 \';');
 		foreach($this->getColumns() as $k=>$v) {
-			$this->addLine( TAB.TAB.TAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,\''.strtoupper($v).'\',\' AND '.strtoupper($v).' like \\\'%\'.$whereGrid[\''.strtoupper($v).'\'].\'%\\\' \',null) );' );
+			$v = StringHelper::strtoupper($v);
+			$this->addLine( TAB.TAB.TAB.'$where = $where.( paginationSQLHelper::attributeIssetOrNotZero($whereGrid,\''.$v.'\',\' AND '.$v.' like \\\'%\'.$whereGrid[\''.$v.'\'].\'%\\\' \',null) );' );
 		}
 		$this->addLine( TAB.TAB.TAB.'$result = $where;');
 		$this->addLine( TAB.TAB.'}');
@@ -462,13 +463,14 @@ class TDAOCreate {
 	}
 	//--------------------------------------------------------------------------------------
 	public  function removeUnderline($txt) {
-		$len = strlen($txt);
+		$len = StringHelper::strlen($txt);
 		for ($i = $len-1; $i >= 0; $i--) {
 			if ($txt[$i] === '_') {
 				$len--;
 				$txt = substr_replace($txt, '', $i, 1);
-				if ($i != $len)
-					$txt[$i] = strtoupper($txt[$i]);
+				if ($i != $len){
+					$txt[$i] = StringHelper::strtoupper($txt[$i]);
+				}
 			}
 		}
 		return $txt;

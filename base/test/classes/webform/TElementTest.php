@@ -240,4 +240,54 @@ class TElementTest extends TestCase
 	    $result = $test->getIdent(0);
 	    $this->assertEquals( $expected , $result);
 	}
+	//---------------------------------------------------
+	public function testRemoveIllegalChars_null() {
+	    $expected = null;
+	    $test = new TElement();
+		$teste = null;
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_StringEmpty() {
+	    $expected = '';
+	    $test = new TElement();
+		$teste = '';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_a() {
+	    $expected = 'A[]aaaaAAAA';
+	    $test = new TElement();
+		$teste = 'Ã[]áàãâÁÀÃÂ';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_e() {
+	    $expected = 'EEee[]';
+	    $test = new TElement();
+		$teste = 'ÉÊéê[]';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_Cholcete1() {
+	    $expected = '[]';
+	    $test = new TElement();
+		$teste = '[]';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_Cholcete2() {
+	    $expected = '][';
+	    $test = new TElement();
+		$teste = '][';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}
+	public function testRemoveIllegalChars_o() {
+	    $expected = 'OOO[]ooo';
+	    $test = new TElement();
+		$teste = 'ÓÔÕ[]óôõ';
+	    $result = $test->removeIllegalChars($teste,'[]');
+	    $this->assertEquals( $expected , $result);
+	}	
 }

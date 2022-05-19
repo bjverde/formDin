@@ -119,12 +119,10 @@ if( strpos( $file, '../' ) === false)
 	$file = '../../ajuda/'.$file;	
 }
 // criar o arquivo
-if( ! file_exists($file) )
-{
+if( ! FileHelper::exists($file) ){
 	//file_put_contents($file,'O texto de ajuda para este campo ainda não foi definido!');
 }
-if( file_exists($file) )
-{
+if( FileHelper::exists($file) ){
 	print 'Arquivo:'.$file.'<hr>';
 	print file_get_contents($file);
 }
