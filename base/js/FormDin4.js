@@ -886,7 +886,7 @@ function fwFormatarProcesso(e)
 		s = r.substring(0,tam+2);
 	else
 		s = r.substring(0,tam+3);
-
+	e.value = s;
 	return s;
 }
 //-----------------------------------------------------------------------------------------
