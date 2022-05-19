@@ -7132,8 +7132,8 @@ class TForm Extends TBox
        return $field;
     }
 
-    /**
-    * Campo para entrada de numero de processo do serviço público
+        /**
+    * Campo para entrada de numeros de processos do TJDFT
     *
     * @param string $strName
     * @param string $strLabel
@@ -7141,7 +7141,9 @@ class TForm Extends TBox
     * @param string $boolNewLine
     * @param string $strValue
     * @param string $boolLabelAbove
-    * @return TProcesso
+    * @param boolean $boolAcceptNumeroDistribuicao 
+    * @param boolean $boolAcceptNumeroUnico 
+    * @return TNumeroTJDFT
     */
     public function addNumeroTJDFTField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true )
     {
