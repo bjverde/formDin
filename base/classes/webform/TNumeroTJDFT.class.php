@@ -60,14 +60,14 @@ class TNumeroTJDFT extends TEdit
 			$numeroUnico = 'false';
 
 		if ($boolAcceptNumeroDistribuicao == true){
-			$intMaxLength = 20;
-			$intSize = 14;
+			$intMaxLength = 18;
+			$intSize = 19;
 			$numeroDistribuicao = 'true';
 		}
 
 		if ($boolAcceptNumeroUnico == true){
-			$intMaxLength = 26;
-			$intSize = 20;
+			$intMaxLength = 25;
+			$intSize = 26;
 			$numeroUnico = 'true';
 		}
 		
