@@ -58,26 +58,32 @@ class TProcesso extends TEdit
 		$this->addEvent('onkeyup','fwFormatarProcesso(this)');
 		$this->addEvent('onblur','fwValidarProcesso(this)');
 	}
+
 	public function getFormated()
 	{
-
-		if( $this->getValue() )
-		{
-		    $value = preg_replace("[^0-9]","",$this->getValue());
-			if ( ! $value) // nenhum valor informado
-			{
-				return null;
-			}
-			if( strlen($value) == 17 )
-			{
-				$value = substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,4).'-'.substr($value,15,2);
-			}
-			else
-			{
-				$value=substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,2).'-'.substr($value,13,2);
-			}
-			return $value;
+		if( $this->getValue() ){
+		  return self::formatarNumero($this->getValue());
 		}
+	}
+
+	public static function formatarNumero($value)
+	{
+		$value = preg_replace("/\D/", '', $value);
+
+		if ( ! $value) // nenhum valor informado
+		{
+			return null;
+		}
+		if( strlen($value) == 17 )
+		{
+			$value = substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,4).'-'.substr($value,15,2);
+		}
+		else
+		{
+			$value=substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,2).'-'.substr($value,13,2);
+		}
+		return $value;
+
 	}
 }
 ?>
