@@ -6184,7 +6184,7 @@ class TForm Extends TBox
                            $obj->setProperty('shortcut','ALT+'.$char.'|'.$target);
                            //$obj->setValue(preg_replace('/&/','',$label) );
                            $label = preg_replace('/&/','',$label);
-                           $label = htmlentities( $label,null,ENCODINGS );
+                           $label = htmlentities( $label,ENT_COMPAT,ENCODINGS );
                            $label = str_replace( $arrSpecialCharTo,$arrSpecialCharFrom,$label);
                            if( $obj->getFieldType() == 'tabsheet') {
                                $obj->setValue(null,$label);
