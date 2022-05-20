@@ -50,8 +50,8 @@ class TNumeroTJDFT extends TEdit
 	 * @param string $strName        - 1: ID do campo
 	 * @param string $strValue       - 2: Valor inicial do campo
 	 * @param boolean $boolRequired  - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
-	 * @param boolean $boolAcceptNumeroDistribuicao
-	 * @param boolean $boolAcceptNumeroUnico
+	 * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
+	 * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
 	 */
 	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true)
 	{
