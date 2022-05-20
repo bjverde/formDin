@@ -1,3 +1,5 @@
+@echo off 
+
 REM ECHO php 7.3.5 and PHPUnit 9.1.4 with Config XML file
 REM D:\wamp\bin\php\php7.3.5\php.exe D:\wamp\bin\phpunit\phpunit-9.1.4.phar --configuration D:\wamp\www\formDin\base\test\phpunit-conf-win.xml D:\wamp\www\formDin\base\test\
 
