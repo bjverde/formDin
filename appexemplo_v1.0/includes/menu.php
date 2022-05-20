@@ -69,6 +69,7 @@ $menu->add('14', '1', 'Campo Select');
 
 $menu->add('15', '1', 'Campo Radio', 'view/fields/exe_RadioField.php');
 $menu->add('16', '1', 'Campo Check', 'view/fields/exe_CheckField.php',null,'../../base/imagens/iconCheckAll.gif');
+
 $menu->add('17', '1', 'Campo Arquivo ou Blob');
     $menu->add('171', '17', 'Campo Blob');
         $menu->add('1171', '171', 'Campo Blob Salvo no Banco', 'view/fields/exe_fwShowBlob.php');
@@ -81,18 +82,17 @@ $menu->add('17', '1', 'Campo Arquivo ou Blob');
 
     
 $menu->add('18', '1', 'Campo Numérico', 'view/fields/exe_NumberField.php');
+
 $menu->add('19', '1', 'Campo Brasil', null, null, '../../base/imagens/flag_brazil.png');
     $menu->add('191', '19', 'Campo CEP', 'view/fields/exe_CepField.php');
     $menu->add('192', '19', 'Campo Telefone', 'view/fields/exe_FoneField.php');
     $menu->add('193', '19', 'Campo Cpf/Cnpj', 'view/fields/exe_campo_cpf_cnpj.php');
+    $menu->add('194', '19', 'Campos Processo', 'view/fields/exe_ProcessoField.php');    
+
 $menu->add('110', '1', 'Campos Data e hora');
     $menu->add('1101', '110', 'Campo Data', 'view/fields/exe_DateField.php');
     $menu->add('1102', '110', 'Campo Hora', 'view/fields/exe_campo_hora.php');
     $menu->add('1104', '110', 'Campo Agenda', 'view/fields/exe_TCalendar.php');
-
-$menu->add('111', '1', 'Campos Processo', 'view/fields/exe_ProcessoField.php');    
-
-
 
 
 
