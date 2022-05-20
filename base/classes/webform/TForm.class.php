@@ -7034,7 +7034,7 @@ class TForm Extends TBox
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
 	 * @param boolean $boolRequired - 3: Obrigatório
 	 * @param boolean $boolNewLine  - 4: Campo em nova linha
-	 * @param string $strValue
+	 * @param string $strValue      - 5: valor inicial do campo
 	 * @param boolean $boolLabelAbove
      * @param boolean $boolNoWrapLabel
 	 * @return TFone
@@ -7086,13 +7086,13 @@ class TForm Extends TBox
     /**
     * Campo para entrada de senhas
     *
-    * @param string $strName              -1: Ida do campoa
-    * @param string $strLabel             -2: Label
-    * @param boolean $boolRequired        -3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
-    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não Obrigatório.
-    * @param integer $intmaxLength        -5: Tamanho maximo
-    * @param string $strValue
-    * @param boolean $boolLabelAbove      -7: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $strName              - 1: Id do campoa
+    * @param string $strLabel             - 2: Label
+    * @param boolean $boolRequired        - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param boolean $boolNewLine         - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param integer $intmaxLength        - 5: Tamanho maximo
+    * @param string $strValue             - 6: valor inicial do campo
+    * @param boolean $boolLabelAbove      - 7: Label acima, DEFAULT is FALSE na mesma linha
     * @param boolean $boolNoWrapLabel
     * @param integer $intSize
     * @param boolean $boolUseVirtualKeyboard
@@ -7121,12 +7121,12 @@ class TForm Extends TBox
     /**
     * Campo para entrada de numero de processo do serviço público
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param string $boolRequired
-    * @param string $boolNewLine
-    * @param string $strValue
-    * @param string $boolLabelAbove
+    * @param string $strName         - 1: Id do campoa
+    * @param string $strLabel        - 2: Label
+    * @param string $boolRequired    - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string $strValue        - 5: valor inicial do campo
+    * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
     * @return TProcesso
     */
     public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
@@ -7136,15 +7136,15 @@ class TForm Extends TBox
        return $field;
     }
 
-        /**
+    /**
     * Campo para entrada de numeros de processos do TJDFT
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param string $boolRequired
-    * @param string $boolNewLine
-    * @param string $strValue
-    * @param string $boolLabelAbove
+    * @param string $strName        - 1: Id do campoa
+    * @param string $strLabel       - 2: Label
+    * @param string $boolRequired   - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string $strValue       - 5: valor inicial do campo
+    * @param string $boolLabelAbove - 6: Label acima, DEFAULT is FALSE na mesma linha
     * @param boolean $boolAcceptNumeroDistribuicao 
     * @param boolean $boolAcceptNumeroUnico 
     * @return TNumeroTJDFT
