@@ -191,8 +191,11 @@ class TEdit extends TControl
 					$value = preg_replace('/[^0-9]/','',$value);
 				}
 				//Conta caracteres ao invés de bytes
-				if( (int)$this->getMaxLenght() < mb_strlen(str_replace(PHP_EOL, '', $value)) )
-				{
+				$tamanho = 0;
+				if( !empty($value) ){
+					$tamanho = mb_strlen(str_replace(PHP_EOL, '', $value));
+				}
+				if( (int)$this->getMaxLenght() < $tamanho ){
 				    $this->setCss('border','1px solid #ff0000'); //#176 relacionado com FormDin4.js
 				    //$this->setClass('fwFieldRequiredBoarder');
 					$this->setError('máximo '.$this->getMaxLenght().' caracteres.');
