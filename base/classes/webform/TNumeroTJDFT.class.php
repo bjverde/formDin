@@ -80,22 +80,29 @@ class TNumeroTJDFT extends TEdit
 	public function getFormated()
 	{
 		if( $this->getValue() ){
-		    $value = preg_replace("/\D/", '', $this->getValue());
-			if( strlen($value) == 20 ){
-				//#######-##.####.#.##.#### - 20 dígitos
-				//0123456-78.9012.3.45.6789 
-				//7-2.4.1.2.4				
-				$value = substr($value,0,7).'-'.substr($value,7,2).'.'.substr($value,9,4).'.'.substr($value,13,1).'.'.substr($value,14,2).'.'.substr($value,16,4);
-			} else if( strlen($value) == 14 ) {
-				//formatação para o número de 14 digitos
-				//1999.01.1.001573-8
-				//4.2.1.6-1
-				$value = substr($value,0,4).'.'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,13,1);
-			} else {
-				$value =  null;
-			}
-			return $value;
+		  return self::formatarNumero($this->getValue());
 		}
+	}
+
+	public static function formatarNumero($value)
+	{
+		$value = preg_replace("/\D/", '', $value);
+
+		if( strlen($value) == 20 ){
+			//#######-##.####.#.##.#### - 20 dígitos
+			//0123456-78.9012.3.45.6789 
+			//7-2.4.1.2.4				
+			$value = substr($value,0,7).'-'.substr($value,7,2).'.'.substr($value,9,4).'.'.substr($value,13,1).'.'.substr($value,14,2).'.'.substr($value,16,4);
+		} else if( strlen($value) == 14 ) {
+			//formatação para o número de 14 digitos
+			//1999.01.1.001573-8
+			//4.2.1.6-1
+			$value = substr($value,0,4).'.'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,13,1);
+		} else {
+			$value =  null;
+		}
+		return $value;
+
 	}
 }
 ?>
