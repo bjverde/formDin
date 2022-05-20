@@ -161,6 +161,10 @@ class TEdit extends TControl
 	{
 		$this->size=(int)$intSize;
 	}
+	public function getSize()
+	{
+		return $this->size;
+	}	
 	/**
 	* Valida se o campo foi preenchido
 	*
