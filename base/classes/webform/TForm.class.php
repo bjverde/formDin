@@ -7145,8 +7145,8 @@ class TForm Extends TBox
     * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue       - 5: valor inicial do campo
     * @param string $boolLabelAbove - 6: Label acima, DEFAULT is FALSE na mesma linha
-    * @param boolean $boolAcceptNumeroDistribuicao 
-    * @param boolean $boolAcceptNumeroUnico 
+    * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
+    * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
     * @return TNumeroTJDFT
     */
     public function addNumeroTJDFTField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true )
