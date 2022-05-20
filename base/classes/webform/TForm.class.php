@@ -1402,7 +1402,11 @@ class TForm Extends TBox
                                 }
                                 
                                 foreach($aDados as $k=>$v){
-                                    $aDados[$k] = htmlentities($v,null,ENCODINGS);
+                                    if( empty($v) ){
+                                        $aDados[$k] = $v;
+                                    }else{
+                                        $aDados[$k] = htmlentities($v,ENT_COMPAT,ENCODINGS);
+                                    }                                    
                                 }
                                 
                                 if( $this->getPublicMode() ) {
