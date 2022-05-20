@@ -90,7 +90,7 @@ class TNumeroTJDFT extends TEdit
 				//formatação para o número de 14 digitos
 				//1999.01.1.001573-8
 				//4.2.1.6-1
-				$value = substr($value,0,4).'3'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,14,1);
+				$value = substr($value,0,4).'.'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,13,1);
 			} else {
 				$value =  null;
 			}
