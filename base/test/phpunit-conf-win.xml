@@ -7,7 +7,7 @@
             processUncoveredFiles="true"
             >
     <include>
-      <directory suffix=".php">../classes/webform</directory>
+      <directory suffix=".class.php">../classes/webform</directory>
     </include>
     <exclude>
       <directory suffix=".php">..\base\callbacks</directory>
@@ -21,23 +21,23 @@
       <directory suffix=".php">..\base\vendor</directory>
       <directory suffix=".php">..\base\tmp</directory>
       <directory suffix=".php">..\base\xajax</directory>
+      <file>..\base\callbacks\index.php</file>
+      <file>..\base\classes\webform\TGridTest.class.php</file>      
+      <file>..\base\classes\helpers\index.php</file>
+      <file>..\base\classes\webform\index.php</file>
+      <file>..\base\classes\index.php</file>
       <file>..\base\classes\excelwriter.inc.php</file>
       <file>..\base\classes\FormDin4.xls.php</file>
       <file>..\base\classes\nusoap.inc</file>
-      <file>..\base\classes\webform\TGridTest.class.php</file>
-      <file>..\base\tmp\index.php</file>
-      <file>..\base\callbacks\index.php</file>
-      <file>..\base\index.php</file>
-      <file>..\base\test\index.php</file>
-      <file>..\base\xajax\index.php</file>
-      <file>..\base\classes\helpers\index.php</file>
-      <file>..\base\classes\index.php</file>
-      <file>..\base\classes\webform\index.php</file>
       <file>..\base\css\index.php</file>
       <file>..\base\imagens\index.php</file>
       <file>..\base\js\index.php</file>
       <file>..\base\logs\index.php</file>
+      <file>..\base\test\index.php</file>
+      <file>..\base\tmp\index.php</file>
       <file>..\base\vendor\index.php</file>
+      <file>..\base\xajax\index.php</file>
+      <file>..\base\index.php</file>
     </exclude>
     <report>
       <text outputFile="../../phpunit-code-coverage/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>
