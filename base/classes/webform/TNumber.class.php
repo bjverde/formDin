@@ -140,7 +140,18 @@ class TNumber extends TEdit
     	}
 		if(	$this->getMinValue() || $this->getMaxValue())
 		{
-			$this->addEvent('onBlur', "fwChkMinMax(". (is_numeric(str_replace(',','.',$this->getMinValue()) ) ? str_replace(',','.',$this->getMinValue()) : "Number.NaN").",".(is_numeric( str_replace(',','.',$this->getMaxValue()) ) ? str_replace(',','.',$this->getMaxValue()) : "Number.NaN").",'".$this->getName()."',".$this->getDecimalPlaces().",".$this->getAllowZero().",".$this->getAllowNull().")");
+			$minValue = null;
+			if( !empty($minValue) ){
+				$minValue = str_replace(',','.',$this->getMinValue());
+			}
+			$minValue = (is_numeric($minValue) ? $minValue : "Number.NaN");
+			$maxValue = null;
+			if( !empty($maxValue) ){
+				$maxValue = str_replace(',','.',$this->getMaxValue());
+			}
+			$maxValue = (is_numeric( $maxValue ) ? $maxValue : "Number.NaN");
+			$stringFuncaoJs = "fwChkMinMax(".$minValue.",".$maxValue.",'".$this->getName()."',".$this->getDecimalPlaces().",".$this->getAllowZero().",".$this->getAllowNull().")";
+			$this->addEvent('onBlur',$stringFuncaoJs);
 		}
 		if( $this->getEvents() )
 		{
