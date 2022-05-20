@@ -45,12 +45,14 @@ Classe para entrada de número de processo
 class TNumeroTJDFT extends TEdit
 {
 	/**
-	* Classe para entrada de número de processo
-	*
-	* @param string $name
-	* @param string $value
-	* @param boolean $required
-	*/
+	 * Classe para entrada de número de processo
+	 *
+	 * @param string $strName        - 1: ID do campo
+	 * @param string $strValue       - 2: Valor inicial do campo
+	 * @param boolean $boolRequired  - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+	 * @param boolean $boolAcceptNumeroDistribuicao
+	 * @param boolean $boolAcceptNumeroUnico
+	 */
 	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true)
 	{
 

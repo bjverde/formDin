@@ -7086,7 +7086,7 @@ class TForm Extends TBox
     /**
     * Campo para entrada de senhas
     *
-    * @param string $strName              - 1: Id do campoa
+    * @param string $strName              - 1: ID do campo
     * @param string $strLabel             - 2: Label
     * @param boolean $boolRequired        - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param boolean $boolNewLine         - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
@@ -7121,7 +7121,7 @@ class TForm Extends TBox
     /**
     * Campo para entrada de numero de processo do serviço público
     *
-    * @param string $strName         - 1: Id do campoa
+    * @param string $strName         - 1: ID do campo
     * @param string $strLabel        - 2: Label
     * @param string $boolRequired    - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
@@ -7139,7 +7139,7 @@ class TForm Extends TBox
     /**
     * Campo para entrada de numeros de processos do TJDFT
     *
-    * @param string $strName        - 1: Id do campoa
+    * @param string $strName        - 1: ID do campo
     * @param string $strLabel       - 2: Label
     * @param string $boolRequired   - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
@@ -7167,7 +7167,7 @@ class TForm Extends TBox
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
     * 
-     * @param string  $strName         - 1: id do campo
+     * @param string  $strName         - 1: ID do campo
      * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired    - 3: Obrigatório
      * @param string  $strAllowedFileTypes - Tipos de arquivos
@@ -7212,7 +7212,7 @@ class TForm Extends TBox
     *
     * @link http://digitalbush.com/projects/masked-input-plugin/
     *
-    * @param string $strName         - 1: id do campo
+    * @param string $strName         - 1: ID do campo
     * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired   - 3: Obrigatório
     * @param string $strMask
@@ -7233,7 +7233,7 @@ class TForm Extends TBox
     /**
      * Campo para criação de hiperlink no formulário
      *
-     * @param string $strName           - 1: id do campo
+     * @param string $strName           - 1: ID do campo
      * @param string $strLabel          - 2: Rotulo do campo que irá aparece na tela
      * @param string $strValue          - 3: Valor
      * @param string $strOnClick        - 4: Nome metodo JavScript
@@ -7256,7 +7256,7 @@ class TForm Extends TBox
     /**
      * Método para criar campo de edição de horas
      *
-     * @param string  $strName             - 1: id do campo
+     * @param string  $strName             - 1: ID do campo
      * @param string  $strLabel            - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired        - 3: True = Obrigatório; False (Defalt) = Não Obrigatório
      * @param string  $strMinValue         - 4: Menor Valor
@@ -7308,11 +7308,11 @@ class TForm Extends TBox
     /**
     * Adicionar treeview ao formulário.
     *
-    * @param mixed $strName            - 1: id do campo
-    * @param string $strRootLabel      - 2: Lavel do campo
+    * @param mixed $strName            - 1: ID do campo
+    * @param string $strRootLabel      - 2: Label do campo
     * @param mixed $arrData            - 3: array de dados
-    * @param mixed $strParentFieldName - 4: id do campo chave do pai
-    * @param mixed $strChildFieldName  - 5: id do campo chave dos filhos
+    * @param mixed $strParentFieldName - 4: ID do campo chave do pai
+    * @param mixed $strChildFieldName  - 5: ID do campo chave dos filhos
     * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
     * @param mixed $strInitialParentKey- 7:
     * @param mixed $mixUserDataFields  - 8: campos que serão passados quando clicamos no nó da arvore
