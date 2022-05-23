@@ -84,7 +84,7 @@ class TCpfCnpj extends TMask
 	/**
      * Recebe uma string e formata 
      * ###.###.###-## para CPF
-     * ##.###.###/####-##
+     * ##.###.###/####-## CNPJ
      * @param string $value
      * @return string
      */
@@ -102,6 +102,14 @@ class TCpfCnpj extends TMask
 		return $value;
 	}
 
+
+	/**
+     * Recebe uma string Formatada e retorna apenas os números
+     * ###.###.###-## para CPF
+     * ##.###.###/####-## CNPJ
+     * @param string $value
+     * @return string
+     */
     public static function limpaCnpjCpf($value){
         $limpo = preg_replace("/\D/", '', $value);
         return $limpo;
