@@ -102,7 +102,6 @@ class TCpfCnpj extends TMask
 		return $value;
 	}
 
-
 	/**
      * Recebe uma string Formatada e retorna apenas os números
      * ###.###.###-## para CPF
@@ -115,6 +114,11 @@ class TCpfCnpj extends TMask
         return $limpo;
     }
 
+	/**
+     * Valida o número do CPF
+     * @param string $value
+     * @return boolean
+     */
 	public static function validarCpf($value){
 		$dv 		= false;
 		$cpf 		= self::limpaCnpjCpf($value);
