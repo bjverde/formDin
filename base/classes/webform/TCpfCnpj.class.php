@@ -81,6 +81,13 @@ class TCpfCnpj extends TMask
 		}
 	}
 
+	/**
+     * Recebe uma string e formata 
+     * ###.###.###-## para CPF
+     * ##.###.###/####-##
+     * @param string $value
+     * @return string
+     */
 	public static function formatarNumero($value)
 	{
 		$value = preg_replace("/[^0-9]/","",$value);
