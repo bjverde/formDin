@@ -153,6 +153,11 @@ class TCpfCnpj extends TMask
 		return true;
 	}
 
+	/**
+     * Valida o número do CNPJ
+     * @param string $value
+     * @return boolean
+     */
 	//fonte:https://gist.github.com/guisehn/3276302
 	function validarCnpj($value)
 	{
