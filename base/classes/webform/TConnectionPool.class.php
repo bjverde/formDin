@@ -54,21 +54,26 @@ class TConnectionPool
     	$connId = md5(strtolower($dbType.$username.$password.$database.$host.$port.$schema.$boolUtf8));
         try
         {
-        	if( array_key_exists( $connId, self::$conn ) )
-			{
+        	if( array_key_exists( $connId, self::$conn ) ){
 				//echo 'Conexão já estabelecida<br>';
 				$conn = self::$conn[$connId];
-			}
-			else
-			{
+			}else{
 				//echo 'Nova Conexão<br>';
 		        $conn = TConnection::connect( $dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8 );
-		        $conn->poolId = $conn;
+				$conn->poolId = $conn;
+				/*
+				$TPDOConnectionObj = new TPDOConnectionObj();
+				$TPDOConnectionObj->setDBMS($dbType);
+				$TPDOConnectionObj->setUsername($username);
+				$TPDOConnectionObj->setPassword($password);
+				$TPDOConnectionObj->setDataBaseName($database);
+				$TPDOConnectionObj->setHost($host);
+				$TPDOConnectionObj->setPort($port);
+				$conn = $TPDOConnectionObj->getTPDOConnection();
+				*/
 				self::$conn[$connId] = $conn;
 			}
-        }
-        catch( Exception $e )
-        {
+        } catch( Exception $e ){
 			throw $e;
         }
         return $conn;
