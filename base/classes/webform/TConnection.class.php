@@ -157,19 +157,25 @@ final class TConnection
 				if( ! $port ){
 					$port = '1433';
 				}
-				/**
-				 * Dica de Reinaldo A. BarrÃªto Junior para utilizar o sql server no linux
-				 * 
-				 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-				 * */
-					if (PHP_OS == "Linux") {
-					$driver = 'dblib';
-					$dsn = $driver.':host='.$host.';dbname='.$database.';port='.$port;
-				} else {
-					$driver = 'sqlsrv';
+                /**
+                 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
+                 *
+                 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
+                 * */
+                if (PHP_OS == "Linux") {
+                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+                        $driver = 'sqlsrv';
+                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                    } else {
+                        $driver = 'dblib';
+                        $dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
+                    }
+                } else {
+                    $driver = 'sqlsrv';
 					$dsn = $driver.':Server='.$host.';Database='.$database;
-				}
-			break;
+                }
+            break;
+            //----------------------------------------------------------
 			case 'firebird':
 				$dsn = 'firebird:dbname='.( ( is_null($host) ? '' : $host.':') ).$database;
 			break;
