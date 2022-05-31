@@ -40,18 +40,16 @@
  */
 
 // ============= PROJECT CONSTANTS =================//
-
-if(!defined('ROWS_PER_PAGE') ) { define('ROWS_PER_PAGE', 20); 
+if(!defined('ROWS_PER_PAGE') ) {
+    define('ROWS_PER_PAGE', 20); 
 }
-if(!defined('ENCODINGS') ) { define('ENCODINGS', 'UTF-8'); 
+if(!defined('ENCODINGS') ) {
+    define('ENCODINGS', 'UTF-8'); 
 }
-
-
-
 
 // ============= FORMDIN FRAMEWORK CONSTANTS =================//
-
-if(!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); 
+if(!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR); 
 }
 if (!defined('EOL')) {
     define('EOL', "\n");
@@ -66,7 +64,7 @@ if (!defined('TAB')) {
 }
 
 
-define('FORMDIN_VERSION', '4.17.0');
+define('FORMDIN_VERSION', '4.17.1');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');
