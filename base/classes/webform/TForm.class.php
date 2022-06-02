@@ -2845,7 +2845,7 @@ class TForm Extends TBox
                              , $strConfigFileName=null
                              )
      {
-         // se o campo estiver dentro de uma aba ou de cum container, chamar o método combinar select destes
+         // se o campo estiver dentro de uma aba ou de um container, chamar o método combinar select destes
          $parentField = $this->getField( $selectPai );
          if( $parentField ) {
              if( $parentField->getParentControl() != $this ) {
@@ -2868,16 +2868,17 @@ class TForm Extends TBox
          } else {
              return;
          }
-         //die($selectPai);
+         
          // inicializar com os valores padrão
          $descNenhumaOpcao = $descNenhumaOpcao == null ? '-- vazio --' : $descNenhumaOpcao;
          $descPrimeiraOpcao = is_null( $descPrimeiraOpcao ) ? '-- selecione --' : $descPrimeiraOpcao;
          $valorPrimeiraOpcao = $valorPrimeiraOpcao == null ? '' : $valorPrimeiraOpcao;
          $funcaoExecutar = $funcaoExecutar == null ? null : $this->removeIllegalChars( $funcaoExecutar ) . '()';
          $boolSelectUniqueOption = ( ( $boolSelectUniqueOption==true )  ? 1 : 0);
+         
          // criticar se os campo existem
          $parentField = $this->getField( $selectPai );
-         //$childField = $this->getField( $selectFilho );
+
          // todo campo filho combinado dever ter um _temp correspondente
          $this->addHiddenField( $selectFilho . '_temp' );
          $arrDados = array( );
