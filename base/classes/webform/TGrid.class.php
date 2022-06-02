@@ -1322,7 +1322,7 @@ class TGrid extends TTable
             @unlink($tmpName);
         }
         if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
-            $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,ENCODINGS));
+            $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',ENT_COMPAT,ENCODINGS));
         }
     }
     
@@ -1832,7 +1832,7 @@ class TGrid extends TTable
         if ( is_null( $this->actionColumnTitle ) ){
             return htmlentities( 'Ação',ENT_COMPAT, ENCODINGS );
         }
-        return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
+        return htmlentities( $this->actionColumnTitle,ENT_COMPAT, ENCODINGS );
     }
     
     //---------------------------------------------------------------------------------------
