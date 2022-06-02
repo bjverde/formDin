@@ -2816,19 +2816,19 @@ class TForm Extends TBox
       * @example exemple/exCampoSelectAgrupado.php
       *
       *
-      * @param string $selectPai             - 1: Id Campo pai no Form
-      * @param string $selectFilho           - 2: Id Campo filho no Form
-      * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
-      * @param string $colunaFiltro          - 4: Coluna filtro na tabela/view o equivalente a id Campo pai 
-      * @param string $colunaCodigo          - 5: Coluna na tabela/view codigo do campo filho
-      * @param string $colunaDescricao       - 6: Coluna na na tabela/view com as descrições
-      * @param string $descPrimeiraOpcao     - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
-      * @param string $valorPrimeiraOpcao    - 8: Valor da primeira opção geralmente um valor da lista
-      * @param string $descNenhumaOpcao      - 9: Mensagem caso não tenho nenhuma opção correspondente.
-      * @param string $campoFormFiltro       -10: Campos extras que serão usados como critérios de filtro
-      * @param string $funcaoExecutar        -11: Função JavaScript que será chamado no caso de onChange
-      * @param boolean $strConfigFileName   - 12: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
-      * @param boolean $boolSelectUniqueOption
+      * @param string $selectPai              - 1: Id Campo pai no Form
+      * @param string $selectFilho            - 2: Id Campo filho no Form
+      * @param string $TabelaPacoteFuncao     - 3: Tabela ou View ou pacoteFuncaoOracle
+      * @param string $colunaFiltro           - 4: Coluna filtro na tabela/view o equivalente a id Campo pai 
+      * @param string $colunaCodigo           - 5: Coluna na tabela/view codigo do campo filho
+      * @param string $colunaDescricao        - 6: Coluna na na tabela/view com as descrições
+      * @param string $descPrimeiraOpcao      - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
+      * @param string $valorPrimeiraOpcao     - 8: Valor da primeira opção geralmente um valor da lista
+      * @param string $descNenhumaOpcao       - 9: Mensagem caso não tenho nenhuma opção correspondente.
+      * @param string $campoFormFiltro       - 10: Campos extras que serão usados como critérios de filtro
+      * @param string $funcaoExecutar        - 11: Função JavaScript que será chamado no caso de onChange
+      * @param boolean $boolSelectUniqueOption 12: 
+      * @param boolean $strConfigFileName    - 13: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
       */
      function combinarSelects( $selectPai='cod_uf'
                              , $selectFilho='cod_municipio'
