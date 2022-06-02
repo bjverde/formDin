@@ -2849,7 +2849,7 @@ class TForm Extends TBox
          $parentField = $this->getField( $selectPai );
          if( $parentField ) {
              if( $parentField->getParentControl() != $this ) {
-                 $parentField->getParentControl()->combinarSelects( $selectPai, $selectFilho, $TabelaPacoteFuncao, $colunaFiltro, $colunaCodigo, $colunaDescricao, $descPrimeiraOpcao, $valorPrimeiraOpcao, $descNenhumaOpcao, $campoFormFiltro, $funcaoExecutar , $boolSelectUniqueOption );
+                 $parentField->getParentControl()->combinarSelects( $selectPai, $selectFilho, $TabelaPacoteFuncao, $colunaFiltro, $colunaCodigo, $colunaDescricao, $descPrimeiraOpcao, $valorPrimeiraOpcao, $descNenhumaOpcao, $campoFormFiltro, $funcaoExecutar , $boolSelectUniqueOption, $strConfigFileName );
                  return;
              }
          } else {
