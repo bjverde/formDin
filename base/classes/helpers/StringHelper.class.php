@@ -126,8 +126,10 @@ class StringHelper
      */
     public static function convert_encoding($string,$to_encoding='UTF-8',$from_encoding='ASCII')
     {
-        if ( mb_detect_encoding($string, $to_encoding, true)!=$to_encoding ){
-            $string = mb_convert_encoding($string,$to_encoding,$from_encoding);
+        if( !empty($string) ){
+            if ( mb_detect_encoding($string, $to_encoding, true)!=$to_encoding ){
+                $string = mb_convert_encoding($string,$to_encoding,$from_encoding);
+            }
         }
         return $string;
     }
