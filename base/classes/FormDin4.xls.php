@@ -176,7 +176,7 @@ else
 }
 // fim
 //---------------------------------------------------------------------------
-function prepareNumberPlanilha( $v = null,&$isNumber )
+function prepareNumberPlanilha( $v,&$isNumber )
 {
     if(empty($v)){
         return $v;
