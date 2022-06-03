@@ -26,6 +26,17 @@ Class ExcelWriter
     var $state="CLOSED";
     var $newRow=false;
 
+
+    /*
+    * @Params : $file  : file name of excel file to be created.
+    * @Return : On Success Valid File Pointer to file
+    *             On Failure return false
+    */
+    public function __construct($file="",$bsc="CELLPAR")
+    {
+        $this->open($file);
+    } 
+
     /*
     * @Params : $file  : file name of excel file to be created.
     * @Return : On Success Valid File Pointer to file
