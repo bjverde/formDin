@@ -84,12 +84,12 @@ $keys = array_keys($dadosGride);
 // escrever o titulo do gride
 if($tituloGride ) {
     $excel->writeRow();
-    $excel->writeCol(htmlentities($tituloGride, ENT_COMPAT, ENCODINGS), count($keys));
+    $tituloGrideHtml = htmlentities($tituloGride, ENT_COMPAT, ENCODINGS);
+    $excel->writeCol($tituloGrideHtml, count($keys));
 }
 
 $count=0;
-foreach( $_REQUEST as $k => $v )
-{
+foreach( $_REQUEST as $k => $v ) {
     if (preg_match('/^w_/', $k) ) {
         if($count == 0 ) {
             $count++;
@@ -169,9 +169,7 @@ if($handle ) {
         flush();
     }
     fclose($handle);
-}
-else
-{
+}else{
     readfile($fileName);
 }
 // fim
