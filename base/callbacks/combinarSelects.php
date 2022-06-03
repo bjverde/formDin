@@ -68,13 +68,15 @@ function getConfigBanco(String $configFileName) {
 		if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
 		$configFileNamePath = ROOT_PATH.DS.'includes'.DS.$configFileName;
 		if( !FileHelper::exists($configFileNamePath) ){
-			throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_CONFIG);
-			return;
+			throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_CONFIG_ARRAY);
 		}
 		require_once $configFileNamePath;
 		$configArray = getConnectionArray();
 		$tpdo->connect(null,true,null,$configArray);
 	}else{
+		if ( !defined('BANCO') ) {
+			throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_CONFIG_GERAL);
+		}
 		$configArray= array(
 			'DBMS' => BANCO
 		   ,'PORT' => PORT
