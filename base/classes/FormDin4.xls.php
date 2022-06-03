@@ -66,7 +66,7 @@ if (FileHelper::exists($tempFile) ) {
     $fileContents = file_get_contents($tempFile);
     $dadosGride = unserialize($fileContents);
     $tituloGride = $_REQUEST[ 'title' ];
-} else {
+}else{
     echo '<h2>Dados do gride não foram salvos em ' . $tempFile . '</h2>';
     die();
 }
@@ -114,29 +114,22 @@ foreach($keys as $v ) {
 $excel->writeLine($a);
 
 
-foreach($dadosGride[$keys[0]] as $k => $v )
-{
+foreach($dadosGride[$keys[0]] as $k => $v ) {
     $a=null;
-    foreach($keys as $col => $v1 )
-    {
+    foreach($keys as $col => $v1 ) {
         $isNumber = false;
         $x = prepareNumberPlanilha($dadosGride[$v1][$k], $isNumber);
 
         if(isset($checkboxes->$col) && is_object($checkboxes->$col) ) {
             if(in_array($k, $checkboxes->$col->dados) ) {
                 $x = '[ X ]';
-            }
-            else
-            {
+            } else {
                 $x='';
             }
-        }
-        else if(isset($radiobuttons->$col) && is_object($radiobuttons->$col) ) {
+        } else if(isset($radiobuttons->$col) && is_object($radiobuttons->$col) ) {
             if(in_array($k, $radiobuttons->$col->dados) ) {
                 $x = '[ X ]';
-            }
-            else
-            {
+            } else {
                 $x='';
             }
         }
@@ -161,15 +154,14 @@ header("Content-Description: PHP Generated Data");
 $handle = fopen($fileName, 'rb');
 if($handle ) {
     $buffer = '';
-    while( !feof($handle) )
-    {
+    while( !feof($handle) ){
         $buffer = fread($handle, 4096);
         echo $buffer;
         ob_flush();
         flush();
     }
     fclose($handle);
-}else{
+} else {
     readfile($fileName);
 }
 // fim
@@ -190,14 +182,11 @@ function prepareNumberPlanilha( $v,&$isNumber )
     if ($posPonto && $posVirgula ) {
         if ($posVirgula > $posPonto ) {
             $v = preg_replace('/\./', '', $v);
-        }
-        else
-        {
+        } else {
             $v = preg_replace('/,/', '', $v);
             $v = preg_replace('/\./', ',', $v);
         }
-    }
-    else if($posPonto ) {
+    } else if($posPonto ) {
         $v = preg_replace('/\./', ',', $v);
     }
     if(defined('DECIMAL_SEPARATOR') ) {
