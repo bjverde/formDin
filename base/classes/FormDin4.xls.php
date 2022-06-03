@@ -178,6 +178,9 @@ else
 //---------------------------------------------------------------------------
 function prepareNumberPlanilha( $v = null,&$isNumber )
 {
+    if(empty($v)){
+        return $v;
+    }
     if (!is_numeric(preg_replace('/[,\.]/', '', $v)) ) {
         return $v;
     }
