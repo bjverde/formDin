@@ -94,9 +94,15 @@ foreach( $_REQUEST as $k => $v )
         if($count == 0 ) {
             $count++;
             $excel->writeRow();
-            $excel->writeCol(htmlentities("Critério(s) de Seleção:", ENT_COMPAT, ENCODINGS), count($keys));
+            $htmlentities = htmlentities("Critério(s) de Seleção:", ENT_COMPAT, ENCODINGS);
+            $excel->writeCol($htmlentities, count($keys));
         }
-        $excel->writeLine(array( htmlentities(preg_replace('/(w_|:)/', '', $k), ENT_COMPAT, ENCODINGS),array( htmlentities($v, ENT_COMPAT, ENCODINGS),(count($keys)-1) ) ));
+        $pregReplace   = preg_replace('/(w_|:)/', '', $k);
+        $htmlentities0 = htmlentities($pregReplace, ENT_COMPAT, ENCODINGS);
+        $htmlentities1 = htmlentities($v, ENT_COMPAT, ENCODINGS);
+        $arrayInterno  = array( $htmlentities1,(count($keys)-1) );
+        $arrayExterno  = array( $htmlentities0,$arrayInterno );
+        $excel->writeLine($arrayExterno);
     }
 }
 
