@@ -65,7 +65,8 @@ class TMessage {
     const ERROR_TYPE_NOT_SET = 'A variable has not been defined! ';
     
     const ERROR_AUTOCOMPLETE_WHITOUT_TPDO_OBJ = 'Erro na função autocomplete(). Erro: não encontra classe de config de banco';
-    const ERROR_AUTOCOMPLETE_WHITOUT_ROOT = 'A Constante ROOT_PATH com o caminho completo para o sistema, não foi definida no index.php do sistema';
+    const ERROR_AUTOCOMPLETE_WHITOUT_ROOT  = 'A Constante ROOT_PATH com o caminho completo para o sistema, não foi definida no index.php do sistema';
+    const ERROR_AUTOCOMPLETE_WHITOUT_CONFIG= 'O Arquivo de configuração informado não existe';
 
     public function __construct() {
     }
