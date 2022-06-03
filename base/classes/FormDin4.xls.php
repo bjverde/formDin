@@ -84,7 +84,7 @@ $keys = array_keys($dadosGride);
 // escrever o titulo do gride
 if($tituloGride ) {
     $excel->writeRow();
-    $excel->writeCol(htmlentities($tituloGride, null, ENCODINGS), count($keys));
+    $excel->writeCol(htmlentities($tituloGride, ENT_COMPAT, ENCODINGS), count($keys));
 }
 
 $count=0;
@@ -94,17 +94,16 @@ foreach( $_REQUEST as $k => $v )
         if($count == 0 ) {
             $count++;
             $excel->writeRow();
-            $excel->writeCol(htmlentities("Critério(s) de Seleção:", null, ENCODINGS), count($keys));
+            $excel->writeCol(htmlentities("Critério(s) de Seleção:", ENT_COMPAT, ENCODINGS), count($keys));
         }
-        $excel->writeLine(array( htmlentities(preg_replace('/(w_|:)/', '', $k), null, ENCODINGS),array( htmlentities($v, null, ENCODINGS),(count($keys)-1) ) ));
+        $excel->writeLine(array( htmlentities(preg_replace('/(w_|:)/', '', $k), ENT_COMPAT, ENCODINGS),array( htmlentities($v, ENT_COMPAT, ENCODINGS),(count($keys)-1) ) ));
     }
 }
 
 // criar os titulos das colunas
 $a=null;
 foreach($keys as $v ) {
-    //$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
-    $a[]  = htmlentities(utf8_encode($v), null, 'UTF-8');
+    $a[]  = htmlentities(utf8_encode($v), ENT_COMPAT, 'UTF-8');
 }
 $excel->writeLine($a);
 
