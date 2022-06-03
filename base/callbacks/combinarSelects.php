@@ -60,7 +60,7 @@ function combinarSelectIsUTF8($string) {
  * a constante vai a configuração padrão do arquivo config_conexao.php
  *
  * @param String $configFileName 
- * @return void
+ * @return TPDOConnectionObj
  */
 function getConfigBanco(String $configFileName) {
 	$tpdo = New TPDOConnectionObj(false);
@@ -183,30 +183,6 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
 			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".$tpdo->getError();
 			MessageHelper::logRecordSimple($tpdo->getError());
 		}
-
-
-
-		/*
-		$tpdo = New TPDOConnectionObj(false);
-		if( empty($configFileName) ){
-			$tpdo->connect(null,true,null,null);
-		}else{
-			if ( !defined('ROOT_PATH') ) {
-				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
-				return;
-			}
-			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
-			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
-			$configArray = getConnectionArray();
-			$tpdo->connect(null,true,null,$configArray);
-		}
-		$res = $tpdo->executeSql($sql);
-		if( $tpdo->getError() ) {
-			$res[$campoCodigo][] = 0;
-			$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".$tpdo->getError();
-			MessageHelper::logRecordSimple($tpdo->getError());
-		}
-		*/
 	}
 }
 
