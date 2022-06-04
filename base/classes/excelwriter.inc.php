@@ -59,19 +59,19 @@ Class ExcelWriter
     {
         if($this->state!="CLOSED") {
             $this->error="Error : Another file is opend .Close it to save the file";
-            return false;
+            throw new RuntimeException($this->error);
         }
 
         if(!empty($file)) {
             $this->fp=@fopen($file, "w+");
         }else{
             $this->error="Usage : New ExcelWriter('fileName')";
-            return false;
+            throw new RuntimeException($this->error);
         }
 
         if($this->fp==false) {
             $this->error="Error: Unable to open/create File.You may not have permmsion to write the file.";
-            return false;
+            throw new RuntimeException($this->error);
         }
         $this->state="OPENED";
         fwrite($this->fp, $this->GetHeader());

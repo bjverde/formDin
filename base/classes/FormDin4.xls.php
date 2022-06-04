@@ -71,21 +71,28 @@ if (FileHelper::exists($tempFile) ) {
     die();
 }
 
-// nome temporario da planilha
-$fileName = $dirBase . 'tmp/Planilha '.date('d-m-Y His').'.xls';
-$excel=new ExcelWriter($fileName);
-if($excel==false) {
-    die($excel->error);
+
+try {
+    // nome temporario da planilha
+    $fileName = $dirBase . 'tmp/Planilha '.date('d-m-Y His').'.xls';
+    $excel = new ExcelWriter($fileName);
+    if($excel==false) {
+        die($excel->error);
+    }
+
+    // colunas
+    $keys = array_keys($dadosGride);
+
+    // escrever o titulo do gride
+    if($tituloGride ) {
+        $excel->writeRow();
+        $tituloGrideHtml = htmlentities($tituloGride, ENT_COMPAT, ENCODINGS);
+        $excel->writeCol($tituloGrideHtml, count($keys));
+    }    
 }
-
-// colunas
-$keys = array_keys($dadosGride);
-
-// escrever o titulo do gride
-if($tituloGride ) {
-    $excel->writeRow();
-    $tituloGrideHtml = htmlentities($tituloGride, ENT_COMPAT, ENCODINGS);
-    $excel->writeCol($tituloGrideHtml, count($keys));
+catch( Exception  $e ) {
+    MessageHelper::logRecord($e);
+    echo $e->getMessage();
 }
 
 $count=0;
