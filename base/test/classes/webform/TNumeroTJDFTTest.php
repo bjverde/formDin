@@ -68,9 +68,9 @@ class TNumeroTJDFTTest extends TestCase
 		$numero = '1999.01.1.001573-8';
 	    $test = new TNumeroTJDFT('disrib', $numero,false,true,false);
 	    $result = $test->getMaxLenght();
-	    $this->assertSame(20, $result);
+	    $this->assertSame(18, $result);
         $result = $test->getSize();
-	    $this->assertSame(14, $result);
+	    $this->assertSame(19, $result);
 		$result = $test->getFormated();
 		$this->assertSame($numero, $result);
 	}
@@ -78,18 +78,18 @@ class TNumeroTJDFTTest extends TestCase
 		$numero = '0123456-78.9012.3.45.6789';
 	    $test = new TNumeroTJDFT('disrib', $numero,false,false,true);
 	    $result = $test->getMaxLenght();
-	    $this->assertSame(26, $result);
+	    $this->assertSame(25, $result);
         $result = $test->getSize();
-	    $this->assertSame(20, $result);
+	    $this->assertSame(26, $result);
 		$result = $test->getFormated();
 		$this->assertSame($numero, $result);
 	}
 	public function testNumeroTJDFT_geral() {
 	    $test = new TNumeroTJDFT('unico', 'NumeroUnico',false);
 	    $result = $test->getMaxLenght();
-	    $this->assertSame(26, $result);
+	    $this->assertSame(25, $result);
         $result = $test->getSize();
-	    $this->assertSame(20, $result);
+	    $this->assertSame(26, $result);
 		$result = $test->getFormated();
 		$this->assertSame(null, $result);
 	}
