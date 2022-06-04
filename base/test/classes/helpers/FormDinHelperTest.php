@@ -50,7 +50,7 @@ use PHPUnit\Framework\TestCase;
 class FormDinHelperTest extends TestCase
 {
     public function testVersion() {
-		$expected = '4.17.2';
+		$expected = '4.17.3';
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}
