@@ -1656,8 +1656,7 @@ function fwUpdateFields( fields, values, event )
 // Função utilizada pelo autocomplete para limpar os campo que serão atualizados ao começar a digitar
 function fwSetFields( fields, values, event )
 {
-	if( event )
-	{
+	if( event ){
 		tecla = fwGetTecla(event);
 		// desprezar teclas que não alteram valor do campo
 		if( tecla==9 ||tecla==17 ||tecla==18 ||tecla==20 || tecla==33|| tecla==34 || tecla==35 || tecla==36 || tecla==37 || tecla==38 || tecla==39 || tecla==40 )
@@ -1665,86 +1664,62 @@ function fwSetFields( fields, values, event )
 			return false;
 		}
 	}
-	try
-	{
+	try {
 		var val;
 		var delim;
 		var obj;
 		var aFields = [];
 		var	aValues = [];
 		var parentSelects = [];
-		if( fields.indexOf('|') >- 1)
-		{
+		if( fields.indexOf('|') >- 1){
 			delim = '|';
-		}
-		else if( fields.indexOf(',') > -1 )
-		{
+		} else if( fields.indexOf(',') > -1 ) {
 			delim = ',';
-		}
-		else
-		{
+		} else {
 			aFields[0] = fields;
 			aValues[0] = values;
 		}
 
-		if( delim )
-		{
+		if( delim ) {
 			aFields = fields.split(delim);
 			aValues = values.split(delim);
 		}
-		for( i=0;i<aFields.length;i++ )
-		{
+		for( i=0;i<aFields.length;i++ ) {
 			val = (aValues[i] == null ) ? aValues : aValues[i];
-		   try
-		   {
+		   try {
 				obj = jQuery("#"+aFields[i]).get(0);
-				if( !obj )
-				{
+				if( !obj ){
 					obj = jQuery("input[name='" + aFields[i] + "']" ).get(0);
 				}
 				// verificar se é checkbox de opção S ou N
-				if( !obj )
-				{
+				if( !obj ){
 					obj = jQuery("#" + aFields[i] + "_"+val ).get(0);
 				}
 
-				if( obj.type =='select-one' )
-				{
+				if( obj.type =='select-one' ){
 					obj.selectedIndex=-1;
 					jQuery(obj).val(val);
 					// verificar se é um select combinado atraves da propriedade parentselect
-					if( jQuery(obj).attr('parentselect'))
-					{
+					if( jQuery(obj).attr('parentselect')){
 						parentSelects.push(jQuery(obj).attr('parentselect'));
 						// criar  campo temp se não existir
-						if( ! jQuery("#"+obj.id+'_temp').get(0) )
-						{
+						if( ! jQuery("#"+obj.id+'_temp').get(0) ){
 							jQuery(obj).append('<input type="hidden" id="'+obj.id+'_temp" name="'+obj.id+'_temp" value="'+val+'">');
 						}
 					}
-				}
-				else if( obj.type =='checkbox' )
-				{
+				} else if( obj.type =='checkbox' ) {
 					obj.checked=true;
-				}
-				else if( obj.type =='radio' )
-				{
+				} else if( obj.type =='radio' ) {
 					fwClearChildFields(aFields[i]+'_table');
-					if( val )
-					{
+					if( val ) {
 						obj = jQuery("#"+aFields[i] + "_"+val ).get(0);
-						if( obj && obj.value==val )
-						{
+						if( obj && obj.value==val ) {
 							obj.checked=true;
 						}
 					}
-				}
-				else if( obj.innerHTML )
-				{
+				} else if( obj.innerHTML ) {
 					jQuery(obj).html('');
-				}
-				else
-				{
+				} else {
 					  jQuery(obj).val(val);
 				}
 				// limpar o campo desabilitado tambem
@@ -1763,10 +1738,8 @@ function fwSetFields( fields, values, event )
 
 		}
 		// disparar os eventos onchange dos selects pai
-		if( parentSelects.length > 0 )
-		{
-			for( key in parentSelects)
-			{
+		if( parentSelects.length > 0 ){
+			for( key in parentSelects){
 				jQuery("#"+parentSelects[key] ).change();
 			}
 		}
