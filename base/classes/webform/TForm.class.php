@@ -2126,7 +2126,9 @@ class TForm Extends TBox
             }
         }
 
-        $strExtraParams = str_replace( array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' ), array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' ), stripcslashes( json_encode( $aTemp ) ) );
+        $strExtraParamsSearch  = array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' );
+        $strExtraParamsReplace = array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' );
+        $strExtraParams = str_replace( $strExtraParamsSearch, $strExtraParamsReplace, stripcslashes( json_encode( $aTemp ) ) );
         $this->addJavascript( 'jQuery("#' . $strFieldName . '").autocomplete(' . $strUrl 
                             . '&ajax=1", { ajax:1, delay:' . $intDelay . ', minChars:' . $intMinChars 
                             .' ,matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:fwAutoCompleteSelectItem'
