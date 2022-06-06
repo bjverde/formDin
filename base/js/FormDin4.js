@@ -1789,17 +1789,12 @@ function fwAutoCompleteFindValue(li,obj)
 	var keepFieldValues = obj.getAttribute('keepFieldValues');
 	obj.setAttribute('keepFieldValues','0');
 	fwSetBordaCampo(obj,false,true);
-	if( li == null )
-	{
-		if( obj.getAttribute('needed')=='true' )
-		{
+	if( li == null ){
+		if( obj.getAttribute('needed')=='true' ) {
 			fwSetBordaCampo(obj,true,true);
-		}
-		else
-		{
+		} else {
 			var label = obj.getAttribute('label');
-			if( obj.value )
-			{
+			if( obj.value ){
 				fwAlert( (label?label+' ':'')+obj.value+ ' inexistente.');
 			}
 			// limpar os campos dependentes
@@ -1810,34 +1805,26 @@ function fwAutoCompleteFindValue(li,obj)
 	}
 
 	// voltou da chamada ajax
-	if( !!li.extra )
-	{
+	if( !!li.extra ) {
 		try	{
 			eval('var dados='+li.extra[0]);
-			for (key in dados)
-			{
+			for (key in dados) {
 				var campo = key;
 				var valor = dados[key];
-				if( key == 'fwCallbackAc')
-				{
+				if( key == 'fwCallbackAc') {
 					// retirar as barras invertidas. ex: atualizar(\'atualizar\');
 					//campo = campo.replace(new RegExp(/\\/g),'');
 					valor = valor.replace(new RegExp(/\(\\\'/g),'(\'');
 					valor = valor.replace(new RegExp(/\\\'\)/g),'\')');
 					eval( valor );
-				}
-				else if( keepFieldValues == '0' || jQuery('#'+campo ).val() == '' )
-				{
-					if(campo.indexOf('(')>0)
-					{
+				} else if( keepFieldValues == '0' || jQuery('#'+campo ).val() == '' ) {
+					if(campo.indexOf('(')>0) {
 						// retirar as barras invertidas. ex: atualizar(\'atualizar\');
 						//campo = campo.replace(new RegExp(/\\/g),'');
 						//campo = campo.replace(new RegExp(/\(\\\'/g),'(\'');
 						//campo = campo.replace(new RegExp(/\\\'\)/g),'\')');
 						//eval(campo);
-					}
-					else
-					{
+					} else {
 						fwAtualizarCampos(campo,valor);
 					/*
 						if(oCampo = fwGetObj(campo)
@@ -1857,9 +1844,7 @@ function fwAutoCompleteFindValue(li,obj)
 				}
 			}
 		} catch(e){}
-	}
-	else
-	{
+	} else {
 		var sValue = li.selectValue;
 	}
 }
@@ -1870,7 +1855,7 @@ function fwAutoCompleteSelectItem(li,obj)
 	//alert( li.extra[0] );
 	//alert( 'fwAutoCompleteSelectItem');
 	fwAutoCompleteFindValue(li,obj);
-//alert('Parametros extras:'+li.extra[0]+' e '+ li.extra[1]);
+	//alert('Parametros extras:'+li.extra[0]+' e '+ li.extra[1]);
 }
 //-------------------------------------------------
 function fwAutoCompleteValidade(e)
