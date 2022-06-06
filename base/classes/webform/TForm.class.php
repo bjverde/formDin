@@ -2039,11 +2039,9 @@ class TForm Extends TBox
         $strMessageNotFound = $strMessageNotFound === null ? 'Nenhum registro encontrado' : ( string ) $strMessageNotFound;
         $boolSearchAnyPosition = ( $boolSearchAnyPosition === true ? true : false );
         $trimText = ( $trimText === true ? true : false );
-        if(is_null( $boolKeepFieldValuesOnPost))
-        {
+        if(is_null( $boolKeepFieldValuesOnPost)){
             //if( $_REQUEST['gridOffline'] == 1 )
-            if( $this->getFormGridOffLine() )
-            {
+            if( $this->getFormGridOffLine() ){
                 $boolKeepFieldValuesOnPost=true;
             }
         }
@@ -2127,6 +2125,7 @@ class TForm Extends TBox
                 $strExtraParams.= $mixExtraSearchFields;
             }
         }
+
         $strExtraParams = str_replace( array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' ), array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' ), stripcslashes( json_encode( $aTemp ) ) );
         $this->addJavascript( 'jQuery("#' . $strFieldName . '").autocomplete(' . $strUrl 
                             . '&ajax=1", { ajax:1, delay:' . $intDelay . ', minChars:' . $intMinChars 
