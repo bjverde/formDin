@@ -2000,14 +2000,13 @@ class TGrid extends TTable
      * @return TGridCheckColumn
      */
     public function addCheckColumn( string $strName
-        , string $strTitle = null
-        , $strKeyField
-        , $strDescField = null
-        , $boolReadOnly = null
-        , $boolAllowCheckAll = null )
+                                  , string $strTitle = null
+                                  , $strKeyField
+                                  , $strDescField = null
+                                  , $boolReadOnly = null
+                                  , $boolAllowCheckAll = null )
     {
-        if ( !$strKeyField )
-        {
+        if ( !$strKeyField ){
             $strKeyField = strtoupper( $strName );
         }
         $col = new TGridCheckColumn( $strName, $strTitle, $strKeyField, $strDescField, $boolReadOnly, $boolAllowCheckAll );
