@@ -1994,7 +1994,7 @@ class TGrid extends TTable
      * @param string $strName       - 1: Nome do variavel no POST
      * @param string $strTitle      - 2: Titulo que aparece no grid
      * @param string $strKeyField   - 3: Valor que será passado no POST
-     * @param string $strDescField  - 4: Descrição do campo, valor que irá aparecer o gride
+     * @param string $strDescField  - 4: Campo do grid que será usado na descrição do campo, valor que irá aparecer o gride
      * @param boolean $boolReadOnly
      * @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
      * @return TGridCheckColumn
