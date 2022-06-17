@@ -276,8 +276,7 @@ jQuery.autocomplete = function(input, options) {
 			results.innerHTML = "";
 
 			// if the field no longer has focus or if there are no matches, do not display the drop down
-			if( !hasFocus || data.length == 0 )
-			{
+			if( !hasFocus || data.length == 0 ){
 				return hideResultsNow();
 			}
 			if (jQuery.browser.msie) {
@@ -291,8 +290,7 @@ jQuery.autocomplete = function(input, options) {
 			// adaptação feita por Luis Eugênio para retirar a mascara antes de procurar campos formatados
 			//-----------------------------------------------------------------------------
 			var currentVal = q;
-			if(options.removeMask || data.length == 1 )
-			{
+			if(options.removeMask || data.length == 1 ){
             	q = q.replace(/[^0-9]/g,'');
 			}
 			//------------------------------------------------------------------------------
@@ -303,22 +301,17 @@ jQuery.autocomplete = function(input, options) {
 			//------------------------------------------------------------------------------
 			// adaptacao eugenio para selecionar automaticamente a primeira opção e retornar
 			//------------------------------------------------------------------------------
-			if(options.removeMask || data.length==1)
-			{
+			if(options.removeMask || data.length==1){
 				selectCurrent();
 				//$input.val(currentVal);
-				for( key in data )
-				{
+				for( key in data ){
 					this.value =  data[key];
 				}
-			}
-			else
-			{
+			}else{
 				showResults();
 			}
 			//------------------------------------------
 			//showResults();
-
 		} else {
 			hideResultsNow();
 		}
