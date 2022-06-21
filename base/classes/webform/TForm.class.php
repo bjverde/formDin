@@ -5660,12 +5660,9 @@ class TForm Extends TBox
        public function setVO( $vo )
        {
            foreach( $this->displayControls as $name=>$dc ) {
-               if( $dc->getField()->getFieldType() == 'pagecontrol' )
-               {
+               if( $dc->getField()->getFieldType() == 'pagecontrol' ){
                    $dc->getField()->setVo( $vo );
-               }
-               else if( $dc->getField()->getFieldType() == 'group' )
-               {
+               }else if( $dc->getField()->getFieldType() == 'group' ){
                    $dc->getField()->setVo( $vo );
                } else {
                    $dc = new TDAOCreate();
