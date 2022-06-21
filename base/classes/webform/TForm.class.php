@@ -5698,7 +5698,11 @@ class TForm Extends TBox
                                }                               
                            }
                            if( !is_array($value) ){
-                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            if( empty($value) ){
+                                $method = '$vo->' . $method . '();';
+                            }else{
+                                $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            }                            
                            }else{
                                $method = '$vo->' . $method . '( array(';
                                $stringArray = null;
