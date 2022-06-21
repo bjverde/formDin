@@ -5661,17 +5661,14 @@ class TForm Extends TBox
        public function setVO( $vo )
        {
            foreach( $this->displayControls as $name=>$dc ) {
-               if( $dc->getField()->getFieldType() == 'pagecontrol' )
-               {
+               if( $dc->getField()->getFieldType() == 'pagecontrol' ){
                    $dc->getField()->setVo( $vo );
-               }
-               else if( $dc->getField()->getFieldType() == 'group' )
-               {
+               }else if( $dc->getField()->getFieldType() == 'group' ){
                    $dc->getField()->setVo( $vo );
                } else {
                    $dc = new TDAOCreate();
-                   if( method_exists( $vo, $method = 'set' . ucfirst( $name ) )
-                       || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
+                   if( method_exists($vo, $method = 'set' . ucfirst( $name ) )
+                    || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
                    {
                        $field = $this->getField( $name );
                        if( $field ) {
@@ -5699,7 +5696,11 @@ class TForm Extends TBox
                                }                               
                            }
                            if( !is_array($value) ){
-                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            if( empty($value) ){
+                                $method = '$vo->' . $method . '();';
+                            }else{
+                                $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            }                            
                            }else{
                                $method = '$vo->' . $method . '( array(';
                                $stringArray = null;
