@@ -5666,8 +5666,8 @@ class TForm Extends TBox
                    $dc->getField()->setVo( $vo );
                } else {
                    $dc = new TDAOCreate();
-                   if( method_exists( $vo, $method = 'set' . ucfirst( $name ) )
-                       || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
+                   if( method_exists($vo, $method = 'set' . ucfirst( $name ) )
+                    || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
                    {
                        $field = $this->getField( $name );
                        if( $field ) {
