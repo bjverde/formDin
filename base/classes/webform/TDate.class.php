@@ -155,8 +155,10 @@ class TDate extends TMask
 	public function validate()
 	{
 		if(parent::validate()){
-			
-		    $date = preg_replace('/[^0-9]/','',$this->getValue());
+			$date = '';
+			if( !empty($this->getValue()) ){
+				$date = preg_replace('/[^0-9]/','',$this->getValue());
+			}
 			if($this->getMaskType() =='dm'){
 				$date .= '2000';
 			}elseif($this->getMaskType() == 'my'){
