@@ -157,59 +157,41 @@ class TDate extends TMask
 		if(parent::validate())
 		{
 		    $date = preg_replace('/[^0-9]/','',$this->getValue());
-			if($this->getMaskType() =='dm')
-			{
+			if($this->getMaskType() =='dm'){
 				$date .= '2000';
-			}
-			elseif($this->getMaskType() == 'my')
-			{
+			}elseif($this->getMaskType() == 'my'){
 				$date = '01'.$date;
 			}
 			$tam = strlen($date);
-			if ( $tam == 8 or $tam==6 )
-			{
+			if ( $tam == 8 or $tam==6 ){
 				$day = substr($date,0,2);
 				$month = substr($date,2,2);
 				$year = substr($date,4,4)+0;
 
-				if( $year < 60 )
-				{
+				if( $year < 60 ){
 					$year += 2000;
-				}
-				else if( $year > 59 and $year < 100)
-				{
+				} else if( $year > 59 and $year < 100) {
 					$year += 1900;
 				}
 
 				if ( ($day<1) or ($day>31)  || ($month<1) || ($month>12)  || ( ($day>29) && ($month==2) ) || ( ($day>30) && ( ($month==4) || ($month==6) || ($month==9) || ($month==11)  ) ) )
 				{
-					if( $this->getMaskType() == 'dm')
-					{
+					if( $this->getMaskType() == 'dm') {
 						$this->setError('DIA/MÊS está inválido');
-					}
-					else if( $this->getMaskType() == 'my')
-					{
+					} else if( $this->getMaskType() == 'my') {
 						$this->setError('MÊS/ANO está inválido');
-					}
-					else
-					{
+					} else {
 						$this->setError('Valor inválido');
 					}
-				}
-				else
-				{
+				} else {
 					// validar ano bissexto
-					if ( $month == 2 )
-					{
-						if (($day==29) && ((($year % 4) != 0) || ((($year % 100) == 0) && (($year % 400) != 0))))
-						{
+					if ( $month == 2 ) {
+						if (($day==29) && ((($year % 4) != 0) || ((($year % 100) == 0) && (($year % 400) != 0)))) {
 							$this->setError('Dia inválido. Ano não é bissexto.');
 						}
 					}
 				}
-			}
-			else
-			{
+			} else {
 				$this->setValue('');
 				parent::validate();
 			}
