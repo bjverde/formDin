@@ -45,12 +45,14 @@ Classe para entrada de número de processo
 class TNumeroTJDFT extends TEdit
 {
 	/**
-	* Classe para entrada de número de processo
-	*
-	* @param string $name
-	* @param string $value
-	* @param boolean $required
-	*/
+	 * Classe para entrada de número de processo
+	 *
+	 * @param string $strName        - 1: ID do campo
+	 * @param string $strValue       - 2: Valor inicial do campo
+	 * @param boolean $boolRequired  - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+	 * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
+	 * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
+	 */
 	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true)
 	{
 
@@ -58,14 +60,14 @@ class TNumeroTJDFT extends TEdit
 			$numeroUnico = 'false';
 
 		if ($boolAcceptNumeroDistribuicao == true){
-			$intMaxLength = 20;
-			$intSize = 14;
+			$intMaxLength = 18;
+			$intSize = 19;
 			$numeroDistribuicao = 'true';
 		}
 
 		if ($boolAcceptNumeroUnico == true){
-			$intMaxLength = 26;
-			$intSize = 20;
+			$intMaxLength = 25;
+			$intSize = 26;
 			$numeroUnico = 'true';
 		}
 		
@@ -77,32 +79,30 @@ class TNumeroTJDFT extends TEdit
 
 	public function getFormated()
 	{
+		if( $this->getValue() ){
+		  return self::formatarNumero($this->getValue());
+		}
+	}
 
-		if( $this->getValue() )
-		{
-		    $value = preg_replace("[^0-9]","",$this->getValue());
-			if ( ! $value) // nenhum valor informado
-			{
-				return null;
-			}
+	public static function formatarNumero($value)
+	{
+		$value = preg_replace("/\D/", '', $value);
 
+		if( strlen($value) == 20 ){
 			//#######-##.####.#.##.#### - 20 dígitos
 			//0123456-78.9012.3.45.6789 
-			//7-2.4.1.2.4
-			if( strlen($value) == 20 )
-			{
-				$value = substr($value,0,7).'-'.substr($value,7,2).'.'.substr($value,9,4).'.'.substr($value,13,1).'.'.substr($value,14,2).'.'.substr($value,16,4);
-			}
-			else
-			{
-				//formatação para o número de 14 digitos
-				//1999.01.1.001573-8
-				//4.2.1.6-1
-				$value = substr($value,0,4).'3'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,14,1);
-				null;
-			}
-			return $value;
+			//7-2.4.1.2.4				
+			$value = substr($value,0,7).'-'.substr($value,7,2).'.'.substr($value,9,4).'.'.substr($value,13,1).'.'.substr($value,14,2).'.'.substr($value,16,4);
+		} else if( strlen($value) == 14 ) {
+			//formatação para o número de 14 digitos
+			//1999.01.1.001573-8
+			//4.2.1.6-1
+			$value = substr($value,0,4).'.'.substr($value,4,2).'.'.substr($value,6,1).'.'.substr($value,7,6).'-'.substr($value,13,1);
+		} else {
+			$value =  null;
 		}
+		return $value;
+
 	}
 }
 ?>

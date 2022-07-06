@@ -66,72 +66,77 @@ if (FileHelper::exists($tempFile) ) {
     $fileContents = file_get_contents($tempFile);
     $dadosGride = unserialize($fileContents);
     $tituloGride = $_REQUEST[ 'title' ];
-} else {
+}else{
     echo '<h2>Dados do gride não foram salvos em ' . $tempFile . '</h2>';
     die();
 }
 
-// nome temporario da planilha
-$fileName = $dirBase . 'tmp/Planilha '.date('d-m-Y His').'.xls';
-$excel=new ExcelWriter($fileName);
-if($excel==false) {
-    die($excel->error);
+
+try {
+    // nome temporario da planilha
+    $fileName = $dirBase . 'tmp/Planilha '.date('d-m-Y His').'.xls';
+    $excel = new ExcelWriter($fileName);
+    if($excel==false) {
+        die($excel->error);
+    }
+
+    // colunas
+    $keys = array_keys($dadosGride);
+
+    // escrever o titulo do gride
+    if($tituloGride ) {
+        $excel->writeRow();
+        $tituloGrideHtml = htmlentities($tituloGride, ENT_COMPAT, ENCODINGS);
+        $excel->writeCol($tituloGrideHtml, count($keys));
+    }    
 }
-
-// colunas
-$keys = array_keys($dadosGride);
-
-// escrever o titulo do gride
-if($tituloGride ) {
-    $excel->writeRow();
-    $excel->writeCol(htmlentities($tituloGride, null, ENCODINGS), count($keys));
+catch( Exception  $e ) {
+    MessageHelper::logRecord($e);
+    echo $e->getMessage();
 }
 
 $count=0;
-foreach( $_REQUEST as $k => $v )
-{
+foreach( $_REQUEST as $k => $v ) {
     if (preg_match('/^w_/', $k) ) {
         if($count == 0 ) {
             $count++;
             $excel->writeRow();
-            $excel->writeCol(htmlentities("Critério(s) de Seleção:", null, ENCODINGS), count($keys));
+            $htmlentities = htmlentities("Critério(s) de Seleção:", ENT_COMPAT, ENCODINGS);
+            $excel->writeCol($htmlentities, count($keys));
         }
-        $excel->writeLine(array( htmlentities(preg_replace('/(w_|:)/', '', $k), null, ENCODINGS),array( htmlentities($v, null, ENCODINGS),(count($keys)-1) ) ));
+        $pregReplace   = preg_replace('/(w_|:)/', '', $k);
+        $htmlentities0 = htmlentities($pregReplace, ENT_COMPAT, ENCODINGS);
+        $htmlentities1 = htmlentities($v, ENT_COMPAT, ENCODINGS);
+        $arrayInterno  = array( $htmlentities1,(count($keys)-1) );
+        $arrayExterno  = array( $htmlentities0,$arrayInterno );
+        $excel->writeLine($arrayExterno);
     }
 }
 
 // criar os titulos das colunas
 $a=null;
 foreach($keys as $v ) {
-    //$a[]  = htmlentities(utf8_decode($v),null,'ISO-8859-1');
-    $a[]  = htmlentities(utf8_encode($v), null, 'UTF-8');
+    $a[]  = htmlentities(utf8_encode($v), ENT_COMPAT, 'UTF-8');
 }
 $excel->writeLine($a);
 
 
-foreach($dadosGride[$keys[0]] as $k => $v )
-{
+foreach($dadosGride[$keys[0]] as $k => $v ) {
     $a=null;
-    foreach($keys as $col => $v1 )
-    {
+    foreach($keys as $col => $v1 ) {
         $isNumber = false;
         $x = prepareNumberPlanilha($dadosGride[$v1][$k], $isNumber);
 
         if(isset($checkboxes->$col) && is_object($checkboxes->$col) ) {
             if(in_array($k, $checkboxes->$col->dados) ) {
                 $x = '[ X ]';
-            }
-            else
-            {
+            } else {
                 $x='';
             }
-        }
-        else if(isset($radiobuttons->$col) && is_object($radiobuttons->$col) ) {
+        } else if(isset($radiobuttons->$col) && is_object($radiobuttons->$col) ) {
             if(in_array($k, $radiobuttons->$col->dados) ) {
                 $x = '[ X ]';
-            }
-            else
-            {
+            } else {
                 $x='';
             }
         }
@@ -156,23 +161,23 @@ header("Content-Description: PHP Generated Data");
 $handle = fopen($fileName, 'rb');
 if($handle ) {
     $buffer = '';
-    while( !feof($handle) )
-    {
+    while( !feof($handle) ){
         $buffer = fread($handle, 4096);
         echo $buffer;
         ob_flush();
         flush();
     }
     fclose($handle);
-}
-else
-{
+} else {
     readfile($fileName);
 }
 // fim
 //---------------------------------------------------------------------------
-function prepareNumberPlanilha( $v = null,&$isNumber )
+function prepareNumberPlanilha( $v,&$isNumber )
 {
+    if(empty($v)){
+        return $v;
+    }
     if (!is_numeric(preg_replace('/[,\.]/', '', $v)) ) {
         return $v;
     }
@@ -184,14 +189,11 @@ function prepareNumberPlanilha( $v = null,&$isNumber )
     if ($posPonto && $posVirgula ) {
         if ($posVirgula > $posPonto ) {
             $v = preg_replace('/\./', '', $v);
-        }
-        else
-        {
+        } else {
             $v = preg_replace('/,/', '', $v);
             $v = preg_replace('/\./', ',', $v);
         }
-    }
-    else if($posPonto ) {
+    } else if($posPonto ) {
         $v = preg_replace('/\./', ',', $v);
     }
     if(defined('DECIMAL_SEPARATOR') ) {

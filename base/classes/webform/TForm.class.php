@@ -1416,7 +1416,11 @@ class TForm Extends TBox
                                 }
                                 
                                 foreach($aDados as $k=>$v){
-                                    $aDados[$k] = htmlentities($v,null,ENCODINGS);
+                                    if( empty($v) ){
+                                        $aDados[$k] = $v;
+                                    }else{
+                                        $aDados[$k] = htmlentities($v,ENT_COMPAT,ENCODINGS);
+                                    }                                    
                                 }
                                 
                                 if( $this->getPublicMode() ) {
@@ -2049,11 +2053,9 @@ class TForm Extends TBox
         $strMessageNotFound = $strMessageNotFound === null ? 'Nenhum registro encontrado' : ( string ) $strMessageNotFound;
         $boolSearchAnyPosition = ( $boolSearchAnyPosition === true ? true : false );
         $trimText = ( $trimText === true ? true : false );
-        if(is_null( $boolKeepFieldValuesOnPost))
-        {
+        if(is_null( $boolKeepFieldValuesOnPost)){
             //if( $_REQUEST['gridOffline'] == 1 )
-            if( $this->getFormGridOffLine() )
-            {
+            if( $this->getFormGridOffLine() ){
                 $boolKeepFieldValuesOnPost=true;
             }
         }
@@ -2137,7 +2139,10 @@ class TForm Extends TBox
                 $strExtraParams.= $mixExtraSearchFields;
             }
         }
-        $strExtraParams = str_replace( array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' ), array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' ), stripcslashes( json_encode( $aTemp ) ) );
+
+        $strExtraParamsSearch  = array( '{', '}', ':"$', ').value"', '"jQuery("#', '\").get', '"{', '}"' );
+        $strExtraParamsReplace = array( '', '', ':$', ').value', 'jQuery("#', '").get', '{', '}' );
+        $strExtraParams = str_replace( $strExtraParamsSearch, $strExtraParamsReplace, stripcslashes( json_encode( $aTemp ) ) );
         $this->addJavascript( 'jQuery("#' . $strFieldName . '").autocomplete(' . $strUrl 
                             . '&ajax=1", { ajax:1, delay:' . $intDelay . ', minChars:' . $intMinChars 
                             .' ,matchSubset:1, matchContains:1, cacheLength:10, onItemSelect:fwAutoCompleteSelectItem'
@@ -2826,19 +2831,19 @@ class TForm Extends TBox
       * @example exemple/exCampoSelectAgrupado.php
       *
       *
-      * @param string $selectPai             - 1: Id Campo pai no Form
-      * @param string $selectFilho           - 2: Id Campo filho no Form
-      * @param string $TabelaPacoteFuncao    - 3: Tabela ou View ou pacoteFuncaoOracle
-      * @param string $colunaFiltro          - 4: Coluna filtro na tabela/view o equivalente a id Campo pai 
-      * @param string $colunaCodigo          - 5: Coluna na tabela/view codigo do campo filho
-      * @param string $colunaDescricao       - 6: Coluna na na tabela/view com as descrições
-      * @param string $descPrimeiraOpcao     - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
-      * @param string $valorPrimeiraOpcao    - 8: Valor da primeira opção geralmente um valor da lista
-      * @param string $descNenhumaOpcao      - 9: Mensagem caso não tenho nenhuma opção correspondente.
-      * @param string $campoFormFiltro       -10: Campos extras que serão usados como critérios de filtro
-      * @param string $funcaoExecutar        -11: Função JavaScript que será chamado no caso de onChange
-      * @param boolean $strConfigFileName   - 12: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
-      * @param boolean $boolSelectUniqueOption
+      * @param string $selectPai              - 1: Id Campo pai no Form
+      * @param string $selectFilho            - 2: Id Campo filho no Form
+      * @param string $TabelaPacoteFuncao     - 3: Tabela ou View ou pacoteFuncaoOracle
+      * @param string $colunaFiltro           - 4: Coluna filtro na tabela/view o equivalente a id Campo pai 
+      * @param string $colunaCodigo           - 5: Coluna na tabela/view codigo do campo filho
+      * @param string $colunaDescricao        - 6: Coluna na na tabela/view com as descrições
+      * @param string $descPrimeiraOpcao      - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
+      * @param string $valorPrimeiraOpcao     - 8: Valor da primeira opção geralmente um valor da lista
+      * @param string $descNenhumaOpcao       - 9: Mensagem caso não tenho nenhuma opção correspondente.
+      * @param string $campoFormFiltro       - 10: Campos extras que serão usados como critérios de filtro
+      * @param string $funcaoExecutar        - 11: Função JavaScript que será chamado no caso de onChange
+      * @param boolean $boolSelectUniqueOption 12: 
+      * @param boolean $strConfigFileName    - 13: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
       */
      function combinarSelects( $selectPai='cod_uf'
                              , $selectFilho='cod_municipio'
@@ -2855,26 +2860,40 @@ class TForm Extends TBox
                              , $strConfigFileName=null
                              )
      {
-         // se o campo estiver dentro de uma aba ou de cum container, chamar o método combinar select destes
+         // se o campo estiver dentro de uma aba ou de um container, chamar o método combinar select destes
          $parentField = $this->getField( $selectPai );
          if( $parentField ) {
              if( $parentField->getParentControl() != $this ) {
-                 $parentField->getParentControl()->combinarSelects( $selectPai, $selectFilho, $TabelaPacoteFuncao, $colunaFiltro, $colunaCodigo, $colunaDescricao, $descPrimeiraOpcao, $valorPrimeiraOpcao, $descNenhumaOpcao, $campoFormFiltro, $funcaoExecutar , $boolSelectUniqueOption );
+                 $parentField->getParentControl()->combinarSelects( $selectPai
+                                                                  , $selectFilho
+                                                                  , $TabelaPacoteFuncao
+                                                                  , $colunaFiltro
+                                                                  , $colunaCodigo
+                                                                  , $colunaDescricao
+                                                                  , $descPrimeiraOpcao
+                                                                  , $valorPrimeiraOpcao
+                                                                  , $descNenhumaOpcao
+                                                                  , $campoFormFiltro
+                                                                  , $funcaoExecutar
+                                                                  , $boolSelectUniqueOption
+                                                                  , $strConfigFileName
+                                                                );
                  return;
              }
          } else {
              return;
          }
-         //die($selectPai);
+         
          // inicializar com os valores padrão
          $descNenhumaOpcao = $descNenhumaOpcao == null ? '-- vazio --' : $descNenhumaOpcao;
          $descPrimeiraOpcao = is_null( $descPrimeiraOpcao ) ? '-- selecione --' : $descPrimeiraOpcao;
          $valorPrimeiraOpcao = $valorPrimeiraOpcao == null ? '' : $valorPrimeiraOpcao;
          $funcaoExecutar = $funcaoExecutar == null ? null : $this->removeIllegalChars( $funcaoExecutar ) . '()';
          $boolSelectUniqueOption = ( ( $boolSelectUniqueOption==true )  ? 1 : 0);
+         
          // criticar se os campo existem
          $parentField = $this->getField( $selectPai );
-         //$childField = $this->getField( $selectFilho );
+
          // todo campo filho combinado dever ter um _temp correspondente
          $this->addHiddenField( $selectFilho . '_temp' );
          $arrDados = array( );
@@ -5656,17 +5675,14 @@ class TForm Extends TBox
        public function setVO( $vo )
        {
            foreach( $this->displayControls as $name=>$dc ) {
-               if( $dc->getField()->getFieldType() == 'pagecontrol' )
-               {
+               if( $dc->getField()->getFieldType() == 'pagecontrol' ){
                    $dc->getField()->setVo( $vo );
-               }
-               else if( $dc->getField()->getFieldType() == 'group' )
-               {
+               }else if( $dc->getField()->getFieldType() == 'group' ){
                    $dc->getField()->setVo( $vo );
                } else {
                    $dc = new TDAOCreate();
-                   if( method_exists( $vo, $method = 'set' . ucfirst( $name ) )
-                       || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
+                   if( method_exists($vo, $method = 'set' . ucfirst( $name ) )
+                    || method_exists($vo, $method = 'set' . ucfirst( $dc->removeUnderline($name) )) )
                    {
                        $field = $this->getField( $name );
                        if( $field ) {
@@ -5694,7 +5710,11 @@ class TForm Extends TBox
                                }                               
                            }
                            if( !is_array($value) ){
-                            $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            if( empty($value) ){
+                                $method = '$vo->' . $method . '();';
+                            }else{
+                                $method = '$vo->' . $method . '(\'' . addslashes($value) . '\');';
+                            }                            
                            }else{
                                $method = '$vo->' . $method . '( array(';
                                $stringArray = null;
@@ -6194,7 +6214,7 @@ class TForm Extends TBox
                            $obj->setProperty('shortcut','ALT+'.$char.'|'.$target);
                            //$obj->setValue(preg_replace('/&/','',$label) );
                            $label = preg_replace('/&/','',$label);
-                           $label = htmlentities( $label,null,ENCODINGS );
+                           $label = htmlentities( $label,ENT_COMPAT,ENCODINGS );
                            $label = str_replace( $arrSpecialCharTo,$arrSpecialCharFrom,$label);
                            if( $obj->getFieldType() == 'tabsheet') {
                                $obj->setValue(null,$label);
@@ -7036,7 +7056,7 @@ class TForm Extends TBox
 	 * @param string $strLabel      - 2: Label do campo, que irá aparecer na tela do usuario
 	 * @param boolean $boolRequired - 3: Obrigatório
 	 * @param boolean $boolNewLine  - 4: Campo em nova linha
-	 * @param string $strValue
+	 * @param string $strValue      - 5: valor inicial do campo
 	 * @param boolean $boolLabelAbove
      * @param boolean $boolNoWrapLabel
 	 * @return TFone
@@ -7088,13 +7108,13 @@ class TForm Extends TBox
     /**
     * Campo para entrada de senhas
     *
-    * @param string $strName              -1: Ida do campoa
-    * @param string $strLabel             -2: Label
-    * @param boolean $boolRequired        -3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
-    * @param boolean $boolNewLine         -4: Em nova linha, DEFALUT is TRUE não Obrigatório.
-    * @param integer $intmaxLength        -5: Tamanho maximo
-    * @param string $strValue
-    * @param boolean $boolLabelAbove      -7: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $strName              - 1: ID do campo
+    * @param string $strLabel             - 2: Label
+    * @param boolean $boolRequired        - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param boolean $boolNewLine         - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param integer $intmaxLength        - 5: Tamanho maximo
+    * @param string $strValue             - 6: valor inicial do campo
+    * @param boolean $boolLabelAbove      - 7: Label acima, DEFAULT is FALSE na mesma linha
     * @param boolean $boolNoWrapLabel
     * @param integer $intSize
     * @param boolean $boolUseVirtualKeyboard
@@ -7123,12 +7143,12 @@ class TForm Extends TBox
     /**
     * Campo para entrada de numero de processo do serviço público
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param string $boolRequired
-    * @param string $boolNewLine
-    * @param string $strValue
-    * @param string $boolLabelAbove
+    * @param string $strName         - 1: ID do campo
+    * @param string $strLabel        - 2: Label
+    * @param string $boolRequired    - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string $strValue        - 5: valor inicial do campo
+    * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
     * @return TProcesso
     */
     public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
@@ -7138,17 +7158,17 @@ class TForm Extends TBox
        return $field;
     }
 
-        /**
+    /**
     * Campo para entrada de numeros de processos do TJDFT
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param string $boolRequired
-    * @param string $boolNewLine
-    * @param string $strValue
-    * @param string $boolLabelAbove
-    * @param boolean $boolAcceptNumeroDistribuicao 
-    * @param boolean $boolAcceptNumeroUnico 
+    * @param string $strName        - 1: ID do campo
+    * @param string $strLabel       - 2: Label
+    * @param string $boolRequired   - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+    * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string $strValue       - 5: valor inicial do campo
+    * @param string $boolLabelAbove - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
+    * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
     * @return TNumeroTJDFT
     */
     public function addNumeroTJDFTField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true )
@@ -7169,7 +7189,7 @@ class TForm Extends TBox
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
     * 
-     * @param string  $strName         - 1: id do campo
+     * @param string  $strName         - 1: ID do campo
      * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired    - 3: Obrigatório
      * @param string  $strAllowedFileTypes - Tipos de arquivos
@@ -7214,7 +7234,7 @@ class TForm Extends TBox
     *
     * @link http://digitalbush.com/projects/masked-input-plugin/
     *
-    * @param string $strName         - 1: id do campo
+    * @param string $strName         - 1: ID do campo
     * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired   - 3: Obrigatório
     * @param string $strMask
@@ -7235,7 +7255,7 @@ class TForm Extends TBox
     /**
      * Campo para criação de hiperlink no formulário
      *
-     * @param string $strName           - 1: id do campo
+     * @param string $strName           - 1: ID do campo
      * @param string $strLabel          - 2: Rotulo do campo que irá aparece na tela
      * @param string $strValue          - 3: Valor
      * @param string $strOnClick        - 4: Nome metodo JavScript
@@ -7258,7 +7278,7 @@ class TForm Extends TBox
     /**
      * Método para criar campo de edição de horas
      *
-     * @param string  $strName             - 1: id do campo
+     * @param string  $strName             - 1: ID do campo
      * @param string  $strLabel            - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired        - 3: True = Obrigatório; False (Defalt) = Não Obrigatório
      * @param string  $strMinValue         - 4: Menor Valor
@@ -7310,11 +7330,11 @@ class TForm Extends TBox
     /**
     * Adicionar treeview ao formulário.
     *
-    * @param mixed $strName            - 1: id do campo
-    * @param string $strRootLabel      - 2: Lavel do campo
+    * @param mixed $strName            - 1: ID do campo
+    * @param string $strRootLabel      - 2: Label do campo
     * @param mixed $arrData            - 3: array de dados
-    * @param mixed $strParentFieldName - 4: id do campo chave do pai
-    * @param mixed $strChildFieldName  - 5: id do campo chave dos filhos
+    * @param mixed $strParentFieldName - 4: ID do campo chave do pai
+    * @param mixed $strChildFieldName  - 5: ID do campo chave dos filhos
     * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
     * @param mixed $strInitialParentKey- 7:
     * @param mixed $mixUserDataFields  - 8: campos que serão passados quando clicamos no nó da arvore

@@ -73,21 +73,128 @@ class TCpfCnpj extends TMask
         $this->setAttribute('meta-callback',$this->getCallback());
 		return parent::show($print);
 	}
+
 	public function getFormated()
 	{
-		if($this->getValue())
-		{
-			$value = @preg_replace("/[^0-9]/","",$this->getValue() );
-			$tamanho = StringHelper::strlen($value);
-			if( $tamanho == 11 ){
-				return substr($value,0,3).".".substr($value,3,3).".".substr($value,6,3)."-".substr($value,9,2);
-			} else if ( $tamanho == 14 ) {
-				return substr($value,0,2).".".substr($value,2,3).".".substr($value,5,3)."/".substr($value,8,4)."-".substr($value,12,2);
-			}
+		if( $this->getValue() ){
+		  return self::formatarNumero($this->getValue());
 		}
-		return $this->value();
 	}
 
+	/**
+     * Recebe uma string e formata 
+     * ###.###.###-## para CPF
+     * ##.###.###/####-## CNPJ
+     * @param string $value
+     * @return string
+     */
+	public static function formatarNumero($value)
+	{
+		$value = preg_replace("/[^0-9]/","",$value);
+
+		$tamanho = StringHelper::strlen($value);
+		if( $tamanho == 11 ){
+			return substr($value,0,3).".".substr($value,3,3).".".substr($value,6,3)."-".substr($value,9,2);
+		} else if ( $tamanho == 14 ) {
+			return substr($value,0,2).".".substr($value,2,3).".".substr($value,5,3)."/".substr($value,8,4)."-".substr($value,12,2);
+		}
+
+		return $value;
+	}
+
+	/**
+     * Recebe uma string Formatada e retorna apenas os números
+     * ###.###.###-## para CPF
+     * ##.###.###/####-## CNPJ
+     * @param string $value
+     * @return string
+     */
+    public static function limpaCnpjCpf($value){
+        $limpo = preg_replace("/\D/", '', $value);
+        return $limpo;
+    }
+
+	/**
+     * Valida o número do CPF
+     * @param string $value
+     * @return boolean
+     */
+	public static function validarCpf($value){
+		$dv 		= false;
+		$cpf 		= self::limpaCnpjCpf($value);
+		if($cpf=='') {
+			return false;
+		}
+
+		$cpf_dv 	= substr($cpf,-2);
+		$controle 	= '';
+		// evitar sequencias de número. Ex:11111111111
+		for ( $i = 0; $i < 10; $i++ ) {
+			if( $cpf == str_repeat($i,11)){
+				$cpf_dv = '99'; // causar erro de validação
+				break;
+			}
+		}
+
+        $digito = null;
+		for ( $i = 0; $i < 2; $i++ ) {
+			$soma = 0;
+			for ( $j = 0; $j < 9; $j++ )
+			$soma += substr($cpf,$j,1)*(10+$i-$j);
+			if ( $i == 1 ) $soma += $digito * 2;
+			$digito = ($soma * 10) % 11;
+			if ( $digito == 10 ) $digito = 0;
+			$controle .= $digito;
+		}
+
+		if ( $controle != $cpf_dv ){
+		    return false;
+		}
+		return true;
+	}
+
+	/**
+     * Valida o número do CNPJ
+     * @param string $value
+     * @return boolean
+     */
+	//fonte:https://gist.github.com/guisehn/3276302
+	function validarCnpj($value)
+	{
+		$cnpj = preg_replace('/[^0-9]/', '', $value);
+		
+		// Valida tamanho
+		if (strlen($cnpj) != 14)
+			return false;
+
+		// Verifica se todos os digitos são iguais
+		if (preg_match('/(\d)\1{13}/', $cnpj))
+			return false;	
+
+		// Valida primeiro dígito verificador
+		for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++)
+		{
+			$soma += $cnpj[$i] * $j;
+			$j = ($j == 2) ? 9 : $j - 1;
+		}
+
+		$resto = $soma % 11;
+
+		if ($cnpj[12] != ($resto < 2 ? 0 : 11 - $resto))
+			return false;
+
+		// Valida segundo dígito verificador
+		for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)
+		{
+			$soma += $cnpj[$i] * $j;
+			$j = ($j == 2) ? 9 : $j - 1;
+		}
+
+		$resto = $soma % 11;
+
+		return $cnpj[13] == ($resto < 2 ? 0 : 11 - $resto);
+	}
+	
 	/**
 	* Retorna o CPF CNPJ sem formatação
 	*

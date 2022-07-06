@@ -50,7 +50,7 @@ use PHPUnit\Framework\TestCase;
 class FormDinHelperTest extends TestCase
 {
     public function testVersion() {
-		$expected = '4.16.1' ;
+		$expected = '4.17.3';
 		$result =  FormDinHelper::version();
 		$this->assertEquals( $expected , $result);
 	}
@@ -58,7 +58,7 @@ class FormDinHelperTest extends TestCase
 	    $expected = false;
 	    $result = FormDinHelper::versionMinimum('99.99.99');
 	    $this->assertEquals( $expected , $result);
-	}	
+	}
 	public function testVersionMinimum_true() {
 	    $expected = true;
 	    $result = FormDinHelper::versionMinimum('1.0.0');

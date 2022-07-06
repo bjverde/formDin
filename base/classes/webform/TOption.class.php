@@ -379,7 +379,7 @@ abstract class TOption extends TControl
 				$arrOptionsData = $this->getOptionsData();
 				foreach( $this->getOptions() as $k=>$v ) {
 					$k=trim($k);
-					$v=trim($v);
+					$v=(!empty($v))?trim($v):'';
 					$this->add( $opt = new TElement( 'option' ) );
 					$opt->setProperty( 'value', $k );
 					$opt->clearCss();

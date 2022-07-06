@@ -54,6 +54,44 @@ function combinarSelectIsUTF8($string) {
     return (utf8_encode(utf8_decode($string)) == $string);
 }
 
+/**
+ * Configura a conexão de banco. Se foi informado a constante ROOT_PATH vai
+ * procurar o arquivo $configFileName informado via POST. Se não foi definida
+ * a constante vai a configuração padrão do arquivo config_conexao.php
+ *
+ * @param String $configFileName 
+ * @return TPDOConnectionObj
+ */
+function getConfigBanco(String $configFileName) {
+	$tpdo = New TPDOConnectionObj(false);
+	if ( defined('ROOT_PATH') ) {
+		if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
+		$configFileNamePath = ROOT_PATH.DS.'includes'.DS.$configFileName;
+		if( !FileHelper::exists($configFileNamePath) ){
+			throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_CONFIG_ARRAY);
+		}
+		require_once $configFileNamePath;
+		$configArray = getConnectionArray();
+		$tpdo->connect(null,true,null,$configArray);
+	}else{
+		if ( !defined('BANCO') ) {
+			throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_CONFIG_GERAL);
+		}
+		$configArray= array(
+			'DBMS' => BANCO
+		   ,'PORT' => PORT
+		   ,'HOST' => HOST
+		   ,'DATABASE' => DATABASE
+		   ,'USERNAME' => USUARIO
+		   ,'PASSWORD' => SENHA
+		   ,'UTF8_DECODE' => 0
+	   );
+	   $tpdo->connect(null,true,null,$configArray);	
+	}
+	return $tpdo;
+}
+
+
 if( isset( $_REQUEST['descPrimeiraOpcao'] ) && combinarSelectIsUTF8( $_REQUEST['descPrimeiraOpcao'] ) )
 {
 	$_REQUEST['descPrimeiraOpcao'] = utf8_encode( $_REQUEST['descPrimeiraOpcao'] );
@@ -140,19 +178,7 @@ if( preg_match('/\.PK\a?/i',$pacoteCache[0]) > 0 ) {
 			}
 		}
 	} else {
-		$tpdo = New TPDOConnectionObj(false);
-		if( empty($configFileName) ){
-			$tpdo->connect(null,true,null,null);
-		}else{
-			if ( !defined('ROOT_PATH') ) {
-				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
-				return;
-			}
-			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
-			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
-			$configArray = getConnectionArray();
-			$tpdo->connect(null,true,null,$configArray);
-		}
+		$tpdo = getConfigBanco($configFileName);
 		$res = $tpdo->executeSql($sql);
 		if( $tpdo->getError() ) {
 			$res[$campoCodigo][] = 0;

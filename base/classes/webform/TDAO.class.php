@@ -1356,11 +1356,10 @@ class TDAO
 	*/
 	public function setMetadataDir( $strNewValue = null )
 	{
-		$this->metadataDir=trim( $strNewValue ) . '/';
+		$strNewValue = isset($strNewValue)?(string)trim($strNewValue):'';
+		$this->metadataDir=$strNewValue.'/';
 		$this->metadataDir=preg_replace( '/\/\//', '', $this->metadataDir ) . '/';
-
-		if ( !is_null( $strNewValue ) && !file_exists( $strNewValue ) )
-		{
+		if ( !is_null( $strNewValue ) && !file_exists( $strNewValue ) ){
 			$oldumask=umask( 0 );
 			@mkdir( $strNewValue, 0755, true );
 			umask( $oldumask );

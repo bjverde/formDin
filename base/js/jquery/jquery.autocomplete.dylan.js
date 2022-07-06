@@ -276,8 +276,7 @@ jQuery.autocomplete = function(input, options) {
 			results.innerHTML = "";
 
 			// if the field no longer has focus or if there are no matches, do not display the drop down
-			if( !hasFocus || data.length == 0 )
-			{
+			if( !hasFocus || data.length == 0 ){
 				return hideResultsNow();
 			}
 			if (jQuery.browser.msie) {
@@ -291,8 +290,7 @@ jQuery.autocomplete = function(input, options) {
 			// adaptação feita por Luis Eugênio para retirar a mascara antes de procurar campos formatados
 			//-----------------------------------------------------------------------------
 			var currentVal = q;
-			if(options.removeMask || data.length == 1 )
-			{
+			if(options.removeMask || data.length == 1 ){
             	q = q.replace(/[^0-9]/g,'');
 			}
 			//------------------------------------------------------------------------------
@@ -303,22 +301,17 @@ jQuery.autocomplete = function(input, options) {
 			//------------------------------------------------------------------------------
 			// adaptacao eugenio para selecionar automaticamente a primeira opção e retornar
 			//------------------------------------------------------------------------------
-			if(options.removeMask || data.length==1)
-			{
+			if(options.removeMask || data.length==1){
 				selectCurrent();
 				//$input.val(currentVal);
-				for( key in data )
-				{
+				for( key in data ){
 					this.value =  data[key];
 				}
-			}
-			else
-			{
+			}else{
 				showResults();
 			}
 			//------------------------------------------
 			//showResults();
-
 		} else {
 			hideResultsNow();
 		}
@@ -385,43 +378,33 @@ jQuery.autocomplete = function(input, options) {
 		//{
 			//qlc = q.toLowerCase();
 		//}
-		if(options.removeMask)
-		{
+		if(options.removeMask){
            	q = q.replace(/[^0-9]/g,'');
 		}
 		var data = options.cacheLength ? loadFromCache(q) : null;
 		// recieve the cached data
-		if (data)
-		{
+		if (data){
 			//alert('Tem data');
 			//alert( data );
 			receiveData(q, data);
 		// if an AJAX url has been supplied, try loading the data now
-		}
-		else if( (typeof options.url == "string") && (options.url.length > 0) )
-		{
+		} else if( (typeof options.url == "string") && (options.url.length > 0) ) {
 			//alert('Não tem data, vou buscar novamente no banco');
 			jQuery.get(makeUrl(q), function(data) {
-				if( data )
-				{
+				if( data ) {
 					//alert( data );
 					data = parseData(data);
 					addToCache(q, data);
 					receiveData(q, data);
-				}
-				else
-				{
+				} else {
 					alert(options.messageNotFound);
-					if( options.clearOnNotFound )
-					{
+					if( options.clearOnNotFound ) {
 						input.value='';
 					}
 				}
 			});
 		// if there's been no data found, remove the loading class
-		}
-		else
-		{
+		} else {
 			//alert(msgNenhumaOpcao);
 			alert(options.messageNotFound);
 			$input.removeClass(options.loadingClass);
@@ -432,38 +415,28 @@ jQuery.autocomplete = function(input, options) {
 	function makeUrl(q) {
 		var url;
 		// eugenio - alteração para detectar ?q ou &q
-		if( options.url.indexOf('?')== -1 )
-		{
+		if( options.url.indexOf('?')== -1 ){
 			url = options.url + "?q=" + encodeURI(q);
-		}
-		else
-		{
+		} else {
 			url = options.url + "&q=" + encodeURI(q);
 		}
 		// eugenio - adaptação feita para ler os valores atuais dos campos do formulário que farão parte do filtro
-		for( key in options.extraParams)
-		{
-			if( key.indexOf('_w_') == 0 )
-			{
+		for( key in options.extraParams){
+			if( key.indexOf('_w_') == 0 ){
 				var campoForm = key.replace('_w_','');
 				var aCampoForm = campoForm.split('|');
-				if( !aCampoForm[1] )
-				{
+				if( !aCampoForm[1] ){
 					aCampoForm[1] = aCampoForm[0];
 				}
-				if( fwGetObj )
-				{
+				if( fwGetObj ){
 					campoForm = fwGetObj( aCampoForm[0] );
-					if( campoForm )
-					{
+					if( campoForm ){
 						options.extraParams[key] = campoForm.value;
 					}
 				}
-
 			}
 		}
-		for (var i in options.extraParams)
-		{
+		for (var i in options.extraParams){
 			url += "&" + i + "=" + encodeURI(options.extraParams[i]);
 		}
 		return url;
@@ -478,8 +451,7 @@ extraParams:{"tablePackageFunction":"TESTE.PKG_TESTE.SEL_MUNICIPIO","searchField
 		if (!q) return null;
 
 		var qlc = q;
-		if ( !options.matchCase )
-		{
+		if ( !options.matchCase ){
 			qlc = q.toLowerCase();
 		}
 		if (cache.data[qlc])
@@ -487,12 +459,9 @@ extraParams:{"tablePackageFunction":"TESTE.PKG_TESTE.SEL_MUNICIPIO","searchField
 		if (options.matchSubset) {
 			for (var i = q.length - 1; i >= options.minChars; i--) {
 				var qs = q.substr(0, i);
-				if ( !options.matchCase )
-				{
+				if ( !options.matchCase ){
             		var c = cache.data[qs.toLowerCase()];
-				}
-				else
-				{
+				} else {
             		var c = cache.data[qs];
 				}
 				if (c) {

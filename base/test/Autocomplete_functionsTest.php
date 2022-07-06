@@ -56,7 +56,7 @@ class Autocomplete_functionsTest extends TestCase
       
         $esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'x%\') order by nome_camplo_coluna';
         
-        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
+        $retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,true);
         $this->assertEquals($esperado, $retorno);
     }
     
@@ -70,7 +70,7 @@ class Autocomplete_functionsTest extends TestCase
     	
     	$esperado = 'select nome_camplo_coluna from table_sys where upper(nome_camplo_coluna) like upper(\'%x%\') order by nome_camplo_coluna';
     	
-    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion);
+    	$retorno = tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,true);
     	
     	$this->assertEquals($esperado, $retorno);
     }

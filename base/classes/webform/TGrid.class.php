@@ -1322,7 +1322,7 @@ class TGrid extends TTable
             @unlink($tmpName);
         }
         if( !file_put_contents( $tmpName, serialize( $this->getData2Excel() ) ) ) {
-            $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',null,ENCODINGS));
+            $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',ENT_COMPAT,ENCODINGS));
         }
     }
     
@@ -1832,7 +1832,7 @@ class TGrid extends TTable
         if ( is_null( $this->actionColumnTitle ) ){
             return htmlentities( 'Ação',ENT_COMPAT, ENCODINGS );
         }
-        return htmlentities( $this->actionColumnTitle,null, ENCODINGS );
+        return htmlentities( $this->actionColumnTitle,ENT_COMPAT, ENCODINGS );
     }
     
     //---------------------------------------------------------------------------------------
@@ -1991,23 +1991,22 @@ class TGrid extends TTable
      * será criado uma nova variavel com valor de strName
      *
      *
-     * @param string $strName       - Nome do variavel no POST
-     * @param string $strTitle      - Titulo que aparece no grid
-     * @param string $strKeyField   - Valor que será passado no POST
-     * @param string $strDescField  - Descrição do campo, valor que irá aparecer o gride
+     * @param string $strName       - 1: Nome do variavel no POST
+     * @param string $strTitle      - 2: Titulo que aparece no grid
+     * @param string $strKeyField   - 3: Valor que será passado no POST
+     * @param string $strDescField  - 4: Campo do grid que será usado na descrição do campo, valor que irá aparecer o gride
      * @param boolean $boolReadOnly
      * @param boolean $boolAllowCheckAll  - TRUE = pode selecionar todos , FALSE = não permite multiplas seleções
      * @return TGridCheckColumn
      */
     public function addCheckColumn( string $strName
-        , string $strTitle = null
-        , $strKeyField
-        , $strDescField = null
-        , $boolReadOnly = null
-        , $boolAllowCheckAll = null )
+                                  , string $strTitle = null
+                                  , $strKeyField
+                                  , $strDescField = null
+                                  , $boolReadOnly = null
+                                  , $boolAllowCheckAll = null )
     {
-        if ( !$strKeyField )
-        {
+        if ( !$strKeyField ){
             $strKeyField = strtoupper( $strName );
         }
         $col = new TGridCheckColumn( $strName, $strTitle, $strKeyField, $strDescField, $boolReadOnly, $boolAllowCheckAll );
@@ -2038,17 +2037,17 @@ class TGrid extends TTable
     /*****
      * Coluna do tipo select
      *
-     * @param string $strName         - 1: ID do campos
-     * @param string $strTitle        - 2: Titulo que irá aparecer para o usuário no grid
-     * @param string $strFieldName    - 3: ID do campo na origem dos dados do grid
-     * @param mixed $mixOptions       - 4: Opções caso o Campo do gride não seja um array
-     * @param mixed $strWidth         - 5: largura do campos em pixel
-     * @param boolean $boolReadOnly   - 6: Somente Leitura
-     * @param string $strFirstOptionText  - 7: Label do Primeiro elemento
-     * @param string $strFirstOptionValue - 8: Valor do Primeiro elemento. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null  
-     * @param string $strKeyField         - 9: 
-     * @param string $strDisplayField     - 10:
-     * @param string $strInitialValueField -11: Default Valeu
+     * @param string $strName            -  1: ID do campos
+     * @param string $strTitle           -  2: Titulo que irá aparecer para o usuário no grid
+     * @param string $strFieldName       -  3: ID do campo na origem dos dados do grid
+     * @param mixed $mixOptions          -  4: Opções caso o Campo do gride não seja um array
+     * @param mixed $strWidth            -  5: largura do campos em pixel
+     * @param boolean $boolReadOnly      -  6: Somente Leitura
+     * @param string $strFirstOptionText -  7: Label do Primeiro elemento
+     * @param string $strFirstOptionValue-  8: Valor do Primeiro elemento. Para o valor DEFAULT informe o ID do $mixOptions e $strFirstOptionText = '' não pode ser null  
+     * @param string $strKeyField        -  9: 
+     * @param string $strDisplayField    - 10:
+     * @param string $strInitialValueField-11: Default Valeu
      * @return TGridSelectColumn
      */
     public function addSelectColumn( $strName

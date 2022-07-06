@@ -42,15 +42,27 @@
  // marcar os campos obrigatórios com Asterisco na frente
 define('REQUIRED_FIELD_MARK', '*');
 
+d($_REQUEST);
+
 $frm = new TForm('Exemplo do Campo Texto');
+$frm->addCssFile('css/css_formDinv5.css');
 
 $frm->addTextField('nome', 'Nome da pessoa sem quebra:', 60, false, 60, null, null, null, null, null, true);
 
-$frm->addTextField('nome2', 'Nome Desabilitado:', 80, null, null, 'Desabilitado', true, null, null, true)->setEnabled(false);
 $frm->addTextField('nome3', 'Nome Somente Leitura:', 80, true, null, 'Somente leitura', true, null, null, true)->setReadOnly(true);
+
+
+$html1 = '<b>ATENÇÃO</b> Eviete ao maximo usar setEnabled.'
+         .'<br>'
+         .'<br>Existem vários casos que o campo desabilitados não funcionada corretamente'
+         .'<br>';
+
+$frm->addHtmlField('html1', $html1, null, null, null, null)->setClass('boxAlert',false);
+$frm->addTextField('nome2', 'Nome Desabilitado:', 80, null, null, 'Desabilitado', true, null, null, true)->setEnabled(false);
 
 // botões de ação
 $frm->setAction('Atualizar');
+$frm->addButton('Post');
 $frm->addButton('Validar', null, null, 'fwValidateFields()');
 $frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
