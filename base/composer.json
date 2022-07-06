@@ -6,6 +6,7 @@
 		"php" : ">=7.4.0",
 		"phpmailer/phpmailer" : "^6.6",
 		"components/font-awesome" : "^6.1",
+		"slim/psr7" : "^1.5",
 		"slim/slim" : "^4.10",
 		"tuupola/slim-basic-auth" : "^3.3",
 		"tuupola/slim-jwt-auth" : "^3.6"
