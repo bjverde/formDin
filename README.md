@@ -42,10 +42,10 @@ O FormDin compõe-se por um conjunto de componentes de software, que proveem uma
 A estrutura da aplicação utilizada pelo FormDin é composta por três classes a saber: TApplication, TForm e TPDOConnection. Elas são responsáveis pela implementação do padrão MVC ( Model, View e Controller). A classe TApplication (controller) é a responsável por receber as requisições e executar as ações pertinentes. A classe TForm ( view ) é a responsável pela criação dos formulários de entrada de dados. A classe TPDOConnection (model) é a responsável em recuperar e gravar as informações no banco de dados.
 
 
-![Tela formDin 4.1.5 App01](https://raw.githubusercontent.com/bjverde/formDin/utf8/documents/img/screenshot-2018-2-4_APPEV1_01.png)
+![Tela formDin 4.1.5 App01](/documents/img/screenshot-2018-2-4_APPEV1_01.png)
 
 
-![Tela formDin 4.1.5 App02](https://raw.githubusercontent.com/bjverde/formDin/utf8/documents/img/screenshot-2018-2-4_APPEV2_01.png)
+![Tela formDin 4.1.5 App02](/documents/img/screenshot-2018-2-4_APPEV2_01.png)
 
 
 ## Ambiente formDin
