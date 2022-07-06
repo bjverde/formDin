@@ -31,8 +31,9 @@ class Meta_tipoAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
-        return $response;
+        $msgJson = json_encode($msg);
+        $response->getBody()->write( $msgJson );
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     //--------------------------------------------------------------------------------
@@ -52,8 +53,9 @@ class Meta_tipoAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
-        return $response;
+        $msgJson = json_encode($msg);
+        $response->getBody()->write( $msgJson );
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     //--------------------------------------------------------------------------------
@@ -73,8 +75,9 @@ class Meta_tipoAPI
         $controller = new \Meta_tipo;
         $controller->save($vo);
 
-        $response = $response->withJson($msg);
-        return $response;
+        $msgJson = json_encode($msg);
+        $response->getBody()->write( $msgJson );
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     //--------------------------------------------------------------------------------
@@ -83,7 +86,8 @@ class Meta_tipoAPI
         $id = $args['id'];
         $controller = new \Meta_tipo;
         $msg = $controller->delete($id);
-        $response = $response->withJson($msg);
-        return $response;
+        $msgJson = json_encode($msg);
+        $response->getBody()->write( $msgJson );
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }
