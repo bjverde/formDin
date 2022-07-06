@@ -257,6 +257,7 @@ class FormDinHelper
     }
     
     /**
+     * @codeCoverageIgnore
      * Verifica se o modulo do apache está instaldo ou não
      * @param string $moduloApache
      * @return boolean
