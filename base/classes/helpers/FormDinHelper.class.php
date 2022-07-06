@@ -256,5 +256,11 @@ class FormDinHelper
     	return $result;
     }
     
+    public static function ApacheModule($moduloApache) 
+    {
+    	$listModulos = apache_get_modules();
+        $result = in_array($moduloApache, $listModulos);
+        return $result;
+    }
 }
 ?>
