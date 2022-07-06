@@ -3,6 +3,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
+use api_controllers\SysinfoAPI;
+
 /**
  * Instantiate App
  *
@@ -32,14 +34,34 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 
-$urlChamada = $_SERVER["REQUEST_URI"];
+$urlChamada = ServerHelper::getRequestUri(true);
+$urlChamada = explode('api/', $urlChamada);
+$urlChamada = $urlChamada[0];
+$urlChamada = $urlChamada.'api/';
 // Define app routes
-$app->get($urlChamada, function (Request $request, Response $response, $args) {
-    $msg = "Hello, mundo";
+$app->get($urlChamada, function (Request $request, Response $response, $args) use ($app) {
+    $url = \ServerHelper::getFullServerName();
+    $routes = $app->getRouteCollector()->getRoutes();
+    $routesArray = array();
+    foreach ($routes as $route) {
+        $routeArray = array();
+        $routeArray['id']  = $route->getIdentifier();
+        $routeArray['name']= $route->getName();
+        $routeArray['url'] = $url.$route->getPattern();
+        $routesArray[] = $routeArray;
+    }
+    $msg = array( 'info'=> SysinfoAPI::info()
+                , 'endpoints'=>array( 'qtd'=> \CountHelper::count($routesArray)
+                                    ,'result'=>$routesArray
+                                    )
+                );
+    
     $msgJson = json_encode($msg);
     $response->getBody()->write( $msgJson );
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get($urlChamada.'sysinfo', SysinfoAPI::class . ':getInfo');
 
 // Run app
 $app->run();
