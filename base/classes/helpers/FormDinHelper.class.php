@@ -256,6 +256,11 @@ class FormDinHelper
     	return $result;
     }
     
+    /**
+     * Verifica se o modulo do apache está instaldo ou não
+     * @param string $moduloApache
+     * @return boolean
+     */
     public static function ApacheModule($moduloApache) 
     {
     	$listModulos = apache_get_modules();
