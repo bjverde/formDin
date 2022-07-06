@@ -1199,21 +1199,26 @@ class TApplication extends TLayout {
 	        throw new DomainException(TMessage::CSS_FILE_FORM_DEFAULT_FAIL);
 	    }
 	}
+	
 	public function getCssFileFormDefault() {
 	    return $this->cssFileFormDefault;
 	}
-	
-	
+
 	public function setLoginInfo($strInfo = null) {
-		$this->loginInfo = preg_replace ( '/' . chr ( 10 ) . '/', '<br/>', $strInfo );
+		if( empty($strInfo) ){
+			$this->loginInfo = '';
+		}else{
+			$this->loginInfo = preg_replace ( '/' . chr ( 10 ) . '/', '<br/>', $strInfo );
+		}
 	}
+
 	public function getLoginInfo() {
 		if (isset ( $this->onGetLoginInfo ) && function_exists ( $this->removeIllegalChars ( $this->onGetLoginInfo ) )) {
 			return call_user_func ( $this->getOnGetLoginInfo () );
 		}
 		return $this->loginInfo;
 	}
-	
+
 	/**
 	 * Define o conetudo ou o arquivo para montagem do cabeçalho da página
 	 * 
@@ -1222,6 +1227,7 @@ class TApplication extends TLayout {
 	public function setHeaderContent($strNewValue = null) {
 		$this->headerContent = $strNewValue;
 	}
+
 	public function getHeaderContent() {
 		if ( FormDinHelper::pregMatch( '/\.php?|\.inc|\.htm?/', $this->headerContent ) > 0) {
 			if ( FileHelper::exists( $this->headerContent) ) {
@@ -1352,7 +1358,7 @@ class TApplication extends TLayout {
 	            $userInfo = 'CPF:' . formatar_cpf_cnpj ( $_SESSION [APLICATIVO] ["login"] ["num_cpf"] ) . '<br/>' . $_SESSION [APLICATIVO] ["login"] ["nom_pessoa"] ;
 	        }
 	        
-	        if (preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
+	        if (!empty($this->getLoginInfo ()) && preg_match ( '/<input/i', $this->getLoginInfo () ) == 0) {
 	            $userInfo =  $userInfo. '<br/>' . $btnLogOut;
 	        }
 	    } else {
