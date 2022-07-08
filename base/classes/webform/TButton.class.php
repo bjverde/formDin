@@ -143,26 +143,18 @@ class TButton extends TControl
 		}
 
 		// o evento action tem precedencia sobre o evento onClick
-		if((string)$this->getAction()!='')
-		{
-			if( $this->getSubmitAction() )
-			{
+		if( (string)$this->getAction()!='') {
+			$id = empty($this->getId())?'':ucwords($this->getId());
+			if( $this->getSubmitAction() ){
 				$formAction = 'fwFazerAcao("'.$this->getAction().'")';
-// 				$this->addEvent('onclick',$jsConfirm.'if( typeof(btn'.ucwords($this->getId()).'OnClick)=="function"){btn'.ucwords($this->getId()).'OnClick(this);return true;};this.disabled=true;this.value="Aguarde";this.style.color="red";'.$formAction);
-				$this->addEvent('onclick',$jsConfirmBegin.'if( typeof(btn'.ucwords($this->getId()).'OnClick)=="function"){btn'.ucwords($this->getId()).'OnClick(this);return true;};jQuery(this).attr("disabled","true").val("Aguarde").css("color","red");'.$formAction.$jsConfirmEnd);
+				$this->addEvent('onclick',$jsConfirmBegin.'if( typeof(btn'.$id.'OnClick)=="function"){btn'.$id.'OnClick(this);return true;};jQuery(this).attr("disabled","true").val("Aguarde").css("color","red");'.$formAction.$jsConfirmEnd);
+			}else{
+				$this->addEvent('onclick',$jsConfirmBegin.'if( typeof(btn'.$id.'OnClick)=="function"){btn'.$id.'OnClick(this);return true;};.'.$jsConfirmEnd);
 			}
-			else
-			{
-// 				$this->addEvent('onclick',$jsConfirm.'if( typeof(btn'.ucwords($this->getId()).'OnClick)=="function"){btn'.ucwords($this->getId()).'OnClick(this);return true;};');
-				$this->addEvent('onclick',$jsConfirmBegin.'if( typeof(btn'.ucwords($this->getId()).'OnClick)=="function"){btn'.ucwords($this->getId()).'OnClick(this);return true;};.'.$jsConfirmEnd);
-			}
-			//$this->addEvent('onclick',$jsConfirm.'if( typeof(btn'.ucwords($this->getId()).'OnClick)=="function"){btn'.ucwords($this->getId()).'OnClick(this);return true;};this.disabled=true;this.value="Aguarde";this.style.color="red";fwFazerAcao("'.$this->getAction().'")');
-			//$this->addEvent('onclick','if(!'.$this->getId().'Click()) { return false } '.$jsConfirm.'fwFazerAcao("'.$this->getAction().'")');
-		}
-		else if($this->getOnClick())
-		{
+		} else if( $this->getOnClick() ){
 			$this->setEvent('onclick',$jsConfirmBegin.$this->getOnClick().$jsConfirmEnd,false);
 		}
+
 		if( ! $this->getEnabled() ){
 			$this->setCss('cursor','default');
 			if( ! $this->getProperty('title') ){

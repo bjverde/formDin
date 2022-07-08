@@ -22,8 +22,9 @@ class SysinfoAPI {
     //--------------------------------------------------------------------------------
     public static function getInfo(Request $request, Response $response, array $args)
     {
-        $result = self::info();        
-        $response = $response->withJson($result);
-        return $response;
+        $msg = self::info();
+        $msgJson = json_encode($msg);
+        $response->getBody()->write( $msgJson );
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }
