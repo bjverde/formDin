@@ -7145,9 +7145,9 @@ class TForm Extends TBox
     * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
     * @return TProcesso
     */
-    public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroProcessoAA=true, $boolAcceptNumeroProcessoAAAA=true, $boolAcceptNumeroSEI=true )
+    public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSEI=true )
     {
-       $field = new TProcesso( $strName, $strValue, $boolRequired, $boolAcceptNumeroProcessoAA, $boolAcceptNumeroProcessoAAAA, $boolAcceptNumeroSEI );
+       $field = new TProcesso( $strName, $strValue, $boolRequired, $boolAcceptNumeroProcessoAAouAAAA, $boolAcceptNumeroSEI );
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
        return $field;
     }
