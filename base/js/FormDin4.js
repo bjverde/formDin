@@ -865,7 +865,7 @@ function fwFormatarCep(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwFormatarProcesso(e, boolAcceptNumeroProcessoAA, boolAcceptNumeroProcessoAAAA, boolAcceptNumeroSEI) {
+function fwFormatarProcesso(e, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumeroSEI) {
 
 	//  alert(e.value);
 
@@ -876,16 +876,10 @@ function fwFormatarProcesso(e, boolAcceptNumeroProcessoAA, boolAcceptNumeroProce
 //   alert(valor);
 	// alert(tam);
 
-	if (boolAcceptNumeroProcessoAA.toLowerCase() == 'true') {
-		numeroProcessoAA = true;
+	if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
+		numeroProcessoAAouAAAA = true;
 	} else {
-		numeroProcessoAA = false;
-	}
-
-	if (boolAcceptNumeroProcessoAAAA.toLowerCase() == 'true') {
-		numeroProcessoAAAA = true;
-	} else {
-		numeroProcessoAAAA = false;
+		numeroProcessoAAouAAAA = false;
 	}
 
 	if (boolAcceptNumeroSEI.toLowerCase() == 'true') {
@@ -893,36 +887,33 @@ function fwFormatarProcesso(e, boolAcceptNumeroProcessoAA, boolAcceptNumeroProce
 	} else {
 		numeroSEI = false;
 	}
+	
 
-	// alert(numeroProcessoAA);
-	// alert(numeroProcessoAAAA);
-	// alert(numeroSEI);
+	// alert(numeroProcessoAA + ' ' + numeroProcessoAAAA + ' ' + numeroSEI);
 
 	//APENAS processos do tipo NÃO SEI
-	if ((numeroProcessoAA == true || numeroProcessoAAAA == true) && numeroSEI != true ) {
+	if ((numeroProcessoAAouAAAA == true ) && numeroSEI != true ) {
+		// alert("formatar processo NAO SEI");
 		retorno = fwFormatarProcessoNaoSei(valor);
-	}
 
 	//APENAS processos do tipo SEI
-	if ((numeroProcessoAA != true || numeroProcessoAAAA != true) && numeroSEI == true) {
+	} else if ((numeroProcessoAAouAAAA != true ) && numeroSEI == true ) {
 
 		// alert("Formatar processo SEI");
 
 		retorno = fwFormatarProcessoSei(valor);
 
+	//Qualquer processo
+	} else if ((numeroProcessoAAouAAAA == numeroSEI ) ) {
+		// if (tam == ) {
+			
+		// } else {
+			
+		// }
+		// alert("Formatar Qualquer coisa ");
+		retorno = fwFormatarProcessoAAAAeSei(valor);
 
 	}
-
-	//Qualquer processo
-	// if (( numeroProcessoAA == numeroProcessoAAAA == numeroSEI ) ) {
-	// 	// if (tam == ) {
-			
-	// 	// } else {
-			
-	// 	// }
-	// 	retorno = fwFormatarProcessoSei(valor);
-	// 	alert("Formatar processo SEI");
-	// }
 
 	e.value = retorno;
 	return e;
@@ -949,6 +940,19 @@ function fwFormatarProcessoNaoSei(e) {
 	else
 		s = r.substring(0, tam + 3);
 	e.value = s;
+	return s;
+}//-----------------------------------------------------------------------------------------
+function fwFormatarProcessoAAAAeSei(e) {
+	var s = "";
+	s = fwFiltraCampo(e);
+	tam = s.length;
+
+	if (tam == 15 || tam == 17) {
+		retorno = fwFormatarProcessoNaoSei(s);
+	} else {
+		retorno = fwFormatarProcessoSei(s);
+	}
+	s = retorno;
 	return s;
 }//-----------------------------------------------------------------------------------------
 function fwFormatarProcessoSei(e) {
