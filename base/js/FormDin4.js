@@ -1144,7 +1144,7 @@ function fwValidarNumeroUnico(e,clear) {
 	return dv;
 }
 //-----------------------------------------------------------------------------------------
-function fwValidarProcesso(e,clear)
+function fwValidarProcessoAAouAAAA(e,clear)
 {
 	var dv = false;
 	clear  = clear||true;
