@@ -42,7 +42,9 @@
 $frm = new TForm('Campos de processos');
 
 $frm->addGroupField('Federal','Campos do Processo Federal');
-    $frm->addProcessoField('processo','Campo de processo federal: ',false,true)->setExampleText('Ex: 02000.000343/2020-51');
+    $frm->addProcessoField('processo1','Campo de processo federal (antigo): ',false,true,null,null,null,true,false,false)->setExampleText('Ex: 02001.015960/2022-11');
+    $frm->addProcessoField('processo2','Campo de processo federal: ',false,true,null,null,null,false,true,false)->setExampleText('Ex: 02000.000343/2020-51');
+    $frm->addProcessoField('processo3','Campo de processo federal (SEI): ',false,true,null,null,null,false,false,true)->setExampleText('Ex: ##.##.####.#######/####-## / 190441920000009202280');
 $frm->closeGroup();
 
 $frm->addGroupField('TJDFT','Campos do Processo Judiciário');
