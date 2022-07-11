@@ -70,7 +70,7 @@ class TProcesso extends TEdit
 		$this->setFieldType('processo');
 
 		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSEI."')");
-		// $this->addEvent('onblur','fwValidarProcesso(this)');
+		$this->addEvent('onblur','fwValidarProcesso(this)');
 	}
 
 	public function getFormated()
