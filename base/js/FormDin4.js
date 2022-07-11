@@ -865,28 +865,121 @@ function fwFormatarCep(e) {
 	return s;
 }
 //-----------------------------------------------------------------------------------------
-function fwFormatarProcesso(e)
-{
+function fwFormatarProcesso(e, boolAcceptNumeroProcessoAA, boolAcceptNumeroProcessoAAAA, boolAcceptNumeroSEI) {
+
+	//  alert(e.value);
+
+	var valor = fwFiltraCampo(e.value);
+	var retorno = '';
+	var tam = valor.length;
+
+//   alert(valor);
+	// alert(tam);
+
+	if (boolAcceptNumeroProcessoAA.toLowerCase() == 'true') {
+		numeroProcessoAA = true;
+	} else {
+		numeroProcessoAA = false;
+	}
+
+	if (boolAcceptNumeroProcessoAAAA.toLowerCase() == 'true') {
+		numeroProcessoAAAA = true;
+	} else {
+		numeroProcessoAAAA = false;
+	}
+
+	if (boolAcceptNumeroSEI.toLowerCase() == 'true') {
+		numeroSEI = true;
+	} else {
+		numeroSEI = false;
+	}
+
+	// alert(numeroProcessoAA);
+	// alert(numeroProcessoAAAA);
+	// alert(numeroSEI);
+
+	//APENAS processos do tipo NÃO SEI
+	if ((numeroProcessoAA == true || numeroProcessoAAAA == true) && numeroSEI != true ) {
+		retorno = fwFormatarProcessoNaoSei(valor);
+	}
+
+	//APENAS processos do tipo SEI
+	if ((numeroProcessoAA != true || numeroProcessoAAAA != true) && numeroSEI == true) {
+
+		// alert("Formatar processo SEI");
+
+		retorno = fwFormatarProcessoSei(valor);
+
+
+	}
+
+	//Qualquer processo
+	// if (( numeroProcessoAA == numeroProcessoAAAA == numeroSEI ) ) {
+	// 	// if (tam == ) {
+			
+	// 	// } else {
+			
+	// 	// }
+	// 	retorno = fwFormatarProcessoSei(valor);
+	// 	alert("Formatar processo SEI");
+	// }
+
+	e.value = retorno;
+	return e;
+
+}//-----------------------------------------------------------------------------------------
+function fwFormatarProcessoNaoSei(e) {
 	var s = "";
-	s =  fwFiltraCampo(e.value);
-	tam =  s.length;
-	if ( tam >15 ) // && s.substring(0,5) == "02000" && s.substring(11,13) == "20" )
+	s = fwFiltraCampo(e);
+	tam = s.length;
+	if (tam > 15) // && s.substring(0,5) == "02000" && s.substring(11,13) == "20" )
 		ano_dig = 4;
 	else
 		ano_dig = 2;
 
-	r = s.substring(0,5) + "." + s.substring(5,11) + "/";
-	r+= s.substring(11,11+ano_dig)  + "-" + s.substring(11+ano_dig,13+ano_dig);
+	r = s.substring(0, 5) + "." + s.substring(5, 11) + "/";
+	r += s.substring(11, 11 + ano_dig) + "-" + s.substring(11 + ano_dig, 13 + ano_dig);
 	//window.status = r + 'tam:'+tam;
-	if ( tam < 6 )
-		s = r.substring(0,tam);
-	else if ( tam < 12 )
-		s = r.substring(0,tam+1);
-	else if ( tam < 12 + ano_dig )
-		s = r.substring(0,tam+2);
+	if (tam < 6)
+		s = r.substring(0, tam);
+	else if (tam < 12)
+		s = r.substring(0, tam + 1);
+	else if (tam < 12 + ano_dig)
+		s = r.substring(0, tam + 2);
 	else
-		s = r.substring(0,tam+3);
+		s = r.substring(0, tam + 3);
 	e.value = s;
+	return s;
+}//-----------------------------------------------------------------------------------------
+function fwFormatarProcessoSei(e) {
+
+	// alert(e);
+
+	var s = "";
+	s = fwFiltraCampo(e);
+	tam = s.length;
+	
+	// 12.34.5678.9012345/6789-01
+		// 2.2.4.7/4-2
+		// 12345678901234567890123456
+		// 19 04 4192 0000009 2022 80
+
+	r = s.substring(0, 2) + "." + s.substring(2, 4) + "." + s.substring(4, 8) + "." + s.substring(8, 15) + "/";
+	r += s.substring(15, 19) + "-" + s.substring(19, 21);
+	tam = s.length;
+
+	if (tam < 2)
+		s = r.substring(0, tam);
+	else if (tam < 4)
+		s = r.substring(0, tam + 1);
+	else if (tam < 8)
+		s = r.substring(0, tam + 2);
+	else if (tam < 15)
+		s = r.substring(0, tam + 3);
+	else if (tam < 19)
+		s = r.substring(0, tam + 4);
+	else
+		s = r.substring(0, tam + 5);
 	return s;
 }
 //-----------------------------------------------------------------------------------------
