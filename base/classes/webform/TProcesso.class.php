@@ -51,12 +51,28 @@ class TProcesso extends TEdit
 	* @param string $value
 	* @param boolean $required
 	*/
-	public function __construct($strName,$strValue=null,$boolRequired=null)
+	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroProcessoAA=true, $boolAcceptNumeroProcessoAAAA=true, $boolAcceptNumeroSEI=true )
 	{
-		parent::__construct($strName,$strValue,21,$boolRequired);
+
+		if ( ( $boolAcceptNumeroProcessoAA == true || $boolAcceptNumeroProcessoAAAA == true ) && $boolAcceptNumeroSEI != true ){
+			$intMaxLength = 21;
+			$intSize = 22;
+		}
+
+		if ( ( $boolAcceptNumeroProcessoAA != true || $boolAcceptNumeroProcessoAAAA != true ) && $boolAcceptNumeroSEI == true ){
+			$intMaxLength = 26;
+			$intSize = 27;
+		}
+
+			$numeroProcessoAA = ( $boolAcceptNumeroProcessoAA ) ? 'true' : 'false';
+			$numeroProcessoAAAA = ( $boolAcceptNumeroProcessoAAAA ) ? 'true' : 'false';
+			$numeroSEI = ( $boolAcceptNumeroSEI ) ? 'true' : 'false';		
+
+		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('processo');
-		$this->addEvent('onkeyup','fwFormatarProcesso(this)');
-		$this->addEvent('onblur','fwValidarProcesso(this)');
+
+		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAA."','".$numeroProcessoAAAA."','".$numeroSEI."')");
+		// $this->addEvent('onblur','fwValidarProcesso(this)');
 	}
 
 	public function getFormated()
@@ -70,18 +86,48 @@ class TProcesso extends TEdit
 	{
 		$value = preg_replace("/\D/", '', $value);
 
-		if ( ! $value) // nenhum valor informado
+		if ( ! $value ) // nenhum valor informado
 		{
 			return null;
 		}
-		if( strlen($value) == 17 )
-		{
-			$value = substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,4).'-'.substr($value,15,2);
-		}
-		else
-		{
+
+
+		// 02001.015960/2022-11
+		// 12345.678901/2345-67
+
+		// if( strlen($value) == 21 ){
+		// // ##.##.####.#######/####-##
+
+		// // 12.34.5678.9012345/6789-01
+		// // 2.2.4.7/4-2
+		// // 12345678901234567890123456
+		// // 19 04 4192 0000009 2022 80
+		// 	$value = substr( $value,0,2 ).'.'.substr( $value,2,2 ).'.'.substr( $value,4,4 ).'.'.substr( $value,8,7 ).'/'.substr( $value,15,4 ).'-'.substr( $value,19,2 );
+
+		// }
+		
+		if ( strlen($value) == 17 ){
+		// 02001.015960/2022-11
+		// 12345.678901/2345-67
+			$value = substr( $value,0,5 ).'.'.substr( $value,5,6 ).'/'.substr( $value,11,4 ).'-'.substr( $value,15,2 );
+
+		} else if( strlen($value) == 13 ){ 
+			//12345.678901/23		
 			$value=substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,2).'-'.substr($value,13,2);
+		} else {
+		// ##.##.####.#######/####-##
+		// 12.34.5678.9012345/6789-01
+		// 2.2.4.7/4-2
+		// 12345678901234567890123456
+		// 19 04 4192 0000009 2022 80
+			$value = substr( $value,0,2 ).'.'.substr( $value,2,2 ).'.'.substr( $value,4,4 ).'.'.substr( $value,8,7 ).'/'.substr( $value,15,4 ).'-'.substr( $value,19,2 );
+
 		}
+
+
+
+
+
 		return $value;
 
 	}
