@@ -953,20 +953,13 @@ function fwFormatarProcessoNaoSei(e) {
 }//-----------------------------------------------------------------------------------------
 function fwFormatarProcessoSei(e) {
 
-	// alert(e);
-
 	var s = "";
 	s = fwFiltraCampo(e);
 	tam = s.length;
 	
 	// 12.34.5678.9012345/6789-01
-		// 2.2.4.7/4-2
-		// 12345678901234567890123456
-		// 19 04 4192 0000009 2022 80
-
 	r = s.substring(0, 2) + "." + s.substring(2, 4) + "." + s.substring(4, 8) + "." + s.substring(8, 15) + "/";
 	r += s.substring(15, 19) + "-" + s.substring(19, 21);
-	tam = s.length;
 
 	if (tam < 2)
 		s = r.substring(0, tam);
