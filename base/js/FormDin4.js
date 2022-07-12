@@ -1144,6 +1144,41 @@ function fwValidarNumeroUnico(e,clear) {
 	return dv;
 }
 //-----------------------------------------------------------------------------------------
+function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumeroSEI) {
+	var valor = fwFiltraCampo(e.value);
+	tam = valor.length;
+	clear = clear || true;
+
+	//	Mantendo a compatibilidade com o funcionamento anterior 
+	if (boolAcceptNumeroProcessoAAouAAAA == null && boolAcceptNumeroSEI == null) {
+		fwValidarProcessoAAouAAAA(e, clear);
+	} else {
+		if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
+			numeroProcessoAAouAAAA = true;
+		} else {
+			numeroProcessoAAouAAAA = false;
+		}
+
+		if (boolAcceptNumeroSEI.toLowerCase() == 'true') {
+			numeroSEI = true;
+		} else {
+			numeroSEI = false;
+		}
+
+		if (numeroProcessoAAouAAAA == true && numeroSEI != true) {
+			fwValidarProcessoAAouAAAA(e, clear);
+		} else if (numeroProcessoAAouAAAA != true && numeroSEI == true) {
+			fwValidarNumeroDistribuicao(e, clear);
+		} else {
+			if (tam == 15 || tam == 17) {
+				fwValidarProcessoAAouAAAA(e, clear);
+			} else { 
+				fwValidarProcessoSEI(e, clear);
+			}
+		} 
+	} 
+}//-----------------------------------------------------------------------------------------
+
 function fwValidarProcessoAAouAAAA(e,clear)
 {
 	var dv = false;
