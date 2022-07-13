@@ -1144,13 +1144,13 @@ function fwValidarNumeroUnico(e,clear) {
 	return dv;
 }
 //-----------------------------------------------------------------------------------------
-function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumeroSEI) {
+function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumeroSeiMP) {
 	var valor = fwFiltraCampo(e.value);
 	tam = valor.length;
 	clear = clear || true;
 
 	//	Mantendo a compatibilidade com o funcionamento anterior 
-	if (boolAcceptNumeroProcessoAAouAAAA == null && boolAcceptNumeroSEI == null) {
+	if (boolAcceptNumeroProcessoAAouAAAA == null && boolAcceptNumeroSeiMP == null) {
 		fwValidarProcessoAAouAAAA(e, clear);
 	} else {
 		if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
@@ -1159,7 +1159,7 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 			numeroProcessoAAouAAAA = false;
 		}
 
-		if (boolAcceptNumeroSEI.toLowerCase() == 'true') {
+		if (boolAcceptNumeroSeiMP.toLowerCase() == 'true') {
 			numeroSEI = true;
 		} else {
 			numeroSEI = false;
@@ -1173,47 +1173,49 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 			if (tam == 15 || tam == 17) {
 				fwValidarProcessoAAouAAAA(e, clear);
 			} else { 
-				fwValidarProcessoSEI(e, clear);
+				fwValidarProcessoSeiMP(e, clear);
 			}
 		} 
 	} 
 }//-----------------------------------------------------------------------------------------
+function fwValidarProcessoSeiMP(e, clear) {
+	
+	return null;
+}//-----------------------------------------------------------------------------------------
 
-function fwValidarProcessoAAouAAAA(e,clear)
-{
+function fwValidarProcessoAAouAAAA(e, clear) {
 	var dv = false;
-	clear  = clear||true;
+	clear = clear || true;
 	s = fwFiltraCampo(e.value);
 	tam = s.length
 	if ( tam == 15 || tam == 17 ) {
-		if ( tam == 15 && s.substring(11,13) < 60 ) {
-			s = s.substring(0,tam-4) + "20" + s.substring(tam-4);
+		if ( tam == 15 && s.substring(11, 13) < 60 ) {
+			s = s.substring(0, tam-4) + "20" + s.substring(tam - 4);
 			tam = 17;
 		}
-		num = s.substring(0,tam-2);
-		for ( i = 0; i < 2; i++ ) {
+		num = s.substring(0, tam - 2);
+		for (i = 0; i < 2; i++) {
 			soma = 0;
 			mult = num.length + 1;
-			for ( k = 0; k < num.length ; k++ )
-				soma += num.substring(k,k+1)*(mult-k);
+			for (k = 0; k < num.length; k++)
+				soma += num.substring(k, k + 1) * (mult - k);
 			mod11 = 11 - (soma % 11);
-			if ( mod11 < 10 )  dv_proc="0"+mod11;
-			else  dv_proc = mod11 + "";
-			dv_proc = dv_proc.substring(1,2);
-			num+= dv_proc;
+			if (mod11 < 10) dv_proc = "0" + mod11;
+			else dv_proc = mod11 + "";
+			dv_proc = dv_proc.substring(1, 2);
+			num += dv_proc;
 		}
-		if ( num == s )
+		if (num == s)
 			dv = true;
 	}
-	if ( ! dv && tam > 0 ) {
-		if( !fwValidarProcessoSISPROT(e) ) {
+	if (!dv && tam > 0) {
+		if (!fwValidarProcessoSISPROT(e)) {
 			mensagem = "           Erro de digitação:\n";
-			mensagem+= "          ===============\n\n";
-			mensagem+= " DV para o processo " + e.value + " não confere!!\n";
+			mensagem += "          ===============\n\n";
+			mensagem += " DV para o processo " + e.value + " não confere!!\n";
 
 			alert(mensagem);
-			if( clear )
-			{
+			if (clear) {
 				e.value = '';
 			}
 			e.focus();
