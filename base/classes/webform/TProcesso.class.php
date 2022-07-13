@@ -60,7 +60,6 @@ class TProcesso extends TEdit
 		}else{
 			$intMaxLength = 26;
 			$intSize = 27;
-			print ($boolAcceptNumeroProcessoAAouAAAA . ' ' . $boolAcceptNumeroSeiMP);
 		}
 
 			$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA ) ? 'true' : 'false';
