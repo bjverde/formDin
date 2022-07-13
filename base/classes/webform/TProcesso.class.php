@@ -45,11 +45,16 @@ Classe para entrada de número de processo
 class TProcesso extends TEdit
 {
 	/**
-	* Classe para entrada de número de processo
+	* Classe para entrada de número de processo com os formatos: 
+	* #####.######/####-## (2 digitos no ano) ou
+	* ######.######/##-## (4 dígitos no ano)ou
+	* ##.##.####.#######/####-## (SEI do MP)
 	*
-	* @param string $name
-	* @param string $value
-	* @param boolean $required
+	* @param string $strName 		- 1: ID do campo.
+	* @param string $strValue 		- 2: Valor inicial do campo.
+	* @param boolean $boolRequired 	- 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+	* @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 4: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
+	* @param boolean $boolAcceptNumeroSeiMP  			- 5: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
 	*/
 	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSeiMP=true )
 	{
