@@ -1196,41 +1196,18 @@ function fwValidarProcessoSeiMP(e, clear) {
 	tam = s.length
 
 	if (tam == 21) {
-
-		//19.00.0001.0000001/2017-01
 		//12.34.5678.9012345/6789-01
-		//19000001 0000001 201701
-		//12345678 9012345 678901
-		//12345678 1234567 1234 12
-
-		//19.04.4192.0000009/2022-80
-		//12.34.5678.9012345/6789-01
-		//2.2.4.7/4-2
-
-		//$ok = ((((R1%97).R2)%97).R3.$dv)%97;
-		//die($strValor."\nT=[".R1."]\nN=[".R2."]\nA=[".R3."]\nDV=[".$dv."]\nOK=".$ok);
-
 		t = s.substring(0, 8);
-		// alert(t);
 		n = s.substring(8, 15);
-		// alert(n);
 		a = s.substring(15, 19);
-		// alert(a);
 		numeroDV = s.substring(19, 21);
-		// alert(numeroDV);
-		
-		//var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
 
 		R1 = parseInt(t) % 97;
-		// alert(R1);
 		R2 = parseInt(R1 + "" + n) % 97;
-		// alert(R2);		
 		R3 = 100 * parseInt(R2 + "" + a) % 97;
-		// alert(R3);
 		digito = 98 - R3;
-		// alert(digito);
 
-		if (digito == numeroDV)
+		if (digito == parseInt(numeroDV))
 			dv = true;
 	}
 
