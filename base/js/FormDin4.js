@@ -867,14 +867,9 @@ function fwFormatarCep(e) {
 //-----------------------------------------------------------------------------------------
 function fwFormatarProcesso(e, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumeroSEI) {
 
-	//  alert(e.value);
-
 	var valor = fwFiltraCampo(e.value);
 	var retorno = '';
 	var tam = valor.length;
-
-//   alert(valor);
-	// alert(tam);
 
 	if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
 		numeroProcessoAAouAAAA = true;
@@ -887,32 +882,18 @@ function fwFormatarProcesso(e, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumer
 	} else {
 		numeroSEI = false;
 	}
-	
-
-	// alert(numeroProcessoAA + ' ' + numeroProcessoAAAA + ' ' + numeroSEI);
 
 	//APENAS processos do tipo NÃO SEI
 	if ((numeroProcessoAAouAAAA == true ) && numeroSEI != true ) {
-		// alert("formatar processo NAO SEI");
 		retorno = fwFormatarProcessoNaoSei(valor);
 
 	//APENAS processos do tipo SEI
 	} else if ((numeroProcessoAAouAAAA != true ) && numeroSEI == true ) {
-
-		// alert("Formatar processo SEI");
-
 		retorno = fwFormatarProcessoSeiMP(valor);
 
-	//Qualquer processo
+		//Qualquer processo
 	} else if ((numeroProcessoAAouAAAA == numeroSEI ) ) {
-		// if (tam == ) {
-			
-		// } else {
-			
-		// }
-		// alert("Formatar Qualquer coisa ");
 		retorno = fwFormatarProcessoAAAAeSei(valor);
-
 	}
 
 	e.value = retorno;
