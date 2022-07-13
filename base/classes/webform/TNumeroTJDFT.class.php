@@ -45,7 +45,7 @@ Classe para entrada de número de processo
 class TNumeroTJDFT extends TEdit
 {
 	/**
-	 * Classe para entrada de número de processo
+	 * Classe para entrada de número de processo do TJ
 	 *
 	 * @param string $strName        - 1: ID do campo
 	 * @param string $strValue       - 2: Valor inicial do campo
