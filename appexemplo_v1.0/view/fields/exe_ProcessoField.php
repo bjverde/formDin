@@ -53,6 +53,11 @@ $frm->addGroupField('TJDFT','Campos do Processo Judiciário');
     $frm->addNumeroTJDFTField('numeroDistribuicaoTJDFT','Campo do número Distribuição do TJDFT: ',false,true,null,null,null,true,false)->setExampleText('Ex: 1999.01.1.001573-8');
 $frm->closeGroup();
 
+
+$frm->setHint('processo2','Aceita apenas o número #####.######/##-## e o número #####.######/####-##');
+$frm->setHint('processo3','Aceita apenas o número do SEI do MP - ##.##.####.#######/####-## ');
+
+
 $frm->setHint('numeroTJDFT','Aceita o número Único e o número de Distribuição');
 $frm->setHint('numeroUnicoTJDFT','Aceita apenas o número Único');
 $frm->setHint('numeroDistribuicaoTJDFT','Aceita apenas o número de Distribuição');
