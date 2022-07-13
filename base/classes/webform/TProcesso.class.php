@@ -64,12 +64,12 @@ class TProcesso extends TEdit
 		}
 
 			$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA ) ? 'true' : 'false';
-			$numeroSEI = ( $boolAcceptNumeroSeiMP ) ? 'true' : 'false';		
+			$numeroSeiMP = ( $boolAcceptNumeroSeiMP ) ? 'true' : 'false';		
 
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('processo');
 
-		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSEI."')");
+		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
 		$this->addEvent('onblur','fwValidarProcesso(this)');
 	}
 
