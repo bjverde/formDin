@@ -901,7 +901,7 @@ function fwFormatarProcesso(e, boolAcceptNumeroProcessoAAouAAAA, boolAcceptNumer
 
 		// alert("Formatar processo SEI");
 
-		retorno = fwFormatarProcessoSei(valor);
+		retorno = fwFormatarProcessoSeiMP(valor);
 
 	//Qualquer processo
 	} else if ((numeroProcessoAAouAAAA == numeroSEI ) ) {
@@ -950,12 +950,12 @@ function fwFormatarProcessoAAAAeSei(e) {
 	if (tam == 15 || tam == 17) {
 		retorno = fwFormatarProcessoNaoSei(s);
 	} else {
-		retorno = fwFormatarProcessoSei(s);
+		retorno = fwFormatarProcessoSeiMP(s);
 	}
 	s = retorno;
 	return s;
 }//-----------------------------------------------------------------------------------------
-function fwFormatarProcessoSei(e) {
+function fwFormatarProcessoSeiMP(e) {
 
 	var s = "";
 	s = fwFiltraCampo(e);
@@ -1149,14 +1149,23 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 	tam = valor.length;
 	clear = clear || true;
 
-	//	Mantendo a compatibilidade com o funcionamento anterior 
+	// alert('boolAcceptNumeroProcessoAAouAAAA ' + boolAcceptNumeroProcessoAAouAAAA);
+	// alert(boolAcceptNumeroSeiMP);
+	//	Mantendo a compatibilidade com o funcionamento anterior
+
+	a = boolAcceptNumeroProcessoAAouAAAA.toLowerCase();
+	b = boolAcceptNumeroSeiMP.toLowerCase();
+
 	if (boolAcceptNumeroProcessoAAouAAAA == null && boolAcceptNumeroSeiMP == null) {
 		fwValidarProcessoAAouAAAA(e, clear);
+
 	} else {
 		if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
 			numeroProcessoAAouAAAA = true;
+			// alert('numeroProcessoAAouAAAA true');
 		} else {
 			numeroProcessoAAouAAAA = false;
+			// alert('numeroProcessoAAouAAAA false');			
 		}
 
 		if (boolAcceptNumeroSeiMP.toLowerCase() == 'true') {
@@ -1165,10 +1174,12 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 			numeroSEI = false;
 		}
 
+		// alert(numeroProcessoAAouAAAA) 
+		// alert(numeroSEI) 
 		if (numeroProcessoAAouAAAA == true && numeroSEI != true) {
 			fwValidarProcessoAAouAAAA(e, clear);
 		} else if (numeroProcessoAAouAAAA != true && numeroSEI == true) {
-			fwValidarNumeroDistribuicao(e, clear);
+			fwValidarProcessoSeiMP(e, clear);
 		} else {
 			if (tam == 15 || tam == 17) {
 				fwValidarProcessoAAouAAAA(e, clear);
@@ -1179,8 +1190,64 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 	} 
 }//-----------------------------------------------------------------------------------------
 function fwValidarProcessoSeiMP(e, clear) {
-	
-	return null;
+	var dv = false;
+	clear = clear || true;
+	s = fwFiltraCampo(e.value);
+	tam = s.length
+
+	if (tam == 21) {
+
+		//19.00.0001.0000001/2017-01
+		//12.34.5678.9012345/6789-01
+		//19000001 0000001 201701
+		//12345678 9012345 678901
+		//12345678 1234567 1234 12
+
+		//19.04.4192.0000009/2022-80
+		//12.34.5678.9012345/6789-01
+		//2.2.4.7/4-2
+
+		//$ok = ((((R1%97).R2)%97).R3.$dv)%97;
+		//die($strValor."\nT=[".R1."]\nN=[".R2."]\nA=[".R3."]\nDV=[".$dv."]\nOK=".$ok);
+
+		t = s.substring(0, 8);
+		// alert(t);
+		n = s.substring(8, 15);
+		// alert(n);
+		a = s.substring(15, 19);
+		// alert(a);
+		numeroDV = s.substring(19, 21);
+		// alert(numeroDV);
+		
+		//var R2 = parseInt(R1 + "" + numeroAno + "" + numeroRamo + "" + numeroTribunal) % 97;
+
+		R1 = parseInt(t) % 97;
+		// alert(R1);
+		R2 = parseInt(R1 + "" + n) % 97;
+		// alert(R2);		
+		R3 = 100 * parseInt(R2 + "" + a) % 97;
+		// alert(R3);
+		digito = 98 - R3;
+		// alert(digito);
+
+		if (digito == numeroDV)
+			dv = true;
+	}
+
+	if (!dv && tam > 0) {
+
+		val = fwFormatarProcessoSeiMP(e.value);
+		mensagem = "           Erro de digitação:\n";
+		mensagem += "          ===============\n\n";
+		mensagem += " DV para o número " + val + " não confere!!\n";
+
+		alert(mensagem);
+		if (clear) {
+			e.value = '';
+		}
+		e.focus();
+	}
+	return dv;
 }//-----------------------------------------------------------------------------------------
 
 function fwValidarProcessoAAouAAAA(e, clear) {
