@@ -51,20 +51,20 @@ class TProcesso extends TEdit
 	* @param string $value
 	* @param boolean $required
 	*/
-	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSEI=true )
+	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSeiMP=true )
 	{
 
-		if ( $boolAcceptNumeroProcessoAAouAAAA == true  && $boolAcceptNumeroSEI != true ){
+		if ( $boolAcceptNumeroProcessoAAouAAAA == true  && $boolAcceptNumeroSeiMP != true ){
 			$intMaxLength = 21;
 			$intSize = 22;
 		}else{
 			$intMaxLength = 26;
 			$intSize = 27;
-			print ($boolAcceptNumeroProcessoAAouAAAA . ' ' . $boolAcceptNumeroSEI);
+			print ($boolAcceptNumeroProcessoAAouAAAA . ' ' . $boolAcceptNumeroSeiMP);
 		}
 
 			$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA ) ? 'true' : 'false';
-			$numeroSEI = ( $boolAcceptNumeroSEI ) ? 'true' : 'false';		
+			$numeroSEI = ( $boolAcceptNumeroSeiMP ) ? 'true' : 'false';		
 
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('processo');
