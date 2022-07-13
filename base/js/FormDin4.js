@@ -1149,23 +1149,14 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 	tam = valor.length;
 	clear = clear || true;
 
-	// alert('boolAcceptNumeroProcessoAAouAAAA ' + boolAcceptNumeroProcessoAAouAAAA);
-	// alert(boolAcceptNumeroSeiMP);
-	//	Mantendo a compatibilidade com o funcionamento anterior
-
-	a = boolAcceptNumeroProcessoAAouAAAA.toLowerCase();
-	b = boolAcceptNumeroSeiMP.toLowerCase();
-
 	if (boolAcceptNumeroProcessoAAouAAAA == null && boolAcceptNumeroSeiMP == null) {
 		fwValidarProcessoAAouAAAA(e, clear);
 
 	} else {
 		if (boolAcceptNumeroProcessoAAouAAAA.toLowerCase() == 'true') {
 			numeroProcessoAAouAAAA = true;
-			// alert('numeroProcessoAAouAAAA true');
 		} else {
 			numeroProcessoAAouAAAA = false;
-			// alert('numeroProcessoAAouAAAA false');			
 		}
 
 		if (boolAcceptNumeroSeiMP.toLowerCase() == 'true') {
@@ -1174,8 +1165,6 @@ function fwValidarProcesso(e, clear, boolAcceptNumeroProcessoAAouAAAA, boolAccep
 			numeroSEI = false;
 		}
 
-		// alert(numeroProcessoAAouAAAA) 
-		// alert(numeroSEI) 
 		if (numeroProcessoAAouAAAA == true && numeroSEI != true) {
 			fwValidarProcessoAAouAAAA(e, clear);
 		} else if (numeroProcessoAAouAAAA != true && numeroSEI == true) {
