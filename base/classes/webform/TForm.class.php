@@ -7143,6 +7143,8 @@ class TForm Extends TBox
     * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue        - 5: valor inicial do campo
     * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 7: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
+	* @param boolean $boolAcceptNumeroSeiMP  			- 8: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
     * @return TProcesso
     */
     public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSeiMP=true )
