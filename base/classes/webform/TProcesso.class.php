@@ -61,15 +61,14 @@ class TProcesso extends TEdit
 			$intMaxLength = 26;
 			$intSize = 27;
 		}
-
-			$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA ) ? 'true' : 'false';
-			$numeroSeiMP = ( $boolAcceptNumeroSeiMP ) ? 'true' : 'false';		
+		
+		$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA == 1 ) ? 'true' : 'false';
+		$numeroSeiMP = ( $boolAcceptNumeroSeiMP == 1 ) ? 'true' : 'false';		
 
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('processo');
-
 		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
-		$this->addEvent('onblur',"fwValidarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
+		$this->addEvent('onblur',"fwValidarProcesso(this,null,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
 	}
 
 	public function getFormated()
