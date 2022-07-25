@@ -85,6 +85,8 @@ class TProcesso extends TEdit
 
 	public static function formatarNumero($value)
 	{
+		$value = is_null($value)?'':$value;
+
 		$value = preg_replace("/\D/", '', $value);
 
 		if ( ! $value ) // nenhum valor informado
