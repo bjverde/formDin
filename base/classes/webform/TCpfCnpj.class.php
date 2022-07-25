@@ -90,6 +90,7 @@ class TCpfCnpj extends TMask
      */
 	public static function formatarNumero($value)
 	{
+		$value = is_null($value)?'':$value;
 		$value = preg_replace("/[^0-9]/","",$value);
 
 		$tamanho = StringHelper::strlen($value);
