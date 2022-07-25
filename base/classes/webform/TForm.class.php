@@ -2586,6 +2586,8 @@ class TForm Extends TBox
       */
      public function addMessage( $mixMessage=null )
      {
+        $mixMessage = is_null($mixMessage)?'':$mixMessage;
+
          if( is_array( $mixMessage ) )
          {
              $mixMessage = implode( '\n', $mixMessage );
