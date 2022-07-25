@@ -86,6 +86,8 @@ class TNumeroTJDFT extends TEdit
 
 	public static function formatarNumero($value)
 	{
+		$value = is_null($value)?'':$value;
+
 		$value = preg_replace("/\D/", '', $value);
 
 		if( strlen($value) == 20 ){
