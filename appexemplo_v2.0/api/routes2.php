@@ -60,7 +60,8 @@ $app->addRoutingMiddleware();
  * Note: This middleware should be added last. It will not handle any exceptions/errors
  * for middleware added after it.
  */
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$displayErrorDetails = getenv('DISPLAY_ERRORS_DETAILS');
+$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, true, true);
 
 
 $urlChamada = ServerHelper::getRequestUri(true);
