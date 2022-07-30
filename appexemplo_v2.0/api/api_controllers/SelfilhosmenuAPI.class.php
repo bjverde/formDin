@@ -31,7 +31,7 @@ class SelfilhosmenuAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -52,7 +52,7 @@ class SelfilhosmenuAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 }

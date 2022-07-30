@@ -114,6 +114,20 @@ $app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo)
 });
 
 //--------------------------------------------------------------------
+//  TABLE: acesso_menu
+//--------------------------------------------------------------------
+$urlGrupo = $urlChamada.'acesso_menu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_menuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':selectById');
+
+
+    $app->post($urlGrupo.'', Acesso_menuAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':delete');
+});
+
+//--------------------------------------------------------------------
 //  TABLE: meta_tipo
 //--------------------------------------------------------------------
 $urlGrupo = $urlChamada.'meta_tipo';
