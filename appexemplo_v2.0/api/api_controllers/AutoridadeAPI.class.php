@@ -31,7 +31,8 @@ class AutoridadeAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -52,7 +53,8 @@ class AutoridadeAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -72,8 +74,8 @@ class AutoridadeAPI
 
         $controller = new \Autoridade;
         $controller->save($vo);
-
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -83,7 +85,8 @@ class AutoridadeAPI
         $id = $args['id'];
         $controller = new \Autoridade;
         $msg = $controller->delete($id);
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 }

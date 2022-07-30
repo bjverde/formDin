@@ -31,7 +31,8 @@ class Acesso_perfilAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -52,7 +53,8 @@ class Acesso_perfilAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -72,8 +74,8 @@ class Acesso_perfilAPI
 
         $controller = new \Acesso_perfil;
         $controller->save($vo);
-
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -83,7 +85,8 @@ class Acesso_perfilAPI
         $id = $args['id'];
         $controller = new \Acesso_perfil;
         $msg = $controller->delete($id);
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 }

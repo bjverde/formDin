@@ -31,7 +31,8 @@ class Acesso_menuAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -52,7 +53,8 @@ class Acesso_menuAPI
         $msg = array( 'qtd'=> \CountHelper::count($result)
                     , 'result'=>$result
         );
-        $response = $response->withJson($msg);
+
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -73,7 +75,7 @@ class Acesso_menuAPI
         $controller = new \Acesso_menu;
         $controller->save($vo);
 
-        $response = $response->withJson($msg);
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 
@@ -83,7 +85,8 @@ class Acesso_menuAPI
         $id = $args['id'];
         $controller = new \Acesso_menu;
         $msg = $controller->delete($id);
-        $response = $response->withJson($msg);
+        
+        $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
 }
