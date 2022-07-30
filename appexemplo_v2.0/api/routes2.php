@@ -95,6 +95,25 @@ $app->get($urlChamada.'sysinfo', SysinfoAPI::class . ':getInfo');
 
 
 //--------------------------------------------------------------------
+//  VIEW: selFilhosMenu
+//--------------------------------------------------------------------
+$urlGrupo = $urlChamada.'selfilhosmenu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo, SelfilhosmenuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', SelfilhosmenuAPI::class . ':selectById');
+
+});
+
+//--------------------------------------------------------------------
+//  VIEW: selFilhosMenuQtd
+//--------------------------------------------------------------------
+$urlGrupo = $urlChamada.'selfilhosmenuqtd';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo, SelfilhosmenuqtdAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', SelfilhosmenuqtdAPI::class . ':selectById');
+});
+
+//--------------------------------------------------------------------
 //  TABLE: meta_tipo
 //--------------------------------------------------------------------
 $urlGrupo = $urlChamada.'meta_tipo';
