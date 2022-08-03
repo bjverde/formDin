@@ -9,6 +9,10 @@
  * 
  * System appev2 created in: 2019-09-10 09:04:46
  */
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Routing\RouteCollectorProxy as RouteCollectorProxy;
+use Slim\Factory\AppFactory;
 
 use api_controllers\SysinfoAPI;
 use api_controllers\SelfilhosmenuAPI;
@@ -40,29 +44,62 @@ use api_controllers\Vw_acesso_user_menuAPI;
 use api_controllers\Vw_pessoaAPI;
 use api_controllers\Vw_pessoa_marca_produtoAPI;
 
-$app = new \Slim\App(slimConfiguration());
+/**
+ * Instantiate App
+ *
+ * In order for the factory to work you need to ensure you have installed
+ * a supported PSR-7 implementation of your choice e.g.: Slim PSR-7 and a supported
+ * ServerRequest creator (included with Slim PSR-7)
+ */
+$app = AppFactory::create();
 
-$app->get("/", function ($request, $response, $args) use ($app) {
-    $url = \ServerHelper::getCurrentUrl();
-    $url = substr($url,0,strlen($url)-1);
-    $routes = $app->getContainer()->router->getRoutes();
+/**
+  * The routing middleware should be added earlier than the ErrorMiddleware
+  * Otherwise exceptions thrown from it will not be handled by the middleware
+  */
+$app->addRoutingMiddleware();
+
+/**
+ * Add Error Middleware
+ *
+ * @param bool                  $displayErrorDetails -> Should be set to false in production
+ * @param bool                  $logErrors -> Parameter is passed to the default ErrorHandler
+ * @param bool                  $logErrorDetails -> Display error details in error log
+ * @param LoggerInterface|null  $logger -> Optional PSR-3 Logger  
+ *
+ * Note: This middleware should be added last. It will not handle any exceptions/errors
+ * for middleware added after it.
+ */
+$displayErrorDetails = getenv('DISPLAY_ERRORS_DETAILS');
+$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, true, true);
+
+
+$urlChamada = ServerHelper::getRequestUri(true);
+$urlChamada = explode('api/', $urlChamada);
+$urlChamada = $urlChamada[0];
+$urlChamada = $urlChamada.'api/';
+// Define app routes
+$app->get($urlChamada, function (Request $request, Response $response, $args) use ($app) {
+    $url = \ServerHelper::getFullServerName();
+    $routes = $app->getRouteCollector()->getRoutes();
     $routesArray = array();
     foreach ($routes as $route) {
         $routeArray = array();
-        $met = $route->getMethods();
-        $routeArray['methods']  = $met[0];
-        $routeArray['url']  = $url.$route->getPattern();
+        $routeArray['id']  = $route->getIdentifier();
+        $routeArray['name']= $route->getName();
+        $routeArray['methods']= $route->getMethods()[0];
+        $routeArray['url'] = $url.$route->getPattern();
         $routesArray[] = $routeArray;
     }
-
     $msg = array( 'info'=> SysinfoAPI::info()
                 , 'endpoints'=>array( 'qtd'=> \CountHelper::count($routesArray)
                                     ,'result'=>$routesArray
                                     )
                 );
-
-    $response = $response->withJson($msg);
-    return $response;
+    
+    $msgJson = json_encode($msg);
+    $response->getBody()->write( $msgJson );
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
@@ -72,9 +109,10 @@ $app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
 //--------------------------------------------------------------------
 //  VIEW: selFilhosMenu
 //--------------------------------------------------------------------
-$app->group('/selfilhosmenu', function() use ($app) {
-    $app->get('', SelfilhosmenuAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', SelfilhosmenuAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'selfilhosmenu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', SelfilhosmenuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', SelfilhosmenuAPI::class . ':selectById');
 
 });
 
@@ -82,9 +120,10 @@ $app->group('/selfilhosmenu', function() use ($app) {
 //--------------------------------------------------------------------
 //  VIEW: selFilhosMenuQtd
 //--------------------------------------------------------------------
-$app->group('/selfilhosmenuqtd', function() use ($app) {
-    $app->get('', SelfilhosmenuqtdAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', SelfilhosmenuqtdAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'selfilhosmenuqtd';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', SelfilhosmenuqtdAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', SelfilhosmenuqtdAPI::class . ':selectById');
 
 });
 
@@ -102,303 +141,325 @@ $app->group('/selmenuqtd', function() use ($app) {
 //--------------------------------------------------------------------
 //  TABLE: acesso_menu
 //--------------------------------------------------------------------
-$app->group('/acesso_menu', function() use ($app) {
-    $app->get('', Acesso_menuAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_menuAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'acesso_menu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_menuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':selectById');
 
 
-    $app->post('', Acesso_menuAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_menuAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_menuAPI::class . ':delete');
+    $app->post($urlGrupo.'', Acesso_menuAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_menuAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: acesso_perfil
 //--------------------------------------------------------------------
-$app->group('/acesso_perfil', function() use ($app) {
-    $app->get('', Acesso_perfilAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_perfilAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'acesso_perfil';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_perfilAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_perfilAPI::class . ':selectById');
 
 
-    $app->post('', Acesso_perfilAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_perfilAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_perfilAPI::class . ':delete');
+    $app->post($urlGrupo.'', Acesso_perfilAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_perfilAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_perfilAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: acesso_perfil_menu
 //--------------------------------------------------------------------
-$app->group('/acesso_perfil_menu', function() use ($app) {
-    $app->get('', Acesso_perfil_menuAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'acesso_perfil_menu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_perfil_menuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':selectById');
 
 
-    $app->post('', Acesso_perfil_menuAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':delete');
+    $app->post($urlGrupo.'', Acesso_perfil_menuAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_menuAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: acesso_perfil_user
 //--------------------------------------------------------------------
-$app->group('/acesso_perfil_user', function() use ($app) {
-    $app->get('', Acesso_perfil_userAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'acesso_perfil_user';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_perfil_userAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':selectById');
 
 
-    $app->post('', Acesso_perfil_userAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':delete');
+    $app->post($urlGrupo.'', Acesso_perfil_userAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_perfil_userAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: acesso_user
 //--------------------------------------------------------------------
-$app->group('/acesso_user', function() use ($app) {
-    $app->get('', Acesso_userAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Acesso_userAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'acesso_user';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Acesso_userAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Acesso_userAPI::class . ':selectById');
 
 
-    $app->post('', Acesso_userAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Acesso_userAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Acesso_userAPI::class . ':delete');
+    $app->post($urlGrupo.'', Acesso_userAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Acesso_userAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Acesso_userAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: autoridade
 //--------------------------------------------------------------------
-$app->group('/autoridade', function() use ($app) {
-    $app->get('', AutoridadeAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', AutoridadeAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'autoridade';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', AutoridadeAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', AutoridadeAPI::class . ':selectById');
 
 
-    $app->post('', AutoridadeAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', AutoridadeAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', AutoridadeAPI::class . ':delete');
+    $app->post($urlGrupo.'', AutoridadeAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', AutoridadeAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', AutoridadeAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: endereco
 //--------------------------------------------------------------------
-$app->group('/endereco', function() use ($app) {
-    $app->get('', EnderecoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', EnderecoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'endereco';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', EnderecoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', EnderecoAPI::class . ':selectById');
 
 
-    $app->post('', EnderecoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', EnderecoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', EnderecoAPI::class . ':delete');
+    $app->post($urlGrupo.'', EnderecoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', EnderecoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', EnderecoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: marca
 //--------------------------------------------------------------------
-$app->group('/marca', function() use ($app) {
-    $app->get('', MarcaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', MarcaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'marca';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', MarcaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', MarcaAPI::class . ':selectById');
 
 
-    $app->post('', MarcaAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', MarcaAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', MarcaAPI::class . ':delete');
+    $app->post($urlGrupo.'', MarcaAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', MarcaAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', MarcaAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: meta_tipo
 //--------------------------------------------------------------------
-$app->group('/meta_tipo', function() use ($app) {
-    $app->get('', Meta_tipoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Meta_tipoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'meta_tipo';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Meta_tipoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Meta_tipoAPI::class . ':selectById');
 
 
-    $app->post('', Meta_tipoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Meta_tipoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Meta_tipoAPI::class . ':delete');
+    $app->post($urlGrupo.'', Meta_tipoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Meta_tipoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Meta_tipoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: municipio
 //--------------------------------------------------------------------
-$app->group('/municipio', function() use ($app) {
-    $app->get('', MunicipioAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', MunicipioAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'municipio';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', MunicipioAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', MunicipioAPI::class . ':selectById');
 
 
-    $app->post('', MunicipioAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', MunicipioAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', MunicipioAPI::class . ':delete');
+    $app->post($urlGrupo.'', MunicipioAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', MunicipioAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', MunicipioAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: natureza_juridica
 //--------------------------------------------------------------------
-$app->group('/natureza_juridica', function() use ($app) {
-    $app->get('', Natureza_juridicaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Natureza_juridicaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'natureza_juridica';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Natureza_juridicaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Natureza_juridicaAPI::class . ':selectById');
 
 
-    $app->post('', Natureza_juridicaAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Natureza_juridicaAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Natureza_juridicaAPI::class . ':delete');
+    $app->post($urlGrupo.'', Natureza_juridicaAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Natureza_juridicaAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Natureza_juridicaAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: pedido
 //--------------------------------------------------------------------
-$app->group('/pedido', function() use ($app) {
-    $app->get('', PedidoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', PedidoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'pedido';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', PedidoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', PedidoAPI::class . ':selectById');
 
 
-    $app->post('', PedidoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', PedidoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', PedidoAPI::class . ':delete');
+    $app->post($urlGrupo.'', PedidoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', PedidoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', PedidoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: pedido_item
 //--------------------------------------------------------------------
-$app->group('/pedido_item', function() use ($app) {
-    $app->get('', Pedido_itemAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Pedido_itemAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'pedido_item';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Pedido_itemAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Pedido_itemAPI::class . ':selectById');
 
 
-    $app->post('', Pedido_itemAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Pedido_itemAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Pedido_itemAPI::class . ':delete');
+    $app->post($urlGrupo.'', Pedido_itemAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Pedido_itemAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Pedido_itemAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: pessoa
 //--------------------------------------------------------------------
-$app->group('/pessoa', function() use ($app) {
-    $app->get('', PessoaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', PessoaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'pessoa';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', PessoaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', PessoaAPI::class . ':selectById');
 
 
-    $app->post('', PessoaAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', PessoaAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', PessoaAPI::class . ':delete');
+    $app->post($urlGrupo.'', PessoaAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', PessoaAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', PessoaAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: pessoa_fisica
 //--------------------------------------------------------------------
-$app->group('/pessoa_fisica', function() use ($app) {
-    $app->get('', Pessoa_fisicaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'pessoa_fisica';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Pessoa_fisicaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':selectById');
 
 
-    $app->post('', Pessoa_fisicaAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':delete');
+    $app->post($urlGrupo.'', Pessoa_fisicaAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Pessoa_fisicaAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: pessoa_juridica
 //--------------------------------------------------------------------
-$app->group('/pessoa_juridica', function() use ($app) {
-    $app->get('', Pessoa_juridicaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'pessoa_juridica';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Pessoa_juridicaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':selectById');
 
 
-    $app->post('', Pessoa_juridicaAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':delete');
+    $app->post($urlGrupo.'', Pessoa_juridicaAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', Pessoa_juridicaAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: produto
 //--------------------------------------------------------------------
-$app->group('/produto', function() use ($app) {
-    $app->get('', ProdutoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', ProdutoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'produto';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', ProdutoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', ProdutoAPI::class . ':selectById');
 
 
-    $app->post('', ProdutoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', ProdutoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', ProdutoAPI::class . ':delete');
+    $app->post($urlGrupo.'', ProdutoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', ProdutoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', ProdutoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: regiao
 //--------------------------------------------------------------------
-$app->group('/regiao', function() use ($app) {
-    $app->get('', RegiaoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', RegiaoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'regiao';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', RegiaoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', RegiaoAPI::class . ':selectById');
 
 
-    $app->post('', RegiaoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', RegiaoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', RegiaoAPI::class . ':delete');
+    $app->post($urlGrupo.'', RegiaoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', RegiaoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', RegiaoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: telefone
 //--------------------------------------------------------------------
-$app->group('/telefone', function() use ($app) {
-    $app->get('', TelefoneAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', TelefoneAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'telefone';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', TelefoneAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', TelefoneAPI::class . ':selectById');
 
 
-    $app->post('', TelefoneAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', TelefoneAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', TelefoneAPI::class . ':delete');
+    $app->post($urlGrupo.'', TelefoneAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', TelefoneAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', TelefoneAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: tipo
 //--------------------------------------------------------------------
-$app->group('/tipo', function() use ($app) {
-    $app->get('', TipoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', TipoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'tipo';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', TipoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', TipoAPI::class . ':selectById');
 
 
-    $app->post('', TipoAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', TipoAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', TipoAPI::class . ':delete');
+    $app->post($urlGrupo.'', TipoAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', TipoAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', TipoAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  TABLE: uf
 //--------------------------------------------------------------------
-$app->group('/uf', function() use ($app) {
-    $app->get('', UfAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', UfAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'uf';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', UfAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', UfAPI::class . ':selectById');
 
 
-    $app->post('', UfAPI::class . ':save');
-    $app->put('/{id:[0-9]+}', UfAPI::class . ':save');
-    $app->delete('/{id:[0-9]+}', UfAPI::class . ':delete');
+    $app->post($urlGrupo.'', UfAPI::class . ':save');
+    $app->put($urlGrupo.'/{id:[0-9]+}', UfAPI::class . ':save');
+    $app->delete($urlGrupo.'/{id:[0-9]+}', UfAPI::class . ':delete');
 });
 
 
 //--------------------------------------------------------------------
 //  VIEW: vw_acesso_user_menu
 //--------------------------------------------------------------------
-$app->group('/vw_acesso_user_menu', function() use ($app) {
-    $app->get('', Vw_acesso_user_menuAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Vw_acesso_user_menuAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'vw_acesso_user_menu';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Vw_acesso_user_menuAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Vw_acesso_user_menuAPI::class . ':selectById');
 
 });
 
@@ -406,9 +467,21 @@ $app->group('/vw_acesso_user_menu', function() use ($app) {
 //--------------------------------------------------------------------
 //  VIEW: vw_pessoa
 //--------------------------------------------------------------------
-$app->group('/vw_pessoa', function() use ($app) {
-    $app->get('', Vw_pessoaAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Vw_pessoaAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'vw_pessoa';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Vw_pessoaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Vw_pessoaAPI::class . ':selectById');
+
+});
+
+
+//--------------------------------------------------------------------
+//  VIEW: vw_pessoa_fisica
+//--------------------------------------------------------------------
+$urlGrupo = $urlChamada.'vw_pessoa_fisica';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Vw_pessoa_fisicaAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Vw_pessoa_fisicaAPI::class . ':selectById');
 
 });
 
@@ -416,10 +489,23 @@ $app->group('/vw_pessoa', function() use ($app) {
 //--------------------------------------------------------------------
 //  VIEW: vw_pessoa_marca_produto
 //--------------------------------------------------------------------
-$app->group('/vw_pessoa_marca_produto', function() use ($app) {
-    $app->get('', Vw_pessoa_marca_produtoAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', Vw_pessoa_marca_produtoAPI::class . ':selectById');
+$urlGrupo = $urlChamada.'vw_pessoa_marca_produto';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Vw_pessoa_marca_produtoAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Vw_pessoa_marca_produtoAPI::class . ':selectById');
 
 });
 
+
+//--------------------------------------------------------------------
+//  VIEW: vw_regiao_municipio
+//--------------------------------------------------------------------
+$urlGrupo = $urlChamada.'vw_regiao_municipio';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
+    $app->get($urlGrupo.'', Vw_regiao_municipioAPI::class . ':selectAll');
+    $app->get($urlGrupo.'/{id:[0-9]+}', Vw_regiao_municipioAPI::class . ':selectById');
+
+});
+
+// Run app
 $app->run();
