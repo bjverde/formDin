@@ -131,10 +131,10 @@ $app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo)
 //--------------------------------------------------------------------
 //  VIEW: selMenuQtd
 //--------------------------------------------------------------------
-$app->group('/selmenuqtd', function() use ($app) {
+$urlGrupo = $urlChamada.'selmenuqtd';
+$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
     $app->get('', SelmenuqtdAPI::class . ':selectAll');
     $app->get('/{id:[0-9]+}', SelmenuqtdAPI::class . ':selectById');
-
 });
 
 
