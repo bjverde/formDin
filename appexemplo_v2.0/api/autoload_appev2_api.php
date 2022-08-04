@@ -13,6 +13,7 @@
 if ( !function_exists( 'appev2_api_autoload') ) {
     function appev2_api_autoload( $class_name )
     {
+        $class_name = str_replace('\\',DS,$class_name);
         $path = __DIR__.DS.$class_name.'.class.php';
         if (file_exists($path)){
             require_once $path;
