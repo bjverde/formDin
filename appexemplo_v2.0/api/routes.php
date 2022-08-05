@@ -82,16 +82,6 @@ $urlChamada = explode('api/', $urlChamada);
 $urlChamada = $urlChamada[0];
 $urlChamada = $urlChamada.'api/';
 
-$app->add(Authentication::basicAuth());
-
-/*
-$app->add(new Tuupola\Middleware\HttpBasicAuthentication([
-    "users" => [
-        "root" => "t00r",
-        "somebody" => "passw0rd"
-    ]
-]));
-*/
 
 // Define app routes
 $app->get($urlChamada, function (Request $request, Response $response, $args) use ($app) {
@@ -117,9 +107,14 @@ $app->get($urlChamada, function (Request $request, Response $response, $args) us
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/sysinfo', SysinfoAPI::class . ':getInfo');
+//Grupo acesso_menu exige autenticacao
+//Entrar na classe Authentication para pegar usuário e senha
+$controllerAuthentication = new Authentication($urlChamada);
+$controllerAuthentication->addPath('acesso_menu');
+$app->add($controllerAuthentication->basicAuth());
 
-
+$app->get($urlChamada.'sysinfo', SysinfoAPI::class . ':getInfo');
+$app->get($urlChamada.'auth', SysinfoAPI::class . ':getInfo');
 
 //--------------------------------------------------------------------
 //  VIEW: selFilhosMenu
