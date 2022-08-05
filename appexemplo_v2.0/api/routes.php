@@ -18,6 +18,9 @@ use api_controllers\SysinfoAPI;
 use api_controllers\SelfilhosmenuAPI;
 use api_controllers\SelfilhosmenuqtdAPI;
 use api_controllers\SelmenuqtdAPI;
+
+use api_controllers\Authentication;
+
 use api_controllers\Acesso_menuAPI;
 use api_controllers\Acesso_perfilAPI;
 use api_controllers\Acesso_perfil_menuAPI;
@@ -78,6 +81,18 @@ $urlChamada = ServerHelper::getRequestUri(true);
 $urlChamada = explode('api/', $urlChamada);
 $urlChamada = $urlChamada[0];
 $urlChamada = $urlChamada.'api/';
+
+$app->add(Authentication::basicAuth());
+
+/*
+$app->add(new Tuupola\Middleware\HttpBasicAuthentication([
+    "users" => [
+        "root" => "t00r",
+        "somebody" => "passw0rd"
+    ]
+]));
+*/
+
 // Define app routes
 $app->get($urlChamada, function (Request $request, Response $response, $args) use ($app) {
     $url = \ServerHelper::getFullServerName();
