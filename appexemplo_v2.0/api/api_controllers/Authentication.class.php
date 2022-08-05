@@ -48,8 +48,8 @@ class Authentication
     public function basicAuth(): HttpBasicAuthentication
     {
         return new HttpBasicAuthentication([
-             'path'  => $this->getArrayPath()
-            ,'ignore'=> $this->getArrayPathIgnore()
+             'ignore'=> $this->getArrayPathIgnore()
+            ,'path'  => $this->getArrayPath()
             ,"users" => [
                 "root" => "teste123"
             ]
