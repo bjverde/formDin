@@ -8,10 +8,13 @@ class Authentication
 {
     private $urlChamada = null;
     private $listPath   = array();
+    private $listPathIgnore= array();
 
     public function __construct($urlChamada)
     {
         $this->urlChamada = $urlChamada;
+        $this->listPathIgnore[] = $urlChamada.'api';
+        $this->listPathIgnore[] = $urlChamada.'sysinfo';
     }
 
     public function getUrlbase(){
@@ -30,6 +33,10 @@ class Authentication
         $this->listPath[] = $this->getUrlbase().$path;
     }
 
+    public function getArrayPathIgnore(){
+        return $this->listPathIgnore;
+    }    
+
     /**
      * Cria um autenticação basica 
      * 
@@ -42,7 +49,7 @@ class Authentication
     {
         return new HttpBasicAuthentication([
              'path'  => $this->getArrayPath()
-            ,'ignore'=> [$this->getUrlbase().'/api', $this->getUrlbase().'/sysinfo']
+            ,'ignore'=> $this->getArrayPathIgnore()
             ,"users" => [
                 "root" => "teste123"
             ]
