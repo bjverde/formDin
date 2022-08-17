@@ -130,12 +130,12 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 
 /**
  * Gera o SQL que será executado
- * @param bvars
- * @param bool $boolSearchAnyPosition   2: pesquisa o texto com like dos dois lados
- * @param arrUpdateFields
- * @param strSearchField
- * @param string $strTablePackageFuncion
- * @param bool   $trimText             6: se não deve fazer uso o trim na pesquisa do texto
+ * @param bvars 
+ * @param bool   $boolSearchAnyPosition  2: pesquisa o texto com like dos dois lados
+ * @param array  $arrUpdateFields        3:
+ * @param string $strSearchField         4:
+ * @param string $strTablePackageFuncion 5:
+ * @param bool   $trimText               6: se não deve fazer uso o trim na pesquisa do texto
  */
 function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion ,$trimText) {
 	$selectColumns=$strSearchField;
