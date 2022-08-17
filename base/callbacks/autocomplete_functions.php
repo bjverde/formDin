@@ -130,7 +130,8 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 
 /**
  * Gera o SQL que será executado
- * @param bvars 
+ * 
+ * @param array  $bvars                  1: 
  * @param bool   $boolSearchAnyPosition  2: pesquisa o texto com like dos dois lados
  * @param array  $arrUpdateFields        3:
  * @param string $strSearchField         4:
@@ -151,7 +152,7 @@ function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields,
 
 	if( $trimText == true){
 		$text  = trim($text);
-	}	
+	}
 	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$text."%')";
 	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v) {
