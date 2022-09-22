@@ -54,9 +54,7 @@ $frm->addButton('Limpar'   , null, 'btnLimpar', 'fwClearChildFields()', null, fa
 
 // adicionar grupo
 $frm->addGroupField('gpTree', 'Exemplo Treeview com Fonte de Dados Definido pelo Usuário');
-    //$mixUserDataFields = array('ID_PAI','ID','NOME');
-    $mixUserDataFields = 'ID,ID_PAI,NOME,COD_REGIAO';
-    //$mixUserDataFields = 'ID,ID_PAI,NOME';
+    $mixUserDataFields = array('ID_PAI','ID','NOME','SIG_UF','COD_REGIAO');
     $tree = $frm->addTreeField('tree'
                               ,'Região/Extados/Municípios'
                               ,'vw_tree_regiao_uf_mun'
