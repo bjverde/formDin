@@ -730,7 +730,6 @@ class TTreeView extends TControl
 	public function getShowToolBar()
 	{
 		return is_null( $this->toolBarVisible ) ? true : $this->toolBarVisible;
-		showToolBar;
 	}
 
 	public function showToolBar()
