@@ -210,10 +210,10 @@ class TTreeView extends TControl
 	    if( !$itens ) {
 	   		$xmlFile = is_null($this->xmlFile) ? $this->getBase().'callbacks/treeView.php' : $this->xmlFile;
    			if( file_exists($xmlFile) ) {
-   			    $parentFieldName = $this->getParentFieldName();
+   			    $parentFieldName= $this->getParentFieldName();
    			    $childFieldName = $this->getChildFieldName();
-   			    $descFieldName = $this->getDescFieldName();
-   			    $tableName = $this->getTableName();
+   			    $descFieldName  = $this->getDescFieldName();
+   			    $tableName      = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
 				if ( is_array( $userDataFieldNames ) ) {
 					$userDataFieldNames = implode( ',', $userDataFieldNames );
