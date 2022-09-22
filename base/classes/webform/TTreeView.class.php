@@ -366,14 +366,12 @@ class TTreeView extends TControl
 	    $strDescField = $this->getDescFieldName();
 	    $mixUserDataFields = $this->getUserDataFieldNames();
 	    
-		if ( !is_array( $arrData ) || is_null( $strParentField ) || is_null( $strChildField ) || is_null( $strDescField ) )
-		{
+		if ( !is_array( $arrData ) || is_null( $strParentField ) || is_null( $strChildField ) || is_null( $strDescField ) ) {
 			return;
 		}
 
 		// construir valores do parametro UserData
-		if ( is_string( $mixUserDataFields ) )
-		{
+		if ( is_string( $mixUserDataFields ) ) {
 			$mixUserDataFields = explode( ',', $mixUserDataFields );
 		}
 
