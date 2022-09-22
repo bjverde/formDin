@@ -7405,7 +7405,6 @@ class TForm Extends TBox
                              , $boolShowToolBar
                              , $startExpanded
                             );
-        //$tree->addItem(0,1,'Animal',true,'Animais');
         $display = new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
         $this->addDisplayControl( $display );
         return $tree;
