@@ -39,12 +39,15 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-/*
-Módulo utilizado para gerar o xml de carregamento on-line da classe TreeView
-Exemplo de chamada para teste do resultado:
-http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=SEQ_TAXONOMIA_PAI&childField=SEQ_TAXONOMIA&descField=DES_TAXONOMIA&tableName=TESTE.PKG_TAXONOMIA_TREE.SEL_TAXON
-http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
+/**
+ * Módulo utilizado para gerar o xml de carregamento on-line da classe TreeView
+ * 
+ * Exemplo de chamada para teste do resultado:
+ * http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=SEQ_TAXONOMIA_PAI&childField=SEQ_TAXONOMIA&descField=DES_TAXONOMIA&tableName=TESTE.PKG_TAXONOMIA_TREE.SEL_TAXON
+ * http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
  */
+
+
 error_reporting(0);
 header("Content-type:text/xml");
 echo '<?xml version="1.0" encoding="iso-8859-1"?>';
@@ -93,8 +96,7 @@ if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 ) {
 	// pdo
 	$where = '';
 	if( is_array($bvars) ) {
-		foreach($bvars as $k=>$v)
-		{
+		foreach($bvars as $k=>$v){
 			$where .= ($where =='' ? ' where ' :' and ').$k."='".$v."'";
 		}
 	} else {
