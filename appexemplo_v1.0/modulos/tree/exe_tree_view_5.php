@@ -37,7 +37,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Estados e Municípios com Método setXmlFile()', 500);
+$frm = new TForm('Exemplo 5 : Estados e Municípios com Método setXmlFile()', 500);
+
+$frm->addHtmlField('obs', '<b>Este exemplo utiliza as tabelas vw_tree_regiao_uf_mun do banco de dados bdApoio.s3db ( sqlite )</b>');
 
 // ler os Estados cadastrados
 $ufs = TPDOConnection::executeSql("select 'uf'||cod_uf as cod_uf,nom_uf||'/'||sig_uf as nom_uf from tb_uf order by nom_uf");
