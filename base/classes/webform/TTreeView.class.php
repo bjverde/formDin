@@ -39,11 +39,14 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-/*
-	Estrutura do xml - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:syntax_templates
-	API - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:api_toc_categories
-	Componente: http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:toc
-*/
+/**
+ * Classe para criar um TreeView baseado no DHX 
+ * Documentação:  https://docs.dhtmlx.com/tree__index.html
+ * 
+ * Estrutura do xml - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:syntax_templates
+ * API - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:api_toc_categories
+ * Componente: http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:toc
+ */
 class TTreeView extends TControl
 {
 	private $itens;
@@ -110,32 +113,38 @@ class TTreeView extends TControl
 	*	};
 	* </code>
 	*
-	* @param mixed $strName               - 1: id do campo
-	* @param string $strRootLabel         - 2: Lavel do campo
-	* @param mixed $mixData               - 3: array de dados
-	* @param mixed $strParentFieldName    - 4: id do campo chave do pai
-	* @param mixed $strChildFieldName     - 5: id do campo chave dos filhos
-	* @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
+	* @param mixed $strName               -01: id do campo
+	* @param string $strRootLabel         -02: Label do campo
+	* @param mixed $mixData               -03: array de dados ou table ou view
+	* @param mixed $strParentFieldName    -04: id do campo chave do pai
+	* @param mixed $strChildFieldName     -05: id do campo chave dos filhos
+	* @param mixed $strDescFieldName      -06: Texto da descrição dos nos da arvore
 	* @param mixed $strInitialParentKey   -07:
-	* @param mixed $mixUserDataFieldNames -08: campos separados por virgula ou array normal ex: array('nome','telefone');
+	* @param mixed $mixUserDataFieldNames -08: Campos separados por virgula ou array normal ex: array('nome','telefone'); ATENÇÃO usar muito campos pode gerar problema veja TTreeView::setXmlFile
 	* @param mixed $strHeight             -09: altura
 	* @param mixed $strWidth              -10: largura
-	* @param mixed $jsOnClick             -11:
-	* @param mixed $jsOnDblClick          -12:
-	* @param mixed $jsOnCheck             -13:
+	* @param mixed $jsOnClick             -11: Nome da função JS CallBack para click simples
+	* @param mixed $jsOnDblClick          -12: Nome da função JS CallBack para click duplo
+	* @param mixed $jsOnCheck             -13: Nome da função JS CallBack para check item 
 	* @param mixed $jsOnDrag              -14:
-	* @param mixed $boolEnableCheckBoxes  -15:
+	* @param mixed $boolEnableCheckBoxes  -15: Habilita campo Checks
 	* @param mixed $boolEnableRadioButtons-16:
 	* @param mixed $boolEnableTreeLines   -17:
 	* @param mixed $mixFormSearchFields   -18:
-	* @param mixed $boolShowToolBar       -19:
+	* @param mixed $boolShowToolBar       -19: Se vai aparecer o treeView ou não
 	* @param mixed $startExpanded         -20: Se o treeView deve aparecer expandido ou não.
 	* @return TTreeView
 	*/
-	public function __construct( $strName=null, $strRootLabel = null, $mixData = null
-	                           , $strParentFieldName = null, $strChildFieldName = null
-	                           , $strDescFieldName = null, $strInitialParentKey = null
-	                           , $mixUserDataFieldNames = null, $strHeight = null, $strWidth = null
+	public function __construct( $strName=null
+							   , $strRootLabel = null
+							   , $mixData = null
+	                           , $strParentFieldName = null
+							   , $strChildFieldName = null
+	                           , $strDescFieldName = null
+							   , $strInitialParentKey = null
+	                           , $mixUserDataFieldNames = null
+							   , $strHeight = null
+							   , $strWidth = null
 	                           , $jsOnClick = null
 	                           , $jsOnDblClick = null
 	                           , $jsOnCheck = null
@@ -168,8 +177,7 @@ class TTreeView extends TControl
 		$this->addFormSearchFields( $mixFormSearchFields );
 		$this->enableLines( $boolEnableTreeLines );
 		$this->setMixData($mixData);
-		if ( is_string( $mixData ) )
-		{
+		if ( is_string( $mixData ) ) {
 		    $this->setTableName($mixData);
 		}
 		//$this->setData( $mixData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $mixUserDataFieldNames );
@@ -185,7 +193,7 @@ class TTreeView extends TControl
 	*
 	* Se for definido os parametros $mixData,$strParentFieldName,$strChildFieldName,$strDescFieldName, a classe
 	* utilizará automaticamente o arquivo genérico base/callbacks/treeView.php para obter os valores via ajax
-
+	*
 	* <code>
 	* 	$tree->setXmlFile('index.php?modulo=base/exemplos/tree.php&ajax=1');
 	* </code>
@@ -202,11 +210,14 @@ class TTreeView extends TControl
 	    if( !$itens ) {
 	   		$xmlFile = is_null($this->xmlFile) ? $this->getBase().'callbacks/treeView.php' : $this->xmlFile;
    			if( file_exists($xmlFile) ) {
-   			    $parentFieldName = $this->getParentFieldName();
+   			    $parentFieldName= $this->getParentFieldName();
    			    $childFieldName = $this->getChildFieldName();
-   			    $descFieldName = $this->getDescFieldName();
-   			    $tableName = $this->getTableName();
+   			    $descFieldName  = $this->getDescFieldName();
+   			    $tableName      = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
+				if ( is_array( $userDataFieldNames ) ) {
+					$userDataFieldNames = implode( ',', $userDataFieldNames );
+				}
    			    $url = 'index.php?modulo='.$xmlFile
            			    .'&ajax=1&fwTreeview=1&parentField='.$parentFieldName
            			    .'&childField='.$childFieldName
@@ -358,14 +369,12 @@ class TTreeView extends TControl
 	    $strDescField = $this->getDescFieldName();
 	    $mixUserDataFields = $this->getUserDataFieldNames();
 	    
-		if ( !is_array( $arrData ) || is_null( $strParentField ) || is_null( $strChildField ) || is_null( $strDescField ) )
-		{
+		if ( !is_array( $arrData ) || is_null( $strParentField ) || is_null( $strChildField ) || is_null( $strDescField ) ) {
 			return;
 		}
 
 		// construir valores do parametro UserData
-		if ( is_string( $mixUserDataFields ) )
-		{
+		if ( is_string( $mixUserDataFields ) ) {
 			$mixUserDataFields = explode( ',', $mixUserDataFields );
 		}
 
@@ -402,17 +411,13 @@ class TTreeView extends TControl
 	*/
 	public function addFormSearchFields( $mixFieldId = null, $strValue = null )
 	{
-		if ( is_null( $mixFieldId ) || $mixFieldId == '' )
-		{
+		if ( is_null( $mixFieldId ) || $mixFieldId == '' ) {
 			return;
 		}
 
-		if ( is_array( $mixFieldId ) )
-		{
+		if ( is_array( $mixFieldId ) ) {
 			$this->formSearchFields = $mixFieldId;
-		}
-		else
-		{
+		} else {
 			$this->formSearchFields[ $mixFieldId ] = $strValue;
 		}
 	}
@@ -420,13 +425,11 @@ class TTreeView extends TControl
 	//---------------------------------------------------------------------------
 	public function getFormSearchFields( $boolJson = null )
 	{
-		if ( !$boolJson )
-		{
+		if ( !$boolJson ) {
 			return $this->formSearchFields;
 		}
 
-		if ( is_array( $this->formSearchFields ) )
-		{
+		if ( is_array( $this->formSearchFields ) ) {
 			return json_encode( $this->formSearchFields );
 		}
 	}
@@ -450,12 +453,9 @@ class TTreeView extends TControl
 
 	public function getEnableHighlighting()
 	{
-		if ( $this->enableHighlighting === false )
-		{
+		if ( $this->enableHighlighting === false ) {
 			return 0;
-		}
-		else
-		{
+		} else {
 			return 1;
 		}
 	}
@@ -550,10 +550,10 @@ class TTreeView extends TControl
 	* @param mixed $id             2: id do registro
 	* @param mixed $text           3: Texto do Registro
 	* @param mixed $open           4: Nó aberto ou fechado
-	* @param mixed $hint           5: 
+	* @param mixed $hint           5: Texto explicativo do item
 	* @param mixed $arrUserData    6: campos que serão passados quando clicamos no nó da arvore, usado no TreeClik
-	* @param mixed $boolSelect
-	* @param mixed $boolChecked
+	* @param mixed $boolSelect     7:
+	* @param mixed $boolChecked    8: Informa se o item está marcado
 	*/
 	public function addItem( $idParent, string $id, string $text, $open = null, $hint = null, $arrUserData = null, $boolSelect = null, $boolChecked = null )
 	{
@@ -610,16 +610,14 @@ class TTreeView extends TControl
 	//---------------------------------------------------------------------------
 	protected function setToolBar()
 	{
-		if ( $this->getShowToolBar() )
-		{
+		if ( $this->getShowToolBar() ){
 			$tb = new TElement( 'div' );
 			$tb->setClass( 'fwTreeViewToolBar' );
 			$tb->setId( $this->getId() . '_toolbar' );
 			$tb->add( new TButton( $tb->getId() . '_btn1', null, null, $this->getId() . 'Js.openAllItems(0)', null, 'folderAzulOpen.gif', null, 'Expandir Todos' ) );
 			$tb->add( new TButton( $tb->getId() . '_btn2', null, null, $this->getId() . 'Js.closeAllItems(0)', null, 'folderAzul.gif', null, 'Fechar Todos' ) );
 
-			if ( $this->getEnableCheck() )
-			{
+			if ( $this->getEnableCheck() ){
 				$tb->add( new TButton( $tb->getId() . '_btn3', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um ítem");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),true)', null, 'iconCheckAll.gif', null, 'Marcar o ítem e seus descendentes' ) );
 				$tb->add( new TButton( $tb->getId() . '_btn4', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um item");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),false)', null, 'iconUncheckAll.gif', null, 'Desmarcar o ítem e seus descendentes' ) );
 			}
@@ -659,36 +657,30 @@ class TTreeView extends TControl
 		//{
 		//$js .= $id.'.enableRadiobuttons(true);'."\n";
 		//}
-		if ( $this->getEnableDrag() )
-		{
+		if ( $this->getEnableDrag() ){
 			// Parametro false = não pode soltar em uma area vazia da arvore, somente sobre outro item
 			$js .= $id . '.enableDragAndDrop(1,false);' . "\n";
 		}
 
-		if ( $this->getOnDragEnd() )
-		{
+		if ( $this->getOnDragEnd() ){
 			$js .= $id . '.setDragHandler( ' . $this->getOnDragEnd() . ' );' . "\n";
 		}
 
-		if ( $this->getOnCheck() )
-		{
+		if ( $this->getOnCheck() ){
 			$js .= $id . '.setOnCheckHandler( ' . $this->getOnCheck() . ' );' . "\n";
 		}
 
-		if ( $this->getEnableLines() )
-		{
+		if ( $this->getEnableLines() ){
 			$js .= $id . '.enableTreeLines(true);' . "\n";
 		}
 
 		if ( $xmlFile ){
 		    $url = $xmlFile;
 			$url = str_replace( 'index.php', '', $url );
-			if ( !strpos( $url, 'ajax=1' ) )
-			{
+			if ( !strpos( $url, 'ajax=1' ) ){
 				$url .= ( strpos( $url, '?' ) > 0 ? '&' : '?' ) . 'ajax=1';
 			}
-			if ( $this->initialParentKey )
-			{
+			if ( $this->initialParentKey ){
 				$url .= '&initialParentKey=' . $this->initialParentKey;
 			}
 
@@ -699,12 +691,9 @@ class TTreeView extends TControl
 				$js .= $id . '.setXMLAutoLoading(fwUrlAddParams("' . $url . '"' . ( ( $this->getFormSearchFields( true )) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 				$js .= $id . '.loadXML(fwUrlAddParams("' . $url . '"' . ( $this->getFormSearchFields( true ) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 			}
-		}
-		else
-		{
+		} else {
 			// adicionar os itens orfãos
-			if ( $this->getOrphans() )
-			{
+			if ( $this->getOrphans() ){
 				foreach( $this->getOrphans() as $k => $item )
 				{
 					if ( $parent = $this->itens->getElementById( $item->getIdParent() ) )
@@ -713,8 +702,8 @@ class TTreeView extends TControl
 					}
 				}
 			}
-			if (is_null($this->itens))
-			{
+			if (is_null($this->itens)) {
+				$expand = $this->getStartExpanded();
 				$this->itens = new TTreeViewData( 0, 'root', $expand, '' ); // nivel obrigatório
 			}
 			$js .= $id . ".loadXMLString('" . $this->getXml(false) . "')";
@@ -730,7 +719,6 @@ class TTreeView extends TControl
 	public function getShowToolBar()
 	{
 		return is_null( $this->toolBarVisible ) ? true : $this->toolBarVisible;
-		showToolBar;
 	}
 
 	public function showToolBar()
@@ -755,9 +743,7 @@ class TTreeView extends TControl
 		if ( $obj = $this->getOrphanById( $item->getIdParent() ) )
 		{
 			$obj->addItem( $item );
-		}
-		else
-		{
+		} else {
 			// adicionar a lista de orfãos
 			$this->arrOrphan[ ] = $item;
 		}
@@ -807,7 +793,6 @@ class TTreeView extends TControl
 	{
 		return $this->arrOrphan;
 	}
-
 	public function setParentFieldName($strNewValue=null)
 	{
 		$this->parentFieldName = $strNewValue;
@@ -858,36 +843,27 @@ class TTreeView extends TControl
 	}
 	public function getXml($print=false)
 	{
-	  	if( !$this->itens  )
-		{
-   			if( $this->getOrphans() )
-			{
+	  	if( !$this->itens  ) {
+   			if( $this->getOrphans() ) {
 				list($item) = $this->getOrphans();
 				$this->itens=null;
 				$this->itens = new TTreeViewData( $item->getIdParent(), 'root');
-			 }
-			else
-			{
+			 } else {
 				$this->itens = new TTreeViewData( $this->getInitialParentKey(), 'root');
 			}
    		}
-   		if( $this->getOrphans() )
-   		{
-			foreach( $this->getOrphans() as $item )
-			{
+   		if( $this->getOrphans() ) {
+			foreach( $this->getOrphans() as $item ) {
 				$this->itens->addItem($item);
 			}
    		}
 
 		$xml = '<?xml version="1.0" encoding="iso-8859-1"?>' . str_replace( chr( 13 ), '', str_replace( chr( 9 ), '', str_replace( chr( 10 ), '', $this->itens->getXml() ) ) );
-		if ( $print === true )
-		{
+		if ( $print === true ) {
 			ob_clean();
 			header("Content-type:text/xml");
 			echo $xml;
-		}
-		else
-		{
+		} else {
 			return $xml;
 		}
 	}
