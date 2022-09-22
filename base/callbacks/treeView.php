@@ -50,8 +50,7 @@ header("Content-type:text/xml");
 echo '<?xml version="1.0" encoding="iso-8859-1"?>';
 
 $debug=false;
-if( $debug )
-{
+if( $debug ) {
 	print	'<tree id="0">';
 	print	'	<item text="Tabela: '.$_REQUEST['tableName'].'" id="1"/>';
 	print	'	<item text="Coluna Pai: '.$_REQUEST['parentField'].'" id="2"/>';
@@ -62,62 +61,47 @@ if( $debug )
 	die();
 }
 // parametro recebido pela chamada ajax
-if( isset( $_GET['id'] ) && ! is_null( $_GET['id'] ) && $_GET['id'] > '0' )
-{
+if( isset( $_GET['id'] ) && ! is_null( $_GET['id'] ) && $_GET['id'] > '0' ) {
 	//sleep(1);
 	$bvars = array( $_REQUEST['parentField'] => $_GET['id'] );
 	//sleep(2);
-}
-else
-{
+} else {
 	$_GET['id'] = '0';
 	$bvars = null;
 	//sleep(4);
 
-	foreach($_REQUEST as $k=>$v)
-	{
-		if(substr($k,0,3)=="_w_")
-		{
-			if( $_REQUEST['parentField'] != strtoupper(substr($k,3)) )
-			{
+	foreach($_REQUEST as $k=>$v) {
+		if(substr($k,0,3)=="_w_") {
+			if( $_REQUEST['parentField'] != strtoupper(substr($k,3)) ){
 				$bvars[strtoupper(substr($k,3))]= $v;
 			}
 		}
 	}
 }
+
 // cria a instância do objeto treeData
 $tree = new TTreeViewData($_GET['id'],'');
 
 // recuperar os dados do banco de dados
 $res=null;
-if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 )
-{
+if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 ) {
 	$erro = recuperarPacote($_REQUEST['tableName'],$bvars,$res);
-	if( $erro )
-	{
+	if( $erro ) {
 		$tree->addItem(new TTreeViewData($_GET['id'],$erro[ 0 ] ) );
 	}
-}
-else
-{
+} else {
 	// pdo
 	$where = '';
-	if( is_array($bvars) )
-	{
+	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v)
 		{
 			$where .= ($where =='' ? ' where ' :' and ').$k."='".$v."'";
 		}
-	}
-	else
-	{
-		if( isset($_REQUEST['initialParentKey']))
-		{
+	} else {
+		if( isset($_REQUEST['initialParentKey'])) {
 			//$where =' where ('.$_REQUEST['parentField']." = '".$_REQUEST['initialParentKey']."' or ".$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
 			$where =' where ('.$_REQUEST['childField']." = '".$_REQUEST['initialParentKey']."')";
-		}
-		else
-		{
+		} else {
 			$where =' where '.$_REQUEST['parentField'].' is null';
 		}
 	}
@@ -126,27 +110,23 @@ else
 	$res = TPDOConnection::executeSql($sql);
 	//$res=null;
 }
-if( $res )
-{
+
+if( $res ) {
 	foreach($res[ $_REQUEST['childField'] ] as $k=>$v)
 	{
 		// criar o array com userdata
 		$aUserData=null;
-		if( $_REQUEST['userDataFields'])
-		{
+		if( $_REQUEST['userDataFields']) {
 			$aUserDataFields = explode(',',$_REQUEST['userDataFields']);
-			foreach( $aUserDataFields as $u => $f )
-			{
-				if( $res[ $f ][$k] )
-				{
+			foreach( $aUserDataFields as $u => $f ) {
+				if( $res[ $f ][$k] ){
 					$aUserData[$f]=$res[ $f ][$k];
-				}
-				else if( $res[ strtoupper( $f ) ][$k] )
-				{
+				} else if( $res[ strtoupper( $f ) ][$k] ) {
 					$aUserData[$f]=$res[ strtoupper( $f ) ][$k];
 				}
 			}
 		}
+		
 		$tree->addItem(new TTreeViewData(
 			$res[$_REQUEST['childField']][$k]
 			,(is_null($res[$_REQUEST['descField']][$k]) ? '':$res[$_REQUEST['descField']][$k] )
