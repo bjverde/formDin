@@ -39,11 +39,14 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-/*
-	Estrutura do xml - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:syntax_templates
-	API - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:api_toc_categories
-	Componente: http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:toc
-*/
+/**
+ * Classe para criar um TreeView baseado no DHX 
+ * Documentação:  https://docs.dhtmlx.com/tree__index.html
+ * 
+ * Estrutura do xml - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:syntax_templates
+ * API - http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:api_toc_categories
+ * Componente: http://docs.dhtmlx.com/doku.php?id=dhtmlxtree:toc
+ */
 class TTreeView extends TControl
 {
 	private $itens;
