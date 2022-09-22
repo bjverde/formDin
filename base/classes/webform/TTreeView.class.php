@@ -697,6 +697,7 @@ class TTreeView extends TControl
 				}
 			}
 			if (is_null($this->itens)) {
+				$expand = $this->getStartExpanded();
 				$this->itens = new TTreeViewData( 0, 'root', $expand, '' ); // nivel obrigatório
 			}
 			$js .= $id . ".loadXMLString('" . $this->getXml(false) . "')";
