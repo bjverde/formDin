@@ -37,18 +37,51 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Exemplo 9 : Estados e Municípios com Método setando campos', 500);
+$frm = new TForm('Exemplo 9 : Estados e Municípios com Método setando campos', 800);
 
 $frm->addHtmlField('obs1', '<b>Este exemplo utiliza as tabelas vw_tree_regiao_uf_mun do banco de dados bdApoio.s3db ( sqlite )</b>');
+
+$frm->addGroupField('gpFields', 'Campos');
+    $frm->addTextField('ID_PAI', 'Id Pai:', 10);
+    $frm->addTextField('ID', 'id:', 60);
+    $frm->addTextField('NOME', 'Nome:', 60);
+    $frm->addTextField('sig_unidade', 'Sigla:', 60);
+$frm->closeGroup();  // fim do grupo
 
 // adicionar grupo
 $frm->addGroupField('gpTree', 'Exemplo Treeview com Fonte de Dados Definido pelo Usuário')->setcloseble(true);
     // adicionar o campo Treeview ao formulário
-    $tree = $frm->addTreeField('tree', 'Região/Extados/Municípios', 'vw_tree_regiao_uf_mun', 'ID_PAI', 'ID', 'NOME', null, null, 320);
-    // configurar a treeview
-    $tree->addFormSearchFields('cod_uf'); // informar a tree para utilizar o campo cod_uf do form como parte do filtro
+    $tree = $frm->addTreeField('tree'
+                              ,'Região/Extados/Municípios'
+                              ,'vw_tree_regiao_uf_mun'
+                              ,'ID_PAI'
+                              ,'ID'
+                              ,'NOME'
+                              ,null, null, 320);
     $tree->setStartExpanded(true);  // iniciar aberta
+    $tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
 $frm->closeGroup();  // fim do grupo
+
+$frm->addButton('Post');
+$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
 // exibir o formulário
 $frm->show();
+?>
+<script>
+function treeClick(id)
+{
+    /*
+    alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+    'Item text:'+treeJs.getItemText(id )+'\n'+
+    'User data URL:'+treeJs.getUserData(id,'URL_UNIDADE')
+    );
+    */
+    // atualizar os campos do formulário
+    jQuery("#cod_unidade").val(treeJs.getSelectedItemId());
+    jQuery("#nom_unidade").val(treeJs.getItemText(id ));
+    jQuery("#url_unidade").val(treeJs.getUserData(id,'URL_UNIDADE'));
+    jQuery("#sig_unidade").val(treeJs.getUserData(id,'SIG_UNIDADE'));
+    
+}
+</script>
