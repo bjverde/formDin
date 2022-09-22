@@ -215,6 +215,9 @@ class TTreeView extends TControl
    			    $descFieldName = $this->getDescFieldName();
    			    $tableName = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
+				if ( is_array( $userDataFieldNames ) ) {
+					$userDataFieldNames = implode( ',', $userDataFieldNames );
+				}
    			    $url = 'index.php?modulo='.$xmlFile
            			    .'&ajax=1&fwTreeview=1&parentField='.$parentFieldName
            			    .'&childField='.$childFieldName
