@@ -53,7 +53,7 @@ class TTreeViewItem
 	private $open;
 	private $checked;
 
-	public function __construct( $id,$text, $open=null, $boolchecked=null, $boolSelect=null, $hint=null, $arrUserData=null )
+	public function __construct( $id,$text, $boolOpen=null, $boolChecked=null, $boolSelect=null, $hint=null, $arrUserData=null )
 	{
 		$this->parent	= null;
 		$this->child	= 0;
@@ -83,21 +83,15 @@ class TTreeViewItem
 	public function getElementById($id)
 	{
 		$result=null;
-		if($id == $this->id)
-		{
+		if($id == $this->id) {
 			return $this;
 		}
-		if($this->itens)
-		{
-			forEach($this->itens as $k=>$item)
-			{
-				if( $k == $id)
-				{
+		if($this->itens) {
+			forEach($this->itens as $k=>$item) {
+				if( $k == $id) {
 					$result = $this->itens[$k];
 					break;
-				}
-				else
-				{
+				} else {
 					$result = $item->getElementById($id);
 				}
 			}
@@ -139,27 +133,21 @@ class TTreeViewItem
 		$tag = new TElement('tree');
 		$tag->setProperty('id',$this->getId());
 		$tag->setProperty('text',$this->text);
-		if(!is_null($this->parent) )
-		{
+		if(!is_null($this->parent) ) {
 			$tag->setTagType('item');
-			if($this->child==1)
-			{
+			if($this->child==1){
 				$tag->setProperty('child',"1");
 			}
-			if($this->tooltip)
-			{
+			if($this->tooltip){
 				$tag->setProperty('tooltip',$this->hint);
 			}
-			if($this->select=="yes")
-			{
+			if($this->select=="yes"){
 				$tag->setProperty('select',$this->select);
 			}
-			if($this->open=="yes")
-			{
+			if($this->open=="yes"){
 				$tag->setProperty('open',$this->open);
 			}
-			if($this->checked=="yes")
-			{
+			if($this->checked=="yes"){
 				$tag->setProperty("checked",$this->checked);
 			}
 		}
@@ -169,20 +157,16 @@ class TTreeViewItem
 	public function generateXml($fim=true)
 	{
 		$xml = $this->getTag();
-		if($this->userData)
-		{
-			foreach($this->userData as $k=>$v)
-			{
+		if($this->userData) {
+			foreach($this->userData as $k=>$v) {
 				$userData = new TElement('userdata');
 				$userData->setProperty('name',$k);
 				$userData->add($v);
 				$xml->add($userData);
 			}
 		}
-		if( $this->itens)
-		{
-			foreach($this->itens as $k=>$item)
-			{
+		if( $this->itens) {
+			foreach($this->itens as $k=>$item) {
 				$xml->add($item->generateXml(false));
 			}
 		}
@@ -192,16 +176,14 @@ class TTreeViewItem
 	public function getXml()
 	{
 		$this->generateXml();
-		if( $this->xml)
-		{
+		if( $this->xml) {
 			return $this->xml->show(false);
 		}
 	}
 	public function show()
 	{
 		$this->generateXml();
-		if( $this->xml)
-		{
+		if( $this->xml) {
 			$this->xml->show();
 		}
 	}
