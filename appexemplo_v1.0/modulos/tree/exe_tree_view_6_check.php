@@ -70,9 +70,20 @@ $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
     for ($i=23; $i<30; $i++) {
         $tree->addItem(2, $i, 'Nivel teste '.$i);
     }
+    $tree->setOnCheck('treeCheck'); // fefinir o evento que será chamado ao clicar no item da treeview
 $frm->closeGroup();
 
 $frm->addButton('Post');
 $frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
 $frm->show();
+?>
+<script>
+function treeCheck(id) {
+    var checkState = treeJs.isItemChecked(id);
+
+    alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+    'stado checado:'+checkState+'\n'
+    );    
+}
+</script>
