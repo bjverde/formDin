@@ -7328,29 +7328,30 @@ class TForm Extends TBox
     /**
     * Adicionar treeview ao formulário.
     *
-    * @param mixed $strName            - 1: ID do campo
-    * @param string $strRootLabel      - 2: Label do campo
-    * @param mixed $arrData            - 3: array de dados ou table ou view
-    * @param mixed $strParentFieldName - 4: ID do campo chave do pai
-    * @param mixed $strChildFieldName  - 5: ID do campo chave dos filhos
-    * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
-    * @param mixed $strInitialParentKey- 7:
-    * @param mixed $mixUserDataFields  - 8: campos que serão passados quando clicamos no nó da arvore
-    * @param bool $strHeight           - 9: altura
-    * @param bool $strWidth            -10: largura
-    * @param mixed $jsOnClick          -11:
-    * @param mixed $jsOnCheck          -12:
-    * @param mixed $jsOnDrag           -13:
-    * @param mixed $boolEnableCheckBoxes - 14: Habilita campo Checks
-    * @param mixed $boolEnableRadioButtons - 15:
-    * @param mixed $boolEnableTreeLines -16:
-    * @param mixed $strLabel            -17:
-    * @param mixed $boolLabelAbove      -18:
-    * @param mixed $boolNewLine         -19: boolNewLine
-    * @param mixed $boolNoWrapLabel     -20: boolNoWrapLabel
-    * @param mixed $mixFormSearchFields -21:
-    * @param mixed $boolShowToolBar     -22:
-    * @param mixed $startExpanded       -23: Se o TreeView deve iniciar expandido ou não
+    * @param mixed $strName               - 1: ID do campo
+    * @param string $strRootLabel         - 2: Label do campo
+    * @param mixed $arrData               - 3: array de dados ou table ou view
+    * @param mixed $strParentFieldName    - 4: ID do campo chave do pai
+    * @param mixed $strChildFieldName     - 5: ID do campo chave dos filhos
+    * @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
+    * @param mixed $strInitialParentKey   - 7:
+    * @param mixed $mixUserDataFields     - 8: Campos separados por virgula ou array normal ex: array('nome','telefone'); ATENÇÃO usar muito campos pode gerar problema veja TTreeView::setXmlFile
+    * @param bool $strHeight              - 9: altura
+    * @param bool $strWidth               -10: largura
+    * @param mixed $jsOnClick             -11: Nome da função JS CallBack para click simples
+    * @param mixed $jsOnDblClick          -12: Nome da função JS CallBack para click duplo
+    * @param mixed $jsOnCheck             -13: Nome da função JS CallBack para check item 
+    * @param mixed $jsOnDrag              -14:
+    * @param mixed $boolEnableCheckBoxes  -15: Habilita campo Checks
+    * @param mixed $boolEnableRadioButtons-16:
+    * @param mixed $boolEnableTreeLines   -17:
+    * @param mixed $strLabel              -18:
+    * @param mixed $boolLabelAbove        -19:
+    * @param mixed $boolNewLine           -20: boolNewLine
+    * @param mixed $boolNoWrapLabel       -20: boolNoWrapLabel
+    * @param mixed $mixFormSearchFields   -21:
+    * @param mixed $boolShowToolBar       -22: Se vai aparecer o treeView ou não
+    * @param mixed $startExpanded         -23: Se o TreeView deve iniciar expandido ou não
     * @return TTreeView
     */
     public function addTreeField( $strName

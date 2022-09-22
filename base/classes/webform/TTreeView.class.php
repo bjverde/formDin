@@ -120,18 +120,18 @@ class TTreeView extends TControl
 	* @param mixed $strChildFieldName     -05: id do campo chave dos filhos
 	* @param mixed $strDescFieldName      -06: Texto da descrição dos nos da arvore
 	* @param mixed $strInitialParentKey   -07:
-	* @param mixed $mixUserDataFieldNames -08: campos separados por virgula ou array normal ex: array('nome','telefone');
+	* @param mixed $mixUserDataFieldNames -08: Campos separados por virgula ou array normal ex: array('nome','telefone'); ATENÇÃO usar muito campos pode gerar problema veja TTreeView::setXmlFile
 	* @param mixed $strHeight             -09: altura
 	* @param mixed $strWidth              -10: largura
-	* @param mixed $jsOnClick             -11:
-	* @param mixed $jsOnDblClick          -12:
-	* @param mixed $jsOnCheck             -13:
+	* @param mixed $jsOnClick             -11: Nome da função JS CallBack para click simples
+	* @param mixed $jsOnDblClick          -12: Nome da função JS CallBack para click duplo
+	* @param mixed $jsOnCheck             -13: Nome da função JS CallBack para check item 
 	* @param mixed $jsOnDrag              -14:
-	* @param mixed $boolEnableCheckBoxes  -15:
+	* @param mixed $boolEnableCheckBoxes  -15: Habilita campo Checks
 	* @param mixed $boolEnableRadioButtons-16:
 	* @param mixed $boolEnableTreeLines   -17:
 	* @param mixed $mixFormSearchFields   -18:
-	* @param mixed $boolShowToolBar       -19:
+	* @param mixed $boolShowToolBar       -19: Se vai aparecer o treeView ou não
 	* @param mixed $startExpanded         -20: Se o treeView deve aparecer expandido ou não.
 	* @return TTreeView
 	*/
@@ -193,7 +193,7 @@ class TTreeView extends TControl
 	*
 	* Se for definido os parametros $mixData,$strParentFieldName,$strChildFieldName,$strDescFieldName, a classe
 	* utilizará automaticamente o arquivo genérico base/callbacks/treeView.php para obter os valores via ajax
-
+	*
 	* <code>
 	* 	$tree->setXmlFile('index.php?modulo=base/exemplos/tree.php&ajax=1');
 	* </code>
