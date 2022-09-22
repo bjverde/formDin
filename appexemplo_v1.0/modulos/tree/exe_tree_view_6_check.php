@@ -62,7 +62,7 @@ $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
     $tree->enableCheck(true);
 
     $tree->addItem(null, 1, 'Relatório', true);
-    $tree->addItem(1, 11, 'Financeiro', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
+    $tree->addItem(1, 11, 'Financeiro, tem hint', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
     $tree->addItem(1, 12, 'Recursos Humanos', null, null, array('URL'=>'www.google.com.br'));
     $tree->addItem(null, 2, 'Arquivos', true);
     $tree->addItem(2, 21, 'Documentos', null, 'Documentos do órgão', array('MODULO'=>'modulos/cad_documento'));
@@ -71,5 +71,8 @@ $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
         $tree->addItem(2, $i, 'Nivel teste '.$i);
     }
 $frm->closeGroup();
+
+$frm->addButton('Post');
+$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
 $frm->show();
