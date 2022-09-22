@@ -7614,12 +7614,10 @@ class TForm Extends TBox
                                     , $jsOnDrop=null
                                     , $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
     {
-       if( !DEFINED('INDEX_FILE_NAME') )
-       {
+       if( !DEFINED('INDEX_FILE_NAME') ){
            DEFINE('INDEX_FILE_NAME','index.php');
        }
-       if( ! is_null($strUrl) )
-       {
+       if( ! is_null($strUrl) ){
            $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
        }
        $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);
