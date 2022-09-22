@@ -42,8 +42,8 @@
 /*
 Módulo utilizado para gerar o xml de carregamento on-line da classe TreeView
 Exemplo de chamada para teste do resultado:
-https://10.1.4.65/~45427380191/appbase/?modulo=base/callbacks/treeView.php&ajax=1&parentField=SEQ_TAXONOMIA_PAI&childField=SEQ_TAXONOMIA&descField=DES_TAXONOMIA&tableName=TESTE.PKG_TAXONOMIA_TREE.SEL_TAXON
-https://10.1.4.65/~45427380191/appbase/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
+http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=SEQ_TAXONOMIA_PAI&childField=SEQ_TAXONOMIA&descField=DES_TAXONOMIA&tableName=TESTE.PKG_TAXONOMIA_TREE.SEL_TAXON
+http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
  */
 error_reporting(0);
 header("Content-type:text/xml");
@@ -126,7 +126,7 @@ if( $res ) {
 				}
 			}
 		}
-		
+
 		$tree->addItem(new TTreeViewData(
 			$res[$_REQUEST['childField']][$k]
 			,(is_null($res[$_REQUEST['descField']][$k]) ? '':$res[$_REQUEST['descField']][$k] )
