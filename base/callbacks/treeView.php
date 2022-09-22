@@ -107,7 +107,17 @@ if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 ) {
 			$where =' where '.$_REQUEST['parentField'].' is null';
 		}
 	}
-	$sql = "select ".$_REQUEST['parentField'].','.$_REQUEST['childField'].",".$_REQUEST['descField']. " from ".$_REQUEST['tableName'].' '.$where;
+	
+	$aUserDataFields = array();
+	if( is_string($_REQUEST['userDataFields']) && !empty($_REQUEST['userDataFields']) ){
+		$aUserDataFields = explode(',',$_REQUEST['userDataFields']);
+	}
+	array_unshift($aUserDataFields, $_REQUEST['parentField'], $_REQUEST['childField'], $_REQUEST['descField']);
+	$listFields = array();
+	$listFields = array_unique($aUserDataFields);
+	$fields = implode(',',$listFields);
+
+	$sql = "select ".$fields. " from ".$_REQUEST['tableName'].' '.$where;
 	//$tree->addItem(new TTreeViewData($_GET['id'],$sql ) );
 	$res = TPDOConnection::executeSql($sql);
 	//$res=null;
