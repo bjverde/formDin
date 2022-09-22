@@ -402,17 +402,13 @@ class TTreeView extends TControl
 	*/
 	public function addFormSearchFields( $mixFieldId = null, $strValue = null )
 	{
-		if ( is_null( $mixFieldId ) || $mixFieldId == '' )
-		{
+		if ( is_null( $mixFieldId ) || $mixFieldId == '' ) {
 			return;
 		}
 
-		if ( is_array( $mixFieldId ) )
-		{
+		if ( is_array( $mixFieldId ) ) {
 			$this->formSearchFields = $mixFieldId;
-		}
-		else
-		{
+		} else {
 			$this->formSearchFields[ $mixFieldId ] = $strValue;
 		}
 	}
@@ -420,13 +416,11 @@ class TTreeView extends TControl
 	//---------------------------------------------------------------------------
 	public function getFormSearchFields( $boolJson = null )
 	{
-		if ( !$boolJson )
-		{
+		if ( !$boolJson ) {
 			return $this->formSearchFields;
 		}
 
-		if ( is_array( $this->formSearchFields ) )
-		{
+		if ( is_array( $this->formSearchFields ) ) {
 			return json_encode( $this->formSearchFields );
 		}
 	}
@@ -450,12 +444,9 @@ class TTreeView extends TControl
 
 	public function getEnableHighlighting()
 	{
-		if ( $this->enableHighlighting === false )
-		{
+		if ( $this->enableHighlighting === false ) {
 			return 0;
-		}
-		else
-		{
+		} else {
 			return 1;
 		}
 	}
@@ -610,16 +601,14 @@ class TTreeView extends TControl
 	//---------------------------------------------------------------------------
 	protected function setToolBar()
 	{
-		if ( $this->getShowToolBar() )
-		{
+		if ( $this->getShowToolBar() ){
 			$tb = new TElement( 'div' );
 			$tb->setClass( 'fwTreeViewToolBar' );
 			$tb->setId( $this->getId() . '_toolbar' );
 			$tb->add( new TButton( $tb->getId() . '_btn1', null, null, $this->getId() . 'Js.openAllItems(0)', null, 'folderAzulOpen.gif', null, 'Expandir Todos' ) );
 			$tb->add( new TButton( $tb->getId() . '_btn2', null, null, $this->getId() . 'Js.closeAllItems(0)', null, 'folderAzul.gif', null, 'Fechar Todos' ) );
 
-			if ( $this->getEnableCheck() )
-			{
+			if ( $this->getEnableCheck() ){
 				$tb->add( new TButton( $tb->getId() . '_btn3', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um ítem");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),true)', null, 'iconCheckAll.gif', null, 'Marcar o ítem e seus descendentes' ) );
 				$tb->add( new TButton( $tb->getId() . '_btn4', null, null, 'if(!' . $this->getId() . 'Js.getSelectedItemId()){alert("Selecione um item");return false;}' . $this->getId() . 'Js.setSubChecked(' . $this->getId() . 'Js.getSelectedItemId(),false)', null, 'iconUncheckAll.gif', null, 'Desmarcar o ítem e seus descendentes' ) );
 			}
@@ -659,36 +648,30 @@ class TTreeView extends TControl
 		//{
 		//$js .= $id.'.enableRadiobuttons(true);'."\n";
 		//}
-		if ( $this->getEnableDrag() )
-		{
+		if ( $this->getEnableDrag() ){
 			// Parametro false = não pode soltar em uma area vazia da arvore, somente sobre outro item
 			$js .= $id . '.enableDragAndDrop(1,false);' . "\n";
 		}
 
-		if ( $this->getOnDragEnd() )
-		{
+		if ( $this->getOnDragEnd() ){
 			$js .= $id . '.setDragHandler( ' . $this->getOnDragEnd() . ' );' . "\n";
 		}
 
-		if ( $this->getOnCheck() )
-		{
+		if ( $this->getOnCheck() ){
 			$js .= $id . '.setOnCheckHandler( ' . $this->getOnCheck() . ' );' . "\n";
 		}
 
-		if ( $this->getEnableLines() )
-		{
+		if ( $this->getEnableLines() ){
 			$js .= $id . '.enableTreeLines(true);' . "\n";
 		}
 
 		if ( $xmlFile ){
 		    $url = $xmlFile;
 			$url = str_replace( 'index.php', '', $url );
-			if ( !strpos( $url, 'ajax=1' ) )
-			{
+			if ( !strpos( $url, 'ajax=1' ) ){
 				$url .= ( strpos( $url, '?' ) > 0 ? '&' : '?' ) . 'ajax=1';
 			}
-			if ( $this->initialParentKey )
-			{
+			if ( $this->initialParentKey ){
 				$url .= '&initialParentKey=' . $this->initialParentKey;
 			}
 
@@ -699,12 +682,9 @@ class TTreeView extends TControl
 				$js .= $id . '.setXMLAutoLoading(fwUrlAddParams("' . $url . '"' . ( ( $this->getFormSearchFields( true )) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 				$js .= $id . '.loadXML(fwUrlAddParams("' . $url . '"' . ( $this->getFormSearchFields( true ) ? ',' . $this->getFormSearchFields( true ) : '' ) . '));' . "\n";
 			}
-		}
-		else
-		{
+		} else {
 			// adicionar os itens orfãos
-			if ( $this->getOrphans() )
-			{
+			if ( $this->getOrphans() ){
 				foreach( $this->getOrphans() as $k => $item )
 				{
 					if ( $parent = $this->itens->getElementById( $item->getIdParent() ) )
@@ -713,8 +693,7 @@ class TTreeView extends TControl
 					}
 				}
 			}
-			if (is_null($this->itens))
-			{
+			if (is_null($this->itens)) {
 				$this->itens = new TTreeViewData( 0, 'root', $expand, '' ); // nivel obrigatório
 			}
 			$js .= $id . ".loadXMLString('" . $this->getXml(false) . "')";
@@ -754,9 +733,7 @@ class TTreeView extends TControl
 		if ( $obj = $this->getOrphanById( $item->getIdParent() ) )
 		{
 			$obj->addItem( $item );
-		}
-		else
-		{
+		} else {
 			// adicionar a lista de orfãos
 			$this->arrOrphan[ ] = $item;
 		}
@@ -806,7 +783,6 @@ class TTreeView extends TControl
 	{
 		return $this->arrOrphan;
 	}
-
 	public function setParentFieldName($strNewValue=null)
 	{
 		$this->parentFieldName = $strNewValue;
@@ -857,36 +833,27 @@ class TTreeView extends TControl
 	}
 	public function getXml($print=false)
 	{
-	  	if( !$this->itens  )
-		{
-   			if( $this->getOrphans() )
-			{
+	  	if( !$this->itens  ) {
+   			if( $this->getOrphans() ) {
 				list($item) = $this->getOrphans();
 				$this->itens=null;
 				$this->itens = new TTreeViewData( $item->getIdParent(), 'root');
-			 }
-			else
-			{
+			 } else {
 				$this->itens = new TTreeViewData( $this->getInitialParentKey(), 'root');
 			}
    		}
-   		if( $this->getOrphans() )
-   		{
-			foreach( $this->getOrphans() as $item )
-			{
+   		if( $this->getOrphans() ) {
+			foreach( $this->getOrphans() as $item ) {
 				$this->itens->addItem($item);
 			}
    		}
 
 		$xml = '<?xml version="1.0" encoding="iso-8859-1"?>' . str_replace( chr( 13 ), '', str_replace( chr( 9 ), '', str_replace( chr( 10 ), '', $this->itens->getXml() ) ) );
-		if ( $print === true )
-		{
+		if ( $print === true ) {
 			ob_clean();
 			header("Content-type:text/xml");
 			echo $xml;
-		}
-		else
-		{
+		} else {
 			return $xml;
 		}
 	}
