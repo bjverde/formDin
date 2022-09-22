@@ -113,12 +113,12 @@ class TTreeView extends TControl
 	*	};
 	* </code>
 	*
-	* @param mixed $strName               - 1: id do campo
-	* @param string $strRootLabel         - 2: Label do campo
-	* @param mixed $mixData               - 3: array de dados ou table ou view
-	* @param mixed $strParentFieldName    - 4: id do campo chave do pai
-	* @param mixed $strChildFieldName     - 5: id do campo chave dos filhos
-	* @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
+	* @param mixed $strName               -01: id do campo
+	* @param string $strRootLabel         -02: Label do campo
+	* @param mixed $mixData               -03: array de dados ou table ou view
+	* @param mixed $strParentFieldName    -04: id do campo chave do pai
+	* @param mixed $strChildFieldName     -05: id do campo chave dos filhos
+	* @param mixed $strDescFieldName      -06: Texto da descrição dos nos da arvore
 	* @param mixed $strInitialParentKey   -07:
 	* @param mixed $mixUserDataFieldNames -08: campos separados por virgula ou array normal ex: array('nome','telefone');
 	* @param mixed $strHeight             -09: altura
@@ -135,10 +135,16 @@ class TTreeView extends TControl
 	* @param mixed $startExpanded         -20: Se o treeView deve aparecer expandido ou não.
 	* @return TTreeView
 	*/
-	public function __construct( $strName=null, $strRootLabel = null, $mixData = null
-	                           , $strParentFieldName = null, $strChildFieldName = null
-	                           , $strDescFieldName = null, $strInitialParentKey = null
-	                           , $mixUserDataFieldNames = null, $strHeight = null, $strWidth = null
+	public function __construct( $strName=null
+							   , $strRootLabel = null
+							   , $mixData = null
+	                           , $strParentFieldName = null
+							   , $strChildFieldName = null
+	                           , $strDescFieldName = null
+							   , $strInitialParentKey = null
+	                           , $mixUserDataFieldNames = null
+							   , $strHeight = null
+							   , $strWidth = null
 	                           , $jsOnClick = null
 	                           , $jsOnDblClick = null
 	                           , $jsOnCheck = null
@@ -171,8 +177,7 @@ class TTreeView extends TControl
 		$this->addFormSearchFields( $mixFormSearchFields );
 		$this->enableLines( $boolEnableTreeLines );
 		$this->setMixData($mixData);
-		if ( is_string( $mixData ) )
-		{
+		if ( is_string( $mixData ) ) {
 		    $this->setTableName($mixData);
 		}
 		//$this->setData( $mixData, $strParentFieldName, $strChildFieldName, $strDescFieldName, $mixUserDataFieldNames );
