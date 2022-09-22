@@ -7330,7 +7330,7 @@ class TForm Extends TBox
     *
     * @param mixed $strName            - 1: ID do campo
     * @param string $strRootLabel      - 2: Label do campo
-    * @param mixed $arrData            - 3: array de dados
+    * @param mixed $arrData            - 3: array de dados ou table ou view
     * @param mixed $strParentFieldName - 4: ID do campo chave do pai
     * @param mixed $strChildFieldName  - 5: ID do campo chave dos filhos
     * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore

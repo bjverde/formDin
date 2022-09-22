@@ -111,8 +111,8 @@ class TTreeView extends TControl
 	* </code>
 	*
 	* @param mixed $strName               - 1: id do campo
-	* @param string $strRootLabel         - 2: Lavel do campo
-	* @param mixed $mixData               - 3: array de dados
+	* @param string $strRootLabel         - 2: Label do campo
+	* @param mixed $mixData               - 3: array de dados ou table ou view
 	* @param mixed $strParentFieldName    - 4: id do campo chave do pai
 	* @param mixed $strChildFieldName     - 5: id do campo chave dos filhos
 	* @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
@@ -550,10 +550,10 @@ class TTreeView extends TControl
 	* @param mixed $id             2: id do registro
 	* @param mixed $text           3: Texto do Registro
 	* @param mixed $open           4: Nó aberto ou fechado
-	* @param mixed $hint           5: 
+	* @param mixed $hint           5: Texto explicativo do item
 	* @param mixed $arrUserData    6: campos que serão passados quando clicamos no nó da arvore, usado no TreeClik
-	* @param mixed $boolSelect
-	* @param mixed $boolChecked
+	* @param mixed $boolSelect     7:
+	* @param mixed $boolChecked    8: Informa se o item está marcado
 	*/
 	public function addItem( $idParent, string $id, string $text, $open = null, $hint = null, $arrUserData = null, $boolSelect = null, $boolChecked = null )
 	{
