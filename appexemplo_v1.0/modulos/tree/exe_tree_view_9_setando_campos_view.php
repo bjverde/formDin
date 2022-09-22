@@ -42,28 +42,33 @@ $frm = new TForm('Exemplo 9 : Estados e Municípios com Método setando campos',
 $frm->addHtmlField('obs1', '<b>Este exemplo utiliza as tabelas vw_tree_regiao_uf_mun do banco de dados bdApoio.s3db ( sqlite )</b>');
 
 $frm->addGroupField('gpFields', 'Campos');
-    $frm->addTextField('ID_PAI', 'Id Pai:', 10);
-    $frm->addTextField('ID', 'id:', 60);
+    $frm->addTextField('ID_PAI', 'Id Pai:', 20);
+    $frm->addTextField('ID', 'id:', 20,null,null,null,false);
     $frm->addTextField('NOME', 'Nome:', 60);
     $frm->addTextField('sig_unidade', 'Sigla:', 60);
 $frm->closeGroup();  // fim do grupo
 
+$frm->addButton('Atualizar', null, 'Atualizar', null, null, true, false);
+$frm->addButton('Limpar'   , null, 'btnLimpar', 'fwClearChildFields()', null, false, false);
+
 // adicionar grupo
-$frm->addGroupField('gpTree', 'Exemplo Treeview com Fonte de Dados Definido pelo Usuário')->setcloseble(true);
-    // adicionar o campo Treeview ao formulário
+$frm->addGroupField('gpTree', 'Exemplo Treeview com Fonte de Dados Definido pelo Usuário');
+    //$mixUserDataFields = array('ID_PAI','ID','NOME');
+    $mixUserDataFields = 'ID_PAI,ID,NOME';
     $tree = $frm->addTreeField('tree'
                               ,'Região/Extados/Municípios'
                               ,'vw_tree_regiao_uf_mun'
                               ,'ID_PAI'
                               ,'ID'
                               ,'NOME'
-                              ,null, null, 320);
+                              ,null
+                              ,$mixUserDataFields
+                              ,320
+                              ,null);
     $tree->setStartExpanded(true);  // iniciar aberta
     $tree->setOnClick('treeClick'); // fefinir o evento que será chamado ao clicar no item da treeview
 $frm->closeGroup();  // fim do grupo
 
-$frm->addButton('Post');
-$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 
 // exibir o formulário
 $frm->show();
@@ -78,9 +83,9 @@ function treeClick(id)
     );
     */
     // atualizar os campos do formulário
-    jQuery("#cod_unidade").val(treeJs.getSelectedItemId());
-    jQuery("#nom_unidade").val(treeJs.getItemText(id ));
-    jQuery("#url_unidade").val(treeJs.getUserData(id,'URL_UNIDADE'));
+    jQuery("#ID").val(treeJs.getSelectedItemId());
+    jQuery("#NOME").val(treeJs.getItemText(id));
+    jQuery("#ID_PAI").val(treeJs.getUserData(id,'ID_PAI'));
     jQuery("#sig_unidade").val(treeJs.getUserData(id,'SIG_UNIDADE'));
     
 }
