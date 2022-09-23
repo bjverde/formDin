@@ -57,19 +57,17 @@ $frm->addHtmlField('html1', $html, null,null)->setClass('alert');
 
 $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
 
-    $tree = $frm->addTreeField('tree', null, null, null, null, null, null, null, null);
+    $tree = $frm->addTreeField('tree'
+                              , null
+                              , 'treecheck_link'
+                              ,'ID_PAI'
+                              ,'ID'
+                              ,'NOME'
+                              , null
+                              , null, null);
     $tree->setStartExpanded(true);
     $tree->enableCheck(true);
 
-    $tree->addItem(null, 1, 'Relatório', true);
-    $tree->addItem(1, 11, 'Financeiro, tem hint', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
-    $tree->addItem(1, 12, 'Recursos Humanos', null, null, array('URL'=>'www.google.com.br'));
-    $tree->addItem(null, 2, 'Arquivos', true);
-    $tree->addItem(2, 21, 'Documentos', null, 'Documentos do órgão', array('MODULO'=>'modulos/cad_documento'));
-    $tree->addItem(2, 22, 'Planilhas');
-    for ($i=23; $i<30; $i++) {
-        $tree->addItem(2, $i, 'Nivel teste '.$i);
-    }
     $tree->setOnCheck('treeCheck'); //Função chamada ao checar o item
     //$tree->setOnCheck('treeCheckOld'); //Função chamada ao checar o item
 $frm->closeGroup();
@@ -82,6 +80,20 @@ $frm->show();
 <script>
 function treeCheck(id, state){
     alert( state );
+    jQuery.ajax({
+         type: "POST"
+        ,url: "includes/treeview_salvar_check.php"
+        ,data: "id="+id+'&checked='+state
+        ,success: function(msg){
+                msg = jQuery.trim(msg);
+                if( msg ){
+                    alert( msg );
+                }
+            }
+        ,error: function(msg){
+                alert( 'erro:' + msg );
+            }
+    });
 }
 function treeCheckOld(id) {
     var checkState = treeJs.isItemChecked(id);
