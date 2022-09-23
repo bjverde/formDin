@@ -79,18 +79,25 @@ $frm->show();
 ?>
 <script>
 function treeCheck(id, checked){
-    alert( state );
+    var postForm = {
+             'id'     : id
+            ,'checked': checked
+        };
     jQuery.ajax({
          type: "POST"
         ,url: "treeview_salvar_check.php"
-        ,data: "id="+id+'&checked='+checked
-        ,success: function(msg){
-                msg = jQuery.trim(msg);
+        ,data: postForm
+        ,success: function(response, textStatus, jqXHR){
+                console.log(response);
+                console.log(textStatus);
+                msg = jQuery.trim(response);
                 if( msg ){
                     alert( msg );
                 }
             }
-        ,error: function(msg){
+        ,error: function(response, textStatus, jqXHR){
+                console.log(response);
+                console.log(textStatus);
                 alert( 'erro:' + msg );
             }
     });

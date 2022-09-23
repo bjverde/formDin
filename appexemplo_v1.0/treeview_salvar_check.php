@@ -9,6 +9,11 @@ require_once 'includes/constantes.php';
 require_once 'includes/config_conexao.php';
 require_once '../base/classes/webform/TApplication.class.php'; //FormDin 5
 
+// AQUI SERÁ O CONTROLE DE ACESSO
+// AQUI SERÁ O CONTROLE DE ACESSO
+// AQUI SERÁ O CONTROLE DE ACESSO
+// AQUI SERÁ O CONTROLE DE ACESSO
+
 try{
     //var_dump($_REQUEST);
     $id = $_REQUEST['id'];
