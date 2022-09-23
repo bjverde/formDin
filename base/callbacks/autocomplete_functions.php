@@ -88,13 +88,13 @@ function recuperaPacoteOracleAutoComplete($strSearchField, $intCacheTime, $strTa
 
 /**
  * Recupera o resultado da tabela 
- * @param array $bvars
- * @param [type] $boolSearchAnyPosition
- * @param [type] $arrUpdateFields
- * @param [type] $strSearchField
- * @param [type] $strTablePackageFuncion
- * @param string $configFileName Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
- * @param bool $trimText 
+ * @param array $bvars                   1:
+ * @param bool  $boolSearchAnyPosition   2: Pesquisa o texto com like dos dois lados
+ * @param [type] $arrUpdateFields        3:
+ * @param [type] $strSearchField         4:
+ * @param [type] $strTablePackageFuncion 5:
+ * @param string $configFileName         6: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete.
+ * @param bool $trimText                 7: Se não deve fazer uso o trim na pesquisa do texto
  * @return void
  */
 function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion,$configFileName,$trimText) {
@@ -130,12 +130,13 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 
 /**
  * Gera o SQL que será executado
- * @param bvars
- * @param bool $boolSearchAnyPosition   2: pesquisa o texto com like dos dois lados
- * @param arrUpdateFields
- * @param strSearchField
- * @param string $strTablePackageFuncion
- * @param bool   $trimText             6: se não deve fazer uso o trim na pesquisa do texto
+ * 
+ * @param array  $bvars                  1: 
+ * @param bool   $boolSearchAnyPosition  2: pesquisa o texto com like dos dois lados
+ * @param array  $arrUpdateFields        3:
+ * @param string $strSearchField         4:
+ * @param string $strTablePackageFuncion 5:
+ * @param bool   $trimText               6: se não deve fazer uso o trim na pesquisa do texto
  */
 function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields, $strSearchField, $strTablePackageFuncion ,$trimText) {
 	$selectColumns=$strSearchField;
@@ -151,7 +152,7 @@ function tableRecoverCreateSql($bvars, $boolSearchAnyPosition, $arrUpdateFields,
 
 	if( $trimText == true){
 		$text  = trim($text);
-	}	
+	}
 	$where = "upper({$strSearchField}) like upper('".($boolSearchAnyPosition === true ? '%' : '' ).$text."%')";
 	if( is_array($bvars) ) {
 		foreach($bvars as $k=>$v) {

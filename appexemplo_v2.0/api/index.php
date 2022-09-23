@@ -32,6 +32,4 @@ require_once $current_dirApi.DS.'env.php';
 //require_once $current_dirApi.DS.'basicAuth.php';
 //require_once $current_dirApi.DS.'jwtAuth.php';
 //require_once $current_dirApi.DS.'slimConfiguration.php';
-//require_once $current_dirApi.DS.'routes.php';
-
-require_once $current_dirApi.DS.'routes2.php';
+require_once $current_dirApi.DS.'routes.php';

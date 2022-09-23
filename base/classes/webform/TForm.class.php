@@ -1974,15 +1974,15 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - 1: nome do campo no form(tela) irá funcionar com autocomplete
-     * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
-     * @param string $strSearchField                - 3: campo de pesquisa
-     * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-     * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
-     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like, procure usar campos do tipo INT. ATENÇÃO Segue o Padrão <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
-     * @param string $strCallBackFunctionJs         - 7: função javascript de callback
-     * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
+     * @param string $strFieldName                  -  1: Nome do campo no form(tela) irá funcionar com autocomplete
+     * @param string $strTablePackageFuncion        -  2: Tabela alvo da pesquisa ou pacote somente no oracle
+     * @param string $strSearchField                -  3: Campo de pesquisa
+     * @param mixed $mixUpdateFields                -  4: Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param boolean $boolDisableUpdateFields      -  5: Desativa os campos que serão atuliazados depois da pesquisa
+     * @param mixed $mixExtraSearchFields           -  6: Campos do formulário que serão adicionados como filtro. Os campos serão uma direta e não usa like. Procure usar campos do tipo INT ou CHAR. ATENÇÃO para mais de um campo de filtro usei o array com os nomes dos campos do Form, ou use a string  <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
+     * @param string $strCallBackFunctionJs         -  7: Função javascript de callback
+     * @param integer $intMinChars                  -  8: Default 3, numero de caracteres minimos para disparar a pesquisa
+     * @param integer $intDelay                     -  9: Default 500, tempo após a digitação para disparar a consulta
      * @param integer $intMaxItensToShow            - 10: Default 50, máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
