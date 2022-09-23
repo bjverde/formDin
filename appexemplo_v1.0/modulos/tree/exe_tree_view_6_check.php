@@ -78,12 +78,12 @@ $frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
 $frm->show();
 ?>
 <script>
-function treeCheck(id, state){
+function treeCheck(id, checked){
     alert( state );
     jQuery.ajax({
          type: "POST"
-        ,url: "includes/treeview_salvar_check.php"
-        ,data: "id="+id+'&checked='+state
+        ,url: "treeview_salvar_check.php"
+        ,data: "id="+id+'&checked='+checked
         ,success: function(msg){
                 msg = jQuery.trim(msg);
                 if( msg ){
