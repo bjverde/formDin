@@ -63,13 +63,16 @@ class Acesso_menuAPI
     {
         $vo = new \Acesso_menuVO;
         $msg = \Message::GENERIC_INSERT;
-        if($request->isPut()){
+        if($request->getMethod() == 'PUT'){
             $msg = \Message::GENERIC_UPDATE;
             $result = self::selectByIdInside($args);
             $bodyRequest = $result[0];
             $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
         }
         $bodyRequest = json_decode($request->getBody(),true);
+        if(empty($bodyRequest)){
+            $bodyRequest = $request->getParsedBody();
+        }
         $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
 
         $controller = new \Acesso_menu;
