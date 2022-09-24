@@ -57,6 +57,7 @@ $menu->add('11', '1', 'Campo Texto', null, 'Declaração de texto');
     	$menu->add('11.3.3', '11.3', 'Consulta On-line', 'view/fields/exe_onlinesearch.php');
     	$menu->add('11.3.4', '11.3', 'Consulta On-line I (ERRO)', 'view/fields/exe_onlinesearch1.php');
     	$menu->add('11.3.5', '11.3', 'Autocompletar 3 + Consulta On-line', 'view/fields/exe_autocomplete3.php');
+        $menu->add('11.3.5', '11.3', 'AutoComplete Multiplos Bancos', 'pdo/database_multiplos_autocomplete.php', null, '../../base/imagens/database_balance.png');
 $menu->add('12', '1', 'Campo HTML');
     $menu->add('12.1', '12', 'Campo HTML', 'view/fields/exe_HtmlField.php');
     $menu->add('12.2', '12', 'Campo HTML com iFrame', 'modulos/iframe_phpinfo/ambiente_phpinfo.php');
