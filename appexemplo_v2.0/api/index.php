@@ -15,11 +15,6 @@ if (! defined ( 'DS' )) {
     define ( 'DS', DIRECTORY_SEPARATOR );
 }
 $current_dirApi = dirname ( __FILE__ );
-
-/***
-  * Baseado no curso APIs REST com PHP 7 e Slim Framework
-  * https://github.com/codeeasy-dev/apis-rest-com-php-7-e-slim-framework
-  */
 require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'constantes.php';
 require_once $current_dirApi.DS.'..'.DS.'includes'.DS.'config_conexao.php';
 require_once $current_dirApi.DS.'..'.DS.'..'.DS.'base/classes/webform/TApplication.class.php';
@@ -28,6 +23,10 @@ require_once $current_dirApi.DS.'..'.DS.'dao'.DS.'autoload_appev2_dao.php';
 require_once $current_dirApi.DS.'autoload_appev2_api.php';
 
 //--------------------------------------------------------------------------------
+/***
+  * Baseado no curso APIs REST com PHP 7 e Slim Framework
+  * https://github.com/codeeasy-dev/apis-rest-com-php-7-e-slim-framework
+  */
 require_once $current_dirApi.DS.'env.php';
 //require_once $current_dirApi.DS.'basicAuth.php';
 //require_once $current_dirApi.DS.'jwtAuth.php';
