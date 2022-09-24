@@ -40,7 +40,11 @@
 d($_REQUEST);
 
 
-$html = 'Essa Funcionalidade não está completa, falta algumas coisas !';
+$html = 'Essa exemplo não está completo, falta algumas coisas !';
+$html = $html.'<br>';
+$html = $html.'<br>Os dados são gravados na tabela treecheck_link';
+$html = $html.'<br>Quando clicar em um item vai chamar uma função JS treeCheck que irá gravar no banco';
+$html = $html.'<br>Falta a função de resgatar do banco de dados os elementos que estão marcados';
 
 
 $frm = new TForm('6 - TreeView with CheckBox', 400);
@@ -52,7 +56,7 @@ $frm->setMaximize(true);
 $frm->setAutoSize(true);
 $frm->addCssFile('css/css_form04.css');
 
-$frm->addHtmlField('html1', $html, null,null)->setClass('alert');
+$frm->addHtmlField('html1', $html, null,null)->setClass('failure');
 
 
 $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
