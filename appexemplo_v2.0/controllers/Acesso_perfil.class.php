@@ -52,9 +52,23 @@ class Acesso_perfil
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function validarNomePerfilJaExiste( Acesso_perfilVO $objVo )
+    {
+        $where=array('NOM_PERFIL'=>$objVo->getNom_perfil());
+        $qtd = $this->selectCount($where);
+        if($qtd >= 1){
+            throw new DomainException('Já existe um perfil com o mesmo nome!');
+        }
+    }
+    public function validar( Acesso_perfilVO $objVo )
+    {
+        $this->validarNomePerfilJaExiste($objVo);
+    }
+    //--------------------------------------------------------------------------------
     public function save( Acesso_perfilVO $objVo )
     {
         $result = null;
+        $this->validar();
         if( $objVo->getIdperfil() ) {
             $result = $this->dao->update( $objVo );
         } else {
@@ -74,6 +88,5 @@ class Acesso_perfil
         $result = $this->dao->getVoById( $id );
         return $result;
     }
-
 }
 ?>
