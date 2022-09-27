@@ -13,7 +13,7 @@ class TGenericAPI
     public static function getBodyJson($msg, Response $response,$status=200)
     {
         $status = empty($status)?200:$status;
-        $msgJson = json_encode($msg);
+        $msgJson = json_encode($msg, JSON_UNESCAPED_UNICODE);
         $response->withHeader('Content-Type', 'application/json');        
         $response->getBody()->write( $msgJson );
         return $response->withStatus( $status );
