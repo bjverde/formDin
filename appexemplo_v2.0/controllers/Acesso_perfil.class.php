@@ -68,7 +68,7 @@ class Acesso_perfil
     public function save( Acesso_perfilVO $objVo )
     {
         $result = null;
-        $this->validar();
+        $this->validar($objVo);
         if( $objVo->getIdperfil() ) {
             $result = $this->dao->update( $objVo );
         } else {
