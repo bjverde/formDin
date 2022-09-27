@@ -84,7 +84,10 @@ class Acesso_perfilAPI
         $id = $args['id'];
         $controller = new \Acesso_perfil;
         $msg = $controller->delete($id);
-
+        if($msg==true){
+            $msg = \Message::GENERIC_DELETE;
+            $msg = $msg.' id='.$id;
+        }
         $response = TGenericAPI::getBodyJson($msg,$response);
         return $response;
     }
