@@ -61,15 +61,18 @@ class Acesso_perfilAPI
     public static function save(Request $request, Response $response, array $args)
     {
         $vo = new \Acesso_perfilVO;
+        $msg = \Message::GENERIC_INSERT;
         if($request->getMethod() == 'PUT'){
             $msg = \Message::GENERIC_UPDATE;
             $result = self::selectByIdInside($args);
             $bodyRequest = $result[0];
-            $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
-        } else {
-            $msg = \Message::GENERIC_INSERT;
-            $vo  = TGenericAPI::setObjVoInset($request,$vo);
+            $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);            
         }
+        $bodyRequest = json_decode($request->getBody(),true);        
+        if(empty($bodyRequest)){
+            $bodyRequest = $request->getParsedBody();
+        }
+        $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
         $controller = new \Acesso_perfil;
         $controller->save($vo);
         $response = TGenericAPI::getBodyJson($msg,$response);
