@@ -96,11 +96,6 @@ class Acesso_perfilAPI
     public static function delete(Request $request, Response $response, array $args)
     {
         try{
-            $result = self::selectByIdInside($args);
-            if( empty($result) ){
-                throw new \DomainException('Registro não existe');
-            }
-
             $id = $args['id'];
             $controller = new \Acesso_perfil;
             $msg = $controller->delete($id);

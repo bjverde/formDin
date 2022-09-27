@@ -77,8 +77,17 @@ class Acesso_perfil
         return $result;
     }
     //--------------------------------------------------------------------------------
+    public function validarIdNaoExiste( $id )
+    {
+        $where=array('IDPERFIL'=>$id);
+        $qtd = $this->selectCount($where);
+        if($qtd >= 1){
+            throw new DomainException('Registro não existe');
+        }
+    }
     public function delete( $id )
     {
+        $this->validarIdNaoExiste( $id );
         $result = $this->dao->delete( $id );
         return $result;
     }
