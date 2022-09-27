@@ -7,7 +7,7 @@
  * SysGen  Version: 1.11.0
  * FormDin Version: 4.19.0
  * 
- * System appev2 created in: 2022-07-30 16:51:57
+ * System appev2 created in: 2022-09-27 15:40:18
  */
 
 namespace api_controllers;
@@ -25,15 +25,28 @@ class Vw_pessoa_marca_produtoAPI
     //--------------------------------------------------------------------------------
     public static function selectAll(Request $request, Response $response, array $args)
     {
-        $controller = new \Vw_pessoa_marca_produto();
-        $result = $controller->selectAll();
-        $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $param = $request->getQueryParams();
+            $page = TGenericAPI::getSelectNumPage($param);
+            $rowsPerPage = TGenericAPI::getSelectNumRowsPerPage($param);
+            $orderBy = null;
+            $where = array();
+            $controller = new \Vw_pessoa_marca_produto();
+            //$result = $controller->selectAll();
+            $qtd_total = $controller->selectCount( $where );
+            $result = $controller->selectAllPagination( $orderBy, $where, $page,  $rowsPerPage);
+            $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+            $msg = array( 'qtd_total'=> $qtd_total
+                        , 'qtd_result'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
 
     //--------------------------------------------------------------------------------
@@ -49,12 +62,17 @@ class Vw_pessoa_marca_produtoAPI
     //--------------------------------------------------------------------------------
     public static function selectById(Request $request, Response $response, array $args)
     {
-        $result = self::selectByIdInside($args);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $result = self::selectByIdInside($args);
+            $msg = array( 'qtd'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
 }
