@@ -25,14 +25,20 @@ class Acesso_perfilAPI
     //--------------------------------------------------------------------------------
     public static function selectAll(Request $request, Response $response, array $args)
     {
-        $controller = new \Acesso_perfil();
-        $result = $controller->selectAll();
-        $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-        $response = TGenericAPI::getBodyJson($msg,$response,200);
-        return $response;
+        try{
+            $controller = new \Acesso_perfil();
+            $result = $controller->selectAll();
+            $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+            $msg = array( 'qtd'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }        
     }
     //--------------------------------------------------------------------------------
     private static function selectByIdInside(array $args)
@@ -46,13 +52,18 @@ class Acesso_perfilAPI
     //--------------------------------------------------------------------------------
     public static function selectById(Request $request, Response $response, array $args)
     {
-        $result = self::selectByIdInside($args);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $result = self::selectByIdInside($args);
+            $msg = array( 'qtd'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
     //--------------------------------------------------------------------------------
     public static function save(Request $request, Response $response, array $args)
