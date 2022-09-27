@@ -14,9 +14,9 @@ class TGenericAPI
     {
         $status = empty($status)?200:$status;
         $msgJson = json_encode($msg);
-        $response->withStatus( $status );
+        $response->withHeader('Content-Type', 'application/json');        
         $response->getBody()->write( $msgJson );
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response->withStatus( $status );
     }
 
     public static function setObjVoInset(Request $request,$vo)
