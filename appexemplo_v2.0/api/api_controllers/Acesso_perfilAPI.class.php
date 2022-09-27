@@ -81,14 +81,25 @@ class Acesso_perfilAPI
     //--------------------------------------------------------------------------------
     public static function delete(Request $request, Response $response, array $args)
     {
-        $id = $args['id'];
-        $controller = new \Acesso_perfil;
-        $msg = $controller->delete($id);
-        if($msg==true){
-            $msg = \Message::GENERIC_DELETE;
-            $msg = $msg.' id='.$id;
+        try{
+            $result = self::selectByIdInside($args);
+            if( empty($result) ){
+                throw new \DomainException('Registro não existe');
+            }
+
+            $id = $args['id'];
+            $controller = new \Acesso_perfil;
+            $msg = $controller->delete($id);
+            if($msg==true){
+                $msg = \Message::GENERIC_DELETE;
+                $msg = $msg.' id='.$id;
+            }
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
         }
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
     }
 }
