@@ -7,7 +7,7 @@
  * SysGen  Version: 1.11.0
  * FormDin Version: 4.19.0
  * 
- * System appev2 created in: 2022-07-30 16:51:55
+ * System appev2 created in: 2022-09-27 15:40:17
  */
 
 namespace api_controllers;
@@ -25,15 +25,28 @@ class MunicipioAPI
     //--------------------------------------------------------------------------------
     public static function selectAll(Request $request, Response $response, array $args)
     {
-        $controller = new \Municipio();
-        $result = $controller->selectAll();
-        $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $param = $request->getQueryParams();
+            $page = TGenericAPI::getSelectNumPage($param);
+            $rowsPerPage = TGenericAPI::getSelectNumRowsPerPage($param);
+            $orderBy = null;
+            $where = array();
+            $controller = new \Municipio();
+            //$result = $controller->selectAll();
+            $qtd_total = $controller->selectCount( $where );
+            $result = $controller->selectAllPagination( $orderBy, $where, $page,  $rowsPerPage);
+            $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
+            $msg = array( 'qtd_total'=> $qtd_total
+                        , 'qtd_result'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
 
     //--------------------------------------------------------------------------------
@@ -49,45 +62,66 @@ class MunicipioAPI
     //--------------------------------------------------------------------------------
     public static function selectById(Request $request, Response $response, array $args)
     {
-        $result = self::selectByIdInside($args);
-        $msg = array( 'qtd'=> \CountHelper::count($result)
-                    , 'result'=>$result
-        );
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $result = self::selectByIdInside($args);
+            $msg = array( 'qtd'=> \CountHelper::count($result)
+                        , 'result'=>$result
+            );
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
 
     //--------------------------------------------------------------------------------
     public static function save(Request $request, Response $response, array $args)
     {
-        $vo = new \MunicipioVO;
-        $msg = \Message::GENERIC_INSERT;
-        if($request->isPut()){
-            $msg = \Message::GENERIC_UPDATE;
-            $result = self::selectByIdInside($args);
-            $bodyRequest = $result[0];
+        try{
+            $vo = new \MunicipioVO;
+            $msg = \Message::GENERIC_INSERT;
+            if($request->getMethod() == 'PUT'){
+                $msg = \Message::GENERIC_UPDATE;
+                $result = self::selectByIdInside($args);
+                $bodyRequest = $result[0];
+                $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
+            }
+            $bodyRequest = json_decode($request->getBody(),true);
+            if( empty($bodyRequest) ){
+                $bodyRequest = $request->getParsedBody();
+            }
             $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
+            $controller = new \Municipio;
+            $controller->save($vo);
+
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
         }
-        $bodyRequest = json_decode($request->getBody(),true);
-        $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
-
-        $controller = new \Municipio;
-        $controller->save($vo);
-
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
     }
 
     //--------------------------------------------------------------------------------
     public static function delete(Request $request, Response $response, array $args)
     {
-        $id = $args['id'];
-        $controller = new \Municipio;
-        $msg = $controller->delete($id);
-
-        $response = TGenericAPI::getBodyJson($msg,$response);
-        return $response;
+        try{
+            $id = $args['id'];
+            $controller = new \Municipio;
+            $msg = $controller->delete($id);
+            if($msg==true){
+                $msg = \Message::GENERIC_DELETE;
+                $msg = $msg.' id='.$id;
+            }
+            $response = TGenericAPI::getBodyJson($msg,$response,200);
+            return $response;
+        } catch ( \Exception $e) {
+            $msg = $e->getMessage();
+            $response = TGenericAPI::getBodyJson($msg,$response,500);
+            return $response;
+        }
     }
 }
