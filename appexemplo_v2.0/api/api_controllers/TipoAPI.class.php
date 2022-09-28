@@ -4,10 +4,10 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.11.0
+ * SysGen  Version: 1.12.0
  * FormDin Version: 4.19.0
  * 
- * System appev2 created in: 2022-09-27 15:40:18
+ * System appev2 created in: 2022-09-28 00:42:13
  */
 
 namespace api_controllers;
@@ -38,7 +38,9 @@ class TipoAPI
             $result = \ArrayHelper::convertArrayFormDin2Pdo($result);
             $msg = array( 'qtd_total'=> $qtd_total
                         , 'qtd_result'=> \CountHelper::count($result)
-                        , 'result'=>$result
+                        , 'page'=>$page
+                        , 'pages'=>$page
+                        , 'result'=>round($qtd_total/$rowsPerPage)
             );
             $response = TGenericAPI::getBodyJson($msg,$response,200);
             return $response;
@@ -85,7 +87,10 @@ class TipoAPI
             if($request->getMethod() == 'PUT'){
                 $msg = \Message::GENERIC_UPDATE;
                 $result = self::selectByIdInside($args);
-                $bodyRequest = $result[0];
+                $bodyRequest = \ArrayHelper::get($result,0);
+                if( empty($bodyRequest) ){
+                    throw new \DomainException(\Message::GENERIC_ID_NOT_EXIST);
+                }
                 $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
             }
             $bodyRequest = json_decode($request->getBody(),true);

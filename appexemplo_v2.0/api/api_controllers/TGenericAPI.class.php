@@ -9,7 +9,6 @@ class TGenericAPI
     public function __construct()
     {
     }
-
     public static function getBodyJson($msg, Response $response,$status=200)
     {
         $status = empty($status)?200:$status;
@@ -18,14 +17,15 @@ class TGenericAPI
         $response->getBody()->write( $msgJson );
         return $response->withStatus( $status );
     }
-
-    public static function setObjVoInset(Request $request,$vo)
+    public static function getSelectNumPage($args)
     {
-        $bodyRequest = json_decode($request->getBody(),true);
-        if(empty($bodyRequest)){
-            $bodyRequest = $request->getParsedBody();
-        }
-        $vo = \FormDinHelper::setPropertyVo($bodyRequest,$vo);
-        return $vo;
+        $page = \ArrayHelper::get($args,'page');
+        return $page;
+    }
+    public static function getSelectNumRowsPerPage($args)
+    {
+        $rowsPerPage = \ArrayHelper::get($args,'rowsPerPage');
+        $rowsPerPage = empty($page)?ROWS_PER_PAGE:$rowsPerPage;
+        return $rowsPerPage;
     }
 }
