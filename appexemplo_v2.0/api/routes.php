@@ -4,29 +4,26 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.12.0
+ * FormDin Version: 4.19.0
  * 
- * System appev2 created in: 2019-09-10 09:04:46
+ * System appev2 created in: 2022-09-28 00:42:11
  */
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy as RouteCollectorProxy;
 use Slim\Factory\AppFactory;
 
+use api_controllers\Authentication;
+
 use api_controllers\SysinfoAPI;
 use api_controllers\SelfilhosmenuAPI;
 use api_controllers\SelfilhosmenuqtdAPI;
-use api_controllers\SelmenuqtdAPI;
-
-use api_controllers\Authentication;
-
 use api_controllers\Acesso_menuAPI;
 use api_controllers\Acesso_perfilAPI;
 use api_controllers\Acesso_perfil_menuAPI;
 use api_controllers\Acesso_perfil_userAPI;
 use api_controllers\Acesso_userAPI;
-use api_controllers\Acesso_user_menuAPI;
 use api_controllers\AutoridadeAPI;
 use api_controllers\EnderecoAPI;
 use api_controllers\MarcaAPI;
@@ -45,7 +42,9 @@ use api_controllers\TipoAPI;
 use api_controllers\UfAPI;
 use api_controllers\Vw_acesso_user_menuAPI;
 use api_controllers\Vw_pessoaAPI;
+use api_controllers\Vw_pessoa_fisicaAPI;
 use api_controllers\Vw_pessoa_marca_produtoAPI;
+use api_controllers\Vw_regiao_municipioAPI;
 
 /**
  * Instantiate App
@@ -57,9 +56,9 @@ use api_controllers\Vw_pessoa_marca_produtoAPI;
 $app = AppFactory::create();
 
 /**
-  * The routing middleware should be added earlier than the ErrorMiddleware
-  * Otherwise exceptions thrown from it will not be handled by the middleware
-  */
+ * The routing middleware should be added earlier than the ErrorMiddleware
+ * Otherwise exceptions thrown from it will not be handled by the middleware
+ */
 $app->addRoutingMiddleware();
 
 /**
@@ -81,8 +80,6 @@ $urlChamada = ServerHelper::getRequestUri(true);
 $urlChamada = explode('api/', $urlChamada);
 $urlChamada = $urlChamada[0];
 $urlChamada = $urlChamada.'api/';
-
-
 // Define app routes
 $app->get($urlChamada, function (Request $request, Response $response, $args) use ($app) {
     $url = \ServerHelper::getFullServerName();
@@ -96,25 +93,57 @@ $app->get($urlChamada, function (Request $request, Response $response, $args) us
         $routeArray['url'] = $url.$route->getPattern();
         $routesArray[] = $routeArray;
     }
+
     $msg = array( 'info'=> SysinfoAPI::info()
                 , 'endpoints'=>array( 'qtd'=> \CountHelper::count($routesArray)
                                     ,'result'=>$routesArray
                                     )
                 );
-    
+
     $msgJson = json_encode($msg);
     $response->getBody()->write( $msgJson );
-    return $response->withHeader('Content-Type', 'application/json');
+    $result = $response->withHeader('Content-Type', 'application/json');
+    return $result;
 });
 
 //Grupo acesso_menu exige autenticacao
 //Entrar na classe Authentication para pegar usuário e senha
+//Descomentar as linhas que precisam ser autenticadas
 $controllerAuthentication = new Authentication($urlChamada);
+//$controllerAuthentication->addPath('selfilhosmenu');
+//$controllerAuthentication->addPath('selfilhosmenuqtd');
 $controllerAuthentication->addPath('acesso_menu');
+//$controllerAuthentication->addPath('acesso_perfil');
+//$controllerAuthentication->addPath('acesso_perfil_menu');
+//$controllerAuthentication->addPath('acesso_perfil_user');
+//$controllerAuthentication->addPath('acesso_user');
+//$controllerAuthentication->addPath('autoridade');
+//$controllerAuthentication->addPath('endereco');
+//$controllerAuthentication->addPath('marca');
+//$controllerAuthentication->addPath('meta_tipo');
+//$controllerAuthentication->addPath('municipio');
+//$controllerAuthentication->addPath('natureza_juridica');
+//$controllerAuthentication->addPath('pedido');
+//$controllerAuthentication->addPath('pedido_item');
+//$controllerAuthentication->addPath('pessoa');
+//$controllerAuthentication->addPath('pessoa_fisica');
+//$controllerAuthentication->addPath('pessoa_juridica');
+//$controllerAuthentication->addPath('produto');
+//$controllerAuthentication->addPath('regiao');
+//$controllerAuthentication->addPath('telefone');
+//$controllerAuthentication->addPath('tipo');
+//$controllerAuthentication->addPath('uf');
+//$controllerAuthentication->addPath('vw_acesso_user_menu');
+//$controllerAuthentication->addPath('vw_pessoa');
+//$controllerAuthentication->addPath('vw_pessoa_fisica');
+//$controllerAuthentication->addPath('vw_pessoa_marca_produto');
+//$controllerAuthentication->addPath('vw_regiao_municipio');
 $app->add($controllerAuthentication->basicAuth());
 
 $app->get($urlChamada.'sysinfo', SysinfoAPI::class . ':getInfo');
 $app->get($urlChamada.'auth', SysinfoAPI::class . ':getInfo');
+
+
 
 //--------------------------------------------------------------------
 //  VIEW: selFilhosMenu
@@ -126,7 +155,7 @@ $app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo)
 
 });
 
-/*
+
 //--------------------------------------------------------------------
 //  VIEW: selFilhosMenuQtd
 //--------------------------------------------------------------------
@@ -137,16 +166,6 @@ $app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo)
 
 });
 
-
-//--------------------------------------------------------------------
-//  VIEW: selMenuQtd
-//--------------------------------------------------------------------
-$urlGrupo = $urlChamada.'selmenuqtd';
-$app->group($urlGrupo, function(RouteCollectorProxy $group) use ($app,$urlGrupo) {
-    $app->get('', SelmenuqtdAPI::class . ':selectAll');
-    $app->get('/{id:[0-9]+}', SelmenuqtdAPI::class . ':selectById');
-});
-*/
 
 //--------------------------------------------------------------------
 //  TABLE: acesso_menu

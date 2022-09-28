@@ -4,16 +4,14 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.9.0-alpha
- * FormDin Version: 4.7.5
+ * SysGen  Version: 1.12.0
+ * FormDin Version: 4.19.0
  * 
- * System appev2 created in: 2019-09-10 09:04:47
+ * System appev2 created in: 2022-09-28 00:42:13
  */
 class Pessoa
 {
 
-    const PJ = 'PJ';
-    const PF = 'PF';
 
     private $dao = null;
 
@@ -54,10 +52,20 @@ class Pessoa
         return $result;
     }
     //--------------------------------------------------------------------------------
+    private function validatePkNotExist( $id )
+    {
+        $where=array('IDPESSOA'=>$id);
+        $qtd = $this->selectCount($where);
+        if( empty($qtd) ){
+            throw new DomainException(Message::GENERIC_ID_NOT_EXIST);
+        }
+    }
+    //--------------------------------------------------------------------------------
     public function save( PessoaVO $objVo )
     {
         $result = null;
         if( $objVo->getIdpessoa() ) {
+            $this->validatePkNotExist( $objVo->getIdpessoa() );
             $result = $this->dao->update( $objVo );
         } else {
             $result = $this->dao->insert( $objVo );
@@ -67,6 +75,7 @@ class Pessoa
     //--------------------------------------------------------------------------------
     public function delete( $id )
     {
+        $this->validatePkNotExist( $id );
         $result = $this->dao->delete( $id );
         return $result;
     }
