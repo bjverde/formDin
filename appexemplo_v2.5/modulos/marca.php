@@ -147,8 +147,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
     $gride->addColumn($primaryKey,'id');
     $gride->addColumn('NOM_MARCA','Nome da Marca');
-	$gride->addColumn('IDPESSOA','id Pessoa',null,'center');
-	$gride->addColumn('NOM_PESSOA','Pessoa');
+	$gride->addColumn('IDPESSOA','id Empresa',null,'center');
+	$gride->addColumn('NOM_PESSOA','Empresa');
 
     $gride->show();
     die();

@@ -14,7 +14,7 @@ defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'COD_UF';
-$frm = new TForm('Cadastro de UF',800,950);
+$frm = new TForm('Cadastro de UF',700);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -23,12 +23,12 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('NOM_UF', 'NOM_UF',45,true,45);
-$frm->addTextField('SIG_UF', 'SIG_UF',45,true,45);
+$frm->addTextField('NOM_UF', 'Nome',45,true,45);
+$frm->addTextField('SIG_UF', 'Sigla',45,true,45);
 $frm->getLabel('SIG_UF')->setToolTip('sigla da uf');
 $controllerRegiao = new Regiao();
 $listRegiao = $controllerRegiao->selectAll();
-$frm->addSelectField('COD_REGIAO', 'COD_REGIAO',true,$listRegiao,null,null,null,null,null,null,' ',null);
+$frm->addSelectField('COD_REGIAO', 'Região',true,$listRegiao,null,null,null,null,null,null,' ',null);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -108,7 +108,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $whereGrid = getWhereGridParameters($frm);
     $controller = new Uf();
     $page = PostHelper::get('page');
-    $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
+    $dados = $controller->selectAllPagination( 'NOM_UF', $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
                     .',NOM_UF|NOM_UF'
@@ -116,7 +116,7 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
                     .',COD_REGIAO|COD_REGIAO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Gride with SQL Pagination. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Lista de UF. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -126,9 +126,9 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'uf.php' );
 
     $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('NOM_UF','NOM_UF');
-    $gride->addColumn('SIG_UF','SIG_UF');
-    $gride->addColumn('COD_REGIAO','COD_REGIAO');
+    $gride->addColumn('NOM_UF','Nome');
+    $gride->addColumn('SIG_UF','Sigla');
+    $gride->addColumn('COD_REGIAO','Cod Região');
 
 
     $gride->show();

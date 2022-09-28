@@ -13,8 +13,8 @@
 defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
-$primaryKey = 'IDPESSOA_JURIDICA';
-$frm = new TForm('pessoa_juridica',800,950);
+$primaryKey = 'IDPESSOA';
+$frm = new TForm('Cadastro Simples Pessoa Jurídica',800,950);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -22,16 +22,24 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
+$frm->addHiddenField( 'IDPESSOA_JURIDICA');
+$frm->addHiddenField( 'TIPO', Pessoa::PJ);
+$frm->addHiddenField( 'SIT_ATIVO', 'S');
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
-$frm->addTextField('CNPJ', 'CNPJ',14,true,14);
-$controllerPessoa = new Pessoa();
-$listPessoa = $controllerPessoa->selectAll();
-$frm->addSelectField('IDPESSOA', 'IDPESSOA',true,$listPessoa,null,null,null,null,null,null,' ',null);
-$frm->addNumberField('CNAE', 'CNAE',10,false,0);
-$frm->getLabel('CNAE')->setToolTip('códigos de atividades econômicas em todo o país');
-$controllerNatureza_juridica = new Natureza_juridica();
-$listNatureza_juridica = $controllerNatureza_juridica->selectAll();
-$frm->addSelectField('IDNATUREZA_JURIDICA', 'IDNATUREZA_JURIDICA',false,$listNatureza_juridica,null,null,null,null,null,null,' ',null);
+
+
+$frm->addGroupField('gpx1','');
+    $frm->addTextField('NOME', 'Nome',200,true,80);
+    $frm->addCnpjField('CNPJ', 'CNPJ',true);
+$frm->closeGroup();
+
+$frm->addGroupField('gpx2','');
+    $frm->addNumberField('CNAE', 'CNAE',10,false,0);
+    $frm->getLabel('CNAE')->setToolTip('códigos de atividades econômicas em todo o país');
+    $controllerNatureza_juridica = new Natureza_juridica();
+    $listNatureza_juridica = $controllerNatureza_juridica->selectAll();
+    $frm->addSelectField('IDNATUREZA_JURIDICA', 'IDNATUREZA_JURIDICA',false,$listNatureza_juridica,null,null,null,null,null,null,' ',null);
+$frm->closeGroup();
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -48,11 +56,11 @@ switch( $acao ) {
     case 'Salvar':
         try{
             if ( $frm->validate() ) {
-                $vo = new Pessoa_juridicaVO();
+                $vo = new Vw_pessoaVO();
                 $frm->setVo( $vo );
-                $controller = new Pessoa_juridica();
+                $controller = new Vw_pessoa();
                 $resultado = $controller->save( $vo );
-                if($resultado==1) {
+                if( is_int($resultado) && $resultado!=0 ) {
                     $frm->setMessage('Registro gravado com sucesso!!!');
                     $frm->clearFields();
                 }else{
@@ -61,18 +69,18 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
     //--------------------------------------------------------------------------------
     case 'gd_excluir':
         try{
             $id = $frm->get( $primaryKey ) ;
-            $controller = new Pessoa_juridica();
+            $controller = new Vw_pessoa();
             $resultado = $controller->delete( $id );
             if($resultado==1) {
                 $frm->setMessage('Registro excluido com sucesso!!!');
@@ -82,11 +90,11 @@ switch( $acao ) {
             }
         }
         catch (DomainException $e) {
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
         catch (Exception $e) {
             MessageHelper::logRecord($e);
-            $frm->setMessage( $e->getMessage() );
+            $frm->addMessage( $e->getMessage() ); //addMessage evita o problema do setMessage
         }
     break;
 }
@@ -99,9 +107,15 @@ function getWhereGridParameters(&$frm)
         $retorno = array(
                 'IDPESSOA_JURIDICA'=>$frm->get('IDPESSOA_JURIDICA')
                 ,'CNPJ'=>$frm->get('CNPJ')
+                ,'NOME'=>$frm->get('NOME')
                 ,'IDPESSOA'=>$frm->get('IDPESSOA')
                 ,'CNAE'=>$frm->get('CNAE')
                 ,'IDNATUREZA_JURIDICA'=>$frm->get('IDNATUREZA_JURIDICA')
+        );
+    }else{
+        $retorno = array(
+             'TIPO'=>$frm->get('TIPO')
+            ,'SIT_ATIVO'=>$frm->get('SIT_ATIVO')
         );
     }
     return $retorno;
@@ -110,18 +124,19 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Pessoa_juridica();
+    $controller = new Vw_pessoa();
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
                     .',CNPJ|CNPJ'
+                    .',NOME|NOME'
                     .',IDPESSOA|IDPESSOA'
                     .',CNAE|CNAE'
                     .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Gride with SQL Pagination. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Lista de PJ. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -131,8 +146,8 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $gride->setUrl( 'pessoa_juridica.php' );
 
     $gride->addColumn($primaryKey,'id');
-    $gride->addColumn('CNPJ','CNPJ');
-    $gride->addColumn('IDPESSOA','id Pessoa');
+    $gride->addColumn('NOME','Nome');
+    $gride->addColumn('CNPJ','CNPJ');   
     $gride->addColumn('CNAE','CNAE');
     $gride->addColumn('IDNATUREZA_JURIDICA','id Natureza_juridica');
 
@@ -149,9 +164,10 @@ $frm->show();
 <script>
 function init() {
     var Parameters = {"BUSCAR":""
+                    ,"IDPESSOA":""
                     ,"IDPESSOA_JURIDICA":""
                     ,"CNPJ":""
-                    ,"IDPESSOA":""
+                    ,"NOME":""
                     ,"CNAE":""
                     ,"IDNATUREZA_JURIDICA":""
                     };

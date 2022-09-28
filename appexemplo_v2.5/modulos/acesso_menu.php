@@ -23,6 +23,8 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
+
+include 'modulos/includes/acesso_aviso.php';
 $frm->addTextField('NOM_MENU', 'Nome do Menu',45,true,45);
 $frm->getLabel('NOM_MENU')->setToolTip('o nome que o usuario irá ver');
 $controllerAcesso_menu = new Acesso_menu();
