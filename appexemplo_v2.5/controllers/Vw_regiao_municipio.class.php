@@ -4,12 +4,12 @@
  * Download SysGen: https://github.com/bjverde/sysgen
  * Download Formdin Framework: https://github.com/bjverde/formDin
  * 
- * SysGen  Version: 1.12.0
- * FormDin Version: 4.19.0
+ * SysGen  Version: 1.10.1-alpha
+ * FormDin Version: 4.7.9-alpha
  * 
- * System appev2 created in: 2022-09-28 00:42:13
+ * System appev2 created in: 2019-11-01 23:49:32
  */
-class Produto
+class Vw_regiao_municipio
 {
 
 
@@ -17,7 +17,7 @@ class Produto
 
     public function __construct($tpdo = null)
     {
-        $this->dao = new ProdutoDAO($tpdo);
+        $this->dao = new Vw_regiao_municipioDAO($tpdo);
     }
     public function getDao()
     {
@@ -49,34 +49,6 @@ class Produto
     public function selectAll( $orderBy=null, $where=null )
     {
         $result = $this->dao->selectAll( $orderBy, $where );
-        return $result;
-    }
-    //--------------------------------------------------------------------------------
-    private function validatePkNotExist( $id )
-    {
-        $where=array('IDPRODUTO'=>$id);
-        $qtd = $this->selectCount($where);
-        if( empty($qtd) ){
-            throw new DomainException(Message::GENERIC_ID_NOT_EXIST);
-        }
-    }
-    //--------------------------------------------------------------------------------
-    public function save( ProdutoVO $objVo )
-    {
-        $result = null;
-        if( $objVo->getIdproduto() ) {
-            $this->validatePkNotExist( $objVo->getIdproduto() );
-            $result = $this->dao->update( $objVo );
-        } else {
-            $result = $this->dao->insert( $objVo );
-        }
-        return $result;
-    }
-    //--------------------------------------------------------------------------------
-    public function delete( $id )
-    {
-        $this->validatePkNotExist( $id );
-        $result = $this->dao->delete( $id );
         return $result;
     }
     //--------------------------------------------------------------------------------
