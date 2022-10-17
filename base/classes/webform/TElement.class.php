@@ -293,18 +293,18 @@ class TElement
      */
     public function removeIllegalChars( $word=null, $strExcept = null )
     {
-        if( is_null($word) || trim($word) == '' )
-        {
+        if( is_null($word) || trim($word) == '' ){
             return null;
         }
-        if ( isset( $strExcept ) )
-        {
+        if ( isset( $strExcept ) ){
             $strExcept = str_replace( array( '[', ']', '^' ), array( '\\[', '\\]', '\\^' ), $strExcept );
         }
-        return $word = @preg_replace( "/[^a-zA-Z0-9_" . $strExcept . "]/", "",
-            strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" ) );
-        
-        
+        $pattern = "/[^a-zA-Z0-9_" . $strExcept . "]/";
+        $replacement = "";
+        //$string = strtr( $word, "áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ ", "aaaaeeiooouucAAAAEEIOOOUUC_" );
+        $string = StringHelper::tirarAcentos($word);
+        $word = preg_replace($pattern, $replacement, $string);
+        return $word;        
     }
 
     public function removeIllegalCharsv2( $word=null, $strExcept = null )
