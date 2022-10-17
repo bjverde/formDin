@@ -130,15 +130,17 @@ class DateTimeHelper
      */
     public static function getDateTimeLong($date) 
     {
-        /*
-        setlocale(LC_TIME, 'portuguese-brazilian','pt_BR', 'pt_BR.utf-8');
-        date_default_timezone_set(self::DEFAULT_TIME_ZONE);
-        $retorno = strftime('%d de %B de %Y', strtotime($date));
-        $retorno = utf8_encode($retorno);
-        */
-        $pieces = explode('-', $date);
-        $mes = self::mesExtenso($pieces[1]);
-        $retorno = $pieces[2].' de '.strtolower($mes).' de '.$pieces[0];
+        date_default_timezone_set('America/Sao_Paulo');
+        $dateTime = new DateTime($date);
+        $formatter = new IntlDateFormatter(
+             'pt_BR'
+             ,IntlDateFormatter::FULL
+             ,IntlDateFormatter::NONE
+             ,'America/Sao_Paulo'
+             ,IntlDateFormatter::GREGORIAN
+             ,"dd 'de' MMMM 'de' YYYY"
+           );
+        $retorno = $formatter->format($dateTime);
         $retorno = StringHelper::strtoupper_utf8($retorno);
         return $retorno;
     }
