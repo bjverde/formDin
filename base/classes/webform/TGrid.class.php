@@ -1566,7 +1566,11 @@ class TGrid extends TTable
         , $boolSubmitAction = null
         ){
             if ( is_null( $strName ) ){
-                $strName = $this->getId() . ucwords( $this->removeIllegalChars( $strRotulo ) );
+                if ( !empty( $strRotulo ) ){
+                    $strName = $this->getId() . ucwords( $this->removeIllegalChars( $strRotulo ) );
+                }else {
+                    $strName = $this->getId();
+                }
             }
             if ( is_null( $strAction ) && is_null( $strOnClick ) ){
                 $strAction = strtolower( $this->getId() . '_' . $strRotulo );
