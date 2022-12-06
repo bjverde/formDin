@@ -37,7 +37,9 @@
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
 
-$frm = new TForm('Estados e Municípiosl', 500);
+$frm = new TForm('Exemplo 4 : Estados e Municípios', 500);
+
+$frm->addHtmlField('obs', '<b>Este exemplo utiliza as tabelas vw_tree_uf_mun do banco de dados bdApoio.s3db ( sqlite )</b>');
 
 $ufs = TPDOConnection::executeSql("select 'uf'||cod_uf as cod_uf,nom_uf||'/'||sig_uf as nom_uf from tb_uf order by nom_uf");
 $frm->addSelectField('id', 'Estado:', false, $ufs, null, null, null, null, null, null, '-- Todos --')->addEvent('onchange', 'atualizarArvore()');

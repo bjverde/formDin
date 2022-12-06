@@ -40,7 +40,11 @@
 d($_REQUEST);
 
 
-$html = 'Essa Funcionalidade não está completa, falta algumas coisas !';
+$html = 'Essa exemplo não está completo, falta algumas coisas !';
+$html = $html.'<br>';
+$html = $html.'<br>Os dados são gravados na tabela treecheck_link';
+$html = $html.'<br>Quando clicar em um item vai chamar uma função JS treeCheck que irá gravar no banco';
+$html = $html.'<br>Falta a função de resgatar do banco de dados os elementos que estão marcados';
 
 
 $frm = new TForm('6 - TreeView with CheckBox', 400);
@@ -52,24 +56,61 @@ $frm->setMaximize(true);
 $frm->setAutoSize(true);
 $frm->addCssFile('css/css_form04.css');
 
-$frm->addHtmlField('html1', $html, null,null)->setClass('alert');
+$frm->addHtmlField('html1', $html, null,null)->setClass('failure');
 
 
 $frm->addGroupField('gpTree', 'Exemplo Treeview', null)->setcloseble(true);
 
-    $tree = $frm->addTreeField('tree', null, null, null, null, null, null, null, null);
+    $tree = $frm->addTreeField('tree'
+                              , null
+                              , 'treecheck_link'
+                              ,'ID_PAI'
+                              ,'ID'
+                              ,'NOME'
+                              , null
+                              , null, null);
     $tree->setStartExpanded(true);
     $tree->enableCheck(true);
 
-    $tree->addItem(null, 1, 'Relatório', true);
-    $tree->addItem(1, 11, 'Financeiro', true, 'Meu Hint', array('URL'=>'www.bb.com.br'));
-    $tree->addItem(1, 12, 'Recursos Humanos', null, null, array('URL'=>'www.google.com.br'));
-    $tree->addItem(null, 2, 'Arquivos', true);
-    $tree->addItem(2, 21, 'Documentos', null, 'Documentos do órgão', array('MODULO'=>'modulos/cad_documento'));
-    $tree->addItem(2, 22, 'Planilhas');
-    for ($i=23; $i<30; $i++) {
-        $tree->addItem(2, $i, 'Nivel teste '.$i);
-    }
+    $tree->setOnCheck('treeCheck'); //Função chamada ao checar o item
+    //$tree->setOnCheck('treeCheckOld'); //Função chamada ao checar o item
 $frm->closeGroup();
 
+$frm->addButton('Post');
+$frm->addButton('Limpar', null, 'btnLimpar', 'fwClearChildFields()');
+
 $frm->show();
+?>
+<script>
+function treeCheck(id, checked){
+    var postForm = {
+             'id'     : id
+            ,'checked': checked
+        };
+    jQuery.ajax({
+         type: "POST"
+        ,url: "treeview_salvar_check.php"
+        ,data: postForm
+        ,success: function(response, textStatus, jqXHR){
+                console.log(response);
+                console.log(textStatus);
+                msg = jQuery.trim(response);
+                if( msg ){
+                    alert( msg );
+                }
+            }
+        ,error: function(response, textStatus, jqXHR){
+                console.log(response);
+                console.log(textStatus);
+                alert( 'erro:' + msg );
+            }
+    });
+}
+function treeCheckOld(id) {
+    var checkState = treeJs.isItemChecked(id);
+
+    alert( 'Item id:'+treeJs.getSelectedItemId()+'\n'+
+    'stado checado:'+checkState+'\n'
+    );    
+}
+</script>

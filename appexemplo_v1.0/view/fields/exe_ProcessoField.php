@@ -42,7 +42,9 @@
 $frm = new TForm('Campos de processos');
 
 $frm->addGroupField('Federal','Campos do Processo Federal');
-    $frm->addProcessoField('processo','Campo de processo federal: ',false,true)->setExampleText('Ex: 02000.000343/2020-51');
+    $frm->addProcessoField('processo2','Apenas Campo de processo federal: ',false,true,null,null,null,true,false)->setExampleText('Ex: 08190.000000/22-65 ou 02000.000343/2020-51');
+    $frm->addProcessoField('processo3','Apenas Campo de processo federal (SEI do MP): ',false,true,null,null,null,false,true)->setExampleText('Ex: 19.04.4192.0000009/2022-80');
+    $frm->addProcessoField('processo4','Campo de processo federal (SEI do MP): ',false,true,null,null,null,true,true)->setExampleText('Todos os números anteriores');
 $frm->closeGroup();
 
 $frm->addGroupField('TJDFT','Campos do Processo Judiciário');
@@ -50,6 +52,11 @@ $frm->addGroupField('TJDFT','Campos do Processo Judiciário');
     $frm->addNumeroTJDFTField('numeroUnicoTJDFT','Campo do número Único do TJDFT: ',false,true,null,null,null,false,true)->setExampleText('Ex: 0700444-79.2021.8.07.0003');
     $frm->addNumeroTJDFTField('numeroDistribuicaoTJDFT','Campo do número Distribuição do TJDFT: ',false,true,null,null,null,true,false)->setExampleText('Ex: 1999.01.1.001573-8');
 $frm->closeGroup();
+
+
+$frm->setHint('processo2','Aceita apenas o número #####.######/##-## e o número #####.######/####-##');
+$frm->setHint('processo3','Aceita apenas o número do SEI do MP - ##.##.####.#######/####-## ');
+
 
 $frm->setHint('numeroTJDFT','Aceita o número Único e o número de Distribuição');
 $frm->setHint('numeroUnicoTJDFT','Aceita apenas o número Único');

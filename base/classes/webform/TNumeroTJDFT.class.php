@@ -45,13 +45,13 @@ Classe para entrada de número de processo
 class TNumeroTJDFT extends TEdit
 {
 	/**
-	 * Classe para entrada de número de processo
+	 * Classe para entrada de número de processo do TJ
 	 *
 	 * @param string $strName        - 1: ID do campo
 	 * @param string $strValue       - 2: Valor inicial do campo
 	 * @param boolean $boolRequired  - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
-	 * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
-	 * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
+	 * @param boolean $boolAcceptNumeroDistribuicao  - 4: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
+	 * @param boolean $boolAcceptNumeroUnico - 5: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
 	 */
 	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroDistribuicao=true, $boolAcceptNumeroUnico = true)
 	{
@@ -86,6 +86,8 @@ class TNumeroTJDFT extends TEdit
 
 	public static function formatarNumero($value)
 	{
+		$value = is_null($value)?'':$value;
+
 		$value = preg_replace("/\D/", '', $value);
 
 		if( strlen($value) == 20 ){

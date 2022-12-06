@@ -1988,15 +1988,15 @@ class TForm Extends TBox
      *                   true );
      * </code>
      *
-     * @param string $strFieldName                  - 1: nome do campo no form(tela) irá funcionar com autocomplete
-     * @param string $strTablePackageFuncion        - 2: tabela alvo da pesquisa ou pacote somente no oracle
-     * @param string $strSearchField                - 3: campo de pesquisa
-     * @param mixed $mixUpdateFields                - 4: campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
-     * @param boolean $boolDisableUpdateFields      - 5: Desativa os campos que serão atuliazados depois da pesquisa
-     * @param mixed $mixExtraSearchFields           - 6: Campos do formulário que serão adicionados como filtro. Esse campos a consulta é direta não usa like, procure usar campos do tipo INT. ATENÇÃO Segue o Padrão <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
-     * @param string $strCallBackFunctionJs         - 7: função javascript de callback
-     * @param integer $intMinChars                  - 8: Default 3, numero de caracteres minimos para disparar a pesquisa
-     * @param integer $intDelay                     - 9: Default 500, tempo após a digitação para disparar a consulta
+     * @param string $strFieldName                  -  1: Nome do campo no form(tela) irá funcionar com autocomplete
+     * @param string $strTablePackageFuncion        -  2: Tabela alvo da pesquisa ou pacote somente no oracle
+     * @param string $strSearchField                -  3: Campo de pesquisa
+     * @param mixed $mixUpdateFields                -  4: Campos do form origem que serão atualizados ao selecionar o item desejado. Separados por virgulas seguindo o padrão <campo_tabela> | <campo_formulario> , <campo_tabela> | <campo_formulario>
+     * @param boolean $boolDisableUpdateFields      -  5: Desativa os campos que serão atuliazados depois da pesquisa
+     * @param mixed $mixExtraSearchFields           -  6: Campos do formulário que serão adicionados como filtro. Os campos serão uma direta e não usa like. Procure usar campos do tipo INT ou CHAR. ATENÇÃO para mais de um campo de filtro usei o array com os nomes dos campos do Form, ou use a string  <campo_formulario> | <campo_tabela>, <campo_formulario> | <campo_tabela>
+     * @param string $strCallBackFunctionJs         -  7: Função javascript de callback
+     * @param integer $intMinChars                  -  8: Default 3, numero de caracteres minimos para disparar a pesquisa
+     * @param integer $intDelay                     -  9: Default 500, tempo após a digitação para disparar a consulta
      * @param integer $intMaxItensToShow            - 10: Default 50, máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
      * @param boolean $boolRemoveMask
@@ -2600,6 +2600,8 @@ class TForm Extends TBox
       */
      public function addMessage( $mixMessage=null )
      {
+        $mixMessage = is_null($mixMessage)?'':$mixMessage;
+
          if( is_array( $mixMessage ) )
          {
              $mixMessage = implode( '\n', $mixMessage );
@@ -7149,11 +7151,13 @@ class TForm Extends TBox
     * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue        - 5: valor inicial do campo
     * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 7: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
+	* @param boolean $boolAcceptNumeroSeiMP  			- 8: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
     * @return TProcesso
     */
-    public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+    public function addProcessoField( $strName, $strLabel=null, $boolRequired=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSeiMP=true )
     {
-       $field = new TProcesso( $strName, $strValue, $boolRequired );
+       $field = new TProcesso( $strName, $strValue, $boolRequired, $boolAcceptNumeroProcessoAAouAAAA, $boolAcceptNumeroSeiMP );
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
        return $field;
     }
@@ -7330,29 +7334,30 @@ class TForm Extends TBox
     /**
     * Adicionar treeview ao formulário.
     *
-    * @param mixed $strName            - 1: ID do campo
-    * @param string $strRootLabel      - 2: Label do campo
-    * @param mixed $arrData            - 3: array de dados
-    * @param mixed $strParentFieldName - 4: ID do campo chave do pai
-    * @param mixed $strChildFieldName  - 5: ID do campo chave dos filhos
-    * @param mixed $strDescFieldName   - 6: Texto da descrição dos nos da arvore
-    * @param mixed $strInitialParentKey- 7:
-    * @param mixed $mixUserDataFields  - 8: campos que serão passados quando clicamos no nó da arvore
-    * @param bool $strHeight           - 9: altura
-    * @param bool $strWidth            -10: largura
-    * @param mixed $jsOnClick          -11:
-    * @param mixed $jsOnCheck          -12:
-    * @param mixed $jsOnDrag           -13:
-    * @param mixed $boolEnableCheckBoxes - 14: Habilita campo Checks
-    * @param mixed $boolEnableRadioButtons - 15:
-    * @param mixed $boolEnableTreeLines -16:
-    * @param mixed $strLabel            -17:
-    * @param mixed $boolLabelAbove      -18:
-    * @param mixed $boolNewLine         -19: boolNewLine
-    * @param mixed $boolNoWrapLabel     -20: boolNoWrapLabel
-    * @param mixed $mixFormSearchFields -21:
-    * @param mixed $boolShowToolBar     -22:
-    * @param mixed $startExpanded       -23: Se o TreeView deve iniciar expandido ou não
+    * @param mixed $strName               - 1: ID do campo
+    * @param string $strRootLabel         - 2: Label do campo
+    * @param mixed $arrData               - 3: array de dados ou table ou view
+    * @param mixed $strParentFieldName    - 4: ID do campo chave do pai
+    * @param mixed $strChildFieldName     - 5: ID do campo chave dos filhos
+    * @param mixed $strDescFieldName      - 6: Texto da descrição dos nos da arvore
+    * @param mixed $strInitialParentKey   - 7:
+    * @param mixed $mixUserDataFields     - 8: Campos separados por virgula ou array normal ex: array('nome','telefone'); ATENÇÃO usar muito campos pode gerar problema veja TTreeView::setXmlFile
+    * @param bool $strHeight              - 9: altura
+    * @param bool $strWidth               -10: largura
+    * @param mixed $jsOnClick             -11: Nome da função JS CallBack para click simples
+    * @param mixed $jsOnDblClick          -12: Nome da função JS CallBack para click duplo
+    * @param mixed $jsOnCheck             -13: Nome da função JS CallBack para check item 
+    * @param mixed $jsOnDrag              -14:
+    * @param mixed $boolEnableCheckBoxes  -15: Habilita campo Checks
+    * @param mixed $boolEnableRadioButtons-16:
+    * @param mixed $boolEnableTreeLines   -17:
+    * @param mixed $strLabel              -18:
+    * @param mixed $boolLabelAbove        -19:
+    * @param mixed $boolNewLine           -20: boolNewLine
+    * @param mixed $boolNoWrapLabel       -20: boolNoWrapLabel
+    * @param mixed $mixFormSearchFields   -21:
+    * @param mixed $boolShowToolBar       -22: Se vai aparecer o treeView ou não
+    * @param mixed $startExpanded         -23: Se o TreeView deve iniciar expandido ou não
     * @return TTreeView
     */
     public function addTreeField( $strName
@@ -7406,7 +7411,6 @@ class TForm Extends TBox
                              , $boolShowToolBar
                              , $startExpanded
                             );
-        //$tree->addItem(0,1,'Animal',true,'Animais');
         $display = new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
         $this->addDisplayControl( $display );
         return $tree;
@@ -7615,12 +7619,10 @@ class TForm Extends TBox
                                     , $jsOnDrop=null
                                     , $jsOnEventClick=null, $jsOnSelectDay=null, $jsMouseOver=null, $jsEventRender=null )
     {
-       if( !DEFINED('INDEX_FILE_NAME') )
-       {
+       if( !DEFINED('INDEX_FILE_NAME') ){
            DEFINE('INDEX_FILE_NAME','index.php');
        }
-       if( ! is_null($strUrl) )
-       {
+       if( ! is_null($strUrl) ){
            $strUrl = INDEX_FILE_NAME.'?ajax=1&modulo='.$strUrl;
        }
        $field = new TCalendar($strName, $strUrl,  $strHeight, $strWidth, $defaultView, $jsOnResize, $jsOnDrag, $jsOnDrop, $jsOnEventClick, $jsOnSelectDay, $jsMouseOver, $jsEventRender);

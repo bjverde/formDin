@@ -22,12 +22,36 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 
 
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
+$frm->addHiddenField( 'IDPESSOA_FISICA' );
+$frm->addHiddenField( 'IDNATUREZA_JURIDICA' );
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $frm->addTextField('NOME', 'Nome',200,true,80);
-$frm->addSelectField('TIPO'	, 'Tipo Pessoa:',true,'PF=Pessoa física,PJ=Pessoa jurídica');
+$frm->addSelectField('TIPO' ,'Tipo Pessoa:', null, 'PF=Pessoa física,PJ=Pessoa jurídica', false)->addEvent('onChange', 'select_change(this)');
 $frm->getLabel('TIPO')->setToolTip('Valor permitidos PF ou PJ');
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 //$frm->addDateField('DAT_INCLUSAO', 'DAT_INCLUSAO',TRUE);
+
+$pc = $frm->addPageControl('pc', 100, null, null, null);
+
+$pc->addPage('Pessoa Física', false, true, 'pessoaFisica', true, true);
+    $frm->addCpfField('CPF', 'CPF:', false);
+    $frm->addDateField('DAT_NASCIMENTO', 'Data Nascimento',false);
+
+    $controllerUf = new Uf();
+    $listUf = $controllerUf->selectAll('NOM_UF');
+    $frm->addSelectField('COD_UF', 'UF',false,$listUf,null,null,null,null,null,null,' ',null);
+    
+    $controllerMunicipio = new Municipio();
+    $listMunicipio = $controllerMunicipio->selectAll();
+    $frm->addSelectField('COD_MUNICIPIO_NASCIMENTO', 'Município Nascimento',false,$listMunicipio,null,null,null,null,null,null,' ',null);
+    
+    $frm->combinarSelects('COD_UF', 'COD_MUNICIPIO_NASCIMENTO', 'vw_regiao_municipio', 'COD_UF', 'COD_MUNICIPIO', 'NOM_MUNICIPIO', null, null, 'Nenhum', null, null, true);
+
+
+$pc->addPage('Pessoa Jurídica', false, true, 'pessoaJuridica', true, true);
+    $frm->addCnpjField('CNPJ', 'CNPJ:', false);
+
+$frm->closeGroup();
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
@@ -44,9 +68,9 @@ switch( $acao ) {
     case 'Salvar':
         try{
             if ( $frm->validate() ) {
-                $vo = new PessoaVO();
+                $vo = new Vw_pessoaVO();
                 $frm->setVo( $vo );
-                $controller = new Pessoa();
+                $controller = new Vw_pessoa();
                 $resultado = $controller->save( $vo );
                 if($resultado==1) {
                     $frm->setMessage('Registro gravado com sucesso!!!');
@@ -106,18 +130,22 @@ function getWhereGridParameters(&$frm)
 if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
     $maxRows = ROWS_PER_PAGE;
     $whereGrid = getWhereGridParameters($frm);
-    $controller = new Pessoa();
+    $controller = new Vw_pessoa();
     $page = PostHelper::get('page');
     $dados = $controller->selectAllPagination( $primaryKey, $whereGrid, $page,  $maxRows);
     $realTotalRowsSqlPaginator = $controller->selectCount( $whereGrid );
     $mixUpdateFields = $primaryKey.'|'.$primaryKey
                     .',NOME|NOME'
                     .',TIPO|TIPO'
+                    .',CPF|CPF'
+                    .',IDPESSOA_FISICA|IDPESSOA_FISICA'
+                    .',CNPJ|CNPJ'
+                    .',IDNATUREZA_JURIDICA|IDNATUREZA_JURIDICA'
                     .',SIT_ATIVO|SIT_ATIVO'
                     .',DAT_INCLUSAO|DAT_INCLUSAO'
                     ;
     $gride = new TGrid( 'gd'                        // id do gride
-    				   ,'Gride with SQL Pagination. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
+    				   ,'Lista de Pessoas. Qtd: '.$realTotalRowsSqlPaginator // titulo do gride
     				   );
     $gride->addKeyField( $primaryKey ); // chave primaria
     $gride->setData( $dados ); // array de dados
@@ -128,9 +156,11 @@ if( isset( $_REQUEST['ajax'] )  && $_REQUEST['ajax'] ) {
 
     $gride->addColumn($primaryKey,'id');
 	$gride->addColumn('NOME','Nome');
-	$gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
+    $gride->addColumn('TIPO','Tipo de Pessoa',null,'center');
+    $gride->addColumn('CPFCNPJ','CPF/CNPJ');
 	$gride->addColumn('SIT_ATIVO','Ativo',null,'center');
-	$gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('DAT_INCLUSAO','Data da Inclusão',null,'center');
+    $gride->addColumn('DAT_ALTERACAO','Data da Alteração',null,'center');
 
 
     $gride->show();
@@ -156,5 +186,31 @@ function init() {
 function buscar() {
     jQuery("#BUSCAR").val(1);
     init();
+}
+function select_change(e) {
+    if( e.id == 'TIPO'){
+        var valor = jQuery("#"+e.id).find(":selected").val();
+        //var fwg = fwGetFields("#TPPESSOA",null,null);
+        //console.log ( fwg );        
+        jQuery( "#TIPO *").each(  function() {
+                var type    = this.type;
+                var tag     = this.tagName.toLowerCase();
+                var id      = ''
+                var value   = '';
+                console.log ( this );
+            }
+        );                    
+        if (valor=='PF'){
+            fwSetRequired('CPF');
+            fwHabilitarAba('pessoaFisica','pc');
+            fwSelecionarAba('pessoaFisica');
+            fwDesabilitarAba('pessoaJuridica');
+        }else{
+            fwSetRequired('NMCNPJ');
+            fwHabilitarAba('pessoaJuridica','pc');
+            fwSelecionarAba('pessoaJuridica');
+            fwDesabilitarAba('pessoaFisica');
+        }
+    }
 }
 </script>

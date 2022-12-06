@@ -57,6 +57,7 @@ $menu->add('11', '1', 'Campo Texto', null, 'Declaração de texto');
     	$menu->add('11.3.3', '11.3', 'Consulta On-line', 'view/fields/exe_onlinesearch.php');
     	$menu->add('11.3.4', '11.3', 'Consulta On-line I (ERRO)', 'view/fields/exe_onlinesearch1.php');
     	$menu->add('11.3.5', '11.3', 'Autocompletar 3 + Consulta On-line', 'view/fields/exe_autocomplete3.php');
+        $menu->add('11.3.5', '11.3', 'AutoComplete Multiplos Bancos', 'pdo/database_multiplos_autocomplete.php', null, '../../base/imagens/database_balance.png');
 $menu->add('12', '1', 'Campo HTML');
     $menu->add('12.1', '12', 'Campo HTML', 'view/fields/exe_HtmlField.php');
     $menu->add('12.2', '12', 'Campo HTML com iFrame', 'modulos/iframe_phpinfo/ambiente_phpinfo.php');
@@ -127,11 +128,12 @@ $menu->add('2', null, 'Containers');
         $menu->add('241', '24', 'Dentro do Formulário', 'tree/exe_tree_view_1.php', null, '../../base/imagens/folder-bw.png');
         $menu->add('242', '24', 'Fora do Formulário', 'tree/exe_tree_view_2.php', null, '../../base/imagens/folder-bw.png');
         $menu->add('243', '24', 'User Data - Array', 'tree/exe_tree_view_3.php', null, '../../base/imagens/folder-bw.png');
-        $menu->add('244', '24', 'Uf x Municípios', 'tree/exe_tree_view_4.php');
-        $menu->add('245', '24', 'Com vários níveis', 'tree/exe_tree_view_8_multiple_levels.php');
-        $menu->add('246', '24', 'Uf x Municípios com SetXmlFile()', 'tree/exe_tree_view_5.php');
-        $menu->add('247', '24', 'TreeView with CheckBox (ERRO)', 'tree/exe_tree_view_6_check.php');
-        $menu->add('248', '24', 'TreeView with Drag and Drop (ERRO)', 'tree/exe_tree_view_7_drag.php');
+        $menu->add('244', '24', 'Uf x Municípios', 'tree/exe_tree_view_4.php');        
+        $menu->add('245', '24', 'Uf x Municípios com SetXmlFile()', 'tree/exe_tree_view_5.php');
+        $menu->add('246', '24', 'Uf x Municípios setando Campos', 'tree/exe_tree_view_9_setando_campos_view.php', null, '../../base/imagens/folder-bw.png');
+        $menu->add('247', '24', 'Com vários níveis', 'tree/exe_tree_view_8_multiple_levels.php');
+        $menu->add('248', '24', 'TreeView with CheckBox', 'tree/exe_tree_view_6_check.php', null, '../../base/imagens/folder-bw.png');
+        $menu->add('249', '24', 'TreeView with Drag and Drop (ERRO)', 'tree/exe_tree_view_7_drag.php');
 
 //-----------------------------------------------------------------------------
 $menu->add('4', null, 'Mensagens e Ajuda', null, null, '../../base/imagens/feedback-512.png');

@@ -14,7 +14,7 @@ defined('APLICATIVO') or die();
 require_once 'modulos/includes/acesso_view_allowed.php';
 
 $primaryKey = 'COD_MUNICIPIO';
-$frm = new TForm('Município',800,950);
+$frm = new TForm('Município',650);
 $frm->setShowCloseButton(false);
 $frm->setFlat(true);
 $frm->setMaximize(true);
@@ -24,9 +24,10 @@ $frm->setHelpOnLine('Ajuda',600,980,'ajuda/ajuda_tela.php',null);
 $frm->addHiddenField( 'BUSCAR' ); //Campo oculto para buscas
 $frm->addHiddenField( $primaryKey );   // coluna chave da tabela
 $controllerUf = new Uf();
-$listUf = $controllerUf->selectAll();
+$listUf = $controllerUf->selectAll('NOM_UF');
 $frm->addSelectField('COD_UF', 'UF',TRUE,$listUf,null,null,null,null,null,null,' ',null);
-$frm->addMemoField('NOM_MUNICIPIO', 'Nome',200,TRUE,80,3);
+//$frm->addMemoField('NOM_MUNICIPIO', 'Nome',200,TRUE,80,3);
+$frm->addTextField('NOM_MUNICIPIO', 'Nome',200,true,80);
 $frm->addSelectField('SIT_ATIVO', 'Ativo:', true, 'S=Sim,N=Não', true);
 
 $frm->addButton('Buscar', null, 'btnBuscar', 'buscar()', null, true, false);

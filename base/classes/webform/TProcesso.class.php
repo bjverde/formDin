@@ -45,18 +45,35 @@ Classe para entrada de número de processo
 class TProcesso extends TEdit
 {
 	/**
-	* Classe para entrada de número de processo
+	* Classe para entrada de número de processo com os formatos: 
+	* #####.######/####-## (2 digitos no ano) ou
+	* ######.######/##-## (4 dígitos no ano)ou
+	* ##.##.####.#######/####-## (SEI do MP)
 	*
-	* @param string $name
-	* @param string $value
-	* @param boolean $required
+	* @param string $strName 		- 1: ID do campo.
+	* @param string $strValue 		- 2: Valor inicial do campo.
+	* @param boolean $boolRequired 	- 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
+	* @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 4: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
+	* @param boolean $boolAcceptNumeroSeiMP  			- 5: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
 	*/
-	public function __construct($strName,$strValue=null,$boolRequired=null)
+	public function __construct($strName,$strValue=null,$boolRequired=null, $boolAcceptNumeroProcessoAAouAAAA=true, $boolAcceptNumeroSeiMP=true )
 	{
-		parent::__construct($strName,$strValue,21,$boolRequired);
+
+		if ( $boolAcceptNumeroProcessoAAouAAAA == true  && $boolAcceptNumeroSeiMP != true ){
+			$intMaxLength = 21;
+			$intSize = 22;
+		}else{
+			$intMaxLength = 26;
+			$intSize = 27;
+		}
+		
+		$numeroProcessoAAouAAAA = ( $boolAcceptNumeroProcessoAAouAAAA == 1 ) ? 'true' : 'false';
+		$numeroSeiMP = ( $boolAcceptNumeroSeiMP == 1 ) ? 'true' : 'false';		
+
+		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intSize);
 		$this->setFieldType('processo');
-		$this->addEvent('onkeyup','fwFormatarProcesso(this)');
-		$this->addEvent('onblur','fwValidarProcesso(this)');
+		$this->addEvent('onkeyup',"fwFormatarProcesso(this,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
+		$this->addEvent('onblur',"fwValidarProcesso(this,null,'".$numeroProcessoAAouAAAA."','".$numeroSeiMP."')");
 	}
 
 	public function getFormated()
@@ -68,22 +85,28 @@ class TProcesso extends TEdit
 
 	public static function formatarNumero($value)
 	{
+		$value = is_null($value)?'':$value;
+
 		$value = preg_replace("/\D/", '', $value);
 
-		if ( ! $value) // nenhum valor informado
+		if ( ! $value ) // nenhum valor informado
 		{
 			return null;
 		}
-		if( strlen($value) == 17 )
-		{
-			$value = substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,4).'-'.substr($value,15,2);
-		}
-		else
-		{
-			$value=substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,2).'-'.substr($value,13,2);
-		}
-		return $value;
+		if ( strlen($value) == 17 ){
+		// #####.######/####-##
+			$value = substr( $value,0,5 ).'.'.substr( $value,5,6 ).'/'.substr( $value,11,4 ).'-'.substr( $value,15,2 );
 
+		} else if( strlen($value) == 13 ){ 
+		//######.######/##-##		
+			$value=substr($value,0,5).'.'.substr($value,5,6).'/'.substr($value,11,2).'-'.substr($value,13,2);
+		} else {
+		// ##.##.####.#######/####-##
+			$value = substr( $value,0,2 ).'.'.substr( $value,2,2 ).'.'.substr( $value,4,4 ).'.'.substr( $value,8,7 ).'/'.substr( $value,15,4 ).'-'.substr( $value,19,2 );
+
+		}
+
+		return $value;
 	}
 }
 ?>
