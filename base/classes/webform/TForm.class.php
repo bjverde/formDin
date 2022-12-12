@@ -6267,17 +6267,17 @@ class TForm Extends TBox
     /**
      * Adicionar campo entrada de dados texto livre
      *
-     * @param string $strName       - 1: id do campo
-     * @param string $strLabel      - 2: Label do campo
-     * @param integer $intMaxLength - 3: tamanho máximo de caracteres
-     * @param boolean $boolRequired - 4: obrigatório ou não
-     * @param integer $intSize      - 5: quantidade de caracteres visíveis
-     * @param string $strValue      - 6: texto preenchido
-     * @param boolean $boolNewLine  - 7: Nova linha
-     * @param string $strHint
-     * @param string $strExampleText - 9: Texto de exemplo
-     * @param boolean $boolLabelAbove - 10: Label sobre
-     * @param boolean $boolNoWrapLabel
+     * @param string $strName         - 1: id do campo
+     * @param string $strLabel        - 2: Label do campo
+     * @param integer $intMaxLength   - 3: Tamanho máximo de caracteres
+     * @param boolean $boolRequired   - 4: Obrigatório ou não
+     * @param integer $intSize        - 5: Quantidade de caracteres visíveis
+     * @param string $strValue        - 6: Texto preenchido
+     * @param boolean $boolNewLine    - 7: Nova linha
+     * @param string $strHint         - 8: Hint sobre o campo
+     * @param string $strExampleText  - 9: Texto de exemplo
+     * @param boolean $boolLabelAbove -10: Label sobre
+     * @param boolean $boolNoWrapLabel-11: 
      * @return TEdit
      */
     public function addTextField( string $strName
