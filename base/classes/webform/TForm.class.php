@@ -7235,10 +7235,10 @@ class TForm Extends TBox
     * @param string $strName         - 1: ID do campo
     * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired   - 3: Obrigatório
-    * @param string $strMask
-    * @param boolean $boolNewLine
-    * @param string $strValue
-    * @param boolean $boolLabelAbove
+    * @param string $strMask         - 4: Mascará que será 
+    * @param boolean $boolNewLine    - 5: Nova linha
+    * @param string $strValue        - 6: Valor inicial
+    * @param boolean $boolLabelAbove - 7: label sobre o campo
     * @return TMask
     */
     public function addMaskField( $strName, $strLabel=null, $boolRequired=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strExampleText=null )
