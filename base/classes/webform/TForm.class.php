@@ -7144,7 +7144,7 @@ class TForm Extends TBox
     * @param string $boolRequired    - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue        - 5: valor inicial do campo
-    * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $boolLabelAbove  - 6: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 7: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
 	* @param boolean $boolAcceptNumeroSeiMP  			- 8: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
     * @return TProcesso
@@ -7164,7 +7164,7 @@ class TForm Extends TBox
     * @param string $boolRequired   - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue       - 5: valor inicial do campo
-    * @param string $boolLabelAbove - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $boolLabelAbove - 6: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
     * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
     * @return TNumeroTJDFT
@@ -7190,13 +7190,13 @@ class TForm Extends TBox
      * @param string  $strName         - 1: ID do campo
      * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired    - 3: Obrigatório
-     * @param string  $strAllowedFileTypes - Tipos de arquivos
-     * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-     * @param integer $intFieldSize
+     * @param string  $strAllowedFileTypes - 4: Tipos de arquivos
+     * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+     * @param integer $intFieldSize    - 6: 
      * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
-     * @param boolean $boolNewLine
-     * @param string  $strJsCallBack
-     * @param boolean $boolLabelAbove
+     * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
+     * @param string  $strJsCallBack   - 9:
+     * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
      * @param boolean $boolNoWrapLabel
      * @param string  $strMessageInvalidFileType
      * @return TFile|TFileAsync
@@ -7238,7 +7238,7 @@ class TForm Extends TBox
     * @param string $strMask         - 4: Mascará que será 
     * @param boolean $boolNewLine    - 5: Nova linha
     * @param string $strValue        - 6: Valor inicial
-    * @param boolean $boolLabelAbove - 7: label sobre o campo
+    * @param boolean $boolLabelAbove - 7: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @return TMask
     */
     public function addMaskField( $strName, $strLabel=null, $boolRequired=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strExampleText=null )
