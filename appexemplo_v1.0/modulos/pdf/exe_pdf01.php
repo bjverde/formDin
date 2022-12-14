@@ -75,11 +75,11 @@ function gerar_pdf()
     $dados=null;
     // CPF diferente do loop
     $dados['NUM_CPF'][]     = '111.111.111-11';
-    $dados['NOM_PESSOA'][]  = utf8_decode('Usuário de teste');
+    $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode('Usuário de teste');
 
     for ($i=0; $i<100; $i++) {
         $dados['NUM_CPF'][]     = '123.456.789-09';
-        $dados['NOM_PESSOA'][]  = utf8_decode('Usuário de teste');
+        $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode('Usuário de teste');
     }
     $rel->setData($dados);
     $rel->addColumn('Nome', 100, 'L', 'NOM_PESSOA', '', 'I', 8, 'black', 'times');
@@ -107,7 +107,7 @@ function myOdc(TPDFColumn $oCol = null, $value = null, $colIndex = null)
 function cabecalho(TPDF $pdf)
 {
     $pdf->SetFont('Arial', 'B', 14);
-    $pdf->Cell(0, 5, utf8_decode('Cabecalho do Relatório'), 'b', 1, 'C');
+    $pdf->Cell(0, 5, StringHelper::utf8_decode('Cabecalho do Relatório'), 'b', 1, 'C');
     $pdf->ln(3);
     $pdf->SetFont('Times', '', 10);
 }
@@ -118,9 +118,9 @@ function rodape(TPDF $pdf)
         $fs=$pdf->getFontSize();
         $pdf->SetY(-15);
         $pdf->SetFont('', '', 8);
-        $pdf->Cell(0, 5, utf8_decode('Rodapé do Relatório'), 'T', 0, 'L');
+        $pdf->Cell(0, 5, StringHelper::utf8_decode('Rodapé do Relatório'), 'T', 0, 'L');
         $pdf->setx(0);
-        $pdf->Cell(0, 5, utf8_decode('Pág ').$pdf->PageNo().'/{nb}', 0, 0, 'C');
+        $pdf->Cell(0, 5, StringHelper::utf8_decode('Pág ').$pdf->PageNo().'/{nb}', 0, 0, 'C');
         $pdf->setx(0);
         $pdf->cell(0, 5, 'Emitido em:'.date('d/m/Y H:i:s'), 0, 0, 'R');
         $pdf->setfont('', '', $fs);

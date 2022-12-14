@@ -61,7 +61,7 @@ function Teste($arg)
     $gride = new TGrid('gd', 'Gride XAJAX', $res);
     $gride->autoCreateColumns();
     $gride = $gride->show(false);
-    $objResponse->assign("campo_html", "innerHTML", utf8_decode($gride));
+    $objResponse->assign("campo_html", "innerHTML", StringHelper::utf8_decode($gride));
     //sleep(1);
     $objResponse->call("fncRetorno", "arg1", 9432.12, array("myKey" => "some value", "key2" => 'TESTE'));
     return $objResponse;

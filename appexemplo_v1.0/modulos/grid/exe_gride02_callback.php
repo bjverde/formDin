@@ -45,7 +45,7 @@ if (isset($_SESSION['meus_anexos'])) {
     $i=0;
     foreach ($_SESSION['meus_anexos'] as $fileName => $aDados) {
         $res['SEQ_ARQUIVO'][$i] =   ( $i+1 );
-        $res['NOM_ARQUIVO'][$i] =   utf8_decode($fileName);
+        $res['NOM_ARQUIVO'][$i] =   StringHelper::utf8_decode($fileName);
         foreach ($aDados as $key => $val) {
             $res[$key][$i] = $val;
         }
