@@ -5277,24 +5277,24 @@ class TForm Extends TBox
         * Cria um botão para executar uma chamada ajax utilizando a função fwAjaxRequest
         *
         *
-        * @param string $strValue
-        * @param string $strModule
-        * @param string $strJsCallback
-        * @param string $strAction
-        * @param string $strMsgLoading
-        * @param string $strDataTypeReturn
-        * @param boolean $boolAsync
-        * @param string $strName
-        * @param string $strConfirmMessage
-        * @param boolean $boolNewLine
-        * @param boolean $boolFooter
-        * @param string $strImage
-        * @param string $strImageDisabled
-        * @param string $strHint
-        * @param string $strVerticalAlign
-        * @param boolean $boolLabelAbove
-        * @param string $strLabel
-        * @param mixed $strHorizontalAlign
+        * @param string $strValue         - 01:
+        * @param string $strModule        - 02:
+        * @param string $strJsCallback    - 03:
+        * @param string $strAction        - 04:
+        * @param string $strMsgLoading    - 05:
+        * @param string $strDataTypeReturn- 06:
+        * @param boolean $boolAsync       - 07:
+        * @param string $strName          - 08:
+        * @param string $strConfirmMessage- 09:
+        * @param boolean $boolNewLine     - 10:
+        * @param boolean $boolFooter      - 11:
+        * @param string $strImage         - 12:
+        * @param string $strImageDisabled - 13:
+        * @param string $strHint          - 14:
+        * @param string $strVerticalAlign - 15:
+        * @param boolean $boolLabelAbove  - 16: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
+        * @param string $strLabel         - 17: 
+        * @param mixed $strHorizontalAlign- 18:
         * @param mixed $boolBlockScreen
         * @return object TButton
         */
@@ -6267,17 +6267,17 @@ class TForm Extends TBox
     /**
      * Adicionar campo entrada de dados texto livre
      *
-     * @param string $strName       - 1: id do campo
-     * @param string $strLabel      - 2: Label do campo
-     * @param integer $intMaxLength - 3: tamanho máximo de caracteres
-     * @param boolean $boolRequired - 4: obrigatório ou não
-     * @param integer $intSize      - 5: quantidade de caracteres visíveis
-     * @param string $strValue      - 6: texto preenchido
-     * @param boolean $boolNewLine  - 7: Nova linha
-     * @param string $strHint
-     * @param string $strExampleText - 9: Texto de exemplo
-     * @param boolean $boolLabelAbove - 10: Label sobre
-     * @param boolean $boolNoWrapLabel
+     * @param string $strName         - 1: id do campo
+     * @param string $strLabel        - 2: Label do campo
+     * @param integer $intMaxLength   - 3: Tamanho máximo de caracteres
+     * @param boolean $boolRequired   - 4: Obrigatório ou não
+     * @param integer $intSize        - 5: Quantidade de caracteres visíveis
+     * @param string $strValue        - 6: Texto preenchido
+     * @param boolean $boolNewLine    - 7: Nova linha
+     * @param string $strHint         - 8: Hint sobre o campo
+     * @param string $strExampleText  - 9: Texto de exemplo
+     * @param boolean $boolLabelAbove -10: Label acima do campo, DEFAULT is FALSE na mesma linha
+     * @param boolean $boolNoWrapLabel-11: 
      * @return TEdit
      */
     public function addTextField( string $strName
@@ -6311,7 +6311,7 @@ class TForm Extends TBox
      * @param integer $intColumns      - 5: qtd colunas
      * @param integer $intRows         - 6: qtd linhas
      * @param boolean $boolNewLine     - 7: nova linha
-     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param boolean $boolLabelAbove  - 8: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
      * @param boolean $boolShowCounter - 9: Contador de caracteres ! Só funciona em campos não RichText
      * @param string  $strValue
      * @param string $boolNoWrapLabel
@@ -6346,7 +6346,7 @@ class TForm Extends TBox
      * @param integer $intColumns      - 5: qtd colunas
      * @param integer $intRows         - 6: qtd linhas
      * @param boolean $boolNewLine     - 7: nova linha
-     * @param boolean $boolLabelAbove  - 8: Label sobre o campo
+     * @param boolean $boolLabelAbove  - 8: Label acima do campo, DEFAULT is FALSE na mesma linha
      * @param string  $strValue        - 9:
      * @param boolean $boolNoWrapLabel - 10:
      * @return TRichTextEditor
@@ -6384,7 +6384,7 @@ class TForm Extends TBox
      * @param string  $strMaskType     - 8: DEFAULT = DMY. Tipo de Mascara DMY (dia/mês/ano), DM (dia/mês), MY (mês/ano) 
      * @param boolean $boolButtonVisible - 9: Exibe ou não o botão do calendario.
      * @param string  $strExampleText  - 10: Texto de exmplo
-     * @param boolean $boolLabelAbove  - 11: DEFAULT = flase. Label acima do campo = true
+     * @param boolean $boolLabelAbove  - 11: Label acima do campo, DEFAULT is FALSE na mesma linha
      * @param string  $boolNoWrapLabel - 12: 
      * @return TDate
      */
@@ -6478,7 +6478,7 @@ class TForm Extends TBox
     * @param string $strWidth       - 5:
     * @param string $strHeight      - 6: 
     * @param boolean $boolNewLine   - 7: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-    * @param boolean $boolLabelAbove  8:
+    * @param boolean $boolLabelAbove  8: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @return THtml Field
     */
    public function addHtmlField( $strName
@@ -6546,7 +6546,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string  $strValue           -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-    * @param boolean $boolLabelAbove
+    * @param boolean $boolLabelAbove     -  6: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @param boolean $boolNoWrapLabel
     * @param string  $strInvalidMessage
     * @param boolean $boolAlwaysValidate
@@ -6581,7 +6581,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired       -  3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param string $strValue            -  4: Valor inicial do campo
     * @param boolean $boolNewLine        -  5: Default TRUE = campo em nova linha, FALSE continua na linha anterior
-    * @param boolean $boolLabelAbove
+    * @param boolean $boolLabelAbove     -  6: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @return TCnpj Field
     */
    public function addCnpjField( $strName, $strLabel=null, $boolRequired=null, $strValue=null, $boolNewLine=null, $boolLabelAbove=null, $boolNoWrapLabel=null,$strInvalidMessage=null,$boolAlwaysValidate=null,$strJsCallback=null )
@@ -6645,7 +6645,7 @@ class TForm Extends TBox
     * @param string $strFieldNumero       - 12: id do campo numero
     * @param string $strFieldComplemento  - 13: id do complemento
     * @param string $strFieldCodigoMunicipio - 14: id do cod municipio. DEVE TERMINAL COM "_temp" SE for no combinar select
-    * @param boolean $boolLabelAbove      - 15: Label sobre campo 
+    * @param boolean $boolLabelAbove      - 15: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param boolean $boolNoWrapLabel     - 16:
     * @param string $jsCallback           - 17: Js Callback
     * @param string $jsBeforeSend         - 18: Js Before Send
@@ -6773,7 +6773,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired   - 3: Default FALSE = não obrigatori, TRUE = Obrigatório
     * @param mixed   $mixOptions         - 04: Array dos valores. no formato "id=>value", nome do pacote oracle e da função a ser executada, comando sql ou tabela|condicao
     * @param boolean $boolNewLine        - 05: Default TRUE = cria nova linha , FALSE = fica depois do campo anterior
-    * @param boolean $boolLabelAbove     - 06: Default FALSE = Label mesma linha, TRUE = Label acima
+    * @param boolean $boolLabelAbove     - 06: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param mixed   $mixValue           - 07: Valor DEFAULT, informe o ID do array
     * @param boolean $boolMultiSelect    - 08: Default FALSE = SingleSelect, TRUE = MultiSelect
     * @param integer $intSize            - 09: Default 1. Num itens que irão aparecer no MultiSelect
@@ -6823,7 +6823,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired  - 3: TRUE = Required, FALSE = not Required
     * @param array $arrOptions      - 4: Array Options
     * @param boolean $boolNewLine   - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
-    * @param boolean $boolLabelAbove- 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
+    * @param boolean $boolLabelAbove- 6: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param string  $strValue      - 7: Valor DEFUALT, informe do id do array
     * @param integer $intQtdColumns - 8: Quantidade de colunas, valor DEFAULT = 1;
     * @param integer $intWidth
@@ -6862,7 +6862,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired   - 3: TRUE = Required, FALSE = not Required
     * @param array $arrOptions       - 4: array no formato "id=>valeu" para identificar a(s) opção(ões) selecionada(s)
     * @param boolean $boolNewLine    - 5: TRUE = new line, FALSE = no, DEFAULT ou NULL = FALSE
-    * @param boolean $boolLabelAbove - 6: TRUE = Titulo em cima das opções, FALSE = titulo lateral
+    * @param boolean $boolLabelAbove - 6: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param array $arrValues        - 7: Valor DEFAULT, informe do ID do arrOptions ou UM array no forma "key=>id" para maracar mais de um valor ao mesmo tempo
     * @param integer $intQtdColumns  - 8: Quantidade de colunas
     * @param integer $intWidth       - 9: Largura
@@ -6984,11 +6984,11 @@ class TForm Extends TBox
      * @param string $strMinValue        - 8: valor minimo permitido. Null = não tem limite.
      * @param string $strMaxValue        - 9: valor maxima permitido. Null = não tem limite.
      * @param boolean $boolFormatInteger -10: Inteiros com ou sem ponto de separação
-     * @param string $strDirection
-     * @param boolean $boolAllowZero
-     * @param boolean $boolAllowNull
-     * @param boolean $boolLabelAbove
-     * @param boolean $boolNoWrapLabel
+     * @param string $strDirection       -11:
+     * @param boolean $boolAllowZero     -12:
+     * @param boolean $boolAllowNull     -13:
+     * @param boolean $boolLabelAbove    -14: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
+     * @param boolean $boolNoWrapLabel   -15: 
      * @param string $strHint
      * @return TNumber
      */       
@@ -7035,7 +7035,7 @@ class TForm Extends TBox
 	 * @param integer $intSize      - 5: Tamanho do campo na tela
 	 * @param boolean $boolNewLine  - 6: Campo em nova linha
 	 * @param string  $strValue     - 7: valor inicial do campo
-	 * @param boolean $boolLabelAbove-8: Label acima, DEFAULT is FALSE na mesma linha
+	 * @param boolean $boolLabelAbove-8: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
 	 * @return TEmail
 	 */
 	public function addEmailField( string $strName, string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
@@ -7053,7 +7053,7 @@ class TForm Extends TBox
 	 * @param boolean $boolRequired - 3: Obrigatório
 	 * @param boolean $boolNewLine  - 4: Campo em nova linha
 	 * @param string $strValue      - 5: valor inicial do campo
-	 * @param boolean $boolLabelAbove
+	 * @param boolean $boolLabelAbove-6: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
      * @param boolean $boolNoWrapLabel
 	 * @return TFone
 	 */
@@ -7086,7 +7086,7 @@ class TForm Extends TBox
     * @param string $strSymbols - simbolo para grau, minuto e segundo separado por vígula:. ex: °,',"
     * @param mixed $intMapHeight
     * @param mixed $intMapWidth
-    * @param mixed $boolLabelAbove
+    * @param mixed $boolLabelAbove  - Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param mixed $boolNoWrapLabel
     * @param string $strMapHeaderText
     * @param string $strMapHeaderFontColor
@@ -7110,7 +7110,7 @@ class TForm Extends TBox
     * @param boolean $boolNewLine         - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param integer $intmaxLength        - 5: Tamanho maximo
     * @param string $strValue             - 6: valor inicial do campo
-    * @param boolean $boolLabelAbove      - 7: Label acima, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolLabelAbove      - 7: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
     * @param boolean $boolNoWrapLabel
     * @param integer $intSize
     * @param boolean $boolUseVirtualKeyboard
@@ -7144,7 +7144,7 @@ class TForm Extends TBox
     * @param string $boolRequired    - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine     - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue        - 5: valor inicial do campo
-    * @param string $boolLabelAbove  - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $boolLabelAbove  - 6: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @param boolean $boolAcceptNumeroProcessoAAouAAAA  - 7: Número de processo, DEFALUT is TRUE - Aceitar os números de processo ######.######/##-## e #####.######/####-##.
 	* @param boolean $boolAcceptNumeroSeiMP  			- 8: Número SEI do MP, DEFALUT is TRUE - Aceitar o número de processo ##.##.####.#######/####-##.
     * @return TProcesso
@@ -7164,7 +7164,7 @@ class TForm Extends TBox
     * @param string $boolRequired   - 3: Campo Obrigatório, DEFALUT is FALSE não Obrigatório.
     * @param string $boolNewLine    - 4: Em nova linha, DEFALUT is TRUE não Obrigatório.
     * @param string $strValue       - 5: valor inicial do campo
-    * @param string $boolLabelAbove - 6: Label acima, DEFAULT is FALSE na mesma linha
+    * @param string $boolLabelAbove - 6: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @param boolean $boolAcceptNumeroDistribuicao  - 7: número Distribuição DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número Único.
     * @param boolean $boolAcceptNumeroUnico - 8: número Único, DEFAULT is TRUE. Mudar para FALSE se quiser apenas o Número de Distribuição.
     * @return TNumeroTJDFT
@@ -7190,13 +7190,13 @@ class TForm Extends TBox
      * @param string  $strName         - 1: ID do campo
      * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
      * @param boolean $boolRequired    - 3: Obrigatório
-     * @param string  $strAllowedFileTypes - Tipos de arquivos
-     * @param string  $strMaxFileSize  - Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-     * @param integer $intFieldSize
+     * @param string  $strAllowedFileTypes - 4: Tipos de arquivos
+     * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+     * @param integer $intFieldSize    - 6: 
      * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
-     * @param boolean $boolNewLine
-     * @param string  $strJsCallBack
-     * @param boolean $boolLabelAbove
+     * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
+     * @param string  $strJsCallBack   - 9:
+     * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
      * @param boolean $boolNoWrapLabel
      * @param string  $strMessageInvalidFileType
      * @return TFile|TFileAsync
@@ -7235,10 +7235,10 @@ class TForm Extends TBox
     * @param string $strName         - 1: ID do campo
     * @param string $strLabel        - 2: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired   - 3: Obrigatório
-    * @param string $strMask
-    * @param boolean $boolNewLine
-    * @param string $strValue
-    * @param boolean $boolLabelAbove
+    * @param string $strMask         - 4: Mascará que será 
+    * @param boolean $boolNewLine    - 5: Nova linha
+    * @param string $strValue        - 6: Valor inicial
+    * @param boolean $boolLabelAbove - 7: Label acima do campo, DEFAULT is FALSE na mesma linha
     * @return TMask
     */
     public function addMaskField( $strName, $strLabel=null, $boolRequired=null, $strMask=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null, $strExampleText=null )
