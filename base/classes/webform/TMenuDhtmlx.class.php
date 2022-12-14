@@ -117,17 +117,12 @@ class TMenuDhtmlx {
         if( $menu->getIdParent() ) {
 	        // verificar se o pai já está adicionado
 	        $objMenu = $this->getMenuById($strIdParent);
-	        if( ! is_null( $objMenu ) )
-	        {
+	        if( ! is_null( $objMenu ) ){
 	            $objMenu->addMenu($menu);
-	        }
-	        else
-	        {
+	        }else{
         		$this->addOrphan($menu);
 	        }
-		}
-		else
-		{
+		}else{
 			$this->addMenu( $menu );
 		}
 		/*
@@ -248,24 +243,16 @@ class TMenuDhtmlx {
     public function getMenuById($strId)
     {
     	static $o = null;
-		if( (string) $strId == '0' )
-		{
+		if( (string) $strId == '0' ) {
 			return null;
 		}
-        if( $this->arrMenu )
-        {
-            foreach($this->arrMenu as $k=>$objMenu)
-            {
-            	if( is_null( $o ))
-            	{
-	                if( $objMenu->getId() == $strId )
-	                {
+        if( $this->arrMenu ) {
+            foreach($this->arrMenu as $k=>$objMenu){
+            	if( is_null( $o )) {
+	                if( $objMenu->getId() == $strId ) {
 	                   $o = $objMenu;
 	                   break;
-
-	                }
-	                else
-	                {
+	                } else {
                  		$o = $objMenu->getMenuById($strId);
 					}
 				}
@@ -284,8 +271,7 @@ class TMenuDhtmlx {
     //--------------------------------------------------------------------------------------
     public function ignoreOrphans($boolNewValue=null)
     {
-	    if( $boolNewValue === null)
-	    {
+	    if( $boolNewValue === null){
     		return $this->boolIgnoreOrphans;
 	    }
 		$this->boolIgnoreOrphans = $boolNewValue;
@@ -371,19 +357,14 @@ class TMenuDhtmlx {
 		if( $level == 0 )
 		{
 			// processar o itens que ficaram sem pai e coloca-los no nivel 0 para aparecer no menu principal
-			if($this->ignoreOrphans())
-			{
+			if($this->ignoreOrphans()) {
 				$this->clearOrphans();
-			}
-			else
-			{
-				if( $this->getOrphans())
-				{
+			} else {
+				if( $this->getOrphans()) {
 					foreach($this->getOrphans() as $k=>$objMenu)
 					{
 						// não adicionar o item 2 vezes
-						if( ! $this->getMenuById( $objMenu->getId() ) )
-						{
+						if( ! $this->getMenuById( $objMenu->getId() ) ) {
 							$objMenu->setIdParent(0);
    							$this->addMenu($objMenu);
 						}
