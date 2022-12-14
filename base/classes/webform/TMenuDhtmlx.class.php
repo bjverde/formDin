@@ -56,9 +56,9 @@
 class TMenuDhtmlx {
     private $arrMenu;
     private $arrOrphan;
-    private $strId;
-    private $strIdParent;
-    private $strText;
+    private $id;
+    private $idParent;
+    private $text;
 	private $strUrl;
 	private $boolDisabled;
 	private $strImg;
