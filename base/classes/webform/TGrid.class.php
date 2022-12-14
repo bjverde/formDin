@@ -3094,7 +3094,7 @@ class TGrid extends TTable
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
                         if ( ENCODINGS == 'UTF-8'){
-                            $result[ utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+                            $result[ StringHelper::utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         } else {
                             $result[ utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         }

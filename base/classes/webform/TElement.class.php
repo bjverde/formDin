@@ -1080,11 +1080,11 @@ class TElement
         {
             return $strValue;
         }
-        if( FormDinHelper::pregMatch( '/\?/', utf8_decode($strValue) ) )
+        if( FormDinHelper::pregMatch( '/\?/', StringHelper::utf8_decode($strValue) ) )
         {
             return $strValue;
         }
-        return utf8_decode( $strValue );
+        return StringHelper::utf8_decode( $strValue );
     }
     
     //--------------------------------------------------------------------------
