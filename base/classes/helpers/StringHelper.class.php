@@ -116,6 +116,18 @@ class StringHelper
         }
         return $string;
     }
+
+    /**
+     * Tranforma um string UTF8 para ASCII, criada para melhorar compatibilidade com PHP 8.2
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function utf8_decode($string)
+    {
+        $string = self::convert_encoding($string,'ISO-8859-1','UTF-8');
+        return $string;
+    }    
     
     /**
      * Converte uma string com enconding destino e enconding de origem
