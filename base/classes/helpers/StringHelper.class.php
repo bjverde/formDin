@@ -118,7 +118,7 @@ class StringHelper
     }
 
     /**
-     * Tranforma um string UTF8 para ASCII, criada para melhorar compatibilidade com PHP 8.2
+     * Tranforma um string UTF8 para ISO-8859-1, criada para melhorar compatibilidade com PHP 8.2
      *
      * @param string $string
      * @return string
