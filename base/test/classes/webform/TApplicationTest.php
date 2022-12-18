@@ -62,8 +62,10 @@ class TApplicationTest extends TestCase
 	 * Prepares the environment before running a test.
 	 */
 	protected function setUp(): void {
-		if(session_status() === PHP_SESSION_ACTIVE) session_destroy();
-		parent::setUp ();
+		if(session_status() === PHP_SESSION_ACTIVE) {
+			session_destroy();
+		}
+		parent::setUp();
 		if (! defined ( 'APLICATIVO' )) {
 		    define ( 'APLICATIVO', 'phpunit' );
 		}
@@ -74,7 +76,9 @@ class TApplicationTest extends TestCase
 	 * Cleans up the environment after running a test.
 	 */
 	protected function tearDown(): void {
-	    session_destroy();
+		if(session_status() === PHP_SESSION_ACTIVE) {
+			session_destroy();
+		}
 		$this->tApplication = null;		
 		parent::tearDown ();
 	}
@@ -91,6 +95,7 @@ class TApplicationTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$app = new TApplication('PHP Unit','Test','test','unit test',800,'UTF8');
 	}
+	*/
 	//----------------------------------------------
 	public function testSetTitle_Defined() {
 	    $expected= 'xxxTest95784';
@@ -106,6 +111,7 @@ class TApplicationTest extends TestCase
 	    $this->assertNull($result);
 	}
 
+	/*
 	public function testSetFormDinMinimumVersion_OK() {
 	    $this->assertNull( $this->tApplication->setFormDinMinimumVersion('1.0.0') );
 	}
