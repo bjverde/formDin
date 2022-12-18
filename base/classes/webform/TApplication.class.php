@@ -112,8 +112,8 @@ class TApplication extends TLayout {
 		if( !empty($charSet) ){
 			throw new InvalidArgumentException('ERRO !! remova o parametro $charSet');
 		}		
-		ini_set ( 'xdebug.max_nesting_level', 150 );
-		date_default_timezone_set ( 'America/Sao_Paulo' );
+		ini_set( 'xdebug.max_nesting_level', 150 );
+		date_default_timezone_set( 'America/Sao_Paulo' );
 		
 		$this->includePathDao();
 		$this->includePathClasses();
