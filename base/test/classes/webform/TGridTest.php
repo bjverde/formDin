@@ -113,7 +113,7 @@ class TGridTest extends TestCase
 	}
 	
 	public function testGetName() {
-	    $expected = 'gd';
+	    $expected = null;
 	    $result = $this->tGrid->getName();
 	    $this->assertEquals( $expected , $result);
 	}
