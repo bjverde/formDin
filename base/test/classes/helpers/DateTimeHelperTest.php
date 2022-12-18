@@ -256,4 +256,55 @@ class DateTimeHelperTest extends TestCase
         $retorno = DateTimeHelper::isWorkingDay($entrada);
         $this->assertEquals($esperado, $retorno);
     }
+
+    //------------------------------------------------------------
+    //------------------------------------------------------------
+    //------------------------------------------------------------   
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisAntiga_minuto() {
+        $esperado = false;
+        $datahora1 = '17/12/2022 00:30';
+        $datahora2 = '17/12/2022 00:31';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisAntiga_hora() {
+        $esperado = false;
+        $datahora1 = '17/12/2022 00:30';
+        $datahora2 = '17/12/2022 01:00';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisAntiga_dia() {
+        $esperado = false;
+        $datahora1 = '17/12/2022 00:30';
+        $datahora2 = '18/12/2022 00:00';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisNova_minuto() {
+        $esperado = true;
+        $datahora1 = '17/12/2022 00:31';
+        $datahora2 = '17/12/2022 00:30';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisNova_hora() {
+        $esperado = true;
+        $datahora1 = '17/12/2022 01:30';
+        $datahora2 = '17/12/2022 00:00';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testdate1NewerThanDate2_DatasBr_Date1MaisNova_dia() {
+        $esperado = true;
+        $datahora1 = '18/12/2022 00:30';
+        $datahora2 = '17/12/2022 00:00';
+        $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
+        $this->assertEquals($esperado, $retorno);
+    }
 }
