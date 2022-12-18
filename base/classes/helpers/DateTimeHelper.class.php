@@ -316,7 +316,7 @@ class DateTimeHelper
 
     /**
      * @codeCoverageIgnore
-     * @deprecated change to dateBr2Iso
+     * @deprecated change to date1NewerThanDate2
      */    
     public static function verificaData1MaisRecenteQueData2( $datahora1, $datahora2  ){ 
         return self::date1NewerThanDate2( $datahora1, $datahora2  );
@@ -331,6 +331,7 @@ class DateTimeHelper
      */
     public static function date1NewerThanDate2( $datahora1, $datahora2  ){ 
         $interval = self::getIntervalDateDiff( $datahora1, $datahora2 );
+        $result = false;
 	    if( $interval->invert == 1 ){
 	        $result = true;
 	    }
