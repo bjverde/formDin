@@ -95,7 +95,6 @@ class TApplicationTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$app = new TApplication('PHP Unit','Test','test','unit test',800,'UTF8');
 	}
-	*/
 	//----------------------------------------------
 	public function testSetTitle_Defined() {
 	    $expected= 'xxxTest95784';
@@ -110,12 +109,11 @@ class TApplicationTest extends TestCase
 	    $result = $this->tApplication->getTitle();
 	    $this->assertNull($result);
 	}
-
-	/*
+	
 	public function testSetFormDinMinimumVersion_OK() {
 	    $this->assertNull( $this->tApplication->setFormDinMinimumVersion('1.0.0') );
 	}
-	
+
 	public function testSetFormDinMinimumVersion_fail() {
 		$this->expectException(DomainException::class);
 	    $this->tApplication->setFormDinMinimumVersion('999.999.999');
