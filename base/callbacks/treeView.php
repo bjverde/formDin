@@ -157,8 +157,18 @@ if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 ) {
 
 	$sql = "select ".$fields. " from ".$_REQUEST['tableName'].' '.$where;
 	//$tree->addItem(new TTreeViewData($_GET['id'],$sql ) );
-	$res = TPDOConnection::executeSql($sql);
+	//$res = TPDOConnection::executeSql($sql);
 	//$res=null;
+
+	$tpdo = getConfigBanco($configFileName);
+	$res = $tpdo->executeSql($sql);
+	if( $tpdo->getError() ) {
+		$res[$campoCodigo][] = 0;
+		$res[$campoDescricao][] = "Erro na funcao combinarselect(). Erro:".$tpdo->getError();
+		MessageHelper::logRecordSimple($tpdo->getError());
+	}
+
+
 }
 
 if( $res ) {
