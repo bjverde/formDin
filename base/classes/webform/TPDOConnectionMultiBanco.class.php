@@ -70,15 +70,15 @@ class TPDOConnectionMultiBanco
                 throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_GERAL);
             }
             $configArray= array(
-                'DBMS' => BANCO
-            ,'PORT' => PORT
-            ,'HOST' => HOST
-            ,'DATABASE' => DATABASE
-            ,'USERNAME' => USUARIO
-            ,'PASSWORD' => SENHA
-            ,'UTF8_DECODE' => 0
-        );
-        $tpdo->connect(null,true,null,$configArray);	
+                 'DBMS' => BANCO
+                ,'PORT' => PORT
+                ,'HOST' => HOST
+                ,'DATABASE' => DATABASE
+                ,'USERNAME' => USUARIO
+                ,'PASSWORD' => SENHA
+                ,'UTF8_DECODE' => 0
+            );
+            $tpdo->connect(null,true,null,$configArray);	
         }
         return $tpdo;
     }
