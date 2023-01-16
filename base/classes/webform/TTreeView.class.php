@@ -77,6 +77,8 @@ class TTreeView extends TControl
   	private $tableName;
   	private $mixData;
 
+	private $configFileName;
+
 	/**
 	* Implementa Tree View
 	*
@@ -187,7 +189,8 @@ class TTreeView extends TControl
  		$this->SetChildFieldName($strChildFieldName);
  		$this->setDescFieldName($strDescFieldName);
  		$this->setUserDataFieldNames($mixUserDataFieldNames);
- 	    $this->setData();
+		$this->setConfigFileName($strConfigFileName);
+		$this->setData();
 	}
 
 	/**
@@ -217,6 +220,7 @@ class TTreeView extends TControl
    			    $descFieldName  = $this->getDescFieldName();
    			    $tableName      = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
+				$strConfigFileName = $this->getConfigFileName();
 				if ( is_array( $userDataFieldNames ) ) {
 					$userDataFieldNames = implode( ',', $userDataFieldNames );
 				}
@@ -226,7 +230,10 @@ class TTreeView extends TControl
            			    .'&descField='.$descFieldName
            			    .'&tableName='.$tableName
            			    .'&userDataFields='.$userDataFieldNames;
-   			    return $url;
+
+   			    $url = $url . empty($strConfigFileName) ? '' : $strConfigFileName ;
+
+				return $url;
 			} else {
 				$this->addItem(0,1,'Arquivo '.$xmlFile.' não encontrado!', true, '' );
 			}
@@ -843,6 +850,15 @@ class TTreeView extends TControl
 	{
 		return $this->userDataFieldNames;
 	}
+	public function getConfigFileName()
+	{
+		return $this->configFileName;
+	}
+	public function setConfigFileName($strConfigFileName=null)
+	{
+		$this->configFileName = $strConfigFileName;
+	}
+
 	public function getXml($print=false)
 	{
 	  	if( !$this->itens  ) {
