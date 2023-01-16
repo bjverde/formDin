@@ -229,10 +229,8 @@ class TTreeView extends TControl
            			    .'&childField='.$childFieldName
            			    .'&descField='.$descFieldName
            			    .'&tableName='.$tableName
-           			    .'&userDataFields='.$userDataFieldNames;
-
-   			    $url = $url . empty($strConfigFileName) ? '' : '&configFileName='.$strConfigFileName ;
-
+           			    .'&userDataFields='.$userDataFieldNames
+						.'&configFileName='.$strConfigFileName ;
 				return $url;
 			} else {
 				$this->addItem(0,1,'Arquivo '.$xmlFile.' não encontrado!', true, '' );
