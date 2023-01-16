@@ -231,7 +231,7 @@ class TTreeView extends TControl
            			    .'&tableName='.$tableName
            			    .'&userDataFields='.$userDataFieldNames;
 
-   			    $url = $url . empty($strConfigFileName) ? '' : $strConfigFileName ;
+   			    $url = $url . empty($strConfigFileName) ? '' : '&configFileName='.$strConfigFileName ;
 
 				return $url;
 			} else {
