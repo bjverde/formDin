@@ -52,44 +52,6 @@ error_reporting(0);
 header("Content-type:text/xml");
 echo '<?xml version="1.0" encoding="iso-8859-1"?>';
 
-/**
- * Configura a conexão de banco. Se foi informado a constante ROOT_PATH vai
- * procurar o arquivo $configFileName informado via POST. Se não foi definida
- * a constante vai a configuração padrão do arquivo config_conexao.php
- *
- * @param String $configFileName 
- * @return TPDOConnectionObj
- */
-function getConfigBanco(String $configFileName) {
-	$tpdo = New TPDOConnectionObj(false);
-	if ( defined('ROOT_PATH') ) {
-		if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
-		$configFileNamePath = ROOT_PATH.DS.'includes'.DS.$configFileName;
-		if( !FileHelper::exists($configFileNamePath) ){
-			throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_ARRAY);
-		}
-		require_once $configFileNamePath;
-		$configArray = getConnectionArray();
-		$tpdo->connect(null,true,null,$configArray);
-	}else{
-		if ( !defined('BANCO') ) {
-			throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_GERAL);
-		}
-		$configArray= array(
-			'DBMS' => BANCO
-		   ,'PORT' => PORT
-		   ,'HOST' => HOST
-		   ,'DATABASE' => DATABASE
-		   ,'USERNAME' => USUARIO
-		   ,'PASSWORD' => SENHA
-		   ,'UTF8_DECODE' => 0
-	   );
-	   $tpdo->connect(null,true,null,$configArray);	
-	}
-	return $tpdo;
-}
-
-
 $debug=false;
 if( $debug ) {
 	print	'<tree id="0">';
@@ -160,7 +122,7 @@ if( preg_match('/\.PK\a?/i',$_REQUEST['tableName']) > 0 ) {
 	//$res = TPDOConnection::executeSql($sql);
 	//$res=null;
 
-	$tpdo = getConfigBanco($configFileName);
+	$tpdo = TPDOConnectionMultiBanco::getConfigBanco($configFileName);
 	$res = $tpdo->executeSql($sql);
 	if( $tpdo->getError() ) {
 		$res[$campoCodigo][] = 0;
