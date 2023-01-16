@@ -133,6 +133,7 @@ class TTreeView extends TControl
 	* @param mixed $mixFormSearchFields   -18:
 	* @param mixed $boolShowToolBar       -19: Se vai aparecer o treeView ou não
 	* @param mixed $startExpanded         -20: Se o treeView deve aparecer expandido ou não.
+    * @param mixed $strConfigFileName     -21: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 	
 	* @return TTreeView
 	*/
 	public function __construct( $strName=null
@@ -154,7 +155,8 @@ class TTreeView extends TControl
 	                           , $boolEnableTreeLines = null
 	                           , $mixFormSearchFields = null
 	                           , $boolShowToolBar = null
-	                           , $startExpanded = null)
+	                           , $startExpanded = null
+							   , $strConfigFileName = null)
 	{
 		$strName = is_null($strName) ? 'tree_'.$this->getRandomChars(3):$strName;
 		parent::__construct( 'div', $strName );
