@@ -47,6 +47,7 @@
  * http://localhost/formDin/appexemplo/?modulo=base/callbacks/treeView.php&ajax=1&parentField=COD_SUBORDINADO&childField=COD_UNIDADE_IBAMA&descField=NOM_UNIDADE_IBAMA&tableName=SIGER.PKG_UNIDADE_IBAMA.SEL_ARVORE_UNIDADE&_w_cod_unidade_inicial=10000
  */
 
+$configFileName = isset( $_REQUEST['configFileName'] ) ? $_REQUEST['configFileName'] : null; // nome arquivo de config de banco
 
 error_reporting(0);
 header("Content-type:text/xml");
