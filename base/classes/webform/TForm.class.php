@@ -7352,6 +7352,7 @@ class TForm Extends TBox
     * @param mixed $mixFormSearchFields   -21:
     * @param mixed $boolShowToolBar       -22: Se vai aparecer o treeView ou não
     * @param mixed $startExpanded         -23: Se o TreeView deve iniciar expandido ou não
+    * @param mixed $strConfigFileName     -24: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
     * @return TTreeView
     */
     public function addTreeField( $strName
@@ -7378,6 +7379,7 @@ class TForm Extends TBox
                                , $mixFormSearchFields=null
                                , $boolShowToolBar=null
                                , $startExpanded=null
+                               , $strConfigFileName = null
         )
     {
         $this->addJsFile( 'dhtmlx/dhtmlxcommon.js' );
@@ -7404,6 +7406,7 @@ class TForm Extends TBox
                              , $mixFormSearchFields
                              , $boolShowToolBar
                              , $startExpanded
+                             , $strConfigFileName
                             );
         $display = new TDisplayControl( $strLabel, $tree, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
         $this->addDisplayControl( $display );
