@@ -41,11 +41,6 @@
 
 class TPDOConnectionMultiBanco
 {
-
-    private $tpdo = null;
-  
-    
-
     /**
      * Configura a conexão de banco. Se foi informado a constante ROOT_PATH vai
      * procurar o arquivo $configFileName informado via POST. Se não foi definida
@@ -56,16 +51,7 @@ class TPDOConnectionMultiBanco
      */
     public static function getConfigBanco(String $configFileName) {
         $tpdo = New TPDOConnectionObj(false);
-        if ( defined('ROOT_PATH') ) {
-            if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
-            $configFileNamePath = ROOT_PATH.DS.'includes'.DS.$configFileName;
-            if( !FileHelper::exists($configFileNamePath) ){
-                throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_ARRAY);
-            }
-            require_once $configFileNamePath;
-            $configArray = getConnectionArray();
-            $tpdo->connect(null,true,null,$configArray);
-        }else{
+        if ( empty($configFileName) ) {
             if ( !defined('BANCO') ) {
                 throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_GERAL);
             }
@@ -78,7 +64,20 @@ class TPDOConnectionMultiBanco
                 ,'PASSWORD' => SENHA
                 ,'UTF8_DECODE' => 0
             );
-            $tpdo->connect(null,true,null,$configArray);	
+            $tpdo->connect(null,true,null,$configArray);
+        } else {
+            if ( !defined('ROOT_PATH') ) {
+                throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_ROOT_PATH);
+            }else{
+                if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
+                $configFileNamePath = ROOT_PATH.DS.'includes'.DS.$configFileName;
+                if( !FileHelper::exists($configFileNamePath) ){
+                    throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_ARRAY);
+                }
+                require_once $configFileNamePath;
+                $configArray = getConnectionArray();
+                $tpdo->connect(null,true,null,$configArray);
+            }
         }
         return $tpdo;
     }
