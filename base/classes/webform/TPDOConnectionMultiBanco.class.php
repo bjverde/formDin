@@ -51,7 +51,9 @@ class TPDOConnectionMultiBanco
      */
     public static function getConfigBanco(String $configFileName) {
         $tpdo = New TPDOConnectionObj(false);
-        if ( empty($configFileName) ) {
+		if( $configFileName == "null" ){
+			$tpdo->connect(null,true,null,null);
+		}elseif( $configFileName == null){
             if ( !defined('BANCO') ) {
                 throw new BadFunctionCallException(TMessage::ERROR_WHITOUT_CONFIG_GERAL);
             }
