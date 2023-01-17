@@ -102,28 +102,8 @@ function tableRecoverResult($bvars, $boolSearchAnyPosition, $arrUpdateFields, $s
 	$sql = tableRecoverCreateSql ( $bvars, $boolSearchAnyPosition, $arrUpdateFields ,$strSearchField ,$strTablePackageFuncion ,$trimText);
 	//impAutocomplete( $sql,true);return;
 
-	$res	=null;
-    if( !class_exists('TPDOConnectionObj') ) {
-		throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_TPDO_OBJ);
-		return;
-	} else {
-		$tpdo = New TPDOConnectionObj(false);
-		if( $configFileName == "null" ){
-			$tpdo->connect(null,true,null,null);
-		}elseif( $configFileName == null){
-			$tpdo->connect(null,true,null,null);
-		}else{
-			if ( !defined('ROOT_PATH') ) {
-				throw new BadFunctionCallException(TMessage::ERROR_AUTOCOMPLETE_WHITOUT_ROOT);
-				return;
-			}
-			if ( !defined('DS') ){ define ( 'DS', DIRECTORY_SEPARATOR ); }
-			require_once ROOT_PATH.DS.'includes'.DS.$configFileName;
-			$configArray = getConnectionArray();
-			$tpdo->connect(null,true,null,$configArray);
-		}
-		$res = $tpdo->executeSql($sql);
-	}
+	$tpdo = TPDOConnectionMultiBanco::getConfigBanco($configFileName);
+	$res  = $tpdo->executeSql($sql);
 	return $res;
 }
 
