@@ -77,6 +77,8 @@ class TTreeView extends TControl
   	private $tableName;
   	private $mixData;
 
+	private $configFileName;
+
 	/**
 	* Implementa Tree View
 	*
@@ -133,6 +135,7 @@ class TTreeView extends TControl
 	* @param mixed $mixFormSearchFields   -18:
 	* @param mixed $boolShowToolBar       -19: Se vai aparecer o treeView ou não
 	* @param mixed $startExpanded         -20: Se o treeView deve aparecer expandido ou não.
+    * @param mixed $strConfigFileName     -21: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 	
 	* @return TTreeView
 	*/
 	public function __construct( $strName=null
@@ -154,7 +157,8 @@ class TTreeView extends TControl
 	                           , $boolEnableTreeLines = null
 	                           , $mixFormSearchFields = null
 	                           , $boolShowToolBar = null
-	                           , $startExpanded = null)
+	                           , $startExpanded = null
+							   , $strConfigFileName = null)
 	{
 		$strName = is_null($strName) ? 'tree_'.$this->getRandomChars(3):$strName;
 		parent::__construct( 'div', $strName );
@@ -185,7 +189,8 @@ class TTreeView extends TControl
  		$this->SetChildFieldName($strChildFieldName);
  		$this->setDescFieldName($strDescFieldName);
  		$this->setUserDataFieldNames($mixUserDataFieldNames);
- 	    $this->setData();
+		$this->setConfigFileName($strConfigFileName);
+		$this->setData();
 	}
 
 	/**
@@ -215,6 +220,7 @@ class TTreeView extends TControl
    			    $descFieldName  = $this->getDescFieldName();
    			    $tableName      = $this->getTableName();
    			    $userDataFieldNames = $this->getUserDataFieldNames();
+				$strConfigFileName = $this->getConfigFileName();
 				if ( is_array( $userDataFieldNames ) ) {
 					$userDataFieldNames = implode( ',', $userDataFieldNames );
 				}
@@ -223,8 +229,9 @@ class TTreeView extends TControl
            			    .'&childField='.$childFieldName
            			    .'&descField='.$descFieldName
            			    .'&tableName='.$tableName
-           			    .'&userDataFields='.$userDataFieldNames;
-   			    return $url;
+           			    .'&userDataFields='.$userDataFieldNames
+						.'&configFileName='.$strConfigFileName ;
+				return $url;
 			} else {
 				$this->addItem(0,1,'Arquivo '.$xmlFile.' não encontrado!', true, '' );
 			}
@@ -841,6 +848,15 @@ class TTreeView extends TControl
 	{
 		return $this->userDataFieldNames;
 	}
+	public function getConfigFileName()
+	{
+		return $this->configFileName;
+	}
+	public function setConfigFileName($strConfigFileName=null)
+	{
+		$this->configFileName = $strConfigFileName;
+	}
+
 	public function getXml($print=false)
 	{
 	  	if( !$this->itens  ) {
