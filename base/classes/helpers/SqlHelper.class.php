@@ -130,7 +130,7 @@ class SqlHelper
     }
     //----------------------------------------
     public static function transformValidateString( $string )
-    {        
+    {
         if ( self::getDbms() == DBMS_MYSQL ) {
             //$string = addslashes($string);
             //$patterns = '/(%)/';
@@ -156,7 +156,11 @@ class SqlHelper
      */
     public static function explodeTextString( $string )
     {
-        $dataBaseWithLike = (self::getDbms() == DBMS_MYSQL) || (self::getDbms() == DBMS_POSTGRES) || (self::getDbms() == DBMS_SQLITE) || (self::getDbms() == DBMS_SQLSERVER);
+        $dbms = self::getDbms();
+        $dataBaseWithLike = ($dbms == DBMS_MYSQL) 
+                         || ($dbms == DBMS_POSTGRES)
+                         || ($dbms == DBMS_SQLITE)
+                         || ($dbms == DBMS_SQLSERVER);
         if ( $dataBaseWithLike && !is_null($string) ) {
             $string = trim($string);
             $string = preg_replace('/\s/', '%', $string);
@@ -323,9 +327,9 @@ class SqlHelper
      * @param string  $stringWhere     1: Existing SQL String that will be concatenated
      * @param array   $arrayWhereGrid  2: array with all attributes and values
      * @param string  $attribute       3: name of the attribute to be verified
-     * @param string  $type            4:
+     * @param string  $type            4: Type of clauses
      * @param boolean $testZero        5: 
-     * @param string  $connector       6:
+     * @param string  $connector       6: Connector self::SQL_CONNECTOR_AND or self::SQL_CONNECTOR_OR
      * @return string
      */
     public static function getAtributeWhereGridParameters( $stringWhere

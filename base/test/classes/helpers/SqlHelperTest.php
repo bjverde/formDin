@@ -454,7 +454,7 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	public function testGetAtributeWhereGridParameters_TextLike_1word() {
-	    $expected = EOL.' AND 1WORD like \'%blablabla%\' ';
+	    $expected = EOL.' AND 1WORD like \'%blablabla%\' COLLATE Latin1_General_CI_AI';
 	    $where = null;
 	    $whereGrid = self::getWhereGrid();
 	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '1WORD', SqlHelper::SQL_TYPE_TEXT_LIKE);
@@ -462,7 +462,7 @@ class SqlHelperTest extends TestCase
 	}
 	//--------------------------------------------------------------------------------
 	public function testGetAtributeWhereGridParameters_TextLike_5word() {
-	    $expected = EOL.' AND 5WORD like \'%aaa%bbb%ccc%ddd%eee%\' ';
+	    $expected = EOL.' AND 5WORD like \'%aaa%bbb%ccc%ddd%eee%\' COLLATE Latin1_General_CI_AI';
 	    $where = null;
 	    $whereGrid = self::getWhereGrid();
 	    $result = SqlHelper::getAtributeWhereGridParameters($where, $whereGrid, '5WORD', SqlHelper::SQL_TYPE_TEXT_LIKE);

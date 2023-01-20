@@ -183,10 +183,8 @@ class TGrid extends TTable
         $this->setOnDrawActionButton( $strOnDrawActionButton );
         $this->setUpdateFields( is_null( $mixUpdateFields ) ? $strKeyField : $mixUpdateFields );
         $this->setMaxRows( $intMaxRows );
-        if( isset( $_REQUEST[ 'modulo' ] ) )
-        {
-            $this->setUrl( ( is_null( $strRequestUrl ) ? $_REQUEST[ 'modulo' ] : $strRequestUrl ) );
-            
+        if( isset( $_REQUEST[ 'modulo' ] ) ){
+            $this->setUrl( ( is_null( $strRequestUrl ) ? $_REQUEST[ 'modulo' ] : $strRequestUrl ) );            
         }
         $this->setExportExcel( true );
         $this->setSortable( true ); // permitir ordernar clicando no titulo da coluna

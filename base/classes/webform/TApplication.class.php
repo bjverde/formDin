@@ -51,8 +51,8 @@ require_once $dirClasses.'..'.DS.'vendor/autoload.php';   //Composer
 require_once 'autoload_formdin.php';
 
 //FPDF
-define( 'FPDF_FONTPATH', $dirClasses.'..'.DS.'lib_fpdf184/font/' ); //Constante usada pela FPDF
-require_once $dirClasses.'..'.DS.'lib_fpdf184/fpdf.php';            //FPDF
+define( 'FPDF_FONTPATH', $dirClasses.'..'.DS.'lib_fpdf185/font/' ); //Constante usada pela FPDF
+require_once $dirClasses.'..'.DS.'lib_fpdf185/fpdf.php';            //FPDF
 
 class TApplication extends TLayout {
 	private $strTitle;
@@ -112,8 +112,8 @@ class TApplication extends TLayout {
 		if( !empty($charSet) ){
 			throw new InvalidArgumentException('ERRO !! remova o parametro $charSet');
 		}		
-		ini_set ( 'xdebug.max_nesting_level', 150 );
-		date_default_timezone_set ( 'America/Sao_Paulo' );
+		ini_set( 'xdebug.max_nesting_level', 150 );
+		date_default_timezone_set( 'America/Sao_Paulo' );
 		
 		$this->includePathDao();
 		$this->includePathClasses();
