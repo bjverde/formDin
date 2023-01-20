@@ -51,7 +51,7 @@ use PHPUnit\Framework\TestCase;
 class StringHelperTest extends TestCase
 {
     const STRING_ORIGIN = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';
-
+	
     public function testStr2Lower_nochange() {
         $expected = 'você deve ter recebido uma cópia da gnu lgpl versão 3';
 		$result = StringHelper::strtolower_utf8($expected) ;		
@@ -74,8 +74,8 @@ class StringHelperTest extends TestCase
         $expected = 'VOCÊ DEVE TER RECEBIDO UMA CÓPIA DA GNU LGPL VERSÃO 3';
 		$result = StringHelper::strtoupper_utf8(self::STRING_ORIGIN) ;		
 		$this->assertEquals( $expected , $result );
-	}	
-	
+	}
+
     public function testStr2utf8_notUtf8ISO88591() {
         $str = self::STRING_ORIGIN;
 		$str = mb_convert_encoding($str, "ISO-8859-1");
@@ -95,7 +95,7 @@ class StringHelperTest extends TestCase
 	    $this->assertEquals( self::STRING_ORIGIN ,$str);
 	    $this->assertEquals( 'UTF-8' , $result);
 	}
-	
+
 	/*
 	public function testStr2utf8_notUtf8CP850() {
 	    $str = self::STRING_ORIGIN;
@@ -107,7 +107,7 @@ class StringHelperTest extends TestCase
 	    $this->assertEquals( 'UTF-8' , $result);
 	}
 	*/
-	
+
 	public function testStr2utf8_Decode() {
 	    $str = self::STRING_ORIGIN;
 	    $str = utf8_decode($str);
@@ -165,12 +165,232 @@ class StringHelperTest extends TestCase
 		$result = StringHelper::formatPhoneNumber('12345678') ;		
 		$this->assertEquals( $expected , $result );
 	}
+	//-------------------------------------------------------------
+	public function testIsNumeroBrasil_12() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('12');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_12Centavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('12,34');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_12milSemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('12.123');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_12milCemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('12.123,56');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_BilhõesCemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('20.123.456.789,56');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_null() {
+        $expected = false;
+		$result = StringHelper::is_numeroBrasil(null);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_maria() {
+        $expected = false;
+		$result = StringHelper::is_numeroBrasil('maria');
+		$this->assertEquals( $expected , $result );
+	}
+	//Expressão regular não ficou bem feita
+	public function testIsNumeroBrasil_eua12() {
+        $expected = true;
+		$result = StringHelper::is_numeroBrasil('12.00');
+		$this->assertEquals( $expected , $result );
+	}	
+	public function testIsNumeroBrasil_eua12Mil() {
+        $expected = false;
+		$result = StringHelper::is_numeroBrasil('12,000.00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_euaMilhoes() {
+        $expected = false;
+		$result = StringHelper::is_numeroBrasil('123,456,789.99');
+		$this->assertEquals( $expected , $result );
+	}
+	//-------------------------------------------------------------
+	public function testIsNumero_12() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('12');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_12Centavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroEua('12.34');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_12milSemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroEua('12.123');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_12milCemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroEua('12,123.56');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_BilhõesCemCentavos() {
+        $expected = true;
+		$result = StringHelper::is_numeroEua('20,123,456,789.56');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_null() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua(null);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_maria() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('maria');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroEua_br12Centavos() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('12,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_brSimples() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('12345678,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_br12Mil() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('12.000,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testIsNumeroBrasil_nrMilhoes() {
+        $expected = false;
+		$result = StringHelper::is_numeroEua('123.456.789,99');
+		$this->assertEquals( $expected , $result );
+	}
+	//-------------------------------------------------------------
+	public function testNumeroBrasil_stringEua12Mil() {
+        $expected = '12.000,00';
+		$result = StringHelper::numeroBrasil('12,000.00');
+		$this->assertEquals( $expected , $result );
+	}	
+	public function testNumeroBrasil_stringBr12Mil() {
+        $expected = '12.000,00';
+		$result = StringHelper::numeroBrasil('12.000,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_stringSimples() {
+        $expected = '12.345.678,00';
+		$result = StringHelper::numeroBrasil('12345678');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_stringBrasil() {
+        $expected = '12.345.678,00';
+		$result = StringHelper::numeroBrasil('12345678,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_stringEua() {
+        $expected = '12.345.678,00';
+		$result = StringHelper::numeroBrasil('12345678.00');
+		$this->assertEquals( $expected , $result );
+	}		
+	public function testNumeroBrasil_number() {
+        $expected = '12.345.678,00';
+		$result = StringHelper::numeroBrasil(12345678);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_text() {
+        $expected = null;
+		$result = StringHelper::numeroBrasil('maria');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_12Int() {
+        $expected = '12,00';
+		$result = StringHelper::numeroBrasil(12);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_12String() {
+        $expected = '12,00';
+		$result = StringHelper::numeroBrasil('12');
+		$this->assertEquals( $expected , $result );
+	}	
+	public function testNumeroBrasil_ZeroInt() {
+        $expected = '0,00';
+		$result = StringHelper::numeroBrasil(0);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroBrasil_ZeroString() {
+        $expected = '0,00';
+		$result = StringHelper::numeroBrasil('0');
+		$this->assertEquals( $expected , $result );
+	}
+	//-------------------------------------------------------------
+	public function testNumeroEua_stringEua12Mil() {
+        $expected = '12,000.00';
+		$result = StringHelper::numeroEua('12,000.00');
+		$this->assertEquals( $expected , $result );
+	}	
+	public function testNumeroEua_stringBr12Mil() {
+        $expected = '12,000.00';
+		$result = StringHelper::numeroEua('12.000,00');
+		$this->assertEquals( $expected , $result );
+	}	
+	public function testNumeroEua_stringSimples() {
+        $expected = '12,345,678.00';
+		$result = StringHelper::numeroEua('12345678');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_stringBrasil() {
+        $expected = '12,345,678.00';
+		$result = StringHelper::numeroEua('12345678,00');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_stringEua() {
+        $expected = '12,345,678.00';
+		$result = StringHelper::numeroEua('12345678.00');
+		$this->assertEquals( $expected , $result );
+	}		
+	public function testNumeroEua_number() {
+        $expected = '12,345,678.00';
+		$result = StringHelper::numeroEua(12345678);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_text() {
+        $expected = null;
+		$result = StringHelper::numeroEua('maria');
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_12Int() {
+        $expected = '12.00';
+		$result = StringHelper::numeroEua(12);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_12String() {
+        $expected = '12.00';
+		$result = StringHelper::numeroEua('12');
+		$this->assertEquals( $expected , $result );
+	}		
+	public function testNumeroEua_ZeroInt() {
+        $expected = '0.00';
+		$result = StringHelper::numeroEua(0);
+		$this->assertEquals( $expected , $result );
+	}
+	public function testNumeroEua_ZeroString() {
+        $expected = '0.00';
+		$result = StringHelper::numeroEua('0');
+		$this->assertEquals( $expected , $result );
+	}
 	//-------------------------------------------------------------------------
     public function testTirarAcentos_test1() {
         $expected = 'Voce deve ter recebido uma copia da GNU LGPL versao 3';
 		$result = StringHelper::tirarAcentos(self::STRING_ORIGIN);		
 		$this->assertEquals( $expected , $result );
-	}
+	}	
 	public function testTirarAcentos_test2() {
         $expected = 'acao ACAO Nao nAo';
 		$result = StringHelper::tirarAcentos('ação AÇÃO Não nÃo');
@@ -213,7 +433,7 @@ class StringHelperTest extends TestCase
 		$result = StringHelper::removeEspacoBranco('acao ACAO Nao nAo') ;		
 		$this->assertEquals( $expected , $result );
 	}
-	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------		
 	public function testString2PascalCase() {
         $expected = 'AcaoDeletarMao';
 		$result = StringHelper::string2PascalCase('ação deLEtar MÃO') ;		
