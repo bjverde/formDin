@@ -7348,11 +7348,11 @@ class TForm Extends TBox
     * @param mixed $strLabel              -18:
     * @param mixed $boolLabelAbove        -19:
     * @param mixed $boolNewLine           -20: boolNewLine
-    * @param mixed $boolNoWrapLabel       -20: boolNoWrapLabel
-    * @param mixed $mixFormSearchFields   -21:
-    * @param mixed $boolShowToolBar       -22: Se vai aparecer o treeView ou não
-    * @param mixed $startExpanded         -23: Se o TreeView deve iniciar expandido ou não
-    * @param mixed $strConfigFileName     -24: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+    * @param mixed $boolNoWrapLabel       -21: boolNoWrapLabel
+    * @param mixed $mixFormSearchFields   -22:
+    * @param mixed $boolShowToolBar       -23: Se vai aparecer o treeView ou não
+    * @param mixed $startExpanded         -24: Se o TreeView deve iniciar expandido ou não
+    * @param mixed $strConfigFileName     -25: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
     * @return TTreeView
     */
     public function addTreeField( $strName
@@ -7557,24 +7557,25 @@ class TForm Extends TBox
     }
            
     /**
-    * Adiciona um editor de texto (CKEDITOR)
-    * @author Daniel Andrade
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
-    * @param boolean $boolNewLine
-    * @param boolean $boolLabelAbove
-    * @param string $strValue
-    * @param boolean $boolNoWrapLabel
+    * Adiciona um campo do tipo texto rico, com ckeditor 5
+    * @author Daniel Andrade autor da primeira versão
+    *
+    * @param string  $strName         -01: ID do campo
+    * @param string  $strLabel        -02: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired    -03: True = Obrigatório; False (Defalt) = Não Obrigatório
+    * @param boolean $boolNewLine     -04: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+    * @param boolean $boolLabelAbove  -05: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
+    * @param string  $strValue        -06:
+    * @param boolean $boolNoWrapLabel -07:
     * @return TTextEditor
     */
     public function addTextEditorField( $strName
-    	                             , $strLabel=null
-    	                             , $boolRequired=null
-    	                             , $boolNewLine=null
-    	                             , $strValue=null
-    	                             , $boolLabelAbove=null
-    	                             , $boolNoWrapLabel=true )
+    	                              , $strLabel=null
+    	                              , $boolRequired=null
+    	                              , $boolNewLine=null
+    	                              , $strValue=null
+    	                              , $boolLabelAbove=null
+    	                              , $boolNoWrapLabel=true )
     {
        $field = new TTextEditor( $strName
        		                   , $strValue
