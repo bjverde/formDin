@@ -48,7 +48,25 @@ class TTextEditor extends TMemo
 	private $onlineSearch;
 	private $resizeEnabled;
 
-	public function __construct(string $strName,string $strValue=null,$intMaxLength,$boolRequired=null,$intColumns=null,$intRows=null,$boolShowCounter=null)
+	/**
+     * Adiciona um campo do tipo texto rico, com ckeditor 5
+	 *
+	 * @param string $strName        -01: ID do campo
+	 * @param string|null $strValue  -02: Valor inicial do campo
+	 * @param [type] $intMaxLength   -03:
+	 * @param [type] $boolRequired   -04: True = Obrigatório; False (Defalt) = Não Obrigatório
+	 * @param [type] $intColumns     -05:
+	 * @param [type] $intRows        -06:
+	 * @param [type] $boolShowCounter-07: True = Obrigatório; False (Defalt) = Não Obrigatório
+	 */
+	public function __construct(string $strName
+	                           ,string $strValue=null
+							   ,$intMaxLength
+							   ,$boolRequired=null
+							   ,$intColumns=null
+							   ,$intRows=null
+							   ,$boolShowCounter=null
+							   )
 	{
 		parent::__construct($strName,$strValue,$intMaxLength,$boolRequired,$intColumns,$intRows,$boolShowCounter);
 		parent::setFieldType('textEditor');
