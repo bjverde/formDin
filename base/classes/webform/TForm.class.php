@@ -3852,30 +3852,20 @@ class TForm Extends TBox
       */
      public function addJsFile( $mixJsFile=null,$addOnTop=null )
      {
-         if( is_null( $mixJsFile) || ( is_string( $mixJsFile ) && trim( $mixJsFile ) == '' ) )
-         {
+         if( is_null( $mixJsFile) || ( is_string( $mixJsFile ) && trim( $mixJsFile ) == '' ) ) {
              return;
          }
-         if( is_array( $mixJsFile ) )
-         {
-             foreach( $mixJsFile as $k=>$file )
-             {
-                 if( $file )
-                 {
+         if( is_array( $mixJsFile ) ) {
+             foreach( $mixJsFile as $k=>$file ) {
+                 if( $file ) {
                      $this->addJsFile( $file,$addOnTop );
                  }
              }
-         }
-         else if( !is_array( $this->jsFiles ) || array_search( $mixJsFile, $this->jsFiles, true ) === false )
-         {
-             if( trim( $mixJsFile ) != '' )
-             {
-                 if( $addOnTop )
-                 {
+         } else if( !is_array( $this->jsFiles ) || array_search( $mixJsFile, $this->jsFiles, true ) === false ) {
+             if( trim( $mixJsFile ) != '' ) {
+                 if( $addOnTop ) {
                      array_unshift($this->jsFiles,$mixJsFile);
-                 }
-                 else
-                 {
+                 } else {
                      $this->jsFiles[ ] = $mixJsFile;
                  }
              }
