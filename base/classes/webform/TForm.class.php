@@ -7583,10 +7583,11 @@ class TForm Extends TBox
        		                   , $boolRequired
                                , null
                                , null, false );
-       $field->setClass( 'ckeditor' );
-       $this->addJsFile('ckeditor/ckeditor.js');
-       $this->addJsFile('ckeditor/translations/pt-br.js');
+       $field->setClass('ckeditor');
+       $this->addJsFile('https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js');
+       //$this->addJsFile('ckeditor/ckeditor.js');
        //$this->addJsFile('ckeditor/translations/pt-br.js');
+       //$this->addJsFile('ckeditor/ckeditor5_config.js');
        $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
        $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
        $this->addDisplayControl( $display );
