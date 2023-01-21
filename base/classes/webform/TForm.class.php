@@ -7565,7 +7565,7 @@ class TForm Extends TBox
     * @param boolean $boolRequired    -03: True = Obrigatório; False (Defalt) = Não Obrigatório
     * @param boolean $boolNewLine     -04: TRUE = new line, FALSE = same line, DEFAULT ou NULL = FALSE
     * @param boolean $boolLabelAbove  -05: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
-    * @param string  $strValue        -06: (NÃO implemntado) Valor inicial do campo
+    * @param string  $strValue        -06: Valor inicial do campo
     * @param boolean $boolNoWrapLabel -07:
     * @return TTextEditor
     */
@@ -7580,7 +7580,9 @@ class TForm Extends TBox
        $field = new TTextEditor( $strName
        		                   , $strValue
        		                   , null
-       		                   , $boolRequired, null, null, false );
+       		                   , $boolRequired
+                               , null
+                               , null, false );
        $field->setClass( 'ckeditor' );
        $this->addJsFile('ckeditor/ckeditor.js');
        $this->addJsFile('ckeditor/translations/pt-br.js');
