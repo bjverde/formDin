@@ -7555,7 +7555,7 @@ class TForm Extends TBox
        $this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );
        return $field;
     }
-           
+      
     /**
     * Adiciona um campo do tipo texto rico, com ckeditor 5
     * @author Daniel Andrade autor da primeira versão
@@ -7563,9 +7563,9 @@ class TForm Extends TBox
     * @param string  $strName         -01: ID do campo
     * @param string  $strLabel        -02: Rotulo do campo que irá aparece na tela
     * @param boolean $boolRequired    -03: True = Obrigatório; False (Defalt) = Não Obrigatório
-    * @param boolean $boolNewLine     -04: Default TRUE = campo em nova linha, FALSE continua na linha anterior
+    * @param boolean $boolNewLine     -04: TRUE = new line, FALSE = same line, DEFAULT ou NULL = FALSE
     * @param boolean $boolLabelAbove  -05: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
-    * @param string  $strValue        -06:
+    * @param string  $strValue        -06: (NÃO implemntado) Valor inicial do campo
     * @param boolean $boolNoWrapLabel -07:
     * @return TTextEditor
     */
@@ -7582,14 +7582,15 @@ class TForm Extends TBox
        		                   , null
        		                   , $boolRequired, null, null, false );
        $field->setClass( 'ckeditor' );
-       $field->setCss('height','0px');
        $this->addJsFile('ckeditor/ckeditor.js');
+       $this->addJsFile('ckeditor/translations/pt-br.js');
+       //$this->addJsFile('ckeditor/translations/pt-br.js');
        $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
        $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
        $this->addDisplayControl( $display );
        return $field;
     }
-           
+  
    /**
     * Criação de campo calendário de eventos tipo agenda
     * http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
