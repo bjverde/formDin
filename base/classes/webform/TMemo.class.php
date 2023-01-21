@@ -72,8 +72,7 @@ class TMemo extends TEdit
 		$this->addEvent('onBlur','fwRemoverCaractere(this,13);this.onkeyup();');
 
 		// se for para mostrar o contador de caracteres, criar um div externo
-		if($this->getShowCounter())
-		{
+		if($this->getShowCounter()){
 			$divId = $this->getId().'_div';
 			$div = new TDiv($divId);
 			$div->setCss('display','inline');
@@ -90,9 +89,7 @@ class TMemo extends TEdit
 			$script->add('fwGetObj("'.$this->getId().'").onkeyup();');
 			$div->add($script);
 			return $div->show($print);
-		}
-		else
-		{
+		}else{
 			return parent::show($print).$this->getOnlineSearch();
 		}
 	}
