@@ -25,3 +25,4 @@ phpunit-code-coverage/*
 /spu/
 /appev2/
 base/test/.phpunit.result.cache
+caderno_revit/
