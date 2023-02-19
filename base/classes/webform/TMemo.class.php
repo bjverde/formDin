@@ -47,6 +47,18 @@ class TMemo extends TEdit
 {
 	private $showCounter;
 	private $onlineSearch;
+
+	/**
+	 * Adicionar campo de entrada de texto com multiplas linhas ( memo ) equivalente ao html textarea
+	 *
+	 * @param string $strName           - 1: ID do campo
+	 * @param string|null $strValue     - 2: Label do campo
+	 * @param [type] $intMaxLength
+	 * @param [type] $boolRequired
+	 * @param [type] $intColumns
+	 * @param [type] $intRows
+	 * @param [type] $boolShowCounter
+	 */
 	public function __construct(string $strName
 							   ,string $strValue=null
 							   ,$intMaxLength
