@@ -42,10 +42,10 @@ d($_REQUEST);
 
 $frm = new TForm('Exemplo do Campo Editor com CkEditor', 500);
 
-$frm->addTextEditorField('fld_texto', 'Descrição:', false, true);
+$frm->addTextEditorField('textorico', 'Descrição:', false, true);
 
-echo 'Valor do Campo: fld_texto =<br>';
-$valorCampo = $frm->get('fld_texto');
+echo 'Valor do Campo: textorico =<br>';
+$valorCampo = $frm->get('textorico');
 if( empty($valorCampo) ){
     var_dump($valorCampo);
 }else{
