@@ -1331,7 +1331,8 @@ class TGrid extends TTable
     //------------------------------------------------------------------------------------
     public function getColumn( $strColumnName )
     {
-        $strColumnName = strtolower( $strColumnName );        
+        $strColumnName = strtoupper( $strColumnName );
+        //$strColumnName = strtolower( $strColumnName );
         if ( isset( $this->columns[ $strColumnName ] ) ){
             return $this->columns[ $strColumnName ];
         }
