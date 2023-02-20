@@ -101,7 +101,10 @@ class TCoordGMS extends TGroup
 		$strSymbols = is_null($strSymbols) ? "°,',\"" : $strSymbols;
 		$strLabels = is_null($strSymbols) ? ",," : $strLabels;
 		$intSymbolsFontSize = is_null($intSymbolsFontSize) ? "18" : $intSymbolsFontSize;
-		$labels = explode(',', $strLabels);
+		$labels = null;
+		if(!empty($strLabels)){
+			$labels = explode(',', $strLabels);
+		}
 		$labels[0] = isset($labels[0]) ? $labels[0] : '';
 		$labels[1] = isset($labels[1]) ? $labels[1] : '';
 		$labels[2] = isset($labels[2]) ? $labels[2] : '';
