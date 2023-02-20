@@ -97,7 +97,37 @@ class TTextEditor extends TMemo
 		ClassicEditor
 		.create( document.querySelector( '#$id' ), {
 			language: 'pt-br'
-			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+			,toolbar: {
+				items: [ 'restrictedEditingException','findAndReplace'
+						,'|','heading','style'
+						,'|','bold','italic','underline','strikethrough','specialCharacters','link','subscript','superscript'
+						,'|','bulletedList','numberedList','todoList'
+						,'|','alignment','outdent','indent'
+						,'|','blockQuote','insertTable','mediaEmbed','undo','redo',
+						,'-','removeFormat','fontSize','highlight','fontBackgroundColor','fontColor','fontFamily'
+						,'|','imageUpload','imageInsert'
+						,'|','pageBreak','htmlEmbed','sourceEditing','code','codeBlock','textPartLanguage' ]
+				,shouldNotGroupWhenFull: true
+			}
+			,image: {
+				toolbar: [
+					'imageTextAlternative',
+					'toggleImageCaption',
+					'imageStyle:inline',
+					'imageStyle:block',
+					'imageStyle:side',
+					'linkImage'
+				]
+			}
+			,table: {
+				contentToolbar: [
+					'tableColumn',
+					'tableRow',
+					'mergeTableCells',
+					'tableCellProperties',
+					'tableProperties'
+				]
+			}			
 		} )
 		.then( editor => {
 			window.editor = editor;
