@@ -139,7 +139,19 @@ class StringHelper
     {
         $string = self::convert_encoding($string,'ISO-8859-1','UTF-8');
         return $string;
-    }    
+    }
+
+    /**
+     * Tranforma um string UTF8 para windows-1252, criada para melhorar compatibilidade com PHP 8.2
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function utf8_decode_windows1252($string)
+    {
+        $string = self::convert_encoding($string,'windows-1252','UTF-8');
+        return $string;
+    }     
     
     /**
      * Converte uma string com enconding destino e enconding de origem
