@@ -792,9 +792,8 @@ class TCoordGMS extends TGroup
 	public function getMapType()
 	{
 		$aTypes = array('ROADMAP','SATELLITE','TERRAIN','HYBRID');
-		if( in_array( strtoupper($this->mapType), $aTypes ) )
-		{
-		 	return strtolower( $this->mapType );
+		if( in_array( StringHelper::strtoupper($this->mapType), $aTypes ) ){
+		 	return StringHelper::strtolower( $this->mapType );
 		}
 		return 'roadmap';
 	}
