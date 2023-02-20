@@ -98,7 +98,11 @@ class TTextEditor extends TMemo
 	}
 
 	public function getValue() {
-		return str_replace(chr(147), '"', parent::getValue()); //substitui aspas erradas pelas corretas
+		$result = '';
+		if(!empty(parent::getValue())){
+			$result = str_replace(chr(147), '"', parent::getValue());
+		}
+		return $result; //substitui aspas erradas pelas corretas
 	}
 
 }
