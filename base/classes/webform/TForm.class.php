@@ -7547,7 +7547,7 @@ class TForm Extends TBox
     }
       
     /**
-    * Adiciona um campo do tipo texto rico, com ckeditor 5
+    * Adiciona um campo do tipo texto rico, com CkEditor 5
     * @author Daniel Andrade autor da primeira versão
     *
     * @param string  $strName         -01: ID do campo
@@ -7575,8 +7575,11 @@ class TForm Extends TBox
                                , null
                                , false );
        $field->setClass('ckeditor');
-       $this->addJsFile('ckeditor/ckeditor5-build-classic-36.0.1/ckeditor.js');
-       $this->addJsFile('ckeditor/ckeditor5-build-classic-36.0.1/translations/pt-br.js');
+       $this->addCssFile('ckeditor5.css');
+       //$this->addJsFile('ckeditor/ckeditor5-36.0.1-custom/ckeditor.js');
+       //$this->addJsFile('ckeditor/ckeditor5-36.0.1-custom/translations/pt-br.js');
+       $this->addJsFile('ckeditor/ckeditor5-36.0.1-classic/ckeditor.js');
+       $this->addJsFile('ckeditor/ckeditor5-36.0.1-classic/translations/pt-br.js');
        $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
        $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
        $this->addDisplayControl( $display );
