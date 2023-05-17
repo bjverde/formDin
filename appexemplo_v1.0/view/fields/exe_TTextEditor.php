@@ -45,7 +45,12 @@ $frm = new TForm('Exemplo do Campo Editor com CkEditor', 500);
 $frm->addTextEditorField('fld_texto', 'Descrição:', false, true);
 
 echo 'Valor do Campo: fld_texto =<br>';
-echo htmlspecialchars($frm->get('fld_texto'));
+$valorCampo = $frm->get('fld_texto');
+if( empty($valorCampo) ){
+    var_dump($valorCampo);
+}else{
+    echo htmlspecialchars($valorCampo);
+}
 
 $frm->setAction('POST PAGINA');
 $frm->show();
