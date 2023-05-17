@@ -817,40 +817,27 @@ class TElement
             }
         }
         return $this;
-    }
-    
+    }    
     //---------------------------------------------------------------------
     public function setName( $newName )
     {
-        $this->name = $this->removeIllegalChars( $newName, '[]' );
-        
+        $this->name = $this->removeIllegalChars( $newName, '[]' );        
         // se o nome não possuir colchetes, dos campos multivalorados, igualar ao id
-        if ( !$this->id )
-        {
+        if ( !$this->id ){
             $this->id = $this->removeIllegalChars( $newName);
         }
         return $this;
-        /*
-         if( !strpos($this->name,'['))
-         {
-         $this->id	= $this->removeIllegalChars($newName);
-         }
-         */
-        
-    }
-    
+    }    
     //---------------------------------------------------------------------
     public function getName()
     {
         return $this->name;
-    }
-    
+    }    
     //---------------------------------------------------------------------
     public function getId()
     {
         return $this->id;
-    }
-    
+    }    
     //---------------------------------------------------------------------
     public function clearCss()
     {

@@ -3852,30 +3852,20 @@ class TForm Extends TBox
       */
      public function addJsFile( $mixJsFile=null,$addOnTop=null )
      {
-         if( is_null( $mixJsFile) || ( is_string( $mixJsFile ) && trim( $mixJsFile ) == '' ) )
-         {
+         if( is_null( $mixJsFile) || ( is_string( $mixJsFile ) && trim( $mixJsFile ) == '' ) ) {
              return;
          }
-         if( is_array( $mixJsFile ) )
-         {
-             foreach( $mixJsFile as $k=>$file )
-             {
-                 if( $file )
-                 {
+         if( is_array( $mixJsFile ) ) {
+             foreach( $mixJsFile as $k=>$file ) {
+                 if( $file ) {
                      $this->addJsFile( $file,$addOnTop );
                  }
              }
-         }
-         else if( !is_array( $this->jsFiles ) || array_search( $mixJsFile, $this->jsFiles, true ) === false )
-         {
-             if( trim( $mixJsFile ) != '' )
-             {
-                 if( $addOnTop )
-                 {
+         } else if( !is_array( $this->jsFiles ) || array_search( $mixJsFile, $this->jsFiles, true ) === false ) {
+             if( trim( $mixJsFile ) != '' ) {
+                 if( $addOnTop ) {
                      array_unshift($this->jsFiles,$mixJsFile);
-                 }
-                 else
-                 {
+                 } else {
                      $this->jsFiles[ ] = $mixJsFile;
                  }
              }
@@ -7451,7 +7441,7 @@ class TForm Extends TBox
      * @param mixed $strDataType - define o conteudo que será carregado. Ex: image, ajax
      * @param mixed $strLabel - rótulo do campo
      * @param mixed $strImage - imagem que aparecerá na frente do label
-     * @param bool $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
+     * @param bool  $boolNewLine - true ou false se o campo será colocado na frente ou abaixo do último campo adicionado ao formulário
      * @param mixed $boolLabelAbove - true ou false para alterar o layout do rótulo para cima ou na frente da imagem
      * @param mixed $boolNoWrapLabel - true ou false para quebrar ou não o valor do label se não couber na coluna do formulario
      * @param mixed $strHint - texto de ajuda que será exibido ao posicinar o mouse sobre a imagem
@@ -7516,11 +7506,11 @@ class TForm Extends TBox
     * @param string $strName
     * @param string $rootDir
     * @param string $strValue
-    * @param int $intMaxLength
-    * @param bool $boolRequired
-    * @param int $intSize
-    * @param bool $boolLabelAbove
-    * @param bool $boolNewLine
+    * @param int    $intMaxLength
+    * @param bool   $boolRequired
+    * @param int    $intSize
+    * @param bool   $boolLabelAbove
+    * @param bool   $boolNewLine
     * @return TOpenDir
     */
     public function addOpenDirField( $strName, $strLabel=null, $rootDir=null, $strValue=null
@@ -7536,16 +7526,16 @@ class TForm Extends TBox
     /**
     * Campo para seleção de fuso horário
     *
-    * @param string $strName
-    * @param string $strLabel
-    * @param boolean $boolRequired
-    * @param boolean $boolNewLine
-    * @param boolean $boolLabelAbove
-    * @param mixed $mixValue
-    * @param integer $intSize
-    * @param integer $intWidth
-    * @param string $strFirstOptionText
-    * @param string $strFirstOptionValue
+    * @param string  $strName         -01: 
+    * @param string  $strLabel        -02: 
+    * @param boolean $boolRequired    -03: 
+    * @param boolean $boolNewLine     -04: 
+    * @param boolean $boolLabelAbove  -05: 
+    * @param mixed   $mixValue        -06: 
+    * @param integer $intSize         -07: 
+    * @param integer $intWidth        -08: 
+    * @param string  $strFirstOptionText
+    * @param string  $strFirstOptionValue
     * @param boolean $boolNoWrapLabel
     * @return TTimeZone
     */
@@ -7557,7 +7547,7 @@ class TForm Extends TBox
     }
       
     /**
-    * Adiciona um campo do tipo texto rico, com ckeditor 5
+    * Adiciona um campo do tipo texto rico, com CkEditor 5
     * @author Daniel Andrade autor da primeira versão
     *
     * @param string  $strName         -01: ID do campo
@@ -7582,11 +7572,14 @@ class TForm Extends TBox
        		                   , null
        		                   , $boolRequired
                                , null
-                               , null, false );
-       $field->setClass( 'ckeditor' );
-       $this->addJsFile('ckeditor/ckeditor.js');
-       $this->addJsFile('ckeditor/translations/pt-br.js');
-       //$this->addJsFile('ckeditor/translations/pt-br.js');
+                               , null
+                               , false );
+       $field->setClass('ckeditor');
+       $this->addCssFile('ckeditor5.css');
+       //$this->addJsFile('ckeditor/ckeditor5-36.0.1-custom/ckeditor.js');
+       //$this->addJsFile('ckeditor/ckeditor5-36.0.1-custom/translations/pt-br.js');
+       $this->addJsFile('ckeditor/ckeditor5-36.0.1-classic/ckeditor.js');
+       $this->addJsFile('ckeditor/ckeditor5-36.0.1-classic/translations/pt-br.js');
        $boolLabelAbove = is_null($boolLabelAbove) ? true : $boolLabelAbove;
        $display = new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel );
        $this->addDisplayControl( $display );

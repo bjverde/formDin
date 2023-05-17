@@ -48,7 +48,11 @@ class TEdit extends TControl
 {
 	private $exampleText;
 
-	public function __construct($strName,$strValue=null,$intMaxLength=null,$boolRequired=null,$intSize=null)
+	public function __construct($strName
+	                           ,$strValue=null
+							   ,$intMaxLength=null
+							   ,$boolRequired=null
+							   ,$intSize=null)
 	{
 		parent::__construct('input',$strName,$strValue);
 		$this->setMaxLenght($intMaxLength);
@@ -73,20 +77,15 @@ class TEdit extends TControl
 			{
 				$this->setValue(str_replace(array('"'),array('“'),stripslashes($_GET[$strName])));
 			}
-		}
-		else
-		{
+		}else{
 			// tratamento quando o campo texto estiver no formato de array nome[1], nome[2]...
 			$name = preg_replace('/\[\]/','[1]',$this->getName()); // evitar erro dos campos array do TGrid
-	        if( preg_match('/\[/',$name) > 0 )
-			{
+	        if( preg_match('/\[/',$name) > 0 ){
 				$arrTemp = explode('[',$name);
-				if( isset($_POST[$arrTemp[0] ] ) )
-				{
+				if( isset($_POST[$arrTemp[0] ] ) ){
 					$post = '$_POST[\''.str_replace('[',"'][",$name).';';
 	 				@eval('$v=$_POST[\''.str_replace('[',"'][",$name).';');
-					if( !is_null( $v ) )
-					{
+					if( !is_null( $v ) ){
 						$this->setValue($v);
 					}
 				}
@@ -96,45 +95,34 @@ class TEdit extends TControl
 	//-------------------------------------------------------------------------------------
 	public function show($print=true)
 	{
-		if(!$this->getId())
-		{
+		if(!$this->getId()){
 			$this->setId( $this->removeIllegalChars($this->getName()));
 		}
-		if($this->getFieldType() !='hidden')
-		{
-			if( (int) $this->size==0 && (int)$this->maxlength > 0 )
-			{
+		if($this->getFieldType() !='hidden'){
+			if( (int) $this->size==0 && (int)$this->maxlength > 0 ){
 				$this->size = $this->maxlength;
 			}
-			if( (int) $this->size==0 )
-			{
+			if( (int) $this->size==0 ){
 				$this->size = null;
 			}
-			if( (int) $this->maxlength==0 )
-			{
+			if( (int) $this->maxlength==0 ){
 				$this->maxlength = null;
 			}
-			if( $this->getFieldType() != 'tag' && $this->getFieldType() != 'link')
-			{
+			if( $this->getFieldType() != 'tag' && $this->getFieldType() != 'link'){
 				$this->addEvent('onKeyUp','fwSetBordaCampo(this,false,event)');
 			}
-			if($this->getRequired()==true)
-			{
+			if($this->getRequired()==true){
 				// remover a borda de advertencia dos inputs
 				$this->addEvent('onBlur' ,'fwValidarObrigatorio(this)');
 			}
-			if($this->getExampleText())
-			{
+			if($this->getExampleText()){
 				$span = new TElement('span');
 				$span->setId($this->getId().'_exempleText');
 				$span->setClass('fwExampleText');
 				$span->add($this->getExampleText());
 				$this->add($span);
 			}
-
-		}
-		else
-		{
+		} else {
 			$this->clearCss();
 			$this->clearEvents();
 		}

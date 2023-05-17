@@ -91,28 +91,63 @@ class TTextEditor extends TMemo
 	}
 
 	public function show($print=true) {
-		if ($this->getResizeEnabled()) {
-//			$script=new TElement('<script>');
-//			$script->add('CKEDITOR.config.resize_enabled = false;');
-//			$script->show();
+		//CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+		$id = $this->getId();
+		$sck = <<<EOD
+		ClassicEditor
+		.create( document.querySelector( '#$id' ), {
+			language: 'pt-br'
+			,toolbar: {
+				items: [ 'restrictedEditingException','findAndReplace'
+						,'|','heading','style'
+						,'|','bold','italic','underline','strikethrough','specialCharacters','link','subscript','superscript'
+						,'|','bulletedList','numberedList','todoList'
+						,'|','alignment','outdent','indent'
+						,'|','blockQuote','insertTable','mediaEmbed','undo','redo',
+						,'-','removeFormat','fontSize','highlight','fontBackgroundColor','fontColor','fontFamily'
+						,'|','imageUpload','imageInsert'
+						,'|','pageBreak','htmlEmbed','sourceEditing','code','codeBlock','textPartLanguage' ]
+				,shouldNotGroupWhenFull: true
+			}
+			,image: {
+				toolbar: [
+					'imageTextAlternative',
+					'toggleImageCaption',
+					'imageStyle:inline',
+					'imageStyle:block',
+					'imageStyle:side',
+					'linkImage'
+				]
+			}
+			,table: {
+				contentToolbar: [
+					'tableColumn',
+					'tableRow',
+					'mergeTableCells',
+					'tableCellProperties',
+					'tableProperties'
+				]
+			}			
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+		EOD;	
 
-			$div = new TElement('div');
-			$div->setId($this->getId().'_div');
-			$div->add( parent::show(false).$this->getOnlineSearch());
-//			$counter = new TElement('span');
-//			$counter->setId($this->getId().'_counter');
-//			$counter->setCss('border','none');
-//			$counter->setCss('font-size','11');
-//			$counter->setCss('color','#00000');
-//			$div->add('<br>');
-//			$div->add($counter);
-			$script=new TElement('<script>');
-			$script->add('// comentario.');
-			$script->add('CKEDITOR.config.resize_enabled = false;');
-			$div->add($script);
-			return $div->show($print);
-		}
-		return parent::show($print).$this->getOnlineSearch();
+		$div = new TElement('div');
+		$div->setId($id.'_div');
+		$div->add( parent::show(false).$this->getOnlineSearch());
+		$script=new TElement('<script>');
+		$script->add('//Config Ckeditor 5 classic-36.0.1');
+		//$script->add('CKEDITOR.config.resize_enabled = false;');
+		$script->add($sck);
+		$div->add($script);
+		return $div->show($print);
+
+		//return parent::show($print).$this->getOnlineSearch();
 	}
 
 	public function getValue() {
