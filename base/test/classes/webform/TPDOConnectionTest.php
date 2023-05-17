@@ -376,7 +376,7 @@ class TPDOConnectionTest extends TestCase
 	    $this->TPDOConnection->setDBMS(DBMS_POSTGRES);
 	    $result = $this->TPDOConnection->getStrUtf8OrAnsi(true, $string, TPDOConnection::WAY_BANK2APP);	    
 	    
-	    $string = utf8_encode($string);
+	    $string = StringHelper::utf8_encode($string);
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
 	
