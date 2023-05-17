@@ -572,7 +572,7 @@ class TApplication extends TLayout {
 						if (! is_dir ( $filepath ) && FileHelper::exists($filepath) ){
 							$lastModified = @filemtime ( $filepath );
 							if ($lastModified == NULL)
-								$lastModified = @filemtime ( utf8_decode ( $filepath ) );
+								$lastModified = @filemtime ( StringHelper::utf8_decode ( $filepath ) );
 							if ($lastModified) {
 								// 172800 seconds = 2 dias
 								if ($t - $lastModified > 172800) {

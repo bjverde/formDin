@@ -101,7 +101,10 @@ class TCoordGMS extends TGroup
 		$strSymbols = is_null($strSymbols) ? "°,',\"" : $strSymbols;
 		$strLabels = is_null($strSymbols) ? ",," : $strLabels;
 		$intSymbolsFontSize = is_null($intSymbolsFontSize) ? "18" : $intSymbolsFontSize;
-		$labels = explode(',', $strLabels);
+		$labels = null;
+		if(!empty($strLabels)){
+			$labels = explode(',', $strLabels);
+		}
 		$labels[0] = isset($labels[0]) ? $labels[0] : '';
 		$labels[1] = isset($labels[1]) ? $labels[1] : '';
 		$labels[2] = isset($labels[2]) ? $labels[2] : '';
@@ -182,10 +185,10 @@ class TCoordGMS extends TGroup
 		if (!$this->getButtonGMap()->getOnClick())
 		{
 			$params = array('readonly' => !$this->getEnabled()
-				, 'mapHeaderText' => utf8_encode($this->getMapHeaderText())
-				, 'mapHeaderFontColor' => utf8_encode($this->getMapHeaderFontColor())
-				, 'mapHeaderFontColor' => utf8_encode($this->getMapHeaderFontColor())
-				, 'mapHeaderCallBaFontSize' => utf8_encode((integer) $this->getMapHeaderFontSize())
+				, 'mapHeaderText' => StringHelper::utf8_encode($this->getMapHeaderText())
+				, 'mapHeaderFontColor' => StringHelper::utf8_encode($this->getMapHeaderFontColor())
+				, 'mapHeaderFontColor' => StringHelper::utf8_encode($this->getMapHeaderFontColor())
+				, 'mapHeaderCallBaFontSize' => StringHelper::utf8_encode((integer) $this->getMapHeaderFontSize())
 				, 'mapCallback' => $this->getMapCallback()
 				, 'zoom' => $this->getMapZoom()
 				, 'mapType' => $this->getMapType()
@@ -789,9 +792,8 @@ class TCoordGMS extends TGroup
 	public function getMapType()
 	{
 		$aTypes = array('ROADMAP','SATELLITE','TERRAIN','HYBRID');
-		if( in_array( strtoupper($this->mapType), $aTypes ) )
-		{
-		 	return strtolower( $this->mapType );
+		if( in_array( StringHelper::strtoupper($this->mapType), $aTypes ) ){
+		 	return StringHelper::strtolower( $this->mapType );
 		}
 		return 'roadmap';
 	}

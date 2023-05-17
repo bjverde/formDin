@@ -207,7 +207,6 @@ function createBvarsAjax($pFields) {
         if (strpos($v, '|')) {
             $v = explode('|', $v);
             if (isset($_POST[strtolower($v[1])]) && $_POST[strtolower($v[1])] || trim($_POST[strtolower($v[1])]) == '0') {
-                //$bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v[1])])) );
                 $text = stripslashes($_POST[strtolower($v[1])]);
                 $bvar[strtoupper($v[0])] = str_replace(array('"'),array('“'),$text);
             } else {
@@ -215,7 +214,6 @@ function createBvarsAjax($pFields) {
             }
         } else {
             if (isset($_POST[strtolower($v)]) && $_POST[strtolower($v)] || trim($_POST[strtolower($v)]) == '0') {
-                //$bvar[strtoupper($v)] = str_replace(array('"'),array('“'),stripslashes(utf8_decode($_POST[strtolower($v)])));
                 $text = stripslashes($_POST[strtolower($v)]);
                 $bvar[strtoupper($v)] = str_replace(array('"'),array('“'),$text);
             } else {
