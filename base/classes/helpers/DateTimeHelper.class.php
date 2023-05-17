@@ -151,7 +151,7 @@ class DateTimeHelper
      */
     public static function date2Mysql($dateSql,$showTime=false)
     {
-        self::dateBr2Iso($dateSql,$showTime);
+        return self::dateBr2Iso($dateSql,$showTime);
     }
 
 
