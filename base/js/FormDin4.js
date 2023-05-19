@@ -4312,10 +4312,17 @@ function fwExportGrid2Excel(dadosJson)
 // funções Genéricas para utilização com dhtmlx Tree
 function fwTreeAddLoading(tree,id)
 {
-	if( id )
-	{
-		if( !tree.getIndexById(id+'loading') )
-		{
+	fwTreeViewAddLoading(tree,id);
+}
+/**
+ * funções Genéricas para utilização com dhtmlx TreeView
+ * @param {*} tree 
+ * @param {*} id 
+ */
+function fwTreeViewAddLoading(tree,id)
+{
+	if( id ){
+		if( !tree.getIndexById(id+'loading') ){
 			tree.insertNewChild(id,id+'_loading','Carregando...',0,'loader.gif',0,0,'SELECT');
 			tree.setItemStyle(id+'_loading','color:#FFFFC0;background-color:#969696');
 			//tree.setItemStyle(id+'_loading','background-color:#969696');

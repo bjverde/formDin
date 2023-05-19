@@ -51,11 +51,11 @@ if( $_REQUEST['fwDebug']==1) {
 }
 
 function combinarSelectIsUTF8($string) {
-    return (utf8_encode(utf8_decode($string)) == $string);
+    return (StringHelper::utf8_encode(StringHelper::utf8_decode($string)) == $string);
 }
 
 if( isset( $_REQUEST['descPrimeiraOpcao'] ) && combinarSelectIsUTF8( $_REQUEST['descPrimeiraOpcao'] ) ){
-	$_REQUEST['descPrimeiraOpcao'] = utf8_encode( $_REQUEST['descPrimeiraOpcao'] );
+	$_REQUEST['descPrimeiraOpcao'] = StringHelper::utf8_encode( $_REQUEST['descPrimeiraOpcao'] );
 }
 
 // executar pacote
@@ -84,14 +84,14 @@ if( isset($_REQUEST['fwSession_expired'] ) &&  $_REQUEST['fwSession_expired'] &&
 $campoCodigo  	= strtoupper($_REQUEST['colunaCodigo']);
 $campoDescricao = strtoupper($_REQUEST['colunaDescricao']);
 $retorno='{"campo":"'.$_REQUEST['campoSelect'].
-			'","selectPai":"'.utf8_decode($_REQUEST['selectPai']).
-			'","valorInicial":"'.utf8_decode($_REQUEST['valorInicial']).
+			'","selectPai":"'.StringHelper::utf8_decode($_REQUEST['selectPai']).
+			'","valorInicial":"'.StringHelper::utf8_decode($_REQUEST['valorInicial']).
 			'","selectFilhoStatus":"'.$_REQUEST['selectFilhoStatus'].
-			'","descPrimeiraOpcao":"'.utf8_decode($_REQUEST['descPrimeiraOpcao']).
-			'","valorPrimeiraOpcao":"'.utf8_decode($_REQUEST['valorPrimeiraOpcao']).
+			'","descPrimeiraOpcao":"'.StringHelper::utf8_decode($_REQUEST['descPrimeiraOpcao']).
+			'","valorPrimeiraOpcao":"'.StringHelper::utf8_decode($_REQUEST['valorPrimeiraOpcao']).
 			'","funcaoExecutar":"'.$_REQUEST['funcaoExecutar'].
 			'","selectUniqueOption":"'.$_REQUEST['selectUniqueOption'].
-			'","descNenhumaOpcao":"'.utf8_decode($_REQUEST['descNenhumaOpcao']).'"';
+			'","descNenhumaOpcao":"'.StringHelper::utf8_decode($_REQUEST['descNenhumaOpcao']).'"';
 // executar pacote
 $pacoteCache = explode('|',$_REQUEST['pacoteOracle']);
 
@@ -167,8 +167,8 @@ if($res) {
 
 		if ( ! combinarSelectIsUTF8( $res[$campoDescricao][$k] ) )
 		{
-			$res[$campoDescricao][$k] = utf8_encode( $res[$campoDescricao][$k]);
-			$res[$campoCodigo][$k] 	  = utf8_encode( $res[$campoCodigo][$k]);
+			$res[$campoDescricao][$k] = StringHelper::utf8_encode( $res[$campoDescricao][$k]);
+			$res[$campoCodigo][$k] 	  = StringHelper::utf8_encode( $res[$campoCodigo][$k]);
 		}
 	}
 	if( !array_key_exists($campoCodigo,$res))
