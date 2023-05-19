@@ -105,7 +105,7 @@ closedir($h);
 
 if((string)$dados['nomeArquivo']<>'')
 {
-	$arquivo = $tmpDir.'/tmp_'.utf8_decode($dados['nomeArquivo']);
+	$arquivo = $tmpDir.'/tmp_'.StringHelper::utf8_decode($dados['nomeArquivo']);
 }
 else
 {

@@ -121,19 +121,13 @@ class TGridColumn extends TElement
 	//---------------------------------------------------------------------------------------
 	public function getWidth()
 	{
-		if(is_null($this->width))
-		{
+		if(is_null($this->width)) {
 			return 'auto';
-		}
-		else
-		{
-			if( strpos($this->width,'%')===false )
-			{
+		} else {
+			if( strpos($this->width,'%')===false ) {
 				$w = @preg_replace('/[^0-9]/','',$this->width).'px';
 	            $w = $w == 'px' ? 'auto' : $w;
-			}
-			else
-			{
+			} else {
 				return $this->width;
 			}
 		}

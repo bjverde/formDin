@@ -1257,38 +1257,24 @@ class xajax
 		{
 			$sFuncToUse = NULL;
 			
-			if (function_exists('iconv'))
-			{
+			if (function_exists('iconv')){
 				$sFuncToUse = "iconv";
-			}
-			else if (function_exists('mb_convert_encoding'))
-			{
+			}else if (function_exists('mb_convert_encoding')){
 				$sFuncToUse = "mb_convert_encoding";
-			}
-			else if ($this->sEncoding == "ISO-8859-1")
-			{
+			}else if ($this->sEncoding == "ISO-8859-1"){
 				$sFuncToUse = "utf8_decode";
-			}
-			else
-			{
+			}else{
 				trigger_error("The incoming xajax data could not be converted from UTF-8", E_USER_NOTICE);
 			}
 			
-			if ($sFuncToUse)
-			{
-				if (is_string($sValue))
-				{
-					if ($sFuncToUse == "iconv")
-					{
+			if ($sFuncToUse){
+				if (is_string($sValue)){
+					if ($sFuncToUse == "iconv"){
 						$sValue = iconv("UTF-8", $this->sEncoding.'//TRANSLIT', $sValue);
-					}
-					else if ($sFuncToUse == "mb_convert_encoding")
-					{
+					}else if ($sFuncToUse == "mb_convert_encoding"){
 						$sValue = mb_convert_encoding($sValue, $this->sEncoding, "UTF-8");
-					}
-					else
-					{
-						$sValue = utf8_decode($sValue);
+					}else{
+						$sValue = StringHelper::utf8_decode($sValue);
 					}
 				}
 			}

@@ -83,7 +83,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 	// construir array de pesquisa e pesquisar no banco
 	$bvars = array();
 	foreach ( $arrCampoDescricao as $k=>$v ) {
-		$bvars[$v] = utf8_decode($arrBusca[$k]);
+		$bvars[$v] = StringHelper::utf8_decode($arrBusca[$k]);
 	}
 
 	// Por razões de segurança, o variável num_pessoa tem que ser lido da sessão
