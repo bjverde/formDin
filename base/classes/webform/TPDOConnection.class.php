@@ -644,7 +644,7 @@ class TPDOConnection {
     {
         if ( self::$error )
         {
-            return utf8_decode( '<br><b>Erro PDO:</b> ' . self::$error . '<br/><br/><b>Sql: </b>' . self::$lastSql . '<div><br/></div><b>Parametros: </b> ' . print_r( self::$lastParams, true ) );
+            return StringHelper::utf8_decode( '<br><b>Erro PDO:</b> ' . self::$error . '<br/><br/><b>Sql: </b>' . self::$lastSql . '<div><br/></div><b>Parametros: </b> ' . print_r( self::$lastParams, true ) );
         }
         
         if ( self::getMessage() )
@@ -1219,7 +1219,7 @@ class TPDOConnection {
         } else{
             if ( $boolUtf8_Decode ) {
                 if($way == self::WAY_APP2BANK){
-                    $retorno = utf8_decode($string);
+                    $retorno = StringHelper::utf8_decode($string);
                 }else{
                     $retorno = StringHelper::str2utf8($string);
                 }

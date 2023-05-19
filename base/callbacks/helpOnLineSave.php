@@ -59,10 +59,10 @@ if( strpos( $file, '../' ) === false)
 // gravar o arquivo / Remover tag iframe
 $_REQUEST['value'] = preg_replace('/{(<iframe).*?(>).*?(<\/iframe>)}/i', '', $_REQUEST['value']);
 //$_REQUEST['value'] .=utf8_encode('<hr><center>Alterado por:Luis Eugênio em '.date('d/m/Y h:i:s').'</center>');
-if(!file_put_contents($file,utf8_decode($_REQUEST['value'])))
+if(!file_put_contents($file,StringHelper::utf8_decode($_REQUEST['value'])))
 {
 	print '<script>alert("Não foi possível gravar o texto, verifique as permissões de escrita no arquivo '.$file.')</script>';
 	return;
 }
-print utf8_decode($_REQUEST['value']);
+print StringHelper::utf8_decode($_REQUEST['value']);
 print '<script>alert("Gravação Ok");</script>';

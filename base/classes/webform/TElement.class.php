@@ -669,10 +669,8 @@ class TElement
     public function setClass( $newClass, $boolClearCss = null )
     {
         $boolClearCss = $boolClearCss === false ? false : true;
-        $this->class = $newClass;
-        
-        if ( $boolClearCss )
-        {
+        $this->class = $newClass;        
+        if ( $boolClearCss ) {
             $this->clearCss();
         }
         return $this;
@@ -703,10 +701,8 @@ class TElement
         //$functionJs	= $this->removeIllegalChars($functionJs);
         $this->events[ $eventName ] = '';
         
-        if ( ( string ) $functionJs != '' )
-        {
-            if ( ( bool ) $boolRestrictive === true )
-            {
+        if ( ( string ) $functionJs != '' ){
+            if ( ( bool ) $boolRestrictive === true ){
                 $functionJs = 'if(!' . $functionJs . '){return false;}';
             }
             $this->addEvent( $eventName, $functionJs );
@@ -737,18 +733,15 @@ class TElement
     {
         $eventName = strtolower( $this->removeIllegalChars( $eventName ) );
         
-        if ( isset( $this->events[ $eventName ] ) && ( string ) $this->events[ $eventName ] != '' )
-        {
+        if ( isset( $this->events[ $eventName ] ) && ( string ) $this->events[ $eventName ] != '' ){
             $this->events[ $eventName ] .= ';';
         }
         
-        if ( ( bool ) $boolRestrictive === true )
-        {
+        if ( ( bool ) $boolRestrictive === true ){
             $functionJs = 'if(!' . $functionJs . '){return false;}';
         }
         
-        if ( !isset( $this->events[ $eventName ] ) )
-        {
+        if ( !isset( $this->events[ $eventName ] ) ){
             $this->events[ $eventName ] = ""; // evitar wornings do php
         }
         $this->events[ $eventName ] .= $this->setQuotes( $functionJs );
@@ -1080,11 +1073,11 @@ class TElement
         {
             return $strValue;
         }
-        if( FormDinHelper::pregMatch( '/\?/', utf8_decode($strValue) ) )
+        if( FormDinHelper::pregMatch( '/\?/', StringHelper::utf8_decode($strValue) ) )
         {
             return $strValue;
         }
-        return utf8_decode( $strValue );
+        return StringHelper::utf8_decode( $strValue );
     }
     
     //--------------------------------------------------------------------------

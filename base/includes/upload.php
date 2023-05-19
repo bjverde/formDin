@@ -87,15 +87,14 @@ if ( isset( $_FILES[ 'arquivo' ] ) ) // file was send from browser
 	{
 		case UPLOAD_ERR_OK:
 			$filename = $_FILES[ 'arquivo' ][ 'name' ]; // file name
-			$tempName = $tmpDir . 'upload_' . md5( session_id() . utf8_encode( utf8_decode( $filename ) ) );
+			$filename = StringHelper::utf8_decode( $filename );
+			$tempName = $tmpDir . 'upload_' . md5( session_id() . utf8_encode( $filename ) );
 
-			if ( file_exists( $tempName ) )
-			{
+			if ( file_exists( $tempName ) ){
 				unlink ( $tempName );
 			}
 
-			if ( preg_match( '/\.php$/i', $filename ) > 0 )
-			{
+			if ( preg_match( '/\.php$/i', $filename ) > 0 ){
 				$result = 'Por medidas de segurança arquivo com extensão .php não são permitidos.';
 				break;
 			}

@@ -115,7 +115,7 @@ if(isset($_REQUEST['cep']))
 		$content = curl_exec( $ch );
 		if( !$errmsg = curl_error( $ch ) )
 		{
-			echo utf8_decode($content);
+			echo StringHelper::utf8_decode($content);
 		}
 		else
 		{
@@ -140,7 +140,7 @@ if(isset($_REQUEST['cep']))
 		//echo file_get_contents('https://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
 		//$res = file_get_contents('http://www.buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=1vVU3UcKFHfVhFxBSlWWM4kqUREbBu/');
 		$res = file_get_contents('http://buscarcep.com.br/?cep='.$cep.'&formato=xml&chave=Chave_Gratuita_BuscarCep&identificador=CLIENTE1');
-		echo utf8_decode($res);
+		echo StringHelper::utf8_decode($res);
 	}
 	return;
 }

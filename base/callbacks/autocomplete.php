@@ -63,7 +63,7 @@ $strFunctionJs = null;
 //----------------------------------------------------------------------------------
 foreach($_REQUEST as $k=>$v) {
 	// decodificar os parametros recebidos
-	$v = utf8_decode($v);
+	$v = StringHelper::utf8_decode($v);
 	$_REQUEST[$k] = $v;
 
 	// os parametros para adicionar ao bvars vem prefixados com _w_   ( de where )

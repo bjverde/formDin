@@ -51,6 +51,7 @@ class TTreeViewData
 	private $hint;
 	private $userData;
 	private $open;
+	private $select;
 	private $checked;
 	/**
 	* Classe TTreeView
