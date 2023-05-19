@@ -1323,35 +1323,29 @@ class TGrid extends TTable
             $excel->setAttribute('title',htmlentities('Erro ao salvar os dados para exportação',ENT_COMPAT,ENCODINGS));
         }
     }
-    
     //------------------------------------------------------------------------------------
     public function getColumns()
     {
         return $this->columns;
     }
-    
     //------------------------------------------------------------------------------------
     public function getColumn( $strColumnName )
     {
-        $strColumnName = strtolower( $strColumnName );
-        
-        if ( isset( $this->columns[ $strColumnName ] ) )
-        {
+        $strColumnName = strtoupper( $strColumnName );
+        //$strColumnName = strtolower( $strColumnName );
+        if ( isset( $this->columns[ $strColumnName ] ) ){
             return $this->columns[ $strColumnName ];
         }
         return null;
     }
-    
     //------------------------------------------------------------------------------------
     public function getColumnCount()
     {
-        if ( is_array( $this->getColumns() ) )
-        {
+        if ( is_array( $this->getColumns() ) ){
             return ( int ) count( $this->columns );
         }
         return 0;
     }
-    
     //------------------------------------------------------------------------------------
     /**
      * Coluna normal para o grid
@@ -1398,30 +1392,25 @@ class TGrid extends TTable
         $strId = is_null( $strId ) ? strtolower( $strFieldName ) : $strId;
         $this->hiddenField[ $strFieldName ] = $strId;
     }
-    
     //------------------------------------------------------------------------------------
     public function getHiddenField()
     {
         return $this->hiddenField;
     }
-    
     //------------------------------------------------------------------------------------
     protected function addActionColumn( $strTitle = null )
     {
         $this->columns[ $strTitle ] = new TActionColumn( $strTitle );
     }
-    
     //------------------------------------------------------------------------------------
     public function setTitle( $strValue = null )
     {
         $this->title = $strValue;
     }
-    
     public function getTitle()
     {
         return $this->title;
     }
-    
     //------------------------------------------------------------------------------------
     public function setData( $mixValue = null ){
         if ( is_array( $mixValue ) ) {
@@ -1432,7 +1421,6 @@ class TGrid extends TTable
         }
         $this->data = $mixValue;
     }
-    
     //---------------------------------------------------------------------------------------
     /**
      * Retorna o array de dados do gride
@@ -3092,7 +3080,7 @@ class TGrid extends TTable
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
                         if ( ENCODINGS == 'UTF-8'){
-                            $result[ utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+                            $result[ StringHelper::utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         } else {
                             $result[ utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         }

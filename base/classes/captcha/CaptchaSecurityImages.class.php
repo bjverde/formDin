@@ -5,6 +5,9 @@ This code was made by White Hat Web Design and it is free.
 Copyrigth (C) White Hat Web Design - http://www.white-hat-web-design.co.uk/
 */
 
+require_once '../constants.php';
+require_once '../helpers/autoload_formdin_helper.php';
+
 session_start(); // tem que inicializar a sessão, senão não funciona
 class CaptchaSecurityImages {	
 	var $font = __DIR__.'/fonts/monofont.ttf';
@@ -44,6 +47,7 @@ class CaptchaSecurityImages {
 		$textbox = imagettfbbox($font_size, 0, $this->font, $code) or die('Error in imagettfbbox function');
 		$x = ($width - $textbox[4])/2;
 		$y = ($height - $textbox[5])/2;
+		$font_size = (float) $font_size;
 		imagettftext($image, $font_size, 0, $x, $y, $text_color, $this->font , $code) or die('Error in imagettftext function');
 		/* output captcha image to browser */
 		header('Content-Type: image/jpeg');
