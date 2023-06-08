@@ -7187,20 +7187,20 @@ class TForm Extends TBox
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
     * 
-     * @param string  $strName         - 1: ID do campo
-     * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
-     * @param boolean $boolRequired    - 3: Obrigatório
-     * @param string  $strAllowedFileTypes - 4: String Tipos de arquivos. Devem ser informadas separadas por virgula doc,gif,jpg
-     * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-     * @param integer $intFieldSize    - 6: Numero de caracteres do arquivo anexado que serão exibido na tela, pode ser utilizado
-     * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
-     * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
-     * @param string  $strJsCallBack   - 9: Define a função javascript que será chamada quando o upload assincrono terminar.
-     * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
-     * @param boolean $boolNoWrapLabel
-     * @param string  $strMessageInvalidFileType
-     * @return TFile|TFileAsync
-     */
+    * @param string  $strName         - 1: ID do campo
+    * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired    - 3: Obrigatório
+    * @param string  $strAllowedFileTypes - 4: String Tipos de arquivos. Devem ser informadas separadas por virgula doc,gif,jpg
+    * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+    * @param integer $intFieldSize    - 6: Numero de caracteres do arquivo anexado que serão exibido na tela, pode ser utilizado
+    * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
+    * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string  $strJsCallBack   - 9: Define a função javascript que será chamada quando o upload assincrono terminar.
+    * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolNoWrapLabel
+    * @param string  $strMessageInvalidFileType
+    * @return TFile|TFileAsync
+    */
     public function addFileField( $strName
                                , $strLabel=null
                                , $boolRequired=null
