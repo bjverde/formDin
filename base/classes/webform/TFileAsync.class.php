@@ -53,13 +53,13 @@ class TFileAsync extends TEdit
 	* O parametro $strJsCallBack define a função javascript que será chamada quando o upload assincrono terminar.
 	* Esta função receberá, como parametros, o nome do arquivo temporário e o nome do arquivo anexado.
 	*
-	* @param string $strName
+	* @param string $strName    - 1: ID do campo
 	* @param integer $intSize
 	* @param boolean  $boolRequired
 	* @param string $strAllowedFileTypes
 	* @param string $strMaxSize
 	* @param integer $intWidth
-	* @param $strJsCallBack
+	* @param $strJsCallBack     Define a função javascript que será chamada quando o upload assincrono terminar.
 	* @return TFileAsync
 	*/
 	public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null,$intWidth=null,$strJsCallBack=null,$strMessageInvalidFileType=null)
