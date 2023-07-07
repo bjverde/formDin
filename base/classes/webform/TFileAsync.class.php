@@ -53,13 +53,13 @@ class TFileAsync extends TEdit
 	* O parametro $strJsCallBack define a função javascript que será chamada quando o upload assincrono terminar.
 	* Esta função receberá, como parametros, o nome do arquivo temporário e o nome do arquivo anexado.
 	*
-	* @param string $strName
+	* @param string $strName    - 1: ID do campo
 	* @param integer $intSize
 	* @param boolean  $boolRequired
 	* @param string $strAllowedFileTypes
 	* @param string $strMaxSize
 	* @param integer $intWidth
-	* @param $strJsCallBack
+	* @param $strJsCallBack     Define a função javascript que será chamada quando o upload assincrono terminar.
 	* @return TFileAsync
 	*/
 	public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null,$intWidth=null,$strJsCallBack=null,$strMessageInvalidFileType=null)
@@ -147,26 +147,21 @@ class TFileAsync extends TEdit
 	public function getMaxSize()
 	{
 		$maxSize = preg_replace('/[^0-9]/','',$this->maxSize);
-	$bytes=1024; // padrao 1kb
-	if( strpos(strtoupper($this->maxSize),'M')!==false )
-	{
-		// megabytes
-		$bytes  =  ( 1024 * $maxSize ) * 1024;
-		$this->setMaxSize($maxSize.'Mb');
+		$bytes=1024; // padrao 1kb
+		if( strpos(strtoupper($this->maxSize),'M')!==false ){
+			// megabytes
+			$bytes  =  ( 1024 * $maxSize ) * 1024;
+			$this->setMaxSize($maxSize.'Mb');
+		}else if( strpos(strtoupper($this->maxSize),'G')!==false ){
+			// gigabytes
+			$bytes = ( ( 1024 *1024 ) * $maxSize) * 1024;
+			$this->setMaxSize($maxSize.'Gb');
+		}else{
+			$this->setMaxSize('1Kb');
+		}
+		return $bytes;
 	}
-	else if( strpos(strtoupper($this->maxSize),'G')!==false )
-	{
-		// gigabytes
-		$bytes = ( ( 1024 *1024 ) * $maxSize) * 1024;
-		$this->setMaxSize($maxSize.'Gb');
-	}
-	else
-	{
-		$this->setMaxSize('1Kb');
-	}
-	return $bytes;
-}
-/**
+	/**
 	* faz a validação da extensão e do tamanho máximo permitido
 	*
 	*/
@@ -174,9 +169,7 @@ class TFileAsync extends TEdit
 	{
 		//verficar se o arquivo está no servidor
 		$filename = $this->getTempFile();
-
-		if ( !FileHelper::exists($filename) && $this->getRequired() )
-		{
+		if ( !FileHelper::exists($filename) && $this->getRequired() ){
 			$this->addError('Campo obrigatório');
 		}
 		return ( (string)$this->getError()==="" );
@@ -188,8 +181,7 @@ class TFileAsync extends TEdit
 		if( FileHelper::exists($this->getTempFile()) ){
 			@unlink($this->getTempFile());
 		}
-		if( isset( $_REQUEST[$this->getId().'_temp_name'] ) )
-		{
+		if( isset( $_REQUEST[$this->getId().'_temp_name'] ) ){
 			$_REQUEST[$this->getId().'_temp_name']=null;
 			$_REQUEST[$this->getId().'_name']=null;
 			$_REQUEST[$this->getId().'_size']=null;
