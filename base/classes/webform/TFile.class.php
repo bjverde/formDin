@@ -46,7 +46,15 @@ class TFile extends TEdit {
     private $msgUploadException;
     
     
-    
+    /**
+     * Classe para fazer upload de arquivo
+     *
+     * @param string $strName       - 1: ID do campo
+     * @param integer $intSize
+     * @param [type] $boolRequired
+     * @param [type] $strAllowedFileTypes
+     * @param [type] $strMaxSize
+     */
     public function __construct($strName,$intSize=null,$boolRequired=null,$strAllowedFileTypes=null,$strMaxSize=null) {
         $intSize= is_null($intSize) ? 50 : $intSize;
         parent::__construct($strName,null,5000,$boolRequired,$intSize);
