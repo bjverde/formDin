@@ -1985,15 +1985,15 @@ class TForm Extends TBox
      * @param integer $intDelay                     -  9: Default 500, tempo após a digitação para disparar a consulta
      * @param integer $intMaxItensToShow            - 10: Default 50, máximo de registros que deverá ser retornado
      * @param integer $intCacheTime default = 0 ( sessão )
-     * @param boolean $boolRemoveMask
+     * @param boolean $boolRemoveMask               - 12: 
      * @param string $strUrl                        - 13: url da função de callbacks, se ficar em branco será tratado por callbacks/autocomplete.php
      * @param string $strMessageNotFound            - 14: Mensagem caso não encontre nenhum registro
-     * @param boolean $boolKeepFieldValuesOnPost    - 15:
-     * @param boolean $boolClearOnNotFound
-     * @param boolean $boolClearUpdateFields
-     * @param boolean $boolSearchAnyPosition        - 18: busca o texto em qualquer posição igual Like %texto%
+     * @param boolean $boolKeepFieldValuesOnPost    - 15: 
+     * @param boolean $boolClearOnNotFound          - 16: 
+     * @param boolean $boolClearUpdateFields        - 17: 
+     * @param boolean $boolSearchAnyPosition        - 18: Busca o texto em qualquer posição igual Like %texto%
      * @param boolean $strConfigFileName            - 19: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
-     * @param boolean $trimText                     - 20: limpa o texto com trim. DEFAULT = true
+     * @param boolean $trimText                     - 20: Limpa o texto com trim. DEFAULT = true
      */
     public function setAutoComplete( $strFieldName
     		                       , $strTablePackageFuncion
@@ -7187,20 +7187,20 @@ class TForm Extends TBox
     *   $_POST['strName_name'] - nome arquivo;
     * </code>
     * 
-     * @param string  $strName         - 1: ID do campo
-     * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
-     * @param boolean $boolRequired    - 3: Obrigatório
-     * @param string  $strAllowedFileTypes - 4: Tipos de arquivos
-     * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
-     * @param integer $intFieldSize    - 6: 
-     * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
-     * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
-     * @param string  $strJsCallBack   - 9:
-     * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
-     * @param boolean $boolNoWrapLabel
-     * @param string  $strMessageInvalidFileType
-     * @return TFile|TFileAsync
-     */
+    * @param string  $strName         - 1: ID do campo
+    * @param string  $strLabel        - 2: Rotulo do campo que irá aparece na tela
+    * @param boolean $boolRequired    - 3: Obrigatório
+    * @param string  $strAllowedFileTypes - 4: String Tipos de arquivos. Devem ser informadas separadas por virgula doc,gif,jpg
+    * @param string  $strMaxFileSize  - 5: Input the max size file with K, M for Megabit (Mb) or G for Gigabit (Gb). Example 2M = 2 Mb = 2048Kb.
+    * @param integer $intFieldSize    - 6: Numero de caracteres do arquivo anexado que serão exibido na tela, pode ser utilizado
+    * @param boolean $boolAsync       - 7: Type TFile (POST) ou TFileAsync
+    * @param boolean $boolNewLine     - 8: Em nova linha, DEFALUT is TRUE não Obrigatório.
+    * @param string  $strJsCallBack   - 9: Define a função javascript que será chamada quando o upload assincrono terminar.
+    * @param boolean $boolLabelAbove  -10: Label acima do campo, DEFAULT is FALSE na mesma linha
+    * @param boolean $boolNoWrapLabel
+    * @param string  $strMessageInvalidFileType
+    * @return TFile|TFileAsync
+    */
     public function addFileField( $strName
                                , $strLabel=null
                                , $boolRequired=null
