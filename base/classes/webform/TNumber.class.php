@@ -391,8 +391,8 @@ class TNumber extends TEdit
 			}
   		}
 		if( $this->getDecimalPlaces() > 0 ){
-			$posComma = strpos($newValue,',');
-			$posPoint = strpos($newValue,'.');
+			$posComma = is_null($newValue)?$newValue:strpos($newValue,',');
+			$posPoint = is_null($newValue)?$newValue:strpos($newValue,'.');
 			$posComma = !$posComma ? 0 : $posComma;
 			$posPoint = !$posPoint ? 0 : $posPoint;
 			if( $posComma && $posPoint ){
