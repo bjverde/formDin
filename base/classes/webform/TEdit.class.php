@@ -176,7 +176,7 @@ class TEdit extends TControl
 				$value = $this->getValue();
 				if( $this->getFieldType() =='number')
 				{
-					$value = preg_replace('/[^0-9]/','',$value);
+					$value = is_null($value)?$value:preg_replace('/[^0-9]/','',$value);
 				}
 				//Conta caracteres ao invés de bytes
 				$tamanho = 0;

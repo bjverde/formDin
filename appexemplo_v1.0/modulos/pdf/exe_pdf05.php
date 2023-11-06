@@ -40,7 +40,7 @@ $dados['DAT'][] = '01/01/2015';
 $dados['TXT_TERMO'][] = 'Termo';
 $dados['TXT_OBS'][] = 'OBS';
 $dados['NUM_VALOR'][] = '10.45';
-$dados['TXT_DESCRIMINACAO'][] = utf8_decode('Descriminação');
+$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode_windows1252('Descriminação');
 
 $dados['TXT_EMPENHO'][] = '2015NE4478';
 $dados['TXT_REGISTRO'][] = 'REGNE4457';
@@ -49,7 +49,7 @@ $dados['DAT'][] = '02/01/2015';
 $dados['TXT_TERMO'][] = 'Termo 2';
 $dados['TXT_OBS'][] = 'OBS 2';
 $dados['NUM_VALOR'][] = '150.47';
-$dados['TXT_DESCRIMINACAO'][] = utf8_decode('Descriminação');
+$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode_windows1252('Descriminação');
 
 //exibir criterio utilizado no filtro
 $criterio = isset($criterio) ? $criterio : null;
@@ -89,10 +89,10 @@ $pdf->cell($pdf->getRowWidths(6), 5, number_format($total, 2, '.', ','), 1, 0, '
 $pdf->cell($pdf->getRowWidths(7), 5, '', 1, 1, 'R', 1);
 $pdf->SetFillColor(255, 255, 255); // fundo branco
 $pdf->ln(3);
-$pdf->multiCell(0, 4, utf8_decode(getMsgFPDF()), 1);
+$pdf->multiCell(0, 4, StringHelper::utf8_decode_windows1252(getMsgFPDF()), 1);
 
 $msg02 = 'Esse exemplo utiliza os metodos: TPDF->setData e TPDF->addColumn. Para criar um grid de forma facil e semelhante ao que acontece no FormDin;';
-$pdf->multiCell(0, 4, utf8_decode($msg02), 1);
+$pdf->multiCell(0, 4, StringHelper::utf8_decode_windows1252($msg02), 1);
 
 $pdf->ln(4);
 $pdf->SetTextColor(0, 0, 255);//0,64,128);
@@ -102,31 +102,31 @@ $pdf->ln(1);
 
 $dados02 = null;
 $dados02['ID'][] = '20'; 
-$dados02['TEXTO'][] = 'Caros amigos, a execução dos pontos do programa garante a contribuição de um grupo importante na determinação das diretrizes de desenvolvimento para o futuro. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que o novo modelo estrutural aqui preconizado cumpre um papel essencial na formulação dos níveis de motivação departamental. É importante questionar o quanto a revolução dos costumes maximiza as possibilidades por conta de alternativas às soluções ortodoxas.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Caros amigos, a execução dos pontos do programa garante a contribuição de um grupo importante na determinação das diretrizes de desenvolvimento para o futuro. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que o novo modelo estrutural aqui preconizado cumpre um papel essencial na formulação dos níveis de motivação departamental. É importante questionar o quanto a revolução dos costumes maximiza as possibilidades por conta de alternativas às soluções ortodoxas.');
 $dados02['ID'][] = '21'; 
-$dados02['TEXTO'][] = ' Pensando mais a longo prazo, a crescente influência da mídia auxilia a preparação e a composição do remanejamento dos quadros funcionais. É claro que o desafiador cenário globalizado nos obriga à análise das novas proposições. ';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252(' Pensando mais a longo prazo, a crescente influência da mídia auxilia a preparação e a composição do remanejamento dos quadros funcionais. É claro que o desafiador cenário globalizado nos obriga à análise das novas proposições. ');
 $dados02['ID'][] = '22';
-$dados02['TEXTO'][] = 'Desde ontem a noite o último pull request desse SCRUM causou a race condition dos argumentos que definem um schema dinâmico';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Desde ontem a noite o último pull request desse SCRUM causou a race condition dos argumentos que definem um schema dinâmico');
 $dados02['ID'][] = '23';
-$dados02['TEXTO'][] = 'Explica pro Product Onwer que a compilação final do programa causou o bug do fluxo de dados de forma retroativa no server.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Explica pro Product Onwer que a compilação final do programa causou o bug do fluxo de dados de forma retroativa no server.');
 $dados02['ID'][] = '24';
-$dados02['TEXTO'][] = 'Com este commit, a otimização de performance da renderização do DOM causou a race condition na estabilidade do protocolo de transferência de dados.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Com este commit, a otimização de performance da renderização do DOM causou a race condition na estabilidade do protocolo de transferência de dados.');
 $dados02['ID'][] = '25';
-$dados02['TEXTO'][] = 'Dado o fluxo de dados atual, o deploy automatizado no Heroku complexificou o merge na compilação de templates literais.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Dado o fluxo de dados atual, o deploy automatizado no Heroku complexificou o merge na compilação de templates literais.');
 $dados02['ID'][] = '26';
-$dados02['TEXTO'][] = 'Explica pro Product Onwer que a otimização de performance da renderização do DOM superou o desempenho no fechamento automático das tags.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Explica pro Product Onwer que a otimização de performance da renderização do DOM superou o desempenho no fechamento automático das tags.');
 $dados02['ID'][] = '27';
-$dados02['TEXTO'][] = 'Nesse pull request, um erro não identificado otimizou a renderização de uma configuração Webpack eficiente nos builds.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Nesse pull request, um erro não identificado otimizou a renderização de uma configuração Webpack eficiente nos builds.');
 $dados02['ID'][] = '28';
-$dados02['TEXTO'][] = 'Com este commit, o último pull request desse SCRUM complexificou o merge da execução parelela de funções em multi-threads';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Com este commit, o último pull request desse SCRUM complexificou o merge da execução parelela de funções em multi-threads');
 $dados02['ID'][] = '29';
-$dados02['TEXTO'][] = 'Com este commit, o deploy automatizado no Heroku deletou todas as entradas no parse retroativo do DOM.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Com este commit, o deploy automatizado no Heroku deletou todas as entradas no parse retroativo do DOM.');
 $dados02['ID'][] = '30';
-$dados02['TEXTO'][] = 'Fala pro cliente que um erro não identificado deletou todas as entradas na interpolação dinâmica de strings.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Fala pro cliente que um erro não identificado deletou todas as entradas na interpolação dinâmica de strings.');
 $dados02['ID'][] = '31';
-$dados02['TEXTO'][] = 'Fala pro cliente que a compilação final do programa otimizou a renderização do JSON compilado a partir de proto-buffers.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Fala pro cliente que a compilação final do programa otimizou a renderização do JSON compilado a partir de proto-buffers.');
 $dados02['ID'][] = '32';
-$dados02['TEXTO'][] = 'Desde ontem a noite o gerenciador de dependências do frontend corrigiu o bug da renderização de floats parciais.';
+$dados02['TEXTO'][] = StringHelper::utf8_decode_windows1252('Desde ontem a noite o gerenciador de dependências do frontend corrigiu o bug da renderização de floats parciais.');
 
 
 $pdf->clearColumns();
