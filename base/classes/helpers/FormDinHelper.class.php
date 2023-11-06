@@ -180,9 +180,15 @@ class FormDinHelper
     
 
     /***
-     * função para depuração. Exibe o modulo a linha e a variável/objeto solicitado
+     * Função para depuração. Exibe o modulo a linha e a variável/objeto solicitado
      * Retirado do FormDin 4.9.0
      * https://github.com/bjverde/formDin/blob/master/base/includes/funcoes.inc
+     *
+     * @param mixed   $mixExpression  01 - Váriaveis que serão debugas
+     * @param string  $strComentario  02 - Um titulo qualquer
+     * @param boolean $boolExit       03 - Se vai sair ou não
+     * @param boolean $showBackTrace  04 - Vai mostrar debug_backtrace do PHP
+     * @return void
      */
     public static function debug( $mixExpression,$strComentario='Debug', $boolExit=FALSE, $showBackTrace=false ) {
         ini_set ( 'xdebug.max_nesting_level', 150 );

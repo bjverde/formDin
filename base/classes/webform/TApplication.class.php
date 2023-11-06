@@ -51,8 +51,8 @@ require_once $dirClasses.'..'.DS.'vendor/autoload.php';   //Composer
 require_once 'autoload_formdin.php';
 
 //FPDF
-define( 'FPDF_FONTPATH', $dirClasses.'..'.DS.'lib_fpdf185/font/' ); //Constante usada pela FPDF
-require_once $dirClasses.'..'.DS.'lib_fpdf185/fpdf.php';            //FPDF
+define( 'FPDF_FONTPATH', $dirClasses.'..'.DS.'lib_fpdf186/font/' ); //Constante usada pela FPDF
+require_once $dirClasses.'..'.DS.'lib_fpdf186/fpdf.php';            //FPDF
 
 class TApplication extends TLayout {
 	private $strTitle;

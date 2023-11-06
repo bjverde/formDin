@@ -68,5 +68,5 @@ function rodape($pdf)
 
 $pdf->SetFont('Arial', '', 10);
 $pdf->ln(3);
-$pdf->multiCell(0, 4, StringHelper::utf8_decode( print_r($_REQUEST, true)) , 1);
+$pdf->multiCell(0, 4, StringHelper::utf8_decode_windows1252( print_r($_REQUEST, true)) , 1);
 $pdf->show();

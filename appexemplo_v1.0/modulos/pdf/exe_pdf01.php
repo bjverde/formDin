@@ -75,11 +75,11 @@ function gerar_pdf()
     $dados=null;
     // CPF diferente do loop
     $dados['NUM_CPF'][]     = '111.111.111-11';
-    $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode('Usuário de teste');
+    $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode_windows1252('Usuário de teste');
 
     for ($i=0; $i<100; $i++) {
         $dados['NUM_CPF'][]     = '123.456.789-09';
-        $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode('Usuário de teste');
+        $dados['NOM_PESSOA'][]  = StringHelper::utf8_decode_windows1252('Usuário de teste');
     }
     $rel->setData($dados);
     $rel->addColumn('Nome', 100, 'L', 'NOM_PESSOA', '', 'I', 8, 'black', 'times');
