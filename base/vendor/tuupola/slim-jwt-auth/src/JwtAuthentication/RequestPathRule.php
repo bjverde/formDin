@@ -44,15 +44,22 @@ final class RequestPathRule implements RuleInterface
 {
     /**
      * Stores all the options passed to the rule
-     * @var mixed[]
+     *
+     * @var array{
+     *   path: array<string>,
+     *   ignore: array<string>,
+     * }
      */
-    private $options = [
+    private array $options = [
         "path" => ["/"],
         "ignore" => []
     ];
 
     /**
-     * @param mixed[] $options
+     * @param array{
+     *   path?: array<string>,
+     *   ignore?: array<string>,
+     * } $options
      */
     public function __construct(array $options = [])
     {

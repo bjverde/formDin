@@ -47,7 +47,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use RuntimeException;
 use SplStack;
-use Tuupola\Middleware\DoublePassTrait;
 use Tuupola\Http\Factory\ResponseFactory;
 use Tuupola\Middleware\JwtAuthentication\RequestMethodRule;
 use Tuupola\Middleware\JwtAuthentication\RequestPathRule;
@@ -61,25 +60,34 @@ final class JwtAuthentication implements MiddlewareInterface
      * PSR-3 compliant logger.
      * @var LoggerInterface|null
      */
-    private $logger;
-
-    /**
-     * Last error message.
-     * @var string
-     */
-    private $message;
+    private ?LoggerInterface $logger = null;
 
     /**
      * The rules stack.
      * @var SplStack<RuleInterface>
      */
-    private $rules;
+    private SplStack $rules;
 
     /**
      * Stores all the options passed to the middleware.
-     * @var mixed[]
+     *
+     * @var array{
+     *   secret?: string|array<string>,
+     *   secure: bool,
+     *   relaxed: array<string>,
+     *   algorithm: array<string>,
+     *   header: string,
+     *   regexp: string,
+     *   cookie: string,
+     *   attribute: string,
+     *   path: array<string>,
+     *   ignore: array<string>,
+     *   before: null|callable,
+     *   after: null|callable,
+     *   error: null|callable,
+     * }
      */
-    private $options = [
+    private array $options = [
         "secure" => true,
         "relaxed" => ["localhost", "127.0.0.1"],
         "algorithm" => ["HS256", "HS512", "HS384"],
@@ -87,15 +95,29 @@ final class JwtAuthentication implements MiddlewareInterface
         "regexp" => "/Bearer\s+(.*)$/i",
         "cookie" => "token",
         "attribute" => "token",
-        "path" => "/",
-        "ignore" => null,
+        "path" => ["/"],
+        "ignore" => [],
         "before" => null,
         "after" => null,
         "error" => null
     ];
 
     /**
-     * @param mixed[] $options
+     * @param array{
+     *   secret?: string|array<string>,
+     *   secure?: bool,
+     *   relaxed?: array<string>,
+     *   algorithm?: array<string>,
+     *   header?: string,
+     *   regexp?: string,
+     *   cookie?: string,
+     *   attribute?: string,
+     *   path?: array<string>,
+     *   ignore?: array<string>,
+     *   before?: null|callable,
+     *   after?: null|callable,
+     *   error?: null|callable,
+     * } $options
      */
     public function __construct(array $options = [])
     {
@@ -167,7 +189,6 @@ final class JwtAuthentication implements MiddlewareInterface
 
         /* Modify $request before calling next middleware. */
         if (is_callable($this->options["before"])) {
-            $response = (new ResponseFactory)->createResponse(200);
             $beforeRequest = $this->options["before"]($request, $params);
             if ($beforeRequest instanceof ServerRequestInterface) {
                 $request = $beforeRequest;
