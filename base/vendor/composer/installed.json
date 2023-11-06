@@ -1250,6 +1250,6 @@
             "install-path": "../tuupola/slim-jwt-auth"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }

@@ -3,17 +3,17 @@
         'name' => '__root__',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'b0fb3689a2b5afc0d4a30eef9dd11e9cb1fe85d8',
+        'reference' => '10227652c51122dfd765d5494e573d7d3f709f94',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         '__root__' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'b0fb3689a2b5afc0d4a30eef9dd11e9cb1fe85d8',
+            'reference' => '10227652c51122dfd765d5494e573d7d3f709f94',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -85,8 +85,8 @@
         'psr/http-factory-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '^1.0',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '^1.0',
             ),
         ),
         'psr/http-message' => array(
