@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## [3.8.0](https://github.com/tuupola/slim-jwt-auth/compare/3.7.0...3.8.0) - 2023-10-20
+
+### Changed
+- PHP 7.4 is now the minimum requirement ([#227](https://github.com/tuupola/slim-jwt-auth/pull/227)).
+
+### Added
+- Allow installing with latest versions of `psr/http-message` ([#248](https://github.com/tuupola/slim-jwt-auth/pull/248)).
+
+## [3.7.0](https://github.com/tuupola/slim-jwt-auth/compare/3.6.0...3.7.0) - 2022-12-23
+### Removed
+- Support for pre-release versions of `tuupola/callable-handler` ([#233](https://github.com/tuupola/slim-jwt-auth/pull/233)).
+
+### Changed
+- PHP 7.2 is now the minimum requirement ([#232](https://github.com/tuupola/slim-jwt-auth/pull/232)).
+
 ## [3.6.0](https://github.com/tuupola/slim-jwt-auth/compare/3.5.2...3.6.0) - 2022-01-12
 ### Added
 - Allow installing with latest versions of `psr/log` ([#215](https://github.com/tuupola/slim-jwt-auth/pull/215)).
