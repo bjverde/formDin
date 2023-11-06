@@ -40,7 +40,7 @@ $dados['DAT'][] = '01/01/2015';
 $dados['TXT_TERMO'][] = 'Termo';
 $dados['TXT_OBS'][] = 'OBS';
 $dados['NUM_VALOR'][] = '10.45';
-$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode('Descriminação');
+$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode_windows1252('Descriminação');
 
 $dados['TXT_EMPENHO'][] = '2015NE4478';
 $dados['TXT_REGISTRO'][] = 'REGNE4457';
@@ -49,7 +49,7 @@ $dados['DAT'][] = '02/01/2015';
 $dados['TXT_TERMO'][] = 'Termo 2';
 $dados['TXT_OBS'][] = 'OBS 2';
 $dados['NUM_VALOR'][] = '150.47';
-$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode('Descriminação');
+$dados['TXT_DESCRIMINACAO'][] = StringHelper::utf8_decode_windows1252('Descriminação');
 
 //exibir criterio utilizado no filtro
 $criterio = isset($criterio) ? $criterio : null;
@@ -89,10 +89,10 @@ $pdf->cell($pdf->getRowWidths(6), 5, number_format($total, 2, '.', ','), 1, 0, '
 $pdf->cell($pdf->getRowWidths(7), 5, '', 1, 1, 'R', 1);
 $pdf->SetFillColor(255, 255, 255); // fundo branco
 $pdf->ln(3);
-$pdf->multiCell(0, 4, StringHelper::utf8_decode(getMsgFPDF()), 1);
+$pdf->multiCell(0, 4, StringHelper::utf8_decode_windows1252(getMsgFPDF()), 1);
 
 $msg02 = 'Esse exemplo utiliza os metodos: TPDF->setData e TPDF->addColumn. Para criar um grid de forma facil e semelhante ao que acontece no FormDin;';
-$pdf->multiCell(0, 4, StringHelper::utf8_decode($msg02), 1);
+$pdf->multiCell(0, 4, StringHelper::utf8_decode_windows1252($msg02), 1);
 
 $pdf->ln(4);
 $pdf->SetTextColor(0, 0, 255);//0,64,128);
