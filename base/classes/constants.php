@@ -65,6 +65,7 @@ if (!defined('TAB')) {
 
 
 define('FORMDIN_VERSION', '4.23.0');
+define('FPDF_VERSION', '1.86');
 
 // --Data Base Management System
 define('DBMS_ACCESS', 'ACCESS');
