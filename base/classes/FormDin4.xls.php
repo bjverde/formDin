@@ -116,7 +116,7 @@ foreach( $_REQUEST as $k => $v ) {
 // criar os titulos das colunas
 $a=null;
 foreach($keys as $v ) {
-    $a[]  = htmlentities(utf8_encode($v), ENT_COMPAT, 'UTF-8');
+    $a[]  = htmlentities(StringHelper::utf8_encode($v), ENT_COMPAT, 'UTF-8');
 }
 $excel->writeLine($a);
 
