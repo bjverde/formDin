@@ -44,6 +44,8 @@ final class TConnection
 	// construtor
 	private function __construct(){}
 	private function __clone(){}
+
+	public $poolId;
 	//------------------------------------------------------------------------------------------
 	public static function connect($dbType='postgres|mysql|sqlite|oracle|sqlserver',$username=null,$password=null,$database=null,$host=null,$port=null,$schema=null,$boolUtf8=null)
 	{
