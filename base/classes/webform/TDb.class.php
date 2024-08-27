@@ -65,68 +65,49 @@ class TDb
 	public static function sql($sql=null,$arrParams=null,$fetchMode=null,$dbType=null)
 	{
 		$fetchMode = is_null($fetchMode) ? PDO::FETCH_ASSOC : $fetchMode;
-		if( is_null( self::$dbType ) && defined('DEFAULT_DBMS' ) )
-		{
+		if( is_null( self::$dbType ) && defined('DEFAULT_DBMS' ) ) {
 			self::$dbType = DEFAULT_DBMS;
 		}
 		$dbType = is_null($dbType) ? self::$dbType : $dbType;
-		if( ! $dbType )
-		{
+		if( ! $dbType ) {
 			throw new Exception("Necessário informar o tipo do banco de dados. Ex:TDb::setDbType('mysql'); ou defina a constante DEFAULT_DBMS. ex:define('DEFAULT_DBMS','mysql');");
 		}
-		if( is_null( self::$dbType ) )
-		{
+		if( is_null( self::$dbType ) ) {
 			self::$dbType = $dbType;
 		}
-		try
-		{
-			if( array_key_exists( $dbType, self::$conn ) )
-			{
+		try {
+			if( array_key_exists( $dbType, self::$conn ) ) {
 				$conn = self::$conn[$dbType];
-			}
-			else
-			{
+			} else {
 				$conn = TConnection::connect($dbType);
-				if( !array_key_exists( $dbType, self::$conn ) )
-				{
+				if( !array_key_exists( $dbType, self::$conn ) ){
 					self::$conn[$dbType] = $conn;
 				}
 			}
 		}
-		catch( Exception $e )
-		{
-
+		catch( Exception $e ) {
 			throw new Exception("<br><h3>Erro de conexão</h3>".$e->getMessage().'<br>');
 		}
 		$result=null;
-		try
-		{
-			if( !$sql)
-			{
+		try {
+			if( !$sql) {
 				return null;
 			}
 			$sql = trim($sql);
-			if( $stmt = $conn->prepare( $sql ) )
-			{
-				if( $result = $stmt->execute( (array) $arrParams ) )
-				{
-					try
-					{
+			if( $stmt = $conn->prepare( $sql ) ) {
+				if( $result = $stmt->execute( (array) $arrParams ) ) {
+					try {
 						$data = $stmt->fetchAll( $fetchMode );
-						if( preg_match('/^select/i',$sql ) > 0 )
-						{
+						if( preg_match('/^select/i',$sql ) > 0 ) {
 							$result = $data;
 						}
-					}
-					catch(Exception $e)
-					{
+					} catch(Exception $e) {
 						return $result;
 					}
 				}
 			}
 		}
-		catch( Exception $e )
-		{
+		catch( Exception $e ) {
 			$erro = "<h3>Erro de SQL</h3>".$sql.'<br><br>';
 			if( $arrParams )
 			{
@@ -139,7 +120,5 @@ class TDb
 		}
 		return $result;
 	}
-	//public static function
-
 }
 ?>
