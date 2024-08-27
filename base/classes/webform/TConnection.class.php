@@ -286,7 +286,7 @@ final class TConnection
 		die( $html);
 		//throw new Exception( utf8_encode($html) );
 	}
-	
+
 	/**
 	* Localiza a pasta base da framework
 	*
@@ -306,6 +306,14 @@ final class TConnection
 		$base = str_replace('base/','',$base);
 		$root = ($base == '/') ? './' : $base;
 		return $root;
+	}
+
+	public function setPoolId($poolId){
+		$this->poolId = $poolId;
+	}
+
+	public function getPoolId(){
+		return $this->poolId;
 	}
 }
 ?>
