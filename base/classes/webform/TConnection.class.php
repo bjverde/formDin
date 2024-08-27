@@ -47,7 +47,14 @@ final class TConnection
 
 	public $poolId;
 	//------------------------------------------------------------------------------------------
-	public static function connect($dbType='postgres|mysql|sqlite|oracle|sqlserver',$username=null,$password=null,$database=null,$host=null,$port=null,$schema=null,$boolUtf8=null)
+	public static function connect($dbType='postgres|mysql|sqlite|oracle|sqlserver'
+	                              ,$username=null
+								  ,$password=null
+								  ,$database=null
+								  ,$host=null
+								  ,$port=null
+								  ,$schema=null
+								  ,$boolUtf8=null)
 	{
 		if( preg_match('/\|/',$dbType) || is_null($dbType) )
 		{
@@ -58,8 +65,7 @@ final class TConnection
         $dbType = strtolower($dbType);
         $configFile = "conn_$dbType.php";
 		$configErrors=array();
-		if( !$database && !$username )
-		{
+		if( !$database && !$username ) {
 			if( !file_exists( $configFile ))
 			{
 				$configFile = "includes/conn_$dbType.php";
@@ -108,7 +114,6 @@ final class TConnection
 				$boolUtf8 = 1;
 			}
 		}
-
 
 		switch( $dbType )
 		{
@@ -186,45 +191,33 @@ final class TConnection
 				$configErrors[] = 'Variavel $dbType não definida no arquivo de configuração!';
 		}
 
-		if( count( $configErrors ) > 0 )
-		{
+		if( count( $configErrors ) > 0 ){
 			self::showExemple( $configErrors );
 		}
-        if( !$dsn)
-        {
-            //die('Tipo do banco de dados '.$dbType.' não reconhecido. Ex: postgres, mysql, sqlite, oracle.');
+        if( !$dsn){
 			throw new Exception('Tipo do banco de dados '.$dbType.' não reconhecido. Ex: postgres, mysql, sqlite, oracle.');
         }
-		//print 'dns:'.$dsn.'<br>User:'.$username.'<br>Senha:'.$password.'<br>';
-        //die();
-		try
-		{
-			if( $dbType!='oracle')
-			{
+
+		try {
+			if( $dbType!='oracle'){
 				$conn = new PDO($dsn,$username,$password);
 				$conn->isPDO = true;
-
-//				$conn->dsn 		= $dsn;
-//				$conn->utf8 	= $boolUtf8;
-//				$conn->dbType	= $dbType;
-//				$conn->schema	= $schema;
+				//$conn->dsn 	= $dsn;
+				//$conn->utf8 	= $boolUtf8;
+				//$conn->dbType	= $dbType;
+				//$conn->schema	= $schema;
 				$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 				$conn->setAttribute(PDO::ATTR_CASE,PDO::CASE_UPPER );
-
-	            if( $dbType == 'postgres' && $schema )
-	            {
+	            if( $dbType == 'postgres' && $schema ){
 	                $stmt = $conn->prepare( 'set search_path='.$schema );
 	                $stmt->execute();
 	                $stmt=null;
 	            }
-			}
-			else
-			{
+			}else{
 				$dsn=$database;
 				$charSet = ( ( $boolUtf8===true) ? 'UTF8': null );
 				$connection = @oci_connect($username, $password, $database, $charSet);
-				if( ! $connection )
-				{
+				if( ! $connection ){
 					$e = oci_error();
 					throw new Exception('Connection error'.$e['message']);
 				}
@@ -236,22 +229,18 @@ final class TConnection
 				print_r($res);
 				*/
 			}
-			if( is_object($conn))
-			{
+			if( is_object($conn)){
 				$conn->dsn 		= $dsn;
 				$conn->utf8 	= $boolUtf8;
 				$conn->dbType	= $dbType;
 				$conn->schema	= $schema;
 			}
-
-		}
-		catch( Exception $e )
-		{
-			// capturar error de sql
+		}catch( Exception $e ){
 			throw new Exception("<br><b>Connection error using dsn ".$dsn."</b><br>Message:".$e->getMessage().'<br>');
 		}
 		return $conn;
 	}
+
 	private static function showExemple($arrErros=null)
 	{
 		$msgErro =  implode('<br>',$arrErros);
@@ -297,6 +286,7 @@ final class TConnection
 		die( $html);
 		//throw new Exception( utf8_encode($html) );
 	}
+	
 	/**
 	* Localiza a pasta base da framework
 	*
