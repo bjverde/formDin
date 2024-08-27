@@ -45,7 +45,6 @@ final class TConnection
 	private function __construct(){}
 	private function __clone(){}
 
-	public $poolId;
 	//------------------------------------------------------------------------------------------
 	public static function connect($dbType='postgres|mysql|sqlite|oracle|sqlserver'
 	                              ,$username=null
@@ -306,14 +305,6 @@ final class TConnection
 		$base = str_replace('base/','',$base);
 		$root = ($base == '/') ? './' : $base;
 		return $root;
-	}
-
-	public function setPoolId($poolId){
-		$this->poolId = $poolId;
-	}
-
-	public function getPoolId(){
-		return $this->poolId;
 	}
 }
 ?>
