@@ -15,18 +15,25 @@ class TPDOWrapper {
 
     private static $supportedDbTypes = ['postgres', 'postgre', 'pgsql', 'mysql', 'sqlite', 'oracle', 'sqlserver'];
 
-    public function __construct($dbType = 'postgres', $username = null, $password = null, $database = null, $host = null, $port = null, $schema = null, $boolUtf8 = null) {
+    public function __construct(string $dbType
+                               ,string $host = null
+                               ,string $username = null
+                               ,string $password = null
+                               ,string $database = null
+                               ,string $port = null 
+                               ,string $schema = null
+                               ,string $boolUtf8 = null) {
         $this->setDbType($dbType);
+        $this->setHost($host);
         $this->setUsername($username);
         $this->setPassword($password);
         $this->setDatabase($database);
-        $this->setHost($host);
         $this->setPort($port);
         $this->setSchema($schema);
         $this->setBoolUtf8($boolUtf8);
 
         // Calcular o poolId
-        $this->poolId = self::calculateIdConnect($this->dbType, $this->username, $this->password, $this->database, $this->host, $this->port, $this->schema, $this->boolUtf8);
+        $this->poolId = self::calculateIdConnect($this->dbType, $this->host, $this->username, $this->password, $this->database, $this->port, $this->schema, $this->boolUtf8);
 
         // Inicializar a conexão PDO
         $this->initializePDO();
@@ -38,6 +45,7 @@ class TPDOWrapper {
     }
 
     public function setDbType($dbType) {
+        self::isValidDbType($dbType);
         $this->dbType = strtolower($dbType);
     }
 
