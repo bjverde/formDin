@@ -46,14 +46,14 @@ final class TConnection
 	private function __clone(){}
 
 	//------------------------------------------------------------------------------------------
-	public static function connect($dbType='postgres|mysql|sqlite|oracle|sqlserver'
-	                              ,$username=null
-								  ,$password=null
-								  ,$database=null
-								  ,$host=null
-								  ,$port=null
-								  ,$schema=null
-								  ,$boolUtf8=null)
+    public static function connect(string $dbType
+								  ,string $host = null
+								  ,string $username = null
+								  ,string $password = null
+								  ,string $database = null
+								  ,string $port = null 
+								  ,string $schema = null
+								  ,string $boolUtf8 = null) {
 	{
 		if( preg_match('/\|/',$dbType) || is_null($dbType) )
 		{
@@ -65,31 +65,24 @@ final class TConnection
         $configFile = "conn_$dbType.php";
 		$configErrors=array();
 		if( !$database && !$username ) {
-			if( !file_exists( $configFile ))
-			{
+			if( !file_exists( $configFile )){
 				$configFile = "includes/conn_$dbType.php";
-				if( !file_exists( $configFile ))
-				{
+				if( !file_exists( $configFile )){
 					$root = self::getRoot();
 					$configFile = $root.$configFile;
 				}
 			}
-			//die( $configFile);
-			if( ! file_exists( $configFile ) )
-			{
+			if( ! file_exists( $configFile ) ){
 				self::showExemple(array("Classe TConnection.class.php - Arquivo {$configFile} não encontrado!"));
 				return false;
 			}
-			try
-			{
+			try{
 				require_once($configFile);
-				if( isset($utf8))
-				{
+				if( isset($utf8)){
 					$boolUtf8 = $utf8;
 				}
 			}
-			catch(Exception $e)
-			{
+			catch(Exception $e){
 				throw $e;
 			}
 			/*$db			= parse_ini_file($configFile);
@@ -104,12 +97,9 @@ final class TConnection
 			*/
 
 			$decimal_separator = isset($db['decimal_separator']) 		? $db['decimal_separator'] 		: null;
-			if( preg_match('/false|0/i',$boolUtf8 ) == 1 || trim( $boolUtf8 ) == '' )
-			{
+			if( preg_match('/false|0/i',$boolUtf8 ) == 1 || trim( $boolUtf8 ) == '' ){
 				$boolUtf8 = 0;
-			}
-			else
-			{
+			} else {
 				$boolUtf8 = 1;
 			}
 		}
