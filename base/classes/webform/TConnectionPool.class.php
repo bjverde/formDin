@@ -58,9 +58,10 @@ class TConnectionPool {
 				$conn = self::$conn[$connId];
 			}else{
 				//echo 'Nova Conexão<br>';
-		        $conn = TConnection::connect( $dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8 );
-				$conn->poolId = $conn;
-				self::$conn[$connId] = $conn;
+		        $pdo = TConnection::connect( $dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8 );
+                // Criação do wrapper PDO
+                $conn = new TPDOWrapper($pdo, $connId);
+                self::$conn[$connId] = $conn;
 			}
         } catch( Exception $e ){
 			throw $e;
