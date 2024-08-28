@@ -13,6 +13,8 @@ class TPDOWrapper {
     public PDO $pdo;
     public string $poolId;
 
+    private static $supportedDbTypes = ['postgres', 'postgre', 'pgsql', 'mysql', 'sqlite', 'oracle', 'sqlserver'];
+
     public function __construct($dbType = 'postgres', $username = null, $password = null, $database = null, $host = null, $port = null, $schema = null, $boolUtf8 = null) {
         $this->setDbType($dbType);
         $this->setUsername($username);
@@ -131,6 +133,13 @@ class TPDOWrapper {
         }
     }
 
+    public static function isValidDbType(string $dbType){
+        $inArray = in_array(strtolower($dbType), self::$supportedDbTypes);
+        if ($inArray == false) {
+            throw new Exception("Tipo de banco de dados não suportado: $dbType");
+        }
+    }
+
     public static function calculateIdConnect(string $dbType
                                              ,string $host = null
                                              ,string $username = null
@@ -139,7 +148,8 @@ class TPDOWrapper {
                                              ,string $port = null 
                                              ,string $schema = null
                                              ,string $boolUtf8 = null) {
-        $string = strtolower($dbType . $username . $password . $database . $host . $port . $schema . $boolUtf8);
+        self::isValidDbType($dbType);
+        $string = strtolower($dbType.$host.$username.$password.$database.$port.$schema.$boolUtf8);
         $idConnect = md5($string);
         return $idConnect;
     }
