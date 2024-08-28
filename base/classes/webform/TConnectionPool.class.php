@@ -38,10 +38,10 @@
  * ou escreva para a Fundação do Software Livre (FSF) Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
  */
-include_once( 'autoload_formdin.php');
-class TConnectionPool
-{
-	private static $conn	= array();
+require_once 'autoload_formdin.php';
+
+class TConnectionPool {	
+	private static array $conn = [];
 
 	// construtor
 	private function __construct(){}
@@ -52,8 +52,7 @@ class TConnectionPool
     {
 		$conn=false;
     	$connId = md5(strtolower($dbType.$username.$password.$database.$host.$port.$schema.$boolUtf8));
-        try
-        {
+        try {
         	if( array_key_exists( $connId, self::$conn ) ){
 				//echo 'Conexão já estabelecida<br>';
 				$conn = self::$conn[$connId];
