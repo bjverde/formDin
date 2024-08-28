@@ -131,8 +131,16 @@ class TPDOWrapper {
         }
     }
 
-    public static function calculateIdConnect($dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8) {
-        $idConnect = md5(strtolower($dbType . $username . $password . $database . $host . $port . $schema . $boolUtf8));
+    public static function calculateIdConnect(string $dbType
+                                             ,string $host = null
+                                             ,string $username = null
+                                             ,string $password = null
+                                             ,string $database = null
+                                             ,string $port = null 
+                                             ,string $schema = null
+                                             ,string $boolUtf8 = null) {
+        $string = strtolower($dbType . $username . $password . $database . $host . $port . $schema . $boolUtf8);
+        $idConnect = md5($string);
         return $idConnect;
     }
 }
