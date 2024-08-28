@@ -60,16 +60,6 @@ class TConnectionPool {
 				//echo 'Nova Conexão<br>';
 		        $conn = TConnection::connect( $dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8 );
 				$conn->poolId = $conn;
-				/*
-				$TPDOConnectionObj = new TPDOConnectionObj();
-				$TPDOConnectionObj->setDBMS($dbType);
-				$TPDOConnectionObj->setUsername($username);
-				$TPDOConnectionObj->setPassword($password);
-				$TPDOConnectionObj->setDataBaseName($database);
-				$TPDOConnectionObj->setHost($host);
-				$TPDOConnectionObj->setPort($port);
-				$conn = $TPDOConnectionObj->getTPDOConnection();
-				*/
 				self::$conn[$connId] = $conn;
 			}
         } catch( Exception $e ){
