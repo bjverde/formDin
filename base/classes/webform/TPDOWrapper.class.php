@@ -9,6 +9,7 @@ class TPDOWrapper {
     private $port;
     private $schema;
     private $boolUtf8;
+    public  $isPDO;
 
     public PDO $pdo;
     public string $poolId;
@@ -31,6 +32,7 @@ class TPDOWrapper {
         $this->setPort($port);
         $this->setSchema($schema);
         $this->setBoolUtf8($boolUtf8);
+        $this->isPDO = true;
 
         // Calcular o poolId
         $this->poolId = self::calculateIdConnect($this->dbType, $this->host, $this->username, $this->password, $this->database, $this->port, $this->schema, $this->boolUtf8);
