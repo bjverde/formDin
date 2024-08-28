@@ -85,17 +85,6 @@ final class TConnection
 			catch(Exception $e){
 				throw $e;
 			}
-			/*$db			= parse_ini_file($configFile);
-			$dbType     = isset($db['dbtype']) 		? $db['dbtype'] 	: $dbType;
-			$username	= isset($db['username']) 	? $db['username'] 	: null;
-			$password 	= isset($db['password']) 	? $db['password'] 	: null;
-			$database 	= isset($db['database']) 	? $db['database'] 	: null;
-			$host 		= isset($db['host']) 		? $db['host'] 		: null;
-			$port 		= isset($db['port']) 		? $db['port'] 		: null;
-			$schema		= isset($db['schema']) 		? $db['schema'] 	: null;
-			$boolUtf8	= isset($db['utf8']) 		? $db['utf8'] 		: $boolUtf8;
-			*/
-
 			$decimal_separator = isset($db['decimal_separator']) 		? $db['decimal_separator'] 		: null;
 			if( preg_match('/false|0/i',$boolUtf8 ) == 1 || trim( $boolUtf8 ) == '' ){
 				$boolUtf8 = 0;
