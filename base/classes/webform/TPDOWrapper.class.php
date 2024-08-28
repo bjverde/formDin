@@ -37,8 +37,8 @@ class TPDOWrapper {
         // Calcular o poolId
         $this->poolId = self::calculateIdConnect($this->dbType, $this->host, $this->username, $this->password, $this->database, $this->port, $this->schema, $this->boolUtf8);
 
-        // Inicializar a conexão PDO
-        $this->initializePDO();
+        //Inicializar a conexão PDO
+        //$this->initializePDO();
     }
 
     // Getters e Setters
@@ -110,6 +110,14 @@ class TPDOWrapper {
     public function getPoolId() {
         return $this->poolId;
     }
+
+    public function getPdo() {
+        return $this->pdo;
+    }
+
+    public function setPdo(PDO $pdo) {
+        $this->pdo = $pdo;
+    }    
 
     // Métodos auxiliares
     private function initializePDO() {
