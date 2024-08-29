@@ -53,7 +53,7 @@ final class TConnection
 								  ,string $database = null
 								  ,string $port = null 
 								  ,string $schema = null
-								  ,string $boolUtf8 = null) {
+								  ,string $boolUtf8 = null)
 	{
 		$tPdoWrapper = new TPDOWrapper($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
 		$boolUtf8 = $tPdoWrapper->getBoolUtf8();
