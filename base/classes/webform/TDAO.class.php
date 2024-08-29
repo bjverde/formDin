@@ -354,6 +354,21 @@ class TDAO
 		return ( ( $this->utf8 === false ) ? false : true );
 	}
 
+	public function metadataDirConnect(){
+		if( $this->getMetadataDir()){
+			if ( !is_array( $this->getFields() ) ){
+				if ( !$this->unserializeFields() ){
+					$this->loadFieldsFromDatabase();
+				}
+			}
+			if( is_array($this->primaryKeys ) ){
+				foreach($this->primaryKeys as $fieldName=>$boolTemp){
+					$this->getField($fieldName)->primaryKey = 1;
+				}
+			}
+		}
+	}
+
 	/**
 	* Tenta fazer a conexão com o banco de dados retornando verdadeiro o falso
 	*
@@ -376,19 +391,7 @@ class TDAO
 			$this->setError( $e->getMessage() );
 			return false;
 		}
-
-        if( $this->getMetadataDir()){
-			if ( !is_array( $this->getFields() ) ){
-				if ( !$this->unserializeFields() ){
-					$this->loadFieldsFromDatabase();
-				}
-			}
-			if( is_array($this->primaryKeys ) ){
-				foreach($this->primaryKeys as $fieldName=>$boolTemp){
-					$this->getField($fieldName)->primaryKey = 1;
-				}
-			}
-		}
+		$this->metadataDirConnect();
 		return true;
 	}
 
