@@ -2676,6 +2676,127 @@ class TDAO
 		return $result;
 	}
 
+
+	public function updateValuesOralceNotPdo($arrFieldValues=null)
+	{
+		// oracle sem PDO
+		$sql ="update " . $this->getTableName() . ' set ';
+		$valuesClause=array();
+		$params      =array();
+		$returningFields=array();
+		$returningInto=array();
+		$descriptors=null;
+		foreach( $arrFieldValues as $fieldName => $fieldValue )
+		{
+			$fieldName = strtolower( trim( $fieldName ) );
+			$objField  = $this->getField( $fieldName );
+			if ( !$this->getAutoincFieldName() || strtolower( $fieldName ) != strtolower( $this->getAutoincFieldName() ) )
+			{
+				// valor do campo
+				$params[ $fieldName ]=$fieldValue;
+
+				// campo blob
+				if ( $objField && strtoupper( $objField->fieldType ) == 'BLOB' ) {
+					$valuesClause[]= $fieldName.'=empty_blob()';
+					array_push( $returningFields, $fieldName );
+					array_push( $returningInto, ':' . $fieldName );
+				}
+				else if( $objField && strtoupper( $objField->fieldType ) == 'CLOB' ) {
+					$valuesClause[] = $fieldName.'= empty_clob()';
+					array_push( $returningFields, $fieldName );
+					array_push( $returningInto, ':' . $fieldName );
+				}
+				else {
+					$valuesClause[] = $fieldName.'=:' . $fieldName;
+				}
+			}
+		}
+		$valuesClause = implode(',',$valuesClause);
+		$sql .= ' '.$valuesClause;
+
+		// where
+		$whereClause =array();
+		foreach($pks as $v)
+		{
+			$v = strtolower($v);
+			$params['w_'.$v] = $this->getFieldValue($v);
+			$whereClause[] = $v.' = :w_'.$v;
+		}
+		$whereClause = 'where '.implode(' and ', $whereClause);
+		$sql .= ' '.$whereClause;
+
+		// returning
+		$returningClause='';
+		if ( count( $returningFields ) > 0 )
+		{
+			$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
+		}
+
+		$sql .= ' '.$returningClause;
+
+		$stmt = oci_parse( $this->getConn()->connection, $sql);
+		if( !$stmt)
+		{
+			$e = oci_error();
+			throw new Exception( 'Parse error ' . $e[ 'message' ] );
+		}
+
+			$params = $this->prepareParams( $params, true ); // tratar acentos
+		// fazer o bind dos valores aos parametros
+		foreach( $params as $fieldName => $fieldValue )
+		{
+			$objField = $this->getField( $fieldName );
+
+			if ( $objField )
+			{
+				$bindType=$this->getBindType( $objField->fieldType );
+				if ( $bindType == SQLT_CLOB )
+				{
+					$descriptors[ $fieldName ]=$params[ $fieldName ];
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
+				}
+				else if( $bindType == SQLT_BLOB )
+				{
+					$descriptors[ $fieldName ]=$params[ $fieldName ];
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
+				}
+				else
+				{
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
+				}
+			}
+			else
+			{
+				oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
+			}
+		}
+		if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
+		{
+			$e=oci_error( $stmt );
+			oci_free_statement( $stmt );
+
+			throw new Exception( 'Update error ' . $e[ 'message' ] );
+		}
+
+		// salvar os campos lobs
+		if ( count( $descriptors ) > 0 )
+		{
+			foreach( $descriptors as $k => $v )
+			{
+				$params[ $k ]->save( $v );
+			}
+		}
+		if ( $this->getAutoCommit() )
+		{
+			$this->commit();
+		}
+		$result = true;
+		oci_free_statement( $stmt );
+		return $result;
+	}
+
 	/**
 	* Executa o comando update baseado no array de campos e valores recebidos
 	*
@@ -2683,22 +2804,17 @@ class TDAO
 	*/
 	public function updateValues($arrFieldValues=null)
 	{
-		if ( !$this->connect() )
-		{
+		if ( !$this->connect() ){
 			return false;
 		}
 		$result = false;
-		try
-		{
+		try{
 			$pks = $this->getPrimaryKeys();
-			if( ! is_array($pks))
-			{
+			if( ! is_array($pks)){
 				$this->setError('Primary key for table '.$this->getTableName().' not defined!');
 				return $result;
 			}
-
-			if ( $this->getDbType() != DBMS_ORACLE )
-			{
+			if ( $this->getDbType() != DBMS_ORACLE ){
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
 				$valuesClause   = array();
 				$params         = array();
@@ -2731,135 +2847,17 @@ class TDAO
 				}
 				$result = self::query( $sqlUpdate, $params );
 			}
-			else
-			{
-  				// oracle sem PDO
-				$sql ="update " . $this->getTableName() . ' set ';
-				$valuesClause=array();
-				$params      =array();
-				$returningFields=array();
-				$returningInto=array();
-				$descriptors=null;
-				foreach( $arrFieldValues as $fieldName => $fieldValue )
-				{
-					$fieldName = strtolower( trim( $fieldName ) );
-					$objField  = $this->getField( $fieldName );
-					if ( !$this->getAutoincFieldName() || strtolower( $fieldName ) != strtolower( $this->getAutoincFieldName() ) )
-					{
-						// valor do campo
-						$params[ $fieldName ]=$fieldValue;
-
-						// campo blob
-						if ( $objField && strtoupper( $objField->fieldType ) == 'BLOB' )
-						{
-							$valuesClause[]= $fieldName.'=empty_blob()';
-							array_push( $returningFields, $fieldName );
-							array_push( $returningInto, ':' . $fieldName );
-						}
-						else if( $objField && strtoupper( $objField->fieldType ) == 'CLOB' )
-						{
-							$valuesClause[] = $fieldName.'= empty_clob()';
-							array_push( $returningFields, $fieldName );
-							array_push( $returningInto, ':' . $fieldName );
-						}
-						else
-						{
-							$valuesClause[] = $fieldName.'=:' . $fieldName;
-						}
-					}
-				}
-				$valuesClause = implode(',',$valuesClause);
-				$sql .= ' '.$valuesClause;
-
-				// where
-				$whereClause =array();
-				foreach($pks as $v)
-				{
-					$v = strtolower($v);
-					$params['w_'.$v] = $this->getFieldValue($v);
-					$whereClause[] = $v.' = :w_'.$v;
-				}
-				$whereClause = 'where '.implode(' and ', $whereClause);
-				$sql .= ' '.$whereClause;
-
-				// returning
-				$returningClause='';
-				if ( count( $returningFields ) > 0 )
-				{
-					$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
-				}
-
-				$sql .= ' '.$returningClause;
-
-				$stmt = oci_parse( $this->getConn()->connection, $sql);
-				if( !$stmt)
-				{
-					$e = oci_error();
-					throw new Exception( 'Parse error ' . $e[ 'message' ] );
-				}
-
-   				$params = $this->prepareParams( $params, true ); // tratar acentos
-				// fazer o bind dos valores aos parametros
-				foreach( $params as $fieldName => $fieldValue )
-				{
-					$objField = $this->getField( $fieldName );
-
-					if ( $objField )
-					{
-						$bindType=$this->getBindType( $objField->fieldType );
-						if ( $bindType == SQLT_CLOB )
-						{
-							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
-						}
-						else if( $bindType == SQLT_BLOB )
-						{
-							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
-						}
-						else
-						{
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
-						}
-					}
-					else
-					{
-						oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
-					}
-				}
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
-					$e=oci_error( $stmt );
-					oci_free_statement( $stmt );
-
-					throw new Exception( 'Update error ' . $e[ 'message' ] );
-				}
-
-				// salvar os campos lobs
-				if ( count( $descriptors ) > 0 )
-				{
-					foreach( $descriptors as $k => $v )
-					{
-						$params[ $k ]->save( $v );
-					}
-				}
- 				if ( $this->getAutoCommit() )
-				{
-					$this->commit();
-				}
-				$result = true;
- 				oci_free_statement( $stmt );
+			else {
+				$result = $this->updateValuesOralceNotPdo($arrFieldValues=null);
 			}
 		}
-		catch(Exception $e)
-		{
+		catch(Exception $e){
 			$this->setError($e->getMessage());
 			return $result;
 		}
 		return $result;
 	}
+
 	/**
 	* Retorna se já existe ou não uma transação aberta
 	*
