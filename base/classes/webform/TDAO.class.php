@@ -2243,6 +2243,7 @@ class TDAO
 			}
 		}
 	}
+
     /**
     * Retorna o array de campos que fazem parte da chave primária da tabela
     *
@@ -2251,25 +2252,21 @@ class TDAO
 	public function getPrimaryKeys()
 	{
 		$result=array();
-		if( $this->getFields())
-		{
-			foreach($this->getFields() as $fieldName=>$objField)
-			{
-				if( isset( $objField->primaryKey) && $objField->primaryKey == 1 )
-				{
+		if( $this->getFields()) {
+			foreach($this->getFields() as $fieldName=>$objField) {
+				if( isset( $objField->primaryKey) && $objField->primaryKey == 1 ) {
 					array_push($result,$objField->fieldName);
 				}
 			}
 		}
-		else
-		{
-			if( is_array($this->primaryKeys) )
-			{
+		else{
+			if( is_array($this->primaryKeys) ){
 				$result = array_keys($this->primaryKeys);
 			}
 		}
 		return $result;
 	}
+
 	/**
 	* Persiste os valores dos campos definidos com setFieldValue() chamando
 	* o método insert ou update
@@ -2279,40 +2276,34 @@ class TDAO
 	{
 		$result = false;
 		$pks = $this->getPrimaryKeys();
-		if( count($pks) > 0 )
-		{
+		if( count($pks) > 0 ) {
 			$params=null;
 			$where = array();
-			foreach($pks as $v)
-			{
+			foreach($pks as $v) {
 				$params[$v] = $this->getFieldValue($v);
-				if($this->isPDO())
-				{
+				if($this->isPDO()) {
 					$where[] = $v.'=?';
 				}
-				else
-				{
+				else{
 					$where[] = $v.' = :'.$v;
 				}
 			}
 			$sql = "select ".$pks[0]." from ".$this->getTableName()." where ".implode(' and ',$where);
 			//print_r($params);
 			$result = $this->query($sql,$params);
-			if( is_array($result) && count($result)>0)
-			{
+			if( is_array($result) && count($result)>0){
 				$result = $this->update();
 			}
-			else
-			{
+			else{
 				$result = $this->insert();
 			}
 		}
-		else
-		{
+		else{
 			$result = $this->insert();
 		}
 		return $result;
 	}
+
 	/**
 	* Executa o comando insert com os valores definidos nos campos da tabela
 	*
@@ -2320,19 +2311,17 @@ class TDAO
 	public function insert()
 	{
 		$fields=$this->getFields();
-		if( is_array( $fields ) )
-		{
+		if( is_array( $fields ) ){
 			$params=null;
-			foreach($fields as $fieldName=>$objField)
-			{
-				if( ! $objField->autoincrement )
-				{
+			foreach($fields as $fieldName=>$objField){
+				if( ! $objField->autoincrement ){
 					$params[$objField->fieldName] = isset($objField->value) ? $objField->value : null;
 				}
 			}
 		}
 		return $this->insertValues($params);
 	}
+
     /**
     * Executa o comando update na tabela
     *
@@ -2340,19 +2329,17 @@ class TDAO
 	public function update()
 	{
 		$fields=$this->getFields();
-		if( is_array( $fields ) )
-		{
+		if( is_array( $fields ) ){
 			$params=null;
-			foreach($fields as $fieldName=>$objField)
-			{
-				if( ! $objField->autoincrement )
-				{
+			foreach($fields as $fieldName=>$objField){
+				if( ! $objField->autoincrement ){
 					$params[$objField->fieldName] = isset($objField->value) ? $objField->value : null;
 				}
 			}
 		}
 		return $this->updateValues($params);
 	}
+
     /**
     * Executa o comando delete na tabela
     *
@@ -2361,6 +2348,7 @@ class TDAO
 	{
 		return $this->deleteValues();
 	}
+
     /**
     * Executa o comando insert baseado no array de campos e valores recebidos
     *
@@ -2368,8 +2356,7 @@ class TDAO
     */
     public function insertValues( $arrFieldValues = null )
 	{
-		if ( !$this->connect() )
-		{
+		if ( !$this->connect() ) {
 			return false;
 		}
 
