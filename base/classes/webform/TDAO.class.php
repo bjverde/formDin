@@ -283,25 +283,18 @@ class TDAO
 				case 'postgre':
 				case DBMS_POSTGRES:
 					$this->port='5432';
-					break;
-
+				break;
 				case DBMS_MYSQL:
 					$this->port='3306';
-
-					break;
-
+				break;
 				case DBMS_SQLSERVER:
 					$this->port='1433';
-
-					break;
-
+				break;
 				case DBMS_ORACLE:
 					$this->port='1521';
-
-					break;
-				}
+				break;
+			}
 		}
-
 		return $this->port;
 	}
 
@@ -312,8 +305,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setSchema( $strNewValue = null )
-	{
+	public function setSchema( $strNewValue = null ){
 		$this->schema=$strNewValue;
 	}
 
@@ -325,8 +317,7 @@ class TDAO
 	*
 	* @return string
 	*/
-	public function getSchema()
-	{
+	public function getSchema(){
 		if( $this->conn ){
 			return $this->getConnSchema();
 		}
@@ -338,16 +329,14 @@ class TDAO
 	*
 	* @param boolean $boolNewValue
 	*/
-	public function setUtf8( $boolNewValue = null )
-	{
+	public function setUtf8( $boolNewValue = null ){
 		$this->utf8=$boolNewValue;
 	}
     /**
     * Retorna true ou false se o banco de dados está utilizando codificação UTF-8
     *
     */
-	public function getUtf8()
-	{
+	public function getUtf8(){
 		if( $this->conn ){
 			return $this->getConnUtf8();
 		}
