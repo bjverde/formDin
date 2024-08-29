@@ -2450,16 +2450,14 @@ class TDAO
 				$columnsClause='(' . implode( ',', array_keys( $params ) ) . ')';
 				$valuesClause ='values (' . implode( ',', $valuesClause ) . ')';
 
-				if ( $this->getAutoincFieldName() )
-				{
+				if ( $this->getAutoincFieldName() ){
 					array_push( $returningFields, $this->getAutoincFieldName() );
 					array_push( $returningInto, ':' . $this->getAutoincFieldName() );
 				}
 
 				$returningClause='';
 
-				if ( count( $returningFields ) > 0 )
-				{
+				if ( count( $returningFields ) > 0 ){
 					$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
 				}
 				$sqlInsert .= $columnsClause . ' ' . $valuesClause . ' ' . $returningClause;
@@ -2468,28 +2466,23 @@ class TDAO
 				{
 					$objField = $this->getField( $fieldName );
 
-					if ( $objField )
-					{
+					if ( $objField ){
 						$bindType=$this->getBindType( $objField->fieldType );
-						if ( $bindType == SQLT_CLOB )
-						{
+						if ( $bindType == SQLT_CLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
 							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
 						}
-						else if( $bindType == SQLT_BLOB )
-						{
+						else if( $bindType == SQLT_BLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
 							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
 						}
-						else
-						{
+						else{
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
 						}
 					}
-					else
-					{
+					else{
 						oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
 					}
 				}
@@ -2498,13 +2491,11 @@ class TDAO
 				$this->lastId=null;
 
 				// adicionar o campo autoinc no retorno do insert para capturar o valor gerado
-				if ( $this->getAutoincFieldName() )
-				{
+				if ( $this->getAutoincFieldName() ){
 					oci_bind_by_name( $stmt, ':' . $this->getAutoincFieldName(), $lastId, 20, SQLT_INT );
 				}
 
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
+				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) ){
 					$e=oci_error( $stmt );
 					oci_free_statement( $stmt );
 
@@ -2512,61 +2503,54 @@ class TDAO
 				}
 
 				// salvar os campos lobs
-				if ( count( $descriptors ) > 0 )
-				{
-					foreach( $descriptors as $k => $v )
-					{
+				if ( count( $descriptors ) > 0 ){
+					foreach( $descriptors as $k => $v ){
 						$params[ $k ]->save( $v );
 					}
 				}
 
-				if ( $this->getAutoCommit() && ! $userTransation )
-				{
+				if ( $this->getAutoCommit() && ! $userTransation ){
 					$this->commit();
 				}
 
 				oci_free_statement( $stmt );
 
-				if ( $lastId )
-				{
+				if ( $lastId ){
 					$result[ 0 ][ $this->getAutoincFieldName()] = $lastId;
 				}
 			}
 		}
-		catch( Exception $e )
-		{
-			if( ! $userTransation )
-			{
+		catch( Exception $e ){
+			if( ! $userTransation ){
 				$this->rollBack();
 			}
 			$this->setError( $e->getMessage() );
 			return false;
 		}
-		if( $this->getAutoincFieldName() )
-		{
-			if ( isset($result) && is_array($result) )
-			{
-				if ( isset( $result[ 0 ][ strtolower( $this->getAutoincFieldName() )] ) )
-				{
+		if( $this->getAutoincFieldName() ){
+			if ( isset($result) && is_array($result) ){
+				if ( isset( $result[ 0 ][ strtolower( $this->getAutoincFieldName() )] ) ){
 					$this->lastId = $result[ 0 ][ strtolower( $this->getAutoincFieldName() )];
 				}
-				else if( isset( $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )] ) )
-				{
+				else if( isset( $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )] ) ){
 					$this->lastId = $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )];
 				}
 			}
-			else
-			{
+			else{
 				$this->lastId = $this->getLastInsertId();
 			}
 			$this->setFieldValue($this->getAutoincFieldName(),$this->lastId);
 		}
 
-		if( ! $userTransation )
-		{
+		if( ! $userTransation ){
 			$this->commit();
 		}
 		return true;
+	}
+
+
+	public function deleteValuesOralceNotPdo($arrFieldValues=null){
+
 	}
 
     /**
