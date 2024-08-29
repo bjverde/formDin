@@ -189,9 +189,6 @@ class TDAO
 	* @return string;
 	*/
 	public function getDbType(){
-		if( $this->conn ){
-			//return $this->getConnDbType();
-		}
 		return $this->dbType;
 	}
 
@@ -330,8 +327,7 @@ class TDAO
 	*/
 	public function getSchema()
 	{
-		if( $this->conn )
-		{
+		if( $this->conn ){
 			return $this->getConnSchema();
 		}
 		return $this->schema;
@@ -352,8 +348,7 @@ class TDAO
     */
 	public function getUtf8()
 	{
-		if( $this->conn )
-		{
+		if( $this->conn ){
 			return $this->getConnUtf8();
 		}
 		return ( ( $this->utf8 === false ) ? false : true );
@@ -435,15 +430,12 @@ class TDAO
 			return false;
 		}
 
-		if ( $this->isPdo() )
-		{
-			if ( is_null( $fetchMode ) || ( $fetchMode != PDO::FETCH_ASSOC && $fetchMode != PDO::FETCH_CLASS ) )
-			{
+		if ( $this->isPdo() ){
+			if ( is_null( $fetchMode ) || ( $fetchMode != PDO::FETCH_ASSOC && $fetchMode != PDO::FETCH_CLASS ) ){
 				$fetchMode = PDO::FETCH_ASSOC;
 			}
 
-			try
-			{
+			try{
 				// trocar os "?" por ":p" para fazer o bind_by_name
 				if( is_array($params) && preg_match('/\?/',$sql)==1 )
 				{
@@ -457,8 +449,7 @@ class TDAO
 				$this->sqlParams 	= $params;
 
 				$stmt=$this->getConn()->prepare( $sql );
-				if ( !$stmt )
-				{
+				if ( !$stmt ){
 					throw new Exception( 'Error preparing Sql.' );
 				}
 
@@ -669,14 +660,11 @@ class TDAO
 	*/
 	public function getConn()
 	{
-		if ( is_null( $this->conn ) )
-		{
-			if ( !$this->connect() )
-			{
+		if ( is_null( $this->conn ) ){
+			if ( !$this->connect() ){
 				return false;
 			}
 		}
-
 		return $this->conn;
 	}
 
