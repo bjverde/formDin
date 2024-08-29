@@ -93,24 +93,17 @@ final class TConnection
 			}
 		}
 
-		switch( $dbType )
-		{
+		$defaultPort = TPDOConnection::getDefaultPortDBMS( $dbType );
+		$port = empty($port)?$defaultPort:$port;
+		
+		switch( $dbType ){
 			case 'mysql':
-				if( ! $port )
-				{
-					$port = '3306';
-				}
 				$dsn='mysql:host='.$host.';dbname='.$database.';port='.$port;
 			break;
 			//-----------------------------------------------------------------------
 			case 'postgre':
 			case 'postgres':
 			case 'pgsql':
-                $dbType = 'postgres';
-				if(! $port )
-				{
-					$port = '5432';
-				}
 				$dsn='pgsql:host='.$host.';dbname='.$database.';port='.$port;
 			break;
 			//-----------------------------------------------------------------------
@@ -124,24 +117,10 @@ final class TConnection
 			break;
 			//-----------------------------------------------------------------------
 			case 'oracle':
-				if( ! $port )
-				{
-					$port = '1152';
-				}
 				$dsn="oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host.")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = ".$database.")))";
 			break;
 			//----------------------------------------------------------
-			case 'mssql':
-			if( ! $port ){
-				$port = '1433';
-			}
-			$dsn='mssql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//----------------------------------------------------------
 			case 'sqlserver':
-				if( ! $port ){
-					$port = '1433';
-				}
                 /**
                  * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
                  *
