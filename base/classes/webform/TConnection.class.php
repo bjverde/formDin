@@ -58,7 +58,10 @@ final class TConnection
 		$tPdoWrapper = new TPDOWrapper($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
 		$boolUtf8 = $tPdoWrapper->getBoolUtf8();
         $dbType   = $tPdoWrapper->getDbType();
-
+		if( preg_match('/\|/',$dbType) || is_null($dbType) ){
+		    $dbType='';
+            $dbType='default';
+		}
         $configFile = "conn_$dbType.php";
 		$configErrors=array();
 		if( !$database && !$username ) {
@@ -193,12 +196,7 @@ final class TConnection
 					throw new Exception('Connection error'.$e['message']);
 				}
 				$conn = (object) array('connection'=>$connection,'isPDO'=>false);
-				/*
-				$stid = oci_parse($conn, 'SELECT * from tb_uf where cod_uf = 59');
-				oci_execute($stid);
-				$nrows = oci_fetch_all($stid, $res);
-				print_r($res);
-				*/
+				$tPdoWrapper = $conn;
 			}
 		}catch( Exception $e ){
 			throw new Exception("<br><b>Connection error using dsn ".$dsn."</b><br>Message:".$e->getMessage().'<br>');
