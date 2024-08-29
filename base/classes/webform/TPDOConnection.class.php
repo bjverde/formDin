@@ -530,67 +530,13 @@ class TPDOConnection {
      * @return string
      */
     private static function defineDsnPDO($configErrors,$useConfigfile = true) {
-        $host = self::getHost();
         $database = self::getDataBaseName();
+        $host = self::getHost();
         $port = self::getPort();
-        
-        switch( self::getDBMS() ) {
-            case DBMS_MYSQL :
-                self::$dsn = 'mysql:host='.$host.';dbname='.$database.';port='.$port;
-                break;
-                //-----------------------------------------------------------------------
-            case DBMS_POSTGRES :
-                self::$dsn = 'pgsql:host='.$host.';dbname='.$database.';port='.$port;
-                break;
-                //-----------------------------------------------------------------------
-            case DBMS_SQLITE:
-                //self::validateFileDataBaseExists ( $configErrors );
-                self::$dsn = 'sqlite:'.$database;
-                break;
-                //-----------------------------------------------------------------------
-            case DBMS_ORACLE:
-                self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host. ")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
-                //self::$dsn = "oci:dbname=".SERVICE_NAME;
-                break;
-                //----------------------------------------------------------
-            case DBMS_SQLSERVER:
-                /**
-                 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
-                 *
-                 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-                 * */
-                if (PHP_OS == "Linux") {
-                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
-                        $driver = 'sqlsrv';
-                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                    } else {
-                        $driver = 'dblib';
-                        //self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-                        self::$dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
-                    }
-                } else {
-                    $driver = 'sqlsrv';
-                    //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-					self::$dsn = $driver.':Server='.$host.';Database='.$database;
-                }
-                break;
-                //----------------------------------------------------------
-            case DBMS_FIREBIRD:
-                //self::validateFileDataBaseExists ( $configErrors );
-                self::$dsn = 'firebird:dbname='.$database;
-                break;
-                //----------------------------------------------------------
-            case 'MSACCESS':
-            case DBMS_ACCESS:
-                //self::fileDataBaseExists ( $configErrors );
-                self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.$database.';Uid='.self::$username.';Pwd='.self::$password;
-                break;
-                //----------------------------------------------------------
-            default:
-                $configErrors[] = 'Falta informar o sistema gerenciador de Banco de Dados: Access, Firebird, MySQL, Oracle, PostGresSQL, SQL Lite ou SQL Server';
-                break;
-                //----------------------------------------------------------
-        }
+        $DBMS = self::getDBMS();
+        $username = self::$username;
+        $password = self::$password;
+        self::$dsn= self::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
         return $configErrors;
     }
 
@@ -600,7 +546,7 @@ class TPDOConnection {
         }
     }
 
-    public static function getDsnPDO($DBMS,$host,$port,$database,$username,$password) {
+    public static function getDsnPDO($DBMS,$host,$port,$database,$username,$password){
         $dsn = null;
         $defaultPort = TPDOConnection::getDefaultPortDBMS( $DBMS );
 		$port = empty($port)?$defaultPort:$port;
