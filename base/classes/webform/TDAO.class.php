@@ -377,24 +377,18 @@ class TDAO
 			return false;
 		}
 
-        if( $this->getMetadataDir())
-        {
-			if ( !is_array( $this->getFields() ) )
-			{
-				if ( !$this->unserializeFields() )
-				{
+        if( $this->getMetadataDir()){
+			if ( !is_array( $this->getFields() ) ){
+				if ( !$this->unserializeFields() ){
 					$this->loadFieldsFromDatabase();
 				}
 			}
-			if( is_array($this->primaryKeys ) )
-			{
-				foreach($this->primaryKeys as $fieldName=>$boolTemp)
-				{
+			if( is_array($this->primaryKeys ) ){
+				foreach($this->primaryKeys as $fieldName=>$boolTemp){
 					$this->getField($fieldName)->primaryKey = 1;
 				}
 			}
 		}
-
 		return true;
 	}
 
