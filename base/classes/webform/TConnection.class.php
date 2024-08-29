@@ -55,13 +55,10 @@ final class TConnection
 								  ,string $schema = null
 								  ,string $boolUtf8 = null) {
 	{
-		if( preg_match('/\|/',$dbType) || is_null($dbType) )
-		{
-		    $dbType='';
-            $dbType='default';
-		}
-		$boolUtf8 = ( $boolUtf8 === false ) ? false : true;
-        $dbType = strtolower($dbType);
+		$tPdoWrapper = new TPDOWrapper($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
+		$boolUtf8 = $tPdoWrapper->getBoolUtf8();
+        $dbType   = $tPdoWrapper->getDbType();
+
         $configFile = "conn_$dbType.php";
 		$configErrors=array();
 		if( !$database && !$username ) {
@@ -178,19 +175,15 @@ final class TConnection
 
 		try {
 			if( $dbType!='oracle'){
-				$conn = new PDO($dsn,$username,$password);
-				$conn->isPDO = true;
-				//$conn->dsn 	= $dsn;
-				//$conn->utf8 	= $boolUtf8;
-				//$conn->dbType	= $dbType;
-				//$conn->schema	= $schema;
-				$conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-				$conn->setAttribute(PDO::ATTR_CASE,PDO::CASE_UPPER );
+				$pdo = new PDO($dsn,$username,$password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+				$pdo->setAttribute(PDO::ATTR_CASE,PDO::CASE_UPPER );
 	            if( $dbType == 'postgres' && $schema ){
-	                $stmt = $conn->prepare( 'set search_path='.$schema );
+	                $stmt = $pdo->prepare( 'set search_path='.$schema );
 	                $stmt->execute();
 	                $stmt=null;
 	            }
+				$tPdoWrapper->setPdo($pdo);
 			}else{
 				$dsn=$database;
 				$charSet = ( ( $boolUtf8===true) ? 'UTF8': null );
@@ -207,16 +200,10 @@ final class TConnection
 				print_r($res);
 				*/
 			}
-			if( is_object($conn)){
-				$conn->dsn 		= $dsn;
-				$conn->utf8 	= $boolUtf8;
-				$conn->dbType	= $dbType;
-				$conn->schema	= $schema;
-			}
 		}catch( Exception $e ){
 			throw new Exception("<br><b>Connection error using dsn ".$dsn."</b><br>Message:".$e->getMessage().'<br>');
 		}
-		return $conn;
+		return $tPdoWrapper;
 	}
 
 	private static function showExemple($arrErros=null)
