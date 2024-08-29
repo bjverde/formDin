@@ -189,7 +189,7 @@ class TPDOConnection {
                   .self::$dsn
                   .'<br><BR><b>Erro retornado:</b><br>'
                   .$e->getMessage();
-            self::$error = utf8_encode( $msg );
+            self::$error = StringHelper::utf8_encode( $msg );
             return false;
         }
         
@@ -249,7 +249,7 @@ class TPDOConnection {
             }
         }
         
-        if( count( $configErrors ) == 0 ){
+        if( CountHelper::count( $configErrors ) == 0 ){
             $configErrors = self::setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root);
             
             self::setConfigDbmsPort($useConfigFile, $configArray);
@@ -263,7 +263,7 @@ class TPDOConnection {
             $configErrors = self::useSimpleDBMS($configErrors);
             
             $configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
-            if ( count( $configErrorsDsn ) > 0 ) {
+            if ( CountHelper::count( $configErrorsDsn ) > 0 ) {
                 $configErrors = $configErrors + $configErrorsDsn;
             }
         }
@@ -592,6 +592,12 @@ class TPDOConnection {
                 //----------------------------------------------------------
         }
         return $configErrors;
+    }
+
+
+    public static function getDsnPDO($DBMS,$host,$port,$database,$username,$password) {
+        $dsn = null;
+
     }
     
     /**
