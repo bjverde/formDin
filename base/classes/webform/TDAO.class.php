@@ -2550,7 +2550,68 @@ class TDAO
 
 
 	public function deleteValuesOralceNotPdo($arrFieldValues=null){
+		$result = false;
+		// oracle sem PDO
+		$sql ="delete from " . $this->getTableName();
+		$whereClause = array();
+		$params      =null;
+		if( is_array($arrFieldValues))
+		{
+			foreach( $arrFieldValues as $fieldName => $fieldValue )
+			{
+				$params[ $fieldName ]=$fieldValue;
+				$whereClause[] = $fieldName.'=:' . $fieldName;
+			}
+		}
+		else
+		{
+			// where
+			$pks = $this->getPrimaryKeys();
+			if( count($pks) == 0 )
+			{
+				$this->setError('Primary key for table '.$this->getTableName().' not defined!');
+				return $result;
+			}
+			else
+			{
+				$whereClause =null;
+				foreach($pks as $v)
+				{
+					$v = strtolower($v);
+					$params[$v] = $this->getFieldValue($v);
+					$whereClause[] = $v.' = :'.$v;
+				}
+			}
+		}
+		$whereClause = 'where '.implode(' and ', $whereClause);
+		$sql .= ' '.$whereClause;
+		$stmt = oci_parse( $this->getConn()->connection, $sql);
+		if( !$stmt)
+		{
+			$e = oci_error();
+			throw new Exception( 'Parse error ' . $e[ 'message' ] );
+		}
 
+			$params = $this->prepareParams( $params, true ); // tratar acentos
+		// fazer o bind dos valores aos parametros
+
+		foreach( $params as $fieldName => $fieldValue )
+		{
+			oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
+		}
+		if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
+		{
+			$e=oci_error( $stmt );
+			oci_free_statement( $stmt );
+			throw new Exception( 'Update error ' . $e[ 'message' ] );
+		}
+		if ( $this->getAutoCommit() )
+		{
+			$this->commit();
+		}
+		$result = true;
+		oci_free_statement( $stmt );
+		return $result;
 	}
 
     /**
@@ -2604,77 +2665,17 @@ class TDAO
 					$result = self::query( $sqlUpdate, $params );
 				}
 			}
-			else
-			{
-  				// oracle sem PDO
-				$sql ="delete from " . $this->getTableName();
-				$whereClause = array();
-				$params      =null;
-				if( is_array($arrFieldValues))
-				{
-					foreach( $arrFieldValues as $fieldName => $fieldValue )
-					{
-						$params[ $fieldName ]=$fieldValue;
-						$whereClause[] = $fieldName.'=:' . $fieldName;
-					}
-				}
-				else
-				{
-					// where
-					$pks = $this->getPrimaryKeys();
-					if( count($pks) == 0 )
-					{
-						$this->setError('Primary key for table '.$this->getTableName().' not defined!');
-						return $result;
-					}
-					else
-	                {
-						$whereClause =null;
-						foreach($pks as $v)
-						{
-							$v = strtolower($v);
-							$params[$v] = $this->getFieldValue($v);
-							$whereClause[] = $v.' = :'.$v;
-						}
-					}
-				}
-				$whereClause = 'where '.implode(' and ', $whereClause);
-				$sql .= ' '.$whereClause;
-				$stmt = oci_parse( $this->getConn()->connection, $sql);
-				if( !$stmt)
-				{
-					$e = oci_error();
-					throw new Exception( 'Parse error ' . $e[ 'message' ] );
-				}
-
-   				$params = $this->prepareParams( $params, true ); // tratar acentos
-				// fazer o bind dos valores aos parametros
-
-				foreach( $params as $fieldName => $fieldValue )
-				{
-					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
-				}
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
-					$e=oci_error( $stmt );
-					oci_free_statement( $stmt );
-					throw new Exception( 'Update error ' . $e[ 'message' ] );
-				}
- 				if ( $this->getAutoCommit() )
-				{
-					$this->commit();
-				}
-				$result = true;
- 				oci_free_statement( $stmt );
+			else{
+				$result = $this->deleteValuesOralceNotPdo($arrFieldValues);
 			}
 		}
-		catch(Exception $e)
-		{
+		catch(Exception $e){
 			$this->setError($e->getMessage());
 			return $result;
 		}
 		return $result;
 	}
+
 	/**
 	* Executa o comando update baseado no array de campos e valores recebidos
 	*
