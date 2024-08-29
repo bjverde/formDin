@@ -415,27 +415,22 @@ class TDAO
 	{
 		$data=false;
 		$hasUserTransaction = $this->getHasActiveTransaction();
-		if ( !$this->getConn() )
-		{
+		if ( !$this->getConn() ){
 			return false;
 		}
-		try
-		{
-			if ( !is_null($params) && !is_array( $params ) )
-			{
+		try{
+			if ( !is_null($params) && !is_array( $params ) ){
 				$params = array($params);
 			}
 			$sql=trim( $sql );              // remover espaços do início e final
 			$sql=$this->utf8Decode( $sql ); // remover codificação utf8
 
-			if ( $this->getConnUtf8() )
-			{
+			if ( $this->getConnUtf8() ){
 				$sql = $this->utf8Encode( $sql ); // aplicar codificação utf8
 			}
 			$params=$this->prepareParams( $params ); // aplicar/remover utf8 nos parâmetros
 		}
-		catch( Exception $e )
-		{
+		catch( Exception $e ){
 			$this->setError( $e->getMessage() );
 			return false;
 		}
