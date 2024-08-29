@@ -186,7 +186,7 @@ class TDAO
 	/**
 	* Retorna o tipo do banco de dados que será acessado
 	*
-	* @return string;
+	* @return string $dbType;
 	*/
 	public function getDbType(){
 		return $this->dbType;
@@ -273,27 +273,15 @@ class TDAO
 	public function setPort( $strNewValue = null ){
 		$this->port=$strNewValue;
 	}
+
     /**
     * Retorna a porta de comunicação utilizada pelo banco de dados
     *
     */
 	public function getPort() {
 		if ( is_null( $this->port ) ) {
-			switch( strtolower( $this->getDbType() ) ) {
-				case 'postgre':
-				case DBMS_POSTGRES:
-					$this->port='5432';
-				break;
-				case DBMS_MYSQL:
-					$this->port='3306';
-				break;
-				case DBMS_SQLSERVER:
-					$this->port='1433';
-				break;
-				case DBMS_ORACLE:
-					$this->port='1521';
-				break;
-			}
+			$port = TPDOConnection::getDefaultPortDBMS( $this->getDbType() );
+			$this->port=$port;
 		}
 		return $this->port;
 	}
