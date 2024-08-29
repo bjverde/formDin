@@ -51,17 +51,13 @@ class TConnectionPool {
     public static function connect( $dbType=null, $username=null, $password=null, $database=null, $host=null, $port=null, $schema=null, $boolUtf8=null )
     {
 		$conn=false;
-    	$connId = md5(strtolower($dbType.$username.$password.$database.$host.$port.$schema.$boolUtf8));
+    	$connId = TPDOWrapper::calculateIdConnect($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
         try {
         	if( array_key_exists( $connId, self::$conn ) ){
-				//echo 'Conexão já estabelecida<br>';
 				$conn = self::$conn[$connId];
 			}else{
-				//echo 'Nova Conexão<br>';
-		        $pdo = TConnection::connect( $dbType, $username, $password, $database, $host, $port, $schema, $boolUtf8 );
-                // Criação do wrapper PDO
-                $conn = new TPDOWrapper($pdo, $connId);
-                self::$conn[$connId] = $conn;
+		        $tPdoWrapper = TConnection::connect( $dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8 );
+                self::$conn[$tPdoWrapper->getPoolId()] = $tPdoWrapper->getPdo();
 			}
         } catch( Exception $e ){
 			throw $e;
