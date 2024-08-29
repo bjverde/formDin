@@ -431,11 +431,9 @@ class TDAO
 
 			try{
 				// trocar os "?" por ":p" para fazer o bind_by_name
-				if( is_array($params) && preg_match('/\?/',$sql)==1 )
-				{
+				if( is_array($params) && preg_match('/\?/',$sql)==1 ){
 					$keys = array_keys($params);
-					foreach($keys as $v)
-					{
+					foreach($keys as $v){
 						$sql = preg_replace('/\?/',':'.$v,$sql,1);
 					}
 				}
@@ -447,8 +445,7 @@ class TDAO
 					throw new Exception( 'Error preparing Sql.' );
 				}
 
-                if( preg_match( '/^select/i', $sql ) == 0 )
-                {
+                if( preg_match( '/^select/i', $sql ) == 0 ){
 					$this->beginTransaction();
 				}
 				// fazer BINDS
@@ -487,18 +484,14 @@ class TDAO
 					}
 					*/
 			        // formato bindValues
-					foreach( $params  as $fieldName=>$fieldValue )
-					{
+					foreach( $params  as $fieldName=>$fieldValue ){
 						$objField = $this->getField($fieldName);
-						if( $objField )
-						{
+						if( $objField ){
 							$fieldType = $this->getValidFieldType($objField->fieldType);
-							switch( $fieldType )
-							{
+							switch( $fieldType ){
 									case 'binary':
 										// ler o conteudo do arquivo se para o camp blob for informado o nome do arquivo
-										if( @file_exists($params[$fieldName] ) )
-										{
+										if( @file_exists($params[$fieldName] ) ){
 											$params[$fieldName] = file_get_contents($params[$fieldName]);
 										}
 										$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_LOB);
@@ -511,19 +504,14 @@ class TDAO
 									default;
 									$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_STR);
         					}
-						}
-						else
-						{
-							if( is_integer($params[$fieldName] ))
-							{
+						} else {
+							if( is_integer($params[$fieldName] )){
 									$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_INT);
 							}
-							else if( is_numeric($params[$fieldName] ) )
-							{
+							else if( is_numeric($params[$fieldName] ) ){
 								$stmt->bindValue(':'.$fieldName, $params[$fieldName]);
 							}
-							else
-							{
+							else {
 								$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_STR);
 							}
 						}
@@ -531,50 +519,40 @@ class TDAO
 					$params=null;
 				}
 				$result=$stmt->execute( $params );
-				if ( !$result )
-				{
+				if ( !$result ){
 					throw new Exception( 'Error executing Sql!' );
 				}
 			}
-			catch( Exception $e )
-			{
+			catch( Exception $e ){
 				$this->setError( $e->getMessage() );
 				return false;
-			//throw $e;
 			}
-			if( $this->getAutoCommit() && ! $hasUserTransaction )
-			{
+			if( $this->getAutoCommit() && ! $hasUserTransaction ){
 				$this->commit();
 			}
 			$data=true;
-			try
-			{
+			try{
 				if ( preg_match( '/^select/i', $sql ) > 0 || preg_match( '/returning /i', $sql ) > 0 || preg_match( '/^with /i', $sql ) > 0 )
 				{
 					$data = $stmt->fetchAll( $fetchMode );
 				}
 			}
-			catch( Exception $e )
-			{
+			catch( Exception $e ){
 				$data=false;
 				$this->setError( $e->getMessage() );
 			}
 
 			$stmt->closeCursor();
 		}
-		else
-		{
+		else{
 			$conn=$this->getConn()->connection;
 
-			if ( $this->getDbType() == DBMS_ORACLE )
-			{
-				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) )
-				{
+			if ( $this->getDbType() == DBMS_ORACLE ){
+				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) ){
 					$fetchMode = 'FETCH_ASSOC'; //OCI_FETCHSTATEMENT_BY_ROW;
 				}
 
-				try
-				{
+				try {
                     // trocar os "?" por ":p" para fazer o bind_by_name
 					if( is_array($params) && preg_match('/\?/',$sql)==1 )
 					{
