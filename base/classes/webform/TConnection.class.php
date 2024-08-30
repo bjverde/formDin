@@ -94,59 +94,8 @@ final class TConnection
 		}
 
 		$defaultPort = TPDOConnection::getDefaultPortDBMS( $dbType );
-		$port = empty($port)?$defaultPort:$port;
-		
-		switch( $dbType ){
-			case 'mysql':
-				$dsn='mysql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//-----------------------------------------------------------------------
-			case 'postgre':
-			case 'postgres':
-			case 'pgsql':
-				$dsn='pgsql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//-----------------------------------------------------------------------
-			case 'sqllite':
-			case 'sqlite':
-				if( !file_exists( $database ) )
-				{
-					$configErrors[] = 'Arquivo '.$database.' não encontrado!';
-				}
-				$dsn='sqlite:'.$database;
-			break;
-			//-----------------------------------------------------------------------
-			case 'oracle':
-				$dsn="oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host.")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = ".$database.")))";
-			break;
-			//----------------------------------------------------------
-			case 'sqlserver':
-                /**
-                 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
-                 *
-                 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-                 * */
-                if (PHP_OS == "Linux") {
-                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
-                        $driver = 'sqlsrv';
-                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                    } else {
-                        $driver = 'dblib';
-                        $dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
-                    }
-                } else {
-                    $driver = 'sqlsrv';
-					$dsn = $driver.':Server='.$host.';Database='.$database;
-                }
-            break;
-            //----------------------------------------------------------
-			case 'firebird':
-				$dsn = 'firebird:dbname='.( ( is_null($host) ? '' : $host.':') ).$database;
-			break;
-			//----------------------------------------------------------
-			default:
-				$configErrors[] = 'Variavel $dbType não definida no arquivo de configuração!';
-		}
+		$port= empty($port)?$defaultPort:$port;
+		$dsn = TPDOConnection::getDsnPDO($dbType,$host,$port,$database,$username,$password);
 
 		if( count( $configErrors ) > 0 ){
 			self::showExemple( $configErrors );
