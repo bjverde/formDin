@@ -352,13 +352,6 @@ class TPDOConnectionTest extends TestCase
 	    $string = StringHelper::utf8_decode($string);
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
-
-	/**
-	 * Esse cenario nunca irá acontecer. Pois o APP sempre está em UTF-8
-	public function testGetStrUtf8OrAnsi_DecoldeTrueApp2DbStringISO88591() {
-
-	}
-	**/
 	
 	public function testGetStrUtf8OrAnsi_DecoldeTrueDb2AppStringUtf8() {
 	    $string = 'Você deve ter recebido uma cópia da GNU LGPL versão 3';	    
@@ -379,5 +372,54 @@ class TPDOConnectionTest extends TestCase
 	    $string = StringHelper::utf8_encode($string);
 	    $this->assertSame( $string , $result,'String não tem o mesmo formato');
 	}
+
+	public function testGetDsnPDO_DBMS_Branco() {
+		$this->expectException(InvalidArgumentException::class);
+		$DBMS = null;
+		$host = null;
+		$port = null;
+		$database=null;
+		$username=null;
+		$password=null;
+
+	    $dns = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+	}
+
+	public function testGetDsnPDO_Mysql_falhaHost() {
+		$this->expectException(InvalidArgumentException::class);
+		$DBMS = DBMS_MYSQL;
+		$host = null;
+		$port = null;
+		$database=null;
+		$username=null;
+		$password=null;
+
+	    $dns = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+	}
+	
+	public function testGetDsnPDO_Mysql_falhaDatabase() {
+		$this->expectException(InvalidArgumentException::class);
+		$DBMS = DBMS_MYSQL;
+		$host = 'localhost';
+		$port = null;
+		$database=null;
+		$username=null;
+		$password=null;
+
+	    $dns = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+	}
+
+	public function testGetDsnPDO_Mysql() {
+		$expected= 'mysql:host=localhost;dbname=test;port=3306';
+		$DBMS = DBMS_MYSQL;
+		$host = 'localhost';
+		$port = null;
+		$database='test';
+		$username=null;
+		$password=null;
+
+	    $result = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+		$this->assertSame( $expected , $result );
+	}	
 	
 }
