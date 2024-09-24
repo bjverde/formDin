@@ -808,9 +808,12 @@ class TDAO
 	* @param string $str
 	*/
 	public function utf8Decode( $str = null ){
-		foreach( $this->getSpecialChars()as $char ){
-			$char = StringHelper::utf8_encode( $char );
-			$str = preg_replace( '/' . $char . '/', $char, $str );
+		if ( is_null( $str ) || $str == '' ){
+			return $str;
+		}
+		foreach( $this->getSpecialChars() as $char ){
+			$char_utf8= StringHelper::utf8_encode( $char );
+			$str = preg_replace( '/'.$char_utf8.'/', $char, $str );
 		}
 		return $str;
 	}
