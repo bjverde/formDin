@@ -14,7 +14,7 @@ class TPDOWrapper {
     public PDO $pdo;
     public string $poolId;
 
-    private static $supportedDbTypes = ['postgres', 'postgre', 'pgsql', 'mysql', 'sqlite', 'oracle', 'sqlserver'];
+    private static $supportedDbTypes = [DBMS_POSTGRES, DBMS_MYSQL, DBMS_SQLITE, DBMS_ORACLE, DBMS_SQLSERVER];
 
     public function __construct(string $dbType
                                ,string $host = null
@@ -136,15 +136,15 @@ class TPDOWrapper {
 
     private function createDsn() {
         switch ($this->dbType) {
-            case 'mysql':
+            case DBMS_MYSQL:
                 return "mysql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case 'postgres':
+            case DBMS_POSTGRES:
                 return "pgsql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case 'sqlite':
+            case DBMS_SQLITE:
                 return "sqlite:{$this->database}";
-            case 'oracle':
+            case DBMS_ORACLE:
                 return "oci:dbname={$this->host}/{$this->database}";
-            case 'sqlserver':
+            case DBMS_SQLSERVER:
                 return "sqlsrv:Server={$this->host},{$this->port};Database={$this->database}";
             default:
                 throw new Exception("Tipo de banco de dados não suportado: {$this->dbType}");
@@ -152,7 +152,7 @@ class TPDOWrapper {
     }
 
     public static function isValidDbType(string $dbType){
-        $inArray = in_array(strtolower($dbType), self::$supportedDbTypes);
+        $inArray = in_array( StringHelper::strtoupper($dbType), self::$supportedDbTypes);
         if ($inArray == false) {
             throw new Exception("Tipo de banco de dados não suportado: $dbType");
         }
