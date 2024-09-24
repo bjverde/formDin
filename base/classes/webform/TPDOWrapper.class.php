@@ -48,7 +48,7 @@ class TPDOWrapper {
 
     public function setDbType($dbType) {
         self::isValidDbType($dbType);
-        $this->dbType = strtolower($dbType);
+        $this->dbType = StringHelper::strtoupper($dbType);
     }
 
     public function getUsername() {
