@@ -614,7 +614,8 @@ class TDAO
 	public function getConn()
 	{
 		if ( is_null( $this->conn ) ){
-			if ( !$this->connect() ){
+			$conn = $this->connect();
+			if ( !$conn ){
 				return false;
 			}
 		}
@@ -787,8 +788,7 @@ class TDAO
 	*/
 	public function utf8Encode( $str = null )
 	{
-		if ( is_null( $str ) || $str == '' )
-		{
+		if ( is_null( $str ) || $str == '' ){
 			return $str;
 		}
 
@@ -799,7 +799,6 @@ class TDAO
 		for( $i = 0; $i < $len; $i++ ){
 			$result .= StringHelper::utf8_encode( substr( $str, $i, 1 ) );
 		}
-
 		return $result;
 	}
 
@@ -808,14 +807,11 @@ class TDAO
 	*
 	* @param string $str
 	*/
-	public function utf8Decode( $str = null )
-	{
-		foreach( $this->getSpecialChars()as $char )
-		{
+	public function utf8Decode( $str = null ){
+		foreach( $this->getSpecialChars()as $char ){
 			$char = StringHelper::utf8_encode( $char );
 			$str = preg_replace( '/' . $char . '/', $char, $str );
 		}
-
 		return $str;
 	}
 
@@ -831,14 +827,11 @@ class TDAO
 	*/
 	public function prepareParams( $mixParams = null, $boolBind = true )
 	{
-		if ( is_numeric( $mixParams ) )
-		{
+		if ( is_numeric( $mixParams ) ) {
 			return $this->parseNumber( $mixParams );
 		}
-		else if( is_string( $mixParams ) )
-		{
-			if ( $this->getConnUtf8() )
-			{
+		else if( is_string( $mixParams ) ){
+			if ( $this->getConnUtf8() ){
 				$mixParams=trim( $mixParams );
 				$mixParams=$this->utf8Decode( $mixParams ); // remover utf8
 				return $this->utf8Encode( $mixParams );
@@ -846,59 +839,45 @@ class TDAO
 
 			return $this->utf8Decode( $mixParams );
 		}
-		else if( is_array( $mixParams ) )
-		{
+		else if( is_array( $mixParams ) ){
 			$result=array();
 
-			foreach( $mixParams as $k => $item )
-			{
-				if ( is_numeric( $item ) )
-				{
-					if ( !$boolBind )
-					{
+			foreach( $mixParams as $k => $item ){
+				if ( is_numeric( $item ) ){
+					if ( !$boolBind ){
 						array_push( $result, $this->prepareParams( $item, $boolBind ) );
 					}
-					else
-					{
+					else {
 						$result[ $k ] = $this->prepareParams( $item, $boolBind );
 					}
 				}
-				else
-				{
+				else {
 					$objField=$this->getField( $k );
 					$fieldType=null;
 					if ( ! is_null( $objField ) )
 					{
 						$fieldType=$this->getValidFieldType( $objField->fieldType );
-						if ( $fieldType == 'date' )
-						{
-							if ( $this->getDbType() == DBMS_ORACLE )
-							{
+						if ( $fieldType == 'date' ){
+							if ( $this->getDbType() == DBMS_ORACLE ){
 								$item = $this->parseDMY( $item );
 							}
-							else
-							{
+							else{
 								$item = $this->parseYMD( $item );
 							}
 						}
-						elseif( $fieldType == 'number' )
-						{
+						elseif( $fieldType == 'number' ){
 							$item = $this->parseNumber( $item );
 						}
 					}
 
-					if ( ! $boolBind )
-					{
-						if ( $fieldType != 'binary' )
-						{
+					if ( ! $boolBind ){
+						if ( $fieldType != 'binary' ){
 							$item = $this->prepareParams( $item, $boolBind );
 						}
 						array_push( $result, $item );
 					}
-					else
-					{
-						if ( $fieldType != 'binary' )
-						{
+					else{
+						if ( $fieldType != 'binary' ){
 							$item = $this->prepareParams( $item, $boolBind );
 						}
 						$result[ $k ]=$item;
@@ -2058,9 +2037,9 @@ class TDAO
     */
 	public function isPDO()
 	{
-		if ( $this->getConn() )
-		{
-			return $this->getConn()->isPDO;
+		if ( $this->getConn() ){
+			$conn = $this->getConn();
+			return $conn->isPDO;
 		}
 		return null;
 	}
