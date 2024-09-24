@@ -384,7 +384,7 @@ class TPDOConnection {
         }
         
         $port = null;
-        switch( strtoupper( $DBMS ) ) {
+        switch( StringHelper::strtoupper( $DBMS ) ) {
             case DBMS_ACCESS:
             case DBMS_FIREBIRD:
             case DBMS_SQLITE:

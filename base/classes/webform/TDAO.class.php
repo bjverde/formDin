@@ -181,7 +181,7 @@ class TDAO
 	*/
 	public function setDbType( $strNewValue = null ){
 		TPDOConnection::validateDBMS($strNewValue);
-		$this->dbType=$strNewValue;
+		$this->dbType= StringHelper::strtoupper($strNewValue);
 	}
 
 	/**
