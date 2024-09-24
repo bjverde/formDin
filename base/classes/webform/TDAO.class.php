@@ -797,7 +797,7 @@ class TDAO
 
 		$len  = StringHelper::strlen( $str );
 		for( $i = 0; $i < $len; $i++ ){
-			$result .= utf8_encode( substr( $str, $i, 1 ) );
+			$result .= StringHelper::utf8_encode( substr( $str, $i, 1 ) );
 		}
 
 		return $result;
@@ -812,7 +812,8 @@ class TDAO
 	{
 		foreach( $this->getSpecialChars()as $char )
 		{
-			$str = preg_replace( '/' . utf8_encode( $char ) . '/', $char, $str );
+			$char = StringHelper::utf8_encode( $char );
+			$str = preg_replace( '/' . $char . '/', $char, $str );
 		}
 
 		return $str;
@@ -1153,7 +1154,7 @@ class TDAO
 
 		foreach( $this->getSpecialChars()as $k => $v )
 		{
-			if ( preg_match( '/' . utf8_encode( $v ) . '/', $strValue ) )
+			if ( preg_match( '/' . StringHelper::utf8_encode( $v ) . '/', $strValue ) )
 			{
 				$result=true;
 				break;
