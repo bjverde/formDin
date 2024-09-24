@@ -1382,29 +1382,8 @@ class TDAO
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_POSTGRES:
-			    $sql = "SELECT qtd.TABLE_SCHEMA
-                              ,qtd.TABLE_NAME
-                        	  ,qtd.COLUMN_QTD
-                        	  ,ty.TABLE_TYPE
-							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
-                        FROM
-                        	(SELECT TABLE_SCHEMA
-                        		  ,TABLE_NAME
-                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
-                        	FROM INFORMATION_SCHEMA.COLUMNS c
-                        	where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
-                        	group by TABLE_SCHEMA, TABLE_NAME
-                        	) as qtd
-                        	,(SELECT TABLE_SCHEMA
-                        	       , TABLE_NAME
-                        		   , TABLE_TYPE
-                        	FROM INFORMATION_SCHEMA.TABLES i
-                        	where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
-                        	) as ty
-                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
-                        and qtd.TABLE_NAME = ty.TABLE_NAME
-                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
-			    break;
+			    $sql = $this->getSqlToListTablesFromDatabasePostGres();
+			break;
 			//--------------------------------------------------------------------------------
 			default:
 				throw new DomainException('Database '.$DbType.' not implemented ! TDAO->loadTablesFromDatabase. Contribute to the project https://github.com/bjverde/sysgen !');
@@ -1528,6 +1507,32 @@ class TDAO
 		return $sql;
 	}	
 	
+	public function getSqlToListTablesFromDatabasePostGres() {
+		$sql = "SELECT qtd.TABLE_SCHEMA
+						  ,qtd.TABLE_NAME
+						  ,qtd.COLUMN_QTD
+						  ,ty.TABLE_TYPE
+						  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+					FROM
+						(SELECT TABLE_SCHEMA
+							  ,TABLE_NAME
+							  ,COUNT(TABLE_NAME) COLUMN_QTD
+						FROM INFORMATION_SCHEMA.COLUMNS c
+						where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
+						group by TABLE_SCHEMA, TABLE_NAME
+						) as qtd
+						,(SELECT TABLE_SCHEMA
+							   , TABLE_NAME
+							   , TABLE_TYPE
+						FROM INFORMATION_SCHEMA.TABLES i
+						where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
+						) as ty
+					where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+					and qtd.TABLE_NAME = ty.TABLE_NAME
+					order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+		return $sql;
+	}
+
 	public function getSqlToFieldsFromOneStoredProcedureMySQL() {
 	    $sql="select 
                 	 p.parameter_name as COLUMN_NAME
