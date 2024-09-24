@@ -421,7 +421,7 @@ class TDAO
 				$this->sqlCmd 		= $sql;
 				$this->sqlParams 	= $params;
 
-				$stmt=$this->getConn()->prepare( $sql );
+				$stmt=$this->getConn()->getPdo()->prepare( $sql );
 				if ( !$stmt ){
 					throw new Exception( 'Error preparing Sql.' );
 				}
