@@ -1374,108 +1374,11 @@ class TDAO
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
-				$sql = "select vg.TABLE_SCHEMA
-                        	  ,vg.TABLE_NAME
-                              ,vg.COLUMN_QTD
-                              ,vg.TABLE_TYPE
-                        from
-                        (                        
-                        	select vt.TABLE_SCHEMA
-                        		  ,vt.TABLE_NAME
-                        		  ,count(*) as COLUMN_QTD
-                        		  ,vt.TABLE_TYPE
-                        	from
-                        	(
-                        		SELECT t.TABLE_SCHEMA
-                        			  ,t.TABLE_NAME
-                        			  ,case when upper(t.TABLE_TYPE) = 'BASE TABLE' then 'TABLE' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
-                        		FROM INFORMATION_SCHEMA.TABLES as t
-                        			,INFORMATION_SCHEMA.COLUMNS as c
-                        		WHERE t.TABLE_NAME = c.TABLE_NAME 
-                        		 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
-                        		 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
-                        		 and t.TABLE_SCHEMA not in ('sys','phpmyadmin','performance_schema','mysql','information_schema')
-                        	 ) as vt
-                        	 group by vt.TABLE_SCHEMA
-                        			 ,vt.TABLE_NAME
-                        			 ,vt.TABLE_TYPE
-                        			 
-                        	union
-                        
-                        	select vp.TABLE_SCHEMA
-                                  ,vp.TABLE_NAME
-                                  ,count(*) as COLUMN_QTD
-                                  ,'PROCEDURE' as TABLE_TYPE
-                        	from
-                        	(
-                        		select p.SPECIFIC_SCHEMA as TABLE_SCHEMA
-                        			  ,p.SPECIFIC_NAME as TABLE_NAME
-                        			  ,p.routine_type as TABLE_TYPE
-                        		from information_schema.routines as r
-                        		left join information_schema.parameters as p
-                        				  on p.specific_schema = r.routine_schema
-                        				  and p.specific_name = r.specific_name
-                        		where r.routine_schema not in ('sys','phpmyadmin','information_schema','mysql', 'performance_schema')
-                        		and p.routine_type = 'PROCEDURE'
-                        	) as vp
-                        	group by vp.TABLE_SCHEMA
-                        			,vp.TABLE_NAME
-                        			,vp.TABLE_TYPE
-                        ) as vg
-                        order by 
-                                 vg.TABLE_SCHEMA
-                        		,vg.TABLE_TYPE
-                        		,vg.TABLE_NAME";
+				$sql = $this->getSqlToListTablesFromDatabaseMySQL();
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_SQLSERVER:
-			    $sql = "select 
-                        TABLE_SCHEMA
-                        ,TABLE_NAME
-                        ,COLUMN_QTD
-                        ,TABLE_TYPE
-                        from (
-                        SELECT qtd.TABLE_SCHEMA
-                        		,qtd.TABLE_NAME
-                        		,qtd.COLUMN_QTD
-                        		,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
-                        FROM
-                        	(SELECT TABLE_SCHEMA
-                        			,TABLE_NAME
-                        			,COUNT(TABLE_NAME) COLUMN_QTD
-                        	FROM INFORMATION_SCHEMA.COLUMNS c
-                        	where c.TABLE_SCHEMA <> 'METADADOS'
-                        	group by TABLE_SCHEMA, TABLE_NAME
-                        	) as qtd
-                        	,(SELECT TABLE_SCHEMA
-                        			, TABLE_NAME
-                        			, TABLE_TYPE
-                        	FROM INFORMATION_SCHEMA.TABLES i
-                        	where I.TABLE_SCHEMA <> 'METADADOS'
-                        	) as ty
-                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
-                        and qtd.TABLE_NAME = ty.TABLE_NAME
-                        
-                        UNION
-                        
-                         SELECT Schema_name(schema_id)   AS TABLE_SCHEMA,
-                               SO.NAME                   AS TABLE_NAME,       
-                        	   count(*)                  AS COLUMN_QTD,
-                        	   CASE SO.type_desc 
-                        	   WHEN  'SQL_STORED_PROCEDURE' THEN 'PROCEDURE'
-                        	   ELSE 'FUNCTION' 
-                        	   END AS TABLE_TYPE	   
-                        FROM   sys.objects AS SO
-                               INNER JOIN sys.parameters AS P
-                                       ON SO.object_id = P.object_id
-                        WHERE  SO.object_id IN (SELECT object_id
-                                                FROM   sys.objects
-                                                WHERE  type IN ( 'P', 'FN' ))
-                        group by schema_id, SO.NAME, SO.type_desc
-                        ) as res
-                        order by res.TABLE_SCHEMA
-                               , res.TABLE_TYPE
-                               , res.TABLE_NAME";
+			    $sql = $this->getSqlToListTablesFromDatabaseSqlServer();
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_POSTGRES:
@@ -1517,6 +1420,113 @@ class TDAO
 	    }
 	    return $result;
 	}
+
+	public function getSqlToListTablesFromDatabaseMySQL() {
+			$sql = "select vg.TABLE_SCHEMA
+						  ,vg.TABLE_NAME
+						  ,vg.COLUMN_QTD
+						  ,vg.TABLE_TYPE
+					from
+					(                        
+						select vt.TABLE_SCHEMA
+							  ,vt.TABLE_NAME
+							  ,count(*) as COLUMN_QTD
+							  ,vt.TABLE_TYPE
+						from
+						(
+							SELECT t.TABLE_SCHEMA
+								  ,t.TABLE_NAME
+								  ,case when upper(t.TABLE_TYPE) = 'BASE TABLE' then 'TABLE' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
+							FROM INFORMATION_SCHEMA.TABLES as t
+								,INFORMATION_SCHEMA.COLUMNS as c
+							WHERE t.TABLE_NAME = c.TABLE_NAME 
+							 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
+							 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
+							 and t.TABLE_SCHEMA not in ('sys','phpmyadmin','performance_schema','mysql','information_schema')
+						 ) as vt
+						 group by vt.TABLE_SCHEMA
+								 ,vt.TABLE_NAME
+								 ,vt.TABLE_TYPE
+								 
+						union
+					
+						select vp.TABLE_SCHEMA
+							  ,vp.TABLE_NAME
+							  ,count(*) as COLUMN_QTD
+							  ,'PROCEDURE' as TABLE_TYPE
+						from
+						(
+							select p.SPECIFIC_SCHEMA as TABLE_SCHEMA
+								  ,p.SPECIFIC_NAME as TABLE_NAME
+								  ,p.routine_type as TABLE_TYPE
+							from information_schema.routines as r
+							left join information_schema.parameters as p
+									  on p.specific_schema = r.routine_schema
+									  and p.specific_name = r.specific_name
+							where r.routine_schema not in ('sys','phpmyadmin','information_schema','mysql', 'performance_schema')
+							and p.routine_type = 'PROCEDURE'
+						) as vp
+						group by vp.TABLE_SCHEMA
+								,vp.TABLE_NAME
+								,vp.TABLE_TYPE
+					) as vg
+					order by 
+							 vg.TABLE_SCHEMA
+							,vg.TABLE_TYPE
+							,vg.TABLE_NAME";
+		return $sql;		  		
+	}
+
+	public function getSqlToListTablesFromDatabaseSqlServer() {
+		$sql = "select 
+					TABLE_SCHEMA
+					,TABLE_NAME
+					,COLUMN_QTD
+					,TABLE_TYPE
+					from (
+					SELECT qtd.TABLE_SCHEMA
+							,qtd.TABLE_NAME
+							,qtd.COLUMN_QTD
+							,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+					FROM
+						(SELECT TABLE_SCHEMA
+								,TABLE_NAME
+								,COUNT(TABLE_NAME) COLUMN_QTD
+						FROM INFORMATION_SCHEMA.COLUMNS c
+						where c.TABLE_SCHEMA <> 'METADADOS'
+						group by TABLE_SCHEMA, TABLE_NAME
+						) as qtd
+						,(SELECT TABLE_SCHEMA
+								, TABLE_NAME
+								, TABLE_TYPE
+						FROM INFORMATION_SCHEMA.TABLES i
+						where I.TABLE_SCHEMA <> 'METADADOS'
+						) as ty
+					where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+					and qtd.TABLE_NAME = ty.TABLE_NAME
+					
+					UNION
+					
+					 SELECT Schema_name(schema_id)   AS TABLE_SCHEMA,
+						   SO.NAME                   AS TABLE_NAME,       
+						   count(*)                  AS COLUMN_QTD,
+						   CASE SO.type_desc 
+						   WHEN  'SQL_STORED_PROCEDURE' THEN 'PROCEDURE'
+						   ELSE 'FUNCTION' 
+						   END AS TABLE_TYPE	   
+					FROM   sys.objects AS SO
+						   INNER JOIN sys.parameters AS P
+								   ON SO.object_id = P.object_id
+					WHERE  SO.object_id IN (SELECT object_id
+											FROM   sys.objects
+											WHERE  type IN ( 'P', 'FN' ))
+					group by schema_id, SO.NAME, SO.type_desc
+					) as res
+					order by res.TABLE_SCHEMA
+						   , res.TABLE_TYPE
+						   , res.TABLE_NAME";
+		return $sql;
+	}	
 	
 	public function getSqlToFieldsFromOneStoredProcedureMySQL() {
 	    $sql="select 
