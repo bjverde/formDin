@@ -57,7 +57,8 @@ class TConnectionPool {
 				$conn = self::$conn[$connId];
 			}else{
 		        $tPdoWrapper = TConnection::connect( $dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8 );
-                self::$conn[$tPdoWrapper->getPoolId()] = $tPdoWrapper->getPdo();
+				$conn = $tPdoWrapper->getPdo();
+                self::$conn[$tPdoWrapper->getPoolId()] = $conn;
 			}
         } catch( Exception $e ){
 			throw $e;
