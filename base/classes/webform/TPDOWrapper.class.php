@@ -135,20 +135,18 @@ class TPDOWrapper {
     }
 
     private function createDsn() {
-        switch ($this->dbType) {
-            case DBMS_MYSQL:
-                return "mysql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case DBMS_POSTGRES:
-                return "pgsql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case DBMS_SQLITE:
-                return "sqlite:{$this->database}";
-            case DBMS_ORACLE:
-                return "oci:dbname={$this->host}/{$this->database}";
-            case DBMS_SQLSERVER:
-                return "sqlsrv:Server={$this->host},{$this->port};Database={$this->database}";
-            default:
-                throw new Exception("Tipo de banco de dados não suportado: {$this->dbType}");
+        $dsn = null;
+        $DBMS= $this->getDbType();
+        $host= $this->getHost();
+        $port= $this->getPort();
+        $database= $this->getDatabase();
+        $username= $this->getUsername();
+        $password= $this->getPassword();
+        $dsn = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+        if( empty($dsn) ){
+            throw new Exception("Tipo de banco de dados não suportado: {$this->dbType}");
         }
+        return $dsn;
     }
 
     public static function isValidDbType(string $dbType){
