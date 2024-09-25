@@ -393,7 +393,7 @@ class TDAO
 				$params = array($params);
 			}
 			$sql=trim( $sql );              // remover espaços do início e final
-			$sql=$this->utf8Decode( $sql ); // remover codificação utf8
+			//$sql=$this->utf8Decode( $sql ); // remover codificação utf8
 
 			if ( $this->getConnUtf8() ){
 				$sql = $this->utf8Encode( $sql ); // aplicar codificação utf8
@@ -833,11 +833,10 @@ class TDAO
 		else if( is_string( $mixParams ) ){
 			if ( $this->getConnUtf8() ){
 				$mixParams=trim( $mixParams );
-				$mixParams=$this->utf8Decode( $mixParams ); // remover utf8
+				//$mixParams=$this->utf8Decode( $mixParams ); // remover utf8
 				return $this->utf8Encode( $mixParams );
 			}
-
-			return $this->utf8Decode( $mixParams );
+			//return $this->utf8Decode( $mixParams );
 		}
 		else if( is_array( $mixParams ) ){
 			$result=array();
@@ -1183,26 +1182,20 @@ class TDAO
 	*/
 	public function parseString( $strValue = null )
 	{
-		if ( !is_string( $strValue ) || is_numeric( $strValue ) )
-		{
+		if ( !is_string( $strValue ) || is_numeric( $strValue ) ){
 			return $strValue;
 		}
-
-		if ( $this->getCharset() == 'utf-8' )
-		{
-			if ( $this->detectSpecialChar( $strValue ) )
-			{
+		if ( $this->getCharset() == 'utf-8' ){
+			if ( $this->detectSpecialChar( $strValue ) ){
 				$strValue = $this->utf8Encode( $strValue );
 			}
 		}
-		else
-		{
-			if ( $this->detectUTF8( $strValue ) )
-			{
-				$strValue = $this->utf8Decode( $strValue );
+		else{
+			if ( $this->detectUTF8( $strValue ) ){
+				//$strValue = $this->utf8Decode( $strValue );
+				$strValue;
 			}
 		}
-
 		return $strValue;
 	}
 
