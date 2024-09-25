@@ -791,10 +791,7 @@ class TDAO
 		if ( is_null( $str ) || $str == '' ){
 			return $str;
 		}
-
 		$result='';
-		$this->utf8Decode( $str );
-
 		$len  = StringHelper::strlen( $str );
 		for( $i = 0; $i < $len; $i++ ){
 			$result .= StringHelper::utf8_encode( substr( $str, $i, 1 ) );
