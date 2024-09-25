@@ -720,7 +720,7 @@ class TDAO
 	*/
 	public function getConnUtf8(){
 		if ( $this->getConn() ){
-			return $this->getConn()->utf8;
+			return $this->getConn()->getBoolUtf8();
 		}
 		return true;
 	}
