@@ -526,7 +526,7 @@ class TDAO
 			$stmt->closeCursor();
 		}
 		else{
-			$conn=$this->getConn()->connection;
+			$conn=$this->getConn()->getPdo();
 
 			if ( $this->getDbType() == DBMS_ORACLE ){
 				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) ){
@@ -1811,7 +1811,7 @@ class TDAO
 			$params=array($this->getTableName());
 		}
 		else if( $DbType == DBMS_SQLITE) {
-			$stmt = $this->getConn()->query( "PRAGMA table_info(".$this->getTableName().")");
+			$stmt = $this->getConn()->getPdo()->query( "PRAGMA table_info(".$this->getTableName().")");
 			$res  = $stmt->fetchAll();
 			$data = null;
 			$sql  = null;
@@ -2089,7 +2089,7 @@ class TDAO
 		{
 			if ( $this->isPDO() )
 			{
-				$this->getConn()->beginTransaction();
+				$this->getConn()->getPdo()->beginTransaction();
 				$this->hasActiveTransaction=true;
 				return true;
 			}
@@ -2102,20 +2102,16 @@ class TDAO
     */
 	public function commit()
 	{
-		if( ! $this->getHasActiveTransaction() )
-		{
+		if( ! $this->getHasActiveTransaction() ){
 			return;
 		}
 		$this->hasActiveTransaction=false;
 		if ( $this->getConn() )
 		{
-			if ( $this->getDbType() == DBMS_ORACLE )
-			{
+			if ( $this->getDbType() == DBMS_ORACLE ){
 				oci_commit( $this->getConn()->connection );
-			}
-			else
-			{
-				$this->getConn()->commit();
+			} else {
+				$this->getConn()->getPdo()->commit();
 			}
 		}
 	}
@@ -2130,11 +2126,9 @@ class TDAO
 			return;
 		}
 		$this->hasActiveTransaction=false;
-		if ( $this->getConn() )
-		{
-			if ( $this->isPDO() )
-			{
-				$this->getConn()->rollBack();
+		if ( $this->getConn() ){
+			if ( $this->isPDO() ){
+				$this->getConn()->getPdo()->rollBack();
 			}
 		}
 	}
@@ -2430,7 +2424,7 @@ class TDAO
 					$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
 				}
 				$sqlInsert .= $columnsClause . ' ' . $valuesClause . ' ' . $returningClause;
-				$stmt=oci_parse( $this->getConn()->connection, $sqlInsert );
+				$stmt=oci_parse( $this->getConn()->getPdo()->connection, $sqlInsert );
 				foreach( $params as $fieldName => $fieldValue )
 				{
 					$objField = $this->getField( $fieldName );
@@ -2439,12 +2433,12 @@ class TDAO
 						$bindType=$this->getBindType( $objField->fieldType );
 						if ( $bindType == SQLT_CLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
 						}
 						else if( $bindType == SQLT_BLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
 						}
 						else{
@@ -2554,7 +2548,7 @@ class TDAO
 		}
 		$whereClause = 'where '.implode(' and ', $whereClause);
 		$sql .= ' '.$whereClause;
-		$stmt = oci_parse( $this->getConn()->connection, $sql);
+		$stmt = oci_parse( $this->getConn()->getPdo()->connection, $sql);
 		if( !$stmt)
 		{
 			$e = oci_error();
@@ -2703,7 +2697,7 @@ class TDAO
 
 		$sql .= ' '.$returningClause;
 
-		$stmt = oci_parse( $this->getConn()->connection, $sql);
+		$stmt = oci_parse( $this->getConn()->getPdo()->connection, $sql);
 		if( !$stmt)
 		{
 			$e = oci_error();
@@ -2722,13 +2716,13 @@ class TDAO
 				if ( $bindType == SQLT_CLOB )
 				{
 					$descriptors[ $fieldName ]=$params[ $fieldName ];
-					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
 				}
 				else if( $bindType == SQLT_BLOB )
 				{
 					$descriptors[ $fieldName ]=$params[ $fieldName ];
-					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
 				}
 				else
