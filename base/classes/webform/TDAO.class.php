@@ -1155,8 +1155,7 @@ class TDAO
 		}
 
 		// se tiver na codificação utf-8 retornar false
-		if ( $this->detectUTF8( $strValue ) )
-		{
+		if ( $this->detectUTF8( $strValue ) ){
 			return false;
 		}
 
@@ -1186,15 +1185,9 @@ class TDAO
 			return $strValue;
 		}
 		if ( $this->getCharset() == 'utf-8' ){
-			if ( $this->detectSpecialChar( $strValue ) ){
-				$strValue = $this->utf8Encode( $strValue );
-			}
-		}
-		else{
-			if ( $this->detectUTF8( $strValue ) ){
-				//$strValue = $this->utf8Decode( $strValue );
-				$strValue;
-			}
+			$strValue = StringHelper::utf8_encode($strValue);
+		} else {
+			$strValue = StringHelper::utf8_decode($strValue);
 		}
 		return $strValue;
 	}
