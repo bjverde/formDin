@@ -593,7 +593,7 @@ class TPDOConnection {
                 if (PHP_OS == "Linux") {
                     if (version_compare(PHP_VERSION, '8.2.0', '>=')) {
                         $driver = 'sqlsrv';
-                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
+                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
                     }
                     else if(version_compare(PHP_VERSION, '7.0.0', '>=') && version_compare(PHP_VERSION, '8.2.0', '<')) {
                         $driver = 'sqlsrv';
@@ -605,8 +605,12 @@ class TPDOConnection {
                     }
                 } else {
                     $driver = 'sqlsrv';
-                    //$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-					$dsn = $driver.':Server='.$host.';Database='.$database;
+                    if (version_compare(PHP_VERSION, '8.2.0', '>=')) {
+                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
+                    } else {
+                        //$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                    }
                 }
             break;
             //----------------------------------------------------------
