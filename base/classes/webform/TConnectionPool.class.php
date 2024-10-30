@@ -56,8 +56,8 @@ class TConnectionPool {
         	if( array_key_exists( $connId, self::$conn ) ){
 				$conn = self::$conn[$connId];
 			}else{
-		        $tPdoWrapper = TConnection::connect( $dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8 );
-                self::$conn[$tPdoWrapper->getPoolId()] = $tPdoWrapper->getPdo();
+		        $conn = TConnection::connect( $dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8 );
+                self::$conn[$conn->getPoolId()] = $conn; //obj TPDOWrapper
 			}
         } catch( Exception $e ){
 			throw $e;

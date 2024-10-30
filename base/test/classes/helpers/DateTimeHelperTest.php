@@ -307,4 +307,52 @@ class DateTimeHelperTest extends TestCase
         $retorno = DateTimeHelper::date1NewerThanDate2($datahora1,$datahora2);
         $this->assertEquals($esperado, $retorno);
     }
+
+    //------------------------------------------------------------
+    //------------------------------------------------------------
+    //------------------------------------------------------------    
+    public function testDateInRange_true() {        
+        $esperado = true;
+        $datahora    = '17/12/2022 00:31';
+        $datahoraStar= '17/12/2022 00:30';
+        $datahoraEnd = '20/12/2022 00:00';
+        $retorno = DateTimeHelper::dateInRange($datahora,$datahoraStar,$datahoraEnd);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDateInRange_trueLimitMax() {        
+        $esperado = true;
+        $datahora    = '20/12/2022 23:58';
+        $datahoraStar= '17/12/2022 00:30';
+        $datahoraEnd = '20/12/2022 23:59';
+        $retorno = DateTimeHelper::dateInRange($datahora,$datahoraStar,$datahoraEnd);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDateInRange_faselBefore(){
+        $esperado = false;
+        $datahora    = '17/08/2022 00:31';
+        $datahoraStar= '17/12/2022 00:30';
+        $datahoraEnd = '20/12/2022 00:00';
+        $retorno = DateTimeHelper::dateInRange($datahora,$datahoraStar,$datahoraEnd);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDateInRange_faselAfter1Minute(){
+        $esperado = false;
+        $datahora    = '20/12/2023 00:01';
+        $datahoraStar= '17/12/2022 00:30';
+        $datahoraEnd = '20/12/2022 00:00';
+        $retorno = DateTimeHelper::dateInRange($datahora,$datahoraStar,$datahoraEnd);
+        $this->assertEquals($esperado, $retorno);
+    }
+
+    public function testDateInRange_faselAfter(){
+        $esperado = false;
+        $datahora    = '21/08/2023 00:31';
+        $datahoraStar= '17/12/2022 00:30';
+        $datahoraEnd = '20/12/2022 00:00';
+        $retorno = DateTimeHelper::dateInRange($datahora,$datahoraStar,$datahoraEnd);
+        $this->assertEquals($esperado, $retorno);
+    }    
 }

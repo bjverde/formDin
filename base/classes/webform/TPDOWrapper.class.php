@@ -14,7 +14,7 @@ class TPDOWrapper {
     public PDO $pdo;
     public string $poolId;
 
-    private static $supportedDbTypes = ['postgres', 'postgre', 'pgsql', 'mysql', 'sqlite', 'oracle', 'sqlserver'];
+    private static $supportedDbTypes = [DBMS_POSTGRES, DBMS_MYSQL, DBMS_SQLITE, DBMS_ORACLE, DBMS_SQLSERVER];
 
     public function __construct(string $dbType
                                ,string $host = null
@@ -48,7 +48,7 @@ class TPDOWrapper {
 
     public function setDbType($dbType) {
         self::isValidDbType($dbType);
-        $this->dbType = strtolower($dbType);
+        $this->dbType = StringHelper::strtoupper($dbType);
     }
 
     public function getUsername() {
@@ -135,24 +135,22 @@ class TPDOWrapper {
     }
 
     private function createDsn() {
-        switch ($this->dbType) {
-            case 'mysql':
-                return "mysql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case 'postgres':
-                return "pgsql:host={$this->host};port={$this->port};dbname={$this->database}";
-            case 'sqlite':
-                return "sqlite:{$this->database}";
-            case 'oracle':
-                return "oci:dbname={$this->host}/{$this->database}";
-            case 'sqlserver':
-                return "sqlsrv:Server={$this->host},{$this->port};Database={$this->database}";
-            default:
-                throw new Exception("Tipo de banco de dados não suportado: {$this->dbType}");
+        $dsn = null;
+        $DBMS= $this->getDbType();
+        $host= $this->getHost();
+        $port= $this->getPort();
+        $database= $this->getDatabase();
+        $username= $this->getUsername();
+        $password= $this->getPassword();
+        $dsn = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+        if( empty($dsn) ){
+            throw new Exception("Tipo de banco de dados não suportado: {$this->dbType}");
         }
+        return $dsn;
     }
 
     public static function isValidDbType(string $dbType){
-        $inArray = in_array(strtolower($dbType), self::$supportedDbTypes);
+        $inArray = in_array( StringHelper::strtoupper($dbType), self::$supportedDbTypes);
         if ($inArray == false) {
             throw new Exception("Tipo de banco de dados não suportado: $dbType");
         }

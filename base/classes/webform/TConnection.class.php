@@ -58,7 +58,10 @@ final class TConnection
 		$tPdoWrapper = new TPDOWrapper($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
 		$boolUtf8 = $tPdoWrapper->getBoolUtf8();
         $dbType   = $tPdoWrapper->getDbType();
-
+		if( preg_match('/\|/',$dbType) || is_null($dbType) ){
+		    $dbType='';
+            $dbType='default';
+		}
         $configFile = "conn_$dbType.php";
 		$configErrors=array();
 		if( !$database && !$username ) {
@@ -90,81 +93,9 @@ final class TConnection
 			}
 		}
 
-		switch( $dbType )
-		{
-			case 'mysql':
-				if( ! $port )
-				{
-					$port = '3306';
-				}
-				$dsn='mysql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//-----------------------------------------------------------------------
-			case 'postgre':
-			case 'postgres':
-			case 'pgsql':
-                $dbType = 'postgres';
-				if(! $port )
-				{
-					$port = '5432';
-				}
-				$dsn='pgsql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//-----------------------------------------------------------------------
-			case 'sqllite':
-			case 'sqlite':
-				if( !file_exists( $database ) )
-				{
-					$configErrors[] = 'Arquivo '.$database.' não encontrado!';
-				}
-				$dsn='sqlite:'.$database;
-			break;
-			//-----------------------------------------------------------------------
-			case 'oracle':
-				if( ! $port )
-				{
-					$port = '1152';
-				}
-				$dsn="oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host.")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = ".$database.")))";
-			break;
-			//----------------------------------------------------------
-			case 'mssql':
-			if( ! $port ){
-				$port = '1433';
-			}
-			$dsn='mssql:host='.$host.';dbname='.$database.';port='.$port;
-			break;
-			//----------------------------------------------------------
-			case 'sqlserver':
-				if( ! $port ){
-					$port = '1433';
-				}
-                /**
-                 * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
-                 *
-                 * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
-                 * */
-                if (PHP_OS == "Linux") {
-                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
-                        $driver = 'sqlsrv';
-                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                    } else {
-                        $driver = 'dblib';
-                        $dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
-                    }
-                } else {
-                    $driver = 'sqlsrv';
-					$dsn = $driver.':Server='.$host.';Database='.$database;
-                }
-            break;
-            //----------------------------------------------------------
-			case 'firebird':
-				$dsn = 'firebird:dbname='.( ( is_null($host) ? '' : $host.':') ).$database;
-			break;
-			//----------------------------------------------------------
-			default:
-				$configErrors[] = 'Variavel $dbType não definida no arquivo de configuração!';
-		}
+		$defaultPort = TPDOConnection::getDefaultPortDBMS( $dbType );
+		$port= empty($port)?$defaultPort:$port;
+		$dsn = TPDOConnection::getDsnPDO($dbType,$host,$port,$database,$username,$password);
 
 		if( count( $configErrors ) > 0 ){
 			self::showExemple( $configErrors );
@@ -193,12 +124,7 @@ final class TConnection
 					throw new Exception('Connection error'.$e['message']);
 				}
 				$conn = (object) array('connection'=>$connection,'isPDO'=>false);
-				/*
-				$stid = oci_parse($conn, 'SELECT * from tb_uf where cod_uf = 59');
-				oci_execute($stid);
-				$nrows = oci_fetch_all($stid, $res);
-				print_r($res);
-				*/
+				$tPdoWrapper = $conn;
 			}
 		}catch( Exception $e ){
 			throw new Exception("<br><b>Connection error using dsn ".$dsn."</b><br>Message:".$e->getMessage().'<br>');

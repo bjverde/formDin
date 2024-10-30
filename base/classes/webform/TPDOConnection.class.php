@@ -189,7 +189,7 @@ class TPDOConnection {
                   .self::$dsn
                   .'<br><BR><b>Erro retornado:</b><br>'
                   .$e->getMessage();
-            self::$error = utf8_encode( $msg );
+            self::$error = StringHelper::utf8_encode( $msg );
             return false;
         }
         
@@ -249,7 +249,7 @@ class TPDOConnection {
             }
         }
         
-        if( count( $configErrors ) == 0 ){
+        if( CountHelper::count( $configErrors ) == 0 ){
             $configErrors = self::setConfigDBMS($useConfigFile, $configArray ,$configErrors ,$root);
             
             self::setConfigDbmsPort($useConfigFile, $configArray);
@@ -263,7 +263,7 @@ class TPDOConnection {
             $configErrors = self::useSimpleDBMS($configErrors);
             
             $configErrorsDsn = self::defineDsnPDO($configErrors,$useConfigFile);
-            if ( count( $configErrorsDsn ) > 0 ) {
+            if ( CountHelper::count( $configErrorsDsn ) > 0 ) {
                 $configErrors = $configErrors + $configErrorsDsn;
             }
         }
@@ -384,7 +384,7 @@ class TPDOConnection {
         }
         
         $port = null;
-        switch( strtoupper( $DBMS ) ) {
+        switch( StringHelper::strtoupper( $DBMS ) ) {
             case DBMS_ACCESS:
             case DBMS_FIREBIRD:
             case DBMS_SQLITE:
@@ -530,30 +530,61 @@ class TPDOConnection {
      * @return string
      */
     private static function defineDsnPDO($configErrors,$useConfigfile = true) {
-        $host = self::getHost();
         $database = self::getDataBaseName();
+        $host = self::getHost();
         $port = self::getPort();
-        
-        switch( self::getDBMS() ) {
+        $DBMS = self::getDBMS();
+        $username = self::$username;
+        $password = self::$password;
+        self::$dsn= self::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
+        return $configErrors;
+    }
+
+    public static function validateDsnPdoParamValue($paramName,$value){
+        if ( empty($value) ){
+            throw new InvalidArgumentException('PDO requires the '.$paramName.' parameter to be filled in.');
+        }
+    }
+
+    public static function getDsnPDO($DBMS,$host,$port,$database,$username,$password){
+        $dsn = null;
+        $defaultPort = TPDOConnection::getDefaultPortDBMS( $DBMS );
+		$port = empty($port)?$defaultPort:$port;
+
+        switch( $DBMS ) {
             case DBMS_MYSQL :
-                self::$dsn = 'mysql:host='.$host.';dbname='.$database.';port='.$port;
-                break;
-                //-----------------------------------------------------------------------
+                self::validateDsnPdoParamValue('HOST',$host);
+                self::validateDsnPdoParamValue('database',$database);
+                self::validateDsnPdoParamValue('port',$port);
+
+                $dsn = 'mysql:host='.$host.';dbname='.$database.';port='.$port;
+            break;
+            //-----------------------------------------------------------------------
             case DBMS_POSTGRES :
-                self::$dsn = 'pgsql:host='.$host.';dbname='.$database.';port='.$port;
-                break;
-                //-----------------------------------------------------------------------
+                self::validateDsnPdoParamValue('HOST',$host);
+                self::validateDsnPdoParamValue('database',$database);
+                self::validateDsnPdoParamValue('port',$port);
+
+                $dsn = 'pgsql:host='.$host.';dbname='.$database.';port='.$port;
+            break;
+            //-----------------------------------------------------------------------
             case DBMS_SQLITE:
                 //self::validateFileDataBaseExists ( $configErrors );
-                self::$dsn = 'sqlite:'.$database;
-                break;
-                //-----------------------------------------------------------------------
+                self::validateDsnPdoParamValue('database',$database);
+
+                $dsn = 'sqlite:'.$database;
+            break;
+            //-----------------------------------------------------------------------
             case DBMS_ORACLE:
-                self::$dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host. ")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
+                $dsn = "oci:dbname=(DESCRIPTION =(ADDRESS_LIST=(ADDRESS = (PROTOCOL = TCP)(HOST = ".$host. ")(PORT = ".$port.")))(CONNECT_DATA =(SERVICE_NAME = " . SERVICE_NAME . ")))";
                 //self::$dsn = "oci:dbname=".SERVICE_NAME;
-                break;
-                //----------------------------------------------------------
+            break;
+            //----------------------------------------------------------
             case DBMS_SQLSERVER:
+                self::validateDsnPdoParamValue('HOST',$host);
+                self::validateDsnPdoParamValue('database',$database);
+                self::validateDsnPdoParamValue('port',$port);
+
                 /**
                  * Dica de Reinaldo A. Barrêto Junior para utilizar o sql server no linux
                  *
@@ -566,40 +597,37 @@ class TPDOConnection {
                     }
                     else if(version_compare(PHP_VERSION, '7.0.0', '>=') && version_compare(PHP_VERSION, '8.2.0', '<')) {
                         $driver = 'sqlsrv';
-                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                        $dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
                     } else {
                         $driver = 'dblib';
-                        //self::$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
-                        self::$dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
+                        //$dsn = $driver.':version=7.2;charset=UTF-8;host=' . HOST . ';dbname=' . DATABASE . ';port=' . PORT;
+                        $dsn = $driver.':version=7.2;host='.$host.';dbname='.$database.';port='.$port;
                     }
                 } else {
                     $driver = 'sqlsrv';
-                    if (version_compare(PHP_VERSION, '8.2.0', '>=')) {
-                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
-                    } else {
-                        //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-                    }
+                    //$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+					$dsn = $driver.':Server='.$host.';Database='.$database;
                 }
-                break;
-                //----------------------------------------------------------
+            break;
+            //----------------------------------------------------------
             case DBMS_FIREBIRD:
                 //self::validateFileDataBaseExists ( $configErrors );
-                self::$dsn = 'firebird:dbname='.$database;
-                break;
-                //----------------------------------------------------------
+                self::validateDsnPdoParamValue('database',$database);
+
+                $dsn = 'firebird:dbname='.$database;
+            break;
+            //----------------------------------------------------------
             case 'MSACCESS':
             case DBMS_ACCESS:
-                //self::fileDataBaseExists ( $configErrors );
-                self::$dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.$database.';Uid='.self::$username.';Pwd='.self::$password;
-                break;
-                //----------------------------------------------------------
-            default:
-                $configErrors[] = 'Falta informar o sistema gerenciador de Banco de Dados: Access, Firebird, MySQL, Oracle, PostGresSQL, SQL Lite ou SQL Server';
-                break;
-                //----------------------------------------------------------
+                //self::validateFileDataBaseExists ( $configErrors );
+                self::validateDsnPdoParamValue('database',$database);
+                self::validateDsnPdoParamValue('username',$username);
+                self::validateDsnPdoParamValue('password',$password);
+                
+                $dsn = 'odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq='.$database.';Uid='.$username.';Pwd='.$password;
+            break;
         }
-        return $configErrors;
+        return $dsn;
     }
     
     /**

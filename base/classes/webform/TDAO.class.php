@@ -180,18 +180,16 @@ class TDAO
 	* @param string $strNewValue
 	*/
 	public function setDbType( $strNewValue = null ){
-		$this->dbType=$strNewValue;
+		TPDOConnection::validateDBMS($strNewValue);
+		$this->dbType= StringHelper::strtoupper($strNewValue);
 	}
 
 	/**
 	* Retorna o tipo do banco de dados que será acessado
 	*
-	* @return string;
+	* @return string $dbType;
 	*/
 	public function getDbType(){
-		if( $this->conn ){
-			//return $this->getConnDbType();
-		}
 		return $this->dbType;
 	}
 
@@ -276,35 +274,16 @@ class TDAO
 	public function setPort( $strNewValue = null ){
 		$this->port=$strNewValue;
 	}
+
     /**
     * Retorna a porta de comunicação utilizada pelo banco de dados
     *
     */
 	public function getPort() {
 		if ( is_null( $this->port ) ) {
-			switch( strtolower( $this->getDbType() ) ) {
-				case 'postgre':
-				case DBMS_POSTGRES:
-					$this->port='5432';
-					break;
-
-				case DBMS_MYSQL:
-					$this->port='3306';
-
-					break;
-
-				case DBMS_SQLSERVER:
-					$this->port='1433';
-
-					break;
-
-				case DBMS_ORACLE:
-					$this->port='1521';
-
-					break;
-				}
+			$port = TPDOConnection::getDefaultPortDBMS( $this->getDbType() );
+			$this->port=$port;
 		}
-
 		return $this->port;
 	}
 
@@ -315,8 +294,7 @@ class TDAO
 	*
 	* @param string $strNewValue
 	*/
-	public function setSchema( $strNewValue = null )
-	{
+	public function setSchema( $strNewValue = null ){
 		$this->schema=$strNewValue;
 	}
 
@@ -328,10 +306,8 @@ class TDAO
 	*
 	* @return string
 	*/
-	public function getSchema()
-	{
-		if( $this->conn )
-		{
+	public function getSchema(){
+		if( $this->conn ){
 			return $this->getConnSchema();
 		}
 		return $this->schema;
@@ -342,21 +318,33 @@ class TDAO
 	*
 	* @param boolean $boolNewValue
 	*/
-	public function setUtf8( $boolNewValue = null )
-	{
+	public function setUtf8( $boolNewValue = null ){
 		$this->utf8=$boolNewValue;
 	}
     /**
     * Retorna true ou false se o banco de dados está utilizando codificação UTF-8
     *
     */
-	public function getUtf8()
-	{
-		if( $this->conn )
-		{
+	public function getUtf8(){
+		if( $this->conn ){
 			return $this->getConnUtf8();
 		}
 		return ( ( $this->utf8 === false ) ? false : true );
+	}
+
+	public function metadataDirConnect(){
+		if( $this->getMetadataDir()){
+			if ( !is_array( $this->getFields() ) ){
+				if ( !$this->unserializeFields() ){
+					$this->loadFieldsFromDatabase();
+				}
+			}
+			if( is_array($this->primaryKeys ) ){
+				foreach($this->primaryKeys as $fieldName=>$boolTemp){
+					$this->getField($fieldName)->primaryKey = 1;
+				}
+			}
+		}
 	}
 
 	/**
@@ -381,25 +369,7 @@ class TDAO
 			$this->setError( $e->getMessage() );
 			return false;
 		}
-
-        if( $this->getMetadataDir())
-        {
-			if ( !is_array( $this->getFields() ) )
-			{
-				if ( !$this->unserializeFields() )
-				{
-					$this->loadFieldsFromDatabase();
-				}
-			}
-			if( is_array($this->primaryKeys ) )
-			{
-				foreach($this->primaryKeys as $fieldName=>$boolTemp)
-				{
-					$this->getField($fieldName)->primaryKey = 1;
-				}
-			}
-		}
-
+		$this->metadataDirConnect();
 		return true;
 	}
 
@@ -415,60 +385,48 @@ class TDAO
 	{
 		$data=false;
 		$hasUserTransaction = $this->getHasActiveTransaction();
-		if ( !$this->getConn() )
-		{
+		if ( !$this->getConn() ){
 			return false;
 		}
-		try
-		{
-			if ( !is_null($params) && !is_array( $params ) )
-			{
+		try{
+			if ( !is_null($params) && !is_array( $params ) ){
 				$params = array($params);
 			}
 			$sql=trim( $sql );              // remover espaços do início e final
-			$sql=$this->utf8Decode( $sql ); // remover codificação utf8
+			//$sql=$this->utf8Decode( $sql ); // remover codificação utf8
 
-			if ( $this->getConnUtf8() )
-			{
+			if ( $this->getConnUtf8() ){
 				$sql = $this->utf8Encode( $sql ); // aplicar codificação utf8
 			}
 			$params=$this->prepareParams( $params ); // aplicar/remover utf8 nos parâmetros
 		}
-		catch( Exception $e )
-		{
+		catch( Exception $e ){
 			$this->setError( $e->getMessage() );
 			return false;
 		}
 
-		if ( $this->isPdo() )
-		{
-			if ( is_null( $fetchMode ) || ( $fetchMode != PDO::FETCH_ASSOC && $fetchMode != PDO::FETCH_CLASS ) )
-			{
+		if ( $this->isPdo() ){
+			if ( is_null( $fetchMode ) || ( $fetchMode != PDO::FETCH_ASSOC && $fetchMode != PDO::FETCH_CLASS ) ){
 				$fetchMode = PDO::FETCH_ASSOC;
 			}
 
-			try
-			{
+			try{
 				// trocar os "?" por ":p" para fazer o bind_by_name
-				if( is_array($params) && preg_match('/\?/',$sql)==1 )
-				{
+				if( is_array($params) && preg_match('/\?/',$sql)==1 ){
 					$keys = array_keys($params);
-					foreach($keys as $v)
-					{
+					foreach($keys as $v){
 						$sql = preg_replace('/\?/',':'.$v,$sql,1);
 					}
 				}
 				$this->sqlCmd 		= $sql;
 				$this->sqlParams 	= $params;
 
-				$stmt=$this->getConn()->prepare( $sql );
-				if ( !$stmt )
-				{
+				$stmt=$this->getConn()->getPdo()->prepare( $sql );
+				if ( !$stmt ){
 					throw new Exception( 'Error preparing Sql.' );
 				}
 
-                if( preg_match( '/^select/i', $sql ) == 0 )
-                {
+                if( preg_match( '/^select/i', $sql ) == 0 ){
 					$this->beginTransaction();
 				}
 				// fazer BINDS
@@ -507,18 +465,14 @@ class TDAO
 					}
 					*/
 			        // formato bindValues
-					foreach( $params  as $fieldName=>$fieldValue )
-					{
+					foreach( $params  as $fieldName=>$fieldValue ){
 						$objField = $this->getField($fieldName);
-						if( $objField )
-						{
+						if( $objField ){
 							$fieldType = $this->getValidFieldType($objField->fieldType);
-							switch( $fieldType )
-							{
+							switch( $fieldType ){
 									case 'binary':
 										// ler o conteudo do arquivo se para o camp blob for informado o nome do arquivo
-										if( @file_exists($params[$fieldName] ) )
-										{
+										if( @file_exists($params[$fieldName] ) ){
 											$params[$fieldName] = file_get_contents($params[$fieldName]);
 										}
 										$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_LOB);
@@ -531,19 +485,14 @@ class TDAO
 									default;
 									$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_STR);
         					}
-						}
-						else
-						{
-							if( is_integer($params[$fieldName] ))
-							{
+						} else {
+							if( is_integer($params[$fieldName] )){
 									$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_INT);
 							}
-							else if( is_numeric($params[$fieldName] ) )
-							{
+							else if( is_numeric($params[$fieldName] ) ){
 								$stmt->bindValue(':'.$fieldName, $params[$fieldName]);
 							}
-							else
-							{
+							else {
 								$stmt->bindValue(':'.$fieldName, $params[$fieldName], PDO::PARAM_STR);
 							}
 						}
@@ -551,50 +500,40 @@ class TDAO
 					$params=null;
 				}
 				$result=$stmt->execute( $params );
-				if ( !$result )
-				{
+				if ( !$result ){
 					throw new Exception( 'Error executing Sql!' );
 				}
 			}
-			catch( Exception $e )
-			{
+			catch( Exception $e ){
 				$this->setError( $e->getMessage() );
 				return false;
-			//throw $e;
 			}
-			if( $this->getAutoCommit() && ! $hasUserTransaction )
-			{
+			if( $this->getAutoCommit() && ! $hasUserTransaction ){
 				$this->commit();
 			}
 			$data=true;
-			try
-			{
+			try{
 				if ( preg_match( '/^select/i', $sql ) > 0 || preg_match( '/returning /i', $sql ) > 0 || preg_match( '/^with /i', $sql ) > 0 )
 				{
 					$data = $stmt->fetchAll( $fetchMode );
 				}
 			}
-			catch( Exception $e )
-			{
+			catch( Exception $e ){
 				$data=false;
 				$this->setError( $e->getMessage() );
 			}
 
 			$stmt->closeCursor();
 		}
-		else
-		{
-			$conn=$this->getConn()->connection;
+		else{
+			$conn=$this->getConn()->getPdo();
 
-			if ( $this->getDbType() == DBMS_ORACLE )
-			{
-				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) )
-				{
+			if ( $this->getDbType() == DBMS_ORACLE ){
+				if ( is_null( $fetchMode ) || ( $fetchMode != 'FETCH_ASSOC' && $fetchMode != 'FETCH_CLASS' ) ){
 					$fetchMode = 'FETCH_ASSOC'; //OCI_FETCHSTATEMENT_BY_ROW;
 				}
 
-				try
-				{
+				try {
                     // trocar os "?" por ":p" para fazer o bind_by_name
 					if( is_array($params) && preg_match('/\?/',$sql)==1 )
 					{
@@ -674,14 +613,12 @@ class TDAO
 	*/
 	public function getConn()
 	{
-		if ( is_null( $this->conn ) )
-		{
-			if ( !$this->connect() )
-			{
+		if ( is_null( $this->conn ) ){
+			$conn = $this->connect();
+			if ( !$conn ){
 				return false;
 			}
 		}
-
 		return $this->conn;
 	}
 
@@ -783,7 +720,7 @@ class TDAO
 	*/
 	public function getConnUtf8(){
 		if ( $this->getConn() ){
-			return $this->getConn()->utf8;
+			return $this->getConn()->getBoolUtf8();
 		}
 		return true;
 	}
@@ -851,19 +788,14 @@ class TDAO
 	*/
 	public function utf8Encode( $str = null )
 	{
-		if ( is_null( $str ) || $str == '' )
-		{
+		if ( is_null( $str ) || $str == '' ){
 			return $str;
 		}
-
 		$result='';
-		$this->utf8Decode( $str );
-
 		$len  = StringHelper::strlen( $str );
 		for( $i = 0; $i < $len; $i++ ){
-			$result .= utf8_encode( substr( $str, $i, 1 ) );
+			$result .= StringHelper::utf8_encode( substr( $str, $i, 1 ) );
 		}
-
 		return $result;
 	}
 
@@ -872,13 +804,14 @@ class TDAO
 	*
 	* @param string $str
 	*/
-	public function utf8Decode( $str = null )
-	{
-		foreach( $this->getSpecialChars()as $char )
-		{
-			$str = preg_replace( '/' . utf8_encode( $char ) . '/', $char, $str );
+	public function utf8Decode( $str = null ){
+		if ( is_null( $str ) || $str == '' ){
+			return $str;
 		}
-
+		foreach( $this->getSpecialChars() as $char ){
+			$char_utf8= StringHelper::utf8_encode( $char );
+			$str = preg_replace( '/'.$char_utf8.'/', $char, $str );
+		}
 		return $str;
 	}
 
@@ -894,74 +827,56 @@ class TDAO
 	*/
 	public function prepareParams( $mixParams = null, $boolBind = true )
 	{
-		if ( is_numeric( $mixParams ) )
-		{
+		if ( is_numeric( $mixParams ) ) {
 			return $this->parseNumber( $mixParams );
 		}
-		else if( is_string( $mixParams ) )
-		{
-			if ( $this->getConnUtf8() )
-			{
+		else if( is_string( $mixParams ) ){
+			if ( $this->getConnUtf8() ){
 				$mixParams=trim( $mixParams );
-				$mixParams=$this->utf8Decode( $mixParams ); // remover utf8
+				//$mixParams=$this->utf8Decode( $mixParams ); // remover utf8
 				return $this->utf8Encode( $mixParams );
 			}
-
-			return $this->utf8Decode( $mixParams );
+			//return $this->utf8Decode( $mixParams );
 		}
-		else if( is_array( $mixParams ) )
-		{
+		else if( is_array( $mixParams ) ){
 			$result=array();
 
-			foreach( $mixParams as $k => $item )
-			{
-				if ( is_numeric( $item ) )
-				{
-					if ( !$boolBind )
-					{
+			foreach( $mixParams as $k => $item ){
+				if ( is_numeric( $item ) ){
+					if ( !$boolBind ){
 						array_push( $result, $this->prepareParams( $item, $boolBind ) );
 					}
-					else
-					{
+					else {
 						$result[ $k ] = $this->prepareParams( $item, $boolBind );
 					}
 				}
-				else
-				{
+				else {
 					$objField=$this->getField( $k );
 					$fieldType=null;
 					if ( ! is_null( $objField ) )
 					{
 						$fieldType=$this->getValidFieldType( $objField->fieldType );
-						if ( $fieldType == 'date' )
-						{
-							if ( $this->getDbType() == DBMS_ORACLE )
-							{
+						if ( $fieldType == 'date' ){
+							if ( $this->getDbType() == DBMS_ORACLE ){
 								$item = $this->parseDMY( $item );
 							}
-							else
-							{
+							else{
 								$item = $this->parseYMD( $item );
 							}
 						}
-						elseif( $fieldType == 'number' )
-						{
+						elseif( $fieldType == 'number' ){
 							$item = $this->parseNumber( $item );
 						}
 					}
 
-					if ( ! $boolBind )
-					{
-						if ( $fieldType != 'binary' )
-						{
+					if ( ! $boolBind ){
+						if ( $fieldType != 'binary' ){
 							$item = $this->prepareParams( $item, $boolBind );
 						}
 						array_push( $result, $item );
 					}
-					else
-					{
-						if ( $fieldType != 'binary' )
-						{
+					else{
+						if ( $fieldType != 'binary' ){
 							$item = $this->prepareParams( $item, $boolBind );
 						}
 						$result[ $k ]=$item;
@@ -1217,7 +1132,7 @@ class TDAO
 
 		foreach( $this->getSpecialChars()as $k => $v )
 		{
-			if ( preg_match( '/' . utf8_encode( $v ) . '/', $strValue ) )
+			if ( preg_match( '/' . StringHelper::utf8_encode( $v ) . '/', $strValue ) )
 			{
 				$result=true;
 				break;
@@ -1240,8 +1155,7 @@ class TDAO
 		}
 
 		// se tiver na codificação utf-8 retornar false
-		if ( $this->detectUTF8( $strValue ) )
-		{
+		if ( $this->detectUTF8( $strValue ) ){
 			return false;
 		}
 
@@ -1267,26 +1181,14 @@ class TDAO
 	*/
 	public function parseString( $strValue = null )
 	{
-		if ( !is_string( $strValue ) || is_numeric( $strValue ) )
-		{
+		if ( !is_string( $strValue ) || is_numeric( $strValue ) ){
 			return $strValue;
 		}
-
-		if ( $this->getCharset() == 'utf-8' )
-		{
-			if ( $this->detectSpecialChar( $strValue ) )
-			{
-				$strValue = $this->utf8Encode( $strValue );
-			}
+		if ( $this->getCharset() == 'utf-8' ){
+			$strValue = StringHelper::utf8_encode($strValue);
+		} else {
+			$strValue = StringHelper::utf8_decode($strValue);
 		}
-		else
-		{
-			if ( $this->detectUTF8( $strValue ) )
-			{
-				$strValue = $this->utf8Decode( $strValue );
-			}
-		}
-
 		return $strValue;
 	}
 
@@ -1438,134 +1340,16 @@ class TDAO
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_MYSQL:
-				$sql = "select vg.TABLE_SCHEMA
-                        	  ,vg.TABLE_NAME
-                              ,vg.COLUMN_QTD
-                              ,vg.TABLE_TYPE
-                        from
-                        (                        
-                        	select vt.TABLE_SCHEMA
-                        		  ,vt.TABLE_NAME
-                        		  ,count(*) as COLUMN_QTD
-                        		  ,vt.TABLE_TYPE
-                        	from
-                        	(
-                        		SELECT t.TABLE_SCHEMA
-                        			  ,t.TABLE_NAME
-                        			  ,case when upper(t.TABLE_TYPE) = 'BASE TABLE' then 'TABLE' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
-                        		FROM INFORMATION_SCHEMA.TABLES as t
-                        			,INFORMATION_SCHEMA.COLUMNS as c
-                        		WHERE t.TABLE_NAME = c.TABLE_NAME 
-                        		 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
-                        		 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
-                        		 and t.TABLE_SCHEMA not in ('sys','phpmyadmin','performance_schema','mysql','information_schema')
-                        	 ) as vt
-                        	 group by vt.TABLE_SCHEMA
-                        			 ,vt.TABLE_NAME
-                        			 ,vt.TABLE_TYPE
-                        			 
-                        	union
-                        
-                        	select vp.TABLE_SCHEMA
-                                  ,vp.TABLE_NAME
-                                  ,count(*) as COLUMN_QTD
-                                  ,'PROCEDURE' as TABLE_TYPE
-                        	from
-                        	(
-                        		select p.SPECIFIC_SCHEMA as TABLE_SCHEMA
-                        			  ,p.SPECIFIC_NAME as TABLE_NAME
-                        			  ,p.routine_type as TABLE_TYPE
-                        		from information_schema.routines as r
-                        		left join information_schema.parameters as p
-                        				  on p.specific_schema = r.routine_schema
-                        				  and p.specific_name = r.specific_name
-                        		where r.routine_schema not in ('sys','phpmyadmin','information_schema','mysql', 'performance_schema')
-                        		and p.routine_type = 'PROCEDURE'
-                        	) as vp
-                        	group by vp.TABLE_SCHEMA
-                        			,vp.TABLE_NAME
-                        			,vp.TABLE_TYPE
-                        ) as vg
-                        order by 
-                                 vg.TABLE_SCHEMA
-                        		,vg.TABLE_TYPE
-                        		,vg.TABLE_NAME";
+				$sql = $this->getSqlToListTablesFromDatabaseMySQL();
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_SQLSERVER:
-			    $sql = "select 
-                        TABLE_SCHEMA
-                        ,TABLE_NAME
-                        ,COLUMN_QTD
-                        ,TABLE_TYPE
-                        from (
-                        SELECT qtd.TABLE_SCHEMA
-                        		,qtd.TABLE_NAME
-                        		,qtd.COLUMN_QTD
-                        		,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
-                        FROM
-                        	(SELECT TABLE_SCHEMA
-                        			,TABLE_NAME
-                        			,COUNT(TABLE_NAME) COLUMN_QTD
-                        	FROM INFORMATION_SCHEMA.COLUMNS c
-                        	where c.TABLE_SCHEMA <> 'METADADOS'
-                        	group by TABLE_SCHEMA, TABLE_NAME
-                        	) as qtd
-                        	,(SELECT TABLE_SCHEMA
-                        			, TABLE_NAME
-                        			, TABLE_TYPE
-                        	FROM INFORMATION_SCHEMA.TABLES i
-                        	where I.TABLE_SCHEMA <> 'METADADOS'
-                        	) as ty
-                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
-                        and qtd.TABLE_NAME = ty.TABLE_NAME
-                        
-                        UNION
-                        
-                         SELECT Schema_name(schema_id)   AS TABLE_SCHEMA,
-                               SO.NAME                   AS TABLE_NAME,       
-                        	   count(*)                  AS COLUMN_QTD,
-                        	   CASE SO.type_desc 
-                        	   WHEN  'SQL_STORED_PROCEDURE' THEN 'PROCEDURE'
-                        	   ELSE 'FUNCTION' 
-                        	   END AS TABLE_TYPE	   
-                        FROM   sys.objects AS SO
-                               INNER JOIN sys.parameters AS P
-                                       ON SO.object_id = P.object_id
-                        WHERE  SO.object_id IN (SELECT object_id
-                                                FROM   sys.objects
-                                                WHERE  type IN ( 'P', 'FN' ))
-                        group by schema_id, SO.NAME, SO.type_desc
-                        ) as res
-                        order by res.TABLE_SCHEMA
-                               , res.TABLE_TYPE
-                               , res.TABLE_NAME";
+			    $sql = $this->getSqlToListTablesFromDatabaseSqlServer();
 			break;
 			//--------------------------------------------------------------------------------
 			case DBMS_POSTGRES:
-			    $sql = "SELECT qtd.TABLE_SCHEMA
-                              ,qtd.TABLE_NAME
-                        	  ,qtd.COLUMN_QTD
-                        	  ,ty.TABLE_TYPE
-							  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
-                        FROM
-                        	(SELECT TABLE_SCHEMA
-                        		  ,TABLE_NAME
-                        		  ,COUNT(TABLE_NAME) COLUMN_QTD
-                        	FROM INFORMATION_SCHEMA.COLUMNS c
-                        	where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
-                        	group by TABLE_SCHEMA, TABLE_NAME
-                        	) as qtd
-                        	,(SELECT TABLE_SCHEMA
-                        	       , TABLE_NAME
-                        		   , TABLE_TYPE
-                        	FROM INFORMATION_SCHEMA.TABLES i
-                        	where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
-                        	) as ty
-                        where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
-                        and qtd.TABLE_NAME = ty.TABLE_NAME
-                        order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
-			    break;
+			    $sql = $this->getSqlToListTablesFromDatabasePostGres();
+			break;
 			//--------------------------------------------------------------------------------
 			default:
 				throw new DomainException('Database '.$DbType.' not implemented ! TDAO->loadTablesFromDatabase. Contribute to the project https://github.com/bjverde/sysgen !');
@@ -1581,7 +1365,140 @@ class TDAO
 	    }
 	    return $result;
 	}
+
+	public function getSqlToListTablesFromDatabaseMySQL() {
+			$sql = "select vg.TABLE_SCHEMA
+						  ,vg.TABLE_NAME
+						  ,vg.COLUMN_QTD
+						  ,vg.TABLE_TYPE
+					from
+					(                        
+						select vt.TABLE_SCHEMA
+							  ,vt.TABLE_NAME
+							  ,count(*) as COLUMN_QTD
+							  ,vt.TABLE_TYPE
+						from
+						(
+							SELECT t.TABLE_SCHEMA
+								  ,t.TABLE_NAME
+								  ,case when upper(t.TABLE_TYPE) = 'BASE TABLE' then 'TABLE' else upper(t.TABLE_TYPE) end  as TABLE_TYPE
+							FROM INFORMATION_SCHEMA.TABLES as t
+								,INFORMATION_SCHEMA.COLUMNS as c
+							WHERE t.TABLE_NAME = c.TABLE_NAME 
+							 and  t.TABLE_SCHEMA = c.TABLE_SCHEMA
+							 and (t.TABLE_TYPE = 'BASE TABLE' OR t.TABLE_TYPE = 'VIEW')
+							 and t.TABLE_SCHEMA not in ('sys','phpmyadmin','performance_schema','mysql','information_schema')
+						 ) as vt
+						 group by vt.TABLE_SCHEMA
+								 ,vt.TABLE_NAME
+								 ,vt.TABLE_TYPE
+								 
+						union
+					
+						select vp.TABLE_SCHEMA
+							  ,vp.TABLE_NAME
+							  ,count(*) as COLUMN_QTD
+							  ,'PROCEDURE' as TABLE_TYPE
+						from
+						(
+							select p.SPECIFIC_SCHEMA as TABLE_SCHEMA
+								  ,p.SPECIFIC_NAME as TABLE_NAME
+								  ,p.routine_type as TABLE_TYPE
+							from information_schema.routines as r
+							left join information_schema.parameters as p
+									  on p.specific_schema = r.routine_schema
+									  and p.specific_name = r.specific_name
+							where r.routine_schema not in ('sys','phpmyadmin','information_schema','mysql', 'performance_schema')
+							and p.routine_type = 'PROCEDURE'
+						) as vp
+						group by vp.TABLE_SCHEMA
+								,vp.TABLE_NAME
+								,vp.TABLE_TYPE
+					) as vg
+					order by 
+							 vg.TABLE_SCHEMA
+							,vg.TABLE_TYPE
+							,vg.TABLE_NAME";
+		return $sql;		  		
+	}
+
+	public function getSqlToListTablesFromDatabaseSqlServer() {
+		$sql = "select 
+					TABLE_SCHEMA
+					,TABLE_NAME
+					,COLUMN_QTD
+					,TABLE_TYPE
+					from (
+					SELECT qtd.TABLE_SCHEMA
+							,qtd.TABLE_NAME
+							,qtd.COLUMN_QTD
+							,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+					FROM
+						(SELECT TABLE_SCHEMA
+								,TABLE_NAME
+								,COUNT(TABLE_NAME) COLUMN_QTD
+						FROM INFORMATION_SCHEMA.COLUMNS c
+						where c.TABLE_SCHEMA <> 'METADADOS'
+						group by TABLE_SCHEMA, TABLE_NAME
+						) as qtd
+						,(SELECT TABLE_SCHEMA
+								, TABLE_NAME
+								, TABLE_TYPE
+						FROM INFORMATION_SCHEMA.TABLES i
+						where I.TABLE_SCHEMA <> 'METADADOS'
+						) as ty
+					where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+					and qtd.TABLE_NAME = ty.TABLE_NAME
+					
+					UNION
+					
+					 SELECT Schema_name(schema_id)   AS TABLE_SCHEMA,
+						   SO.NAME                   AS TABLE_NAME,       
+						   count(*)                  AS COLUMN_QTD,
+						   CASE SO.type_desc 
+						   WHEN  'SQL_STORED_PROCEDURE' THEN 'PROCEDURE'
+						   ELSE 'FUNCTION' 
+						   END AS TABLE_TYPE	   
+					FROM   sys.objects AS SO
+						   INNER JOIN sys.parameters AS P
+								   ON SO.object_id = P.object_id
+					WHERE  SO.object_id IN (SELECT object_id
+											FROM   sys.objects
+											WHERE  type IN ( 'P', 'FN' ))
+					group by schema_id, SO.NAME, SO.type_desc
+					) as res
+					order by res.TABLE_SCHEMA
+						   , res.TABLE_TYPE
+						   , res.TABLE_NAME";
+		return $sql;
+	}	
 	
+	public function getSqlToListTablesFromDatabasePostGres() {
+		$sql = "SELECT qtd.TABLE_SCHEMA
+						  ,qtd.TABLE_NAME
+						  ,qtd.COLUMN_QTD
+						  ,ty.TABLE_TYPE
+						  ,case ty.TABLE_TYPE WHEN 'BASE TABLE' THEN 'TABLE' ELSE ty.TABLE_TYPE end as TABLE_TYPE
+					FROM
+						(SELECT TABLE_SCHEMA
+							  ,TABLE_NAME
+							  ,COUNT(TABLE_NAME) COLUMN_QTD
+						FROM INFORMATION_SCHEMA.COLUMNS c
+						where c.TABLE_SCHEMA <> 'pg_catalog' and c.TABLE_SCHEMA <> 'information_schema'
+						group by TABLE_SCHEMA, TABLE_NAME
+						) as qtd
+						,(SELECT TABLE_SCHEMA
+							   , TABLE_NAME
+							   , TABLE_TYPE
+						FROM INFORMATION_SCHEMA.TABLES i
+						where I.TABLE_SCHEMA <> 'pg_catalog' and I.TABLE_SCHEMA <> 'information_schema'
+						) as ty
+					where qtd.TABLE_SCHEMA = ty.TABLE_SCHEMA
+					and qtd.TABLE_NAME = ty.TABLE_NAME
+					order by qtd.TABLE_SCHEMA, qtd.TABLE_NAME";
+		return $sql;
+	}
+
 	public function getSqlToFieldsFromOneStoredProcedureMySQL() {
 	    $sql="select 
                 	 p.parameter_name as COLUMN_NAME
@@ -1894,7 +1811,7 @@ class TDAO
 			$params=array($this->getTableName());
 		}
 		else if( $DbType == DBMS_SQLITE) {
-			$stmt = $this->getConn()->query( "PRAGMA table_info(".$this->getTableName().")");
+			$stmt = $this->getConn()->getPdo()->query( "PRAGMA table_info(".$this->getTableName().")");
 			$res  = $stmt->fetchAll();
 			$data = null;
 			$sql  = null;
@@ -2106,9 +2023,9 @@ class TDAO
     */
 	public function isPDO()
 	{
-		if ( $this->getConn() )
-		{
-			return $this->getConn()->isPDO;
+		if ( $this->getConn() ){
+			$conn = $this->getConn();
+			return $conn->isPDO;
 		}
 		return null;
 	}
@@ -2172,7 +2089,7 @@ class TDAO
 		{
 			if ( $this->isPDO() )
 			{
-				$this->getConn()->beginTransaction();
+				$this->getConn()->getPdo()->beginTransaction();
 				$this->hasActiveTransaction=true;
 				return true;
 			}
@@ -2185,20 +2102,16 @@ class TDAO
     */
 	public function commit()
 	{
-		if( ! $this->getHasActiveTransaction() )
-		{
+		if( ! $this->getHasActiveTransaction() ){
 			return;
 		}
 		$this->hasActiveTransaction=false;
 		if ( $this->getConn() )
 		{
-			if ( $this->getDbType() == DBMS_ORACLE )
-			{
+			if ( $this->getDbType() == DBMS_ORACLE ){
 				oci_commit( $this->getConn()->connection );
-			}
-			else
-			{
-				$this->getConn()->commit();
+			} else {
+				$this->getConn()->getPdo()->commit();
 			}
 		}
 	}
@@ -2213,11 +2126,9 @@ class TDAO
 			return;
 		}
 		$this->hasActiveTransaction=false;
-		if ( $this->getConn() )
-		{
-			if ( $this->isPDO() )
-			{
-				$this->getConn()->rollBack();
+		if ( $this->getConn() ){
+			if ( $this->isPDO() ){
+				$this->getConn()->getPdo()->rollBack();
 			}
 		}
 	}
@@ -2308,6 +2219,7 @@ class TDAO
 			}
 		}
 	}
+
     /**
     * Retorna o array de campos que fazem parte da chave primária da tabela
     *
@@ -2316,25 +2228,21 @@ class TDAO
 	public function getPrimaryKeys()
 	{
 		$result=array();
-		if( $this->getFields())
-		{
-			foreach($this->getFields() as $fieldName=>$objField)
-			{
-				if( isset( $objField->primaryKey) && $objField->primaryKey == 1 )
-				{
+		if( $this->getFields()) {
+			foreach($this->getFields() as $fieldName=>$objField) {
+				if( isset( $objField->primaryKey) && $objField->primaryKey == 1 ) {
 					array_push($result,$objField->fieldName);
 				}
 			}
 		}
-		else
-		{
-			if( is_array($this->primaryKeys) )
-			{
+		else{
+			if( is_array($this->primaryKeys) ){
 				$result = array_keys($this->primaryKeys);
 			}
 		}
 		return $result;
 	}
+
 	/**
 	* Persiste os valores dos campos definidos com setFieldValue() chamando
 	* o método insert ou update
@@ -2344,40 +2252,34 @@ class TDAO
 	{
 		$result = false;
 		$pks = $this->getPrimaryKeys();
-		if( count($pks) > 0 )
-		{
+		if( count($pks) > 0 ) {
 			$params=null;
 			$where = array();
-			foreach($pks as $v)
-			{
+			foreach($pks as $v) {
 				$params[$v] = $this->getFieldValue($v);
-				if($this->isPDO())
-				{
+				if($this->isPDO()) {
 					$where[] = $v.'=?';
 				}
-				else
-				{
+				else{
 					$where[] = $v.' = :'.$v;
 				}
 			}
 			$sql = "select ".$pks[0]." from ".$this->getTableName()." where ".implode(' and ',$where);
 			//print_r($params);
 			$result = $this->query($sql,$params);
-			if( is_array($result) && count($result)>0)
-			{
+			if( is_array($result) && count($result)>0){
 				$result = $this->update();
 			}
-			else
-			{
+			else{
 				$result = $this->insert();
 			}
 		}
-		else
-		{
+		else{
 			$result = $this->insert();
 		}
 		return $result;
 	}
+
 	/**
 	* Executa o comando insert com os valores definidos nos campos da tabela
 	*
@@ -2385,19 +2287,17 @@ class TDAO
 	public function insert()
 	{
 		$fields=$this->getFields();
-		if( is_array( $fields ) )
-		{
+		if( is_array( $fields ) ){
 			$params=null;
-			foreach($fields as $fieldName=>$objField)
-			{
-				if( ! $objField->autoincrement )
-				{
+			foreach($fields as $fieldName=>$objField){
+				if( ! $objField->autoincrement ){
 					$params[$objField->fieldName] = isset($objField->value) ? $objField->value : null;
 				}
 			}
 		}
 		return $this->insertValues($params);
 	}
+
     /**
     * Executa o comando update na tabela
     *
@@ -2405,19 +2305,17 @@ class TDAO
 	public function update()
 	{
 		$fields=$this->getFields();
-		if( is_array( $fields ) )
-		{
+		if( is_array( $fields ) ){
 			$params=null;
-			foreach($fields as $fieldName=>$objField)
-			{
-				if( ! $objField->autoincrement )
-				{
+			foreach($fields as $fieldName=>$objField){
+				if( ! $objField->autoincrement ){
 					$params[$objField->fieldName] = isset($objField->value) ? $objField->value : null;
 				}
 			}
 		}
 		return $this->updateValues($params);
 	}
+
     /**
     * Executa o comando delete na tabela
     *
@@ -2426,6 +2324,7 @@ class TDAO
 	{
 		return $this->deleteValues();
 	}
+
     /**
     * Executa o comando insert baseado no array de campos e valores recebidos
     *
@@ -2433,8 +2332,7 @@ class TDAO
     */
     public function insertValues( $arrFieldValues = null )
 	{
-		if ( !$this->connect() )
-		{
+		if ( !$this->connect() ) {
 			return false;
 		}
 
@@ -2515,46 +2413,39 @@ class TDAO
 				$columnsClause='(' . implode( ',', array_keys( $params ) ) . ')';
 				$valuesClause ='values (' . implode( ',', $valuesClause ) . ')';
 
-				if ( $this->getAutoincFieldName() )
-				{
+				if ( $this->getAutoincFieldName() ){
 					array_push( $returningFields, $this->getAutoincFieldName() );
 					array_push( $returningInto, ':' . $this->getAutoincFieldName() );
 				}
 
 				$returningClause='';
 
-				if ( count( $returningFields ) > 0 )
-				{
+				if ( count( $returningFields ) > 0 ){
 					$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
 				}
 				$sqlInsert .= $columnsClause . ' ' . $valuesClause . ' ' . $returningClause;
-				$stmt=oci_parse( $this->getConn()->connection, $sqlInsert );
+				$stmt=oci_parse( $this->getConn()->getPdo()->connection, $sqlInsert );
 				foreach( $params as $fieldName => $fieldValue )
 				{
 					$objField = $this->getField( $fieldName );
 
-					if ( $objField )
-					{
+					if ( $objField ){
 						$bindType=$this->getBindType( $objField->fieldType );
-						if ( $bindType == SQLT_CLOB )
-						{
+						if ( $bindType == SQLT_CLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
 						}
-						else if( $bindType == SQLT_BLOB )
-						{
+						else if( $bindType == SQLT_BLOB ){
 							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
+							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
 						}
-						else
-						{
+						else{
 							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
 						}
 					}
-					else
-					{
+					else{
 						oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
 					}
 				}
@@ -2563,13 +2454,11 @@ class TDAO
 				$this->lastId=null;
 
 				// adicionar o campo autoinc no retorno do insert para capturar o valor gerado
-				if ( $this->getAutoincFieldName() )
-				{
+				if ( $this->getAutoincFieldName() ){
 					oci_bind_by_name( $stmt, ':' . $this->getAutoincFieldName(), $lastId, 20, SQLT_INT );
 				}
 
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
+				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) ){
 					$e=oci_error( $stmt );
 					oci_free_statement( $stmt );
 
@@ -2577,61 +2466,115 @@ class TDAO
 				}
 
 				// salvar os campos lobs
-				if ( count( $descriptors ) > 0 )
-				{
-					foreach( $descriptors as $k => $v )
-					{
+				if ( count( $descriptors ) > 0 ){
+					foreach( $descriptors as $k => $v ){
 						$params[ $k ]->save( $v );
 					}
 				}
 
-				if ( $this->getAutoCommit() && ! $userTransation )
-				{
+				if ( $this->getAutoCommit() && ! $userTransation ){
 					$this->commit();
 				}
 
 				oci_free_statement( $stmt );
 
-				if ( $lastId )
-				{
+				if ( $lastId ){
 					$result[ 0 ][ $this->getAutoincFieldName()] = $lastId;
 				}
 			}
 		}
-		catch( Exception $e )
-		{
-			if( ! $userTransation )
-			{
+		catch( Exception $e ){
+			if( ! $userTransation ){
 				$this->rollBack();
 			}
 			$this->setError( $e->getMessage() );
 			return false;
 		}
-		if( $this->getAutoincFieldName() )
-		{
-			if ( isset($result) && is_array($result) )
-			{
-				if ( isset( $result[ 0 ][ strtolower( $this->getAutoincFieldName() )] ) )
-				{
+		if( $this->getAutoincFieldName() ){
+			if ( isset($result) && is_array($result) ){
+				if ( isset( $result[ 0 ][ strtolower( $this->getAutoincFieldName() )] ) ){
 					$this->lastId = $result[ 0 ][ strtolower( $this->getAutoincFieldName() )];
 				}
-				else if( isset( $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )] ) )
-				{
+				else if( isset( $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )] ) ){
 					$this->lastId = $result[ 0 ][ strtoupper( $this->getAutoincFieldName() )];
 				}
 			}
-			else
-			{
+			else{
 				$this->lastId = $this->getLastInsertId();
 			}
 			$this->setFieldValue($this->getAutoincFieldName(),$this->lastId);
 		}
 
-		if( ! $userTransation )
-		{
+		if( ! $userTransation ){
 			$this->commit();
 		}
 		return true;
+	}
+
+
+	public function deleteValuesOralceNotPdo($arrFieldValues=null){
+		$result = false;
+		// oracle sem PDO
+		$sql ="delete from " . $this->getTableName();
+		$whereClause = array();
+		$params      =null;
+		if( is_array($arrFieldValues))
+		{
+			foreach( $arrFieldValues as $fieldName => $fieldValue )
+			{
+				$params[ $fieldName ]=$fieldValue;
+				$whereClause[] = $fieldName.'=:' . $fieldName;
+			}
+		}
+		else
+		{
+			// where
+			$pks = $this->getPrimaryKeys();
+			if( count($pks) == 0 )
+			{
+				$this->setError('Primary key for table '.$this->getTableName().' not defined!');
+				return $result;
+			}
+			else
+			{
+				$whereClause =null;
+				foreach($pks as $v)
+				{
+					$v = strtolower($v);
+					$params[$v] = $this->getFieldValue($v);
+					$whereClause[] = $v.' = :'.$v;
+				}
+			}
+		}
+		$whereClause = 'where '.implode(' and ', $whereClause);
+		$sql .= ' '.$whereClause;
+		$stmt = oci_parse( $this->getConn()->getPdo()->connection, $sql);
+		if( !$stmt)
+		{
+			$e = oci_error();
+			throw new Exception( 'Parse error ' . $e[ 'message' ] );
+		}
+
+			$params = $this->prepareParams( $params, true ); // tratar acentos
+		// fazer o bind dos valores aos parametros
+
+		foreach( $params as $fieldName => $fieldValue )
+		{
+			oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
+		}
+		if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
+		{
+			$e=oci_error( $stmt );
+			oci_free_statement( $stmt );
+			throw new Exception( 'Update error ' . $e[ 'message' ] );
+		}
+		if ( $this->getAutoCommit() )
+		{
+			$this->commit();
+		}
+		$result = true;
+		oci_free_statement( $stmt );
+		return $result;
 	}
 
     /**
@@ -2685,77 +2628,138 @@ class TDAO
 					$result = self::query( $sqlUpdate, $params );
 				}
 			}
-			else
-			{
-  				// oracle sem PDO
-				$sql ="delete from " . $this->getTableName();
-				$whereClause = array();
-				$params      =null;
-				if( is_array($arrFieldValues))
-				{
-					foreach( $arrFieldValues as $fieldName => $fieldValue )
-					{
-						$params[ $fieldName ]=$fieldValue;
-						$whereClause[] = $fieldName.'=:' . $fieldName;
-					}
-				}
-				else
-				{
-					// where
-					$pks = $this->getPrimaryKeys();
-					if( count($pks) == 0 )
-					{
-						$this->setError('Primary key for table '.$this->getTableName().' not defined!');
-						return $result;
-					}
-					else
-	                {
-						$whereClause =null;
-						foreach($pks as $v)
-						{
-							$v = strtolower($v);
-							$params[$v] = $this->getFieldValue($v);
-							$whereClause[] = $v.' = :'.$v;
-						}
-					}
-				}
-				$whereClause = 'where '.implode(' and ', $whereClause);
-				$sql .= ' '.$whereClause;
-				$stmt = oci_parse( $this->getConn()->connection, $sql);
-				if( !$stmt)
-				{
-					$e = oci_error();
-					throw new Exception( 'Parse error ' . $e[ 'message' ] );
-				}
-
-   				$params = $this->prepareParams( $params, true ); // tratar acentos
-				// fazer o bind dos valores aos parametros
-
-				foreach( $params as $fieldName => $fieldValue )
-				{
-					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
-				}
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
-					$e=oci_error( $stmt );
-					oci_free_statement( $stmt );
-					throw new Exception( 'Update error ' . $e[ 'message' ] );
-				}
- 				if ( $this->getAutoCommit() )
-				{
-					$this->commit();
-				}
-				$result = true;
- 				oci_free_statement( $stmt );
+			else{
+				$result = $this->deleteValuesOralceNotPdo($arrFieldValues);
 			}
 		}
-		catch(Exception $e)
-		{
+		catch(Exception $e){
 			$this->setError($e->getMessage());
 			return $result;
 		}
 		return $result;
 	}
+
+
+	public function updateValuesOralceNotPdo($arrFieldValues=null)
+	{
+		// oracle sem PDO
+		$sql ="update " . $this->getTableName() . ' set ';
+		$valuesClause=array();
+		$params      =array();
+		$returningFields=array();
+		$returningInto=array();
+		$descriptors=null;
+		foreach( $arrFieldValues as $fieldName => $fieldValue )
+		{
+			$fieldName = strtolower( trim( $fieldName ) );
+			$objField  = $this->getField( $fieldName );
+			if ( !$this->getAutoincFieldName() || strtolower( $fieldName ) != strtolower( $this->getAutoincFieldName() ) )
+			{
+				// valor do campo
+				$params[ $fieldName ]=$fieldValue;
+
+				// campo blob
+				if ( $objField && strtoupper( $objField->fieldType ) == 'BLOB' ) {
+					$valuesClause[]= $fieldName.'=empty_blob()';
+					array_push( $returningFields, $fieldName );
+					array_push( $returningInto, ':' . $fieldName );
+				}
+				else if( $objField && strtoupper( $objField->fieldType ) == 'CLOB' ) {
+					$valuesClause[] = $fieldName.'= empty_clob()';
+					array_push( $returningFields, $fieldName );
+					array_push( $returningInto, ':' . $fieldName );
+				}
+				else {
+					$valuesClause[] = $fieldName.'=:' . $fieldName;
+				}
+			}
+		}
+		$valuesClause = implode(',',$valuesClause);
+		$sql .= ' '.$valuesClause;
+
+		// where
+		$whereClause =array();
+		foreach($pks as $v)
+		{
+			$v = strtolower($v);
+			$params['w_'.$v] = $this->getFieldValue($v);
+			$whereClause[] = $v.' = :w_'.$v;
+		}
+		$whereClause = 'where '.implode(' and ', $whereClause);
+		$sql .= ' '.$whereClause;
+
+		// returning
+		$returningClause='';
+		if ( count( $returningFields ) > 0 )
+		{
+			$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
+		}
+
+		$sql .= ' '.$returningClause;
+
+		$stmt = oci_parse( $this->getConn()->getPdo()->connection, $sql);
+		if( !$stmt)
+		{
+			$e = oci_error();
+			throw new Exception( 'Parse error ' . $e[ 'message' ] );
+		}
+
+			$params = $this->prepareParams( $params, true ); // tratar acentos
+		// fazer o bind dos valores aos parametros
+		foreach( $params as $fieldName => $fieldValue )
+		{
+			$objField = $this->getField( $fieldName );
+
+			if ( $objField )
+			{
+				$bindType=$this->getBindType( $objField->fieldType );
+				if ( $bindType == SQLT_CLOB )
+				{
+					$descriptors[ $fieldName ]=$params[ $fieldName ];
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
+				}
+				else if( $bindType == SQLT_BLOB )
+				{
+					$descriptors[ $fieldName ]=$params[ $fieldName ];
+					$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->getPdo()->connection );
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
+				}
+				else
+				{
+					oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
+				}
+			}
+			else
+			{
+				oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
+			}
+		}
+		if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
+		{
+			$e=oci_error( $stmt );
+			oci_free_statement( $stmt );
+
+			throw new Exception( 'Update error ' . $e[ 'message' ] );
+		}
+
+		// salvar os campos lobs
+		if ( count( $descriptors ) > 0 )
+		{
+			foreach( $descriptors as $k => $v )
+			{
+				$params[ $k ]->save( $v );
+			}
+		}
+		if ( $this->getAutoCommit() )
+		{
+			$this->commit();
+		}
+		$result = true;
+		oci_free_statement( $stmt );
+		return $result;
+	}
+
 	/**
 	* Executa o comando update baseado no array de campos e valores recebidos
 	*
@@ -2763,22 +2767,17 @@ class TDAO
 	*/
 	public function updateValues($arrFieldValues=null)
 	{
-		if ( !$this->connect() )
-		{
+		if ( !$this->connect() ){
 			return false;
 		}
 		$result = false;
-		try
-		{
+		try{
 			$pks = $this->getPrimaryKeys();
-			if( ! is_array($pks))
-			{
+			if( ! is_array($pks)){
 				$this->setError('Primary key for table '.$this->getTableName().' not defined!');
 				return $result;
 			}
-
-			if ( $this->getDbType() != DBMS_ORACLE )
-			{
+			if ( $this->getDbType() != DBMS_ORACLE ){
 				$sqlUpdate 		= "update " . $this->getTableName() . ' set ';
 				$valuesClause   = array();
 				$params         = array();
@@ -2811,135 +2810,17 @@ class TDAO
 				}
 				$result = self::query( $sqlUpdate, $params );
 			}
-			else
-			{
-  				// oracle sem PDO
-				$sql ="update " . $this->getTableName() . ' set ';
-				$valuesClause=array();
-				$params      =array();
-				$returningFields=array();
-				$returningInto=array();
-				$descriptors=null;
-				foreach( $arrFieldValues as $fieldName => $fieldValue )
-				{
-					$fieldName = strtolower( trim( $fieldName ) );
-					$objField  = $this->getField( $fieldName );
-					if ( !$this->getAutoincFieldName() || strtolower( $fieldName ) != strtolower( $this->getAutoincFieldName() ) )
-					{
-						// valor do campo
-						$params[ $fieldName ]=$fieldValue;
-
-						// campo blob
-						if ( $objField && strtoupper( $objField->fieldType ) == 'BLOB' )
-						{
-							$valuesClause[]= $fieldName.'=empty_blob()';
-							array_push( $returningFields, $fieldName );
-							array_push( $returningInto, ':' . $fieldName );
-						}
-						else if( $objField && strtoupper( $objField->fieldType ) == 'CLOB' )
-						{
-							$valuesClause[] = $fieldName.'= empty_clob()';
-							array_push( $returningFields, $fieldName );
-							array_push( $returningInto, ':' . $fieldName );
-						}
-						else
-						{
-							$valuesClause[] = $fieldName.'=:' . $fieldName;
-						}
-					}
-				}
-				$valuesClause = implode(',',$valuesClause);
-				$sql .= ' '.$valuesClause;
-
-				// where
-				$whereClause =array();
-				foreach($pks as $v)
-				{
-					$v = strtolower($v);
-					$params['w_'.$v] = $this->getFieldValue($v);
-					$whereClause[] = $v.' = :w_'.$v;
-				}
-				$whereClause = 'where '.implode(' and ', $whereClause);
-				$sql .= ' '.$whereClause;
-
-				// returning
-				$returningClause='';
-				if ( count( $returningFields ) > 0 )
-				{
-					$returningClause = ' returning ' . implode( ',', $returningFields ) . ' into ' . implode( ',', $returningInto );
-				}
-
-				$sql .= ' '.$returningClause;
-
-				$stmt = oci_parse( $this->getConn()->connection, $sql);
-				if( !$stmt)
-				{
-					$e = oci_error();
-					throw new Exception( 'Parse error ' . $e[ 'message' ] );
-				}
-
-   				$params = $this->prepareParams( $params, true ); // tratar acentos
-				// fazer o bind dos valores aos parametros
-				foreach( $params as $fieldName => $fieldValue )
-				{
-					$objField = $this->getField( $fieldName );
-
-					if ( $objField )
-					{
-						$bindType=$this->getBindType( $objField->fieldType );
-						if ( $bindType == SQLT_CLOB )
-						{
-							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_CLOB );
-						}
-						else if( $bindType == SQLT_BLOB )
-						{
-							$descriptors[ $fieldName ]=$params[ $fieldName ];
-							$params[ $fieldName ]     =oci_new_descriptor( $this->getConn()->connection );
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], -1, SQLT_BLOB );
-						}
-						else
-						{
-							oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ], $objField->size, $bindType );
-						}
-					}
-					else
-					{
-						oci_bind_by_name( $stmt, ':' . $fieldName, $params[ $fieldName ] );
-					}
-				}
-				if ( !@oci_execute( $stmt, OCI_NO_AUTO_COMMIT ) )
-				{
-					$e=oci_error( $stmt );
-					oci_free_statement( $stmt );
-
-					throw new Exception( 'Update error ' . $e[ 'message' ] );
-				}
-
-				// salvar os campos lobs
-				if ( count( $descriptors ) > 0 )
-				{
-					foreach( $descriptors as $k => $v )
-					{
-						$params[ $k ]->save( $v );
-					}
-				}
- 				if ( $this->getAutoCommit() )
-				{
-					$this->commit();
-				}
-				$result = true;
- 				oci_free_statement( $stmt );
+			else {
+				$result = $this->updateValuesOralceNotPdo($arrFieldValues=null);
 			}
 		}
-		catch(Exception $e)
-		{
+		catch(Exception $e){
 			$this->setError($e->getMessage());
 			return $result;
 		}
 		return $result;
 	}
+
 	/**
 	* Retorna se já existe ou não uma transação aberta
 	*
