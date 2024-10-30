@@ -560,7 +560,11 @@ class TPDOConnection {
                  * No PHP 5.4 ou superior o drive mudou de MSSQL para SQLSRV
                  * */
                 if (PHP_OS == "Linux") {
-                    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+                    if (version_compare(PHP_VERSION, '8.2.0', '>=')) {
+                        $driver = 'sqlsrv';
+                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
+                    }
+                    else if(version_compare(PHP_VERSION, '7.0.0', '>=') && version_compare(PHP_VERSION, '8.2.0', '<')) {
                         $driver = 'sqlsrv';
                         self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
                     } else {
@@ -570,8 +574,12 @@ class TPDOConnection {
                     }
                 } else {
                     $driver = 'sqlsrv';
-                    //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
-					self::$dsn = $driver.':Server='.$host.';Database='.$database;
+                    if (version_compare(PHP_VERSION, '8.2.0', '>=')) {
+                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database.';TrustServerCertificate=true';
+                    } else {
+                        //self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                        self::$dsn = $driver.':Server='.$host.','.$port.';Database='.$database;
+                    }
                 }
                 break;
                 //----------------------------------------------------------
