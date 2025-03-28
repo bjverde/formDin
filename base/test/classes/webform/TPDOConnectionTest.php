@@ -420,6 +420,33 @@ class TPDOConnectionTest extends TestCase
 
 	    $result = TPDOConnection::getDsnPDO($DBMS,$host,$port,$database,$username,$password);
 		$this->assertSame( $expected , $result );
-	}	
-	
+	}
+
+	public function testStringStoredProcedureInSqlServer_ExecInicial()
+    {
+        $sql = "EXEC my_stored_procedure";
+        $result = TPDOConnection::stringStoredProcedureInSqlServer($sql);
+        $this->assertTrue($result, "Deve retornar true para comandos que começam com 'EXEC'.");
+    }
+
+    public function testStringStoredProcedureInSqlServer_ExecMeioContextInfo()
+    {
+        $sql = "SELECT * FROM table WHERE context_info = 'EXEC my_stored_procedure'";
+        $result = TPDOConnection::stringStoredProcedureInSqlServer($sql);
+        $this->assertTrue($result, "Deve retornar true para comandos que contêm 'EXEC' no meio.");
+    }
+
+    public function testStringStoredProcedureInSqlServer_SemExec()
+    {
+        $sql = "SELECT * FROM table";
+        $result = TPDOConnection::stringStoredProcedureInSqlServer($sql);
+        $this->assertFalse($result, "Deve retornar false para comandos que não contêm 'EXEC'.");
+    }
+
+    public function testStringStoredProcedureInSqlServer_SemExecContextInfo()
+    {
+        $sql = "SELECT * context_info FROM table";
+        $result = TPDOConnection::stringStoredProcedureInSqlServer($sql);
+        $this->assertFalse($result, "Deve retornar false para comandos que não contêm 'EXEC'.");
+    }	
 }
