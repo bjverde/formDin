@@ -821,7 +821,7 @@ class TPDOConnection {
                     }
                     
                 // Para stored procedure do MS SQL Server
-                }else if( stringStoredProcedureInSqlServer($sql)  ){
+                }else if( self::stringStoredProcedureInSqlServer($sql)  ){
                     $res = array();
                     /*
                     do {
