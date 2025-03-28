@@ -757,7 +757,7 @@ class TPDOConnection {
      */
     public static function stringStoredProcedureInSqlServer($sql) {
         $execInicial = preg_match('/^exec/i', $sql) > 0;
-        $execMeio = preg_match('/^(exec|.*context_info.*exec.*)$/i', $sql) > 0;
+        $execMeio = preg_match('/^(.*context_info.*exec.*)$/i', $sql) > 0;
         $condicao = ( $execInicial || $execMeio );
         return $condicao;
     }
