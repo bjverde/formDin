@@ -742,9 +742,13 @@ class TPDOConnection {
     
     //------------------------------------------------------------------------------------------
     private function __clone() {
-    }
-    
+    }    
     //------------------------------------------------------------------------------------------
+    public static function stringStoredProcedureInSqlServer($sql) {
+        $execInicial = preg_match('/^exec/i', $sql) > 0;
+        $execMeio = preg_match('/^(exec|.*context_info.*exec.*)$/i', $sql) > 0;
+        return $execInicial || $execMeio;
+    }
     public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null ) {
         if ( !self::getInstance() ) {
             self::getError();
@@ -816,8 +820,8 @@ class TPDOConnection {
                         return null;
                     }
                     
-                    // Para stored procedure do MS SQL Server
-                }else if( preg_match( '/^exec/i', $sql ) > 0  ){
+                // Para stored procedure do MS SQL Server
+                }else if( stringStoredProcedureInSqlServer($sql)  ){
                     $res = array();
                     /*
                     do {
@@ -838,7 +842,7 @@ class TPDOConnection {
                     }else {
                         return null;
                     }
-                    // Para stored procedure do MySQL
+                // Para stored procedure do MySQL
                 }else if( preg_match( '/^call/i', $sql ) > 0  ){
                     $res = $stmt->fetchAll( $fetchMode );
                     $res = self::processResult( $res, $fetchMode, $boolUtfDecode );
