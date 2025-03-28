@@ -744,10 +744,16 @@ class TPDOConnection {
     private function __clone() {
     }    
     //------------------------------------------------------------------------------------------
+    /**
+     * Verifca se a string é uma stored procedure do SQL Server
+     * @param string $sql
+     * @return boolean
+     */
     public static function stringStoredProcedureInSqlServer($sql) {
         $execInicial = preg_match('/^exec/i', $sql) > 0;
         $execMeio = preg_match('/^(exec|.*context_info.*exec.*)$/i', $sql) > 0;
-        return $execInicial || $execMeio;
+        $condicao = ( $execInicial || $execMeio );
+        return $condicao;
     }
     public static function executeSql( $sql, $arrParams = null, $fetchMode = PDO::FETCH_ASSOC, $boolUtfDecode = null ) {
         if ( !self::getInstance() ) {
