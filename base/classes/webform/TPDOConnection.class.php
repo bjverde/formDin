@@ -739,7 +739,13 @@ class TPDOConnection {
             return self::$instance;
         }
     }
-    
+    /**
+     * Retorna o objeto PDO para acesso direto ao banco de dados
+     * @return PDO
+     */
+    public static function getObjPdo(){
+        return self::getInstance();
+    }
     //------------------------------------------------------------------------------------------
     private function __clone() {
     }    

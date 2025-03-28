@@ -264,6 +264,16 @@ class TPDOConnectionObj
         $instance = $tpdo::getInstance();
         return $instance;
     }
+    /**
+     * Retorna o objeto PDO para acesso direto ao banco de dados
+     * @return PDO
+     */
+    public function getObjPdo()
+    {
+        $tpdo = $this->getTPDOConnection();
+        $pdo = $tpdo::getObjPdo();
+        return $pdo;
+    }
     //--------------------------------------------------------------------------------------
     public function beginTransaction()
     {
