@@ -2385,7 +2385,7 @@ class TGrid extends TTable
      * @param TForm $frm
      * @param boolean $boolShowCollapsed
      */
-    public function setForm( TForm $frm = null, $boolShowCollapsed = null )
+    public function setForm( ?TForm $frm = null, $boolShowCollapsed = null )
     {
         $this->form = $frm;
         $this->setShowCollapsed( $boolShowCollapsed );

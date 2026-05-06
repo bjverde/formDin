@@ -778,7 +778,7 @@ class TLayout extends THtmlPage {
     }
 
     //-------------------------------------------------------------------------------------------
-    public function setLayOut(TLayout $newLayOut=null) {
+    public function setLayOut(?TLayout $newLayOut=null) {
 	$this->layOut = $newLayOut;
     }
 
@@ -825,7 +825,7 @@ class TLayout extends THtmlPage {
     }
 
     //-------------------------------------------------------------------------------------------
-    public function removeLayout(TLayout $layout=null) {
+    public function removeLayout(?TLayout $layout=null) {
 	$this->clearArea($layout->getNorthArea());
 	$this->clearArea($layout->getSouthArea());
 	$this->clearArea($layout->getEastArea());
@@ -833,7 +833,7 @@ class TLayout extends THtmlPage {
 	$this->clearArea($layout->getCenterArea());
     }
 
-    public function clearArea(TLayoutArea $area=null) {
+    public function clearArea(?TLayoutArea $area=null) {
 	if (is_null($area)) {
 	    return;
 	}
