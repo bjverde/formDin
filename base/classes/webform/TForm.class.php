@@ -6281,7 +6281,7 @@ class TForm Extends TBox
      * @return TEdit
      */
     public function addTextField( string $strName
-    		                    , string $strLabel=null
+    		                    , ?string $strLabel=null
     		                    , $intMaxLength
     		                    , $boolRequired=null
     		                    , $intSize=null
@@ -6318,7 +6318,7 @@ class TForm Extends TBox
      * @return TMemo
      */
     public function addMemoField(string $strName
-   		                       , string $strLabel=null
+   		                       , ?string $strLabel=null
    		                       , $intMaxLength
    		                       , $boolRequired=null
    		                       , $intColumns=null
@@ -6352,7 +6352,7 @@ class TForm Extends TBox
      * @return TRichTextEditor
      */
     public function addRichTextEditor( string $strName
-    		, string $strLabel=null
+    		, ?string $strLabel=null
     		, $intMaxLength=null
     		, $boolRequired=null
     		, $intColumns=null
@@ -6993,7 +6993,7 @@ class TForm Extends TBox
      * @return TNumber
      */       
 	public function addNumberField(string $strName
-				           		, string $strLabel=null
+				           		, ?string $strLabel=null
 				           		, $intMaxLength
 				           		, $boolRequired=null
 				           		, $intDecimalPlaces=null
@@ -7038,7 +7038,7 @@ class TForm Extends TBox
 	 * @param boolean $boolLabelAbove-8: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
 	 * @return TEmail
 	 */
-	public function addEmailField( string $strName, string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	public function addEmailField( string $strName, ?string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
 		$field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
 		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );

@@ -1904,13 +1904,13 @@ class TGrid extends TTable
     
     //------------------------------------------------------------------------------------
     public function addAutoCompleteColumn( string $strName
-                                         , string $strTitle = null
-                                         , string $strFieldName = null
-                                         , string $strSize = null
-                                         , int $intMaxLength = null
+                                         , ?string $strTitle = null
+                                         , ?string $strFieldName = null
+                                         , ?string $strSize = null
+                                         , ?int $intMaxLength = null
                                          , string $strTablePackage
                                          , string $strSearchField
-                                         , int $intMinChars = null
+                                         , ?int $intMinChars = null
                                          , $mixUpdateFields = null
                                          , $strWidth = null
                                          , $strAlign = null
@@ -1990,7 +1990,7 @@ class TGrid extends TTable
      * @return TGridCheckColumn
      */
     public function addCheckColumn( string $strName
-                                  , string $strTitle = null
+                                  , ?string $strTitle = null
                                   , $strKeyField
                                   , $strDescField = null
                                   , $boolReadOnly = null
@@ -2013,7 +2013,7 @@ class TGrid extends TTable
      * @param boolean $boolReadOnly
      * @return TGridRadioColumn
      */
-    public function addRadioColumn( string $strName, string $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
+    public function addRadioColumn( string $strName, ?string $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
     {
         if ( !$strKeyField )
         {

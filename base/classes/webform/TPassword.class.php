@@ -58,7 +58,7 @@
 	* @return TPassword
 	*/
 	public function __construct(string $strName
-	                           ,string $strValue=null
+	                           ,?string $strValue=null
 							   ,$intMaxLength
 							   ,$boolRequired=null,$intSize=null, $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
 	{

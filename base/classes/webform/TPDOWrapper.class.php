@@ -17,13 +17,13 @@ class TPDOWrapper {
     private static $supportedDbTypes = [DBMS_POSTGRES, DBMS_MYSQL, DBMS_SQLITE, DBMS_ORACLE, DBMS_SQLSERVER];
 
     public function __construct(string $dbType
-                               ,string $host = null
-                               ,string $username = null
-                               ,string $password = null
-                               ,string $database = null
-                               ,string $port = null 
-                               ,string $schema = null
-                               ,string $boolUtf8 = null) {
+                               ,?string $host = null
+                               ,?string $username = null
+                               ,?string $password = null
+                               ,?string $database = null
+                               ,?string $port = null
+                               ,?string $schema = null
+                               ,?string $boolUtf8 = null) {
         $this->setDbType($dbType);
         $this->setHost($host);
         $this->setUsername($username);
@@ -157,13 +157,13 @@ class TPDOWrapper {
     }
 
     public static function calculateIdConnect(string $dbType
-                                             ,string $host = null
-                                             ,string $username = null
-                                             ,string $password = null
-                                             ,string $database = null
-                                             ,string $port = null 
-                                             ,string $schema = null
-                                             ,string $boolUtf8 = null) {
+                                             ,?string $host = null
+                                             ,?string $username = null
+                                             ,?string $password = null
+                                             ,?string $database = null
+                                             ,?string $port = null
+                                             ,?string $schema = null
+                                             ,?string $boolUtf8 = null) {
         self::isValidDbType($dbType);
         $string = strtolower($dbType.$host.$username.$password.$database.$port.$schema.$boolUtf8);
         $idConnect = md5($string);

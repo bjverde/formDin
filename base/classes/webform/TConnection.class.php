@@ -47,13 +47,13 @@ final class TConnection
 
 	//------------------------------------------------------------------------------------------
     public static function connect(string $dbType
-								  ,string $host = null
-								  ,string $username = null
-								  ,string $password = null
-								  ,string $database = null
-								  ,string $port = null 
-								  ,string $schema = null
-								  ,string $boolUtf8 = null)
+								  ,?string $host = null
+								  ,?string $username = null
+								  ,?string $password = null
+								  ,?string $database = null
+								  ,?string $port = null
+								  ,?string $schema = null
+								  ,?string $boolUtf8 = null)
 	{
 		$tPdoWrapper = new TPDOWrapper($dbType, $host, $username, $password, $database, $port, $schema, $boolUtf8);
 		$boolUtf8 = $tPdoWrapper->getBoolUtf8();

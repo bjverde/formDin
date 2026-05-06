@@ -60,7 +60,7 @@ class TNumber extends TEdit
 	 * @param boolean $allowNull
 	 */
 	public function __construct(string $strName
-	                          ,string $strValue=null
+	                          ,?string $strValue=null
 	                          ,$intMaxLength
 							  ,$boolRequired=null,$intDecimalPlaces=null,$strMinValue=null,$strMaxValue=null,$boolFormatInteger=null,$strDirection=null,$boolAllowZero=null,$boolAllowNull=null)
 	{

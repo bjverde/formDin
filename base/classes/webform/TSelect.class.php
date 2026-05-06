@@ -125,7 +125,7 @@ class TSelect extends TOption
 			$arrTemp=array();
 			if($this->getFirstOptionText())
 			{
-				$arrTemp = array($this->getFirstOptionValue()=>$this->getFirstOptionText());
+				$arrTemp = array(($this->getFirstOptionValue() ?? '')=>$this->getFirstOptionText());
 			}
 			if(is_array($this->getOptions()) )
 			{
