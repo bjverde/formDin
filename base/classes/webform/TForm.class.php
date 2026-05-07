@@ -2257,6 +2257,7 @@ class TForm Extends TBox
     public function getField( $strFieldName=null )
     {
         $field = null;
+        if( $strFieldName === null ) { return null; }
         if( is_array( $this->displayControls ) )
         {
             if( array_key_exists( $strFieldName, $this->displayControls ) )
@@ -2318,7 +2319,7 @@ class TForm Extends TBox
     public function getLabel( $strFieldName=null )
     {
         $label = null;
-        
+        if( $strFieldName === null ) { return null; }
         if( is_array( $this->displayControls ) )
         {
             if( array_key_exists( $strFieldName, $this->displayControls ) )
@@ -2455,18 +2456,18 @@ class TForm Extends TBox
                                      $label = 'C&oacute;digo de seguran&ccedil;a';
                                  }
                              }
-                             self::$errors[ $field->getId() ] = str_replace( "::", ":", $tab . $label.$dc->getLabel()->getValue() . ':' . $field->getError() );
+                             self::$errors[ $field->getId() ?? '' ] = str_replace( "::", ":", $tab . $label.$dc->getLabel()->getValue() . ':' . $field->getError() );
                          }
                          else
                          {
                              
                              if( $field->getFieldType() == 'hidden' )
                              {
-                                 self::$errors[ $field->getId() ] = 'Campo oculto ' . $field->getId() . ':' . $field->getError();
+                                 self::$errors[ $field->getId() ?? '' ] = 'Campo oculto ' . $field->getId() . ':' . $field->getError();
                              }
                              else
                              {
-                                 self::$errors[ $field->getId() ] = $field->getError();
+                                 self::$errors[ $field->getId() ?? '' ] = $field->getError();
                              }
                          }
                      }
@@ -5120,7 +5121,7 @@ class TForm Extends TBox
               {
                   $newDisplayControl->getField()->setParentControl( $this );
               }
-              $this->displayControls[ $newDisplayControl->getField()->getName() ] = $newDisplayControl;
+              $this->displayControls[ $newDisplayControl->getField()->getName() ?? '' ] = $newDisplayControl;
           }
           // adicionar o valor do rotulo do campo em sua propriedade
           if( $newDisplayControl->getLabel() )

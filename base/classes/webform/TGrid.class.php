@@ -442,7 +442,7 @@ class TGrid extends TTable
                                 $chk->setProperty( 'disabled', 'true' );
                             }
                             
-                            if ( isset( $_POST[ $chk->getId()] ) && $_POST[ $chk->getId()] == 1 )
+                            if ( isset( $_POST[ $chk->getId() ?? ''] ) && $_POST[ $chk->getId() ?? ''] == 1 )
                             {
                                 $chk->setProperty( 'checked', '' );
                             }
