@@ -98,7 +98,7 @@ class TPageControl extends TTable
 	public function addPage($strLabel,$boolDefault=null,$boolVisible=null,$strName=null,$boolDisableTab=null,$boolEnabled=null) {
 		$strName	= ($strName==null) ? $strLabel : $strName;
 		$boolEnabled= ($boolEnabled===false) ? false : true;
-		$strName 	= strtolower(parent::removeIllegalChars($strName));
+		$strName 	= strtolower(parent::removeIllegalChars($strName) ?? '');
 		$pageName 	= $strName;
 		$this->setAttribute('fieldType','pagecontrol');
 		$page 		= new TForm(null,null,null,$pageName);

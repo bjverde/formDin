@@ -5208,7 +5208,7 @@ class TForm Extends TBox
                }
                foreach( $mixValue as $k=>$value ) {
                    //$strName	= $this->removeIllegalChars($value).'_'.mt_rand(1, 100);
-                   $strName = strtolower( $this->removeIllegalChars( $value ) );
+                   $strName = strtolower( $this->removeIllegalChars( $value ) ?? '' );
                    $strValue = $value;
                    if( !$onClick ) {
                        if( $this->getFieldType() != 'form' ) {
@@ -5239,7 +5239,7 @@ class TForm Extends TBox
                {
                    if( isset( $mixValue ) )
                    {
-                       $strName = strtolower( $this->removeIllegalChars( $mixValue ) );
+                       $strName = strtolower( $this->removeIllegalChars( $mixValue ) ?? '' );
                    }
                }
                $button = new TButton( $strName, $mixValue, $strAction, $strOnClick, $strConfirmMessage, $strImage, $strImageDisabled, $strHint );
@@ -5317,7 +5317,7 @@ class TForm Extends TBox
            {
                if( isset( $strValue ) )
                {
-                   $strName = strtolower( $this->removeIllegalChars( $strValue ) );
+                   $strName = strtolower( $this->removeIllegalChars( $strValue ) ?? '' );
                }
            }
            /*if( is_null( $strJsCallback ) )

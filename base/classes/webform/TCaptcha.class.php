@@ -71,7 +71,7 @@ class TCaptcha extends TButton
     }
     public function validate()
     {
-		if( strtolower($this->removeIllegalChars($this->getInput()->getValue())) != strtolower($this->removeIllegalChars($_SESSION[$this->getInput()->getId().'_code'])) )
+		if( strtolower($this->removeIllegalChars($this->getInput()->getValue()) ?? '') != strtolower($this->removeIllegalChars($_SESSION[$this->getInput()->getId().'_code']) ?? '') )
 		{
 			/*$this->setError(strtolower($this->removeIllegalChars($this->getInput()->getValue())) .' e '.
 			strtolower($this->removeIllegalChars($_SESSION[$this->getInput()->getId().'_code'])) );

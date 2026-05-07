@@ -755,10 +755,10 @@ class TElement
      */
     public function getEvent( $strEventName )
     {
-        $strEventName = strtolower( $this->removeIllegalChars( $strEventName ) );
+        $strEventName = strtolower( $this->removeIllegalChars( $strEventName ) ?? '' );
         $event = null;
         if(is_array($this->events)){
-            $event = $this->events[ $strEventName ];
+            $event = $this->events[ $strEventName ] ?? null;
         }
         return $event;
     }
