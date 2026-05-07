@@ -92,7 +92,7 @@ function gerar_pdf()
     $rel->show();
 }
 
-function myOdc(TPDFColumn $oCol = null, $value = null, $colIndex = null)
+function myOdc(?TPDFColumn $oCol = null, $value = null, $colIndex = null)
 {
     if ($oCol->getFieldName() == 'NUM_CPF' && $value=='111.111.111-11') {
         $oCol->setFontColor('red');

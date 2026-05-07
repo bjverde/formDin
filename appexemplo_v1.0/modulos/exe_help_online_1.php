@@ -61,7 +61,7 @@ $frm->addMemoField('HELP_TEXT', 'HELP_TEXT', 10000, false, 100, 15, true, true, 
 $frm->addJavascript('fwSetHtmlEditor("HELP_TEXT",false,false)');
 //$frm->addJavascript('fwSetHtmlEditor("HELP_TEXT","callBackEditor",false)');
 echo 'Valor do Campo: HELP_TEXT =<br>';
-echo htmlspecialchars($frm->get('HELP_TEXT'));
+echo htmlspecialchars($frm->get('HELP_TEXT') ?? '');
 
 $frm->addButton('Buscar', null, 'Buscar', null, null, true, false);
 $frm->addButton('Salvar', null, 'Salvar', null, null, false, false);
