@@ -122,7 +122,7 @@ class TDate extends TMask
 	//--------------------------------------------------------------------------
 	public function setMask($strNewMaskType=null)
 	{
-		$strNewMaskType = isset($strNewMaskType)?strtolower($strNewMaskType):null;
+		$strNewMaskType = ($strNewMaskType !== null) ? strtolower($strNewMaskType) : '';
 		$arrMasksTypes = array(
 			 'dmy'	=> '99/99/9999'
 			,'dm'	=> '99/99'

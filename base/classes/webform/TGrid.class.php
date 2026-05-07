@@ -1360,7 +1360,7 @@ class TGrid extends TTable
         $col = new TGridColumn( $strFieldName, $strValue, $strWidth, $strTextAlign );
         $col->clearCss();
         $col->setGridId($this->getId());
-        $this->columns[ $col->getId()] = $col;
+        $this->columns[ $col->getId() ?? '' ] = $col;
         return $col;
     }
     //------------------------------------------------------------------------------------
@@ -1378,7 +1378,7 @@ class TGrid extends TTable
         $col = new TGridColumnCompact( $strFieldName, $strValue, $strWidth, $strTextAlign, null,null,null,$strMaxTextLength);
         $col->clearCss();
         $col->setGridId($this->getId());
-        $this->columns[ $col->getId()] = $col;
+        $this->columns[ $col->getId() ?? '' ] = $col;
         return $col;
     }
     //------------------------------------------------------------------------------------
@@ -3075,8 +3075,8 @@ class TGrid extends TTable
             foreach( $this->getColumns() as $name => $objColumn )
             {
                 $getName = $objColumn->getFieldName();
-                $colName = isset($getName)?strtoupper($getName):null;
-                if ( isset( $res[ $colName ] ) ) {
+                $colName = ($getName !== null) ? strtoupper($getName) : '';
+                if ( $colName !== '' && isset( $res[ $colName ] ) ) {
                     if ( $objColumn->getColumnType() != 'hidden' && $objColumn->getVisible() ) {
                         $colTitle = $objColumn->getTitle() ? $objColumn->getTitle() : $colName;
                         if ( ENCODINGS == 'UTF-8'){
