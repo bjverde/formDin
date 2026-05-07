@@ -63,7 +63,7 @@ session_start();
 include(encontrarArquivoMostrarAnexo('includes/config.inc'));
 include(encontrarArquivoMostrarAnexo('classes/banco.inc'));
 $tmpDir = encontrarArquivoMostrarAnexo('tmp');
-$dados = json_decode(utf8_encode($_REQUEST['dados']),true);
+$dados = json_decode(StringHelper::utf8_encode($_REQUEST['dados']),true);
 
 if(!is_array($dados))
 {

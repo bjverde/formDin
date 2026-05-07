@@ -88,7 +88,7 @@ if ( isset( $_FILES[ 'arquivo' ] ) ) // file was send from browser
 		case UPLOAD_ERR_OK:
 			$filename = $_FILES[ 'arquivo' ][ 'name' ]; // file name
 			$filename = StringHelper::utf8_decode( $filename );
-			$tempName = $tmpDir . 'upload_' . md5( session_id() . utf8_encode( $filename ) );
+			$tempName = $tmpDir . 'upload_' . md5( session_id() . StringHelper::utf8_encode( $filename ) );
 
 			if ( file_exists( $tempName ) ){
 				unlink ( $tempName );

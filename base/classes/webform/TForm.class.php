@@ -1710,7 +1710,7 @@ class TForm Extends TBox
                 $header = $this->getTitle();
                 $header = str_replace( '<br>', '<BR>', $header );
                 $header = str_replace( '<BR>', ' ', $header );
-                $aDadosPrototype = array( 'winId'=>$this->getPrototypeId(), 'title'=>utf8_encode( $header ), 'width'=>$this->getWidth(), 'height'=>$this->getHeight() );
+                $aDadosPrototype = array( 'winId'=>$this->getPrototypeId(), 'title'=>StringHelper::utf8_encode( $header ), 'width'=>$this->getWidth(), 'height'=>$this->getHeight() );
                 $this->addJavascript( "parent.app_set_prototype_win(" . json_encode( $aDadosPrototype ) . ")" );
                 //registra o id da janela quando estiver utilizando a classe prototype
                 /*

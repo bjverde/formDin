@@ -3016,7 +3016,7 @@ class TGrid extends TTable
             $arrTemp = array();
             foreach($this->excelHeadFields as $k=>$v)
             {
-                $arrTemp[utf8_encode($k)] = utf8_encode($v);
+                $arrTemp[StringHelper::utf8_encode($k)] = StringHelper::utf8_encode($v);
             }
             return $arrTemp;
         }
@@ -3082,7 +3082,7 @@ class TGrid extends TTable
                         if ( ENCODINGS == 'UTF-8'){
                             $result[ StringHelper::utf8_decode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         } else {
-                            $result[ utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
+                            $result[ StringHelper::utf8_encode($colTitle) ][ $k ] = $res[ $colName ][ $k ];
                         }
                     }
                 }

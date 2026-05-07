@@ -1060,7 +1060,7 @@ class TElement
                 }
                 else
                 {
-                    $data[$k] = utf8_encode($v);
+                    $data[$k] = StringHelper::utf8_encode($v);
                 }
             }
         }

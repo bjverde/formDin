@@ -53,7 +53,7 @@ function genFieldRetunr1($arrIdRetorno,$arrCampoRetorno,$retorno){
 		$pattern = "/'/";
 		$subject = "\\'";
 		$result = preg_replace($pattern,$subject,$res[$campoRetorno][$k]);
-		$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".utf8_encode($result)."'";
+		$retorno .= ";document.getElementById('".$arrIdRetorno[$k1]."').value = '".StringHelper::utf8_encode($result)."'";
 	}
 	
 	return $retorno;
@@ -76,7 +76,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 
 	// verficar se o array de pesquisa tem mesmo tamanho que array dos parametros de entrada
 	if ( count($arrBusca) != count($arrCampoDescricao) ) {
-		$objResponse->addAlert(utf8_encode('Tamanho dos campos de entrada não são iguais!'));
+		$objResponse->addAlert(StringHelper::utf8_encode('Tamanho dos campos de entrada não são iguais!'));
 		return $objResponse->getXML();
 	}
 
@@ -186,7 +186,7 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 					$funcaoExecutar.='()';
 			}
 			$valeu = preg_replace("/'/","\\'",$v);
-			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".$valeu."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".utf8_encode($dadoMarcado)."</a></li>\n";
+			$sRet .= "<li class=\"liAjaxSelect\"><a class=\"linkAjaxSelect\" onclick=\"javascript:document.getElementById('".$arrStrOrigem[0]."').value='".$valeu."'".$retorno.";document.getElementById('".$divSelect."').style.display = 'none';".$funcaoExecutar.";\">".StringHelper::utf8_encode($dadoMarcado)."</a></li>\n";
 		}
 		if(strlen($sRet) > 0)  {
 
@@ -224,11 +224,11 @@ function autoCompletar($jsonBusca,$strOrigem,$divSelect,$idsRetorno,$nomePacoteF
 		$campoDescricao = $arrCampoDescricao[0];
 		// Se tiver so uma linha de retorno, podemos auto-completar os campos
 		$objResponse->addScript("document.getElementById('".$divSelect."').style.display = \"none\"");
-		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".utf8_encode(preg_replace("/'/","\\'",$res[$campoDescricao][0]))."\"");
+		$objResponse->addScript("document.getElementById('".$arrStrOrigem[0]."').value = \"".StringHelper::utf8_encode(preg_replace("/'/","\\'",$res[$campoDescricao][0]))."\"");
 		//	Gerar os campos de retorno
 		foreach ( $arrIdRetorno as $k=>$v ) {
 			$campoRetorno = $arrCampoRetorno[$k];
-			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".utf8_encode(preg_replace("/'/","\\'",$res[$campoRetorno][0]))."\"");
+			$objResponse->addScript("document.getElementById('".$arrIdRetorno[$k]."').value = \"".StringHelper::utf8_encode(preg_replace("/'/","\\'",$res[$campoRetorno][0]))."\"");
 		}
 		$objResponse->addScript("formDinAutoSugestao.clearBuffer()");
 	} elseif ($nCnt < 1 ) {

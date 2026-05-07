@@ -234,7 +234,7 @@ function utf8_encode_array($res)
 			}
 			else
 			{
-				$res[$k] = utf8_encode($v);
+				$res[$k] = StringHelper::utf8_encode($v);
 			}
 	}
 	return $res;

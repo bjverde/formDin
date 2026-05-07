@@ -221,7 +221,7 @@ switch( $acao )
 		$data = null;
 		$_REQUEST['label'] = is_null($_REQUEST['label']) ?'&lt;CAMPO&gt;' : $_REQUEST['label'];
 		$html = '<p><span style="text-decoration: underline;"><span style="font-size: x-large;">'.$_REQUEST['label'].'</span></span></p>';
-		$data['help_text']  = utf8_encode( $html);//'Digite aqui o conteúdo do arquivo de ajuda!' );
+		$data['help_text']  = StringHelper::utf8_encode( $html);//'Digite aqui o conteúdo do arquivo de ajuda!' );
 		$data['help_title'] = '';
 		if( $res->numRows() > 0)
 		{
