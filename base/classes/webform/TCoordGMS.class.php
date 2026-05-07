@@ -188,7 +188,7 @@ class TCoordGMS extends TGroup
 				, 'mapHeaderText' => StringHelper::utf8_encode($this->getMapHeaderText())
 				, 'mapHeaderFontColor' => StringHelper::utf8_encode($this->getMapHeaderFontColor())
 				, 'mapHeaderFontColor' => StringHelper::utf8_encode($this->getMapHeaderFontColor())
-				, 'mapHeaderCallBaFontSize' => StringHelper::utf8_encode((integer) $this->getMapHeaderFontSize())
+				, 'mapHeaderCallBaFontSize' => StringHelper::utf8_encode((int) $this->getMapHeaderFontSize())
 				, 'mapCallback' => $this->getMapCallback()
 				, 'zoom' => $this->getMapZoom()
 				, 'mapType' => $this->getMapType()

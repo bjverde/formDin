@@ -351,7 +351,7 @@ if( $arquivo = encontrarArquivoIframeConsultaDinamica('conexao.inc') )
 $executarFuncao = str_replace('"',"'",$_GET['executarFuncao']); // não obrigatorio
 // colocar o titulo da janela
 $tituloJanela = $_GET['tituloJanela'];
-$numMaximoRegistros = ((integer)$_GET['qtdMaxRegistros'])==0?200:$_GET['qtdMaxRegistros'];
+$numMaximoRegistros = ((int)$_GET['qtdMaxRegistros'])==0?200:$_GET['qtdMaxRegistros'];
 if( $tituloJanela ) {
 	imp('<tr>');
 	imp('<th height="1%" colspan="3" class="tabela">'.$tituloJanela.'</th>');

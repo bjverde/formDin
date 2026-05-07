@@ -121,9 +121,9 @@ class TTime extends TMask
 			}
 			if ( $tam == 5 or $tam==8 )
 			{
-				$h = (integer) substr($hora,0,2);
-				$m = (integer) substr($hora,3,2);
-				$s = (integer) substr($hora,5,4)+0;
+				$h = (int) substr($hora,0,2);
+				$m = (int) substr($hora,3,2);
+				$s = (int) substr($hora,5,4)+0;
 				//print $h.','.$m.'.'.$s;
 				if ( ($h<0) || ($h>23)  || ($m<0) || ($m>59)|| ($s<0) || ($s>59) )
 				{

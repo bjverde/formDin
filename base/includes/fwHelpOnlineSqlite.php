@@ -115,7 +115,7 @@ $key  	= md5( strtoupper(trim($_REQUEST['contexto'].'_'.$_REQUEST['campo'])));
 sleep(1); // mostrar progressbar
 switch( $acao )
 {
-	case 'salvar';
+	case 'salvar':
 		//error_reporting(E_ALL);
 		$query = "select help_key from tb_help where help_key='".$key."'";
 		$res = $db->query( $query );
@@ -191,7 +191,7 @@ $key  	= md5( strtoupper(trim($_REQUEST['contexto'].'_'.$_REQUEST['campo'])));
 sleep(1); // mostrar progressbar
 switch( $acao )
 {
-	case 'salvar';
+	case 'salvar':
 		$query = "select help_key from tb_help where help_key='".$key."'";
 		if( ! $res=$db->query( $query, SQLITE_ASSOC, $error) )
 		{

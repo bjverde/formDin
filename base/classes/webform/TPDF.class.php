@@ -850,7 +850,7 @@ class TPDF extends FPDF
     }
     public function setTopMargin($intNewValue=null)
     {
-    	if( (integer) $intNewValue > -1 )
+    	if( (int) $intNewValue > -1 )
     	{
     		$this->tMargin = $intNewValue;
 		}else{

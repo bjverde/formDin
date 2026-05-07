@@ -145,7 +145,7 @@ class TAjuda {
 		//-------------------------------------------------------
 		public function setLargura($intLargura=null)
 		{
-			$this->intLargura = ((integer)$intLargura<1) ? 400  : (integer)$intLargura;
+			$this->intLargura = ((int)$intLargura<1) ? 400  : (int)$intLargura;
 		}
 		function getLargura()
 		{
@@ -154,7 +154,7 @@ class TAjuda {
 		//-------------------------------------------------------
 		public function setAltura($intAltura=null)
 		{
-			$this->intAltura = ((integer)$intAltura<1) ? 200  : (integer)$intAltura;
+			$this->intAltura = ((int)$intAltura<1) ? 200  : (int)$intAltura;
 		}
 		function getAltura()
 		{

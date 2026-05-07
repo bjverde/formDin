@@ -210,16 +210,16 @@ class TNumber extends TEdit
 	{
 		switch($strDirection)
 		{
-			case 'R';
-			case 'r';
+			case 'R':
+			case 'r':
 				$this->direction = 'rtl';
 			break;
-			case 'L';
-			case 'l';
+			case 'L':
+			case 'l':
 				$this->direction = 'ltr';
 			break;
-			case 'C';
-			case 'c';
+			case 'C':
+			case 'c':
 				$this->direction = 'c';
 			break;
 			//--------------------------------
@@ -259,7 +259,7 @@ class TNumber extends TEdit
 		$strNumber = is_null($strNumber) ? $this->getValue() : $strNumber;
 		if($this->getDecimalPlaces()>0)
 		{
-			return (double) str_replace(',','.',str_replace('.','',$strNumber));
+			return (float) str_replace(',','.',str_replace('.','',$strNumber));
 		}
 		else
 		{
@@ -271,7 +271,7 @@ class TNumber extends TEdit
 	{
 		if( parent::validate() )
 		{
-			$zero 	= (double) ($this->getDecimalPlaces()>0) ? '0.'.str_repeat('0',$this->getDecimalPlaces()) : "0";
+			$zero 	= (float) ($this->getDecimalPlaces()>0) ? '0.'.str_repeat('0',$this->getDecimalPlaces()) : "0";
 			if( $this->getValue() == '' || is_null($this->getValue()))
 			{
 				if($this->getAllowNull())

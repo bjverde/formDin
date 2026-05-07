@@ -212,7 +212,7 @@ switch( $acao )
 				}
 				
 				$sql = "select * from " . $aParams[ 'packageFunction' ] . ( ( $where == '' ) ? '' : ' where ' . $where );
-                if( (integer) $aParams[ 'maxRecords' ] > 0 && DEFINED('BANCO') && preg_match('/MYSQL|SQLITE|POSTGRE/i',BANCO) == 1 )
+                if( (int) $aParams[ 'maxRecords' ] > 0 && DEFINED('BANCO') && preg_match('/MYSQL|SQLITE|POSTGRE/i',BANCO) == 1 )
                 {
                     $sql  .= ' LIMIT ' . $aParams[ 'maxRecords' ];
                 }
@@ -330,7 +330,7 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 			$newField = null;
 			switch( strtolower( $type ) )
 			{
-				case 'uf';
+				case 'uf':
 					$newField = $form->addSelectField( $name, $label, $required );
 					$bvars = null;
 					//$clientedb = new banco();
@@ -342,7 +342,7 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 
 					break;
 
-				case 'select';
+				case 'select':
 
 					$newField = $form->addSelectField( $name, $label, $required );
 					$arrSqls = json_decode( $arrSqls, true );
@@ -401,37 +401,37 @@ function addFields( $form, $filterFields, $formFilterFields, $arrSqls )
 					}
 					break;
 
-				case 'cpf';
+				case 'cpf':
 					$newField = $form->addCpfField( $name, $label, $required );
 					break;
 
 				//-------------------------------------
-				case 'cnpj';
+				case 'cnpj':
 					$newField = $form->addCnpjField( $name, $label, $required );
 					break;
 
 				//-------------------------------------
-				case 'cpfcnpj';
+				case 'cpfcnpj':
 					$newField = $form->addCpfCnpjField( $name, $label, $required );
 					break;
 
 				//-------------------------------------
-				case 'data';
+				case 'data':
 					$newField = $form->addDateField( $name, $label, null, $required );
 					break;
 
 				//-------------------------------------
-				case 'int';
+				case 'int':
 					$length = is_null( $length ) ? 10 : $length;
 					$newField = $form->addNumberField( $name, $label, $length, $required, 0 );
 					break;
 
-				case 'dec';
+				case 'dec':
 					$length = is_null( $length ) ? 10 : $length;
 					$newField = $form->addNumberField( $name, $label, $length, $required, $decimalPlaces );
 					break;
 
-				case 'hidden';
+				case 'hidden':
 					$length = is_null( $length ) ? 100 : $length;
 					$newField = $form->addHiddenField( $name, null, $required );
 					break;
