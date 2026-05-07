@@ -138,7 +138,7 @@ class CKEditor
 		foreach ($this->textareaAttributes as $key => $val) {
 			$attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
 		}
-		$out = "<textarea name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea>\n";
+		$out = "<textarea name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value ?? '') . "</textarea>\n";
 		if (!$this->initialized) {
 			$out .= $this->init();
 		}

@@ -48,7 +48,7 @@ $frm->setRichEdit(true);
 $frm->addJavascript('fwSetHtmlEditorPreview("campo_memo_tinymce")');
 
 echo 'Valor do Campo: campo_memo_tinymce =<br>';
-echo htmlspecialchars($frm->get('campo_memo_tinymce'));
+echo htmlspecialchars($frm->get('campo_memo_tinymce') ?? '');
 
 $frm->addButton('Preview', null, 'btnPreview', 'doPreview()');
 $frm->addButton('Post');
