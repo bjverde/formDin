@@ -1908,8 +1908,8 @@ class TGrid extends TTable
                                          , ?string $strFieldName = null
                                          , ?string $strSize = null
                                          , ?int $intMaxLength = null
-                                         , string $strTablePackage
-                                         , string $strSearchField
+                                         , ?string $strTablePackage = null
+                                         , ?string $strSearchField = null
                                          , ?int $intMinChars = null
                                          , $mixUpdateFields = null
                                          , $strWidth = null
@@ -1991,7 +1991,7 @@ class TGrid extends TTable
      */
     public function addCheckColumn( string $strName
                                   , ?string $strTitle = null
-                                  , $strKeyField
+                                  , $strKeyField = null
                                   , $strDescField = null
                                   , $boolReadOnly = null
                                   , $boolAllowCheckAll = null )

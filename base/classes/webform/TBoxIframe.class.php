@@ -44,7 +44,7 @@ class TBoxIframe extends Tbox
 	private $strUrl;
 	private $strTitle;
 	public function __construct(?string $strTitle=null
-	                           ,string $strUrl
+	                           ,?string $strUrl=null
 							   ,?string $strName=null,$strHeight=null,$strWidth=null,$boolFlat=null)
 	{
 		$strHeight = is_null($strHeight) ? 600 : $strHeight;
