@@ -46,7 +46,7 @@ class TGridRadioColumn extends TGridEditColumn
 	private $values;
 	public function __construct(string $strEditName
 	                           ,?string $strTitle=null
-							   ,string $strKeyField,$strDescField=null,$boolReadOnly=null)
+							   ,?string $strKeyField=null,$strDescField=null,$boolReadOnly=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strKeyField,'radio',null,null,null,null,$boolReadOnly);
 		$this->setSortable(true);

@@ -59,7 +59,7 @@
 	*/
 	public function __construct(string $strName
 	                           ,?string $strValue=null
-							   ,$intMaxLength
+							   ,$intMaxLength=null
 							   ,$boolRequired=null,$intSize=null, $boolUseVirtualKeyboard=null, $boolShowVirtualKeyboardImage=null, $boolReadOnly=null )
 	{
 		$intMaxLength = is_null($intMaxLength) ? 20 : $intMaxLength;

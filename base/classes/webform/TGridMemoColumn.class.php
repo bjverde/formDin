@@ -60,7 +60,7 @@ class TGridMemoColumn extends TGridEditColumn
 	public function __construct(string $strEditName
 	                           ,?string $strTitle=null
 							   ,?string $strFieldName=null
-							   ,int $intMaxLength,$intColumns=null,$intRows=null,$boolReadOnly=null,$boolShowCounter=null)
+							   ,?int $intMaxLength=null,$intColumns=null,$intRows=null,$boolReadOnly=null,$boolShowCounter=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strFieldName,'memo',null,$intMaxLength,null,null,null,$boolReadOnly);
 		$this->setRows($intRows);

@@ -61,7 +61,7 @@ class TNumber extends TEdit
 	 */
 	public function __construct(string $strName
 	                          ,?string $strValue=null
-	                          ,$intMaxLength
+	                          ,$intMaxLength=null
 							  ,$boolRequired=null,$intDecimalPlaces=null,$strMinValue=null,$strMaxValue=null,$boolFormatInteger=null,$strDirection=null,$boolAllowZero=null,$boolAllowNull=null)
 	{
 		parent::__construct($strName,null,$intMaxLength,$boolRequired);

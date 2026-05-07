@@ -6282,7 +6282,7 @@ class TForm Extends TBox
      */
     public function addTextField( string $strName
     		                    , ?string $strLabel=null
-    		                    , $intMaxLength
+    		                    , $intMaxLength=null
     		                    , $boolRequired=null
     		                    , $intSize=null
     		                    , $strValue=null
@@ -6319,7 +6319,7 @@ class TForm Extends TBox
      */
     public function addMemoField(string $strName
    		                       , ?string $strLabel=null
-   		                       , $intMaxLength
+   		                       , $intMaxLength=null
    		                       , $boolRequired=null
    		                       , $intColumns=null
    		                       , $intRows=null
@@ -6994,7 +6994,7 @@ class TForm Extends TBox
      */       
 	public function addNumberField(string $strName
 				           		, ?string $strLabel=null
-				           		, $intMaxLength
+				           		, $intMaxLength=null
 				           		, $boolRequired=null
 				           		, $intDecimalPlaces=null
 				           		, $boolNewLine=null
@@ -7038,7 +7038,7 @@ class TForm Extends TBox
 	 * @param boolean $boolLabelAbove-8: Label acima do campo, DEFAULT is FALSE na mesma, TRUE = Label acima
 	 * @return TEmail
 	 */
-	public function addEmailField( string $strName, ?string $strLabel=null, $intMaxLength, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
+	public function addEmailField( string $strName, ?string $strLabel=null, $intMaxLength=null, $boolRequired=null, $intSize=null, $boolNewLine=null, $strValue=null, $boolLabelAbove=null, $boolNoWrapLabel=null )
 	{
 		$field = new TEmail( $strName, $strValue, $intMaxLength, $boolRequired, $intSize );
 		$this->addDisplayControl( new TDisplayControl( $strLabel, $field, $boolLabelAbove, $boolNewLine, $boolNoWrapLabel ) );

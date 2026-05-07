@@ -47,7 +47,7 @@ class TGridCheckColumn extends TGridEditColumn
 	private $allowCheckAll;
 	public function __construct(string $strEditName
 	                           ,?string $strTitle=null
-							   ,string $strKeyField,$strDescField=null,$boolReadOnly=null,$boolAllowCheckAll=null)
+							   ,?string $strKeyField=null,$strDescField=null,$boolReadOnly=null,$boolAllowCheckAll=null)
 	{
 		parent::__construct($strEditName,$strTitle,$strKeyField,'checkbox',null,null,null,null,$boolReadOnly);
 		$boolAllowCheckAll = is_null($boolAllowCheckAll) ? true : $boolAllowCheckAll;

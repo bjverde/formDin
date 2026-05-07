@@ -2013,7 +2013,7 @@ class TGrid extends TTable
      * @param boolean $boolReadOnly
      * @return TGridRadioColumn
      */
-    public function addRadioColumn( string $strName, ?string $strTitle = null, $strKeyField, $strDescField = null, $boolReadOnly = null )
+    public function addRadioColumn( string $strName, ?string $strTitle = null, $strKeyField = null, $strDescField = null, $boolReadOnly = null )
     {
         if ( !$strKeyField )
         {
