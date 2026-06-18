@@ -79,6 +79,7 @@ class TTime extends TMask
 	//--------------------------------------------------------------------------
 	public function setMask($strNewMaskType=null)
 	{
+		$strNewMaskType = (string)$strNewMaskType;
 		$strNewMaskType = StringHelper::strtolower($strNewMaskType);
 		$arrMasksTypes = array(
 		 'hms'	=> '99:99:99'
