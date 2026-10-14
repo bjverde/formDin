@@ -192,7 +192,7 @@ if($res) {
 			$retorno .= ($k>0) ? ',' : '';
 			//$retorno.='"'.$v.'":"'.str_replace("'",'´',str_replace('"','“',$res[$campoDescricao][$k]) ).'"';
 			//$retorno.='"'.$v.'":"'.htmlspecialchars(str_replace('"','“',$res[$campoDescricao][$k])).'"';
-			$retorno.='”'. htmlspecialchars(str_replace('”','”',(string)($res[$campoDescricao][$k] ?? '')))  .'”:”'.$v.'”';
+			$retorno.='"'. htmlspecialchars(str_replace('"','“',(string)($res[$campoDescricao][$k] ?? '')))  .'":"'.$v.'"';
 		}
 		//$retorno.='"where":"'.$where.'"';
 		$retorno.="}";
