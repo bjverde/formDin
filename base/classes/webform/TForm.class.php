@@ -2829,10 +2829,10 @@ class TForm Extends TBox
       * @param string $descPrimeiraOpcao      - 7: Descricão da primeira opção, geralmente uma msg informando que deve ser selecionado
       * @param string $valorPrimeiraOpcao     - 8: Valor da primeira opção geralmente um valor da lista
       * @param string $descNenhumaOpcao       - 9: Mensagem caso não tenho nenhuma opção correspondente.
-      * @param string $campoFormFiltro       - 10: Campos extras que serão usados como critérios de filtro
-      * @param string $funcaoExecutar        - 11: Função JavaScript que será chamado no caso de onChange
-      * @param boolean $boolSelectUniqueOption 12: 
-      * @param boolean $strConfigFileName    - 13: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
+      * @param string $campoFormFiltro        - 10: Campos extras que serão usados como critérios de filtro
+      * @param string $funcaoExecutar         - 11: Função JavaScript que será chamado no caso de onChange
+      * @param boolean $boolSelectUniqueOption- 12: Ativa a seleção automática quando houver apenas uma opção disponível
+      * @param string $strConfigFileName      - 13: Nome do arquivo conexão com banco na pasta <APP>/includes/<nome_arquivo>.php para executar o autocomplete. 
       */
      function combinarSelects( $selectPai='cod_uf'
                              , $selectFilho='cod_municipio'
